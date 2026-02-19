@@ -9782,12 +9782,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the Azure AI Search tool call."
           },
@@ -9999,12 +9997,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the Azure Function tool call."
           },
@@ -10184,12 +10180,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the Bing custom search tool call."
           },
@@ -10344,12 +10338,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the Bing grounding tool call."
           },
@@ -10468,12 +10460,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the browser automation tool call."
           },
@@ -13374,12 +13364,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the Fabric data agent tool call."
           },
@@ -25639,7 +25627,15 @@
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
-              "workflow_action"
+              "workflow_action",
+              "bing_grounding_call",
+              "sharepoint_grounding_preview_call",
+              "azure_ai_search_call",
+              "bing_custom_search_preview_call",
+              "openapi_call",
+              "browser_automation_preview_call",
+              "fabric_dataagent_preview_call",
+              "azure_function_call"
             ]
           }
         ]
@@ -25733,7 +25729,15 @@
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
-              "workflow_action"
+              "workflow_action",
+              "bing_grounding_call",
+              "sharepoint_grounding_preview_call",
+              "azure_ai_search_call",
+              "bing_custom_search_preview_call",
+              "openapi_call",
+              "browser_automation_preview_call",
+              "fabric_dataagent_preview_call",
+              "azure_function_call"
             ]
           }
         ]
@@ -27704,7 +27708,15 @@
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
-              "workflow_action"
+              "workflow_action",
+              "bing_grounding_call",
+              "sharepoint_grounding_preview_call",
+              "azure_ai_search_call",
+              "bing_custom_search_preview_call",
+              "openapi_call",
+              "browser_automation_preview_call",
+              "fabric_dataagent_preview_call",
+              "azure_function_call"
             ]
           }
         ]
@@ -32685,12 +32697,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the OpenAPI tool call."
           },
@@ -33853,12 +33863,10 @@
             ]
           },
           "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "failed"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallStatus"
+              }
             ],
             "description": "The status of the SharePoint grounding tool call."
           },
@@ -34322,6 +34330,16 @@
           }
         },
         "description": "Taxonomy sub-category definition."
+      },
+      "ToolCallStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "completed",
+          "incomplete",
+          "failed"
+        ],
+        "description": "The status of a grounding tool call."
       },
       "ToolDescription": {
         "type": "object",

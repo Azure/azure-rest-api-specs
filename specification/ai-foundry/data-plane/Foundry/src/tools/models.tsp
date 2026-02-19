@@ -784,8 +784,16 @@ namespace Azure.AI.Projects {
   }
 
   // ==============================================================================
-  // Grounding Tool Call Document Models
+  // Grounding Tool Call Status and Document Models
   // ==============================================================================
+
+  @doc("The status of a grounding tool call.")
+  union ToolCallStatus {
+    in_progress: "in_progress",
+    completed: "completed",
+    incomplete: "incomplete",
+    failed: "failed",
+  }
 
   @doc("A document returned from a grounding tool search.")
   model GroundingToolCallDocument {
@@ -835,9 +843,8 @@ namespace Azure.AI.Projects {
   model BingGroundingToolCallItemResource extends OpenAI.OutputItem {
     type: "bing_grounding_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the Bing grounding tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...BingGroundingToolCallItemBase;
     ...BingGroundingToolCallOutputBase;
@@ -867,9 +874,8 @@ namespace Azure.AI.Projects {
   model SharepointGroundingToolCallItemResource extends OpenAI.OutputItem {
     type: "sharepoint_grounding_preview_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the SharePoint grounding tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...SharepointGroundingToolCallItemBase;
     ...SharepointGroundingToolCallOutputBase;
@@ -902,9 +908,8 @@ namespace Azure.AI.Projects {
   model AzureAISearchToolCallItemResource extends OpenAI.OutputItem {
     type: "azure_ai_search_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the Azure AI Search tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...AzureAISearchToolCallItemBase;
     ...AzureAISearchToolCallOutputBase;
@@ -934,9 +939,8 @@ namespace Azure.AI.Projects {
   model BingCustomSearchToolCallItemResource extends OpenAI.OutputItem {
     type: "bing_custom_search_preview_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the Bing custom search tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...BingCustomSearchToolCallItemBase;
     ...BingCustomSearchToolCallOutputBase;
@@ -969,9 +973,8 @@ namespace Azure.AI.Projects {
   model OpenApiToolCallItemResource extends OpenAI.OutputItem {
     type: "openapi_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the OpenAPI tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...OpenApiToolCallItemBase;
     ...OpenApiToolCallOutputBase;
@@ -1001,9 +1004,8 @@ namespace Azure.AI.Projects {
   model BrowserAutomationToolCallItemResource extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the browser automation tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...BrowserAutomationToolCallItemBase;
     ...BrowserAutomationToolCallOutputBase;
@@ -1033,9 +1035,8 @@ namespace Azure.AI.Projects {
   model FabricDataAgentToolCallItemResource extends OpenAI.OutputItem {
     type: "fabric_dataagent_preview_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the Fabric data agent tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...FabricDataAgentToolCallItemBase;
     ...FabricDataAgentToolCallOutputBase;
@@ -1068,9 +1069,8 @@ namespace Azure.AI.Projects {
   model AzureFunctionToolCallItemResource extends OpenAI.OutputItem {
     type: "azure_function_call";
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
     @doc("The status of the Azure Function tool call.")
-    status: "in_progress" | "completed" | "incomplete" | "failed";
+    status: ToolCallStatus;
 
     ...AzureFunctionToolCallItemBase;
     ...AzureFunctionToolCallOutputBase;
