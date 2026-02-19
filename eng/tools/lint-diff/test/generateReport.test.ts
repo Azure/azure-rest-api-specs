@@ -428,7 +428,6 @@ describe("generateLintDiffReport", () => {
 
 
       **[must fix]The following errors/warnings are introduced by current PR:**
-      
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
       | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/repo/path/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
