@@ -787,7 +787,7 @@ namespace Azure.AI.Projects {
   // Grounding Tool Call Status and Document Models
   // ==============================================================================
 
-  @doc("The status of a grounding tool call.")
+  @doc("The status of a tool call.")
   union ToolCallStatus {
     in_progress: "in_progress",
     completed: "completed",
