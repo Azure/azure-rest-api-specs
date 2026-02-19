@@ -54,7 +54,11 @@ interface PrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This is actually a sync operation, but modeled as async with 200/204 to maintain backward compatibility."
+  delete is ArmResourceDeleteAsyncBase<
+    PrivateEndpointConnection,
+    PrivateEndpointConnectionDeleteOkResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
@@ -89,6 +93,16 @@ interface PrivateEndpointConnectionsOps
 // =============================================================================
 // PrivateEndpointConnection models
 // =============================================================================
+
+/**
+ * Async 200 OK response for delete with LRO polling headers.
+ */
+@doc("Resource deleted successfully.")
+model PrivateEndpointConnectionDeleteOkResponse {
+  ...OkResponse;
+  ...ArmAsyncOperationHeader;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+}
 
 /**
  * The current provisioning state.
