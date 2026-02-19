@@ -307,3 +307,5 @@ namespace Azure.AI.Projects;
 @@usage(AgentVersionObject, Usage.output);
 @@access(AgentVersionObject, Access.public);
 @@clientName(AgentVersionObject, "AgentVersion");
+
+@@usage(OpenAI.ItemResourceOutputMessage, Usage.output);
