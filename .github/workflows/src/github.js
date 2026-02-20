@@ -9,25 +9,6 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
  */
 
 /**
-<<<<<<< copilot/upgrade-eslint-to-v10
- * Writes content to the GitHub Actions summary
- * @param {string} content - Markdown content to add to the summary
- * @param {typeof import("@actions/core")} core - GitHub Actions core library
- */
-export async function writeToActionsSummary(content, core) {
-  try {
-    await core.summary.addRaw(content).write();
-    core.info("Successfully wrote to the GitHub Actions summary");
-  } catch (error) {
-    throw new Error(`Failed to write to the GitHub Actions summary: ${inspect(error)}`, {
-      cause: error,
-    });
-  }
-}
-
-/**
-=======
->>>>>>> main
  * @param {import("@octokit/endpoint").endpoint} endpoint
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
