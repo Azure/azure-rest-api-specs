@@ -288,7 +288,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 3. Run `npm install` in both directories
 4. If `.github/shared/package.json` was modified, also run `npm install` in the **repo root** to update the root `package-lock.json` (the root `package.json` depends on `.github/shared` via `"file:.github/shared"`)
 5. Commit all modified `package.json` and `package-lock.json` files
-6. Test with `npm run check` in `.github/`
+6. Test with `npm run check` in both directories
 
 ### Node.js Version Management
 
