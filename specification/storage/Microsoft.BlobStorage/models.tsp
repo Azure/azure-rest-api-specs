@@ -906,7 +906,7 @@ model BlobItem {
   @Xml.name("Metadata") metadata?: BlobMetadata;
 
   /** The tags of the blob. */
-  @Xml.name("BlobTags") blobTags?: BlobTags;
+  @Xml.name("Tags") blobTags?: BlobTags;
 
   /** The object replication metadata of the blob. */
   #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
