@@ -16,8 +16,19 @@ using Microsoft.ContainerService;
   "java"
 );
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
+@@clientName(ManagedClusterWebAppRoutingGatewayAPIImplementations,
+  "ManagedClusterWebAppRoutingGatewayApiImplementations",
+  "java"
+);
+@@clientName(GatewayAPIIstioEnabled, "GatewayApiIstioEnabled", "java");
+@@clientName(ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
+  "gatewayApiImplementations",
+  "java"
+);
 @@clientName(ManagedClusterOIDCIssuerProfile.issuerURL, "issuerUrl", "java");
 @@clientName(TrustedAccessRoleRule.nonResourceURLs, "nonResourceUrls", "java");
+
+
 
 @@clientName(Microsoft.ContainerService, "ContainerServiceClient", "python");
 @@clientName(ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
