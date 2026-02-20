@@ -67,7 +67,7 @@ namespace Azure.AI.Projects {
     {
       /** The type of location approximation. Always `approximate`. */
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-      type: "approximate";
+      type: "approximate",
     }
   );
 

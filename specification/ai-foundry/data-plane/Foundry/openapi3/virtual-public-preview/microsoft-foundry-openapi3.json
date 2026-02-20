@@ -6158,7 +6158,11 @@
             "required": false,
             "description": "Number of runs to retrieve.",
             "schema": {
-              "$ref": "#/components/schemas/integer",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/integer"
+                }
+              ],
               "default": 20
             },
             "explode": false
@@ -6453,7 +6457,11 @@
             "required": false,
             "description": "Number of runs to retrieve.",
             "schema": {
-              "$ref": "#/components/schemas/integer",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/integer"
+                }
+              ],
               "default": 20
             },
             "explode": false
@@ -6785,7 +6793,11 @@
             "required": false,
             "description": "Number of runs to retrieve.",
             "schema": {
-              "$ref": "#/components/schemas/integer",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/integer"
+                }
+              ],
               "default": 20
             },
             "explode": false
@@ -22668,7 +22680,8 @@
         "type": "object",
         "properties": {
           "image_url": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           },
           "file_id": {
             "type": "string"

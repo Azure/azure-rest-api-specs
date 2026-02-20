@@ -799,8 +799,8 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
     Record<unknown>,

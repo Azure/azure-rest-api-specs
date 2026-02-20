@@ -4,11 +4,13 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Streams;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Containers")
+@removed(Versions.v1)
 interface AgentContainers {
   /**
    * Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
