@@ -114,13 +114,13 @@ export async function checkBreakingChangeOnSameVersion(
   oadViolationsCnt: number;
   errorCnt: number;
 }> {
-  logMessage(`ENTER definition checkBreakingChangeOnSameVersion`);
+  await logMessage(`ENTER definition checkBreakingChangeOnSameVersion`);
 
   let aggregateOadViolationsCnt = 0;
   let aggregateErrorCnt = 0;
 
   for (const swaggerPath of detectionContext.existingVersionSwaggers) {
-    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
+    await logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
       path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
@@ -132,11 +132,11 @@ export async function checkBreakingChangeOnSameVersion(
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;
-    logMessage("Processing completed", LogLevel.EndGroup);
+    await logMessage("Processing completed", LogLevel.EndGroup);
   }
 
   for (const { from, to } of detectionContext.renamedSwaggers) {
-    logMessage(`Processing rename: ${from} -> ${to}`, LogLevel.Group);
+    await logMessage(`Processing rename: ${from} -> ${to}`, LogLevel.Group);
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
       path.resolve(detectionContext.context.prInfo!.tempRepoFolder, from),
@@ -146,10 +146,10 @@ export async function checkBreakingChangeOnSameVersion(
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;
-    logMessage("Processing completed", LogLevel.EndGroup);
+    await logMessage("Processing completed", LogLevel.EndGroup);
   }
 
-  logMessage(
+  await logMessage(
     `RETURN definition checkBreakingChangeOnSameVersion. ` +
       `msgs.length: ${detectionContext.msgs.length}, ` +
       `aggregateOadViolationsCnt: ${aggregateOadViolationsCnt}, aggregateErrorCnt: ${aggregateErrorCnt}`,
@@ -178,21 +178,23 @@ export async function checkCrossVersionBreakingChange(
   oadViolationsCnt: number;
   errorCnt: number;
 }> {
-  logMessage(`ENTER definition checkCrossVersionBreakingChange`);
+  await logMessage(`ENTER definition checkCrossVersionBreakingChange`);
 
   let aggregateOadViolationsCnt = 0;
   let aggregateErrorCnt = 0;
   for (const swaggerPath of detectionContext.newVersionSwaggers
     .concat(detectionContext.newVersionChangedSwaggers)
     .concat(detectionContext.existingVersionSwaggers.filter(isInDevFolder))) {
-    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
+    await logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
 
     // use the detectionContext.context.localSpecRepoPath to resolve the absolute path as it's the merge commit working directory
     const absoluteSwaggerPath = path.resolve(
       detectionContext.context.localSpecRepoPath,
       swaggerPath,
     );
-    logMessage(`checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+    await logMessage(
+      `checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`,
+    );
     const specModel = await getSpecModel(
       detectionContext.context.prInfo!.tempRepoFolder,
       swaggerPath,
@@ -205,13 +207,13 @@ export async function checkCrossVersionBreakingChange(
 
     const originalReturnedSwaggers = await specModel.getSwaggers();
     const availableSwaggers = deduplicateSwaggers(originalReturnedSwaggers);
-    logMessage(
+    await logMessage(
       `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
     );
 
     // use absoluteSwaggerPath as it will need to it will fall back to use the version info in the swagger content
     const previousVersions = await getPrecedingSwaggers(absoluteSwaggerPath, availableSwaggers);
-    logMessage(
+    await logMessage(
       `checkCrossVersionBreakingChange: previousVersions: ${JSON.stringify(previousVersions)}`,
     );
     const previousStableSwaggerPath = previousVersions.stable;
@@ -255,9 +257,9 @@ export async function checkCrossVersionBreakingChange(
     if (!previousStableSwaggerPath && !previousPreviewSwaggerPath) {
       await checkAPIsBeingMovedToANewSpec(detectionContext.context, swaggerPath, availableSwaggers);
     }
-    logMessage("Processing completed", LogLevel.EndGroup);
+    await logMessage("Processing completed", LogLevel.EndGroup);
   }
-  logMessage(
+  await logMessage(
     `RETURN definition checkCrossVersionBreakingChange. ` +
       `msgs.length: ${detectionContext.msgs.length}, ` +
       `aggregateOadViolationsCnt: ${aggregateOadViolationsCnt}, aggregateErrorCnt: ${aggregateErrorCnt}`,
@@ -304,7 +306,9 @@ export async function doBreakingChangeDetection(
   scenario: BreakingChangesCheckType,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): Promise<{ oadViolationsCnt: number; errorCnt: number }> {
-  logMessage(`ENTER definition doBreakingChangeDetection oldSpec: ${oldSpec}, newSpec: ${newSpec}`);
+  await logMessage(
+    `ENTER definition doBreakingChangeDetection oldSpec: ${oldSpec}, newSpec: ${newSpec}`,
+  );
 
   let oadViolationsCnt = 0;
   let errorCnt = 0;
@@ -319,7 +323,7 @@ export async function doBreakingChangeDetection(
       newSpec,
     );
 
-    const modifiedOadMessages: OadMessage[] = applyRules(
+    const modifiedOadMessages: OadMessage[] = await applyRules(
       oadMessages,
       scenario,
       previousApiVersionLifecycleStage,
@@ -360,10 +364,10 @@ export async function doBreakingChangeDetection(
     detectionContext.runtimeErrors.push(runtimeError);
     errorCnt += 1;
     appendFileSync(logFileName, JSON.stringify(runtimeError) + "\n");
-    logError(`appendOadRuntimeErrors: ${JSON.stringify(runtimeError)}`);
+    await logError(`appendOadRuntimeErrors: ${JSON.stringify(runtimeError)}`);
   }
 
-  logMessage(
+  await logMessage(
     `RETURN definition doBreakingChangeDetection ` +
       `scenario: ${scenario}, ` +
       `previousApiVersionLifecycleStage: ${previousApiVersionLifecycleStage}, ` +
@@ -431,7 +435,10 @@ export function getReadmeFolder(swaggerFile: string) {
  * @param swaggerPath - Path to the swagger file
  * @returns SpecModel instance for the folder containing the swagger file or undefined if the folder does not exist
  */
-export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecModel | undefined {
+export async function getSpecModel(
+  specRepoFolder: string,
+  swaggerPath: string,
+): Promise<SpecModel | undefined> {
   const folder = getReadmeFolder(swaggerPath);
 
   if (!folder) {
@@ -469,12 +476,12 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
 
   // Return if the readme folder is not found which means it's a new RP
   if (isNewRp) {
-    logMessage(
+    await logMessage(
       `getSpecModel: this is a new RP as ${fullFolderPath} folder does not exist in the base branch of spec repo.`,
     );
     return undefined;
   }
-  logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
+  await logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
 
   // Create new SpecModel and cache it
   const specModel = new SpecModel(fullFolderPath);
@@ -488,15 +495,15 @@ export async function checkAPIsBeingMovedToANewSpec(
   availableSwaggers: any[],
 ) {
   const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
-  logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
-  const specModel = getSpecModel(context.localSpecRepoPath, swaggerPath);
+  await logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+  const specModel = await getSpecModel(context.localSpecRepoPath, swaggerPath);
   if (!specModel) {
     return;
   }
   const swaggersFromOriginalClonedRepo = await specModel.getSwaggers();
   const targetSwagger = swaggersFromOriginalClonedRepo.find((s) => s.path === absoluteSwaggerPath);
   if (!targetSwagger) {
-    logError(
+    await logError(
       `checkAPIsBeingMovedToANewSpec: targetSwagger not found for swaggerPath: ${swaggerPath}`,
     );
     return;
@@ -507,11 +514,11 @@ export async function checkAPIsBeingMovedToANewSpec(
   const movedApis = await getExistedVersionOperations(absoluteSwaggerPath, availableSwaggers, [
     ...targetOperations.values(),
   ]);
-  logMessage(
+  await logMessage(
     `checkAPIsBeingMovedToANewSpec: swaggerPath: ${swaggerPath}, movedApis.size: ${movedApis.size}`,
   );
   if (movedApis.size > 0) {
-    logMessage(
+    await logMessage(
       `The swagger ${swaggerPath} has no previous version being found, but its APIs were found in other swaggers. It means that you are moving some APIs to this new swagger file.`,
     );
     for (const [swaggerFile, operations] of movedApis) {
@@ -527,8 +534,8 @@ export async function checkAPIsBeingMovedToANewSpec(
           swaggerFile,
         ),
       );
-      logMessage(`The following are details for existing APIs being moved to the new spec:`);
-      logMessage(`  swagger file: ${swaggerFile}, operationIds: ${operationIds}\n`);
+      await logMessage(`The following are details for existing APIs being moved to the new spec:`);
+      await logMessage(`  swagger file: ${swaggerFile}, operationIds: ${operationIds}\n`);
     }
   }
 }

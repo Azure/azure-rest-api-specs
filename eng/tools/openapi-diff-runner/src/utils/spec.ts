@@ -120,7 +120,7 @@ export async function getExistedVersionOperations(
       });
       result.set(previousSwagger.path, matchingOperations);
     } catch (e) {
-      logError(
+      await logError(
         `Failed to get operations for previous swagger: ${previousSwagger.path}. This may be due to the swagger file being inaccessible or malformed.`,
       );
       throw e;

@@ -611,7 +611,7 @@ describe("command-helpers", () => {
       const { logMessage } = await import("../src/log.js");
       const msgs = createMockMessages();
 
-      logFullOadMessagesList(msgs);
+      await logFullOadMessagesList(msgs);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
@@ -627,7 +627,7 @@ describe("command-helpers", () => {
     it("should handle empty message list", async () => {
       const { logMessage } = await import("../src/log.js");
 
-      logFullOadMessagesList([]);
+      await logFullOadMessagesList([]);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
@@ -830,7 +830,7 @@ describe("command-helpers", () => {
     it("should set both labels to false when no labels need to be added", async () => {
       const { setOutput } = await import("../src/log.js");
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
 
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
@@ -849,7 +849,7 @@ describe("command-helpers", () => {
 
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
@@ -867,7 +867,7 @@ describe("command-helpers", () => {
 
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
@@ -886,7 +886,7 @@ describe("command-helpers", () => {
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
@@ -904,7 +904,7 @@ describe("command-helpers", () => {
 
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
@@ -923,7 +923,7 @@ describe("command-helpers", () => {
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
 
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
       expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,

@@ -50,22 +50,22 @@ import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
 export async function validateBreakingChange(context: Context): Promise<number> {
   let statusCode: number = 0;
   let oadTracer = createOadTrace(context);
-  logMessage("ENTER definition validateBreakingChange");
+  await logMessage("ENTER definition validateBreakingChange");
 
-  logMessage(`PR target branch is ${context.prInfo ? context.prTargetBranch : ""}`);
+  await logMessage(`PR target branch is ${context.prInfo ? context.prTargetBranch : ""}`);
 
   const diffs = await getSwaggerDiffs();
 
-  logMessage("Found PR changes:");
-  logMessage(JSON.stringify(diffs, null, 2));
+  await logMessage("Found PR changes:");
+  await logMessage(JSON.stringify(diffs, null, 2));
 
   let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
 
-  logMessage("Processing swaggers:");
-  logMessage(JSON.stringify(swaggersToProcess, null, 2));
+  await logMessage("Processing swaggers:");
+  await logMessage(JSON.stringify(swaggersToProcess, null, 2));
 
   // switch pr to base branch
-  changeBaseBranch(context);
+  await changeBaseBranch(context);
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
@@ -112,22 +112,22 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     .concat(newExistingVersionSwaggers)
     .concat(needCompareDeletedSwaggers);
 
-  logMessage("Found new version swaggers:");
-  logMessage(JSON.stringify(newVersionSwaggers, null, 2));
+  await logMessage("Found new version swaggers:");
+  await logMessage(JSON.stringify(newVersionSwaggers, null, 2));
 
-  logMessage("Found new existing version swaggers:");
-  logMessage(JSON.stringify(newExistingVersionSwaggers, null, 2));
+  await logMessage("Found new existing version swaggers:");
+  await logMessage(JSON.stringify(newExistingVersionSwaggers, null, 2));
 
-  logMessage("Found changed existing swaggers:");
-  logMessage(JSON.stringify(existingChangedSwaggers, null, 2));
+  await logMessage("Found changed existing swaggers:");
+  await logMessage(JSON.stringify(existingChangedSwaggers, null, 2));
 
-  logMessage("The following changed swaggers are not existed in base branch:");
-  logMessage(JSON.stringify(newVersionChangedSwaggers, null, 2));
+  await logMessage("The following changed swaggers are not existed in base branch:");
+  await logMessage(JSON.stringify(newVersionChangedSwaggers, null, 2));
 
-  logMessage("The following are deleted swaggers that need to do the comparison: ");
-  logMessage(JSON.stringify(needCompareDeletedSwaggers, null, 2));
+  await logMessage("The following are deleted swaggers that need to do the comparison: ");
+  await logMessage(JSON.stringify(needCompareDeletedSwaggers, null, 2));
 
-  logMessage(
+  await logMessage(
     `Creating dummy files to compare for deleted Swagger files. Count: ${needCompareDeletedSwaggers.length}`,
   );
 
@@ -135,22 +135,22 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   for (const f of needCompareDeletedSwaggers) {
     const baseFilePath = path.join(context.prInfo!.tempRepoFolder, f);
     if (isSameVersionBreakingType(context.runType)) {
-      createDummySwagger(baseFilePath, path.resolve(f));
+      await createDummySwagger(baseFilePath, path.resolve(f));
     }
   }
 
-  logMessage(
+  await logMessage(
     `Creating dummy files to compare for new Swagger files in existing API version folders. ` +
       `Count: ${newExistingVersionSwaggers.length}`,
   );
 
   // create dummy swagger for new swaggers whose api version already existed before the PR.
-  newExistingVersionSwaggers.forEach((f: string) => {
+  for (const f of newExistingVersionSwaggers) {
     const oldSwagger = path.join(context.prInfo!.tempRepoFolder, f);
     if (isSameVersionBreakingType(context.runType)) {
-      createDummySwagger(path.resolve(f), oldSwagger);
+      await createDummySwagger(path.resolve(f), oldSwagger);
     }
-  });
+  }
 
   if (context.prInfo) {
     const detectionContext = createBreakingChangeDetectionContext(
@@ -182,12 +182,12 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     }
 
     // output breaking change label variables only when the PR targets a production branch
-    logMessage(
+    await logMessage(
       `Evaluate breaking change labels: targetRepo: ${context.targetRepo}, ` +
         `targetBranch: ${context.prInfo!.targetBranch}`,
     );
     if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo!.targetBranch)) {
-      outputBreakingChangeLabelVariables();
+      await outputBreakingChangeLabelVariables();
     }
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
@@ -210,7 +210,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       process.exitCode = errorCnt > 0 ? 1 : 0;
     }
 
-    logMessage(
+    await logMessage(
       `${LOG_PREFIX}validateBreakingChange: prUrl: ${context.prUrl}, ` +
         `comparisonType: ${context.runType},` +
         `errorCnt: ${errorCnt}, oadViolationsCnt: ${oadViolationsCnt}, ` +
@@ -220,7 +220,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     if (process.exitCode === 0 && oadViolationsCnt > 0) {
       // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 2/22/2024.
       // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
-      logMessage(
+      await logMessage(
         `${LOG_PREFIX}validateBreakingChange: ` +
           `Prevented spurious failure of breaking change check. prUrl: ${context.prUrl}, ` +
           `comparisonType: ${context.runType}, oadViolationsCnt: ${oadViolationsCnt}, ` +
@@ -232,7 +232,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       statusCode = 1;
     }
 
-    logFullOadMessagesList(msgs);
+    await logFullOadMessagesList(msgs);
     await generateBreakingChangeResultSummary(
       context,
       msgs,
@@ -241,14 +241,14 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       "",
     );
   } else {
-    logMessage("!pr. Skipping the process of breaking change detection.");
+    await logMessage("!pr. Skipping the process of breaking change detection.");
   }
 
-  logMessage(`Cleaning up dummy files. Count: ${getCreatedDummySwaggerCount()}`);
+  await logMessage(`Cleaning up dummy files. Count: ${getCreatedDummySwaggerCount()}`);
 
   cleanDummySwagger();
 
-  logMessage("RETURN definition validateBreakingChange");
-  logMessage(`${LOG_PREFIX}validateBreakingChange: statusCode: ${statusCode}`);
+  await logMessage("RETURN definition validateBreakingChange");
+  await logMessage(`${LOG_PREFIX}validateBreakingChange: statusCode: ${statusCode}`);
   return statusCode;
 }

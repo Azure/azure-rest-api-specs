@@ -77,37 +77,37 @@ function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
  * This function checks the BreakingChangeLabelsToBeAdded set and sets the appropriate outputs.
  * The doc describing breaking change review rules can be found here: https://aka.ms/brch-dev
  */
-export function outputBreakingChangeLabelVariables(): void {
+export async function outputBreakingChangeLabelVariables(): Promise<void> {
   // Output the breaking change labels as GitHub Actions environment variables
   if (BreakingChangeLabelsToBeAdded.size === 0) {
-    logMessage("None of the breaking change review labels need to be added.");
-    logMessage("Setting default breaking change labels to false.");
-    setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-    setOutput("breakingChangeReviewLabelValue", "false");
-    setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-    setOutput("versioningReviewLabelValue", "false");
+    await logMessage("None of the breaking change review labels need to be added.");
+    await logMessage("Setting default breaking change labels to false.");
+    await setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+    await setOutput("breakingChangeReviewLabelValue", "false");
+    await setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+    await setOutput("versioningReviewLabelValue", "false");
   } else {
     if (BreakingChangeLabelsToBeAdded.has(BreakingChangeReviewRequiredLabel)) {
-      logMessage("'BreakingChangeReviewRequired' label needs to be added.");
-      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-      setOutput("breakingChangeReviewLabelValue", "true");
-      logMessage("'VersioningReviewRequired' label needs to be deleted.");
-      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      setOutput("versioningReviewLabelValue", "false");
+      await logMessage("'BreakingChangeReviewRequired' label needs to be added.");
+      await setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      await setOutput("breakingChangeReviewLabelValue", "true");
+      await logMessage("'VersioningReviewRequired' label needs to be deleted.");
+      await setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      await setOutput("versioningReviewLabelValue", "false");
     } else {
-      logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
-      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-      setOutput("breakingChangeReviewLabelValue", "false");
+      await logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
+      await setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      await setOutput("breakingChangeReviewLabelValue", "false");
 
       // versioning review label is only set if the breaking change review label is not set
       if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
-        logMessage("'VersioningReviewRequired' label needs to be added.");
-        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-        setOutput("versioningReviewLabelValue", "true");
+        await logMessage("'VersioningReviewRequired' label needs to be added.");
+        await setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        await setOutput("versioningReviewLabelValue", "true");
       } else {
-        logMessage("'VersioningReviewRequired' label needs to be deleted.");
-        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-        setOutput("versioningReviewLabelValue", "false");
+        await logMessage("'VersioningReviewRequired' label needs to be deleted.");
+        await setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        await setOutput("versioningReviewLabelValue", "false");
       }
     }
   }
@@ -190,7 +190,7 @@ export async function getSwaggerDiffs(
         filteredRenames.length,
     };
   } catch (error) {
-    logError(`Error getting categorized changed files: ${error}`);
+    await logError(`Error getting categorized changed files: ${error}`);
     // Return empty result on error
     return {
       additions: [],
@@ -224,7 +224,7 @@ const createdDummySwagger: string[] = [];
 /**
  * Change the base branch for comparison based on context and whitelist rules
  */
-export function changeBaseBranch(context: Context): void {
+export async function changeBaseBranch(context: Context): Promise<void> {
   /*
    * always compare against main
    * we still use the changed files got from the PR, because the main branch may quite different with the PR target branch
@@ -238,29 +238,29 @@ export function changeBaseBranch(context: Context): void {
   // same version breaking change for PR targets to rpaas or armCoreRpDev, will compare with the original target branch.
   if (context.baseBranch !== context.prTargetBranch && !isBreakingChangeWhiteListBranch()) {
     context.prInfo!.baseBranch = context.baseBranch;
-    logMessage(`switch target branch to ${context.baseBranch}`);
+    await logMessage(`switch target branch to ${context.baseBranch}`);
   }
 }
 
 /**
  * Log the full list of OAD messages to console
  */
-export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
-  logMessage("---- Full list of messages ----", LogLevel.Group);
-  logMessage("[");
+export async function logFullOadMessagesList(msgs: ResultMessageRecord[]): Promise<void> {
+  await logMessage("---- Full list of messages ----", LogLevel.Group);
+  await logMessage("[");
   // Printing the messages one by one because the console.log appears to elide the messages with "... X more items"
   // after approximately 292 messages.
   for (const msg of msgs) {
-    logMessage(JSON.stringify(msg, null, 4) + ",");
+    await logMessage(JSON.stringify(msg, null, 4) + ",");
   }
-  logMessage("]");
-  logMessage("---- End of full list of messages ----", LogLevel.EndGroup);
+  await logMessage("]");
+  await logMessage("---- End of full list of messages ----", LogLevel.EndGroup);
 }
 
 /**
  * Create a dummy swagger file for comparison purposes
  */
-export function createDummySwagger(fromSwagger: string, toSwagger: string): void {
+export async function createDummySwagger(fromSwagger: string, toSwagger: string): Promise<void> {
   if (!existsSync(path.dirname(toSwagger))) {
     mkdirSync(path.dirname(toSwagger), { recursive: true });
   }
@@ -278,7 +278,7 @@ export function createDummySwagger(fromSwagger: string, toSwagger: string): void
   swaggerJson.definitions = {};
   writeFileSync(toSwagger, JSON.stringify(swaggerJson, null, 2));
   createdDummySwagger.push(toSwagger);
-  logMessage(`created a dummy swagger: ${toSwagger} from ${fromSwagger}`);
+  await logMessage(`created a dummy swagger: ${toSwagger} from ${fromSwagger}`);
 }
 
 /**

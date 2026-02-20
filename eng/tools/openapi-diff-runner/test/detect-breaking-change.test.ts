@@ -268,7 +268,7 @@ describe("detect-breaking-change", () => {
   });
 
   describe("getReadmeFolder", () => {
-    it("should return first readme.md found when searching upward", () => {
+    it("should return first readme.md found when searching upward", async () => {
       const testPath = TEST_CONSTANTS.PATHS.network;
 
       // Mock existsSync to return true only for the resource-manager level
@@ -282,7 +282,7 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
-    it("should find readme.md at data-plane level", () => {
+    it("should find readme.md at data-plane level", async () => {
       const testPath =
         "specification/cognitiveservices/data-plane/TextAnalytics/preview/v3.1/textanalytics.json";
 
@@ -296,7 +296,7 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "cognitiveservices", "data-plane"));
     });
 
-    it("should fall back to boundary when no readme.md found", () => {
+    it("should fall back to boundary when no readme.md found", async () => {
       const testPath = TEST_CONSTANTS.PATHS.network;
 
       // No readme.md files exist
@@ -306,7 +306,7 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
-    it("should fall back to first 3 segments when no boundary found", () => {
+    it("should fall back to first 3 segments when no boundary found", async () => {
       const testPath = "specification/someservice/other/deep/path/file.json";
 
       vi.mocked(existsSync).mockReturnValue(false);
@@ -315,7 +315,7 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "someservice", "other"));
     });
 
-    it("should handle dev folder conversion", () => {
+    it("should handle dev folder conversion", async () => {
       const testPath =
         "dev/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
@@ -329,13 +329,13 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
-    it("should return undefined for short paths", () => {
+    it("should return undefined for short paths", async () => {
       const testPath = "spec/test";
       const result = getReadmeFolder(testPath);
       expect(result).toBeUndefined();
     });
 
-    it("should handle backslashes in paths", () => {
+    it("should handle backslashes in paths", async () => {
       const testPath =
         "specification\\network\\resource-manager\\Microsoft.Network\\stable\\2019-11-01\\network.json";
 
@@ -349,7 +349,7 @@ describe("detect-breaking-change", () => {
       expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
-    it("should find readme.md within boundary search range", () => {
+    it("should find readme.md within boundary search range", async () => {
       const testPath =
         "specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
 
@@ -367,19 +367,19 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("isInDevFolder", () => {
-    it("should return true for dev paths", () => {
+  describe("isInDevFolder", async () => {
+    it("should return true for dev paths", async () => {
       expect(isInDevFolder("dev/test/file.json")).toBe(true);
       expect(isInDevFolder("dev/network/resource-manager/test.json")).toBe(true);
     });
 
-    it("should return false for non-dev paths", () => {
+    it("should return false for non-dev paths", async () => {
       expect(isInDevFolder("specification/test/file.json")).toBe(false);
       expect(isInDevFolder("other/dev/file.json")).toBe(false);
     });
   });
 
-  describe("getSpecModel", () => {
+  describe("getSpecModel", async () => {
     beforeEach(() => {
       MockSetup.resetAllMocks();
     });
@@ -399,7 +399,7 @@ describe("detect-breaking-change", () => {
       });
     };
 
-    it("should create SpecModel when folder exists", () => {
+    it("should create SpecModel when folder exists", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
@@ -408,7 +408,7 @@ describe("detect-breaking-change", () => {
         ["resource-manager"],
       );
 
-      const result = getSpecModel(
+      const result = await getSpecModel(
         TEST_CONSTANTS.FOLDERS.testRepoPath,
         TEST_CONSTANTS.PATHS.network,
       );
@@ -424,7 +424,7 @@ describe("detect-breaking-change", () => {
       );
     });
 
-    it("should search upward and find parent folder when initial folder doesn't exist", () => {
+    it("should search upward and find parent folder when initial folder doesn't exist", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
@@ -434,7 +434,7 @@ describe("detect-breaking-change", () => {
         ["resource-manager"],
       );
 
-      const result = getSpecModel(
+      const result = await getSpecModel(
         TEST_CONSTANTS.FOLDERS.testRepoPath,
         TEST_CONSTANTS.PATHS.network,
       );
@@ -450,7 +450,7 @@ describe("detect-breaking-change", () => {
       );
     });
 
-    it("should handle data-plane boundary correctly", () => {
+    it("should handle data-plane boundary correctly", async () => {
       const testPath = path.join(
         "specification",
         "cognitiveservices",
@@ -469,7 +469,7 @@ describe("detect-breaking-change", () => {
         ["data-plane"],
       );
 
-      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
+      const result = await getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
@@ -482,14 +482,14 @@ describe("detect-breaking-change", () => {
       );
     });
 
-    it("should return undefined when no valid folder with readme.md is found", () => {
+    it("should return undefined when no valid folder with readme.md is found", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       // No folders exist, not even boundary folders
       createFolderExistenceMock([], []);
 
-      const result = getSpecModel(
+      const result = await getSpecModel(
         TEST_CONSTANTS.FOLDERS.testRepoPath,
         TEST_CONSTANTS.PATHS.network,
       );
@@ -498,7 +498,7 @@ describe("detect-breaking-change", () => {
       expect(vi.mocked(SpecModel)).not.toHaveBeenCalled();
     });
 
-    it("should use boundary folder when getReadmeFolder returns boundary folder", () => {
+    it("should use boundary folder when getReadmeFolder returns boundary folder", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
@@ -514,7 +514,7 @@ describe("detect-breaking-change", () => {
         return false;
       });
 
-      const result = getSpecModel(
+      const result = await getSpecModel(
         TEST_CONSTANTS.FOLDERS.testRepoPath,
         TEST_CONSTANTS.PATHS.network,
       );
@@ -531,7 +531,7 @@ describe("detect-breaking-change", () => {
       );
     });
 
-    it("should find readme.md in intermediate folder during upward search", () => {
+    it("should find readme.md in intermediate folder during upward search", async () => {
       const testPath = path.join(
         "specification",
         "network",
@@ -563,7 +563,7 @@ describe("detect-breaking-change", () => {
         return false;
       });
 
-      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
+      const result = await getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       // Should use resource-manager folder because that's where readme.md was found during upward search
@@ -577,7 +577,7 @@ describe("detect-breaking-change", () => {
       );
     });
 
-    it("should create different SpecModels for different folders", () => {
+    it("should create different SpecModels for different folders", async () => {
       MockSetup.setupSpecModelMock();
 
       // Both services have their folders and readme.md files
@@ -603,7 +603,7 @@ describe("detect-breaking-change", () => {
       expect(result2).toBeDefined();
     });
 
-    it("should handle dev folder conversion in upward search", () => {
+    it("should handle dev folder conversion in upward search", async () => {
       const testPath = path.join(
         "dev",
         "network",
@@ -622,7 +622,7 @@ describe("detect-breaking-change", () => {
         ["resource-manager"],
       );
 
-      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
+      const result = await getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
@@ -636,7 +636,7 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("checkAPIsBeingMovedToANewSpec", () => {
+  describe("checkAPIsBeingMovedToANewSpec", async () => {
     beforeEach(() => {
       MockSetup.resetAllMocks();
     });
@@ -721,7 +721,7 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("checkCrossVersionBreakingChange", () => {
+  describe("checkCrossVersionBreakingChange", async () => {
     let mockSpecModelInstance: any;
 
     beforeEach(async () => {
@@ -823,7 +823,7 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("createBreakingChangeDetectionContext", () => {
+  describe("createBreakingChangeDetectionContext", async () => {
     it("should create context with all required properties", async () => {
       vi.mocked(detectionModule.createBreakingChangeDetectionContext).mockImplementation(
         (
@@ -860,7 +860,7 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("checkBreakingChangeOnSameVersion", () => {
+  describe("checkBreakingChangeOnSameVersion", async () => {
     beforeEach(() => {
       mockDetectionContext.existingVersionSwaggers = [
         TEST_CONSTANTS.PATHS.networkStable,
@@ -905,7 +905,7 @@ describe("detect-breaking-change", () => {
     });
   });
 
-  describe("doBreakingChangeDetection", () => {
+  describe("doBreakingChangeDetection", async () => {
     const mockOldSpec = "/old/spec/path.json";
     const mockNewSpec =
       "specification/test/resource-manager/Microsoft.Test/stable/2021-05-01/test.json";

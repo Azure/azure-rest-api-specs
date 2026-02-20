@@ -1,3 +1,4 @@
+import { log } from "@azure-tools/specs-shared/console";
 import { appendFileSync } from "node:fs";
 
 /**
@@ -21,35 +22,35 @@ export enum LogLevel {
  * @param message The message to log.
  * @param level The log level (e.g., LogLevel.Group, LogLevel.EndGroup, LogLevel.Debug, LogLevel.Error).
  */
-export function logMessage(message: string, level?: LogLevel): void {
+export async function logMessage(message: string, level?: LogLevel): Promise<void> {
   switch (level) {
     case LogLevel.Group: {
-      console.log(`::group::${message}`);
+      await log(`::group::${message}`);
       break;
     }
     case LogLevel.EndGroup: {
-      console.log(`::endgroup::`);
+      await log(`::endgroup::`);
       break;
     }
     case LogLevel.Debug: {
-      console.log(`::debug::${message}`);
+      await log(`::debug::${message}`);
       break;
     }
     case LogLevel.Error: {
-      console.log(`::error::${message}`);
+      await log(`::error::${message}`);
       break;
     }
     case LogLevel.Warn: {
-      console.log(`::warning::${message}`);
+      await log(`::warning::${message}`);
       break;
     }
     case LogLevel.Notice: {
-      console.log(`::notice::${message}`);
+      await log(`::notice::${message}`);
       break;
     }
     case LogLevel.Info:
     default: {
-      console.log(message);
+      await log(message);
       break;
     }
   }
@@ -63,13 +64,18 @@ export function logMessage(message: string, level?: LogLevel): void {
  * @param line Line number (optional)
  * @param col Column number (optional)
  */
-export function logError(message: string, file?: string, line?: number, col?: number): void {
+export async function logError(
+  message: string,
+  file?: string,
+  line?: number,
+  col?: number,
+): Promise<void> {
   if (file) {
     const location = line && col ? `line=${line},col=${col}` : line ? `line=${line}` : "";
     const fileLocation = location ? `file=${file},${location}` : `file=${file}`;
-    console.log(`::error ${fileLocation}::${message}`);
+    await log(`::error ${fileLocation}::${message}`);
   } else {
-    console.log(`::error::${message}`);
+    await log(`::error::${message}`);
   }
 }
 
@@ -81,13 +87,18 @@ export function logError(message: string, file?: string, line?: number, col?: nu
  * @param line Line number (optional)
  * @param col Column number (optional)
  */
-export function logWarning(message: string, file?: string, line?: number, col?: number): void {
+export async function logWarning(
+  message: string,
+  file?: string,
+  line?: number,
+  col?: number,
+): Promise<void> {
   if (file) {
     const location = line && col ? `line=${line},col=${col}` : line ? `line=${line}` : "";
     const fileLocation = location ? `file=${file},${location}` : `file=${file}`;
-    console.log(`::warning ${fileLocation}::${message}`);
+    await log(`::warning ${fileLocation}::${message}`);
   } else {
-    console.log(`::warning::${message}`);
+    await log(`::warning::${message}`);
   }
 }
 
@@ -96,12 +107,12 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
  * @param name Output parameter name
  * @param value Output parameter value
  */
-export function setOutput(name: string, value: string): void {
+export async function setOutput(name: string, value: string): Promise<void> {
   if (process.env.GITHUB_OUTPUT) {
     appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
   } else {
     // Fallback to older syntax
-    console.log(`::set-output name=${name}::${value}`);
+    await log(`::set-output name=${name}::${value}`);
   }
 }
 
@@ -122,12 +133,12 @@ export function addToSummary(content: string): void {
  * @param content Function that logs the group content
  */
 export async function logGroup<T>(title: string, content: () => Promise<T> | T): Promise<T> {
-  logMessage(title, LogLevel.Group);
+  await logMessage(title, LogLevel.Group);
   try {
     const result = await content();
     return result;
   } finally {
-    logMessage("", LogLevel.EndGroup);
+    await logMessage("", LogLevel.EndGroup);
   }
 }
 
@@ -160,7 +171,11 @@ export function truncateLogMessage(message: string, prefix?: string): string {
  * @param level The log level
  * @param prefix Optional prefix for truncation message
  */
-export function logMessageSafe(message: string, level?: LogLevel, prefix?: string): void {
+export async function logMessageSafe(
+  message: string,
+  level?: LogLevel,
+  prefix?: string,
+): Promise<void> {
   const safeMessage = truncateLogMessage(message, prefix);
-  logMessage(safeMessage, level);
+  await logMessage(safeMessage, level);
 }

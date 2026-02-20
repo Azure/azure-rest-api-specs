@@ -53,7 +53,7 @@ export async function generateBreakingChangeResultSummary(
   // Output to GitHub Actions job summary
   await writeToJobSummary(markdownReport);
 
-  logMessage(
+  await logMessage(
     `RETURNING. messageRecords# raw/result/all: ` +
       `${runtimeErrors.length}/${messages.length}/${runtimeErrors.length + messages.length}, ` +
       `length summary/comment/(summary+comment): ` +
@@ -81,7 +81,7 @@ async function getCommentData(
 
   let commentData = markdownMessageRow + reportsString;
   if (commentData.length > maxCommentDataLength) {
-    logWarning(
+    await logWarning(
       `ASSERTION VIOLATION! commentData.length == ${commentData.length} which is > maxCommentDataLength of ${maxCommentDataLength}.`,
     );
     commentData = commentData.substring(0, maxCommentDataLength - 20) + "... ⚠️ TRUNCATED ⚠️";
@@ -114,12 +114,12 @@ async function getReportsAsString(
   }
 
   if (!totalTextLengthWithinLimit(reportsString, textPrefixLength, maxCommentDataLength)) {
-    logWarning(
+    await logWarning(
       `ASSERTION VIOLATION! totalTextLengthWithinLimit is false. currentMaxRowCount: ${currentMaxRowCount}.`,
     );
   }
 
-  logMessage(
+  await logMessage(
     `getReportsAsOneString: RETURNING. ` +
       `checkShowName: ${checkName}, ` +
       `maxRowCount reduced/current/max: ${maxRowCountAcrossKeys - currentMaxRowCount}/${currentMaxRowCount}/${maxRowCountAcrossKeys}, ` +
@@ -266,7 +266,7 @@ function getMessageLevelCounts(msgs: BrChMsgRecord[], msgLevel: MessageLevel) {
  */
 async function writeToJobSummary(markdownContent: string): Promise<void> {
   if (!process.env.GITHUB_STEP_SUMMARY) {
-    logMessage("GitHub Actions job summary not available, skipping summary output.");
+    await logMessage("GitHub Actions job summary not available, skipping summary output.");
     return;
   }
 
@@ -279,11 +279,13 @@ async function writeToJobSummary(markdownContent: string): Promise<void> {
     const availableSpace = jobSummaryLengthLimit - truncationMessage.length;
     finalContent = markdownContent.substring(0, availableSpace) + truncationMessage;
 
-    logWarning(
+    await logWarning(
       `Job summary content truncated. Original length: ${markdownContent.length}, truncated to: ${finalContent.length}`,
     );
   }
 
   addToSummary(finalContent);
-  logMessage(`Successfully wrote ${finalContent.length} characters to GitHub Actions job summary.`);
+  await logMessage(
+    `Successfully wrote ${finalContent.length} characters to GitHub Actions job summary.`,
+  );
 }

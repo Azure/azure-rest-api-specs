@@ -19,7 +19,7 @@ const __dirname: string = path.dirname(__filename);
 /**
  * Parse command line arguments using Node.js parseArgs
  */
-function parseCliArguments(): ParsedCliArguments {
+async function parseCliArguments(): Promise<ParsedCliArguments> {
   const options: ParseArgsConfig = {
     options: {
       "spec-repo-path": {
@@ -80,14 +80,14 @@ function parseCliArguments(): ParsedCliArguments {
 
     // Show help if requested
     if (values.help) {
-      showHelp();
+      await showHelp();
       exit(0);
     }
 
     // Validate required arguments
     if (!values["pr-number"]) {
-      logError("Error: --pr-number (PR number) is required");
-      showHelp();
+      await logError("Error: --pr-number (PR number) is required");
+      await showHelp();
       exit(1);
     }
 
@@ -97,7 +97,7 @@ function parseCliArguments(): ParsedCliArguments {
       BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
     ];
     if (!validRunTypes.includes(values["run-type"] as BreakingChangesCheckType)) {
-      logError(`Error: --run-type must be one of: ${validRunTypes.join(", ")}`);
+      await logError(`Error: --run-type must be one of: ${validRunTypes.join(", ")}`);
       exit(1);
     }
 
@@ -113,51 +113,53 @@ function parseCliArguments(): ParsedCliArguments {
       prTargetBranch: values["pr-target-branch"] as string,
     };
   } catch (error) {
-    logError(`Error parsing arguments: ${error}`);
-    showHelp();
+    await logError(`Error parsing arguments: ${error}`);
+    await showHelp();
     exit(1);
+    // unreachable but satisfies TypeScript's exhaustive return check
+    throw new Error("unreachable");
   }
 }
 
 /**
  * Show help message
  */
-function showHelp() {
-  logMessage("OpenAPI Diff Runner - Breaking Change Detection Tool");
-  logMessage("");
-  logMessage("Usage: node index.js [options]");
-  logMessage("");
-  logMessage("Options:");
-  logMessage("  -h, --help                Show help message");
-  logMessage("  -p, --spec-repo-path      Local spec repository path (default: ..)");
-  logMessage(
+async function showHelp() {
+  await logMessage("OpenAPI Diff Runner - Breaking Change Detection Tool");
+  await logMessage("");
+  await logMessage("Usage: node index.js [options]");
+  await logMessage("");
+  await logMessage("Options:");
+  await logMessage("  -h, --help                Show help message");
+  await logMessage("  -p, --spec-repo-path      Local spec repository path (default: ..)");
+  await logMessage(
     "  -r, --target-repo         Target repository (owner/repo format) (default: azure/azure-rest-api-specs)",
   );
-  logMessage(
+  await logMessage(
     "  -s, --source-repo         Source repository (owner/repo format) (default: azure/azure-rest-api-specs)",
   );
-  logMessage("  -n, --pr-number           Pull request number (required)");
-  logMessage(
+  await logMessage("  -n, --pr-number           Pull request number (required)");
+  await logMessage(
     "  -t, --run-type            Run type (SameVersion or CrossVersion) (default: SameVersion)",
   );
-  logMessage("  -b, --base-branch         Base branch for comparison (default: main)");
-  logMessage("  -c, --head-commit         Head commit SHA (default: HEAD)");
-  logMessage("      --pr-source-branch    PR source branch (default: '')");
-  logMessage("      --pr-target-branch    PR target branch (default: '')");
-  logMessage("");
-  logMessage("Examples:");
-  logMessage("  node index.js --pr-number 12345 --run-type SameVersion");
-  logMessage("  node index.js -n 12345 -t CrossVersion -b main");
-  logMessage("  node index.js --pr-number 12345 --target-repo myorg/my-specs");
+  await logMessage("  -b, --base-branch         Base branch for comparison (default: main)");
+  await logMessage("  -c, --head-commit         Head commit SHA (default: HEAD)");
+  await logMessage("      --pr-source-branch    PR source branch (default: '')");
+  await logMessage("      --pr-target-branch    PR target branch (default: '')");
+  await logMessage("");
+  await logMessage("Examples:");
+  await logMessage("  node index.js --pr-number 12345 --run-type SameVersion");
+  await logMessage("  node index.js -n 12345 -t CrossVersion -b main");
+  await logMessage("  node index.js --pr-number 12345 --target-repo myorg/my-specs");
 }
 
 export async function main() {
   // Parse command line arguments
-  const parsedArgs = parseCliArguments();
+  const parsedArgs = await parseCliArguments();
 
   // Log the arguments to the console
-  logMessage(`Arguments: ${JSON.stringify(parsedArgs, null, 2)}`);
-  logMessage(`Current working directory: ${process.cwd()}`);
+  await logMessage(`Arguments: ${JSON.stringify(parsedArgs, null, 2)}`);
+  await logMessage(`Current working directory: ${process.cwd()}`);
 
   // Create working folder and log file folder
   const workingFolder = path.join(parsedArgs.localSpecRepoPath, "..");
@@ -175,7 +177,7 @@ export async function main() {
   statusCode = await validateBreakingChange(context);
 
   if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
-    logMessage(
+    await logMessage(
       `See validation report summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
     );
   }

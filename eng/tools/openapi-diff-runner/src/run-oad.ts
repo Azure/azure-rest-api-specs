@@ -30,7 +30,7 @@ export async function runOad(
   oldTag?: string,
   newTag?: string,
 ): Promise<OadMessage[]> {
-  logMessage(
+  await logMessage(
     `ENTER definition runOad oldSpec: ${oldSpec}, newSpec: ${newSpec}, oldTag: ${oldTag}, newTag: ${newTag}`,
   );
 
@@ -58,18 +58,18 @@ export async function runOad(
 
   let oadCompareOutput: string;
   if (oldTag && newTag) {
-    logMessage("oad.CompareTags() when (oldTag && newTag)");
+    await logMessage("oad.CompareTags() when (oldTag && newTag)");
 
     oadCompareOutput = await oad.compareTags(oldSpec, oldTag, newSpec, newTag, {
       consoleLogLevel: "warn",
     });
   } else {
-    logMessage("oad.CompareTags() when !(oldTag && newTag)");
+    await logMessage("oad.CompareTags() when !(oldTag && newTag)");
 
     oadCompareOutput = await oad.compare(oldSpec, newSpec, { consoleLogLevel: "warn" });
   }
 
-  logMessageSafe(`oadCompareOutput: ${oadCompareOutput}`);
+  await logMessageSafe(`oadCompareOutput: ${oadCompareOutput}`);
 
   // The oadCompareOutput is emitted by this OAD source:
   // OpenApiDiff.Program.Main():
@@ -79,7 +79,7 @@ export async function runOad(
   // after it was transformed by ComparisonMessage.GetValidationMessagesAsJson().
   const oadMessages: OadMessage[] = JSON.parse(oadCompareOutput);
 
-  logMessage(
+  await logMessage(
     `RETURN definition runOad. oadMessages.length: ${oadMessages.length}, ` +
       `oldSpec: ${oldSpec}, newSpec: ${newSpec}, oldTag: ${oldTag}, newTag: ${newTag}.`,
   );

@@ -71,9 +71,9 @@ export const createPullRequestProperties = async (
       if (!currentBranches.all.includes(branchName)) {
         const branchArgs = startPoint ? [branchName, startPoint] : [branchName];
         await originGitRepository.branch(branchArgs);
-        logMessage(`Created branch ${branchName}${startPoint ? ` from ${startPoint}` : ""}`);
+        await logMessage(`Created branch ${branchName}${startPoint ? ` from ${startPoint}` : ""}`);
       } else {
-        logMessage(`Branch ${branchName} already exists, skipping creation`);
+        await logMessage(`Branch ${branchName} already exists, skipping creation`);
       }
     } catch (error: any) {
       // If the error is about branch already existing, that's fine - continue
@@ -81,9 +81,11 @@ export const createPullRequestProperties = async (
         error.message?.includes("already exists") ||
         error.message?.includes("fatal: a branch named")
       ) {
-        logMessage(`Branch ${branchName} already exists (caught during creation), continuing`);
+        await logMessage(
+          `Branch ${branchName} already exists (caught during creation), continuing`,
+        );
       } else {
-        logError(`Failed to create branch ${branchName}: ${error.message}`);
+        await logError(`Failed to create branch ${branchName}: ${error.message}`);
         throw error;
       }
     }
@@ -133,9 +135,9 @@ export const createPullRequestProperties = async (
   if (!skipInitializeBase) {
     await workingGitRepository.fetch("origin", `${baseBranch}`);
   }
-  logMessage(`checking out target branch ${context.prTargetBranch} in ${tempRepoFolder}`);
+  await logMessage(`checking out target branch ${context.prTargetBranch} in ${tempRepoFolder}`);
   await workingGitRepository.checkout(context.prTargetBranch);
-  logMessage(`Current working directory: ${process.cwd()}`);
+  await logMessage(`Current working directory: ${process.cwd()}`);
 
   return {
     baseBranch: context.prTargetBranch,
@@ -145,7 +147,7 @@ export const createPullRequestProperties = async (
     checkout: async function (this: any, branch: string) {
       if (this.currentBranch !== branch) {
         await workingGitRepository.checkout([branch]);
-        logMessage(
+        await logMessage(
           `checkout to ${branch} in ${tempRepoFolder}\n Current working directory: ${process.cwd()}`,
         );
         this.currentBranch = branch;

@@ -30,12 +30,12 @@ import {
  *
  * This function is invoked by the BreakingChangeDetector.doBreakingChangeDetection()
  */
-export function applyRules(
+export async function applyRules(
   oadMessages: OadMessage[],
   scenario: BreakingChangesCheckType,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): OadMessage[] {
-  logMessage("ENTER definition applyRules");
+): Promise<OadMessage[]> {
+  await logMessage("ENTER definition applyRules");
   let outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
 
@@ -45,14 +45,14 @@ export function applyRules(
     );
 
     if (rule !== undefined) {
-      outputOadMessage = applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
+      outputOadMessage = await applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
     } else {
-      logWarning(
+      await logWarning(
         `ASSERTION VIOLATION! No rule found for scenario: '${scenario}', oadMessage: '${JSON.stringify(
           oadMessage,
         )}'. Using fallback rule: '${JSON.stringify(fallbackOadMessageRule)}'.`,
       );
-      outputOadMessage = applyRule(
+      outputOadMessage = await applyRule(
         oadMessage,
         { ...fallbackOadMessageRule, scenario },
         previousApiVersionLifecycleStage,
@@ -68,15 +68,15 @@ export function applyRules(
     outputOadMessages.push(outputOadMessage);
   }
 
-  logMessage("RETURN definition applyRules");
+  await logMessage("RETURN definition applyRules");
   return outputOadMessages;
 }
 
-function applyRule(
+async function applyRule(
   oadMessage: OadMessage,
   rule: Omit<OadMessageRule, "code">,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): OadMessage {
+): Promise<OadMessage> {
   const isSameVersionOnPreview =
     previousApiVersionLifecycleStage === "preview" &&
     rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
@@ -99,7 +99,7 @@ function applyRule(
   let labelToAdd: ReviewRequiredLabel = fallbackLabel;
   if (addLabel) {
     if (rule.label == null) {
-      logWarning(
+      await logWarning(
         `ASSERTION VIOLATION! Missing "label" for 'Error' severity rule '${JSON.stringify(
           rule,
         )}'. Using fallback label '${labelToAdd}'.`,
@@ -123,7 +123,7 @@ function applyRule(
     type: appliedSeverity,
   };
 
-  logMessage(
+  await logMessage(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
       rule,
     )}', outputOadMessage: '${JSON.stringify(outputOadMessage)}'.`,
