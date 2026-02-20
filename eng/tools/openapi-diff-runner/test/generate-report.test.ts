@@ -1,7 +1,7 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { generateBreakingChangeResultSummary } from "../src/generate-report.js";
-import { addToSummary, logMessage } from "../src/log.js";
+import { logMessage } from "../src/log.js";
 import { Context } from "../src/types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "../src/types/message.js";
 import {
@@ -14,6 +14,17 @@ import {
 // Mock dependencies
 vi.mock("../src/log.js");
 vi.mock("../src/utils/markdown-report.js");
+
+const { mockWrite, mockAddRaw } = vi.hoisted(() => {
+  const mockWrite = vi.fn().mockResolvedValue(undefined);
+  const mockAddRaw = vi.fn().mockReturnValue({ write: mockWrite });
+  return { mockWrite, mockAddRaw };
+});
+vi.mock("@actions/core", () => ({
+  summary: {
+    addRaw: (...args: unknown[]) => mockAddRaw(...args),
+  },
+}));
 
 describe("generate-report", () => {
   // Test constants
@@ -58,7 +69,6 @@ describe("generate-report", () => {
     TEST_TIME: new Date("2023-01-01"),
   };
 
-  const mockAddToSummary = vi.mocked(addToSummary);
   const mockLogMessage = vi.mocked(logMessage);
   const mockCreateBreakingChangeMdReport = vi.mocked(createBreakingChangeMdReport);
   const mockReportToString = vi.mocked(reportToString);
@@ -66,6 +76,10 @@ describe("generate-report", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+
+    // Re-establish mock chain for @actions/core summary
+    mockAddRaw.mockReturnValue({ write: mockWrite });
+    mockWrite.mockResolvedValue(undefined);
 
     // Mock environment variable for GitHub Actions
     vi.stubEnv("GITHUB_STEP_SUMMARY", TEST_CONSTANTS.PATHS.SUMMARY);
@@ -164,7 +178,7 @@ describe("generate-report", () => {
   };
 
   const expectSummaryContains = (content: string) => {
-    expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining(content));
+    expect(mockAddRaw).toHaveBeenCalledWith(expect.stringContaining(content));
   };
 
   const expectLogMessage = (content: string) => {

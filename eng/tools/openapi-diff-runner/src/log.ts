@@ -106,32 +106,6 @@ export function setOutput(name: string, value: string): void {
 }
 
 /**
- * Add content to the GitHub Actions job summary
- * @param content Content to add to summary
- */
-export function addToSummary(content: string): void {
-  if (process.env.GITHUB_STEP_SUMMARY) {
-    appendFileSync(process.env.GITHUB_STEP_SUMMARY, content);
-  }
-  // Do nothing if GITHUB_STEP_SUMMARY is not available
-}
-
-/**
- * Create a collapsible group in logs
- * @param title Group title
- * @param content Function that logs the group content
- */
-export async function logGroup<T>(title: string, content: () => Promise<T> | T): Promise<T> {
-  logMessage(title, LogLevel.Group);
-  try {
-    const result = await content();
-    return result;
-  } finally {
-    logMessage("", LogLevel.EndGroup);
-  }
-}
-
-/**
  * Maximum safe log line length for GitHub Actions (64KB - some buffer)
  */
 const MAX_LOG_LINE_LENGTH = 60 * 1024; // 60KB to leave some buffer
