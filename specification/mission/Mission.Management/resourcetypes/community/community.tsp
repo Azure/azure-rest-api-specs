@@ -257,6 +257,10 @@ model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2026_01_01_preview)
   @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsModel;
+
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
+  @doc("Address spaces list")
+  addressSpaces?: string[];
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -292,6 +296,10 @@ model CommunityPatchProperties
   @added(Microsoft.Mission.Versions.v2026_01_01_preview)
   @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
+  @doc("Address spaces list")
+  addressSpaces?: string[];
 }
 
 @doc("Community Patch Resource")

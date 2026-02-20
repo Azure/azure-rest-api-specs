@@ -37,6 +37,18 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
   - Microsoft.MessagingCatalog/preview/2025-11-01-preview/messagingcatalog.json
+suppressions:
+  - code: XMSSecretInResponse
+    reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
+    from:
+      - messagingcatalog.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.MessagingCatalog/catalogs"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
 ```
 
 ### Tag: package-2024-10-01-preview
