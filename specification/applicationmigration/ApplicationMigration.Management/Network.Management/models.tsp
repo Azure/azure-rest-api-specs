@@ -373,6 +373,7 @@ model AzureResourceProperties {
   nsxOriginalPath?: string;
 
   /** The NSX unique identifier. */
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   uniqueId?: string;
 
   /** NSX tags applied to this resource. */
@@ -675,8 +676,33 @@ model NsxManagerPatchProperties {
 
 /** NsxManager updatable fields. */
 model NsxManagerPatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The fully qualified domain name of the NSX Manager. */
+  fqdn?: string;
+
   /** The run-as account credential reference. */
   runAsAccount?: string;
+
+  /** ARM resource IDs of local NSX Manager references. */
+  localNsxManagerRefs?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of managed vCenter servers. */
+  vcenterRefs?: Azure.Core.armResourceIdentifier<[
+    { type: "Microsoft.OffAzure/vmwareSites/vcenters"; }
+  ]>[];
 }
 
 /** NsxTier0Gateway patch envelope. */
@@ -687,11 +713,37 @@ model NsxTier0GatewayPatchProperties {
 
 /** NsxTier0Gateway updatable fields. */
 model NsxTier0GatewayPatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
   /** The high-availability mode. */
   haMode?: HaMode;
 
   /** Whether the firewall is enabled. */
   firewallEnabled?: boolean;
+
+  /** ARM resource IDs of associated Tier-1 gateways. */
+  associatedTier1Gateways?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated segments. */
+  associatedSegments?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated NAT rules. */
+  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated gateway firewall policies. */
+  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxTier1Gateway patch envelope. */
@@ -702,11 +754,40 @@ model NsxTier1GatewayPatchProperties {
 
 /** NsxTier1Gateway updatable fields. */
 model NsxTier1GatewayPatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
   /** The high-availability mode. */
   haMode?: HaMode;
 
   /** Whether the firewall is enabled. */
   firewallEnabled?: boolean;
+
+  /** ARM resource ID of the parent Tier-0 gateway. */
+  parentTier0Gateway?: Azure.Core.armResourceIdentifier;
+
+  /** ARM resource IDs of associated segments. */
+  associatedSegments?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated NAT rules. */
+  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated gateway firewall policies. */
+  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated load balancers. */
+  associatedLoadBalancers?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxSegment patch envelope. */
@@ -717,8 +798,43 @@ model NsxSegmentPatchProperties {
 
 /** NsxSegment updatable fields. */
 model NsxSegmentPatchFields {
-  /** The admin state. */
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** ARM resource ID of the parent gateway. */
+  parentGateway?: Azure.Core.armResourceIdentifier;
+
+  /** The segment type. */
+  segmentType?: SegmentType;
+
+  /** VLAN identifiers for this segment. */
+  vlanIds?: string[];
+
+  /** The subnet definitions. */
+  @identifiers(#[])
+  subnets?: Subnet[];
+
+  /** Whether this segment is system-owned. */
+  systemOwned?: boolean;
+
+  /** The administrative state of the segment. */
   adminState?: AdminState;
+
+  /** ARM resource IDs of virtual machines connected to this segment. */
+  associatedVirtualMachines?: Azure.Core.armResourceIdentifier<[
+    { type: "Microsoft.OffAzure/vmwareSites/machines"; }
+  ]>[];
 }
 
 /** NsxNsGroup patch envelope. */
@@ -729,9 +845,30 @@ model NsxNsGroupPatchProperties {
 
 /** NsxNsGroup updatable fields. */
 model NsxNsGroupPatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
   /** The group membership expressions. */
   @identifiers(#[])
   expressions?: GroupExpression[];
+
+  /** Effective virtual machine references resolved by the group. */
+  @identifiers(#[])
+  effectiveVirtualMachineRefs?: EffectiveVmRef[];
+
+  /** Effective IP address members resolved by the group. */
+  effectiveIpMembers?: string[];
 }
 
 /** NsxGatewayFirewallPolicy patch envelope. */
@@ -742,8 +879,40 @@ model NsxGatewayFirewallPolicyPatchProperties {
 
 /** NsxGatewayFirewallPolicy updatable fields. */
 model NsxGatewayFirewallPolicyPatchFields {
-  /** The sequence number. */
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The policy category. */
+  category?: GatewayPolicyCategory;
+
+  /** The sequence number determining policy evaluation order. */
   sequenceNumber?: int32;
+
+  /** Whether this is a default policy. */
+  isDefault?: boolean;
+
+  /** The context type. */
+  contextType?: PolicyContextType;
+
+  /** The federation scope of the policy. */
+  federationScope?: FederationScope;
+
+  /** ARM resource IDs of scopes this policy is applied to. */
+  appliedScopes?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of effective scopes. */
+  effectiveScopes?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxGatewayFirewallRule patch envelope. */
@@ -754,11 +923,56 @@ model NsxGatewayFirewallRulePatchProperties {
 
 /** NsxGatewayFirewallRule updatable fields. */
 model NsxGatewayFirewallRulePatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The action to take when the rule matches. */
+  action?: FirewallAction;
+
+  /** The traffic direction the rule applies to. */
+  direction?: FirewallDirection;
+
   /** Whether the rule is disabled. */
   disabled?: boolean;
 
-  /** The sequence number. */
+  /** The sequence number determining rule evaluation order. */
   sequenceNumber?: int32;
+
+  /** The global priority of the rule. */
+  globalPriority?: string;
+
+  /** ARM resource IDs of source IP groups. */
+  sourceIpGroups?: Azure.Core.armResourceIdentifier[];
+
+  /** Source IP addresses. */
+  sourceAddresses?: string[];
+
+  /** ARM resource IDs of destination IP groups. */
+  destinationIpGroups?: Azure.Core.armResourceIdentifier[];
+
+  /** Destination IP addresses. */
+  destinationAddresses?: string[];
+
+  /** The services this rule applies to. */
+  @identifiers(#[])
+  services?: FirewallService[];
+
+  /** ARM resource IDs of scopes this rule is applied to. */
+  appliedScopes?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of effective scopes. */
+  effectiveScopes?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxLoadBalancer patch envelope. */
@@ -769,8 +983,34 @@ model NsxLoadBalancerPatchProperties {
 
 /** NsxLoadBalancer updatable fields. */
 model NsxLoadBalancerPatchFields {
-  /** The admin state. */
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The type of load balancer (L4 or L7). */
+  lbType?: LbType;
+
+  /** The administrative state. */
   adminState?: AdminState;
+
+  /** ARM resource ID of the parent gateway. */
+  parentGateway?: Azure.Core.armResourceIdentifier;
+
+  /** The frontend configuration. */
+  frontend?: FrontendConfig;
+
+  /** The backend configuration (pool, health probe, SNAT). */
+  backendConfig?: BackendConfig;
 }
 
 /** NsxNatRule patch envelope. */
@@ -781,8 +1021,34 @@ model NsxNatRulePatchProperties {
 
 /** NsxNatRule updatable fields. */
 model NsxNatRulePatchFields {
-  /** The admin state. */
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The NAT type (SNAT or DNAT). */
+  natType?: NatType;
+
+  /** The administrative state. */
   adminState?: AdminState;
+
+  /** ARM resource ID of the parent gateway. */
+  parentGateway?: Azure.Core.armResourceIdentifier;
+
+  /** The match criteria. */
+  match?: NatMatch;
+
+  /** The translation target. */
+  translate?: NatTranslate;
 }
 
 // ──────────────────────────────────────────────
@@ -875,6 +1141,16 @@ model NetworkAgentPatchProperties {
 
 /** NetworkAgent updatable fields. */
 model NetworkAgentPatchFields {
+  /** The display name of the agent. */
+  displayName?: string;
+
   /** Health details of the agent. */
   healthDetails?: AgentHealthProperties;
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
 }

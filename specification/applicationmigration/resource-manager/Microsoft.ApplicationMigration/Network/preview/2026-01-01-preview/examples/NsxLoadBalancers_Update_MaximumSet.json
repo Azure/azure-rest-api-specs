@@ -2,8 +2,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/loadBalancers/lb1",
-        "name": "lb1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/loadBalancers/c9d0e1f2-3a4b-5c6d-7e8f-901234567890",
+        "name": "c9d0e1f2-3a4b-5c6d-7e8f-901234567890",
         "type": "Microsoft.ApplicationMigration/networkSites/loadBalancers",
         "systemData": {
           "lastModifiedAt": "2024-01-01T00:00:00Z",
@@ -16,12 +16,12 @@
         "properties": {
           "provisioningState": "Succeeded",
           "displayName": "LB-01",
-          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
-          "uniqueId": "lb-uid-001",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/nsxManagers/b2c3d4e5-6f7a-8b9c-0d1e-f23456789012",
+          "uniqueId": "99999999-9999-9999-9999-999999999999",
           "nsxTags": [],
           "lbType": "L4",
           "adminState": "ENABLED",
-          "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1",
+          "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/tier1Gateways/d4e5f6a7-8b9c-0d1e-2f3a-456789012345",
           "frontend": {
             "protocol": "HTTPS",
             "vip": "10.0.1.100",
@@ -63,11 +63,49 @@
     "api-version": "2026-01-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "siteName": "site1",
-    "loadBalancerName": "lb1",
+    "siteName": "d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d",
+    "loadBalancerName": "c9d0e1f2-3a4b-5c6d-7e8f-901234567890",
     "properties": {
       "properties": {
-        "adminState": "ENABLED"
+        "displayName": "LB-Updated",
+        "nsxTags": [],
+        "errors": [],
+        "errorCount": 0,
+        "lbType": "L4",
+        "adminState": "ENABLED",
+        "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/tier1Gateways/d4e5f6a7-8b9c-0d1e-2f3a-456789012345",
+        "frontend": {
+          "protocol": "HTTPS",
+          "vip": "10.0.1.100",
+          "port": 443
+        },
+        "backendConfig": {
+          "snat": {
+            "type": "AUTOMAP"
+          },
+          "backendPool": {
+            "members": [
+              {
+                "weight": 1,
+                "ipAddress": "10.0.2.10",
+                "adminState": "ENABLED",
+                "port": 8080,
+                "vmRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+              },
+              {
+                "weight": 1,
+                "ipAddress": "10.0.2.11",
+                "adminState": "ENABLED",
+                "port": 8080
+              }
+            ],
+            "algorithm": "ROUND_ROBIN"
+          },
+          "healthProbe": {
+            "port": 8080,
+            "protocol": "TCP"
+          }
+        }
       }
     }
   },

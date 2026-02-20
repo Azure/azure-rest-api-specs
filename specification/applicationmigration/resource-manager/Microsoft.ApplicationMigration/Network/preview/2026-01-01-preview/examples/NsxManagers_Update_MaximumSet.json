@@ -2,8 +2,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
-        "name": "mgr1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d/nsxManagers/b2c3d4e5-6f7a-8b9c-0d1e-f23456789012",
+        "name": "b2c3d4e5-6f7a-8b9c-0d1e-f23456789012",
         "type": "Microsoft.ApplicationMigration/networkSites/nsxManagers",
         "systemData": {
           "lastModifiedAt": "2024-01-01T00:00:00Z",
@@ -16,7 +16,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "displayName": "nsx-mgr-01",
-          "uniqueId": "mgr-uid-001",
+          "uniqueId": "22222222-2222-2222-2222-222222222222",
           "nsxTags": [
             {
               "tag": "prod",
@@ -40,11 +40,25 @@
     "api-version": "2026-01-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "siteName": "site1",
-    "managerName": "mgr1",
+    "siteName": "d7c19c0e-2b4a-4f3c-8a6d-1e5f7a9b3c2d",
+    "managerName": "b2c3d4e5-6f7a-8b9c-0d1e-f23456789012",
     "properties": {
       "properties": {
-        "runAsAccount": "account1"
+        "displayName": "NSX-Manager-Updated",
+        "nsxTags": [
+          {
+            "scope": "env",
+            "tag": "production"
+          }
+        ],
+        "errors": [],
+        "errorCount": 0,
+        "fqdn": "nsx-manager-updated.contoso.com",
+        "runAsAccount": "account1",
+        "localNsxManagerRefs": [],
+        "vcenterRefs": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/vcenters/vc1"
+        ]
       }
     }
   },

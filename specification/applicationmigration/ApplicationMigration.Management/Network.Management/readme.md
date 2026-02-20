@@ -67,7 +67,7 @@ Every ProxyResource's properties model inherits from `AzureResourceProperties`:
 | `provisioningState` | ProvisioningState | **Read-only**. Set by server ("Succeeded", "Failed", etc.) |
 | `displayName` | string | The display name from NSX |
 | `nsxOriginalPath` | string | The original path identifier in NSX (e.g., `/infra/tier-0s/T0-GW`) |
-| `uniqueId` | string | The NSX unique identifier |
+| `uniqueId` | string | The NSX unique identifier. **Must be UUID format** (`@pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")`) |
 | `nsxTags` | NsxTag[] | NSX tags (scope + tag pairs — NOT Azure resource tags) |
 | `errors` | Error[] | List of discovery/health errors |
 | `errorCount` | int64 | The number of errors |
@@ -82,7 +82,7 @@ Every ProxyResource's properties model inherits from `AzureResourceProperties`:
     "displayName": "Segment-Web-Tier",
     "nsxOriginalPath": "/infra/segments/segment-web",
     "nsxManagerRef": "/subscriptions/.../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "abc-123-def",
+    "uniqueId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "nsxTags": [{ "scope": "env", "tag": "production" }],
     "errors": [],
     "errorCount": 0,
@@ -500,13 +500,22 @@ TypeSpec:
     properties?: NsxManagerPatchFields;           ← inner fields
   }
   model NsxManagerPatchFields {
-    runAsAccount?: string;                        ← only patchable fields
+    displayName?: string;
+    nsxTags?: NsxTag[];
+    errors?: Error[];
+    errorCount?: int64;
+    fqdn?: string;
+    runAsAccount?: string;
+    localNsxManagerRefs?: armResourceIdentifier[];
+    vcenterRefs?: armResourceIdentifier[];
   }
 
 Request body:
   PATCH .../nsxManagers/mgr1
   {
     "properties": {
+      "displayName": "Updated Name",
+      "fqdn": "new-nsx-mgr.contoso.com",
       "runAsAccount": "newAccount"
     }
   }
@@ -579,7 +588,7 @@ Network.Management/
 ├── NsxGatewayFirewallRule.tsp       ← Firewall Rule (3-level, parent=Policy)
 ├── NsxLoadBalancer.tsp              ← Load Balancer (ProxyResource)
 ├── NsxNatRule.tsp                   ← NAT Rule (ProxyResource)
-├── plan.md                          ← This file
+├── readme.md                        ← This file
 └── examples/
     └── 2026-01-01-preview/          ← 59 example JSON files
         ├── Operations_List_MaximumSet.json
@@ -692,7 +701,7 @@ GET /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ApplicationMigr
     "provisioningState": "Succeeded",
     "displayName": "MySite",
     "nsxOriginalPath": "/infra/sites/default",
-    "uniqueId": "site-uid-001",
+    "uniqueId": "11111111-1111-1111-1111-111111111111",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -756,7 +765,7 @@ GET .../networkSites/site1/nsxManagers/mgr1
     "provisioningState": "Succeeded",
     "displayName": "nsx-mgr-01",
     "nsxOriginalPath": "/infra/managers/mgr1",
-    "uniqueId": "mgr-uid-001",
+    "uniqueId": "22222222-2222-2222-2222-222222222222",
     "nsxTags": [{ "scope": "env", "tag": "prod" }],
     "errors": [],
     "errorCount": 0,
@@ -792,7 +801,7 @@ GET .../networkSites/site1/tier0Gateways/t0gw1
     "displayName": "T0-Gateway",
     "nsxOriginalPath": "/infra/tier-0s/t0gw",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "t0-uid-001",
+    "uniqueId": "33333333-3333-3333-3333-333333333333",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -836,7 +845,7 @@ GET .../networkSites/site1/tier1Gateways/t1gw1
     "displayName": "T1-Gateway",
     "nsxOriginalPath": "/infra/tier-1s/t1gw",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "t1-uid-001",
+    "uniqueId": "44444444-4444-4444-4444-444444444444",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -882,7 +891,7 @@ GET .../networkSites/site1/segments/seg1
     "displayName": "Segment-01",
     "nsxOriginalPath": "/infra/segments/seg1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "seg-uid-001",
+    "uniqueId": "55555555-5555-5555-5555-555555555555",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -924,7 +933,7 @@ GET .../networkSites/site1/nsGroups/grp1
     "displayName": "Group-01",
     "nsxOriginalPath": "/infra/domains/default/groups/grp1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "grp-uid-001",
+    "uniqueId": "66666666-6666-6666-6666-666666666666",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -984,7 +993,7 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1
     "displayName": "Default-Policy",
     "nsxOriginalPath": "/infra/domains/default/gateway-policies/pol1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "pol-uid-001",
+    "uniqueId": "77777777-7777-7777-7777-777777777777",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -1027,7 +1036,7 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1
     "displayName": "Allow-SSH",
     "nsxOriginalPath": "/infra/domains/default/gateway-policies/pol1/rules/rule1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "rule-uid-001",
+    "uniqueId": "88888888-8888-8888-8888-888888888888",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -1100,7 +1109,7 @@ GET .../networkSites/site1/loadBalancers/lb1
     "displayName": "LB-01",
     "nsxOriginalPath": "/infra/lb-services/lb1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "lb-uid-001",
+    "uniqueId": "99999999-9999-9999-9999-999999999999",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
@@ -1161,7 +1170,7 @@ GET .../networkSites/site1/natRules/nat1
     "displayName": "NAT-SNAT-01",
     "nsxOriginalPath": "/infra/tier-1s/t1gw/nat/USER/nat-rules/nat1",
     "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
-    "uniqueId": "nat-uid-001",
+    "uniqueId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,

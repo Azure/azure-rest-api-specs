@@ -3759,7 +3759,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -4544,9 +4545,26 @@
       "type": "object",
       "description": "NetworkAgent updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the agent."
+        },
         "healthDetails": {
           "$ref": "#/definitions/AgentHealthProperties",
           "description": "Health details of the agent."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
         }
       }
     },
@@ -4679,7 +4697,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -4771,10 +4790,69 @@
       "type": "object",
       "description": "NsxGatewayFirewallPolicy updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "category": {
+          "$ref": "#/definitions/GatewayPolicyCategory",
+          "description": "The policy category."
+        },
         "sequenceNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "The sequence number."
+          "description": "The sequence number determining policy evaluation order."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is a default policy."
+        },
+        "contextType": {
+          "$ref": "#/definitions/PolicyContextType",
+          "description": "The context type."
+        },
+        "federationScope": {
+          "$ref": "#/definitions/FederationScope",
+          "description": "The federation scope of the policy."
+        },
+        "appliedScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of scopes this policy is applied to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "effectiveScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of effective scopes.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         }
       }
     },
@@ -4807,7 +4885,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -4919,6 +4998,39 @@
       "type": "object",
       "description": "NsxGatewayFirewallRule updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "action": {
+          "$ref": "#/definitions/FirewallAction",
+          "description": "The action to take when the rule matches."
+        },
+        "direction": {
+          "$ref": "#/definitions/FirewallDirection",
+          "description": "The traffic direction the rule applies to."
+        },
         "disabled": {
           "type": "boolean",
           "description": "Whether the rule is disabled."
@@ -4926,7 +5038,69 @@
         "sequenceNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "The sequence number."
+          "description": "The sequence number determining rule evaluation order."
+        },
+        "globalPriority": {
+          "type": "string",
+          "description": "The global priority of the rule."
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "ARM resource IDs of source IP groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "Source IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "ARM resource IDs of destination IP groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "Destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "The services this rule applies to.",
+          "items": {
+            "$ref": "#/definitions/FirewallService"
+          },
+          "x-ms-identifiers": []
+        },
+        "appliedScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of scopes this rule is applied to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "effectiveScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of effective scopes.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         }
       }
     },
@@ -4959,7 +5133,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5111,9 +5286,51 @@
       "type": "object",
       "description": "NsxLoadBalancer updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "lbType": {
+          "$ref": "#/definitions/LbType",
+          "description": "The type of load balancer (L4 or L7)."
+        },
         "adminState": {
           "$ref": "#/definitions/AdminState",
-          "description": "The admin state."
+          "description": "The administrative state."
+        },
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
+        },
+        "frontend": {
+          "$ref": "#/definitions/FrontendConfig",
+          "description": "The frontend configuration."
+        },
+        "backendConfig": {
+          "$ref": "#/definitions/BackendConfig",
+          "description": "The backend configuration (pool, health probe, SNAT)."
         }
       }
     },
@@ -5146,7 +5363,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5240,9 +5458,63 @@
       "type": "object",
       "description": "NsxManager updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The fully qualified domain name of the NSX Manager."
+        },
         "runAsAccount": {
           "type": "string",
           "description": "The run-as account credential reference."
+        },
+        "localNsxManagerRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of local NSX Manager references.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "vcenterRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of managed vCenter servers.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/vcenters"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -5275,7 +5547,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5379,9 +5652,51 @@
       "type": "object",
       "description": "NsxNatRule updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "natType": {
+          "$ref": "#/definitions/NatType",
+          "description": "The NAT type (SNAT or DNAT)."
+        },
         "adminState": {
           "$ref": "#/definitions/AdminState",
-          "description": "The admin state."
+          "description": "The administrative state."
+        },
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
+        },
+        "match": {
+          "$ref": "#/definitions/NatMatch",
+          "description": "The match criteria."
+        },
+        "translate": {
+          "$ref": "#/definitions/NatTranslate",
+          "description": "The translation target."
         }
       }
     },
@@ -5414,7 +5729,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5508,6 +5824,31 @@
       "type": "object",
       "description": "NsxNsGroup updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
         "expressions": {
           "type": "array",
           "description": "The group membership expressions.",
@@ -5515,6 +5856,21 @@
             "$ref": "#/definitions/GroupExpression"
           },
           "x-ms-identifiers": []
+        },
+        "effectiveVirtualMachineRefs": {
+          "type": "array",
+          "description": "Effective virtual machine references resolved by the group.",
+          "items": {
+            "$ref": "#/definitions/EffectiveVmRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "effectiveIpMembers": {
+          "type": "array",
+          "description": "Effective IP address members resolved by the group.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5547,7 +5903,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5643,9 +6000,78 @@
       "type": "object",
       "description": "NsxSegment updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
+        },
+        "segmentType": {
+          "$ref": "#/definitions/SegmentType",
+          "description": "The segment type."
+        },
+        "vlanIds": {
+          "type": "array",
+          "description": "VLAN identifiers for this segment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The subnet definitions.",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "x-ms-identifiers": []
+        },
+        "systemOwned": {
+          "type": "boolean",
+          "description": "Whether this segment is system-owned."
+        },
         "adminState": {
           "$ref": "#/definitions/AdminState",
-          "description": "The admin state."
+          "description": "The administrative state of the segment."
+        },
+        "associatedVirtualMachines": {
+          "type": "array",
+          "description": "ARM resource IDs of virtual machines connected to this segment.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/machines"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -5678,7 +6104,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5813,6 +6240,31 @@
       "type": "object",
       "description": "NsxTier0Gateway updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
         "haMode": {
           "$ref": "#/definitions/HaMode",
           "description": "The high-availability mode."
@@ -5820,6 +6272,42 @@
         "firewallEnabled": {
           "type": "boolean",
           "description": "Whether the firewall is enabled."
+        },
+        "associatedTier1Gateways": {
+          "type": "array",
+          "description": "ARM resource IDs of associated Tier-1 gateways.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedSegments": {
+          "type": "array",
+          "description": "ARM resource IDs of associated segments.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedNatRules": {
+          "type": "array",
+          "description": "ARM resource IDs of associated NAT rules.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedGfwPolicies": {
+          "type": "array",
+          "description": "ARM resource IDs of associated gateway firewall policies.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         }
       }
     },
@@ -5852,7 +6340,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
@@ -5973,6 +6462,31 @@
       "type": "object",
       "description": "NsxTier1Gateway updatable fields.",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
         "haMode": {
           "$ref": "#/definitions/HaMode",
           "description": "The high-availability mode."
@@ -5980,6 +6494,47 @@
         "firewallEnabled": {
           "type": "boolean",
           "description": "Whether the firewall is enabled."
+        },
+        "parentTier0Gateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent Tier-0 gateway."
+        },
+        "associatedSegments": {
+          "type": "array",
+          "description": "ARM resource IDs of associated segments.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedNatRules": {
+          "type": "array",
+          "description": "ARM resource IDs of associated NAT rules.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedGfwPolicies": {
+          "type": "array",
+          "description": "ARM resource IDs of associated gateway firewall policies.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedLoadBalancers": {
+          "type": "array",
+          "description": "ARM resource IDs of associated load balancers.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         }
       }
     },
@@ -6012,7 +6567,8 @@
         },
         "uniqueId": {
           "type": "string",
-          "description": "The NSX unique identifier."
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
         },
         "nsxTags": {
           "type": "array",
