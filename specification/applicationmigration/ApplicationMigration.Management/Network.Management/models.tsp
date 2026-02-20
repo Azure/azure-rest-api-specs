@@ -701,7 +701,9 @@ model NsxManagerPatchFields {
 
   /** ARM resource IDs of managed vCenter servers. */
   vcenterRefs?: Azure.Core.armResourceIdentifier<[
-    { type: "Microsoft.OffAzure/vmwareSites/vcenters"; }
+    {
+      type: "Microsoft.OffAzure/vmwareSites/vcenters";
+    }
   ]>[];
 }
 
@@ -833,7 +835,9 @@ model NsxSegmentPatchFields {
 
   /** ARM resource IDs of virtual machines connected to this segment. */
   associatedVirtualMachines?: Azure.Core.armResourceIdentifier<[
-    { type: "Microsoft.OffAzure/vmwareSites/machines"; }
+    {
+      type: "Microsoft.OffAzure/vmwareSites/machines";
+    }
   ]>[];
 }
 
