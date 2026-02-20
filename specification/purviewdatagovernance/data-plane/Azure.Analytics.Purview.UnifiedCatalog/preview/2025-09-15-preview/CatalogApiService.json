@@ -1146,13 +1146,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "includeLineage",
-            "in": "query",
-            "description": "Include lineage information in the response.",
-            "required": true,
-            "type": "boolean"
-          },
-          {
             "name": "includeExtendedProperties",
             "in": "query",
             "description": "Include extended properties in the response.",
@@ -1177,7 +1170,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDataAsset"
+              "$ref": "#/definitions/PagedDataAssetResponse"
             }
           },
           "default": {
@@ -5019,7 +5012,7 @@
       "type": "object",
       "description": "System metadata with expiration information for catalog entities.",
       "properties": {
-        "provisioningState": {
+        "provisionedValue": {
           "type": "string",
           "description": "The provisioning state of the record. ex: softdeleted"
         },
@@ -5540,8 +5533,9 @@
           "description": "Type properties of the asset."
         },
         "lineage": {
-          "$ref": "#/definitions/LineageInfo",
-          "description": "Lineage information for the asset."
+          "type": "object",
+          "description": "Lineage information for the asset.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -5658,10 +5652,6 @@
             "type": "string"
           }
         },
-        "includeLineage": {
-          "type": "boolean",
-          "description": "includeLineage true or false"
-        },
         "includeExtendedProperties": {
           "type": "boolean",
           "description": "includeExtendedProperties true or false"
@@ -5764,11 +5754,80 @@
         "name"
       ]
     },
+    "DataAssetResponse": {
+      "type": "object",
+      "description": "DataAsset.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "myDataProduct."
+        },
+        "systemData": {
+          "$ref": "#/definitions/DataAssetSystemData",
+          "description": "System data associated with the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description about the relationship."
+        },
+        "source": {
+          "$ref": "#/definitions/CatalogModelDataAssetSource",
+          "description": "Source of the asset."
+        },
+        "contacts": {
+          "$ref": "#/definitions/ContactsMap",
+          "description": "Contacts associated with the asset."
+        },
+        "classifications": {
+          "type": "array",
+          "description": "A list of classification labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/DataAssetType",
+          "description": "type of the data asset."
+        },
+        "schema": {
+          "type": "array",
+          "description": "Schema of the asset.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataAssetSchema"
+          }
+        },
+        "dataQuality": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for the data asset."
+        },
+        "openInUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A redirection link.."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetTypeProperties",
+          "description": "Type properties of the asset."
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
     "DataAssetSystemData": {
       "type": "object",
       "description": "System metadata with expiration information for data assets.",
       "properties": {
-        "provisioningState": {
+        "provisionedValue": {
           "$ref": "#/definitions/DataAssetProvisioningState",
           "description": "The provisioning state of the record."
         },
@@ -5882,7 +5941,7 @@
           "type": "array",
           "description": "The list of data assets.",
           "items": {
-            "$ref": "#/definitions/DataAsset"
+            "$ref": "#/definitions/DataAssetResponse"
           }
         },
         "nextLink": {
@@ -6408,266 +6467,6 @@
         "domainId"
       ]
     },
-    "LineageEntityAttributes": {
-      "type": "object",
-      "description": "Attributes of a lineage entity.",
-      "properties": {
-        "modifiedTime": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The last modified time of the entity."
-        },
-        "partitionCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of partitions in the entity."
-        },
-        "qualifiedName": {
-          "type": "string",
-          "description": "The fully qualified name of the entity."
-        },
-        "schemaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of schemas in the entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the entity."
-        },
-        "totalSizeBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total size of the entity in bytes."
-        }
-      }
-    },
-    "LineageEntityDetails": {
-      "type": "object",
-      "description": "Details of an entity in the lineage graph.",
-      "properties": {
-        "typeName": {
-          "type": "string",
-          "description": "The type name of the entity."
-        },
-        "attributes": {
-          "$ref": "#/definitions/LineageEntityAttributes",
-          "description": "The attributes of the entity."
-        },
-        "lastModifiedTS": {
-          "type": "string",
-          "description": "The last modified timestamp."
-        },
-        "guid": {
-          "type": "string",
-          "description": "The GUID of the entity."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the entity."
-        },
-        "displayText": {
-          "type": "string",
-          "description": "The display text for the entity."
-        },
-        "classificationNames": {
-          "type": "array",
-          "description": "An array of classification names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "meaningNames": {
-          "type": "array",
-          "description": "An array of meaning names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "meanings": {
-          "type": "array",
-          "description": "An array of term assignment headers.",
-          "items": {
-            "$ref": "#/definitions/LineageTermAssignmentHeader"
-          }
-        },
-        "isIncomplete": {
-          "type": "boolean",
-          "description": "Indicates if the entity is incomplete."
-        },
-        "labels": {
-          "type": "array",
-          "description": "An array of labels associated with the entity.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isIndexed": {
-          "type": "boolean",
-          "description": "Indicates if the entity is indexed."
-        },
-        "collectionId": {
-          "type": "string",
-          "description": "The collection ID of the entity."
-        },
-        "domainId": {
-          "type": "string",
-          "description": "The domain ID of the entity."
-        }
-      }
-    },
-    "LineageInfo": {
-      "type": "object",
-      "description": "The lineage information for an entity.",
-      "properties": {
-        "baseEntityGuid": {
-          "type": "string",
-          "description": "The GUID of the base entity."
-        },
-        "lineageDirection": {
-          "type": "string",
-          "description": "The direction of lineage traversal."
-        },
-        "lineageDepth": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The depth of lineage to retrieve."
-        },
-        "lineageWidth": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The width of lineage to retrieve."
-        },
-        "childrenCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of children nodes."
-        },
-        "includeParent": {
-          "type": "boolean",
-          "description": "Indicates whether to include the parent entity."
-        },
-        "guidEntityMap": {
-          "type": "object",
-          "description": "A map of entity GUIDs to entity details.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LineageEntityDetails"
-          }
-        },
-        "relations": {
-          "type": "array",
-          "description": "An array of lineage relations.",
-          "items": {
-            "$ref": "#/definitions/LineageRelation"
-          }
-        },
-        "parentRelations": {
-          "type": "array",
-          "description": "An array of parent relations.",
-          "items": {
-            "$ref": "#/definitions/LineageParentRelation"
-          }
-        },
-        "widthCounts": {
-          "type": "object",
-          "description": "The width counts for input and output directions.",
-          "additionalProperties": {
-            "$ref": "#/definitions/LineageWidthCount"
-          }
-        }
-      }
-    },
-    "LineageParentRelation": {
-      "type": "object",
-      "description": "A parent relation in the lineage graph.",
-      "properties": {
-        "childEntityId": {
-          "type": "string",
-          "description": "The GUID of the child entity."
-        },
-        "relationshipId": {
-          "type": "string",
-          "description": "The GUID of the relationship."
-        },
-        "parentEntityId": {
-          "type": "string",
-          "description": "The GUID of the parent entity."
-        }
-      }
-    },
-    "LineageRelation": {
-      "type": "object",
-      "description": "A lineage relation between entities.",
-      "properties": {
-        "fromEntityId": {
-          "type": "string",
-          "description": "The GUID of the source entity."
-        },
-        "relationshipId": {
-          "type": "string",
-          "description": "The GUID of the relationship."
-        },
-        "toEntityId": {
-          "type": "string",
-          "description": "The GUID of the target entity."
-        }
-      }
-    },
-    "LineageTermAssignmentHeader": {
-      "type": "object",
-      "description": "Term assignment header for lineage entities.",
-      "properties": {
-        "termGuid": {
-          "type": "string",
-          "description": "The GUID of the term."
-        },
-        "relationGuid": {
-          "type": "string",
-          "description": "The relationship GUID."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the term assignment."
-        },
-        "displayText": {
-          "type": "string",
-          "description": "The display text for the term."
-        },
-        "expression": {
-          "type": "string",
-          "description": "The expression for the term assignment."
-        },
-        "source": {
-          "type": "string",
-          "description": "The source of the term assignment."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the term assignment."
-        },
-        "steward": {
-          "type": "string",
-          "description": "The steward of the term assignment."
-        },
-        "confidence": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The confidence level of the term assignment."
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The user who created the term assignment."
-        }
-      }
-    },
-    "LineageWidthCount": {
-      "type": "object",
-      "description": "A map of entity GUIDs to their lineage width counts.",
-      "additionalProperties": {
-        "format": "int32",
-        "type": "integer"
-      }
-    },
     "ModelsFacetRequestObject": {
       "type": "object",
       "description": "ModelsFacetRequestObject.",
@@ -7069,15 +6868,15 @@
         "value"
       ]
     },
-    "PagedDataAsset": {
+    "PagedDataAssetRelationship": {
       "type": "object",
-      "description": "Paged collection of DataAsset items",
+      "description": "Paged collection of DataAssetRelationship items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataAsset items on this page",
+          "description": "The DataAssetRelationship items on this page",
           "items": {
-            "$ref": "#/definitions/DataAsset"
+            "$ref": "#/definitions/DataAssetRelationship"
           }
         },
         "nextLink": {
@@ -7090,15 +6889,15 @@
         "value"
       ]
     },
-    "PagedDataAssetRelationship": {
+    "PagedDataAssetResponse": {
       "type": "object",
-      "description": "Paged collection of DataAssetRelationship items",
+      "description": "Paged collection of DataAssetResponse items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataAssetRelationship items on this page",
+          "description": "The DataAssetResponse items on this page",
           "items": {
-            "$ref": "#/definitions/DataAssetRelationship"
+            "$ref": "#/definitions/DataAssetResponse"
           }
         },
         "nextLink": {

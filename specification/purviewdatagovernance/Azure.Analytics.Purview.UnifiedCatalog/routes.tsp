@@ -271,12 +271,8 @@ interface DataAssets {
   @doc("Lists data assets with optional ordering and pagination.")
   @get
   List is UnifiedCatalogOperations.ResourceList<
-    DataAsset,
+    DataAssetResponse,
     ListQueryParametersTrait<{
-      @doc("Include lineage information in the response.")
-      @query
-      includeLineage: boolean;
-
       @doc("Include extended properties in the response.")
       @query
       includeExtendedProperties: boolean;
@@ -346,7 +342,7 @@ interface DataAssets {
   @tag("DataAsset")
   @doc("Deletes a data asset by its unique identifier.")
   @delete
-  DeleteById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
+  DeleteById is UnifiedCatalogOperations.ResourceDelete<DataAssetResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
