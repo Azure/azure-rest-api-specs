@@ -27,6 +27,9 @@ jobs:
       run:
         working-directory: ./${{ matrix.folder }}
 
+    env:
+      POST_SUMMARY: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu' }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -34,22 +37,117 @@ jobs:
           sparse-checkout: |
             .github
 
-      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
-      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
-        name: Add ActionLint Problem Matcher
-        run: echo "::add-matcher::.github/matchers/actionlint.json"
-
-      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
-        name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.10
+      - name: Install dev deps
+        uses: ./.github/actions/setup-node-install-deps
         with:
-          args: -color -verbose
+          # actions/github-script@v8 uses Node 24
+          node-version: 24.x
+          working-directory: ./${{ matrix.folder }}
 
-      - if: ${{ matrix.folder == '.github' }}
+      - name: npm run test:ci
+        shell: bash
+        run: |
+          set +e
+          npm run test:ci 2>&1 | tee /tmp/vitest-output.txt
+          TEST_EXIT=$?
+          set -e
+
+          if [ "$POST_SUMMARY" = "true" ]; then
+            {
+              echo '## Vitest Summary'
+              echo '```text'
+              awk '/Test Files/{flag=1} flag{print} /Duration/{flag=0}' /tmp/vitest-output.txt | sed 's/\x1b\[[0-9;]*m//g'
+              echo '```'
+              echo '## Coverage Report'
+              echo '```text'
+              awk '/^-+\|/{found=1} found{print}' /tmp/vitest-output.txt | sed 's/\x1b\[[0-9;]*m//g'
+              echo '```'
+              echo '<details>'
+              echo '<summary>📋 Full Test Log (click to expand)</summary>'
+              echo ''
+              echo '```text'
+              sed 's/\x1b\[[0-9;]*m//g' /tmp/vitest-output.txt
+              echo '```'
+              echo '</details>'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          exit $TEST_EXIT
+
+      - name: npm run lint
+        shell: bash
+        run: |
+          set +e
+          npm run lint 2>&1 | tee /tmp/lint-output.txt
+          LINT_EXIT=$?
+          set -e
+
+          if [ "$POST_SUMMARY" = "true" ]; then
+            {
+              echo '<details>'
+              echo '<summary>🔍 Lint Output (click to expand)</summary>'
+              echo ''
+              echo '```text'
+              sed 's/\x1b\[[0-9;]*m//g' /tmp/lint-output.txt
+              echo '```'
+              echo '</details>'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          exit $LINT_EXIT
+
+      - name: npm run format:check
+        shell: bash
+        run: |
+          set +e
+          npm run format:check 2>&1 | tee /tmp/format-output.txt
+          FORMAT_EXIT=$?
+          set -e
+
+          if [ "$POST_SUMMARY" = "true" ]; then
+            {
+              echo '<details>'
+              echo '<summary>📝 Format Check (click to expand)</summary>'
+              echo ''
+              echo '```text'
+              sed 's/\x1b\[[0-9;]*m//g' /tmp/format-output.txt
+              echo '```'
+              echo '</details>'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          exit $FORMAT_EXIT
+
+      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+      - if: matrix.folder == '.github' && matrix.os == 'ubuntu'
+        name: actionlint
+        shell: bash
+        working-directory: .
+        run: |
+          echo "::add-matcher::.github/matchers/actionlint.json"
+          curl -sL "https://github.com/rhysd/actionlint/releases/download/v1.7.10/actionlint_1.7.10_linux_amd64.tar.gz" | tar xz -C /tmp actionlint
+          set +e
+          /tmp/actionlint -color -verbose 2>&1 | tee /tmp/actionlint-output.txt
+          ACTIONLINT_EXIT=$?
+          set -e
+
+          {
+            echo '<details>'
+            echo '<summary>🔧 ActionLint (click to expand)</summary>'
+            echo ''
+            echo '```text'
+            sed 's/\x1b\[[0-9;]*m//g' /tmp/actionlint-output.txt
+            echo '```'
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          exit $ACTIONLINT_EXIT
+
+      - if: matrix.folder == '.github'
         name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - if: ${{ matrix.folder == '.github' }}
+      - if: matrix.folder == '.github'
         name: Verify all modules are importable
         uses: actions/github-script@v8
         with:
@@ -60,22 +158,14 @@ jobs:
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
 
-      - name: Install dev deps
-        uses: ./.github/actions/setup-node-install-deps
-        with:
-          # actions/github-script@v8 uses Node 24
-          node-version: 24.x
-          working-directory: ./${{ matrix.folder }}
-
-      - run: npm run lint
-
-      - run: npm run format:check:ci
-
-      - run: npm run test:ci
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v6
-        with:
-          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
-          path: ./${{ matrix.folder }}/coverage
-          if-no-files-found: ignore
+      - if: matrix.folder == '.github' && matrix.os == 'ubuntu'
+        name: Post verify modules summary
+        shell: bash
+        run: |
+          {
+            echo '<details>'
+            echo '<summary>📦 Verify Modules Importable (click to expand)</summary>'
+            echo ''
+            echo '✅ All modules verified importable'
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
