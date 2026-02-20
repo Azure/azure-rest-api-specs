@@ -5533,9 +5533,8 @@
           "description": "Type properties of the asset."
         },
         "lineage": {
-          "type": "object",
-          "description": "Lineage information for the asset.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/LineageObject",
+          "description": "Lineage information for the asset. See example responses for detailed structure."
         }
       },
       "required": [
@@ -6466,6 +6465,11 @@
         "status",
         "domainId"
       ]
+    },
+    "LineageObject": {
+      "type": "object",
+      "description": "Lineage information object containing entity relationships and graph data.",
+      "additionalProperties": {}
     },
     "ModelsFacetRequestObject": {
       "type": "object",

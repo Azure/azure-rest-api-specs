@@ -576,8 +576,14 @@ model DataAsset {
   typeProperties?: DataAssetTypeProperties;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
-  @doc("Lineage information for the asset.")
-  lineage?: Record<unknown>;
+  @doc("Lineage information for the asset. See example responses for detailed structure.")
+  lineage?: LineageObject;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
+@doc("Lineage information object containing entity relationships and graph data.")
+model LineageObject {
+  ...Record<unknown>;
 }
 
 @doc("DataAsset.")
