@@ -6208,6 +6208,9 @@ model VmConnectJobDetails {
 
   /** Name of the node the VM is on. */
   nodeName?: string;
+
+  /** Name of the resource group of the VM. */
+  vmResourceGroupName?: string;
 }
 
 /** Properties for enabling VM Connect. */
