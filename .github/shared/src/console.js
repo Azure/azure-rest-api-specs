@@ -2,7 +2,7 @@ import { once } from "node:events";
 import { format } from "node:util";
 
 /**
- * Async, backpressure-aware console.log() replacement.  console.log() silently drops messages under backpressure.
+ * Async, backpressure-aware console.log() replacement.  console.log() can silently drop messages under backpressure.
  *
  * Use when you need to log a lot of text, and the console reader may be applying backpressure.
  *
