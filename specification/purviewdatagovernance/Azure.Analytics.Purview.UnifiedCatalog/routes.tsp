@@ -319,8 +319,20 @@ interface DataAssets {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataAsset")
   @doc("Retrieves a data asset by its unique identifier.")
+  @route("/dataAssets/{dataAssetId}")
   @get
-  GetById is UnifiedCatalogOperations.ResourceRead<DataAsset>;
+  GetById is RpcOperation<
+    DataAssetIdParameter & {
+      @doc("Include extended properties in the response.")
+      @query
+      includeExtendedProperties: boolean;
+
+      @doc("Include lineage information in the response.")
+      @query
+      includeLineage: boolean;
+    },
+    DataAsset
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -350,7 +362,7 @@ interface DataAssets {
   @doc("Lists relationships for a data asset filtered by entity category.")
   @get
   ListRelationships is UnifiedCatalogOperations.ResourceList<
-    DataAssetRelationship,
+    DataAssetProperties,
     ListQueryParametersTrait<{
       @doc("Required entity category to list relationships for.")
       @query
@@ -374,7 +386,7 @@ interface DataAssets {
       @bodyRoot
       relationship: DataAssetProperties;
     },
-    DataAssetsRelationship
+    Relationship
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."

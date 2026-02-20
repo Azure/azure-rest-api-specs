@@ -1256,10 +1256,24 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "The data asset identifier.",
+            "description": "The unique identifier of the data asset.",
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "includeExtendedProperties",
+            "in": "query",
+            "description": "Include extended properties in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "includeLineage",
+            "in": "query",
+            "description": "Include lineage information in the response.",
+            "required": true,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1508,7 +1522,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDataAssetRelationship"
+              "$ref": "#/definitions/PagedDataAssetProperties"
             }
           },
           "default": {
@@ -1664,7 +1678,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataAssetsRelationship"
+              "$ref": "#/definitions/Relationship"
             }
           },
           "default": {
@@ -4615,7 +4629,7 @@
         },
         "classifications": {
           "type": "array",
-          "description": "Classifications of the asset.",
+          "description": "A list of classification labels. example: [PII, PHI]",
           "items": {
             "type": "string"
           }
@@ -5012,8 +5026,8 @@
       "type": "object",
       "description": "System metadata with expiration information for catalog entities.",
       "properties": {
-        "provisionedValue": {
-          "type": "string",
+        "provisioningState": {
+          "$ref": "#/definitions/DataAssetProvisioningState",
           "description": "The provisioning state of the record. ex: softdeleted"
         },
         "createdAt": {
@@ -5482,7 +5496,7 @@
         },
         "name": {
           "type": "string",
-          "description": "myDataProduct."
+          "description": "Name of the data asset."
         },
         "systemData": {
           "$ref": "#/definitions/DataAssetSystemData",
@@ -5556,7 +5570,10 @@
         },
         "entityId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Name of the associated entity. ex:dataproduct id"
+          "description": "Name of the associated entity. ex:dataproduct id",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "required": [
@@ -5567,6 +5584,7 @@
       "type": "string",
       "description": "The provisioning state of a data asset.",
       "enum": [
+        "Unknown",
         "Succeeded",
         "SoftDeleted"
       ],
@@ -5574,6 +5592,11 @@
         "name": "DataAssetProvisioningState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The provisioning state is unknown."
+          },
           {
             "name": "Succeeded",
             "value": "Succeeded",
@@ -5640,42 +5663,14 @@
             "type": "string"
           }
         },
-        "includingOrphans": {
-          "type": "boolean",
-          "description": "includingOrphans true or false"
-        },
         "assetTypes": {
           "type": "array",
           "description": "To filter by data map asset Ids.",
           "items": {
             "type": "string"
           }
-        },
-        "includeExtendedProperties": {
-          "type": "boolean",
-          "description": "includeExtendedProperties true or false"
         }
       }
-    },
-    "DataAssetRelationship": {
-      "type": "object",
-      "description": "Relationship information between entities.",
-      "properties": {
-        "relationshipType": {
-          "type": "string",
-          "description": "Type of the relationship. ex: Related"
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity. ex: dataproductID",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "entityId"
-      ]
     },
     "DataAssetRelationshipType": {
       "type": "string",
@@ -5826,7 +5821,7 @@
       "type": "object",
       "description": "System metadata with expiration information for data assets.",
       "properties": {
-        "provisionedValue": {
+        "provisioningState": {
           "$ref": "#/definitions/DataAssetProvisioningState",
           "description": "The provisioning state of the record."
         },
@@ -5863,12 +5858,24 @@
       "type": "string",
       "description": "The type of a data asset.",
       "enum": [
+        "AzureSqlTable",
+        "ADLSGen2Path",
         "General"
       ],
       "x-ms-enum": {
         "name": "DataAssetType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "AzureSqlTable",
+            "value": "AzureSqlTable",
+            "description": "Azure SQL Table data asset type."
+          },
+          {
+            "name": "ADLSGen2Path",
+            "value": "ADLSGen2Path",
+            "description": "ADLS Gen2 Path data asset type."
+          },
           {
             "name": "General",
             "value": "General",
@@ -5903,34 +5910,6 @@
           "description": "The table name of the sql table."
         }
       }
-    },
-    "DataAssetsRelationship": {
-      "type": "object",
-      "description": "Relationship information between entities.",
-      "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System metadata for the relationship."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the relationship."
-        },
-        "relationshipType": {
-          "type": "string",
-          "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "entityId"
-      ]
     },
     "DataAssetsResponse": {
       "type": "object",
@@ -6872,15 +6851,15 @@
         "value"
       ]
     },
-    "PagedDataAssetRelationship": {
+    "PagedDataAssetProperties": {
       "type": "object",
-      "description": "Paged collection of DataAssetRelationship items",
+      "description": "Paged collection of DataAssetProperties items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataAssetRelationship items on this page",
+          "description": "The DataAssetProperties items on this page",
           "items": {
-            "$ref": "#/definitions/DataAssetRelationship"
+            "$ref": "#/definitions/DataAssetProperties"
           }
         },
         "nextLink": {
@@ -7078,6 +7057,34 @@
           }
         ]
       }
+    },
+    "Relationship": {
+      "type": "object",
+      "description": "Relationship information between entities.",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the relationship."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the relationship."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the relationship."
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the related entity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "entityId"
+      ]
     },
     "SharedEntityStatus": {
       "type": "string",

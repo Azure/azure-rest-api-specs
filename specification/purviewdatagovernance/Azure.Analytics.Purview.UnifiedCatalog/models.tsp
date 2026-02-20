@@ -56,7 +56,7 @@ union SharedEntityStatus {
 @doc("System metadata with expiration information for catalog entities.")
 model CatalogModelSystemDataWithExpired {
   @doc("The provisioning state of the record. ex: softdeleted")
-  provisionedValue?: string;
+  provisioningState?: DataAssetProvisioningState;
 
   @doc("The timestamp when the record was created.")
   createdAt?: utcDateTime;
@@ -79,6 +79,9 @@ model CatalogModelSystemDataWithExpired {
 
 @doc("The provisioning state of a data asset.")
 union DataAssetProvisioningState {
+  @doc("The provisioning state is unknown.")
+  Unknown: "Unknown",
+
   @doc("The resource has been successfully provisioned.")
   Succeeded: "Succeeded",
 
@@ -91,7 +94,7 @@ union DataAssetProvisioningState {
 @doc("System metadata with expiration information for data assets.")
 model DataAssetSystemData {
   @doc("The provisioning state of the record.")
-  provisionedValue?: DataAssetProvisioningState;
+  provisioningState?: DataAssetProvisioningState;
 
   @doc("The timestamp when the record was created.")
   createdAt?: utcDateTime;
@@ -407,6 +410,8 @@ model CriticalDataColumnProperties {
 }
 
 @doc("Properties for data asset relationships.")
+@resource("relationships")
+@parentResource(DataAsset)
 model DataAssetProperties {
   @doc("Description of the relationship.")
   description?: string;
@@ -415,6 +420,8 @@ model DataAssetProperties {
   relationshipType?: DataAssetRelationshipType;
 
   @doc("Name of the associated entity. ex:dataproduct id")
+  @key
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 }
 
@@ -519,7 +526,7 @@ model CatalogModelDataAssetSchema {
   @doc("Description of the asset.")
   description?: string;
 
-  @doc("Classifications of the asset.")
+  @doc("A list of classification labels. example: [PII, PHI]")
   classifications?: string[];
 
   @doc("Type of the asset.")
@@ -528,6 +535,12 @@ model CatalogModelDataAssetSchema {
 
 @doc("The type of a data asset.")
 union DataAssetType {
+  @doc("Azure SQL Table data asset type.")
+  AzureSqlTable: "AzureSqlTable",
+
+  @doc("ADLS Gen2 Path data asset type.")
+  ADLSGen2Path: "ADLSGen2Path",
+
   @doc("General data asset type.")
   General: "General",
 
@@ -542,7 +555,7 @@ model DataAsset {
   @visibility(Lifecycle.Create)
   id: uuid;
 
-  @doc("myDataProduct.")
+  @doc("Name of the data asset.")
   name: string;
 
   @doc("System data associated with the asset.")
@@ -682,14 +695,8 @@ model DataAssetQueryRequest {
   @doc("To filter by data map asset Ids.")
   sourceAssetIds?: string[];
 
-  @doc("includingOrphans true or false")
-  includingOrphans?: boolean;
-
   @doc("To filter by data map asset Ids.")
   assetTypes?: string[];
-
-  @doc("includeExtendedProperties true or false")
-  includeExtendedProperties?: boolean;
 }
 
 @doc("FacetValue.")
@@ -1638,20 +1645,7 @@ alias DataAssetIdParameter = {
 @doc("Relationship information between entities.")
 @resource("relationships")
 @parentResource(DataAsset)
-model DataAssetRelationship {
-  @doc("Type of the relationship. ex: Related")
-  relationshipType?: string;
-
-  @doc("Unique identifier of the related entity. ex: dataproductID")
-  @key
-  @visibility(Lifecycle.Create)
-  entityId: uuid;
-}
-
-@doc("Relationship information between entities.")
-@resource("relationships")
-@parentResource(DataAsset)
-model DataAssetsRelationship {
+model Relationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
