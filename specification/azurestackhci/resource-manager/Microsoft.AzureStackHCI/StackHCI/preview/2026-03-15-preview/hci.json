@@ -3495,6 +3495,12 @@
           },
           "ClusterJobs_Get_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
+          },
+          "ClusterJobs_Get_VmConnectProvisionJob": {
+            "$ref": "./examples/ClusterJobs_Get_VmConnectProvisionJob.json"
+          },
+          "ClusterJobs_Get_VmConnectRemoveJob": {
+            "$ref": "./examples/ClusterJobs_Get_VmConnectRemoveJob.json"
           }
         }
       },
@@ -3585,6 +3591,12 @@
           },
           "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
+          },
+          "ClusterJobs_CreateOrUpdate_VmConnectProvisionJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_VmConnectProvision.json"
+          },
+          "ClusterJobs_CreateOrUpdate_VmConnectRemoveJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_VmConnectRemove.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14588,7 +14600,9 @@
         "GpuCreatePartition",
         "GpuSwitchMode",
         "ConfigureCVM",
-        "ConfigureSdnIntegration"
+        "ConfigureSdnIntegration",
+        "VmConnectProvision",
+        "VmConnectRemove"
       ],
       "x-ms-enum": {
         "name": "HciJobType",
@@ -14618,6 +14632,16 @@
             "name": "ConfigureSdnIntegration",
             "value": "ConfigureSdnIntegration",
             "description": "Job to configure SDN (Software Defined Networking) integration for the cluster."
+          },
+          {
+            "name": "VmConnectProvision",
+            "value": "VmConnectProvision",
+            "description": "Job to open port to enable RDP Connection"
+          },
+          {
+            "name": "VmConnectRemove",
+            "value": "VmConnectRemove",
+            "description": "Job to close port to disable RDP Connection"
           }
         ]
       }
@@ -20734,6 +20758,73 @@
       "required": [
         "recipeContent"
       ]
+    },
+    "VmConnectJobDetails": {
+      "type": "object",
+      "description": "Details of vm connect job.",
+      "properties": {
+        "vmName": {
+          "type": "string",
+          "description": "Name of the VM."
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "Name of the node the VM is on."
+        },
+        "vmResourceGroupName": {
+          "type": "string",
+          "description": "Name of the resource group of the VM."
+        }
+      },
+      "required": [
+        "vmName"
+      ]
+    },
+    "VmConnectProvisionJobProperties": {
+      "type": "object",
+      "description": "Properties for enabling VM Connect.",
+      "properties": {
+        "vmConnectProvisionJobDetails": {
+          "type": "array",
+          "description": "Details of VM needed to enable VM Connect",
+          "items": {
+            "$ref": "#/definitions/VmConnectJobDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vmConnectProvisionJobDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VmConnectProvision"
+    },
+    "VmConnectRemoveJobProperties": {
+      "type": "object",
+      "description": "Properties for disabling VM Connect.",
+      "properties": {
+        "vmConnectRemoveJobDetails": {
+          "type": "array",
+          "description": "Details of VM needed to disable VM Connect",
+          "items": {
+            "$ref": "#/definitions/VmConnectJobDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vmConnectRemoveJobDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VmConnectRemove"
     },
     "VolumeConfiguration": {
       "type": "object",
