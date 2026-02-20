@@ -61,6 +61,16 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // TODO: Remove the below when importing latest verion of OpenAI TypeSpec package that already includes this fix.
+  @@withoutOmittedProperties(OpenAI.WebSearchApproximateLocation, "type");
+  @@copyProperties(OpenAI.WebSearchApproximateLocation,
+    {
+      /** The type of location approximation. Always `approximate`. */
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+      type: "approximate";
+    }
+  );
+
   alias AgentNameQueryParam = {
     @query
     @doc("Filter by agent name. If provided, only items associated with the specified agent will be returned.")

@@ -45,25 +45,26 @@ using Azure.AI.Projects;
 
 // Use short form method names
 @@clientName(Agents.getAgent, "get");
-@@clientName(Agents.createAgent, "create");
-@@clientName(Agents.updateAgent, "update");
 @@clientName(Agents.deleteAgent, "delete");
 @@clientName(Agents.listAgents, "list");
 @@clientName(Agents.createAgentVersion, "create_version", "python");
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
 @@clientName(Agents.listAgentVersions, "list_versions", "python");
-@@clientName(Agents.createAgentFromManifest, "create_from_manifest", "python");
 @@clientName(Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
-@@clientName(Agents.updateAgentFromManifest, "update_from_manifest", "python");
-
 @@clientName(Agents.createAgentVersion, "createVersion", "javascript");
 @@clientName(Agents.getAgentVersion, "getVersion", "javascript");
 @@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
 @@clientName(Agents.listAgentVersions, "listVersions", "javascript");
+
+// Suppress these operations from Python and JavaScript SDK public surface.
+@@access(Agents.createAgent, Access.internal);
+@@access(Agents.updateAgent, Access.internal);
+@@access(Agents.createAgentFromManifest, Access.internal);
+@@access(Agents.updateAgentFromManifest, Access.internal);
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
@@ -71,6 +72,15 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
+
+// Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
+@@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
+
+// Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`,  "MEMORY_1GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`,  "MEMORY_4GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
 // --------------------------------------------------------------------------------
 // Memories sub-client
@@ -167,4 +177,5 @@ using Azure.AI.Projects;
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse` 
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
+
 
