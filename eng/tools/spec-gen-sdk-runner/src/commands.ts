@@ -54,8 +54,8 @@ export async function generateSdkForSingleSpec(): Promise<number> {
 
   // Always set the pipeline variables for the SDK pull request even if
   // there are failures in the generation process since we allow the PR creation for such cases.
-  let packageName = "";
-  let installationInstructions = "";
+  let packageName;
+  let installationInstructions;
   if (executionReport) {
     packageName =
       executionReport.packages[0]?.packageName ??
@@ -65,6 +65,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     installationInstructions = executionReport.packages[0]?.installationInstructions ?? "";
   } else {
     packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
+    installationInstructions = "";
   }
 
   packageName = packageName.replace("/", "-");
@@ -95,14 +96,14 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let statusCode = 0;
   let pushedSpecConfigCount;
   let executionReport;
-  let changedSpecPathText = "";
+  let changedSpecPathText;
   let hasManagementPlaneSpecs = false;
   let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
-  let currentRunHasBreakingChange = false;
+  let currentRunHasBreakingChange;
   let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
-  let currentExecutionResult = "";
+  let currentExecutionResult;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
 
