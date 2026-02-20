@@ -196,7 +196,7 @@ describe("Swagger", () => {
       await swagger.toJSONAsync({ includeRefs: true })
     );
     const refs = /** @type {import('../src/swagger.js').SwaggerJSON[]} */ (json.refs);
-    expect(refs.length).toBe(2);
+    expect(refs.length).toBe(4);
     expect(refs[0].path.localeCompare(refs[1].path)).toBeLessThan(0);
   });
 
