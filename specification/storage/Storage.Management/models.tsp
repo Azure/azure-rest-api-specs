@@ -3164,6 +3164,12 @@ model StorageAccountPropertiesCreateParameters {
    */
   @added(Versions.v2025_08_01)
   allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**
@@ -3614,6 +3620,27 @@ model StorageAccountSharedKeyAccessProperties {
 }
 
 /**
+ * Defines Data Collaboration Policy for a storage account.
+ */
+@added(Versions.v2025_08_01)
+model StorageDataCollaborationPolicyProperties {
+  /**
+   * Indicates whether storage connectors are allowed to created or managed on the storage account.
+   */
+  allowStorageConnectors?: boolean;
+
+  /**
+   * Indicates whether data shares are allowed to be created or managed on the storage account.
+   */
+  allowStorageDataShares?: boolean;
+
+  /**
+   * Indicates whether cross-entra tenant data sharing is allowed on the storage account.
+   */
+  allowCrossTenantDataSharing?: boolean;
+}
+
+/**
  * Properties of the storage account.
  */
 model StorageAccountProperties {
@@ -3862,6 +3889,12 @@ model StorageAccountProperties {
    */
   @added(Versions.v2025_08_01)
   allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**
@@ -4409,6 +4442,12 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2025_08_01)
   allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**

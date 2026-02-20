@@ -613,6 +613,9 @@
           "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.": {
             "$ref": "./examples/StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
+          "StorageAccountCreateWithDataCollaborationPolicy": {
+            "$ref": "./examples/StorageAccountCreateWithDataCollaborationPolicy.json"
+          },
           "StorageAccountCreateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
           },
@@ -712,6 +715,9 @@
           },
           "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
             "$ref": "./examples/StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
+          },
+          "StorageAccountUpdateWithDataCollaborationPolicy": {
+            "$ref": "./examples/StorageAccountUpdateWithDataCollaborationPolicy.json"
           },
           "StorageAccountUpdateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccountUpdateWithImmutabilityPolicy.json"
@@ -14375,6 +14381,10 @@
         "allowSharedKeyAccessForServices": {
           "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
           "description": "Indicate shared key access properties at service level"
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
+          "description": "Data Collaboration policy for the storage account."
         }
       }
     },
@@ -14499,6 +14509,10 @@
         "allowSharedKeyAccessForServices": {
           "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
           "description": "Indicate shared key access properties at service level"
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
+          "description": "Data Collaboration policy for the storage account."
         }
       }
     },
@@ -14613,6 +14627,10 @@
         "allowSharedKeyAccessForServices": {
           "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
           "description": "Indicate shared key access properties at service level"
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
+          "description": "Data Collaboration policy for the storage account."
         }
       }
     },
@@ -14983,6 +15001,24 @@
       "required": [
         "type"
       ]
+    },
+    "StorageDataCollaborationPolicyProperties": {
+      "type": "object",
+      "description": "Defines Data Collaboration Policy for a storage account.",
+      "properties": {
+        "allowStorageConnectors": {
+          "type": "boolean",
+          "description": "Indicates whether storage connectors are allowed to created or managed on the storage account."
+        },
+        "allowStorageDataShares": {
+          "type": "boolean",
+          "description": "Indicates whether data shares are allowed to be created or managed on the storage account."
+        },
+        "allowCrossTenantDataSharing": {
+          "type": "boolean",
+          "description": "Indicates whether cross-entra tenant data sharing is allowed on the storage account."
+        }
+      }
     },
     "StorageDataShareAccessPolicy": {
       "type": "object",
