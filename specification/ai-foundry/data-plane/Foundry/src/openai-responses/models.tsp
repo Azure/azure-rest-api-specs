@@ -114,6 +114,8 @@ namespace Azure.AI.Projects {
     oauth_consent_request: "oauth_consent_request",
     memory_search_call: "memory_search_call",
     workflow_action: "workflow_action",
+    a2a_preview_call: "a2a_preview_call",
+    a2a_preview_call_output: "a2a_preview_call_output",
     bing_grounding_call: "bing_grounding_call",
     bing_grounding_call_output: "bing_grounding_call_output",
     sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
