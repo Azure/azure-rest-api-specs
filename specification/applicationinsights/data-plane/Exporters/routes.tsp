@@ -22,18 +22,7 @@ op track(
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Raw array type used for backward compatibility"
   @bodyRoot
   body: TelemetryEnvelope[],
-
-  /**
-   * Body Parameter content-type
-   */
-  @header("content-type")
-  contentType: "application/json",
-): {
-  /** All of the telemetry items were accepted and processed. */
-  @statusCode statusCode: 200;
-
-  @body body: TrackResponse;
-} | {
+): TrackResponse | {
   /** Partial success. Some of the telemetry items were accepted and processed. */
   @statusCode statusCode: 206;
 
