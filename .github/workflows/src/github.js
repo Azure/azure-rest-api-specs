@@ -19,7 +19,9 @@ export async function writeToActionsSummary(content, core) {
     await core.summary.addRaw(content).write();
     core.info("Successfully wrote to the GitHub Actions summary");
   } catch (error) {
-    throw new Error(`Failed to write to the GitHub Actions summary: ${inspect(error)}`);
+    throw new Error(`Failed to write to the GitHub Actions summary: ${inspect(error)}`, {
+      cause: error,
+    });
   }
 }
 
