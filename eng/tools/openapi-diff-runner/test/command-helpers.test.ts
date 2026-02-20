@@ -1,4 +1,3 @@
-import * as core from "@actions/core";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -191,7 +190,6 @@ vi.mock("../src/utils/common-utils.js");
 vi.mock("../src/utils/oad-message-processor.js");
 vi.mock("../src/utils/pull-request.js");
 vi.mock("../src/log.js");
-vi.mock("@actions/core");
 vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   const actual = await vi.importActual("@azure-tools/specs-shared/changed-files");
   return {
@@ -830,112 +828,112 @@ describe("command-helpers", () => {
     });
 
     it("should set both labels to false when no labels need to be added", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       outputBreakingChangeLabelVariables();
 
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
 
     it("should set BreakingChangeReviewRequired to true when present in labels set", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
 
       outputBreakingChangeLabelVariables();
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
 
     it("should set VersioningReviewRequired to true when present in labels set", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
 
       outputBreakingChangeLabelVariables();
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "true");
     });
 
     it("should set both labels to true when both are present in labels set", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
       BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
 
       outputBreakingChangeLabelVariables();
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
 
     it("should handle labels set with non-review labels", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
 
       outputBreakingChangeLabelVariables();
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
 
     it("should handle mixed labels including one review label", async () => {
-      const mockSetOutput = vi.mocked(core.setOutput);
+      const { setOutput } = await import("../src/log.js");
 
       BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
       BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
 
       outputBreakingChangeLabelVariables();
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith(
         "breakingChangeReviewLabelName",
         BreakingChangeReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
-      expect(mockSetOutput).toHaveBeenCalledWith(
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(mockSetOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
   });
 });

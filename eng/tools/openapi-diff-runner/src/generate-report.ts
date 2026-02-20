@@ -1,5 +1,4 @@
-import * as core from "@actions/core";
-import { logMessage, logWarning } from "./log.js";
+import { addToSummary, logMessage, logWarning } from "./log.js";
 import { ApiVersionLifecycleStage, Context } from "./types/breaking-change.js";
 import {
   BrChMsgRecord,
@@ -285,6 +284,6 @@ async function writeToJobSummary(markdownContent: string): Promise<void> {
     );
   }
 
-  await core.summary.addRaw(finalContent).write();
+  await addToSummary(finalContent);
   logMessage(`Successfully wrote ${finalContent.length} characters to GitHub Actions job summary.`);
 }

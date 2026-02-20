@@ -1,3 +1,5 @@
+import * as core from "@actions/core";
+
 /**
  * Log prefix for all messages from openapi-diff-runner
  */
@@ -86,6 +88,25 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
     console.log(`::warning ${fileLocation}::${message}`);
   } else {
     console.log(`::warning::${message}`);
+  }
+}
+
+/**
+ * Set an output parameter in GitHub Actions
+ * @param name Output parameter name
+ * @param value Output parameter value
+ */
+export function setOutput(name: string, value: string): void {
+  core.setOutput(name, value);
+}
+
+/**
+ * Add content to the GitHub Actions job summary
+ * @param content Content to add to summary
+ */
+export async function addToSummary(content: string): Promise<void> {
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    await core.summary.addRaw(content).write();
   }
 }
 

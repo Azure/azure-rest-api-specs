@@ -3,8 +3,7 @@ import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/chan
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import * as core from "@actions/core";
-import { logError, LogLevel, logMessage } from "./log.js";
+import { logError, LogLevel, logMessage, setOutput } from "./log.js";
 import {
   BreakingChangeReviewRequiredLabel,
   BreakingChangesCheckType,
@@ -83,32 +82,32 @@ export function outputBreakingChangeLabelVariables(): void {
   if (BreakingChangeLabelsToBeAdded.size === 0) {
     logMessage("None of the breaking change review labels need to be added.");
     logMessage("Setting default breaking change labels to false.");
-    core.setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-    core.setOutput("breakingChangeReviewLabelValue", "false");
-    core.setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-    core.setOutput("versioningReviewLabelValue", "false");
+    setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+    setOutput("breakingChangeReviewLabelValue", "false");
+    setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+    setOutput("versioningReviewLabelValue", "false");
   } else {
     if (BreakingChangeLabelsToBeAdded.has(BreakingChangeReviewRequiredLabel)) {
       logMessage("'BreakingChangeReviewRequired' label needs to be added.");
-      core.setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-      core.setOutput("breakingChangeReviewLabelValue", "true");
+      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      setOutput("breakingChangeReviewLabelValue", "true");
       logMessage("'VersioningReviewRequired' label needs to be deleted.");
-      core.setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      core.setOutput("versioningReviewLabelValue", "false");
+      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      setOutput("versioningReviewLabelValue", "false");
     } else {
       logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
-      core.setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
-      core.setOutput("breakingChangeReviewLabelValue", "false");
+      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      setOutput("breakingChangeReviewLabelValue", "false");
 
       // versioning review label is only set if the breaking change review label is not set
       if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
         logMessage("'VersioningReviewRequired' label needs to be added.");
-        core.setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-        core.setOutput("versioningReviewLabelValue", "true");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "true");
       } else {
         logMessage("'VersioningReviewRequired' label needs to be deleted.");
-        core.setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-        core.setOutput("versioningReviewLabelValue", "false");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "false");
       }
     }
   }
