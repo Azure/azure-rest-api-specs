@@ -1,11 +1,14 @@
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./main.tsp";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using ContentUnderstanding;
+using TypeSpec.Http;
 
 namespace ClientCustomizations;
 
@@ -23,8 +26,32 @@ interface ContentUnderstandingClient {
 
   copyAnalyzer is ContentAnalyzers.copy;
 
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Scope is not applied to csharp"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Doesn't fit standard naming"
+  @scope("!csharp")
   createAnalyzer is ContentAnalyzers.createOrReplace;
+
+  // For csharp, we work around bug https://github.com/Azure/typespec-azure/issues/3630,
+  // and rewrite createOrReplace not to use LongRunningResourceCreateReplace.  No behavioral change.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Scope is not applied to csharp"
+  @doc("Create a new analyzer asynchronously.")
+  @pollingOperation(ContentAnalyzers.getOperationStatus)
+  @put
+  @finalOperation(ContentAnalyzers.get)
+  @route("/analyzers/{analyzerId}")
+  @scope("csharp")
+  @clientName("createAnalyzer", "csharp")
+  createOrReplaceCustom is Foundations.Operation<
+    Foundations.ItemKeysOf<ContentAnalyzer> & {
+      ...AllowReplaceParameter;
+      ...ClientRequestIdHeader;
+    } & Foundations.ResourceBody<ContentAnalyzer>,
+    Foundations.ResourceCreatedOrOkResponse<ContentAnalyzer &
+      Foundations.LongRunningStatusLocation<ContentAnalyzer> &
+      ClientRequestIdHeader>,
+    ServiceTraits
+  >;
 
   deleteAnalyzer is ContentAnalyzers.delete;
 
@@ -88,6 +115,13 @@ interface ContentUnderstandingClient {
   DocumentationMode.replace
 );
 
+// .NET specific parameter for custom lro method
+alias AllowReplaceParameter = {
+  @doc("Allow the operation to replace an existing resource.")
+  @query
+  allowReplace?: boolean = false;
+};
+
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
 @@clientName(ContentUnderstandingClient.listAnalyzers,
   "getAnalyzers",
@@ -96,3 +130,5 @@ interface ContentUnderstandingClient {
 
 @@convenientAPI(ContentAnalyzers.update, false, "csharp");
 @@convenientAPI(ContentAnalyzers.updateDefaults, false, "csharp");
+@@alternateType(SupportedModels.completion, string[], "csharp");
+@@alternateType(SupportedModels.embedding, string[], "csharp");
