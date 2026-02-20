@@ -69,13 +69,6 @@ jobs:
 
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
         name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.10
+        uses: docker://rhysd/actionlint:1.7.11
         with:
           args: -color -verbose
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v6
-        with:
-          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
-          path: ./${{ matrix.folder }}/coverage
-          if-no-files-found: ignore
