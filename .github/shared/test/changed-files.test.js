@@ -440,7 +440,7 @@ describe("changedFiles", () => {
       ]);
     });
 
-    it("should log categories selectively with a logger (covers false branches of per-category logging)", async () => {
+    it("should log categories selectively with a logger", async () => {
       // When only some categories are populated and a logger is provided, the per-category
       // if-blocks whose category is empty should take their false branch.
       const gitOutput = [
