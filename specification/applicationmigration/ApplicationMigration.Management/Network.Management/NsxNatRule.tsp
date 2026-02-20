@@ -30,6 +30,9 @@ model NsxNatRule
  * Properties of an NSX NAT rule.
  */
 model NsxNatRuleProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** The NAT type (SNAT or DNAT). */
   natType?: NatType;
 

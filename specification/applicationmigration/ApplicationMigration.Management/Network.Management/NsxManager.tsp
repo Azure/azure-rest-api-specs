@@ -36,6 +36,9 @@ model NsxManagerProperties is AzureResourceProperties {
   /** The run-as account credential reference. */
   runAsAccount?: string;
 
+  /** ARM resource IDs of local NSX Manager references. */
+  localNsxManagerRefs?: Azure.Core.armResourceIdentifier[];
+
   /** ARM resource IDs of managed vCenter servers. */
   vcenterRefs?: Azure.Core.armResourceIdentifier<[
     {

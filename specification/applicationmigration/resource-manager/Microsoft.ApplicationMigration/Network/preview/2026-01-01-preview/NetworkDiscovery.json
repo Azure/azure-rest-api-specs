@@ -3753,14 +3753,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -3773,6 +3768,19 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
         }
       }
     },
@@ -3884,6 +3892,49 @@
         "displayName": {
           "type": "string",
           "description": "Display name of the virtual machine."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The error ID."
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "The summarized error message."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "The run-as account ID used during discovery."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed error message."
+        },
+        "possibleCause": {
+          "type": "string",
+          "description": "The possible cause of the error."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "The recommended action to resolve the error."
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the error."
+        },
+        "updatedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when this error was last updated."
         }
       }
     },
@@ -4012,16 +4063,46 @@
       "type": "string",
       "description": "The category of a gateway firewall policy.",
       "enum": [
-        "LocalGatewayRules"
+        "Emergency",
+        "Infrastructure",
+        "Environment",
+        "Application",
+        "LocalGatewayRules",
+        "Default"
       ],
       "x-ms-enum": {
         "name": "GatewayPolicyCategory",
         "modelAsString": true,
         "values": [
           {
+            "name": "Emergency",
+            "value": "Emergency",
+            "description": "Emergency rules category."
+          },
+          {
+            "name": "Infrastructure",
+            "value": "Infrastructure",
+            "description": "Infrastructure rules category."
+          },
+          {
+            "name": "Environment",
+            "value": "Environment",
+            "description": "Environment rules category."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application rules category."
+          },
+          {
             "name": "LocalGatewayRules",
             "value": "LocalGatewayRules",
             "description": "Local gateway rules category."
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default rules category."
           }
         ]
       }
@@ -4490,28 +4571,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The NSX display name."
-        },
-        "nsxOriginalId": {
-          "type": "string",
-          "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
-        },
-        "uniqueId": {
-          "type": "string",
-          "description": "The NSX unique identifier."
-        },
-        "nsxTags": {
-          "type": "array",
-          "description": "NSX tags applied to this resource.",
-          "items": {
-            "$ref": "#/definitions/NsxTag"
-          },
-          "x-ms-identifiers": []
+          "description": "The display name of the agent."
         },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/AgentSpnProperties",
@@ -4540,6 +4600,19 @@
         "healthDetails": {
           "$ref": "#/definitions/AgentHealthProperties",
           "description": "Health details of the agent."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
         }
       },
       "required": [
@@ -4600,14 +4673,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -4620,6 +4688,19 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
         },
         "masterSiteId": {
           "type": "string",
@@ -4720,14 +4801,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -4740,6 +4816,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "category": {
           "$ref": "#/definitions/GatewayPolicyCategory",
@@ -4755,8 +4849,8 @@
           "description": "Whether this is a default policy."
         },
         "contextType": {
-          "type": "string",
-          "description": "The context type (e.g. GatewaySpecific)."
+          "$ref": "#/definitions/PolicyContextType",
+          "description": "The context type."
         },
         "federationScope": {
           "$ref": "#/definitions/FederationScope",
@@ -4859,14 +4953,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -4879,6 +4968,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "action": {
           "$ref": "#/definitions/FirewallAction",
@@ -5033,14 +5140,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5053,6 +5155,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "lbType": {
           "$ref": "#/definitions/LbType",
@@ -5149,14 +5269,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5170,6 +5285,19 @@
           },
           "x-ms-identifiers": []
         },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
         "fqdn": {
           "type": "string",
           "description": "The fully qualified domain name of the NSX Manager."
@@ -5177,6 +5305,15 @@
         "runAsAccount": {
           "type": "string",
           "description": "The run-as account credential reference."
+        },
+        "localNsxManagerRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of local NSX Manager references.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
         },
         "vcenterRefs": {
           "type": "array",
@@ -5271,14 +5408,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5291,6 +5423,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "natType": {
           "$ref": "#/definitions/NatType",
@@ -5391,14 +5541,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5411,6 +5556,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "expressions": {
           "type": "array",
@@ -5509,14 +5672,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5529,6 +5687,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "parentGateway": {
           "type": "string",
@@ -5670,14 +5846,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5690,6 +5861,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "haMode": {
           "$ref": "#/definitions/HaMode",
@@ -5817,14 +6006,9 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalId": {
+        "nsxOriginalPath": {
           "type": "string",
           "description": "The NSX original path identifier."
-        },
-        "nsxManagerRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated NSX Manager."
         },
         "uniqueId": {
           "type": "string",
@@ -5837,6 +6021,24 @@
             "$ref": "#/definitions/NsxTag"
           },
           "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "haMode": {
           "$ref": "#/definitions/HaMode",
@@ -5887,6 +6089,30 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
+      }
+    },
+    "PolicyContextType": {
+      "type": "string",
+      "description": "The context type of a gateway firewall policy.",
+      "enum": [
+        "Generic",
+        "GatewaySpecific"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyContextType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Generic",
+            "value": "Generic",
+            "description": "Generic context."
+          },
+          {
+            "name": "GatewaySpecific",
+            "value": "GatewaySpecific",
+            "description": "Gateway-specific context."
+          }
+        ]
       }
     },
     "ProvisioningState": {

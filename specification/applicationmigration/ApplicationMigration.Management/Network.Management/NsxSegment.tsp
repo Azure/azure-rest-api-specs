@@ -30,6 +30,9 @@ model NsxSegment
  * Properties of an NSX segment.
  */
 model NsxSegmentProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** ARM resource ID of the parent gateway. */
   parentGateway?: Azure.Core.armResourceIdentifier;
 

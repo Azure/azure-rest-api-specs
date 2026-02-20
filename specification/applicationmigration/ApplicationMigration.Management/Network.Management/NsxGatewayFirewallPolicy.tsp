@@ -33,6 +33,9 @@ model NsxGatewayFirewallPolicy
  * Properties of a gateway firewall policy.
  */
 model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** The policy category. */
   category?: GatewayPolicyCategory;
 
@@ -42,8 +45,8 @@ model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
   /** Whether this is a default policy. */
   isDefault?: boolean;
 
-  /** The context type (e.g. GatewaySpecific). */
-  contextType?: string;
+  /** The context type. */
+  contextType?: PolicyContextType;
 
   /** The federation scope of the policy. */
   federationScope?: FederationScope;

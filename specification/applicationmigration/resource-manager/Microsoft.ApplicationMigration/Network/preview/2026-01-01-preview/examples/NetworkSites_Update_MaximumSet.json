@@ -1,10 +1,5 @@
 {
   "responses": {
-    "202": {
-      "headers": {
-        "Location": "https://contoso.com/operationstatus"
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1",
@@ -25,12 +20,19 @@
         "properties": {
           "provisioningState": "Succeeded",
           "displayName": "MySite",
-          "nsxOriginalId": "/infra/sites/default",
           "uniqueId": "site-uid-001",
           "nsxTags": [],
           "masterSiteId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/masterSites/ms1",
-          "migrateProjectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Migrate/migrateProjects/mp1"
+          "migrateProjectId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Migrate/migrateProjects/mp1",
+          "nsxOriginalPath": "/infra/sites/default",
+          "errors": [],
+          "errorCount": 0
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
       }
     }
   },

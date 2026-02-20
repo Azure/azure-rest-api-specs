@@ -30,6 +30,9 @@ model NsxLoadBalancer
  * Properties of an NSX load balancer.
  */
 model NsxLoadBalancerProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** The type of load balancer (L4 or L7). */
   lbType?: LbType;
 

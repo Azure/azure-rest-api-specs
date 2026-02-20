@@ -30,6 +30,9 @@ model NsxNsGroup
  * Properties of an NS group.
  */
 model NsxNsGroupProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** The group membership expressions. */
   @identifiers(#[])
   expressions?: GroupExpression[];

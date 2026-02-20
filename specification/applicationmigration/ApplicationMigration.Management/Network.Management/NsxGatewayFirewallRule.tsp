@@ -33,6 +33,9 @@ model NsxGatewayFirewallRule
  * Properties of a gateway firewall rule.
  */
 model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
   /** The action to take when the rule matches. */
   action?: FirewallAction;
 

@@ -309,8 +309,23 @@ union GroupExpressionKey {
 union GatewayPolicyCategory {
   string,
 
+  /** Emergency rules category. */
+  Emergency: "Emergency",
+
+  /** Infrastructure rules category. */
+  Infrastructure: "Infrastructure",
+
+  /** Environment rules category. */
+  Environment: "Environment",
+
+  /** Application rules category. */
+  Application: "Application",
+
   /** Local gateway rules category. */
   LocalGatewayRules: "LocalGatewayRules",
+
+  /** Default rules category. */
+  Default: "Default",
 }
 
 /**
@@ -324,6 +339,19 @@ union FederationScope {
 
   /** Global scope. */
   Global: "Global",
+}
+
+/**
+ * The context type of a gateway firewall policy.
+ */
+union PolicyContextType {
+  string,
+
+  /** Generic context. */
+  Generic: "Generic",
+
+  /** Gateway-specific context. */
+  GatewaySpecific: "GatewaySpecific",
 }
 
 // ──────────────────────────────────────────────
@@ -342,10 +370,7 @@ model AzureResourceProperties {
   displayName?: string;
 
   /** The NSX original path identifier. */
-  nsxOriginalId?: string;
-
-  /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxOriginalPath?: string;
 
   /** The NSX unique identifier. */
   uniqueId?: string;
@@ -353,6 +378,13 @@ model AzureResourceProperties {
   /** NSX tags applied to this resource. */
   @identifiers(#[])
   nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
 }
 
 // ──────────────────────────────────────────────
@@ -599,6 +631,38 @@ model GroupExpression {
   conjunctionOperator?: ConjunctionOperator;
 }
 
+/**
+ * Defines the error.
+ */
+model Error {
+  /** The error ID. */
+  id?: string;
+
+  /** The error code. */
+  code?: string;
+
+  /** The summarized error message. */
+  summaryMessage?: string;
+
+  /** The run-as account ID used during discovery. */
+  runAsAccountId?: string;
+
+  /** The detailed error message. */
+  message?: string;
+
+  /** The possible cause of the error. */
+  possibleCause?: string;
+
+  /** The recommended action to resolve the error. */
+  recommendedAction?: string;
+
+  /** The severity of the error. */
+  severity?: string;
+
+  /** The time when this error was last updated. */
+  updatedTimeStamp?: utcDateTime;
+}
+
 // ──────────────────────────────────────────────
 //  Patch Models for ProxyResources
 // ──────────────────────────────────────────────
@@ -733,7 +797,14 @@ model NetworkAgentList is Azure.Core.Page<NetworkAgent>;
 /**
  * Properties of a network agent.
  */
-model NetworkAgentProperties is AzureResourceProperties {
+model NetworkAgentProperties {
+  /** The provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** The display name of the agent. */
+  displayName?: string;
+
   /**
    * Service principal identity details used by agent for communication to the service.
    */
@@ -756,6 +827,13 @@ model NetworkAgentProperties is AzureResourceProperties {
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
 }
 
 /**
