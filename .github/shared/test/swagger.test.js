@@ -195,8 +195,10 @@ describe("Swagger", () => {
     const json = /** @type {import('../src/swagger.js').SwaggerJSON} */ (
       await swagger.toJSONAsync({ includeRefs: true })
     );
-    expect(json.refs).toBeDefined();
-    expect(/** @type {unknown[]} */ (json.refs).length).toBeGreaterThanOrEqual(2);
+    const refs = /** @type {import('../src/swagger.js').SwaggerJSON[]} */ (json.refs);
+    expect(refs).toBeDefined();
+    expect(refs.length).toBeGreaterThanOrEqual(2);
+    expect(refs[0].path.localeCompare(refs[1].path)).toBeLessThan(0);
   });
 
   // TODO: Test that path is resolved against backpointer
