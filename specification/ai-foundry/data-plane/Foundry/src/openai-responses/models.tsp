@@ -115,13 +115,21 @@ namespace Azure.AI.Projects {
     memory_search_call: "memory_search_call",
     workflow_action: "workflow_action",
     bing_grounding_call: "bing_grounding_call",
+    bing_grounding_call_output: "bing_grounding_call_output",
     sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
+    sharepoint_grounding_preview_call_output: "sharepoint_grounding_preview_call_output",
     azure_ai_search_call: "azure_ai_search_call",
+    azure_ai_search_call_output: "azure_ai_search_call_output",
     bing_custom_search_preview_call: "bing_custom_search_preview_call",
+    bing_custom_search_preview_call_output: "bing_custom_search_preview_call_output",
     openapi_call: "openapi_call",
+    openapi_call_output: "openapi_call_output",
     browser_automation_preview_call: "browser_automation_preview_call",
+    browser_automation_preview_call_output: "browser_automation_preview_call_output",
     fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
+    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
     azure_function_call: "azure_function_call",
+    azure_function_call_output: "azure_function_call_output",
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
