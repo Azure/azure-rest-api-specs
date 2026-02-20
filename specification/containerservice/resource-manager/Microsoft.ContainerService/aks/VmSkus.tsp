@@ -170,9 +170,9 @@ model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching Microsoft.Compute API naming"
   @visibility(Lifecycle.Read)
   // NOTE: Property name 'meterID' uses PascalCase 'ID' instead of camelCase 'Id' to match Microsoft.Compute API
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching Microsoft.Compute API naming"
   meterID?: string;
 
   /**
