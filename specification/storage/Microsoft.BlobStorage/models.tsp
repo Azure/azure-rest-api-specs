@@ -467,7 +467,7 @@ model FilterBlobItem {
   @Xml.name("ContainerName") containerName: string;
 
   /** The metadata of the blob. */
-  @Xml.unwrapped tags?: BlobTags;
+  @Xml.name("Tags") tags?: BlobTags;
 
   /** The version ID of the blob. */
   @Xml.name("VersionId") versionId?: string;
