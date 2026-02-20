@@ -6528,6 +6528,12 @@ model OwnershipVoucherDetails {
    * Owner key type
    */
   ownerKeyType: OwnerKeyType;
+
+  /**
+   * Ownership Voucher Validation Details
+   */
+  @visibility(Lifecycle.Read)
+  validationDetails?: OwnershipVoucherValidationDetails;
 }
 
 /**
