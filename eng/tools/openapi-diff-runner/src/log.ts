@@ -108,6 +108,7 @@ export async function addToSummary(content: string): Promise<void> {
   if (process.env.GITHUB_STEP_SUMMARY) {
     await core.summary.addRaw(content).write();
   }
+  // Do nothing if GITHUB_STEP_SUMMARY is not available
 }
 
 /**
