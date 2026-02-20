@@ -187,6 +187,18 @@ describe("Swagger", () => {
     );
   });
 
+  it("sorts refs in toJSONAsync", async () => {
+    // a.json has 2+ refs (nesting/b.json, c.json, etc.) so the sort comparator gets invoked
+    const swagger = new Swagger(
+      resolve(__dirname, "fixtures/getAffectedSwaggers/specification/1/data-plane/a.json"),
+    );
+    const json = /** @type {import('../src/swagger.js').SwaggerJSON} */ (
+      await swagger.toJSONAsync({ includeRefs: true })
+    );
+    expect(json.refs).toBeDefined();
+    expect(/** @type {unknown[]} */ (json.refs).length).toBeGreaterThanOrEqual(2);
+  });
+
   // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
