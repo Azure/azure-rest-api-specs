@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-10-02-preview
+tag: package-preview-2026-02-01-preview
 ```
 
 ### Suppression
@@ -48,6 +48,49 @@ directive:
       - $.definitions.ServiceBind.properties.customizedKeys
     reason: |
       Do not introduce breaking changes in GA services
+```
+
+### Tag: package-preview-2026-02-01-preview
+
+These settings apply only when `--tag=package-preview-2026-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-02-01-preview'
+input-file:
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/AppResiliency.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/AuthConfigs.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/BillingMeters.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Builders.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Builds.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/CommonDefinitions.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerApps.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerAppsBuilds.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerAppsFunctions.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerAppsPatches.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Diagnostics.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/DotNetComponents.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/FunctionsExtension.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Global.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/JavaComponents.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Jobs.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/LogicAppsExtension.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironments.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/SessionPools.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/SourceControls.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Subscriptions.json
+  - Microsoft.App/ContainerApps/preview/2026-02-01-preview/Usages.json
 ```
 
 ### Tag: package-preview-2025-10-02-preview
