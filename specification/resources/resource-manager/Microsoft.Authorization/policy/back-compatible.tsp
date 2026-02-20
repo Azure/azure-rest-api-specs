@@ -96,3 +96,9 @@ using Microsoft.Authorization;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VariableValue.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifest.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifestProperties.resourceFunctions);
