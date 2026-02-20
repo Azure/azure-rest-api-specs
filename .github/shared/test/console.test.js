@@ -32,11 +32,20 @@ describe("console", () => {
     it("awaits drain when stdout has backpressure", async () => {
       writeSpy.mockReturnValueOnce(false);
 
-      const promise = log("backpressure test");
+      let resolved = false;
+      const promise = log("backpressure test").then(() => {
+        resolved = true;
+      });
+
+      // Should still be pending before drain
+      expect(resolved).toBe(false);
+      expect(writeSpy).toBeCalledWith("backpressure test\n");
+
+      // Unblock backpressure
       process.stdout.emit("drain");
       await promise;
 
-      expect(writeSpy).toBeCalledWith("backpressure test\n");
+      expect(resolved).toBe(true);
     });
   });
 });
