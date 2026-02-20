@@ -197,6 +197,7 @@ describe("Swagger", () => {
     );
     const refs = /** @type {import('../src/swagger.js').SwaggerJSON[]} */ (json.refs);
     expect(refs.length).toBe(4);
+    // ensure at least first two elements are sorted correctly
     expect(refs[0].path.localeCompare(refs[1].path)).toBeLessThan(0);
   });
 
