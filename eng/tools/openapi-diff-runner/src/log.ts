@@ -1,5 +1,3 @@
-import { appendFileSync } from "node:fs";
-
 /**
  * Log prefix for all messages from openapi-diff-runner
  */
@@ -88,20 +86,6 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
     console.log(`::warning ${fileLocation}::${message}`);
   } else {
     console.log(`::warning::${message}`);
-  }
-}
-
-/**
- * Set an output parameter in GitHub Actions
- * @param name Output parameter name
- * @param value Output parameter value
- */
-export function setOutput(name: string, value: string): void {
-  if (process.env.GITHUB_OUTPUT) {
-    appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
-  } else {
-    // Fallback to older syntax
-    console.log(`::set-output name=${name}::${value}`);
   }
 }
 
