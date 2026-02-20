@@ -37,6 +37,7 @@ interface Configurations {
    * Updates a configuration of a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
     Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
@@ -47,6 +48,7 @@ interface Configurations {
    * Updates a configuration of a server.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<Configuration, PatchModel = Configuration>;
 
   /**
