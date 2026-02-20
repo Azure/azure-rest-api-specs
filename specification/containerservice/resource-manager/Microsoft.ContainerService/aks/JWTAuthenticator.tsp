@@ -18,7 +18,7 @@ namespace Microsoft.ContainerService;
 /**
  * Configuration for JWT authenticator in the managed cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @parentResource(ManagedCluster)
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticator
@@ -41,7 +41,7 @@ model JWTAuthenticator
   "The JWT authenticator to create or update."
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @armResourceOperations
 @added(Versions.v2025_10_02_preview)
 interface JWTAuthenticators {
@@ -53,7 +53,11 @@ interface JWTAuthenticators {
   /**
    * Creates or updates JWT authenticator in the managed cluster and updates the managed cluster to apply the settings.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<JWTAuthenticator>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    JWTAuthenticator,
+    LroHeaders = ArmLroLocationHeader<FinalResult = JWTAuthenticator> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Deletes a JWT authenticator and updates the managed cluster to apply the settings.
@@ -115,7 +119,7 @@ union JWTAuthenticatorProvisioningState {
 /**
  * The properties of JWTAuthenticator. For details on how to configure the properties of a JWT authenticator, please refer to the Kubernetes documentation: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#using-authentication-configuration. Please note that not all fields available in the Kubernetes documentation are supported by AKS. For troubleshooting, please see https://aka.ms/aks-external-issuers-docs.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorProperties {
   /**
@@ -150,7 +154,7 @@ model JWTAuthenticatorProperties {
 /**
  * The OIDC issuer details for JWTAuthenticator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorIssuer {
   /**
@@ -168,7 +172,7 @@ model JWTAuthenticatorIssuer {
 /**
  * The validation rule for JWTAuthenticator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorValidationRule {
   /**
@@ -185,7 +189,7 @@ model JWTAuthenticatorValidationRule {
 /**
  * The claim mappings for JWTAuthenticator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorClaimMappings {
   /**
@@ -213,7 +217,7 @@ model JWTAuthenticatorClaimMappings {
 /**
  * The claim mapping expression for JWTAuthenticator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorClaimMappingExpression {
   /**
@@ -225,13 +229,13 @@ model JWTAuthenticatorClaimMappingExpression {
 /**
  * The extra claim mapping expression for JWTAuthenticator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model JWTAuthenticatorExtraClaimMappingExpression {
   /**
    * The key of the extra attribute.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The 'key' property refers to the key of an extra claim mapping attribute, not a secret or credential."
   key: string;
 
   /**
