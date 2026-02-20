@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -10,6 +11,7 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -32,6 +34,11 @@ model RecoveryResourceProperties {
   @doc("Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
   resourceLocation?: string;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
+  @visibility(Lifecycle.Read)
+  resourcePhysicalZones?: string[];
 
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   inclusionState?: ResourceInclusionState;

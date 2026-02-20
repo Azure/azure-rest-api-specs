@@ -44,16 +44,34 @@ model NamespaceAssetExecuteActionRequest {
   @doc("Name of the management group under which the action is to be executed.")
   managementGroupName: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "payload property field is custom defined by customer"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "payload property field is custom defined by customer"
   @doc("Payload required for executing the management action.")
-  payload?: {};
+  payload?: Record<unknown>;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Status of the management action execution.")
+union ManagementActionExecutionStatus {
+  @doc("Management action execution has succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("Management action execution has failed.")
+  Failed: "Failed",
+
+  @doc("Management action execution has been canceled.")
+  Canceled: "Canceled",
+
+  @doc("Management action execution is currently in progress.")
+  InProgress: "InProgress",
+
+  string,
 }
 
 @added(Versions.v2026_02_01_preview)
 @doc("The response body for the executeAction operation on NamespaceAsset.")
 model NamespaceAssetExecuteActionResponse {
   @doc("Status of the management action execution.")
-  status: string;
+  status: ManagementActionExecutionStatus;
 
   @doc("Name of the management action that was executed.")
   managementActionName: string;
@@ -64,9 +82,9 @@ model NamespaceAssetExecuteActionResponse {
   @doc("Resource ID of the asset on which the management action was executed.")
   assetResourceId: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "payload property field is custom defined by connector"
+  // Response property field is custom defined by connector. Cannot be strongly typed beyond a generic string (stringified payload)
   @doc("Response from the asset regarding the management action execution.")
-  response?: {};
+  response?: string;
 
   @doc("Error if the execute action operation is not successful.")
   error?: Error;

@@ -50,6 +50,11 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_10_24_preview: "2025-10-24-preview",
+
+  /** 2026-01-29-preview version (new) */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2026_01_29_preview: "2026-01-29-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
@@ -102,6 +107,62 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+}
+
+@added(Versions.v2026_01_29_preview)
+@doc("Agent status enumeration")
+union AgentStatus {
+  string,
+
+  /** Enabled status */
+  Enabled: "Enabled",
+
+  /** Disabled status */
+  Disabled: "Disabled",
+}
+
+@added(Versions.v2026_01_29_preview)
+@doc("Properties specific to Agent")
+model AgentProperties is BaseResourceProperties {
+  @doc("Status of the agent")
+  status: AgentStatus;
+}
+
+@added(Versions.v2026_01_29_preview)
+model AgentResource is Azure.ResourceManager.TrackedResource<AgentProperties> {
+  @key("agentName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @segment("agents")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the Agent resource")
+  @path
+  name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+/**
+ * The type used for update operations of the Agent Resource.
+ */
+@added(Versions.v2026_01_29_preview)
+model AgentResourceUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@added(Versions.v2026_01_29_preview)
+@armResourceOperations
+interface Agents {
+  get is ArmResourceRead<AgentResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AgentResource>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<AgentResource, AgentResourceUpdate>;
+  delete is ArmResourceDeleteWithoutOkAsync<AgentResource>;
+  listByResourceGroup is ArmResourceListByParent<AgentResource>;
+  listBySubscription is ArmListBySubscription<AgentResource>;
 }
 
 @added(Versions.v2025_04_03_preview)
@@ -572,10 +633,12 @@ interface ProviderLevelTestActions {
 @added(Versions.v2025_05_23_preview)
 @armResourceOperations
 interface SaasOperations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @doc("Activate SaaS resource.")
   @armResourceAction(SaaS)
   @action("activateSaaS")
   @post
+  @OpenAPI.extension("x-ms-long-running-operation", true)
   activateSaaS(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -584,5 +647,5 @@ interface SaasOperations {
     @bodyRoot
     @doc("The details for ActivateSaaSParameter request.")
     request: ActivateSaasParameterRequest,
-  ): ArmResponse<ActivateSaasResponse> | ErrorResponse;
+  ): ArmResponse<ActivateSaasResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }

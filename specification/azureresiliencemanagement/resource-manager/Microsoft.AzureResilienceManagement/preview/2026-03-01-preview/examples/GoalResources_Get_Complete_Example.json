@@ -1,0 +1,47 @@
+{
+  "title": "GoalResources_Get_Complete_Example",
+  "operationId": "GoalResources_Get",
+  "parameters": {
+    "serviceGroupName": "production-sg",
+    "api-version": "2026-03-01-preview",
+    "goalAssignmentName": "resiliencyGoalAssignment",
+    "goalResourceName": "web-app-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.Web/sites/MyWebApp",
+          "highAvailabilityGoalParticipation": "Included",
+          "highAvailabilityAttestationStatus": "ManuallyAttested",
+          "disasterRecoveryGoalParticipation": "Included",
+          "disasterRecoveryAttestationStatus": "NotAttested",
+          "exclusionReasonForHighAvailabilityGoals": null,
+          "exclusionReasonForDisasterRecoveryGoals": null,
+          "serviceGroupMemberships": [
+            {
+              "serviceGroupId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/serviceGroups/production-sg",
+              "membershipType": "Direct"
+            },
+            {
+              "serviceGroupId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/serviceGroups/subscription-level-sg",
+              "membershipType": "ThroughSubscription"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/goalAssignments/resiliency-goal-assignment/goalResources/web-app-resource",
+        "name": "web-app-resource",
+        "type": "Microsoft.AzureResilienceManagement/goalResources",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-30T10:15:30.123Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-30T14:22:45.789Z"
+        }
+      }
+    }
+  }
+}
