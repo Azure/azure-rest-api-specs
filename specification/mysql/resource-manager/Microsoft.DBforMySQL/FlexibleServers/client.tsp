@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.DBforMySQL;
 
@@ -34,8 +35,14 @@ using Microsoft.DBforMySQL;
 @@clientName(Database, "MySqlFlexibleServerDatabase", "csharp");
 @@clientName(FirewallRule, "MySqlFlexibleServerFirewallRule", "csharp");
 @@clientName(ServerBackup, "MySqlFlexibleServerBackup", "csharp");
+@@usage(ServerBackup, Usage.input, "csharp");
 @@clientName(ServerBackupV2, "MySqlFlexibleServerBackupV2", "csharp");
 @@clientName(Server, "MySqlFlexibleServer", "csharp");
+@@alternateType(Server.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(ServerProperties.restorePointInTime, "RestorePointInOn", "csharp");
 @@clientName(ServerVersion, "MySqlFlexibleServerVersion", "csharp");
 @@clientName(EnableStatusEnum, "MySqlFlexibleServerEnableStatusEnum", "csharp");
 @@clientName(ReplicationRole, "MySqlFlexibleServerReplicationRole", "csharp");
@@ -58,6 +65,10 @@ using Microsoft.DBforMySQL;
   "csharp"
 );
 @@clientName(ServerForUpdate, "MySqlFlexibleServerForUpdate", "csharp");
+@@alternateType(ServerForUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(ServerListResult, "MySqlFlexibleServerListResult", "csharp");
 @@clientName(ServerRestartParameter,
   "MySqlFlexibleServerRestartParameter",
@@ -167,13 +178,14 @@ using Microsoft.DBforMySQL;
   "csharp"
 );
 @@clientName(BackupAndExportRequest,
-  "MySqlFlexibleServerBackupAndExportRequest",
+  "MySqlFlexibleServerBackupAndExportContent",
   "csharp"
 );
 @@clientName(BackupAndExportResponse,
   "MySqlFlexibleServerBackupAndExportResult",
   "csharp"
 );
+@@usage(BackupAndExportResponse, Usage.input, "csharp");
 @@clientName(BackupFormat, "MySqlFlexibleServerBackupFormat", "csharp");
 @@clientName(BackupRequestBase,
   "MySqlFlexibleServerBackupContentBase",
@@ -190,6 +202,7 @@ using Microsoft.DBforMySQL;
   "csharp"
 );
 @@clientName(LogFile, "MySqlFlexibleServerLogFile", "csharp");
+@@usage(LogFile, Usage.input, "csharp");
 @@clientName(LogFileListResult,
   "MySqlFlexibleServerLogFileListResult",
   "csharp"
@@ -210,6 +223,7 @@ using Microsoft.DBforMySQL;
   "MySqlFlexibleServerValidateBackupResult",
   "csharp"
 );
+@@usage(Maintenance, Usage.input, "csharp");
 @@clientName(Maintenance, "MySqlFlexibleServerMaintenance", "csharp");
 @@clientName(MaintenanceType, "MySqlFlexibleServerMaintenanceType", "csharp");
 @@clientName(MaintenanceState, "MySqlFlexibleServerMaintenanceState", "csharp");
@@ -250,7 +264,6 @@ using Microsoft.DBforMySQL;
 );
 @@clientName(Configurations.batchUpdate, "UpdateConfigurations", "csharp");
 @@clientName(BackupAndExport.validateBackup, "ValidateBackup", "csharp");
-@@clientName(Servers.detachVNet, "DetachVnet", "csharp");
 @@clientName(BackupType.FULL, "Full", "csharp");
 @@clientName(DataEncryption.type, "EncryptionType", "csharp");
 @@clientName(LogFileProperties.type, "TypePropertiesType", "csharp");
@@ -273,6 +286,8 @@ using Microsoft.DBforMySQL;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(FirewallRuleProperties.startIpAddress, "StartIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "EndIPAddress", "csharp");
 @@alternateType(FirewallRuleProperties.startIpAddress, ipV4Address, "csharp");
 @@alternateType(FirewallRuleProperties.endIpAddress, ipV4Address, "csharp");
 @@alternateType(ImportSourceProperties.storageUrl, url, "csharp");
@@ -304,3 +319,50 @@ using Microsoft.DBforMySQL;
   azureLocation,
   "csharp"
 );
+@@clientName(BackupStoreDetails,
+  "MySqlFlexibleServerBackupStoreDetails",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "MySqlFlexibleServersPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(DataEncryption.primaryKeyURI, "PrimaryKeyUri", "csharp");
+@@clientName(DataEncryption.geoBackupKeyURI, "GeoBackupKeyUri", "csharp");
+@@usage(AdvancedThreatProtectionUpdateProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
+
+@@clientName(LogFiles.listByServer, "GetLogFiles", "csharp");
+@@clientName(Replicas.listByServer, "GetReplicas", "csharp");
+@@clientName(CheckVirtualNetworkSubnetUsage.execute,
+  "ExecuteCheckVirtualNetworkSubnetUsage",
+  "csharp"
+);
+@@clientName(GetPrivateDnsZoneSuffix.execute,
+  "ExecuteGetPrivateDnsZoneSuffix",
+  "csharp"
+);
+@@clientName(LocationBasedCapabilities.list,
+  "GetLocationBasedCapabilities",
+  "csharp"
+);
+@@clientName(BackupAndExport.create, "CreateBackupAndExport", "csharp");
+@@clientName(ServersMigration.cutoverMigration,
+  "CutoverMigrationServersMigration",
+  "csharp"
+);
+@@clientName(Servers.detachVNet, "DetachVnet", "csharp");
+@@clientName(Servers.detachVNet::parameters.body, "content", "csharp");
+@@clientName(BackupAndExport.create::parameters.body, "content", "csharp");
+@@clientName(Servers.update::parameters.properties, "patch", "csharp");
+@@clientName(Servers.resetGtid::parameters.body, "content", "csharp");
+@@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
+  "patch",
+  "csharp"
+);
+@@clientName(Maintenances.update::parameters.properties, "patch", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@markAsPageable(PrivateEndpointConnections.listByServer, "csharp");

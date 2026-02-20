@@ -63,10 +63,40 @@ using Azure.Core;
   "ConnectionState",
   "csharp"
 );
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(ManagedByInfo.resourceId, armResourceIdentifier, "csharp");
 @@clientName(PrivateLinkResource, "ElasticSanPrivateLinkResource", "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
 @@clientName(restoreVolume, "RestoreVolume", "csharp");
+@@clientName(VolumeGroups.preBackup, "PreBackupVolume", "csharp");
+@@clientName(VolumeGroups.preRestore, "PreRestoreVolume", "csharp");
+@@alternateType(VolumeGroupUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(VolumeGroup.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "ElasticSanPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(ElasticSans.listByElasticSan, "GetPrivateLinkResources", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(ElasticSans.update::parameters.properties, "patch", "csharp");
+@@clientName(VolumeGroups.update::parameters.properties, "patch", "csharp");
+@@clientName(VolumeGroups.preBackup::parameters.body, "content", "csharp");
+@@clientName(VolumeGroups.preRestore::parameters.body, "content", "csharp");
+@@clientName(Volumes.update::parameters.properties, "patch", "csharp");
+@@clientName(SkusOperationGroup.list, "GetSkus", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ElasticSans.listByElasticSan,
+  "csharp"
+);
 
 // Move restoreVolume operation to Management client for Go to maintain compatibility
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
