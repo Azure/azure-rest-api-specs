@@ -283,7 +283,7 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: containerregistry.json
-    reason: Previously existing implementation, flagged as part of Typespec conversion
+    reason: Previously existing implementation (properties retentionDays and metadataSearch), flagged as part of Typespec conversion
     where: 
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties
   - code: RequestSchemaForTrackedResourcesMustHaveTags
