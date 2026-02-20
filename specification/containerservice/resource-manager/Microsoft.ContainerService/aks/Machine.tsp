@@ -451,6 +451,13 @@ model MachineProperties {
   @added(Versions.v2026_01_02_preview)
   @visibility(Lifecycle.Read)
   status?: MachineStatus;
+
+  /**
+   * Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
+  localDNSProfile?: LocalDNSProfile;
 }
 
 /**
