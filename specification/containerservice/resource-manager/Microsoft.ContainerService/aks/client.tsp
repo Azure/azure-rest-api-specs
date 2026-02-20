@@ -28,8 +28,6 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusterOIDCIssuerProfile.issuerURL, "issuerUrl", "java");
 @@clientName(TrustedAccessRoleRule.nonResourceURLs, "nonResourceUrls", "java");
 
-
-
 @@clientName(Microsoft.ContainerService, "ContainerServiceClient", "python");
 @@clientName(ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
   "count_ipv6",
