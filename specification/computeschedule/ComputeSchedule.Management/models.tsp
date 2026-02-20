@@ -562,7 +562,7 @@ model FlexProperties {
   @identifiers(#[])
   @doc("The list of VM size profiles to use for flex creation")
   @minItems(1)
-  @maxItems(10)
+  @maxItems(5)
   vmSizeProfiles: Array<VmSizeProfile>;
 
   @doc("The operating system type for the VMs")
