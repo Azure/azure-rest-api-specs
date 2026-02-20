@@ -1,0 +1,70 @@
+{
+  "title": "ClusterJobs_Get_VmConnectRemoveJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "vmConnectRemove",
+    "api-version": "2026-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/vmConnectRemove",
+        "name": "vmConnectRemove",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "VmConnectRemove",
+          "deploymentMode": "Deploy",
+          "vmConnectRemoveJobDetails": [
+            {
+              "vmName": "myVM",
+              "nodeName": "Node-1"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Remove Deployment",
+                  "description": "Close port to disable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Remove Deployment",
+                  "description": "Close port to disable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded"
+        }
+      }
+    }
+  }
+}
