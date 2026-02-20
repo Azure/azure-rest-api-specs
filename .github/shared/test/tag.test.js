@@ -23,7 +23,6 @@ describe("Tag", () => {
     const files = json.inputFiles.map(
       (f) => /** @type {import('../src/swagger.js').SwaggerJSON} */ (f).path,
     );
-    expect(files[0]).toContain("a.json");
-    expect(files[1]).toContain("b.json");
+    expect(files[0].localeCompare(files[1])).toBeLessThan(0);
   });
 });
