@@ -284,6 +284,6 @@ async function writeToJobSummary(markdownContent: string): Promise<void> {
     );
   }
 
-  addToSummary(finalContent);
+  await addToSummary(finalContent);
   logMessage(`Successfully wrote ${finalContent.length} characters to GitHub Actions job summary.`);
 }

@@ -2,6 +2,7 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
@@ -10,10 +11,11 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface defined for custom operations"
 interface UsagesOperationGroup {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
@@ -29,7 +31,7 @@ interface UsagesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface defined for custom operations"
 interface VirtualMachineSizesOperationGroup {
   /**
    * Returns supported VM Sizes in a location
@@ -44,7 +46,7 @@ interface VirtualMachineSizesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface defined for custom operations"
 interface QuotasOperationGroup {
   /**
    * Update quota for each VM family in workspace.
@@ -71,8 +73,12 @@ interface QuotasOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * PTUQuotaOperationGroup is preview-only.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface defined for custom operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+@removed(Versions.v2025_12_01)
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
