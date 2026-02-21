@@ -56,6 +56,17 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
   - suppress: Example Validations
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+  - suppress: R3006
+    where:
+      - $.definitions.ApplicationTypeResource.properties
+      - $.definitions.ApplicationTypeVersionResource.properties
+      - $.definitions.ApplicationResource.properties
+      - $.definitions.ApplicationResourceUpdate.properties
+      - $.definitions.Cluster.properties
+      - $.definitions.ServiceResource.properties
+      - $.definitions.ServiceResourceUpdate.properties
+    reason:
+      - Currently systemData is not allowed.
 ```
 
 ### Tag: package-2026-03-preview
@@ -64,8 +75,8 @@ These settings apply only when `--tag=package-2026-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2026-03-preview'
 input-file:
-- stable/2026-03-01/cluster.json
-- stable/2021-03-01/application.json
+- preview/2026-03-01-preview/cluster.json
+- preview/2026-03-01-preview/application.json
 ```
 
 ### Tag: package-2023-11-preview
