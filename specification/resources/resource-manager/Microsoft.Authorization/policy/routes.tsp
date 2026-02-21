@@ -63,9 +63,7 @@ alias PolicyDefinitionManagementGroupListOps = Azure.ResourceManager.Legacy.Exte
   }
 >;
 
-// Stable-only interfaces: excluded from the preview API version openapi.json.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-@removed(Versions.v2025_12_01_preview)
 interface PolicyDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy definition versions for all built-in policy definitions.
@@ -93,7 +91,6 @@ interface PolicyDefinitionVersionsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-@removed(Versions.v2025_12_01_preview)
 interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy set definition versions for all built-in policy set definitions.
@@ -121,7 +118,6 @@ interface PolicySetDefinitionVersionsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-@removed(Versions.v2025_12_01_preview)
 interface PolicyTokensOperationGroup {
   /**
    * This operation acquires a policy token in the given subscription for the given request body.

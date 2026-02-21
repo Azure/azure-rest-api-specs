@@ -16,10 +16,7 @@ namespace Microsoft.Authorization;
 /**
  * The variable value.
  */
-// Preview-only resource type: excluded from stable API version openapi.json files.
-// Stable-only types use @removed(Versions.v2025_12_01_preview) to exclude themselves from preview.
-// When adding a new stable version after the preview, add @removed on this type for that version,
-// or re-add the stable types with @added for the new version.
+// Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
 @subscriptionResource
 @parentResource(Variable)

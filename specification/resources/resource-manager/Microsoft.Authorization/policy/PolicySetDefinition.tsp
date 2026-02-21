@@ -15,9 +15,6 @@ namespace Microsoft.Authorization;
 /**
  * The policy set definition.
  */
-// Stable-only resource type: excluded from the preview API version openapi.json.
-// Preview-only types are in PolicyExemption.tsp, Variable.tsp, VariableValue.tsp.
-@removed(Versions.v2025_12_01_preview)
 @subscriptionResource
 model PolicySetDefinition
   is Azure.ResourceManager.ProxyResource<PolicySetDefinitionProperties> {
@@ -103,7 +100,6 @@ alias PolicySetDefinitionManagementGroupOps = Azure.ResourceManager.Legacy.Exten
   }
 >;
 
-@removed(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface PolicySetDefinitions {
   /**

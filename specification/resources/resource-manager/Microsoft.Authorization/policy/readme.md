@@ -35,7 +35,6 @@ These settings apply only when `--tag=package-policy-2025-12-preview` is specifi
 
 ```yaml $(tag) == 'package-policy-2025-12-preview'
 input-file:
-- stable/2025-11-01/openapi.json
 - preview/2025-12-01-preview/openapi.json
 
 # Needed when there is more than one input file

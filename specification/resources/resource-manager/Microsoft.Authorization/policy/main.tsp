@@ -7,28 +7,28 @@
  * Version: 0.11.12
  * Date: 2025-10-27T02:40:16.533Z
  */
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "@typespec/rest";
+import "@typespec/versioning";
 import "./back-compatible.tsp";
 import "./DataPolicyManifests.tsp";
+import "./models.tsp";
 import "./PolicyAssignment.tsp";
 import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";
+import "./PolicyExemption.tsp";
 import "./PolicySetDefinition.tsp";
 import "./PolicySetDefinitionVersion.tsp";
-import "./PolicyExemption.tsp";
+import "./routes.tsp";
 import "./Variable.tsp";
 import "./VariableValue.tsp";
-import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /**
@@ -44,18 +44,11 @@ namespace Microsoft.Authorization;
 /**
  * The available API versions.
  *
- * IMPORTANT: Stable and preview API versions produce separate openapi.json files
- * with mutually exclusive resource types:
- * - Stable versions (v2025_03_01, v2025_11_01): PolicyAssignment, PolicyDefinition,
- *   PolicyDefinitionVersion, PolicySetDefinition, PolicySetDefinitionVersion, PolicyTokens.
- *   These use @removed(Versions.v2025_12_01_preview) to exclude from preview.
- * - Preview version (v2025_12_01_preview): PolicyExemption, Variable, VariableValue.
- *   These use @added(Versions.v2025_12_01_preview) to exclude from stable.
+ * The preview version (v2025_12_01_preview) includes everything from the latest
+ * stable version plus new preview-only resource types:
+ * - PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2025_12_01_preview))
  *
- * When adding a new stable version after the preview, ensure:
- * 1. Add @added(newStableVersion) on stable types to bring them back.
- * 2. Add @removed(newStableVersion) on preview-only types to keep them out, or
- *    promote them to stable by removing the preview-only annotations.
+ * See https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/
  */
 enum Versions {
   /**
@@ -71,5 +64,6 @@ enum Versions {
   /**
    * The 2025-12-01-preview API version.
    */
+  @previewVersion
   v2025_12_01_preview: "2025-12-01-preview",
 }

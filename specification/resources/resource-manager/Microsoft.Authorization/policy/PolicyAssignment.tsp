@@ -15,9 +15,6 @@ namespace Microsoft.Authorization;
 /**
  * The policy assignment.
  */
-// Stable-only resource type: excluded from the preview API version openapi.json.
-// Preview-only types are in PolicyExemption.tsp, Variable.tsp, VariableValue.tsp.
-@removed(Versions.v2025_12_01_preview)
 model PolicyAssignment
   is Azure.ResourceManager.ExtensionResource<PolicyAssignmentProperties> {
   ...ResourceNameParameter<
@@ -63,7 +60,6 @@ alias PolicyAssignmentListParameters = {
 };
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-@removed(Versions.v2025_12_01_preview)
 interface PolicyAssignmentGenericOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -107,7 +103,6 @@ interface PolicyAssignmentGenericOps
       }
     > {}
 
-@removed(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface PolicyAssignments {
   /**
