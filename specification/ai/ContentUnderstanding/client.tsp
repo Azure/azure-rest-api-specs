@@ -71,19 +71,6 @@ interface ContentUnderstandingClient {
 @@clientName(TimeField.type, "fieldType");
 @@clientName(JsonField.type, "fieldType");
 
-// .NET: Hide wire-format value properties (valueString, valueNumber, etc.) from public API.
-// Each sub-type adds a strongly-typed "Value" property via C# customization that delegates
-// to the internal wire-format property. ContentField.Value (object) provides polymorphic access.
-@@access(StringField.valueString, Access.internal, "csharp");
-@@access(DateField.valueDate, Access.internal, "csharp");
-@@access(TimeField.valueTime, Access.internal, "csharp");
-@@access(NumberField.valueNumber, Access.internal, "csharp");
-@@access(IntegerField.valueInteger, Access.internal, "csharp");
-@@access(BooleanField.valueBoolean, Access.internal, "csharp");
-@@access(ArrayField.valueArray, Access.internal, "csharp");
-@@access(ObjectField.valueObject, Access.internal, "csharp");
-@@access(JsonField.valueJson, Access.internal, "csharp");
-
 // .NET: type name "DateTimeOffsetField" to align with value type DateTimeOffset.
 @@clientName(DateField, "DateTimeOffsetField", "csharp");
 
