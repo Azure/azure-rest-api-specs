@@ -60,6 +60,10 @@ interface ContentUnderstandingClient {
   updateDefaults is ContentAnalyzers.updateDefaults;
 }
 
+// ============================================================================
+// Cross-language customizations (all emitters)
+// ============================================================================
+
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
 @@clientName(ArrayField.type, "fieldType");
 @@clientName(BooleanField.type, "fieldType");
@@ -71,9 +75,6 @@ interface ContentUnderstandingClient {
 @@clientName(TimeField.type, "fieldType");
 @@clientName(JsonField.type, "fieldType");
 
-// .NET: type name "DateTimeOffsetField" to align with value type DateTimeOffset.
-@@clientName(DateField, "DateTimeOffsetField", "csharp");
-
 // Rename 'items' to avoid conflict with built-in 'items' method.
 @@clientName(ContentFieldDefinition.items, "itemDefinition");
 
@@ -83,27 +84,8 @@ interface ContentUnderstandingClient {
 @@clientName(AnalyzeInput.range, "inputRange");
 @@clientName(AnalyzeBinaryRequest.range, "inputRange");
 
-// .NET: type name "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase).
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
-@@clientName(AnalyzeInput, "AnalysisInput", "csharp");
 @@access(AnalyzeInput, Access.public);
-// .NET: type name "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase).
-@@clientName(AnalyzeResult, "AnalysisResult", "csharp");
-// .NET: property name "Uri" to match type System.Uri (noun phrase, type-aligned).
-@@clientName(AnalyzeInput.url, "Uri", "csharp");
-
-// .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
-@@clientName(ContentAnalyzer.dynamicFieldSchema, "HasDynamicFieldSchema", "csharp");
-
-// .NET: boolean properties on ContentAnalyzerConfig use "Should" prefix for clarity.
-@@clientName(ContentAnalyzerConfig.omitContent, "ShouldOmitContent", "csharp");
-@@clientName(ContentAnalyzerConfig.returnDetails, "ShouldReturnDetails", "csharp");
-
-// .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentUnderstandingClient.listAnalyzers,
-  "getAnalyzers",
-  "csharp"
-);
 
 // Mark polling operations as internal - client generators automatically handle
 // the polling pattern for long-running operations. When users call analyze(), the
@@ -111,15 +93,6 @@ interface ContentUnderstandingClient {
 // and retrieve results, eliminating the need for manual operation ID management.
 @@access(ContentUnderstandingClient.getResult, Access.internal);
 @@access(ContentUnderstandingClient.getOperationStatus, Access.internal);
-
-// Suppress convenient method generation for updateDefaults in Java only
-@@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
-
-// Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
-@@clientDoc(AnalyzeInput.data,
-  "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
-  DocumentationMode.replace
-);
 
 // Custom parameter order for analyzeBinary: put required 'input' before optional parameters with defaults.
 // This ensures 'contentType' (which has a default) appears after the required body parameter.
@@ -190,3 +163,51 @@ op analyzeCustomSignature(
 ): AnalyzeResult;
 
 @@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
+
+// ============================================================================
+// .NET-specific customizations
+// ============================================================================
+
+// .NET: type name "DateTimeOffsetField" to align with value type DateTimeOffset.
+@@clientName(DateField, "DateTimeOffsetField", "csharp");
+
+// .NET: type name "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase).
+@@clientName(AnalyzeInput, "AnalysisInput", "csharp");
+// .NET: type name "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase).
+@@clientName(AnalyzeResult, "AnalysisResult", "csharp");
+// .NET: property name "Uri" to match type System.Uri (noun phrase, type-aligned).
+@@clientName(AnalyzeInput.url, "Uri", "csharp");
+
+// .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
+@@clientName(ContentAnalyzer.dynamicFieldSchema, "HasDynamicFieldSchema", "csharp");
+
+// .NET: boolean properties on ContentAnalyzerConfig use "Should" prefix for clarity.
+@@clientName(ContentAnalyzerConfig.omitContent, "ShouldOmitContent", "csharp");
+@@clientName(ContentAnalyzerConfig.returnDetails, "ShouldReturnDetails", "csharp");
+
+// .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
+@@clientName(ContentUnderstandingClient.listAnalyzers,
+  "getAnalyzers",
+  "csharp"
+);
+
+// ============================================================================
+// Java-specific customizations
+// ============================================================================
+
+// Suppress convenient method generation for updateDefaults in Java only
+@@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
+
+// ============================================================================
+// Python-specific customizations
+// ============================================================================
+
+// Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
+@@clientDoc(AnalyzeInput.data,
+  "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
+  DocumentationMode.replace
+);
+
+// ============================================================================
+// JavaScript-specific customizations
+// ============================================================================
