@@ -86,6 +86,15 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
     reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: PathForResourceAction
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The pricings API uses a {scopeId} parameter which does not conform to the standard subscription/resourceGroup path patterns. The batchUpdate action is a POST on the pricings collection.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: EnumInsteadOfBoolean
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The success property is a simple success/failure indicator for batch results that will not need additional states.
   - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
