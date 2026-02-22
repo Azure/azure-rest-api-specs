@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"e9e0fecd13d7beb507db5709d89df511c3dd91c031f02a087011ca80db14afe4","compiler_version":"v0.49.0"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"d028d9a02e3e1a9d9643d0dd85392618b1b0ef57af6444ddd5ebbb45f2314eb1","compiler_version":"v0.49.0"}
 
 name: "SDK Generation Agent"
 "on":
@@ -42,7 +42,6 @@ name: "SDK Generation Agent"
   workflow_dispatch:
     inputs:
       issue_url:
-        default: https://github.com/Azure/azure-rest-api-specs/issues/40516
         description: Issue URL providing SDK generation context
 
 permissions: {}
@@ -345,8 +344,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Install azsdk mcp server
-        run: |
-          ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory /tmp/bin
+        run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory /tmp/bin
         shell: pwsh
 
       - name: Configure Git credentials
