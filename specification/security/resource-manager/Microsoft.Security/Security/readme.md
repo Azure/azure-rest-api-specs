@@ -106,6 +106,16 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2026-03
+
+These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03'
+input-file:
+  - preview/2026-03-01-preview/defenderForStorageSettings.json
+  - preview/2026-03-01-preview/operations.json
+```
+
 ### Tag: package-2026-01
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
