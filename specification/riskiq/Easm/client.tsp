@@ -159,5 +159,5 @@ interface EasmClient {
 // rename for duplicate model from Azure.Core.Foundations
 @@clientName(Azure.Core.Foundations.InnerError,
   "CoreInnerError",
-  "java,go,python"
+  "java,go,python,csharp"
 );
