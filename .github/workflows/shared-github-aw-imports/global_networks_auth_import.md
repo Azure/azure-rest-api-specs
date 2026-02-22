@@ -55,15 +55,6 @@ steps:
         cat /tmp/az-account.err >&2 || true
         exit 1
       fi
-  - name: Fetch secret from Azure Key Vault
-    id: fetch_secret
-    shell: bash
-    run: |
-      set -euo pipefail
-      SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-      echo "::add-mask::${SECRET_VALUE}"
-      echo "COPILOT_GITHUB_TOKEN=${SECRET_VALUE}" >> "${GITHUB_ENV}"
-      echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
 ---
 
 ## Workflow Behavior
