@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2025-07-01-preview"
+    "version": "2026-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -345,6 +345,10 @@
           "$ref": "#/definitions/OperationStatus",
           "readOnly": true,
           "description": "Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation."
+        },
+        "scannerResourceId": {
+          "type": "string",
+          "description": "Resource identifier of the security operator (or data scanner) associated with malware scanning. Accepts both Microsoft.Security/securityOperators and Microsoft.Security/dataScanners resource types."
         }
       },
       "description": "Properties of Malware Scanning."
@@ -408,6 +412,10 @@
           "$ref": "#/definitions/OperationStatus",
           "readOnly": true,
           "description": "Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation."
+        },
+        "scannerResourceId": {
+          "type": "string",
+          "description": "Resource identifier of the security operator (or data scanner) associated with sensitive data discovery. Accepts both Microsoft.Security/securityOperators and Microsoft.Security/dataScanners resource types."
         }
       },
       "description": "Properties of Sensitive Data Discovery."

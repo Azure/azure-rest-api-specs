@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-07-01-preview",
+    "api-version": "2026-03-01-preview",
     "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
     "settingName": "current"
   },
@@ -31,10 +31,12 @@
             },
             "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
             "blobScanResultsOptions": "BlobIndexTags",
-            "automatedResponse": "BlobSoftDelete"
+            "automatedResponse": "BlobSoftDelete",
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/DefenderForStorageMalwareScanning"
           },
           "sensitiveDataDiscovery": {
-            "isEnabled": true
+            "isEnabled": true,
+            "scannerResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/DefenderForStorageDataSensitivity"
           },
           "overrideSubscriptionLevelSettings": true
         }
