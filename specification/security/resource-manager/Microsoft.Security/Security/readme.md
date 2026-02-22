@@ -64,8 +64,6 @@ directive:
     where: $.definitions.Pricing
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
-  - suppress: MULTIPLE_API_VERSION
-    reason: The default composite tag intentionally includes multiple API versions to provide a unified client experience across all Security Center features.
   - suppress: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
     from: pricings.json
     reason: The default composite tag may include the stable version of pricings while the latest preview version is available under a separate tag.
@@ -726,7 +724,7 @@ input-file:
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- preview/2025-10-01-preview/pricings.json
+- stable/2024-01-01/pricings.json
 - stable/2024-08-01/securityStandards.json
 - stable/2024-08-01/standardAssignments.json
 - stable/2024-08-01/customRecommedations.json
