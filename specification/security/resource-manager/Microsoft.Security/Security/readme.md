@@ -94,9 +94,6 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: preview/2025-10-01-preview/pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
-  - code: PathForResourceAction
-    from: preview/2025-10-01-preview/pricings.json
-    reason: Batch update is a collection-level action that operates on multiple pricing plans simultaneously. The path follows the designed API pattern.
   - code: AvoidAdditionalProperties
     from: preview/2025-10-01-preview/pricings.json
     reason: The additionalExtensionProperties property is used across all API versions. Changing it would be a breaking change.
