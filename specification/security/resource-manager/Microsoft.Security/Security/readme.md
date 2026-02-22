@@ -64,63 +64,40 @@ directive:
     where: $.definitions.Pricing
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
-  - suppress: MULTIPLE_API_VERSION
-    reason: The default composite tag intentionally includes multiple API versions to provide a unified client experience across all Security Center features.
-  - suppress: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
-    from: pricings.json
-    reason: The default composite tag may include the stable version of pricings while the latest preview version is available under a separate tag.
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: pricings.json
-    reason: New APIs such as batch update are included in the preview tag and will be promoted to the default tag when stable.
 ```
 
 ``` yaml
 suppressions:
   - code: ResourceNameRestriction
-    from: stable/2024-01-01/pricings.json
-    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
-  - code: ResourceNameRestriction
-    from: preview/2025-10-01-preview/pricings.json
+    from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PutRequestResponseSchemeArm
-    from: stable/2024-01-01/pricings.json
-    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
-  - code: PutRequestResponseSchemeArm
-    from: preview/2025-10-01-preview/pricings.json
+    from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: stable/2024-01-01/pricings.json
+    from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
-  - code: GetCollectionOnlyHasValueAndNextLink
-    from: preview/2025-10-01-preview/pricings.json
-    reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
-  - code: AvoidAdditionalProperties
-    from: preview/2025-10-01-preview/pricings.json
-    reason: The additionalExtensionProperties property is used across all API versions. Changing it would be a breaking change.
-  - code: RequiredReadOnlySystemData
-    from: preview/2025-10-01-preview/pricings.json
-    reason: Pricings API does not return systemData, consistent with all previous API versions.
-  - code: PutInOperationName
-    from: preview/2025-10-01-preview/pricings.json
-    reason: The operation name Pricings_Update is consistent with previous API versions. Changing it would introduce a breaking change in already-shipped SDKs.
-  - code: ParameterNotDefinedInGlobalParameters
-    from: preview/2025-10-01-preview/pricings.json
-    reason: API version parameter is defined in common types file and referenced consistently across all Security API versions.
-  - code: EnumInsteadOfBoolean
-    from: preview/2025-10-01-preview/pricings.json
-    reason: Boolean properties are appropriate for success and deprecated flags in the pricing and batch operation response models.
   - code: ResourceNameRestriction
-    from: preview/2024-03-01/securityConnectors.json
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PatchBodyParametersSchema
-    from: preview/2024-03-01/securityConnectors.json
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
   - code: UnSupportedPatchProperties
-    from: preview/2024-03-01/securityConnectors.json
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
   - code: AvoidAdditionalProperties
-    from: preview/2024-03-01/securityConnectors.json
-    reason: This is a property used across all API versions. Changing it would be a breaking change and is required for extensibility.
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
 ```
 
 ### Basic Information
@@ -162,17 +139,10 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - preview/2025-10-01-preview/pricings.json
   - preview/2025-10-01-preview/operations.json
   - preview/2025-10-01-preview/operationResults.json
   - preview/2025-10-01-preview/operationStatuses.json
-suppressions:
-  - code: GetResponseCodes
-    from: operationResults.json
-    where:
-          - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"].get.responses["204"]
-    reason: According to the [Azure Resource Manager async API reference spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md), the 204 No Content response status code
-      is required for polling operations when the operation has completed successfully with no content to return.
+  - preview/2025-10-01-preview/pricings.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -723,7 +693,7 @@ input-file:
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- stable/2024-01-01/pricings.json
+- preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/securityStandards.json
 - stable/2024-08-01/standardAssignments.json
 - stable/2024-08-01/customRecommedations.json
