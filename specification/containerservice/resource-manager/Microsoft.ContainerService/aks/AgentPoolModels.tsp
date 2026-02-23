@@ -181,6 +181,13 @@ model ManagedClusterAgentPoolProfileProperties {
   upgradeStrategy?: UpgradeStrategy;
 
   /**
+   * Whether to enable the full-cache ephemeral OS disk feature. When this feature is enabled, the entire operating system will be locally cached on the ephemeral OS disk, preventing E17 events caused by network failures.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
+  enableOSDiskFullCaching?: boolean;
+
+  /**
    * Settings for upgrading the agentpool
    */
   upgradeSettings?: AgentPoolUpgradeSettings;
