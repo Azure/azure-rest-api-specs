@@ -12,7 +12,7 @@ using OpenAPI;
 
 namespace Microsoft.ResourceNotifications;
 
-// Scope discriminator for resource subscriptions
+/** The kind of scope for resource subscriptions, determining how notifications are scoped and delivered */
 union ScopeKind {
   string,
 
@@ -264,11 +264,11 @@ model FabricTableDestinationProperties extends DestinationProperties {
 
   /** The output schema - readonly for now, will provide a way for 1P to set to fabric1P */
   @visibility(Lifecycle.Read)
-  outputSchema: string;
+  outputSchema?: string;
 
   /** The output encoding - readonly and not configurable */
   @visibility(Lifecycle.Read)
-  outputEncoding: string;
+  outputEncoding?: string;
 
   /** The fabric endpoint configuration */
   endpoint: FabricEndpoint;
@@ -325,6 +325,17 @@ union BatchingPolicyKind {
   minCountMaxDelay: "minCountMaxDelay",
 }
 
+/** The delivery mode for endpoints, determining how notifications are distributed across endpoints */
+union EndpointDeliveryMode {
+  string,
+
+  /** Spreads load over all endpoints */
+  roundRobin: "round-robin",
+
+  /** Delivers to the first available endpoint */
+  failover: "failover",
+}
+
 /** Base properties for batching policy configuration */
 @discriminator("kind")
 model BatchingPolicy {
@@ -340,7 +351,7 @@ model MinCountMaxDelayBatchingPolicy extends BatchingPolicy {
   /** Minimum number of resources */
   minResources: int32;
 
-  /** Maximum delay */
+  /** Maximum delay in ISO 8601 duration format (e.g., PT5M for 5 minutes) */
   maxDelay: string;
 }
 
@@ -369,8 +380,8 @@ model StorageAccountDestinationProperties extends DestinationProperties {
   /** Storage container to store the data */
   endpointContainer: string;
 
-  /** How to deliver to the endpoints below: round-robin spreads load over all endpoints, failover delivers to the first available */
-  endpointDeliveryMode: string;
+  /** How to deliver to the endpoints below */
+  endpointDeliveryMode: EndpointDeliveryMode;
 
   /** Set of endpoints to use */
   @OpenAPI.extension("x-ms-identifiers", #["url"])

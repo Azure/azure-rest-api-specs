@@ -1107,6 +1107,30 @@
         "kind"
       ]
     },
+    "EndpointDeliveryMode": {
+      "type": "string",
+      "description": "The delivery mode for endpoints, determining how notifications are distributed across endpoints",
+      "enum": [
+        "round-robin",
+        "failover"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointDeliveryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "roundRobin",
+            "value": "round-robin",
+            "description": "Spreads load over all endpoints"
+          },
+          {
+            "name": "failover",
+            "value": "failover",
+            "description": "Delivers to the first available endpoint"
+          }
+        ]
+      }
+    },
     "FabricEndpoint": {
       "type": "object",
       "description": "Fabric endpoint configuration",
@@ -1153,8 +1177,6 @@
         }
       },
       "required": [
-        "outputSchema",
-        "outputEncoding",
         "endpoint"
       ],
       "allOf": [
@@ -1205,12 +1227,13 @@
       "description": "Min count max delay batching policy",
       "properties": {
         "minResources": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Minimum number of resources"
         },
         "maxDelay": {
           "type": "string",
-          "description": "Maximum delay"
+          "description": "Maximum delay in ISO 8601 duration format (e.g., PT5M for 5 minutes)"
         }
       },
       "required": [
@@ -1632,6 +1655,7 @@
     },
     "ScopeKind": {
       "type": "string",
+      "description": "The kind of scope for resource subscriptions, determining how notifications are scoped and delivered",
       "enum": [
         "tenant",
         "cloud"
@@ -1687,8 +1711,8 @@
           "description": "Storage container to store the data"
         },
         "endpointDeliveryMode": {
-          "type": "string",
-          "description": "How to deliver to the endpoints below: round-robin spreads load over all endpoints, failover delivers to the first available"
+          "$ref": "#/definitions/EndpointDeliveryMode",
+          "description": "How to deliver to the endpoints below"
         },
         "endpoints": {
           "type": "array",
