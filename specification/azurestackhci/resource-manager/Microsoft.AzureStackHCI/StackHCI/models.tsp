@@ -3484,20 +3484,17 @@ model SanAdapterProperties {
   /**
    * 802.1p priority value for cluster traffic.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  priorityValue8021Action_Cluster?: int32;
+  priorityValue8021ActionCluster?: int32;
 
   /**
    * 802.1p priority value for SMB traffic.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  priorityValue8021Action_SMB?: int32;
+  priorityValue8021ActionSmb?: int32;
 
   /**
    * SMB bandwidth percentage (1-97).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  bandwidthPercentage_SMB?: int32;
+  bandwidthPercentageSmb?: int32;
 
   /**
    * Jumbo frame size in bytes.
