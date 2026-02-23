@@ -427,7 +427,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -486,7 +486,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -613,7 +613,7 @@ describe("generateLintDiffReport", () => {
         | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-        **[must fix]The following errors/warnings are intorduced by current PR:**
+        **[must fix]The following errors/warnings are introduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |

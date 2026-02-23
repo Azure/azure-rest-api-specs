@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 @service(#{ title: "Microsoft.AzureResilienceManagement" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -194,6 +195,24 @@ union JobResourceType {
   string,
 }
 
+@added(Versions.v2026_03_01_preview)
+@doc("An action task type indicates the type of action task.")
+union ActionTask {
+  @added(Versions.v2026_03_01_preview)
+  @doc("No action task.")
+  None: "None",
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Pre-action task.")
+  PreActionTask: "PreActionTask",
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Post-action task.")
+  PostActionTask: "PostActionTask",
+
+  string,
+}
+
 @doc("Types of Failover directions.")
 union FailoverDirectionTypes {
   @doc("Failover resources from specific locations.")
@@ -202,10 +221,38 @@ union FailoverDirectionTypes {
   string,
 }
 
+@added(Versions.v2026_03_01_preview)
+@doc("User consent for performing recovery action.")
+union UserConsent {
+  @doc("User consent is not specified for the operation.")
+  Unspecified: "Unspecified",
+
+  @doc("Action is allowed with user consent.")
+  Allowed: "Allowed",
+
+  string,
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Execution configurations for recovery action.")
+model ExecutionConfigurations {
+  @added(Versions.v2026_03_01_preview)
+  @doc("User consent for performing recovery action.")
+  userConsent: UserConsent;
+}
+
 @doc("Additional properties for Failover.")
 model FailoverRequestProperties {
   @doc("Source locations from where resources to be failed-over.")
   sourceLocations: string[];
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s) will be processed.")
+  selectedResourceIds?: armResourceIdentifier[];
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Execution configurations for the recovery action.")
+  executionConfigurations?: ExecutionConfigurations;
 }
 
 @doc("Failover post action request.")

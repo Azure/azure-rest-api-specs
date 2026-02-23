@@ -6553,6 +6553,43 @@
         "targetUri"
       ]
     },
+    "ManagementActionExecutionStatus": {
+      "type": "string",
+      "description": "Status of the management action execution.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementActionExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Management action execution has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Management action execution has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Management action execution has been canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Management action execution is currently in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ManagementActionType": {
       "type": "string",
       "description": "Defines the ManagementAction's type.",
@@ -6942,7 +6979,8 @@
         },
         "payload": {
           "type": "object",
-          "description": "Payload required for executing the management action."
+          "description": "Payload required for executing the management action.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -6955,7 +6993,7 @@
       "description": "The response body for the executeAction operation on NamespaceAsset.",
       "properties": {
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/ManagementActionExecutionStatus",
           "description": "Status of the management action execution."
         },
         "managementActionName": {
@@ -6971,7 +7009,7 @@
           "description": "Resource ID of the asset on which the management action was executed."
         },
         "response": {
-          "type": "object",
+          "type": "string",
           "description": "Response from the asset regarding the management action execution."
         },
         "error": {

@@ -1,0 +1,57 @@
+{
+  "title": "EdgeMachineDisks_Get",
+  "operationId": "EdgeMachineDisks_Get",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "diskName": "disk-0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "diskConfiguration": {
+            "volumes": [
+              {
+                "path": "/data",
+                "sizeInBytes": 107374182400,
+                "fileSystem": "NTFS"
+              }
+            ]
+          },
+          "reportedProperties": {
+            "diskName": "disk-0",
+            "model": "Virtual HD",
+            "manufacturer": "Microsoft",
+            "serialNumber": "SN001234567890",
+            "firmwareVersion": "1.0.0",
+            "diskType": "SSD",
+            "state": "Online",
+            "sizeInBytes": 1099511627776,
+            "volumes": [
+              {
+                "volumeId": "vol-001",
+                "volumeNumber": 1,
+                "sizeInBytes": 107374182400
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/disks/disk-0",
+        "name": "disk-0",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}
