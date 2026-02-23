@@ -1804,20 +1804,20 @@
       "properties": {
         "timeSource": {
           "type": "string",
-          "description": "The time source"
+          "description": "The source of time used for partitioning and hashing.\nTypical values include \"eventTime\" (use the event timestamp) and \"systemTime\" (use the ingestion/processing time)."
         },
         "scope": {
           "type": "string",
-          "description": "The scope"
+          "description": "The logical scope used for hashing into buckets, for example \"tenant\", \"subscription\", or \"resourceGroup\"."
         },
         "scopeBuckets": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scope buckets"
+          "description": "The number of scope buckets to hash the chosen scope into."
         },
         "pathTemplate": {
           "type": "string",
-          "description": "The path template following the pattern: year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}"
+          "description": "The path template string with variable placeholders that will be resolved at runtime, following the pattern:\nyear={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}.\nPlaceholders such as {yyyy}, {mm}, {dd}, {hh}, and {scopeBucket} are replaced with the corresponding values."
         }
       },
       "required": [
