@@ -8,11 +8,11 @@ using Microsoft.BillingBenefits;
 @@clientLocation(BenefitOperationGroup.validate, "RP", "go");
 @@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
-  "BillingBenefitsManagedServiceIdentity",
+  "ServiceManagedIdentity",
   "go"
 );
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
-  "BillingBenefitsManagedServiceIdentityType",
+  "ServiceManagedIdentityType",
   "go"
 );
 
