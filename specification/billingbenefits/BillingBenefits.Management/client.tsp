@@ -18,3 +18,11 @@ using Microsoft.BillingBenefits;
 
 // java
 @@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+  "ServiceManagedIdentity",
+  "java"
+);
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+  "ServiceManagedIdentityType",
+  "java"
+);
