@@ -80,9 +80,9 @@ interface ContentUnderstandingClient {
 
 @@clientName(AnalyzeBinaryRequest.input, "binaryInput");
 
-// Rename 'range' to 'inputRange' for clarity that it specifies input range.
-@@clientName(AnalyzeInput.range, "inputRange");
-@@clientName(AnalyzeBinaryRequest.range, "inputRange");
+// Rename 'range' to 'contentRange' for clarity that it specifies content range.
+@@clientName(AnalyzeInput.range, "contentRange");
+@@clientName(AnalyzeBinaryRequest.range, "contentRange");
 
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
 @@access(AnalyzeInput, Access.public);
@@ -179,11 +179,17 @@ op analyzeCustomSignature(
 @@clientName(AnalyzeInput.url, "Uri", "csharp");
 
 // .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
-@@clientName(ContentAnalyzer.dynamicFieldSchema, "HasDynamicFieldSchema", "csharp");
+@@clientName(ContentAnalyzer.dynamicFieldSchema,
+  "HasDynamicFieldSchema",
+  "csharp"
+);
 
 // .NET: boolean properties on ContentAnalyzerConfig use "Should" prefix for clarity.
 @@clientName(ContentAnalyzerConfig.omitContent, "ShouldOmitContent", "csharp");
-@@clientName(ContentAnalyzerConfig.returnDetails, "ShouldReturnDetails", "csharp");
+@@clientName(ContentAnalyzerConfig.returnDetails,
+  "ShouldReturnDetails",
+  "csharp"
+);
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
 @@clientName(ContentUnderstandingClient.listAnalyzers,
