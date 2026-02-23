@@ -18,7 +18,7 @@ namespace Microsoft.Discovery;
 @parentResource(Bookshelf)
 model BookshelfPrivateLinkResource
   is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties> {
-  ...PrivateLinkResourceParameter;
+  ...Azure.ResourceManager.CommonTypes.PrivateLinkResourceParameter;
 }
 
 @added(Versions.v2026_02_01_preview)

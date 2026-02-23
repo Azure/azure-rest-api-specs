@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "natGatewayName": "test-nat-gw",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rdp-inbound-rule",
+            "type": "Microsoft.AzureStackHCI/natGateways/inboundRules",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/natGateways/test-nat-gw/inboundRules/rdp-inbound-rule",
+            "extendedLocation": {
+              "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "protocol": "Tcp",
+              "frontendPort": 3389,
+              "backendPort": 3389,
+              "backendIPConfiguration": {
+                "resourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/networkInterfaces/test-nic/ipConfigurations/ipconfig1"
+              },
+              "publicIPAddress": {
+                "resourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/test-public-ip"
+              },
+              "provisioningState": "Succeeded",
+              "status": {
+                "provisioningStatus": {
+                  "operationId": "12345678-1234-1234-1234-123456789012",
+                  "status": "Succeeded"
+                }
+              }
+            }
+          },
+          {
+            "name": "ssh-inbound-rule",
+            "type": "Microsoft.AzureStackHCI/natGateways/inboundRules",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/natGateways/test-nat-gw/inboundRules/ssh-inbound-rule",
+            "extendedLocation": {
+              "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "protocol": "Tcp",
+              "frontendPort": 22,
+              "backendPort": 22,
+              "backendIPConfiguration": {
+                "resourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/networkInterfaces/test-nic-2/ipConfigurations/ipconfig1"
+              },
+              "publicIPAddress": {
+                "resourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/test-public-ip"
+              },
+              "provisioningState": "Succeeded",
+              "status": {
+                "provisioningStatus": {
+                  "operationId": "87654321-4321-4321-4321-210987654321",
+                  "status": "Succeeded"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "InboundRules_ListByNatGateway",
+  "title": "ListInboundRulesByNatGateway"
+}

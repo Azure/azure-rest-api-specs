@@ -5179,6 +5179,36 @@
     }
   },
   "definitions": {
+    "ActionTask": {
+      "type": "string",
+      "description": "An action task type indicates the type of action task.",
+      "enum": [
+        "None",
+        "PreActionTask",
+        "PostActionTask"
+      ],
+      "x-ms-enum": {
+        "name": "ActionTask",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No action task."
+          },
+          {
+            "name": "PreActionTask",
+            "value": "PreActionTask",
+            "description": "Pre-action task."
+          },
+          {
+            "name": "PostActionTask",
+            "value": "PostActionTask",
+            "description": "Post-action task."
+          }
+        ]
+      }
+    },
     "AddOrUpdateResourcesRequest": {
       "type": "object",
       "description": "Request body of the AddOrUpdateResources API.",
@@ -7411,6 +7441,19 @@
         ]
       }
     },
+    "ExecutionConfigurations": {
+      "type": "object",
+      "description": "Execution configurations for recovery action.",
+      "properties": {
+        "userConsent": {
+          "$ref": "#/definitions/UserConsent",
+          "description": "User consent for performing recovery action."
+        }
+      },
+      "required": [
+        "userConsent"
+      ]
+    },
     "ExecutionReadinessState": {
       "type": "string",
       "description": "Drill Execution Readiness State",
@@ -7574,6 +7617,19 @@
           "items": {
             "type": "string"
           }
+        },
+        "selectedResourceIds": {
+          "type": "array",
+          "description": "Selected recovery resource Ids to be processed. If not provided, all qualified resources based on the source location(s) will be processed.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "executionConfigurations": {
+          "$ref": "#/definitions/ExecutionConfigurations",
+          "description": "Execution configurations for the recovery action."
         }
       },
       "required": [
@@ -8454,6 +8510,11 @@
           "description": "The type of job.",
           "readOnly": true
         },
+        "executionConfigurations": {
+          "$ref": "#/definitions/ExecutionConfigurations",
+          "description": "Execution configurations for the job.",
+          "readOnly": true
+        },
         "triggeredBy": {
           "$ref": "#/definitions/JobTriggeredBy",
           "description": "Indicates whether the job was triggered by the system or a user.",
@@ -8649,6 +8710,7 @@
       "type": "string",
       "description": "Job Statuses",
       "enum": [
+        "NotApplicable",
         "NotStarted",
         "Pending",
         "InProgress",
@@ -8664,6 +8726,11 @@
         "name": "JobStatus",
         "modelAsString": true,
         "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The job status is not applicable."
+          },
           {
             "name": "NotStarted",
             "value": "NotStarted",
@@ -9475,6 +9542,38 @@
         }
       ]
     },
+    "RecoveryGroupActionSettings": {
+      "type": "object",
+      "description": "Settings for a recovery group action.",
+      "properties": {
+        "actionTask": {
+          "$ref": "#/definitions/ActionTask",
+          "description": "The action task associated with this job resource.",
+          "readOnly": true
+        },
+        "actionSequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sequence number for the action.",
+          "readOnly": true
+        },
+        "recoveryGroupActionType": {
+          "$ref": "#/definitions/RecoveryGroupActionType",
+          "description": "Type of the recovery group action.",
+          "readOnly": true
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Name of the action.",
+          "readOnly": true
+        },
+        "actionDescription": {
+          "type": "string",
+          "description": "User description of the action.",
+          "readOnly": true
+        }
+      }
+    },
     "RecoveryGroupActionType": {
       "type": "string",
       "description": "Specifies the type of recovery orchestration group actions.",
@@ -9823,6 +9922,11 @@
         "protectionSolutionType": {
           "$ref": "#/definitions/ResourceProtectionSolutionType",
           "description": "A setting that indicates the protection solution selected.",
+          "readOnly": true
+        },
+        "recoveryGroupActionSettings": {
+          "$ref": "#/definitions/RecoveryGroupActionSettings",
+          "description": "The recovery action settings.",
           "readOnly": true
         }
       },
@@ -11318,6 +11422,30 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "UserConsent": {
+      "type": "string",
+      "description": "User consent for performing recovery action.",
+      "enum": [
+        "Unspecified",
+        "Allowed"
+      ],
+      "x-ms-enum": {
+        "name": "UserConsent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "User consent is not specified for the operation."
+          },
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Action is allowed with user consent."
+          }
+        ]
       }
     },
     "VMPresent": {

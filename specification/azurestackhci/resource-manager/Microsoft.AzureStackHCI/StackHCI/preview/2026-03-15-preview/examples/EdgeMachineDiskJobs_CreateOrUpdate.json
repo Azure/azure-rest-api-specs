@@ -1,0 +1,79 @@
+{
+  "title": "EdgeMachineDiskJobs_CreateOrUpdate",
+  "operationId": "EdgeMachineDiskJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "diskName": "disk-0",
+    "jobName": "job-002",
+    "resource": {
+      "properties": {
+        "jobType": "CreateVolume",
+        "sizeInBytes": 107374182400,
+        "path": "/newvolume",
+        "fileSystem": "NTFS"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "CreateVolume",
+          "provisioningState": "Succeeded",
+          "jobId": "job-002",
+          "startTimeUtc": "2024-11-14T10:46:55.167Z",
+          "endTimeUtc": "2024-11-14T10:50:55.167Z",
+          "status": "Succeeded",
+          "sizeInBytes": 107374182400,
+          "path": "/newvolume",
+          "fileSystem": "NTFS",
+          "reportedProperties": {
+            "percentComplete": 100
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/disks/disk-0/jobs/job-002",
+        "name": "job-002",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:50:55.167Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "jobType": "CreateVolume",
+          "provisioningState": "Creating",
+          "jobId": "job-002",
+          "startTimeUtc": "2024-11-14T10:46:55.167Z",
+          "status": "Running",
+          "sizeInBytes": 107374182400,
+          "path": "/newvolume",
+          "fileSystem": "NTFS",
+          "reportedProperties": {
+            "percentComplete": 25
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/disks/disk-0/jobs/job-002",
+        "name": "job-002",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}
