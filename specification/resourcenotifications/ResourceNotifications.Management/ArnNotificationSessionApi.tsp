@@ -121,6 +121,7 @@ model GetNotificationSessionDetails {
   id?: string;
 
   /** Encoded notification session data */
+  @secret
   encodedNotificationSession?: string;
 
   /** Connection details for the session */

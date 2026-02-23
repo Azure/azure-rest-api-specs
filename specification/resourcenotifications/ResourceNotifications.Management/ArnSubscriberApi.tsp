@@ -209,7 +209,7 @@ interface ResourceSubscriptions {
     "x-ms-examples",
     #{
       `List all resource subscriptions in a subscription`: #{
-        $ref: "./examples/ResourceSubscriptions_List.json",
+        $ref: "./examples/ResourceSubscriptions_ListBySubscription.json",
       },
     }
   )

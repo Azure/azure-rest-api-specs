@@ -406,7 +406,7 @@
         },
         "x-ms-examples": {
           "List all resource subscriptions in a subscription": {
-            "$ref": "./examples/ResourceSubscriptions_List.json"
+            "$ref": "./examples/ResourceSubscriptions_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1196,7 +1196,9 @@
         },
         "encodedNotificationSession": {
           "type": "string",
-          "description": "Encoded notification session data"
+          "format": "password",
+          "description": "Encoded notification session data",
+          "x-ms-secret": true
         },
         "connectionDetails": {
           "$ref": "#/definitions/NotificationSessionConnectionDetails",
@@ -1253,7 +1255,9 @@
       "properties": {
         "connectionString": {
           "type": "string",
-          "description": "Connection string for the session"
+          "format": "password",
+          "description": "Connection string for the session",
+          "x-ms-secret": true
         },
         "endpoint": {
           "type": "string",
