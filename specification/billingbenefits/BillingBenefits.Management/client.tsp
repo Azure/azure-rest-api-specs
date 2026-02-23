@@ -26,3 +26,13 @@ using Microsoft.BillingBenefits;
   "ServiceManagedIdentityType",
   "java"
 );
+
+// python
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+  "ServiceManagedIdentity",
+  "python"
+);
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+  "ServiceManagedIdentityType",
+  "python"
+);
