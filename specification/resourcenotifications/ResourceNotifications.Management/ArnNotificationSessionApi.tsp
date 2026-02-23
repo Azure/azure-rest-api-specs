@@ -151,10 +151,7 @@ interface NotificationsSessions {
 
   /** Creates or updates a notification session */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "This is a valid final state for a PUT operation"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NotificationSessionResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NotificationSessionResource>;
 
   /** Deletes a notification session */
   delete is ArmResourceDeleteSync<NotificationSessionResource>;

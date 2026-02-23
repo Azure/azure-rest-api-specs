@@ -167,10 +167,7 @@ interface ResourceSubscriptions {
 
   /** Creates or updates a resource subscription */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "This is a valid final state for a PUT operation"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ResourceSubscription,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ResourceSubscription>;
 
   /** Updates a resource subscription (supports tags and property updates) */
   @OpenAPI.extension(
