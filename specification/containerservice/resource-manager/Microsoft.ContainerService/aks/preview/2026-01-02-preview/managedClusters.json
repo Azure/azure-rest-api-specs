@@ -11830,6 +11830,10 @@
             "type": "string",
             "format": "byte"
           }
+        },
+        "serviceAccountImagePullProfile": {
+          "$ref": "#/definitions/ServiceAccountImagePullProfile",
+          "description": "Defines service account based image pull settings."
         }
       }
     },
@@ -14156,6 +14160,20 @@
             "description": "The default seccomp profile for container runtime is applied, which restricts certain system calls for enhanced security."
           }
         ]
+      }
+    },
+    "ServiceAccountImagePullProfile": {
+      "type": "object",
+      "description": "Profile for configuring image pull authentication to use service account scoped managed identities for authentication instead of node scoped managed identity (kubelet identity) for authentication to Azure Container Registry. For more information, refer to https://aka.ms/aks/identity-binding/acr-image-pull/docs",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether service account based image pull is enabled, for which identity bindings are required for the managed identity to be used for authentication. For more information, refer to https://aka.ms/aks/identity-binding-docs."
+        },
+        "defaultManagedIdentityId": {
+          "type": "string",
+          "description": "Optional. The default managed identity resource ID used for image pulls at the cluster level. When configured, this identity is used if a Pod’s service account does not explicitly specify an identity for pulling images. If not configured and no identity is specified at service account level, image will be pulled via anonymous authentication."
+        }
       }
     },
     "ServiceMeshMode": {
