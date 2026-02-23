@@ -101,7 +101,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.listMemoryStores, "list");
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 
-// The SDK will have custom code to handle LRO memory updates. And we don't want to expose OpenAI.InputItem on client library surface.
+// The Python SDK will have custom code to handle LRO memory updates.
 @@access(MemoryStores.updateMemories, Access.internal, "python");
 @@scope(MemoryStores.getUpdateResult, "!(python)");
 
