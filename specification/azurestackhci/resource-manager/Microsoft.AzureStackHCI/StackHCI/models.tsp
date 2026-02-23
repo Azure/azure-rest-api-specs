@@ -2068,6 +2068,14 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   identityProvider?: IdentityProvider = IdentityProvider.ActiveDirectory;
+
+  // PRIVATE PREVIEW
+  /**
+   * Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  storageType?: StorageType;
 }
 
 /**
