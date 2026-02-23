@@ -258,7 +258,7 @@
             "description": "Configuration details of the Java Component.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JavaComponentPatch"
+              "$ref": "#/definitions/JavaComponentUpdate"
             }
           }
         ],
@@ -618,6 +618,74 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "SpringCloudConfig"
+    },
+    "JavaComponentUpdate": {
+      "description": "Java Component patch properties for update operations.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component updatable properties",
+          "type": "object",
+          "properties": {
+            "componentType": {
+              "description": "Type of the Java Component.",
+              "enum": [
+                "SpringBootAdmin",
+                "SpringCloudEureka",
+                "SpringCloudConfig",
+                "SpringCloudGateway",
+                "Nacos"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "JavaComponentType",
+                "modelAsString": true
+              }
+            },
+            "configurations": {
+              "description": "List of Java Components configuration properties",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JavaComponentConfigurationProperty"
+              },
+              "x-ms-identifiers": [
+                "propertyName"
+              ]
+            },
+            "scale": {
+              "description": "Java component scaling configurations",
+              "type": "object",
+              "properties": {
+                "minReplicas": {
+                  "format": "int32",
+                  "description": "Optional. Minimum number of Java component replicas. Defaults to 1 if not set",
+                  "type": "integer"
+                },
+                "maxReplicas": {
+                  "format": "int32",
+                  "description": "Optional. Maximum number of Java component replicas",
+                  "type": "integer"
+                }
+              }
+            },
+            "serviceBinds": {
+              "description": "List of Java Components that are bound to the Java component",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JavaComponentServiceBind"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          }
+        }
+      }
     },
     "JavaComponentsCollection": {
       "description": "Java Components ARM resource.",
