@@ -55,7 +55,7 @@ namespace Azure.AI.Projects;
 // Evaluators
 // no renames
 
-// Indexes 
+// Indexes
 // removed because convention dictates names need to be `verbNoun`
 // @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
@@ -80,7 +80,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
-
 
 // // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
@@ -122,7 +121,10 @@ namespace Azure.AI.Projects;
 @@clientName(ApiKeyCredentials, "ApiKeyCredential", "java");
 @@clientName(EntraIDCredentials, "EntraIdCredential", "java");
 @@clientName(NoAuthenticationCredentials, "NoAuthenticationCredential", "java");
-@@clientName(AgenticIdentityPreviewCredentials, "AgenticIdentityPreviewCredential", "java");
+@@clientName(AgenticIdentityPreviewCredentials,
+  "AgenticIdentityPreviewCredential",
+  "java"
+);
 
 // Enums variants
 @@clientName(ConnectionType.APIKey, "API_KEY", "java");

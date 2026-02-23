@@ -42,7 +42,9 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
 @@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
 @@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
-@@clientName(CreateAgentVersionFromManifestRequest, "CreateAgentVersionFromManifestInput");
+@@clientName(CreateAgentVersionFromManifestRequest,
+  "CreateAgentVersionFromManifestInput"
+);
 
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
@@ -55,7 +57,7 @@ using Azure.AI.Projects;
 
 @@clientName(ApiError, "OpenAIError");
 
-@@clientName(OpenAI.MCPListToolsToolAnnotations , "McpListToolsToolAnnotations");
+@@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
 @@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
@@ -66,13 +68,16 @@ using Azure.AI.Projects;
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
-@@clientName(OpenAI.ResponseFormatJsonSchemaSchema, "ResponseFormatJsonSchemaInner");
-@@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens, "cachedTokensCount");
+@@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
+  "ResponseFormatJsonSchemaInner"
+);
+@@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
+  "cachedTokensCount"
+);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
-
 
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
