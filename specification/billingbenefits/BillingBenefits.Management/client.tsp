@@ -4,11 +4,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 // go
-@@clientLocation(Microsoft.BillingBenefits.validatePurchase, "RP", "go");
+@@clientLocation(BenefitOperationGroup.validate, "RP", "go");
 @@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
 
 // java
-@@clientLocation(Microsoft.BillingBenefits.validatePurchase,
+@@clientLocation(BenefitOperationGroup.validate,
   "ResourceProviders",
   "java"
 );
