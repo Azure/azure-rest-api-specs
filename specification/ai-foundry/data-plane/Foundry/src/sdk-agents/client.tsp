@@ -31,9 +31,51 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults");
 @@clientName(OpenAI.MCPApprovalResponse.approve, "approved");
 
+@@clientName(CreateAgentRequest.name, "agentName");
+@@clientName(CreateAgentFromManifestRequest.name, "agentName");
+
+// Rename request models to avoid collision with synthetic body types generated
+// by the Java codegen. The codegen names synthetic bodies as {OperationName}Request,
+// which clashes with the identically-named TypeSpec models, causing a "1" suffix.
+@@clientName(CreateAgentRequest, "CreateAgentInput");
+@@clientName(UpdateAgentRequest, "UpdateAgentInput");
+@@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
+@@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
+@@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
+@@clientName(CreateAgentVersionFromManifestRequest,
+  "CreateAgentVersionFromManifestInput"
+);
+
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB");
+
+@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
+
+@@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
+
+@@clientName(ApiError, "OpenAIError");
+
+@@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
+
+@@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
+
+@@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
+  "ResponseFormatJsonSchemaInner"
+);
+@@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
+  "cachedTokensCount"
+);
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
+
+@@access(Agents.createAgent, Access.internal);
+@@access(Agents.updateAgent, Access.internal);
+@@access(Agents.createAgentFromManifest, Access.internal);
+@@access(Agents.updateAgentFromManifest, Access.internal);
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
