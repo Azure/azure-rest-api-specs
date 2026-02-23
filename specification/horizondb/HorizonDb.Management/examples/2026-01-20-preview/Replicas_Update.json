@@ -1,13 +1,16 @@
 {
-  "operationId": "HorizonDbReplicas_Get",
-  "title": "Get a HorizonDb replica",
+  "operationId": "HorizonDbReplicas_Update",
+  "title": "Update a HorizonDb replica",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "myResourceGroup",
     "clusterName": "myHorizonCluster",
     "poolName": "myPool",
     "horizonDbReplicaName": "myReplica",
-    "api-version": "2026-01-20-preview"
+    "api-version": "2026-01-20-preview",
+    "properties": {
+      "role": "Read/Write"
+    }
   },
   "responses": {
     "200": {
@@ -16,11 +19,16 @@
         "name": "myReplica",
         "type": "Microsoft.HorizonDb/clusters/pools/replicas",
         "properties": {
-          "role": "Read",
+          "role": "Read/Write",
           "status": "Healthy",
           "fullyQualifiedDomainName": "myReplica.eastus2.horizondb.azure.com",
           "provisioningState": "Succeeded"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/pools/myPool/replicas/myReplica/operationStatuses/550e8400-e29b-41d4-a716-446655440000"
       }
     }
   }

@@ -11,20 +11,22 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster1",
-            "name": "myHorizonCluster1",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
+            "name": "myHorizonCluster",
             "type": "Microsoft.HorizonDb/clusters",
-            "location": "canadacentral",
+            "location": "eastus2",
             "tags": {
-              "environment": "production"
+              "env": "dev"
             },
             "properties": {
-              "administratorLogin": "dbadmin",
+              "administratorLogin": "hdbadmin",
               "version": "17",
               "vCores": 4,
               "replicaCount": 2,
+              "zonePlacementPolicy": "Strict",
               "state": "Ready",
-              "fullyQualifiedDomainName": "myHorizonCluster1.horizon.database.azure.com",
+              "fullyQualifiedDomainName": "myHorizonCluster.eastus2.horizondb.azure.com",
+              "readonlyEndpoint": "myHorizonCluster-ro.eastus2.horizondb.azure.com",
               "provisioningState": "Succeeded"
             }
           },
@@ -41,8 +43,10 @@
               "version": "17",
               "vCores": 2,
               "replicaCount": 1,
+              "zonePlacementPolicy": "Strict",
               "state": "Ready",
-              "fullyQualifiedDomainName": "myHorizonCluster2.horizon.database.azure.com",
+              "fullyQualifiedDomainName": "myHorizonCluster2.westus2.horizondb.azure.com",
+              "readonlyEndpoint": "myHorizonCluster2-ro.westus2.horizondb.azure.com",
               "provisioningState": "Succeeded"
             }
           }

@@ -8,8 +8,9 @@
     "poolName": "myPool",
     "horizonDbReplicaName": "myReplica",
     "api-version": "2026-01-20-preview",
-    "resource": {
-      "properties": {}
+    "location": "eastus2",
+    "properties": {
+        "role": "Read"
     }
   },
   "responses": {
@@ -19,20 +20,10 @@
         "name": "myReplica",
         "type": "Microsoft.HorizonDb/clusters/pools/replicas",
         "properties": {
-          "replicaName": "myReplica",
-          "isPrimary": false,
           "role": "Read",
-          "status": "Ready",
-          "fullyQualifiedDomainName": "myReplica.horizon.database.azure.com",
+          "status": "Healthy",
+          "fullyQualifiedDomainName": "myReplica.eastus2.horizondb.azure.com",
           "provisioningState": "Succeeded"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-01-20T10:00:00.000Z"
         }
       }
     },
@@ -42,16 +33,8 @@
         "name": "myReplica",
         "type": "Microsoft.HorizonDb/clusters/pools/replicas",
         "properties": {
-          "replicaName": "myReplica",
-          "isPrimary": false,
           "role": "Read",
-          "status": "Starting",
-          "provisioningState": "InProgress"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z"
+          "provisioningState": "Provisioning"
         }
       }
     }

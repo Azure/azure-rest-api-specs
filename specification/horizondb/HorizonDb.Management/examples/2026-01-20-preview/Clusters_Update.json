@@ -7,11 +7,11 @@
     "clusterName": "myHorizonCluster",
     "api-version": "2026-01-20-preview",
     "tags": {
-      "environment": "production",
       "team": "updated-data-platform"
     },
     "properties": {
-      "vCores": 8
+      "vCores": 8,
+      "administratorLoginPassword": "N3wP@ssword!"
     }
   },
   "responses": {
@@ -20,42 +20,28 @@
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
         "name": "myHorizonCluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "canadacentral",
+        "location": "eastus2",
         "tags": {
-          "environment": "production",
+          "env": "dev",
           "team": "updated-data-platform"
         },
         "properties": {
-          "administratorLogin": "dbadmin",
+          "administratorLogin": "hdbadmin",
           "version": "17",
           "createMode": "Default",
           "vCores": 8,
           "replicaCount": 2,
-          "availabilityZone": "1",
-          "processorType": "Intel",
+          "zonePlacementPolicy": "Strict",
           "state": "Ready",
-          "fullyQualifiedDomainName": "myHorizonCluster.horizon.database.azure.com",
-          "provisioningState": "Succeeded",
-          "network": {
-            "publicNetworkAccess": "Enabled"
-          },
-          "highAvailability": {
-            "mode": "ZoneRedundant"
-          }
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-01-20T15:30:00.000Z"
+          "fullyQualifiedDomainName": "myHorizonCluster.eastus2.horizondb.azure.com",
+          "readonlyEndpoint": "myHorizonCluster-ro.eastus2.horizondb.azure.com",
+          "provisioningState": "Succeeded"
         }
       }
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/canadacentral/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff"
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff"
       }
     }
   }

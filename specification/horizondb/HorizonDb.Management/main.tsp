@@ -69,7 +69,7 @@ model HorizonDbReplica
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
-  @key("horizonDbReplicaName")
+  @key("replicaName")
   @path
   @segment("replicas")
   name: string;
@@ -132,6 +132,9 @@ interface HorizonDbReplicas {
   @doc("Creates a new HorizonDb replica or updates an existing replica")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbReplica>;
+
+  @doc("Updates an existing HorizonDb replica (e.g., role)")
+  update is ArmCustomPatchAsync<HorizonDbReplica, HorizonDbReplicaForUpdate>;
 
   @doc("Deletes a HorizonDb replica")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbReplica>;

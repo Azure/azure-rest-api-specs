@@ -8,51 +8,36 @@
     "poolName": "myPool",
     "firewallRuleName": "myFirewallRule",
     "api-version": "2026-01-20-preview",
-    "resource": {
-      "properties": {
+    "properties": {
         "startIpAddress": "10.0.0.1",
         "endIpAddress": "10.0.0.10",
         "description": "Allow access from corporate network"
       }
-    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/firewallRules/myFirewallRule",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/pools/myPool/firewallRules/myFirewallRule",
         "name": "myFirewallRule",
-        "type": "Microsoft.HorizonDb/clusters/firewallRules",
+        "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
         "properties": {
           "startIpAddress": "10.0.0.1",
           "endIpAddress": "10.0.0.10",
           "description": "Allow access from corporate network",
           "provisioningState": "Succeeded"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-01-20T10:00:00.000Z"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/firewallRules/myFirewallRule",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster/pools/myPool/firewallRules/myFirewallRule",
         "name": "myFirewallRule",
-        "type": "Microsoft.HorizonDb/clusters/firewallRules",
+        "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
         "properties": {
           "startIpAddress": "10.0.0.1",
           "endIpAddress": "10.0.0.10",
           "description": "Allow access from corporate network",
-          "provisioningState": "InProgress"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z"
+          "provisioningState": "Provisioning"
         }
       }
     }

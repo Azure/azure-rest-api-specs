@@ -349,18 +349,6 @@ model HorizonDbPoolForUpdate {
  */
 model HorizonDbReplicaProperties {
   /**
-   * The name of the replica
-   */
-  @visibility(Lifecycle.Read)
-  replicaName?: string;
-
-  /**
-   * Boolean indicating if this is the primary replica
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  isPrimary?: boolean;
-
-  /**
    * Role of the replica
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -383,6 +371,26 @@ model HorizonDbReplicaProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * Properties of a HorizonDb replica for update operations
+ */
+model HorizonDbReplicaPropertiesForUpdate {
+  /**
+   * Role of the replica
+   */
+  role?: ReplicaRole;
+}
+
+/**
+ * Represents a HorizonDb replica resource for update operations
+ */
+model HorizonDbReplicaForUpdate {
+  /**
+   * The properties of the replica for update
+   */
+  properties?: HorizonDbReplicaPropertiesForUpdate;
 }
 
 /**
@@ -476,6 +484,9 @@ union State {
 
   /** Is being updated */
   Updating: "Updating",
+
+  /** Is healthy */
+  Healthy: "Healthy",
 }
 
 /**
@@ -486,6 +497,9 @@ union ReplicaRole {
 
   /** Read-only replica */
   Read: "Read",
+
+  /** Read/write replica */
+  ReadWrite: "Read/Write",
 }
 
 /**
@@ -505,4 +519,7 @@ union ProvisioningState {
 
   /** Provisioning is in progress */
   InProgress: "InProgress",
+
+  /** Provisioning is in progress */
+  Provisioning: "Provisioning",
 }

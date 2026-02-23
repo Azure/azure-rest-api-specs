@@ -7,27 +7,18 @@
     "clusterName": "myHorizonCluster",
     "api-version": "2026-01-20-preview",
     "resource": {
-      "location": "canadacentral",
+      "location": "eastus2",
       "tags": {
-        "environment": "production",
-        "team": "data-platform"
+        "env": "dev"
       },
       "properties": {
-        "administratorLogin": "dbadmin",
-        "administratorLoginPassword": "examplepassword",
-        "version": "17",
         "createMode": "Create",
+        "version": "17",
+        "administratorLogin": "hdbadmin",
+        "administratorLoginPassword": "P@ssword1!",
         "vCores": 4,
         "replicaCount": 2,
-        "availabilityZone": "1",
-        "processorType": "Intel",
-        "network": {
-          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/horizondb.private.postgres.database.azure.com"
-        },
-        "highAvailability": {
-          "mode": "ZoneRedundant"
-        }
+        "zonePlacementPolicy": "Strict"
       }
     }
   },
@@ -37,41 +28,21 @@
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
         "name": "myHorizonCluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "canadacentral",
+        "location": "eastus2",
         "tags": {
-          "environment": "production",
-          "team": "data-platform"
+          "env": "dev"
         },
         "properties": {
-          "administratorLogin": "dbadmin",
+          "administratorLogin": "hdbadmin",
           "version": "17",
           "createMode": "Default",
           "vCores": 4,
           "replicaCount": 2,
-          "availabilityZone": "1",
-          "processorType": "Intel",
-          "network": {
-            "publicNetworkAccess": "Enabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/horizondb.private.postgres.database.azure.com"
-          },
-          "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "2"
-          },
+          "zonePlacementPolicy": "Strict",
           "state": "Ready",
-          "fullyQualifiedDomainName": "myHorizonCluster.horizon.database.azure.com",
-          "readonlyEndpoint": "myHorizonCluster-ro.horizon.database.azure.com",
+          "fullyQualifiedDomainName": "myHorizonCluster.eastus2.horizondb.azure.com",
+          "readonlyEndpoint": "myHorizonCluster-ro.horizondb.azure.com",
           "provisioningState": "Succeeded"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-01-20T10:00:00.000Z"
         }
       }
     },
@@ -80,33 +51,19 @@
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/myHorizonCluster",
         "name": "myHorizonCluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "canadacentral",
+        "location": "eastus2",
         "tags": {
-          "environment": "production",
-          "team": "data-platform"
+          "env": "dev"
         },
         "properties": {
-          "administratorLogin": "dbadmin",
+          "administratorLogin": "hdbadmin",
           "version": "17",
           "createMode": "Default",
           "vCores": 4,
           "replicaCount": 2,
-          "availabilityZone": "1",
-          "processorType": "Intel",
-          "network": {
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/horizondb.private.postgres.database.azure.com"
-          },
-          "highAvailability": {
-            "mode": "ZoneRedundant"
-          },
+          "zonePlacementPolicy": "Strict",
           "state": "Starting",
-          "provisioningState": "InProgress"
-        },
-        "systemData": {
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "createdAt": "2026-01-20T10:00:00.000Z"
+          "provisioningState": "Provisioning"
         }
       }
     }
