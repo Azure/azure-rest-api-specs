@@ -55,6 +55,34 @@ steps:
         cat /tmp/az-account.err >&2 || true
         exit 1
       fi
+  - name: Fetch secret from Azure Key Vault
+    id: fetch_secret
+    shell: bash
+    run: |
+      set -euo pipefail
+      SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
+      echo "::add-mask::${SECRET_VALUE}"
+      echo "COPILOT_GITHUB_TOKEN=${SECRET_VALUE}" >> "${GITHUB_ENV}"
+      echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
+
+  - name: Persist COPILOT_GITHUB_TOKEN as repo secret
+    shell: bash
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    run: |
+      set -euo pipefail
+      if [[ -z "${COPILOT_GITHUB_TOKEN:-}" ]]; then
+        echo "COPILOT_GITHUB_TOKEN environment variable is not set." >&2
+        exit 1
+      fi
+
+      if [[ -z "${GH_TOKEN:-}" ]]; then
+        echo "GH_TOKEN environment variable is not available for gh CLI authentication." >&2
+        exit 1
+      fi
+
+      gh config set prompt disabled >/dev/null
+      gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
 ---
 
 ## Workflow Behavior
