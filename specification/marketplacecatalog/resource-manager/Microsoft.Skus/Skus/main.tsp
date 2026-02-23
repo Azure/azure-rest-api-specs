@@ -25,13 +25,13 @@ enum Versions {
 }
 
 /** SKU resource */
-model Skus is ProxyResource<SkuSummary> {
-  ...ResourceNameParameter<Skus>;
+model Sku is ProxyResource<SkuSummary> {
+  ...ResourceNameParameter<Sku>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@armResourceOperations(Skus)
+@armResourceOperations(Sku)
 interface SkuList {
   /** Lists SKUs for tenant. */
   @route("/providers/Microsoft.Marketplace/skus")
@@ -85,7 +85,7 @@ interface SkuList {
   /** Lists SKUs for subscription. */
   @list
   listBySubscription is ArmListBySubscriptionCustom<
-    Skus,
+    Sku,
     Parameters = {
       @doc("The service family to filter by, such as 'Compute'.")
       @query
@@ -125,7 +125,7 @@ interface SkuList {
   /** Lists SKUs for billing account. */
   @list
   listByBillingAccount is ArmListByBillingAccount<
-    Skus,
+    Sku,
     Parameters = {
       @doc("The service family to filter by, such as 'Compute'.")
       @query
@@ -165,7 +165,7 @@ interface SkuList {
   /** Lists SKUs for billing profile. */
   @list
   listByBillingProfile is ArmListByBillingProfile<
-    Skus,
+    Sku,
     Parameters = {
       @doc("The service family to filter by, such as 'Compute'.")
       @query

@@ -256,6 +256,7 @@ model SkuSummary {
   cspState?: CspState;
 
   /** A value indicating whether the SKU supports reservations. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches existing API contract"
   hasRI?: boolean;
 
   /** The SKU attributes. */

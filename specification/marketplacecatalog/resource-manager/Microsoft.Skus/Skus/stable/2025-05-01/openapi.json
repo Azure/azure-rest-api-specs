@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skuses": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus": {
       "get": {
         "operationId": "SkuList_ListByBillingProfile",
         "tags": [
@@ -135,17 +135,17 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List SKUs by billing profile": {
+          "List SKUs for billing profile": {
             "$ref": "./examples/SkuList_ListByBillingProfile.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skuses": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus": {
       "get": {
         "operationId": "SkuList_ListByBillingAccount",
         "tags": [
@@ -230,13 +230,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List SKUs by billing account": {
+          "List SKUs for billing account": {
             "$ref": "./examples/SkuList_ListByBillingAccount.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -266,13 +266,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List operations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -373,17 +373,17 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List SKUs by tenant": {
+          "List SKUs for tenant": {
             "$ref": "./examples/SkuList_ListByTenant.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/skuses": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/skus": {
       "get": {
         "operationId": "SkuList_ListBySubscription",
         "tags": [
@@ -468,13 +468,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List SKUs by subscription": {
+          "List SKUs for subscription": {
             "$ref": "./examples/SkuList_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -708,6 +708,21 @@
           }
         ]
       }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "SKU resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkuSummary",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SkuAlternateIds": {
       "type": "object",
@@ -1024,21 +1039,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Skus": {
-      "type": "object",
-      "description": "SKU resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SkuSummary",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
       ]
     }
   },
