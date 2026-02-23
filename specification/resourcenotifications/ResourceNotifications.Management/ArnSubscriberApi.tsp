@@ -304,16 +304,25 @@ model TimeAndScopeRangeHashPathPolicy extends PathPolicy {
   /** The discriminator for time and scope range hash path policy */
   kind: "timeAndScopeRangeHash";
 
-  /** The time source */
+  /**
+   * The source of time used for partitioning and hashing.
+   * Typical values include "eventTime" (use the event timestamp) and "systemTime" (use the ingestion/processing time).
+   */
   timeSource: string;
 
-  /** The scope */
+  /**
+   * The logical scope used for hashing into buckets, for example "tenant", "subscription", or "resourceGroup".
+   */
   scope: string;
 
-  /** The number of scope buckets */
+  /** The number of scope buckets to hash the chosen scope into. */
   scopeBuckets: int32;
 
-  /** The path template following the pattern: year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket} */
+  /**
+   * The path template string with variable placeholders that will be resolved at runtime, following the pattern:
+   * year={yyyy},month={mm},day={dd}/hour={hh}/tenantBucket={scopeBucket}.
+   * Placeholders such as {yyyy}, {mm}, {dd}, {hh}, and {scopeBucket} are replaced with the corresponding values.
+   */
   pathTemplate: string;
 }
 
