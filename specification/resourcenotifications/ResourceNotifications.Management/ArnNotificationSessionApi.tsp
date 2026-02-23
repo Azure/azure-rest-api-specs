@@ -108,6 +108,7 @@ model GetSessionDetailsRequest {
 /** Connection details for a notification session */
 model NotificationSessionConnectionDetails {
   /** Connection string for the session */
+  @secret
   connectionString?: string;
 
   /** Endpoint URL for the session */
