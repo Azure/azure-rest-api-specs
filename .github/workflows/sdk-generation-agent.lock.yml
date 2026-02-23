@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"49cdb8ca76d4cf21bc2f64248872fa4f8793aaf35eab6830b182e247cd3d2131","compiler_version":"v0.49.4"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"95d85f38a63e42f3de9561cce54327350dabac4821f707c627b816d1647ef0c6","compiler_version":"v0.49.4"}
 
 name: "SDK Generation Agent"
 "on":
@@ -310,13 +310,13 @@ jobs:
         name: Fetch secret from Azure Key Vault
         run: |
           set -euo pipefail
-          AZURE_SDK_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-          AZURE_SDK_COPILOT_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
-          echo "::add-mask::${AZURE_SDK_PAT_SECRET_VALUE}"
-          echo "::add-mask::${AZURE_SDK_COPILOT_PAT_SECRET_VALUE}"
-          echo "AZURESDK_GITHUB_TOKEN=${AZURE_SDK_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-          echo "COPILOT_GITHUB_TOKEN=${AZURE_SDK_COPILOT_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-          echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
+          AZURESDK_GITHUB_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
+          AZURESDK_COPILOT_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
+          echo "::add-mask::${AZURESDK_GITHUB_TOKEN}"
+          echo "::add-mask::${AZURESDK_COPILOT_TOKEN}"
+          echo "AZURESDK_GITHUB_TOKEN=${AZURESDK_GITHUB_TOKEN}" >> "${GITHUB_ENV}"
+          echo "AZURESDK_COPILOT_TOKEN=${AZURESDK_COPILOT_TOKEN}" >> "${GITHUB_ENV}"
+          echo "Secret copied to AZURESDK_COPILOT_TOKEN environment variable"
         shell: bash
       - name: Install GitHub CLI
         run: |
@@ -332,8 +332,8 @@ jobs:
         name: Persist COPILOT_GITHUB_TOKEN as repo secret
         run: |-
           set -euo pipefail
-          if [[ -z "${COPILOT_GITHUB_TOKEN:-}" ]]; then
-            echo "COPILOT_GITHUB_TOKEN environment variable is not set." >&2
+          if [[ -z "${AZURESDK_COPILOT_TOKEN:-}" ]]; then
+            echo "AZURESDK_COPILOT_TOKEN environment variable is not set." >&2
             exit 1
           fi
 
@@ -344,7 +344,7 @@ jobs:
 
           gh config set prompt disabled >/dev/null
           pushd "${GITHUB_WORKSPACE}" >/dev/null
-          gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
+          gh aw secrets set COPILOT_GITHUB_TOKEN --value "${AZURESDK_COPILOT_TOKEN}"
           popd >/dev/null
         shell: bash
 
@@ -955,7 +955,7 @@ jobs:
           GH_AW_WORKFLOW_ID: "sdk-generation-agent"
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.agent.outputs.secret_verification_result }}
           GH_AW_CHECKOUT_PR_SUCCESS: ${{ needs.agent.outputs.checkout_pr_success }}
-          GH_AW_SAFE_OUTPUT_MESSAGES: "{\"runStarted\":\"[{workflow_name}]({run_url}) started.\"}"
+          GH_AW_SAFE_OUTPUT_MESSAGES: "{\"runStarted\":\"[{workflow_name}]({run_url}) started for sdk generation.\"}"
           GH_AW_GROUP_REPORTS: "false"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -1129,7 +1129,7 @@ jobs:
     timeout-minutes: 15
     env:
       GH_AW_ENGINE_ID: "copilot"
-      GH_AW_SAFE_OUTPUT_MESSAGES: "{\"runStarted\":\"[{workflow_name}]({run_url}) started.\"}"
+      GH_AW_SAFE_OUTPUT_MESSAGES: "{\"runStarted\":\"[{workflow_name}]({run_url}) started for sdk generation.\"}"
       GH_AW_WORKFLOW_ID: "sdk-generation-agent"
       GH_AW_WORKFLOW_NAME: "SDK Generation Agent"
     outputs:

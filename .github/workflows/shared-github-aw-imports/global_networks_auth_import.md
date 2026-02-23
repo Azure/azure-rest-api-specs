@@ -57,13 +57,13 @@ steps:
     shell: bash
     run: |
       set -euo pipefail
-      AZURE_SDK_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-      AZURE_SDK_COPILOT_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
-      echo "::add-mask::${AZURE_SDK_PAT_SECRET_VALUE}"
-      echo "::add-mask::${AZURE_SDK_COPILOT_PAT_SECRET_VALUE}"
-      echo "AZURESDK_GITHUB_TOKEN=${AZURE_SDK_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-      echo "COPILOT_GITHUB_TOKEN=${AZURE_SDK_COPILOT_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-      echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
+      AZURESDK_GITHUB_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
+      AZURESDK_COPILOT_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
+      echo "::add-mask::${AZURESDK_GITHUB_TOKEN}"
+      echo "::add-mask::${AZURESDK_COPILOT_TOKEN}"
+      echo "AZURESDK_GITHUB_TOKEN=${AZURESDK_GITHUB_TOKEN}" >> "${GITHUB_ENV}"
+      echo "AZURESDK_COPILOT_TOKEN=${AZURESDK_COPILOT_TOKEN}" >> "${GITHUB_ENV}"
+      echo "Secret copied to AZURESDK_COPILOT_TOKEN environment variable"
 
   - name: Install GitHub CLI
     shell: bash
@@ -81,8 +81,8 @@ steps:
       GH_TOKEN: ${{ env.AZURESDK_GITHUB_TOKEN }}
     run: |
       set -euo pipefail
-      if [[ -z "${COPILOT_GITHUB_TOKEN:-}" ]]; then
-        echo "COPILOT_GITHUB_TOKEN environment variable is not set." >&2
+      if [[ -z "${AZURESDK_COPILOT_TOKEN:-}" ]]; then
+        echo "AZURESDK_COPILOT_TOKEN environment variable is not set." >&2
         exit 1
       fi
 
@@ -93,7 +93,7 @@ steps:
 
       gh config set prompt disabled >/dev/null
       pushd "${GITHUB_WORKSPACE}" >/dev/null
-      gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
+      gh aw secrets set COPILOT_GITHUB_TOKEN --value "${AZURESDK_COPILOT_TOKEN}"
       popd >/dev/null
 ---
 
