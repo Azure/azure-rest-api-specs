@@ -48,23 +48,22 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
-enum FoundryFeaturesOptInKeys {
-  container_agents_v1_preview: "ContainerAgents=V1Preview",
-  hosted_agents_v1_preview: "HostedAgents=V1Preview",
-  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
-  evaluations_v1_preview: "Evaluations=V1Preview",
-  schedules_v1_preview: "Schedules=V1Preview",
-  red_teams_v1_preview: "RedTeams=V1Preview",
-  insights_v1_preview: "Insights=V1Preview",
-  memory_stores_v1_preview: "MemoryStores=V1Preview",
-}
-
 /** Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents. */
 union AgentDefinitionFeatureKeys {
   string,
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
+}
+
+union FoundryFeaturesOptInKeys {
+  string,
+  AgentDefinitionFeatureKeys,
+  evaluations_v1_preview: "Evaluations=V1Preview",
+  schedules_v1_preview: "Schedules=V1Preview",
+  red_teams_v1_preview: "RedTeams=V1Preview",
+  insights_v1_preview: "Insights=V1Preview",
+  memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
@@ -75,7 +74,7 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -86,7 +85,7 @@ alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader> = {
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
@@ -110,7 +109,7 @@ op OpenAIOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 op OpenAIOperationWithPreview<
-  AreaPreviewLabel,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse

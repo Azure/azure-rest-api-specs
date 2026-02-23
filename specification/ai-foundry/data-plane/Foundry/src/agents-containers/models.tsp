@@ -10,7 +10,7 @@ namespace Azure.AI.Projects;
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 union AgentContainerOperationStatus {
@@ -31,7 +31,7 @@ union AgentContainerOperationStatus {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 union AgentContainerStatus {
@@ -64,7 +64,7 @@ union AgentContainerStatus {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model AgentContainerOperationError {
@@ -82,7 +82,7 @@ model AgentContainerOperationError {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model AgentContainerOperationObject {
@@ -109,7 +109,7 @@ model AgentContainerOperationObject {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model AgentContainerObject {
@@ -154,7 +154,7 @@ model AgentContainerObject {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model ContainerReplica {
@@ -172,7 +172,7 @@ model ContainerReplica {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model ContainerDetails {
@@ -198,7 +198,7 @@ model ContainerDetails {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model AcceptedAgentContainerOperation {
