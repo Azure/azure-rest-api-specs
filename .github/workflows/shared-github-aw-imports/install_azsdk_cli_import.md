@@ -4,6 +4,8 @@ description: Install Azure SDK CLI tool
 steps:
   - name: Checkout code
     uses: actions/checkout@v6
+    with:
+      persist-credentials: false
 
   - name: Install azsdk mcp server
     shell: pwsh

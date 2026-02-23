@@ -5,11 +5,8 @@ network:
   allowed:
     - defaults
     - "login.microsoftonline.com"
-    - "dev.azure.com"
-    - "*.dev.azure.com"
-    - "*.applicationinsights.azure.com"
-    - "*.visualstudio.com"
-    - "management.azure.com"
+    - "azure.com"
+    - "visualstudio.com"
 steps:
   - name: Acquire OIDC token for Azure
     id: oidc
@@ -60,15 +57,28 @@ steps:
     shell: bash
     run: |
       set -euo pipefail
-      SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-      echo "::add-mask::${SECRET_VALUE}"
-      echo "COPILOT_GITHUB_TOKEN=${SECRET_VALUE}" >> "${GITHUB_ENV}"
+      AZURE_SDK_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
+      COPILOT_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "copilot-github-pat" --query value -o tsv)
+      echo "::add-mask::${AZURE_SDK_PAT_SECRET_VALUE}"
+      echo "::add-mask::${COPILOT_PAT_SECRET_VALUE}"
+      echo "AZURESDK_GITHUB_TOKEN=${AZURE_SDK_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
+      echo "COPILOT_GITHUB_TOKEN=${COPILOT_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
       echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
+
+  - name: Install GitHub CLI
+    shell: bash
+    run: |
+      set -euo pipefail
+      if ! command -v gh >/dev/null 2>&1; then
+        echo "GitHub CLI is required." >&2
+        exit 1
+      fi
+      gh extension install github/gh-aw
 
   - name: Persist COPILOT_GITHUB_TOKEN as repo secret
     shell: bash
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ env.AZURESDK_GITHUB_TOKEN }}
     run: |
       set -euo pipefail
       if [[ -z "${COPILOT_GITHUB_TOKEN:-}" ]]; then
