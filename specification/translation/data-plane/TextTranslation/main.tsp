@@ -6,7 +6,6 @@ import "./routes.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
 @service(#{ title: "Text Translation" })
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
