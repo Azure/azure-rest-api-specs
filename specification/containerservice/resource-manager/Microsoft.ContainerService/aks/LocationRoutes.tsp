@@ -69,7 +69,7 @@ interface ContainerServiceOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Adding @armResourceOperations would inject an undesired resource-derived tag on these location-scoped operations."
 @added(Versions.v2026_01_02_preview)
-interface ContainerServiceVmSkusOperationGroup {
+interface VmSkusOperationGroup {
   /**
    * Gets the list of VM SKUs accepted by AKS when creating node pools in a specified location. AKS will perform a best effort approach to provision the requested VM SKUs, but availability is not guaranteed.
    */
