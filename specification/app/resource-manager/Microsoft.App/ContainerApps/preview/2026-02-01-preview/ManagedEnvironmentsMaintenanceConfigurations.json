@@ -309,12 +309,18 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScheduledEntries",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
+          "allOf": [
+            {
+              "$ref": "#/definitions/ScheduledEntries"
+            },
+            {
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
           ]
         }
       }
