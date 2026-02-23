@@ -279,6 +279,12 @@ suppressions:
   
   - code: ValidFormats
     reason: duration-constant is an expected format to the .NET SDK generator
+
+  - code: XMSSecretInResponse
+    reason: High key and low key refer to partition ranges, not secrets
+    where:
+    - $.definitions.UniformInt64RangePartitionSchemeDescription.properties.lowKey
+    - $.definitions.UniformInt64RangePartitionSchemeDescription.properties.highKey
 ```
 
 ---
