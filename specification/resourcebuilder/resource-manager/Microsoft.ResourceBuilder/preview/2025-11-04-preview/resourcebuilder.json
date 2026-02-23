@@ -1623,6 +1623,10 @@
           "$ref": "#/definitions/DatasetProperties",
           "description": "The resource-specific properties for this resource."
         },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind",
+          "description": "Optional. Dataset kind discriminator. Determines which properties are valid for this dataset."
+        },
         "tags": {
           "type": "object",
           "description": "Gets or sets tags of the resource",
@@ -1637,6 +1641,30 @@
         }
       ]
     },
+        "DatasetKind": {
+          "type": "string",
+          "description": "Dataset kind",
+          "enum": [
+            "Custom",
+            "ArmResource"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Custom",
+                "value": "Custom",
+                "description": "Custom user-defined dataset."
+              },
+              {
+                "name": "ArmResource",
+                "value": "ArmResource",
+                "description": "ARM (Azure Resource Manager) managed resource dataset."
+              }
+            ]
+          }
+        },
     "DatasetColumn": {
       "type": "object",
       "description": "Dataset column",
