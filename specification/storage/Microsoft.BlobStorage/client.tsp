@@ -61,41 +61,41 @@ interface BlockBlobClient extends Storage.Blob.BlockBlob {}
 )
 interface PageBlobClient extends Storage.Blob.PageBlob {}
 
-@@clientInitialization(BlobServiceClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(BlobServiceClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
-@@clientInitialization(BlobContainerClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(BlobContainerClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
-@@clientInitialization(BlobClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(BlobClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
-@@clientInitialization(AppendBlobClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(AppendBlobClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
-@@clientInitialization(BlockBlobClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(BlockBlobClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
-@@clientInitialization(PageBlobClient,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  }
-);
+// @@clientInitialization(PageBlobClient,
+//   {
+//     initializedBy: InitializedBy.customizeCode,
+//   }
+// );
 
 @@usage(BlobName, Usage.output, "rust");
 
@@ -221,15 +221,15 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
-
 // GO SPECIFICATION
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum EncryptionAlgorithmTypeGo {
   /** The AES256 encryption algorithm. */
   AES256: "AES256",
+
   /** Deprecated */
-  None: "None"
+  None: "None",
 }
 /** The list blob includes parameter values. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
@@ -284,10 +284,22 @@ enum ImmutabilityPolicySetting {
 @@alternateType(BlobPrefix.name, string, "go");
 @@alternateType(BlockIdParameter.blockid, string, "go");
 @@alternateType(BlockLookupList.latest, string[], "go");
-@@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm, EncryptionAlgorithmTypeGo, "go");
-@@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode, ImmutabilityPolicySetting, "go");
-@@alternateType(SourceEncryptionAlgorithmParameter.sourceEncryptionAlgorithm, EncryptionAlgorithmTypeGo, "go");
-@@alternateType(ListBlobsIncludeParameter.include, ListBlobsIncludeItemGo[], "go");
+@@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm,
+  EncryptionAlgorithmTypeGo,
+  "go"
+);
+@@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
+  ImmutabilityPolicySetting,
+  "go"
+);
+@@alternateType(SourceEncryptionAlgorithmParameter.sourceEncryptionAlgorithm,
+  EncryptionAlgorithmTypeGo,
+  "go"
+);
+@@alternateType(ListBlobsIncludeParameter.include,
+  ListBlobsIncludeItemGo[],
+  "go"
+);
 @@alternateType(UserDelegationKey.signedExpiry, utcDateTime, "go");
 @@alternateType(UserDelegationKey.signedStart, utcDateTime, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
@@ -308,10 +320,19 @@ enum ImmutabilityPolicySetting {
 @@clientName(Storage.Blob.Blob.setProperties, "SetHTTPHeaders", "go");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "FilterBlobs", "go");
 @@clientName(Storage.Blob.Container.listBlobs, "ListBlobFlatSegment", "go");
-@@clientName(Storage.Blob.Service.listContainers, "ListContainersSegment", "go");
-@@clientName(Storage.Blob.PageBlob.setSequenceNumber, "UpdateSequenceNumber", "go");
+@@clientName(Storage.Blob.Service.listContainers,
+  "ListContainersSegment",
+  "go"
+);
+@@clientName(Storage.Blob.PageBlob.setSequenceNumber,
+  "UpdateSequenceNumber",
+  "go"
+);
 @@clientName(Storage.Blob.Service.findBlobsByTags, "FilterBlobs", "go");
-@@clientName(UserDelegationKey.signedDelegatedUserTid, "SignedDelegatedUserTID", "go");
+@@clientName(UserDelegationKey.signedDelegatedUserTid,
+  "SignedDelegatedUserTID",
+  "go"
+);
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 
@@ -364,3 +385,7 @@ enum ImmutabilityPolicySetting {
 
 @@clientName(Storage.Blob.ContainerProperties.eTag, "etag", "python");
 @@clientName(Storage.Blob.ContainerItem.delete, "deleted", "python");
+
+@@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
+@@alternateType(Storage.Blob.UserDelegationKey.signedExpiry, string, "python");
+@@alternateType(Storage.Blob.UserDelegationKey.value, string, "python");
