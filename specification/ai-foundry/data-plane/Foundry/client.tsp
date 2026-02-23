@@ -77,8 +77,8 @@ using Azure.AI.Projects;
 @@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
-@@clientName(OpenAI.ContainerMemoryLimit.`1g`,  "MEMORY_1GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`4g`,  "MEMORY_4GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
@@ -168,14 +168,11 @@ using Azure.AI.Projects;
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 
-
 // --------------------------------------------------------------------------------
 // Other
 // --------------------------------------------------------------------------------
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
-// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse` 
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
-
-

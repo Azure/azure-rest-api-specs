@@ -4,7 +4,6 @@ info:
   version: v1
 tags:
   - name: Agents
-  - name: Agent Containers
   - name: Connections
   - name: Datasets
   - name: Deployments
@@ -327,159 +326,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
-  /agents/{agent_name}/operations:
-    get:
-      operationId: AgentContainers_listAgentContainerOperations
-      description: List container operations for an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AgentContainerOperationObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/operations/{operation_id}:
-    get:
-      operationId: AgentContainers_getAgentContainerOperation
-      description: Get the status of a container operation for an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: operation_id
-          in: path
-          required: true
-          description: The operation ID.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion
@@ -712,517 +558,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents/{agent_name}/versions/{agent_version}/containers/default:
-    get:
-      operationId: AgentContainers_getAgentContainer
-      description: Get a container for a specific version of an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default/operations:
-    get:
-      operationId: AgentContainers_listAgentVersionContainerOperations
-      description: List container operations for a specific version of an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AgentContainerOperationObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:delete:
-    post:
-      operationId: AgentContainers_deleteAgentContainer
-      description: |-
-        Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
-    post:
-      operationId: AgentContainers_streamAgentContainerLogs
-      description: |-
-        Container log entry streamed from the container as text chunks.
-        Each chunk is a UTF-8 string that may be either a plain text log line
-        or a JSON-formatted log entry, depending on the type of container log being streamed.
-        Clients should treat each chunk as opaque text and, if needed, attempt
-        to parse it as JSON based on their logging requirements.
-
-        For system logs, the format is JSON with the following structure:
-        {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
-        {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
-
-        For console logs, the format is plain text as emitted by the container's stdout/stderr.
-        2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
-        2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
-        2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
-        2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
-        2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: kind
-          in: query
-          required: false
-          description: console returns container stdout/stderr, system returns container app event stream. defaults to console
-          schema:
-            $ref: '#/components/schemas/ContainerLogKind'
-          explode: false
-        - name: replica_name
-          in: query
-          required: false
-          description: When omitted, the server chooses the first replica for console logs. Required to target a specific replica.
-          schema:
-            type: string
-          explode: false
-        - name: tail
-          in: query
-          required: false
-          description: Number of trailing lines returned. Enforced to 1-300. Defaults to 20
-          schema:
-            type: integer
-            format: int32
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:start:
-    post:
-      operationId: AgentContainers_startAgentContainer
-      description: |-
-        Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                min_replicas:
-                  type: integer
-                  format: int32
-                  description: The minimum number of replicas. Defaults to 1.
-                  default: 1
-                max_replicas:
-                  type: integer
-                  format: int32
-                  description: The maximum number of replicas. Defaults to 1.
-                  default: 1
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:stop:
-    post:
-      operationId: AgentContainers_stopAgentContainer
-      description: |-
-        Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:update:
-    post:
-      operationId: AgentContainers_updateAgentContainer
-      description: |-
-        Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                min_replicas:
-                  type: integer
-                  format: int32
-                  description: The minimum number of replicas.
-                max_replicas:
-                  type: integer
-                  format: int32
-                  description: The maximum number of replicas.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions:import:
     post:
       operationId: Agents_createAgentVersionFromManifest
@@ -1819,16 +1154,9 @@ paths:
           schema:
             type: boolean
           explode: false
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -1859,16 +1187,9 @@ paths:
           description: Unique identifier for the evaluation rule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -1898,16 +1219,9 @@ paths:
           description: Unique identifier for the evaluation rule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
       responses:
         '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
+          description: There is no content to send for this request, but the headers may be useful.
         default:
           description: An unexpected error response.
           headers:
@@ -1933,6 +1247,14 @@ paths:
           description: Unique identifier for the evaluation rule.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -1987,16 +1309,17 @@ paths:
           schema:
             type: string
           explode: false
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -2027,16 +1350,17 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -2066,16 +1390,17 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
+          description: There is no content to send for this request, but the headers may be useful.
         default:
           description: An unexpected error response.
           headers:
@@ -2773,16 +2098,17 @@ paths:
           schema:
             type: boolean
           explode: false
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -2813,6 +2139,14 @@ paths:
           description: The unique identifier for the insights report.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=V1Preview
         - name: includeCoordinates
           in: query
           required: false
@@ -2820,16 +2154,9 @@ paths:
           schema:
             type: boolean
           explode: false
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -3817,7 +3144,7 @@ paths:
         - Conversations
   /openai/v1/evals:
     get:
-      operationId: OpenAIEvals_listEvals
+      operationId: Evals_listEvals
       summary: List all evaluations
       description: List evaluations for a project.
       parameters:
@@ -3833,7 +3160,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -3894,7 +3222,7 @@ paths:
       tags:
         - Evals
     post:
-      operationId: OpenAIEvals_createEval
+      operationId: Evals_createEval
       summary: Create evaluation
       description: |-
         Create the structure of an evaluation that can be used to test a model's performance.
@@ -3924,7 +3252,7 @@ paths:
               $ref: '#/components/schemas/CreateEvalRequest'
   /openai/v1/evals/{eval_id}:
     delete:
-      operationId: OpenAIEvals_deleteEval
+      operationId: Evals_deleteEval
       summary: Delete an evaluation
       description: Delete an evaluation.
       parameters:
@@ -3950,7 +3278,7 @@ paths:
       tags:
         - Evals
     get:
-      operationId: OpenAIEvals_getEval
+      operationId: Evals_getEval
       summary: Get an evaluation
       description: Get an evaluation by ID.
       parameters:
@@ -3976,7 +3304,7 @@ paths:
       tags:
         - Evals
     post:
-      operationId: OpenAIEvals_updateEval
+      operationId: Evals_updateEval
       summary: Update an evaluation
       description: Update certain properties of an evaluation.
       parameters:
@@ -4009,7 +3337,7 @@ paths:
               $ref: '#/components/schemas/UpdateEvalParametersBody'
   /openai/v1/evals/{eval_id}/runs:
     get:
-      operationId: OpenAIEvals_listRuns
+      operationId: Evals_listRuns
       summary: Get a list of runs for an evaluation
       description: Get a list of runs for an evaluation.
       parameters:
@@ -4031,7 +3359,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -4093,7 +3422,7 @@ paths:
       tags:
         - Evals
     post:
-      operationId: OpenAIEvals_createEvalRun
+      operationId: Evals_createEvalRun
       summary: Create evaluation run
       parameters:
         - name: eval_id
@@ -4125,7 +3454,7 @@ paths:
               $ref: '#/components/schemas/CreateEvalRunRequest'
   /openai/v1/evals/{eval_id}/runs/{run_id}:
     delete:
-      operationId: OpenAIEvals_deleteEvalRun
+      operationId: Evals_deleteEvalRun
       summary: Delete evaluation run
       description: Delete an eval run.
       parameters:
@@ -4157,7 +3486,7 @@ paths:
       tags:
         - Evals
     get:
-      operationId: OpenAIEvals_getEvalRun
+      operationId: Evals_getEvalRun
       summary: Get an evaluation run
       description: Get an evaluation run by ID.
       parameters:
@@ -4189,7 +3518,7 @@ paths:
       tags:
         - Evals
     post:
-      operationId: OpenAIEvals_cancelEvalRun
+      operationId: Evals_cancelEvalRun
       summary: Cancel evaluation run
       description: Cancel an ongoing evaluation run.
       parameters:
@@ -4222,7 +3551,7 @@ paths:
         - Evals
   /openai/v1/evals/{eval_id}/runs/{run_id}/output_items:
     get:
-      operationId: OpenAIEvals_getEvalRunOutputItems
+      operationId: Evals_getEvalRunOutputItems
       summary: Get evaluation run output items
       description: Get a list of output items for an evaluation run.
       parameters:
@@ -4249,7 +3578,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -4310,7 +3640,7 @@ paths:
         - Evals
   /openai/v1/evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}:
     get:
-      operationId: OpenAIEvals_getEvalRunOutputItem
+      operationId: Evals_getEvalRunOutputItem
       summary: Get an output item of an evaluation run
       description: Get an evaluation run output item by ID.
       parameters:
@@ -4765,7 +4095,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -4889,7 +4221,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -5260,16 +4594,17 @@ paths:
       description: List a redteam by name.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - RedTeams=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5300,16 +4635,17 @@ paths:
           description: Identifier of the red team run.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - RedTeams=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5376,16 +4712,31 @@ paths:
       description: List all schedules.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: type
+          in: query
+          required: false
+          description: Filter by the type of schedule.
+          schema:
+            $ref: '#/components/schemas/ScheduleTaskType'
+          explode: false
+        - name: enabled
+          in: query
+          required: false
+          description: Filter by the enabled status.
+          schema:
+            type: boolean
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Schedules=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5416,16 +4767,17 @@ paths:
           description: Identifier of the schedule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Schedules=V1Preview
       responses:
         '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
+          description: There is no content to send for this request, but the headers may be useful.
         default:
           description: An unexpected error response.
           headers:
@@ -5451,16 +4803,17 @@ paths:
           description: Identifier of the schedule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Schedules=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5490,28 +4843,23 @@ paths:
           description: Identifier of the schedule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Schedules=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schedule'
         '201':
           description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5533,7 +4881,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/merge-patch+json:
+          application/json:
             schema:
               $ref: '#/components/schemas/Schedule'
         description: The resource instance.
@@ -5549,16 +4897,31 @@ paths:
           description: Identifier of the schedule.
           schema:
             type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+        - name: type
+          in: query
+          required: false
+          description: Filter by the type of schedule.
+          schema:
+            $ref: '#/components/schemas/ScheduleTaskType'
+          explode: false
+        - name: enabled
+          in: query
+          required: false
+          description: Filter by the enabled status.
+          schema:
+            type: boolean
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Schedules=V1Preview
       responses:
         '200':
           description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
           content:
             application/json:
               schema:
@@ -5673,6 +5036,64 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
+    A2AToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the A2A agent card being called.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: An A2A (Agent-to-Agent) tool call.
+    A2AToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the A2A agent card that was called.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the A2A tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of an A2A (Agent-to-Agent) tool call.
     AISearchIndexResource:
       type: object
       properties:
@@ -5734,141 +5155,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
-    AgentContainerObject:
-      type: object
-      required:
-        - object
-        - status
-        - created_at
-        - updated_at
-      properties:
-        object:
-          type: string
-          enum:
-            - agent.container
-          description: The object type, which is always 'agent.container'.
-          readOnly: true
-        id:
-          type: string
-          description: The identifier of the container.
-          readOnly: true
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerStatus'
-          description: The status of the container of a specific version of an agent.
-          readOnly: true
-        max_replicas:
-          type: integer
-          format: int32
-          description: The maximum number of replicas for the container. Default is 1.
-          example: 10
-        min_replicas:
-          type: integer
-          format: int32
-          description: The minimum number of replicas for the container. Default is 1.
-          example: 1
-        error_message:
-          type: string
-          description: The error message if the container failed to operate, if any.
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: The creation time of the container.
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: The last update time of the container.
-          readOnly: true
-        container:
-          allOf:
-            - $ref: '#/components/schemas/ContainerDetails'
-          description: The detailed container information.
-          readOnly: true
-      description: The details of the container of a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationError:
-      type: object
-      required:
-        - code
-        - type
-        - message
-      properties:
-        code:
-          type: string
-          description: The error code of the container operation, if any.
-        type:
-          type: string
-          description: The error type of the container operation, if any.
-        message:
-          type: string
-          description: The error message of the container operation, if any.
-      description: The error details of the container operation, if any.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationObject:
-      type: object
-      required:
-        - id
-        - agent_id
-        - agent_version_id
-        - status
-      properties:
-        id:
-          type: string
-          description: The ID of the container operation. This id is unique identifier across the system.
-        agent_id:
-          type: string
-          description: The ID of the agent.
-        agent_version_id:
-          type: string
-          description: The ID of the agent version.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationStatus'
-          description: The status of the container operation.
-        error:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationError'
-          description: The error of the container operation, if any.
-        container:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerObject'
-          description: The container of the specific version of an agent.
-      description: The container operation for a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationStatus:
-      type: string
-      enum:
-        - NotStarted
-        - InProgress
-        - Succeeded
-        - Failed
-      description: Status of the container operation for a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerStatus:
-      type: string
-      enum:
-        - Starting
-        - Running
-        - Stopping
-        - Stopped
-        - Failed
-        - Deleting
-        - Deleted
-        - Updating
-      description: Status of the container of a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -6382,6 +5668,56 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an Azure AI search tool as used to configure an agent.
+    AzureAISearchToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_search_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: An Azure AI Search tool call.
+    AzureAISearchToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_search_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Azure AI Search tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of an Azure AI Search tool call.
     AzureAISearchToolResource:
       type: object
       required:
@@ -6476,6 +5812,64 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an Azure Function Tool, as used to configure an Agent.
+    AzureFunctionToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_function_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the Azure Function being called.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: An Azure Function tool call.
+    AzureFunctionToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_function_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the Azure Function that was called.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Azure Function tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of an Azure Function tool call.
     AzureOpenAIModelConfiguration:
       type: object
       required:
@@ -6556,6 +5950,56 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Bing custom search tool as used to configure an agent.
+    BingCustomSearchToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - bing_custom_search_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A Bing custom search tool call.
+    BingCustomSearchToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - bing_custom_search_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Bing custom search tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a Bing custom search tool call.
     BingCustomSearchToolParameters:
       type: object
       required:
@@ -6624,6 +6068,56 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a bing grounding search tool as used to configure an agent.
+    BingGroundingToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - bing_grounding_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A Bing grounding tool call.
+    BingGroundingToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - bing_grounding_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Bing grounding tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a Bing grounding tool call.
     BlobReference:
       type: object
       required:
@@ -6661,6 +6155,56 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+    BrowserAutomationToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - browser_automation_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A browser automation tool call.
+    BrowserAutomationToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - browser_automation_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the browser automation tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a browser automation tool call.
     BrowserAutomationToolConnectionParameters:
       type: object
       required:
@@ -6920,69 +6464,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The container app agent definition.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    ContainerDetails:
-      type: object
-      required:
-        - provisioning_state
-        - state
-        - health_state
-        - replicas
-        - updated_on
-      properties:
-        provisioning_state:
-          type: string
-          description: The provisioning state of the container.
-        provisioning_error:
-          type: string
-          description: The provisioning error of the container, if any.
-        state:
-          type: string
-          description: The state of the container.
-        health_state:
-          type: string
-          description: The health state of the container.
-        replicas:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerReplica'
-          description: The list of replicas in the container.
-        updated_on:
-          type: string
-          format: date-time
-          description: The last update time of the container.
-      description: Detailed information about the container.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    ContainerLogKind:
-      type: string
-      enum:
-        - console
-        - system
-      description: The type of logs to stream from a container.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    ContainerReplica:
-      type: object
-      required:
-        - name
-        - state
-        - container_state
-      properties:
-        name:
-          type: string
-          description: The name of the replica.
-        state:
-          type: string
-          description: The state of the replica.
-        container_state:
-          type: string
-          description: The container state of the replica.
-      description: Information about a container replica.
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
@@ -7686,6 +7167,39 @@ components:
               "test": "synthetics",
             }
           }
+    EvalCsvFileIdSource:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - file_id
+          description: The type of source, always `file_id`.
+        id:
+          type: string
+          description: The identifier of the uploaded CSV file.
+      description: Represents a reference to an uploaded CSV file used as a source for evaluation data.
+    EvalCsvRunDataSource:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - csv
+          description: The type of data source, always `csv`.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/EvalCsvFileIdSource'
+          description: The source of the CSV data, either inline content or a file reference.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Represents a CSV data source for evaluation runs.
     EvalGraderAzureAIEvaluator:
       type: object
       required:
@@ -8029,6 +7543,7 @@ components:
           azure_ai_synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource'
           azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
+          csv: '#/components/schemas/EvalCsvRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
@@ -8393,6 +7908,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluationRuleAction'
           description: Definition of the evaluation rule action.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - Evaluations=V1Preview
         filter:
           allOf:
             - $ref: '#/components/schemas/EvaluationRuleFilter'
@@ -8424,7 +7942,7 @@ components:
         propertyName: type
         mapping:
           continuousEvaluation: '#/components/schemas/ContinuousEvaluationRuleAction'
-          humanEvaluation: '#/components/schemas/HumanEvaluationRuleAction'
+          humanEvaluationPreview: '#/components/schemas/HumanEvaluationPreviewRuleAction'
       description: Evaluation action model.
     EvaluationRuleActionType:
       anyOf:
@@ -8432,7 +7950,7 @@ components:
         - type: string
           enum:
             - continuousEvaluation
-            - humanEvaluation
+            - humanEvaluationPreview
       description: Type of the evaluation action.
     EvaluationRuleEventType:
       anyOf:
@@ -8855,6 +8373,56 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+    FabricDataAgentToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_dataagent_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A Fabric data agent tool call.
+    FabricDataAgentToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_dataagent_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the Fabric data agent tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a Fabric data agent tool call.
     FabricDataAgentToolParameters:
       type: object
       properties:
@@ -8999,7 +8567,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Hourly recurrence schedule.
-    HumanEvaluationRuleAction:
+    HumanEvaluationPreviewRuleAction:
       type: object
       required:
         - type
@@ -9008,7 +8576,7 @@ components:
         type:
           type: string
           enum:
-            - humanEvaluation
+            - humanEvaluationPreview
         templateId:
           allOf:
             - $ref: '#/components/schemas/AssetId'
@@ -10673,6 +10241,8 @@ components:
         file_id:
           type: string
           nullable: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A screenshot of a computer.
       title: Computer screenshot
     OpenAI.ComputerScreenshotImage:
@@ -11566,16 +11136,7 @@ components:
         content:
           type: array
           items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.InputTextContent'
-              - $ref: '#/components/schemas/OpenAI.OutputTextContent'
-              - $ref: '#/components/schemas/OpenAI.TextContent'
-              - $ref: '#/components/schemas/OpenAI.SummaryTextContent'
-              - $ref: '#/components/schemas/OpenAI.ReasoningTextContent'
-              - $ref: '#/components/schemas/OpenAI.RefusalContent'
-              - $ref: '#/components/schemas/OpenAI.InputImageContent'
-              - $ref: '#/components/schemas/OpenAI.ComputerScreenshotContent'
-              - $ref: '#/components/schemas/OpenAI.InputFileContent'
+            $ref: '#/components/schemas/OpenAI.MessageContent'
           description: The content of the message
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
@@ -11739,6 +11300,8 @@ components:
           x-stainless-const: true
           default: conversation
         metadata:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
               Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
@@ -12596,8 +12159,6 @@ components:
       required:
         - code
         - message
-        - param
-        - type
       properties:
         code:
           type: string
@@ -14765,6 +14326,7 @@ components:
       properties:
         image_url:
           type: string
+          format: uri
         file_id:
           type: string
     OpenAI.IncludeEnum:
@@ -17658,6 +17220,24 @@ components:
             - oauth_consent_request
             - memory_search_call
             - workflow_action
+            - a2a_preview_call
+            - a2a_preview_call_output
+            - bing_grounding_call
+            - bing_grounding_call_output
+            - sharepoint_grounding_preview_call
+            - sharepoint_grounding_preview_call_output
+            - azure_ai_search_call
+            - azure_ai_search_call_output
+            - bing_custom_search_preview_call
+            - bing_custom_search_preview_call_output
+            - openapi_call
+            - openapi_call_output
+            - browser_automation_preview_call
+            - browser_automation_preview_call_output
+            - fabric_dataagent_preview_call
+            - fabric_dataagent_preview_call_output
+            - azure_function_call
+            - azure_function_call_output
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -17730,6 +17310,24 @@ components:
             - oauth_consent_request
             - memory_search_call
             - workflow_action
+            - a2a_preview_call
+            - a2a_preview_call_output
+            - bing_grounding_call
+            - bing_grounding_call_output
+            - sharepoint_grounding_preview_call
+            - sharepoint_grounding_preview_call_output
+            - azure_ai_search_call
+            - azure_ai_search_call_output
+            - bing_custom_search_preview_call
+            - bing_custom_search_preview_call_output
+            - openapi_call
+            - openapi_call_output
+            - browser_automation_preview_call
+            - browser_automation_preview_call_output
+            - fabric_dataagent_preview_call
+            - fabric_dataagent_preview_call_output
+            - azure_function_call
+            - azure_function_call_output
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -18082,6 +17680,187 @@ components:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
         never:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
+    OpenAI.MessageContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.MessageContentType'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/OpenAI.TextContent'
+          summary_text: '#/components/schemas/OpenAI.SummaryTextContent'
+          computer_screenshot: '#/components/schemas/OpenAI.ComputerScreenshotContent'
+          input_text: '#/components/schemas/OpenAI.MessageContentInputTextContent'
+          output_text: '#/components/schemas/OpenAI.MessageContentOutputTextContent'
+          reasoning_text: '#/components/schemas/OpenAI.MessageContentReasoningTextContent'
+          refusal: '#/components/schemas/OpenAI.MessageContentRefusalContent'
+          input_image: '#/components/schemas/OpenAI.MessageContentInputImageContent'
+          input_file: '#/components/schemas/OpenAI.MessageContentInputFileContent'
+      description: A content part that makes up an input or output item.
+    OpenAI.MessageContentInputFileContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - input_file
+          description: The type of the input item. Always `input_file`.
+          x-stainless-const: true
+          default: input_file
+        file_id:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          description: The name of the file to be sent to the model.
+        file_url:
+          type: string
+          format: uri
+          description: The URL of the file to be sent to the model.
+        file_data:
+          type: string
+          description: The content of the file to be sent to the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: A file input to the model.
+      title: Input file
+    OpenAI.MessageContentInputImageContent:
+      type: object
+      required:
+        - type
+        - detail
+      properties:
+        type:
+          type: string
+          enum:
+            - input_image
+          description: The type of the input item. Always `input_image`.
+          x-stainless-const: true
+          default: input_image
+        image_url:
+          type: string
+          format: uri
+          nullable: true
+        file_id:
+          type: string
+          nullable: true
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ImageDetail'
+          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision).
+      title: Input image
+    OpenAI.MessageContentInputTextContent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - input_text
+          description: The type of the input item. Always `input_text`.
+          x-stainless-const: true
+          default: input_text
+        text:
+          type: string
+          description: The text input to the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: A text input to the model.
+      title: Input text
+    OpenAI.MessageContentOutputTextContent:
+      type: object
+      required:
+        - type
+        - text
+        - annotations
+      properties:
+        type:
+          type: string
+          enum:
+            - output_text
+          description: The type of the output text. Always `output_text`.
+          x-stainless-const: true
+          default: output_text
+        text:
+          type: string
+          description: The text output from the model.
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Annotation'
+          description: The annotations of the text output.
+        logprobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.LogProb'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: A text output from the model.
+      title: Output text
+    OpenAI.MessageContentReasoningTextContent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - reasoning_text
+          description: The type of the reasoning text. Always `reasoning_text`.
+          x-stainless-const: true
+          default: reasoning_text
+        text:
+          type: string
+          description: The reasoning text from the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: Reasoning text from the model.
+      title: ReasoningTextContent
+    OpenAI.MessageContentRefusalContent:
+      type: object
+      required:
+        - type
+        - refusal
+      properties:
+        type:
+          type: string
+          enum:
+            - refusal
+          description: The type of the refusal. Always `refusal`.
+          x-stainless-const: true
+          default: refusal
+        refusal:
+          type: string
+          description: The refusal explanation from the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
+      description: A refusal from the model.
+      title: Refusal
+    OpenAI.MessageContentType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - input_text
+            - output_text
+            - text
+            - summary_text
+            - reasoning_text
+            - refusal
+            - input_image
+            - computer_screenshot
+            - input_file
     OpenAI.MessageRole:
       type: string
       enum:
@@ -18183,6 +17962,7 @@ components:
         mapping:
           output_text: '#/components/schemas/OpenAI.OutputContentOutputTextContent'
           refusal: '#/components/schemas/OpenAI.OutputContentRefusalContent'
+          reasoning_text: '#/components/schemas/OpenAI.OutputContentReasoningTextContent'
     OpenAI.OutputContentOutputTextContent:
       type: object
       required:
@@ -18213,6 +17993,26 @@ components:
         - $ref: '#/components/schemas/OpenAI.OutputContent'
       description: A text output from the model.
       title: Output text
+    OpenAI.OutputContentReasoningTextContent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - reasoning_text
+          description: The type of the reasoning text. Always `reasoning_text`.
+          x-stainless-const: true
+          default: reasoning_text
+        text:
+          type: string
+          description: The reasoning text from the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputContent'
+      description: Reasoning text from the model.
+      title: ReasoningTextContent
     OpenAI.OutputContentRefusalContent:
       type: object
       required:
@@ -18262,6 +18062,24 @@ components:
           workflow_action: '#/components/schemas/WorkflowActionOutputItem'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestOutputItem'
           memory_search_call: '#/components/schemas/MemorySearchToolCallItemResource'
+          bing_grounding_call: '#/components/schemas/BingGroundingToolCall'
+          bing_grounding_call_output: '#/components/schemas/BingGroundingToolCallOutput'
+          sharepoint_grounding_preview_call: '#/components/schemas/SharepointGroundingToolCall'
+          sharepoint_grounding_preview_call_output: '#/components/schemas/SharepointGroundingToolCallOutput'
+          azure_ai_search_call: '#/components/schemas/AzureAISearchToolCall'
+          azure_ai_search_call_output: '#/components/schemas/AzureAISearchToolCallOutput'
+          bing_custom_search_preview_call: '#/components/schemas/BingCustomSearchToolCall'
+          bing_custom_search_preview_call_output: '#/components/schemas/BingCustomSearchToolCallOutput'
+          openapi_call: '#/components/schemas/OpenApiToolCall'
+          openapi_call_output: '#/components/schemas/OpenApiToolCallOutput'
+          browser_automation_preview_call: '#/components/schemas/BrowserAutomationToolCall'
+          browser_automation_preview_call_output: '#/components/schemas/BrowserAutomationToolCallOutput'
+          fabric_dataagent_preview_call: '#/components/schemas/FabricDataAgentToolCall'
+          fabric_dataagent_preview_call_output: '#/components/schemas/FabricDataAgentToolCallOutput'
+          azure_function_call: '#/components/schemas/AzureFunctionToolCall'
+          azure_function_call_output: '#/components/schemas/AzureFunctionToolCallOutput'
+          a2a_preview_call: '#/components/schemas/A2AToolCall'
+          a2a_preview_call_output: '#/components/schemas/A2AToolCallOutput'
           output_message: '#/components/schemas/OpenAI.OutputItemOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.OutputItemFileSearchToolCall'
           function_call: '#/components/schemas/OpenAI.OutputItemFunctionToolCall'
@@ -18949,6 +18767,24 @@ components:
             - oauth_consent_request
             - memory_search_call
             - workflow_action
+            - a2a_preview_call
+            - a2a_preview_call_output
+            - bing_grounding_call
+            - bing_grounding_call_output
+            - sharepoint_grounding_preview_call
+            - sharepoint_grounding_preview_call_output
+            - azure_ai_search_call
+            - azure_ai_search_call_output
+            - bing_custom_search_preview_call
+            - bing_custom_search_preview_call_output
+            - openapi_call
+            - openapi_call_output
+            - browser_automation_preview_call
+            - browser_automation_preview_call_output
+            - fabric_dataagent_preview_call
+            - fabric_dataagent_preview_call_output
+            - azure_function_call
+            - azure_function_call_output
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -19057,34 +18893,6 @@ components:
           enum:
             - output_text
             - refusal
-    OpenAI.OutputTextContent:
-      type: object
-      required:
-        - type
-        - text
-        - annotations
-      properties:
-        type:
-          type: string
-          enum:
-            - output_text
-          description: The type of the output text. Always `output_text`.
-          x-stainless-const: true
-          default: output_text
-        text:
-          type: string
-          description: The text output from the model.
-        annotations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Annotation'
-          description: The annotations of the text output.
-        logprobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.LogProb'
-      description: A text output from the model.
-      title: Output text
     OpenAI.Prompt:
       type: object
       required:
@@ -19184,28 +18992,8 @@ components:
         text:
           type: string
           description: The reasoning text from the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputContent'
       description: Reasoning text from the model.
       title: ReasoningTextContent
-    OpenAI.RefusalContent:
-      type: object
-      required:
-        - type
-        - refusal
-      properties:
-        type:
-          type: string
-          enum:
-            - refusal
-          description: The type of the refusal. Always `refusal`.
-          x-stainless-const: true
-          default: refusal
-        refusal:
-          type: string
-          description: The refusal explanation from the model.
-      description: A refusal from the model.
-      title: Refusal
     OpenAI.Response:
       type: object
       required:
@@ -19293,7 +19081,9 @@ components:
         tools:
           $ref: '#/components/schemas/OpenAI.ToolsArray'
         tool_choice:
-          $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
         truncation:
@@ -22096,6 +21886,8 @@ components:
         text:
           type: string
           description: A summary of the reasoning output from the model so far.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A summary text from the model.
       title: Summary text
     OpenAI.TextContent:
@@ -22112,6 +21904,8 @@ components:
           default: text
         text:
           type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A text content.
       title: Text Content
     OpenAI.TextResponseFormatConfiguration:
@@ -22405,6 +22199,19 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
       title: MCP tool
+    OpenAI.ToolChoiceOptions:
+      type: string
+      enum:
+        - none
+        - auto
+        - required
+      description: |-
+        Controls which (if any) tool is called by the model.
+        `none` means the model will not call any tool and instead generates a message.
+        `auto` means the model can pick between generating a message or calling one or
+        more tools.
+        `required` means the model must call one or more tools.
+      title: Tool choice mode
     OpenAI.ToolChoiceParam:
       type: object
       required:
@@ -22739,14 +22546,9 @@ components:
           type: string
     OpenAI.WebSearchApproximateLocation:
       type: object
+      required:
+        - type
       properties:
-        type:
-          type: string
-          enum:
-            - approximate
-          description: The type of location approximation. Always `approximate`.
-          x-stainless-const: true
-          default: approximate
         country:
           type: string
           nullable: true
@@ -22759,6 +22561,11 @@ components:
         timezone:
           type: string
           nullable: true
+        type:
+          type: string
+          enum:
+            - approximate
+          description: The type of location approximation. Always `approximate`.
       description: The approximate location of the user.
       title: Web search approximate location
     OpenAI.WebSearchPreviewTool:
@@ -23002,6 +22809,64 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an OpenAPI tool as used to configure an agent.
+    OpenApiToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - openapi_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the OpenAPI operation being called.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: An OpenAPI tool call.
+    OpenApiToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - openapi_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        name:
+          type: string
+          description: The name of the OpenAPI operation that was called.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the OpenAPI tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of an OpenAPI tool call.
     PageOrder:
       type: string
       enum:
@@ -23760,6 +23625,56 @@ components:
             - Evaluation
             - Insight
       description: Type of the task.
+    SharepointGroundingToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - sharepoint_grounding_preview_call
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the tool.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A SharePoint grounding tool call.
+    SharepointGroundingToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - sharepoint_grounding_preview_call_output
+        call_id:
+          type: string
+          description: The unique ID of the tool call generated by the model.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallOutputContent'
+          description: The output from the SharePoint grounding tool call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ToolCallStatus'
+          description: The status of the tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a SharePoint grounding tool call.
     SharepointGroundingToolParameters:
       type: object
       properties:
@@ -24060,6 +23975,22 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+    ToolCallOutputContent:
+      anyOf:
+        - type: object
+          additionalProperties: {}
+        - type: string
+        - type: array
+          items: {}
+      description: The output content from a tool call, which can be a dictionary, string, or array.
+    ToolCallStatus:
+      type: string
+      enum:
+        - in_progress
+        - completed
+        - incomplete
+        - failed
+      description: The status of a tool call.
     ToolDescription:
       type: object
       properties:
