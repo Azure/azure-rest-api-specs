@@ -1194,6 +1194,24 @@ union ManagedGatewayType {
 }
 
 /**
+ * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
+ */
+@added(Versions.v2026_01_02_preview)
+union GatewayAPIIstioEnabled {
+  string,
+
+  /**
+   * Enables managed ingress via the Gateway API using a sidecar-less Istio controlplane.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Disables the sidecar-less istio control plane for managed ingress via the Gateway API.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Ingress type for the default NginxIngressController custom resource
  */
 union NginxIngressControllerType {
@@ -3345,6 +3363,13 @@ model ManagedClusterIngressProfileWebAppRouting {
   enabled?: boolean;
 
   /**
+   * Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
+  @added(Versions.v2026_01_02_preview)
+  gatewayAPIImplementations?: ManagedClusterWebAppRoutingGatewayAPIImplementations;
+
+  /**
    * Resource IDs of the DNS zones to be associated with the Application Routing add-on. Used only when Application Routing add-on is enabled. Public and private DNS zones can be in different resource groups, but all public DNS zones must be in the same resource group and all private DNS zones must be in the same resource group.
    */
   @maxItems(5)
@@ -3373,6 +3398,25 @@ model ManagedClusterIngressProfileWebAppRouting {
    */
   @added(Versions.v2026_01_02_preview)
   defaultDomain?: ManagedClusterIngressDefaultDomainProfile;
+}
+
+/** Configurations for Gateway API providers to be used for managed ingress with App Routing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
+@added(Versions.v2026_01_02_preview)
+model ManagedClusterWebAppRoutingGatewayAPIImplementations {
+  /**
+   * Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.
+   */
+  appRoutingIstio?: ManagedClusterAppRoutingIstio;
+}
+
+/** Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API. */
+@added(Versions.v2026_01_02_preview)
+model ManagedClusterAppRoutingIstio {
+  /**
+   * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
+   */
+  mode?: GatewayAPIIstioEnabled;
 }
 
 /** Nginx ingress controller configuration for the managed cluster ingress profile. */

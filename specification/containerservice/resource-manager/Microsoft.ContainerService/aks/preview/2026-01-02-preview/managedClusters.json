@@ -7863,6 +7863,30 @@
         }
       }
     },
+    "GatewayAPIIstioEnabled": {
+      "type": "string",
+      "description": "Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayAPIIstioEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enables managed ingress via the Gateway API using a sidecar-less Istio controlplane."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disables the sidecar-less istio control plane for managed ingress via the Gateway API."
+          }
+        ]
+      }
+    },
     "GuardrailsAvailableVersion": {
       "type": "object",
       "description": "Available Guardrails Version",
@@ -10378,6 +10402,16 @@
         }
       }
     },
+    "ManagedClusterAppRoutingIstio": {
+      "type": "object",
+      "description": "Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GatewayAPIIstioEnabled",
+          "description": "Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing."
+        }
+      }
+    },
     "ManagedClusterAutoUpgradeProfile": {
       "type": "object",
       "description": "Auto upgrade profile for a managed cluster.",
@@ -10743,6 +10777,10 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether to enable the Application Routing add-on."
+        },
+        "gatewayAPIImplementations": {
+          "$ref": "#/definitions/ManagedClusterWebAppRoutingGatewayAPIImplementations",
+          "description": "Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API."
         },
         "dnsZoneResourceIds": {
           "type": "array",
@@ -12131,6 +12169,16 @@
         "controlPlaneProfile",
         "agentPoolProfiles"
       ]
+    },
+    "ManagedClusterWebAppRoutingGatewayAPIImplementations": {
+      "type": "object",
+      "description": "Configurations for Gateway API providers to be used for managed ingress with App Routing.",
+      "properties": {
+        "appRoutingIstio": {
+          "$ref": "#/definitions/ManagedClusterAppRoutingIstio",
+          "description": "Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API."
+        }
+      }
     },
     "ManagedClusterWindowsProfile": {
       "type": "object",
