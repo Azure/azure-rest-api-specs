@@ -338,7 +338,7 @@ model MinCountMaxDelayBatchingPolicy extends BatchingPolicy {
   kind: "minCountMaxDelay";
 
   /** Minimum number of resources */
-  minResources: string;
+  minResources: int32;
 
   /** Maximum delay */
   maxDelay: string;
