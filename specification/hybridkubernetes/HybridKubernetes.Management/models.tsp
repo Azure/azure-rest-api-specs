@@ -252,7 +252,7 @@ model ConnectedClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
-   * Timestamp representing the lastinbound connectivity health check.
+   * Timestamp representing the last inbound connectivity health check.
    */
   @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
