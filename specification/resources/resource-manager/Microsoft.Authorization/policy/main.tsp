@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./DataPolicyManifests.tsp";
 import "./PolicyAssignment.tsp";
 import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";
@@ -45,4 +46,9 @@ enum Versions {
    * The 2025-03-01 API version.
    */
   v2025_03_01: "2025-03-01",
+
+  /**
+   * The 2025-11-01 API version.
+   */
+  v2025_11_01: "2025-11-01",
 }

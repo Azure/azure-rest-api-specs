@@ -15,7 +15,7 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
@@ -54,8 +54,8 @@ export async function generateSdkForSingleSpec(): Promise<number> {
 
   // Always set the pipeline variables for the SDK pull request even if
   // there are failures in the generation process since we allow the PR creation for such cases.
-  let packageName = "";
-  let installationInstructions = "";
+  let packageName: string;
+  let installationInstructions: string;
   if (executionReport) {
     packageName =
       executionReport.packages[0]?.packageName ??
@@ -65,6 +65,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     installationInstructions = executionReport.packages[0]?.installationInstructions ?? "";
   } else {
     packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
+    installationInstructions = "";
   }
 
   packageName = packageName.replace("/", "-");
@@ -93,16 +94,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
   const changedSpecs = detectChangedSpecConfigFiles(commandInput);
 
   let statusCode = 0;
-  let pushedSpecConfigCount;
-  let executionReport;
-  let changedSpecPathText = "";
+  let pushedSpecConfigCount: number;
+  let executionReport: ExecutionReport | undefined;
+  let changedSpecPathText: string;
   let hasManagementPlaneSpecs = false;
   let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
-  let currentRunHasBreakingChange = false;
+  let currentRunHasBreakingChange: boolean;
   let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
-  let currentExecutionResult = "";
+  let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
 
@@ -241,6 +242,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   let specConfigPath = "";
   let stagedArtifactsFolder = "";
   let serviceFolderPath = "";
+  const failedSpecs: string[] = [];
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
@@ -300,6 +302,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       } else {
         failedContent += `${specConfigPath},`;
         failedCount++;
+        // Extract relative path from 'specification/' for telemetry
+        const specIndex = specConfigPath.indexOf("specification/");
+        const relativePath = specIndex >= 0 ? specConfigPath.substring(specIndex) : specConfigPath;
+        failedSpecs.push(relativePath);
       }
       // Check for duplicated SDK configurations,
       // the execution result can be "succeeded" or "warning"
@@ -340,6 +346,32 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     : "";
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
+
+  // Emit structured telemetry for Kusto ingestion (only for mgmtplane/dataplane batch types)
+  if (batchType === "all-mgmtplane-typespecs" || batchType === "all-dataplane-typespecs") {
+    const specType = batchType === "all-mgmtplane-typespecs" ? "management-plane" : "data-plane";
+    const telemetry = {
+      eventType: "SdkBatchGenerationSummary",
+      timestamp: new Date().toISOString(),
+      batchType: batchType,
+      specType: specType,
+      sdkRepoName: commandInput.sdkRepoName,
+      language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
+      totalSpecs: succeededCount + failedCount,
+      succeededCount: succeededCount,
+      failedCount: failedCount,
+      notEnabledCount: notEnabledCount,
+      duplicatedConfigCount: duplicatedConfigCount,
+      successRate:
+        succeededCount + failedCount > 0
+          ? Math.round((succeededCount / (succeededCount + failedCount)) * 100)
+          : 0,
+      buildId: process.env.BUILD_BUILDID ?? "",
+      pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
+      failedSpecs: failedSpecs,
+    };
+    logMessage(`##[SdkBatchGenerationSummary]${JSON.stringify(telemetry)}`);
+  }
 
   // Write the markdown content to a file
   const markdownFilePath = path.join(commandInput.workingFolder, "out/logs/generation-summary.md");
