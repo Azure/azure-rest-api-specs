@@ -141,9 +141,7 @@ interface VariableValues {
    *  This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.
    */
   @summary("Creates or updates a variable value.")
-  createOrUpdateAtManagementGroup is VariableValueManagementGroupOps.CreateOrUpdateSync<
-    VariableValue
-  >;
+  createOrUpdateAtManagementGroup is VariableValueManagementGroupOps.CreateOrUpdateSync<VariableValue>;
 
   /**
    * This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.

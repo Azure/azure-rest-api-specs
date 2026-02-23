@@ -60,16 +60,16 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
-   * The selector kind to filter policies by the user principle ID.
+   * The selector kind to filter policies by the user principal ID.
    */
   @added(Versions.v2025_12_01_preview)
-  UserPrincipalId: "UserPrincipalId",
+  userPrincipalId: "userPrincipalId",
 
   /**
    * The selector kind to filter policies by the security group membership ID.
    */
   @added(Versions.v2025_12_01_preview)
-  GroupPrincipalId: "GroupPrincipalId",
+  groupPrincipalId: "groupPrincipalId",
 }
 
 /**
@@ -1334,7 +1334,6 @@ model PolicyExemptionProperties {
   /**
    * The expiration date and time (in UTC ISO 8601 format yyyy-MM-ddTHH:mm:ssZ) of the policy exemption.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiresOn?: utcDateTime;
 
   /**
@@ -1384,7 +1383,7 @@ model PolicyExemptionUpdateProperties {
   /**
    * The resource selector list to filter policies by resource properties.
    */
-  @identifiers(#[])
+  @identifiers(#["name"])
   resourceSelectors?: ResourceSelector[];
 
   /**

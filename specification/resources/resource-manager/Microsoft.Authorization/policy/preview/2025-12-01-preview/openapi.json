@@ -5892,7 +5892,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSelector"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "assignmentScopeValidation": {
           "$ref": "#/definitions/AssignmentScopeValidation",
@@ -6539,8 +6541,8 @@
         "resourceType",
         "resourceWithoutLocation",
         "policyDefinitionReferenceId",
-        "UserPrincipalId",
-        "GroupPrincipalId"
+        "userPrincipalId",
+        "groupPrincipalId"
       ],
       "x-ms-enum": {
         "name": "SelectorKind",
@@ -6567,13 +6569,13 @@
             "description": "The selector kind to filter policies by the policy definition reference ID."
           },
           {
-            "name": "UserPrincipalId",
-            "value": "UserPrincipalId",
-            "description": "The selector kind to filter policies by the user principle ID."
+            "name": "userPrincipalId",
+            "value": "userPrincipalId",
+            "description": "The selector kind to filter policies by the user principal ID."
           },
           {
-            "name": "GroupPrincipalId",
-            "value": "GroupPrincipalId",
+            "name": "groupPrincipalId",
+            "value": "groupPrincipalId",
             "description": "The selector kind to filter policies by the security group membership ID."
           }
         ]
