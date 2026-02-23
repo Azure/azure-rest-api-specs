@@ -23,6 +23,10 @@ model CloudValidationProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @doc("Error details. Populated when provisioningState is Failed or Canceled.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
   @doc("The overall state of the resource.")
   overallState?: CloudValidationOverallState;
 

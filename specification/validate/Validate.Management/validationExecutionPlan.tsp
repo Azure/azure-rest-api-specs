@@ -33,6 +33,10 @@ model ValidationExecutionPlanProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ValidationExecutionPlanProvisioningState;
 
+  @doc("Error details. Populated when provisioningState is Failed or Canceled.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
   @doc("The overall state of the resource.")
   overallState?: ValidationExecutionPlanOverallState;
 }
@@ -43,7 +47,7 @@ union ValidationExecutionPlanProvisioningState {
   ResourceProvisioningState,
 
   @doc("The resource is being provisioned.")
-  Creating: "Creating",
+  Creating: "Provisioning",
 
   @doc("The resource is updating.")
   Updating: "Updating",
