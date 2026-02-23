@@ -3125,6 +3125,12 @@ model ManagedClusterSecurityProfile {
   @maxItems(10)
   @minItems(0)
   customCATrustCertificates?: bytes[];
+
+  /**
+   * Defines service account based image pull settings.
+   */
+  @added(Versions.v2026_01_02_preview)
+  serviceAccountImagePullProfile?: ServiceAccountImagePullProfile;
 }
 
 /**
@@ -3283,6 +3289,21 @@ model ManagedClusterSecurityProfileNodeRestriction {
    * Whether to enable Node Restriction
    */
   enabled?: boolean;
+}
+
+/**
+ * Profile for configuring image pull authentication to use service account scoped managed identities for authentication instead of node scoped managed identity (kubelet identity) for authentication to Azure Container Registry. For more information, refer to https://aka.ms/aks/identity-binding/acr-image-pull/docs
+ */
+model ServiceAccountImagePullProfile {
+  /**
+   * Indicates whether service account based image pull is enabled, for which identity bindings are required for the managed identity to be used for authentication. For more information, refer to https://aka.ms/aks/identity-binding-docs.
+   */
+  enabled?: boolean;
+
+  /**
+   * Optional. The default managed identity resource ID used for image pulls at the cluster level. When configured, this identity is used if a Pod’s service account does not explicitly specify an identity for pulling images. If not configured and no identity is specified at service account level, image will be pulled via anonymous authentication.
+   */
+  defaultManagedIdentityId?: string;
 }
 
 /**
