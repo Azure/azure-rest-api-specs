@@ -128,7 +128,7 @@ model HorizonDbClusterProperties {
   /**
    * The zone placement policy
    */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   zonePlacementPolicy?: string;
 }
 
@@ -155,7 +155,7 @@ model HorizonDbClusterPropertiesForUpdate {
 /**
  * Represents a HorizonDb cluster resource for update operations
  */
-model HorizonDbClusterForUpdate {
+model HorizonDbClusterForPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /**
@@ -343,7 +343,7 @@ model HorizonDbPoolPropertiesForUpdate {
 /**
  * Represents a HorizonDb pool resource for update operations
  */
-model HorizonDbPoolForUpdate {
+model HorizonDbPoolForPatch {
   /**
    * The properties of the pool for update
    */
@@ -392,7 +392,7 @@ model HorizonDbReplicaPropertiesForUpdate {
 /**
  * Represents a HorizonDb replica resource for update operations
  */
-model HorizonDbReplicaForUpdate {
+model HorizonDbReplicaForPatch {
   /**
    * The properties of the replica for update
    */
@@ -427,6 +427,36 @@ model HorizonDbFirewallRuleProperties {
   @doc("The provisioning state of the firewall rule")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * Properties of a HorizonDb firewall rule for update operations
+ */
+model HorizonDbFirewallRulePropertiesForUpdate {
+  /**
+   * The start IP address of the firewall rule
+   */
+  startIpAddress?: string;
+
+  /**
+   * The end IP address of the firewall rule
+   */
+  endIpAddress?: string;
+
+  /**
+   * The description of the firewall rule
+   */
+  description?: string;
+}
+
+/**
+ * Represents a HorizonDb firewall rule resource for update operations
+ */
+model HorizonDbFirewallRuleForPatch {
+  /**
+   * The properties of the firewall rule for update
+   */
+  properties?: HorizonDbFirewallRulePropertiesForUpdate;
 }
 
 /**

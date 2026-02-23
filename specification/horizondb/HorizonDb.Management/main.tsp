@@ -95,7 +95,7 @@ interface HorizonDbClusters {
   get is ArmResourceRead<HorizonDbCluster>;
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbCluster>;
-  update is ArmCustomPatchAsync<HorizonDbCluster, HorizonDbClusterForUpdate>;
+  update is ArmCustomPatchAsync<HorizonDbCluster, HorizonDbClusterForPatch>;
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbCluster>;
   listByResourceGroup is ArmResourceListByParent<HorizonDbCluster>;
   listBySubscription is ArmListBySubscription<HorizonDbCluster>;
@@ -115,7 +115,7 @@ interface HorizonDbPools {
 
   @doc("Updates an existing HorizonDb pool (e.g., replica count)")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<HorizonDbPool, HorizonDbPoolForUpdate>;
+  update is ArmCustomPatchAsync<HorizonDbPool, HorizonDbPoolForPatch>;
 
   @doc("Deletes a HorizonDb pool")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbPool>;
@@ -134,7 +134,7 @@ interface HorizonDbReplicas {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbReplica>;
 
   @doc("Updates an existing HorizonDb replica (e.g., role)")
-  update is ArmCustomPatchAsync<HorizonDbReplica, HorizonDbReplicaForUpdate>;
+  update is ArmCustomPatchAsync<HorizonDbReplica, HorizonDbReplicaForPatch>;
 
   @doc("Deletes a HorizonDb replica")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbReplica>;
@@ -151,6 +151,12 @@ interface HorizonDbFirewallRules {
   @doc("Creates a new HorizonDb firewall rule or updates an existing rule")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbFirewallRule>;
+
+  @doc("Updates an existing HorizonDb firewall rule (e.g., IP ranges)")
+  update is ArmCustomPatchAsync<
+    HorizonDbFirewallRule,
+    HorizonDbFirewallRuleForPatch
+  >;
 
   @doc("Deletes a HorizonDb firewall rule")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbFirewallRule>;

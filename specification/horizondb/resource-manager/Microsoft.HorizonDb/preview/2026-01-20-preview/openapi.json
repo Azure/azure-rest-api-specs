@@ -331,7 +331,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterForUpdate"
+              "$ref": "#/definitions/HorizonDbClusterForPatch"
             }
           }
         ],
@@ -677,7 +677,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbPoolForUpdate"
+              "$ref": "#/definitions/HorizonDbPoolForPatch"
             }
           }
         ],
@@ -1017,6 +1017,101 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/HorizonDbFirewallRule"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HorizonDbFirewallRules_Update",
+        "tags": [
+          "HorizonDbFirewallRules"
+        ],
+        "description": "Updates an existing HorizonDb firewall rule (e.g., IP ranges)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDb cluster",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDb pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the HorizonDb firewall rule",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRuleForPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HorizonDbFirewallRule"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a HorizonDb firewall rule": {
+            "$ref": "./examples/FirewallRules_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/HorizonDbFirewallRule"
         },
         "x-ms-long-running-operation": true
@@ -1384,7 +1479,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbReplicaForUpdate"
+              "$ref": "#/definitions/HorizonDbReplicaForPatch"
             }
           }
         ],
@@ -1648,7 +1743,7 @@
         }
       ]
     },
-    "HorizonDbClusterForUpdate": {
+    "HorizonDbClusterForPatch": {
       "type": "object",
       "description": "Represents a HorizonDb cluster resource for update operations",
       "properties": {
@@ -1802,7 +1897,10 @@
         "zonePlacementPolicy": {
           "type": "string",
           "description": "The zone placement policy",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1844,6 +1942,16 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "HorizonDbFirewallRuleForPatch": {
+      "type": "object",
+      "description": "Represents a HorizonDb firewall rule resource for update operations",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbFirewallRulePropertiesForUpdate",
+          "description": "The properties of the firewall rule for update"
+        }
+      }
     },
     "HorizonDbFirewallRuleListResult": {
       "type": "object",
@@ -1905,6 +2013,24 @@
         "endIpAddress"
       ]
     },
+    "HorizonDbFirewallRulePropertiesForUpdate": {
+      "type": "object",
+      "description": "Properties of a HorizonDb firewall rule for update operations",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule"
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the firewall rule"
+        }
+      }
+    },
     "HorizonDbPool": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -1920,7 +2046,7 @@
         }
       ]
     },
-    "HorizonDbPoolForUpdate": {
+    "HorizonDbPoolForPatch": {
       "type": "object",
       "description": "Represents a HorizonDb pool resource for update operations",
       "properties": {
@@ -2061,7 +2187,7 @@
         }
       ]
     },
-    "HorizonDbReplicaForUpdate": {
+    "HorizonDbReplicaForPatch": {
       "type": "object",
       "description": "Represents a HorizonDb replica resource for update operations",
       "properties": {
