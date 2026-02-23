@@ -324,15 +324,3 @@ model ResourceSkuZoneDetails {
  */
 @added(Versions.v2026_01_02_preview)
 model VmSkusListResult is Azure.Core.Page<ResourceSku>;
-
-/**
- * Query parameters for listing VM SKUs.
- */
-@added(Versions.v2026_01_02_preview)
-model IncludeExtendedLocationsParameter {
-  /**
-   * To Include Extended Locations information or not in the response.
-   */
-  @query
-  includeExtendedLocations?: string;
-}

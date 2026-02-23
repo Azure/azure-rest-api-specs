@@ -549,7 +549,11 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/IncludeExtendedLocationsParameter"
+            "name": "includeExtendedLocations",
+            "in": "query",
+            "description": "To Include Extended Locations information or not in the response.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -15477,14 +15481,5 @@
       }
     }
   },
-  "parameters": {
-    "IncludeExtendedLocationsParameter": {
-      "name": "includeExtendedLocations",
-      "in": "query",
-      "description": "To Include Extended Locations information or not in the response.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

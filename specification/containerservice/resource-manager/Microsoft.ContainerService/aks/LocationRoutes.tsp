@@ -84,7 +84,12 @@ interface VmSkusOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationResourceParameter;
-      ...IncludeExtendedLocationsParameter;
+
+      /**
+       * To Include Extended Locations information or not in the response.
+       */
+      @query
+      includeExtendedLocations?: string;
     }
   >;
 }
