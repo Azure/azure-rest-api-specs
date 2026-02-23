@@ -85,13 +85,21 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
+
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in all the many OpenAI input item classes. We want to the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+@@clientDoc(OpenAI.InputItem, "An input message item represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`), identical to OpenAI's EasyInputMessage. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
+@@clientDoc(OpenAI.InputItem, "An input message item represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`), similar to how OpenAI defines them. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
+
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
 @@clientName(MemoryStores.getMemoryStore, "get");
 @@clientName(MemoryStores.listMemoryStores, "list");
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 
-// The SDK will have custom code to handle LRO memory updates.
+// The SDK will have custom code to handle LRO memory updates. And we don't want to expose OpenAI.InputItem on client library surface.
 @@access(MemoryStores.updateMemories, Access.internal, "python");
 @@scope(MemoryStores.getUpdateResult, "!(python)");
 
