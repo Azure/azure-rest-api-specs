@@ -10,6 +10,9 @@ namespace Azure.AI.Projects {
   @@changePropertyType(OpenAI.CreateResponse.`model`, string);
   @@changePropertyType(OpenAI.Response.`model`, string);
 
+  // This is a temporary correction to the OpenAI source spec pending an upstream fix via overlay/origin.
+  @@changePropertyType(OpenAI.MCPToolCall.error, Record<unknown>);
+
   @@doc(OpenAI.CreateResponse.`model`,
     "The model deployment to use for the creation of this response."
   );
