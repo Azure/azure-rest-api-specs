@@ -170,3 +170,5 @@ using Microsoft.ContainerService;
 );
 
 @@clientLocation(TrustedAccessRolesOperationGroup.list, "TrustedAccessRoles");
+
+@@clientLocation(VmSkusOperationGroup.list, "VmSkus");

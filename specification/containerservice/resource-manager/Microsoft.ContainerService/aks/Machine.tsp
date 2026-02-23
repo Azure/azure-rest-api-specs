@@ -300,7 +300,6 @@ model MachineKubernetesProfile {
  */
 @added(Versions.v2026_01_02_preview)
 model MachineBillingProfile {
-
   /**
    * The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)
    */
