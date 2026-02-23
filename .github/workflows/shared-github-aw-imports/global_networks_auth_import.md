@@ -57,13 +57,10 @@ steps:
     shell: bash
     run: |
       set -euo pipefail
-      AZURE_SDK_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-      COPILOT_PAT_SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "copilot-github-pat" --query value -o tsv)
-      echo "::add-mask::${AZURE_SDK_PAT_SECRET_VALUE}"
-      echo "::add-mask::${COPILOT_PAT_SECRET_VALUE}"
-      echo "AZURESDK_GITHUB_TOKEN=${AZURE_SDK_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-      echo "COPILOT_GITHUB_TOKEN=${COPILOT_PAT_SECRET_VALUE}" >> "${GITHUB_ENV}"
-      echo "Secret copied to COPILOT_GITHUB_TOKEN environment variable"
+      SECRET_VALUE=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
+      echo "::add-mask::${SECRET_VALUE}"
+      echo "AZSDK_COPILOT_GITHUB_TOKEN=${SECRET_VALUE}" >> "${GITHUB_ENV}"
+      echo "Secret copied to AZSDK_COPILOT_GITHUB_TOKEN environment variable"
 
   - name: Install GitHub CLI
     shell: bash
@@ -75,14 +72,14 @@ steps:
       fi
       gh extension install github/gh-aw
 
-  - name: Persist COPILOT_GITHUB_TOKEN as repo secret
+  - name: Persist AZSDK_COPILOT_GITHUB_TOKEN as repo secret
     shell: bash
     env:
-      GH_TOKEN: ${{ env.AZURESDK_GITHUB_TOKEN }}
+      GH_TOKEN: ${{ env.AZSDK_COPILOT_GITHUB_TOKEN }}
     run: |
       set -euo pipefail
-      if [[ -z "${COPILOT_GITHUB_TOKEN:-}" ]]; then
-        echo "COPILOT_GITHUB_TOKEN environment variable is not set." >&2
+      if [[ -z "${AZSDK_COPILOT_GITHUB_TOKEN:-}" ]]; then
+        echo "AZSDK_COPILOT_GITHUB_TOKEN environment variable is not set." >&2
         exit 1
       fi
 
@@ -93,7 +90,7 @@ steps:
 
       gh config set prompt disabled >/dev/null
       pushd "${GITHUB_WORKSPACE}" >/dev/null
-      gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
+      gh aw secrets set COPILOT_GITHUB_TOKEN --value "${AZSDK_COPILOT_GITHUB_TOKEN}"
       popd >/dev/null
 ---
 
