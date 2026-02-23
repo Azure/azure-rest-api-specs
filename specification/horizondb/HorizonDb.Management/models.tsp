@@ -124,6 +124,12 @@ model HorizonDbClusterProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The zone placement policy
+   */
+  @visibility(Lifecycle.Read)
+  zonePlacementPolicy?: string;
 }
 
 /**
