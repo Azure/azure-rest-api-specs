@@ -30,16 +30,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
-              - type: string
-                enum:
-                  - HostedAgents=V1Preview
-              - type: string
-                enum:
-                  - WorkflowAgents=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
         - name: api-version
           in: query
           required: true
@@ -209,16 +200,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
-              - type: string
-                enum:
-                  - HostedAgents=V1Preview
-              - type: string
-                enum:
-                  - WorkflowAgents=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
         - name: agent_name
           in: path
           required: true
@@ -336,16 +318,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
-              - type: string
-                enum:
-                  - HostedAgents=V1Preview
-              - type: string
-                enum:
-                  - WorkflowAgents=V1Preview
+            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
         - name: agent_name
           in: path
           required: true
@@ -5178,6 +5151,15 @@ components:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
+    AgentDefinitionFeatureKeys:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - ContainerAgents=V1Preview
+            - HostedAgents=V1Preview
+            - WorkflowAgents=V1Preview
+      description: Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents.
     AgentKind:
       anyOf:
         - type: string

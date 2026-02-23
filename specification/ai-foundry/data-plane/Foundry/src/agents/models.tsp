@@ -7,9 +7,9 @@ namespace Azure.AI.Projects;
 
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
-    FoundryFeaturesOptInKeys.hosted_agents_v1_preview,
-    FoundryFeaturesOptInKeys.container_agents_v1_preview,
-    FoundryFeaturesOptInKeys.workflow_agents_v1_preview
+    AgentDefinitionFeatureKeys.hosted_agents_v1_preview,
+    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionFeatureKeys.workflow_agents_v1_preview
   ],
 };
 
@@ -220,7 +220,7 @@ model PromptAgentDefinitionTextOptions {
 @doc("The workflow agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.workflow_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionFeatureKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
@@ -232,7 +232,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
 )
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
@@ -275,7 +275,7 @@ model HostedAgentDefinition extends AgentDefinition {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -369,7 +369,7 @@ model ToolArgumentBinding {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
 union ContainerLogKind {

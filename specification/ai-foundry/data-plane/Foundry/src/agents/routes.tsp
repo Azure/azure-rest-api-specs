@@ -30,7 +30,7 @@ interface Agents {
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview | FoundryFeaturesOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionFeatureKeys,
     CreateAgentRequest,
     AgentObject
   >;
@@ -43,7 +43,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}")
   updateAgent is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview | FoundryFeaturesOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionFeatureKeys,
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -115,7 +115,7 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview | FoundryFeaturesOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionFeatureKeys,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.

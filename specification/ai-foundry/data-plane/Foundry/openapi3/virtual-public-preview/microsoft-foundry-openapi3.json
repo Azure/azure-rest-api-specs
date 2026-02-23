@@ -69,26 +69,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "WorkflowAgents=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionFeatureKeys"
             }
           },
           {
@@ -326,26 +307,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "WorkflowAgents=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionFeatureKeys"
             }
           },
           {
@@ -743,26 +705,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "WorkflowAgents=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionFeatureKeys"
             }
           },
           {
@@ -9426,6 +9369,22 @@
             "WorkflowAgents=V1Preview"
           ]
         }
+      },
+      "AgentDefinitionFeatureKeys": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ContainerAgents=V1Preview",
+              "HostedAgents=V1Preview",
+              "WorkflowAgents=V1Preview"
+            ]
+          }
+        ],
+        "description": "Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents."
       },
       "AgentEvaluation": {
         "type": "object",
