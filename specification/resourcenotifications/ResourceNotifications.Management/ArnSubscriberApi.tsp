@@ -37,11 +37,11 @@ model TenantScope extends Scope {
 
   /** The tenant ID populated by API after validation (from Aux token) */
   @visibility(Lifecycle.Read)
-  tenantId: string;
+  tenantId?: string;
 
   /** The service principal populated by API after validation (from Aux token) */
   @visibility(Lifecycle.Read)
-  servicePrincipal: string;
+  servicePrincipal?: string;
 }
 
 /** Cloud scope configuration */
@@ -54,7 +54,7 @@ model CloudScope extends Scope {
 
   /** The application ID extracted from request, checked against manifest */
   @visibility(Lifecycle.Read)
-  appId: string;
+  appId?: string;
 }
 
 /** Partitioning configuration kind discriminator */
