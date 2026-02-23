@@ -56,6 +56,13 @@ using Azure.AI.Projects;
 @@clientName(ApiError, "OpenAIError");
 
 @@clientName(OpenAI.MCPListToolsToolAnnotations , "McpListToolsToolAnnotations");
+@@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
+@@clientName(OpenAI.MCPTool, "McpTool");
+@@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
+@@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus");
+@@clientName(OpenAI.MCPTool.connector_id, "connectorType");
+@@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
+@@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
