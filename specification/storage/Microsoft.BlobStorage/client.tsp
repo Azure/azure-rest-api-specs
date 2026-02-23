@@ -185,6 +185,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "continuationToken",
   "javascript"
 );
+@@clientName(MaxResultsParameter.maxresults, "maxPageSize", "javascript");
 @@clientName(ListContainersSegmentResponse.maxResults,
   "maxPageSize",
   "javascript"
