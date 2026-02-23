@@ -151,11 +151,11 @@ union TypePropertiesFormat {
 
 @doc("Type properties for a data asset.")
 model DataAssetTypeProperties {
+  @doc("The server endpoint of the data asset.")
+  serverEndpoint?: url;
+
   @doc("The format of the sql table.")
   format?: TypePropertiesFormat;
-
-  @doc("The server endpoint of the sql table.")
-  serverEndpoint?: url;
 
   @doc("The database name of the sql table.")
   databaseName?: string;
@@ -165,6 +165,30 @@ model DataAssetTypeProperties {
 
   @doc("The table name of the sql table.")
   tableName?: string;
+
+  @doc("The container name of the ADLS Gen2 path.")
+  container?: string;
+
+  @doc("The folder path of the ADLS Gen2 path.")
+  folderPath?: string;
+
+  @doc("The file name of the ADLS Gen2 path.")
+  fileName?: string;
+}
+
+@doc("Type properties for an Azure SQL table data asset.")
+model DataAssetAzureSqlTableTypeProperties {
+  ...DataAssetTypeProperties;
+}
+
+@doc("Type properties for an ADLS Gen2 path data asset.")
+model DataAssetAdlsGen2PathTypeProperties {
+  ...DataAssetTypeProperties;
+}
+
+@doc("Type properties for a general data asset.")
+model DataAssetGeneralTypeProperties {
+  ...DataAssetTypeProperties;
 }
 
 @doc("Managed attribute configuration for catalog entities.")
@@ -433,9 +457,6 @@ union DataAssetRelationshipType {
   @doc("Synonym relationship type.")
   Synonym: "Synonym",
 
-  @doc("Parent relationship type.")
-  Parent: "Parent",
-
   string,
 }
 
@@ -549,6 +570,7 @@ union DataAssetType {
 
 @doc("DataAsset.")
 @resource("dataAssets")
+@discriminator("type")
 model DataAsset {
   @doc("The data asset identifier.")
   @key("dataAssetId")
@@ -573,24 +595,53 @@ model DataAsset {
   @doc("A list of classification labels.")
   classifications?: string[];
 
-  @doc("type of the data asset.")
-  type?: DataAssetType;
+  @doc("Type of the data asset.")
+  type: DataAssetType;
 
   @doc("Schema of the asset.")
   schema?: CatalogModelDataAssetSchema[];
-
-  @doc("Data quality score for the data asset.")
-  dataQuality?: float64;
 
   @doc("A redirection link..")
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
   typeProperties?: DataAssetTypeProperties;
+}
+
+@doc("Data asset model that includes lineage details for GetById responses.")
+model DataAssetWithLineage {
+  ...DataAsset;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
   @doc("Lineage information for the asset. See example responses for detailed structure.")
   lineage?: LineageObject;
+}
+
+@doc("Data asset of type Azure SQL Table.")
+model DataAssetAzureSqlTable extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset of type ADLS Gen2 Path.")
+model DataAssetAdlsGen2Path extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset of type General.")
+model DataAssetGeneral extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "General";
+
+  @doc("Type properties of the general asset.")
+  typeProperties?: DataAssetGeneralTypeProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
@@ -601,20 +652,48 @@ model LineageObject {
 
 @doc("DataAsset.")
 @resource("dataAssets")
-model DataAssetResponse {
+model DataAssetResponse is DataAsset;
+
+@doc("Data asset response of type Azure SQL Table.")
+model DataAssetResponseAzureSqlTable extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset response of type ADLS Gen2 Path.")
+model DataAssetResponseAdlsGen2Path extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset response of type General.")
+model DataAssetResponseGeneral extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "General";
+
+  @doc("Type properties of the general asset.")
+  typeProperties?: DataAssetGeneralTypeProperties;
+}
+@doc("DataAsset.")
+@resource("dataAssets")
+@discriminator("type")
+model DataAssetRequest {
   @doc("The data asset identifier.")
   @key("dataAssetId")
   @visibility(Lifecycle.Create)
   id: uuid;
 
-  @doc("myDataProduct.")
+  @doc("Name of the data asset.")
   name: string;
 
   @doc("System data associated with the asset.")
   systemData?: DataAssetSystemData;
-
-  @doc("A description about the relationship.")
-  description?: string;
 
   @doc("Source of the asset.")
   source?: CatalogModelDataAssetSource;
@@ -622,17 +701,8 @@ model DataAssetResponse {
   @doc("Contacts associated with the asset.")
   contacts?: ContactsMap;
 
-  @doc("A list of classification labels.")
-  classifications?: string[];
-
-  @doc("type of the data asset.")
-  type?: DataAssetType;
-
-  @doc("Schema of the asset.")
-  schema?: CatalogModelDataAssetSchema[];
-
-  @doc("Data quality score for the data asset.")
-  dataQuality?: float64;
+  @doc("Type of the data asset.")
+  type: DataAssetType;
 
   @doc("A redirection link..")
   openInUrl?: url;
@@ -640,34 +710,32 @@ model DataAssetResponse {
   @doc("Type properties of the asset.")
   typeProperties?: DataAssetTypeProperties;
 }
-@doc("DataAsset.")
-@resource("dataAssets")
-model DataAssetRequest {
-  @doc("The data asset identifier.")
-  @key("dataAssetId")
-  @visibility(Lifecycle.Create)
-  id: uuid;
 
-  @doc("Name of the asset.")
-  name: string;
+@doc("Data asset request of type Azure SQL Table.")
+model DataAssetRequestAzureSqlTable extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
 
-  @doc("System data associated with the asset.")
-  systemData?: DataAssetSystemData;
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
 
-  @doc("Source of the asset.")
-  source?: CatalogModelDataAssetSource;
+@doc("Data asset request of type ADLS Gen2 Path.")
+model DataAssetRequestAdlsGen2Path extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
 
-  @doc("Contacts associated with the asset.")
-  contacts?: ContactsMap;
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
 
-  @doc("type of the data asset.")
-  type?: DataAssetType;
+@doc("Data asset request of type General.")
+model DataAssetRequestGeneral extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "General";
 
-  @doc("A redirection link..")
-  openInUrl?: url;
-
-  @doc("Type properties of the asset.")
-  typeProperties?: DataAssetTypeProperties;
+  @doc("Type properties of the general asset.")
+  typeProperties?: DataAssetGeneralTypeProperties;
 }
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
@@ -1634,7 +1702,7 @@ model CreateDataAssetResponse {
 
   @doc("The request body containing query criteria.")
   @bodyRoot
-  body: DataAssetRequest;
+  body: DataAssetResponse;
 }
 
 alias DataAssetIdParameter = {

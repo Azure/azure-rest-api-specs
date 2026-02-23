@@ -331,7 +331,7 @@ interface DataAssets {
       @query
       includeLineage: boolean;
     },
-    DataAsset
+    DataAssetWithLineage
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -346,7 +346,7 @@ interface DataAssets {
       @bodyRoot
       dataAsset: DataAssetRequest;
     },
-    DataAssetRequest
+    DataAssetResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."

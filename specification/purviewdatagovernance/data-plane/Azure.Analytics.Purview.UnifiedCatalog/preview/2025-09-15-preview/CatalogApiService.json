@@ -1219,7 +1219,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/DataAssetRequest"
+              "$ref": "#/definitions/DataAssetResponse"
             }
           },
           "default": {
@@ -1280,7 +1280,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataAsset"
+              "$ref": "#/definitions/DataAssetWithLineage"
             }
           },
           "default": {
@@ -1334,7 +1334,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataAssetRequest"
+              "$ref": "#/definitions/DataAssetResponse"
             }
           },
           "default": {
@@ -5483,78 +5483,122 @@
         "value"
       ]
     },
-    "DataAsset": {
+    "DataAssetAdlsGen2PathTypeProperties": {
       "type": "object",
-      "description": "DataAsset.",
+      "description": "Type properties for an ADLS Gen2 path data asset.",
       "properties": {
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The data asset identifier.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the data asset."
-        },
-        "systemData": {
-          "$ref": "#/definitions/DataAssetSystemData",
-          "description": "System data associated with the asset."
-        },
-        "description": {
-          "type": "string",
-          "description": "A description about the relationship."
-        },
-        "source": {
-          "$ref": "#/definitions/CatalogModelDataAssetSource",
-          "description": "Source of the asset."
-        },
-        "contacts": {
-          "$ref": "#/definitions/ContactsMap",
-          "description": "Contacts associated with the asset."
-        },
-        "classifications": {
-          "type": "array",
-          "description": "A list of classification labels.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "$ref": "#/definitions/DataAssetType",
-          "description": "type of the data asset."
-        },
-        "schema": {
-          "type": "array",
-          "description": "Schema of the asset.",
-          "items": {
-            "$ref": "#/definitions/CatalogModelDataAssetSchema"
-          }
-        },
-        "dataQuality": {
-          "type": "number",
-          "format": "double",
-          "description": "Data quality score for the data asset."
-        },
-        "openInUrl": {
+        "serverEndpoint": {
           "type": "string",
           "format": "uri",
-          "description": "A redirection link.."
+          "description": "The server endpoint of the data asset."
         },
-        "typeProperties": {
-          "$ref": "#/definitions/DataAssetTypeProperties",
-          "description": "Type properties of the asset."
+        "format": {
+          "$ref": "#/definitions/TypePropertiesFormat",
+          "description": "The format of the sql table."
         },
-        "lineage": {
-          "$ref": "#/definitions/LineageObject",
-          "description": "Lineage information for the asset. See example responses for detailed structure."
+        "databaseName": {
+          "type": "string",
+          "description": "The database name of the sql table."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name of the sql table."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the sql table."
+        },
+        "container": {
+          "type": "string",
+          "description": "The container name of the ADLS Gen2 path."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the ADLS Gen2 path."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name of the ADLS Gen2 path."
         }
-      },
-      "required": [
-        "id",
-        "name"
-      ]
+      }
+    },
+    "DataAssetAzureSqlTableTypeProperties": {
+      "type": "object",
+      "description": "Type properties for an Azure SQL table data asset.",
+      "properties": {
+        "serverEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The server endpoint of the data asset."
+        },
+        "format": {
+          "$ref": "#/definitions/TypePropertiesFormat",
+          "description": "The format of the sql table."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name of the sql table."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name of the sql table."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the sql table."
+        },
+        "container": {
+          "type": "string",
+          "description": "The container name of the ADLS Gen2 path."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the ADLS Gen2 path."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name of the ADLS Gen2 path."
+        }
+      }
+    },
+    "DataAssetGeneralTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a general data asset.",
+      "properties": {
+        "serverEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The server endpoint of the data asset."
+        },
+        "format": {
+          "$ref": "#/definitions/TypePropertiesFormat",
+          "description": "The format of the sql table."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name of the sql table."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name of the sql table."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the sql table."
+        },
+        "container": {
+          "type": "string",
+          "description": "The container name of the ADLS Gen2 path."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the ADLS Gen2 path."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name of the ADLS Gen2 path."
+        }
+      }
     },
     "DataAssetProperties": {
       "type": "object",
@@ -5677,8 +5721,7 @@
       "description": "The type of relationship between data assets.",
       "enum": [
         "Related",
-        "Synonym",
-        "Parent"
+        "Synonym"
       ],
       "x-ms-enum": {
         "name": "DataAssetRelationshipType",
@@ -5693,11 +5736,6 @@
             "name": "Synonym",
             "value": "Synonym",
             "description": "Synonym relationship type."
-          },
-          {
-            "name": "Parent",
-            "value": "Parent",
-            "description": "Parent relationship type."
           }
         ]
       }
@@ -5715,7 +5753,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the asset."
+          "description": "Name of the data asset."
         },
         "systemData": {
           "$ref": "#/definitions/DataAssetSystemData",
@@ -5731,7 +5769,7 @@
         },
         "type": {
           "$ref": "#/definitions/DataAssetType",
-          "description": "type of the data asset."
+          "description": "Type of the data asset."
         },
         "openInUrl": {
           "type": "string",
@@ -5743,10 +5781,60 @@
           "description": "Type properties of the asset."
         }
       },
+      "discriminator": "type",
       "required": [
         "id",
-        "name"
+        "name",
+        "type"
       ]
+    },
+    "DataAssetRequestAdlsGen2Path": {
+      "type": "object",
+      "description": "Data asset request of type ADLS Gen2 Path.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetAdlsGen2PathTypeProperties",
+          "description": "Type properties of the ADLS Gen2 path asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "ADLSGen2Path"
+    },
+    "DataAssetRequestAzureSqlTable": {
+      "type": "object",
+      "description": "Data asset request of type Azure SQL Table.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetAzureSqlTableTypeProperties",
+          "description": "Type properties of the Azure SQL table asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSqlTable"
+    },
+    "DataAssetRequestGeneral": {
+      "type": "object",
+      "description": "Data asset request of type General.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetGeneralTypeProperties",
+          "description": "Type properties of the general asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "General"
     },
     "DataAssetResponse": {
       "type": "object",
@@ -5761,7 +5849,7 @@
         },
         "name": {
           "type": "string",
-          "description": "myDataProduct."
+          "description": "Name of the data asset."
         },
         "systemData": {
           "$ref": "#/definitions/DataAssetSystemData",
@@ -5788,7 +5876,7 @@
         },
         "type": {
           "$ref": "#/definitions/DataAssetType",
-          "description": "type of the data asset."
+          "description": "Type of the data asset."
         },
         "schema": {
           "type": "array",
@@ -5796,11 +5884,6 @@
           "items": {
             "$ref": "#/definitions/CatalogModelDataAssetSchema"
           }
-        },
-        "dataQuality": {
-          "type": "number",
-          "format": "double",
-          "description": "Data quality score for the data asset."
         },
         "openInUrl": {
           "type": "string",
@@ -5812,10 +5895,60 @@
           "description": "Type properties of the asset."
         }
       },
+      "discriminator": "type",
       "required": [
         "id",
-        "name"
+        "name",
+        "type"
       ]
+    },
+    "DataAssetResponseAdlsGen2Path": {
+      "type": "object",
+      "description": "Data asset response of type ADLS Gen2 Path.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetAdlsGen2PathTypeProperties",
+          "description": "Type properties of the ADLS Gen2 path asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "ADLSGen2Path"
+    },
+    "DataAssetResponseAzureSqlTable": {
+      "type": "object",
+      "description": "Data asset response of type Azure SQL Table.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetAzureSqlTableTypeProperties",
+          "description": "Type properties of the Azure SQL table asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSqlTable"
+    },
+    "DataAssetResponseGeneral": {
+      "type": "object",
+      "description": "Data asset response of type General.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetGeneralTypeProperties",
+          "description": "Type properties of the general asset."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "General"
     },
     "DataAssetSystemData": {
       "type": "object",
@@ -5888,14 +6021,14 @@
       "type": "object",
       "description": "Type properties for a data asset.",
       "properties": {
-        "format": {
-          "$ref": "#/definitions/TypePropertiesFormat",
-          "description": "The format of the sql table."
-        },
         "serverEndpoint": {
           "type": "string",
           "format": "uri",
-          "description": "The server endpoint of the sql table."
+          "description": "The server endpoint of the data asset."
+        },
+        "format": {
+          "$ref": "#/definitions/TypePropertiesFormat",
+          "description": "The format of the sql table."
         },
         "databaseName": {
           "type": "string",
@@ -5908,8 +6041,89 @@
         "tableName": {
           "type": "string",
           "description": "The table name of the sql table."
+        },
+        "container": {
+          "type": "string",
+          "description": "The container name of the ADLS Gen2 path."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "The folder path of the ADLS Gen2 path."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name of the ADLS Gen2 path."
         }
       }
+    },
+    "DataAssetWithLineage": {
+      "type": "object",
+      "description": "Data asset model that includes lineage details for GetById responses.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the data asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/DataAssetSystemData",
+          "description": "System data associated with the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description about the relationship."
+        },
+        "source": {
+          "$ref": "#/definitions/CatalogModelDataAssetSource",
+          "description": "Source of the asset."
+        },
+        "contacts": {
+          "$ref": "#/definitions/ContactsMap",
+          "description": "Contacts associated with the asset."
+        },
+        "classifications": {
+          "type": "array",
+          "description": "A list of classification labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/DataAssetType",
+          "description": "Type of the data asset."
+        },
+        "schema": {
+          "type": "array",
+          "description": "Schema of the asset.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataAssetSchema"
+          }
+        },
+        "openInUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A redirection link.."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/DataAssetTypeProperties",
+          "description": "Type properties of the asset."
+        },
+        "lineage": {
+          "$ref": "#/definitions/LineageObject",
+          "description": "Lineage information for the asset. See example responses for detailed structure."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "DataAssetsResponse": {
       "type": "object",
