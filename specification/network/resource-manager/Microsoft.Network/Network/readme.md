@@ -105,7 +105,7 @@ input-file:
   - stable/2025-07-01/vmssNetworkInterface.json
   - stable/2025-07-01/vmssPublicIpAddress.json
   - stable/2025-07-01/webapplicationfirewall.json
- suppressions:
+suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
