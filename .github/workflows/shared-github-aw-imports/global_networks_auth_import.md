@@ -92,7 +92,9 @@ steps:
       fi
 
       gh config set prompt disabled >/dev/null
+      pushd "${GITHUB_WORKSPACE}" >/dev/null
       gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
+      popd >/dev/null
 ---
 
 ## Workflow Behavior

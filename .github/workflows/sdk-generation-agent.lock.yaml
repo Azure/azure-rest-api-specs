@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"706e1bb5775d357a7bcc02947d319250cfd73fd9d21f158f08b64dc99bb08103","compiler_version":"v0.49.4"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"6d6f4a46117b7aaf1bc73a5241f4829d9f1d260e3e7cf383af5dbda37904c213","compiler_version":"v0.49.4"}
 
 name: "SDK Generation Agent"
 "on":
@@ -183,10 +183,10 @@ jobs:
           </system>
           GH_AW_PROMPT_EOF
           cat << 'GH_AW_PROMPT_EOF'
-          {{#runtime-import shared-github-aw-imports/global_networks_auth_import.md}}
+          {{#runtime-import shared-github-aw-imports/install_azsdk_cli_import.md}}
           GH_AW_PROMPT_EOF
           cat << 'GH_AW_PROMPT_EOF'
-          {{#runtime-import shared-github-aw-imports/install_azsdk_cli_import.md}}
+          {{#runtime-import shared-github-aw-imports/global_networks_auth_import.md}}
           GH_AW_PROMPT_EOF
           cat << 'GH_AW_PROMPT_EOF'
           {{#runtime-import .github/workflows/sdk-generation-agent.md}}
@@ -288,6 +288,13 @@ jobs:
           destination: /opt/gh-aw/actions
       - name: Create gh-aw temp directory
         run: bash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+      - name: Install azsdk mcp server
+        run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory /tmp/bin
+        shell: pwsh
       - id: oidc
         name: Acquire OIDC token for Azure
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
@@ -336,15 +343,10 @@ jobs:
           fi
 
           gh config set prompt disabled >/dev/null
+          pushd "${GITHUB_WORKSPACE}" >/dev/null
           gh aw secrets set COPILOT_GITHUB_TOKEN --value "${COPILOT_GITHUB_TOKEN}"
+          popd >/dev/null
         shell: bash
-      - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          persist-credentials: false
-      - name: Install azsdk mcp server
-        run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory /tmp/bin
-        shell: pwsh
 
       - name: Configure Git credentials
         env:
