@@ -49,8 +49,6 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB");
 
-@@clientName(OpenAI.ImageGenTool.size.)
-
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
