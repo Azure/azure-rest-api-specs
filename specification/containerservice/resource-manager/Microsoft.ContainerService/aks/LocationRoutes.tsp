@@ -82,6 +82,9 @@ interface VmSkusOperationGroup {
   list is ArmProviderActionSync<
     Response = VmSkusListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter & IncludeExtendedLocationsParameter
+    Parameters = {
+      ...LocationResourceParameter;
+      ...IncludeExtendedLocationsParameter;
+    }
   >;
 }
