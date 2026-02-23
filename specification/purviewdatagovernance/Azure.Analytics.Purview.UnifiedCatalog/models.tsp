@@ -275,12 +275,23 @@ union EntityCategory {
 }
 
 @doc("Ordering configuration for API service results.")
+union CatalogApiServiceOrderDirection {
+  @doc("Ascending sort direction (long form).")
+  Ascending: "ascending",
+
+  @doc("Descending sort direction (long form).")
+  Descending: "descending",
+
+  string,
+}
+
+@doc("Ordering configuration for API service results.")
 model CatalogApiServiceOrderBy {
   @doc("The field name to order by.")
   field?: string;
 
   @doc("The sort direction (ascending or descending).")
-  direction?: string;
+  direction?: CatalogApiServiceOrderDirection;
 }
 
 @doc("Filter configuration for searching managed attributes.")
@@ -592,7 +603,7 @@ model DataAsset {
   @doc("Schema of the asset.")
   schema?: CatalogModelDataAssetSchema[];
 
-  @doc("A redirection link..")
+  @doc("A redirection link.")
   openInUrl?: url;
 }
 
@@ -711,7 +722,7 @@ model DataAssetRequest {
   @doc("Type of the data asset.")
   type: DataAssetType;
 
-  @doc("A redirection link..")
+  @doc("A redirection link.")
   openInUrl?: url;
 }
 
