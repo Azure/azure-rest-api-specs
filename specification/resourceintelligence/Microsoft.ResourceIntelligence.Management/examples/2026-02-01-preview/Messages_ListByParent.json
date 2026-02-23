@@ -18,7 +18,7 @@
             "name": "msg-001",
             "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
             "properties": {
-              "messageType": "user_message",
+              "type": "user_message",
               "source": "user",
               "content": "Show me all virtual machines in this subscription",
               "timestamp": "2026-02-01T12:00:00Z"
@@ -34,7 +34,7 @@
             "name": "msg-002",
             "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
             "properties": {
-              "messageType": "tool_call",
+              "type": "tool_call",
               "source": "actor",
               "content": "{\"toolCallId\": \"call-001\", \"toolName\": \"azure_resource_graph_query\", \"arguments\": \"{\\\"query\\\": \\\"Resources | where type =~ 'Microsoft.Compute/virtualMachines'\\\"}\"}",
               "timestamp": "2026-02-01T12:00:05Z"
@@ -50,7 +50,7 @@
             "name": "msg-003",
             "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
             "properties": {
-              "messageType": "assistant_message",
+              "type": "assistant_message",
               "source": "actor",
               "content": "I found 2 virtual machines in your subscription:\n\n1. **vm-web-01** - located in East US\n2. **vm-db-01** - located in East US",
               "timestamp": "2026-02-01T12:00:15Z"
