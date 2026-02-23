@@ -511,7 +511,7 @@ model CatalogModelDataAssetSource {
   @doc("Link to the data map asset ID.")
   assetId?: uuid;
 
-  @doc("Data map asset type. Example: adls_gen2_path")
+  @doc("Data map asset type. Example: adls_gen2_path, azure_sql_table, etc.")
   assetType?: string;
 
   @doc("Type properties of the asset.")
