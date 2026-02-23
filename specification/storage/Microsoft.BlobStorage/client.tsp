@@ -389,3 +389,4 @@ enum ImmutabilityPolicySetting {
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
 @@alternateType(Storage.Blob.UserDelegationKey.signedExpiry, string, "python");
 @@alternateType(Storage.Blob.UserDelegationKey.value, string, "python");
+@@alternateType(Storage.Blob.Block.name, string, "python");
