@@ -287,7 +287,6 @@
             "name": "environmentEnvelope",
             "in": "body",
             "description": "Configuration details of the connectedEnvironment.",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
             }
@@ -427,11 +426,7 @@
             "daprAIConnectionString": {
               "type": "string",
               "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
-              "x-ms-secret": true,
-              "x-ms-mutability": [
-                "create",
-                "update"
-              ]
+              "x-ms-secret": true
             },
             "customDomainConfiguration": {
               "$ref": "./CommonDefinitions.json#/definitions/CustomDomainConfiguration",

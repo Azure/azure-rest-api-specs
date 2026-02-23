@@ -54,9 +54,9 @@
             "$ref": "#/parameters/ContainerAppsNameParameter"
           },
           {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation. For example, filter=properties/patchApplyStatus eq 'Succeeded'",
+            "description": "The filter to apply on the operation. For example, $filter=properties/patchApplyStatus eq 'Succeeded'",
             "required": false,
             "type": "string"
           }
@@ -83,7 +83,7 @@
             "$ref": "./examples/ContainerAppsPatches_ListByContainerApp.json"
           }
         },
-        "x-ms-odata": "#/definitions/ContainerAppsPatchResource"
+        "x-ms-odata": "#/definitions/ContainerAppsContainerAppsPatchResource"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/patches/{patchName}": {
