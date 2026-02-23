@@ -1,0 +1,28 @@
+{
+  "operationId": "Agents_Run",
+  "title": "Create a new thread and run for an agent",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "agentName": "myAgent",
+    "body": {
+      "message": "Show me all virtual machines in this subscription",
+      "allowToolUse": "enabled",
+      "resumePolicy": "none"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/550e8400-e29b-41d4-a716-446655440000/threadRuns/6fa459ea-ee8a-3ca4-894e-db77e160355e?api-version=2026-02-01-preview",
+        "Retry-After": "5"
+      },
+      "body": {
+        "threadId": "550e8400-e29b-41d4-a716-446655440000",
+        "runId": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
+        "status": "running"
+      }
+    }
+  }
+}

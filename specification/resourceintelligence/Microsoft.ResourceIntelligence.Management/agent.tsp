@@ -63,12 +63,7 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Agent>;
-
-  /**
-   * Updates an agent.
-   */
-  update is ArmResourcePatchSync<Agent, AgentProperties>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
    * Deletes an agent.
@@ -84,4 +79,10 @@ interface Agents {
    * Lists agents in a subscription.
    */
   listBySubscription is ArmListBySubscription<Agent>;
+
+  /**
+   * Creates a new thread and run for the agent. Returns 202 Accepted with run tracking info.
+   * The client should poll GET threadRuns/{runId} for completion.
+   */
+  run is ArmResourceActionAsync<Agent, ThreadRunRequest, ThreadRunResponse>;
 }

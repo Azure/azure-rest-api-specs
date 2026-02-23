@@ -51,6 +51,9 @@
       "name": "ThreadRuns"
     },
     {
+      "name": "LatestThreadRuns"
+    },
+    {
       "name": "Messages"
     }
   ],
@@ -263,17 +266,6 @@
             "description": "Resource 'Agent' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Agent"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -286,65 +278,6 @@
         "x-ms-examples": {
           "Create or update an Agent": {
             "$ref": "./examples/Agents_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Agent"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Agents_Update",
-        "tags": [
-          "Agents"
-        ],
-        "description": "Updates an agent.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgentUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update an Agent": {
-            "$ref": "./examples/Agents_Update.json"
           }
         }
       },
@@ -392,6 +325,81 @@
             "$ref": "./examples/Agents_Delete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/run": {
+      "post": {
+        "operationId": "Agents_Run",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Creates a new thread and run for the agent. Returns 202 Accepted with run tracking info.\nThe client should poll GET threadRuns/{runId} for completion.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreadRunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThreadRunResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new thread and run for an agent": {
+            "$ref": "./examples/Agents_Run.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ThreadRunResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads": {
@@ -676,6 +684,87 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "operationId": "Threads_CreateRun",
+        "tags": [
+          "Threads"
+        ],
+        "description": "Creates a new run on an existing thread. Returns 202 Accepted with run tracking info.\nThe client should poll GET threadRuns/{runId} for completion.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The unique identifier of the thread.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThreadRunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThreadRunResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a run on an existing thread": {
+            "$ref": "./examples/Threads_CreateRun.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ThreadRunResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads/{threadId}/threadRuns/{runId}": {
@@ -737,6 +826,67 @@
         "x-ms-examples": {
           "Get a ThreadRun": {
             "$ref": "./examples/ThreadRuns_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ThreadRuns_Delete",
+        "tags": [
+          "ThreadRuns"
+        ],
+        "description": "Deletes a thread run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The unique identifier of the thread.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The unique identifier of the thread run.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a ThreadRun": {
+            "$ref": "./examples/ThreadRuns_Delete.json"
           }
         }
       }
@@ -877,6 +1027,129 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/threads/{threadId}/threadRuns/latest": {
+      "get": {
+        "operationId": "LatestThreadRuns_Get",
+        "tags": [
+          "LatestThreadRuns"
+        ],
+        "description": "Gets the latest thread run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The unique identifier of the thread.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LatestThreadRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest thread run": {
+            "$ref": "./examples/LatestThreadRuns_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LatestThreadRuns_CreateOrUpdate",
+        "tags": [
+          "LatestThreadRuns"
+        ],
+        "description": "Creates or updates a thread run via PUT for ARM/Bicep compatibility.\nThe \"latest\" name is a logical identifier — the actual run ID is generated server-side.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "The unique identifier of the thread.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LatestThreadRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LatestThreadRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LatestThreadRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'LatestThreadRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LatestThreadRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a thread run via PUT (ARM/Bicep compatibility)": {
+            "$ref": "./examples/LatestThreadRuns_CreateOrUpdate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -935,39 +1208,29 @@
         }
       }
     },
-    "AgentUpdate": {
-      "type": "object",
-      "description": "An AI Agent resource that can execute runs within threads.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AgentProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
+    "AllowToolUse": {
+      "type": "string",
+      "description": "Whether tool invocation is permitted during a thread run.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AllowToolUse",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Tool invocation is enabled during the run"
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Tool invocation is disabled during the run"
           }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
+        ]
+      }
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -998,6 +1261,21 @@
           }
         ]
       }
+    },
+    "LatestThreadRun": {
+      "type": "object",
+      "description": "Singleton resource representing the latest thread run.\nProvides PUT endpoint for ARM/Bicep compatibility at threadRuns/latest.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreadRunProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Message": {
       "type": "object",
@@ -1146,6 +1424,42 @@
         ]
       }
     },
+    "ResumePolicy": {
+      "type": "string",
+      "description": "The resume policy for a thread run.",
+      "enum": [
+        "none",
+        "resume",
+        "pause",
+        "cancel"
+      ],
+      "x-ms-enum": {
+        "name": "ResumePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "No specific policy — default behavior, starts the thread run"
+          },
+          {
+            "name": "Resume",
+            "value": "resume",
+            "description": "Resume the thread run"
+          },
+          {
+            "name": "Pause",
+            "value": "pause",
+            "description": "Pause the thread run"
+          },
+          {
+            "name": "Cancel",
+            "value": "cancel",
+            "description": "Cancel the thread run"
+          }
+        ]
+      }
+    },
     "Thread": {
       "type": "object",
       "description": "A conversation thread for an agent. Tracks message history and run state.",
@@ -1236,7 +1550,7 @@
     },
     "ThreadRunProperties": {
       "type": "object",
-      "description": "Properties of a ThreadRun resource.\nBased on AgentBuilder.md design and C# ThreadRunProperties contract.",
+      "description": "Properties of a ThreadRun resource.",
       "properties": {
         "startTime": {
           "type": "string",
@@ -1257,16 +1571,69 @@
         }
       }
     },
+    "ThreadRunRequest": {
+      "type": "object",
+      "description": "Request body for creating and running a thread.",
+      "properties": {
+        "allowToolUse": {
+          "$ref": "#/definitions/AllowToolUse",
+          "description": "Whether tool invocation is permitted during the run. Defaults to enabled."
+        },
+        "resumePolicy": {
+          "$ref": "#/definitions/ResumePolicy",
+          "description": "The resume policy for the run. Defaults to none."
+        },
+        "inputOverrides": {
+          "type": "object",
+          "description": "Optional input overrides as key-value pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The input message from the user."
+        },
+        "model": {
+          "type": "string",
+          "description": "Optional model URL override. When specified, this URL is used for all agents\ninstead of the model URL from the agent definitions.",
+          "x-ms-client-name": "modelUrl"
+        }
+      }
+    },
+    "ThreadRunResponse": {
+      "type": "object",
+      "description": "Response body returned when a thread run is accepted.",
+      "properties": {
+        "threadId": {
+          "type": "string",
+          "description": "The ID of the thread."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The ID of the created run."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the run."
+        }
+      },
+      "required": [
+        "threadId",
+        "runId",
+        "status"
+      ]
+    },
     "ThreadStatus": {
       "type": "string",
       "description": "The lifecycle status of a thread.",
       "enum": [
-        "Idle",
-        "Running",
-        "Paused",
-        "AwaitingInput",
-        "Completed",
-        "Failed"
+        "idle",
+        "running",
+        "paused",
+        "awaitingInput",
+        "completed",
+        "failed"
       ],
       "x-ms-enum": {
         "name": "ThreadStatus",
@@ -1274,32 +1641,32 @@
         "values": [
           {
             "name": "Idle",
-            "value": "Idle",
+            "value": "idle",
             "description": "The thread is idle and not currently running"
           },
           {
             "name": "Running",
-            "value": "Running",
+            "value": "running",
             "description": "The thread is actively running"
           },
           {
             "name": "Paused",
-            "value": "Paused",
+            "value": "paused",
             "description": "The thread execution is paused"
           },
           {
             "name": "AwaitingInput",
-            "value": "AwaitingInput",
+            "value": "awaitingInput",
             "description": "The thread is awaiting user input"
           },
           {
             "name": "Completed",
-            "value": "Completed",
+            "value": "completed",
             "description": "The thread has completed execution"
           },
           {
             "name": "Failed",
-            "value": "Failed",
+            "value": "failed",
             "description": "The thread execution failed"
           }
         ]

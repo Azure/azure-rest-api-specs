@@ -72,4 +72,11 @@ interface Threads {
    * Lists threads for an agent.
    */
   listByParent is ArmResourceListByParent<Thread>;
+
+  /**
+   * Creates a new run on an existing thread. Returns 202 Accepted with run tracking info.
+   * The client should poll GET threadRuns/{runId} for completion.
+   */
+  @action("threadRuns")
+  createRun is ArmResourceActionAsync<Thread, ThreadRunRequest, ThreadRunResponse>;
 }

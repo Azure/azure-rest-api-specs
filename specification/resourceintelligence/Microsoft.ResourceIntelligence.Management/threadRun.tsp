@@ -32,7 +32,6 @@ model ThreadRun is ProxyResource<ThreadRunProperties> {
 
 /**
  * Properties of a ThreadRun resource.
- * Based on AgentBuilder.md design and C# ThreadRunProperties contract.
  */
 model ThreadRunProperties {
   /**
@@ -66,7 +65,47 @@ interface ThreadRuns {
   get is ArmResourceRead<ThreadRun>;
 
   /**
+   * Deletes a thread run.
+   */
+  delete is ArmResourceDeleteSync<ThreadRun>;
+
+  /**
    * Lists thread runs for a thread.
    */
   listByParent is ArmResourceListByParent<ThreadRun>;
+}
+
+// ============================================
+// LATEST THREAD RUN (SINGLETON)
+// ============================================
+
+/**
+ * Singleton resource representing the latest thread run.
+ * Provides PUT endpoint for ARM/Bicep compatibility at threadRuns/latest.
+ */
+@parentResource(Thread)
+@singleton("latest")
+model LatestThreadRun is ProxyResource<ThreadRunProperties> {
+  /**
+   * The name of the singleton resource (always "latest").
+   */
+  @key("runId")
+  @segment("threadRuns")
+  @pattern("^latest$")
+  @path
+  name: string;
+}
+
+@armResourceOperations
+interface LatestThreadRuns {
+  /**
+   * Gets the latest thread run.
+   */
+  get is ArmResourceRead<LatestThreadRun>;
+
+  /**
+   * Creates or updates a thread run via PUT for ARM/Bicep compatibility.
+   * The "latest" name is a logical identifier — the actual run ID is generated server-side.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LatestThreadRun>;
 }
