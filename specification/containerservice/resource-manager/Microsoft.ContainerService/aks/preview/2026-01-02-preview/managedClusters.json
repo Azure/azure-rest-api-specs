@@ -7860,6 +7860,10 @@
         "driverType": {
           "$ref": "#/definitions/DriverType",
           "description": "Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility."
+        },
+        "nvidia": {
+          "$ref": "#/definitions/NvidiaGPUProfile",
+          "description": "NVIDIA-specific GPU settings."
         }
       }
     },
@@ -12377,6 +12381,30 @@
         }
       }
     },
+    "ManagementMode": {
+      "type": "string",
+      "description": "The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.",
+      "enum": [
+        "Unmanaged",
+        "Managed"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unmanaged",
+            "value": "Unmanaged",
+            "description": "Managed GPU experience is disabled for NVIDIA GPUs."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed GPU experience is enabled for NVIDIA GPUs."
+          }
+        ]
+      }
+    },
     "ManualScaleProfile": {
       "type": "object",
       "description": "Specifications on number of machines.",
@@ -12667,6 +12695,36 @@
           "$ref": "#/definitions/MeshRevision"
         }
       ]
+    },
+    "MigStrategy": {
+      "type": "string",
+      "description": "Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.",
+      "enum": [
+        "None",
+        "Single",
+        "Mixed"
+      ],
+      "x-ms-enum": {
+        "name": "MigStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Don't set a MIG strategy. If you previously had one set, this will override it and set remove the set MIG strategy."
+          },
+          {
+            "name": "Single",
+            "value": "Single",
+            "description": "Set the MIG strategy for managed MIG as single."
+          },
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Set the MIG strategy for managed MIG as mixed."
+          }
+        ]
+      }
     },
     "Mode": {
       "type": "string",
@@ -13174,6 +13232,20 @@
             "description": "Nodes are provisioned automatically by AKS using Karpenter (See aka.ms/aks/nap for more details). Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
           }
         ]
+      }
+    },
+    "NvidiaGPUProfile": {
+      "type": "object",
+      "description": "NVIDIA-specific GPU settings",
+      "properties": {
+        "managementMode": {
+          "$ref": "#/definitions/ManagementMode",
+          "description": "The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu."
+        },
+        "migStrategy": {
+          "$ref": "#/definitions/MigStrategy",
+          "description": "Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None."
+        }
       }
     },
     "OSDiskType": {

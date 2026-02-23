@@ -549,6 +549,47 @@ union DriverType {
 }
 
 /**
+ * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
+ */
+@added(Versions.v2026_01_02_preview)
+union ManagementMode {
+  string,
+
+  /**
+   * Managed GPU experience is disabled for NVIDIA GPUs.
+   */
+  Unmanaged: "Unmanaged",
+
+  /**
+   * Managed GPU experience is enabled for NVIDIA GPUs.
+   */
+  Managed: "Managed",
+}
+
+/**
+ * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
+ */
+@added(Versions.v2026_01_02_preview)
+union MigStrategy {
+  string,
+
+  /**
+   * Don't set a MIG strategy. If you previously had one set, this will override it and set remove the set MIG strategy.
+   */
+  None: "None",
+
+  /**
+   * Set the MIG strategy for managed MIG as single.
+   */
+  Single: "Single",
+
+  /**
+   * Set the MIG strategy for managed MIG as mixed.
+   */
+  Mixed: "Mixed",
+}
+
+/**
  * Mode of enablement for localDNS.
  */
 union LocalDNSMode {

@@ -835,6 +835,28 @@ model GPUProfile {
    */
   @added(Versions.v2026_01_02_preview)
   driverType?: DriverType;
+
+  /**
+   * NVIDIA-specific GPU settings.
+   */
+  @added(Versions.v2026_01_02_preview)
+  nvidia?: NvidiaGPUProfile;
+}
+
+/**
+ * NVIDIA-specific GPU settings
+ */
+@added(Versions.v2026_01_02_preview)
+model NvidiaGPUProfile {
+  /**
+   * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
+   */
+  managementMode?: ManagementMode;
+
+  /**
+   * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
+   */
+  migStrategy?: MigStrategy;
 }
 
 /**
