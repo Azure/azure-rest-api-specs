@@ -2230,6 +2230,52 @@
           "type": "string",
           "format": "date-time",
           "description": "The collection last modified timestamp."
+        },
+        "criticalErrors": {
+          "type": "array",
+          "description": "The list of critical errors.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "criticalErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of critical errors."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The list of warnings.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "warningsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of warnings."
+        },
+        "informationalMessages": {
+          "type": "array",
+          "description": "The list of informational messages.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "informationalMessagesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of informational messages."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2452,6 +2498,96 @@
           "type": "integer",
           "format": "int64",
           "description": "The number of collections in the database."
+        },
+        "numberOfIndexes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of indexes in the database."
+        },
+        "numberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents in the database."
+        },
+        "averageDocumentSizeInBytes": {
+          "type": "number",
+          "format": "float",
+          "description": "The average document size in bytes."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The database creation timestamp."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The database last modified timestamp."
+        },
+        "collections": {
+          "type": "array",
+          "description": "List of collection names in the database.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usesGridFs": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the database uses GridFS for file storage."
+        },
+        "storageEngine": {
+          "type": "string",
+          "description": "The database storage engine."
+        },
+        "shardingConfig": {
+          "type": "string",
+          "description": "The database sharding configuration."
+        },
+        "criticalErrors": {
+          "type": "array",
+          "description": "The list of critical errors.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "criticalErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of critical errors."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The list of warnings.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "warningsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of warnings."
+        },
+        "informationalMessages": {
+          "type": "array",
+          "description": "The list of informational messages.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "informationalMessagesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of informational messages."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2520,12 +2656,7 @@
           "format": "int64",
           "description": "The sockets count."
         }
-      },
-      "required": [
-        "vCores",
-        "allocatedMemoryInMb",
-        "storageInMb"
-      ]
+      }
     },
     "MongoInstance": {
       "type": "object",
@@ -2760,6 +2891,33 @@
           "type": "string",
           "description": "The Server IP/host name."
         },
+        "hostIp": {
+          "type": "array",
+          "description": "The Server IP/host name.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                }
+              ]
+            }
+          }
+        },
+        "hostMachineProperties": {
+          "$ref": "#/definitions/MongoHostMachineProperties",
+          "description": "The host machine properties."
+        },
         "portNumber": {
           "type": "integer",
           "format": "int32",
@@ -2768,6 +2926,129 @@
         "version": {
           "type": "string",
           "description": "The mongo server version."
+        },
+        "home": {
+          "type": "string",
+          "description": "The home directory of mongo installation."
+        },
+        "region": {
+          "type": "string",
+          "description": "The mongo server region."
+        },
+        "numberOfDatabases": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of databases."
+        },
+        "supportStatus": {
+          "$ref": "#/definitions/SupportStatus",
+          "description": "mongo version support status."
+        },
+        "edition": {
+          "$ref": "#/definitions/Edition",
+          "description": "Mongo instance edition."
+        },
+        "endOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Time when mongo instance version support end."
+        },
+        "criticalErrors": {
+          "type": "array",
+          "description": "The list of critical errors.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "criticalErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of critical errors."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The list of warnings.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "warningsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of warnings."
+        },
+        "informationalMessages": {
+          "type": "array",
+          "description": "The list of informational messages.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "informationalMessagesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of informational messages."
+        },
+        "storageSizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets storage size of Mongo instance."
+        },
+        "maxConnections": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of connections allowed in the instance"
+        },
+        "supportsSsl": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports SSL connections."
+        },
+        "supportsIpv6Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv6 connections."
+        },
+        "supportsIpv4Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv4 connections."
+        },
+        "computeIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of compute IOPS (Input/Output Operations Per Second) collected."
+        },
+        "storageIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of storage IOPS (Input/Output Operations Per Second) collected."
+        },
+        "replicaSetName": {
+          "type": "string",
+          "description": "Specifies the replica set name for the MongoDB instance."
+        },
+        "isSharded": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the MongoDB instance is part of a sharded cluster."
+        },
+        "authenticationMechanism": {
+          "type": "string",
+          "description": "Specifies the authentication mechanism used by MongoDB."
+        },
+        "enabledFeatures": {
+          "type": "array",
+          "description": "List of enabled MongoDB features.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
