@@ -64,6 +64,11 @@ interface ContentUnderstandingClient {
 // Cross-language customizations (all emitters)
 // ============================================================================
 
+// .NET: type name "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase).
+@@clientName(AnalyzeInput, "AnalysisInput");
+// .NET: type name "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase).
+@@clientName(AnalyzeResult, "AnalysisResult");
+
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
 @@clientName(ArrayField.type, "fieldType");
 @@clientName(BooleanField.type, "fieldType");
@@ -168,13 +173,20 @@ op analyzeCustomSignature(
 // .NET-specific customizations
 // ============================================================================
 
-// .NET: type name "DateTimeOffsetField" to align with value type DateTimeOffset.
-@@clientName(DateField, "DateTimeOffsetField", "csharp");
+// .NET: ContentField-derived types use "Content*Field" naming to avoid generic names that might conflict with other system-level libraries.
+@@clientName(StringField, "ContentStringField", "csharp");
+@@clientName(DateField, "ContentDateTimeOffsetField", "csharp");
+@@clientName(TimeField, "ContentTimeField", "csharp");
+@@clientName(NumberField, "ContentNumberField", "csharp");
+@@clientName(IntegerField, "ContentIntegerField", "csharp");
+@@clientName(BooleanField, "ContentBooleanField", "csharp");
+@@clientName(ArrayField, "ContentArrayField", "csharp");
+@@clientName(ObjectField, "ContentObjectField", "csharp");
+@@clientName(JsonField, "ContentJsonField", "csharp");
 
-// .NET: type name "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase).
-@@clientName(AnalyzeInput, "AnalysisInput", "csharp");
-// .NET: type name "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase).
-@@clientName(AnalyzeResult, "AnalysisResult", "csharp");
+// .NET: MediaContent → AnalysisContent to avoid generic names that might conflict with other system-level libraries.
+@@clientName(MediaContent, "AnalysisContent", "csharp");
+
 // .NET: property name "Uri" to match type System.Uri (noun phrase, type-aligned).
 @@clientName(AnalyzeInput.url, "Uri", "csharp");
 
@@ -200,6 +212,20 @@ op analyzeCustomSignature(
 // ============================================================================
 // Java-specific customizations
 // ============================================================================
+
+// Java: ContentField-derived types use "Content*Field" naming to avoid generic names that might conflict with other system-level libraries.
+@@clientName(StringField, "ContentStringField", "java");
+@@clientName(DateField, "ContentDateField", "java");
+@@clientName(TimeField, "ContentTimeField", "java");
+@@clientName(NumberField, "ContentNumberField", "java");
+@@clientName(IntegerField, "ContentIntegerField", "java");
+@@clientName(BooleanField, "ContentBooleanField", "java");
+@@clientName(ArrayField, "ContentArrayField", "java");
+@@clientName(ObjectField, "ContentObjectField", "java");
+@@clientName(JsonField, "ContentJsonField", "java");
+
+// Java: MediaContent → AnalysisContent to avoid generic names that might conflict with other system-level libraries.
+@@clientName(MediaContent, "AnalysisContent", "java");
 
 // Suppress convenient method generation for updateDefaults in Java only
 @@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
