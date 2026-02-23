@@ -1,0 +1,35 @@
+{
+  "title": "ScheduledActions_VirtualMachinesExecuteCreateFlex_MinimumSet",
+  "operationId": "ScheduledActions_VirtualMachinesExecuteCreateFlex",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "locationparameter": "eastus",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "resourceCount": 1,
+        "flexProperties": {
+          "vmSizeProfiles": [
+            {
+              "name": "Standard_D2ads_v5",
+              "rank": 0
+            }
+          ],
+          "osType": "Linux",
+          "priorityProfile": {}
+        }
+      },
+      "executionParameters": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "CreateFlex operation submitted",
+        "type": "virtualMachines",
+        "location": "eastus",
+        "results": []
+      }
+    }
+  }
+}

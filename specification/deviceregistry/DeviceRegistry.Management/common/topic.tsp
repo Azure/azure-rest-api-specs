@@ -19,7 +19,6 @@ union TopicRetainType {
 
 @doc("Object that describes the topic information.")
 @added(Versions.v2024_07_01_preview)
-@removed(Versions.v2025_07_01_preview)
 model Topic {
   @doc("The topic path for messages published to an MQTT broker.")
   path: string;

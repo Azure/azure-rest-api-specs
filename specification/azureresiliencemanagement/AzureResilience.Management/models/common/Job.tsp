@@ -14,6 +14,10 @@ namespace Microsoft.AzureResilienceManagement;
 
 @doc("Job Statuses")
 union JobStatus {
+  @added(Versions.v2026_03_01_preview)
+  @doc("The job status is not applicable.")
+  NotApplicable: "NotApplicable",
+
   @doc("The job has not started yet.")
   NotStarted: "NotStarted",
 
@@ -61,9 +65,11 @@ union JobTriggeredBy {
 @added(Versions.v2026_03_01_preview)
 @doc("The type of user comment.")
 union CommentType {
+  @added(Versions.v2026_03_01_preview)
   @doc("A general description comment.")
   Description: "Description",
 
+  @added(Versions.v2026_03_01_preview)
   @doc("A comment indicating the reason for resuming a job.")
   ResumeReason: "ResumeReason",
 
@@ -211,6 +217,11 @@ model JobProperties {
   @doc("The type of job.")
   @visibility(Lifecycle.Read)
   jobType?: JobType;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Execution configurations for the job.")
+  @visibility(Lifecycle.Read)
+  executionConfigurations?: ExecutionConfigurations;
 
   @doc("Indicates whether the job was triggered by the system or a user.")
   @visibility(Lifecycle.Read)
