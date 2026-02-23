@@ -5385,6 +5385,7 @@ model ObjectReplicationPolicyProperties {
   /**
    * Optional. The object replication policy tags replication feature options.
    */
+  @added(Versions.v2025_08_01)
   tagsReplication?: ObjectReplicationPolicyPropertiesTagsReplication;
 }
 
@@ -5451,6 +5452,7 @@ model ObjectReplicationPolicyPropertiesPriorityReplication {
 /**
  * Optional. The object replication policy tags replication feature options.
  */
+@added(Versions.v2025_08_01)
 model ObjectReplicationPolicyPropertiesTagsReplication {
   /**
    * Indicates whether object replication tags replication feature is enabled for the policy.
