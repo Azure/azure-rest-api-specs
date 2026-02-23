@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCluster",
+        "type": "applications",
+        "etag": "W/\"636462502180261859\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp",
+        "location": "eastus",
+        "properties": {
+          "maximumNodes": 3,
+          "metrics": [
+            {
+              "name": "metric1",
+              "maximumCapacity": 3,
+              "reservationCapacity": 1,
+              "totalApplicationCapacity": 5
+            }
+          ],
+          "minimumNodes": 1,
+          "parameters": {
+            "param1": "value1"
+          },
+          "provisioningState": "Updating",
+          "removeApplicationCapacity": false,
+          "typeName": "myAppType",
+          "typeVersion": "1.0",
+          "upgradePolicy": {
+            "applicationHealthPolicy": {
+              "considerWarningAsError": true,
+              "defaultServiceTypeHealthPolicy": {
+                "maxPercentUnhealthyPartitionsPerService": 0,
+                "maxPercentUnhealthyReplicasPerPartition": 0,
+                "maxPercentUnhealthyServices": 0
+              },
+              "maxPercentUnhealthyDeployedApplications": 0
+            },
+            "forceRestart": false,
+            "rollingUpgradeMonitoringPolicy": {
+              "failureAction": "Rollback",
+              "healthCheckRetryTimeout": "00:10:00",
+              "healthCheckStableDuration": "00:05:00",
+              "healthCheckWaitDuration": "00:02:00",
+              "upgradeDomainTimeout": "1.06:00:00",
+              "upgradeTimeout": "01:00:00"
+            },
+            "upgradeMode": "Monitored",
+            "upgradeReplicaSetCheckTimeout": "01:00:00"
+          }
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Applications_Get",
+  "title": "Get an application"
+}
