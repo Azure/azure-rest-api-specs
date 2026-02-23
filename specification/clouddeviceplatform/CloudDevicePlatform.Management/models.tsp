@@ -83,7 +83,7 @@ namespace Microsoft.ManagedServiceCommonTypes {
     location?: string;
   }
 
-  /** mix-in envelope property for ManagedServiceIdentityWithDelegation */
+  /** Mix-in envelope property for ManagedServiceIdentityWithDelegation */
   alias ManagedServiceIdentityWithDelegationProperty = {
     /** The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "common type"
