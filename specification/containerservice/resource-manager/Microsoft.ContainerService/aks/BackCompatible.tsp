@@ -171,4 +171,4 @@ using Microsoft.ContainerService;
 
 @@clientLocation(TrustedAccessRolesOperationGroup.list, "TrustedAccessRoles");
 
-@@clientLocation(VmSkusOperationGroup.listVmSkus, "VmSkus");
+@@clientLocation(VmSkusOperationGroup.list, "VmSkus");
