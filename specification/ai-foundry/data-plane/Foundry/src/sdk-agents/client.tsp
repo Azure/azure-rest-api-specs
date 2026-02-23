@@ -44,6 +44,25 @@ using Azure.AI.Projects;
 @@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
 @@clientName(CreateAgentVersionFromManifestRequest, "CreateAgentVersionFromManifestInput");
 
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB");
+
+@@clientName(OpenAI.ImageGenTool.size.)
+
+@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
+
+@@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
+
+@@clientName(ApiError, "OpenAIError");
+
+@@clientName(OpenAI.MCPListToolsToolAnnotations , "McpListToolsToolAnnotations");
+
+@@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
+
+@@clientName(OpenAI.ResponseFormatJsonSchemaSchema, "ResponseFormatJsonSchemaInner");
+@@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens, "cachedTokensCount");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
