@@ -9,7 +9,4 @@ using Microsoft.BillingBenefits;
 @@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
 
 // java
-@@clientLocation(BenefitOperationGroup.validate,
-  "ResourceProviders",
-  "java"
-);
+@@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
