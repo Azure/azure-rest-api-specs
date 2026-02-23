@@ -1,0 +1,1065 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Marketplace SKU management service",
+    "version": "2025-05-01",
+    "description": "Microsoft.Marketplace Resource Provider management API for SKUs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SkuList"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skuses": {
+      "get": {
+        "operationId": "SkuList_ListByBillingProfile",
+        "tags": [
+          "SkuList"
+        ],
+        "description": "Lists SKUs for billing profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingProfileIdParameter"
+          },
+          {
+            "name": "serviceFamily",
+            "in": "query",
+            "description": "The service family to filter by, such as 'Compute'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "description": "The service to filter by, such as 'Virtual Machines'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is 'en'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=serviceFamily eq 'Compute'. Fields that can be filtered by are:\n- `productId`\n- `serviceFamily`\n- `service`\n- `skuId`\n- `skuName`\n- `skuType`\n- `armRegionName`\n- `location`\n- `publisherId`\n- `productType`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=skuName,skuId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request. Example: $orderby=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List SKUs by billing profile": {
+            "$ref": "./examples/SkuList_ListByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skuses": {
+      "get": {
+        "operationId": "SkuList_ListByBillingAccount",
+        "tags": [
+          "SkuList"
+        ],
+        "description": "Lists SKUs for billing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "name": "serviceFamily",
+            "in": "query",
+            "description": "The service family to filter by, such as 'Compute'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "description": "The service to filter by, such as 'Virtual Machines'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is 'en'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=serviceFamily eq 'Compute'. Fields that can be filtered by are:\n- `productId`\n- `serviceFamily`\n- `service`\n- `skuId`\n- `skuName`\n- `skuType`\n- `armRegionName`\n- `location`\n- `publisherId`\n- `productType`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=skuName,skuId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request. Example: $orderby=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List SKUs by billing account": {
+            "$ref": "./examples/SkuList_ListByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/skus": {
+      "get": {
+        "operationId": "SkuList_ListByTenant",
+        "tags": [
+          "SkuList"
+        ],
+        "description": "Lists SKUs for tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceFamily",
+            "in": "query",
+            "description": "The service family to filter by, such as 'Compute'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "description": "The service to filter by, such as 'Virtual Machines'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "Product market value (the response will include only SKUs that can be sold in the specified market). Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is 'en'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=serviceFamily eq 'Compute'. Fields that can be filtered by are:\n- `productId`\n- `serviceFamily`\n- `service`\n- `skuId`\n- `skuName`\n- `skuType`\n- `armRegionName`\n- `location`\n- `publisherId`\n- `productType`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=skuName,skuId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request. Example: $orderby=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List SKUs by tenant": {
+            "$ref": "./examples/SkuList_ListByTenant.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/skuses": {
+      "get": {
+        "operationId": "SkuList_ListBySubscription",
+        "tags": [
+          "SkuList"
+        ],
+        "description": "Lists SKUs for subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "serviceFamily",
+            "in": "query",
+            "description": "The service family to filter by, such as 'Compute'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "description": "The service to filter by, such as 'Virtual Machines'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is 'en'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=serviceFamily eq 'Compute'. Fields that can be filtered by are:\n- `productId`\n- `serviceFamily`\n- `service`\n- `skuId`\n- `skuName`\n- `skuType`\n- `armRegionName`\n- `location`\n- `publisherId`\n- `productType`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=skuName,skuId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request. Example: $orderby=skuName desc. This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `skuName`\n- `skuId`\n- `productId`\n- `serviceFamily`\n- `service`",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List SKUs by subscription": {
+            "$ref": "./examples/SkuList_ListBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attribute": {
+      "type": "object",
+      "description": "Key-value attribute pair.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The attribute key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The attribute value."
+        }
+      }
+    },
+    "BillingAccountBaseParameters": {
+      "type": "object",
+      "description": "The static parameters for a billing account based resource.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "The ID of the target billing account.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "billingAccountId"
+      ]
+    },
+    "BillingProfileBaseParameters": {
+      "type": "object",
+      "description": "The static parameters for a billing profile based resource.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "The ID of the target billing account.",
+          "minLength": 1
+        },
+        "billingProfileId": {
+          "type": "string",
+          "description": "The ID of the target billing profile.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "billingAccountId",
+        "billingProfileId"
+      ]
+    },
+    "CspState": {
+      "type": "string",
+      "description": "A value indicating whether the product is available for purchase through CSP channel.",
+      "enum": [
+        "OptIn",
+        "OptOut",
+        "Terminated",
+        "SelectiveOptIn"
+      ],
+      "x-ms-enum": {
+        "name": "CspState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OptIn",
+            "value": "OptIn",
+            "description": "Opted in for CSP."
+          },
+          {
+            "name": "OptOut",
+            "value": "OptOut",
+            "description": "Opted out from CSP."
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated from CSP."
+          },
+          {
+            "name": "SelectiveOptIn",
+            "value": "SelectiveOptIn",
+            "description": "Selectively opted in for CSP."
+          }
+        ]
+      }
+    },
+    "DiscoveryErrorDetails": {
+      "type": "object",
+      "description": "Error details returned in DiscoveryErrorPayload.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "DiscoveryErrorPayload": {
+      "type": "object",
+      "description": "Error payload returned by Marketplace Discovery APIs.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DiscoveryErrorDetails",
+          "description": "The error details object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "OfferingProperties": {
+      "type": "object",
+      "description": "Offering properties such as: product code (UPN), term id, meter type, offering id.",
+      "properties": {
+        "meterType": {
+          "type": "string",
+          "description": "The meter type."
+        },
+        "billingMeterId": {
+          "type": "string",
+          "description": "The billing meter id."
+        },
+        "offeringId": {
+          "type": "string",
+          "description": "The offering id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code (UPN)."
+        },
+        "termId": {
+          "type": "string",
+          "description": "The term id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The pricing property type (e.g., Consumption, Reservation, Entitlement)."
+        }
+      }
+    },
+    "ProductAlternateIds": {
+      "type": "object",
+      "description": "Product-level alternate ids (product id without SKU id), used for OData lookup on SKUs of a specific product.",
+      "properties": {
+        "applicablePromotion": {
+          "type": "array",
+          "description": "Applicable promotion product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "addOnParent": {
+          "type": "array",
+          "description": "Add-on parent product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableFuturePriceConcession": {
+          "type": "array",
+          "description": "Applicable future price concession product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "benefitSku": {
+          "type": "array",
+          "description": "Benefit SKU product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedInBundle": {
+          "type": "array",
+          "description": "Included in bundle product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedSku": {
+          "type": "array",
+          "description": "Associated SKU product identifiers.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PublisherType": {
+      "type": "string",
+      "description": "A value indicating whether the publisher is Microsoft or a third party.",
+      "enum": [
+        "Microsoft",
+        "ThirdParty"
+      ],
+      "x-ms-enum": {
+        "name": "PublisherType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft publisher."
+          },
+          {
+            "name": "ThirdParty",
+            "value": "ThirdParty",
+            "description": "Third party publisher."
+          }
+        ]
+      }
+    },
+    "SkuAlternateIds": {
+      "type": "object",
+      "description": "Alternate ids for the SKU.",
+      "properties": {
+        "aadSkuId": {
+          "type": "array",
+          "description": "AAD SKU identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "legacyOfferGuid": {
+          "type": "array",
+          "description": "Legacy offer GUID identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicablePromotion": {
+          "type": "array",
+          "description": "Applicable promotion identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "addOnParent": {
+          "type": "array",
+          "description": "Add-on parent identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableFuturePriceConcession": {
+          "type": "array",
+          "description": "Applicable future price concession identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "benefitSku": {
+          "type": "array",
+          "description": "Benefit SKU identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedInBundle": {
+          "type": "array",
+          "description": "Included in bundle identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedSku": {
+          "type": "array",
+          "description": "Associated SKU identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "products": {
+          "$ref": "#/definitions/ProductAlternateIds",
+          "description": "Product-level alternate ids (product id without SKU id), used for OData lookup on SKUs of a specific product."
+        }
+      }
+    },
+    "SkuProperties": {
+      "type": "object",
+      "description": "SKU properties, can be different per each service family.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The SKU category."
+        },
+        "dataDiskType": {
+          "type": "string",
+          "description": "The data disk type, such as 'Ssd'."
+        },
+        "diskType": {
+          "type": "string",
+          "description": "The disk type, such as 'Ssd'."
+        },
+        "numberOfCores": {
+          "type": "string",
+          "description": "The number of cores."
+        },
+        "ram": {
+          "type": "string",
+          "description": "The RAM."
+        },
+        "vCpu": {
+          "type": "string",
+          "description": "The number of virtual CPUs."
+        },
+        "armSkuName": {
+          "type": "string",
+          "description": "The ARM SKU name."
+        },
+        "accessTier": {
+          "type": "string",
+          "description": "The access tier, such as 'Standard'."
+        }
+      }
+    },
+    "SkuSummary": {
+      "type": "object",
+      "description": "Summary description of the SKU.",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product."
+        },
+        "productDisplayName": {
+          "type": "string",
+          "description": "Product display name."
+        },
+        "productDescription": {
+          "type": "string",
+          "description": "The product description text."
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'."
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id."
+        },
+        "publisherType": {
+          "$ref": "#/definitions/PublisherType",
+          "description": "A value indicating whether the publisher is Microsoft or a third party."
+        },
+        "productType": {
+          "type": "string",
+          "description": "Offer type."
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary."
+        },
+        "productAttributes": {
+          "type": "array",
+          "description": "The product attributes.",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "skuName": {
+          "type": "string",
+          "description": "SKU name."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "SKU id.",
+          "readOnly": true
+        },
+        "skuType": {
+          "type": "string",
+          "description": "SKU type."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code for the SKU content."
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "SKU description localized."
+        },
+        "skuTitle": {
+          "type": "string",
+          "description": "SKU title localized."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Latest update date of the SKU."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location (region)."
+        },
+        "armRegionName": {
+          "type": "string",
+          "description": "The ARM region name."
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud, such as 'Global'."
+        },
+        "locationType": {
+          "type": "string",
+          "description": "The location type, such as 'Region'."
+        },
+        "region": {
+          "type": "string",
+          "description": "The region."
+        },
+        "skuGroupId": {
+          "type": "string",
+          "description": "The SKU group id."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone, such as 'Zone 1'."
+        },
+        "feature": {
+          "type": "string",
+          "description": "The feature."
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The service type."
+        },
+        "minQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum order quantity."
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum order quantity."
+        },
+        "cspState": {
+          "$ref": "#/definitions/CspState",
+          "description": "A value indicating whether the product is available for purchase through CSP channel."
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "A value indicating whether the SKU supports reservations."
+        },
+        "skuAttributes": {
+          "type": "array",
+          "description": "The SKU attributes.",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "skuProperties": {
+          "$ref": "#/definitions/SkuProperties",
+          "description": "The SKU properties."
+        },
+        "offeringProperties": {
+          "type": "array",
+          "description": "Offering properties such as: product code (UPN), term id, meter type, offering id.",
+          "items": {
+            "$ref": "#/definitions/OfferingProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "alternateIds": {
+          "$ref": "#/definitions/SkuAlternateIds",
+          "description": "Alternate ids for the SKU."
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "Offering type of product family Offers."
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Category IDs for this SKU.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "productId",
+        "skuName",
+        "skuId",
+        "skuType",
+        "language",
+        "skuDescription",
+        "skuTitle",
+        "location",
+        "armRegionName",
+        "cloud",
+        "locationType",
+        "region",
+        "skuGroupId",
+        "zone"
+      ]
+    },
+    "SkuSummaryListResult": {
+      "type": "object",
+      "description": "The response of a SkuSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SkuSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/SkuSummary"
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Skus": {
+      "type": "object",
+      "description": "SKU resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkuSummary",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "BillingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "The ID of the target billing account.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "BillingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "The ID of the target billing profile.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
