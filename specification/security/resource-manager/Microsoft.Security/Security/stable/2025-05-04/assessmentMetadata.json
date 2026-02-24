@@ -264,15 +264,19 @@
       "type": "string",
       "description": "The risk level",
       "enum": [
-        "Unknown",
+        "None",
         "Low",
         "Medium",
-        "High"
+        "High",
+        "Critical"
       ],
       "x-ms-enum": {
         "name": "RiskLevel",
         "modelAsString": true,
         "values": [
+          {
+            "value": "None"
+          },
           {
             "value": "Low"
           },
@@ -281,6 +285,9 @@
           },
           {
             "value": "High"
+          },
+          {
+            "value": "Critical"
           }
         ]
       }
@@ -644,8 +651,16 @@
             "modelAsString": true,
             "values": [
               {
+                "value": "Unknown",
+                "description": "Unknown assessment type"
+              },
+              {
                 "value": "BuiltIn",
                 "description": "Microsoft Defender for Cloud managed assessments"
+              },
+              {
+                "value": "Custom",
+                "description": "User defined custom assessments"
               },
               {
                 "value": "CustomPolicy",
