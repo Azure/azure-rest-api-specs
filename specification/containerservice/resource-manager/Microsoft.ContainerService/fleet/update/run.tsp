@@ -108,6 +108,11 @@ model ManagedClusterUpdate {
   @doc("The node image upgrade to be applied to the target nodes in update run.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelection;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The platform component upgrade to be applied to the target clusters in update run.")
+  @added(Versions.v2026_04_01_preview)
+  platformComponent?: PlatformComponent;
 }
 
 @doc("The node image upgrade to be applied to the target nodes in update run.")
@@ -139,6 +144,16 @@ union NodeImageSelectionType {
   "Custom",
 }
 
+@doc("The platform component upgrade type.")
+@added(Versions.v2026_04_01_preview)
+model PlatformComponent {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The platform component version identifier. (e.g., pcv20260307-CKcSEO8SELsSGO8S)")
+  platformComponentVersion: PlatformComponentVersion;
+}
+
+scalar PlatformComponentVersion extends string;
+
 scalar KubernetesVersion extends string;
 
 @doc("The upgrade to apply to a ManagedCluster.")
@@ -163,6 +178,10 @@ union ManagedClusterUpgradeType {
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters and will not be applied to the AgentPool. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set.")
   @added(Versions.v2024_02_02_preview)
   "ControlPlaneOnly",
+
+  @doc("PlatformComponent upgrades AKS platform components of the ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set.")
+  @added(Versions.v2026_04_01_preview)
+  "PlatformComponent",
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")

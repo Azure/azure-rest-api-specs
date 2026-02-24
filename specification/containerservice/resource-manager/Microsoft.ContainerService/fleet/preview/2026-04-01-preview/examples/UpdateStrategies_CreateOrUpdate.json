@@ -45,6 +45,13 @@
                 }
               ],
               "afterStageWaitInSeconds": 3600
+            },
+            {
+              "name": "stage2",
+              "maxConcurrency": "50%",
+              "memberSelector": {
+                "byLabel": "env=production"
+              }
             }
           ]
         }
@@ -103,6 +110,13 @@
                   }
                 ],
                 "afterStageWaitInSeconds": 3600
+              },
+              {
+                "name": "stage2",
+                "maxConcurrency": "50%",
+                "memberSelector": {
+                  "byLabel": "env=production"
+                }
               }
             ]
           }
@@ -161,6 +175,13 @@
                   }
                 ],
                 "afterStageWaitInSeconds": 3600
+              },
+              {
+                "name": "stage2",
+                "maxConcurrency": "50%",
+                "memberSelector": {
+                  "byLabel": "env=production"
+                }
               }
             ]
           }

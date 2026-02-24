@@ -34,6 +34,11 @@ model UpdateStage {
   @doc("Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.")
   groups?: UpdateGroup[];
 
+  @doc("Select the members of the stage. If empty or not specified, no Fleet members will be selected for the stage. Requires Groups property to NOT be set.")
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  memberSelector?: MemberSelector;
+
   @doc("The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified.")
   afterStageWaitInSeconds?: int32;
 
