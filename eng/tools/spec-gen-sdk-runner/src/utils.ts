@@ -24,7 +24,7 @@ export async function resetGitRepo(repoPath: string): Promise<void> {
       logMessage(`Successfully reset git repo at ${repoPath}`, LogLevel.Info);
     }
   } catch (error) {
-    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`);
+    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`, { cause: error });
   }
 }
 
