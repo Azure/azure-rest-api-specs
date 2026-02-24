@@ -583,7 +583,7 @@ model ReceiptLeafComponents {
   commitEvidence?: string;
 
   /**
-   * TWrite set digest
+   * Write set digest
    */
   writeSetDigest?: string;
 }
