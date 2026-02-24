@@ -78,3 +78,16 @@ op calculateModelCapacityCustom(
   workloads?: ModelCapacityCalculatorWorkload[],
 ): CalculateModelCapacityResult;
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
+
+@@clientName(Microsoft.CognitiveServices.PATAuthTypeConnectionProperties,
+  "PatAuthTypeConnectionProperties",
+  "java"
+);
+@@clientName(Microsoft.CognitiveServices.SASAuthTypeConnectionProperties,
+  "SasAuthTypeConnectionProperties",
+  "java"
+);
+@@clientName(Microsoft.CognitiveServices.AADAuthTypeConnectionProperties,
+  "AadAuthTypeConnectionProperties",
+  "java"
+);
