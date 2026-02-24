@@ -11,13 +11,11 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./commonModels.tsp";
-import "./kubernetesVersions.tsp";
-import "./platformUpdates.tsp";
-import "./osImages.tsp";
-import "./updateContents.tsp";
+import "./KubernetesVersions.tsp";
+import "./PlatformUpdates.tsp";
+import "./OsImages.tsp";
+import "./UpdateContents.tsp";
 import "./Operations.tsp";
-import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
@@ -33,14 +31,12 @@ import "./UpdateRun.tsp";
 import "./Update.tsp";
 import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
-import "./edgeMachine.tsp";
-import "./edgeMachineJobs.tsp";
-import "./validateOwnershipVouchers.tsp";
+import "./EdgeMachine.tsp";
+import "./EdgeMachineJobs.tsp";
+import "./ValidateOwnershipVouchers.tsp";
+import "./ClusterJobs.tsp";
+import "./DevicePool.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -58,17 +54,12 @@ namespace Microsoft.AzureStackHCI;
  */
 enum Versions {
   /**
-   * The 2025-11-01-preview API version.
-   */
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  /**
-   * The 2025-12-01-preview API version.
-   */
-  v2025_12_01_preview: "2025-12-01-preview",
-
-  /**
    * The 2026-02-01 API version.
    */
   v2026_02_01: "2026-02-01",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }

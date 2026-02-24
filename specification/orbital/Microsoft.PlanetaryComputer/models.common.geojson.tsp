@@ -15,7 +15,8 @@ model FeatureCollection {
   /**
    * Bounding box coordinates for the collection
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
 }
 
 /**
@@ -35,19 +36,9 @@ union FeatureCollectionType {
  */
 model FeatureBase {
   /**
-   * GeoJSON type identifier for Feature
-   */
-  type: FeatureType;
-
-  /**
    * Geometry object defining the feature's shape
    */
-  geometry: GeoJson;
-
-  /**
-   * Bounding box coordinates for the feature
-   */
-  bbox: float64[];
+  geometry: Geometry;
 }
 /**
  * GeoJSON Feature object representing a geographic entity
@@ -56,9 +47,15 @@ model Feature {
   ...FeatureBase;
 
   /**
-   * Unique identifier for the feature
+   * GeoJSON type identifier for Feature
    */
-  id: string;
+  type: FeatureType;
+
+  /**
+   * Feature properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties are user-provided"
+  properties?: Record<unknown> = #{};
 }
 
 /**
@@ -74,8 +71,6 @@ union FeatureType {
 }
 
 /**
- * GeoJSON Feature or FeatureCollection.
- *
  * Represents a GeoJSON geometry object as defined by RFC 7946.
  *
  * Supported geometry types include:
@@ -88,110 +83,99 @@ union FeatureType {
  *
  * Used for spatial filtering in STAC.
  */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Unions cannot be emitted to OpenAPI v2 unless all options are literals of the same type."
-union GeoJson {
-  Point,
-  LineString,
-  Polygon,
-  MultiPoint,
-  MultiLineString,
-  MultiPolygon,
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Work around Python SDK bug."
+@discriminator("type")
+model Geometry {
+  /**
+   * Optional bounding box of the geometry.
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
+}
+
+/**
+ * Represents the type of a GeoJSON geometry.
+ */
+union GeometryType {
+  /**
+   * Represents a generic geometry type.
+   */
+  string,
+
+  /**
+   * Represents a Point geometry.
+   */
+  Point: "Point",
+
+  /**
+   * Represents a LineString geometry.
+   */
+  LineString: "LineString",
+
+  /**
+   * Represents a Polygon geometry.
+   */
+  Polygon: "Polygon",
+
+  /**
+   * Represents a MultiPoint geometry.
+   */
+  MultiPoint: "MultiPoint",
+
+  /**
+   * Represents a MultiLineString geometry.
+   */
+  MultiLineString: "MultiLineString",
+
+  /**
+   * Represents a MultiPolygon geometry.
+   */
+  MultiPolygon: "MultiPolygon",
 }
 
 /**
  * Represents a GeoJSON Point geometry.
  */
-model Point {
+model Point extends Geometry {
   /**
    * The geometry type, always "Point" for Point geometries.
    */
-  type: PointType;
+  type: GeometryType.Point;
 
   /**
    * The coordinates of the point as [longitude, latitude].
    */
-  coordinates: string;
-
-  /**
-   * Optional bounding box of the geometry.
-   */
-  bbox?: float64;
-}
-
-/**
- * Represents the GeoJSON Point geometry type.
- */
-union PointType {
-  string,
-
-  /**
-   * Standard GeoJSON Point geometry type.
-   */
-  Point: "Point",
+  coordinates: float32[];
 }
 
 /**
  * Represents a Polygon.
  */
-model Polygon {
+model Polygon extends Geometry {
   /**
    * The coordinates of the polygon.
    */
-  coordinates: float64[][][];
+  coordinates: float32[][][];
 
   /**
    * The type of the polygon.
    */
-  type: PolygonType;
-
-  /**
-   * The bounding box of the polygon.
-   */
-  bbox?: float64;
-}
-
-/**
- * Represents a Polygon type.
- */
-union PolygonType {
-  string,
-
-  /**
-   * Represents a Polygon.
-   */
-  Polygon: "Polygon",
+  type: GeometryType.Polygon;
 }
 
 /**
  * Represents a MultiPolygon.
  */
-model MultiPolygon {
+model MultiPolygon extends Geometry {
   /**
    * The coordinates of the multipolygon.
    */
-  coordinates: float64[][][];
+  coordinates: float32[][][][];
 
   /**
    * The type of the multipolygon.
    */
-  type: MultiPolygonType;
-
-  /**
-   * The bounding box of the multipolygon.
-   */
-  bbox?: float64;
-}
-
-/**
- * Represents a MultiPolygon type.
- */
-union MultiPolygonType {
-  string,
-
-  /**
-   * Represents a MultiPolygon.
-   */
-  MultiPolygon: "MultiPolygon",
+  type: GeometryType.MultiPolygon;
 }
 
 /**
@@ -206,12 +190,13 @@ model GeometryCollection {
   /**
    * The geometries in the collection.
    */
-  geometries: GeoJson[];
+  geometries: Geometry[];
 
   /**
    * The bounding box of the geometry collection.
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
 }
 
 /**
@@ -229,95 +214,44 @@ union GeometryCollectionType {
 /**
  * Represents a MultiLineString.
  */
-model MultiLineString {
+model MultiLineString extends Geometry {
   /**
    * The type of the multilinestring.
    */
-  type: MultiLineStringType;
+  type: GeometryType.MultiLineString;
 
   /**
    * The coordinates of the multilinestring.
    */
-  coordinates: float64[][];
-
-  /**
-   * The bounding box of the multilinestring.
-   */
-  bbox?: float64;
+  coordinates: float32[][][];
 }
 
 /**
  * Represents a LineString.
  */
-model LineString {
+model LineString extends Geometry {
   /**
    * The type of the linestring.
    */
-  type: LineStringType;
+  type: GeometryType.LineString;
 
   /**
    * The coordinates of the linestring.
    */
-  coordinates: float64[];
-
-  /**
-   * The bounding box of the linestring.
-   */
-  bbox?: float64;
-}
-
-/**
- * Represents a LineString type.
- */
-union LineStringType {
-  string,
-
-  /**
-   * Represents a LineString.
-   */
-  LineString: "LineString",
-}
-
-/**
- * Represents a MultiLineString type.
- */
-union MultiLineStringType {
-  string,
-
-  /**
-   * Represents a MultiLineString.
-   */
-  MultiLineString: "MultiLineString",
+  coordinates: float32[][];
 }
 
 /**
  * Represents a MultiPoint.
  */
-model MultiPoint {
+model MultiPoint extends Geometry {
   /**
    * The type of the multipoint.
    */
-  type: MultiPointType;
+  type: GeometryType.MultiPoint;
 
   /**
    * The coordinates of the multipoint.
    */
-  coordinates: float64[];
-
-  /**
-   * The bounding box of the multipoint.
-   */
-  bbox?: float64;
-}
-
-/**
- * Represents a MultiPoint type.
- */
-union MultiPointType {
-  string,
-
-  /**
-   * Represents a MultiPoint.
-   */
-  MultiPoint: "MultiPoint",
+  coordinates: float32[][];
 }
