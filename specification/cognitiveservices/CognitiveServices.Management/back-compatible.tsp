@@ -183,7 +183,7 @@ using Microsoft.CognitiveServices;
   "OutboundRules"
 );
 
-@@clientName(AgentApplications.createOrUpdate::parameters.resource, "body");
+@@clientName(AgenticApplications.createOrUpdate::parameters.resource, "body");
 
 @@clientLocation(AgentDeploymentResources.get, "AgentDeployments");
 @@clientLocation(AgentDeploymentResources.createOrUpdate, "AgentDeployments");

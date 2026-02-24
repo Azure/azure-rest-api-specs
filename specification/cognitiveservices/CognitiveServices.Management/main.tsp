@@ -35,7 +35,7 @@ import "./ProjectCapabilityHost.tsp";
 import "./QuotaTier.tsp";
 import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
-import "./AgentApplication.tsp";
+import "./AgenticApplication.tsp";
 import "./AgentDeploymentResource.tsp";
 import "./routes.tsp";
 

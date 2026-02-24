@@ -115,7 +115,7 @@
       "name": "QuotaTier"
     },
     {
-      "name": "AgentApplication"
+      "name": "AgenticApplication"
     },
     {
       "name": "AgentDeployment"
@@ -5300,12 +5300,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications": {
       "get": {
-        "operationId": "AgentApplications_List",
+        "operationId": "AgenticApplications_List",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Lists Agent Applications in the project.",
-        "description": "Lists Agent Applications in the project.",
+        "summary": "Lists Agentic Applications in the project.",
+        "description": "Lists Agentic Applications in the project.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5339,7 +5339,7 @@
           {
             "name": "count",
             "in": "query",
-            "description": "Number of agent applications to be retrieved in a page of results.",
+            "description": "Number of agentic applications to be retrieved in a page of results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -5348,7 +5348,7 @@
           {
             "name": "$skip",
             "in": "query",
-            "description": "Number of agent applications to skip.",
+            "description": "Number of agentic applications to skip.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -5363,7 +5363,7 @@
           {
             "name": "names",
             "in": "query",
-            "description": "Names of agent applications to retrieve.",
+            "description": "Names of agentic applications to retrieve.",
             "required": false,
             "type": "array",
             "items": {
@@ -5374,7 +5374,7 @@
           {
             "name": "searchText",
             "in": "query",
-            "description": "Search text for filtering agent applications.",
+            "description": "Search text for filtering agentic applications.",
             "required": false,
             "type": "string"
           },
@@ -5398,7 +5398,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResourceArmPaginatedResult"
+              "$ref": "#/definitions/AgenticApplicationResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -5410,7 +5410,7 @@
         },
         "x-ms-examples": {
           "List Account Agent Applications.": {
-            "$ref": "./examples/AgentApplication/list.json"
+            "$ref": "./examples/AgenticApplication/list.json"
           }
         },
         "x-ms-pageable": {
@@ -5420,12 +5420,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}": {
       "get": {
-        "operationId": "AgentApplications_Get",
+        "operationId": "AgenticApplications_Get",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Gets an Agent Application by name.",
-        "description": "Gets an Agent Application by name.",
+        "summary": "Gets an Agentic Application by name.",
+        "description": "Gets an Agentic Application by name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5459,7 +5459,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           }
@@ -5468,7 +5468,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgenticApplication"
             }
           },
           "default": {
@@ -5480,17 +5480,17 @@
         },
         "x-ms-examples": {
           "Get Account Agent Application.": {
-            "$ref": "./examples/AgentApplication/get.json"
+            "$ref": "./examples/AgenticApplication/get.json"
           }
         }
       },
       "put": {
-        "operationId": "AgentApplications_CreateOrUpdate",
+        "operationId": "AgenticApplications_CreateOrUpdate",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Creates or updates an Agent Application (asynchronous).",
-        "description": "Creates or updates an Agent Application (asynchronous).",
+        "summary": "Creates or updates an Agentic Application (asynchronous).",
+        "description": "Creates or updates an Agentic Application (asynchronous).",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5524,17 +5524,17 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Agent Application definition object.",
+            "description": "Agentic Application definition object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgenticApplication"
             }
           }
         ],
@@ -5542,13 +5542,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgenticApplication"
             }
           },
           "201": {
-            "description": "Resource 'AgentApplication' create operation succeeded",
+            "description": "Resource 'AgenticApplication' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgenticApplication"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -5575,22 +5575,22 @@
         },
         "x-ms-examples": {
           "Create or Update Account Agent Application.": {
-            "$ref": "./examples/AgentApplication/createOrUpdate.json"
+            "$ref": "./examples/AgenticApplication/createOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/AgentApplication"
+          "final-state-schema": "#/definitions/AgenticApplication"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AgentApplications_Delete",
+        "operationId": "AgenticApplications_Delete",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Delete Agent Application.",
-        "description": "Delete Agent Application.",
+        "summary": "Delete Agentic Application.",
+        "description": "Delete Agentic Application.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5624,7 +5624,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           }
@@ -5656,7 +5656,7 @@
         },
         "x-ms-examples": {
           "Delete Account Agent Application.": {
-            "$ref": "./examples/AgentApplication/delete.json"
+            "$ref": "./examples/AgenticApplication/delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6195,12 +6195,12 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/disable": {
       "post": {
-        "operationId": "AgentApplications_Disable",
+        "operationId": "AgenticApplications_Disable",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Disables an Agent Application.",
-        "description": "Disables an Agent Application.",
+        "summary": "Disables an Agentic Application.",
+        "description": "Disables an Agentic Application.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6234,7 +6234,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           }
@@ -6252,19 +6252,19 @@
         },
         "x-ms-examples": {
           "Disable Agent Application.": {
-            "$ref": "./examples/AgentApplication/disable.json"
+            "$ref": "./examples/AgenticApplication/disable.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/enable": {
       "post": {
-        "operationId": "AgentApplications_Enable",
+        "operationId": "AgenticApplications_Enable",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Enables an Agent Application.",
-        "description": "Enables an Agent Application.",
+        "summary": "Enables an Agentic Application.",
+        "description": "Enables an Agentic Application.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6298,7 +6298,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           }
@@ -6316,19 +6316,19 @@
         },
         "x-ms-examples": {
           "Enable Agent Application.": {
-            "$ref": "./examples/AgentApplication/enable.json"
+            "$ref": "./examples/AgenticApplication/enable.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/listAgents": {
       "post": {
-        "operationId": "AgentApplications_ListAgents",
+        "operationId": "AgenticApplications_ListAgents",
         "tags": [
-          "AgentApplication"
+          "AgenticApplication"
         ],
-        "summary": "Lists agents for an Agent Application.",
-        "description": "Lists agents for an Agent Application.",
+        "summary": "Lists agents for an Agentic Application.",
+        "description": "Lists agents for an Agentic Application.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6362,7 +6362,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name for the Agent Application.",
+            "description": "Name for the Agentic Application.",
             "required": true,
             "type": "string"
           }
@@ -6383,7 +6383,7 @@
         },
         "x-ms-examples": {
           "List Agents for Agent Application.": {
-            "$ref": "./examples/AgentApplication/listAgents.json"
+            "$ref": "./examples/AgenticApplication/listAgents.json"
           }
         }
       }
@@ -9826,42 +9826,6 @@
         ]
       }
     },
-    "AgentApplication": {
-      "type": "object",
-      "description": "Agent Application resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AgenticApplicationProperties",
-          "description": "[Required] Additional attributes of the entity."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AgentApplicationResourceArmPaginatedResult": {
-      "type": "object",
-      "description": "A paginated list of Agent Application entities.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of Agent Application objects. If null, there are no additional pages.",
-          "x-nullable": true
-        },
-        "value": {
-          "type": "array",
-          "description": "An array of objects of type Agent Application.",
-          "items": {
-            "$ref": "#/definitions/AgentApplication"
-          }
-        }
-      }
-    },
     "AgentCard": {
       "type": "object",
       "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
@@ -10249,6 +10213,24 @@
         }
       }
     },
+    "AgenticApplication": {
+      "type": "object",
+      "description": "Agentic Application resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgenticApplicationProperties",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AgenticApplicationProperties": {
       "type": "object",
       "description": "Resource type representing an agentic application as a management construct.",
@@ -10354,6 +10336,24 @@
             "description": "The application is being deleted."
           }
         ]
+      }
+    },
+    "AgenticApplicationResourceArmPaginatedResult": {
+      "type": "object",
+      "description": "A paginated list of Agent Application entities.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of Agentic Application objects. If null, there are no additional pages.",
+          "x-nullable": true
+        },
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type Agentic Application.",
+          "items": {
+            "$ref": "#/definitions/AgenticApplication"
+          }
+        }
       }
     },
     "ApiKeyAuthConnectionProperties": {
