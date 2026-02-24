@@ -219,10 +219,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "javascript"
 );
 @@clientName(ContentMd5ResponseHeader.contentMd5, "contentMD5", "javascript");
-@@clientName(RangeGetContentMd5Parameter.rangeGetContentMd5,
-  "rangeGetContentMD5",
-  "javascript"
-);
 
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");

@@ -676,6 +676,7 @@ interface Blob {
     ...LeaseIdOptionalParameter,
 
     /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    @clientName("rangeGetContentMD5", "javascript")
     @header("x-ms-range-get-content-md5")
     rangeGetContentMd5?: boolean,
 
