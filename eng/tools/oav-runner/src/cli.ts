@@ -93,9 +93,9 @@ export async function main() {
     outputAnnotatedErrors(errorList);
 
     // print the errors in a summary report that we can later output to
-    outputErrorSummary(errorList, reportName);
+    await outputErrorSummary(errorList, reportName);
   } else {
-    outputSuccessSummary(scannedSwaggerFiles, reportName);
+    await outputSuccessSummary(scannedSwaggerFiles, reportName);
   }
 
   process.exit(exitCode);
