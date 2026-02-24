@@ -1,5 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { logError, LogLevel, logMessage, setOutput } from "./log.js";
@@ -140,6 +141,7 @@ export async function getSwaggerDiffs(
       baseCommitish: options.baseCommitish,
       cwd: options.cwd,
       headCommitish: options.headCommitish,
+      logger: defaultLogger,
       paths: ["specification"],
     });
 
