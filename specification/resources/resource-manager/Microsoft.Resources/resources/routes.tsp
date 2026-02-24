@@ -26,6 +26,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 // ================================
 
 @armResourceOperations
+@added(Versions.v2025_08_01_preview)
 interface BatchOperations {
   /** Invokes a batch of individual Azure Resource Manager requests at a subscription scope. */
   @doc("The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.")

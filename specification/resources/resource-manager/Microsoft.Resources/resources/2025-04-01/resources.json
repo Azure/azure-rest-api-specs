@@ -43,9 +43,6 @@
       "name": "Operations"
     },
     {
-      "name": "BatchOperations"
-    },
-    {
       "name": "ResourceGroups"
     },
     {
@@ -174,7 +171,7 @@
             "description": "Update resource parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenericResource"
+              "$ref": "#/definitions/GenericResourceUpdate"
             }
           }
         ],
@@ -280,6 +277,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a resource group": {
+            "$ref": "./examples/ResourceGroups_Get.json"
           }
         }
       },
@@ -462,7 +464,7 @@
         }
       }
     },
-    "/resourceGroups/{name}/providers/Microsoft.Resources/resources": {
+    "/providers/Microsoft.Resources/resources": {
       "get": {
         "operationId": "Resources_ListByResourceGroup",
         "tags": [
@@ -470,9 +472,6 @@
         ],
         "description": "Get all the resources for a resource group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroup.name"
-          },
           {
             "name": "body",
             "in": "body",
@@ -484,6 +483,10 @@
                 "properties": {
                   "$ref": "#/definitions/ResourceGroupProperties",
                   "description": "The resource-specific properties for this resource."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the resource group."
                 },
                 "location": {
                   "type": "string",
@@ -502,6 +505,7 @@
                 }
               },
               "required": [
+                "name",
                 "location"
               ]
             }
@@ -523,46 +527,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/invokeAtSubscriptionScope": {
-      "post": {
-        "operationId": "BatchOperations_InvokeAtSubscriptionScope",
-        "tags": [
-          "BatchOperations"
-        ],
-        "description": "The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Specifications for all of the requests that will be invoked as part of the batch.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchRequests"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BatchResponseStatus"
-            }
-          },
-          "202": {
-            "description": "The batch was accepted and has begun processing.",
-            "schema": {
-              "$ref": "#/definitions/BatchResponseStatus"
-            }
-          }
         }
       }
     },
@@ -633,261 +597,27 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/invokeAtResourceGroupScope": {
-      "post": {
-        "operationId": "BatchOperations_InvokeAtResourceGroupScope",
-        "tags": [
-          "BatchOperations"
-        ],
-        "description": "The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Specifications for all of the requests that will be invoked as part of the batch.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchRequests"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BatchResponseStatus"
-            }
-          },
-          "202": {
-            "description": "The batch was accepted and has begun processing.",
-            "schema": {
-              "$ref": "#/definitions/BatchResponseStatus"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "Azure.Core.Foundations.Error": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
-      "description": "The error object.",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
-      }
-    },
-    "BatchRequest": {
-      "type": "object",
-      "description": "The specification for one request that will be part of a larger batch.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier for the request. Must be unique within a batch."
-        },
-        "method": {
-          "$ref": "#/definitions/HttpMethod",
-          "description": "The HTTP method associated with the request."
-        },
-        "url": {
-          "type": "string",
-          "description": "The request's absolute path."
-        },
-        "headers": {
+        "tags": {
           "type": "object",
-          "description": "Headers that are specific to the request.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "body": {
-          "description": "The body of the request. Not allowed for requests with an method of GET or DELETE."
         }
       },
-      "required": [
-        "id",
-        "method",
-        "url"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
       ]
-    },
-    "BatchRequests": {
-      "type": "object",
-      "description": "Specifications for all of the requests that will be invoked as part of the batch.",
-      "properties": {
-        "requests": {
-          "type": "array",
-          "description": "The requests that will be invoked.",
-          "items": {
-            "$ref": "#/definitions/BatchRequest"
-          }
-        }
-      },
-      "required": [
-        "requests"
-      ]
-    },
-    "BatchResponse": {
-      "type": "object",
-      "description": "The response received for one request in the batch.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier of the request that generated the response."
-        },
-        "httpStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code of the response."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the batch request. The request is complete when the status is set to Succeeded, Failed, or Canceled."
-        },
-        "headers": {
-          "type": "object",
-          "description": "Headers that are specific to this response.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "body": {
-          "description": "The body of the response."
-        }
-      }
-    },
-    "BatchResponseStatus": {
-      "type": "object",
-      "description": "The result of the batch operation and each request within it.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation"
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error object that describes the error when status is \"Failed\"."
-        },
-        "batchResult": {
-          "$ref": "#/definitions/BatchResponses",
-          "description": "The final result of the batch operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "If present, a GET on this URL will return the next page of results."
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
-    "BatchResponses": {
-      "type": "object",
-      "description": "Responses for all requests contained in the batch.",
-      "properties": {
-        "responses": {
-          "type": "array",
-          "description": "Responses for all requests contained in the batch.",
-          "items": {
-            "$ref": "#/definitions/BatchResponse"
-          }
-        }
-      }
     },
     "GenericResource": {
       "type": "object",
@@ -896,8 +626,16 @@
         "properties": {
           "$ref": "#/definitions/GenericResourceProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -934,47 +672,20 @@
         }
       }
     },
-    "HttpMethod": {
-      "type": "string",
-      "description": "The HTTP method associated with the request.",
-      "enum": [
-        "GET",
-        "PUT",
-        "PATCH",
-        "DELETE",
-        "POST"
-      ],
-      "x-ms-enum": {
-        "name": "HttpMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GET",
-            "value": "GET",
-            "description": "HTTP GET method"
-          },
-          {
-            "name": "PUT",
-            "value": "PUT",
-            "description": "HTTP PUT method"
-          },
-          {
-            "name": "PATCH",
-            "value": "PATCH",
-            "description": "HTTP PATCH method"
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE",
-            "description": "HTTP DELETE method"
-          },
-          {
-            "name": "POST",
-            "value": "POST",
-            "description": "HTTP POST method"
-          }
-        ]
-      }
+    "GenericResourceUpdate": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenericResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ResourceGroup": {
       "type": "object",
@@ -983,6 +694,11 @@
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource group.",
+          "readOnly": true
         },
         "location": {
           "type": "string",
@@ -1001,6 +717,7 @@
         }
       },
       "required": [
+        "name",
         "location"
       ],
       "allOf": [
@@ -1080,14 +797,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "ResourceGroup.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the resource group.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }

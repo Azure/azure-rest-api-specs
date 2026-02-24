@@ -174,7 +174,7 @@
             "description": "Update resource parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenericResource"
+              "$ref": "#/definitions/GenericResourceUpdate"
             }
           }
         ],
@@ -462,7 +462,7 @@
         }
       }
     },
-    "/resourceGroups/{name}/providers/Microsoft.Resources/resources": {
+    "/providers/Microsoft.Resources/resources": {
       "get": {
         "operationId": "Resources_ListByResourceGroup",
         "tags": [
@@ -470,9 +470,6 @@
         ],
         "description": "Get all the resources for a resource group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroup.name"
-          },
           {
             "name": "body",
             "in": "body",
@@ -484,6 +481,10 @@
                 "properties": {
                   "$ref": "#/definitions/ResourceGroupProperties",
                   "description": "The resource-specific properties for this resource."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the resource group."
                 },
                 "location": {
                   "type": "string",
@@ -502,6 +503,7 @@
                 }
               },
               "required": [
+                "name",
                 "location"
               ]
             }
@@ -562,6 +564,11 @@
             "schema": {
               "$ref": "#/definitions/BatchResponseStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Invoke batch operation at subscription scope": {
+            "$ref": "./examples/BatchOperations_InvokeAtSubscriptionScope.json"
           }
         }
       }
@@ -768,6 +775,25 @@
         ]
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "BatchRequest": {
       "type": "object",
       "description": "The specification for one request that will be part of a larger batch.",
@@ -896,8 +922,16 @@
         "properties": {
           "$ref": "#/definitions/GenericResourceProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -933,6 +967,21 @@
           "description": "The resource properties."
         }
       }
+    },
+    "GenericResourceUpdate": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenericResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "HttpMethod": {
       "type": "string",
@@ -984,6 +1033,11 @@
           "$ref": "#/definitions/ResourceGroupProperties",
           "description": "The resource-specific properties for this resource."
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource group.",
+          "readOnly": true
+        },
         "location": {
           "type": "string",
           "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
@@ -1001,6 +1055,7 @@
         }
       },
       "required": [
+        "name",
         "location"
       ],
       "allOf": [
@@ -1080,14 +1135,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "ResourceGroup.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the resource group.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }
