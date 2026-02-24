@@ -330,10 +330,11 @@ interface LoadBalancersOperationGroup {
    */
   @tag("LoadBalancers")
   @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses")
+  @action("setLoadBalancerFrontendPublicIpAddresses")
   swapPublicIpAddresses(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
     ...LocationResourceParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @body body: LoadBalancerVipSwapRequest,
@@ -370,17 +371,18 @@ interface NetworkSecurityPerimeterOperationStatusesOperationGroup {
    * Gets the operation status for the given operation id.
    */
   @tag("NetworkSecurityPerimeterOperationStatuses")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}")
   @get
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
     ...LocationResourceParameter,
 
     /**
      * The operation id of the async operation.
      */
     @path
+    @segment("networkSecurityPerimeterOperationStatuses")
     operationId: string,
   ): ArmResponse<CommonTypes.OperationStatusResult> | CloudError;
 }
