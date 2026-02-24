@@ -276,11 +276,11 @@ union EntityCategory {
 
 @doc("Ordering configuration for API service results.")
 union CatalogApiServiceOrderDirection {
-  @doc("Ascending sort direction (long form).")
-  Ascending: "ascending",
+  @doc("Ascending sort direction.")
+  Asc: "asc",
 
-  @doc("Descending sort direction (long form).")
-  Descending: "descending",
+  @doc("Descending sort direction.")
+  Desc: "desc",
 
   string,
 }
@@ -290,7 +290,7 @@ model CatalogApiServiceOrderBy {
   @doc("The field name to order by.")
   field?: string;
 
-  @doc("The sort direction (ascending or descending).")
+  @doc("The sort direction (asc or desc).")
   direction?: CatalogApiServiceOrderDirection;
 }
 
