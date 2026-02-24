@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AI Search",
-    "version": "2025-11-01-preview",
+    "version": "2026-04-01",
     "description": "Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.",
     "x-typespec-generated": [
       {
@@ -587,14 +587,6 @@
             "x-ms-client-name": "prefer"
           },
           {
-            "name": "ignoreResetRequirements",
-            "in": "query",
-            "description": "Ignores cache reset requirements.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "skipIndexerResetRequirementForCache"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -929,21 +921,6 @@
             "x-ms-client-name": "prefer"
           },
           {
-            "name": "ignoreResetRequirements",
-            "in": "query",
-            "description": "Ignores cache reset requirements.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "skipIndexerResetRequirementForCache"
-          },
-          {
-            "name": "disableCacheReprocessingChangeDetection",
-            "in": "query",
-            "description": "Disables cache reprocessing change detection.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1108,136 +1085,6 @@
         "x-ms-examples": {
           "SearchServiceResetIndexer": {
             "$ref": "./examples/SearchServiceResetIndexer.json"
-          }
-        }
-      }
-    },
-    "/indexers('{indexerName}')/search.resetdocs": {
-      "post": {
-        "operationId": "Indexers_ResetDocs",
-        "description": "Resets specific documents in the datasource to be selectively re-ingested by the indexer.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The Accept header.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/json;odata.metadata=minimal"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
-            "name": "overwrite",
-            "in": "query",
-            "description": "If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested.",
-            "required": false,
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "indexerName",
-            "in": "path",
-            "description": "The name of the indexer.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "name"
-          },
-          {
-            "name": "keysOrIds",
-            "in": "body",
-            "description": "The keys or ids of the documents to be re-ingested. If keys are provided, the document key field must be specified in the indexer configuration. If ids are provided, the document key field is ignored.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/DocumentKeysOrIds"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceResetDocs": {
-            "$ref": "./examples/SearchServiceResetDocs.json"
-          }
-        }
-      }
-    },
-    "/indexers('{indexerName}')/search.resync": {
-      "post": {
-        "operationId": "Indexers_Resync",
-        "description": "Resync selective options from the datasource to be re-ingested by the indexer.\"",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The Accept header.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/json;odata.metadata=minimal"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "indexerName",
-            "in": "path",
-            "description": "The name of the indexer.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "name"
-          },
-          {
-            "name": "indexerResync",
-            "in": "body",
-            "description": "The definition of the indexer resync options.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IndexerResyncBody"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceResync": {
-            "$ref": "./examples/SearchServiceResync.json"
           }
         }
       }
@@ -1705,22 +1552,6 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
-            "name": "x-ms-enable-elevated-read",
-            "in": "header",
-            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "enableElevatedRead"
-          },
-          {
             "name": "search",
             "in": "query",
             "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents.",
@@ -1801,19 +1632,7 @@
             "$ref": "#/parameters/SearchOptions.semanticQuery"
           },
           {
-            "$ref": "#/parameters/SearchOptions.queryRewrites"
-          },
-          {
             "$ref": "#/parameters/SearchOptions.debug"
-          },
-          {
-            "$ref": "#/parameters/SearchOptions.queryLanguage"
-          },
-          {
-            "$ref": "#/parameters/SearchOptions.speller"
-          },
-          {
-            "$ref": "#/parameters/SearchOptions.semanticFields"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2232,22 +2051,6 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
-            "name": "x-ms-enable-elevated-read",
-            "in": "header",
-            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "enableElevatedRead"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2480,22 +2283,6 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
-            "name": "x-ms-enable-elevated-read",
-            "in": "header",
-            "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "enableElevatedRead"
-          },
-          {
             "name": "key",
             "in": "path",
             "description": "The key of the document to retrieve.",
@@ -2662,53 +2449,6 @@
         "x-ms-examples": {
           "SearchServiceGetIndexStatistics": {
             "$ref": "./examples/SearchServiceGetIndexStatistics.json"
-          }
-        }
-      }
-    },
-    "/indexstats": {
-      "get": {
-        "operationId": "GetIndexStatsSummary",
-        "description": "Retrieves a summary of statistics for all indexes in the search service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The Accept header.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/json;odata.metadata=minimal"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListIndexStatsSummary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetIndexStatsSummary": {
-            "$ref": "./examples/SearchServiceGetIndexStatsSummary.json"
           }
         }
       }
@@ -3066,14 +2806,6 @@
             "type": "string"
           },
           {
-            "name": "x-ms-query-source-authorization",
-            "in": "header",
-            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3166,9 +2898,6 @@
           "SearchServiceListKnowledgeSourcesIndexedOneLake": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
           },
-          "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
-            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
-          },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
           }
@@ -3231,9 +2960,6 @@
           },
           "SearchServiceCreateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
-          },
-          "SearchServiceCreateKnowledgeSourceIndexedSharePoint": {
-            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
@@ -3298,9 +3024,6 @@
           },
           "SearchServiceGetKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
-          },
-          "SearchServiceGetKnowledgeSourceIndexedSharePoint": {
-            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceGetKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
@@ -3409,9 +3132,6 @@
           "SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
           },
-          "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
-          },
           "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
           }
@@ -3489,9 +3209,6 @@
           },
           "SearchServiceDeleteKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
-          },
-          "SearchServiceDeleteKnowledgeSourceIndexedSharePoint": {
-            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceDeleteKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
@@ -3822,21 +3539,6 @@
             "x-ms-client-name": "prefer"
           },
           {
-            "name": "ignoreResetRequirements",
-            "in": "query",
-            "description": "Ignores cache reset requirements.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "skipIndexerResetRequirementForCache"
-          },
-          {
-            "name": "disableCacheReprocessingChangeDetection",
-            "in": "query",
-            "description": "Disables cache reprocessing change detection.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3949,67 +3651,6 @@
         "x-ms-examples": {
           "SearchServiceDeleteSkillset": {
             "$ref": "./examples/SearchServiceDeleteSkillset.json"
-          }
-        }
-      }
-    },
-    "/skillsets('{skillsetName}')/search.resetskills": {
-      "post": {
-        "operationId": "Skillsets_ResetSkills",
-        "description": "Reset an existing skillset in a search service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The Accept header.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/json;odata.metadata=minimal"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "skillsetName",
-            "in": "path",
-            "description": "The name of the skillset.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "name"
-          },
-          {
-            "name": "skillNames",
-            "in": "body",
-            "description": "The names of the skills to reset. If not specified, all skills in the skillset will be reset.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkillNames"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceResetSkills": {
-            "$ref": "./examples/SearchServiceResetSkills.json"
           }
         }
       }
@@ -5624,36 +5265,6 @@
           "type": "string",
           "description": "The url for the Web API."
         },
-        "httpHeaders": {
-          "$ref": "#/definitions/WebApiHttpHeaders",
-          "description": "The headers required to make the http request."
-        },
-        "httpMethod": {
-          "type": "string",
-          "description": "The method for the http request."
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "The desired timeout for the request. Default is 30 seconds."
-        },
-        "batchSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The desired batch size which indicates number of documents.",
-          "x-nullable": true
-        },
-        "degreeOfParallelism": {
-          "type": "integer",
-          "format": "int32",
-          "description": "If set, the number of parallel calls that can be made to the Web API.",
-          "x-nullable": true
-        },
-        "authResourceId": {
-          "type": "string",
-          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.",
-          "x-nullable": true
-        },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
@@ -6371,14 +5982,7 @@
     },
     "DebugInfo": {
       "type": "object",
-      "description": "Contains debugging information that can be used to further explore your search results.",
-      "properties": {
-        "queryRewrites": {
-          "$ref": "#/definitions/QueryRewritesDebugInfo",
-          "description": "Contains debugging information specific to query rewrites.",
-          "readOnly": true
-        }
-      }
+      "description": "Contains debugging information that can be used to further explore your search results."
     },
     "DefaultCognitiveServicesAccount": {
       "type": "object",
@@ -6480,11 +6084,6 @@
       "type": "object",
       "description": "Contains debugging information that can be used to further explore your search results.",
       "properties": {
-        "semantic": {
-          "$ref": "#/definitions/SemanticDebugInfo",
-          "description": "Contains debugging information specific to semantic ranking requests.",
-          "readOnly": true
-        },
         "vectors": {
           "$ref": "#/definitions/VectorsDebugInfo",
           "description": "Contains debugging information specific to vector and hybrid search.",
@@ -8099,68 +7698,6 @@
         ]
       }
     },
-    "IndexedSharePointKnowledgeSource": {
-      "type": "object",
-      "description": "Configuration for SharePoint knowledge source.",
-      "properties": {
-        "indexedSharePointParameters": {
-          "$ref": "#/definitions/IndexedSharePointKnowledgeSourceParameters",
-          "description": "The parameters for the knowledge source."
-        }
-      },
-      "required": [
-        "indexedSharePointParameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "x-ms-discriminator-value": "indexedSharePoint"
-    },
-    "IndexedSharePointKnowledgeSourceParameters": {
-      "type": "object",
-      "description": "Parameters for SharePoint knowledge source.",
-      "properties": {
-        "connectionString": {
-          "type": "string",
-          "description": "SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id]"
-        },
-        "containerName": {
-          "$ref": "#/definitions/IndexedSharePointContainerName",
-          "description": "Specifies which SharePoint libraries to access."
-        },
-        "query": {
-          "type": "string",
-          "description": "Optional query to filter SharePoint content.",
-          "x-nullable": true
-        },
-        "ingestionParameters": {
-          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Consolidates all general ingestion settings.",
-          "x-nullable": true
-        },
-        "createdResources": {
-          "$ref": "#/definitions/CreatedResources",
-          "description": "Resources created by the knowledge source.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "connectionString",
-        "containerName"
-      ]
-    },
-    "IndexedSharePointKnowledgeSourceParams": {
-      "type": "object",
-      "description": "Specifies runtime parameters for a indexed SharePoint knowledge source",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceParams"
-        }
-      ],
-      "x-ms-discriminator-value": "indexedSharePoint"
-    },
     "IndexerCurrentState": {
       "type": "object",
       "description": "Represents all of the state that defines and dictates the indexer's current execution.",
@@ -9197,14 +8734,6 @@
             "$ref": "#/definitions/KnowledgeBaseModel"
           }
         },
-        "retrievalReasoningEffort": {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
-          "description": "The retrieval reasoning effort configuration."
-        },
-        "outputMode": {
-          "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
-          "description": "The output mode for the knowledge base."
-        },
         "@odata.etag": {
           "type": "string",
           "description": "The ETag of the knowledge base.",
@@ -9268,12 +8797,8 @@
       "enum": [
         "searchIndex",
         "azureBlob",
-        "indexedSharePoint",
         "indexedOneLake",
         "web",
-        "remoteSharePoint",
-        "modelQueryPlanning",
-        "modelAnswerSynthesis",
         "agenticReasoning"
       ],
       "x-ms-enum": {
@@ -9291,11 +8816,6 @@
             "description": "Azure Blob retrieval activity."
           },
           {
-            "name": "indexedSharePoint",
-            "value": "indexedSharePoint",
-            "description": "Indexed SharePoint retrieval activity."
-          },
-          {
             "name": "indexedOneLake",
             "value": "indexedOneLake",
             "description": "Indexed OneLake retrieval activity."
@@ -9304,21 +8824,6 @@
             "name": "web",
             "value": "web",
             "description": "Web retrieval activity."
-          },
-          {
-            "name": "remoteSharePoint",
-            "value": "remoteSharePoint",
-            "description": "Remote SharePoint retrieval activity."
-          },
-          {
-            "name": "modelQueryPlanning",
-            "value": "modelQueryPlanning",
-            "description": "LLM query planning activity."
-          },
-          {
-            "name": "modelAnswerSynthesis",
-            "value": "modelAnswerSynthesis",
-            "description": "LLM answer synthesis activity."
           },
           {
             "name": "agenticReasoning",
@@ -9522,48 +9027,6 @@
       ],
       "x-ms-discriminator-value": "indexedOneLake"
     },
-    "KnowledgeBaseIndexedSharePointActivityArguments": {
-      "type": "object",
-      "description": "Represents the arguments the indexed SharePoint retrieval activity was run with.",
-      "properties": {
-        "search": {
-          "type": "string",
-          "description": "The search string used to query indexed SharePoint contents."
-        }
-      }
-    },
-    "KnowledgeBaseIndexedSharePointActivityRecord": {
-      "type": "object",
-      "description": "Represents a indexed SharePoint retrieval activity record.",
-      "properties": {
-        "indexedSharePointArguments": {
-          "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
-          "description": "The indexed SharePoint arguments for the retrieval activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "indexedSharePoint"
-    },
-    "KnowledgeBaseIndexedSharePointReference": {
-      "type": "object",
-      "description": "Represents an indexed SharePoint document reference.",
-      "properties": {
-        "docUrl": {
-          "type": "string",
-          "description": "The document URL for the reference."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseReference"
-        }
-      ],
-      "x-ms-discriminator-value": "indexedSharePoint"
-    },
     "KnowledgeBaseMessage": {
       "type": "object",
       "description": "The natural language message style object.",
@@ -9674,28 +9137,6 @@
         "kind"
       ]
     },
-    "KnowledgeBaseModelAnswerSynthesisActivityRecord": {
-      "type": "object",
-      "description": "Represents an LLM answer synthesis activity record.",
-      "properties": {
-        "inputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of input tokens for the LLM answer synthesis activity."
-        },
-        "outputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of output tokens for the LLM answer synthesis activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "modelAnswerSynthesis"
-    },
     "KnowledgeBaseModelKind": {
       "type": "string",
       "description": "The AI model to be used for query planning.",
@@ -9713,28 +9154,6 @@
           }
         ]
       }
-    },
-    "KnowledgeBaseModelQueryPlanningActivityRecord": {
-      "type": "object",
-      "description": "Represents an LLM query planning activity record.",
-      "properties": {
-        "inputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of input tokens for the LLM query planning activity."
-        },
-        "outputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of output tokens for the LLM query planning activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "modelQueryPlanning"
     },
     "KnowledgeBaseReference": {
       "type": "object",
@@ -9777,10 +9196,8 @@
       "enum": [
         "searchIndex",
         "azureBlob",
-        "indexedSharePoint",
         "indexedOneLake",
-        "web",
-        "remoteSharePoint"
+        "web"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -9797,11 +9214,6 @@
             "description": "Azure Blob document reference."
           },
           {
-            "name": "indexedSharePoint",
-            "value": "indexedSharePoint",
-            "description": "Indexed SharePoint document reference."
-          },
-          {
             "name": "indexedOneLake",
             "value": "indexedOneLake",
             "description": "Indexed OneLake document reference."
@@ -9810,65 +9222,9 @@
             "name": "web",
             "value": "web",
             "description": "Web document reference."
-          },
-          {
-            "name": "remoteSharePoint",
-            "value": "remoteSharePoint",
-            "description": "Remote SharePoint document reference."
           }
         ]
       }
-    },
-    "KnowledgeBaseRemoteSharePointActivityArguments": {
-      "type": "object",
-      "description": "Represents the arguments the remote SharePoint retrieval activity was run with.",
-      "properties": {
-        "search": {
-          "type": "string",
-          "description": "The search string used to query the remote SharePoint knowledge source."
-        },
-        "filterExpressionAddOn": {
-          "type": "string",
-          "description": "The filter expression add-on for the retrieval activity."
-        }
-      }
-    },
-    "KnowledgeBaseRemoteSharePointActivityRecord": {
-      "type": "object",
-      "description": "Represents a remote SharePoint retrieval activity record.",
-      "properties": {
-        "remoteSharePointArguments": {
-          "$ref": "#/definitions/KnowledgeBaseRemoteSharePointActivityArguments",
-          "description": "The remote SharePoint arguments for the retrieval activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "remoteSharePoint"
-    },
-    "KnowledgeBaseRemoteSharePointReference": {
-      "type": "object",
-      "description": "Represents a remote SharePoint document reference.",
-      "properties": {
-        "webUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The url the reference data originated from."
-        },
-        "searchSensitivityLabelInfo": {
-          "$ref": "#/definitions/SharePointSensitivityLabelInfo",
-          "description": "Information about the sensitivity label applied to the SharePoint document."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseReference"
-        }
-      ],
-      "x-ms-discriminator-value": "remoteSharePoint"
     },
     "KnowledgeBaseRetrievalActivityRecord": {
       "type": "object",
@@ -9939,7 +9295,7 @@
           "format": "int32",
           "description": "The maximum runtime in seconds."
         },
-        "maxOutputSize": {
+        "maxOutputSizeInTokens": {
           "type": "integer",
           "format": "int32",
           "description": "Limits the maximum size of the content in the output."
@@ -9951,10 +9307,6 @@
         "includeActivity": {
           "type": "boolean",
           "description": "Indicates retrieval results should include activity information."
-        },
-        "outputMode": {
-          "$ref": "#/definitions/KnowledgeRetrievalOutputMode",
-          "description": "The output configuration for this retrieval."
         },
         "knowledgeSourceParams": {
           "type": "array",
@@ -10165,26 +9517,6 @@
         ]
       }
     },
-    "KnowledgeRetrievalLowReasoningEffort": {
-      "type": "object",
-      "description": "Run knowledge retrieval with low reasoning effort.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
-        }
-      ],
-      "x-ms-discriminator-value": "low"
-    },
-    "KnowledgeRetrievalMediumReasoningEffort": {
-      "type": "object",
-      "description": "Run knowledge retrieval with medium reasoning effort.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
-        }
-      ],
-      "x-ms-discriminator-value": "medium"
-    },
     "KnowledgeRetrievalMinimalReasoningEffort": {
       "type": "object",
       "description": "Run knowledge retrieval with minimal reasoning effort.",
@@ -10194,30 +9526,6 @@
         }
       ],
       "x-ms-discriminator-value": "minimal"
-    },
-    "KnowledgeRetrievalOutputMode": {
-      "type": "string",
-      "description": "The output configuration for this retrieval.",
-      "enum": [
-        "extractiveData",
-        "answerSynthesis"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeRetrievalOutputMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "extractiveData",
-            "value": "extractiveData",
-            "description": "Return data from the knowledge sources directly without generative alteration."
-          },
-          {
-            "name": "answerSynthesis",
-            "value": "answerSynthesis",
-            "description": "Synthesize an answer for the response payload."
-          }
-        ]
-      }
     },
     "KnowledgeRetrievalReasoningEffort": {
       "type": "object",
@@ -10237,9 +9545,7 @@
       "type": "string",
       "description": "The amount of effort to use during retrieval.",
       "enum": [
-        "minimal",
-        "low",
-        "medium"
+        "minimal"
       ],
       "x-ms-enum": {
         "name": "KnowledgeRetrievalReasoningEffortKind",
@@ -10249,16 +9555,6 @@
             "name": "minimal",
             "value": "minimal",
             "description": "Does not perform any source selections, query planning, or iterative search."
-          },
-          {
-            "name": "low",
-            "value": "low",
-            "description": "Use low reasoning during retrieval."
-          },
-          {
-            "name": "medium",
-            "value": "medium",
-            "description": "Use a moderate amount of reasoning during retrieval."
           }
         ]
       }
@@ -10354,6 +9650,46 @@
           }
         ]
       }
+    },
+    "KnowledgeSourceErrorRecord": {
+      "type": "object",
+      "description": "Represents a document-level indexing error encountered during knowledge source synchronization.",
+      "properties": {
+        "docKey": {
+          "type": "string",
+          "description": "Unique identifier for the failed document or item within the synchronization run."
+        },
+        "docUrl": {
+          "type": "string",
+          "description": "Fully qualified document URL associated with the error. May be empty."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTP-like status code representing the failure category (e.g., 400)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the ingestion or processing component reporting the error."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Human-readable, customer-visible error message."
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional contextual information about the failure."
+        },
+        "documentationLink": {
+          "type": "string",
+          "description": "Link to relevant troubleshooting documentation."
+        }
+      },
+      "required": [
+        "docKey",
+        "statusCode",
+        "errorMessage"
+      ]
     },
     "KnowledgeSourceIngestionParameters": {
       "type": "object",
@@ -10518,10 +9854,6 @@
           "type": "boolean",
           "description": "Indicates whether references should include the structured data obtained during retrieval in their payload."
         },
-        "alwaysQuerySource": {
-          "type": "boolean",
-          "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
-        },
         "rerankerThreshold": {
           "type": "number",
           "format": "float",
@@ -10580,6 +9912,10 @@
       "type": "object",
       "description": "Represents the status and synchronization history of a knowledge source.",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/KnowledgeSourceKind",
+          "description": "The kind of knowledge source."
+        },
         "synchronizationStatus": {
           "$ref": "#/definitions/KnowledgeSourceSynchronizationStatus",
           "description": "The current synchronization status."
@@ -10606,6 +9942,7 @@
         }
       },
       "required": [
+        "kind",
         "synchronizationStatus"
       ]
     },
@@ -14813,68 +14150,6 @@
         }
       }
     },
-    "QueryRewritesDebugInfo": {
-      "type": "object",
-      "description": "Contains debugging information specific to query rewrites.",
-      "properties": {
-        "text": {
-          "$ref": "#/definitions/QueryRewritesValuesDebugInfo",
-          "description": "List of query rewrites generated for the text query.",
-          "readOnly": true
-        },
-        "vectors": {
-          "type": "array",
-          "description": "List of query rewrites generated for the vectorizable text queries.",
-          "items": {
-            "$ref": "#/definitions/QueryRewritesValuesDebugInfo"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "QueryRewritesType": {
-      "type": "string",
-      "description": "This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`.",
-      "enum": [
-        "none",
-        "generative"
-      ],
-      "x-ms-enum": {
-        "name": "QueryRewritesType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Do not generate additional query rewrites for this query."
-          },
-          {
-            "name": "Generative",
-            "value": "generative",
-            "description": "Generate alternative query terms to increase the recall of a search request."
-          }
-        ]
-      }
-    },
-    "QueryRewritesValuesDebugInfo": {
-      "type": "object",
-      "description": "Contains debugging information specific to query rewrites.",
-      "properties": {
-        "inputQuery": {
-          "type": "string",
-          "description": "The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical.",
-          "readOnly": true
-        },
-        "rewrites": {
-          "type": "array",
-          "description": "List of query rewrites.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "QuerySpellerType": {
       "type": "string",
       "description": "Improve search recall by spell-correcting individual search query terms.",
@@ -15012,59 +14287,6 @@
           }
         ]
       }
-    },
-    "RemoteSharePointKnowledgeSource": {
-      "type": "object",
-      "description": "Configuration for remote SharePoint knowledge source.",
-      "properties": {
-        "remoteSharePointParameters": {
-          "$ref": "#/definitions/RemoteSharePointKnowledgeSourceParameters",
-          "description": "The parameters for the remote SharePoint knowledge source."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "x-ms-discriminator-value": "remoteSharePoint"
-    },
-    "RemoteSharePointKnowledgeSourceParameters": {
-      "type": "object",
-      "description": "Parameters for remote SharePoint knowledge source.",
-      "properties": {
-        "filterExpression": {
-          "type": "string",
-          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs."
-        },
-        "resourceMetadata": {
-          "type": "array",
-          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "containerTypeId": {
-          "type": "string",
-          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
-        }
-      }
-    },
-    "RemoteSharePointKnowledgeSourceParams": {
-      "type": "object",
-      "description": "Specifies runtime parameters for a remote SharePoint knowledge source",
-      "properties": {
-        "filterExpressionAddOn": {
-          "type": "string",
-          "description": "A filter condition applied to the SharePoint data source. It must be specified in the Keyword Query Language syntax. It will be combined as a conjunction with the filter expression specified in the knowledge source definition."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceParams"
-        }
-      ],
-      "x-ms-discriminator-value": "remoteSharePoint"
     },
     "RescoringOptions": {
       "type": "object",
@@ -15426,12 +14648,6 @@
           "description": "Type of partial response that was returned for a semantic ranking request.",
           "readOnly": true,
           "x-ms-client-name": "semanticPartialResponseType"
-        },
-        "@search.semanticQueryRewritesResultType": {
-          "$ref": "#/definitions/SemanticQueryRewritesResultType",
-          "description": "Type of query rewrite that was used to retrieve documents.",
-          "readOnly": true,
-          "x-ms-client-name": "semanticQueryRewritesResultType"
         }
       },
       "required": [
@@ -15734,11 +14950,6 @@
         "permissionFilterOption": {
           "$ref": "#/definitions/SearchIndexPermissionFilterOption",
           "description": "A value indicating whether permission filtering is enabled for the index.",
-          "x-nullable": true
-        },
-        "purviewEnabled": {
-          "type": "boolean",
-          "description": "A value indicating whether Purview is enabled for the index.",
           "x-nullable": true
         },
         "@odata.etag": {
@@ -16141,11 +15352,6 @@
           "$ref": "#/definitions/SearchIndexerDataSourceType",
           "description": "The type of the datasource."
         },
-        "subType": {
-          "type": "string",
-          "description": "A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.",
-          "readOnly": true
-        },
         "credentials": {
           "$ref": "#/definitions/DataSourceCredentials",
           "description": "Credentials for the datasource.",
@@ -16159,14 +15365,6 @@
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared.",
           "x-nullable": true
-        },
-        "indexerPermissionOptions": {
-          "type": "array",
-          "description": "Ingestion options with various types of permission data.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/IndexerPermissionOption"
-          }
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
@@ -16263,6 +15461,10 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
+        },
+        "federatedIdentityClientId": {
+          "type": "string",
+          "description": "Multi-tenant User-Assigned Managed Identity Support: The client id of the multi-tenant App that has been configured to federate with the user-assigned managed identity."
         }
       },
       "required": [
@@ -16397,10 +15599,6 @@
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
           "x-nullable": true
-        },
-        "parameters": {
-          "$ref": "#/definitions/SearchIndexerKnowledgeStoreParameters",
-          "description": "A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
         }
       },
       "required": [
@@ -16662,11 +15860,6 @@
           "description": "Overall indexer status.",
           "readOnly": true
         },
-        "runtime": {
-          "$ref": "#/definitions/IndexerRuntime",
-          "description": "Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.",
-          "readOnly": true
-        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "description": "The result of the most recent or an in-progress indexer execution.",
@@ -16694,7 +15887,6 @@
       "required": [
         "name",
         "status",
-        "runtime",
         "executionHistory",
         "limits"
       ]
@@ -16883,14 +16075,6 @@
         "captions": {
           "$ref": "#/definitions/QueryCaptionType",
           "description": "A value that specifies whether captions should be returned as part of the search response."
-        },
-        "queryRewrites": {
-          "$ref": "#/definitions/QueryRewritesType",
-          "description": "A value that specifies whether query rewrites should be generated to augment the search query."
-        },
-        "semanticFields": {
-          "type": "string",
-          "description": "The comma-separated list of field names used for semantic ranking."
         },
         "vectorQueries": {
           "type": "array",
@@ -17129,16 +16313,11 @@
         "limits": {
           "$ref": "#/definitions/SearchServiceLimits",
           "description": "Service level general limits."
-        },
-        "indexersRuntime": {
-          "$ref": "#/definitions/ServiceIndexersRuntime",
-          "description": "Service level indexer runtime consumption."
         }
       },
       "required": [
         "counters",
-        "limits",
-        "indexersRuntime"
+        "limits"
       ]
     },
     "SearchSuggester": {
@@ -17189,49 +16368,12 @@
           "$ref": "#/definitions/RankingOrder",
           "description": "Specifies the score type to be used for the sort order of the search results.",
           "x-nullable": true
-        },
-        "flightingOptIn": {
-          "type": "boolean",
-          "description": "Determines which semantic or query rewrite models to use during model flighting/upgrades.",
-          "default": false
         }
       },
       "required": [
         "name",
         "prioritizedFields"
       ]
-    },
-    "SemanticDebugInfo": {
-      "type": "object",
-      "description": "Contains debugging information specific to semantic ranking requests.",
-      "properties": {
-        "titleField": {
-          "$ref": "#/definitions/QueryResultDocumentSemanticField",
-          "description": "The title field that was sent to the semantic enrichment process, as well as how it was used",
-          "readOnly": true
-        },
-        "contentFields": {
-          "type": "array",
-          "description": "The content fields that were sent to the semantic enrichment process, as well as how they were used",
-          "items": {
-            "$ref": "#/definitions/QueryResultDocumentSemanticField"
-          },
-          "readOnly": true
-        },
-        "keywordFields": {
-          "type": "array",
-          "description": "The keyword fields that were sent to the semantic enrichment process, as well as how they were used",
-          "items": {
-            "$ref": "#/definitions/QueryResultDocumentSemanticField"
-          },
-          "readOnly": true
-        },
-        "rerankerInput": {
-          "$ref": "#/definitions/QueryResultDocumentRerankerInput",
-          "description": "The raw concatenated strings that were sent to the semantic enrichment process.",
-          "readOnly": true
-        }
-      }
     },
     "SemanticErrorMode": {
       "type": "string",
@@ -17352,24 +16494,6 @@
             "$ref": "#/definitions/SemanticField"
           }
         }
-      }
-    },
-    "SemanticQueryRewritesResultType": {
-      "type": "string",
-      "description": "Type of query rewrite that was used for this request.",
-      "enum": [
-        "originalQueryOnly"
-      ],
-      "x-ms-enum": {
-        "name": "SemanticQueryRewritesResultType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OriginalQueryOnly",
-            "value": "originalQueryOnly",
-            "description": "Query rewrites were not successfully generated for this request. Only the original query was used to retrieve the results."
-          }
-        ]
       }
     },
     "SemanticSearch": {
@@ -19056,6 +18180,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of items skipped in the current synchronization."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Collection of document-level indexing errors encountered during the current synchronization run. Returned only when errors are present.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceErrorRecord"
+          }
         }
       },
       "required": [
@@ -20546,10 +19677,6 @@
         "text": {
           "type": "string",
           "description": "The text to be vectorized to perform a vector search query."
-        },
-        "queryRewrites": {
-          "$ref": "#/definitions/QueryRewritesType",
-          "description": "Can be configured to let a generative model rewrite the query before sending it to be vectorized."
         }
       },
       "required": [
@@ -21152,482 +20279,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "orderBy"
     },
-    "SearchOptions.queryLanguage": {
-      "name": "queryLanguage",
-      "in": "query",
-      "description": "The language of the query.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "none",
-        "en-us",
-        "en-gb",
-        "en-in",
-        "en-ca",
-        "en-au",
-        "fr-fr",
-        "fr-ca",
-        "de-de",
-        "es-es",
-        "es-mx",
-        "zh-cn",
-        "zh-tw",
-        "pt-br",
-        "pt-pt",
-        "it-it",
-        "ja-jp",
-        "ko-kr",
-        "ru-ru",
-        "cs-cz",
-        "nl-be",
-        "nl-nl",
-        "hu-hu",
-        "pl-pl",
-        "sv-se",
-        "tr-tr",
-        "hi-in",
-        "ar-sa",
-        "ar-eg",
-        "ar-ma",
-        "ar-kw",
-        "ar-jo",
-        "da-dk",
-        "no-no",
-        "bg-bg",
-        "hr-hr",
-        "hr-ba",
-        "ms-my",
-        "ms-bn",
-        "sl-sl",
-        "ta-in",
-        "vi-vn",
-        "el-gr",
-        "ro-ro",
-        "is-is",
-        "id-id",
-        "th-th",
-        "lt-lt",
-        "uk-ua",
-        "lv-lv",
-        "et-ee",
-        "ca-es",
-        "fi-fi",
-        "sr-ba",
-        "sr-me",
-        "sr-rs",
-        "sk-sk",
-        "nb-no",
-        "hy-am",
-        "bn-in",
-        "eu-es",
-        "gl-es",
-        "gu-in",
-        "he-il",
-        "ga-ie",
-        "kn-in",
-        "ml-in",
-        "mr-in",
-        "fa-ae",
-        "pa-in",
-        "te-in",
-        "ur-pk"
-      ],
-      "x-ms-enum": {
-        "name": "QueryLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Query language not specified."
-          },
-          {
-            "name": "EnUs",
-            "value": "en-us",
-            "description": "Query language value for English (United States)."
-          },
-          {
-            "name": "EnGb",
-            "value": "en-gb",
-            "description": "Query language value for English (Great Britain)."
-          },
-          {
-            "name": "EnIn",
-            "value": "en-in",
-            "description": "Query language value for English (India)."
-          },
-          {
-            "name": "EnCa",
-            "value": "en-ca",
-            "description": "Query language value for English (Canada)."
-          },
-          {
-            "name": "EnAu",
-            "value": "en-au",
-            "description": "Query language value for English (Australia)."
-          },
-          {
-            "name": "FrFr",
-            "value": "fr-fr",
-            "description": "Query language value for French (France)."
-          },
-          {
-            "name": "FrCa",
-            "value": "fr-ca",
-            "description": "Query language value for French (Canada)."
-          },
-          {
-            "name": "DeDe",
-            "value": "de-de",
-            "description": "Query language value for German (Germany)."
-          },
-          {
-            "name": "EsEs",
-            "value": "es-es",
-            "description": "Query language value for Spanish (Spain)."
-          },
-          {
-            "name": "EsMx",
-            "value": "es-mx",
-            "description": "Query language value for Spanish (Mexico)."
-          },
-          {
-            "name": "ZhCn",
-            "value": "zh-cn",
-            "description": "Query language value for Chinese (China)."
-          },
-          {
-            "name": "ZhTw",
-            "value": "zh-tw",
-            "description": "Query language value for Chinese (Taiwan)."
-          },
-          {
-            "name": "PtBr",
-            "value": "pt-br",
-            "description": "Query language value for Portuguese (Brazil)."
-          },
-          {
-            "name": "PtPt",
-            "value": "pt-pt",
-            "description": "Query language value for Portuguese (Portugal)."
-          },
-          {
-            "name": "ItIt",
-            "value": "it-it",
-            "description": "Query language value for Italian (Italy)."
-          },
-          {
-            "name": "JaJp",
-            "value": "ja-jp",
-            "description": "Query language value for Japanese (Japan)."
-          },
-          {
-            "name": "KoKr",
-            "value": "ko-kr",
-            "description": "Query language value for Korean (Korea)."
-          },
-          {
-            "name": "RuRu",
-            "value": "ru-ru",
-            "description": "Query language value for Russian (Russia)."
-          },
-          {
-            "name": "CsCz",
-            "value": "cs-cz",
-            "description": "Query language value for Czech (Czech Republic)."
-          },
-          {
-            "name": "NlBe",
-            "value": "nl-be",
-            "description": "Query language value for Dutch (Belgium)."
-          },
-          {
-            "name": "NlNl",
-            "value": "nl-nl",
-            "description": "Query language value for Dutch (Netherlands)."
-          },
-          {
-            "name": "HuHu",
-            "value": "hu-hu",
-            "description": "Query language value for Hungarian (Hungary)."
-          },
-          {
-            "name": "PlPl",
-            "value": "pl-pl",
-            "description": "Query language value for Polish (Poland)."
-          },
-          {
-            "name": "SvSe",
-            "value": "sv-se",
-            "description": "Query language value for Swedish (Sweden)."
-          },
-          {
-            "name": "TrTr",
-            "value": "tr-tr",
-            "description": "Query language value for Turkish (Turkey)."
-          },
-          {
-            "name": "HiIn",
-            "value": "hi-in",
-            "description": "Query language value for Hindi (India)."
-          },
-          {
-            "name": "ArSa",
-            "value": "ar-sa",
-            "description": "Query language value for Arabic (Saudi Arabia)."
-          },
-          {
-            "name": "ArEg",
-            "value": "ar-eg",
-            "description": "Query language value for Arabic (Egypt)."
-          },
-          {
-            "name": "ArMa",
-            "value": "ar-ma",
-            "description": "Query language value for Arabic (Morocco)."
-          },
-          {
-            "name": "ArKw",
-            "value": "ar-kw",
-            "description": "Query language value for Arabic (Kuwait)."
-          },
-          {
-            "name": "ArJo",
-            "value": "ar-jo",
-            "description": "Query language value for Arabic (Jordan)."
-          },
-          {
-            "name": "DaDk",
-            "value": "da-dk",
-            "description": "Query language value for Danish (Denmark)."
-          },
-          {
-            "name": "NoNo",
-            "value": "no-no",
-            "description": "Query language value for Norwegian (Norway)."
-          },
-          {
-            "name": "BgBg",
-            "value": "bg-bg",
-            "description": "Query language value for Bulgarian (Bulgaria)."
-          },
-          {
-            "name": "HrHr",
-            "value": "hr-hr",
-            "description": "Query language value for Croatian (Croatia)."
-          },
-          {
-            "name": "HrBa",
-            "value": "hr-ba",
-            "description": "Query language value for Croatian (Bosnia and Herzegovina)."
-          },
-          {
-            "name": "MsMy",
-            "value": "ms-my",
-            "description": "Query language value for Malay (Malaysia)."
-          },
-          {
-            "name": "MsBn",
-            "value": "ms-bn",
-            "description": "Query language value for Malay (Brunei Darussalam)."
-          },
-          {
-            "name": "SlSl",
-            "value": "sl-sl",
-            "description": "Query language value for Slovenian (Slovenia)."
-          },
-          {
-            "name": "TaIn",
-            "value": "ta-in",
-            "description": "Query language value for Tamil (India)."
-          },
-          {
-            "name": "ViVn",
-            "value": "vi-vn",
-            "description": "Query language value for Vietnamese (Viet Nam)."
-          },
-          {
-            "name": "ElGr",
-            "value": "el-gr",
-            "description": "Query language value for Greek (Greece)."
-          },
-          {
-            "name": "RoRo",
-            "value": "ro-ro",
-            "description": "Query language value for Romanian (Romania)."
-          },
-          {
-            "name": "IsIs",
-            "value": "is-is",
-            "description": "Query language value for Icelandic (Iceland)."
-          },
-          {
-            "name": "IdId",
-            "value": "id-id",
-            "description": "Query language value for Indonesian (Indonesia)."
-          },
-          {
-            "name": "ThTh",
-            "value": "th-th",
-            "description": "Query language value for Thai (Thailand)."
-          },
-          {
-            "name": "LtLt",
-            "value": "lt-lt",
-            "description": "Query language value for Lithuanian (Lithuania)."
-          },
-          {
-            "name": "UkUa",
-            "value": "uk-ua",
-            "description": "Query language value for Ukrainian (Ukraine)."
-          },
-          {
-            "name": "LvLv",
-            "value": "lv-lv",
-            "description": "Query language value for Latvian (Latvia)."
-          },
-          {
-            "name": "EtEe",
-            "value": "et-ee",
-            "description": "Query language value for Estonian (Estonia)."
-          },
-          {
-            "name": "CaEs",
-            "value": "ca-es",
-            "description": "Query language value for Catalan."
-          },
-          {
-            "name": "FiFi",
-            "value": "fi-fi",
-            "description": "Query language value for Finnish (Finland)."
-          },
-          {
-            "name": "SrBa",
-            "value": "sr-ba",
-            "description": "Query language value for Serbian (Bosnia and Herzegovina)."
-          },
-          {
-            "name": "SrMe",
-            "value": "sr-me",
-            "description": "Query language value for Serbian (Montenegro)."
-          },
-          {
-            "name": "SrRs",
-            "value": "sr-rs",
-            "description": "Query language value for Serbian (Serbia)."
-          },
-          {
-            "name": "SkSk",
-            "value": "sk-sk",
-            "description": "Query language value for Slovak (Slovakia)."
-          },
-          {
-            "name": "NbNo",
-            "value": "nb-no",
-            "description": "Query language value for Norwegian (Norway)."
-          },
-          {
-            "name": "HyAm",
-            "value": "hy-am",
-            "description": "Query language value for Armenian (Armenia)."
-          },
-          {
-            "name": "BnIn",
-            "value": "bn-in",
-            "description": "Query language value for Bengali (India)."
-          },
-          {
-            "name": "EuEs",
-            "value": "eu-es",
-            "description": "Query language value for Basque."
-          },
-          {
-            "name": "GlEs",
-            "value": "gl-es",
-            "description": "Query language value for Galician."
-          },
-          {
-            "name": "GuIn",
-            "value": "gu-in",
-            "description": "Query language value for Gujarati (India)."
-          },
-          {
-            "name": "HeIl",
-            "value": "he-il",
-            "description": "Query language value for Hebrew (Israel)."
-          },
-          {
-            "name": "GaIe",
-            "value": "ga-ie",
-            "description": "Query language value for Irish (Ireland)."
-          },
-          {
-            "name": "KnIn",
-            "value": "kn-in",
-            "description": "Query language value for Kannada (India)."
-          },
-          {
-            "name": "MlIn",
-            "value": "ml-in",
-            "description": "Query language value for Malayalam (India)."
-          },
-          {
-            "name": "MrIn",
-            "value": "mr-in",
-            "description": "Query language value for Marathi (India)."
-          },
-          {
-            "name": "FaAe",
-            "value": "fa-ae",
-            "description": "Query language value for Persian (U.A.E.)."
-          },
-          {
-            "name": "PaIn",
-            "value": "pa-in",
-            "description": "Query language value for Punjabi (India)."
-          },
-          {
-            "name": "TeIn",
-            "value": "te-in",
-            "description": "Query language value for Telugu (India)."
-          },
-          {
-            "name": "UrPk",
-            "value": "ur-pk",
-            "description": "Query language value for Urdu (Pakistan)."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "SearchOptions.queryRewrites": {
-      "name": "queryRewrites",
-      "in": "query",
-      "description": "When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "none",
-        "generative"
-      ],
-      "x-ms-enum": {
-        "name": "QueryRewritesType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Do not generate additional query rewrites for this query."
-          },
-          {
-            "name": "Generative",
-            "value": "generative",
-            "description": "Generate alternative query terms to increase the recall of a search request."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "SearchOptions.queryType": {
       "name": "queryType",
       "in": "query",
@@ -21800,18 +20451,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "SearchOptions.semanticFields": {
-      "name": "semanticFields",
-      "in": "query",
-      "description": "The list of field names used for semantic ranking.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
     "SearchOptions.semanticMaxWaitInMilliseconds": {
       "name": "semanticMaxWaitInMilliseconds",
       "in": "query",
@@ -21848,34 +20487,6 @@
       "format": "int32",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "skip"
-    },
-    "SearchOptions.speller": {
-      "name": "speller",
-      "in": "query",
-      "description": "Improve search recall by spell-correcting individual search query terms.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "none",
-        "lexicon"
-      ],
-      "x-ms-enum": {
-        "name": "QuerySpellerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Speller not enabled."
-          },
-          {
-            "name": "Lexicon",
-            "value": "lexicon",
-            "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
     },
     "SearchOptions.top": {
       "name": "$top",
