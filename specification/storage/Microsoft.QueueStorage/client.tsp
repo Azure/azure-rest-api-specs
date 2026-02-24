@@ -12,7 +12,7 @@ namespace Customizations;
   },
   "rust"
 )
-interface QueueClient extends Storage.Queues.Queue {}
+interface QueueServiceClient extends Storage.Queues.Service {}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -21,8 +21,26 @@ interface QueueClient extends Storage.Queues.Queue {}
   },
   "rust"
 )
-interface QueueServiceClient extends Storage.Queues.Service {}
+interface QueueClient extends Storage.Queues.Queue {}
+
+@@clientInitialization(QueueServiceClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(QueueClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
 
 @@clientNamespace(Storage.Queues, "Azure.Storage.Queues");
 @@clientNamespace(Storage.Queues.Service, "Azure.Storage.Queues");
 @@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues");
+
+@@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
+
+@@clientName(Storage.Queues.Queue.sendMessage, "sendMessageInternal", "rust");
+
+@@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");

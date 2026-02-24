@@ -597,7 +597,7 @@ alias PopReceiptQueryParameter = {
   /**
    * Required. Specifies the valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.
    */
-  @query("popReceipt")
+  @query("popreceipt")
   popReceipt: string;
 };
 
@@ -620,7 +620,7 @@ alias TimeoutParameter = {
 alias VisibilityTimeoutParameter = {
   @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
   @maxValue(604800)
-  @query("visibilityTimeout")
+  @query("visibilitytimeout")
   visibilityTimeout?: int32;
 };
 
@@ -673,6 +673,14 @@ alias TimeNextVisibleResponseHeaderPrivate = {
   @encode("rfc7231")
   @header("x-ms-time-next-visible")
   timeNextVisible: utcDateTime;
+};
+
+/** The metadata headers parameter (required). */
+alias MetadataHeadersParameter = {
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string;
 };
 
 /** The metadata headers. */
