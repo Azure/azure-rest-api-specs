@@ -347,23 +347,23 @@ model ListQueuesResponse {
   serviceEndpoint: string;
 
   /** The prefix of the queues. */
-  @Xml.name("Prefix") prefix?: string;
+  @Xml.name("Prefix") prefix: string;
 
   /** The marker of the queues. */
   @Xml.name("Marker") marker?: string;
 
   /** The max results of the queues. */
-  @Xml.name("MaxResults") maxResults?: int32;
+  @Xml.name("MaxResults") maxResults: int32;
 
   /** The queue segment. */
   @pageItems
   @Xml.name("Queues")
-  queueItems: QueueItem[];
+  queueItems?: QueueItem[];
 
   /** The next marker of the queues. */
   @continuationToken
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  nextMarker: string;
 }
 
 /**
@@ -392,15 +392,15 @@ model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
   @encode("rfc3339")
-  start: utcDateTime;
+  start?: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
   @encode("rfc3339")
-  expiry: utcDateTime;
+  expiry?: utcDateTime;
 
   /** The permissions for acl the policy. */
-  @Xml.name("Permission") permission: string;
+  @Xml.name("Permission") permission?: string;
 }
 
 /**
@@ -453,7 +453,7 @@ model ReceivedMessage {
 
 /** Represents an array of signed identifiers */
 @Xml.name("SignedIdentifiers")
-model ListOfSignedIdentifier {
+model SignedIdentifiers {
   /**
    * The list of signed identifiers.
    *

@@ -101,6 +101,7 @@ interface Service {
 
       /** Key information */
       @bodyRoot
+      @Xml.name("KeyInfo")
       keyInfo: KeyInfo;
     },
     {
@@ -212,7 +213,7 @@ interface Queue {
       ...TimeoutParameter;
     },
     {
-      @bodyRoot body: ListOfSignedIdentifier;
+      @bodyRoot body: SignedIdentifiers;
     }
   >;
 
@@ -229,9 +230,11 @@ interface Queue {
       /** The access control list for the queue. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @bodyRoot
-      queueAcl: ListOfSignedIdentifier;
+      queueAcl: SignedIdentifiers;
     },
-    {}
+    {
+      @statusCode statusCode: 204;
+    }
   >;
 
   /**
