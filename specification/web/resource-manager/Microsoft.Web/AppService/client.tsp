@@ -2887,3 +2887,107 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   "AppCertificatePatchResourceProperties",
   "go"
 );
+@@clientName(AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
+  "listInboundNetworkDependenciesEndpoints",
+  "javascript"
+);
+@@clientName(AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
+  "listOutboundNetworkDependenciesEndpoints",
+  "javascript"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getAvailableStacks,
+  "listAvailableStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getAvailableStacksOnPrem,
+  "listAvailableStacksOnPrem",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getFunctionAppStacks,
+  "listFunctionAppStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getFunctionAppStacksForLocation,
+  "listFunctionAppStacksForLocation",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getWebAppStacks,
+  "listWebAppStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getWebAppStacksForLocation,
+  "listWebAppStacksForLocation",
+  "javascript"
+);
+@@clientName(DatabaseConnections.getBuildDatabaseConnections,
+  "listBuildDatabaseConnections",
+  "javascript"
+);
+@@clientName(StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
+  "listBuildDatabaseConnectionsWithDetails",
+  "javascript"
+);
+@@clientName(DatabaseConnectionOperationGroup.getDatabaseConnections,
+  "listDatabaseConnections",
+  "javascript"
+);
+@@clientName(StaticSiteARMResources.getDatabaseConnectionsWithDetails,
+  "listDatabaseConnectionsWithDetails",
+  "javascript"
+);
+@@clientName(StaticSiteLinkedBackendARMResources.getLinkedBackends,
+  "listLinkedBackends",
+  "javascript"
+);
+@@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
+  "listLinkedBackendsForBuild",
+  "javascript"
+);
+@@clientName(StaticSites.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+@@clientName(StaticSiteBuildARMResources.getStaticSiteBuilds,
+  "listStaticSiteBuilds",
+  "javascript"
+);
+@@clientName(StaticSiteARMResources.getStaticSitesByResourceGroup,
+  "listStaticSitesByResourceGroup",
+  "javascript"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
+  "listUserProvidedFunctionAppsForStaticSite",
+  "javascript"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
+  "listUserProvidedFunctionAppsForStaticSiteBuild",
+  "javascript"
+);
+@@clientName(AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
+  "listAppSettingsKeyVaultReferences",
+  "javascript"
+);
+@@clientName(AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
+  "listAppSettingsKeyVaultReferencesSlot",
+  "javascript"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+@@clientName(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
+  "listPrivateEndpointConnectionListSlot",
+  "javascript"
+);
+@@clientName(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
+  "listSiteConnectionStringKeyVaultReferences",
+  "javascript"
+);
+@@clientName(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
+  "listSiteConnectionStringKeyVaultReferencesSlot",
+  "javascript"
+);
