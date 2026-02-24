@@ -36,6 +36,7 @@ import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./StorageTaskAssignment.tsp";
 import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
+import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
