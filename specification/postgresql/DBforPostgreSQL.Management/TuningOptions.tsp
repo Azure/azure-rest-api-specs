@@ -19,7 +19,8 @@ namespace Microsoft.DBforPostgreSQL;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-model TuningOptions is Azure.ResourceManager.ProxyResource<never> {
+model TuningOptions
+  is Azure.ResourceManager.ProxyResource<TuningOptionsProperties> {
   ...ResourceNameParameter<
     Resource = TuningOptions,
     KeyName = "tuningOption",
