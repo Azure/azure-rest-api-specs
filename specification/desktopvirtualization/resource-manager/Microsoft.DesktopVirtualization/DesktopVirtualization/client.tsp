@@ -244,3 +244,10 @@ using Microsoft.DesktopVirtualization;
   "getProvisioningStatus",
   "csharp"
 );
+@@clientName(HostPoolProvisioningControlParameter,
+  "HostPoolProvisioningControlContent",
+  "csharp"
+);
+
+@@clientName(ResourceProviderOperation, "ResourceProviderOperationInfo", "csharp");
+@@clientName(HostPoolUpdateControlParameter, "HostPoolUpdateControlContent", "csharp");
