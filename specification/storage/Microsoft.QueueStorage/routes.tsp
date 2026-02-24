@@ -231,7 +231,9 @@ interface Queue {
       @bodyRoot
       queueAcl: ListOfSignedIdentifier;
     },
-    {}
+    {
+      @statusCode statusCode: 204;
+    }
   >;
 
   /**
