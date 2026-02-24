@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -139,6 +141,7 @@ union CreatedByType {
 /**
  * Object representing LanguageRuntime for Manged CCF.
  */
+@removed(Versions.v2026_02_23)
 union LanguageRuntime {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -424,6 +427,7 @@ model ConfidentialLedgerRestoreResponse {
  * Additional Managed CCF properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFProperties {
   /**
    * Unique name for the Managed CCF.
@@ -480,6 +484,7 @@ model ManagedCCFProperties {
 /**
  * Object representing MemberIdentityCertificate for Managed CCF.
  */
+@removed(Versions.v2026_02_23)
 model MemberIdentityCertificate {
   /**
    * Member Identity Certificate
@@ -502,6 +507,7 @@ model MemberIdentityCertificate {
 /**
  * Object representing DeploymentType for Managed CCF.
  */
+@removed(Versions.v2026_02_23)
 model DeploymentType {
   /**
    * Unique name for the Managed CCF.
@@ -518,12 +524,14 @@ model DeploymentType {
  * Object that includes an array of Managed CCF and a possible link for next set.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFList is Azure.Core.Page<ManagedCCF>;
 
 /**
  * Object representing Backup properties of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFBackup {
   /**
    * The region where the backup of the managed CCF resource will eventually be restored to.
@@ -541,6 +549,7 @@ model ManagedCCFBackup {
  * Object representing the backup response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFBackupResponse {
   /**
    * Response body stating if the managed CCF resource is being backed up.
@@ -553,6 +562,7 @@ model ManagedCCFBackupResponse {
  * Object representing Restore properties of Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFRestore {
   /**
    * Fileshare where the managed CCF resource backup is stored.
@@ -575,6 +585,7 @@ model ManagedCCFRestore {
  * Object representing the restore response of a Managed CCF Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_02_23)
 model ManagedCCFRestoreResponse {
   /**
    * Response body stating if the managed CCF resource is being restored.
@@ -586,6 +597,7 @@ model ManagedCCFRestoreResponse {
 /**
  * Tags for Managed CCF Certificates
  */
+@removed(Versions.v2026_02_23)
 model CertificateTags {
   /**
    * Additional tags for Managed CCF Certificates
