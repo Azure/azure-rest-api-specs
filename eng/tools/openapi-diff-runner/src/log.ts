@@ -1,4 +1,4 @@
-import { appendFileSync } from "node:fs";
+import * as core from "@actions/core";
 
 /**
  * Log prefix for all messages from openapi-diff-runner
@@ -97,38 +97,18 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
  * @param value Output parameter value
  */
 export function setOutput(name: string, value: string): void {
-  if (process.env.GITHUB_OUTPUT) {
-    appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
-  } else {
-    // Fallback to older syntax
-    console.log(`::set-output name=${name}::${value}`);
-  }
+  core.setOutput(name, value);
 }
 
 /**
  * Add content to the GitHub Actions job summary
  * @param content Content to add to summary
  */
-export function addToSummary(content: string): void {
+export async function addToSummary(content: string): Promise<void> {
   if (process.env.GITHUB_STEP_SUMMARY) {
-    appendFileSync(process.env.GITHUB_STEP_SUMMARY, content);
+    await core.summary.addRaw(content).write();
   }
   // Do nothing if GITHUB_STEP_SUMMARY is not available
-}
-
-/**
- * Create a collapsible group in logs
- * @param title Group title
- * @param content Function that logs the group content
- */
-export async function logGroup<T>(title: string, content: () => Promise<T> | T): Promise<T> {
-  logMessage(title, LogLevel.Group);
-  try {
-    const result = await content();
-    return result;
-  } finally {
-    logMessage("", LogLevel.EndGroup);
-  }
 }
 
 /**
