@@ -347,23 +347,23 @@ model ListQueuesResponse {
   serviceEndpoint: string;
 
   /** The prefix of the queues. */
-  @Xml.name("Prefix") prefix?: string;
+  @Xml.name("Prefix") prefix: string;
 
   /** The marker of the queues. */
   @Xml.name("Marker") marker?: string;
 
   /** The max results of the queues. */
-  @Xml.name("MaxResults") maxResults?: int32;
+  @Xml.name("MaxResults") maxResults: int32;
 
   /** The queue segment. */
   @pageItems
   @Xml.name("Queues")
-  queueItems: QueueItem[];
+  queueItems?: QueueItem[];
 
   /** The next marker of the queues. */
   @continuationToken
   @Xml.name("NextMarker")
-  nextMarker?: string;
+  nextMarker: string;
 }
 
 /**

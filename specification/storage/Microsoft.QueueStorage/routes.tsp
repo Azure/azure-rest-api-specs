@@ -101,6 +101,7 @@ interface Service {
 
       /** Key information */
       @bodyRoot
+      @Xml.name("KeyInfo")
       keyInfo: KeyInfo;
     },
     {
@@ -231,9 +232,7 @@ interface Queue {
       @bodyRoot
       queueAcl: SignedIdentifiers;
     },
-    {
-      @statusCode statusCode: 204;
-    }
+    {}
   >;
 
   /**
