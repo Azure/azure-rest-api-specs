@@ -24869,7 +24869,7 @@
         },
         "distribution": {
           "$ref": "#/definitions/DistributionConfiguration",
-          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
@@ -29060,7 +29060,8 @@
       "enum": [
         "PyTorch",
         "TensorFlow",
-        "Mpi"
+        "Mpi",
+        "Ray"
       ],
       "x-ms-enum": {
         "name": "DistributionType",
@@ -29077,6 +29078,10 @@
           {
             "name": "Mpi",
             "value": "Mpi"
+          },
+          {
+            "name": "Ray",
+            "value": "Ray"
           }
         ]
       }
@@ -45041,6 +45046,51 @@
           }
         }
       }
+    },
+    "Ray": {
+      "description": "Ray distribution configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        }
+      ],
+      "properties": {
+        "address": {
+          "description": "The address of Ray head node.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dashboardPort": {
+          "format": "int32",
+          "description": "The port to bind the dashboard server to.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "headNodeAdditionalArgs": {
+          "description": "Additional arguments passed to ray start in head node.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "includeDashboard": {
+          "description": "Provide this argument to start the Ray dashboard GUI.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port of the head ray process.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "workerNodeAdditionalArgs": {
+          "description": "Additional arguments passed to ray start in worker node.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Ray",
+      "additionalProperties": false
     }
   },
   "parameters": {
