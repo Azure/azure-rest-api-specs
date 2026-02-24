@@ -26,6 +26,7 @@ import "./BackupEngineBaseResource.tsp";
 import "./ProtectionContainerResource.tsp";
 import "./ResourceGuardProxyBaseResource.tsp";
 import "./VirtualResource.tsp";
+import "./SourceVaultMappingResource.tsp";
 import "./routes.tsp";
 
 using Azure.ResourceManager;
@@ -58,6 +59,11 @@ enum Versions {
    * The 2026-01-01-preview API version.
    */
   v2026_01_01_preview: "2026-01-01-preview",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations

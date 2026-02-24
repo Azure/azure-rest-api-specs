@@ -1,0 +1,30 @@
+{
+  "operationId": "CrossTenant_ListProtectedItems",
+  "title": "List Cross-Tenant Protected Items",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "sourceVaultMappingName": "sourceVaultMapping1",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupSourceVaultMappings/sourceVaultMapping1/protectedItems/VM;iaasvmcontainerv2;SwaggerTestRg;testVM",
+            "name": "VM;iaasvmcontainerv2;SwaggerTestRg;testVM",
+            "type": "Microsoft.RecoveryServices/vaults/backupSourceVaultMappings/protectedItems",
+            "properties": {
+              "protectedItemType": "Microsoft.Compute/virtualMachines",
+              "virtualMachineId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.Compute/virtualMachines/testVM",
+              "protectionState": "Protected",
+              "lastBackupTime": "2026-01-15T08:00:00.0000000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

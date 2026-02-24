@@ -8675,3 +8675,83 @@ model ClientDiscoveryResponse {
   @nextLink
   nextLink?: string;
 }
+
+// ============================================================
+// Cross-Tenant Restore (CTR) Models — added in v2026_03_01_preview
+// ============================================================
+
+/**
+ * Source vault mapping properties for cross-tenant restore.
+ * Represents the configuration linking a source vault to a target vault across tenants.
+ */
+@added(Versions.v2026_03_01_preview)
+model SourceVaultMapping {
+  /**
+   * ARM resource ID of the source vault.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service API uses sourceVaultARMId"
+  sourceVaultARMId: string;
+
+  /**
+   * Name of the mapping.
+   */
+  mappingName?: string;
+
+  /**
+   * Timestamp when the mapping was created.
+   */
+  createdTime?: utcDateTime;
+
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: string[];
+
+  /**
+   * Provisioning state of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+}
+
+/**
+ * Request to remove a source vault mapping for cross-tenant restore.
+ */
+@added(Versions.v2026_03_01_preview)
+model RemoveSourceVaultMappingRequest {
+  /**
+   * ResourceGuardOperationRequests on which LAC check will be performed.
+   */
+  resourceGuardOperationRequests?: string[];
+}
+
+/**
+ * State of a vault mapping.
+ */
+@added(Versions.v2026_03_01_preview)
+union VaultMappingState {
+  string,
+
+  /** The mapping is active. */
+  Active: "Active",
+
+  /** The mapping is inactive. */
+  Inactive: "Inactive",
+}
+
+/**
+ * Response for CheckVaultMappingStatus API.
+ * Contains information about whether a source vault is mapped to a target vault.
+ */
+@added(Versions.v2026_03_01_preview)
+model SourceVaultMappingStatusResponse {
+  /**
+   * Mapping name (if mapped).
+   */
+  mappingName?: string;
+
+  /**
+   * Current state of the mapping.
+   */
+  mappingState?: VaultMappingState;
+}

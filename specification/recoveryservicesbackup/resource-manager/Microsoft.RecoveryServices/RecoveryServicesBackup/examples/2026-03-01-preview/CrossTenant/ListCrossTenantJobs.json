@@ -1,0 +1,36 @@
+{
+  "operationId": "CrossTenant_ListJobs",
+  "title": "List Cross-Tenant Jobs",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "sourceVaultMappingName": "sourceVaultMapping1",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupJobs/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs",
+            "properties": {
+              "jobType": "AzureIaaSVMJob",
+              "operation": "Restore",
+              "status": "Completed",
+              "startTime": "2026-01-15T10:30:00.0000000Z",
+              "endTime": "2026-01-15T10:35:00.0000000Z",
+              "entityFriendlyName": "testVM",
+              "backupManagementType": "AzureIaasVM",
+              "activityId": "00000000-0000-0000-0000-000000000000",
+              "virtualMachineVersion": "Compute",
+              "duration": "PT5M"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
