@@ -104,12 +104,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@clientOption(BlobItem.name,
   "deserialize_with",
-  "crate::models::deserialize_blob_name",
+  "crate::models::blob_name::option::deserialize",
   "rust"
 );
 @@clientOption(BlobPrefix.name,
   "deserialize_with",
-  "crate::models::deserialize_blob_name",
+  "crate::models::blob_name::option::deserialize",
   "rust"
 );
 
