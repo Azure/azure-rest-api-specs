@@ -207,14 +207,33 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?comp=acl")
-  getAccessPolicy is StorageOperation<
-    {
-      ...TimeoutParameter;
-    },
-    {
-      @bodyRoot body: ListOfSignedIdentifier;
-    }
-  >;
+  getAccessPolicy(
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: "application/xml",
+
+    ...ApiVersionHeader,
+    ...ClientRequestIdHeader,
+    ...TimeoutParameter,
+  ): {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: "application/xml";
+
+    ...ApiVersionHeader;
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
+    ...DateResponseHeader;
+    @bodyRoot body: ListOfSignedIdentifier;
+  } | {
+    @statusCode statusCode: 204;
+    ...ApiVersionHeader;
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
+    ...DateResponseHeader;
+  } | StorageError;
 
   /** sets the permissions for the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
