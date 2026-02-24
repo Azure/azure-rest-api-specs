@@ -27,12 +27,12 @@ using Azure.ResourceManager;
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentApplicationsListParameters.count,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.CognitiveServices.AgenticApplicationsListParameters.count,
   30,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentApplicationsListParameters.orderByAsc,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.CognitiveServices.AgenticApplicationsListParameters.orderByAsc,
   false,
   "python"
 );

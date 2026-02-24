@@ -4384,19 +4384,19 @@ model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
 /**
  * A paginated list of Agent Application entities.
  */
-model AgentApplicationResourceArmPaginatedResult {
+model AgenticApplicationResourceArmPaginatedResult {
   /**
-   * The link to the next page of Agent Application objects. If null, there are no additional pages.
+   * The link to the next page of Agentic Application objects. If null, there are no additional pages.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'nextLink' is nullable in 'AgentApplicationResourceArmPaginatedResult' for backward compatibility with existing API behavior"
   @nextLink
   nextLink?: string | null;
 
   /**
-   * An array of objects of type Agent Application.
+   * An array of objects of type Agentic Application.
    */
   @pageItems
-  value?: AgentApplication[];
+  value?: AgenticApplication[];
 }
 
 /**
