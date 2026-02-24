@@ -26,8 +26,18 @@
               "minReplicas": 2,
               "maxReplicas": 10,
               "autoscalingTriggers": [
-                {"cpu": {"metricType": "Utilization", "value": "70"}},
-                {"memory": {"metricType": "Utilization", "value": "80"}}
+                {
+                  "cpu": {
+                    "metricType": "Utilization",
+                    "value": "70"
+                  }
+                },
+                {
+                  "memory": {
+                    "metricType": "Utilization",
+                    "value": "80"
+                  }
+                }
               ]
             },
             "identity": {
@@ -39,24 +49,88 @@
               "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1.2",
               "replicas": 3,
               "command": "/app/start.sh",
-              "arguments": ["--port", "8080", "--log-level", "info"],
-              "primaryPort": {"name": "http", "port": 8080, "protocol": "TCP"},
-              "containerProbes": [
-                {"type": "liveness", "protocol": "HTTP", "path": "/healthz", "port": 8080, "initialDelaySeconds": 15, "periodSeconds": 10, "timeoutSeconds": 1, "successThreshold": 1, "failureThreshold": 3},
-                {"type": "readiness", "protocol": "HTTP", "path": "/ready", "port": 8080, "initialDelaySeconds": 5, "periodSeconds": 5, "timeoutSeconds": 1, "successThreshold": 1, "failureThreshold": 3}
+              "arguments": [
+                "--port",
+                "8080",
+                "--log-level",
+                "info"
               ],
-              "labels": [{"key": "app", "value": "helloworld"}, {"key": "version", "value": "v1.2"}],
+              "primaryPort": {
+                "name": "http",
+                "port": 8080,
+                "protocol": "TCP"
+              },
+              "containerProbes": [
+                {
+                  "type": "liveness",
+                  "protocol": "HTTP",
+                  "path": "/healthz",
+                  "port": 8080,
+                  "initialDelaySeconds": 15,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 1,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                {
+                  "type": "readiness",
+                  "protocol": "HTTP",
+                  "path": "/ready",
+                  "port": 8080,
+                  "initialDelaySeconds": 5,
+                  "periodSeconds": 5,
+                  "timeoutSeconds": 1,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                }
+              ],
+              "labels": [
+                {
+                  "key": "app",
+                  "value": "helloworld"
+                },
+                {
+                  "key": "version",
+                  "value": "v1.2"
+                }
+              ],
               "environmentVariables": [
-                {"name": "DATABASE_URL", "value": "postgresql://db.example.com:5432/mydb"},
-                {"name": "LOG_LEVEL", "value": "info"}
+                {
+                  "name": "DATABASE_URL",
+                  "value": "postgresql://db.example.com:5432/mydb"
+                },
+                {
+                  "name": "LOG_LEVEL",
+                  "value": "info"
+                }
               ],
               "volumes": [
-                {"name": "cache", "emptyDir": {"medium": "Memory", "sizeLimit": "512Mi"}},
-                {"name": "app-config-volume", "configMap": {"name": "app-config", "optional": false}}
+                {
+                  "name": "cache",
+                  "emptyDir": {
+                    "medium": "Memory",
+                    "sizeLimit": "512Mi"
+                  }
+                },
+                {
+                  "name": "app-config-volume",
+                  "configMap": {
+                    "name": "app-config",
+                    "optional": false
+                  }
+                }
               ],
               "volumeMounts": [
-                {"name": "cache", "mountPath": "/tmp/cache", "readOnly": false},
-                {"name": "app-config-volume", "mountPath": "/etc/config", "readOnly": true}
+                {
+                  "name": "cache",
+                  "mountPath": "/tmp/cache",
+                  "readOnly": false
+                },
+                {
+                  "name": "app-config-volume",
+                  "mountPath": "/etc/config",
+                  "readOnly": true
+                }
               ]
             },
             "generatedServiceAccountName": "sa-production-helloworld-app",
