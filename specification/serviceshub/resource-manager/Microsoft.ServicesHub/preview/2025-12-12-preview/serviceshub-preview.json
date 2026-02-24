@@ -1148,6 +1148,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getOfflineDownloadUrl": {
+      "post": {
+        "operationId": "Get_OfflineDownloadUrl",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Get the offline download URL.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OfflineDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OfflineDownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the offline download URL": {
+            "$ref": "./examples/OfflineDownloadReport.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2154,6 +2205,35 @@
         "content": {
           "type": "string",
           "description": "Base64 encoded content of the file."
+        }
+      }
+    },
+    "OfflineDownloadPayload": {
+      "type": "object",
+      "description": "Defines the payload for offline download of Assessment Report.",
+      "properties": {
+        "assessmentName": {
+          "type": "string",
+          "description": "Defines the name of the assessment."
+        }
+      }
+    },
+    "OfflineDownloadResult": {
+      "type": "object",
+      "description": "Defines the Result for offline download of Assessment Report.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Defines the name of the file."
+        },
+        "downloadUrl": {
+          "type": "string",
+          "description": "The URL to download the file."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time for the download URL."
         }
       }
     },
