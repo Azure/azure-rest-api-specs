@@ -16,43 +16,11 @@ namespace Microsoft.Resources {
 // ================================  
 // OPERATIONS INTERFACE
 // ================================
-// ================================
-// ================================
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 // ================================
-// BATCH OPERATIONS (Preview)
-// ================================
-
-@armResourceOperations
-@added(Versions.v2025_08_01_preview)
-interface BatchOperations {
-  /** Invokes a batch of individual Azure Resource Manager requests at a subscription scope. */
-  @doc("The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.")
-  @post
-  @armResourceAction(BatchResponseStatus)
-  invokeAtSubscriptionScope(
-    ...Azure.ResourceManager.Foundations.SubscriptionScope<{}>,
-    @doc("Specifications for all of the requests that will be invoked as part of the batch.")
-    @body
-    parameters: BatchRequests,
-  ): ArmResponse<BatchResponseStatus> | ArmAcceptedLroResponse<"The batch was accepted and has begun processing.", BatchResponseStatus>;
-
-  /** Invokes a batch of individual Azure Resource Manager requests at a resource group scope. */
-  @doc("The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.")
-  @post
-  @armResourceAction(BatchResponseStatus)
-  invokeAtResourceGroupScope(
-    ...Azure.ResourceManager.Foundations.ResourceGroupScope<{}>,
-    @doc("Specifications for all of the requests that will be invoked as part of the batch.")
-    @body
-    parameters: BatchRequests,
-  ): ArmResponse<BatchResponseStatus> | ArmAcceptedLroResponse<"The batch was accepted and has begun processing.", BatchResponseStatus>;
-}
-
-// ================================
-// RESOURCE GROUP OPERATIONS (Stable)
+// RESOURCE GROUP OPERATIONS
 // ================================
 
 @armResourceOperations
@@ -79,7 +47,7 @@ interface ResourceGroups {
 }
 
 // ================================
-// RESOURCES OPERATIONS (Stable)
+// RESOURCES OPERATIONS
 // ================================
 
 @armResourceOperations

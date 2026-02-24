@@ -18,7 +18,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
 @armProviderNamespace("Microsoft.Resources")
 @service(#{
-  title: "Microsoft Azure Resources Client",
+  title: "ResourceManagementClient",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -29,9 +29,6 @@ namespace Microsoft.Resources {
 enum Versions {
   /** The 2025-04-01 stable API version. */
   v2025_04_01: "2025-04-01",
-
-  /** The 2025-08-01-preview API version with batch operations. */
-  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 // Include all operations and models
