@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 
@@ -15,6 +17,7 @@ namespace Microsoft.Resources {
 
 /** HTTP method enumeration for batch requests */
 @doc("The HTTP method associated with the request.")
+@added(Versions.v2025_08_01_preview)
 union HttpMethod {
   string,
   /** HTTP GET method */
@@ -35,6 +38,7 @@ union HttpMethod {
 
 /** Specifications for all of the requests that will be invoked as part of the batch. */
 @doc("Specifications for all of the requests that will be invoked as part of the batch.")
+@added(Versions.v2025_08_01_preview)
 model BatchRequests {
   /** The requests that will be invoked. */
   @doc("The requests that will be invoked.")
@@ -43,6 +47,7 @@ model BatchRequests {
 
 /** The specification for one request that will be part of a larger batch. */
 @doc("The specification for one request that will be part of a larger batch.")
+@added(Versions.v2025_08_01_preview)
 model BatchRequest {
   /** The identifier for the request. Must be unique within a batch. */
   @doc("The identifier for the request. Must be unique within a batch.")
@@ -67,6 +72,7 @@ model BatchRequest {
 
 /** Responses for all requests contained in the batch. */
 @doc("Responses for all requests contained in the batch.")
+@added(Versions.v2025_08_01_preview)
 model BatchResponses {
   /** Responses for all requests contained in the batch. */
   @doc("Responses for all requests contained in the batch.")
@@ -75,6 +81,7 @@ model BatchResponses {
 
 /** The response received for one request in the batch. */
 @doc("The response received for one request in the batch.")
+@added(Versions.v2025_08_01_preview)
 model BatchResponse {
   /** The identifier of the request that generated the response. */
   @doc("The identifier of the request that generated the response.")
@@ -99,6 +106,7 @@ model BatchResponse {
 
 /** The result of the batch operation and each request within it. */
 @doc("The result of the batch operation and each request within it.")
+@added(Versions.v2025_08_01_preview)
 model BatchResponseStatus {
   ...Azure.Core.Foundations.OperationStatus;
 
