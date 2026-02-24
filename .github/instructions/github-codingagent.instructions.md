@@ -1,3 +1,7 @@
+---
+excludeAgent: "code-review"
+---
+
 # Run SDK generation using pipeline in GitHub coding agent
 
 Run only SDK generation using pipeline and do not run SDK generation using local SDK generation tools. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context. Run SDK generation tool even if release plan already has SDK generation pipeline URL to support regenerating SDK. Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.

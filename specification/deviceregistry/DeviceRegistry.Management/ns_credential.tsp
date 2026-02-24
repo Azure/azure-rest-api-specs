@@ -14,6 +14,7 @@ namespace Microsoft.DeviceRegistry;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "singleton"
 @added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
 @doc("A Credential Resource")
 @parentResource(Namespace)
 model Credential is TrackedResource<CredentialProperties> {
@@ -25,6 +26,7 @@ model Credential is TrackedResource<CredentialProperties> {
 }
 
 @added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
 @doc("Details of the Credential Resource.")
 model CredentialProperties {
   @visibility(Lifecycle.Read)
@@ -33,6 +35,7 @@ model CredentialProperties {
 }
 
 @added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
 @armResourceOperations
 interface Credentials {
   get is ArmResourceRead<Credential>;
