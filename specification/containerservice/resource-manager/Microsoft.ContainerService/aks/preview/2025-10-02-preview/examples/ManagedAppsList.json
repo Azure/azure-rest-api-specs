@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "namespaceName": "production",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "helloworld-app",
+            "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
+            "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+            "properties": {
+              "activeRevisionName": "helloworld-app-revision-7",
+              "maxRevisionCount": 50,
+              "uniqueIdentifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "template": {
+                "scaling": {"type": "autoscale", "minReplicas": 2, "maxReplicas": 10, "autoscalingTriggers": [{"cpu": {"metricType": "Utilization", "value": "70"}}]},
+                "template": {
+                  "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1.2",
+                  "replicas": 3,
+                  "command": "/app/start.sh",
+                  "primaryPort": {"name": "http", "port": 8080, "protocol": "TCP"}
+                },
+                "generatedServiceAccountName": "sa-production-helloworld-app",
+                "generatedKubernetesServiceName": "svc-production-helloworld-app"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "nginx-app",
+            "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/nginx-app",
+            "etag": "\"0000aaaa-0000-1111-2222-bbbb4444dddd\"",
+            "properties": {
+              "activeRevisionName": "nginx-app-revision-3",
+              "maxRevisionCount": 50,
+              "uniqueIdentifier": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+              "template": {
+                "scaling": {"type": "manual"},
+                "template": {
+                  "image": "nginx:1.25",
+                  "replicas": 2,
+                  "command": "nginx",
+                  "arguments": ["-g", "daemon off;"],
+                  "primaryPort": {"name": "http", "port": 80, "protocol": "TCP"}
+                },
+                "generatedServiceAccountName": "sa-production-nginx-app",
+                "generatedKubernetesServiceName": "svc-production-nginx-app"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Apps_ListByManagedNamespace",
+  "title": "List Managed Apps in Namespace"
+}

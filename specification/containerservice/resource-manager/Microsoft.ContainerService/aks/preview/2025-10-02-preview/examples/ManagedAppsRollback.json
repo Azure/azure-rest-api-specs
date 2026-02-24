@@ -18,48 +18,31 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
         "etag": "\"0000aaaa-0000-1111-2222-bbbb3333dddd\"",
         "properties": {
-          "scaling": {
-            "type": "autoscale",
-            "minReplicas": 2,
-            "maxReplicas": 10,
-            "autoscalingTriggers": [
-              {
-                "cpu": {
-                  "metricType": "Utilization",
-                  "value": "70"
-                }
-              }
-            ]
-          },
+          "activeRevisionName": "helloworld-app-revision-5",
+          "maxRevisionCount": 50,
+          "uniqueIdentifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
           "template": {
-            "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1",
-            "replicas": 3,
-            "command": "/app/start.sh",
-            "arguments": [
-              "--port",
-              "8080"
-            ],
-            "primaryPort": {
-              "name": "http",
-              "port": 8080,
-              "protocol": "TCP"
+            "scaling": {
+              "type": "autoscale",
+              "minReplicas": 2,
+              "maxReplicas": 10,
+              "autoscalingTriggers": [
+                {"cpu": {"metricType": "Utilization", "value": "70"}}
+              ]
             },
-            "containerProbes": [
-              {
-                "type": "liveness",
-                "protocol": "HTTP",
-                "path": "/healthz",
-                "port": 8080,
-                "initialDelaySeconds": 15,
-                "periodSeconds": 10,
-                "timeoutSeconds": 1,
-                "successThreshold": 1,
-                "failureThreshold": 3
-              }
-            ]
+            "template": {
+              "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1",
+              "replicas": 3,
+              "command": "/app/start.sh",
+              "arguments": ["--port", "8080"],
+              "primaryPort": {"name": "http", "port": 8080, "protocol": "TCP"},
+              "containerProbes": [
+                {"type": "liveness", "protocol": "HTTP", "path": "/healthz", "port": 8080, "initialDelaySeconds": 15, "periodSeconds": 10, "timeoutSeconds": 1, "successThreshold": 1, "failureThreshold": 3}
+              ]
+            },
+            "generatedServiceAccountName": "sa-production-helloworld-app",
+            "generatedKubernetesServiceName": "svc-production-helloworld-app"
           },
-          "generatedServiceAccountName": "sa-production-helloworld-app",
-          "generatedKubernetesServiceName": "svc-production-helloworld-app",
           "provisioningState": "Succeeded"
         }
       }

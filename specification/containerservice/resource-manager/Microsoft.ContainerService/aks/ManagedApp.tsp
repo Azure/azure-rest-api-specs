@@ -19,6 +19,7 @@ interface Apps {
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
+  listByManagedNamespace is ArmResourceListByParent<ManagedApp>;
   rollback is ArmResourceActionAsync<
     ManagedApp,
     ManagedAppRollbackPostParameters,
@@ -33,21 +34,15 @@ interface ManagedAppRevisions {
   listByManagedApp is ArmResourceListByParent<ManagedAppRevision>;
 }
 
-alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
-  @header("If-Match")
-  @doc("The request should only proceed if an entity matches this string.")
-  ifMatch?: string;
-};
-
 /** App resource */
 @parentResource(ManagedNamespace)
-model ManagedApp is Azure.ResourceManager.ProxyResource<AppProperties> {
+model ManagedApp is Azure.ResourceManager.ProxyResource<ManagedAppProperties> {
   ...ResourceNameParameter<ManagedApp>;
   ...EntityTagProperty;
 }
 
 model ManagedAppRevision
-  is Azure.ResourceManager.ExtensionResource<AppProperties> {
+  is Azure.ResourceManager.ExtensionResource<AppRevisionProperties> {
   @key("managedAppRevisionName")
   @doc("The name of the managed app revision resource.")
   @segment("managedAppRevisions")
@@ -65,8 +60,43 @@ model ManagedAppRollbackPostParameters {
   managedAppRevisionName: string;
 }
 
-/** App properties */
-model AppProperties {
+/** Properties of the managed app */
+model ManagedAppProperties {
+  /** The name of the active revision */
+  @visibility(Lifecycle.Read)
+  activeRevisionName: string;
+
+  /** Maximum number of revisions to retain. Oldest revisions are automatically deleted when exceeded. */
+  maxRevisionCount?: int32 = 50;
+
+  /** Unique identifier for the managed app */
+  @visibility(Lifecycle.Read)
+  uniqueIdentifier: string;
+
+  /** The deployment template for the managed app */
+  template: AppTemplate;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Properties of the managed app revision */
+model AppRevisionProperties {
+  /** Time the revision was created */
+  @visibility(Lifecycle.Read)
+  createdTime: string;
+
+  /** The deployment template for the managed app revision */
+  template: AppTemplate;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** App Template */
+model AppTemplate {
   /** Additional k8s resources (in yaml format) to deploy along with the app
    * This can include things like ConfigMaps, Secrets, PersistentVolumeClaims, etc.
    * Do we split this out into separate fields? Easier to maintain as raw yaml, but harder to validate
@@ -98,10 +128,6 @@ model AppProperties {
   /** The name of the generated kubernetes service. This is generated from the app deployment name and namespace name */
   @visibility(Lifecycle.Read)
   generatedKubernetesServiceName: string;
-
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 }
 
 /** Deployment template for the app */
@@ -120,6 +146,9 @@ model DeploymentTemplate {
 
   /** The primary port your application listens on, where it receives traffic. */
   primaryPort?: ContainerPort;
+
+  /** The resource requirements for the app */
+  resources?: ResourceRequirements;
 
   /** An array of container probes for the app. If not specified, the default is an http request to /healthz */
   @identifiers(#["type"])
@@ -224,6 +253,14 @@ model Container {
   /** Container Resource Requirements. If not specified, defaults will be applied */
   resources?: ResourceRequirements;
 
+  /** Environment variables for the container */
+  @identifiers(#["name"])
+  environmentVariables?: EnvironmentVariable[];
+
+  /** Ports exposed by the container */
+  @identifiers(#["port", "name"])
+  ports?: ContainerPort[];
+
   /** Volume mounts for the container */
   @identifiers(#["name"])
   volumeMounts?: VolumeMount[];
@@ -248,6 +285,26 @@ model ResourceRequirements {
 
   /** Memory resource request and limit */
   memory?: string = "2Gi";
+
+  /** Approximate T-Shirt size. Mutually exclusive with cpu and memory */
+  tShirtSize?: TShirtSize;
+}
+
+/** T-Shirt size for resource requirements */
+union TShirtSize {
+  /** Small T-Shirt size */
+  Small: "Small",
+
+  /** Medium T-Shirt size */
+  Medium: "Medium",
+
+  /** Large T-Shirt size */
+  Large: "Large",
+
+  /** Extra Large T-Shirt size */
+  XLarge: "XLarge",
+
+  string,
 }
 
 /** Role definition for k8s resources that the app needs to access */

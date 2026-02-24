@@ -4043,6 +4043,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}/managedApps": {
+      "get": {
+        "operationId": "Apps_ListByManagedNamespace",
+        "tags": [
+          "Apps"
+        ],
+        "description": "List ManagedApp resources by ManagedNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the managed namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedAppListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}/managedApps/{managedAppName}": {
       "get": {
         "operationId": "Apps_Get",
@@ -7435,9 +7492,33 @@
         }
       }
     },
-    "AppProperties": {
+    "AppRevisionProperties": {
       "type": "object",
-      "description": "App properties",
+      "description": "Properties of the managed app revision",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "description": "Time the revision was created",
+          "readOnly": true
+        },
+        "template": {
+          "$ref": "#/definitions/AppTemplate",
+          "description": "The deployment template for the managed app revision"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "createdTime",
+        "template"
+      ]
+    },
+    "AppTemplate": {
+      "type": "object",
+      "description": "App Template",
       "properties": {
         "additionalK8sResources": {
           "type": "array",
@@ -7491,11 +7572,6 @@
         "generatedKubernetesServiceName": {
           "type": "string",
           "description": "The name of the generated kubernetes service. This is generated from the app deployment name and namespace name",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
           "readOnly": true
         }
       },
@@ -8408,6 +8484,27 @@
           "$ref": "#/definitions/ResourceRequirements",
           "description": "Container Resource Requirements. If not specified, defaults will be applied"
         },
+        "environmentVariables": {
+          "type": "array",
+          "description": "Environment variables for the container",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ports": {
+          "type": "array",
+          "description": "Ports exposed by the container",
+          "items": {
+            "$ref": "#/definitions/ContainerPort"
+          },
+          "x-ms-identifiers": [
+            "port",
+            "name"
+          ]
+        },
         "volumeMounts": {
           "type": "array",
           "description": "Volume mounts for the container",
@@ -8888,6 +8985,10 @@
         "primaryPort": {
           "$ref": "#/definitions/ContainerPort",
           "description": "The primary port your application listens on, where it receives traffic."
+        },
+        "resources": {
+          "$ref": "#/definitions/ResourceRequirements",
+          "description": "The resource requirements for the app"
         },
         "containerProbes": {
           "type": "array",
@@ -11215,7 +11316,7 @@
       "description": "App resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AppProperties",
+          "$ref": "#/definitions/ManagedAppProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -11230,12 +11331,69 @@
         }
       ]
     },
+    "ManagedAppListResult": {
+      "type": "object",
+      "description": "The response of a ManagedApp list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedApp items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedApp"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedAppProperties": {
+      "type": "object",
+      "description": "Properties of the managed app",
+      "properties": {
+        "activeRevisionName": {
+          "type": "string",
+          "description": "The name of the active revision",
+          "readOnly": true
+        },
+        "maxRevisionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of revisions to retain. Oldest revisions are automatically deleted when exceeded.",
+          "default": 50
+        },
+        "uniqueIdentifier": {
+          "type": "string",
+          "description": "Unique identifier for the managed app",
+          "readOnly": true
+        },
+        "template": {
+          "$ref": "#/definitions/AppTemplate",
+          "description": "The deployment template for the managed app"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "activeRevisionName",
+        "uniqueIdentifier",
+        "template"
+      ]
+    },
     "ManagedAppRevision": {
       "type": "object",
       "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AppProperties",
+          "$ref": "#/definitions/AppRevisionProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -15498,6 +15656,10 @@
           "type": "string",
           "description": "Memory resource request and limit",
           "default": "2Gi"
+        },
+        "tShirtSize": {
+          "$ref": "#/definitions/TShirtSize",
+          "description": "Approximate T-Shirt size. Mutually exclusive with cpu and memory"
         }
       }
     },
@@ -16229,6 +16391,42 @@
           "format": "int32",
           "description": "Sysctl setting vm.vfs_cache_pressure."
         }
+      }
+    },
+    "TShirtSize": {
+      "type": "string",
+      "description": "T-Shirt size for resource requirements",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large",
+        "XLarge"
+      ],
+      "x-ms-enum": {
+        "name": "TShirtSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Small",
+            "value": "Small",
+            "description": "Small T-Shirt size"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium T-Shirt size"
+          },
+          {
+            "name": "Large",
+            "value": "Large",
+            "description": "Large T-Shirt size"
+          },
+          {
+            "name": "XLarge",
+            "value": "XLarge",
+            "description": "Extra Large T-Shirt size"
+          }
+        ]
       }
     },
     "TagsObject": {

@@ -3,6 +3,7 @@
     "api-version": "2025-10-02-preview",
     "parameters": {
       "properties": {
+        "maxRevisionCount": 10,
         "additionalK8sResources": [
           "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
           "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
@@ -167,7 +168,14 @@
               "resources": {
                 "cpu": "100m",
                 "memory": "128Mi"
-              }
+              },
+              "environmentVariables": [
+                {
+                  "name": "DB_HOST",
+                  "value": "db.example.com"
+                }
+              ],
+              "ports": []
             }
           ],
           "sidecarContainers": [
@@ -184,6 +192,19 @@
                 "cpu": "200m",
                 "memory": "256Mi"
               },
+              "environmentVariables": [
+                {
+                  "name": "LOG_LEVEL",
+                  "value": "info"
+                }
+              ],
+              "ports": [
+                {
+                  "name": "http",
+                  "port": 2020,
+                  "protocol": "TCP"
+                }
+              ],
               "volumeMounts": [
                 {
                   "name": "log-config",
@@ -285,6 +306,8 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
         "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
         "properties": {
+          "activeRevisionName": "helloworld-app-revision-1",
+          "maxRevisionCount": 10,
           "additionalK8sResources": [
             "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
             "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
@@ -454,7 +477,14 @@
                 "resources": {
                   "cpu": "100m",
                   "memory": "128Mi"
-                }
+                },
+                "environmentVariables": [
+                  {
+                    "name": "DB_HOST",
+                    "value": "db.example.com"
+                  }
+                ],
+                "ports": []
               }
             ],
             "sidecarContainers": [
@@ -476,6 +506,19 @@
                     "name": "log-config",
                     "mountPath": "/fluent-bit/etc",
                     "readOnly": true
+                  }
+                ],
+                "environmentVariables": [
+                  {
+                    "name": "LOG_LEVEL",
+                    "value": "info"
+                  }
+                ],
+                "ports": [
+                  {
+                    "name": "http",
+                    "port": 2020,
+                    "protocol": "TCP"
                   }
                 ]
               }
@@ -569,6 +612,8 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
         "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
         "properties": {
+          "activeRevisionName": "helloworld-app-revision-1",
+          "maxRevisionCount": 10,
           "additionalK8sResources": [
             "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
             "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
@@ -738,7 +783,14 @@
                 "resources": {
                   "cpu": "100m",
                   "memory": "128Mi"
-                }
+                },
+                "environmentVariables": [
+                  {
+                    "name": "DB_HOST",
+                    "value": "db.example.com"
+                  }
+                ],
+                "ports": []
               }
             ],
             "sidecarContainers": [
@@ -760,6 +812,19 @@
                     "name": "log-config",
                     "mountPath": "/fluent-bit/etc",
                     "readOnly": true
+                  }
+                ],
+                "environmentVariables": [
+                  {
+                    "name": "LOG_LEVEL",
+                    "value": "info"
+                  }
+                ],
+                "ports": [
+                  {
+                    "name": "http",
+                    "port": 2020,
+                    "protocol": "TCP"
                   }
                 ]
               }
