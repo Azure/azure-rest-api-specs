@@ -16,10 +16,6 @@ using Microsoft.DataFactory;
 @@clientName(AmazonMWSLinkedService, "AmazonMwsLinkedService", "java");
 @@clientName(WebHookActivity, "WebhookActivity", "java");
 @@clientName(WebHookActivityMethod, "WebhookActivityMethod", "java");
-@@clientName(PrivateEndpointConnectionResources,
-  "PrivateEndpointConnection",
-  "java"
-);
 
 @@clientName(AmazonMWSLinkedServiceTypeProperties,
   "AmazonMwsLinkedServiceTypeProperties",
@@ -103,6 +99,77 @@ using Microsoft.DataFactory;
 
 @@clientName(SqlServerBaseLinkedServiceTypeProperties.hostNameInCertificate,
   "hostnameInCertificate",
+  "java"
+);
+
+@@clientName(HBaseLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(HiveLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(ImpalaLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PhoenixLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PrestoLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(SparkLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PrestoLinkedServiceTypeProperties.timeZoneID,
+  "timeZoneId",
+  "java"
+);
+@@clientName(HDInsightOnDemandLinkedServiceTypeProperties.clusterUserName,
+  "clusterUsername",
+  "java"
+);
+@@clientName(HDInsightOnDemandLinkedServiceTypeProperties.clusterSshUserName,
+  "clusterSshUsername",
+  "java"
+);
+@@clientName(GoogleAdWordsLinkedServiceTypeProperties.clientCustomerID,
+  "clientCustomerId",
+  "java"
+);
+@@clientName(GoogleAdWordsLinkedServiceTypeProperties.loginCustomerID,
+  "loginCustomerId",
+  "java"
+);
+@@clientName(IntegrationRuntimeSsisCatalogInfo.catalogAdminUserName,
+  "catalogAdminUsername",
+  "java"
+);
+@@clientName(SelfHostedIntegrationRuntimeStatusTypeProperties.autoUpdateETA,
+  "autoUpdateEta",
+  "java"
+);
+@@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "soqlQuery", "java");
+
+@@clientLocation(PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.createOrUpdate,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.listByFactory,
+  "PrivateEndPointConnections",
   "java"
 );
 
