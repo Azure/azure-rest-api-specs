@@ -10598,6 +10598,30 @@
         "disablePrometheusMetricsScraping": {
           "type": "boolean",
           "description": "Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false"
+        },
+        "containerNetworkLogs": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "containerNetworkLogs",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Azure monitor ingestion of container network logs is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "Azure monitor ingestion of container network logs is enabled"
+              }
+            ]
+          },
+          "title": "Container Network Logs Ingestion",
+          "description": "Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.",
+          "default": "Disabled"
         }
       }
     },
