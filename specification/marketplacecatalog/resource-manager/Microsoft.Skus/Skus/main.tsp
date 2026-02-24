@@ -59,7 +59,7 @@ interface SkuList {
 
     @doc(LocationsParameterDescription)
     @query
-    locations?: string,
+    locations?: string[],
 
     @doc(ExcludePublicParameterDescription)
     @query
@@ -101,7 +101,7 @@ interface SkuList {
 
       @doc(LocationsParameterDescription)
       @query
-      locations?: string;
+      locations?: string[];
 
       @doc(FilterOdataParameterDescription)
       @query
@@ -141,7 +141,7 @@ interface SkuList {
 
       @doc(LocationsParameterDescription)
       @query
-      locations?: string;
+      locations?: string[];
 
       @doc(FilterOdataParameterDescription)
       @query
@@ -181,7 +181,7 @@ interface SkuList {
 
       @doc(LocationsParameterDescription)
       @query
-      locations?: string;
+      locations?: string[];
 
       @doc(FilterOdataParameterDescription)
       @query

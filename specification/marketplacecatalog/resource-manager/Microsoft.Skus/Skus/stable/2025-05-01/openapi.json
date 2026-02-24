@@ -90,7 +90,11 @@
             "in": "query",
             "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "$filter",
@@ -185,7 +189,11 @@
             "in": "query",
             "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "$filter",
@@ -320,7 +328,11 @@
             "in": "query",
             "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "excludePublicOffersAndPublicPlans",
@@ -423,7 +435,11 @@
             "in": "query",
             "description": "Return SKUs available in the selected locations. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "$filter",
@@ -540,42 +556,6 @@
         "billingProfileId"
       ]
     },
-    "CspState": {
-      "type": "string",
-      "description": "A value indicating whether the product is available for purchase through CSP channel.",
-      "enum": [
-        "OptIn",
-        "OptOut",
-        "Terminated",
-        "SelectiveOptIn"
-      ],
-      "x-ms-enum": {
-        "name": "CspState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OptIn",
-            "value": "OptIn",
-            "description": "Opted in for CSP."
-          },
-          {
-            "name": "OptOut",
-            "value": "OptOut",
-            "description": "Opted out from CSP."
-          },
-          {
-            "name": "Terminated",
-            "value": "Terminated",
-            "description": "Terminated from CSP."
-          },
-          {
-            "name": "SelectiveOptIn",
-            "value": "SelectiveOptIn",
-            "description": "Selectively opted in for CSP."
-          }
-        ]
-      }
-    },
     "DiscoveryErrorDetails": {
       "type": "object",
       "description": "Error details returned in DiscoveryErrorPayload.",
@@ -683,30 +663,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "PublisherType": {
-      "type": "string",
-      "description": "A value indicating whether the publisher is Microsoft or a third party.",
-      "enum": [
-        "Microsoft",
-        "ThirdParty"
-      ],
-      "x-ms-enum": {
-        "name": "PublisherType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Microsoft",
-            "value": "Microsoft",
-            "description": "Microsoft publisher."
-          },
-          {
-            "name": "ThirdParty",
-            "value": "ThirdParty",
-            "description": "Third party publisher."
-          }
-        ]
       }
     },
     "Sku": {
@@ -857,8 +813,8 @@
           "description": "Publisher id."
         },
         "publisherType": {
-          "$ref": "#/definitions/PublisherType",
-          "description": "A value indicating whether the publisher is Microsoft or a third party."
+          "type": "string",
+          "description": "Identifies the publisher relationship to Microsoft for support and partnership classification.\\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance"
         },
         "productType": {
           "type": "string",
@@ -907,7 +863,6 @@
         },
         "lastModifiedDateTime": {
           "type": "string",
-          "format": "date-time",
           "description": "Latest update date of the SKU."
         },
         "location": {
@@ -957,8 +912,8 @@
           "description": "Maximum order quantity."
         },
         "cspState": {
-          "$ref": "#/definitions/CspState",
-          "description": "A value indicating whether the product is available for purchase through CSP channel."
+          "type": "string",
+          "description": "Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment"
         },
         "hasRI": {
           "type": "boolean",

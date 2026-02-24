@@ -8,38 +8,6 @@ using Azure.ResourceManager;
 namespace Microsoft.Marketplace;
 
 // ============================================================================
-// Enums
-// ============================================================================
-
-/** A value indicating whether the publisher is Microsoft or a third party. */
-union PublisherType {
-  string,
-
-  /** Microsoft publisher. */
-  Microsoft: "Microsoft",
-
-  /** Third party publisher. */
-  ThirdParty: "ThirdParty",
-}
-
-/** A value indicating whether the product is available for purchase through CSP channel. */
-union CspState {
-  string,
-
-  /** Opted in for CSP. */
-  OptIn: "OptIn",
-
-  /** Opted out from CSP. */
-  OptOut: "OptOut",
-
-  /** Terminated from CSP. */
-  Terminated: "Terminated",
-
-  /** Selectively opted in for CSP. */
-  SelectiveOptIn: "SelectiveOptIn",
-}
-
-// ============================================================================
 // Referenced Models
 // ============================================================================
 
@@ -178,8 +146,8 @@ model SkuSummary {
   /** Publisher id. */
   publisherId?: string;
 
-  /** A value indicating whether the publisher is Microsoft or a third party. */
-  publisherType?: PublisherType;
+  /** Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance */
+  publisherType?: string;
 
   /** Offer type. */
   productType?: string;
@@ -217,7 +185,7 @@ model SkuSummary {
   skuTitle: string;
 
   /** Latest update date of the SKU. */
-  lastModifiedDateTime?: utcDateTime;
+  lastModifiedDateTime?: string;
 
   /** Location (region). */
   location: string;
@@ -252,8 +220,8 @@ model SkuSummary {
   /** Maximum order quantity. */
   maxQuantity?: int32;
 
-  /** A value indicating whether the product is available for purchase through CSP channel. */
-  cspState?: CspState;
+  /** Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment */
+  cspState?: string;
 
   /** A value indicating whether the SKU supports reservations. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches existing API contract"
