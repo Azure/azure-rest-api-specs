@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import { writeSync } from "node:fs";
 
 /**
  * Log prefix for all messages from openapi-diff-runner
@@ -53,6 +54,68 @@ export function logMessage(message: string, level?: LogLevel): void {
       break;
     }
   }
+}
+
+/**
+ * Synchronously writes a line to stdout using fs.writeSync, bypassing Node's stream buffering.
+ * This avoids silently dropping messages when stdout has backpressure (e.g. `node app.js | tee out.txt`).
+ */
+function writeStdoutSync(line: string): void {
+  writeSync(process.stdout.fd, line + "\n");
+}
+
+/**
+ * Logs a message to the console with GitHub Actions workflow commands.
+ * Uses fs.writeSync(process.stdout.fd) instead of console.log() to ensure all messages are
+ * written even under stdout backpressure.
+ * @param message The message to log.
+ * @param level The log level (e.g., LogLevel.Group, LogLevel.EndGroup, LogLevel.Debug, LogLevel.Error).
+ */
+export function logMessageSync(message: string, level?: LogLevel): void {
+  switch (level) {
+    case LogLevel.Group: {
+      writeStdoutSync(`::group::${message}`);
+      break;
+    }
+    case LogLevel.EndGroup: {
+      writeStdoutSync(`::endgroup::`);
+      break;
+    }
+    case LogLevel.Debug: {
+      writeStdoutSync(`::debug::${message}`);
+      break;
+    }
+    case LogLevel.Error: {
+      writeStdoutSync(`::error::${message}`);
+      break;
+    }
+    case LogLevel.Warn: {
+      writeStdoutSync(`::warning::${message}`);
+      break;
+    }
+    case LogLevel.Notice: {
+      writeStdoutSync(`::notice::${message}`);
+      break;
+    }
+    case LogLevel.Info:
+    default: {
+      writeStdoutSync(message);
+      break;
+    }
+  }
+}
+
+/**
+ * Logs a message with automatic truncation if it exceeds GitHub Actions limits.
+ * Uses fs.writeSync(process.stdout.fd) instead of console.log() to ensure all messages are
+ * written even under stdout backpressure.
+ * @param message The message to log
+ * @param level The log level
+ * @param prefix Optional prefix for truncation message
+ */
+export function logMessageSafeSync(message: string, level?: LogLevel, prefix?: string): void {
+  const safeMessage = truncateLogMessage(message, prefix);
+  logMessageSync(safeMessage, level);
 }
 
 /**

@@ -14,7 +14,7 @@ import {
 import { OadMessage } from "../types/oad-types.js";
 
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { logMessage, logWarning } from "../log.js";
+import { logMessage, logMessageSync, logWarning } from "../log.js";
 import {
   OadMessageRule,
   fallbackLabel,
@@ -123,7 +123,8 @@ function applyRule(
     type: appliedSeverity,
   };
 
-  logMessage(
+  // Use fs.writeSync-based log to ensure all messages written despite stdout backpressure
+  logMessageSync(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
       rule,
     )}', outputOadMessage: '${JSON.stringify(outputOadMessage)}'.`,

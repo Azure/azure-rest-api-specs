@@ -17,6 +17,7 @@ vi.mock("../../src/command-helpers.js", () => ({
 // Mock the log module
 vi.mock("../../src/log.js", () => ({
   logMessage: vi.fn(),
+  logMessageSync: vi.fn(),
   logWarning: vi.fn(),
   LogLevel: {
     Info: "Info",

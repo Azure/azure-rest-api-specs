@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { logMessage, logMessageSafe } from "../log.js";
+import { logMessage, logMessageSafeSync } from "../log.js";
 import { Context, logFileName } from "../types/breaking-change.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { OadMessage } from "../types/oad-types.js";
@@ -111,7 +111,7 @@ export function createMessageKey(message: OadMessage): string {
 export function appendToLogFile(logFilePath: string, msg: string): void {
   fs.appendFileSync(logFilePath, msg);
   fs.appendFileSync(logFilePath, "\n");
-  logMessageSafe("oad-message-processor.appendMsg: " + msg);
+  logMessageSafeSync("oad-message-processor.appendMsg: " + msg);
 }
 
 /**

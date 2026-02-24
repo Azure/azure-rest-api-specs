@@ -608,15 +608,15 @@ describe("command-helpers", () => {
 
   describe("logFullOadMessagesList", () => {
     it("should log all messages individually", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage, logMessageSync } = await import("../src/log.js");
       const msgs = createMockMessages();
 
       logFullOadMessagesList(msgs);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
-      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
-      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
+      expect(logMessageSync).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
+      expect(logMessageSync).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith("]");
       expect(logMessage).toHaveBeenCalledWith(
         "---- End of full list of messages ----",
