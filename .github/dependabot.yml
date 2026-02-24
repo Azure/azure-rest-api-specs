@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    exclude-paths:
+      - ".github/workflows/*.lock.{yaml,yml}"
   - package-ecosystem: "npm"
     directories:
       - "/"
@@ -30,6 +32,10 @@ updates:
       - dependency-name: "@azure-tools/spec-gen-sdk"
         update-types: ["version-update:semver-minor", "version-update:semver-major"]
     groups:
+      # Ships separately from other typespec packages
+      openapi-typespec:
+        patterns:
+          - "@azure-tools/openai-typespec"
       # Ships separately from other typespec packages
       typespec-client-generator-cli:
         patterns:

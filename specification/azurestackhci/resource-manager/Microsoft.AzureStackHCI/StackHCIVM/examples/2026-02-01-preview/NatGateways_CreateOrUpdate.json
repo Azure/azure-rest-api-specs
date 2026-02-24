@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "natGatewayName": "test-nat-gw",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+        "type": "CustomLocation"
+      },
+      "properties": {
+        "publicIPAddresses": [
+          {
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/azure-local-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/outbound-pip"
+          }
+        ]
+      },
+      "location": "West US2"
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-nat-gw",
+        "type": "Microsoft.AzureStackHCI/natGateways",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/natGateways/test-nat-gw",
+        "location": "West US2",
+        "properties": {
+          "publicIPAddresses": [
+            {
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/azure-local-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/outbound-pip"
+            }
+          ],
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-nat-gw",
+        "type": "Microsoft.AzureStackHCI/natGateways",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/natGateways/test-nat-gw",
+        "location": "West US2",
+        "properties": {
+          "publicIPAddresses": [
+            {
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/azure-local-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/outbound-pip"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "NatGateways_CreateOrUpdate",
+  "title": "PutNatGateway"
+}
