@@ -4,6 +4,7 @@ using Azure.Core.Experimental;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 /** Error response for API failures. */
 @error
@@ -51,9 +52,10 @@ op FoundryDataPlaneOperation<
 /** Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents. */
 union AgentDefinitionFeatureKeys {
   string,
-  container_agents_v1_preview: "ContainerAgents=V1Preview",
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
+  @removed(Versions.v1)
+  container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
