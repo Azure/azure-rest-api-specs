@@ -109,8 +109,7 @@ export function createMessageKey(message: OadMessage): string {
  * Append a message to the log file
  */
 export async function appendToLogFile(logFilePath: string, msg: string): Promise<void> {
-  fs.appendFileSync(logFilePath, msg);
-  fs.appendFileSync(logFilePath, "\n");
+  await fs.promises.appendFile(logFilePath, msg + "\n");
   await logMessageSafeAsync("oad-message-processor.appendMsg: " + msg);
 }
 
