@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/kusto"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,37 @@ options:
     emit-lro-options: "all"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-kusto"
+    service-dir: "sdk/kusto"
+    namespace: "azure.mgmt.kusto"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-kusto"
+    namespace: "com.azure.resourcemanager.kusto"
+    service-name: "Kusto"
+    enable-sync-stack: true
+    client-side-validations: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-kusto"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-kusto"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/kusto"
+    emitter-output-dir: "{output-dir}/{service-dir}/armkusto"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkusto"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
