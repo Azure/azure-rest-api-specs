@@ -1,0 +1,58 @@
+{
+  "title": "Invoke batch operation at subscription scope",
+  "operationId": "BatchOperations_InvokeAtSubscriptionScope",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "requests": [
+        {
+          "id": "1",
+          "method": "GET", 
+          "url": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group"
+        },
+        {
+          "id": "2",
+          "method": "GET",
+          "url": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group/resources"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "batchResult": {
+          "responses": [
+            {
+              "id": "1",
+              "httpStatusCode": 200,
+              "status": "Succeeded",
+              "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group",
+                "name": "my-resource-group",
+                "type": "Microsoft.Resources/resourceGroups",
+                "location": "westus2"
+              }
+            },
+            {
+              "id": "2", 
+              "httpStatusCode": 200,
+              "status": "Succeeded",
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "status": "InProgress",
+        "batchResult": null
+      }
+    }
+  }
+}
