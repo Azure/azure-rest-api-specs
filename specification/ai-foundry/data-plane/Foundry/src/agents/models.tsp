@@ -2,6 +2,7 @@ import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -137,8 +138,9 @@ union AgentKind {
   string,
   prompt: "prompt",
   hosted: "hosted",
-  container_app: "container_app",
   workflow: "workflow",
+  @removed(Versions.v1)
+  container_app: "container_app",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
@@ -278,6 +280,7 @@ model HostedAgentDefinition extends AgentDefinition {
     required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
+@removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
   kind: AgentKind.container_app;
 
