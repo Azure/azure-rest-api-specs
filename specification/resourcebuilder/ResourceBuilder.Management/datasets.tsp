@@ -36,12 +36,15 @@ model Dataset is ProxyResource<DatasetProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
   tags?: Record<string>;
 }
+
 /** Dataset kind discriminator */
 union DatasetKind {
   /** Custom user-defined dataset. */
   Custom: "Custom",
+
   /** ARM (Azure Resource Manager) managed resource dataset. */
   ArmResource: "ArmResource",
+
   string,
 }
 
