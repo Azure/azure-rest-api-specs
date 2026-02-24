@@ -11,13 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/managedops.json"
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.ManagedOps"
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ManagedOps"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ManagedOps"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.ManagedOps"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-managedops"
     namespace: "azure.mgmt.managedops"
