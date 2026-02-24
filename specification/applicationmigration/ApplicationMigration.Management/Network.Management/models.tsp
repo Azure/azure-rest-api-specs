@@ -441,7 +441,7 @@ model ServiceEntry {
   /** The destination port ranges. */
   destinationPorts?: string[];
 
-  /** The protocol. */
+  /** The Layer 4 protocol. */
   protocol?: string;
 
   /** The ICMP type. */
@@ -696,6 +696,12 @@ model NsxManagerPatchFields {
   /** The run-as account credential reference. */
   runAsAccount?: string;
 
+  /** The NSX Manager version. */
+  version?: string;
+
+  /** Whether this is a global manager. */
+  isGlobalManager?: boolean;
+
   /** ARM resource IDs of local NSX Manager references. */
   localNsxManagerRefs?: Azure.Core.armResourceIdentifier[];
 
@@ -741,6 +747,9 @@ model NsxTier0GatewayPatchFields {
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
 
+  /** ARM resource IDs of associated DNS services. */
+  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
+
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];
 
@@ -781,6 +790,9 @@ model NsxTier1GatewayPatchFields {
 
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of associated DNS services. */
+  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];

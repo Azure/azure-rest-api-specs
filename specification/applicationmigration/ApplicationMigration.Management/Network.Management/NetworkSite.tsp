@@ -27,7 +27,11 @@ model NetworkSite
 /**
  * Properties of a network site.
  */
-model NetworkSiteProperties is AzureResourceProperties {
+model NetworkSiteProperties {
+  /** The provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
   /** ARM resource ID of the associated master site. */
   masterSiteId?: Azure.Core.armResourceIdentifier<[
     {

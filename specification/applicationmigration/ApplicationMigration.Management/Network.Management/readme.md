@@ -60,7 +60,7 @@ and writes them into Azure as ARM resources under a **NetworkSite** container.
 
 ## 3. Common Properties (AzureResourceProperties)
 
-Every ProxyResource's properties model inherits from `AzureResourceProperties`:
+Every NSX-discovered ProxyResource's properties model inherits from `AzureResourceProperties`. **NetworkSite and NetworkAgent do NOT use this base** — they have their own standalone properties.
 
 | Property | Type | Notes |
 |----------|------|-------|
@@ -123,7 +123,7 @@ Every ProxyResource's properties model inherits from `AzureResourceProperties`:
 **URL:** `.../networkSites/{siteName}/agents/{agentName}`
 **TypeSpec file:** `NetworkAgent.tsp`
 
-> **Note:** NetworkAgent does NOT inherit `AzureResourceProperties`. It has its own standalone properties (NSX tags, nsxOriginalPath, uniqueId, and nsxManagerRef do not apply to agents).
+> **Note:** NetworkAgent does NOT inherit `AzureResourceProperties`, same as NetworkSite. It has its own standalone properties (NSX tags, nsxOriginalPath, uniqueId, and nsxManagerRef do not apply to agents or the site).
 
 | Property | Type | Required | Visibility | Notes |
 |----------|------|----------|------------|-------|
@@ -699,12 +699,6 @@ GET /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ApplicationMigr
   },
   "properties": {
     "provisioningState": "Succeeded",
-    "displayName": "MySite",
-    "nsxOriginalPath": "/infra/sites/default",
-    "uniqueId": "11111111-1111-1111-1111-111111111111",
-    "nsxTags": [],
-    "errors": [],
-    "errorCount": 0,
     "masterSiteId": ".../Microsoft.OffAzure/masterSites/ms1",
     "migrateProjectId": ".../Microsoft.Migrate/migrateProjects/mp1"
   }

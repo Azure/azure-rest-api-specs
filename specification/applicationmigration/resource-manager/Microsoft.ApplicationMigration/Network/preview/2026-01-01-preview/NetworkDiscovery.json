@@ -4687,40 +4687,6 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
-        "displayName": {
-          "type": "string",
-          "description": "The NSX display name."
-        },
-        "nsxOriginalPath": {
-          "type": "string",
-          "description": "The NSX original path identifier."
-        },
-        "uniqueId": {
-          "type": "string",
-          "description": "The NSX unique identifier.",
-          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
-        },
-        "nsxTags": {
-          "type": "array",
-          "description": "NSX tags applied to this resource.",
-          "items": {
-            "$ref": "#/definitions/NsxTag"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The list of errors.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "errorCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of errors."
-        },
         "masterSiteId": {
           "type": "string",
           "format": "arm-id",
@@ -5490,6 +5456,14 @@
         "runAsAccount": {
           "type": "string",
           "description": "The run-as account credential reference."
+        },
+        "version": {
+          "type": "string",
+          "description": "The NSX Manager version."
+        },
+        "isGlobalManager": {
+          "type": "boolean",
+          "description": "Whether this is a global manager."
         },
         "localNsxManagerRefs": {
           "type": "array",
@@ -6794,7 +6768,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol."
+          "description": "The Layer 4 protocol."
         },
         "icmpType": {
           "type": "string",
