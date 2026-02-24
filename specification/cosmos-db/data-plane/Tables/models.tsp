@@ -36,15 +36,7 @@ union ResponseFormat {
 }
 
 /** The properties for the table entity. */
-alias TableEntityProperties = Record<EntityValueType>;
-
-/** The type for values of entity properties */
-union EntityValueType {
-  string,
-  integer,
-  float,
-  boolean,
-}
+alias TableEntityProperties = Record<unknown>;
 
 /** The table name parameter. */
 alias TablePathParameter = {
