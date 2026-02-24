@@ -7,6 +7,8 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 
+namespace Microsoft.Resources {
+
 // ================================
 // HTTP METHOD ENUMS
 // ================================
@@ -118,7 +120,6 @@ model BatchResponseStatus {
 model GenericResource is Azure.ResourceManager.TrackedResource<GenericResourceProperties> {
   /** The name of the resource */
   @doc("The name of the resource")
-  @path
   @key("resourceName")
   @segment("resources")
   name: string;
@@ -134,16 +135,23 @@ model GenericResourceProperties {
 
 /** Resource group information. */
 @doc("Resource group information.")
-model ResourceGroup is Azure.ResourceManager.TrackedResource<ResourceGroupProperties> {
+model ResourceGroup is Azure.ResourceManager.ExtensionResource<ResourceGroupProperties> {
   /** The name of the resource group. */
   @doc("The name of the resource group.")
-  @path
   @key("resourceGroupName")
   @segment("resourceGroups")
   name: string;
 
+  /** The location of the resource group. */
+  @doc("Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations.")
+  location: string;
+
+  /** The tags attached to the resource group. */
+  @doc("The tags attached to the resource group.")
+  tags?: Record<string>;
+
   /** The ID of the resource that manages this resource group. */
-  @doc("The ID of the resource that manages this resource group.")
+  @doc("The ID of the resource that manages this resource group.")  
   managedBy?: string;
 }
 
@@ -160,5 +168,7 @@ model ResourceGroupProperties {
 model ResourceGroupListResult is Azure.Core.Page<ResourceGroup>;
 
 /** List of resources. */
-@doc("List of resources.")  
+@doc("List of resources.")
 model ResourceListResult is Azure.Core.Page<GenericResource>;
+
+}
