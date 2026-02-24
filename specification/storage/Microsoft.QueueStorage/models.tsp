@@ -453,7 +453,7 @@ model ReceivedMessage {
 
 /** Represents an array of signed identifiers */
 @Xml.name("SignedIdentifiers")
-model ListOfSignedIdentifier {
+model SignedIdentifiers {
   /**
    * The list of signed identifiers.
    *
