@@ -1,7 +1,9 @@
 import "./common.tsp";
 import "./cloudValidation.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -35,6 +37,7 @@ model ValidationExecutionPlanProperties {
 
   @doc("Error details. Populated when provisioningState is Failed or Canceled.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   @doc("The overall state of the resource.")
@@ -47,7 +50,7 @@ union ValidationExecutionPlanProvisioningState {
   ResourceProvisioningState,
 
   @doc("The resource is being provisioned.")
-  Creating: "Provisioning",
+  Creating: "Creating",
 
   @doc("The resource is updating.")
   Updating: "Updating",

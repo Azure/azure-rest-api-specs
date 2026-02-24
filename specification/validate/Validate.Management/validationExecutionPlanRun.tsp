@@ -27,6 +27,7 @@ model ExecutionPlanRunProperties {
 
   @doc("Error details. Populated when status is Failed, Canceled, TimedOut, or Aborted.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   @doc("The start time of the execution plan run.")
@@ -53,6 +54,7 @@ model ExecutionPlanRunProperties {
 
   @doc("The provisioning state of the execution plan run.")
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(Versions.v2026_03_01_preview, ResourceProvisioningState)
   provisioningState?: ExecutionPlanRunProvisioningState;
 }
 
@@ -62,7 +64,7 @@ union ExecutionPlanRunProvisioningState {
   ResourceProvisioningState,
 
   @doc("The execution plan run is in progress.")
-  InProgress: "InProgress",
+  Creating: "Creating",
 
   @doc("The execution plan run is running.")
   Running: "Running",
@@ -71,7 +73,7 @@ union ExecutionPlanRunProvisioningState {
   Waiting: "Waiting",
 
   @doc("The execution plan run is partially executed.")
-  PartiallyExecuted: "PartiallyExecuted",
+  Processing: "Processing",
 
   string,
 }

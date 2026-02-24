@@ -1340,11 +1340,6 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error details. Populated when provisioningState is Failed or Canceled.",
-          "readOnly": true
-        },
         "overallState": {
           "$ref": "#/definitions/CloudValidationOverallState",
           "description": "The overall state of the resource."
@@ -1420,11 +1415,6 @@
           "description": "The status of the execution plan run.",
           "readOnly": true
         },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error details. Populated when status is Failed, Canceled, TimedOut, or Aborted.",
-          "readOnly": true
-        },
         "startTimestampInUtc": {
           "type": "string",
           "format": "date-time",
@@ -1454,66 +1444,11 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/ExecutionPlanRunProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of the execution plan run.",
           "readOnly": true
         }
       }
-    },
-    "ExecutionPlanRunProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the execution plan run.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "InProgress",
-        "Running",
-        "Waiting",
-        "PartiallyExecuted"
-      ],
-      "x-ms-enum": {
-        "name": "ExecutionPlanRunProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The execution plan run is in progress."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The execution plan run is running."
-          },
-          {
-            "name": "Waiting",
-            "value": "Waiting",
-            "description": "The execution plan run is waiting."
-          },
-          {
-            "name": "PartiallyExecuted",
-            "value": "PartiallyExecuted",
-            "description": "The execution plan run is partially executed."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "ExecutionPlanRunStatus": {
       "type": "string",
@@ -1607,7 +1542,7 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Provisioning",
+        "Creating",
         "Updating",
         "Disabling",
         "Deleting",
@@ -1633,8 +1568,8 @@
             "description": "Resource creation was canceled."
           },
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
+            "name": "Creating",
+            "value": "Creating",
             "description": "The resource is being provisioned."
           },
           {
@@ -1736,11 +1671,6 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error details. Populated when provisioningState is Failed or Canceled.",
-          "readOnly": true
-        },
         "overallState": {
           "$ref": "#/definitions/ValidationExecutionPlanOverallState",
           "description": "The overall state of the resource."
@@ -1754,7 +1684,7 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Provisioning",
+        "Creating",
         "Updating",
         "Disabling",
         "Deleting"
@@ -1780,7 +1710,7 @@
           },
           {
             "name": "Creating",
-            "value": "Provisioning",
+            "value": "Creating",
             "description": "The resource is being provisioned."
           },
           {

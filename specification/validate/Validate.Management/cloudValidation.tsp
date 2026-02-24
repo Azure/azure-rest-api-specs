@@ -1,11 +1,13 @@
 import "./common.tsp";
 import "@typespec/rest";
 import "@typespec/openapi3";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-autorest";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Validate;
 
@@ -25,6 +27,7 @@ model CloudValidationProperties {
 
   @doc("Error details. Populated when provisioningState is Failed or Canceled.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   @doc("The overall state of the resource.")
@@ -41,7 +44,7 @@ union ProvisioningState {
   ResourceProvisioningState,
 
   @doc("The resource is being provisioned.")
-  Provisioning: "Provisioning",
+  Creating: "Creating",
 
   @doc("The resource is updating.")
   Updating: "Updating",
