@@ -747,9 +747,6 @@ model NsxTier0GatewayPatchFields {
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
 
-  /** ARM resource IDs of associated DNS services. */
-  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
-
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];
 
@@ -790,9 +787,6 @@ model NsxTier1GatewayPatchFields {
 
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
-
-  /** ARM resource IDs of associated DNS services. */
-  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];
