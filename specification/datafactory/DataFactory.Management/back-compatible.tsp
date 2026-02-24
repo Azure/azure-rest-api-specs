@@ -1105,19 +1105,24 @@ using Microsoft.DataFactory;
 @@clientLocation(CredentialResources.listByFactory, "CredentialOperations");
 
 @@clientLocation(PrivateEndpointConnectionResources.get,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!java"
 );
 @@clientLocation(PrivateEndpointConnectionResources.createOrUpdate,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!java"
 );
 @@clientName(PrivateEndpointConnectionResources.createOrUpdate::parameters.resource,
-  "privateEndpointWrapper"
+  "privateEndpointWrapper",
+  "!java"
 );
 @@clientLocation(PrivateEndpointConnectionResources.delete,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!java"
 );
 @@clientLocation(PrivateEndpointConnectionResources.listByFactory,
-  "privateEndPointConnections"
+  "privateEndPointConnections",
+  "!java"
 );
 
 @@clientLocation(GlobalParameterResources.get, "GlobalParameters");
