@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/openapi";
 
+using Azure.Core;
 using TypeSpec.Http;
 
 namespace Data.Tables {
@@ -10,7 +11,7 @@ namespace Data.Tables {
   op TablesXmlOperation<
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model
-  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
