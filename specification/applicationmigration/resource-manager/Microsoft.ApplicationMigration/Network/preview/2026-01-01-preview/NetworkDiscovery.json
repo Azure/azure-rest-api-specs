@@ -5553,6 +5553,14 @@
           "type": "string",
           "description": "The run-as account credential reference."
         },
+        "version": {
+          "type": "string",
+          "description": "The NSX Manager version."
+        },
+        "isGlobalManager": {
+          "type": "boolean",
+          "description": "Whether this is a global manager."
+        },
         "localNsxManagerRefs": {
           "type": "array",
           "description": "ARM resource IDs of local NSX Manager references.",
@@ -6265,6 +6273,15 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
+        "associatedDnsServices": {
+          "type": "array",
+          "description": "ARM resource IDs of associated DNS services.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
         "associatedNatRules": {
           "type": "array",
           "description": "ARM resource IDs of associated NAT rules.",
@@ -6477,6 +6494,15 @@
         "associatedSegments": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedDnsServices": {
+          "type": "array",
+          "description": "ARM resource IDs of associated DNS services.",
           "items": {
             "type": "string",
             "format": "arm-id",
