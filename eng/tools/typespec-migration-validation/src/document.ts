@@ -120,6 +120,15 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
   }
+  index = newOperation.parameters.findIndex((p) => isSubscriptionIdParameter(p));
+  if (index > -1) {
+    newOperation.parameters.splice(index, 1);
+  }
+  index = newOperation.parameters.findIndex((p) => isResourceGroupNameParameter(p));
+  if (index > -1) {
+    newOperation.parameters.splice(index, 1);
+  }
+  newOperation.parameters = newOperation.parameters.map((p) => processParameter(p));
 
   for (const response in operation.responses) {
     const responseObject = operation.responses[response] as OpenAPI2Response;
