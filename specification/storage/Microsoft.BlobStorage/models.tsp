@@ -2552,14 +2552,6 @@ alias LeaseDurationHeaderParameter = {
 };
 
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
-alias MetadataHeadersParameter = {
-  /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
-  @header("x-ms-meta")
-  metadata: string;
-};
-
-// NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
   @alternateType(Record<string>, "rust")

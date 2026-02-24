@@ -169,3 +169,25 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
+
+// Override setMetadata operations to make metadata required for Rust
+op containerSetMetadataOverride(
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string,
+): void;
+
+@@override(Storage.Blob.Container.setMetadata,
+  containerSetMetadataOverride,
+  "rust"
+);
+
+op blobSetMetadataOverride(
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string,
+): void;
+
+@@override(Storage.Blob.Blob.setMetadata, blobSetMetadataOverride, "rust");
