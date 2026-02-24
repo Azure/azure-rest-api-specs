@@ -60,7 +60,6 @@ export function logMessage(message: string, level?: LogLevel): void {
  * Logs a message to the console with GitHub Actions workflow commands.
  * Uses the async, backpressure-aware log() from .github/shared/src/console.js instead of console.log(),
  * to ensure all messages written despite stdout backpressure.
- * Automatically prefixes messages with LOG_PREFIX.
  * @param message The message to log.
  * @param level The log level (e.g., LogLevel.Group, LogLevel.EndGroup, LogLevel.Debug, LogLevel.Error).
  */
