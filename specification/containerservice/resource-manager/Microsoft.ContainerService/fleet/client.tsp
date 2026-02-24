@@ -95,6 +95,10 @@ using TypeSpec.Http;
 );
 @@clientName(GateState, "ContainerServiceFleetGateState", "csharp");
 @@clientName(GateTarget, "ContainerServiceFleetGateTarget", "csharp");
+@@clientName(GateConfiguration,
+  "ContainerServiceFleetGateConfiguration",
+  "csharp"
+);
 @@clientName(UpdateStatus, "ContainerServiceFleetUpdateStatus", "csharp");
 @@clientName(WaitStatus, "ContainerServiceFleetWaitStatus", "csharp");
 @@clientName(UpdateStageStatus,
