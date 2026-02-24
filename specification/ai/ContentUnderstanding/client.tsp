@@ -64,9 +64,9 @@ interface ContentUnderstandingClient {
 // Cross-language customizations (all emitters)
 // ============================================================================
 
-// .NET: type name "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase).
+// Cross-language: "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase). Applied consistently in all languages.
 @@clientName(AnalyzeInput, "AnalysisInput");
-// .NET: type name "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase).
+// Cross-language: "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase). Applied consistently in all languages.
 @@clientName(AnalyzeResult, "AnalysisResult");
 
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
