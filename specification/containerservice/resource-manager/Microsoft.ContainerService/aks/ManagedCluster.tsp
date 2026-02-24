@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./models.tsp";
+import "./CommonModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -9,6 +9,215 @@ using TypeSpec.Http;
 using Versioning;
 
 namespace Microsoft.ContainerService;
+
+/**
+ * The list of available versions for an agent pool.
+ */
+model AgentPoolAvailableVersions {
+  /**
+   * The ID of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of agent pool available versions.
+   */
+  properties: AgentPoolAvailableVersionsProperties;
+}
+
+/**
+ * The list of available agent pool versions.
+ */
+model AgentPoolAvailableVersionsProperties {
+  /**
+   * List of versions available for agent pool.
+   */
+  @identifiers(#[])
+  agentPoolVersions?: AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem[];
+}
+
+/** Available version information for an agent pool. */
+model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
+  /**
+   * Whether this version is the default agent pool version.
+   */
+  default?: boolean;
+
+  /**
+   * The Kubernetes version (major.minor.patch).
+   */
+  kubernetesVersion?: string;
+
+  /**
+   * Whether Kubernetes version is currently in preview.
+   */
+  isPreview?: boolean;
+}
+
+/**
+ * A run command request
+ */
+model RunCommandRequest {
+  /**
+   * The command to run.
+   */
+  command: string;
+
+  /**
+   * A base64 encoded zip file containing the files required by the command.
+   */
+  context?: string;
+
+  /**
+   * AuthToken issued for AKS AAD Server App.
+   */
+  clusterToken?: string;
+}
+
+/**
+ * run command result.
+ */
+model RunCommandResult {
+  /**
+   * The command id.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Properties of command result.
+   */
+  properties?: CommandResultProperties;
+}
+
+/**
+ * The results of a run command
+ */
+model CommandResultProperties {
+  /**
+   * provisioning State
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The exit code of the command
+   */
+  @visibility(Lifecycle.Read)
+  exitCode?: int32;
+
+  /**
+   * The time when the command started.
+   */
+  @visibility(Lifecycle.Read)
+  startedAt?: utcDateTime;
+
+  /**
+   * The time when the command finished.
+   */
+  @visibility(Lifecycle.Read)
+  finishedAt?: utcDateTime;
+
+  /**
+   * The command output.
+   */
+  @visibility(Lifecycle.Read)
+  logs?: string;
+
+  /**
+   * An explanation of why provisioningState is set to failed (if so).
+   */
+  @visibility(Lifecycle.Read)
+  reason?: string;
+}
+
+/**
+ * Collection of OutboundEnvironmentEndpoint
+ */
+model OutboundEnvironmentEndpointCollection
+  is Azure.Core.Page<OutboundEnvironmentEndpoint>;
+
+/**
+ * Egress endpoints which AKS agent nodes connect to for common purpose.
+ */
+model OutboundEnvironmentEndpoint {
+  /**
+   * The category of endpoints accessed by the AKS agent node, e.g. azure-resource-management, apiserver, etc.
+   */
+  category?: string;
+
+  /**
+   * The endpoints that AKS agent nodes connect to
+   */
+  @identifiers(#[])
+  endpoints?: EndpointDependency[];
+}
+
+/**
+ * A domain name that AKS agent nodes are reaching at.
+ */
+model EndpointDependency {
+  /**
+   * The domain name of the dependency.
+   */
+  domainName?: string;
+
+  /**
+   * The Ports and Protocols used when connecting to domainName.
+   */
+  @identifiers(#[])
+  endpointDetails?: EndpointDetail[];
+}
+
+/**
+ * connect information from the AKS agent nodes to a single endpoint.
+ */
+model EndpointDetail {
+  /**
+   * An IP Address that Domain Name currently resolves to.
+   */
+  ipAddress?: string;
+
+  /**
+   * The port an endpoint is connected to.
+   */
+  port?: int32;
+
+  /**
+   * The protocol used for connection
+   */
+  protocol?: string;
+
+  /**
+   * Description of the detail
+   */
+  description?: string;
+}
+
+/**
+ * A list of private link resources
+ */
+model PrivateLinkResourcesListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: PrivateLinkResource[];
+}
+
 /**
  * Managed cluster.
  */
@@ -25,25 +234,25 @@ model ManagedCluster
   /**
    * The managed cluster SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   sku?: ManagedClusterSKU;
 
   /**
    * The extended location of the Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
   extendedLocation?: ExtendedLocation;
 
   /**
    * The identity of the managed cluster, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   identity?: ManagedClusterIdentity;
 
   /**
    * This is primarily used to expose different UI experiences in the portal for different kinds
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   kind?: string;
 }
 
@@ -73,9 +282,7 @@ interface ManagedClusters {
        */
       @header
       ifNoneMatch?: string;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedCluster> &
-      Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**
@@ -86,6 +293,8 @@ interface ManagedClusters {
   updateTags is ArmCustomPatchAsync<
     ManagedCluster,
     PatchModel = TagsObject,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation<FinalResult = ManagedCluster> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * The request should only proceed if an entity matches this string.
@@ -101,6 +310,8 @@ interface ManagedClusters {
   @tag("ManagedClusters")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedCluster,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * The request should only proceed if an entity matches this string.
@@ -111,7 +322,7 @@ interface ManagedClusters {
       /**
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
       @added(Versions.v2025_10_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
@@ -164,7 +375,7 @@ interface ManagedClusters {
       /**
        * server fqdn type for credentials to be returned
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -183,7 +394,7 @@ interface ManagedClusters {
       /**
        * server fqdn type for credentials to be returned
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
       @query("server-fqdn")
       `server-fqdn`?: string;
 
@@ -208,7 +419,7 @@ interface ManagedClusters {
       /**
        * server fqdn type for credentials to be returned
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
       @query("server-fqdn")
       `server-fqdn`?: string;
     }
@@ -231,7 +442,7 @@ interface ManagedClusters {
    * **WARNING**: This API will be deprecated. Please see [AKS-managed Azure Active Directory integration](https://aka.ms/aks-managed-aad) to update your cluster with AKS-managed Azure AD.
    */
   #deprecated "This API will be deprecated. Please see [AKS-managed Azure Active Directory integration](https://aka.ms/aks-managed-aad) to update your cluster with AKS-managed Azure AD."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @tag("ManagedClusters")
   @summary("Reset the AAD Profile of a managed cluster.")
   resetAADProfile is ArmResourceActionAsync<
@@ -245,7 +456,7 @@ interface ManagedClusters {
   /**
    * See [Certificate rotation](https://docs.microsoft.com/azure/aks/certificate-rotation) for more details about rotating managed cluster certificates.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
   @summary("Rotates the certificates of a managed cluster.")
   rotateClusterCertificates is ArmResourceActionAsync<
@@ -259,7 +470,7 @@ interface ManagedClusters {
   /**
    * Aborts the currently running operation on the managed cluster. The Managed Cluster will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancellation can take place, a 409 error code is returned.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
   @action("abort")
   @summary("Aborts last operation running on managed cluster.")
@@ -274,7 +485,7 @@ interface ManagedClusters {
   /**
    * Rotates the service account signing keys of a managed cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
   rotateServiceAccountSigningKeys is ArmResourceActionAsync<
     ManagedCluster,
@@ -287,7 +498,7 @@ interface ManagedClusters {
   /**
    * This can only be performed on Azure Virtual Machine Scale set backed clusters. Stopping a cluster stops the control plane and agent nodes entirely, while maintaining all object and cluster state. A cluster does not accrue charges while it is stopped. See [stopping a cluster](https://docs.microsoft.com/azure/aks/start-stop-cluster) for more details about stopping a cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
   @summary("Stops a Managed Cluster")
   stop is ArmResourceActionAsync<
@@ -301,7 +512,7 @@ interface ManagedClusters {
   /**
    * See [starting a cluster](https://docs.microsoft.com/azure/aks/start-stop-cluster) for more details about starting a cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
   @summary("Starts a previously stopped Managed Cluster")
   start is ArmResourceActionAsync<
@@ -364,7 +575,7 @@ interface ManagedClusters {
   rebalanceLoadBalancers is ArmResourceActionAsyncBase<
     ManagedCluster,
     RebalanceLoadBalancersRequestBody,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeaderWithLocation &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedCluster>
   >;
