@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
-using Azure.Core;
+import "./selector.tsp";
+
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
@@ -34,10 +35,9 @@ model ClusterMeshProfileProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ClusterMeshProfileProvisioningState;
 
-  @doc("Kubernetes-style label selector for selecting Fleet members to join the mesh, e.g. `env=production`. If empty or not specified, no Fleet members will be selected to join the mesh.")
-  @maxLength(512)
+  @doc("Select the members of the mesh. If empty or not specified, no Fleet members will be selected to join the mesh.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  memberLabelSelector?: string;
+  memberSelector?: MemberSelector;
 
   @doc("The cluster mesh profile status.")
   @visibility(Lifecycle.Read)
