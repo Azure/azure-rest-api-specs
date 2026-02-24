@@ -3717,47 +3717,6 @@ model CMKIdentityDefinition {
 }
 
 /**
- * Azure Data Factory top-level resource.
- */
-model Resource {
-  /**
-   * The resource identifier.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The resource location.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /**
-   * The resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * Etag identifies change in the resource.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-}
-
-/**
  * Factory's git repo information.
  */
 model FactoryRepoUpdate {
