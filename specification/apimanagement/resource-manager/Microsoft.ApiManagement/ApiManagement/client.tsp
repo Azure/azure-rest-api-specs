@@ -93,7 +93,7 @@ using Azure.ResourceManager;
 );
 @@clientName(CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
-  "python"
+  "python,go"
 );
 
 /**
