@@ -154,6 +154,26 @@
         "publicBlob": {
           "description": "The certificate public blob",
           "type": "string"
+        },
+        "trustedRootCertificates": {
+          "description": "Trusted root certificates required to validate the instance certificate",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedRootCertificateInfo"
+          }
+        }
+      }
+    },
+    "TrustedRootCertificateInfo": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicBlob": {
+          "type": "string",
+          "readOnly": true
         }
       }
     }
