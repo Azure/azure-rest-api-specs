@@ -115,20 +115,10 @@ function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
 
 function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   const newOperation = deepCopy(operation);
-  if (newOperation.parameters) {
-    let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
-    if (index > -1) {
-      newOperation.parameters.splice(index, 1);
-    }
-    index = newOperation.parameters.findIndex((p) => isSubscriptionIdParameter(p));
-    if (index > -1) {
-      newOperation.parameters.splice(index, 1);
-    }
-    index = newOperation.parameters.findIndex((p) => isResourceGroupNameParameter(p));
-    if (index > -1) {
-      newOperation.parameters.splice(index, 1);
-    }
-    newOperation.parameters = newOperation.parameters.map((p) => processParameter(p));
+  newOperation.parameters ??= [];
+  let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
+  if (index > -1) {
+    newOperation.parameters.splice(index, 1);
   }
 
   for (const response in operation.responses) {

@@ -73,7 +73,7 @@ export async function generateLintDiffReport(
 
   console.log(`New violations: ${newViolations.length}`);
   if (newViolations.length > 0) {
-    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
+    outputMarkdown += "**[must fix]The following errors/warnings are introduced by current PR:**\n";
     if (newViolations.length > 50) {
       outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
     }
