@@ -103,6 +103,14 @@ using Microsoft.CertificateRegistration;
 @@clientName(Status, "DetectorStatusInfo", "csharp");
 @@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
 @@alternateType(SupportTopic.pesId, armResourceIdentifier, "csharp");
+@@clientName(GetAppServiceCertificateOrderDetectorParameters.startTime,
+  "StartOn",
+  "csharp"
+);
+@@clientName(GetAppServiceCertificateOrderDetectorParameters.endTime,
+  "EndOn",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AppServiceCertificateOrderPatchResource,

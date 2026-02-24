@@ -6,7 +6,6 @@ import "./models.tsp";
 import "./AppServiceCertificateOrder.tsp";
 
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -32,6 +31,27 @@ model DetectorResponse
   kind?: string;
 }
 
+alias GetAppServiceCertificateOrderDetectorParameters = {
+  /**
+   * The start time for detector response.
+   */
+  @query("startTime")
+  startTime?: utcDateTime;
+
+  /**
+   * The end time for the detector response.
+   */
+  @query("endTime")
+  endTime?: utcDateTime;
+
+  /**
+   * The time grain for the detector response.
+   */
+  @pattern("PT[1-9][0-9]+[SMH]")
+  @query("timeGrain")
+  timeGrain?: string;
+};
+
 @armResourceOperations
 interface CertificateOrdersDiagnostics {
   /**
@@ -40,26 +60,7 @@ interface CertificateOrdersDiagnostics {
   getAppServiceCertificateOrderDetectorResponse is ArmResourceRead<
     DetectorResponse,
     Parameters = {
-      /**
-       * The start time for detector response.
-       */
-      @query("startTime")
-      @clientName("startOn", "csharp")
-      startTime?: utcDateTime;
-
-      /**
-       * The end time for the detector response.
-       */
-      @query("endTime")
-      @clientName("endOn", "csharp")
-      endTime?: utcDateTime;
-
-      /**
-       * The time grain for the detector response.
-       */
-      @pattern("PT[1-9][0-9]+[SMH]")
-      @query("timeGrain")
-      timeGrain?: string;
+      ...GetAppServiceCertificateOrderDetectorParameters;
     },
     Error = DefaultErrorResponse
   >;
