@@ -4,41 +4,8 @@ using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@clientNamespace("Azure.AI.Projects.OpenAI")
-namespace Azure.AI.Projects {
-  // ------------------------------------------------------------------------------------------------
-  // Operation scope customizations - don't generate OpenAI operations that we'll use the OpenAI client for
-  // ------------------------------------------------------------------------------------------------
-  @@scope(Responses.createResponse, "!csharp");
-  @@scope(Responses.createResponseStream, "!csharp");
-  @@scope(Responses.getResponseStream, "!csharp");
-  @@scope(Responses.getResponse, "!csharp");
-  @@scope(Responses.deleteResponse, "!csharp");
-  @@scope(Responses.cancelResponse, "!csharp");
-  @@scope(Responses.listInputItems, "!csharp");
-  @@scope(Responses.listResponses, "!csharp");
-
-  // These operations are temporarily preserved to root request/response models for
-  // interim convenience layer support; to be removed once available in
-  // https://github.com/openai/openai-dotnet
-  // @@scope(Conversations.createConversation, "!csharp");
-  // @@scope(Conversations.updateConversation, "!csharp");
-
-  @@scope(Conversations.listConversations, "!csharp");
-  @@scope(Conversations.getConversation, "!csharp");
-  @@scope(Conversations.deleteConversation, "!csharp");
-  @@scope(Conversations.createConversationItems, "!csharp");
-  @@scope(Conversations.listConversationItems, "!csharp");
-  @@scope(Conversations.getConversationItem, "!csharp");
-  @@scope(Conversations.deleteConversationItem, "!csharp");
-
-  @@usage(OpenAI.Conversation, Usage.output);
-  @@access(OpenAI.Conversation, Access.public);
-  @@clientName(OpenAI.Conversation, "ProjectConversation");
-  @@usage(OpenAI.CreateConversationBody, Usage.input);
-  @@access(OpenAI.CreateConversationBody, Access.public);
-  @@usage(OpenAI.UpdateConversationBody, Usage.input);
-  @@access(OpenAI.UpdateConversationBody, Access.public);
+@clientNamespace("Azure.AI.Projects.Agents")
+namespace Azure.AI.Projects.Agents {
 
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
@@ -46,7 +13,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
-  @@clientNamespace(OpenAI, "Azure.AI.Projects.OpenAI", "csharp");
+  @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
 
   // --------------------------------------------------------------------------------
   // Root client
