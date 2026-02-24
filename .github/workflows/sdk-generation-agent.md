@@ -47,7 +47,7 @@ safe-outputs:
     max: 15
     hide-older-comments: true
   messages:
-    run-started: "[{workflow_name}]({run_url}) started for sdk generation."
+    run-started: "[{workflow_name}]({run_url}) started for Azure sdk generation."
   noop:
 ---
 
@@ -85,30 +85,23 @@ If the triggering event does not meet its corresponding requirements, immediatel
 
 When validation succeeds, execute the following steps in order.
 
-1. Azure CLI Login using az login:
+1. Announce workflow start by commenting on the resolved issue with `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`. If the issue cannot be determined for any reason, fall back to the `messages.run-started` safe output.
 
-- Run `mkdir -p /tmp/gh-aw/agent/.azure`.
-- Set env variable AZURE_CONFIG_DIR=/tmp/gh-aw/agent/.azure
-- Run `az login --service-principal --username $AZURE_CLIENT_ID --tenant $AZURE_TENANT_ID --federated-token $(cat /tmp/azure-oidc-token) --allow-no-subscriptions 2>&1`
-- If authentication fails, call the `noop` safe output with the captured response (labelled `authentication_failed`) and stop further processing.
+2. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
 
-2. Announce workflow start by commenting on the resolved issue with `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`. If the issue cannot be determined for any reason, fall back to the `messages.run-started` safe output.
-
-3. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
-
-4. Find whether there is an open TypeSpec API spec pull request associated with this request.
+3. Find whether there is an open TypeSpec API spec pull request associated with this request.
 
 - Identify TypeSpec API spec PR from issue context.
 - Check if API spec PR is in open status or merged status.
 - If such a PR is found and if it's open, set source branch for SDK generation to exactly `refs/pull/<PR number>`.
 - If no such PR is found, use default branch context.
 
-5. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
+4. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
 
-6. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
+5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
 
 - `--typespec-project <PATH>` (required)
 - `--api-version <VERSION>` (required)
@@ -117,7 +110,7 @@ When validation succeeds, execute the following steps in order.
 - `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
 - Capture the pipeline/run URL emitted by the CLI for status tracking.
 
-7. Immediately add a comment with the pipeline run link/status URL or failure details (use `noop` only if no issue comment can be posted).
+6. Immediately add a comment with the pipeline run link/status URL or failure details (use `noop` only if no issue comment can be posted).
 
 ## Monitoring and Status Updates
 
