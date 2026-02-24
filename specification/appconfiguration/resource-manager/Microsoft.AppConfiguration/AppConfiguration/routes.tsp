@@ -13,7 +13,6 @@ using Azure.ResourceManager;
 namespace Microsoft.AppConfiguration;
 
 // TODO -- we need this until https://github.com/Azure/typespec-azure/issues/3903 is resolved
-@doc("lists resource {name}", ProviderResource)
 @segmentOf(ProviderResource)
 @list
 @Azure.ResourceManager.armResourceList(ProviderResource)
