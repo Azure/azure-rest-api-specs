@@ -87,6 +87,7 @@ model ArnLocationPartitioningConfiguration extends PartitioningConfiguration {
   kind: "arnLocation";
 
   /** The partitions list */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   partitions: Partition[];
 }
 

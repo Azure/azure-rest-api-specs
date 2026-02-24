@@ -131,15 +131,6 @@ model GetNotificationSessionDetails {
   validUntil?: utcDateTime;
 }
 
-/** Response body for closing a session */
-model CloseSessionResponse {
-  /** Status of the close operation */
-  status: string;
-
-  /** Optional message about the close operation */
-  message?: string;
-}
-
 /** Operations for Notification Sessions */
 @armResourceOperations
 interface NotificationsSessions {
