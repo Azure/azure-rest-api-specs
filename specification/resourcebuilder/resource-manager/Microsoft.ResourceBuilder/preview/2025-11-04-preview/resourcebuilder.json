@@ -1625,7 +1625,7 @@
         },
         "kind": {
           "$ref": "#/definitions/DatasetKind",
-          "description": "Optional. Dataset kind discriminator. Determines which properties are valid for this dataset."
+          "description": "Dataset kind discriminator. Determines which properties are valid for this dataset.\n- Custom: Custom user-defined dataset.\n- ArmResource: ARM (Azure Resource Manager) managed resource dataset."
         },
         "tags": {
           "type": "object",
@@ -1640,30 +1640,6 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "DatasetKind": {
-      "type": "string",
-      "description": "Dataset kind",
-      "enum": [
-        "Custom",
-        "ArmResource"
-      ],
-      "x-ms-enum": {
-        "name": "DatasetKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Custom user-defined dataset."
-          },
-          {
-            "name": "ArmResource",
-            "value": "ArmResource",
-            "description": "ARM (Azure Resource Manager) managed resource dataset."
-          }
-        ]
-      }
     },
     "DatasetColumn": {
       "type": "object",
@@ -1755,6 +1731,30 @@
             "name": "Decimal",
             "value": "Decimal",
             "description": "Decimal column type."
+          }
+        ]
+      }
+    },
+    "DatasetKind": {
+      "type": "string",
+      "description": "Dataset kind discriminator",
+      "enum": [
+        "Custom",
+        "ArmResource"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom user-defined dataset."
+          },
+          {
+            "name": "ArmResource",
+            "value": "ArmResource",
+            "description": "ARM (Azure Resource Manager) managed resource dataset."
           }
         ]
       }
