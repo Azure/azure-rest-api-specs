@@ -152,6 +152,13 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+@@clientName(Microsoft.Peering.ConnectivityProbe,
+  "PeeringConnectivityProbe",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.Protocol, "PeeringProtocol ", "csharp");
+
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
