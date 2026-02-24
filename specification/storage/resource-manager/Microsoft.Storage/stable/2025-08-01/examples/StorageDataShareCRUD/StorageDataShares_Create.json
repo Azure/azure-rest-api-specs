@@ -1,0 +1,86 @@
+{
+  "operationId": "DataShares_Create",
+  "title": "CreateDataShare",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2025-08-01",
+    "dataShareName": "testdatashare",
+    "accountName": "teststorageaccount",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "description": "Dummy data share",
+        "accessPolicies": [
+          {
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "tenantId": "00000000-0000-0000-0000-000000000000",
+            "permission": "r"
+          }
+        ],
+        "assets": [
+          {
+            "assetPath": "/container/folder/foo",
+            "displayName": "virtualFoo"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/dataShares/testdatashare",
+        "name": "testdatashare",
+        "type": "Microsoft.Storage/storageAccounts/dataShares",
+        "location": "eastus",
+        "properties": {
+          "dataShareIdentifier": "00000000-0000-0000-0000-000000000000",
+          "description": "Dummy data share",
+          "dataShareUri": "azds://eastus:testdatashare:00000000-0000-0000-0000-000000000000",
+          "accessPolicies": [
+            {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "permission": "Read"
+            }
+          ],
+          "assets": [
+            {
+              "assetPath": "/container/folder/foo",
+              "displayName": "virtualFoo"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/dataShares/testdatashare",
+        "name": "testdatashare",
+        "type": "Microsoft.Storage/storageAccounts/dataShares",
+        "location": "eastus",
+        "properties": {
+          "dataShareIdentifier": "00000000-0000-0000-0000-000000000000",
+          "description": "Dummy data share",
+          "dataShareUri": "azds://eastus:testdatashare:00000000-0000-0000-0000-000000000000",
+          "accessPolicies": [
+            {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "permission": "Read"
+            }
+          ],
+          "assets": [
+            {
+              "assetPath": "/container/folder/foo",
+              "displayName": "virtualFoo"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
