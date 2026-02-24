@@ -36,10 +36,15 @@ union ResponseFormat {
 }
 
 /** The properties for the table entity. */
-alias TableEntityProperties = Record<unknown>;
+alias TableEntityProperties = Record<EntityValueType>;
 
 /** The type for values of entity properties */
-alias EntityValueType = string | numeric | boolean;
+union EntityValueType {
+  string,
+  integer,
+  float,
+  boolean,
+}
 
 /** The table name parameter. */
 alias TablePathParameter = {
@@ -91,23 +96,6 @@ alias FilterParameter = {
   @doc("OData filter expression.")
   @query
   $filter?: string;
-};
-
-/** Client request ID header */
-alias ClientRequestIdHeader = {
-  @access(Access.internal)
-  @header("x-ms-client-request-id")
-  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
-  clientRequestId?: uuid;
-};
-
-/** Request ID response header */
-alias RequestIdResponseHeader = {
-  @access(Access.internal)
-  @visibility(Lifecycle.Read)
-  @header("x-ms-request-id")
-  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
-  requestId?: uuid;
 };
 
 /** The Date response header */
