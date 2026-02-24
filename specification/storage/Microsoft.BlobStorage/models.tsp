@@ -435,7 +435,7 @@ model SignedIdentifier {
   @Xml.name("Id") id: string;
 
   /** The access policy for the signed identifier. */
-  @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
+  @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
 /** The result of a Filter Blobs API call */
@@ -801,15 +801,15 @@ model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
-  start: utcDateTime;
+  start?: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
-  expiry: utcDateTime;
+  expiry?: utcDateTime;
 
   /** The permissions for acl the policy. */
-  @Xml.name("Permission") permission: string;
+  @Xml.name("Permission") permission?: string;
 }
 
 /** The access tiers. */
