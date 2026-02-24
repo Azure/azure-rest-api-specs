@@ -28,7 +28,7 @@ using Azure.Core.Traits;
   "Existing Live Metrics global endpoint.",
   {
     @doc("The endpoint of the Live Metrics service.")
-    endpoint: string = "https://global.livediagnostics.monitor.azure.com",
+    endpoint: url = "https://global.livediagnostics.monitor.azure.com",
   }
 )
 namespace Azure.Monitor.LiveMetrics;
