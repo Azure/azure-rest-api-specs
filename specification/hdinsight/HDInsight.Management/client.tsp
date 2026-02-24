@@ -52,4 +52,4 @@ using Azure.ClientGenerator.Core;
   Record<Record<string | null>>,
   "go"
 );
-@@alternateType(ClusterConfigurations.configurations, unknown, "go");
+@@alternateType(ClusterDefinition.configurations, unknown, "go");
