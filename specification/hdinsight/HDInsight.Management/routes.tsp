@@ -201,7 +201,8 @@ interface Extensions {
     Cluster,
     AzureMonitorRequest,
     OkResponse | ArmAcceptedLroResponse,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
+    Error = ErrorResponse
   >;
 
   /**
