@@ -43,6 +43,7 @@ union QueryCaptionType {
 }
 
 /** This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. */
+@removed(Versions.v2026_04_01)
 union QueryRewritesType {
   string,
 
@@ -401,6 +402,7 @@ union SemanticSearchResultsType {
 }
 
 /** Type of query rewrite that was used for this request. */
+@removed(Versions.v2026_04_01)
 union SemanticQueryRewritesResultType {
   string,
 
@@ -574,6 +576,7 @@ model SearchOptions {
   semanticQuery?: string;
 
   /** When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`. */
+  @removed(Versions.v2026_04_01)
   @query
   queryRewrites?: QueryRewritesType;
 
@@ -582,14 +585,17 @@ model SearchOptions {
   debug?: QueryDebugMode;
 
   /** The language of the query. */
+  @removed(Versions.v2026_04_01)
   @query
   queryLanguage?: QueryLanguage;
 
   /** Improve search recall by spell-correcting individual search query terms. */
+  @removed(Versions.v2026_04_01)
   @query
   speller?: QuerySpellerType;
 
   /** The list of field names used for semantic ranking. */
+  @removed(Versions.v2026_04_01)
   @query
   semanticFields?: string[];
 }
@@ -689,6 +695,7 @@ model SearchDocumentsResult {
   semanticPartialResponseType?: SemanticSearchResultsType;
 
   /** Type of query rewrite that was used to retrieve documents. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
@@ -751,11 +758,13 @@ model QueryAnswerResult is Record<unknown> {
 /** Contains debugging information that can be used to further explore your search results. */
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_04_01)
 model QueryRewritesDebugInfo {
   /** List of query rewrites generated for the text query. */
   @visibility(Lifecycle.Read)
@@ -767,6 +776,7 @@ model QueryRewritesDebugInfo {
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_04_01)
 model QueryRewritesValuesDebugInfo {
   /** The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical. */
   @visibility(Lifecycle.Read)
@@ -877,11 +887,13 @@ model SearchRequest {
   captions?: QueryCaptionType;
 
   /** A value that specifies whether query rewrites should be generated to augment the search query. */
+  @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
   /** The comma-separated list of field names used for semantic ranking. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   @encode(ArrayEncoding.commaDelimited)
   semanticFields?: string[];
 
@@ -1000,6 +1012,7 @@ model QueryCaptionResult {
 /** Contains debugging information that can be used to further explore your search results. */
 model DocumentDebugInfo {
   /** Contains debugging information specific to semantic ranking requests. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
 
@@ -1013,6 +1026,7 @@ model DocumentDebugInfo {
 }
 
 /** Contains debugging information specific to semantic ranking requests. */
+@removed(Versions.v2026_04_01)
 model SemanticDebugInfo {
   /** The title field that was sent to the semantic enrichment process, as well as how it was used */
   @visibility(Lifecycle.Read)
@@ -1307,6 +1321,7 @@ model VectorizableTextQuery extends VectorQuery {
   text: string;
 
   /** Can be configured to let a generative model rewrite the query before sending it to be vectorized. */
+  @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
   /** The kind of vector query being performed. */

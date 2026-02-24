@@ -10,6 +10,22 @@
       }
     ]
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint URL of the search service.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -10437,7 +10453,7 @@
           {
             "name": "NbMicrosoft",
             "value": "nb.microsoft",
-            "description": "Microsoft analyzer for Norwegian (BokmÃ¥l)."
+            "description": "Microsoft analyzer for Norwegian (Bokm\u00c3\u00a5l)."
           },
           {
             "name": "NoLucene",
@@ -11463,7 +11479,7 @@
           {
             "name": "NorwegianBokmaal",
             "value": "norwegianBokmaal",
-            "description": "Selects the Microsoft stemming tokenizer for Norwegian (BokmÃ¥l)."
+            "description": "Selects the Microsoft stemming tokenizer for Norwegian (Bokm\u00c3\u00a5l)."
           },
           {
             "name": "Polish",
@@ -11727,7 +11743,7 @@
           {
             "name": "NorwegianBokmaal",
             "value": "norwegianBokmaal",
-            "description": "Selects the Microsoft tokenizer for Norwegian (BokmÃ¥l)."
+            "description": "Selects the Microsoft tokenizer for Norwegian (Bokm\u00c3\u00a5l)."
           },
           {
             "name": "Polish",
@@ -12963,7 +12979,7 @@
           {
             "name": "vo",
             "value": "vo",
-            "description": "Volapük"
+            "description": "Volap\u00fck"
           },
           {
             "name": "wae",
@@ -13364,12 +13380,12 @@
           {
             "name": "KoelnerPhonetik",
             "value": "koelnerPhonetik",
-            "description": "Encodes a token using the Kölner Phonetik algorithm."
+            "description": "Encodes a token using the K\u00f6lner Phonetik algorithm."
           },
           {
             "name": "HaasePhonetik",
             "value": "haasePhonetik",
-            "description": "Encodes a token using the Haase refinement of the Kölner Phonetik algorithm."
+            "description": "Encodes a token using the Haase refinement of the K\u00f6lner Phonetik algorithm."
           },
           {
             "name": "BeiderMorse",
@@ -13447,12 +13463,12 @@
               {
                 "name": "KoelnerPhonetik",
                 "value": "koelnerPhonetik",
-                "description": "Encodes a token using the Kölner Phonetik algorithm."
+                "description": "Encodes a token using the K\u00f6lner Phonetik algorithm."
               },
               {
                 "name": "HaasePhonetik",
                 "value": "haasePhonetik",
-                "description": "Encodes a token using the Haase refinement of the Kölner Phonetik algorithm."
+                "description": "Encodes a token using the Haase refinement of the K\u00f6lner Phonetik algorithm."
               },
               {
                 "name": "BeiderMorse",
@@ -17531,17 +17547,17 @@
           {
             "name": "Norwegian",
             "value": "norwegian",
-            "description": "Selects the Lucene stemming tokenizer for Norwegian (BokmÃ¥l)."
+            "description": "Selects the Lucene stemming tokenizer for Norwegian (Bokm\u00c3\u00a5l)."
           },
           {
             "name": "LightNorwegian",
             "value": "lightNorwegian",
-            "description": "Selects the Lucene stemming tokenizer for Norwegian (BokmÃ¥l) that does light stemming."
+            "description": "Selects the Lucene stemming tokenizer for Norwegian (Bokm\u00c3\u00a5l) that does light stemming."
           },
           {
             "name": "MinimalNorwegian",
             "value": "minimalNorwegian",
-            "description": "Selects the Lucene stemming tokenizer for Norwegian (BokmÃ¥l) that does minimal stemming."
+            "description": "Selects the Lucene stemming tokenizer for Norwegian (Bokm\u00c3\u00a5l) that does minimal stemming."
           },
           {
             "name": "LightNynorsk",
@@ -19046,7 +19062,7 @@
           {
             "name": "ScandinavianFoldingNormalization",
             "value": "scandinavian_folding",
-            "description": "Folds Scandinavian characters Ã¥Ã…Ã¤Ã¦Ã„Ã†-&gt;a and Ã¶Ã–Ã¸Ã˜-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html"
+            "description": "Folds Scandinavian characters \u00c3\u00a5\u00c3\u2026\u00c3\u00a4\u00c3\u00a6\u00c3\u201e\u00c3\u2020-&gt;a and \u00c3\u00b6\u00c3\u2013\u00c3\u00b8\u00c3\u02dc-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html"
           },
           {
             "name": "Shingle",

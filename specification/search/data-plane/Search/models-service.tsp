@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using Azure.ClientGenerator.Core.Legacy;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -3000,6 +3002,7 @@ model SearchIndexerDataSource {
 
   /** A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts. */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_04_01)
   subType?: string;
 
   /** Credentials for the datasource. */
@@ -3016,6 +3019,7 @@ model SearchIndexerDataSource {
 
   /** Ingestion options with various types of permission data. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   indexerPermissionOptions?: IndexerPermissionOption[] | null;
 
   /** The data change detection policy for the datasource. */
@@ -3313,6 +3317,7 @@ model SearchIndexerStatus {
   status: IndexerStatus;
 
   /** Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   runtime: IndexerRuntime;
 
@@ -3609,6 +3614,7 @@ model SearchIndexerKnowledgeStore {
 
   /** A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @removed(Versions.v2026_04_01)
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
 
@@ -3811,6 +3817,7 @@ model SearchIndex {
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
 
   /** The ETag of the index. */
@@ -4110,6 +4117,7 @@ model SemanticConfiguration {
   rankingOrder?: RankingOrder | null;
 
   /** Determines which semantic or query rewrite models to use during model flighting/upgrades. */
+  @removed(Versions.v2026_04_01)
   flightingOptIn?: boolean = false;
 }
 
@@ -4325,9 +4333,11 @@ model KnowledgeBase {
   models?: KnowledgeBaseModel[];
 
   /** The retrieval reasoning effort configuration. */
+  @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** The output mode for the knowledge base. */
+  @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
   /** The ETag of the knowledge base. */
@@ -4515,6 +4525,7 @@ model AzureBlobKnowledgeSourceParameters {
 }
 
 /** Configuration for SharePoint knowledge source. */
+@removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.IndexedSharePoint;
 
@@ -4523,6 +4534,7 @@ model IndexedSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for SharePoint knowledge source. */
+@removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParameters {
   /** SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id] */
   connectionString: string;
@@ -4604,6 +4616,7 @@ model WebKnowledgeSourceDomain {
 }
 
 /** Configuration for remote SharePoint knowledge source. */
+@removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.RemoteSharePoint;
 
@@ -4612,6 +4625,7 @@ model RemoteSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for remote SharePoint knowledge source. */
+@removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParameters {
   /** Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. */
   filterExpression?: string;
@@ -4644,6 +4658,7 @@ model SearchServiceStatistics {
   limits: SearchServiceLimits;
 
   /** Service level indexer runtime consumption. */
+  @removed(Versions.v2026_04_01)
   indexersRuntime: ServiceIndexersRuntime;
 }
 
@@ -5635,6 +5650,10 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /** The fully qualified Azure resource Id of a user assigned managed identity typically in the form "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId" that should have been assigned to the search service. */
   userAssignedIdentity: string;
 
+  /** Multi-tenant User-Assigned Managed Identity Support: The client id of the multi-tenant App that has been configured to federate with the user-assigned managed identity. */
+  @added(Versions.v2026_04_01)
+  federatedIdentityClientId?: string;
+
   /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
@@ -5780,7 +5799,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   /** The key used to provision the Azure AI service resource attached to a skillset. */
   key: string;
 
-  /** The subdomain url for the corresponding AI Service. */
+  /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
@@ -5795,7 +5814,7 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 
-  /** The subdomain url for the corresponding AI Service. */
+  /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
@@ -6419,24 +6438,30 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   uri: string;
 
   /** The headers required to make the http request. */
+  @removed(Versions.v2026_04_01)
   httpHeaders?: WebApiHttpHeaders;
 
   /** The method for the http request. */
+  @removed(Versions.v2026_04_01)
   httpMethod?: string;
 
   /** The desired timeout for the request. Default is 30 seconds. */
+  @removed(Versions.v2026_04_01)
   timeout?: duration;
 
   /** The desired batch size which indicates number of documents. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   batchSize?: int32 | null;
 
   /** If set, the number of parallel calls that can be made to the Web API. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   degreeOfParallelism?: int32 | null;
 
   /** Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   authResourceId?: string | null;
 
   /** The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
