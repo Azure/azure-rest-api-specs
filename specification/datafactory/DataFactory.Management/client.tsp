@@ -176,6 +176,13 @@ using Microsoft.DataFactory;
   "java"
 );
 
+@@alternateType(Factory.additionalProperties, Record<unknown>, "java");
+@@alternateType(PipelineResource.additionalProperties, Record<unknown>, "java");
+@@alternateType(ChangeDataCaptureResource.additionalProperties,
+  Record<unknown>,
+  "java"
+);
+
 @@clientLocation(PrivateEndpointConnectionResources.listByFactory,
   "PrivateEndPointConnections",
   "python"
