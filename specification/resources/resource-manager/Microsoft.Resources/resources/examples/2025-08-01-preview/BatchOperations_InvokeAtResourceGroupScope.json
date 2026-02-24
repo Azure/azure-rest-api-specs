@@ -1,0 +1,37 @@
+{
+  "title": "Invoke batch operation at resource group scope",
+  "operationId": "BatchOperations_InvokeAtResourceGroupScope",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "requests": [
+        {
+          "id": "1",
+          "method": "GET",
+          "url": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group/providers/Microsoft.Storage/storageAccounts"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "batchResult": {
+          "responses": [
+            {
+              "id": "1",
+              "httpStatusCode": 200,
+              "status": "Succeeded",
+              "body": {
+                "value": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
