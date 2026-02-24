@@ -7,19 +7,17 @@ using TypeSpec.Http;
 
 namespace AzureFileStorage;
 
-//
-// Operation Templates
-//
-
-/** Azure File Storage basic operation template */
-op FileStorageOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
+/** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperation<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
   RequestMediaType extends string = "application/xml",
   ResponseMediaType extends string = "application/xml",
-  TError = FileStorageErrorResponse
+  TError = StorageError
 >(
   /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: RequestMediaType,
 
@@ -28,55 +26,62 @@ op FileStorageOperation<
   ...TParams,
 ): (TResponse & {
   /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: ResponseMediaType;
 
-  ...FileStorageResponseHeaders;
+  ...ApiVersionHeader;
+  ...RequestIdResponseHeader;
+  ...ClientRequestIdHeader;
 }) | TError;
 
-/** Azure File Storage operation template without request body */
-op FileStorageOperationNoBody<
+/** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
-  TError = FileStorageErrorResponse
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse &
-  FileStorageResponseHeaders) | TError;
+  TError = StorageError
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
+  ...ApiVersionHeader;
+  ...RequestIdResponseHeader;
+  ...ClientRequestIdHeader;
+}) | TError;
 
-/** Azure File Storage operation template with resource headers */
-op FileStorageResourceOperation<
-  TParams extends TypeSpec.Reflection.Model | void,
-  TResponse extends TypeSpec.Reflection.Model | void,
-  TError = FileStorageErrorResponse
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse &
-  FileStorageResourceHeaders) | TError;
-
-op FileStorageOperationRequestBody<
-  TParams extends TypeSpec.Reflection.Model | void,
-  TResponse extends TypeSpec.Reflection.Model | void,
-  RequestMediaType extends string = "application/xml",
-  TError = FileStorageErrorResponse
->(
-  /** Content-Type header */
-  @header("Content-Type")
-  contentType: RequestMediaType,
-
-  ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
-  ...TParams,
-): (TResponse & FileStorageResponseHeaders) | TError;
-
-op FileStorageOperationResponseBody<
+/** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationResponseBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   ResponseMediaType extends string = "application/xml",
-  TError = FileStorageErrorResponse
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-  /** Content-Type header */
-  @header("Content-Type")
-  contentType: ResponseMediaType;
+  TError = StorageError
+> is StorageOperationNoBody<
+  TParams,
+  {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: ResponseMediaType;
+  } & TResponse,
+  TError
+>;
 
-  ...FileStorageResponseHeaders;
-}) | TError;
+/** Azure Storage File basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationRequestBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  RequestMediaType extends string = "application/xml",
+  TError = StorageError
+> is StorageOperationNoBody<
+  {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: RequestMediaType;
+  } & TParams,
+  TResponse,
+  TError
+>;
 
 /**
  * Service operations
@@ -87,7 +92,7 @@ interface Service {
    */
   @route("/?restype=service&comp=properties")
   @put
-  setProperties is FileStorageOperationRequestBody<
+  setProperties is StorageOperationRequestBody<
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -103,7 +108,7 @@ interface Service {
    */
   @route("/?restype=service&comp=properties")
   @get
-  getProperties is FileStorageOperationResponseBody<
+  getProperties is StorageOperationResponseBody<
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -118,7 +123,7 @@ interface Service {
    */
   @route("/?comp=list")
   @get
-  listSharesSegment is FileStorageOperationResponseBody<
+  listSharesSegment is StorageOperationResponseBody<
     {
       ...PrefixParameter;
       ...MarkerParameter;
@@ -139,7 +144,7 @@ interface Service {
    */
   @route("/?restype=service&comp=userdelegationkey")
   @post
-  getUserDelegationKey is FileStorageOperation<
+  getUserDelegationKey is StorageOperation<
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -160,7 +165,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share")
   @put
-  create is FileStorageResourceOperation<
+  create is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -233,7 +238,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share")
   @get
-  getProperties is FileStorageResourceOperation<
+  getProperties is StorageOperationNoBody<
     {
       @path shareName: string;
       ...ShareSnapshotParameter;
@@ -330,7 +335,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share")
   @delete
-  delete is FileStorageOperationNoBody<
+  delete is StorageOperationNoBody<
     {
       @path shareName: string;
       ...ShareSnapshotParameter;
@@ -352,7 +357,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&acquire")
   @put
-  acquireLease is FileStorageResourceOperation<
+  acquireLease is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -372,7 +377,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&release")
   @put
-  releaseLease is FileStorageResourceOperation<
+  releaseLease is StorageOperationNoBody<
     {
       @path shareName: string;
       ...LeaseIdParameter;
@@ -390,7 +395,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&change")
   @put
-  changeLease is FileStorageResourceOperation<
+  changeLease is StorageOperationNoBody<
     {
       @path shareName: string;
       ...LeaseIdParameter;
@@ -410,7 +415,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&renew")
   @put
-  renewLease is FileStorageResourceOperation<
+  renewLease is StorageOperationNoBody<
     {
       @path shareName: string;
       ...LeaseIdParameter;
@@ -429,7 +434,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&break")
   @put
-  breakLease is FileStorageResourceOperation<
+  breakLease is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -448,7 +453,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=snapshot")
   @put
-  createSnapshot is FileStorageResourceOperation<
+  createSnapshot is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -488,7 +493,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=filepermission")
   @get
-  getPermission is FileStorageOperationResponseBody<
+  getPermission is StorageOperationResponseBody<
     {
       @path shareName: string;
       @header("x-ms-file-permission-key") filePermissionKey: string;
@@ -509,7 +514,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=properties")
   @put
-  setProperties is FileStorageResourceOperation<
+  setProperties is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -529,9 +534,7 @@ interface Share {
       @header("x-ms-paid-bursting-max-bandwidth-mibps")
       paidBurstingMaxBandwidthMibps?: int64;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -539,7 +542,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=metadata")
   @put
-  setMetadata is FileStorageResourceOperation<
+  setMetadata is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -547,9 +550,7 @@ interface Share {
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -557,7 +558,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=acl")
   @get
-  getAccessPolicy is FileStorageResourceOperation<
+  getAccessPolicy is StorageOperationResponseBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -574,7 +575,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=acl")
   @put
-  setAccessPolicy is FileStorageResourceOperation<
+  setAccessPolicy is StorageOperationRequestBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -592,7 +593,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=stats")
   @get
-  getStatistics is FileStorageResourceOperation<
+  getStatistics is StorageOperationResponseBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -609,7 +610,7 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=undelete")
   @put
-  restore is FileStorageResourceOperation<
+  restore is StorageOperationNoBody<
     {
       @path shareName: string;
       ...TimeoutParameter;
@@ -632,7 +633,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory")
   @put
-  create is FileStorageResourceOperation<
+  create is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -673,7 +674,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory")
   @get
-  getProperties is FileStorageResourceOperation<
+  getProperties is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -698,7 +699,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory")
   @delete
-  delete is FileStorageOperationNoBody<
+  delete is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -715,7 +716,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=properties")
   @put
-  setProperties is FileStorageResourceOperation<
+  setProperties is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -738,7 +739,6 @@ interface Directory {
       @header("x-ms-mode") mode?: string;
     },
     {
-      @statusCode statusCode: 200;
       @header("x-ms-file-permission-key") filePermissionKey?: string;
       @header("x-ms-file-attributes") fileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
@@ -754,7 +754,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=metadata")
   @put
-  setMetadata is FileStorageResourceOperation<
+  setMetadata is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -762,9 +762,7 @@ interface Directory {
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -772,7 +770,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=list")
   @get
-  listFilesAndDirectoriesSegment is FileStorageOperationResponseBody<
+  listFilesAndDirectoriesSegment is StorageOperationResponseBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -795,7 +793,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?comp=listhandles")
   @get
-  listHandles is FileStorageOperationResponseBody<
+  listHandles is StorageOperationResponseBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -816,7 +814,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?comp=forceclosehandles")
   @put
-  forceCloseHandles is FileStorageOperationNoBody<
+  forceCloseHandles is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -839,7 +837,7 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=rename")
   @put
-  rename is FileStorageResourceOperation<
+  rename is StorageOperationNoBody<
     {
       @path shareName: string;
       @path directory: string;
@@ -851,15 +849,16 @@ interface Directory {
 
       @header("x-ms-file-rename-ignore-read-only")
       renameIgnoreReadOnly?: boolean;
+
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
       ...FileRequestIntentParameter;
+
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
+
       ...AllowTrailingDotParameter;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 }
 
