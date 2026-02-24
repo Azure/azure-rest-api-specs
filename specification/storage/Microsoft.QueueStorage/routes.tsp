@@ -232,7 +232,9 @@ interface Queue {
       @bodyRoot
       queueAcl: SignedIdentifiers;
     },
-    {}
+    {
+      @statusCode statusCode: 204;
+    }
   >;
 
   /**
