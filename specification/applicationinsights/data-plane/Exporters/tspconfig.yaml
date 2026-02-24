@@ -24,14 +24,11 @@ options:
     namespace: "exporter"
     generate-packaging-files: false
     tracing: false
-  "@azure-tools/typespec-csharp":
-    namespace: "Azure.Monitor.OpenTelemetry.Exporter"
-    generate-convenience-methods: false
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.Monitor.OpenTelemetry.Exporter"
+    namespace: "{package-name}"
     model-namespace: false
-    flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    output-path: "./src/Generated"
-    clear-output-folder: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/monitor-opentelemetry-exporter"
     src-folder: "src/generated"
