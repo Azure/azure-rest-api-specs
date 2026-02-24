@@ -4196,15 +4196,15 @@ model OperationListResult {
 }
 
 /**
-* Health monitor profile for the managed cluster.
-*/
+ * Health monitor profile for the managed cluster.
+ */
 @added(Versions.v2026_01_02_preview)
 model ManagedClusterHealthMonitorProfile {
   /**
    * Whether to enable continuous control plane and addon monitor.
    */
   enableContinuousControlPlaneAndAddonMonitor?: boolean;
- 
+
   /**
    * Whether to enable on-demand monitor.
    */
