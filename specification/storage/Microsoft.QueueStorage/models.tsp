@@ -392,15 +392,15 @@ model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
   @encode("rfc3339")
-  start: utcDateTime;
+  start?: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
   @encode("rfc3339")
-  expiry: utcDateTime;
+  expiry?: utcDateTime;
 
   /** The permissions for acl the policy. */
-  @Xml.name("Permission") permission: string;
+  @Xml.name("Permission") permission?: string;
 }
 
 /**
