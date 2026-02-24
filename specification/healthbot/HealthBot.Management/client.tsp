@@ -27,3 +27,7 @@ using Microsoft.HealthBot;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "CloudErrorAdditionalInfo",
+  "csharp"
+);
