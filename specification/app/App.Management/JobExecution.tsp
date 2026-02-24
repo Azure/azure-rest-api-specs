@@ -25,9 +25,6 @@ model JobExecution
   >;
 }
 
-@armResourceOperations
-interface JobExecutions {}
-
 @@doc(JobExecution.name, "Job execution name.");
 @@doc(JobExecution.properties,
   "Container Apps Job execution specific properties."

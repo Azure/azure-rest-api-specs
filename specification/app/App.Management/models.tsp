@@ -4574,7 +4574,6 @@ model DiagnosticDataTableResponseObject {
   /**
    * Rows in the table
    */
-  // @identifiers(#[])
   rows?: unknown[];
 }
 
@@ -7938,7 +7937,6 @@ model PreBuildStep {
   /**
    * Http get request to send before the build.
    */
-  // @identifiers(#[])
   httpGet?: HttpGet;
 }
 
@@ -8602,7 +8600,7 @@ model JavaComponentServiceBind {
 model WorkflowEnvelopeCollection is Azure.Core.Page<WorkflowEnvelope>;
 
 /**
- * Logic App properties.
+ * The properties of logic apps extension.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
