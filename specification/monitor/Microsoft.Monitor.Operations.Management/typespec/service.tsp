@@ -20,6 +20,10 @@ enum Versions {
   v2024_10_01_preview: "2024-10-01-preview",
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("API Version 2025-03-01")
+  v2025_03_01_preview: "2025-03-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("API Version 2025-05-03")
   v2025_05_03_preview: "2025-05-03-preview",
 }
