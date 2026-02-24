@@ -172,12 +172,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 // Override setMetadata operations to make metadata required for Rust
 op containerSetMetadataOverride(
-  ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
   ...TimeoutParameter,
   ...LeaseIdOptionalParameter,
 
   /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
   @header("x-ms-meta")
   metadata: string,
 
@@ -190,11 +189,10 @@ op containerSetMetadataOverride(
 );
 
 op blobSetMetadataOverride(
-  ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
   ...TimeoutParameter,
 
   /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
   @header("x-ms-meta")
   metadata: string,
 
