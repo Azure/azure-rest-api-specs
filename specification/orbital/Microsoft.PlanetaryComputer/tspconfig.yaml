@@ -36,3 +36,10 @@ options:
     namespace: com.azure.analytics.planetarycomputer
     use-object-for-unknown: true
     flavor: azure
+    # Workaround for non-deterministic TypeReference ordering in generated Java clients
+    # (DataClient.java, DataAsyncClient.java). The Java code generator produces TypeReference
+    # entries for the StacItemOrStacItemCollection discriminated union subtypes (StacItem,
+    # StacItemCollection) in a non-deterministic order, causing spurious diffs on each
+    # regeneration. This customization class enforces a consistent ordering.
+    # Tracking: once the generator fix is shipped, this customization can be removed.
+    customization-class: "customization/src/main/java/PlanetaryComputerCustomizations.java"
