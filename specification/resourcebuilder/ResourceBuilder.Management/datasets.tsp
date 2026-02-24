@@ -40,8 +40,10 @@ model Dataset is ProxyResource<DatasetProperties> {
 union DatasetKind {
   /** Custom user-defined dataset. */
   Custom: "Custom",
+
   /** ARM (Azure Resource Manager) managed resource dataset. */
   ArmResource: "ArmResource",
+
   string,
 }
 
