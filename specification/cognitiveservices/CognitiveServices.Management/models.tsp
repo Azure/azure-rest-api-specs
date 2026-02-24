@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1576,6 +1578,12 @@ model AccountProperties {
   allowProjectManagement?: boolean;
 
   /**
+    * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
+   */
+  @added(Versions.v2026_01_15_preview)
+    foundryAutoUpgrade?: FoundryAutoUpgrade;
+
+  /**
    * Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter.
    */
   defaultProject?: string;
@@ -1584,6 +1592,51 @@ model AccountProperties {
    * Specifies the projects, by project name, that are associated with this resource.
    */
   associatedProjects?: string[];
+}
+
+/**
+ * Represents the mode for foundry auto-upgrade configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryAutoUpgradeMode {
+  string,
+
+  /**
+   * Auto-upgrade is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Auto-upgrade is disabled (opted out).
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
+ * Customers can opt out of auto-upgrade by setting mode to Disabled.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryAutoUpgrade {
+  /**
+   * Gets or sets the auto-upgrade mode.
+   */
+  mode?: FoundryAutoUpgradeMode;
+
+  /**
+   * Gets or sets a value indicating whether the auto-upgrade is planned by Microsoft.
+   */
+  plannedByMicrosoft?: boolean;
+
+  /**
+   * Gets or sets the status reason for the auto-upgrade configuration.
+   */
+  statusReason?: string;
+
+  /**
+   * Gets or sets the scheduled time for the auto-upgrade.
+   */
+  scheduledAt?: utcDateTime;
 }
 
 /**
