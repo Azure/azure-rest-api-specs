@@ -44,7 +44,7 @@ export class LinterRulesetRule implements Rule {
     // Normalize path separators
     const normalizedFolder = folder.replace(/\\/g, "/");
 
-    let requiredRuleset = "";
+    let requiredRuleset;
     if (
       normalizedFolder.includes("/resource-manager/") ||
       normalizedFolder.trim().endsWith(".Management")
