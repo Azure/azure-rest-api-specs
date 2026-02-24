@@ -1736,7 +1736,11 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
           },
           {
             "name": "virtualHubName",
@@ -1786,7 +1790,11 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
           },
           {
             "name": "virtualHubName",
@@ -1844,7 +1852,11 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
           },
           {
             "name": "virtualHubName",
@@ -1913,7 +1925,11 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
           },
           {
             "name": "virtualHubName",
@@ -9820,7 +9836,8 @@
       "properties": {
         "propagateStaticRoutes": {
           "description": "Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "vnetLocalRouteOverrideCriteria": {
           "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke.",
