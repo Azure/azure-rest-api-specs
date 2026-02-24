@@ -1202,14 +1202,10 @@ model ClusterDefinition {
   /**
    * The cluster configurations.
    */
-  configurations?: ClusterDefinitionConfigurations;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
+  configurations?: unknown;
 }
-/**
- * The cluster configurations.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@secret
-model ClusterDefinitionConfigurations {}
 
 /**
  * The kafka rest proxy configuration which contains AAD security group information.
