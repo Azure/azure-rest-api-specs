@@ -85,13 +85,23 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
+
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each message is identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
+@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
+@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
+@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
+
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
 @@clientName(MemoryStores.getMemoryStore, "get");
 @@clientName(MemoryStores.listMemoryStores, "list");
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 
-// The SDK will have custom code to handle LRO memory updates.
+// The Python SDK will have custom code to handle LRO memory updates.
 @@access(MemoryStores.updateMemories, Access.internal, "python");
 @@scope(MemoryStores.getUpdateResult, "!(python)");
 
