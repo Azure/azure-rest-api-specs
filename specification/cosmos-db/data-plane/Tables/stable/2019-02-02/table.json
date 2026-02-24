@@ -86,13 +86,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -271,13 +265,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -362,7 +350,9 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityValueType"
+              }
             },
             "headers": {
               "Date": {
@@ -450,13 +440,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -517,7 +501,9 @@
             "required": false,
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityValueType"
+              }
             }
           }
         ],
@@ -602,13 +588,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -669,7 +649,9 @@
             "required": false,
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityValueType"
+              }
             }
           }
         ],
@@ -751,13 +733,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -941,13 +917,7 @@
             }
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "Prefer",
@@ -984,7 +954,9 @@
             "required": false,
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityValueType"
+              }
             }
           }
         ],
@@ -993,7 +965,9 @@
             "description": "Insert entity successful response with content",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityValueType"
+              }
             },
             "headers": {
               "Date": {
@@ -1109,13 +1083,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "$format",
@@ -1267,13 +1235,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "$format",
@@ -1443,13 +1405,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "table",
@@ -1537,6 +1493,9 @@
             "x-ms-client-name": "apiVersion"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "table",
             "in": "path",
             "description": "The name of the table.",
@@ -1551,15 +1510,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1625,6 +1575,9 @@
             "x-ms-client-name": "apiVersion"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "table",
             "in": "path",
             "description": "The name of the table.",
@@ -1653,15 +1606,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "tableAcl",
@@ -1733,6 +1677,9 @@
             "x-ms-client-name": "apiVersion"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds.",
@@ -1754,15 +1701,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "accept"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "tableServiceProperties",
@@ -1826,6 +1764,9 @@
             "x-ms-client-name": "apiVersion"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds.",
@@ -1833,15 +1774,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1899,6 +1831,9 @@
             "x-ms-client-name": "apiVersion"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds.",
@@ -1906,15 +1841,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2063,6 +1989,7 @@
       "type": "object",
       "description": "Create table response with no content"
     },
+    "EntityValueType": {},
     "GeoReplication": {
       "type": "object",
       "description": "Geo-Replication information for the Secondary Storage Service",
@@ -2125,7 +2052,9 @@
         "tableEntityProperties": {
           "type": "object",
           "description": "The created entity properties.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "$ref": "#/definitions/EntityValueType"
+          }
         }
       },
       "required": [
@@ -2364,7 +2293,9 @@
           "description": "List of table entities.",
           "items": {
             "type": "object",
-            "additionalProperties": {}
+            "additionalProperties": {
+              "$ref": "#/definitions/EntityValueType"
+            }
           },
           "xml": {
             "wrapped": true
@@ -2613,5 +2544,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    }
+  }
 }
