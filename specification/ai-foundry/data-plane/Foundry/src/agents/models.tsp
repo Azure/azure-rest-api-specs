@@ -280,6 +280,7 @@ model HostedAgentDefinition extends AgentDefinition {
     required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
   }
 )
+@removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
   kind: AgentKind.container_app;
 

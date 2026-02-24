@@ -5142,7 +5142,6 @@ components:
           prompt: '#/components/schemas/PromptAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           hosted: '#/components/schemas/HostedAgentDefinition'
-          container_app: '#/components/schemas/ContainerAppAgentDefinition'
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
@@ -5153,7 +5152,6 @@ components:
         - type: string
         - type: string
           enum:
-            - ContainerAgents=V1Preview
             - HostedAgents=V1Preview
             - WorkflowAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents.
@@ -5164,7 +5162,6 @@ components:
           enum:
             - prompt
             - hosted
-            - container_app
             - workflow
     AgentObject:
       type: object
@@ -6411,41 +6408,6 @@ components:
             - CustomKeys
             - RemoteTool_Preview
       description: The Type (or category) of the connection
-    ContainerAppAgentDefinition:
-      type: object
-      required:
-        - kind
-        - container_protocol_versions
-        - container_app_resource_id
-        - ingress_subdomain_suffix
-      properties:
-        kind:
-          type: string
-          enum:
-            - container_app
-        container_protocol_versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication of the containers.
-          example:
-            - protocol: responses
-              version: v0.1.1
-            - protocol: a2a
-              version: v0.3.0
-        container_app_resource_id:
-          type: string
-          description: The resource ID of the Azure Container App that hosts this agent. Not mutable across versions.
-        ingress_subdomain_suffix:
-          type: string
-          description: The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app.
-          example: --0000001
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
-      description: The container app agent definition.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
     ContinuousEvaluationRuleAction:
       type: object
       required:
