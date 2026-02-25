@@ -229,7 +229,7 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@alternateType(ScalingSchedule.daysOfWeek,
-  ScalingScheduleDaysOfWeekItem,
+  ScalingScheduleDaysOfWeekItemUsingStruct[],
   "csharp"
 );
 
