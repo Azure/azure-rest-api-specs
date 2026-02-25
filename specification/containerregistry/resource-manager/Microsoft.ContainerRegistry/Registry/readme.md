@@ -26,7 +26,16 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-11
+tag: package-2026-01-preview
+```
+
+### Tag: package-2026-01-preview
+
+These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01-preview'
+input-file:
+  - preview/2026-01-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2025-11
@@ -300,6 +309,7 @@ suppressions:
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
     where:
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/resync"].post.responses.200.schema
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].get.responses.200.schema
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put.responses.200.schema
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put.responses.201.schema
