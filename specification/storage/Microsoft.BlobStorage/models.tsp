@@ -1025,7 +1025,7 @@ model BlobProperties {
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
 
-    /** The smart access tier of the blob. */
+  /** The smart access tier of the blob. */
   @Xml.name("SmartAccessTier") smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
