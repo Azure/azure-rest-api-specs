@@ -180,6 +180,10 @@ using Microsoft.Kusto;
 @@clientLocation(SkusOperationGroup.list, "Skus");
 
 @@clientLocation(OperationsResultsOperationGroup.get, "OperationsResults");
+@@clientLocation(OperationsResultsOperationGroup.getLocation,
+  "OperationsResultsLocation"
+);
+@@clientName(OperationsResultsOperationGroup.getLocation, "Get");
 
 @@clientName(ClustersOperationGroup.checkNameAvailability::parameters.body,
   "clusterName"

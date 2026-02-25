@@ -63,6 +63,7 @@ interface OperationsResultsOperationGroup {
   @tag("OperationResults")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}")
   @get
+  @sharedRoute
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -75,27 +76,34 @@ interface OperationsResultsOperationGroup {
     @path
     operationId: string,
   ): ArmResponse<OperationResult> | ErrorResponse;
+
+  /**
+   * Returns operation results.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("OperationResults")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}")
+  @get
+  @sharedRoute
+  getLocation(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The ID of an ongoing async operation.
+     */
+    @minLength(1)
+    @path
+    operationId: string,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @query
+    operationResultResponseType: "Location",
+  ): OkResponse | ArmAcceptedResponse<
+    Message = "Operation is still in progress.",
+    ExtraHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 }
-
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-// interface OperationsResultsLocationOperationGroup {
-//   /**
-//    * Returns operation results.
-//    */
-//   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-//   @operationId("OperationsResultsLocation_Get")
-//   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}")
-//   @get
-//   get(
-//     ...ApiVersionParameter,
-//     ...SubscriptionIdParameter,
-//     ...LocationResourceParameter,
-
-//     /**
-//      * The ID of an ongoing async operation.
-//      */
-//     @minLength(1)
-//     @path
-//     operationId: string,
-//   ): OkResponse | ArmAcceptedResponse | ErrorResponse;
-// }
