@@ -38,6 +38,7 @@ model NamespaceDiscoveredAsset
 
 @armResourceOperations
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2026_11_01_preview)
 interface NamespaceDiscoveredAssets {
   get is ArmResourceRead<NamespaceDiscoveredAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredAsset>;

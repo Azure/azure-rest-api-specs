@@ -42,6 +42,7 @@ model BillingContainerProperties {
 }
 
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface BillingContainers {
   get is ArmResourceRead<BillingContainer>;

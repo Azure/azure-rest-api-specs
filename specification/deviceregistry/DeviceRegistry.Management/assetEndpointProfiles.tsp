@@ -162,7 +162,7 @@ model AssetEndpointProfileStatusError {
   @visibility(Lifecycle.Read)
   message?: string;
 }
-
+@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface AssetEndpointProfiles {
   get is ArmResourceRead<AssetEndpointProfile>;

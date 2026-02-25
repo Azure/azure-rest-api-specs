@@ -148,6 +148,37 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
+### Tag: package-preview-2026-11
+
+These settings apply only when `--tag=package-preview-2026-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-11'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2026-11-01-preview/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.OutboundEndpoints.properties.assigned
+      - $.definitions.OutboundEndpointsUpdate.properties.assigned
+      - $.definitions.OutboundEndpoints.properties.unassigned
+      - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
+    reason: These are customer defined properties with variables keys but well defined value structure.
+```
+
 ### Tag: package-preview-2025-11
 
 These settings apply only when `--tag=package-preview-2025-11` is specified on the command line.

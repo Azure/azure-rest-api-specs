@@ -1,0 +1,1926 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DeviceRegistry management service",
+    "version": "2026-11-01-preview",
+    "description": "Microsoft.DeviceRegistry Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OperationStatus"
+    },
+    {
+      "name": "Namespaces"
+    },
+    {
+      "name": "NamespaceDevices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DeviceRegistry/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Operations": {
+            "$ref": "./examples/List_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_OperationStatus": {
+            "$ref": "./examples/Get_OperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListBySubscription",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Namespaces_BySubscription": {
+            "$ref": "./examples/List_Namespace_BySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListByResourceGroup",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Namespaces_ByResourceGroup": {
+            "$ref": "./examples/List_Namespace_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}": {
+      "get": {
+        "operationId": "Namespaces_Get",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_Namespace": {
+            "$ref": "./examples/Get_Namespace.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Namespaces_CreateOrReplace",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Create a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Namespace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Namespace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplace_Namespace_With_Endpoints": {
+            "$ref": "./examples/CreateOrReplace_Namespace_With_Endpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Namespaces_Update",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Update a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_Namespace_Endpoints": {
+            "$ref": "./examples/Update_Namespace_Endpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Namespaces_Delete",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Delete a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_Namespace": {
+            "$ref": "./examples/Delete_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices": {
+      "get": {
+        "operationId": "NamespaceDevices_ListByResourceGroup",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "List NamespaceDevice resources by Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_NamespaceDevices_ByResourceGroup": {
+            "$ref": "./examples/List_NamespaceDevices_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices/{deviceName}": {
+      "get": {
+        "operationId": "NamespaceDevices_Get",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Get a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NamespaceDevice with Endpoint Error Status": {
+            "$ref": "./examples/Get_NamespaceDeviceWithEndpointErrorStatus.json"
+          },
+          "Get_NamespaceDevice": {
+            "$ref": "./examples/Get_NamespaceDevice.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NamespaceDevices_CreateOrReplace",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Create a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NamespaceDevice' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "201": {
+            "description": "Resource 'NamespaceDevice' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create edge enabled device with UsernamesPassword inbound authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_UsernamePass.json"
+          },
+          "Create edge enabled device with anonymous host authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_Anonymous.json"
+          },
+          "Create edge enabled device with x509 inbound authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_x509.json"
+          },
+          "CreateOrReplace_NamespaceDevices": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NamespaceDevices_Update",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Update a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceDeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_NamespaceDevices": {
+            "$ref": "./examples/Update_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NamespaceDevices_Delete",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Delete a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_NamespaceDevice": {
+            "$ref": "./examples/Delete_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "operationId": "Namespaces_Migrate",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Migrate the resources into Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Namespace Migrate": {
+            "$ref": "./examples/Migrate_Assets_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DeviceMessagingEndpoint": {
+      "type": "object",
+      "description": "Device messaging endpoint model.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for the messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "DeviceMessagingEndpointUpdate": {
+      "type": "object",
+      "description": "Device messaging endpoint model.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for the messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        }
+      }
+    },
+    "DeviceStatus": {
+      "type": "object",
+      "description": "Defines the device status properties.",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/StatusConfig",
+          "description": "Defines the device status config properties.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "$ref": "#/definitions/DeviceStatusEndpoints",
+          "description": "Defines the device status for inbound/outbound endpoints.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceStatusEndpoint": {
+      "type": "object",
+      "description": "Defines the device status properties.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Defines the error related to this endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceStatusEndpoints": {
+      "type": "object",
+      "description": "Defines the device status for inbound/outbound endpoints.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "KeyValue pair representing status of inbound endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceStatusEndpoint"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error object with properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code for classification of errors (ex: '400', '404', '500', etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist”).",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of error details that describe the status of each error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Defines the error details properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Multi-part error code for classification and root causing of errors (ex: 400.200.100.432).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (ex: “Authentication method not supported”).",
+          "readOnly": true
+        },
+        "info": {
+          "type": "string",
+          "description": "Human-readable helpful detailed text context for debugging (ex: “The following mechanisms are supported...”).",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Unique identifier for the transaction to aid in debugging.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "HostAuthentication": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the host.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentials",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509CertificateCredentials",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "HostAuthenticationUpdate": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the host.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509CertificateCredentialsUpdate",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      }
+    },
+    "InboundEndpoints": {
+      "type": "object",
+      "description": "An endpoint to connect to the device.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
+        },
+        "authentication": {
+          "$ref": "#/definitions/HostAuthentication",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "trustSettings": {
+          "$ref": "#/definitions/TrustSettings",
+          "description": "Defines server trust settings for the endpoint."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
+        }
+      },
+      "required": [
+        "endpointType",
+        "address"
+      ]
+    },
+    "InboundEndpointsUpdate": {
+      "type": "object",
+      "description": "An endpoint to connect to the device.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
+        },
+        "authentication": {
+          "$ref": "#/definitions/HostAuthenticationUpdate",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "trustSettings": {
+          "$ref": "#/definitions/TrustSettings",
+          "description": "Defines server trust settings for the endpoint."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
+        }
+      }
+    },
+    "Management": {
+      "type": "object",
+      "description": "The namespace management endpoints model.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of management endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ManagementEndpoint"
+          }
+        }
+      }
+    },
+    "ManagementEndpoint": {
+      "type": "object",
+      "description": "Namespace management endpoint model used by service to connect to device.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for management endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "The scope ID for the management endpoint."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The messaging endpoint Azure resource Id."
+        }
+      },
+      "required": [
+        "endpointType",
+        "address",
+        "scopeId",
+        "resourceId"
+      ]
+    },
+    "Messaging": {
+      "type": "object",
+      "description": "The namespace messaging endpoints model.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of messaging endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MessagingEndpoint"
+          }
+        }
+      }
+    },
+    "MessagingEndpoint": {
+      "type": "object",
+      "description": "Namespace messaging endpoint model used by a device to connect to a service.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The messaging endpoint Azure resource Id."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "MessagingEndpoints": {
+      "type": "object",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "Set of endpoints to connect to the device.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InboundEndpoints"
+          }
+        },
+        "outbound": {
+          "$ref": "#/definitions/OutboundEndpoints",
+          "description": "Set of endpoints a device can connect to."
+        }
+      }
+    },
+    "MessagingEndpointsUpdate": {
+      "type": "object",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "Set of endpoints to connect to the device.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InboundEndpointsUpdate"
+          }
+        },
+        "outbound": {
+          "$ref": "#/definitions/OutboundEndpointsUpdate",
+          "description": "Set of endpoints a device can connect to."
+        }
+      }
+    },
+    "MigrateResult": {
+      "type": "object",
+      "description": "Result of Migrate operation of asset resource into Namespace resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the asset resource."
+        },
+        "result": {
+          "$ref": "#/definitions/MigrateResultType",
+          "description": "The result of the migrate operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error if the migrate operation is not successful."
+        }
+      }
+    },
+    "MigrateResultType": {
+      "type": "string",
+      "description": "Result Type of Migrate Operation.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrateResultType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource Migrate operation is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource Migrate operation is not successful."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Namespace": {
+      "type": "object",
+      "description": "Namespace definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceDevice": {
+      "type": "object",
+      "description": "Device definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceDeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag.",
+          "readOnly": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceDeviceListResult": {
+      "type": "object",
+      "description": "The response of a NamespaceDevice list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamespaceDevice items on this page",
+          "items": {
+            "$ref": "#/definitions/NamespaceDevice"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceDeviceProperties": {
+      "type": "object",
+      "description": "Defines the device properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "A unique identifier for the device.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource is enabled or not.",
+          "default": true
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "discoveredDeviceRef": {
+          "type": "string",
+          "description": "Reference to a device. Populated only if the device had been created from discovery flow. Discovered device name must be provided.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "endpoints": {
+          "$ref": "#/definitions/MessagingEndpoints",
+          "description": "Property bag containing the device's unassigned and assigned endpoints."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceStatus",
+          "description": "Device status updates.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp (in UTC) that is updated each time the resource is modified.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceDeviceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the NamespaceDevice.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceDeviceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceDeviceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NamespaceDevice.",
+      "properties": {
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "endpoints": {
+          "$ref": "#/definitions/MessagingEndpointsUpdate",
+          "description": "Property bag containing the device's unassigned and assigned endpoints."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID."
+        }
+      }
+    },
+    "NamespaceListResult": {
+      "type": "object",
+      "description": "The response of a Namespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Namespace items on this page",
+          "items": {
+            "$ref": "#/definitions/Namespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceMigrateRequest": {
+      "type": "object",
+      "description": "Request body for the migrate resources operation in to Namespace resource.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope of the migrate resources operation."
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "List of asset resources to be migrated.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NamespaceMigrateResponse": {
+      "type": "object",
+      "description": "Response for the migrate asset resources operation into Namespace resource.",
+      "properties": {
+        "migrateResults": {
+          "type": "array",
+          "description": "List of migrate results containing result of each asset migrate operation.",
+          "items": {
+            "$ref": "#/definitions/MigrateResult"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      }
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "description": "The namespace properties model.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "messaging": {
+          "$ref": "#/definitions/Messaging",
+          "description": "Assigned and unassigned messaging endpoints."
+        },
+        "management": {
+          "$ref": "#/definitions/Management",
+          "description": "Assigned and unassigned management endpoints."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Namespace.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Namespace.",
+      "properties": {
+        "messaging": {
+          "$ref": "#/definitions/Messaging",
+          "description": "Assigned and unassigned messaging endpoints."
+        },
+        "management": {
+          "$ref": "#/definitions/Management",
+          "description": "Assigned and unassigned management endpoints."
+        }
+      }
+    },
+    "OutboundEndpoints": {
+      "type": "object",
+      "description": "Property bag contains the device's outbound endpoints",
+      "properties": {
+        "assigned": {
+          "type": "object",
+          "description": "Endpoints the device can connect to.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpoint"
+          }
+        },
+        "unassigned": {
+          "type": "object",
+          "description": "Set of most recently removed endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpoint"
+          }
+        }
+      },
+      "required": [
+        "assigned"
+      ]
+    },
+    "OutboundEndpointsUpdate": {
+      "type": "object",
+      "description": "Property bag contains the device's outbound endpoints",
+      "properties": {
+        "assigned": {
+          "type": "object",
+          "description": "Endpoints the device can connect to.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
+          }
+        },
+        "unassigned": {
+          "type": "object",
+          "description": "Set of most recently removed endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Scope": {
+      "type": "string",
+      "description": "Scope of the migrate resources operation.",
+      "enum": [
+        "Resources"
+      ],
+      "x-ms-enum": {
+        "name": "Scope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Resources",
+            "value": "Resources",
+            "description": "Scoping the migration to resourceIds provided"
+          }
+        ]
+      }
+    },
+    "StatusConfig": {
+      "type": "object",
+      "description": "Defines the status config properties.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A read-only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (edge) state of the CRD. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A read-only timestamp indicating the last time the configuration has been modified from the perspective of the current actual (edge) state of the CRD. Edge would be the only writer of this value and would sync back up to the cloud.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      }
+    },
+    "StatusError": {
+      "type": "object",
+      "description": "Defines the status config error properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code for classification of errors (ex: '400', '404', '500', etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist”).",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of error details that describe the status of each error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TrustSettings": {
+      "type": "object",
+      "description": "Defines server trust settings for an endpoint.",
+      "properties": {
+        "trustList": {
+          "type": "string",
+          "description": "Defines a secret reference for certificates to trust."
+        }
+      }
+    },
+    "UsernamePasswordCredentials": {
+      "type": "object",
+      "description": "The credentials for authentication mode UsernamePassword.",
+      "properties": {
+        "usernameSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the username."
+        },
+        "passwordSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the password."
+        }
+      },
+      "required": [
+        "usernameSecretName",
+        "passwordSecretName"
+      ]
+    },
+    "UsernamePasswordCredentialsUpdate": {
+      "type": "object",
+      "description": "The credentials for authentication mode UsernamePassword.",
+      "properties": {
+        "usernameSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the username."
+        },
+        "passwordSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the password."
+        }
+      }
+    },
+    "X509CertificateCredentials": {
+      "type": "object",
+      "description": "The x509 certificate for authentication mode Certificate.",
+      "properties": {
+        "certificateSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+        },
+        "keySecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate private key in PEM or DER format."
+        },
+        "intermediateCertificatesSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the combined intermediate certificates in PEM format."
+        }
+      },
+      "required": [
+        "certificateSecretName"
+      ]
+    },
+    "X509CertificateCredentialsUpdate": {
+      "type": "object",
+      "description": "The x509 certificate for authentication mode Certificate.",
+      "properties": {
+        "certificateSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+        },
+        "keySecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the certificate private key in PEM or DER format."
+        },
+        "intermediateCertificatesSecretName": {
+          "type": "string",
+          "description": "The name of the secret containing the combined intermediate certificates in PEM format."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

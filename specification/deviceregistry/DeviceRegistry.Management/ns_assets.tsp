@@ -91,6 +91,7 @@ model NamespaceAssetExecuteActionResponse {
 }
 
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface NamespaceAssets {
   get is ArmResourceRead<NamespaceAsset>;

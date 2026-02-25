@@ -37,6 +37,7 @@ model NamespaceDiscoveredDevice
 
 @armResourceOperations
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2026_11_01_preview)
 interface NamespaceDiscoveredDevices {
   get is ArmResourceRead<NamespaceDiscoveredDevice>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredDevice>;
