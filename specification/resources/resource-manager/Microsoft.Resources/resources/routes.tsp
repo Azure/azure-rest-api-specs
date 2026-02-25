@@ -128,4 +128,56 @@ interface Resources {
   listByResourceGroup is ArmResourceListByParent<GenericResource, ResourceGroup>;
 }
 
+// ================================
+// BATCH OPERATIONS
+// ================================
+
+@armResourceOperations
+interface BatchOperations {
+  /** Execute a batch of Azure Resource Manager operations at subscription scope. */
+  @doc("Execute a batch of Azure Resource Manager operations at subscription scope.")
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/batchOperations")
+  @OpenAPI.extension("x-ms-long-running-operation", true)
+  invokeAtSubscriptionScope(
+    /** The subscription ID. */
+    @doc("The subscription ID.")
+    @path  
+    subscriptionId: string,
+
+    @doc("The API version to use for the operation.")
+    @query("api-version")
+    apiVersion: string,
+
+    @doc("Batch request containing multiple operations to execute.")
+    @body
+    batchRequest: BatchRequests,
+  ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<"Batch operation accepted", BatchResponse> | ErrorResponse;
+
+  /** Execute a batch of Azure Resource Manager operations at resource group scope. */
+  @doc("Execute a batch of Azure Resource Manager operations at resource group scope.")
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/batchOperations")
+  @OpenAPI.extension("x-ms-long-running-operation", true)
+  invokeAtResourceGroupScope(
+    /** The subscription ID. */
+    @doc("The subscription ID.")
+    @path
+    subscriptionId: string,
+
+    /** The resource group name. */
+    @doc("The resource group name.")
+    @path
+    resourceGroupName: string,
+
+    @doc("The API version to use for the operation.")
+    @query("api-version")
+    apiVersion: string,
+
+    @doc("Batch request containing multiple operations to execute.")
+    @body
+    batchRequest: BatchRequests,
+  ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<"Batch operation accepted", BatchResponse> | ErrorResponse;
+}
+
 }
