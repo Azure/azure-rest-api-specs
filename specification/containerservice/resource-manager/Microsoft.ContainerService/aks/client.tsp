@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
@@ -69,8 +70,28 @@ using Microsoft.ContainerService;
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
 @@clientName(KubeletConfig.failSwapOn, "FailStartWithSwapOn", "csharp");
+@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+  "DiskCsiDriver",
+  "csharp"
+);
+@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+  "FileCsiDriver",
+  "csharp"
+);
+@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+  "BlobCsiDriver",
+  "csharp"
+);
+@@clientName(ManagedClusterStorageProfileDiskCSIDriver,
+  "ManagedClusterStorageProfileDiskCsiDriver",
+  "csharp"
+);
 @@clientName(ManagedClusterStorageProfileDiskCSIDriver.enabled,
   "IsDiskCsiDriverEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterStorageProfileFileCSIDriver,
+  "ManagedClusterStorageProfileFileCsiDriver",
   "csharp"
 );
 @@clientName(ManagedClusterStorageProfileFileCSIDriver.enabled,
@@ -79,6 +100,10 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusterStorageProfileSnapshotController.enabled,
   "IsSnapshotControllerEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterStorageProfileBlobCSIDriver,
+  "ManagedClusterStorageProfileBlobCsiDriver",
   "csharp"
 );
 @@clientName(ManagedClusterStorageProfileBlobCSIDriver.enabled,
@@ -330,7 +355,7 @@ using Microsoft.ContainerService;
 @@clientName(Machine, "ContainerServiceMachine", "csharp");
 @@clientName(MachineProperties, "ContainerServiceMachineProperties", "csharp");
 @@clientName(ArtifactSource, "ContainerServiceArtifactSource", "csharp");
-@@clientName(MachineIpAddress, "ContainerServiceMachineIpAddress", "csharp");
+@@clientName(MachineIpAddress, "ContainerServiceMachineIPAddress", "csharp");
 @@clientName(IPFamily, "ContainerServiceIPFamily", "csharp");
 @@clientName(JWTAuthenticator, "ManagedClusterJwtAuthenticator", "csharp");
 @@clientName(JWTAuthenticatorProperties,
@@ -447,6 +472,10 @@ using Microsoft.ContainerService;
   "ContainerServicePrivateEndpointConnectionProperties",
   "csharp"
 );
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@clientName(PrivateLinkServiceConnectionState.status,
   "ConnectionState",
   "csharp"
@@ -527,6 +556,34 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterHttpProxyConfig",
   "csharp"
 );
+@@clientName(LocalDNSMode, "LocalDnsMode", "csharp");
+@@clientName(LocalDNSState, "LocalDnsState", "csharp");
+@@clientName(LocalDNSQueryLogging, "LocalDnsQueryLogging", "csharp");
+@@clientName(LocalDNSProtocol, "LocalDnsProtocol", "csharp");
+@@clientName(LocalDNSForwardDestination,
+  "LocalDnsForwardDestination",
+  "csharp"
+);
+@@clientName(LocalDNSForwardPolicy, "LocalDnsForwardPolicy", "csharp");
+@@clientName(LocalDNSServeStale, "LocalDnsServeStale", "csharp");
+@@clientName(LocalDNSProfile, "LocalDnsProfile", "csharp");
+@@clientName(LocalDNSOverride, "LocalDnsOverride", "csharp");
+@@clientName(AgentPoolAvailableVersions, "AgentPoolAvailableVersion", "csharp");
+@@clientName(IdentityBinding, "ManagedClusterIdentityBinding", "csharp");
+@@clientName(IdentityBindingProperties,
+  "ManagedClusterIdentityBindingProperties",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
+@@markAsPageable(PrivateEndpointConnections.list, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedNamespace,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
+@@scope(AgentPools.getByAgentPool, "!csharp");
