@@ -187,8 +187,10 @@ op analyzeCustomSignature(
 // .NET: MediaContent → AnalysisContent to avoid generic names that might conflict with other system-level libraries.
 @@clientName(MediaContent, "AnalysisContent", "csharp");
 
-// .NET: property name "Uri" to match type System.Uri (noun phrase, type-aligned).
+// .NET: property/parameter names use "Uri" to match System.Uri (noun phrase, type-aligned).
 @@clientName(AnalyzeInput.url, "Uri", "csharp");
+@@clientName(DocumentHyperlink.url, "Uri", "csharp");
+@@clientName(LabeledDataKnowledgeSource.containerUrl, "ContainerUri", "csharp");
 
 // .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
 @@clientName(ContentAnalyzer.dynamicFieldSchema,
