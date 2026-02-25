@@ -5190,15 +5190,14 @@ components:
       type: object
       required:
         - name
-        - version
       properties:
         name:
           type: string
-          description: Agent name.
+          description: Agent name (e.g., 'customer-support-bot').
         version:
           type: string
-          description: Agent version.
-      description: Reference to the agent being invoked.
+          description: Optional version string (e.g., 'v1', '2025-01-15'). Defaults to latest if omitted.
+      description: Agent reference specifying which agent to invoke.
     AgentDefinition:
       type: object
       required:
@@ -6485,49 +6484,30 @@ components:
     ContentItem:
       type: object
       required:
-        - content_type
+        - item_type
       properties:
-        content_type:
-          allOf:
-            - $ref: '#/components/schemas/ContentType'
-          description: MIME type (text/plain, image/png, audio/wav, application/pdf, etc.).
-        text:
-          type: string
-          description: Text payload. Required when content_type is text/*.
-        url:
-          type: string
-          format: uri
-          description: Remote URL for media content.
-        file_id:
-          type: string
-          description: Platform-managed file reference.
-        filename:
-          type: string
-          description: Suggested filename (typically used in output).
-        data:
-          type: string
-          description: Inline base64-encoded payload.
-      additionalProperties: {}
-      description: |-
-        A single content item using flat MIME typing.
-        Enables agent chaining (agent A's output becomes agent B's input with zero translation).
-
-        Additional custom properties can be included for developer-defined content types.
-        This enables custom container agent developers to define their own content items with
-        custom content_type values and fully control the payload structure.
-    ContentType:
+        item_type:
+          $ref: '#/components/schemas/ContentItemType'
+      discriminator:
+        propertyName: item_type
+        mapping:
+          text: '#/components/schemas/TextContentItem'
+          image: '#/components/schemas/ImageContentItem'
+          file: '#/components/schemas/FileContentItem'
+          interrupt_resume: '#/components/schemas/InterruptResumeContentItem'
+          interrupt: '#/components/schemas/InterruptContentItem'
+      description: Base for all content items. Discriminated by item_type for type-safe agent chaining and extensibility.
+    ContentItemType:
       anyOf:
         - type: string
         - type: string
           enum:
-            - text/plain
-            - image/png
-            - image/jpeg
-            - audio/wav
-            - application/pdf
-      description: |-
-        MIME type for content items.
-        Supports common predefined types and any custom string for developer-defined content types.
+            - text
+            - image
+            - file
+            - interrupt
+            - interrupt_resume
+      description: Content item type. Predefined types (text, image, file, interrupt, interrupt_resume) or custom string for extensibility.
     ContinuousEvaluationRuleAction:
       type: object
       required:
@@ -8496,6 +8476,34 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The fabric data agent tool parameters.
+    FileContentItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - file
+        file_name:
+          type: string
+          description: Suggested filename (e.g., 'report.pdf').
+        file_id:
+          type: string
+          description: Platform-managed file reference.
+        url:
+          type: string
+          format: uri
+          description: HTTP/HTTPS URL.
+        data:
+          type: string
+          description: Base64-encoded file data.
+        content_type:
+          type: string
+          description: MIME type (e.g., 'application/pdf', 'text/csv').
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: File attachment. Use file_id, url, or data (exactly one required).
     FileDatasetVersion:
       type: object
       required:
@@ -8645,6 +8653,31 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for human evaluation.
+    ImageContentItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - image
+        file_id:
+          type: string
+          description: Platform-managed file reference.
+        url:
+          type: string
+          format: uri
+          description: HTTP/HTTPS URL.
+        data:
+          type: string
+          description: Base64-encoded image data.
+        content_type:
+          type: string
+          description: MIME type (e.g., 'image/jpeg', 'image/png').
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: Image content. Use file_id, url, or data (exactly one required).
     Index:
       type: object
       required:
@@ -8921,23 +8954,80 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
-    InterruptResume:
+    InterruptContentItem:
       type: object
       required:
+        - item_type
+        - interrupt_id
+        - interrupt_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - interrupt
+        interrupt_id:
+          type: string
+          description: Unique ID for this interrupt.
+        interrupt_type:
+          type: string
+          description: Interrupt type (e.g., 'form_input', 'approval').
+      additionalProperties: {}
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: Agent interrupt requesting user input. Supports custom properties for forms, approvals, etc.
+    InterruptDetails:
+      type: object
+      required:
+        - type
         - id
       properties:
+        type:
+          type: string
+          description: Interrupt type discriminator.
         id:
           type: string
           description: |-
-            Interrupt ID from the previous response.
-            Must match the interrupt.id field to resume from the correct checkpoint.
+            Unique identifier for this interrupt.
+            Client must include this in InterruptResume when resuming execution.
+      discriminator:
+        propertyName: type
+      description: Base interrupt model with type discriminator for different interrupt scenarios.
+    InterruptOutputItem:
+      type: object
+      required:
+        - type
+        - interrupt
+      properties:
+        type:
+          type: string
+          enum:
+            - interrupt
+        interrupt:
+          allOf:
+            - $ref: '#/components/schemas/InterruptDetails'
+          description: Interrupt details when agent pauses for human input.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+    InterruptResumeContentItem:
+      type: object
+      required:
+        - item_type
+        - interrupt_id
+      properties:
+        item_type:
+          type: string
+          enum:
+            - interrupt_resume
+        interrupt_id:
+          type: string
+          description: ID of the interrupt being resumed.
         payload:
           type: object
           additionalProperties: {}
-          description: |-
-            Arbitrary payload to pass to the agent when resuming.
-            Can contain user's decision, additional context, or custom data needed by the agent.
-      description: Interrupt resume payload for continuing execution after a human-in-the-loop pause.
+          description: User's response (form data, approval decision, etc.).
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: Resume token referencing an interrupt. Enables stateless agent resumption after user fulfills interrupt.
     InvokeMessage:
       type: object
       required:
@@ -8950,15 +9040,13 @@ components:
               items:
                 $ref: '#/components/schemas/ContentItem'
           description: |-
-            Content items in this message. Can contain text, images, audio, files, etc.
-            String shorthand is normalized to [{"content_type":"text/plain","text":"..."}] by the platform.
+            Message content. String shorthand auto-converts to text content.
+            Example: "Hello!" or [{"item_type": "text", "text": "Hello!"}]
         metadata:
           type: object
           additionalProperties: {}
-          description: Optional message metadata (e.g., timestamps, identifiers).
-      description: |-
-        A message containing one or more content items.
-        Messages enable structured conversations and agent chaining.
+          description: Optional metadata (timestamps, IDs, custom tags).
+      description: Message in agent conversation.
     InvokeRequest:
       type: object
       required:
@@ -8976,29 +9064,16 @@ components:
               items:
                 $ref: '#/components/schemas/InvokeMessage'
           description: |-
-            Input for the agent. Can be:
-            - A simple string (normalized to a user message with text content)
-            - An array of messages (user or assistant messages for multi-turn conversations)
-
-            Examples:
-            - String: "Hello, agent!"
-            - Messages: [{"role": "user", "content": "Hello!"}]
+            Agent input. String auto-converts to user message.
+            Example: "Hello!" or [{"content": "Hello!"}]
         session_id:
           type: string
-          description: Session identifier. Omit to create a new session.
-        interrupt:
-          allOf:
-            - $ref: '#/components/schemas/InterruptResume'
-          description: |-
-            Interrupt resume details when continuing from a human-in-the-loop pause.
-            Required when resuming from status 'awaiting_input'.
+          description: Session ID for multi-turn conversations. Omit to create new session.
         metadata:
           type: object
           additionalProperties: {}
-          description: |-
-            Opaque typed pass-through. Platform does not parse this.
-            Use for model config, custom agent flags, user context, etc.
-      description: Invoke API request body.
+          description: Opaque metadata (model config, tracing, etc.). Not parsed by platform.
+      description: Request to invoke an agent.
     ItemGenerationParams:
       type: object
       required:
@@ -17376,6 +17451,7 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - interrupt
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -17466,6 +17542,7 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - interrupt
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -18196,6 +18273,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          interrupt: '#/components/schemas/InterruptOutputItem'
           structured_outputs: '#/components/schemas/StructuredOutputsOutputItem'
           workflow_action: '#/components/schemas/WorkflowActionOutputItem'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestOutputItem'
@@ -18923,6 +19001,7 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
+            - interrupt
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -24124,6 +24203,21 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+    TextContentItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - text
+        text:
+          type: string
+          description: UTF-8 text string.
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: Text content item.
     ToolCallOutputContent:
       anyOf:
         - type: object

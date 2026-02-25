@@ -10,26 +10,29 @@ namespace Azure.AI.Projects;
 // ---------------------------------------------------------------------------
 
 @doc("""
-  MIME type for content items.
+  Type discriminator for content items.
   Supports common predefined types and any custom string for developer-defined content types.
   """)
-union ContentType {
+union ContentItemType {
   string,
 
-  @doc("Plain text content.")
-  text_plain: "text/plain",
+  @doc("Plain text content")
+  text: "text",
 
-  @doc("PNG image.")
-  image_png: "image/png",
+  @doc("Image content")
+  image: "image",
 
-  @doc("JPEG image.")
-  image_jpeg: "image/jpeg",
+  @doc("Document content")
+  file: "file",
 
-  @doc("WAV audio.")
-  audio_wav: "audio/wav",
+  @doc("Structured data content")
+  structured_data: "structured_data",
 
-  @doc("PDF document.")
-  application_pdf: "application/pdf",
+  @doc("An interrupt (supported only as an agent output).")
+  interrupt: "interrupt",
+
+  @doc("An interrupt resume (supported only as an agent input).")
+  interrupt_resume: "interrupt_resume",
 }
 
 @doc("Reference to the agent being invoked.")
@@ -42,69 +45,146 @@ model AgentDef {
 }
 
 @doc("""
-  A single content item using flat MIME typing.
-  Enables agent chaining (agent A's output becomes agent B's input with zero translation).
-  
-  Additional custom properties can be included for developer-defined content types.
-  This enables custom container agent developers to define their own content items with
-  custom content_type values and fully control the payload structure.
+  Content item
   """)
+@discriminator("item_type")
 model ContentItem {
-  @doc("MIME type (text/plain, image/png, audio/wav, application/pdf, etc.).")
-  content_type: ContentType;
+  item_type: ContentItemType;
+}
 
-  @doc("Text payload. Required when content_type is text/*.")
+@doc("Text content item for plain text content.")
+model TextContentItem extends ContentItem {
+  item_type: ContentItemType.text;
+
+  @doc("Text content.")
   text?: string;
+}
 
-  @doc("Remote URL for media content.")
-  url?: url;
+@doc("Structured data content item.")
+model StructuredDataContentItem extends ContentItem {
+  item_type: ContentItemType.structured_data;
 
-  @doc("Platform-managed file reference.")
+  @doc("Structured data.")
+  data?: Record<unknown>;
+}
+
+@doc("""
+  Image content item.
+  Supports platform-managed files (file_id), remote URLs, or inline base64 data.
+  """)
+model ImageContentItem extends ContentItem {
+  item_type: ContentItemType.image;
+
+  @doc("Platform-managed file reference (preferred for large images).")
   file_id?: string;
 
-  @doc("Suggested filename (typically used in output).")
-  filename?: string;
+  @doc("Remote URL for the image.")
+  url?: url;
 
-  @doc("Inline base64-encoded payload.")
+  @doc("Inline base64-encoded image data.")
   data?: string;
 
-  // Additional custom properties for developer-defined content types
+  @doc("Image MIME type (e.g., 'image/jpeg', 'image/png').")
+  content_type?: string;
+}
+
+@doc("""
+  File content item for document attachments.
+  Supports platform-managed files (file_id), remote URLs, or inline base64 data.
+  """)
+model FileContentItem extends ContentItem {
+  item_type: ContentItemType.file;
+
+  @doc("Suggested filename for the file (commonly used in output).")
+  file_name?: string;
+
+  @doc("Platform-managed file reference (preferred for large files).")
+  file_id?: string;
+
+  @doc("Remote URL for the file.")
+  url?: url;
+
+  @doc("Inline base64-encoded file data.")
+  data?: string;
+
+  @doc("File MIME type (e.g., 'application/pdf', 'text/csv').")
+  content_type?: string;
+}
+
+@doc("""
+  Interrupt resume content item for continuing execution after an interrupt.
+  Used to resume from a human-in-the-loop (HITL) pause or other interrupt scenarios.
+  """)
+model InterruptResumeContentItem extends ContentItem {
+  item_type: ContentItemType.interrupt_resume;
+
+  @doc("""
+    Interrupt ID from the previous response.
+    Must match the interrupt.interrupt_id field to resume from the correct checkpoint.
+    """)
+  interrupt_id: string;
+
+  @doc("""
+    Optional payload to pass to the agent when resuming.
+    Can contain user decisions, additional context, or custom data needed by the agent.
+    """)
+  payload?: Record<unknown>;
+}
+
+@doc("""
+  Interrupt content item for HITL and other pause scenarios.
+  Interrupts pause agent execution and await client action before resuming.
+  """)
+model InterruptContentItem extends ContentItem {
+  item_type: ContentItemType.interrupt;
+
+  @doc("""
+    Unique identifier for this interrupt.
+    Client must include this in InterruptResumeContentItem.interrupt_id when resuming execution.
+    """)
+  interrupt_id: string;
+
+  @doc("Interrupt type discriminator (e.g., 'tool_call', 'oauth_consent', 'approval_required').")
+  interrupt_type: string;
+
   ...Record<unknown>;
 }
 
 @doc("""
   A message containing one or more content items.
-  Messages enable structured conversations and agent chaining.
+  Messages enable structured conversations, agent chaining, and support for interrupts.
+  Each message can contain text, images, files, interrupts, or interrupt resumes.
   """)
 model InvokeMessage {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Content can be string or array of ContentItem"
   @doc("""
-    Content items in this message. Can contain text, images, audio, files, etc.
-    String shorthand is normalized to [{"content_type":"text/plain","text":"..."}] by the platform.
+    Content items in this message. Can contain text, images, files, interrupts, etc.
+    String shorthand is automatically normalized to text content by the platform.
+    
+    Examples:
+    - String: "Hello, agent!"
+    - Array: [{"item_type": "text", "text": "Hello!"}]
     """)
   content: string | ContentItem[];
-
-  @doc("Optional message metadata (e.g., timestamps, identifiers).")
-  metadata?: Record<unknown>;
 }
 
-@doc("Terminal status of an invocation.")
+@doc("Terminal status of an agent invocation.")
 union InvocationStatus {
   string,
 
-  @doc("Agent is executing.")
+  @doc("Agent is currently executing.")
   in_progress: "in_progress",
 
-  @doc("Agent finished successfully.")
+  @doc("Agent completed successfully.")
   completed: "completed",
 
-  @doc("Agent error (exception, timeout).")
+  @doc("Agent execution failed (exception, timeout, or error).")
   failed: "failed",
 
-  @doc("Externally cancelled.")
+  @doc("Invocation was cancelled externally.")
   cancelled: "cancelled",
 
-  @doc("Agent paused, awaiting user input (HITL).")
+  @doc("Agent paused and awaiting user input (interrupt/HITL scenario).")
   awaiting_input: "awaiting_input",
 }
 
@@ -112,111 +192,58 @@ union InvocationStatus {
 // Request
 // ---------------------------------------------------------------------------
 
-@doc("Interrupt resume payload for continuing execution after a human-in-the-loop pause.")
-model InterruptResume {
-  @doc("""
-    Interrupt ID from the previous response.
-    Must match the interrupt.id field to resume from the correct checkpoint.
-    """)
-  id: string;
-
-  @doc("""
-    Arbitrary payload to pass to the agent when resuming.
-    Can contain user's decision, additional context, or custom data needed by the agent.
-    """)
-  payload?: Record<unknown>;
-}
-
 @doc("Invoke API request body.")
 model InvokeRequest {
-  @doc("Agent to invoke.")
+  @doc("Agent definition specifying which agent to invoke.")
   agent_def: AgentDef;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Input can be string or array of messages"
   @doc("""
-    Input for the agent. Can be:
-    - A simple string (normalized to a user message with text content)
-    - An array of messages (user or assistant messages for multi-turn conversations)
+    Input for the agent invocation. Supports:
+    - Simple string: Automatically normalized to a user message with text content
+    - Array of messages: For multi-turn conversations or structured inputs
     
     Examples:
     - String: "Hello, agent!"
-    - Messages: [{"role": "user", "content": "Hello!"}]
+    - Messages: [{"content": "Hello!"}]
+    - With interrupt resume: [{"content": [{"item_type": "interrupt_resume", "interrupt_id": "int_123", "payload": {...}}]}]
     """)
   input: string | InvokeMessage[];
 
-  @doc("Session identifier. Omit to create a new session.")
+  @doc("Session identifier for multi-turn conversations. Omit to create a new session.")
   session_id?: string;
 
   @doc("""
-    Interrupt resume details when continuing from a human-in-the-loop pause.
-    Required when resuming from status 'awaiting_input'.
+    Opaque parameters pass-through. Platform does not parse this field.
+    Use for model configuration, custom agent flags, user context, tracing, etc.
     """)
-  interrupt?: InterruptResume;
-
-  @doc("""
-    Opaque typed pass-through. Platform does not parse this.
-    Use for model config, custom agent flags, user context, etc.
-    """)
-  metadata?: Record<unknown>;
+  params?: Record<unknown>;
 }
 
 // ---------------------------------------------------------------------------
 // Response
 // ---------------------------------------------------------------------------
 
-@doc("Base interrupt model with type discriminator for different interrupt scenarios.")
-@discriminator("type")
-model Interrupt {
-  @doc("Interrupt type discriminator.")
-  type: string;
-
-  @doc("""
-    Unique identifier for this interrupt.
-    Client must include this in InterruptResume when resuming execution.
-    """)
-  id: string;
-}
-
-@doc("Confirmation interrupt - requires user approval to proceed with an action.")
-model ConfirmationInterrupt extends Interrupt {
-  @doc("Interrupt type.")
-  type: "confirmation";
-
-  @doc("Action or operation requiring confirmation.")
-  action?: string;
-
-  @doc("Additional details about what will happen if confirmed.")
-  details?: Record<unknown>;
-}
-
 @doc("Invoke API response — the terminal SSE event payload.")
 model InvokeResponse {
-  @doc("Terminal status of this invocation.")
+  @doc("The id of the response.")
+  id: string;
+
+  @doc("Terminal status of this agent invocation.")
   status: InvocationStatus;
 
-  @doc("Session this invocation belongs to.")
+  @doc("Session identifier this invocation belongs to.")
   session_id: string;
 
   @doc("""
-    Agent response messages. Each message contains content items (text, images, files, etc.).
-    Null when status is 'failed'. May be partial when status is 'awaiting_input'.
+    Agent output message containing content items (text, images, files, interrupts, etc.).
+    - Null when status is 'failed'
+    - May contain an interrupt when status is 'awaiting_input'
+    - Contains final results when status is 'completed'
     """)
   output?: InvokeMessage;
 
-  @doc("""
-    Interrupt details when agent pauses for human input.
-    Present when status is 'awaiting_input'. Type can be 'confirmation', 'input', or 'choice'.
-    Client must provide InterruptResume with interrupt.id when resuming execution.
-    """)
-  interrupt?: Interrupt;
-
-  @doc("""
-    Opaque typed pass-through from agent. Platform does not parse this.
-    Used for citations, interrupt details, framework-specific state.
-    """)
-  metadata?: Record<unknown>;
-
-  @doc("Structured error details. Present when status is 'failed'.")
+  @doc("Structured error details. Present only when status is 'failed'.")
   error?: InvocationError;
 
   @doc("Unix timestamp (seconds) when invocation started.")
@@ -230,15 +257,15 @@ model InvokeResponse {
 // Error (agent-level, in terminal SSE event)
 // ---------------------------------------------------------------------------
 
-@doc("Structured error for agent-level failures in the terminal event.")
+@doc("Structured error information for agent-level failures in the terminal event.")
 model InvocationError {
-  @doc("Machine-readable error code (e.g. 'container_timeout', 'agent_exception').")
+  @doc("Machine-readable error code (e.g., 'container_timeout', 'agent_exception', 'validation_error').")
   code: string;
 
-  @doc("Human-readable error message.")
+  @doc("Human-readable error message describing the failure.")
   message: string;
 
-  @doc("Parameter that caused the error, if applicable.")
+  @doc("Parameter name that caused the error, if applicable.")
   param?: string;
 }
 
@@ -248,10 +275,17 @@ model InvocationError {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Event types are self-documenting"
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "SSE event unions are supported"
-@doc("Union of all possible SSE event types in the invoke streaming response.")
+@doc("""
+  Union of all possible SSE event types in the invoke streaming response.
+  
+  Agents can emit either delta events or final events for content items:
+  - Delta events: Incremental updates that are merged with existing content
+  - Final events: Complete content items that replace any existing content
+  """)
 union InvokeStreamingResponse {
   `invoke.created`: InvocationCreatedEvent,
-  `invoke.content.delta`: ContentDeltaEvent,
+  `output.content.delta`: ContentDeltaEvent,
+  `output.content.final`: ContentFinalEvent,
   `invoke.completed`: InvocationCompletedEvent,
 }
 
@@ -261,56 +295,102 @@ model InvocationEvent {
   seq: int64;
 }
 
-@doc("SSE event: invocation started.")
+@doc("SSE event emitted when an agent invocation starts.")
 model InvocationCreatedEvent {
   ...InvocationEvent;
 
-  @doc("Session this invocation belongs to.")
+  @doc("Session identifier this invocation belongs to.")
   session_id: string;
 
-  @doc("Unix timestamp (seconds) when invocation started.")
+  @doc("Unix timestamp (seconds since epoch) when the invocation started.")
   created_at: int64;
 }
 
-@doc("SSE event: incremental content delta.")
+@doc("""
+  SSE event emitted for incremental content deltas during streaming.
+  
+  Delta events provide incremental updates that are merged with existing content:
+  - Text properties: New text is concatenated to existing text
+  - Numeric properties: New value is added to existing value
+  - Array properties: New items are appended to existing array
+  - New properties: Initialized with the provided value
+  
+  Example sequence:
+  1. Delta event: {"text": "Hello"} → content becomes "Hello"
+  2. Delta event: {"text": " World", "final": true} → content becomes "Hello World" and is complete
+  
+  The final flag on any delta event signals that no more deltas will be sent for this item_index.
+  """)
 model ContentDeltaEvent {
   ...InvocationEvent;
 
-  @doc("The index of the content item in the output message.")
+  @doc("The zero-based index of the content item in the output message.")
   index: int64;
 
-  @doc("Incremental content delta.")
-  delta: ContentDelta;
-
-  @doc("Whether this content item is completed.")
-  is_completed: boolean;
-}
-
-@doc("Incremental content delta containing the content type and incremental data.")
-model ContentDelta {
   @doc("MIME type of the content being streamed.")
-  content_type: ContentType;
+  item_type: ContentItemType;
 
-  @doc("Incremental text content (for text/* content types).")
-  text?: string;
+  @doc("""
+    Incremental delta object containing property updates to merge.
+    Properties in delta are merged with existing content according to merge semantics.
+    """)
+  delta: Record<unknown>;
 
-  @doc("File reference (when file is ready).")
-  file_id?: string;
-
-  @doc("Suggested filename.")
-  filename?: string;
-
-  @doc("Remote URL (when available).")
-  url?: url;
-
-  // Additional custom properties for developer-defined content types
-  ...Record<unknown>;
+  @doc("""
+    Whether this is the final delta for this content item.
+    When true, no more deltas will be sent for this item_index.
+    Can be set on any delta event in the sequence.
+    """)
+  final: boolean;
 }
 
-@doc("SSE event: terminal event (invocation completed).")
+@doc("""
+  SSE event emitted for a finalized content item.
+  
+  Final events provide complete content items that replace existing content:
+  - If content item at index exists: Completely replaced with new item
+  - If content item at index does not exist: New item is added at that index
+  
+  Use final events when:
+  - Content items don't support incremental updates
+  - You want to replace entire content atomically
+  - Simpler streaming logic is preferred over deltas
+  
+  Example:
+  Final event with {"item_type": "text", "text": "Complete message"} 
+  → content at index is set to this complete item
+  """)
+model ContentFinalEvent {
+  ...InvocationEvent;
+
+  @doc("The zero-based index of the content item in the output message.")
+  index: int64;
+
+  @doc("""
+    Complete content item that replaces any existing content at this index.
+    The entire item is set atomically.
+    """)
+  item: ContentItem;
+}
+
+@doc("SSE event emitted when an agent invocation completes (terminal event).")
 model InvocationCompletedEvent {
   ...InvocationEvent;
-  ...InvokeResponse;
+
+  @doc("Terminal status of this agent invocation.")
+  status: InvocationStatus;
+
+  @doc("""
+    Opaque metadata pass-through from the agent. Platform does not parse this field.
+    Commonly used for citations, tool execution details, framework-specific state, etc.
+    """)
+  metadata: Record<unknown>;
+
+  @doc("Structured error details. Present only when status is 'failed'.")
+  error?: InvocationError;
+
+  @doc("Unix timestamp (seconds) when invocation finished.")
+  completed_at?: int64;
 }
 
 // ---------------------------------------------------------------------------
