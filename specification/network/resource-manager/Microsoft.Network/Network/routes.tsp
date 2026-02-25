@@ -372,6 +372,7 @@ interface NetworkSecurityPerimeterOperationStatusesOperationGroup {
    */
   @tag("NetworkSecurityPerimeterOperationStatuses")
   @get
+  @armResourceRead(CommonTypes.OperationStatusResult)
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

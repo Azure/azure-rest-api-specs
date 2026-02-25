@@ -8,3 +8,12 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Microsoft.Network;
 using Microsoft.Compute;
+@client({
+  name: "CombineClient",
+  service: [Microsoft.Network, Microsoft.Compute],
+})
+@useDependency(
+  Microsoft.Network.Versions.v2025_05_01,
+  Microsoft.Compute.Versions.v2025_05_01
+)
+namespace CombineClient;
