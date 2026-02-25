@@ -7,6 +7,13 @@ using Microsoft.HealthBot;
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
 
+// rename for duplicate model from Azure.ResourceManager.Foundations
+@@clientName(ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo", "java, csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "python,go"
+);
+
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
 @@clientName(HealthBots.update::parameters.properties, "patch", "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
@@ -27,6 +34,3 @@ using Microsoft.HealthBot;
   Azure.Core.azureLocation,
   "csharp"
 );
-
-// rename for duplicate model from Azure.ResourceManager.Foundations
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo");
