@@ -253,13 +253,14 @@
             "x-ms-client-name": "numberOfMessages"
           },
           {
-            "name": "visibilityTimeout",
+            "name": "visibilitytimeout",
             "in": "query",
             "description": "Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.",
             "required": false,
             "type": "integer",
             "format": "int32",
-            "maximum": 604800
+            "maximum": 604800,
+            "x-ms-client-name": "visibilityTimeout"
           },
           {
             "name": "timeout",
@@ -344,16 +345,17 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "visibilityTimeout",
+            "name": "visibilitytimeout",
             "in": "query",
             "description": "Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.",
             "required": false,
             "type": "integer",
             "format": "int32",
-            "maximum": 604800
+            "maximum": 604800,
+            "x-ms-client-name": "visibilityTimeout"
           },
           {
-            "name": "messageTtl",
+            "name": "messagettl",
             "in": "query",
             "description": "Optional. Specifies the time-to-live interval for the message, in seconds.\nPrior to version 2017-07-29, the maximum time-to-live allowed is 7 days. For\nversion 2017-07-29 or later, the maximum time-to-live can be any positive\nnumber, as well as -1 indicating that the message does not expire. If this\nparameter is omitted, the default time-to-live is 7 days.",
             "required": false,
@@ -542,20 +544,22 @@
             "type": "string"
           },
           {
-            "name": "popReceipt",
+            "name": "popreceipt",
             "in": "query",
             "description": "Required. Specifies the valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "popReceipt"
           },
           {
-            "name": "visibilityTimeout",
+            "name": "visibilitytimeout",
             "in": "query",
             "description": "Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.",
             "required": true,
             "type": "integer",
             "format": "int32",
-            "maximum": 604800
+            "maximum": 604800,
+            "x-ms-client-name": "visibilityTimeout"
           },
           {
             "name": "timeout",
@@ -662,11 +666,12 @@
             "type": "string"
           },
           {
-            "name": "popReceipt",
+            "name": "popreceipt",
             "in": "query",
             "description": "Required. Specifies the valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "popReceipt"
           },
           {
             "name": "timeout",
@@ -765,7 +770,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListOfSignedIdentifier"
+              "$ref": "#/definitions/SignedIdentifiers"
             },
             "headers": {
               "Date": {
@@ -850,13 +855,13 @@
             "description": "The access control list for the queue.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ListOfSignedIdentifier"
+              "$ref": "#/definitions/SignedIdentifiers"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "Date": {
                 "type": "string",
@@ -1682,12 +1687,7 @@
           "description": "The permissions for acl the policy.",
           "x-ms-client-name": "permission"
         }
-      },
-      "required": [
-        "Start",
-        "Expiry",
-        "Permission"
-      ]
+      }
     },
     "CorsRule": {
       "type": "object",
@@ -1875,29 +1875,6 @@
         "name": "QueueMessagesList"
       }
     },
-    "ListOfSignedIdentifier": {
-      "type": "object",
-      "description": "Represents an array of signed identifiers",
-      "properties": {
-        "SignedIdentifier": {
-          "type": "array",
-          "description": "The list of signed identifiers.",
-          "items": {
-            "$ref": "#/definitions/SignedIdentifier"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "items"
-        }
-      },
-      "required": [
-        "SignedIdentifier"
-      ],
-      "xml": {
-        "name": "SignedIdentifiers"
-      }
-    },
     "ListQueuesIncludeType": {
       "type": "string",
       "description": "Include this parameter to specify that the queue's metadata be returned as part of the response body.",
@@ -1963,7 +1940,9 @@
       },
       "required": [
         "ServiceEndpoint",
-        "Queues"
+        "Prefix",
+        "MaxResults",
+        "NextMarker"
       ],
       "xml": {
         "name": "EnumerationResults"
@@ -2296,6 +2275,26 @@
       "required": [
         "Id",
         "AccessPolicy"
+      ]
+    },
+    "SignedIdentifiers": {
+      "type": "object",
+      "description": "Represents an array of signed identifiers",
+      "properties": {
+        "SignedIdentifier": {
+          "type": "array",
+          "description": "The list of signed identifiers.",
+          "items": {
+            "$ref": "#/definitions/SignedIdentifier"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "items"
+        }
+      },
+      "required": [
+        "SignedIdentifier"
       ]
     },
     "StorageError": {
