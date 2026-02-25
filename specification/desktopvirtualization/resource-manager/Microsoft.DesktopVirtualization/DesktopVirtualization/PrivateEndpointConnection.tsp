@@ -42,7 +42,7 @@ interface WorkspaceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ParentParameters = ResourceInstanceParameters<Workspace>,
       ResourceTypeParameter = PrivateEndpointParameter,
-      ResourceName = "WorkspacePrivateEndpointConnection",
+      ResourceName = "WorkspacePrivateEndpointConnection"
     > {}
 
 @armResourceOperations

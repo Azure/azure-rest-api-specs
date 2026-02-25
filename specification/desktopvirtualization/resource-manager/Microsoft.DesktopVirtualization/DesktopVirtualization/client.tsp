@@ -46,7 +46,7 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(PrivateEndpointConnectionWithSystemData,
-  "DesktopVirtualizationPrivateEndpointConnectionData",
+  "DesktopVirtualizationPrivateEndpointConnectionDataData",
   "csharp"
 );
 
@@ -127,7 +127,7 @@ using Microsoft.DesktopVirtualization;
 @@clientName(AppAttachPackageProperties.keyVaultURL, "KeyVaultUri", "csharp");
 
 @@clientName(ApplicationGroupProperties.cloudPcResource,
-  "IsCloudPcResource",
+  "IsCloudPCResource",
   "csharp"
 );
 
@@ -143,7 +143,7 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(ExpandMsixImageProperties.lastUpdated, "LastUpdatedOn", "csharp");
 
-@@clientName(HostPoolProperties.cloudPcResource, "IsCloudPcResource", "csharp");
+@@clientName(HostPoolProperties.cloudPcResource, "IsCloudPCResource", "csharp");
 
 @@clientName(HostPoolProperties.ssoadfsAuthority, "SsoAdfsAuthority", "csharp");
 
@@ -162,6 +162,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
+@@clientName(MSIXPackageList, "MsixPackageList", "csharp");
 @@clientName(MSIXPackageProperties.lastUpdated, "LastUpdatedOn", "csharp");
 
 @@clientName(ScalingHostPoolReference.hostPoolArmPath, "HostPoolId", "csharp");
@@ -183,7 +184,7 @@ using Microsoft.DesktopVirtualization;
 @@clientName(SessionHostProperties.virtualMachineId, "VmId", "csharp");
 
 @@clientName(WorkspaceProperties.cloudPcResource,
-  "IsCloudPcResource",
+  "IsCloudPCResource",
   "csharp"
 );
 
@@ -249,5 +250,249 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-@@clientName(ResourceProviderOperation, "ResourceProviderOperationInfo", "csharp");
-@@clientName(HostPoolUpdateControlParameter, "HostPoolUpdateControlContent", "csharp");
+@@clientName(ResourceProviderOperation,
+  "ResourceProviderOperationInfo",
+  "csharp"
+);
+@@clientName(HostPoolUpdateControlParameter,
+  "HostPoolUpdateControlContent",
+  "csharp"
+);
+@@clientName(MSIXPackage, "MsixPackage", "csharp");
+
+// Category A fixes: acronym casing and property rename decorators
+@@clientName(MSIXImageURI, "MsixImageUri", "csharp");
+@@clientName(HostPoolProperties.startVMOnConnect, "StartVmOnConnect", "csharp");
+@@clientName(AppAttachPackageArchitectures.x86a64, "X86A64", "csharp");
+@@clientName(HostPoolPatchProperties.startVMOnConnect,
+  "StartVmOnConnect",
+  "csharp"
+);
+@@clientName(MsixPackageApplications.appUserModelID,
+  "AppUserModelId",
+  "csharp"
+);
+
+@@clientName(ScalingPlanPersonalSchedulePatchProperties.offPeakStartVMOnConnect,
+  "OffPeakStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalSchedulePatchProperties.peakStartVMOnConnect,
+  "PeakStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalSchedulePatchProperties.rampDownStartVMOnConnect,
+  "RampDownStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalSchedulePatchProperties.rampUpStartVMOnConnect,
+  "RampUpStartVmOnConnect",
+  "csharp"
+);
+
+@@clientName(AgentUpdatePatchProperties.type, "UpdateType", "csharp");
+@@clientName(AgentUpdateProperties.type, "UpdateType", "csharp");
+
+@@clientName(HealthCheckName.SxSStackListenerCheck,
+  "SxsStackListenerCheck",
+  "csharp"
+);
+@@clientName(HealthCheckName.WebRTCRedirectorCheck,
+  "WebRtcRedirectorCheck",
+  "csharp"
+);
+@@clientName(Status.SxSStackListenerNotReady,
+  "SxsStackListenerNotReady",
+  "csharp"
+);
+
+@@clientName(ScalingPlanPersonalScheduleProperties.offPeakStartVMOnConnect,
+  "OffPeakStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalScheduleProperties.peakStartVMOnConnect,
+  "PeakStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalScheduleProperties.rampDownStartVMOnConnect,
+  "RampDownStartVmOnConnect",
+  "csharp"
+);
+@@clientName(ScalingPlanPersonalScheduleProperties.rampUpStartVMOnConnect,
+  "RampUpStartVmOnConnect",
+  "csharp"
+);
+
+@@clientName(SessionHostProperties.osVersion, "OSVersion", "csharp");
+@@clientName(SessionHostProperties.sxSStackVersion,
+  "SxsStackVersion",
+  "csharp"
+);
+
+// Category B fixes: managedBy alternateType decorators
+@@alternateType(HostPool.managedBy, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ScalingPlan.managedBy,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ApplicationGroup.managedBy,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Workspace.managedBy,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Breaking #1 fix: ETag type from string to Azure.ETag
+@@alternateType(HostPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ScalingPlan.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ApplicationGroup.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Workspace.etag, Azure.Core.eTag, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionWithSystemData.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpandMsixImage.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPool.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackage.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackagePatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlan.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedule.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedule.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHost.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserSession.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Application.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Desktop.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StartMenuItem.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPoolPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedulePatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedulePatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroupPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DesktopPatch.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspacePatch.properties,
+  "csharp"
+);
+
+@@usage(StartMenuItem, Usage.input, "csharp");
+@@usage(ExpandMsixImage, Usage.input, "csharp");
+@@usage(ExpandMsixImageProperties, Usage.input, "csharp");
+@@usage(UserSession, Usage.input, "csharp");
+@@usage(UserSessionProperties, Usage.input, "csharp");
+@@usage(Desktop, Usage.input, "csharp");
+@@usage(DesktopProperties, Usage.input, "csharp");
+@@usage(SessionHostProperties, Usage.input, "csharp");
+
+// Breaking #9 fix: Public constructors for resource data types
+@@usage(MSIXPackage, Usage.input, "csharp");
+@@usage(ScalingPlanPersonalSchedule, Usage.input, "csharp");
+@@usage(ScalingPlanPooledSchedule, Usage.input, "csharp");
+@@usage(PrivateEndpointConnectionWithSystemData, Usage.input, "csharp");
+@@usage(PrivateEndpointConnection, Usage.input, "csharp");
+@@usage(PrivateLinkResource, Usage.input, "csharp");
