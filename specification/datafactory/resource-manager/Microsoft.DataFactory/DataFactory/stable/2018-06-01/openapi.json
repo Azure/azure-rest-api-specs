@@ -12275,14 +12275,6 @@
       "type": "object",
       "description": "Copy activity.",
       "properties": {
-        "linkedServiceName": {
-          "$ref": "#/definitions/LinkedServiceReference",
-          "description": "Linked service reference."
-        },
-        "policy": {
-          "$ref": "#/definitions/ActivityPolicy",
-          "description": "Activity policy."
-        },
         "typeProperties": {
           "$ref": "#/definitions/CopyActivityTypeProperties",
           "description": "Copy activity properties.",
@@ -12314,7 +12306,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Activity"
+          "$ref": "#/definitions/ExecutionActivity"
         }
       ],
       "x-ms-discriminator-value": "Copy"
@@ -15999,44 +15991,6 @@
       "type": "object",
       "description": "Base class for all execution activities.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Activity name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of activity."
-        },
-        "description": {
-          "type": "string",
-          "description": "Activity description."
-        },
-        "state": {
-          "$ref": "#/definitions/ActivityState",
-          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
-        },
-        "onInactiveMarkAs": {
-          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
-          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
-        },
-        "dependsOn": {
-          "type": "array",
-          "description": "Activity depends on condition.",
-          "items": {
-            "$ref": "#/definitions/ActivityDependency"
-          },
-          "x-ms-identifiers": []
-        },
-        "userProperties": {
-          "type": "array",
-          "description": "Activity user properties.",
-          "items": {
-            "$ref": "#/definitions/UserProperty"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "linkedServiceName": {
           "$ref": "#/definitions/LinkedServiceReference",
           "description": "Linked service reference."
@@ -16046,12 +16000,12 @@
           "description": "Activity policy."
         }
       },
-      "discriminator": "type",
-      "required": [
-        "name",
-        "type"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
       ],
-      "additionalProperties": {}
+      "x-ms-discriminator-value": "Execution"
     },
     "ExportSettings": {
       "type": "object",

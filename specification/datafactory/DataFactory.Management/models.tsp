@@ -19335,8 +19335,9 @@ model ControlActivity is Activity;
 /**
  * Base class for all execution activities.
  */
-model ExecutionActivity is Activity {
+model ExecutionActivity extends Activity {
   ...ExecutionActivityProperties;
+  type: "Execution";
 }
 
 alias ExecutionActivityProperties = {
@@ -25016,7 +25017,11 @@ model TypeConversionSettings {
  * HDInsight Hive activity type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HDInsightHiveActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model HDInsightHiveActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * HDInsight Hive activity properties.
    */
@@ -25082,7 +25087,11 @@ model HDInsightHiveActivityTypeProperties {
  * HDInsight Pig activity type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HDInsightPigActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model HDInsightPigActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * HDInsight Pig activity properties.
    */
@@ -25136,7 +25145,11 @@ model HDInsightPigActivityTypeProperties {
  * HDInsight MapReduce activity type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HDInsightMapReduceActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model HDInsightMapReduceActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * HDInsight MapReduce activity properties.
    */
@@ -25200,7 +25213,11 @@ model HDInsightMapReduceActivityTypeProperties {
  * HDInsight streaming activity type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HDInsightStreamingActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model HDInsightStreamingActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * HDInsight streaming activity properties.
    */
@@ -25284,7 +25301,11 @@ model HDInsightStreamingActivityTypeProperties {
  * HDInsight Spark activity.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HDInsightSparkActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model HDInsightSparkActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * HDInsight spark activity properties.
    */
@@ -25346,7 +25367,11 @@ model HDInsightSparkActivityTypeProperties {
 /**
  * Execute SSIS package activity.
  */
-model ExecuteSsisPackageActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model ExecuteSsisPackageActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Execute SSIS package activity properties.
    */
@@ -25622,7 +25647,11 @@ model SsisLogLocationTypeProperties {
 /**
  * Custom activity type.
  */
-model CustomActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model CustomActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Custom activity properties.
    */
@@ -25695,7 +25724,11 @@ model CustomActivityReferenceObject {
 /**
  * SQL stored procedure activity type.
  */
-model SqlServerStoredProcedureActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model SqlServerStoredProcedureActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * SQL stored procedure activity properties.
    */
@@ -25779,7 +25812,11 @@ model ExecutePipelineActivityTypeProperties {
 /**
  * Delete activity.
  */
-model DeleteActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DeleteActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Delete activity properties.
    */
@@ -25830,7 +25867,11 @@ model DeleteActivityTypeProperties {
 /**
  * Azure Data Explorer command activity.
  */
-model AzureDataExplorerCommandActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model AzureDataExplorerCommandActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Azure Data Explorer command activity properties.
    */
@@ -25860,7 +25901,11 @@ model AzureDataExplorerCommandActivityTypeProperties {
 /**
  * Lookup activity.
  */
-model LookupActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model LookupActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Lookup activity properties.
    */
@@ -25900,7 +25945,11 @@ model LookupActivityTypeProperties {
 /**
  * Web activity.
  */
-model WebActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model WebActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Web activity properties.
    */
@@ -26018,7 +26067,11 @@ model WebActivityAuthentication {
 /**
  * Activity to get metadata of dataset
  */
-model GetMetadataActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model GetMetadataActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * GetMetadata activity properties.
    */
@@ -26194,7 +26247,11 @@ model ForEachActivityTypeProperties {
  * Azure ML Batch Execution activity.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureMLBatchExecutionActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model AzureMLBatchExecutionActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Azure ML Batch Execution activity properties.
    */
@@ -26250,7 +26307,11 @@ model AzureMLWebServiceFile {
  * Azure ML Update Resource management activity.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureMLUpdateResourceActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model AzureMLUpdateResourceActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Azure ML Update Resource management activity properties.
    */
@@ -26287,7 +26348,11 @@ model AzureMLUpdateResourceActivityTypeProperties {
  * Azure ML Execute Pipeline activity.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureMLExecutePipelineActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model AzureMLExecutePipelineActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Azure ML Execute Pipeline activity properties.
    */
@@ -26349,7 +26414,11 @@ model AzureMLExecutePipelineActivityTypeProperties {
 /**
  * Data Lake Analytics U-SQL activity.
  */
-model DataLakeAnalyticsUsqlActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DataLakeAnalyticsUsqlActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Data Lake Analytics U-SQL activity properties.
    */
@@ -26571,7 +26640,11 @@ model FilterActivityTypeProperties {
 /**
  * DatabricksNotebook activity.
  */
-model DatabricksNotebookActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DatabricksNotebookActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Databricks Notebook activity properties.
    */
@@ -26608,7 +26681,11 @@ model DatabricksNotebookActivityTypeProperties {
 /**
  * DatabricksSparkJar activity.
  */
-model DatabricksSparkJarActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DatabricksSparkJarActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Databricks SparkJar activity properties.
    */
@@ -26644,7 +26721,11 @@ model DatabricksSparkJarActivityTypeProperties {
 /**
  * DatabricksSparkPython activity.
  */
-model DatabricksSparkPythonActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DatabricksSparkPythonActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Databricks SparkPython activity properties.
    */
@@ -26680,7 +26761,11 @@ model DatabricksSparkPythonActivityTypeProperties {
 /**
  * Databricks Job activity.
  */
-model DatabricksJobActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model DatabricksJobActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Databricks Job activity properties.
    */
@@ -26796,7 +26881,11 @@ model AppendVariableActivityTypeProperties {
 /**
  * Azure Function activity.
  */
-model AzureFunctionActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model AzureFunctionActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Azure Function activity properties.
    */
@@ -26901,7 +26990,11 @@ model WebHookActivityTypeProperties {
 /**
  * Execute data flow activity.
  */
-model ExecuteDataFlowActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model ExecuteDataFlowActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Execute data flow activity properties.
    */
@@ -27056,7 +27149,11 @@ model PowerQuerySinkMapping {
 /**
  * Script activity type.
  */
-model ScriptActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model ScriptActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Script activity properties.
    */
@@ -27188,7 +27285,11 @@ model SharePointOnlineListSource extends CopySource {
 /**
  * Execute Synapse notebook activity.
  */
-model SynapseNotebookActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model SynapseNotebookActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Execute Synapse notebook activity properties.
    */
@@ -27321,7 +27422,11 @@ model SparkConfigurationParametrizationReference {
 /**
  * Execute spark job activity.
  */
-model SynapseSparkJobDefinitionActivity extends ExecutionActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
+model SynapseSparkJobDefinitionActivity extends Activity {
+  ...ExecutionActivityProperties;
+
   /**
    * Execute spark job activity properties.
    */
