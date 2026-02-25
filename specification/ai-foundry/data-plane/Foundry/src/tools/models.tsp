@@ -54,15 +54,7 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.WebSearchTool,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
 
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -75,75 +67,35 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.CodeInterpreterTool,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.ImageGenTool,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.LocalShellToolParam,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.FunctionShellToolParam,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.FileSearchTool,
     {
-      /**
-       * Optional user-defined name for this tool.
-       */
-      name?: string,
-
-      /**
-       * Optional user-defined description for this tool.
-       */
-      description?: string,
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
@@ -151,7 +103,7 @@ namespace Azure.AI.Projects {
    * A web search configuration for bing custom search
    */
   model WebSearchConfiguration {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * Project connection id for grounding with bing custom search
@@ -167,7 +119,7 @@ namespace Azure.AI.Projects {
   /**
    * Optional name and description fields for tool definitions and nested tool configurations.
    */
-  alias FriendlyToolNameDescriptionExtension = {
+  alias ToolNameAndDescriptionExtension = {
     /**
      * Optional user-defined name for this tool or configuration.
      */
@@ -188,7 +140,7 @@ namespace Azure.AI.Projects {
      */
     type: "bing_grounding";
 
-      ...FriendlyToolNameDescriptionExtension;
+      ...ToolNameAndDescriptionExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -200,7 +152,7 @@ namespace Azure.AI.Projects {
    * The fabric data agent tool parameters.
    */
   model FabricDataAgentToolParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -219,7 +171,7 @@ namespace Azure.AI.Projects {
      */
     type: "fabric_dataagent_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The fabric data agent tool parameters.
@@ -231,7 +183,7 @@ namespace Azure.AI.Projects {
    * The sharepoint grounding tool parameters.
    */
   model SharepointGroundingToolParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -250,7 +202,7 @@ namespace Azure.AI.Projects {
      */
     type: "sharepoint_grounding_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -267,7 +219,7 @@ namespace Azure.AI.Projects {
      */
     type: "azure_ai_search";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The azure ai search index resource.
@@ -279,7 +231,7 @@ namespace Azure.AI.Projects {
    * A set of index resources used by the `azure_ai_search` tool.
    */
   model AzureAISearchToolResource {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The indices attached to this agent. There can be a maximum of 1 index
@@ -309,7 +261,7 @@ namespace Azure.AI.Projects {
    */
   model AISearchIndexResource {
     ...IndexResource;
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      *  Type of query in an AIIndexResource attached to this agent.
@@ -376,7 +328,7 @@ namespace Azure.AI.Projects {
      */
     type: "bing_custom_search_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The bing custom search tool parameters.
@@ -393,7 +345,7 @@ namespace Azure.AI.Projects {
      */
     type: "browser_automation_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -405,7 +357,7 @@ namespace Azure.AI.Projects {
    * Definition of input parameters for the Browser Automation Tool.
    */
   model BrowserAutomationToolParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -417,7 +369,7 @@ namespace Azure.AI.Projects {
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
   model BrowserAutomationToolConnectionParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -616,7 +568,7 @@ namespace Azure.AI.Projects {
    * A project connection resource.
    */
   model ToolProjectConnection {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * A project connection in a ToolProjectConnectionList attached to this tool.
@@ -640,7 +592,7 @@ namespace Azure.AI.Projects {
    * Search configuration for Bing Grounding
    */
   model BingGroundingSearchConfiguration {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * Project connection id for grounding with bing search
@@ -672,7 +624,7 @@ namespace Azure.AI.Projects {
    * The bing grounding search tool parameters.
    */
   model BingGroundingSearchToolParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The search configurations attached to this tool. There can be a maximum of 1
@@ -686,7 +638,7 @@ namespace Azure.AI.Projects {
    * The bing custom search tool parameters.
    */
   model BingCustomSearchToolParameters {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -700,7 +652,7 @@ namespace Azure.AI.Projects {
    * A bing custom search configuration.
    */
   model BingCustomSearchConfiguration {
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * Project connection id for grounding with bing search
@@ -797,7 +749,7 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The structured outputs to capture from the model.
@@ -814,7 +766,7 @@ namespace Azure.AI.Projects {
      */
     type: "a2a_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * Base URL of the agent.
@@ -843,7 +795,7 @@ namespace Azure.AI.Projects {
      */
     type: "memory_search_preview";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
@@ -878,7 +830,7 @@ namespace Azure.AI.Projects {
      */
     type: "memory_search";
 
-    ...FriendlyToolNameDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
