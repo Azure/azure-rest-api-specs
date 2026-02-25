@@ -869,6 +869,10 @@ interface Blob {
       @header("x-ms-access-tier-change-time")
       accessTierChangeTime?: utcDateTime;
 
+      /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+      @header("x-ms-smart-access-tier")
+      smartAccessTier?: string;
+
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
       ...TagCountResponseHeader;
