@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -30,6 +31,9 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
   kind?: string;
 }
+
+// here is the augment decorator for versioning
+@@added(Cluster.kind, Versions.v2026_03_01_preview);
 
 @armResourceOperations
 interface Clusters {
@@ -124,6 +128,7 @@ interface Clusters {
   /**
    * Changes ring of a cluster
    */
+  @added(Versions.v2026_03_01_preview)
   changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
