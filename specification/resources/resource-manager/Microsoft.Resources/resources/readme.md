@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: ResourceManagementClient
 description: ResourceManagement Client
 openapi-type: arm
-tag: package-resources-2025-08-preview
+tag: package-resources-2025-04
 ```
 
 ### Tag: package-resources-2023-07
