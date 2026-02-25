@@ -244,7 +244,7 @@ model DesiredConfigurationUpdate {
 
 /** The operations that can be performed on our resource */
 @armResourceOperations(ManagedOp)
-interface ManagedOperations {
+interface ManagedOps {
   @doc("Gets the information of the ManagedOps instance.")
   get is ArmResourceRead<ManagedOp>;
 
