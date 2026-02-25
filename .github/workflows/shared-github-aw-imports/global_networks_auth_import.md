@@ -52,19 +52,6 @@ steps:
         cat /tmp/az-account.err >&2 || true
         exit 1
       fi
-  - name: Fetch secret from Azure Key Vault
-    id: fetch_secret
-    shell: bash
-    run: |
-      set -euo pipefail
-      AZURESDK_GITHUB_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-      AZURESDK_COPILOT_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
-      echo "::add-mask::${AZURESDK_GITHUB_TOKEN}"
-      echo "::add-mask::${AZURESDK_COPILOT_TOKEN}"
-      echo "AZURESDK_GITHUB_TOKEN=${AZURESDK_GITHUB_TOKEN}" >> "${GITHUB_ENV}"
-      echo "AZURESDK_COPILOT_TOKEN=${AZURESDK_COPILOT_TOKEN}" >> "${GITHUB_ENV}"
-      echo "Secret copied to AZURESDK_COPILOT_TOKEN environment variable"
-
   - name: Install GitHub CLI
     shell: bash
     run: |
@@ -74,23 +61,28 @@ steps:
         exit 1
       fi
       gh extension install github/gh-aw
-
-  - name: Persist COPILOT_GITHUB_TOKEN as repo secret
+  - name: Fetch secrets and persist COPILOT token
+    id: fetch_secret
     shell: bash
-    env:
-      GH_TOKEN: ${{ env.AZURESDK_GITHUB_TOKEN }}
     run: |
       set -euo pipefail
-      if [[ -z "${AZURESDK_COPILOT_TOKEN:-}" ]]; then
-        echo "AZURESDK_COPILOT_TOKEN environment variable is not set." >&2
+      AZURESDK_GITHUB_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
+      AZURESDK_COPILOT_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
+
+      if [[ -z "${AZURESDK_GITHUB_TOKEN}" ]]; then
+        echo "Unable to retrieve azuresdk-github-pat secret." >&2
         exit 1
       fi
 
-      if [[ -z "${GH_TOKEN:-}" ]]; then
-        echo "GH_TOKEN environment variable is not available for gh CLI authentication." >&2
+      if [[ -z "${AZURESDK_COPILOT_TOKEN}" ]]; then
+        echo "Unable to retrieve azuresdk-copilot-github-pat secret." >&2
         exit 1
       fi
 
+      echo "::add-mask::${AZURESDK_GITHUB_TOKEN}"
+      echo "::add-mask::${AZURESDK_COPILOT_TOKEN}"
+
+      printf '%s' "${AZURESDK_GITHUB_TOKEN}" | gh auth login --hostname github.com --with-token
       gh config set prompt disabled >/dev/null
       pushd "${GITHUB_WORKSPACE}" >/dev/null
       gh aw secrets set COPILOT_GITHUB_TOKEN --value "${AZURESDK_COPILOT_TOKEN}"
