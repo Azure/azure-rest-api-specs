@@ -5495,19 +5495,24 @@ union MsixPackageSource {
   string,
 
   /**
+   * Package sourced from Microsoft Store.
+   */
+  MicrosoftStore: "MicrosoftStore",
+
+  /**
    * Package sourced from Winget.
    */
   Winget: "Winget",
 
   /**
-   * Package sourced from a file share.
+   * Package sourced from private WPM repo.
    */
-  FileShare: "FileShare",
+  PrivateWPMRepo: "PrivateWPMRepo",
 
   /**
-   * Package sourced from a URL.
+   * Package sourced from customer input.
    */
-  Url: "Url",
+  CustomerInput: "CustomerInput",
 }
 
 /**
@@ -5520,11 +5525,6 @@ union OutputFileType {
    * CIM file format.
    */
   CIM: "CIM",
-
-  /**
-   * VHD file format.
-   */
-  VHD: "VHD",
 
   /**
    * VHDX file format.

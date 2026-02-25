@@ -8968,28 +8968,34 @@
       "type": "string",
       "description": "The source of the MSIX package.",
       "enum": [
+        "MicrosoftStore",
         "Winget",
-        "FileShare",
-        "Url"
+        "PrivateWPMRepo",
+        "CustomerInput"
       ],
       "x-ms-enum": {
         "name": "MsixPackageSource",
         "modelAsString": true,
         "values": [
           {
+            "name": "MicrosoftStore",
+            "value": "MicrosoftStore",
+            "description": "Package sourced from Microsoft Store."
+          },
+          {
             "name": "Winget",
             "value": "Winget",
             "description": "Package sourced from Winget."
           },
           {
-            "name": "FileShare",
-            "value": "FileShare",
-            "description": "Package sourced from a file share."
+            "name": "PrivateWPMRepo",
+            "value": "PrivateWPMRepo",
+            "description": "Package sourced from private WPM repo."
           },
           {
-            "name": "Url",
-            "value": "Url",
-            "description": "Package sourced from a URL."
+            "name": "CustomerInput",
+            "value": "CustomerInput",
+            "description": "Package sourced from customer input."
           }
         ]
       }
@@ -9042,7 +9048,6 @@
       "description": "The output file type for the expanded MSIX file.",
       "enum": [
         "CIM",
-        "VHD",
         "VHDX"
       ],
       "x-ms-enum": {
@@ -9053,11 +9058,6 @@
             "name": "CIM",
             "value": "CIM",
             "description": "CIM file format."
-          },
-          {
-            "name": "VHD",
-            "value": "VHD",
-            "description": "VHD file format."
           },
           {
             "name": "VHDX",
