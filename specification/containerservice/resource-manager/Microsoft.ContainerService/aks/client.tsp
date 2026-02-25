@@ -188,12 +188,15 @@ using Microsoft.ContainerService;
   "IsVpaEnabled",
   "csharp"
 );
+@@clientName(AddonAutoscaling, "ManagedClusterAddonAutoscaling", "csharp");
 @@clientName(NodeOSUpgradeChannel,
   "ManagedClusterNodeOSUpgradeChannel",
   "csharp"
 );
 @@clientName(PortRange, "AgentPoolNetworkPortRange", "csharp");
 @@clientName(Protocol, "AgentPoolNetworkPortProtocol", "csharp");
+@@clientName(Protocol.TCP, "Tcp", "csharp");
+@@clientName(Protocol.UDP, "Udp", "csharp");
 @@alternateType(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
   armResourceIdentifier,
   "csharp"
@@ -236,6 +239,14 @@ using Microsoft.ContainerService;
 @@clientName(AdoptionPolicy, "NamespaceAdoptionPolicy", "csharp");
 @@clientName(AdvancedNetworking, "ManagedClusterAdvancedNetworking", "csharp");
 @@clientName(AdvancedNetworking.enabled, "IsEnabled", "csharp");
+@@clientName(AdvancedNetworkingPerformance,
+  "ManagedClusterAdvancedNetworkingPerformance",
+  "csharp"
+);
+@@clientName(AccelerationMode,
+  "ManagedClusterAdvancedNetworkingAccelerationMode",
+  "csharp"
+);
 @@clientName(AdvancedNetworkingSecurity,
   "ManagedClusterAdvancedNetworkingSecurity",
   "csharp"
@@ -300,6 +311,7 @@ using Microsoft.ContainerService;
 @@clientName(OSType, "ContainerServiceOSType", "csharp");
 @@clientName(OSDiskType, "ContainerServiceOSDiskType", "csharp");
 @@clientName(OSSKU, "ContainerServiceOSSku", "csharp");
+@@clientName(OSSKU.CBLMariner, "CblMariner", "csharp");
 @@clientName(UserAssignedIdentity,
   "ContainerServiceUserAssignedIdentity",
   "csharp"
@@ -320,6 +332,8 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(EndpointDetail, "ContainerServiceEndpointDetail", "csharp");
+@@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
+@@alternateType(EndpointDetail.ipAddress, Azure.Core.ipV4Address, "csharp");
 @@clientName(LoadBalancerSku, "ContainerServiceLoadBalancerSku", "csharp");
 @@clientName(NetworkMode, "ContainerServiceNetworkMode", "csharp");
 @@clientName(NetworkPlugin, "ContainerServiceNetworkPlugin", "csharp");
@@ -337,6 +351,7 @@ using Microsoft.ContainerService;
 @@clientName(PowerState, "ContainerServicePowerState", "csharp");
 @@clientName(DateSpan, "ContainerServiceDateSpan", "csharp");
 @@clientName(IPTag, "ContainerServiceIPTag", "csharp");
+@@clientName(IPTag.ipTagType, "IPTagType", "csharp");
 @@clientName(MaintenanceWindow, "ContainerServiceMaintenanceWindow", "csharp");
 @@clientName(NetworkPluginMode, "ContainerServiceNetworkPluginMode", "csharp");
 @@clientName(TrustedAccessRole, "ContainerServiceTrustedAccessRole", "csharp");
@@ -356,6 +371,7 @@ using Microsoft.ContainerService;
 @@clientName(MachineProperties, "ContainerServiceMachineProperties", "csharp");
 @@clientName(ArtifactSource, "ContainerServiceArtifactSource", "csharp");
 @@clientName(MachineIpAddress, "ContainerServiceMachineIPAddress", "csharp");
+@@clientName(MachineIpAddress.ip, "IP", "csharp");
 @@clientName(IPFamily, "ContainerServiceIPFamily", "csharp");
 @@clientName(JWTAuthenticator, "ManagedClusterJwtAuthenticator", "csharp");
 @@clientName(JWTAuthenticatorProperties,
@@ -568,10 +584,29 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(LocalDNSServeStale, "LocalDnsServeStale", "csharp");
 @@clientName(LocalDNSProfile, "LocalDnsProfile", "csharp");
 @@clientName(LocalDNSOverride, "LocalDnsOverride", "csharp");
-@@clientName(AgentPoolAvailableVersions, "AgentPoolAvailableVersion", "csharp");
+@@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem,
+  "AgentPoolAvailableVersion",
+  "csharp"
+);
+@@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.default,
+  "IsDefault",
+  "csharp"
+);
 @@clientName(IdentityBinding, "ManagedClusterIdentityBinding", "csharp");
 @@clientName(IdentityBindingProperties,
   "ManagedClusterIdentityBindingProperties",
+  "csharp"
+);
+@@clientName(MeshMembership, "ManagedClusterMeshMembership", "csharp");
+@@clientName(MeshMembershipProperties,
+  "ManagedClusterMeshMembershipProperties",
+  "csharp"
+);
+@@clientName(AgentPoolRecentlyUsedVersion.timestamp, "LastUsedOn", "csharp");
+@@clientName(Component, "KubernetesVersionComponent", "csharp");
+@@clientName(ComponentsByRelease, "KubernetesVersionComponents", "csharp");
+@@clientName(ManagedClusterNATGatewayProfile,
+  "ManagedClusterNatGatewayProfile",
   "csharp"
 );
 
@@ -581,6 +616,11 @@ namespace Azure.ResourceManager.ContainerService.Models {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedNamespace,
   Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AgentPoolAvailableVersions,
+  Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 
