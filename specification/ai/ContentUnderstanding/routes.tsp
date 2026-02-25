@@ -89,9 +89,6 @@ interface ContentAnalyzers {
   @doc("List analyzers.")
   list is Operations.ResourceList<ContentAnalyzer>;
 
-  // analyze/analyzeBinary: Foundations.Operation + explicit @route (not ResourceOperation + @action)
-  // so we can use named model ContentAnalyzerAnalyzeOperationStatus for 202 body and avoid status monitor limitation.
-  // copy (below) uses ResourceOperation + @action/@actionSeparator; do not add @route there (linter warning).
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Use named model for 202 response to avoid status monitor limitation."
   @doc("Extract content and fields from input.")
   @pollingOperation(ContentAnalyzers.getResult)

@@ -150,7 +150,7 @@ op analyzeCustomSignature(
   @query
   stringEncoding: string,
 
-  @doc("Override default mapping of model names to deployments. Ex. { \"gpt-4.1\": \"myGpt41Deployment\" }.")
+  @doc("Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.")
   modelDeployments?: Record<string>,
 
   @doc("The location where the data may be processed. Defaults to global.")
