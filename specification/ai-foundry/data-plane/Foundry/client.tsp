@@ -86,25 +86,11 @@ using Azure.AI.Projects;
 // Memories sub-client
 // --------------------------------------------------------------------------------
 
-// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
-// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
-// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
-@@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each message is identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
-@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
-@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
-@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
-
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
 @@clientName(MemoryStores.getMemoryStore, "get");
 @@clientName(MemoryStores.listMemoryStores, "list");
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
-
-// The Python SDK will have custom code to handle LRO memory updates.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
-@@scope(MemoryStores.getUpdateResult, "!(python)");
-
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
@@ -113,15 +99,32 @@ using Azure.AI.Projects;
   "python"
 );
 
-// Hand written code still needs the below classes. Make sure they are emitted.
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+@@clientDoc(MemoryStoreUpdateRequest.items, "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.", DocumentationMode.replace, "javascript");
+@@clientDoc(MemoryStoreSearchRequest.items, "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.", DocumentationMode.replace, "javascript");
+
+
+// The Python SDK will have custom code to handle LRO memory updates, and
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
 
+// The Python SDK will have custom code to handle memory search, with
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.searchMemories, Access.internal, "python");
+@@access(MemoryStoreSearchResponse, Access.public, "python");
+
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+// Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
