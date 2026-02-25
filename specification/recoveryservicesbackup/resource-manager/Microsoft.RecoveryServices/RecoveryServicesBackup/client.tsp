@@ -1126,6 +1126,7 @@ op exportJobsOperationResultsGet(
   operationId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupJobs: "backupJobs",
 ): OperationResultInfoBaseResource;
 
