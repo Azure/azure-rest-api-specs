@@ -20,6 +20,15 @@ using TypeSpec.Versioning;
 /**
  * Azure File Storage provides scalable file shares in the cloud using SMB and NFS protocols.
  */
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://storage.azure.com/.default"],
+    }
+  ]>
+)
 @service(#{ title: "Azure File Storage" })
 @versioned(Versions)
 @server(
@@ -29,7 +38,7 @@ using TypeSpec.Versioning;
     /**
      * The URL of the service account, share, directory or file that is the target of the desired operation.
      */
-    url: string,
+    url: url,
   }
 )
 namespace AzureFileStorage;
