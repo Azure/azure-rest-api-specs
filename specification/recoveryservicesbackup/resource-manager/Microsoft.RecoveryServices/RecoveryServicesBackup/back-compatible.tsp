@@ -363,7 +363,5 @@ using Microsoft.RecoveryServices;
   ValidateRestoreOperationRequest
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
-  "ArmErrorDetail",
-  "python,javascript"
-);
+// rename for duplicate model from Azure.ResourceManager.CommonTypes
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail");
