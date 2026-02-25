@@ -749,8 +749,6 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The structured outputs to capture from the model.
      */
