@@ -9436,7 +9436,7 @@
         "tags": [
           "RansomwareReports"
         ],
-        "description": "\"Clear ransomware suspects for the given Advanced Ransomware Protection report. You should evaluate the report to determine whether the activity is acceptable (false positive) or whether an attack seems malicious.\nARP creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of these ARP snapshots or another snapshot of your volume to restore data\",",
+        "description": "Clear ransomware suspects for the given Advanced Ransomware Protection report. You should evaluate the report to determine whether the activity is acceptable (false positive) or whether an attack seems malicious.\nARP creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of these ARP snapshots or another snapshot of your volume to restore data\",",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -14074,13 +14074,17 @@
       "properties": {
         "accessKey": {
           "type": "string",
+          "format": "password",
           "description": "The Access Key that is required along with the Secret Key to access the bucket.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secretKey": {
           "type": "string",
+          "format": "password",
           "description": "The Secret Key that is required along with the Access Key to access the bucket.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "keyPairExpiry": {
           "type": "string",
@@ -14155,10 +14159,6 @@
       "type": "object",
       "description": "Bucket resource properties for a Patch operation",
       "properties": {
-        "path": {
-          "type": "string",
-          "description": "The volume path mounted inside the bucket."
-        },
         "fileSystemUser": {
           "$ref": "#/definitions/FileSystemUser",
           "description": "File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both."
@@ -14189,7 +14189,11 @@
         "path": {
           "type": "string",
           "description": "The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.",
-          "default": "/"
+          "default": "/",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "fileSystemUser": {
           "$ref": "#/definitions/FileSystemUser",
@@ -17288,7 +17292,7 @@
         },
         "federatedClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults."
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
         }
       }
     },
@@ -17928,7 +17932,7 @@
           "type": "array",
           "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "ldapOverTLS": {
@@ -19197,7 +19201,7 @@
       "description": "Quota report record properties",
       "properties": {
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota"
         },
         "quotaTarget": {
@@ -19223,6 +19227,42 @@
           "type": "boolean",
           "description": "Flag to indicate whether the quota is derived from default quota."
         }
+      }
+    },
+    "QuotaType": {
+      "type": "string",
+      "description": "Type of quota",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultUserQuota",
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "name": "DefaultGroupQuota",
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "name": "IndividualUserQuota",
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "name": "IndividualGroupQuota",
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
       }
     },
     "RansomwareProtectionPatchSettings": {
@@ -19693,10 +19733,7 @@
           "description": "Replication deletion time",
           "readOnly": true
         }
-      },
-      "required": [
-        "remoteVolumeResourceId"
-      ]
+      }
     },
     "ReplicationMirrorState": {
       "type": "string",
@@ -20625,42 +20662,6 @@
           "type": "string",
           "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>"
         }
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "Type of quota",
-      "enum": [
-        "DefaultUserQuota",
-        "DefaultGroupQuota",
-        "IndividualUserQuota",
-        "IndividualGroupQuota"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DefaultUserQuota",
-            "value": "DefaultUserQuota",
-            "description": "Default user quota"
-          },
-          {
-            "name": "DefaultGroupQuota",
-            "value": "DefaultGroupQuota",
-            "description": "Default group quota"
-          },
-          {
-            "name": "IndividualUserQuota",
-            "value": "IndividualUserQuota",
-            "description": "Individual user quota"
-          },
-          {
-            "name": "IndividualGroupQuota",
-            "value": "IndividualGroupQuota",
-            "description": "Individual group quota"
-          }
-        ]
       }
     },
     "UnixPermissions": {
@@ -22493,7 +22494,7 @@
           "description": "Size of quota"
         },
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota",
           "x-ms-mutability": [
             "read",
