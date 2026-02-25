@@ -2609,6 +2609,8 @@ op webAppsRecoverSiteConfigurationSnapshotSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   web: "web",
 
   @body
