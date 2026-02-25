@@ -22490,9 +22490,14 @@ components:
           type: string
     OpenAI.WebSearchApproximateLocation:
       type: object
-      required:
-        - type
       properties:
+        type:
+          type: string
+          enum:
+            - approximate
+          description: The type of location approximation. Always `approximate`.
+          x-stainless-const: true
+          default: approximate
         country:
           type: string
           nullable: true
@@ -22505,11 +22510,6 @@ components:
         timezone:
           type: string
           nullable: true
-        type:
-          type: string
-          enum:
-            - approximate
-          description: The type of location approximation. Always `approximate`.
       description: The approximate location of the user.
       title: Web search approximate location
     OpenAI.WebSearchPreviewTool:
