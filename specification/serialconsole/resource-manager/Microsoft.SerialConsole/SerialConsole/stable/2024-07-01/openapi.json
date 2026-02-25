@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "SerialConsole"
     },
     {
       "name": "SerialPorts"
@@ -51,7 +51,7 @@
       "get": {
         "operationId": "ListOperations",
         "tags": [
-          "Operations"
+          "SerialConsole"
         ],
         "description": "Gets a list of Serial Console API operations.",
         "parameters": [
@@ -83,6 +83,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}": {
       "get": {
         "operationId": "GetConsoleStatus",
+        "tags": [
+          "SerialConsole"
+        ],
         "summary": "Get the disabled status for a subscription",
         "description": "Gets whether or not Serial Console is disabled for a given subscription",
         "parameters": [
@@ -131,6 +134,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/disableConsole": {
       "post": {
         "operationId": "DisableConsole",
+        "tags": [
+          "SerialConsole"
+        ],
         "summary": "Disable Serial Console for a subscription",
         "description": "Disables the Serial Console service for all VMs and VM scale sets in the provided subscription",
         "parameters": [
@@ -179,6 +185,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/enableConsole": {
       "post": {
         "operationId": "EnableConsole",
+        "tags": [
+          "SerialConsole"
+        ],
         "summary": "Enable Serial Console for a subscription",
         "description": "Enables the Serial Console service for all VMs and VM scale sets in the provided subscription",
         "parameters": [
@@ -260,7 +269,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts": {
       "get": {
         "operationId": "SerialPorts_List",
         "tags": [
@@ -275,7 +284,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
           },
           {
             "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
@@ -308,7 +317,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}": {
       "get": {
         "operationId": "SerialPorts_Get",
         "tags": [
@@ -323,7 +332,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
           },
           {
             "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
@@ -376,7 +385,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
           },
           {
             "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
@@ -425,7 +434,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}/connect": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}/connect": {
       "post": {
         "operationId": "SerialPorts_Connect",
         "tags": [
@@ -440,7 +449,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
           },
           {
             "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
@@ -767,6 +776,16 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "ParentResourceParameters.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
     },
     "ParentResourceParameters.resourceProviderNamespace": {
       "name": "resourceProviderNamespace",

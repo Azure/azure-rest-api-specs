@@ -43,7 +43,7 @@ enum Versions {
 
 interface Operations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
+  @tag("SerialConsole")
   @autoRoute
   @doc("List the operations for the provider")
   @segment("operations")

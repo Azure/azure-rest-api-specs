@@ -27,7 +27,13 @@ model SerialPort is Azure.ResourceManager.ProxyResource<SerialPortProperties> {
 model ParentResourceParameters {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
-  ...ResourceGroupParameter;
+
+  @path
+  @minLength(1)
+  @maxLength(90)
+  @segment("resourcegroups")
+  @pattern("^[-\\w\\._\\(\\)]+$")
+  resourceGroupName: string;
 
   /**
    * The resource provider namespace of the parent resource.
