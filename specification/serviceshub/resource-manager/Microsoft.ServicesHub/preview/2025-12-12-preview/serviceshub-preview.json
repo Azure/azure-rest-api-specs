@@ -676,8 +676,8 @@
         "tags": [
           "ServicesHubAssessmentSurvey"
         ],
-        "summary": "Gets the Assessment and Survey for the Log Analytics workspace.",
-        "operationId": "Get_ServicesHubAssessmentSurvey",
+        "summary": "Query the Assessment and Survey for the Log Analytics workspace.",
+        "operationId": "Query_ServicesHubAssessmentSurvey",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -717,7 +717,7 @@
         },
         "x-ms-examples": {
           "Get Assessment and Survey": {
-            "$ref": "./examples/GetServicesHubAssessmentSurvey.json"
+            "$ref": "./examples/QueryServicesHubAssessmentSurvey.json"
           }
         }
       }
@@ -2005,11 +2005,18 @@
       "type": "object",
       "description": "Defines the properties of ServicesHubAssessmentSurveyResult",
       "properties": {
-        "assessments": {
+        "onDemandAssessment": {
           "type": "array",
-          "description": "Assessment cards list.",
+          "description": "On-Demand Assessment cards list.",
           "items": {
-            "$ref": "#/definitions/Assessment"
+            "$ref": "#/definitions/OnDemandAssessment"
+          }
+        },
+        "offlineAssessments": {
+          "type": "array",
+          "description": "Offline Assessment cards list.",
+          "items": {
+            "$ref": "#/definitions/OfflineAssessment"
           }
         },
         "surveys": {
@@ -2517,6 +2524,34 @@
           "items": {
             "$ref": "#/definitions/AnalyzedSurvey"
           }
+        }
+      }
+    },
+    "OnDemandAssessment": {
+      "type": "object",
+      "description": "List of On-Demand Assessment Services",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "On-Demand Assessment Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Internal Name of the On-Demand Assessment."
+        }
+      }
+    },
+    "OfflineAssessments": {
+      "type": "object",
+      "description": "List of Offline Assessment Services",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Offline Assessment Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Internal Name of the Offline Assessment."
         }
       }
     }
