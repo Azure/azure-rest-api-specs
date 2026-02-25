@@ -20,27 +20,34 @@
             "name": "input-dataset"
           }
         ],
-        "dataQualityMetricEvaluations": [
-          {
-            "name": "tableRowCountMetric",
-            "evaluation": {
-              "metricEvaluationType": "tableRowCount",
-              "metricType": "count",
-              "metricUnit": "count"
+        "metrics": {
+          "evaluations": [
+            {
+              "name": "tableRowCountMetric",
+              "evaluation": {
+                "evaluationType": "TableRowCount",
+                "metricType": "Count",
+                "metricUnit": "Count"
+              }
             }
-          }
-        ],
-        "dataQualityMetricValidations": [
-          {
-            "name": "tableRowCountValidation",
-            "validation": {
-              "dataQualityMetricValidationType": "anomalyValidation",
-              "dataQualityMetricEvaluationName": "tableRowCountMetric"
+          ],
+          "validations": [
+            {
+              "name": "tableRowCountValidation",
+              "validation": {
+                "validationType": "AnomalyValidation",
+                "metricEvaluationName": "tableRowCountMetric",
+                "anomalyDetectionParameters": {
+                  "sensitivity": 5,
+                  "lookbackWindowInDays": 7,
+                  "minimumDataPoints": 10
+                }
+              }
             }
-          }
-        ],
-        "dataQualityValidation": {
-          "validationCondition": "all",
+          ]
+        },
+        "validationPolicy": {
+          "passCriteria": "AlwaysPass",
           "validations": [
             "tableRowCountValidation"
           ]
@@ -62,32 +69,34 @@
               "name": "input-dataset"
             }
           ],
-          "dataQualityMetricEvaluations": [
-            {
-              "name": "tableRowCountMetric",
-              "evaluation": {
-                "metricEvaluationType": "tableRowCount",
-                "metricType": "count",
-                "metricUnit": "count"
-              }
-            }
-          ],
-          "dataQualityMetricValidations": [
-            {
-              "name": "tableRowCountValidation",
-              "validation": {
-                "dataQualityMetricValidationType": "anomalyValidation",
-                "dataQualityMetricEvaluationName": "tableRowCountMetric",
-                "anomalyDetectionParameters": {
-                  "sensitivity": 5,
-                  "lookbackWindowInDays": 7,
-                  "minimumDataPoints": 10
+          "metrics": {
+            "evaluations": [
+              {
+                "name": "tableRowCountMetric",
+                "evaluation": {
+                  "evaluationType": "TableRowCount",
+                  "metricType": "Count",
+                  "metricUnit": "Count"
                 }
               }
-            }
-          ],
-          "dataQualityValidation": {
-            "validationCondition": "all",
+            ],
+            "validations": [
+              {
+                "name": "tableRowCountValidation",
+                "validation": {
+                  "validationType": "AnomalyValidation",
+                  "metricEvaluationName": "tableRowCountMetric",
+                  "anomalyDetectionParameters": {
+                    "sensitivity": 5,
+                    "lookbackWindowInDays": 7,
+                    "minimumDataPoints": 10
+                  }
+                }
+              }
+            ]
+          },
+          "validationPolicy": {
+            "passCriteria": "AlwaysPass",
             "validations": [
               "tableRowCountValidation"
             ]
@@ -111,34 +120,36 @@
               "name": "input-dataset"
             }
           ],
-          "dataQualityMetricEvaluations": [
-            {
-              "name": "tableRowCountMetric",
-              "evaluation": {
-                "metricEvaluationType": "tableRowCount",
-                "metricType": "count",
-                "metricUnit": "count",
-                "filter": "",
-                "columns": []
-              }
-            }
-          ],
-          "dataQualityMetricValidations": [
-            {
-              "name": "tableRowCountValidation",
-              "validation": {
-                "dataQualityMetricValidationType": "anomalyValidation",
-                "dataQualityMetricEvaluationName": "tableRowCountMetric",
-                "anomalyDetectionParameters": {
-                  "sensitivity": 5,
-                  "lookbackWindowInDays": 7,
-                  "minimumDataPoints": 10
+          "metrics": {
+            "evaluations": [
+              {
+                "name": "tableRowCountMetric",
+                "evaluation": {
+                  "evaluationType": "TableRowCount",
+                  "metricType": "Count",
+                  "metricUnit": "Count",
+                  "filter": "",
+                  "columns": []
                 }
               }
-            }
-          ],
-          "dataQualityValidation": {
-            "validationCondition": "all",
+            ],
+            "validations": [
+              {
+                "name": "tableRowCountValidation",
+                "validation": {
+                  "validationType": "AnomalyValidation",
+                  "metricEvaluationName": "tableRowCountMetric",
+                  "anomalyDetectionParameters": {
+                    "sensitivity": 5,
+                    "lookbackWindowInDays": 7,
+                    "minimumDataPoints": 10
+                  }
+                }
+              }
+            ]
+          },
+          "validationPolicy": {
+            "passCriteria": "AlwaysPass",
             "validations": [
               "tableRowCountValidation"
             ]

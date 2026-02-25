@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to a custom table",
+  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to the standard Syslog table",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -35,7 +35,7 @@
             "type": "TransformLanguage",
             "name": "additional-transform1",
             "transformLanguage": {
-              "transformStatement": "source | where Facility == 'daemon' | extend Foo = 'bar'"
+              "transformStatement": "source | where Facility == 'daemon'"
             }
           }
         ],
@@ -46,17 +46,57 @@
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-SyslogTable_CL",
+                "stream": "Microsoft-Syslog-FullyFormed",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
                     {
-                      "from": "body",
-                      "to": "Body"
+                      "from": "attributes.TimeGenerated",
+                      "to": "TimeGenerated"
                     },
                     {
-                      "from": "time_unix_nano",
-                      "to": "TimeGenerated"
+                      "from": "attributes.CollectorHostName",
+                      "to": "CollectorHostName"
+                    },
+                    {
+                      "from": "attributes.Computer",
+                      "to": "Computer"
+                    },
+                    {
+                      "from": "attributes.EventTime",
+                      "to": "EventTime"
+                    },
+                    {
+                      "from": "attributes.Facility",
+                      "to": "Facility"
+                    },
+                    {
+                      "from": "attributes.HostIP",
+                      "to": "HostIP"
+                    },
+                    {
+                      "from": "attributes.HostName",
+                      "to": "HostName"
+                    },
+                    {
+                      "from": "attributes.ProcessID",
+                      "to": "ProcessID"
+                    },
+                    {
+                      "from": "attributes.ProcessName",
+                      "to": "ProcessName"
+                    },
+                    {
+                      "from": "attributes.SeverityLevel",
+                      "to": "SeverityLevel"
+                    },
+                    {
+                      "from": "attributes.SourceSystem",
+                      "to": "SourceSystem"
+                    },
+                    {
+                      "from": "attributes.SyslogMessage",
+                      "to": "SyslogMessage"
                     }
                   ]
                 }
@@ -124,7 +164,7 @@
               "type": "TransformLanguage",
               "name": "additional-transform1",
               "transformLanguage": {
-                "transformStatement": "source | where Facility == 'daemon' | extend Foo = 'bar'"
+                "transformStatement": "source | where Facility == 'daemon' | extend FooColumn = 'bar'"
               }
             }
           ],
@@ -135,29 +175,57 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-SyslogTable_CL",
+                  "stream": "Microsoft-Syslog-FullyFormed",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
+                      {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.CollectorHostName",
+                        "to": "CollectorHostName"
+                      },
+                      {
+                        "from": "attributes.Computer",
+                        "to": "Computer"
+                      },
+                      {
+                        "from": "attributes.EventTime",
+                        "to": "EventTime"
+                      },
                       {
                         "from": "attributes.Facility",
                         "to": "Facility"
                       },
                       {
-                        "from": "attributes.Severity",
-                        "to": "Severity"
+                        "from": "attributes.HostIP",
+                        "to": "HostIP"
                       },
                       {
-                        "from": "attributes.Foo",
-                        "to": "Foo"
+                        "from": "attributes.HostName",
+                        "to": "HostName"
                       },
                       {
-                        "from": "body",
-                        "to": "Body"
+                        "from": "attributes.ProcessID",
+                        "to": "ProcessID"
                       },
                       {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
+                        "from": "attributes.ProcessName",
+                        "to": "ProcessName"
+                      },
+                      {
+                        "from": "attributes.SeverityLevel",
+                        "to": "SeverityLevel"
+                      },
+                      {
+                        "from": "attributes.SourceSystem",
+                        "to": "SourceSystem"
+                      },
+                      {
+                        "from": "attributes.SyslogMessage",
+                        "to": "SyslogMessage"
                       }
                     ]
                   }
@@ -232,7 +300,7 @@
               "type": "TransformLanguage",
               "name": "additional-transform1",
               "transformLanguage": {
-                "transformStatement": "source | where Facility == 'daemon' | extend Foo = 'bar'"
+                "transformStatement": "source | where Facility == 'daemon'"
               }
             }
           ],
@@ -248,24 +316,52 @@
                   "schema": {
                     "recordMap": [
                       {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.CollectorHostName",
+                        "to": "CollectorHostName"
+                      },
+                      {
+                        "from": "attributes.Computer",
+                        "to": "Computer"
+                      },
+                      {
+                        "from": "attributes.EventTime",
+                        "to": "EventTime"
+                      },
+                      {
                         "from": "attributes.Facility",
                         "to": "Facility"
                       },
                       {
-                        "from": "attributes.Severity",
-                        "to": "Severity"
+                        "from": "attributes.HostIP",
+                        "to": "HostIP"
                       },
                       {
-                        "from": "attributes.Foo",
-                        "to": "Foo"
+                        "from": "attributes.HostName",
+                        "to": "HostName"
                       },
                       {
-                        "from": "body",
-                        "to": "Body"
+                        "from": "attributes.ProcessID",
+                        "to": "ProcessID"
                       },
                       {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
+                        "from": "attributes.ProcessName",
+                        "to": "ProcessName"
+                      },
+                      {
+                        "from": "attributes.SeverityLevel",
+                        "to": "SeverityLevel"
+                      },
+                      {
+                        "from": "attributes.SourceSystem",
+                        "to": "SourceSystem"
+                      },
+                      {
+                        "from": "attributes.SyslogMessage",
+                        "to": "SyslogMessage"
                       }
                     ]
                   }

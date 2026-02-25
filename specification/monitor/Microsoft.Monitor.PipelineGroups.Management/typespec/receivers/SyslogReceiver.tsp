@@ -14,6 +14,7 @@ model SyslogReceiver {
   endpoint: string;
 
   @doc("Protocol to parse syslog messages. Default rfc3164")
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
   protocol?: SyslogProtocol = SyslogProtocol.rfc3164;
 
   @doc("Transport protocol. Default tcp.")
@@ -22,10 +23,12 @@ model SyslogReceiver {
 
   @doc("Configure the receiver to allow parsing of messages without the PRI header. Default false.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
   allowSkipPriHeader?: boolean = false;
 }
 
 @doc("The syslog protocol to parse messages.")
+@removed(Microsoft.Monitor.Versions.v2026_04_01)
 union SyslogProtocol {
   string,
 

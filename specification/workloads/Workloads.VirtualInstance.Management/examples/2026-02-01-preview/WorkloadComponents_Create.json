@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "TestSystem": "true"
+      },
+      "properties": {
+        "componentType": "database",
+        "componentRole": "default",
+        "resources": [
+          {
+            "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+          },
+          {
+            "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+          }
+        ],
+        "metadata": {
+          "DBType": "HANA"
+        }
+      }
+    },
+    "componentName": "db01",
+    "virtualInstanceName": "testvi",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvi",
+        "type": "Microsoft.Workloads/virtualInstances/components",
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/db01",
+        "location": "eastus2euap",
+        "tags": {
+          "TestSystem": "true"
+        },
+        "properties": {
+          "componentType": "database",
+          "componentRole": "default",
+          "resources": [
+            {
+              "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+            },
+            {
+              "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+            }
+          ],
+          "metadata": {
+            "DBType": "HANA"
+          },
+          "complianceState": "Compliant",
+          "enrollmentState": "Completed",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2024-12-01T00:00:00.001Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvi",
+        "type": "Microsoft.Workloads/virtualInstances/components",
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/db01",
+        "location": "eastus2euap",
+        "tags": {
+          "TestSystem": "true"
+        },
+        "properties": {
+          "componentType": "database",
+          "componentRole": "default",
+          "resources": [
+            {
+              "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+            },
+            {
+              "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+            }
+          ],
+          "metadata": {
+            "DBType": "HANA"
+          },
+          "complianceState": "NonCompliant",
+          "enrollmentState": "NeedsAttention",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2024-12-01T00:00:00.001Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "WorkloadComponents_Create",
+  "title": "Create a workload component - sample 1"
+}

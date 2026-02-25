@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -7,6 +8,7 @@ import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -107,4 +109,13 @@ model TestFailoverCleanupRequest {
   @doc("Comments for test failover cleanup.")
   @maxLength(1024)
   comments?: string;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Request body for providing user input for a recovery action.")
+model RecoveryActionRequest {
+  @added(Versions.v2026_03_01_preview)
+  @doc("User-provided input for the action.")
+  @maxLength(1024)
+  description?: string;
 }

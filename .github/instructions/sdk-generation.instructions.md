@@ -1,3 +1,7 @@
+---
+excludeAgent: "code-review"
+---
+
 ## Prerequisites
 
 - run `npm ci` to install the dependencies

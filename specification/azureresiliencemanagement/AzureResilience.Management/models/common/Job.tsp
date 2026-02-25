@@ -1,17 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
 @doc("Job Statuses")
 union JobStatus {
+  @added(Versions.v2026_03_01_preview)
+  @doc("The job status is not applicable.")
+  NotApplicable: "NotApplicable",
+
   @doc("The job has not started yet.")
   NotStarted: "NotStarted",
 
@@ -56,8 +62,27 @@ union JobTriggeredBy {
   string,
 }
 
+@added(Versions.v2026_03_01_preview)
+@doc("The type of user comment.")
+union CommentType {
+  @added(Versions.v2026_03_01_preview)
+  @doc("A general description comment.")
+  Description: "Description",
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("A comment indicating the reason for resuming a job.")
+  ResumeReason: "ResumeReason",
+
+  string,
+}
+
 @doc("Job User's Comment.")
 model JobUserComment {
+  @added(Versions.v2026_03_01_preview)
+  @doc("The type of the user comment.")
+  @visibility(Lifecycle.Read)
+  commentType?: CommentType;
+
   @doc("The time of user comment.")
   @visibility(Lifecycle.Read)
   commentTime?: utcDateTime;
@@ -127,6 +152,12 @@ model JobRetryDetails {
 
   @doc("The retry attempt number of the job.")
   retryAttempt: int32;
+
+  @added(Versions.v2026_03_01_preview)
+  @identifiers(#[])
+  @doc("User Comments.")
+  @visibility(Lifecycle.Read)
+  userComments?: JobUserComment[];
 }
 
 @doc("Job Execution Details.")
@@ -186,6 +217,11 @@ model JobProperties {
   @doc("The type of job.")
   @visibility(Lifecycle.Read)
   jobType?: JobType;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Execution configurations for the job.")
+  @visibility(Lifecycle.Read)
+  executionConfigurations?: ExecutionConfigurations;
 
   @doc("Indicates whether the job was triggered by the system or a user.")
   @visibility(Lifecycle.Read)

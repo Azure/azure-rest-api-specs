@@ -283,22 +283,72 @@ model MongoHostMachineProperties {
   /**
    * The machine vCore count.
    */
-  vCores: int64;
+  vCores?: int64;
 
   /**
    * The allocated RAM in Machine.
    */
-  allocatedMemoryInMb: int64;
+  allocatedMemoryInMb?: int64;
 
   /**
    *  The storage on the machine
    */
-  storageInMb: int64;
+  storageInMb?: int64;
 
   /**
    *  IOPS
    */
   maxIops?: int64;
+
+  /**
+   * The network node host name for mongo.
+   */
+  csName?: string;
+
+  /**
+   * The operating system type for mongo.
+   */
+  osType?: string;
+
+  /**
+   * The operating system name for mongo.
+   */
+  osName?: string;
+
+  /**
+   * The operating system version for mongo.
+   */
+  osVersion?: string;
+
+  /**
+   * The operating system edition for mongo.
+   */
+  osEdition?: string;
+
+  /**
+   * The operating system architecture for mongo.
+   */
+  osArch?: string;
+
+  /**
+   * The processor name for mongo.
+   */
+  procName?: string;
+
+  /**
+   * The processor architecture for mongo.
+   */
+  procArch?: string;
+
+  /**
+   * The processor max clock speed.
+   */
+  procMaxClockSpeedMhz?: string;
+
+  /**
+   * The sockets count.
+   */
+  sockets?: int64;
 }
 
 /**
@@ -376,6 +426,11 @@ model MongoInstanceProperties is AzureResourceProperties {
    * The mongo server version.
    */
   version?: string;
+
+  /**
+   * The home directory of mongo installation.
+   */
+  home?: string;
 
   /**
    * The mongo server region.
@@ -489,6 +544,12 @@ model MongoInstanceProperties is AzureResourceProperties {
    * List of enabled MongoDB features.
    */
   enabledFeatures?: string[];
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -511,6 +572,25 @@ model MongoInstanceResourcePatch is AzureResourceProperties {
   hostName?: string;
 
   /**
+   * The Server IP/host name.
+   */
+  hostIp?: string[];
+
+  /**
+   * discovery Machine Ids
+   */
+  machineArmIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/serverSites/machines";
+    }
+  ]>[];
+
+  /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: MongoHostMachineProperties;
+
+  /**
    * Mongo Server port number
    */
   portNumber?: int32;
@@ -519,6 +599,130 @@ model MongoInstanceResourcePatch is AzureResourceProperties {
    * The mongo server version.
    */
   version?: string;
+
+  /**
+   * The home directory of mongo installation.
+   */
+  home?: string;
+
+  /**
+   * The mongo server region.
+   */
+  region?: string;
+
+  /**
+   * The number of databases.
+   */
+  numberOfDatabases?: int64;
+
+  /**
+   * mongo version support status.
+   */
+  supportStatus?: SupportStatus;
+
+  /**
+   * Mongo instance edition.
+   */
+  edition?: Edition;
+
+  /**
+   * Time when mongo instance version support end.
+   */
+  endOfSupportDate?: plainDate;
+
+  /**
+   * The list of critical errors.
+   */
+  @identifiers(#[])
+  criticalErrors?: CollectionExceptionInfo[];
+
+  /**
+   * The number of critical errors.
+   */
+  criticalErrorCount?: int64;
+
+  /**
+   * The list of warnings.
+   */
+  @identifiers(#[])
+  warnings?: CollectionExceptionInfo[];
+
+  /**
+   * The number of warnings.
+   */
+  warningsCount?: int64;
+
+  /**
+   * The list of informational messages.
+   */
+  @identifiers(#[])
+  informationalMessages?: CollectionExceptionInfo[];
+
+  /**
+   * The number of informational messages.
+   */
+  informationalMessagesCount?: int64;
+
+  /**
+   * Gets or sets storage size of Mongo instance.
+   */
+  storageSizeInMb?: float32;
+
+  /**
+   * The maximum number of connections allowed in the instance
+   */
+  maxConnections?: int64;
+
+  /**
+   * Indicates whether the system supports SSL connections.
+   */
+  supportsSsl?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv6 connections.
+   */
+  supportsIpv6Connections?: BoolValue;
+
+  /**
+   * Indicates whether the system supports IPv4 connections.
+   */
+  supportsIpv4Connections?: BoolValue;
+
+  /**
+   * The number of compute IOPS (Input/Output Operations Per Second) collected.
+   */
+  computeIops?: int64;
+
+  /**
+   * The number of storage IOPS (Input/Output Operations Per Second) collected.
+   */
+  storageIops?: int64;
+
+  /**
+   * Specifies the replica set name for the MongoDB instance.
+   */
+  replicaSetName?: string;
+
+  /**
+   * Indicates whether the MongoDB instance is part of a sharded cluster.
+   */
+  isSharded?: BoolValue;
+
+  /**
+   * Specifies the authentication mechanism used by MongoDB.
+   */
+  authenticationMechanism?: string;
+
+  /**
+   * List of enabled MongoDB features.
+   */
+  enabledFeatures?: string[];
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -631,6 +835,12 @@ model MongoDatabaseProperties is AzureResourceProperties {
    * The number of informational messages.
    */
   informationalMessagesCount: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -670,6 +880,90 @@ model MongoDatabaseResourcePatchProperties {
    * The number of collections in the database.
    */
   numberOfCollections?: int64;
+
+  /**
+   * The number of indexes in the database.
+   */
+  numberOfIndexes?: int64;
+
+  /**
+   * The number of documents in the database.
+   */
+  numberOfDocuments?: int64;
+
+  /**
+   * The average document size in bytes.
+   */
+  averageDocumentSizeInBytes?: float32;
+
+  /**
+   * The database creation timestamp.
+   */
+  createdAt?: utcDateTime;
+
+  /**
+   * The database last modified timestamp.
+   */
+  lastModifiedAt?: utcDateTime;
+
+  /**
+   * List of collection names in the database.
+   */
+  collections?: string[];
+
+  /**
+   * Indicates whether the database uses GridFS for file storage.
+   */
+  usesGridFs?: BoolValue;
+
+  /**
+   * The database storage engine.
+   */
+  storageEngine?: string;
+
+  /**
+   * The database sharding configuration.
+   */
+  shardingConfig?: string;
+
+  /**
+   * The list of critical errors.
+   */
+  @identifiers(#[])
+  criticalErrors?: CollectionExceptionInfo[];
+
+  /**
+   * The number of critical errors.
+   */
+  criticalErrorCount?: int64;
+
+  /**
+   * The list of warnings.
+   */
+  @identifiers(#[])
+  warnings?: CollectionExceptionInfo[];
+
+  /**
+   * The number of warnings.
+   */
+  warningsCount?: int64;
+
+  /**
+   * The list of informational messages.
+   */
+  @identifiers(#[])
+  informationalMessages?: CollectionExceptionInfo[];
+
+  /**
+   * The number of informational messages.
+   */
+  informationalMessagesCount?: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -757,6 +1051,12 @@ model MongoCollectionProperties is AzureResourceProperties {
    * The number of informational messages.
    */
   informationalMessagesCount: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -802,6 +1102,45 @@ model MongoCollectionResourcePatchProperties {
 
   /** The collection last modified timestamp. */
   lastModifiedAt?: utcDateTime;
+
+  /**
+   * The list of critical errors.
+   */
+  @identifiers(#[])
+  criticalErrors?: CollectionExceptionInfo[];
+
+  /**
+   * The number of critical errors.
+   */
+  criticalErrorCount?: int64;
+
+  /**
+   * The list of warnings.
+   */
+  @identifiers(#[])
+  warnings?: CollectionExceptionInfo[];
+
+  /**
+   * The number of warnings.
+   */
+  warningsCount?: int64;
+
+  /**
+   * The list of informational messages.
+   */
+  @identifiers(#[])
+  informationalMessages?: CollectionExceptionInfo[];
+
+  /**
+   * The number of informational messages.
+   */
+  informationalMessagesCount?: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
