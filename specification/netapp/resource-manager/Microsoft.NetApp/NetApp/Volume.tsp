@@ -2179,7 +2179,11 @@ model QuotaReportFilterRequest {
 /**
  * * Result of ListQuotaReportResponse
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
 model ListQuotaReportResult {
   /**
    * Represents the properties of the ListQuotaReport.
@@ -2697,8 +2701,8 @@ interface Volumes {
   listQuotaReportOld is ArmResourceActionAsync<
     Volume,
     void,
-    ArmResponse<ListQuotaReportResponse>,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
+    ArmResponse<ListQuotaReportResult>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
