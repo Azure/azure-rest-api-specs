@@ -331,10 +331,17 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+ * Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a non-null value starting API version 2025-11-01.
  */
 union SecurityTypes {
   string,
+
+  /**
+   * Indicates a VM without UEFI features such as SecureBoot or vTPM; returned as the default value when securityType is not specified.
+   */
+  @added(Versions.v2025_11_01)
+  Standard: "Standard",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -3233,7 +3240,7 @@ model SecurityProfile {
   encryptionAtHost?: boolean;
 
   /**
-   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version.
    */
   securityType?: SecurityTypes;
 
