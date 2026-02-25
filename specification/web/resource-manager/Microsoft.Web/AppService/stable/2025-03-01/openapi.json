@@ -47400,8 +47400,51 @@
       "description": "MSDeploy ARM PUT information",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MSDeployCore",
+          "type": "object",
           "description": "Core resource properties",
+          "properties": {
+            "packageUri": {
+              "type": "string",
+              "description": "Package URI"
+            },
+            "connectionString": {
+              "type": "string",
+              "description": "SQL Connection String"
+            },
+            "dbType": {
+              "type": "string",
+              "description": "Database Type"
+            },
+            "setParametersXmlFileUri": {
+              "type": "string",
+              "description": "URI of MSDeploy Parameters file. Must not be set if SetParameters is used."
+            },
+            "setParameters": {
+              "type": "object",
+              "description": "MSDeploy Parameters. Must not be set if SetParametersXmlFileUri is used.",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "skipAppData": {
+              "type": "boolean",
+              "description": "Controls whether the MSDeploy operation skips the App_Data directory.\nIf set to <code>true</code>, the existing App_Data directory on the destination\nwill not be deleted, and any App_Data directory in the source will be ignored.\nSetting is <code>false</code> by default."
+            },
+            "appOffline": {
+              "type": "boolean",
+              "description": "Sets the AppOffline rule while the MSDeploy operation executes.\nSetting is <code>false</code> by default."
+            },
+            "addOnPackages": {
+              "type": "array",
+              "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
+              "items": {
+                "$ref": "#/definitions/MSDeployCore"
+              },
+              "x-ms-identifiers": [
+                "packageUri"
+              ]
+            }
+          },
           "x-ms-client-flatten": true
         }
       },

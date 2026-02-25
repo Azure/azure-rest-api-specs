@@ -11669,11 +11669,19 @@ model MSDeployStatusProperties {
 /**
  * MSDeploy ARM PUT information
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "MSDeploy is a type that inherits ProxyOnlyResource by design, not for code reuse"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MSDeploy is the intentional name matching the existing parameter name in the API"
 model MSDeploy extends ProxyOnlyResource {
   /** Core resource properties */
-  properties?: MSDeployCore;
+  properties?: {
+    ...MSDeployCore;
+
+    /**
+     * List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.
+     */
+    @identifiers(#["packageUri"])
+    addOnPackages?: MSDeployCore[];
+  };
 }
 
 /**

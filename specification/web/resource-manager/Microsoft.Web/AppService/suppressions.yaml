@@ -67,3 +67,9 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-11-01/*.json
   reason: "Suppressing TypeSpec requirement"
+
+- tool: AvoidAdditionalProperties
+  paths:
+    - stable/2025-03-01/openapi.json
+    - stable/2025-05-01/openapi.json
+  reason: "MSDeploy.setParameters is a legitimate string dictionary (Record<string>) that has been part of the MSDeploy API since its initial version. This pattern is preserved from the 2024-11-01 MSDeployCore definition."
