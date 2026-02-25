@@ -9300,10 +9300,6 @@
           "format": "int32",
           "description": "Limits the maximum size of the content in the output."
         },
-        "retrievalReasoningEffort": {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort",
-          "description": "The retrieval reasoning effort configuration."
-        },
         "includeActivity": {
           "type": "boolean",
           "description": "Indicates retrieval results should include activity information."
@@ -9651,46 +9647,6 @@
         ]
       }
     },
-    "KnowledgeSourceErrorRecord": {
-      "type": "object",
-      "description": "Represents a document-level indexing error encountered during knowledge source synchronization.",
-      "properties": {
-        "docKey": {
-          "type": "string",
-          "description": "Unique identifier for the failed document or item within the synchronization run."
-        },
-        "docUrl": {
-          "type": "string",
-          "description": "Fully qualified document URL associated with the error. May be empty."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "HTTP-like status code representing the failure category (e.g., 400)."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the ingestion or processing component reporting the error."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Human-readable, customer-visible error message."
-        },
-        "details": {
-          "type": "string",
-          "description": "Additional contextual information about the failure."
-        },
-        "documentationLink": {
-          "type": "string",
-          "description": "Link to relevant troubleshooting documentation."
-        }
-      },
-      "required": [
-        "docKey",
-        "statusCode",
-        "errorMessage"
-      ]
-    },
     "KnowledgeSourceIngestionParameters": {
       "type": "object",
       "description": "Consolidates all general ingestion settings for knowledge sources.",
@@ -9796,10 +9752,8 @@
       "enum": [
         "searchIndex",
         "azureBlob",
-        "indexedSharePoint",
         "indexedOneLake",
-        "web",
-        "remoteSharePoint"
+        "web"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -9816,11 +9770,6 @@
             "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
           },
           {
-            "name": "IndexedSharePoint",
-            "value": "indexedSharePoint",
-            "description": "A knowledge source that reads data from indexed SharePoint."
-          },
-          {
             "name": "IndexedOneLake",
             "value": "indexedOneLake",
             "description": "A knowledge source that reads data from indexed OneLake."
@@ -9829,11 +9778,6 @@
             "name": "Web",
             "value": "web",
             "description": "A knowledge source that reads data from the web."
-          },
-          {
-            "name": "RemoteSharePoint",
-            "value": "remoteSharePoint",
-            "description": "A knowledge source that reads data from remote SharePoint."
           }
         ]
       }
@@ -9914,7 +9858,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/KnowledgeSourceKind",
-          "description": "The kind of knowledge source."
+          "description": "Identifies the Knowledge Source kind directly from the Status response."
         },
         "synchronizationStatus": {
           "$ref": "#/definitions/KnowledgeSourceSynchronizationStatus",
@@ -9942,8 +9886,41 @@
         }
       },
       "required": [
-        "kind",
         "synchronizationStatus"
+      ]
+    },
+    "KnowledgeSourceSynchronizationError": {
+      "type": "object",
+      "description": "Represents a document-level indexing error encountered during a knowledge source synchronization run.",
+      "properties": {
+        "docId": {
+          "type": "string",
+          "description": "The unique identifier for the failed document or item within the synchronization run."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTP-like status code representing the failure category (e.g., 400)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the ingestion or processing component reporting the error."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Human-readable, customer-visible error message."
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional contextual information about the failure."
+        },
+        "documentationLink": {
+          "type": "string",
+          "description": "A link to relevant troubleshooting documentation."
+        }
+      },
+      "required": [
+        "errorMessage"
       ]
     },
     "KnowledgeSourceSynchronizationStatus": {
@@ -18185,7 +18162,7 @@
           "type": "array",
           "description": "Collection of document-level indexing errors encountered during the current synchronization run. Returned only when errors are present.",
           "items": {
-            "$ref": "#/definitions/KnowledgeSourceErrorRecord"
+            "$ref": "#/definitions/KnowledgeSourceSynchronizationError"
           }
         }
       },
