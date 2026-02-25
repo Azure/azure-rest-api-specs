@@ -41,6 +41,7 @@ using Microsoft.GuestConfiguration;
 );
 @@alternateType(AssignmentReportDetails.jobId, Azure.Core.uuid, "csharp");
 @@alternateType(ProxyResource.location, Azure.Core.azureLocation, "csharp");
+@@clientName(ProxyResource.type, "ResourceType", "csharp");
 
 // ============================================================================
 // Type renaming - restore old SDK names for backward compatibility
