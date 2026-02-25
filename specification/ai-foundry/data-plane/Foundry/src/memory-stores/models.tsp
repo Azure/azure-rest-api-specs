@@ -355,7 +355,7 @@ alias MemoryStoreUpdateRequest = {
   @doc("The namespace that logically groups and isolates memories, such as a user ID.")
   scope: string;
 
-  @doc("Conversation items to store in memory.")
+  @doc("Conversation items to be stored in memory.")
   items?: OpenAI.InputItem[];
 
   @doc("The unique ID of the previous update request, enabling incremental memory updates from where the last operation left off.")
