@@ -665,3 +665,40 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
+
+// Fix union type names to match old API surface (singular, not plural)
+@@clientName(DataStoreTypes, "DataStoreType", "csharp");
+@@clientName(StorageSettingStoreTypes, "StorageSettingStoreType", "csharp");
+@@clientName(StorageSettingTypes, "StorageSettingType", "csharp");
+
+// Fix model name to match old API surface
+@@clientName(DppBaseResource, "ResourceGuardProtectedObjectData", "csharp");
+
+// Fix operation names to match old API surface
+@@clientName(BackupInstanceResources.adhocBackup,
+  "TriggerAdhocBackup",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.triggerRehydrate,
+  "TriggerRehydration",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.validateForRestore,
+  "ValidateRestore",
+  "csharp"
+);
+@@clientName(BackupVaultResources.validateForBackup,
+  "ValidateAdhocBackup",
+  "csharp"
+);
+@@clientName(BackupVaultResources.trigger,
+  "TriggerExportJob",
+  "csharp"
+);
+
+// Fix ResourceGuard operation names to match old API surface
+@@clientName(ResourceGuardResources.patch, "Update", "csharp");
+@@clientName(ResourceGuardResources.patch::parameters.properties,
+  "patch",
+  "csharp"
+);
