@@ -22,7 +22,9 @@
         "in": "path",
         "description": "The URL of the service account, share, directory or file that is the target of the desired operation.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -33,6 +35,23 @@
   "consumes": [
     "application/xml"
   ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://storage.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://storage.azure.com/.default": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/{shareName}/{directory}/{fileName}": {
@@ -237,8 +256,9 @@
               "x-ms-lease-status": {
                 "type": "string"
               },
-              "x-ms-meta-*": {
-                "type": "string"
+              "x-ms-meta": {
+                "type": "string",
+                "description": "Optional. User-defined metadata for the resource."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -339,8 +359,9 @@
               "x-ms-lease-status": {
                 "type": "string"
               },
-              "x-ms-meta-*": {
-                "type": "string"
+              "x-ms-meta": {
+                "type": "string",
+                "description": "Optional. User-defined metadata for the resource."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -480,7 +501,7 @@
             "x-ms-client-name": "fileType"
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -1130,8 +1151,9 @@
               "x-ms-lease-status": {
                 "type": "string"
               },
-              "x-ms-meta-*": {
-                "type": "string"
+              "x-ms-meta": {
+                "type": "string",
+                "description": "Optional. User-defined metadata for the resource."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -1251,7 +1273,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -1283,7 +1305,7 @@
           {
             "name": "x-ms-share-quota",
             "in": "header",
-            "description": "The maximum size of the share in bytes.",
+            "description": "Specifies the maximum size of the share, in gigabytes.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1712,7 +1734,7 @@
                 "format": "int64",
                 "description": "The maximum burst credits for IOPS."
               },
-              "x-ms-meta-*": {
+              "x-ms-meta": {
                 "type": "string",
                 "description": "Optional. User-defined metadata for the resource."
               },
@@ -2885,7 +2907,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -3372,6 +3394,7 @@
           {
             "name": "x-ms-share-quota",
             "in": "header",
+            "description": "Specifies the maximum size of the share, in gigabytes.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -3640,7 +3663,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -4429,7 +4452,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -4776,7 +4799,7 @@
               "x-ms-file-permission-key": {
                 "type": "string"
               },
-              "x-ms-meta-*": {
+              "x-ms-meta": {
                 "type": "string",
                 "description": "Optional. User-defined metadata for the resource."
               },
@@ -5322,7 +5345,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -6597,7 +6620,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -8191,7 +8214,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -9386,7 +9409,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
@@ -9747,8 +9770,9 @@
               "x-ms-link-text": {
                 "type": "string"
               },
-              "x-ms-meta-*": {
-                "type": "string"
+              "x-ms-meta": {
+                "type": "string",
+                "description": "Optional. User-defined metadata for the resource."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -9875,7 +9899,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-meta-*",
+            "name": "x-ms-meta",
             "in": "header",
             "description": "Optional. User-defined metadata for the resource.",
             "required": false,
