@@ -385,3 +385,19 @@ using Microsoft.Batch;
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
+@@clientName(DiskCustomerManagedKey, "BatchDiskCustomerManagedKey", "csharp");
+@@clientName(DiskEncryptionConfiguration,
+  "BatchDiskEncryptionConfiguration",
+  "csharp"
+);
+@@clientName(HostEndpointSettings, "BatchHostEndpointSettings", "csharp");
+@@clientName(HostEndpointSettingsModeTypes,
+  "BatchHostEndpointSettingsModeTypes",
+  "csharp"
+);
+@@clientName(IPFamily, "BatchIPFamily", "csharp");
+@@clientName(IPTag, "BatchIPTag", "csharp");
+@@clientName(JobDefaultOrder, "BatchJobDefaultOrder", "csharp");
+@@clientName(ProxyAgentSettings, "BatchProxyAgentSettings", "csharp");
+@@clientName(TaskSchedulingPolicy, "BatchTaskSchedulingPolicy", "csharp");
+@@clientName(VMDiskSecurityProfile, "BatchVMDiskSecurityProfile", "csharp");
