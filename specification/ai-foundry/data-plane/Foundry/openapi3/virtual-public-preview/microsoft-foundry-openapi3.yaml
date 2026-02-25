@@ -6203,14 +6203,15 @@ components:
       type: object
       required:
         - name
+        - version
       properties:
         name:
           type: string
-          description: Agent name (e.g., 'customer-support-bot').
+          description: Agent name.
         version:
           type: string
-          description: Optional version string (e.g., 'v1', '2025-01-15'). Defaults to latest if omitted.
-      description: Agent reference specifying which agent to invoke.
+          description: Agent version.
+      description: Reference to the agent being invoked.
     AgentDefinition:
       type: object
       required:
@@ -7761,11 +7762,12 @@ components:
         propertyName: item_type
         mapping:
           text: '#/components/schemas/TextContentItem'
+          structured_data: '#/components/schemas/StructuredDataContentItem'
           image: '#/components/schemas/ImageContentItem'
           file: '#/components/schemas/FileContentItem'
           interrupt_resume: '#/components/schemas/InterruptResumeContentItem'
           interrupt: '#/components/schemas/InterruptContentItem'
-      description: Base for all content items. Discriminated by item_type for type-safe agent chaining and extensibility.
+      description: Content item
     ContentItemType:
       anyOf:
         - type: string
@@ -7774,9 +7776,12 @@ components:
             - text
             - image
             - file
+            - structured_data
             - interrupt
             - interrupt_resume
-      description: Content item type. Predefined types (text, image, file, interrupt, interrupt_resume) or custom string for extensibility.
+      description: |-
+        Type discriminator for content items.
+        Supports common predefined types and any custom string for developer-defined content types.
     ContinuousEvaluationRuleAction:
       type: object
       required:
@@ -9869,23 +9874,25 @@ components:
             - file
         file_name:
           type: string
-          description: Suggested filename (e.g., 'report.pdf').
+          description: Suggested filename for the file (commonly used in output).
         file_id:
           type: string
-          description: Platform-managed file reference.
+          description: Platform-managed file reference (preferred for large files).
         url:
           type: string
           format: uri
-          description: HTTP/HTTPS URL.
+          description: Remote URL for the file.
         data:
           type: string
-          description: Base64-encoded file data.
+          description: Inline base64-encoded file data.
         content_type:
           type: string
-          description: MIME type (e.g., 'application/pdf', 'text/csv').
+          description: File MIME type (e.g., 'application/pdf', 'text/csv').
       allOf:
         - $ref: '#/components/schemas/ContentItem'
-      description: File attachment. Use file_id, url, or data (exactly one required).
+      description: |-
+        File content item for document attachments.
+        Supports platform-managed files (file_id), remote URLs, or inline base64 data.
     FileDatasetVersion:
       type: object
       required:
@@ -10063,20 +10070,22 @@ components:
             - image
         file_id:
           type: string
-          description: Platform-managed file reference.
+          description: Platform-managed file reference (preferred for large images).
         url:
           type: string
           format: uri
-          description: HTTP/HTTPS URL.
+          description: Remote URL for the image.
         data:
           type: string
-          description: Base64-encoded image data.
+          description: Inline base64-encoded image data.
         content_type:
           type: string
-          description: MIME type (e.g., 'image/jpeg', 'image/png').
+          description: Image MIME type (e.g., 'image/jpeg', 'image/png').
       allOf:
         - $ref: '#/components/schemas/ContentItem'
-      description: Image content. Use file_id, url, or data (exactly one required).
+      description: |-
+        Image content item.
+        Supports platform-managed files (file_id), remote URLs, or inline base64 data.
     Index:
       type: object
       required:
@@ -10395,47 +10404,18 @@ components:
             - interrupt
         interrupt_id:
           type: string
-          description: Unique ID for this interrupt.
+          description: |-
+            Unique identifier for this interrupt.
+            Client must include this in InterruptResumeContentItem.interrupt_id when resuming execution.
         interrupt_type:
           type: string
-          description: Interrupt type (e.g., 'form_input', 'approval').
+          description: Interrupt type discriminator (e.g., 'tool_call', 'oauth_consent', 'approval_required').
       additionalProperties: {}
       allOf:
         - $ref: '#/components/schemas/ContentItem'
-      description: Agent interrupt requesting user input. Supports custom properties for forms, approvals, etc.
-    InterruptDetails:
-      type: object
-      required:
-        - type
-        - id
-      properties:
-        type:
-          type: string
-          description: Interrupt type discriminator.
-        id:
-          type: string
-          description: |-
-            Unique identifier for this interrupt.
-            Client must include this in InterruptResume when resuming execution.
-      discriminator:
-        propertyName: type
-      description: Base interrupt model with type discriminator for different interrupt scenarios.
-    InterruptOutputItem:
-      type: object
-      required:
-        - type
-        - interrupt
-      properties:
-        type:
-          type: string
-          enum:
-            - interrupt
-        interrupt:
-          allOf:
-            - $ref: '#/components/schemas/InterruptDetails'
-          description: Interrupt details when agent pauses for human input.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: |-
+        Interrupt content item for HITL and other pause scenarios.
+        Interrupts pause agent execution and await client action before resuming.
     InterruptResumeContentItem:
       type: object
       required:
@@ -10448,14 +10428,20 @@ components:
             - interrupt_resume
         interrupt_id:
           type: string
-          description: ID of the interrupt being resumed.
+          description: |-
+            Interrupt ID from the previous response.
+            Must match the interrupt.interrupt_id field to resume from the correct checkpoint.
         payload:
           type: object
           additionalProperties: {}
-          description: User's response (form data, approval decision, etc.).
+          description: |-
+            Optional payload to pass to the agent when resuming.
+            Can contain user decisions, additional context, or custom data needed by the agent.
       allOf:
         - $ref: '#/components/schemas/ContentItem'
-      description: Resume token referencing an interrupt. Enables stateless agent resumption after user fulfills interrupt.
+      description: |-
+        Interrupt resume content item for continuing execution after an interrupt.
+        Used to resume from a human-in-the-loop (HITL) pause or other interrupt scenarios.
     InvokeMessage:
       type: object
       required:
@@ -10468,13 +10454,16 @@ components:
               items:
                 $ref: '#/components/schemas/ContentItem'
           description: |-
-            Message content. String shorthand auto-converts to text content.
-            Example: "Hello!" or [{"item_type": "text", "text": "Hello!"}]
-        metadata:
-          type: object
-          additionalProperties: {}
-          description: Optional metadata (timestamps, IDs, custom tags).
-      description: Message in agent conversation.
+            Content items in this message. Can contain text, images, files, interrupts, etc.
+            String shorthand is automatically normalized to text content by the platform.
+
+            Examples:
+            - String: "Hello, agent!"
+            - Array: [{"item_type": "text", "text": "Hello!"}]
+      description: |-
+        A message containing one or more content items.
+        Messages enable structured conversations, agent chaining, and support for interrupts.
+        Each message can contain text, images, files, interrupts, or interrupt resumes.
     InvokeRequest:
       type: object
       required:
@@ -10484,7 +10473,7 @@ components:
         agent_def:
           allOf:
             - $ref: '#/components/schemas/AgentDef'
-          description: Agent to invoke.
+          description: Agent definition specifying which agent to invoke.
         input:
           anyOf:
             - type: string
@@ -10492,16 +10481,24 @@ components:
               items:
                 $ref: '#/components/schemas/InvokeMessage'
           description: |-
-            Agent input. String auto-converts to user message.
-            Example: "Hello!" or [{"content": "Hello!"}]
+            Input for the agent invocation. Supports:
+            - Simple string: Automatically normalized to a user message with text content
+            - Array of messages: For multi-turn conversations or structured inputs
+
+            Examples:
+            - String: "Hello, agent!"
+            - Messages: [{"content": "Hello!"}]
+            - With interrupt resume: [{"content": [{"item_type": "interrupt_resume", "interrupt_id": "int_123", "payload": {...}}]}]
         session_id:
           type: string
-          description: Session ID for multi-turn conversations. Omit to create new session.
-        metadata:
+          description: Session identifier for multi-turn conversations. Omit to create a new session.
+        params:
           type: object
           additionalProperties: {}
-          description: Opaque metadata (model config, tracing, etc.). Not parsed by platform.
-      description: Request to invoke an agent.
+          description: |-
+            Opaque parameters pass-through. Platform does not parse this field.
+            Use for model configuration, custom agent flags, user context, tracing, etc.
+      description: Invoke API request body.
     ItemGenerationParams:
       type: object
       required:
@@ -18935,7 +18932,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - interrupt
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -19026,7 +19022,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - interrupt
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -19762,7 +19757,6 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          interrupt: '#/components/schemas/InterruptOutputItem'
           structured_outputs: '#/components/schemas/StructuredOutputsOutputItem'
           workflow_action: '#/components/schemas/WorkflowActionOutputItem'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestOutputItem'
@@ -20490,7 +20484,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - interrupt
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -25471,6 +25464,22 @@ components:
           type: string
           description: Sku tier
       description: Sku information
+    StructuredDataContentItem:
+      type: object
+      required:
+        - item_type
+      properties:
+        item_type:
+          type: string
+          enum:
+            - structured_data
+        data:
+          type: object
+          additionalProperties: {}
+          description: Structured data.
+      allOf:
+        - $ref: '#/components/schemas/ContentItem'
+      description: Structured data content item.
     StructuredInputDefinition:
       type: object
       properties:
@@ -25743,10 +25752,10 @@ components:
             - text
         text:
           type: string
-          description: UTF-8 text string.
+          description: Text content.
       allOf:
         - $ref: '#/components/schemas/ContentItem'
-      description: Text content item.
+      description: Text content item for plain text content.
     ToolCallOutputContent:
       anyOf:
         - type: object

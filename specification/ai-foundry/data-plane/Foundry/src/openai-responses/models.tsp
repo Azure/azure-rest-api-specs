@@ -145,7 +145,6 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
     azure_function_call: "azure_function_call",
     azure_function_call_output: "azure_function_call_output",
-    interrupt: "interrupt",
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
@@ -176,26 +175,6 @@ namespace Azure.AI.Projects {
 
     @doc("The response on which the item is created.")
     response_id?: string;
-  }
-
-  model InterruptOutputItem extends OpenAI.OutputItem {
-    type: "interrupt";
-
-    @doc("Interrupt details when agent pauses for human input.")
-    interrupt: InterruptDetails;
-  }
-
-  @doc("Base interrupt model with type discriminator for different interrupt scenarios.")
-  @discriminator("type")
-  model InterruptDetails {
-    @doc("Interrupt type discriminator.")
-    type: string;
-
-    @doc("""
-      Unique identifier for this interrupt.
-      Client must include this in InterruptResume when resuming execution.
-      """)
-    id: string;
   }
 
   model StructuredOutputsOutputItem extends OpenAI.OutputItem {
