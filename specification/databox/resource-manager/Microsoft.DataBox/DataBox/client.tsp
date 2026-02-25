@@ -362,4 +362,7 @@ using Microsoft.DataBox;
 );
 
 // We are using ErrorDetail from commonTypes and user has defined a model named ErrorDetail in their spec, to avoid naming conflict we are renaming the ErrorDetail model defined in spec to DataBoxErrorDetail
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "DataBoxErrorDetail", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "DataBoxErrorDetail",
+  "csharp"
+);
