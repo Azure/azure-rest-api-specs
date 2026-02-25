@@ -185,7 +185,13 @@
             "description": "The request was successful; the Confidential Ledger is deleted."
           },
           "202": {
-            "description": "The Confidential Ledger resource will be deleted asynchronously"
+            "description": "The Confidential Ledger resource will be deleted asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to check the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "The request was successful; Confidential Ledger does not exist."
@@ -245,7 +251,13 @@
             }
           },
           "201": {
-            "description": "The Confidential Ledger resource will be created asynchronously"
+            "description": "The Confidential Ledger resource will be created asynchronously",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to check the status of the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
@@ -299,7 +311,13 @@
             }
           },
           "201": {
-            "description": "The Confidential Ledger resource will be updated asynchronously"
+            "description": "The Confidential Ledger resource will be updated asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to check the status of the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
