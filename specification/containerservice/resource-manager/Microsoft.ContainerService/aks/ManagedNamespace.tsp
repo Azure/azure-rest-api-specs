@@ -17,7 +17,7 @@ namespace Microsoft.ContainerService;
 /**
  * Namespace managed by ARM.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage pattern is required for backward compatibility with existing API versions."
 @parentResource(ManagedCluster)
 model ManagedNamespace
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NamespaceProperties> {
@@ -64,7 +64,7 @@ interface ManagedNamespaces {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedNamespace,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -186,13 +186,13 @@ model NamespaceProperties {
   /**
    * The labels of managed namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   labels?: Record<string>;
 
   /**
    * The annotations of managed namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   annotations?: Record<string>;
 
   /**
