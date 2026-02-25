@@ -362,6 +362,3 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(ValidateIaasVMRestoreOperationRequest,
   ValidateRestoreOperationRequest
 );
-
-// rename for duplicate model from Azure.ResourceManager.CommonTypes
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail");
