@@ -2698,6 +2698,7 @@ interface Volumes {
   @removed(Versions.v2025_09_01)
   @sharedRoute
   @renamedFrom(Versions.v2025_12_01, "listQuotaReport")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   listQuotaReportOld is ArmResourceActionAsync<
     Volume,
     void,
