@@ -7,13 +7,6 @@ using Microsoft.HealthBot;
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
 
-// rename for duplicate model from Azure.ResourceManager.Foundations
-@@clientName(ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo", "java");
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "ArmErrorAdditionalInfo",
-  "python,go"
-);
-
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
 @@clientName(HealthBots.update::parameters.properties, "patch", "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
@@ -35,8 +28,5 @@ using Microsoft.HealthBot;
   "csharp"
 );
 
-// We are using ErrorAdditionalInfo from commonTypes and user has defined a model named ErrorAdditionalInfo in their spec, rename to avoid naming conflict
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "HealthBotErrorAdditionalInfo",
-  "csharp"
-);
+// rename for duplicate model from Azure.ResourceManager.Foundations
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo");
