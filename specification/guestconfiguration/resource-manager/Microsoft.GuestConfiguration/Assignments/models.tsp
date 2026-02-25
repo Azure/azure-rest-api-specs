@@ -788,4 +788,10 @@ model ProxyResource {
    */
   @visibility(Lifecycle.Read)
   type?: armResourceType;
+
+  /**
+   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
