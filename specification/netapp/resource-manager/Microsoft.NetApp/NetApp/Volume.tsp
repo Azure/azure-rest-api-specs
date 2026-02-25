@@ -2177,6 +2177,17 @@ model QuotaReportFilterRequest {
 }
 
 /**
+ * * Result of ListQuotaReportResponse
+ */
+@added(Versions.v2025_12_01)
+model ListQuotaReportResult {
+  /**
+   * Represents the properties of the ListQuotaReport.
+   */
+  properties?: ListQuotaReportResponse;
+}
+
+/**
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
@@ -2189,7 +2200,7 @@ model ListQuotaReportResponse {
    * List of quota reports
    */
   @identifiers(#[])
-  value?: QuotaReport[];
+  quotaReportRecords?: QuotaReport[];
 }
 
 /**
@@ -2696,6 +2707,7 @@ interface Volumes {
    */
   @added(Versions.v2025_12_01)
   @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     /**
@@ -2703,8 +2715,8 @@ interface Volumes {
      * This is optional and will be included in the body of the request.
      */
     QuotaReportFilterRequest,
-    ArmResponse<ListQuotaReportResponse>,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
+    ArmResponse<ListQuotaReportResult>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
