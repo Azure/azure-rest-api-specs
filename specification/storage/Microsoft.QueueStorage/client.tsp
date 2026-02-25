@@ -26,13 +26,15 @@ interface QueueClient extends Storage.Queues.Queue {}
 @@clientInitialization(QueueServiceClient,
   {
     initializedBy: InitializedBy.customizeCode,
-  }
+  },
+  "rust"
 );
 
 @@clientInitialization(QueueClient,
   {
     initializedBy: InitializedBy.customizeCode,
-  }
+  },
+  "rust"
 );
 
 @@clientNamespace(Storage.Queues, "Azure.Storage.Queues");
