@@ -3683,7 +3683,7 @@ model PriorityMixPolicy {
 }
 
 /**
- * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.
+ * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).
  */
 model ResiliencyPolicy {
   /**
