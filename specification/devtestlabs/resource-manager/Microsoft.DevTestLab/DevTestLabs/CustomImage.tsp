@@ -12,20 +12,23 @@ namespace Microsoft.DevTestLab;
 /**
  * A custom image.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model CustomImage extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("customimages")
-  name: string;
+@parentResource(Lab)
+model CustomImage
+  is Azure.ResourceManager.ProxyResource<CustomImageProperties, false> {
+  ...ResourceNameParameter<
+    Resource = CustomImage,
+    KeyName = "customImageName",
+    SegmentName = "customimages",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: CustomImageProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations
