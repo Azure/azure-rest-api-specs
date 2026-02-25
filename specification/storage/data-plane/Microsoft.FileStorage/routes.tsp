@@ -871,782 +871,683 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}")
   @put
-  create(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-content-length") contentLength: int64,
-    @query timeout?: int32,
-    @header("x-ms-type") fileType?: string,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-    @header("Content-Type") contentType?: string,
-    @header("Content-Encoding") contentEncoding?: string,
-    @header("Content-Language") contentLanguage?: string,
-    @header("Cache-Control") cacheControl?: string,
-    @header("Content-MD5") contentMd5?: string,
-    @header("Content-Disposition") contentDisposition?: string,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
-
-    @header("x-ms-owner") owner?: string,
-    @header("x-ms-group") group?: string,
-    @header("x-ms-mode") mode?: string,
-    @header("x-ms-nfs-file-type") nfsFileType?: NfsFileType,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  create is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-content-length") contentLength: int64;
+      ...TimeoutParameter;
+      @header("x-ms-type") fileType?: string;
+      ...MetadataHeaders;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("Content-Type") contentType?: string;
+      @header("Content-Encoding") contentEncoding?: string;
+      @header("Content-Language") contentLanguage?: string;
+      @header("Cache-Control") cacheControl?: string;
+      @header("Content-MD5") contentMd5?: string;
+      @header("Content-Disposition") contentDisposition?: string;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
+      @header("x-ms-mode") mode?: string;
+      @header("x-ms-nfs-file-type") nfsFileType?: NfsFileType;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Reads or downloads a file from the system, including its metadata and properties.
    */
   @route("/{shareName}/{directory}/{fileName}")
   @get
-  download(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("Range") range?: string,
-    @header("x-ms-range-get-content-md5") getContentMd5?: boolean,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-    @header("x-ms-structured-body-get") structuredBodyGet?: string,
-  ): {
-    @statusCode statusCode: 200 | 206;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-meta-*") metadata?: Record<string>;
-    @header("Content-Length") contentLength: int64;
-    @header("Content-Type") contentType?: string;
-    @header("Content-Range") contentRange?: string;
-    @header("ETag") etag: string;
-    @header("Content-MD5") contentMd5?: string;
-    @header("Content-Encoding") contentEncoding?: string;
-    @header("Cache-Control") cacheControl?: string;
-    @header("Content-Disposition") contentDisposition?: string;
-    @header("Content-Language") contentLanguage?: string;
-    @header("Accept-Ranges") acceptRanges?: string;
-    @header("x-ms-copy-completion-time") copyCompletionTime?: string;
-    @header("x-ms-copy-status-description") copyStatusDescription?: string;
-    @header("x-ms-copy-id") copyId?: string;
-    @header("x-ms-copy-progress") copyProgress?: string;
-    @header("x-ms-copy-source") copySource?: string;
-    @header("x-ms-copy-status") copyStatus?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-    @header("x-ms-lease-duration") leaseDuration?: string;
-    @header("x-ms-lease-state") leaseState?: string;
-    @header("x-ms-lease-status") leaseStatus?: string;
-    @body content?: bytes;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 416 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  download is StorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      @query sharesnapshot?: string;
+      @header("Range") range?: string;
+      @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-structured-body-get") structuredBodyGet?: string;
+    },
+    {
+      @statusCode statusCode: 200 | 206;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-meta-*") metadata?: Record<string>;
+      @header("Content-Length") contentLength: int64;
+      @header("Content-Range") contentRange?: string;
+      @header("ETag") etag: string;
+      @header("Content-MD5") contentMd5?: string;
+      @header("Content-Encoding") contentEncoding?: string;
+      @header("Cache-Control") cacheControl?: string;
+      @header("Content-Disposition") contentDisposition?: string;
+      @header("Content-Language") contentLanguage?: string;
+      @header("Accept-Ranges") acceptRanges?: string;
+      @header("x-ms-copy-completion-time") copyCompletionTime?: string;
+      @header("x-ms-copy-status-description") copyStatusDescription?: string;
+      @header("x-ms-copy-id") copyId?: string;
+      @header("x-ms-copy-progress") copyProgress?: string;
+      @header("x-ms-copy-source") copySource?: string;
+      @header("x-ms-copy-status") copyStatus?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+      @header("x-ms-lease-duration") leaseDuration?: string;
+      @header("x-ms-lease-state") leaseState?: string;
+      @header("x-ms-lease-status") leaseStatus?: string;
+      @body content?: bytes;
+    }
+  >;
 
   /**
    * Returns all user-defined metadata, standard HTTP properties, and system properties for the file.
    */
   @route("/{shareName}/{directory}/{fileName}")
   @head
-  getProperties(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query sharesnapshot?: string,
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-meta-*") metadata?: Record<string>;
-    @header("x-ms-type") fileType: string;
-    @header("Content-Length") contentLength: int64;
-    @header("Content-Type") contentType?: string;
-    @header("ETag") etag: string;
-    @header("Content-MD5") contentMd5?: string;
-    @header("Content-Encoding") contentEncoding?: string;
-    @header("Cache-Control") cacheControl?: string;
-    @header("Content-Disposition") contentDisposition?: string;
-    @header("Content-Language") contentLanguage?: string;
-    @header("x-ms-copy-completion-time") copyCompletionTime?: string;
-    @header("x-ms-copy-status-description") copyStatusDescription?: string;
-    @header("x-ms-copy-id") copyId?: string;
-    @header("x-ms-copy-progress") copyProgress?: string;
-    @header("x-ms-copy-source") copySource?: string;
-    @header("x-ms-copy-status") copyStatus?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-    @header("x-ms-lease-duration") leaseDuration?: string;
-    @header("x-ms-lease-state") leaseState?: string;
-    @header("x-ms-lease-status") leaseStatus?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getProperties is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @query sharesnapshot?: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-meta-*") metadata?: Record<string>;
+      @header("x-ms-type") fileType: string;
+      @header("Content-Length") contentLength: int64;
+      @header("Content-Type") contentType?: string;
+      @header("ETag") etag: string;
+      @header("Content-MD5") contentMd5?: string;
+      @header("Content-Encoding") contentEncoding?: string;
+      @header("Cache-Control") cacheControl?: string;
+      @header("Content-Disposition") contentDisposition?: string;
+      @header("Content-Language") contentLanguage?: string;
+      @header("x-ms-copy-completion-time") copyCompletionTime?: string;
+      @header("x-ms-copy-status-description") copyStatusDescription?: string;
+      @header("x-ms-copy-id") copyId?: string;
+      @header("x-ms-copy-progress") copyProgress?: string;
+      @header("x-ms-copy-source") copySource?: string;
+      @header("x-ms-copy-status") copyStatus?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+      @header("x-ms-lease-duration") leaseDuration?: string;
+      @header("x-ms-lease-state") leaseState?: string;
+      @header("x-ms-lease-status") leaseStatus?: string;
+    }
+  >;
 
   /**
    * Removes the file from the storage account.
    */
   @route("/{shareName}/{directory}/{fileName}")
   @delete
-  delete(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  delete is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 202;
+    }
+  >;
 
   /**
    * Sets HTTP headers on a file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=properties")
   @put
-  setHTTPHeaders(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-
-    @header("x-ms-file-last-write-time-mode")
-    fileLastWriteTimeMode?: FileLastWrittenMode,
-
-    @header("Content-Length") contentLength?: int64,
-    @header("Content-Type") contentType?: string,
-    @header("Content-Encoding") contentEncoding?: string,
-    @header("Content-Language") contentLanguage?: string,
-    @header("Cache-Control") cacheControl?: string,
-    @header("Content-MD5") contentMd5?: string,
-    @header("Content-Disposition") contentDisposition?: string,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
-
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-
-    @header("x-ms-file-property-semantics")
-    filePropertySemantics?: FilePropertySemantics,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  setHTTPHeaders is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-last-write-time-mode")
+      fileLastWriteTimeMode?: FileLastWrittenMode;
+      @header("Content-Length") contentLength?: int64;
+      @header("Content-Type") contentType?: string;
+      @header("Content-Encoding") contentEncoding?: string;
+      @header("Content-Language") contentLanguage?: string;
+      @header("Cache-Control") cacheControl?: string;
+      @header("Content-MD5") contentMd5?: string;
+      @header("Content-Disposition") contentDisposition?: string;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-file-property-semantics")
+      filePropertySemantics?: FilePropertySemantics;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Sets one or more user-defined name-value pairs for the specified file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=metadata")
   @put
-  setMetadata(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  setMetadata is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+    }
+  >;
 
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&acquire")
   @put
-  acquireLease(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-duration") leaseDuration: int32,
-    @header("x-ms-proposed-lease-id") proposedLeaseId?: string,
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-id") leaseId: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  acquireLease is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-lease-duration") leaseDuration: int32;
+      @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-lease-id") leaseId: string;
+    }
+  >;
 
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&release")
   @put
-  releaseLease(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-id") leaseId: string,
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  releaseLease is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-lease-id") leaseId: string;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+    }
+  >;
 
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&change")
   @put
-  changeLease(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-id") leaseId: string,
-    @header("x-ms-proposed-lease-id") proposedLeaseId: string,
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-id") leaseId: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  changeLease is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-lease-id") leaseId: string;
+      @header("x-ms-proposed-lease-id") proposedLeaseId: string;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-lease-id") leaseId: string;
+    }
+  >;
 
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&break")
   @put
-  breakLease(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-break-period") leaseBreakPeriod?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-time") leaseTime?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  breakLease is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-lease-time") leaseTime?: string;
+    }
+  >;
 
   /**
    * Upload a range of bytes to a file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=range")
   @put
-  uploadRange(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-range") targetRange: string,
-    @header("x-ms-write") fileRangeWrite: "update" | "clear",
-    @header("Content-Length") contentLength: int64,
-    @query timeout?: int32,
-    @header("Content-MD5") contentMd5?: string,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-    @header("x-ms-structured-body-put") structuredBodyPut?: string,
-    @header("x-ms-structured-content-length") structuredContentLength?: int64,
-    @body content?: bytes,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("Content-MD5") contentMd5?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 416 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  uploadRange is StorageOperationRequestBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-range") targetRange: string;
+      @header("x-ms-write") fileRangeWrite: "update" | "clear";
+      @header("Content-Length") contentLength: int64;
+      ...TimeoutParameter;
+      @header("Content-MD5") contentMd5?: string;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-structured-body-put") structuredBodyPut?: string;
+      @header("x-ms-structured-content-length") structuredContentLength?: int64;
+      @body content?: bytes;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("Content-MD5") contentMd5?: string;
+    }
+  >;
 
   /**
    * Upload a range of bytes to a file where the contents are read from a URL.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=range&fromURL")
   @put
-  uploadRangeFromURL(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-range") targetRange: string,
-    @header("x-ms-copy-source") copySource: string,
-    @header("x-ms-source-range") sourceRange: string,
-    @header("Content-Length") contentLength: int64,
-    @query timeout?: int32,
-    @header("x-ms-source-content-crc64") sourceContentCrc64?: string,
-    @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string,
-    @header("x-ms-source-if-none-match-crc64") sourceIfNoneMatchCrc64?: string,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-source-lease-id") sourceLeaseId?: string,
-    @header("x-ms-copy-source-authorization") copySourceAuthorization?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-source-allow-trailing-dot") sourceAllowTrailingDot?: boolean,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("Content-MD5") contentMd5?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 416 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  uploadRangeFromURL is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-range") targetRange: string;
+      @header("x-ms-copy-source") copySource: string;
+      @header("x-ms-source-range") sourceRange: string;
+      @header("Content-Length") contentLength: int64;
+      ...TimeoutParameter;
+      @header("x-ms-source-content-crc64") sourceContentCrc64?: string;
+      @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string;
+      @header("x-ms-source-if-none-match-crc64")
+      sourceIfNoneMatchCrc64?: string;
+      @header("x-ms-lease-id") leaseId?: string;
+      @header("x-ms-source-lease-id") sourceLeaseId?: string;
+      @header("x-ms-copy-source-authorization")
+      copySourceAuthorization?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-source-allow-trailing-dot")
+      sourceAllowTrailingDot?: boolean;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("Content-MD5") contentMd5?: string;
+    }
+  >;
 
   /**
    * Returns the list of valid page ranges for a file or snapshot of a file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=rangelist")
   @get
-  getRangeList(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query sharesnapshot?: string,
-    @query timeout?: int32,
-    @header("Range") range?: string,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("Last-Modified") lastModified: string;
-    @header("ETag") etag: string;
-    @header("x-ms-content-length") contentLength: int64;
-    @body rangeList: ShareFileRangeList;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 416 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getRangeList is StorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @query sharesnapshot?: string;
+      ...TimeoutParameter;
+      @header("Range") range?: string;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("Last-Modified") lastModified: string;
+      @header("ETag") etag: string;
+      @header("x-ms-content-length") contentLength: int64;
+      @body rangeList: ShareFileRangeList;
+    }
+  >;
 
   /**
    * Copies a blob or file to a destination file within the storage account.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=copy")
   @put
-  startCopy(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-copy-source") copySource: string,
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-
-    @header("x-ms-file-permission-copy-mode")
-    filePermissionCopyMode?: PermissionCopyModeType,
-
-    @header("x-ms-file-copy-ignore-read-only") fileCopyIgnoreReadOnly?: boolean,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-
-    @header("x-ms-file-copy-file-creation-time")
-    fileCopyFileCreationTime?: string,
-
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-
-    @header("x-ms-file-copy-file-last-write-time")
-    fileCopyFileLastWriteTime?: string,
-
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-    @header("x-ms-file-copy-file-change-time") fileCopyFileChangeTime?: string,
-
-    @header("x-ms-file-copy-set-archive-attribute")
-    fileCopySetArchiveAttribute?: boolean,
-
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-source-lease-id") sourceLeaseId?: string,
-    @header("x-ms-copy-source-authorization") copySourceAuthorization?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
-
-    @header("x-ms-source-allow-trailing-dot") sourceAllowTrailingDot?: boolean,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-    @header("x-ms-owner") owner?: string,
-    @header("x-ms-group") group?: string,
-    @header("x-ms-mode") mode?: string,
-
-    @header("x-ms-file-copy-mode-copy-mode")
-    fileCopyModeCopyMode?: ModeCopyMode,
-
-    @header("x-ms-file-copy-owner-copy-mode")
-    fileCopyOwnerCopyMode?: OwnerCopyMode,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-copy-id") copyId: string;
-    @header("x-ms-copy-status") copyStatus: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  startCopy is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-copy-source") copySource: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-permission-copy-mode")
+      filePermissionCopyMode?: PermissionCopyModeType;
+      @header("x-ms-file-copy-ignore-read-only")
+      fileCopyIgnoreReadOnly?: boolean;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-copy-file-creation-time")
+      fileCopyFileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-copy-file-last-write-time")
+      fileCopyFileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-copy-file-change-time")
+      fileCopyFileChangeTime?: string;
+      @header("x-ms-file-copy-set-archive-attribute")
+      fileCopySetArchiveAttribute?: boolean;
+      @header("x-ms-lease-id") leaseId?: string;
+      @header("x-ms-source-lease-id") sourceLeaseId?: string;
+      @header("x-ms-copy-source-authorization")
+      copySourceAuthorization?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
+      @header("x-ms-source-allow-trailing-dot")
+      sourceAllowTrailingDot?: boolean;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
+      @header("x-ms-mode") mode?: string;
+      @header("x-ms-file-copy-mode-copy-mode")
+      fileCopyModeCopyMode?: ModeCopyMode;
+      @header("x-ms-file-copy-owner-copy-mode")
+      fileCopyOwnerCopyMode?: OwnerCopyMode;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-copy-id") copyId: string;
+      @header("x-ms-copy-status") copyStatus: string;
+    }
+  >;
 
   /**
    * Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=copy&copyid")
   @put
-  abortCopy(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-copy-action") copyActionAbort: "abort",
-    @query copyid: string,
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 204;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  abortCopy is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-copy-action") copyActionAbort: "abort";
+      @query copyid: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-id") leaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
 
   /**
    * Lists handles for file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=listhandles")
   @get
-  listHandles(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query marker?: string,
-    @query maxresults?: int32,
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @body response: ListHandlesResponse;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  listHandles is StorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...TimeoutParameter;
+      @query sharesnapshot?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body response: ListHandlesResponse;
+    }
+  >;
 
   /**
    * Closes all handles open for given file.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=forceclosehandles")
   @put
-  forceCloseHandles(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-handle-id") handleId: string,
-    @query timeout?: int32,
-    @query marker?: string,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-    @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  forceCloseHandles is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-handle-id") handleId: string;
+      ...TimeoutParameter;
+      ...MarkerParameter;
+      @query sharesnapshot?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
+      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+    }
+  >;
 
   /**
    * Renames a file. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
    */
   @route("/{shareName}/{directory}/{fileName}?comp=rename")
   @put
-  rename(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-rename-source") renameSource: string,
-    @query timeout?: int32,
-
-    @header("x-ms-file-rename-replace-if-exists")
-    renameReplaceIfExists?: boolean,
-
-    @header("x-ms-file-rename-ignore-read-only") renameIgnoreReadOnly?: boolean,
-    @header("x-ms-source-lease-id") sourceLeaseId?: string,
-    @header("x-ms-destination-lease-id") destinationLeaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-source-allow-trailing-dot") sourceAllowTrailingDot?: boolean,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  rename is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      @header("x-ms-rename-source") renameSource: string;
+      ...TimeoutParameter;
+      @header("x-ms-file-rename-replace-if-exists")
+      renameReplaceIfExists?: boolean;
+      @header("x-ms-file-rename-ignore-read-only")
+      renameIgnoreReadOnly?: boolean;
+      @header("x-ms-source-lease-id") sourceLeaseId?: string;
+      @header("x-ms-destination-lease-id") destinationLeaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-source-allow-trailing-dot")
+      sourceAllowTrailingDot?: boolean;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+    }
+  >;
 
   /**
    * Creates a symbolic link to a target file. NFS only.
    */
   @route("/{shareName}/{directory}/{fileName}?restype=symboliclink")
   @put
-  createSymbolicLink(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
-
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-    @header("x-ms-owner") owner?: string,
-    @header("x-ms-group") group?: string,
-    @header("x-ms-mode") mode?: string,
-    @header("x-ms-link-text") linkText: string,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  createSymbolicLink is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
+      @header("x-ms-mode") mode?: string;
+      @header("x-ms-link-text") linkText: string;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Returns the target of a symbolic link. NFS only.
    */
   @route("/{shareName}/{directory}/{fileName}?restype=symboliclink")
   @get
-  getSymbolicLink(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-meta-*") metadata?: Record<string>;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-    @header("x-ms-link-text") linkText: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getSymbolicLink is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-meta-*") metadata?: Record<string>;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+      @header("x-ms-link-text") linkText: string;
+    }
+  >;
 
   /**
    * Creates a hard link to a target file. NFS only.
    */
   @route("/{shareName}/{directory}/{fileName}?restype=hardlink")
   @put
-  createHardLink(
-    @path shareName: string,
-    @path directory: string,
-    @path fileName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-    @header("x-ms-target-file") targetFile: string,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  createHardLink is StorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @path fileName: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      ...FileRequestIntentParameter;
+      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      @header("x-ms-target-file") targetFile: string;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("ETag") etag: string;
+      @header("Last-Modified") lastModified: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 }
