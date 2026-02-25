@@ -1355,8 +1355,8 @@ alias ShareSnapshotParameter = {
 /** Common metadata headers. */
 alias MetadataHeaders = {
   /** Optional. User-defined metadata for the resource. */
-  @header("x-ms-meta-*")
-  metadata?: Record<string>;
+  @header("x-ms-meta")
+  metadata?: string;
 };
 
 /** ETag response header. */
@@ -1406,6 +1406,11 @@ alias LeaseIdParameter = {
   /** If specified, the lease ID must match the lease ID of the file. */
   @header("x-ms-lease-id")
   leaseId?: string;
+};
+
+alias ShareQuotaOptionalHeader = {
+  /** Specifies the maximum size of the share, in gigabytes. */
+  @header("x-ms-share-quota") shareQuota?: int32;
 };
 
 //
