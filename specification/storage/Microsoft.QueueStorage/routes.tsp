@@ -51,6 +51,42 @@ op StorageOperationNoBody<
   ...DateResponseHeader;
 }) | TError;
 
+/** Azure Storage Queue basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationResponseBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  ResponseMediaType extends string = "application/xml",
+  TError = StorageError
+> is StorageOperationNoBody<
+  TParams,
+  {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: ResponseMediaType;
+  } & TResponse,
+  TError
+>;
+
+/** Azure Storage Queue basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationRequestBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  RequestMediaType extends string = "application/xml",
+  TError = StorageError
+> is StorageOperationNoBody<
+  {
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: RequestMediaType;
+  } & TParams,
+  TResponse,
+  TError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
   /** Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
@@ -58,7 +94,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
   @route("?restype=service&comp=properties")
-  setProperties is StorageOperation<
+  setProperties is StorageOperationRequestBody<
     {
       ...TimeoutParameter;
 
@@ -74,14 +110,17 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?restype=service&comp=properties")
-  getProperties is StorageOperation<TimeoutParameter, QueueServiceProperties>;
+  getProperties is StorageOperationResponseBody<
+    TimeoutParameter,
+    QueueServiceProperties
+  >;
 
   /** Retrieves statistics related to replication for the Queue service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?restype=service&comp=stats")
-  getStatistics is StorageOperation<
+  getStatistics is StorageOperationResponseBody<
     TimeoutParameter,
     {
       /** Storage service statistics */
@@ -118,7 +157,7 @@ interface Service {
   @get
   @list
   @route("?comp=list")
-  getQueues is StorageOperation<
+  getQueues is StorageOperationResponseBody<
     {
       /** Filters the results to return only queues whose name begins with the specified prefix. */
       @query prefix?: string;
@@ -208,7 +247,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?comp=acl")
-  getAccessPolicy is StorageOperation<
+  getAccessPolicy is StorageOperationResponseBody<
     {
       ...TimeoutParameter;
     },
@@ -223,7 +262,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("?comp=acl")
-  setAccessPolicy is StorageOperation<
+  setAccessPolicy is StorageOperationRequestBody<
     {
       ...TimeoutParameter;
 
@@ -246,7 +285,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("messages")
-  receiveMessages is StorageOperation<
+  receiveMessages is StorageOperationResponseBody<
     {
       /**
        * Optional. A nonzero integer value that specifies the number of messages to
@@ -331,7 +370,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("messages?peekonly=true")
-  peekMessages is StorageOperation<
+  peekMessages is StorageOperationResponseBody<
     {
       /**
        * Optional. A nonzero integer value that specifies the number of messages to
@@ -362,7 +401,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  update is StorageOperation<
+  update is StorageOperationRequestBody<
     {
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
