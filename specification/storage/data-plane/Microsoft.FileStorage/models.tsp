@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
@@ -1133,7 +1133,10 @@ model ShareFileRangeList {
   ClearRanges?: ClearRange[];
 }
 
+@error
 model StorageError {
+  @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
+  @header("x-ms-error-code") errorCode?: string;
   Message?: string;
   CopySourceStatusCode?: int64;
   CopySourceErrorCode?: string;
@@ -1418,10 +1421,3 @@ alias FileStorageResponseHeaders = ApiVersionHeader &
 alias FileStorageResourceHeaders = FileStorageResponseHeaders &
   EtagResponseHeader &
   LastModifiedResponseHeader;
-
-/** Standard error response. */
-alias FileStorageErrorResponse = {
-  @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-  @header("x-ms-error-code") errorCode?: string;
-  @body error: StorageError;
-};
