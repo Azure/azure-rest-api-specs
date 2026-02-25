@@ -64,11 +64,6 @@ interface ContentUnderstandingClient {
 // Cross-language customizations (all emitters)
 // ============================================================================
 
-// Cross-language: "AnalysisInput" (noun phrase; "AnalyzeInput" is a verb phrase). Applied consistently in all languages.
-@@clientName(AnalyzeInput, "AnalysisInput");
-// Cross-language: "AnalysisResult" (noun phrase; "AnalyzeResult" is a verb phrase). Applied consistently in all languages.
-@@clientName(AnalyzeResult, "AnalysisResult");
-
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
 @@clientName(ArrayField.type, "fieldType");
 @@clientName(BooleanField.type, "fieldType");
@@ -86,11 +81,11 @@ interface ContentUnderstandingClient {
 @@clientName(AnalyzeBinaryRequest.input, "binaryInput");
 
 // Rename 'range' to 'contentRange' for clarity that it specifies content range.
-@@clientName(AnalyzeInput.range, "contentRange");
+@@clientName(AnalysisInput.range, "contentRange");
 @@clientName(AnalyzeBinaryRequest.range, "contentRange");
 
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
-@@access(AnalyzeInput, Access.public);
+@@access(AnalysisInput, Access.public);
 
 // Mark polling operations as internal - client generators automatically handle
 // the polling pattern for long-running operations. When users call analyze(), the
@@ -133,7 +128,7 @@ op analyzeBinaryCustomSignature(
   @doc("The API version to use for this operation.")
   @query("api-version")
   apiVersion: string,
-): AnalyzeResult;
+): AnalysisResult;
 
 @@override(ContentUnderstandingClient.analyzeBinary,
   analyzeBinaryCustomSignature
@@ -149,7 +144,7 @@ op analyzeCustomSignature(
   analyzerId: string,
 
   @doc("Inputs to analyze. Currently, only pro mode supports multiple inputs.")
-  inputs: AnalyzeInput[],
+  inputs: AnalysisInput[],
 
   @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'.")
   @query
@@ -165,7 +160,7 @@ op analyzeCustomSignature(
   @doc("The API version to use for this operation.")
   @query("api-version")
   apiVersion: string,
-): AnalyzeResult;
+): AnalysisResult;
 
 @@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
 
@@ -184,11 +179,8 @@ op analyzeCustomSignature(
 @@clientName(ObjectField, "ContentObjectField", "csharp");
 @@clientName(JsonField, "ContentJsonField", "csharp");
 
-// .NET: MediaContent → AnalysisContent to avoid generic names that might conflict with other system-level libraries.
-@@clientName(MediaContent, "AnalysisContent", "csharp");
-
 // .NET: property/parameter names use "Uri" to match System.Uri (noun phrase, type-aligned).
-@@clientName(AnalyzeInput.url, "Uri", "csharp");
+@@clientName(AnalysisInput.url, "Uri", "csharp");
 @@clientName(DocumentHyperlink.url, "Uri", "csharp");
 @@clientName(LabeledDataKnowledgeSource.containerUrl, "ContainerUri", "csharp");
 
@@ -226,9 +218,6 @@ op analyzeCustomSignature(
 @@clientName(ObjectField, "ContentObjectField", "java");
 @@clientName(JsonField, "ContentJsonField", "java");
 
-// Java: MediaContent → AnalysisContent to avoid generic names that might conflict with other system-level libraries.
-@@clientName(MediaContent, "AnalysisContent", "java");
-
 // Suppress convenient method generation for updateDefaults in Java only
 @@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
 
@@ -255,7 +244,7 @@ op analyzeCustomSignature(
 // ============================================================================
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
-@@clientDoc(AnalyzeInput.data,
+@@clientDoc(AnalysisInput.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );
