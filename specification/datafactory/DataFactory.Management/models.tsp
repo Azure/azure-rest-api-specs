@@ -23622,14 +23622,14 @@ model SnowflakeExportCopyCommand extends ExportSettings {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.alternateType(Dfe<Record<string>>, "csharp")
-  additionalCopyOptions?: Record<string>;
+  additionalCopyOptions?: Record<unknown>;
 
   /**
    * Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalFormatOptions": { "OVERWRITE": "TRUE", "MAX_FILE_SIZE": "'FALSE'" }
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.alternateType(Dfe<Record<string>>, "csharp")
-  additionalFormatOptions?: Record<string>;
+  additionalFormatOptions?: Record<unknown>;
 
   /**
    * The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string).
@@ -24482,14 +24482,14 @@ model SnowflakeImportCopyCommand extends ImportSettings {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.alternateType(Dfe<Record<string>>, "csharp")
-  additionalCopyOptions?: Record<string>;
+  additionalCopyOptions?: Record<unknown>;
 
   /**
    * Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalFormatOptions": { "FORCE": "TRUE", "LOAD_UNCERTAIN_FILES": "'FALSE'" }
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.alternateType(Dfe<Record<string>>, "csharp")
-  additionalFormatOptions?: Record<string>;
+  additionalFormatOptions?: Record<unknown>;
 
   /**
    * The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string).
