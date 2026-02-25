@@ -295,7 +295,7 @@ model TilerInfoGeoJsonFeature {
    * Bounding box coordinates for the feature
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float32;
+  boundingBox?: float32[];
 }
 
 /**
