@@ -8,6 +8,7 @@ service-name: AppService
 add-inner: AppServiceCertificate
 remove-inner: CsmDeploymentStatus
 name-for-ungrouped-operations: ResourceProvider
+rename-model: "ApiKVReferencePropertiesSource:ConfigReferenceSource,OpenIdConnectClientCredentialMethod:ClientCredentialMethod"
 enable-sync-stack: false
 directive:
   - from: swagger-document
