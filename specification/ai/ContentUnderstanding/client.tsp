@@ -230,6 +230,15 @@ op analyzeCustomSignature(
 // Suppress convenient method generation for updateDefaults in Java only
 @@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
 
+// Java: boolean properties on ContentAnalyzerConfig follow set*Enabled / is*Enabled convention.
+@@clientName(ContentAnalyzerConfig.enableOcr, "ocrEnabled", "java");
+@@clientName(ContentAnalyzerConfig.enableLayout, "layoutEnabled", "java");
+@@clientName(ContentAnalyzerConfig.enableFigureDescription, "figureDescriptionEnabled", "java");
+@@clientName(ContentAnalyzerConfig.enableFigureAnalysis, "figureAnalysisEnabled", "java");
+@@clientName(ContentAnalyzerConfig.enableFormula, "formulaEnabled", "java");
+@@clientName(ContentAnalyzerConfig.enableSegment, "segmentEnabled", "java");
+@@clientName(ContentAnalyzerConfig.disableFaceBlurring, "faceBlurringDisabled", "java");
+
 // ============================================================================
 // Python-specific customizations
 // ============================================================================
