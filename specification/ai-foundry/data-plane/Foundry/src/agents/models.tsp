@@ -159,6 +159,9 @@ union AgentVersionStatus {
 
   @doc("The agent version is being deleted.")
   deleting: "deleting",
+
+  @doc("The agent version has been deleted.")
+  deleted: "deleted",
 }
 
 @doc("Error details for agent version provisioning failure.")
