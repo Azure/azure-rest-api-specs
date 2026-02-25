@@ -11692,12 +11692,12 @@
           "type": "string",
           "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
           "readOnly": true
-        },
-        "additionalProperties": {}
+        }
       },
       "required": [
         "properties"
       ],
+      "additionalProperties": {},
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -16274,9 +16274,9 @@
         "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
-        },
-        "additionalProperties": {}
+        }
       },
+      "additionalProperties": {},
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
@@ -25500,12 +25500,12 @@
           "type": "string",
           "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
           "readOnly": true
-        },
-        "additionalProperties": {}
+        }
       },
       "required": [
         "properties"
       ],
+      "additionalProperties": {},
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -30573,16 +30573,12 @@
         "additionalCopyOptions": {
           "type": "object",
           "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "additionalFormatOptions": {
           "type": "object",
           "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"OVERWRITE\": \"TRUE\", \"MAX_FILE_SIZE\": \"'FALSE'\" }",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "storageIntegration": {
           "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
@@ -30602,16 +30598,12 @@
         "additionalCopyOptions": {
           "type": "object",
           "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "additionalFormatOptions": {
           "type": "object",
           "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"FORCE\": \"TRUE\", \"LOAD_UNCERTAIN_FILES\": \"'FALSE'\" }",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "storageIntegration": {
           "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
