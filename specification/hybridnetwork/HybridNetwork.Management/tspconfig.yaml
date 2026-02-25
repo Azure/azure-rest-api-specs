@@ -35,13 +35,12 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  # "@azure-tools/typespec-ts":
-  #   experimental-extensible-enums: true
-  #   package-dir: "arm-hybridnetwork"
-  #   flavor: azure
-  #   emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridnetwork"
-  #   package-details:
-  #     name: "@azure/arm-hybridnetwork"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridnetwork"
+    package-details:
+      name: "@azure/arm-hybridnetwork"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

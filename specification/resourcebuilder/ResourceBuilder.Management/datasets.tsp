@@ -20,6 +20,32 @@ model Dataset is ProxyResource<DatasetProperties> {
   @path
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$")
   name: string;
+
+  /**
+   * Dataset kind discriminator. Determines which properties are valid for this dataset.
+   * - Custom: Custom user-defined dataset.
+   * - ArmResource: ARM (Azure Resource Manager) managed resource dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Dataset resource"
+  kind?: DatasetKind;
+
+  /**
+   * Gets or sets tags of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
+  tags?: Record<string>;
+}
+
+/** Dataset kind discriminator */
+union DatasetKind {
+  /** Custom user-defined dataset. */
+  Custom: "Custom",
+
+  /** ARM (Azure Resource Manager) managed resource dataset. */
+  ArmResource: "ArmResource",
+
+  string,
 }
 
 /** Dataset properties */

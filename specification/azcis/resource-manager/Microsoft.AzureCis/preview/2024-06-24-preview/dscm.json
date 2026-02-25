@@ -2797,6 +2797,10 @@
           "type": "string",
           "description": "Service Account Group name. Case-insensitive."
         },
+        "serviceAvailabilityStrategy": {
+          "$ref": "#/definitions/ServiceAvailabilityStrategy",
+          "description": "This property is used to enable auto-creation of service accounts in all regions. By default no service accounts are created."
+        },
         "accountName": {
           "type": "string",
           "description": "Desired naming pattern of the accounts in this group."
@@ -2855,10 +2859,6 @@
           "type": "string",
           "description": "Account version."
         },
-        "serviceAvailabilityStrategy": {
-          "$ref": "#/definitions/ServiceAvailabilityStrategy",
-          "description": "This property is used to enable auto-creation of service accounts in all regions. By default no service accounts are created."
-        },
         "dstsControlledResource": {
           "$ref": "#/definitions/DstsControlledResource",
           "description": "Create Jit dSTS controlled resource with service account group."
@@ -2879,7 +2879,8 @@
         }
       },
       "required": [
-        "groupName"
+        "groupName",
+        "serviceAvailabilityStrategy"
       ]
     },
     "DstsServiceAccountResource": {

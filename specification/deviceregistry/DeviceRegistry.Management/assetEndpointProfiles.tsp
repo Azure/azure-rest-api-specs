@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/authenticationMethod.tsp";
-import "./common/assetEndpointProfilesProperties.tsp";
+import "./properties/assetEndpointProfilesProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -57,6 +57,7 @@ interface AssetEndpointProfiles {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AssetEndpointProfile,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

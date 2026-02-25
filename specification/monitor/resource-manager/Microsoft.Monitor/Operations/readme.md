@@ -32,7 +32,7 @@ title: AzureMonitorOperationsClient
 description: Azure Monitor Operations Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06-03-preview
+tag: package-2026-04-01
 ```
 
 
@@ -73,6 +73,16 @@ These settings apply only when `--tag=package-2025-06-03-preview` is specified o
 ``` yaml $(tag) == 'package-2025-06-03-preview'
 input-file:
 - preview/2025-06-03-preview/operations.json
+
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line
+
+``` yaml $(tag) == 'package-2026-04-01'
+input-file:
+- stable/2026-04-01/operations.json
 
 ```
 

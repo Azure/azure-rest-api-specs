@@ -27,12 +27,39 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-06
+tag: package-2026-02-01-preview
 ```
 
-### Tag: package-2024-12-01-preview
+### Tag: package-2026-02-01-preview
 
-These settings apply only when `--tag=package-preview-2025-06` is specified on the command line.
+These settings apply only when `--tag=package-2026-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-02-01-preview'
+input-file:
+  - preview/2026-02-01-preview/VirtualInstance.json
+  - ../operations/preview/2026-02-01-preview/operations.json
+suppressions:
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.VirtualInstanceProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.WorkloadComponentProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: PatchBodyParametersSchema
+      from: VirtualInstance.json
+      where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}/components/{componentName}"].patch.parameters[5].schema.properties.properties
+      reason: The property (profileType) is used as discriminator to support polymorphic resource definitions. The discriminator need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+    - code: PatchBodyParametersSchema
+      from: VirtualInstance.json
+      where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}"].patch.parameters[4].schema.properties.properties
+      reason: The properties (discoveryType and configurationType) are used as discriminators to support polymorphic resource definitions. The discriminator need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+```
+
+### Tag: package-2025-06-01-preview
+
+These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
@@ -63,7 +90,7 @@ suppressions:
 
 ### Tag: package-2024-12-01-preview
 
-These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
@@ -92,6 +119,7 @@ suppressions:
 ```
 
 ---
+
 
 # Code Generation
 

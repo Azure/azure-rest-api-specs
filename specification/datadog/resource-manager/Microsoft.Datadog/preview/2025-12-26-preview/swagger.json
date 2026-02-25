@@ -875,6 +875,89 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/linkSaaS": {
+      "post": {
+        "operationId": "DatadogMonitorResources_LinkSaaS",
+        "tags": [
+          "DatadogMonitorResources"
+        ],
+        "summary": "Links a new SaaS to the Datadog organization of the underlying monitor.",
+        "description": "Links a new SaaS to the Datadog organization of the underlying monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "description": "Monitor resource name",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Link SaaS body parameter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaaSData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_LinkSaaS": {
+            "$ref": "./examples/Monitors_LinkSaaS.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DatadogMonitorResource"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
         "operationId": "Monitors_ListApiKeys",
@@ -2795,6 +2878,20 @@
         ]
       }
     },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "description": "Details about the marketplace offer associated with the monitor resource.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The publisher ID (e.g., \"datadog1591740804488\")."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The offer ID (e.g., \"dd_liftr_v3_decoupled\")."
+        }
+      }
+    },
     "MarketplaceSaaSInfo": {
       "type": "object",
       "description": "Marketplace SAAS Info of the resource.",
@@ -2940,6 +3037,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails",
+          "description": "Details about the marketplace offer associated with the resource.\nRequired for API version 2025-11 and later.\nFor earlier API versions, defaults to the legacy offer."
         }
       }
     },
@@ -2969,10 +3070,6 @@
               }
             ]
           }
-        },
-        "saaSData": {
-          "$ref": "#/definitions/SaaSData",
-          "description": "SaaS details"
         },
         "cspm": {
           "type": "boolean",

@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/authenticationMethod.tsp";
-import "./common/discoveredAssetEndpointProfilesProperties.tsp";
+import "./properties/discoveredAssetEndpointProfilesProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

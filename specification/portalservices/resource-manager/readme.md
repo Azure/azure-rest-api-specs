@@ -27,7 +27,81 @@ These are the global settings for the portal.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-01-preview
+tag: package-2025-11-01
+```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - Microsoft.PortalServices/settings/stable/2025-11-01/settings.json
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: XmsPageableForListCalls
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TopLevelResourcesListBySubscription
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource,
+      so subscription list operation is not valid. This is a false positive.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TenantLevelAPIsNotAllowed
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+```
+
+### Tag: package-2026-02-01-preview
+
+These settings apply only when `--tag=package-2026-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01-preview'
+input-file:
+  - Microsoft.PortalServices/settings/preview/2026-02-01-preview/settings.json
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: XmsPageableForListCalls
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider @singleton
+      (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TopLevelResourcesListBySubscription
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource,
+      so subscription list operation is not valid. This is a false positive.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: TenantLevelAPIsNotAllowed
+    reason: >
+      The resource type settings in the Microsoft.PortalServices resource provider is @tenantResource.
+    from:
+      - settings.json
+    where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
 ```
 
 ### Tag: package-2025-10-01-preview
