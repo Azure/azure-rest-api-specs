@@ -2895,3 +2895,15 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   "AppCertificatePatchResourceProperties",
   "go"
 );
+
+@@clientName(Microsoft.Web, "WebSiteManagementClient", "java");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.updateApplicationSettings,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(SiteConfigResources.createOrUpdateConfiguration,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.update, "java");

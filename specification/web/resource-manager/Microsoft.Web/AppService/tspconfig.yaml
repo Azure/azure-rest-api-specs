@@ -27,6 +27,11 @@ options:
     client-side-validations: true
     enable-sync-stack: false
     use-object-for-unknown: true
+    add-inner: AppServiceCertificate
+    remove-inner: CsmDeploymentStatus
+    rename-model:
+      ApiKVReferencePropertiesSource: ConfigReferenceSource
+      OpenIdConnectClientCredentialMethod: ClientCredentialMethod
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice"
     flavor: "azure"
