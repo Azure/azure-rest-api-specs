@@ -27,7 +27,9 @@ using Microsoft.HealthBot;
   Azure.Core.azureLocation,
   "csharp"
 );
+
+// We are using ErrorAdditionalInfo from commonTypes and user has defined a model named ErrorAdditionalInfo in their spec, rename to avoid naming conflict
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
-  "CloudErrorAdditionalInfo",
+  "HealthBotErrorAdditionalInfo",
   "csharp"
 );
