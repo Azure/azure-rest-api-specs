@@ -3133,7 +3133,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -3331,7 +3332,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -3549,7 +3551,8 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            $ref: '#/components/schemas/integer'
+            allOf:
+              - $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -14267,6 +14270,7 @@ components:
       properties:
         image_url:
           type: string
+          format: uri
         file_id:
           type: string
     OpenAI.IncludeEnum:
