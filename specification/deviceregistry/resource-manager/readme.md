@@ -92,13 +92,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
-### Tag: package-preview-2026-03
+### Tag: package-preview-2026-11
 
-These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-03'
+```yaml $(tag) == 'package-preview-2026-11'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2026-03-01-preview/deviceregistry.json
+  - Microsoft.DeviceRegistry/preview/2026-11-01-preview/deviceregistry.json
 suppressions:
   - code: AvoidAdditionalProperties
     from:
@@ -113,9 +113,11 @@ suppressions:
     from:
       - deviceregistry.json
     where:
+      - $.definitions.Management.properties.endpoints
       - $.definitions.Messaging.properties.endpoints
       - $.definitions.NamespaceAssetProperties.properties.attributes
       - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceAssetExecuteActionRequest.properties.payload
       - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
       - $.definitions.NamespaceDeviceProperties.properties.attributes
@@ -125,6 +127,7 @@ suppressions:
     from:
       - deviceregistry.json
     where:
+      - $.definitions.Management.properties.endpoints
       - $.definitions.Messaging.properties.endpoints
       - $.definitions.MessagingEndpoints.properties.inbound
       - $.definitions.MessagingEndpointsUpdate.properties.inbound
@@ -148,13 +151,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
-### Tag: package-preview-2026-11
+### Tag: package-preview-2026-03
 
-These settings apply only when `--tag=package-preview-2026-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-11'
+```yaml $(tag) == 'package-preview-2026-03'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2026-11-01-preview/deviceregistry.json
+  - Microsoft.DeviceRegistry/preview/2026-03-01-preview/deviceregistry.json
 suppressions:
   - code: AvoidAdditionalProperties
     from:
