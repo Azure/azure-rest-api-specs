@@ -5,7 +5,25 @@ using Azure.Core.Experimental;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Projects.Agents")
-namespace Azure.AI.Projects.Agents {
+namespace Azure.AI.Projects {
+
+  @@clientName(Azure.AI.Projects.Agents,
+   "AgentsClient",
+   "csharp"
+  );
+
+  @@usage(CreateAgentRequest, Usage.input);
+  @@access(CreateAgentRequest, Access.internal);
+
+  @@usage(CreateAgentVersionFromManifestRequest, Usage.input);
+  @@access(CreateAgentVersionFromManifestRequest, Access.public);
+
+  @@usage(UpdateAgentRequest, Usage.input);
+  @@access(UpdateAgentRequest, Access.internal);
+
+  @@usage(CreateAgentVersionRequest, Usage.input);
+  @@access(CreateAgentVersionRequest, Access.public);
+  @@clientName(CreateAgentVersionRequest, "AgentVersionCreationOptions");
 
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");

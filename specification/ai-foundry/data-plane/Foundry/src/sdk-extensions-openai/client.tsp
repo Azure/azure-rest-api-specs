@@ -3,9 +3,15 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
+// --------------------------------------------------------------------------------
+// Fix the xref.
+// --------------------------------------------------------------------------------
+@@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
+@@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@clientNamespace("Azure.AI.Projects.OpenAI")
-namespace Azure.AI.OpenAI {
+@clientNamespace("Azure.AI.Extensions.OpenAI")
+namespace Azure.AI.Projects {
   // ------------------------------------------------------------------------------------------------
   // Operation scope customizations - don't generate OpenAI operations that we'll use the OpenAI client for
   // ------------------------------------------------------------------------------------------------
@@ -44,20 +50,12 @@ namespace Azure.AI.OpenAI {
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
   // --------------------------------------------------------------------------------
-  // Fix the xref.
-  // --------------------------------------------------------------------------------
-  @@clientNamespace(OpenAI, "Azure.AI.OpenAI", "csharp");
-
-  // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
-  );
-  @@clientName(ContainerAppAgentDefinition,
-    "ContainerApplicationAgentDefinition"
   );
   @@clientName(CreatedBy, "AgentResponseItemSource");
   @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
@@ -86,11 +84,9 @@ namespace Azure.AI.OpenAI {
     "OpenAPIProjectConnectionSecurityScheme"
   );
   @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
-  @@clientName(RaiConfig, "ContentFilterConfiguration");
   @@clientName(SharepointGroundingToolParameters,
     "SharePointGroundingToolOptions"
   );
-  @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -375,9 +371,6 @@ namespace Azure.AI.OpenAI {
   @@access(OpenAI.MCPTool, Access.internal);
   @@clientName(OpenAI.MCPTool, "InternalMCPTool");
 
-  @@access(AgentObjectType, Access.internal);
-  @@clientName(AgentObjectType, "InternalAgentObjectType");
-
   @@access(OpenAI.ToolChoiceParam, Access.internal);
   @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam");
 
@@ -411,18 +404,4 @@ namespace Azure.AI.OpenAI {
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
-
-  @@usage(AgentDefinition, Usage.input | Usage.output);
-  @@access(AgentDefinition, Access.public);
-
-  @@usage(PromptAgentDefinition, Usage.input | Usage.output);
-  @@access(PromptAgentDefinition, Access.public);
-
-  @@usage(AgentObject, Usage.output);
-  @@access(AgentObject, Access.public);
-  @@clientName(AgentObject, "AgentRecord");
-
-  @@usage(AgentVersionObject, Usage.output);
-  @@access(AgentVersionObject, Access.public);
-  @@clientName(AgentVersionObject, "AgentVersion");
 }
