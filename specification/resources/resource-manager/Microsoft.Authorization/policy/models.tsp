@@ -58,6 +58,18 @@ union SelectorKind {
    * The selector kind to filter policies by the policy definition reference ID.
    */
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
+
+  /**
+   * The selector kind to filter policies by the user principal ID.
+   */
+  @added(Versions.v2025_12_01_preview)
+  userPrincipalId: "userPrincipalId",
+
+  /**
+   * The selector kind to filter policies by the security group membership ID.
+   */
+  @added(Versions.v2025_12_01_preview)
+  groupPrincipalId: "groupPrincipalId",
 }
 
 /**
@@ -1260,6 +1272,178 @@ model PolicyLogInfo {
    * An array of policy exemption Ids.
    */
   policyExemptionIds?: string[];
+}
+
+/**
+ * The policy exemption category. Possible values are Waiver and Mitigated.
+ */
+@added(Versions.v2025_12_01_preview)
+union ExemptionCategory {
+  string,
+
+  /**
+   * This category of exemptions usually means the scope is not applicable for the policy.
+   */
+  Waiver: "Waiver",
+
+  /**
+   * This category of exemptions usually means the mitigation actions have been applied to the scope.
+   */
+  Mitigated: "Mitigated",
+}
+
+/**
+ * The option whether validate the exemption is at or under the assignment scope.
+ */
+@added(Versions.v2025_12_01_preview)
+union AssignmentScopeValidation {
+  string,
+
+  /**
+   * This option will validate the exemption is at or under the assignment scope.
+   */
+  Default: "Default",
+
+  /**
+   * This option will bypass the validation the exemption scope is at or under the policy assignment scope.
+   */
+  DoNotValidate: "DoNotValidate",
+}
+
+/**
+ * The policy exemption properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_01_preview)
+model PolicyExemptionProperties {
+  /**
+   * The ID of the policy assignment that is being exempted.
+   */
+  policyAssignmentId: string;
+
+  /**
+   * The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+   */
+  policyDefinitionReferenceIds?: string[];
+
+  /**
+   * The policy exemption category. Possible values are Waiver and Mitigated.
+   */
+  exemptionCategory: ExemptionCategory;
+
+  /**
+   * The expiration date and time (in UTC ISO 8601 format yyyy-MM-ddTHH:mm:ssZ) of the policy exemption.
+   */
+  expiresOn?: utcDateTime;
+
+  /**
+   * The display name of the policy exemption.
+   */
+  displayName?: string;
+
+  /**
+   * The description of the policy exemption.
+   */
+  description?: string;
+
+  /**
+   * The policy exemption metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  metadata?: unknown;
+
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#["name"])
+  resourceSelectors?: ResourceSelector[];
+
+  /**
+   * The option whether validate the exemption is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+}
+
+/**
+ * The policy exemption for Patch request.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyExemptionUpdate {
+  /**
+   * The policy exemption properties for Patch request.
+   */
+  properties?: PolicyExemptionUpdateProperties;
+}
+
+/**
+ * The policy exemption properties for Patch request.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyExemptionUpdateProperties {
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#["name"])
+  resourceSelectors?: ResourceSelector[];
+
+  /**
+   * The option whether validate the exemption is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+}
+
+/**
+ * The variable properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_01_preview)
+model PolicyVariableProperties {
+  /**
+   * Variable column definitions.
+   */
+  @identifiers(#["columnName"])
+  columns: PolicyVariableColumn[];
+}
+
+/**
+ * The variable column.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyVariableColumn {
+  /**
+   * The name of this policy variable column.
+   */
+  columnName: string;
+}
+
+/**
+ * The variable value properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_01_preview)
+model PolicyVariableValueProperties {
+  /**
+   * Variable value column value array.
+   */
+  @identifiers(#["columnName"])
+  values: PolicyVariableValueColumnValue[];
+}
+
+/**
+ * The name value tuple for this variable value column.
+ */
+@added(Versions.v2025_12_01_preview)
+model PolicyVariableValueColumnValue {
+  /**
+   * Column name for the variable value
+   */
+  columnName: string;
+
+  /**
+   * Column value for the variable value; this can be an integer, double, boolean, null or a string.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  columnValue: unknown;
 }
 
 /**
