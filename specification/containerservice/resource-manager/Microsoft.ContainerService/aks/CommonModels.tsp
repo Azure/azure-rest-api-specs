@@ -3653,6 +3653,30 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
    * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false
    */
   disablePrometheusMetricsScraping?: boolean;
+
+  /**
+   * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+   */
+  @added(Versions.v2026_01_02_preview)
+  containerNetworkLogs?: ContainerNetworkLogs;
+}
+
+/**
+ * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+ */
+@added(Versions.v2026_01_02_preview)
+union ContainerNetworkLogs {
+  string,
+
+  /**
+   * Azure monitor ingestion of container network logs is disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Azure monitor ingestion of container network logs is enabled
+   */
+  Enabled: "Enabled",
 }
 
 /**
@@ -4172,15 +4196,15 @@ model OperationListResult {
 }
 
 /**
-* Health monitor profile for the managed cluster.
-*/
+ * Health monitor profile for the managed cluster.
+ */
 @added(Versions.v2026_01_02_preview)
 model ManagedClusterHealthMonitorProfile {
   /**
    * Whether to enable continuous control plane and addon monitor.
    */
   enableContinuousControlPlaneAndAddonMonitor?: boolean;
- 
+
   /**
    * Whether to enable on-demand monitor.
    */
