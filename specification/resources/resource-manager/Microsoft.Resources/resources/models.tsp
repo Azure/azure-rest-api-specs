@@ -28,9 +28,9 @@ namespace Microsoft.Resources {
   /** The resource properties. */
   @doc("The resource properties.")
   model GenericResourceProperties {
-    /** The resource properties. */
-    @doc("The resource properties.")
-    properties?: unknown;
+    /** The resource properties as a JSON object. */
+    @doc("The resource properties as a JSON object.")
+    properties?: Record<unknown>;
   }
 
   /** Resource group information. */
@@ -60,8 +60,20 @@ namespace Microsoft.Resources {
   @doc("The resource group properties.")
   model ResourceGroupProperties {
     /** The provisioning state. */
-    @doc("The provisioning state.")
-    provisioningState?: string;
+    @doc("Gets or sets the provisioning state.")
+    provisioningState?: ResourceProvisioningState;
+  }
+
+  /** Resource provisioning state. */
+  @doc("The provisioning state of the resource.")
+  union ResourceProvisioningState {
+    /** Resource creation succeeded. */
+    Succeeded: "Succeeded",
+    /** Resource creation failed. */
+    Failed: "Failed",
+    /** Resource creation was canceled. */
+    Canceled: "Canceled",
+    string,
   }
 
   /** List of resource groups. */
@@ -76,12 +88,28 @@ namespace Microsoft.Resources {
   // BATCH OPERATION MODELS
   // ================================
 
+  /** HTTP method enumeration. */
+  @doc("HTTP method enumeration.")
+  union HttpMethod {
+    /** GET method. */
+    GET: "GET",
+    /** PUT method. */
+    PUT: "PUT",
+    /** PATCH method. */
+    PATCH: "PATCH",
+    /** DELETE method. */
+    DELETE: "DELETE",
+    /** POST method. */
+    POST: "POST",
+    string,
+  }
+
   /** Batch request definition. */
   @doc("Batch request definition.")
   model BatchRequest {
     /** The HTTP method for the request. */
     @doc("The HTTP method for the request.")
-    httpMethod: "GET" | "PUT" | "PATCH" | "DELETE" | "POST";
+    httpMethod: HttpMethod;
 
     /** The relative URL for the request. */
     @doc("The relative URL for the request.")
@@ -93,7 +121,7 @@ namespace Microsoft.Resources {
 
     /** The request body (for PUT/PATCH/POST operations). */
     @doc("The request body (for PUT/PATCH/POST operations).")
-    body?: unknown;
+    body?: Record<unknown>;
 
     /** Request headers. */
     @doc("Request headers.")
@@ -147,7 +175,7 @@ namespace Microsoft.Resources {
 
     /** The response body. */
     @doc("The response body.")
-    body?: unknown;
+    body?: Record<unknown>;
 
     /** Response headers. */
     @doc("Response headers.")

@@ -60,9 +60,7 @@ namespace Microsoft.Resources {
       @path
       resourceId: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
     ): ArmResponse<GenericResource> | ErrorResponse;
 
     /** Creates a resource. */
@@ -75,9 +73,7 @@ namespace Microsoft.Resources {
       @path
       resourceId: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
 
       @doc("Create or update resource parameters.")
       @body
@@ -97,9 +93,7 @@ namespace Microsoft.Resources {
       @path
       resourceId: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
 
       @doc("Update resource parameters.")
       @body
@@ -119,9 +113,7 @@ namespace Microsoft.Resources {
       @path
       resourceId: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
     ): ArmResponse<GenericResource> | ArmAcceptedLroResponse<
       "Resource deletion accepted",
       GenericResource
@@ -156,9 +148,7 @@ namespace Microsoft.Resources {
       @path
       subscriptionId: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
 
       @doc("Batch request containing multiple operations to execute.")
       @body
@@ -184,9 +174,7 @@ namespace Microsoft.Resources {
       @path
       resourceGroupName: string,
 
-      @doc("The API version to use for the operation.")
-      @query("api-version")
-      apiVersion: string,
+      ...Azure.ResourceManager.ApiVersionParameter,
 
       @doc("Batch request containing multiple operations to execute.")
       @body
