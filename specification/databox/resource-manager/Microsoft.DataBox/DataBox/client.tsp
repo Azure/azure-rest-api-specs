@@ -360,3 +360,13 @@ using Microsoft.DataBox;
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
+
+// rename for duplicate model from Azure.ResourceManager.Foundations
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "DataBoxErrorDetail",
+  "!go"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "ArmErrorDetail",
+  "go"
+);
