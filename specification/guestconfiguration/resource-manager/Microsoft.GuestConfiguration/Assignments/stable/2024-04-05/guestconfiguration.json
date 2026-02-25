@@ -48,6 +48,9 @@
       "name": "GuestConfigurationHCRPAssignments"
     },
     {
+      "name": "GuestConfigurationAssignmentsVMSS"
+    },
+    {
       "name": "GuestConfigurationConnectedVMwarevSphereAssignments"
     }
   ],
@@ -133,6 +136,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "operationId": "GuestConfigurationAssignmentsVMSS_List",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "List all guest configuration assignments for VMSS.",
         "parameters": [
           {
@@ -179,6 +185,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
       "get": {
         "operationId": "GuestConfigurationAssignmentsVMSS_Get",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "Get information about a guest configuration assignment for VMSS",
         "parameters": [
           {
@@ -227,6 +236,9 @@
       },
       "put": {
         "operationId": "GuestConfigurationAssignmentsVMSS_CreateOrUpdate",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "Creates an association between a VMSS and guest configuration",
         "parameters": [
           {
@@ -290,6 +302,9 @@
       },
       "delete": {
         "operationId": "GuestConfigurationAssignmentsVMSS_Delete",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "Delete a guest configuration assignment for VMSS",
         "parameters": [
           {
@@ -343,6 +358,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports": {
       "get": {
         "operationId": "GuestConfigurationAssignmentReportsVMSS_List",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "List all reports for the VMSS guest configuration assignment, latest report first.",
         "parameters": [
           {
@@ -396,6 +414,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}": {
       "get": {
         "operationId": "GuestConfigurationAssignmentReportsVMSS_Get",
+        "tags": [
+          "GuestConfigurationAssignmentsVMSS"
+        ],
         "description": "Get a report for the VMSS guest configuration assignment, by reportId.",
         "parameters": [
           {
@@ -1865,11 +1886,6 @@
         "properties": {
           "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
           "description": "Properties of the Guest configuration assignment."
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -2266,6 +2282,11 @@
         "type": {
           "$ref": "#/definitions/Azure.Core.armResourceType",
           "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
       },
