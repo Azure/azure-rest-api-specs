@@ -363,5 +363,10 @@ using Microsoft.DataBox;
 
 // rename for duplicate model from Azure.ResourceManager.Foundations
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
-  "DataBoxErrorDetail"
+  "DataBoxErrorDetail",
+  "!go"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "ArmErrorDetail",
+  "go"
 );
