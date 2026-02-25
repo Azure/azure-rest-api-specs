@@ -1,6 +1,7 @@
 {
   "name": "azure-rest-api-specs",
   "devDependencies": {
+    "@autorest/openapi-to-typespec": "0.11.12",
     "@azure-tools/openai-typespec": "1.11.0",
     "@azure-tools/spec-gen-sdk": "~0.9.1",
     "@azure-tools/specs-shared": "file:.github/shared",
@@ -14,20 +15,20 @@
     "@azure-tools/typespec-client-generator-cli": "0.31.0",
     "@azure-tools/typespec-client-generator-core": "0.65.3",
     "@azure-tools/typespec-liftr-base": "0.12.0",
-    "@autorest/openapi-to-typespec": "0.11.12",
     "@azure/avocado": "0.10.5",
     "@azure/oad": "0.12.3",
     "@microsoft.azure/openapi-validator": "2.2.4",
     "@microsoft.azure/openapi-validator-core": "1.0.7",
     "@microsoft.azure/openapi-validator-rulesets": "2.2.3",
     "@typespec/compiler": "1.9.0",
-    "@typespec/http": "1.9.0",
-    "@typespec/sse": "0.79.0",
     "@typespec/events": "0.79.0",
+    "@typespec/http": "1.9.0",
+    "@typespec/json-schema": "^1.9.0",
     "@typespec/openapi": "1.9.0",
     "@typespec/openapi3": "1.9.0",
     "@typespec/prettier-plugin-typespec": "1.9.0",
     "@typespec/rest": "0.79.0",
+    "@typespec/sse": "0.79.0",
     "@typespec/streams": "0.79.0",
     "@typespec/versioning": "0.79.0",
     "@typespec/xml": "0.79.0",
@@ -44,5 +45,8 @@
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@typespec/http-client-csharp": "^1.0.0-alpha.20260224.5"
+  }
 }

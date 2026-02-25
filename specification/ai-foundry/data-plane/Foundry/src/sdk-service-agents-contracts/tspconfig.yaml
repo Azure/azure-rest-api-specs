@@ -1,11 +1,19 @@
 emit:
   - "@typespec/http-client-csharp"
+  - "@typespec/json-schema"
 options:
   "@typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}"
     package-name: Azure.AI.Agents.Contracts.V2
     api-version: "virtual-public-preview"
     unreferenced-types-handling: keepAll
+  "@typespec/json-schema":
+    emitAllModels: false
+    emitAllRefs: false
+    emitter-output-dir: "{output-dir}/json-schema"
+    file-type: json
+    polymorphic-models-strategy: oneOf
+    int64-strategy: "number"
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

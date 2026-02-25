@@ -1,7 +1,9 @@
 import "./main.tsp";
+import "@typespec/json-schema";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.JsonSchema;
 
 @clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace OpenAI {
@@ -247,4 +249,38 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.OutputItemCustomToolCallOutput, Access.public);
   @@usage(OpenAI.OutputItemCustomToolCallOutput, Usage.input | Usage.output);
+
+  // Wrapper models for conversations to match C# contract names
+  @jsonSchema
+  model CreateConversationBody is OpenAI.CreateConversationBody;
+
+  @jsonSchema
+  model UpdateConversationRequest is OpenAI.UpdateConversationBody;
+
+  @jsonSchema
+  model CreateConversationItemsRequest {
+    /**
+     * Additional fields to include in the response.
+     * See the `include` parameter for listing Conversation items for more information.
+     */
+    include?: string[];
+
+    /** The items to add to the conversation. You may add up to 20 items at a time. */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @maxItems(20)
+    items: OpenAI.Item[];
+  }
+
+  // JSON Schema decorators for request body models
+  // Agent request models
+  @@jsonSchema(CreateAgentRequest);
+  @@jsonSchema(CreateAgentVersionRequest);
+  @@jsonSchema(UpdateAgentRequest);
+  @@jsonSchema(CreateAgentFromManifestRequest);
+  @@jsonSchema(CreateAgentVersionFromManifestRequest);
+  @@jsonSchema(UpdateAgentFromManifestRequest);
+
+  // Response request models
+  @@jsonSchema(OpenAI.CreateResponse);
+  @@jsonSchema(OpenAI.CompactResponseMethodPublicBody);
 }
