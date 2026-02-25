@@ -13960,6 +13960,14 @@
         "skuName": {
           "type": "string"
         },
+        "scopeId": {
+          "type": "string",
+          "description": "The scope identifier for the capacity (e.g., US, EUR, Global, or a region name like eastus)."
+        },
+        "scopeType": {
+          "$ref": "#/definitions/QuotaScopeType",
+          "description": "The scope type for the capacity (e.g., Global, DataZone, Regional)."
+        },
         "availableCapacity": {
           "type": "number",
           "format": "float",
@@ -15007,6 +15015,19 @@
           "description": "Reason in case the subscription is not eligible for upgrade to the next tier.",
           "x-nullable": true
         }
+      }
+    },
+    "QuotaScopeType": {
+      "type": "string",
+      "description": "The quota scope that determines the level at which the quota is applied.",
+      "enum": [
+        "Regional",
+        "Global",
+        "DataZone"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaScopeType",
+        "modelAsString": true
       }
     },
     "QuotaUsageStatus": {
@@ -16813,6 +16834,14 @@
         "status": {
           "$ref": "#/definitions/QuotaUsageStatus",
           "description": "Cognitive Services account quota usage status."
+        },
+        "quotaScope": {
+          "$ref": "#/definitions/QuotaScopeType",
+          "description": "The quota scope that determines the level at which the quota is applied."
+        },
+        "locationScope": {
+          "type": "string",
+          "description": "The location scope for the quota (e.g., eastus)."
         }
       }
     },
