@@ -496,3 +496,8 @@ using Microsoft.DesktopVirtualization;
 @@usage(PrivateEndpointConnectionWithSystemData, Usage.input, "csharp");
 @@usage(PrivateEndpointConnection, Usage.input, "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
+
+
+@@clientName(ScalingScheduleDaysOfWeekItem, "ScalingScheduleDaysOfWeekItemOld", "csharp");
+@@clientName(ScalingScheduleDaysOfWeekItemUsingStruct, "ScalingScheduleDaysOfWeekItem", "csharp");
+@@alternateType(ScalingScheduleDaysOfWeekItem, ScalingScheduleDaysOfWeekItemUsingStruct, "csharp");

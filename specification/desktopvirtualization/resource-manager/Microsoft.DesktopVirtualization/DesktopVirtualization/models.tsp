@@ -1292,6 +1292,34 @@ enum ScalingScheduleDaysOfWeekItem {
 /**
  * Day of the week. Modeled as string
  */
+union ScalingScheduleDaysOfWeekItemUsingStruct {
+  string,
+
+  /** Monday */
+  Monday: "Monday",
+
+  /** Tuesday */
+  Tuesday: "Tuesday",
+
+  /** Wednesday */
+  Wednesday: "Wednesday",
+
+  /** Thursday */
+  Thursday: "Thursday",
+
+  /** Friday */
+  Friday: "Friday",
+
+  /** Saturday */
+  Saturday: "Saturday",
+
+  /** Sunday */
+  Sunday: "Sunday",
+}
+
+/**
+ * Day of the week. Modeled as string
+ */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
 enum DayOfWeek {
   Monday,
