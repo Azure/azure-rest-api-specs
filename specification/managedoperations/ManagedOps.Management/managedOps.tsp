@@ -88,13 +88,22 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias enablementState =
-  | "Enabled"
-  | "InProgress"
-  | "Failed"
-  | "Disabled"
-  | string;
+@doc("The enablement status of a service.")
+union EnablementStatus {
+  string,
+
+  @doc("The service is enabled.")
+  Enabled: "Enabled",
+
+  @doc("The service enablement is in progress.")
+  InProgress: "InProgress",
+
+  @doc("The service enablement has failed.")
+  Failed: "Failed",
+
+  @doc("The service is disabled.")
+  Disabled: "Disabled",
+}
 
 @doc("Change Tracking and Inventory service information.")
 model ChangeTrackingInformation {
@@ -106,7 +115,7 @@ model ChangeTrackingInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Azure Monitor Insights service information.")
@@ -119,31 +128,31 @@ model AzureMonitorInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Azure Update Manager service information.")
 model UpdateManagerInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Azure Policy and Machine Configuration service information.")
 model GuestConfigurationInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Defender for Servers service information.")
 model DefenderForServersInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Defender Cloud Security Posture Management (CSPM) service information.")
 model DefenderCspmInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementStatus;
 }
 
 @doc("Specifies the service plan for this resource.")
@@ -175,15 +184,23 @@ model DesiredConfiguration {
 
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: desiredEnablementState;
+  defenderForServers?: DesiredEnablementState;
 
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: desiredEnablementState;
+  defenderCspm?: DesiredEnablementState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias desiredEnablementState = "Enable" | "Disable" | string;
+@doc("The desired enablement state of a service.")
+union DesiredEnablementState {
+  string,
+
+  @doc("Enable the service.")
+  Enable: "Enable",
+
+  @doc("Disable the service.")
+  Disable: "Disable",
+}
 
 @doc("Configuration for the Change Tracking and Inventory service.")
 model ChangeTrackingConfiguration {
@@ -235,11 +252,11 @@ model ManagedOpUpdateProperties {
 model DesiredConfigurationUpdate {
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: desiredEnablementState;
+  defenderForServers?: DesiredEnablementState;
 
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: desiredEnablementState;
+  defenderCspm?: DesiredEnablementState;
 }
 
 /** The operations that can be performed on our resource */
