@@ -386,6 +386,9 @@ enum ImmutabilityPolicySetting {
 
 @@clientOption(Storage.Blob, "includeRootSlash", false, "python,javascript");
 
+@@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
+@@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
+
 @@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
