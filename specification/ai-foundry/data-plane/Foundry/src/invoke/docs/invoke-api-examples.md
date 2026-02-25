@@ -30,7 +30,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "customer-support-bot",
     "version": "1"
   },
@@ -72,7 +72,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "travel-assistant",
     "version": "1"
   },
@@ -107,7 +107,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "travel-assistant",
     "version": "1"
   },
@@ -149,7 +149,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "image-analyzer",
     "version": "1"
   },
@@ -204,7 +204,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "document-processor",
     "version": "2"
   },
@@ -267,7 +267,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "data-analyzer",
     "version": "1"
   },
@@ -336,7 +336,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "booking-assistant",
     "version": "1"
   },
@@ -384,7 +384,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "booking-assistant",
     "version": "1"
   },
@@ -445,7 +445,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "support-ticket-agent",
     "version": "1"
   },
@@ -508,7 +508,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "support-ticket-agent",
     "version": "1"
   },
@@ -573,7 +573,7 @@ Content-Type: application/json
 Accept: text/event-stream
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "booking-assistant",
     "version": "1"
   },
@@ -646,7 +646,7 @@ POST /invoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "agent_def": {
+  "agent_reference": {
     "name": "research-assistant",
     "version": "1"
   },

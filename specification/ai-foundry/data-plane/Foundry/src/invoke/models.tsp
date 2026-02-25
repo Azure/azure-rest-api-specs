@@ -35,13 +35,13 @@ union ContentItemType {
   interrupt_resume: "interrupt_resume",
 }
 
-@doc("Reference to the agent being invoked.")
-model AgentDef {
-  @doc("Agent name.")
+model AgentRef {
+  @doc("The name of the agent.")
+  @maxLength(256)
   name: string;
 
-  @doc("Agent version.")
-  version: string;
+  @doc("The version identifier of the agent.")
+  version?: string;
 }
 
 @doc("""
@@ -195,7 +195,7 @@ union InvocationStatus {
 @doc("Invoke API request body.")
 model InvokeRequest {
   @doc("Agent definition specifying which agent to invoke.")
-  agent_def: AgentDef;
+  agent_reference: AgentReference;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Input can be string or array of messages"
   @doc("""
@@ -391,14 +391,4 @@ model InvocationCompletedEvent {
 
   @doc("Unix timestamp (seconds) when invocation finished.")
   completed_at?: int64;
-}
-
-// ---------------------------------------------------------------------------
-// Health check
-// ---------------------------------------------------------------------------
-
-@doc("Readiness probe response.")
-model ReadinessResponse {
-  @doc("Status indicator.")
-  status: "ok";
 }
