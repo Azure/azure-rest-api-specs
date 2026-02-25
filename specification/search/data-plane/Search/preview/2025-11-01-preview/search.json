@@ -1375,17 +1375,6 @@
             "x-ms-client-name": "accept"
           },
           {
-            "name": "$select",
-            "in": "query",
-            "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -1872,6 +1861,10 @@
       "get": {
         "operationId": "Documents_Count",
         "description": "Queries the number of documents in the index.",
+        "produces": [
+          "text/plain; charset=utf-8",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1974,7 +1967,7 @@
             ],
             "x-ms-enum": {
               "name": "AutocompleteMode",
-              "modelAsString": true,
+              "modelAsString": false,
               "values": [
                 {
                   "name": "OneTerm",
@@ -4356,6 +4349,66 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/indexes?_overload=listWithSelectedProperties": {
+      "get": {
+        "operationId": "Indexes_ListWithSelectedProperties",
+        "description": "Lists all indexes available for a search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListIndexesSelectedResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceListIndexesWithSelectedProperties": {
+            "$ref": "./examples/SearchServiceListIndexesWithSelectedProperties.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "AIFoundryModelCatalogName": {
       "type": "string",
@@ -4374,12 +4427,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "OpenAICLIPImageTextEmbeddingsVitBasePatch32",
+            "name": "OpenAiClipImageTextEmbeddingsVitBasePatch32",
             "value": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
             "description": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
           },
           {
-            "name": "OpenAICLIPImageTextEmbeddingsViTLargePatch14336",
+            "name": "OpenAiClipImageTextEmbeddingsViTLargePatch14_336",
             "value": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
             "description": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336"
           },
@@ -4715,7 +4768,7 @@
       ],
       "x-ms-enum": {
         "name": "AutocompleteMode",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "OneTerm",
@@ -5413,7 +5466,7 @@
       "type": "string",
       "description": "Specifies how 'extraParameters' should be handled by Azure AI Foundry. Defaults to 'error'.",
       "enum": [
-        "pass-through",
+        "passThrough",
         "drop",
         "error"
       ],
@@ -5423,7 +5476,7 @@
         "values": [
           {
             "name": "PassThrough",
-            "value": "pass-through",
+            "value": "passThrough",
             "description": "Passes any extra parameters directly to the model."
           },
           {
@@ -5625,7 +5678,7 @@
           "description": "How extra parameters are handled by Azure AI Foundry. Default is 'error'.",
           "default": "error",
           "enum": [
-            "pass-through",
+            "passThrough",
             "drop",
             "error"
           ],
@@ -5635,7 +5688,7 @@
             "values": [
               {
                 "name": "PassThrough",
-                "value": "pass-through",
+                "value": "passThrough",
                 "description": "Passes any extra parameters directly to the model."
               },
               {
@@ -5701,7 +5754,7 @@
       ],
       "x-ms-enum": {
         "name": "CjkBigramTokenFilterScripts",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Han",
@@ -6811,7 +6864,7 @@
           ],
           "x-ms-enum": {
             "name": "EdgeNGramTokenFilterSide",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Front",
@@ -6843,7 +6896,7 @@
       ],
       "x-ms-enum": {
         "name": "EdgeNGramTokenFilterSide",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Front",
@@ -6886,7 +6939,7 @@
           ],
           "x-ms-enum": {
             "name": "EdgeNGramTokenFilterSide",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Front",
@@ -7043,190 +7096,6 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityLinkingSkill"
-    },
-    "EntityRecognitionSkill": {
-      "type": "object",
-      "description": "This skill is deprecated. Use the V3.EntityRecognitionSkill instead.",
-      "properties": {
-        "categories": {
-          "type": "array",
-          "description": "A list of entity categories that should be extracted.",
-          "items": {
-            "$ref": "#/definitions/EntityCategory"
-          }
-        },
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/EntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "includeTypelessEntities": {
-          "type": "boolean",
-          "description": "Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced.",
-          "x-nullable": true
-        },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill"
-    },
-    "EntityRecognitionSkillLanguage": {
-      "type": "string",
-      "description": "Deprecated. The language codes supported for input text by EntityRecognitionSkill.",
-      "enum": [
-        "ar",
-        "cs",
-        "zh-Hans",
-        "zh-Hant",
-        "da",
-        "nl",
-        "en",
-        "fi",
-        "fr",
-        "de",
-        "el",
-        "hu",
-        "it",
-        "ja",
-        "ko",
-        "no",
-        "pl",
-        "pt-PT",
-        "pt-BR",
-        "ru",
-        "es",
-        "sv",
-        "tr"
-      ],
-      "x-ms-enum": {
-        "name": "EntityRecognitionSkillLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ar",
-            "value": "ar",
-            "description": "Arabic"
-          },
-          {
-            "name": "cs",
-            "value": "cs",
-            "description": "Czech"
-          },
-          {
-            "name": "zh-Hans",
-            "value": "zh-Hans",
-            "description": "Chinese-Simplified"
-          },
-          {
-            "name": "zh-Hant",
-            "value": "zh-Hant",
-            "description": "Chinese-Traditional"
-          },
-          {
-            "name": "da",
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "name": "nl",
-            "value": "nl",
-            "description": "Dutch"
-          },
-          {
-            "name": "en",
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "name": "fi",
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "name": "fr",
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "name": "de",
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "name": "el",
-            "value": "el",
-            "description": "Greek"
-          },
-          {
-            "name": "hu",
-            "value": "hu",
-            "description": "Hungarian"
-          },
-          {
-            "name": "it",
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "name": "ja",
-            "value": "ja",
-            "description": "Japanese"
-          },
-          {
-            "name": "ko",
-            "value": "ko",
-            "description": "Korean"
-          },
-          {
-            "name": "no",
-            "value": "no",
-            "description": "Norwegian (Bokmaal)"
-          },
-          {
-            "name": "pl",
-            "value": "pl",
-            "description": "Polish"
-          },
-          {
-            "name": "pt-PT",
-            "value": "pt-PT",
-            "description": "Portuguese (Portugal)"
-          },
-          {
-            "name": "pt-BR",
-            "value": "pt-BR",
-            "description": "Portuguese (Brazil)"
-          },
-          {
-            "name": "ru",
-            "value": "ru",
-            "description": "Russian"
-          },
-          {
-            "name": "es",
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "name": "sv",
-            "value": "sv",
-            "description": "Swedish"
-          },
-          {
-            "name": "tr",
-            "value": "tr",
-            "description": "Turkish"
-          }
-        ]
-      }
     },
     "EntityRecognitionSkillV3": {
       "type": "object",
@@ -8023,7 +7892,7 @@
       ],
       "x-ms-enum": {
         "name": "IndexActionType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Upload",
@@ -8468,7 +8337,7 @@
       ],
       "x-ms-enum": {
         "name": "IndexerExecutionStatus",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "TransientFailure",
@@ -8621,7 +8490,7 @@
       ],
       "x-ms-enum": {
         "name": "IndexerStatus",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Unknown",
@@ -11699,6 +11568,23 @@
         "value"
       ]
     },
+    "ListIndexesSelectedResult": {
+      "type": "object",
+      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The indexes in the Search service.",
+          "items": {
+            "$ref": "#/definitions/SearchIndexResponse"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListKnowledgeBasesResult": {
       "type": "object",
       "description": "Result from listing knowledge bases.",
@@ -12100,7 +11986,7 @@
       ],
       "x-ms-enum": {
         "name": "MicrosoftStemmingTokenizerLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -12379,7 +12265,7 @@
       ],
       "x-ms-enum": {
         "name": "MicrosoftTokenizerLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Bangla",
@@ -13928,8 +13814,8 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
-          "description": "Regular expression flags."
+          "type": "string",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "stopwords": {
           "type": "array",
@@ -14031,8 +13917,8 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
-          "description": "Regular expression flags."
+          "type": "string",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "group": {
           "type": "integer",
@@ -14096,7 +13982,7 @@
       ],
       "x-ms-enum": {
         "name": "PhoneticEncoder",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Metaphone",
@@ -14179,7 +14065,7 @@
           ],
           "x-ms-enum": {
             "name": "PhoneticEncoder",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Metaphone",
@@ -15069,7 +14955,7 @@
     },
     "RegexFlags": {
       "type": "string",
-      "description": "Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.",
+      "description": "Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer.",
       "enum": [
         "CANON_EQ",
         "CASE_INSENSITIVE",
@@ -15312,7 +15198,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Sum",
@@ -15358,7 +15244,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionInterpolation",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Linear",
@@ -15421,7 +15307,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringStatistics",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Local",
@@ -15981,6 +15867,122 @@
           }
         ]
       }
+    },
+    "SearchIndexResponse": {
+      "type": "object",
+      "description": "Represents a search index definition, which describes the fields and search behavior of an index.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the index."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the index."
+        },
+        "fields": {
+          "type": "array",
+          "description": "The fields of the index.",
+          "items": {
+            "$ref": "#/definitions/SearchField"
+          }
+        },
+        "scoringProfiles": {
+          "type": "array",
+          "description": "The scoring profiles for the index.",
+          "items": {
+            "$ref": "#/definitions/ScoringProfile"
+          }
+        },
+        "defaultScoringProfile": {
+          "type": "string",
+          "description": "The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index.",
+          "x-nullable": true
+        },
+        "suggesters": {
+          "type": "array",
+          "description": "The suggesters for the index.",
+          "items": {
+            "$ref": "#/definitions/SearchSuggester"
+          }
+        },
+        "analyzers": {
+          "type": "array",
+          "description": "The analyzers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalAnalyzer"
+          }
+        },
+        "tokenizers": {
+          "type": "array",
+          "description": "The tokenizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalTokenizer"
+          }
+        },
+        "tokenFilters": {
+          "type": "array",
+          "description": "The token filters for the index.",
+          "items": {
+            "$ref": "#/definitions/TokenFilter"
+          }
+        },
+        "charFilters": {
+          "type": "array",
+          "description": "The character filters for the index.",
+          "items": {
+            "$ref": "#/definitions/CharFilter"
+          }
+        },
+        "normalizers": {
+          "type": "array",
+          "description": "The normalizers for the index.",
+          "items": {
+            "$ref": "#/definitions/LexicalNormalizer"
+          }
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "x-nullable": true
+        },
+        "similarity": {
+          "$ref": "#/definitions/SimilarityAlgorithm",
+          "description": "The type of similarity algorithm to be used when scoring and ranking the documents matching a search query. The similarity algorithm can only be defined at index creation time and cannot be modified on existing indexes. If null, the ClassicSimilarity algorithm is used."
+        },
+        "semantic": {
+          "$ref": "#/definitions/SemanticSearch",
+          "description": "Defines parameters for a search index that influence semantic capabilities.",
+          "x-nullable": true
+        },
+        "vectorSearch": {
+          "$ref": "#/definitions/VectorSearch",
+          "description": "Contains configuration options related to vector search.",
+          "x-nullable": true
+        },
+        "permissionFilterOption": {
+          "$ref": "#/definitions/SearchIndexPermissionFilterOption",
+          "description": "A value indicating whether permission filtering is enabled for the index.",
+          "x-nullable": true
+        },
+        "purviewEnabled": {
+          "type": "boolean",
+          "description": "A value indicating whether Purview is enabled for the index.",
+          "x-nullable": true
+        },
+        "@odata.etag": {
+          "type": "string",
+          "description": "The ETag of the index.",
+          "x-ms-client-name": "eTag"
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "SearchIndexer": {
       "type": "object",
@@ -16740,7 +16742,7 @@
       ],
       "x-ms-enum": {
         "name": "SearchMode",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Any",
@@ -17411,124 +17413,6 @@
         ]
       }
     },
-    "SentimentSkill": {
-      "type": "object",
-      "description": "This skill is deprecated. Use the V3.SentimentSkill instead.",
-      "properties": {
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/SentimentSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill"
-    },
-    "SentimentSkillLanguage": {
-      "type": "string",
-      "description": "Deprecated. The language codes supported for input text by SentimentSkill.",
-      "enum": [
-        "da",
-        "nl",
-        "en",
-        "fi",
-        "fr",
-        "de",
-        "el",
-        "it",
-        "no",
-        "pl",
-        "pt-PT",
-        "ru",
-        "es",
-        "sv",
-        "tr"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentSkillLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "da",
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "name": "nl",
-            "value": "nl",
-            "description": "Dutch"
-          },
-          {
-            "name": "en",
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "name": "fi",
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "name": "fr",
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "name": "de",
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "name": "el",
-            "value": "el",
-            "description": "Greek"
-          },
-          {
-            "name": "it",
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "name": "no",
-            "value": "no",
-            "description": "Norwegian (Bokmaal)"
-          },
-          {
-            "name": "pl",
-            "value": "pl",
-            "description": "Polish"
-          },
-          {
-            "name": "pt-PT",
-            "value": "pt-PT",
-            "description": "Portuguese (Portugal)"
-          },
-          {
-            "name": "ru",
-            "value": "ru",
-            "description": "Russian"
-          },
-          {
-            "name": "es",
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "name": "sv",
-            "value": "sv",
-            "description": "Swedish"
-          },
-          {
-            "name": "tr",
-            "value": "tr",
-            "description": "Turkish"
-          }
-        ]
-      }
-    },
     "SentimentSkillV3": {
       "type": "object",
       "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level.",
@@ -17768,7 +17652,7 @@
       ],
       "x-ms-enum": {
         "name": "SnowballTokenFilterLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Armenian",
@@ -18333,7 +18217,7 @@
       ],
       "x-ms-enum": {
         "name": "StemmerTokenFilterLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -18665,7 +18549,7 @@
       ],
       "x-ms-enum": {
         "name": "StopwordsList",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -18875,7 +18759,7 @@
           ],
           "x-ms-enum": {
             "name": "StopwordsList",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Arabic",
@@ -19821,7 +19705,7 @@
       ],
       "x-ms-enum": {
         "name": "TokenCharacterKind",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Letter",
@@ -21811,7 +21695,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringStatistics",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Local",
@@ -21851,7 +21735,7 @@
       ],
       "x-ms-enum": {
         "name": "SearchMode",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Any",
