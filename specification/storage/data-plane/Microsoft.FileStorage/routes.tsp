@@ -381,9 +381,7 @@ interface Share {
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -401,7 +399,6 @@ interface Share {
       ...FileRequestIntentParameter;
     },
     {
-      @statusCode statusCode: 200;
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -420,7 +417,6 @@ interface Share {
       ...FileRequestIntentParameter;
     },
     {
-      @statusCode statusCode: 200;
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -575,9 +571,7 @@ interface Share {
       ...FileRequestIntentParameter;
       @body shareAcl?: SignedIdentifier[];
     },
-    {
-      @statusCode statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -819,7 +813,6 @@ interface Directory {
       ...FileRequestIntentParameter;
     },
     {
-      @statusCode statusCode: 200;
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
       @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
     }
@@ -932,6 +925,7 @@ interface File {
       @header("x-ms-structured-body-get") structuredBodyGet?: string;
     },
     {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying suppported status codes for download operation."
       @statusCode statusCode: 200 | 206;
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
@@ -981,7 +975,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
       @header("x-ms-type") fileType: string;
@@ -1073,7 +1066,6 @@ interface File {
       filePropertySemantics?: FilePropertySemantics;
     },
     {
-      @statusCode statusCode: 200;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
       @header("x-ms-file-permission-key") filePermissionKey?: string;
@@ -1103,7 +1095,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
     }
@@ -1149,7 +1140,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
     }
@@ -1172,7 +1162,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
       @header("x-ms-lease-id") leaseId: string;
@@ -1292,7 +1281,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("Last-Modified") lastModified: string;
       @header("ETag") etag: string;
       @header("x-ms-content-length") contentLength: int64;
@@ -1416,7 +1404,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @body response: ListHandlesResponse;
     }
   >;
@@ -1439,7 +1426,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
       @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
     }
@@ -1474,7 +1460,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
     }
@@ -1538,7 +1523,6 @@ interface File {
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @statusCode statusCode: 200;
       ...MetadataHeaders;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
