@@ -40,7 +40,7 @@ namespace Azure.AI.Projects {
         "x-ms-foundry-meta",
         #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
       )
-      foundry_session_id?: string,
+      agent_session_id?: string,
     }
   );
 
@@ -61,7 +61,7 @@ namespace Azure.AI.Projects {
         "x-ms-foundry-meta",
         #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
       )
-      foundry_session_id?: string,
+      agent_session_id?: string,
     }
   );
 
