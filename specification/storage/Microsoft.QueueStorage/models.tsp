@@ -453,7 +453,15 @@ model ReceivedMessage {
 
 /** Represents an array of signed identifiers */
 @Xml.name("SignedIdentifiers")
-model SignedIdentifiers is Array<SignedIdentifier>;
+model SignedIdentifiers {
+  /**
+   * The list of signed identifiers.
+   *
+   */
+  @Xml.unwrapped
+  @Xml.name("SignedIdentifier")
+  items: Array<SignedIdentifier>;
+}
 
 /**
  * List wrapper for DequeuedMessageItem array
