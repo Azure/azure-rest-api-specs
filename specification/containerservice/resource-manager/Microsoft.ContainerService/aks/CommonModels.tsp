@@ -920,12 +920,6 @@ union OutboundType {
   managedNATGateway: "managedNATGateway",
 
   /**
-   * The AKS-managed NAT gateway V2 is used for egress.
-   */
-  @added(Versions.v2026_01_02_preview)
-  managedNATGatewayV2: "managedNATGatewayV2",
-
-  /**
    * The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration.
    */
   userAssignedNATGateway: "userAssignedNATGateway",
@@ -2634,40 +2628,6 @@ model ManagedClusterNATGatewayProfile {
   effectiveOutboundIPs?: ResourceReference[];
 
   /**
-   * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
-  outboundIPPrefixes?: {
-    /**
-     * A list of public IP prefix resources.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-    publicIPPrefixes?: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.Network/publicIPPrefixes";
-      }
-    ]>[];
-  };
-
-  /**
-   * Desired outbound IP resources for the managed NAT Gateway.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
-  outboundIPs?: {
-    /**
-     * A list of public IP resources.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-    publicIPs?: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.Network/publicIPAddresses";
-      }
-    ]>[];
-  };
-
-  /**
    * Desired outbound flow idle timeout in minutes. Allowed values are in the range of 4 to 120 (inclusive). The default value is 4 minutes.
    */
   @maxValue(120)
@@ -2685,15 +2645,6 @@ model ManagedClusterManagedOutboundIPProfile {
   @maxValue(16)
   @minValue(1)
   count?: int32 = 1;
-
-  /**
-   * The desired number of IPv6 outbound IPs created/managed by Azure. Allowed values must be in the range of 1 to 16 (inclusive).
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_01_02_preview)
-  @maxValue(16)
-  @minValue(1)
-  countIPv6?: int32;
 }
 
 /**

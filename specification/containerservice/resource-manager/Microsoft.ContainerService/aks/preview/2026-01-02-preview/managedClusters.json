@@ -7448,7 +7448,6 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "managedNATGatewayV2",
             "userAssignedNATGateway",
             "none"
           ],
@@ -7470,11 +7469,6 @@
                 "name": "managedNATGateway",
                 "value": "managedNATGateway",
                 "description": "The AKS-managed NAT gateway is used for egress."
-              },
-              {
-                "name": "managedNATGatewayV2",
-                "value": "managedNATGatewayV2",
-                "description": "The AKS-managed NAT gateway V2 is used for egress."
               },
               {
                 "name": "userAssignedNATGateway",
@@ -11105,13 +11099,6 @@
           "default": 1,
           "minimum": 1,
           "maximum": 16
-        },
-        "countIPv6": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The desired number of IPv6 outbound IPs created/managed by Azure. Allowed values must be in the range of 1 to 16 (inclusive).",
-          "minimum": 1,
-          "maximum": 16
         }
       }
     },
@@ -11140,50 +11127,6 @@
             "$ref": "#/definitions/ResourceReference"
           },
           "readOnly": true
-        },
-        "outboundIPPrefixes": {
-          "type": "object",
-          "description": "Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.",
-          "properties": {
-            "publicIPPrefixes": {
-              "type": "array",
-              "description": "A list of public IP prefix resources.",
-              "items": {
-                "type": "string",
-                "format": "arm-id",
-                "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-                "x-ms-arm-id-details": {
-                  "allowedResources": [
-                    {
-                      "type": "Microsoft.Network/publicIPPrefixes"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "outboundIPs": {
-          "type": "object",
-          "description": "Desired outbound IP resources for the managed NAT Gateway.",
-          "properties": {
-            "publicIPs": {
-              "type": "array",
-              "description": "A list of public IP resources.",
-              "items": {
-                "type": "string",
-                "format": "arm-id",
-                "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-                "x-ms-arm-id-details": {
-                  "allowedResources": [
-                    {
-                      "type": "Microsoft.Network/publicIPAddresses"
-                    }
-                  ]
-                }
-              }
-            }
-          }
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
