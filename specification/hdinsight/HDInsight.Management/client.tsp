@@ -52,4 +52,3 @@ using Azure.ClientGenerator.Core;
   Record<Record<string | null>>,
   "go"
 );
-@@alternateType(ClusterDefinition.configurations, unknown, "go");
