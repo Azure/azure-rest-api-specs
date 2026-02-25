@@ -27,7 +27,7 @@ These are the global settings for the MEDS.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-12-15
+tag: package-2026-02-02-preview
 ```
 ### Tag: package-2025-08-06
 
@@ -155,6 +155,14 @@ input-file:
   - Microsoft.OpenEnergyPlatform/stable/2025-12-15/oep.json
 ```
 
+### Tag: package-2026-02-02-preview
+
+These settings apply only when `--tag=package-2026-02-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-02-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2026-02-02-preview/oep.json
+```
 
 ## Suppression
 
