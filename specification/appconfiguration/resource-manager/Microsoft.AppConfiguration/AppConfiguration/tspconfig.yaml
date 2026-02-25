@@ -21,16 +21,10 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.AppConfiguration"
-    flavor: azure
-  "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.ResourceManager.AppConfiguration
-    model-namespace: false
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
     package-details:
