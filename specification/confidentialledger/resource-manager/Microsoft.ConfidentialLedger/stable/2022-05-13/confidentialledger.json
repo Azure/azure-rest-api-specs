@@ -185,7 +185,17 @@
             "description": "The request was successful; the Confidential Ledger is deleted."
           },
           "202": {
-            "description": "The Confidential Ledger resource will be deleted asynchronously"
+            "description": "The Confidential Ledger resource will be deleted asynchronously",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The request was successful; Confidential Ledger does not exist."
