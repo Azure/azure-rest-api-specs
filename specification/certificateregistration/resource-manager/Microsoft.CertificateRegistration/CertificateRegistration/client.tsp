@@ -69,15 +69,19 @@ using Microsoft.CertificateRegistration;
   "csharp"
 );
 @@clientName(AppServiceCertificateOrderProperties.nextAutoRenewalTimeStamp,
-  "NextAutoRenewTimeStamp",
+  "NextAutoRenewOn",
   "csharp"
 );
 @@clientName(AppServiceCertificateOrderPatchResourceProperties.nextAutoRenewalTimeStamp,
-  "NextAutoRenewTimeStamp",
+  "NextAutoRenewOn",
   "csharp"
 );
 @@clientName(AppServiceCertificateOrderPatchResourceProperties.autoRenew,
   "IsAutoRenew",
+  "csharp"
+);
+@@clientName(AppServiceCertificateOrderPatchResourceProperties.lastCertificateIssuanceTime,
+  "LastCertificateIssuedOn",
   "csharp"
 );
 @@clientName(ProvisioningState,
@@ -87,6 +91,7 @@ using Microsoft.CertificateRegistration;
 @@clientName(KeyVaultSecretStatus, "AppServiceVaultSecretStatus", "csharp");
 @@clientName(CertificateDetails, "AppServiceCertificateDetails", "csharp");
 @@clientName(CertificateEmail, "AppServiceCertificateEmail", "csharp");
+@@clientName(CertificateEmail.timeStamp, "SentOn", "csharp");
 @@clientName(DataTableResponseColumn, "DiagnosticDataTableColumn", "csharp");
 @@clientName(DataTableResponseObject, "DiagnosticDataTableObject", "csharp");
 @@clientName(DetectorInfo, "AppServiceDetectorInfo", "csharp");
@@ -109,6 +114,10 @@ using Microsoft.CertificateRegistration;
 );
 @@clientName(GetAppServiceCertificateOrderDetectorParameters.endTime,
   "EndOn",
+  "csharp"
+);
+@@clientName(CertificateOrderStatus.Pendingissuance,
+  "PendingIssuance",
   "csharp"
 );
 
