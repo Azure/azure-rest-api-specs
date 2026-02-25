@@ -4450,6 +4450,7 @@ union KnowledgeSourceKind {
   AzureBlob: "azureBlob",
 
   /** A knowledge source that reads data from indexed SharePoint. */
+  @removed(Versions.v2026_04_01)
   IndexedSharePoint: "indexedSharePoint",
 
   /** A knowledge source that reads data from indexed OneLake. */
@@ -4459,6 +4460,7 @@ union KnowledgeSourceKind {
   Web: "web",
 
   /** A knowledge source that reads data from remote SharePoint. */
+  @removed(Versions.v2026_04_01)
   RemoteSharePoint: "remoteSharePoint",
 }
 

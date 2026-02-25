@@ -31,6 +31,7 @@ model KnowledgeBaseRetrievalRequest {
   maxOutputSizeInTokens?: int32;
 
   /** The retrieval reasoning effort configuration. */
+  @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** Indicates retrieval results should include activity information. */
@@ -826,9 +827,9 @@ union KnowledgeSourceSynchronizationStatus {
 
 /** Represents the status and synchronization history of a knowledge source. */
 model KnowledgeSourceStatus {
-  /** The kind of knowledge source. */
+  /** Identifies the Knowledge Source kind directly from the Status response. */
   @added(Versions.v2026_04_01)
-  kind: KnowledgeSourceKind;
+  kind?: KnowledgeSourceKind;
 
   /** The current synchronization status. */
   synchronizationStatus: KnowledgeSourceSynchronizationStatus;
@@ -862,17 +863,14 @@ model KnowledgeSourceStatistics {
   averageItemsProcessedPerSynchronization: int32;
 }
 
-/** Represents a document-level indexing error encountered during knowledge source synchronization. */
+/** Represents a document-level indexing error encountered during a knowledge source synchronization run. */
 @added(Versions.v2026_04_01)
-model KnowledgeSourceErrorRecord {
-  /** Unique identifier for the failed document or item within the synchronization run. */
-  docKey: string;
-
-  /** Fully qualified document URL associated with the error. May be empty. */
-  docUrl?: string;
+model KnowledgeSourceSynchronizationError {
+  /** The unique identifier for the failed document or item within the synchronization run. */
+  docId?: string;
 
   /** HTTP-like status code representing the failure category (e.g., 400). */
-  statusCode: int32;
+  statusCode?: int32;
 
   /** Name of the ingestion or processing component reporting the error. */
   name?: string;
@@ -883,7 +881,7 @@ model KnowledgeSourceErrorRecord {
   /** Additional contextual information about the failure. */
   details?: string;
 
-  /** Link to relevant troubleshooting documentation. */
+  /** A link to relevant troubleshooting documentation. */
   documentationLink?: string;
 }
 
@@ -903,7 +901,7 @@ model SynchronizationState {
 
   /** Collection of document-level indexing errors encountered during the current synchronization run. Returned only when errors are present. */
   @added(Versions.v2026_04_01)
-  errors?: KnowledgeSourceErrorRecord[];
+  errors?: KnowledgeSourceSynchronizationError[];
 }
 
 /** Represents the completed state of the last synchronization. */
