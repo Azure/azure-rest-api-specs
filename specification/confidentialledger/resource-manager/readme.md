@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2026-02-23` is specified on the co
 
 ```yaml $(tag) == 'package-2026-02-23'
 input-file:
-  - Microsoft.ConfidentialLedger/stable/2026-02-23/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/stable/2026-02-23/openapi.json
 ```
 
 ### Tag: package-preview-2025-06
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-preview-2025-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-06'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2025-06-10-preview/openapi.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2025-06-10-preview/openapi.json
 ```
 
 ### Tag: package-preview-2024-09
