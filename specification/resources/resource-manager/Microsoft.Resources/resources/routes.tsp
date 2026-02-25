@@ -69,7 +69,10 @@ namespace Microsoft.Resources {
 
     /** Updates a resource. */
     @doc("Updates a resource.")
-    updateById is ArmResourcePatchAsync<GenericResource, GenericResourceProperties>;
+    updateById is ArmResourcePatchAsync<
+      GenericResource,
+      GenericResourceProperties
+    >;
 
     /** Deletes a resource. */
     @doc("Deletes a resource.")
@@ -112,9 +115,7 @@ namespace Microsoft.Resources {
       @doc("Batch request containing multiple operations to execute.")
       @body
       batchRequest: BatchRequests,
-    ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<
-      "Batch operation accepted"
-    > | ErrorResponse;
+    ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<"Batch operation accepted"> | ErrorResponse;
 
     /** Execute a batch of Azure Resource Manager operations at resource group scope. */
     @doc("Execute a batch of Azure Resource Manager operations at resource group scope.")
@@ -136,8 +137,6 @@ namespace Microsoft.Resources {
       @doc("Batch request containing multiple operations to execute.")
       @body
       batchRequest: BatchRequests,
-    ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<
-      "Batch operation accepted"
-    > | ErrorResponse;
+    ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<"Batch operation accepted"> | ErrorResponse;
   }
 }
