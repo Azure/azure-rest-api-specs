@@ -223,10 +223,12 @@ model NfsProtocolProperties {
   @doc("Root squash defines how root users on clients are mapped to the NFS share.")
   rootSquash?: ShareRootSquash;
 
+  @added(Versions.v2026_06_01)
   @doc("Encryption in transit defines whether data is encrypted for NFS shares.")
   encryptionInTransitRequired?: EncryptionInTransitRequired;
 }
 
+@added(Versions.v2026_06_01)
 @doc("State of NFS encryption in transit.")
 union EncryptionInTransitRequired {
   string,
