@@ -648,6 +648,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(DriftAction, "ContainerServiceMachineDriftAction", "csharp");
+@@clientName(DriverType, "AgentPoolGpuDriverType", "csharp");
 @@clientName(DriverType.GRID, "Grid", "csharp");
 @@clientName(DriverType.CUDA, "Cuda", "csharp");
 @@clientName(InfrastructureEncryption,
