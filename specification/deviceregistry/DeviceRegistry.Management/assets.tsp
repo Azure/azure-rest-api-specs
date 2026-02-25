@@ -368,7 +368,6 @@ model MessageSchemaReference {
   schemaVersion: string;
 }
 
-@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface Assets {
   get is ArmResourceRead<Asset>;

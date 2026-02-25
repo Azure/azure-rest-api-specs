@@ -177,7 +177,6 @@ model SchemaVersionProperties {
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
 @added(Versions.v2025_07_01_preview)
-@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface SchemaRegistries {
   get is ArmResourceRead<SchemaRegistry>;
@@ -201,7 +200,6 @@ interface SchemaRegistries {
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
 @added(Versions.v2025_07_01_preview)
-@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface Schemas {
   get is ArmResourceRead<Schema>;
@@ -215,7 +213,6 @@ interface Schemas {
   deleteSync is ArmResourceDeleteSync<Schema>;
 
   @added(Versions.v2025_10_01)
-  @removed(Versions.v2026_11_01_preview)
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Schema>;
   listBySchemaRegistry is ArmResourceListByParent<Schema>;
@@ -224,7 +221,6 @@ interface Schemas {
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
 @added(Versions.v2025_07_01_preview)
-@removed(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;
@@ -238,7 +234,6 @@ interface SchemaVersions {
   deleteSync is ArmResourceDeleteSync<SchemaVersion>;
 
   @added(Versions.v2025_10_01)
-  @removed(Versions.v2026_11_01_preview)
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<SchemaVersion>;
   listBySchema is ArmResourceListByParent<SchemaVersion>;
