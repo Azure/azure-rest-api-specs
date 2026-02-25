@@ -36,36 +36,31 @@ model BlobServiceClientParameters {
   {
     parameters: ContainerNamePathParameter,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
-  },
-  "rust"
+  }
 );
 @@clientInitialization(Storage.Blob.Container.Blob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
-  },
-  "rust"
+  }
 );
 @@clientInitialization(Storage.Blob.Container.Blob.AppendBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
-  },
-  "rust"
+  }
 );
 @@clientInitialization(Storage.Blob.Container.Blob.BlockBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
-  },
-  "rust"
+  }
 );
 @@clientInitialization(Storage.Blob.Container.Blob.PageBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
-  },
-  "rust"
+  }
 );
 
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
