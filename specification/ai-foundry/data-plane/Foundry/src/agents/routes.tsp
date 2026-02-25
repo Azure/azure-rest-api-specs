@@ -184,6 +184,9 @@ interface Agents {
 
       /** The version of the agent to delete */
       @path agent_version: string;
+
+      /** When true, force-deletes the version even if active sessions exist. Defaults to false. */
+      @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
   >;
