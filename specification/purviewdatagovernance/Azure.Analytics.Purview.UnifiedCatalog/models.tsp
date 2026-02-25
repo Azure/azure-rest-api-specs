@@ -55,6 +55,9 @@ union SharedEntityStatus {
 
 @doc("System metadata with expiration information for catalog entities.")
 model CatalogModelSystemDataWithExpired {
+  @doc("The provisioning state of the record. ex: softdeleted")
+  provisioningState?: DataAssetProvisioningState;
+
   @doc("The timestamp when the record was created.")
   createdAt?: utcDateTime;
 
@@ -74,13 +77,109 @@ model CatalogModelSystemDataWithExpired {
   expiredBy?: uuid;
 }
 
+@doc("The provisioning state of a data asset.")
+union DataAssetProvisioningState {
+  @doc("The provisioning state is unknown.")
+  Unknown: "Unknown",
+
+  @doc("The resource has been successfully provisioned.")
+  Succeeded: "Succeeded",
+
+  @doc("The resource has been soft deleted.")
+  SoftDeleted: "SoftDeleted",
+
+  string,
+}
+
+@doc("System metadata with expiration information for data assets.")
+model DataAssetSystemData {
+  @doc("The provisioning state of the record.")
+  provisioningState?: DataAssetProvisioningState;
+
+  @doc("The timestamp when the record was created.")
+  createdAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who created the record.")
+  createdBy?: uuid;
+
+  @doc("The timestamp when the record was last modified.")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who last modified the record.")
+  lastModifiedBy?: uuid;
+
+  @doc("The timestamp when the record expires.")
+  expiredAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who expired the record.")
+  expiredBy?: uuid;
+}
 @doc("Contact information for catalog entities.")
 model CatalogModelContactsValueInner {
-  @doc("The unique identifier of the contact.")
+  @doc("AAD oid for the person or group")
   id?: uuid;
 
-  @doc("A description or note about the contact.")
+  @doc("A description of this user assignment")
   description?: string;
+}
+
+@doc("A list of contacts for catalog entities.")
+model ContactsValueInnerList is CatalogModelContactsValueInner[];
+
+@doc("A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').")
+model ContactsMap {
+  @doc("List of owner contacts.")
+  owner?: CatalogModelContactsValueInner[];
+
+  @doc("List of expert contacts.")
+  expert?: CatalogModelContactsValueInner[];
+
+  @doc("List of database administrator contacts.")
+  databaseAdmin?: CatalogModelContactsValueInner[];
+}
+
+@doc("The format of the SQL table.")
+union TypePropertiesFormat {
+  @doc("Table format.")
+  Table: "Table",
+
+  @doc("View format.")
+  View: "View",
+
+  string,
+}
+
+@doc("Type properties for an Azure SQL table data asset.")
+model DataAssetAzureSqlTableTypeProperties {
+  @doc("The format of the sql table.")
+  format?: TypePropertiesFormat;
+
+  @doc("The server endpoint of the sql table.")
+  serverEndpoint?: url;
+
+  @doc("The database name of the sql table.")
+  databaseName?: string;
+
+  @doc("The schema name of the sql table.")
+  schemaName?: string;
+
+  @doc("The table name of the sql table.")
+  tableName?: string;
+}
+
+@doc("Type properties for an ADLS Gen2 path data asset.")
+model DataAssetAdlsGen2PathTypeProperties {
+  @doc("The server endpoint of the ADLS Gen2 path.")
+  serverEndpoint?: url;
+
+  @doc("The container name of the ADLS Gen2 path.")
+  container?: string;
+
+  @doc("The folder path of the ADLS Gen2 path.")
+  folderPath?: string;
+
+  @doc("The file name of the ADLS Gen2 path.")
+  fileName?: string;
 }
 
 @doc("Managed attribute configuration for catalog entities.")
@@ -122,7 +221,7 @@ model CriticalDataElement {
   description?: string;
 
   @doc("The contacts associated with this critical data element.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("Managed attributes associated with this critical data element.")
   managedAttributes?: CatalogModelManagedAttribute[];
@@ -176,12 +275,23 @@ union EntityCategory {
 }
 
 @doc("Ordering configuration for API service results.")
+union CatalogApiServiceOrderDirection {
+  @doc("Ascending sort direction.")
+  Asc: "asc",
+
+  @doc("Descending sort direction.")
+  Desc: "desc",
+
+  string,
+}
+
+@doc("Ordering configuration for API service results.")
 model CatalogApiServiceOrderBy {
   @doc("The field name to order by.")
   field?: string;
 
-  @doc("The sort direction (ascending or descending).")
-  direction?: string;
+  @doc("The sort direction (asc or desc).")
+  direction?: CatalogApiServiceOrderDirection;
 }
 
 @doc("Filter configuration for searching managed attributes.")
@@ -325,6 +435,33 @@ model CriticalDataColumnProperties {
   entityId: uuid;
 }
 
+@doc("Properties for data asset relationships.")
+@resource("relationships")
+@parentResource(DataAsset)
+model DataAssetProperties {
+  @doc("Description of the relationship.")
+  description?: string;
+
+  @doc("Type of the relationship.")
+  relationshipType?: DataAssetRelationshipType;
+
+  @doc("Name of the associated entity. ex:dataproduct id")
+  @key
+  @visibility(Lifecycle.Create)
+  entityId: uuid;
+}
+
+@doc("The type of relationship between data assets.")
+union DataAssetRelationshipType {
+  @doc("Related relationship type.")
+  Related: "Related",
+
+  @doc("Synonym relationship type.")
+  Synonym: "Synonym",
+
+  string,
+}
+
 @doc("Request body for creating relationships with critical data column properties.")
 model CriticalDataColumnRelationshipRequest {
   ...Record<CriticalDataColumnProperties>;
@@ -341,7 +478,7 @@ model SystemData {
   @doc("The timestamp when the entity was created.")
   createdAt?: string;
 
-  @doc("Unique identifier of the asset.")
+  @doc("The unique identifier of the user who created the entity.")
   createdBy?: uuid;
 }
 
@@ -379,28 +516,28 @@ model CdeRelationship {
 
 @doc("Source information for data assets.")
 model CatalogModelDataAssetSource {
-  @doc("The type of the data source.")
+  @doc("The type of the data asset source.")
   type?: string;
 
-  @doc("Unique identifier of the asset.")
+  @doc("Link to the data map asset ID.")
   assetId?: uuid;
 
-  @doc("The type of the asset.")
+  @doc("Data map asset type. Example: adls_gen2_path, azure_sql_table, etc.")
   assetType?: string;
 
-  @doc(".Type properties of the asset.")
+  @doc("Type properties of the asset.")
   assetAttributes?: string[];
 
-  @doc("Fully qualified name.")
+  @doc("Fully qualified name of the data asset.")
   fqn?: string;
 
-  @doc("Name of the account.")
+  @doc("The data map account name of the data asset.")
   accountName?: string;
 
-  @doc("FIXME: (utcDateTime) Please double check that this is the correct type for your scenario")
+  @doc("Date of the last sync time.")
   lastRefreshedAt?: utcDateTime;
 
-  @doc("Name of the user who last refreshed the asset.")
+  @doc("ID of the user who last refreshed the asset.")
   lastRefreshedBy?: string;
 }
 
@@ -412,61 +549,206 @@ model CatalogModelDataAssetSchema {
   @doc("Description of the asset.")
   description?: string;
 
-  @doc("Classifications of the asset.")
+  @doc("A list of classification labels. example: [PII, PHI]")
   classifications?: string[];
 
   @doc("Type of the asset.")
   type?: string;
 }
 
+@doc("The type of a data asset.")
+union DataAssetType {
+  @doc("Azure SQL Table data asset type.")
+  AzureSqlTable: "AzureSqlTable",
+
+  @doc("ADLS Gen2 Path data asset type.")
+  ADLSGen2Path: "ADLSGen2Path",
+
+  @doc("General data asset type.")
+  General: "General",
+
+  string,
+}
+
 @doc("DataAsset.")
 @resource("dataAssets")
+@discriminator("type")
 model DataAsset {
   @doc("The data asset identifier.")
   @key("dataAssetId")
   @visibility(Lifecycle.Create)
   id: uuid;
 
-  @doc("Name of the asset.")
+  @doc("Name of the data asset.")
   name: string;
 
   @doc("System data associated with the asset.")
-  systemData?: CatalogModelSystemDataWithExpired;
+  systemData?: DataAssetSystemData;
 
   @doc("A description about the relationship.")
   description?: string;
-
-  @doc("Link to the owning domain.")
-  domain?: string;
 
   @doc("Source of the asset.")
   source?: CatalogModelDataAssetSource;
 
   @doc("Contacts associated with the asset.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("A list of classification labels.")
   classifications?: string[];
 
-  @doc("Only one label is allowed. A GUID of the information protection label.")
-  sensitivityLabel?: uuid;
-
-  @doc("type of the data asset.")
-  type?: string;
+  @doc("Type of the data asset.")
+  type: DataAssetType;
 
   @doc("Schema of the asset.")
   schema?: CatalogModelDataAssetSchema[];
 
-  @doc("Data quality score for the data asset.")
-  dataQualityScore?: float64;
-
-  @doc("A redirection link..")
+  @doc("A redirection link.")
   openInUrl?: url;
-
-  @doc("Type properties of the asset.")
-  typeProperties?: Record<string>;
 }
 
+@doc("Data asset model that includes lineage details for GetById responses.")
+@discriminator("type")
+model DataAssetWithLineage {
+  ...DataAsset;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
+  @doc("Lineage information for the asset. See example responses for detailed structure.")
+  lineage?: LineageObject;
+}
+
+@doc("Data asset with lineage of type Azure SQL Table.")
+model DataAssetWithLineageAzureSqlTable extends DataAssetWithLineage {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset with lineage of type ADLS Gen2 Path.")
+model DataAssetWithLineageAdlsGen2Path extends DataAssetWithLineage {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset with lineage of type General.")
+model DataAssetWithLineageGeneral extends DataAssetWithLineage {
+  @doc("Type of the data asset.")
+  type: "General";
+}
+
+@doc("Data asset of type Azure SQL Table.")
+model DataAssetAzureSqlTable extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset of type ADLS Gen2 Path.")
+model DataAssetAdlsGen2Path extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset of type General.")
+model DataAssetGeneral extends DataAsset {
+  @doc("Type of the data asset.")
+  type: "General";
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Lineage is a free-form object with structure shown in examples."
+@doc("Lineage information object containing entity relationships and graph data.")
+model LineageObject {
+  ...Record<unknown>;
+}
+
+@doc("DataAsset.")
+@resource("dataAssets")
+model DataAssetResponse is DataAsset;
+
+@doc("Data asset response of type Azure SQL Table.")
+model DataAssetResponseAzureSqlTable extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset response of type ADLS Gen2 Path.")
+model DataAssetResponseAdlsGen2Path extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset response of type General.")
+model DataAssetResponseGeneral extends DataAssetResponse {
+  @doc("Type of the data asset.")
+  type: "General";
+}
+@doc("DataAsset.")
+@resource("dataAssets")
+@discriminator("type")
+model DataAssetRequest {
+  @doc("The data asset identifier.")
+  @key("dataAssetId")
+  @visibility(Lifecycle.Create)
+  id: uuid;
+
+  @doc("Name of the data asset.")
+  name: string;
+
+  @doc("System data associated with the asset.")
+  systemData?: DataAssetSystemData;
+
+  @doc("Source of the asset.")
+  source?: CatalogModelDataAssetSource;
+
+  @doc("Contacts associated with the asset.")
+  contacts?: ContactsMap;
+
+  @doc("Type of the data asset.")
+  type: DataAssetType;
+
+  @doc("A redirection link.")
+  openInUrl?: url;
+}
+
+@doc("Data asset request of type Azure SQL Table.")
+model DataAssetRequestAzureSqlTable extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "AzureSqlTable";
+
+  @doc("Type properties of the Azure SQL table asset.")
+  typeProperties?: DataAssetAzureSqlTableTypeProperties;
+}
+
+@doc("Data asset request of type ADLS Gen2 Path.")
+model DataAssetRequestAdlsGen2Path extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "ADLSGen2Path";
+
+  @doc("Type properties of the ADLS Gen2 path asset.")
+  typeProperties?: DataAssetAdlsGen2PathTypeProperties;
+}
+
+@doc("Data asset request of type General.")
+model DataAssetRequestGeneral extends DataAssetRequest {
+  @doc("Type of the data asset.")
+  type: "General";
+}
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
   @doc("Number of items to skip.")
@@ -491,10 +773,10 @@ model DataAssetQueryRequest {
   owners?: string[];
 
   @doc("To filter by data map asset Ids.")
-  dataMapAssetIds?: string[];
+  sourceAssetIds?: string[];
 
-  @doc("includingOrphans true or false")
-  includingOrphans?: boolean;
+  @doc("To filter by data map asset Ids.")
+  assetTypes?: string[];
 }
 
 @doc("FacetValue.")
@@ -512,18 +794,6 @@ model FacetsResponse {
   facets: Record<FacetValue[]>;
 }
 
-// @doc("Response containing a list of critical data columns.")
-// @pagedResult
-// model CriticalDataColumnsResponse {
-//   @doc("The list of critical data columns.")
-//   @pageItems
-//   value: CriticalDataColumn[];
-
-//   @doc("The link to the next page of results.")
-//   @nextLink
-//   nextLink?: string;
-// }
-
 @doc("Response containing a list of critical data elements.")
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
@@ -539,7 +809,7 @@ model CriticalDataElementsResponse {
 model DataAssetsResponse {
   @doc("The list of data assets.")
   @pageItems
-  value: DataAsset[];
+  value: DataAssetResponse[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -652,7 +922,7 @@ model DataProduct {
   businessUse?: string;
 
   @doc("The contacts associated with the data product.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("The terms of use for the data product.")
   termsOfUse?: CatalogModelExternalLink[];
@@ -951,7 +1221,7 @@ model Term {
   description?: string;
 
   @doc("The contacts associated with the term.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("The domain associated with the term.")
   domain: uuid;
@@ -1124,7 +1394,7 @@ model ObjectiveWithAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("Additional properties for the objective.")
   additionalProperties?: ObjectiveAdditionalProperties;
@@ -1295,7 +1565,7 @@ model ObjectiveQueryAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: ContactsMap;
 
   @doc("Additional properties for objective query.")
   additionalProperties?: OverallStatusEnum;
@@ -1444,18 +1714,18 @@ model CreateDataAssetResponse {
 
   @doc("The request body containing query criteria.")
   @bodyRoot
-  body: DataAsset;
+  body: DataAssetResponse;
 }
 
 alias DataAssetIdParameter = {
-  @doc("The unique identifier of the critical data asset.")
+  @doc("The unique identifier of the data asset.")
   dataAssetId: uuid;
 };
 
 @doc("Relationship information between entities.")
 @resource("relationships")
 @parentResource(DataAsset)
-model DataAssetRelationship {
+model Relationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
@@ -1470,7 +1740,6 @@ model DataAssetRelationship {
   @visibility(Lifecycle.Create)
   entityId: uuid;
 }
-
 @doc("The number of duplicate checks to perform.")
 model CreateDataProductResponse {
   @doc("Create response.")
@@ -1483,7 +1752,7 @@ model CreateDataProductResponse {
 }
 
 alias DataProductIdParameter = {
-  @doc("The unique identifier of the critical data product.")
+  @doc("The unique identifier of the  data product.")
   dataProductId: uuid;
 };
 
@@ -1518,7 +1787,7 @@ model CreateDomainResponse {
 }
 
 alias DomainIdParameter = {
-  @doc("The unique identifier of the critical data domain.")
+  @doc("The unique identifier of the data domain.")
   domainId: uuid;
 };
 
@@ -1534,7 +1803,7 @@ model CreateTermResponse {
 }
 
 alias TermIdParameter = {
-  @doc("The unique identifier of the critical data term or Parent term identifier.")
+  @doc("The unique identifier of the data term or Parent term identifier.")
   termId: uuid;
 };
 
