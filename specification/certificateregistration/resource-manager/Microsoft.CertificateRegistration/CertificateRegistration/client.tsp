@@ -120,6 +120,10 @@ using Microsoft.CertificateRegistration;
   "PendingIssuance",
   "csharp"
 );
+@@clientName(CertificateOrderStatus.Pendingrevocation,
+  "PendingRevocation",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AppServiceCertificateOrderPatchResource,
