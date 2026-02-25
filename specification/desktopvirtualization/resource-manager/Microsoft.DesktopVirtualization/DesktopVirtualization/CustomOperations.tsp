@@ -101,7 +101,7 @@ op ArmCustomPatchAsync<
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
 @autoRoute
-@armResourceAction(Azure.ResourceManager.Foundations.Resource)
+@armResourceAction(Resource)
 @post
 @returnsDoc("Azure operation completed successfully.")
 op ArmResourceActionSync<

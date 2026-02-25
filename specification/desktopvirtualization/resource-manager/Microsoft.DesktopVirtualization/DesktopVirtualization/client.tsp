@@ -509,3 +509,14 @@ using Microsoft.DesktopVirtualization;
   ScalingScheduleDaysOfWeekItemUsingStruct,
   "csharp"
 );
+
+// Fix: Make MsixImageUri type public (it becomes internal when wrapped in action body)
+@@access(MSIXImageURI, Access.public, "csharp");
+
+// Fix: PrivateEndpointId should be ResourceIdentifier, not string
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// Fix: Rename privateLinkServiceConnectionState back to ConnectionState for compat
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState", "csharp"
+);
