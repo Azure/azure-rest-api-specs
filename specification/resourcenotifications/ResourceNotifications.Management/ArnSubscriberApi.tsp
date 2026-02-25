@@ -52,9 +52,9 @@ model CloudScope extends Scope {
   /** The provider namespace populated by caller */
   providerNamespace: string;
 
-  /** The application ID (GUID format) extracted from request, checked against manifest */
+  /** The application ID extracted from request, checked against manifest */
   @visibility(Lifecycle.Read)
-  appId?: string;
+  appId?: uuid;
 }
 
 /** Partitioning configuration kind discriminator */

@@ -934,6 +934,11 @@
       ],
       "x-ms-discriminator-value": "arnLocation"
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1006,8 +1011,8 @@
           "description": "The provider namespace populated by caller"
         },
         "appId": {
-          "type": "string",
-          "description": "The application ID (GUID format) extracted from request, checked against manifest",
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The application ID extracted from request, checked against manifest",
           "readOnly": true
         }
       },

@@ -34,6 +34,16 @@ input-file:
 - Microsoft.ResourceNotifications/preview/2025-11-19-preview/resourcenotifications.json
 ```
 
+## Suppression
+
+``` yaml
+suppressions:
+  - code: GuidUsage
+    from: resourcenotifications.json
+    reason: appId is an Azure Active Directory application ID which is a GUID by definition.
+    where: $.definitions["Azure.Core.uuid"].format
+```
+
 ## Code Generation
 
 ### C#
