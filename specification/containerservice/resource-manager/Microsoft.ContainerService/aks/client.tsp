@@ -64,6 +64,13 @@ using Microsoft.ContainerService;
   "ContainerServicePrivateLinkResourceData",
   "csharp"
 );
+@@clientName(PrivateLinkResource.privateLinkServiceID,
+  "PrivateLinkServiceId",
+  "csharp"
+);
+@@clientName(PrivateLinkResource.type, "ResourceType", "csharp");
+@@alternateType(PrivateLinkResource.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateLinkResource.type, armResourceType, "csharp");
 @@clientName(ManagedClusterAddonProfile.enabled, "IsEnabled", "csharp");
 @@clientName(ManagedClusterPodIdentityProfile.enabled, "IsEnabled", "csharp");
 @@clientName(WindowsGmsaProfile.enabled, "IsEnabled", "csharp");
@@ -343,6 +350,11 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
+@@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
+@@clientName(OutboundType.userAssignedNATGateway,
+  "UserAssignedNatGateway",
+  "csharp"
+);
 @@clientName(PrivateLinkResourcesListResult,
   "ContainerServicePrivateLinkResourcesListResult",
   "csharp"
@@ -363,6 +375,10 @@ using Microsoft.ContainerService;
   "ContainerServiceTrustedAccessRoleRule",
   "csharp"
 );
+@@clientName(TrustedAccessRoleRule.nonResourceURLs,
+  "NonResourceUrls",
+  "csharp"
+);
 @@clientName(TrustedAccessRoleBindingProvisioningState,
   "ContainerServiceTrustedAccessRoleBindingProvisioningState",
   "csharp"
@@ -378,9 +394,17 @@ using Microsoft.ContainerService;
   "ManagedClusterJwtAuthenticatorProperties",
   "csharp"
 );
-@@clientName(LoadBalancer, "ManagedClusterLoadBalancerData", "csharp");
+@@clientName(LoadBalancer, "ManagedClusterLoadBalancer", "csharp");
 @@clientName(LoadBalancerProperties,
   "ManagedClusterLoadBalancerProperties",
+  "csharp"
+);
+@@clientName(LabelSelector,
+  "ManagedClusterLoadBalancerLabelSelector",
+  "csharp"
+);
+@@clientName(LabelSelectorRequirement,
+  "ManagedClusterLoadBalancerLabelSelectorRequirement",
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.osType,
@@ -454,6 +478,11 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(GPUInstanceProfile, "GpuInstanceProfile", "csharp");
+@@clientName(GPUInstanceProfile.MIG1g, "Mig1G", "csharp");
+@@clientName(GPUInstanceProfile.MIG2g, "Mig2G", "csharp");
+@@clientName(GPUInstanceProfile.MIG3g, "Mig3G", "csharp");
+@@clientName(GPUInstanceProfile.MIG4g, "Mig4G", "csharp");
+@@clientName(GPUInstanceProfile.MIG7g, "Mig7G", "csharp");
 @@clientName(LocalDNSProfile, "LocalDnsProfile", "csharp");
 @@clientName(MaintenanceConfigurationProperties.timeInWeek,
   "TimesInWeek",
@@ -489,10 +518,6 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
-  "ConnectionState",
-  "csharp"
-);
-@@clientName(PrivateLinkServiceConnectionState.status,
   "ConnectionState",
   "csharp"
 );
@@ -576,13 +601,22 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(LocalDNSState, "LocalDnsState", "csharp");
 @@clientName(LocalDNSQueryLogging, "LocalDnsQueryLogging", "csharp");
 @@clientName(LocalDNSProtocol, "LocalDnsProtocol", "csharp");
+@@clientName(LocalDNSProtocol.PreferUDP, "PreferUdp", "csharp");
+@@clientName(LocalDNSProtocol.ForceTCP, "ForceTcp", "csharp");
 @@clientName(LocalDNSForwardDestination,
   "LocalDnsForwardDestination",
   "csharp"
 );
+@@clientName(LocalDNSForwardDestination.ClusterCoreDNS,
+  "ClusterCoreDns",
+  "csharp"
+);
+@@clientName(LocalDNSForwardDestination.VnetDNS, "VnetDns", "csharp");
 @@clientName(LocalDNSForwardPolicy, "LocalDnsForwardPolicy", "csharp");
 @@clientName(LocalDNSServeStale, "LocalDnsServeStale", "csharp");
 @@clientName(LocalDNSProfile, "LocalDnsProfile", "csharp");
+@@clientName(LocalDNSProfile.kubeDNSOverrides, "KubeDnsOverrides", "csharp");
+@@clientName(LocalDNSProfile.vnetDNSOverrides, "VnetDnsOverrides", "csharp");
 @@clientName(LocalDNSOverride, "LocalDnsOverride", "csharp");
 @@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem,
   "AgentPoolAvailableVersion",
@@ -597,6 +631,10 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterIdentityBindingProperties",
   "csharp"
 );
+@@clientName(IdentityBindingProvisioningState,
+  "ManagedClusterIdentityBindingProvisioningState",
+  "csharp"
+);
 @@clientName(MeshMembership, "ManagedClusterMeshMembership", "csharp");
 @@clientName(MeshMembershipProperties,
   "ManagedClusterMeshMembershipProperties",
@@ -607,6 +645,46 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(ComponentsByRelease, "KubernetesVersionComponents", "csharp");
 @@clientName(ManagedClusterNATGatewayProfile,
   "ManagedClusterNatGatewayProfile",
+  "csharp"
+);
+@@clientName(DriftAction, "ContainerServiceMachineDriftAction", "csharp");
+@@clientName(DriverType.GRID, "Grid", "csharp");
+@@clientName(DriverType.CUDA, "Cuda", "csharp");
+@@clientName(InfrastructureEncryption,
+  "KubernetesResourceObjectInfrastructureEncryption",
+  "csharp"
+);
+@@clientName(IpvsScheduler, "ContainerServiceNetworkIpvsScheduler", "csharp");
+@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpTimeoutSeconds,
+  "TcpTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpFinTimeoutSeconds,
+  "TcpFinTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.udpTimeoutSeconds,
+  "UdpTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(JWTAuthenticatorClaimMappings,
+  "ManagedClusterJwtAuthenticatorClaimMappings",
+  "csharp"
+);
+@@clientName(JWTAuthenticatorExtraClaimMappingExpression,
+  "ManagedClusterJwtAuthenticatorExtraClaimMappingExpression",
+  "csharp"
+);
+@@clientName(JWTAuthenticatorIssuer,
+  "ManagedClusterJwtAuthenticatorIssuer",
+  "csharp"
+);
+@@clientName(JWTAuthenticatorProvisioningState,
+  "ManagedClusterJwtAuthenticatorProvisioningState",
+  "csharp"
+);
+@@clientName(JWTAuthenticatorValidationRule,
+  "ManagedClusterJwtAuthenticatorValidationRule",
   "csharp"
 );
 
