@@ -474,15 +474,12 @@ interface Share {
   createPermission is StorageOperationRequestBody<
     {
       @path shareName: string;
-      @header("x-ms-version") apiVersion: "2026-04-06";
-      @query timeout?: int32;
-      @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
       @body permission: SharePermission;
     },
     {
       @statusCode statusCode: 201;
-      @header("x-ms-request-id") requestId: string;
-      @header("x-ms-version") version: string;
       @header("x-ms-file-permission-key") filePermissionKey: string;
     }
   >;
