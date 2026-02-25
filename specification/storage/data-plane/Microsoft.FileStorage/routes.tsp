@@ -8,7 +8,6 @@ using TypeSpec.Http;
 namespace AzureFileStorage;
 
 /** Azure Storage File basic operation template */
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -36,7 +35,6 @@ op StorageOperation<
 }) | TError;
 
 /** Azure Storage File basic operation template */
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -48,7 +46,6 @@ op StorageOperationNoBody<
 }) | TError;
 
 /** Azure Storage File basic operation template */
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationResponseBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -66,7 +63,6 @@ op StorageOperationResponseBody<
 >;
 
 /** Azure Storage File basic operation template */
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperationRequestBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -86,6 +82,7 @@ op StorageOperationRequestBody<
 /**
  * Service operations
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 interface Service {
   /**
    * Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
@@ -159,6 +156,7 @@ interface Service {
 /**
  * Share operations
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 interface Share {
   /**
    * Creates a new share under the specified account. If the share with the same name already exists, the operation fails.
@@ -171,9 +169,7 @@ interface Share {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
-
-      /** The maximum size of the share in bytes. */
-      @header("x-ms-share-quota") shareQuota?: int32;
+      ...ShareQuotaOptionalHeader;
 
       /** Specifies the access tier of the share. */
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
@@ -514,7 +510,7 @@ interface Share {
     {
       @path shareName: string;
       ...TimeoutParameter;
-      @header("x-ms-share-quota") shareQuota?: int32;
+      ...ShareQuotaOptionalHeader;
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
       ...LeaseIdParameter;
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
@@ -623,6 +619,7 @@ interface Share {
 /**
  * Directory operations
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 interface Directory {
   /**
    * Creates a new directory under the specified share or parent directory.
@@ -861,6 +858,7 @@ interface Directory {
 /**
  * File operations
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 interface File {
   /**
    * Creates a new file or replaces a file. Note it only initializes the file with no content.
@@ -936,7 +934,7 @@ interface File {
     {
       @statusCode statusCode: 200 | 206;
       @header("Last-Modified") lastModified: string;
-      @header("x-ms-meta-*") metadata?: Record<string>;
+      ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: string;
@@ -985,9 +983,10 @@ interface File {
     {
       @statusCode statusCode: 200;
       @header("Last-Modified") lastModified: string;
-      @header("x-ms-meta-*") metadata?: Record<string>;
+      ...MetadataHeaders;
       @header("x-ms-type") fileType: string;
       @header("Content-Length") contentLength: int64;
+      #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
       @header("ETag") etag: string;
       @header("Content-MD5") contentMd5?: string;
@@ -1540,7 +1539,7 @@ interface File {
     },
     {
       @statusCode statusCode: 200;
-      @header("x-ms-meta-*") metadata?: Record<string>;
+      ...MetadataHeaders;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
       @header("x-ms-file-attributes") fileAttributes?: string;
