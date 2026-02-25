@@ -44,11 +44,3 @@ using Azure.ClientGenerator.Core;
   "privateIpAllocationMethod",
   "java"
 );
-@@alternateType(Configurations.update::parameters.resource,
-  Record<string | null>,
-  "go"
-);
-@@alternateType(ClusterConfigurations.configurations,
-  Record<Record<string | null>>,
-  "go"
-);
