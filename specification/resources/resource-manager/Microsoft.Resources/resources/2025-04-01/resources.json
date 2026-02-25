@@ -69,7 +69,12 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
@@ -82,10 +87,163 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
+      },
+      "put": {
+        "operationId": "Resources_CreateOrUpdateById",
+        "tags": [
+          "Resources"
+        ],
+        "description": "Creates a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Create or update resource parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "202": {
+            "description": "Resource creation/update accepted",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Resources_UpdateById",
+        "tags": [
+          "Resources"
+        ],
+        "description": "Updates a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Update resource parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenericResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "202": {
+            "description": "Resource update accepted",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Resources_DeleteById",
+        "tags": [
+          "Resources"
+        ],
+        "description": "Deletes a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "202": {
+            "description": "Resource deletion accepted",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{resourceUri}/providers/Microsoft.Resources/resourceGroups/{resourceGroupName}": {
@@ -97,7 +255,7 @@
         "description": "Gets a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -107,8 +265,7 @@
             "in": "path",
             "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -121,7 +278,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -134,7 +291,7 @@
         "description": "Creates or updates a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -144,8 +301,7 @@
             "in": "path",
             "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
+            "type": "string"
           },
           {
             "name": "resource",
@@ -173,7 +329,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -186,7 +342,7 @@
         "description": "Updates a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -196,8 +352,7 @@
             "in": "path",
             "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
+            "type": "string"
           },
           {
             "name": "properties",
@@ -219,7 +374,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -232,7 +387,7 @@
         "description": "When you delete a resource group, all of its resources are also deleted. Deleting a resource group deletes all of its template deployments and currently stored operations.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -242,8 +397,7 @@
             "in": "path",
             "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -267,7 +421,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -286,20 +440,86 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/resources": {
+      "get": {
+        "operationId": "Resources_ListByResourceGroup",
+        "tags": [
+          "Resources"
+        ],
+        "description": "Get all the resources for a resource group.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate\nwhere the list should take place.  The default is in a resource group",
+              "properties": {
+                "properties": {
+                  "$ref": "#/definitions/ResourceGroupProperties",
+                  "description": "The resource-specific properties for this resource."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the resource group."
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
+                },
+                "tags": {
+                  "type": "object",
+                  "description": "The tags attached to the resource group.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "managedBy": {
+                  "type": "string",
+                  "description": "The ID of the resource that manages this resource group."
+                }
+              },
+              "required": [
+                "name",
+                "location"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenericResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -324,7 +544,12 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "batchRequest",
@@ -345,27 +570,16 @@
           },
           "202": {
             "description": "Batch operation accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+            "schema": {
+              "$ref": "#/definitions/BatchResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -379,10 +593,10 @@
         "description": "Gets all the resource groups for a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -395,7 +609,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -413,10 +627,10 @@
         "description": "Get all the resources in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -429,7 +643,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -461,7 +675,12 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "batchRequest",
@@ -482,257 +701,18 @@
           },
           "202": {
             "description": "Batch operation accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+            "schema": {
+              "$ref": "#/definitions/BatchResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/resources/{resourceName}": {
-      "put": {
-        "operationId": "Resources_CreateOrUpdateById",
-        "tags": [
-          "Resources"
-        ],
-        "description": "Creates a resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'GenericResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'GenericResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Resources_UpdateById",
-        "tags": [
-          "Resources"
-        ],
-        "description": "Updates a resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenericResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GenericResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Resources_DeleteById",
-        "tags": [
-          "Resources"
-        ],
-        "description": "Deletes a resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/resources/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}": {
-      "get": {
-        "operationId": "Resources_ListByResourceGroup",
-        "tags": [
-          "Resources"
-        ],
-        "description": "Get all the resources for a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     }
   },
@@ -752,47 +732,27 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      }
     },
     "BatchRequest": {
       "type": "object",
       "description": "Batch request definition.",
       "properties": {
         "httpMethod": {
-          "$ref": "#/definitions/HttpMethod",
-          "description": "The HTTP method for the request."
+          "type": "string",
+          "description": "The HTTP method for the request.",
+          "enum": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "POST"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "relativeUrl": {
           "type": "string",
@@ -803,12 +763,14 @@
           "description": "Optional name to identify this request within the batch."
         },
         "body": {
-          "type": "string",
           "description": "The request body (for PUT/PATCH/POST operations)."
         },
         "headers": {
-          "type": "string",
-          "description": "Request headers."
+          "type": "object",
+          "description": "Request headers.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "dependsOn": {
           "type": "array",
@@ -873,12 +835,14 @@
           "description": "The status of the batch response item."
         },
         "body": {
-          "type": "string",
           "description": "The response body."
         },
         "headers": {
-          "type": "string",
-          "description": "Response headers."
+          "type": "object",
+          "description": "Response headers.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -929,11 +893,19 @@
         "properties": {
           "$ref": "#/definitions/GenericResourceProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -962,10 +934,8 @@
       "type": "object",
       "description": "The resource properties.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
+        "properties": {
+          "description": "The resource properties."
         }
       }
     },
@@ -984,48 +954,6 @@
         }
       ]
     },
-    "HttpMethod": {
-      "type": "string",
-      "description": "HTTP method enumeration.",
-      "enum": [
-        "GET",
-        "PUT",
-        "PATCH",
-        "DELETE",
-        "POST"
-      ],
-      "x-ms-enum": {
-        "name": "HttpMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GET",
-            "value": "GET",
-            "description": "GET method."
-          },
-          {
-            "name": "PUT",
-            "value": "PUT",
-            "description": "PUT method."
-          },
-          {
-            "name": "PATCH",
-            "value": "PATCH",
-            "description": "PATCH method."
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE",
-            "description": "DELETE method."
-          },
-          {
-            "name": "POST",
-            "value": "POST",
-            "description": "POST method."
-          }
-        ]
-      }
-    },
     "ResourceGroup": {
       "type": "object",
       "description": "Resource group information.",
@@ -1033,11 +961,35 @@
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource group.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags attached to the resource group.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The ID of the resource that manages this resource group."
         }
       },
+      "required": [
+        "name",
+        "location"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1066,43 +1018,9 @@
       "type": "object",
       "description": "The resource group properties.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
-        },
-        "tags": {
-          "type": "string",
-          "description": "The tags attached to the resource group."
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The ID of the resource that manages this resource group."
-        },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "ResourceGroupPropertiesUpdate": {
-      "type": "object",
-      "description": "The resource group properties.",
-      "properties": {
-        "location": {
           "type": "string",
-          "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
-        },
-        "tags": {
-          "type": "string",
-          "description": "The tags attached to the resource group."
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The ID of the resource that manages this resource group."
+          "description": "The provisioning state."
         }
       }
     },
@@ -1111,35 +1029,29 @@
       "description": "Resource group information.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceGroupPropertiesUpdate",
+          "$ref": "#/definitions/ResourceGroupProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags attached to the resource group.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The ID of the resource that manages this resource group."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ResourceListResult": {
-      "type": "object",
-      "description": "List of resources.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The GenericResource items on this page",
-          "items": {
-            "$ref": "#/definitions/GenericResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     }
   },

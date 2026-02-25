@@ -22,15 +22,19 @@ namespace Microsoft.Resources {
     @doc("The name of the resource")
     @key("resourceName")
     @segment("resources")
+    @visibility(Lifecycle.Read)
+    @path
+    @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$")
     name: string;
   }
 
   /** The resource properties. */
   @doc("The resource properties.")
   model GenericResourceProperties {
-    /** The resource properties as a JSON object. */
-    @doc("The resource properties as a JSON object.")
-    properties?: Record<unknown>;
+    /** The provisioning state. */
+    @doc("Gets or sets the provisioning state.")
+    @visibility(Lifecycle.Read)
+    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
   }
 
   /** Resource group information. */
@@ -41,39 +45,31 @@ namespace Microsoft.Resources {
     @doc("The name of the resource group.")
     @key("resourceGroupName")
     @segment("resourceGroups")
+    @visibility(Lifecycle.Read)
+    @path
+    @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-_.]{0,62}[a-zA-Z0-9])?$")
     name: string;
+  }
 
+  /** The resource group properties. */
+  @doc("The resource group properties.")
+  model ResourceGroupProperties {
     /** The location of the resource group. */
     @doc("Location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations.")
     location: string;
 
     /** The tags attached to the resource group. */
     @doc("The tags attached to the resource group.")
-    tags?: Record<string>;
+    tags?: string;
 
     /** The ID of the resource that manages this resource group. */
     @doc("The ID of the resource that manages this resource group.")
     managedBy?: string;
-  }
 
-  /** The resource group properties. */
-  @doc("The resource group properties.")
-  model ResourceGroupProperties {
     /** The provisioning state. */
     @doc("Gets or sets the provisioning state.")
-    provisioningState?: ResourceProvisioningState;
-  }
-
-  /** Resource provisioning state. */
-  @doc("The provisioning state of the resource.")
-  union ResourceProvisioningState {
-    /** Resource creation succeeded. */
-    Succeeded: "Succeeded",
-    /** Resource creation failed. */
-    Failed: "Failed",
-    /** Resource creation was canceled. */
-    Canceled: "Canceled",
-    string,
+    @visibility(Lifecycle.Read)
+    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
   }
 
   /** List of resource groups. */
@@ -93,14 +89,19 @@ namespace Microsoft.Resources {
   union HttpMethod {
     /** GET method. */
     GET: "GET",
+
     /** PUT method. */
     PUT: "PUT",
+
     /** PATCH method. */
     PATCH: "PATCH",
+
     /** DELETE method. */
     DELETE: "DELETE",
+
     /** POST method. */
     POST: "POST",
+
     string,
   }
 
@@ -121,11 +122,11 @@ namespace Microsoft.Resources {
 
     /** The request body (for PUT/PATCH/POST operations). */
     @doc("The request body (for PUT/PATCH/POST operations).")
-    body?: Record<unknown>;
+    body?: string;
 
     /** Request headers. */
     @doc("Request headers.")
-    headers?: Record<string>;
+    headers?: string;
 
     /** List of request names that this request depends on. */
     @doc("List of request names that this request depends on.")
@@ -175,11 +176,11 @@ namespace Microsoft.Resources {
 
     /** The response body. */
     @doc("The response body.")
-    body?: Record<unknown>;
+    body?: string;
 
     /** Response headers. */
     @doc("Response headers.")
-    headers?: Record<string>;
+    headers?: string;
   }
 
   /** Batch operation response. */

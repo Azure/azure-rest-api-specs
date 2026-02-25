@@ -65,59 +65,15 @@ namespace Microsoft.Resources {
 
     /** Creates a resource. */
     @doc("Creates a resource.")
-    @put
-    @OpenAPI.extension("x-ms-long-running-operation", true)
-    createOrUpdateById(
-      /** The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} */
-      @doc("The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}")
-      @path
-      resourceId: string,
-
-      ...Azure.ResourceManager.ApiVersionParameter,
-
-      @doc("Create or update resource parameters.")
-      @body
-      parameters: GenericResource,
-    ): ArmResponse<GenericResource> | ArmAcceptedLroResponse<
-      "Resource creation/update accepted",
-      GenericResource
-    > | ErrorResponse;
+    createOrUpdateById is ArmResourceCreateOrReplaceAsync<GenericResource>;
 
     /** Updates a resource. */
     @doc("Updates a resource.")
-    @patch(#{ implicitOptionality: true })
-    @OpenAPI.extension("x-ms-long-running-operation", true)
-    updateById(
-      /** The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} */
-      @doc("The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}")
-      @path
-      resourceId: string,
-
-      ...Azure.ResourceManager.ApiVersionParameter,
-
-      @doc("Update resource parameters.")
-      @body
-      parameters: GenericResource,
-    ): ArmResponse<GenericResource> | ArmAcceptedLroResponse<
-      "Resource update accepted",
-      GenericResource
-    > | ErrorResponse;
+    updateById is ArmResourcePatchAsync<GenericResource, GenericResourceProperties>;
 
     /** Deletes a resource. */
     @doc("Deletes a resource.")
-    @delete
-    @OpenAPI.extension("x-ms-long-running-operation", true)
-    deleteById(
-      /** The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} */
-      @doc("The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}")
-      @path
-      resourceId: string,
-
-      ...Azure.ResourceManager.ApiVersionParameter,
-    ): ArmResponse<GenericResource> | ArmAcceptedLroResponse<
-      "Resource deletion accepted",
-      GenericResource
-    > | ErrorResponse;
+    deleteById is ArmResourceDeleteWithoutOkAsync<GenericResource>;
 
     /** Get all the resources in a subscription. */
     @doc("Get all the resources in a subscription.")
@@ -125,10 +81,14 @@ namespace Microsoft.Resources {
 
     /** Get all the resources for a resource group. */
     @doc("Get all the resources for a resource group.")
-    listByResourceGroup is ArmResourceListByParent<
-      GenericResource,
-      ResourceGroup
-    >;
+    @armResourceList(GenericResource)
+    @get
+    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/resources")
+    listByResourceGroup(
+      ...Azure.ResourceManager.ApiVersionParameter,
+      ...Azure.ResourceManager.SubscriptionIdParameter,
+      ...Azure.ResourceManager.ResourceGroupParameter,
+    ): ArmResponse<ResourceListResult> | ErrorResponse;
   }
 
   // ================================
@@ -141,7 +101,6 @@ namespace Microsoft.Resources {
     @doc("Execute a batch of Azure Resource Manager operations at subscription scope.")
     @post
     @route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/batchOperations")
-    @OpenAPI.extension("x-ms-long-running-operation", true)
     invokeAtSubscriptionScope(
       /** The subscription ID. */
       @doc("The subscription ID.")
@@ -154,15 +113,13 @@ namespace Microsoft.Resources {
       @body
       batchRequest: BatchRequests,
     ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<
-      "Batch operation accepted",
-      BatchResponse
+      "Batch operation accepted"
     > | ErrorResponse;
 
     /** Execute a batch of Azure Resource Manager operations at resource group scope. */
     @doc("Execute a batch of Azure Resource Manager operations at resource group scope.")
     @post
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/batchOperations")
-    @OpenAPI.extension("x-ms-long-running-operation", true)
     invokeAtResourceGroupScope(
       /** The subscription ID. */
       @doc("The subscription ID.")
@@ -180,8 +137,7 @@ namespace Microsoft.Resources {
       @body
       batchRequest: BatchRequests,
     ): ArmResponse<BatchResponse> | ArmAcceptedLroResponse<
-      "Batch operation accepted",
-      BatchResponse
+      "Batch operation accepted"
     > | ErrorResponse;
   }
 }
