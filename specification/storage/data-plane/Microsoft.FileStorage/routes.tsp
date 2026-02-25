@@ -471,22 +471,21 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=filepermission")
   @put
-  createPermission(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @body permission: SharePermission,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-file-permission-key") filePermissionKey: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  createPermission is StorageOperationRequestBody<
+    {
+      @path shareName: string;
+      @header("x-ms-version") apiVersion: "2026-04-06";
+      @query timeout?: int32;
+      @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent;
+      @body permission: SharePermission;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("x-ms-request-id") requestId: string;
+      @header("x-ms-version") version: string;
+      @header("x-ms-file-permission-key") filePermissionKey: string;
+    }
+  >;
 
   /**
    * Returns the permission (security descriptor) for a given permission key. This is used to support file level ACLs for SMB shares.
@@ -894,8 +893,10 @@ interface File {
       @header("Content-Disposition") contentDisposition?: string;
       @header("x-ms-lease-id") leaseId?: string;
       ...FileRequestIntentParameter;
+
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
+
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
       @header("x-ms-mode") mode?: string;
@@ -1053,8 +1054,10 @@ interface File {
       @header("x-ms-file-creation-time") fileCreationTime?: string;
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
       @header("x-ms-file-change-time") fileChangeTime?: string;
+
       @header("x-ms-file-last-write-time-mode")
       fileLastWriteTimeMode?: FileLastWrittenMode;
+
       @header("Content-Length") contentLength?: int64;
       @header("Content-Type") contentType?: string;
       @header("Content-Encoding") contentEncoding?: string;
@@ -1064,9 +1067,12 @@ interface File {
       @header("Content-Disposition") contentDisposition?: string;
       @header("x-ms-lease-id") leaseId?: string;
       ...FileRequestIntentParameter;
+
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
+
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+
       @header("x-ms-file-property-semantics")
       filePropertySemantics?: FilePropertySemantics;
     },
@@ -1247,15 +1253,21 @@ interface File {
       ...TimeoutParameter;
       @header("x-ms-source-content-crc64") sourceContentCrc64?: string;
       @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string;
+
       @header("x-ms-source-if-none-match-crc64")
       sourceIfNoneMatchCrc64?: string;
+
       @header("x-ms-lease-id") leaseId?: string;
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
+
       @header("x-ms-copy-source-authorization")
       copySourceAuthorization?: string;
+
       ...FileRequestIntentParameter;
+
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
+
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
@@ -1307,38 +1319,55 @@ interface File {
       ...MetadataHeaders;
       @header("x-ms-file-permission") filePermission?: string;
       @header("x-ms-file-permission-key") filePermissionKey?: string;
+
       @header("x-ms-file-permission-copy-mode")
       filePermissionCopyMode?: PermissionCopyModeType;
+
       @header("x-ms-file-copy-ignore-read-only")
       fileCopyIgnoreReadOnly?: boolean;
+
       @header("x-ms-file-attributes") fileAttributes?: string;
       @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
+
       @header("x-ms-file-copy-file-creation-time")
       fileCopyFileCreationTime?: string;
+
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
       @header("x-ms-file-copy-file-last-write-time")
       fileCopyFileLastWriteTime?: string;
+
       @header("x-ms-file-change-time") fileChangeTime?: string;
+
       @header("x-ms-file-copy-file-change-time")
       fileCopyFileChangeTime?: string;
+
       @header("x-ms-file-copy-set-archive-attribute")
       fileCopySetArchiveAttribute?: boolean;
+
       @header("x-ms-lease-id") leaseId?: string;
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
+
       @header("x-ms-copy-source-authorization")
       copySourceAuthorization?: string;
+
       ...FileRequestIntentParameter;
+
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
+
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
+
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
       @header("x-ms-mode") mode?: string;
+
       @header("x-ms-file-copy-mode-copy-mode")
       fileCopyModeCopyMode?: ModeCopyMode;
+
       @header("x-ms-file-copy-owner-copy-mode")
       fileCopyOwnerCopyMode?: OwnerCopyMode;
     },
@@ -1432,15 +1461,20 @@ interface File {
       @path fileName: string;
       @header("x-ms-rename-source") renameSource: string;
       ...TimeoutParameter;
+
       @header("x-ms-file-rename-replace-if-exists")
       renameReplaceIfExists?: boolean;
+
       @header("x-ms-file-rename-ignore-read-only")
       renameIgnoreReadOnly?: boolean;
+
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
       @header("x-ms-destination-lease-id") destinationLeaseId?: string;
       ...FileRequestIntentParameter;
+
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
+
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
@@ -1469,8 +1503,10 @@ interface File {
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
       @header("x-ms-file-change-time") fileChangeTime?: string;
       ...FileRequestIntentParameter;
+
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
+
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
