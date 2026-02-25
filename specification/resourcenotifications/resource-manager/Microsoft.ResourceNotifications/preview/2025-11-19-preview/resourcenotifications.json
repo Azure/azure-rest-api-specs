@@ -934,6 +934,11 @@
       ],
       "x-ms-discriminator-value": "arnLocation"
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1006,7 +1011,7 @@
           "description": "The provider namespace populated by caller"
         },
         "appId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The application ID extracted from request, checked against manifest",
           "readOnly": true
         }
@@ -1246,6 +1251,7 @@
         },
         "maxDelay": {
           "type": "string",
+          "format": "duration",
           "description": "Maximum delay in ISO 8601 duration format (e.g., PT5M for 5 minutes)"
         }
       },

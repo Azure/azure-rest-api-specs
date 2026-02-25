@@ -54,7 +54,7 @@ model CloudScope extends Scope {
 
   /** The application ID extracted from request, checked against manifest */
   @visibility(Lifecycle.Read)
-  appId?: string;
+  appId?: uuid;
 }
 
 /** Partitioning configuration kind discriminator */
@@ -359,7 +359,7 @@ model MinCountMaxDelayBatchingPolicy extends BatchingPolicy {
   minResources: int32;
 
   /** Maximum delay in ISO 8601 duration format (e.g., PT5M for 5 minutes) */
-  maxDelay: string;
+  maxDelay: duration;
 }
 
 /** Storage account destination properties */
