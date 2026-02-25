@@ -5814,7 +5814,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
 model AIServicesAccountIdentity extends CognitiveServicesAccount {
   /** The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  identity?: SearchIndexerDataIdentity | null;
+  identity: SearchIndexerDataIdentity | null;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
   subdomainUrl: string;
