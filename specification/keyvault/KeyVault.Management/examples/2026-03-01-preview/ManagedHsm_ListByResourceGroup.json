@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "hsm-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs?api-version=2026-03-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==",
+        "value": [
+          {
+            "name": "hsm1",
+            "type": "Microsoft.KeyVault/managedHSMs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1",
+            "location": "westus",
+            "properties": {
+              "enablePurgeProtection": false,
+              "enableSoftDelete": true,
+              "hsmUri": "https://westus.hsm1.managedhsm.azure.net",
+              "initialAdminObjectIds": [
+                "00000000-0000-0000-0000-000000000000"
+              ],
+              "provisioningState": "Succeeded",
+              "softDeleteRetentionInDays": 90,
+              "statusMessage": "ManagedHsm is functional.",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "sku": {
+              "name": "Standard_B1",
+              "family": "B"
+            },
+            "tags": {
+              "Dept": "hsm",
+              "Environment": "dogfood"
+            }
+          },
+          {
+            "name": "hsm2",
+            "type": "Microsoft.KeyVault/managedHSMs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2",
+            "location": "westus",
+            "properties": {
+              "enablePurgeProtection": false,
+              "enableSoftDelete": true,
+              "hsmUri": "https://westus.hsm2.managedhsm.azure.net",
+              "initialAdminObjectIds": [
+                "00000000-0000-0000-0000-000000000000"
+              ],
+              "provisioningState": "Succeeded",
+              "softDeleteRetentionInDays": 90,
+              "statusMessage": "ManagedHsm is functional.",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "sku": {
+              "name": "Standard_B1",
+              "family": "B"
+            },
+            "tags": {
+              "Dept": "hsm",
+              "Environment": "production"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedHsms_ListByResourceGroup",
+  "title": "List managed HSM Pools in a resource group"
+}

@@ -33,7 +33,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 }
 
 // here is the augment decorator for versioning
-@@removed(Cluster.kind, Versions.v2026_02_01);
+@@added(Cluster.kind, Versions.v2026_03_01_preview);
 
 @armResourceOperations
 interface Clusters {
@@ -128,7 +128,7 @@ interface Clusters {
   /**
    * Changes ring of a cluster
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
