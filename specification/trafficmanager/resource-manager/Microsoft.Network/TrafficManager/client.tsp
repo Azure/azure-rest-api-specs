@@ -72,7 +72,7 @@ op getReplace(
   "TrafficManagerEndpointSubnetInfo",
   "csharp"
 );
-@@clientName(HeatMapModel, "TrafficManagerHeatMapData", "csharp");
+@@clientName(HeatMapModel, "TrafficManagerHeatMap", "csharp");
 @@clientName(MonitorConfigCustomHeadersItem,
   "TrafficManagerMonitorConfigCustomHeaderInfo",
   "csharp"
@@ -103,7 +103,7 @@ op getReplace(
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(UserMetricsModel, "TrafficManagerUserMetricData", "csharp");
+@@clientName(UserMetricsModel, "TrafficManagerUserMetric", "csharp");
 @@clientName(TrafficManagerNameAvailability.reason,
   "UnavailableReason",
   "csharp"
@@ -117,10 +117,10 @@ op getReplace(
   "csharp"
 );
 // Resource data type renames
-@@clientName(Endpoint, "TrafficManagerEndpointData", "csharp");
-@@clientName(Profile, "TrafficManagerProfileData", "csharp");
+@@clientName(Endpoint, "TrafficManagerEndpoint", "csharp");
+@@clientName(Profile, "TrafficManagerProfile", "csharp");
 @@clientName(TrafficManagerGeographicHierarchy,
-  "TrafficManagerGeographicHierarchyData",
+  "TrafficManagerGeographicHierarchy",
   "csharp"
 );
 // Model type renames (RP prefix)
@@ -141,10 +141,15 @@ op getReplace(
 );
 @@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
 @@clientName(HeatMapType, "TrafficManagerHeatMapType", "csharp");
-@@clientName(Microsoft.Network.RecordType,
-  "TrafficManagerProfileRecordType",
-  "csharp"
-);
+@@clientName(HeatMapType.default, "Default", "csharp");
+// MonitorProtocol value renames (PascalCase to match old API)
+@@clientName(MonitorProtocol.HTTP, "Http", "csharp");
+@@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
+@@clientName(MonitorProtocol.TCP, "Tcp", "csharp");
+// @@clientName(Microsoft.Network.RecordType,
+//   "TrafficManagerProfileRecordType",
+//   "csharp"
+// );
 @@alternateType(TrafficManagerNameAvailability.type,
   Azure.Core.armResourceType,
   "csharp"
@@ -169,3 +174,4 @@ op getReplace(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(TrackedResource.location, Azure.Core.azureLocation, "csharp");
