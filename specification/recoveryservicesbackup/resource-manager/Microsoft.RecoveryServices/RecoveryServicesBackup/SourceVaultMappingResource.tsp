@@ -11,7 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Legacy;
 using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
@@ -23,11 +22,10 @@ namespace Microsoft.RecoveryServices;
 /**
  * Source vault mapping resource for cross-tenant restore.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @added(Versions.v2026_03_01_preview)
 @parentResource(VaultResource)
 model SourceVaultMappingResource
-  is TrackedResourceWithOptionalLocation<SourceVaultMapping> {
+  is ProxyResource<SourceVaultMapping> {
   ...ResourceNameParameter<
     Resource = SourceVaultMappingResource,
     KeyName = "sourceVaultMappingName",
@@ -64,22 +62,19 @@ interface CrossTenantSourceVaultMappings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
   @operationId("CrossTenant_GetVaultMappingConfiguration")
-  @list
-  getVaultMappingConfiguration is ArmResourceListByParent<
-    SourceVaultMappingResource,
-    Response = ArmResponse<SourceVaultMappingResourceList>
-  >;
+  getVaultMappingConfiguration is ArmResourceListByParent<SourceVaultMappingResource>;
 
   /**
    * Removes the source vault configuration for cross-tenant restore operations.
    * This API removes the target vault properties associated with source vault ID and deletes catalog mapping.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST requires 204 final response per OpenAPI lint-diff PostResponseCodes rule"
   @operationId("CrossTenant_RemoveSourceVaultMapping")
   removeSourceVaultMapping is ArmResourceActionAsyncBase<
     SourceVaultMappingResource,
     RemoveSourceVaultMappingRequest,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse | ArmNoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceVaultMappingResource>
   >;
 }
@@ -152,7 +147,7 @@ interface CrossTenantOperations {
      */
     @query("$skipToken")
     $skipToken?: string,
-  ): ArmResponse<ProtectedItemResourceList> | ErrorResponse;
+  ): ArmResponse<CrossTenantProtectedItemResourceList> | ErrorResponse;
 
   /**
    * Lists recovery points from the source vault in a different tenant.
@@ -204,18 +199,22 @@ interface CrossTenantOperations {
      */
     @query("$filter")
     $filter?: string,
-  ): ArmResponse<RecoveryPointResourceList> | ErrorResponse;
+  ): ArmResponse<CrossTenantRecoveryPointResourceList> | ErrorResponse;
 
   /**
    * Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.
    * To know the status of this API call, use GetProtectedItemOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Cross-tenant restore uses Azure-AsyncOperation header pattern"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSourceVaultMappings/{sourceVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore")
   @post
   @operationId("CrossTenant_TriggerRestore")
   @tag("CrossTenant")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "location" }
+  )
   triggerCrossTenantRestore(
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
@@ -263,14 +262,13 @@ interface CrossTenantOperations {
      */
     @bodyRoot
     parameters: RestoreRequestResource,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
 
   /**
    * Fetches the result of any cross-tenant operation on the backup item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Non-standard cross-tenant pass-through operation"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Operation result uses standard polling pattern"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSourceVaultMappings/{sourceVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}")
   @get
   @operationId("CrossTenant_GetProtectedItemOperationResult")
@@ -318,8 +316,7 @@ interface CrossTenantOperations {
     ...ApiVersionParameter,
   ):
     | ArmResponse<ProtectedItemResource>
-    | AcceptedResponse
-    | ArmNoContentResponse
+    | ArmAcceptedLroResponse
     | ErrorResponse;
 
   /**
@@ -413,7 +410,7 @@ interface CrossTenantOperations {
      */
     @query("$skipToken")
     $skipToken?: string,
-  ): ArmResponse<JobResourceList> | ErrorResponse;
+  ): ArmResponse<CrossTenantJobResourceList> | ErrorResponse;
 
   /**
    * Gets extended information associated with a cross-tenant backup job.
@@ -451,16 +448,54 @@ interface CrossTenantOperations {
 }
 
 /**
- * List of SourceVaultMappingResource resources.
+ * List of protected items for cross-tenant restore operations.
  */
 @added(Versions.v2026_03_01_preview)
-model SourceVaultMappingResourceList {
+model CrossTenantProtectedItemResourceList {
   /**
    * List of resources.
    */
   @pageItems
   @identifiers(#[])
-  value?: SourceVaultMappingResource[];
+  value?: ProtectedItemResource[];
+
+  /**
+   * The uri to fetch the next page of resources.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of recovery points for cross-tenant restore operations.
+ */
+@added(Versions.v2026_03_01_preview)
+model CrossTenantRecoveryPointResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  @identifiers(#[])
+  value?: RecoveryPointResource[];
+
+  /**
+   * The uri to fetch the next page of resources.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of jobs for cross-tenant restore operations.
+ */
+@added(Versions.v2026_03_01_preview)
+model CrossTenantJobResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  @identifiers(#[])
+  value?: JobResource[];
 
   /**
    * The uri to fetch the next page of resources.
