@@ -208,6 +208,9 @@
           },
           "Create route table with route": {
             "$ref": "./examples/RouteTableCreateWithRoute.json"
+          },
+          "Create route table with ECMP route": {
+            "$ref": "./examples/RouteTableCreateWithEcmpRoute.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -543,6 +546,9 @@
         "x-ms-examples": {
           "Create route": {
             "$ref": "./examples/RouteTableRouteCreate.json"
+          },
+          "Create ECMP route": {
+            "$ref": "./examples/RouteTableRouteCreateEcmp.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -619,6 +625,10 @@
         "nextHopIpAddress": {
           "type": "string",
           "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+        },
+        "nextHop": {
+          "$ref": "#/definitions/RouteNextHopEcmp",
+          "description": "The next hop for an ECMP route. Only used when the next hop type is VirtualApplianceEcmp."
         },
         "provisioningState": {
           "readOnly": true,
@@ -758,12 +768,30 @@
         "VnetLocal",
         "Internet",
         "VirtualAppliance",
+        "VirtualApplianceEcmp",
         "None"
       ],
       "x-ms-enum": {
         "name": "RouteNextHopType",
         "modelAsString": true
       }
+    },
+    "RouteNextHopEcmp": {
+      "type": "object",
+      "description": "The next hop for an ECMP route.",
+      "properties": {
+        "nextHopIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "description": "A list of IP addresses for equal-cost multi-path (ECMP) routing. At least two addresses are required. Traffic will be load-balanced across all specified next hop addresses."
+        }
+      },
+      "required": [
+        "nextHopIpAddresses"
+      ]
     }
   }
 }
