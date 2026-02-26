@@ -152,7 +152,6 @@ union AgentVersionStatus {
   deleted: "deleted",
 }
 
-
 union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
