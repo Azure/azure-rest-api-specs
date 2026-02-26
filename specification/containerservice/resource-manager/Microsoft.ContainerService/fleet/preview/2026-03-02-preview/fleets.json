@@ -3540,7 +3540,7 @@
         },
         "memberSelector": {
           "$ref": "#/definitions/MemberSelector",
-          "description": "Select the members of the mesh. If empty or not specified, no Fleet members will be selected to join the mesh.",
+          "description": "Select the members of the mesh.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected to join the mesh.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4789,7 +4789,7 @@
       "properties": {
         "byLabel": {
           "type": "string",
-          "description": "Kubernetes-style label selector for selecting Fleet members, e.g. `env=production`.\n\nThe following restrictions apply compared to standard Kubernetes syntax:\n  * Only key/value pairs with the `=` operator are accepted.\n  * Keys may not be repeated, that is `env=production,env=staging` is invalid.",
+          "description": "Kubernetes-style label selector for selecting Fleet members, e.g. `env=production`.",
           "maxLength": 512,
           "x-ms-mutability": [
             "read",

@@ -35,7 +35,11 @@ model ClusterMeshProfileProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ClusterMeshProfileProvisioningState;
 
-  @doc("Select the members of the mesh. If empty or not specified, no Fleet members will be selected to join the mesh.")
+  @doc("""
+    Select the members of the mesh.
+      * Only key/value pairs with the `=` operator are accepted in the label selector.
+      * If empty or not specified, no Fleet members will be selected to join the mesh.
+    """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   memberSelector?: MemberSelector;
 
