@@ -356,6 +356,11 @@ using Microsoft.DesktopVirtualization;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
   "csharp"
 );
@@ -510,6 +515,9 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
+// Experiment: alternateType on sendMessage request property
+@@alternateType(SendMessageRequest, SendMessage, "csharp");
+
 // Fix: Make MsixImageUri type public (it becomes internal when wrapped in action body)
 @@access(MSIXImageURI, Access.public, "csharp");
 
@@ -520,3 +528,4 @@ using Microsoft.DesktopVirtualization;
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState", "csharp"
 );
+
