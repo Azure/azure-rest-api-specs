@@ -149,6 +149,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(AccessPolicy.expiry, string, "javascript");
 @@alternateType(UserDelegationKey.signedStart, string, "javascript");
 @@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
+@@alternateType(MultipartBodyParameter.body, string, "javascript");
 
 @@clientName(AccessPolicy.start, "startsOn", "javascript");
 @@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
