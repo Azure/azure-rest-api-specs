@@ -60,17 +60,7 @@ namespace Azure.AI.Projects {
        * If not provided, the service assumes auto.
        */
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
-      container?: string | OpenAI.CodeInterpreterContainerAuto,
-    }
-  );
-
-  // TODO: Remove the below when importing latest verion of OpenAI TypeSpec package that already includes this fix.
-  @@withoutOmittedProperties(OpenAI.WebSearchApproximateLocation, "type");
-  @@copyProperties(OpenAI.WebSearchApproximateLocation,
-    {
-      /** The type of location approximation. Always `approximate`. */
-      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-      type: "approximate",
+      container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
 
