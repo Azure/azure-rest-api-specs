@@ -45,3 +45,21 @@ using Microsoft.Edge;
   "csharp"
 );
 @@clientName(DisconnectedOperations, "Disconnected", "csharp");
+
+model CustomizedBillingConfiguration {
+  @doc("The auto renew setting")
+  autoRenew: AutoRenew;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing status")
+  billingStatus?: BillingStatus;
+
+  @doc("The current billing configuration")
+  current: BillingPeriod;
+
+  @doc("The upcoming billing configuration")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  upcoming?: BillingPeriod;
+}
+
+@@override(BillingConfiguration, CustomizedBillingConfiguration, "javascript");
