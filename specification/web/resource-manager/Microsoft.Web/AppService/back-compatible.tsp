@@ -2308,3 +2308,5 @@ using Microsoft.Web;
   "ResourceProviders",
   "java"
 );
+
+@@alternateType(CloningInfo.correlationId, uuid, "java");
