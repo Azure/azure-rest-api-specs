@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "protectedItemIds": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRg;testvm1/protectedItems/VM;iaasvmcontainerv2;testRg;testvm1",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRg;testvm2/protectedItems/VM;iaasvmcontainerv2;testRg;testvm2"
+        ]
+      }
+    },
+    "resourceGroupName": "testRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-03-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/recoveryPointOperationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "BulkRestoreOperations_GetRecoveryPoints",
+  "title": "Get Recovery Points for Multiple Protected Items in Bulk"
+}
+
