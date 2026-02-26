@@ -57,6 +57,9 @@
         "x-ms-examples": {
           "Get a list of endpoint certificates.": {
             "$ref": "./examples/EndpointCertificatesListByInstance.json"
+          },
+          "Get a list of endpoint certificates with trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesListByInstanceWithTrustedRootCertificates.json"
           }
         }
       }
@@ -106,6 +109,9 @@
         "x-ms-examples": {
           "Gets an endpoint certificate.": {
             "$ref": "./examples/EndpointCertificatesGet.json"
+          },
+          "Gets an endpoint certificate with trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesGetWithTrustedRootCertificates.json"
           }
         }
       }
@@ -159,21 +165,22 @@
           "description": "Trusted root certificates required to validate the instance certificate",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrustedRootCertificateInfo"
+            "$ref": "#/definitions/EndpointTrustedRootCertificateInfo"
           }
         }
       }
     },
-    "TrustedRootCertificateInfo": {
+    "EndpointTrustedRootCertificateInfo": {
+      "description": "Trusted root certificate required to validate the instance certificate",
       "type": "object",
       "properties": {
         "subject": {
-          "type": "string",
-          "readOnly": true
+          "description": "Root certificate subject name",
+          "type": "string"
         },
         "publicBlob": {
-          "type": "string",
-          "readOnly": true
+          "description": "Root certificate public blob as DER encoded hex string",
+          "type": "string"
         }
       }
     }
