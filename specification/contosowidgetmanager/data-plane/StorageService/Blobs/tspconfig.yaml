@@ -1,0 +1,22 @@
+# Blobs sub-service tspconfig.yaml for v2 data-plane folder structure testing
+parameters:
+  "service-dir":
+    default: "sdk/contosoblobs"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../.."
+    output-file: "data-plane/StorageService/Blobs/{version-status}/{service-version}/blobs.json"
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azcontosoblobs"
+    service-dir: "sdk/contosoblobs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azcontosoblobs"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
