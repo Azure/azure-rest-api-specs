@@ -43,7 +43,6 @@ options:
     service-dir: "src"
     package-dir: "FileShare/FileShare.Autorest"
     clear-output-folder: true
-    debug: true
     azure: true
     module-version: 0.1.0
     prefix: "Az"
@@ -64,7 +63,7 @@ options:
           default:
             script: "(Get-AzContext).Subscription.Id"
       - where:
-          variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+          variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
         remove: true
       - where:
           variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
