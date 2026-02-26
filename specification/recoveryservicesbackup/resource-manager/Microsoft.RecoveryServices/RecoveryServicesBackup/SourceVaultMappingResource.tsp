@@ -54,13 +54,9 @@ interface CrossTenantSourceVaultMappings {
    * Configures the source vault for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
   @operationId("CrossTenant_ConfigureSourceVault")
-  configureSourceVault is ArmResourceCreateOrReplaceSync<
-    SourceVaultMappingResource,
-    Response = ArmResourceUpdatedResponse<SourceVaultMappingResource>
-  >;
+  configureSourceVault is ArmResourceCreateOrReplaceSync<SourceVaultMappingResource>;
 
   /**
    * Gets the vault mapping configuration for cross-tenant restore operations.
