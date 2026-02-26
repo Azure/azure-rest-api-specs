@@ -17,26 +17,27 @@ compatibility: >-
 
 # PR and CI Pipeline Troubleshooting
 
-## MCP Tools Used
+## Prerequisites
 
-| MCP Tool | Purpose |
-|----------|---------|
-| `azsdk_analyze_pipeline` | Analyze pipeline logs and identify failures |
-| `azsdk_verify_setup` | Verify local environment matches pipeline |
+Requires `azure-sdk-mcp` MCP server for pipeline analysis and local reproduction tools.
+
+## MCP Tools
+
+| Tool | Purpose |
+|------|---------|
+| `azsdk_analyze_pipeline` | Analyze pipeline failures |
+| `azsdk_verify_setup` | Verify local environment |
 | `azsdk_package_build_code` | Reproduce build locally |
-| `azsdk_package_run_check` | Reproduce validation checks locally |
+| `azsdk_package_run_check` | Run validation checks |
 
 ## Steps
 
-1. **Identify Failure** — Get pipeline URL, run `azsdk_analyze_pipeline`. Categorize as build/test/validation/infrastructure failure.
-2. **Analyze Root Cause** — See `references/failure-patterns.md` for patterns by failure type.
-3. **Reproduce Locally** — Run `azsdk_verify_setup`, then `azsdk_package_build_code` and `azsdk_package_run_check`.
-4. **Apply Fixes** — Use `typespec-customization` for TypeSpec changes, direct edits for code fixes, or re-run for infra issues.
-5. **Verify** — Confirm fix locally, update SDK PR, monitor pipeline re-run.
+1. **Identify Failure** — Get build ID, run `azsdk_analyze_pipeline`. Categorize failure type.
+2. **Analyze Root Cause** — See `references/failure-patterns.md` for common patterns.
+3. **Reproduce Locally** — Run `azsdk_verify_setup`, then `azsdk_package_build_code` or `azsdk_package_run_check`.
+4. **Apply Fixes** — Use `typespec-customization` for TypeSpec changes, direct edits for code fixes.
+5. **Verify** — Confirm fix locally, push changes, monitor pipeline re-run.
 
-## Related Skills
+## CLI Fallback
 
-- `typespec-customization` — TypeSpec customizations
-- `generate-sdk-locally` — Local SDK generation
-- `apiview-feedback-resolution` — APIView issues
-- `typespec-to-sdk-workflow` — Full workflow
+Without MCP: view pipeline logs directly in Azure DevOps browser UI at the build URL, download logs, and inspect failure stages manually.

@@ -19,15 +19,21 @@ compatibility: >-
 
 Two paths: **Experimentation** (local) or **Release** (full workflow).
 
-## MCP Tools Used
+## MCP Prerequisites
 
-| MCP Tool | Purpose |
-|----------|---------|
-| `azsdk_create_release_plan` | Create plan |
-| `azsdk_run_generate_sdk` | Pipeline generation |
-| `azsdk_run_typespec_validation` | Validate TypeSpec |
-| `azsdk_get_modified_typespec_projects` | Detect changes |
-| `azsdk_create_pull_request_for_current_branch` | Create PR |
+Requires `azure-sdk-mcp` server for all tool calls.
+
+## CLI Fallback
+
+Without MCP, use `tsp compile .` to validate and `npx tsp-client` for SDK generation.
+
+## MCP Tools
+
+| Tool | Use |
+|------|-----|
+| `azsdk_run_typespec_validation` | Validate |
+| `azsdk_run_generate_sdk` | Generate |
+| `azsdk_create_release_plan` | Plan |
 
 ## Steps
 

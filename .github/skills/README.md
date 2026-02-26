@@ -285,14 +285,14 @@ on pull requests that modify files under `.github/skills/`.
 
 | Skill | Type | Compliance | Tokens | MCP | Eval |
 |-------|------|------------|--------|-----|------|
-| typespec-to-sdk-workflow | Workflow | High | 488 ✅ | 2/4 | ✅ |
-| typespec-authoring | Utility | High | 493 ✅ | 2/4 | ✅ |
-| typespec-customization | Utility | High | 469 ✅ | 2/4 | ✅ |
-| generate-sdk-locally | Utility | High | 420 ✅ | 1/4 | ✅ |
-| prepare-release-plan | Utility | High | 421 ✅ | 3/4 | ✅ |
-| package-release-readiness | Utility | High | 449 ✅ | 2/4 | ✅ |
-| apiview-feedback-resolution | Utility | High | 464 ✅ | 2/4 | ✅ |
-| pipeline-troubleshooting | Utility | High | 476 ✅ | 2/4 | ✅ |
+| typespec-to-sdk-workflow | Workflow | High | 500 ✅ | **4/4** ✅ | ✅ |
+| typespec-authoring | Utility | High | 489 ✅ | **4/4** ✅ | ✅ |
+| typespec-customization | Utility | High | 466 ✅ | **4/4** ✅ | ✅ |
+| generate-sdk-locally | Utility | High | 488 ✅ | **4/4** ✅ | ✅ |
+| prepare-release-plan | Utility | High | 472 ✅ | **4/4** ✅ | ✅ |
+| package-release-readiness | Utility | High | 461 ✅ | **4/4** ✅ | ✅ |
+| apiview-feedback-resolution | Utility | High | 465 ✅ | **4/4** ✅ | ✅ |
+| pipeline-troubleshooting | Utility | High | 449 ✅ | **4/4** ✅ | ✅ |
 | verify-setup | Utility | High | 460 ✅ | **4/4** ✅ | ✅ |
 | validate-service-label | Utility | High | 419 ✅ | **4/4** ✅ | ✅ |
 | validate-codeowners | Utility | High | 445 ✅ | **4/4** ✅ | ✅ |
@@ -303,9 +303,7 @@ on pull requests that modify files under `.github/skills/`.
 | markdown-token-optimizer | Meta | Medium | 333 ✅ | — | ⚠️ |
 | file-test-bug | Meta | Medium | 606 ❌ | — | ⚠️ |
 
-The 4 meta/development skills were imported as-is from [microsoft/GitHub-Copilot-for-Azure](https://github.com/microsoft/GitHub-Copilot-for-Azure/tree/main/.github/skills).
-They intentionally have different compliance profiles — sensei's SKILL.md is large (2098 tokens)
-because it is a comprehensive loop controller, and skill-authoring is a rich reference guide.
+All 13 TypeSpec-to-SDK skills now pass 4/4 MCP Integration checks (prerequisites + CLI fallback documented).
 
 ---
 

@@ -34,8 +34,10 @@ compatibility: >-
 4. **Validate & Regenerate** — Run validation, regenerate SDK, build and test.
 5. **Confirm** — Verify all items addressed, inform user to request re-review.
 
-## Related Skills
+## MCP Prerequisites
 
-- `typespec-customization` — TypeSpec customizations
-- `generate-sdk-locally` — SDK regeneration
-- `typespec-to-sdk-workflow` — Full workflow
+Requires `azure-sdk-mcp` server connected and authenticated.
+
+## CLI Fallback
+
+Without MCP, review APIView comments in browser and apply fixes to TypeSpec or SDK code directly.

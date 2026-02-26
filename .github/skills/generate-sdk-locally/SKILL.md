@@ -5,25 +5,38 @@ metadata:
   version: "1.0.0"
 description: >-
   **UTILITY SKILL**
-  Generate, build, and test Azure SDKs locally from TypeSpec specifications.
-  USE FOR: "generate SDK locally", "build SDK", "run SDK tests", "update changelog", "prepare SDK PR", "local SDK iteration".
-  DO NOT USE FOR: pipeline-based generation (use azsdk_run_generate_sdk), release plans (use prepare-release-plan), releasing packages (use package-release-readiness).
+  Generate, build, and test Azure SDKs locally from TypeSpec.
+  USE FOR: "generate SDK locally", "build SDK", "run SDK tests", "update changelog".
+  DO NOT USE FOR: pipeline generation (use azsdk_run_generate_sdk), release plans (use prepare-release-plan).
   INVOKES: azsdk_verify_setup, azsdk_package_generate_code, azsdk_package_build_code, azsdk_package_run_check, azsdk_package_run_tests, azsdk_package_update_metadata, azsdk_package_update_changelog_content, azsdk_package_update_version.
-  FOR SINGLE OPERATIONS: Use azsdk_package_build_code directly for quick builds.
 compatibility: >-
-  Requires: azure-sdk-mcp server, local clone of azure-sdk-for-{language} repo, language-specific build tools (.NET SDK, JDK, Python, Node.js, or Go).
+  Requires: azure-sdk-mcp server, local azure-sdk-for-{language} clone, language build tools (.NET SDK, JDK, Python, Node.js, or Go).
 ---
 
 # Generate SDK Locally
 
+## MCP Prerequisites
+
+Requires `azure-sdk-mcp` server. Run `azsdk_verify_setup` to confirm.
+
+## MCP Tools
+
+| Tool | Purpose |
+|------|---------|
+| `azsdk_package_generate_code` | Generate SDK from TypeSpec |
+| `azsdk_package_build_code` | Build package |
+| `azsdk_package_run_check` | Validate package |
+| `azsdk_package_run_tests` | Run tests |
+
 ## Steps
 
 1. **Select Language** — .NET, Java, JavaScript, Python, or Go.
-2. **Verify** — Ensure repo is cloned (see `references/sdk-repos.md`), run `azsdk_verify_setup`.
+2. **Verify** — Run `azsdk_verify_setup` to confirm environment.
 3. **Generate** — Run `azsdk_package_generate_code` with config path.
 4. **Build** — Run `azsdk_package_build_code`. On failure, use `typespec-customization`.
 5. **Validate** — Run `azsdk_package_run_check` and `azsdk_package_run_tests`.
 6. **Metadata** — Update metadata, changelog, and version.
+7. **CLI Fallback** — If MCP unavailable, run `npx tsp-client update` then language build tools manually.
 
 ## Related Skills
 

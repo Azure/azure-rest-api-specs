@@ -17,24 +17,26 @@ compatibility: >-
 
 # TypeSpec Customization
 
-## MCP Tools Used
+## MCP Prerequisites
 
-| MCP Tool | Purpose |
-|----------|---------|
-| `azsdk_package_customize_code` | Apply TypeSpec customizations for SDK generation |
-| `azsdk_run_typespec_validation` | Validate TypeSpec after applying customizations |
+Requires `azure-sdk-mcp` server connected and authenticated. Provides customization and validation tools for TypeSpec projects.
+
+## MCP Tools
+
+| Tool | Purpose |
+|------|---------|
+| `azsdk_package_customize_code` | Apply customizations for SDK generation |
+| `azsdk_run_typespec_validation` | Validate TypeSpec after changes |
+
+## CLI Fallback
+
+Without MCP: edit `client.tsp` manually with decorators, run `tsp compile .` to validate, use `npx tsp-client` for SDK regeneration.
 
 ## Steps
 
-1. **Identify Need** — Determine customization: `@clientName`, `@client`, `@operationGroup`, `@access`, `@scope`, `@alternateType`, or `@override`.
-2. **Set Up client.tsp** — Ensure `client.tsp` exists with required imports. See `references/customization-steps.md`.
-3. **Apply Customizations** — Use decorators in `client.tsp`. See `references/decorators-reference.md` for patterns.
-4. **Validate** — Run `tsp compile .` then `azsdk_run_typespec_validation`. Regenerate SDK to verify effect.
+1. **Identify** — Determine decorator: `@clientName`, `@client`, `@operationGroup`, `@access`, `@scope`, `@alternateType`, or `@override`.
+2. **Set Up** — Ensure `client.tsp` exists with imports. See `references/customization-steps.md`.
+3. **Apply** — Add decorators in `client.tsp`. See `references/decorators-reference.md`.
+4. **Validate** — Run `tsp compile .` then `azsdk_run_typespec_validation`. Regenerate SDK to verify.
 
-For language-specific code customizations (when TypeSpec isn't enough), see `references/customization-steps.md`.
-
-## Related Skills
-
-- `typespec-authoring` — TypeSpec authoring
-- `apiview-feedback-resolution` — Resolving APIView feedback
-- `generate-sdk-locally` — Generate SDK after customization
+For language-specific customizations, see `references/customization-steps.md`.

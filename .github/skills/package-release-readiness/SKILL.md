@@ -7,7 +7,7 @@ description: >-
   **UTILITY SKILL**
   Check SDK package release readiness, run validation, and trigger releases.
   USE FOR: "is package ready for release", "check release readiness", "run validation checks", "release SDK package", "verify changelog", "check API review status".
-  DO NOT USE FOR: SDK generation (use generate-sdk-locally), TypeSpec authoring, creating release plans (use prepare-release-plan), pipeline troubleshooting.
+  DO NOT USE FOR: SDK generation (use generate-sdk-locally), TypeSpec authoring, release plans (use prepare-release-plan), pipeline troubleshooting.
   INVOKES: azsdk_release_sdk, azsdk_package_run_check, azsdk_package_update_changelog_content, azsdk_package_update_metadata, azsdk_package_update_version.
   FOR SINGLE OPERATIONS: Use azsdk_release_sdk with checkReady:true directly for quick checks.
 compatibility: >-
@@ -30,9 +30,13 @@ compatibility: >-
 ## Steps
 
 1. **Check Readiness** — Collect package name and language, run `azsdk_release_sdk` with `checkReady: true`. See `references/readiness-details.md`.
-2. **Resolve Issues** — Fix missing changelog, metadata, or version using the appropriate tools. See `references/readiness-details.md`.
+2. **Resolve Issues** — Fix changelog, metadata, or version using appropriate tools.
 3. **Validate** — Run `azsdk_package_run_check` to identify specific failures.
 4. **Release** — Confirm with user, run `azsdk_release_sdk`, instruct user to approve pipeline stage.
+
+## Prerequisites
+
+Azure SDK MCP server required. No CLI fallback — prompt user to configure MCP if unavailable.
 
 ## Related Skills
 
