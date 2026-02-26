@@ -25367,15 +25367,16 @@ model HDInsightSparkActivityTypeProperties {
 /**
  * Execute SSIS package activity.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
-model ExecuteSsisPackageActivity extends Activity {
+model ExecuteSSISPackageActivity extends Activity {
   ...ExecutionActivityProperties;
 
   /**
    * Execute SSIS package activity properties.
    */
-  typeProperties: ExecuteSsisPackageActivityTypeProperties;
+  typeProperties: ExecuteSSISPackageActivityTypeProperties;
 
   /**
    * Type of activity.
@@ -25386,11 +25387,12 @@ model ExecuteSsisPackageActivity extends Activity {
 /**
  * Execute SSIS package activity properties.
  */
-model ExecuteSsisPackageActivityTypeProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ExecuteSSISPackageActivityTypeProperties {
   /**
    * SSIS package location.
    */
-  packageLocation: SsisPackageLocation;
+  packageLocation: SSISPackageLocation;
 
   /**
    * Specifies the runtime to execute SSIS package. The value should be "x86" or "x64". Type: string (or Expression with resultType string).
@@ -25410,7 +25412,7 @@ model ExecuteSsisPackageActivityTypeProperties {
   /**
    * The package execution credential.
    */
-  executionCredential?: SsisExecutionCredential;
+  executionCredential?: SSISExecutionCredential;
 
   /**
    * The integration runtime reference.
@@ -25421,42 +25423,43 @@ model ExecuteSsisPackageActivityTypeProperties {
    * The project level parameters to execute the SSIS package.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  projectParameters?: Record<SsisExecutionParameter>;
+  projectParameters?: Record<SSISExecutionParameter>;
 
   /**
    * The package level parameters to execute the SSIS package.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  packageParameters?: Record<SsisExecutionParameter>;
+  packageParameters?: Record<SSISExecutionParameter>;
 
   /**
    * The project level connection managers to execute the SSIS package.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  projectConnectionManagers?: Record<Record<SsisExecutionParameter>>;
+  projectConnectionManagers?: Record<Record<SSISExecutionParameter>>;
 
   /**
    * The package level connection managers to execute the SSIS package.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  packageConnectionManagers?: Record<Record<SsisExecutionParameter>>;
+  packageConnectionManagers?: Record<Record<SSISExecutionParameter>>;
 
   /**
    * The property overrides to execute the SSIS package.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  propertyOverrides?: Record<SsisPropertyOverride>;
+  propertyOverrides?: Record<SSISPropertyOverride>;
 
   /**
    * SSIS package execution log location.
    */
-  logLocation?: SsisLogLocation;
+  logLocation?: SSISLogLocation;
 }
 
 /**
  * SSIS package location.
  */
-model SsisPackageLocation {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISPackageLocation {
   /**
    * The SSIS package path. Type: string (or Expression with resultType string).
    */
@@ -25470,13 +25473,14 @@ model SsisPackageLocation {
   /**
    * SSIS package location properties.
    */
-  typeProperties?: SsisPackageLocationTypeProperties;
+  typeProperties?: SSISPackageLocationTypeProperties;
 }
 
 /**
  * SSIS package location properties.
  */
-model SsisPackageLocationTypeProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISPackageLocationTypeProperties {
   /**
    * Password of the package.
    */
@@ -25485,7 +25489,7 @@ model SsisPackageLocationTypeProperties {
   /**
    * The package access credential.
    */
-  accessCredential?: SsisAccessCredential;
+  accessCredential?: SSISAccessCredential;
 
   /**
    * The configuration file of the package execution. Type: string (or Expression with resultType string).
@@ -25495,7 +25499,7 @@ model SsisPackageLocationTypeProperties {
   /**
    * The configuration file access credential.
    */
-  configurationAccessCredential?: SsisAccessCredential;
+  configurationAccessCredential?: SSISAccessCredential;
 
   /**
    * The package name.
@@ -25516,13 +25520,14 @@ model SsisPackageLocationTypeProperties {
    * The embedded child package list.
    */
   @identifiers(#["packagePath", "packageName"])
-  childPackages?: SsisChildPackage[];
+  childPackages?: SSISChildPackage[];
 }
 
 /**
  * SSIS access credential.
  */
-model SsisAccessCredential {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISAccessCredential {
   /**
    * Domain for windows authentication. Type: string (or Expression with resultType string).
    */
@@ -25542,7 +25547,8 @@ model SsisAccessCredential {
 /**
  * SSIS embedded child package.
  */
-model SsisChildPackage {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISChildPackage {
   /**
    * Path for embedded child package. Type: string (or Expression with resultType string).
    */
@@ -25567,7 +25573,8 @@ model SsisChildPackage {
 /**
  * SSIS package execution credential.
  */
-model SsisExecutionCredential {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISExecutionCredential {
   /**
    * Domain for windows authentication. Type: string (or Expression with resultType string).
    */
@@ -25587,7 +25594,8 @@ model SsisExecutionCredential {
 /**
  * SSIS execution parameter.
  */
-model SsisExecutionParameter {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISExecutionParameter {
   /**
    * SSIS package execution parameter value. Type: string (or Expression with resultType string).
    */
@@ -25597,7 +25605,8 @@ model SsisExecutionParameter {
 /**
  * SSIS property override.
  */
-model SsisPropertyOverride {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISPropertyOverride {
   /**
    * SSIS package property override value. Type: string (or Expression with resultType string).
    */
@@ -25612,7 +25621,8 @@ model SsisPropertyOverride {
 /**
  * SSIS package execution log location
  */
-model SsisLogLocation {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISLogLocation {
   /**
    * The SSIS package execution log path. Type: string (or Expression with resultType string).
    */
@@ -25626,17 +25636,18 @@ model SsisLogLocation {
   /**
    * SSIS package execution log location properties.
    */
-  typeProperties: SsisLogLocationTypeProperties;
+  typeProperties: SSISLogLocationTypeProperties;
 }
 
 /**
  * SSIS package execution log location properties.
  */
-model SsisLogLocationTypeProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SSISLogLocationTypeProperties {
   /**
    * The package execution log access credential.
    */
-  accessCredential?: SsisAccessCredential;
+  accessCredential?: SSISAccessCredential;
 
   /**
    * Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
@@ -26414,15 +26425,16 @@ model AzureMLExecutePipelineActivityTypeProperties {
 /**
  * Data Lake Analytics U-SQL activity.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExecutionActivity)
-model DataLakeAnalyticsUsqlActivity extends Activity {
+model DataLakeAnalyticsUSQLActivity extends Activity {
   ...ExecutionActivityProperties;
 
   /**
    * Data Lake Analytics U-SQL activity properties.
    */
-  typeProperties: DataLakeAnalyticsUsqlActivityTypeProperties;
+  typeProperties: DataLakeAnalyticsUSQLActivityTypeProperties;
 
   /**
    * Type of activity.
@@ -26433,7 +26445,8 @@ model DataLakeAnalyticsUsqlActivity extends Activity {
 /**
  * DataLakeAnalyticsU-SQL activity properties.
  */
-model DataLakeAnalyticsUsqlActivityTypeProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DataLakeAnalyticsUSQLActivityTypeProperties {
   /**
    * Case-sensitive path to folder that contains the U-SQL script. Type: string (or Expression with resultType string).
    */

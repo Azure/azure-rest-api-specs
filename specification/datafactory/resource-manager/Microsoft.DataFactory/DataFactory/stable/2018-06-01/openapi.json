@@ -13722,12 +13722,12 @@
         }
       }
     },
-    "DataLakeAnalyticsUsqlActivity": {
+    "DataLakeAnalyticsUSQLActivity": {
       "type": "object",
       "description": "Data Lake Analytics U-SQL activity.",
       "properties": {
         "typeProperties": {
-          "$ref": "#/definitions/DataLakeAnalyticsUsqlActivityTypeProperties",
+          "$ref": "#/definitions/DataLakeAnalyticsUSQLActivityTypeProperties",
           "description": "Data Lake Analytics U-SQL activity properties.",
           "x-ms-client-flatten": true
         }
@@ -13742,7 +13742,7 @@
       ],
       "x-ms-discriminator-value": "DataLakeAnalyticsU-SQL"
     },
-    "DataLakeAnalyticsUsqlActivityTypeProperties": {
+    "DataLakeAnalyticsUSQLActivityTypeProperties": {
       "type": "object",
       "description": "DataLakeAnalyticsU-SQL activity properties.",
       "properties": {
@@ -15867,12 +15867,12 @@
         }
       ]
     },
-    "ExecuteSsisPackageActivity": {
+    "ExecuteSSISPackageActivity": {
       "type": "object",
       "description": "Execute SSIS package activity.",
       "properties": {
         "typeProperties": {
-          "$ref": "#/definitions/ExecuteSsisPackageActivityTypeProperties",
+          "$ref": "#/definitions/ExecuteSSISPackageActivityTypeProperties",
           "description": "Execute SSIS package activity properties.",
           "x-ms-client-flatten": true
         }
@@ -15887,12 +15887,12 @@
       ],
       "x-ms-discriminator-value": "ExecuteSSISPackage"
     },
-    "ExecuteSsisPackageActivityTypeProperties": {
+    "ExecuteSSISPackageActivityTypeProperties": {
       "type": "object",
       "description": "Execute SSIS package activity properties.",
       "properties": {
         "packageLocation": {
-          "$ref": "#/definitions/SsisPackageLocation",
+          "$ref": "#/definitions/SSISPackageLocation",
           "description": "SSIS package location."
         },
         "runtime": {
@@ -15905,7 +15905,7 @@
           "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string)."
         },
         "executionCredential": {
-          "$ref": "#/definitions/SsisExecutionCredential",
+          "$ref": "#/definitions/SSISExecutionCredential",
           "description": "The package execution credential."
         },
         "connectVia": {
@@ -15916,14 +15916,14 @@
           "type": "object",
           "description": "The project level parameters to execute the SSIS package.",
           "additionalProperties": {
-            "$ref": "#/definitions/SsisExecutionParameter"
+            "$ref": "#/definitions/SSISExecutionParameter"
           }
         },
         "packageParameters": {
           "type": "object",
           "description": "The package level parameters to execute the SSIS package.",
           "additionalProperties": {
-            "$ref": "#/definitions/SsisExecutionParameter"
+            "$ref": "#/definitions/SSISExecutionParameter"
           }
         },
         "projectConnectionManagers": {
@@ -15931,7 +15931,7 @@
           "description": "The project level connection managers to execute the SSIS package.",
           "additionalProperties": {
             "additionalProperties": {
-              "$ref": "#/definitions/SsisExecutionParameter"
+              "$ref": "#/definitions/SSISExecutionParameter"
             },
             "type": "object"
           }
@@ -15941,7 +15941,7 @@
           "description": "The package level connection managers to execute the SSIS package.",
           "additionalProperties": {
             "additionalProperties": {
-              "$ref": "#/definitions/SsisExecutionParameter"
+              "$ref": "#/definitions/SSISExecutionParameter"
             },
             "type": "object"
           }
@@ -15950,11 +15950,11 @@
           "type": "object",
           "description": "The property overrides to execute the SSIS package.",
           "additionalProperties": {
-            "$ref": "#/definitions/SsisPropertyOverride"
+            "$ref": "#/definitions/SSISPropertyOverride"
           }
         },
         "logLocation": {
-          "$ref": "#/definitions/SsisLogLocation",
+          "$ref": "#/definitions/SSISLogLocation",
           "description": "SSIS package execution log location."
         }
       },
@@ -27347,6 +27347,197 @@
         ]
       }
     },
+    "SSISAccessCredential": {
+      "type": "object",
+      "description": "SSIS access credential.",
+      "properties": {
+        "domain": {
+          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "$ref": "#/definitions/SecretBase",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISChildPackage": {
+      "type": "object",
+      "description": "SSIS embedded child package.",
+      "properties": {
+        "packagePath": {
+          "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Name for embedded child package."
+        },
+        "packageContent": {
+          "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date for embedded child package."
+        }
+      },
+      "required": [
+        "packagePath",
+        "packageContent"
+      ]
+    },
+    "SSISExecutionCredential": {
+      "type": "object",
+      "description": "SSIS package execution credential.",
+      "properties": {
+        "domain": {
+          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "$ref": "#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISExecutionParameter": {
+      "type": "object",
+      "description": "SSIS execution parameter.",
+      "properties": {
+        "value": {
+          "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SSISLogLocation": {
+      "type": "object",
+      "description": "SSIS package execution log location",
+      "properties": {
+        "logPath": {
+          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "$ref": "#/definitions/SsisLogLocationType",
+          "description": "The type of SSIS log location."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/SSISLogLocationTypeProperties",
+          "description": "SSIS package execution log location properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "logPath",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "SSISLogLocationTypeProperties": {
+      "type": "object",
+      "description": "SSIS package execution log location properties.",
+      "properties": {
+        "accessCredential": {
+          "$ref": "#/definitions/SSISAccessCredential",
+          "description": "The package execution log access credential."
+        },
+        "logRefreshInterval": {
+          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "SSISPackageLocation": {
+      "type": "object",
+      "description": "SSIS package location.",
+      "properties": {
+        "packagePath": {
+          "description": "The SSIS package path. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "$ref": "#/definitions/SsisPackageLocationType",
+          "description": "The type of SSIS package location."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/SSISPackageLocationTypeProperties",
+          "description": "SSIS package location properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SSISPackageLocationTypeProperties": {
+      "type": "object",
+      "description": "SSIS package location properties.",
+      "properties": {
+        "packagePassword": {
+          "$ref": "#/definitions/SecretBase",
+          "description": "Password of the package."
+        },
+        "accessCredential": {
+          "$ref": "#/definitions/SSISAccessCredential",
+          "description": "The package access credential."
+        },
+        "configurationPath": {
+          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string)."
+        },
+        "configurationAccessCredential": {
+          "$ref": "#/definitions/SSISAccessCredential",
+          "description": "The configuration file access credential."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "The package name."
+        },
+        "packageContent": {
+          "description": "The embedded package content. Type: string (or Expression with resultType string)."
+        },
+        "packageLastModifiedDate": {
+          "type": "string",
+          "description": "The embedded package last modified date."
+        },
+        "childPackages": {
+          "type": "array",
+          "description": "The embedded child package list.",
+          "items": {
+            "$ref": "#/definitions/SSISChildPackage"
+          },
+          "x-ms-identifiers": [
+            "packagePath",
+            "packageName"
+          ]
+        }
+      }
+    },
+    "SSISPropertyOverride": {
+      "type": "object",
+      "description": "SSIS property override.",
+      "properties": {
+        "value": {
+          "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
+        },
+        "isSensitive": {
+          "type": "boolean",
+          "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "SalesforceLinkedService": {
       "type": "object",
       "description": "Linked service for Salesforce.",
@@ -31880,51 +32071,6 @@
       ],
       "x-ms-discriminator-value": "SquareSource"
     },
-    "SsisAccessCredential": {
-      "type": "object",
-      "description": "SSIS access credential.",
-      "properties": {
-        "domain": {
-          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
-        },
-        "userName": {
-          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "$ref": "#/definitions/SecretBase",
-          "description": "Password for windows authentication."
-        }
-      },
-      "required": [
-        "domain",
-        "userName",
-        "password"
-      ]
-    },
-    "SsisChildPackage": {
-      "type": "object",
-      "description": "SSIS embedded child package.",
-      "properties": {
-        "packagePath": {
-          "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
-        },
-        "packageName": {
-          "type": "string",
-          "description": "Name for embedded child package."
-        },
-        "packageContent": {
-          "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
-        },
-        "packageLastModifiedDate": {
-          "type": "string",
-          "description": "Last modified date for embedded child package."
-        }
-      },
-      "required": [
-        "packagePath",
-        "packageContent"
-      ]
-    },
     "SsisEnvironment": {
       "type": "object",
       "description": "Ssis environment.",
@@ -31972,39 +32118,6 @@
         }
       }
     },
-    "SsisExecutionCredential": {
-      "type": "object",
-      "description": "SSIS package execution credential.",
-      "properties": {
-        "domain": {
-          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
-        },
-        "userName": {
-          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "$ref": "#/definitions/SecureString",
-          "description": "Password for windows authentication."
-        }
-      },
-      "required": [
-        "domain",
-        "userName",
-        "password"
-      ]
-    },
-    "SsisExecutionParameter": {
-      "type": "object",
-      "description": "SSIS execution parameter.",
-      "properties": {
-        "value": {
-          "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "SsisFolder": {
       "type": "object",
       "description": "Ssis folder.",
@@ -32014,29 +32127,6 @@
         }
       ],
       "x-ms-discriminator-value": "Folder"
-    },
-    "SsisLogLocation": {
-      "type": "object",
-      "description": "SSIS package execution log location",
-      "properties": {
-        "logPath": {
-          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string)."
-        },
-        "type": {
-          "$ref": "#/definitions/SsisLogLocationType",
-          "description": "The type of SSIS log location."
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/SsisLogLocationTypeProperties",
-          "description": "SSIS package execution log location properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "logPath",
-        "type",
-        "typeProperties"
-      ]
     },
     "SsisLogLocationType": {
       "type": "string",
@@ -32054,19 +32144,6 @@
             "description": "File"
           }
         ]
-      }
-    },
-    "SsisLogLocationTypeProperties": {
-      "type": "object",
-      "description": "SSIS package execution log location properties.",
-      "properties": {
-        "accessCredential": {
-          "$ref": "#/definitions/SsisAccessCredential",
-          "description": "The package execution log access credential."
-        },
-        "logRefreshInterval": {
-          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        }
       }
     },
     "SsisObjectMetadata": {
@@ -32209,24 +32286,6 @@
       ],
       "x-ms-discriminator-value": "Package"
     },
-    "SsisPackageLocation": {
-      "type": "object",
-      "description": "SSIS package location.",
-      "properties": {
-        "packagePath": {
-          "description": "The SSIS package path. Type: string (or Expression with resultType string)."
-        },
-        "type": {
-          "$ref": "#/definitions/SsisPackageLocationType",
-          "description": "The type of SSIS package location."
-        },
-        "typeProperties": {
-          "$ref": "#/definitions/SsisPackageLocationTypeProperties",
-          "description": "SSIS package location properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SsisPackageLocationType": {
       "type": "string",
       "description": "The type of SSIS package location.",
@@ -32261,49 +32320,6 @@
             "description": "PackageStore"
           }
         ]
-      }
-    },
-    "SsisPackageLocationTypeProperties": {
-      "type": "object",
-      "description": "SSIS package location properties.",
-      "properties": {
-        "packagePassword": {
-          "$ref": "#/definitions/SecretBase",
-          "description": "Password of the package."
-        },
-        "accessCredential": {
-          "$ref": "#/definitions/SsisAccessCredential",
-          "description": "The package access credential."
-        },
-        "configurationPath": {
-          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string)."
-        },
-        "configurationAccessCredential": {
-          "$ref": "#/definitions/SsisAccessCredential",
-          "description": "The configuration file access credential."
-        },
-        "packageName": {
-          "type": "string",
-          "description": "The package name."
-        },
-        "packageContent": {
-          "description": "The embedded package content. Type: string (or Expression with resultType string)."
-        },
-        "packageLastModifiedDate": {
-          "type": "string",
-          "description": "The embedded package last modified date."
-        },
-        "childPackages": {
-          "type": "array",
-          "description": "The embedded child package list.",
-          "items": {
-            "$ref": "#/definitions/SsisChildPackage"
-          },
-          "x-ms-identifiers": [
-            "packagePath",
-            "packageName"
-          ]
-        }
       }
     },
     "SsisParameter": {
@@ -32396,22 +32412,6 @@
         }
       ],
       "x-ms-discriminator-value": "Project"
-    },
-    "SsisPropertyOverride": {
-      "type": "object",
-      "description": "SSIS property override.",
-      "properties": {
-        "value": {
-          "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
-        },
-        "isSensitive": {
-          "type": "boolean",
-          "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SsisVariable": {
       "type": "object",

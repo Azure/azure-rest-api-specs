@@ -741,13 +741,13 @@ using Microsoft.DataFactory;
 @@Legacy.flattenProperty(HDInsightSparkActivity.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ExecuteSsisPackageActivity.typeProperties);
+@@Legacy.flattenProperty(ExecuteSSISPackageActivity.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SsisPackageLocation.typeProperties);
+@@Legacy.flattenProperty(SSISPackageLocation.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(SsisLogLocation.typeProperties);
+@@Legacy.flattenProperty(SSISLogLocation.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CustomActivity.typeProperties);
@@ -792,7 +792,7 @@ using Microsoft.DataFactory;
 @@Legacy.flattenProperty(AzureMLExecutePipelineActivity.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DataLakeAnalyticsUsqlActivity.typeProperties);
+@@Legacy.flattenProperty(DataLakeAnalyticsUSQLActivity.typeProperties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WaitActivity.typeProperties);
