@@ -292,9 +292,9 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.FunctionShellToolParam, Access.internal);
   @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam");
 
-  @@access(OpenAI.CodeInterpreterContainerAuto, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterContainerAuto,
-    "InternalCodeInterpreterContainerAuto"
+  @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
+  @@clientName(OpenAI.AutoCodeInterpreterToolParam,
+    "InternalAutoCodeInterpreterToolParam"
   );
 
   @@access(OpenAI.MCPToolFilter, Access.internal);
@@ -308,8 +308,8 @@ namespace Azure.AI.Projects {
     "InternalOutputItemReasoningItem"
   );
 
-  @@access(OpenAI.Summary, Access.internal);
-  @@clientName(OpenAI.Summary, "InternalSummaryTextObject");
+  @@access(OpenAI.SummaryTextContent, Access.internal);
+  @@clientName(OpenAI.SummaryTextContent, "InternalSummaryTextObject");
 
   @@access(OpenAI.OutputItemCompactionBody, Access.internal);
   @@clientName(OpenAI.OutputItemCompactionBody,
