@@ -8,9 +8,9 @@ namespace Azure.AI.Projects;
 
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
-    AgentDefinitionFeatureKeys.hosted_agents_v1_preview,
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
-    AgentDefinitionFeatureKeys.workflow_agents_v1_preview
+    AgentDefintionOptInKeys.hosted_agents_v1_preview,
+    AgentDefintionOptInKeys.container_agents_v1_preview,
+    AgentDefintionOptInKeys.workflow_agents_v1_preview
   ],
 };
 
@@ -139,6 +139,7 @@ union AgentKind {
   prompt: "prompt",
   hosted: "hosted",
   workflow: "workflow",
+
   @removed(Versions.v1)
   container_app: "container_app",
 }
@@ -222,7 +223,7 @@ model PromptAgentDefinitionTextOptions {
 @doc("The workflow agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.workflow_agents_v1_preview] }
+  #{ required_previews: #[AgentDefintionOptInKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
@@ -234,7 +235,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefintionOptInKeys.hosted_agents_v1_preview] }
 )
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
@@ -276,9 +277,7 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
-  }
+  #{ required_previews: #[AgentDefintionOptInKeys.container_agents_v1_preview] }
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -371,9 +370,7 @@ model ToolArgumentBinding {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
-  }
+  #{ required_previews: #[AgentDefintionOptInKeys.container_agents_v1_preview] }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

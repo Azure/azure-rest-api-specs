@@ -50,7 +50,7 @@ op FoundryDataPlaneOperation<
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
 /** Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents. */
-union AgentDefinitionFeatureKeys {
+union AgentDefintionOptInKeys {
   string,
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
@@ -76,7 +76,7 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionFeatureKeys> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefintionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -87,7 +87,7 @@ alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends Fou
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionFeatureKeys,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefintionOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
