@@ -106,7 +106,8 @@ interface CrossTenantOperations {
   @operationId("CheckVaultMappingStatus")
   @tag("CrossTenant")
   checkVaultMappingStatus(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -114,8 +115,7 @@ interface CrossTenantOperations {
     @path
     vaultName: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
   ): ArmResponse<SourceVaultMappingStatusResponse> | ErrorResponse;
 
   /**
@@ -128,7 +128,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_ListProtectedItems")
   @tag("CrossTenant")
   listCrossTenantProtectedItems(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -142,8 +143,7 @@ interface CrossTenantOperations {
     @path
     sourceVaultMappingName: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
 
     /**
      * OData filter options.
@@ -168,7 +168,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_GetRecoveryPoints")
   @tag("CrossTenant")
   getCrossTenantRecoveryPoints(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -200,8 +201,7 @@ interface CrossTenantOperations {
     @path
     protectedItemName: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
 
     /**
      * OData filter options.
@@ -221,7 +221,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_TriggerRestore")
   @tag("CrossTenant")
   triggerCrossTenantRestore(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -259,8 +260,7 @@ interface CrossTenantOperations {
     @path
     recoveryPointId: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
 
     /**
      * resource restore request
@@ -280,7 +280,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_GetProtectedItemOperationResult")
   @tag("CrossTenant")
   getCrossTenantProtectedItemOperationResult(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -318,8 +319,7 @@ interface CrossTenantOperations {
     @path
     operationId: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
   ):
     | ArmResponse<ProtectedItemResource>
     | AcceptedResponse
@@ -337,7 +337,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_GetProtectedItemOperationStatus")
   @tag("CrossTenant")
   getCrossTenantProtectedItemOperationStatus(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -375,8 +376,7 @@ interface CrossTenantOperations {
     @path
     operationId: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
   ): ArmResponse<OperationStatus> | ErrorResponse;
 
   /**
@@ -389,7 +389,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_ListJobs")
   @tag("CrossTenant")
   listCrossTenantJobs(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -403,8 +404,7 @@ interface CrossTenantOperations {
     @path
     sourceVaultMappingName: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
 
     /**
      * OData filter options.
@@ -429,7 +429,8 @@ interface CrossTenantOperations {
   @operationId("CrossTenant_GetJobDetails")
   @tag("CrossTenant")
   getCrossTenantJobDetails(
-    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The name of the recovery services vault.
@@ -449,8 +450,7 @@ interface CrossTenantOperations {
     @path
     jobName: string,
 
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
+    ...ApiVersionParameter,
   ): ArmResponse<JobResource> | ErrorResponse;
 }
 

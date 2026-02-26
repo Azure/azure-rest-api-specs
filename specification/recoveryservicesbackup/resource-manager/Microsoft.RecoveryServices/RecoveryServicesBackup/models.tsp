@@ -8689,8 +8689,7 @@ model SourceVaultMapping {
   /**
    * ARM resource ID of the source vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service API uses sourceVaultARMId"
-  sourceVaultARMId: string;
+  sourceVaultArmId: string;
 
   /**
    * Name of the mapping.
