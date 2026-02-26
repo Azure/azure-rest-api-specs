@@ -178,45 +178,45 @@ interface Share {
       /** Specifies the access tier of the share. */
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
 
-      /** Specifies which protocols are enabled on the share. */
+      /** Protocols to enable on the share. */
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
 
-      /** Specifies the SquashMode for the share. */
+      /** Root squash to set on the share. Only valid for NFS shares. */
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
 
-      /** Optional. Used to set file permission for shares that use POSIX ACLs. */
+      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission") filePermission?: string;
 
-      /** Optional. Used to set file attributes for shares. */
+      /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
       @header("x-ms-file-attributes") fileAttributes?: string;
 
-      /** Optional. Used to set file creation time for shares. */
+      /** Creation time for the file/directory. Default value: Now. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
 
-      /** Optional. Used to set file last write time for shares. */
+      /** Last write time for the file/directory. Default value: Now. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
 
-      /** Optional. Used to set file change time for shares. */
+      /** Change time for the file/directory. Default value: Now. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
       /** Optional. Used to set permission format for shares. */
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
 
-      /** Optional. Used to set provisioned IOPS for shares. */
+      /** Optional. Supported in version 2025-01-05 and later. Only allowed for provisioned v2 file shares. Specifies the provisioned number of input/output operations per second (IOPS) of the share. If this is not specified, the provisioned IOPS is set to value calculated based on recommendation formula. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
 
-      /** Optional. Used to set provisioned bandwidth for shares. */
+      /** Optional. Supported in version 2025-01-05 and later. Only allowed for provisioned v2 file shares. Specifies the provisioned bandwidth of the share, in mebibytes per second (MiBps). If this is not specified, the provisioned bandwidth is set to value calculated based on recommendation formula. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       shareProvisionedBandwidthMibps?: int32;
 
-      /** Optional. Used to enable paid bursting for shares. */
+      /** Optional. Boolean. Default if not specified is false. This property enables paid bursting. */
       @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
 
-      /** Optional. Used to set max IOPS for paid bursting. */
+      /** Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS. */
       @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
 
-      /** Optional. Used to set max bandwidth for paid bursting. */
+      /** Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340 MiB/sec. */
       @header("x-ms-paid-bursting-max-bandwidth-mibps")
       paidBurstingMaxBandwidthMibps?: int64;
 
@@ -956,9 +956,14 @@ interface File {
       /** The path of the target file. */
       @path fileName: string;
 
+      /** Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero. */
       @header("x-ms-content-length") contentLength: int64;
+
       ...TimeoutParameter;
+
+      /** Dummy constant parameter, file type can only be file. */
       @header("x-ms-type") fileType?: string;
+
       ...MetadataHeaders;
 
       /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
@@ -967,26 +972,57 @@ interface File {
       /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
 
+      /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
       @header("x-ms-file-attributes") fileAttributes?: string;
+
+      /** Creation time for the file/directory. Default value: Now. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+      /** Last write time for the file/directory. Default value: Now. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+      /** Change time for the file/directory. Default value: Now. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
+
+      /** Sets the MIME content type of the file. The default type is 'application/octet-stream'. */
       @header("Content-Type") contentType?: string;
+
+      /** Specifies which content encodings have been applied to the file. */
       @header("Content-Encoding") contentEncoding?: string;
+
+      /** Specifies the natural languages used by this resource. */
       @header("Content-Language") contentLanguage?: string;
+
+      /** Sets the file's cache control. The File service stores this value but does not use or modify it. */
       @header("Cache-Control") cacheControl?: string;
+
+      /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. When the Content-MD5 header is specified, the File service compares the hash of the content that has arrived with the header value that was sent. If the two hashes do not match, the operation will fail with error code 400 (Bad Request). */
       @header("Content-MD5") contentMd5?: string;
+
+      /** Sets the file's Content-Disposition header. */
       @header("Content-Disposition") contentDisposition?: string;
+
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
+
       ...FileRequestIntentParameter;
 
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
 
+      /** Optional, NFS only. The owner of the file or directory. */
       @header("x-ms-owner") owner?: string;
+
+      /** Optional, NFS only. The owning group of the file or directory. */
       @header("x-ms-group") group?: string;
+
+      /** Optional, NFS only. The file mode of the file or directory */
       @header("x-ms-mode") mode?: string;
+
+      /** Optional, NFS only. Type of the file or directory. */
       @header("x-ms-nfs-file-type") nfsFileType?: NfsFileType;
+
+      /** If true, the trailing dot will not be trimmed from the target URI. */
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
@@ -1010,14 +1046,29 @@ interface File {
   @get
   download is StorageOperationResponseBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
+      /** The path of the target file. */
       @path fileName: string;
+
       ...TimeoutParameter;
+
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
+
+      /** Return file data only from the specified byte range. */
       @header("Range") range?: string;
+
+      /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
       @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
+
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
+
       ...FileRequestIntentParameter;
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
       @header("x-ms-structured-body-get") structuredBodyGet?: string;
@@ -1648,19 +1699,41 @@ interface File {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
+
+      /** If true, the trailing dot will not be trimmed from the target URI. */
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+
+      /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account. */
       @header("x-ms-target-file") targetFile: string;
     },
     {
       @statusCode statusCode: 201;
+
+      /** The ETag of the file. */
       @header("ETag") etag: string;
+
+      /** The last modified time of the file. */
       @header("Last-Modified") lastModified: string;
+
+      /** The file permission key. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
+
+      /** The file attributes. */
       @header("x-ms-file-attributes") fileAttributes?: string;
+
+      /** The file creation time. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+      /** The file last write time. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+      /** The file change time. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
+
+      /** The fileId of the directory. */
       @header("x-ms-file-id") fileId?: string;
+
+      /** The parent fileId of the directory. */
       @header("x-ms-file-parent-id") fileParentId?: string;
     }
   >;
