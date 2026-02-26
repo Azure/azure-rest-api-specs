@@ -35,11 +35,7 @@ namespace Azure.AI.Projects {
       /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
       structured_inputs?: Record<unknown>,
 
-      /** Optional session identifier for sandbox affinity. When provided, the request is routed to the same ADC sandbox. When omitted, auto-derived from conversation_id/prev_response_id or a new UUID is generated. */
-      @extension(
-        "x-ms-foundry-meta",
-        #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-      )
+      /** Optional session identifier for sandbox affinity. When provided, the request is routed to the same sandbox. When omitted, auto-derived from conversation_id/prev_response_id or a new UUID is generated. */
       agent_session_id?: string,
     }
   );
@@ -57,10 +53,6 @@ namespace Azure.AI.Projects {
       agent_reference: AgentReference | null,
 
       /** The session identifier for this response. Always returned for hosted agents — either the caller-provided value, the auto-derived value, or an auto-generated UUID. Use for session-scoped operations (log streaming) and to maintain sandbox affinity in follow-up calls. */
-      @extension(
-        "x-ms-foundry-meta",
-        #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-      )
       agent_session_id?: string,
     }
   );

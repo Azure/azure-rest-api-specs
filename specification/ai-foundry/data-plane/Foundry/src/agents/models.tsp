@@ -127,28 +127,16 @@ model AgentVersionObject {
 
   definition: AgentDefinition;
 
-  @doc("The provisioning status of the agent version. For hosted agents, reflects ADC snapshot readiness.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-  )
-  status?: AgentVersionStatus;
+  @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
+  status: AgentVersionStatus = AgentVersionStatus.active;
 
   @doc("Error details if the agent version provisioning failed.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-  )
-  error?: AgentVersionError;
+  error?: ApiError;
 }
 
 @doc("The provisioning status of an agent version.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-)
 union AgentVersionStatus {
-  @doc("The agent version is being provisioned (e.g., ADC snapshot creation in progress).")
+  @doc("The agent version is being provisioned.")
   creating: "creating",
 
   @doc("The agent version is active and ready to serve requests.")
@@ -164,21 +152,6 @@ union AgentVersionStatus {
   deleted: "deleted",
 }
 
-@doc("Error details for agent version provisioning failure.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
-)
-model AgentVersionError {
-  @doc("The error code.")
-  code: string;
-
-  @doc("A human-readable error message.")
-  message: string;
-
-  @doc("Additional error details.")
-  details?: string;
-}
 
 union AgentProtocol {
   string,
