@@ -227,23 +227,23 @@ union ReviewStatus {
   string,
 
   /**
-   * New
+   * The review has been newly created.
    */
   New: "New",
 
   /**
-   * In Progress
+   * The review is currently in progress.
    */
   InProgress: "InProgress",
 
   /**
-   * Triaged
+   * The review has been triaged.
    */
   @removed(Versions.v2026_03_01_preview)
   Triaged: "Triaged",
 
   /**
-   * Completed
+   * The review has been completed.
    */
   Completed: "Completed",
 }
