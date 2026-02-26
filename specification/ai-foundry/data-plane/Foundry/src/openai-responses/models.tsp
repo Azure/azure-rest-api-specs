@@ -60,7 +60,7 @@ namespace Azure.AI.Projects {
        * If not provided, the service assumes auto.
        */
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
-      container?: string | OpenAI.CodeInterpreterContainerAuto,
+      container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
 
