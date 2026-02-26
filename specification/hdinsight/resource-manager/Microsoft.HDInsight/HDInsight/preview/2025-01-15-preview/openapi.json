@@ -1179,7 +1179,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ClusterConfiguration"
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1231,7 +1234,10 @@
             "description": "The cluster configurations.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterConfiguration"
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -4045,13 +4051,6 @@
         }
       ]
     },
-    "ClusterConfiguration": {
-      "type": "object",
-      "description": "The configuration object for the specified configuration for the specified cluster.",
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
     "ClusterConfigurations": {
       "type": "object",
       "description": "The configuration object for the specified cluster.",
@@ -4060,7 +4059,10 @@
           "type": "object",
           "description": "The configuration object for the specified configuration for the specified cluster.",
           "additionalProperties": {
-            "$ref": "#/definitions/ClusterConfiguration"
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
           }
         }
       }

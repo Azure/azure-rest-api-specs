@@ -1918,7 +1918,7 @@ model UpdateClusterIdentityCertificateParameters {
  * The configuration object for the specified configuration for the specified cluster.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ClusterConfiguration is Record<string>;
+alias ClusterConfiguration = Record<string>;
 
 /**
  * The configuration object for the specified cluster.
