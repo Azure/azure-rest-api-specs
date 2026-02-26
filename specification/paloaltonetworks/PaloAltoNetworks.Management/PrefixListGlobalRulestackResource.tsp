@@ -9,11 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
  * GlobalRulestack prefixList
  */
+@removed(Versions.v2026_01_26_preview)
 @parentResource(GlobalRulestackResource)
 model PrefixListGlobalRulestackResource
   is Azure.ResourceManager.ProxyResource<PrefixObject, false> {
@@ -25,6 +27,7 @@ model PrefixListGlobalRulestackResource
   >;
 }
 
+@removed(Versions.v2026_01_26_preview)
 @armResourceOperations
 interface PrefixListGlobalRulestackResources {
   /**

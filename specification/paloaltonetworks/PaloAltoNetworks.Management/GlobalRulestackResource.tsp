@@ -8,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PaloAltoNetworks GlobalRulestack
  */
+@removed(Versions.v2026_01_26_preview)
 @tenantResource
 model GlobalRulestackResource
   is Azure.ResourceManager.ProxyResource<RulestackProperties, false> {
@@ -36,6 +38,7 @@ model GlobalRulestackResource
   identity?: AzureResourceManagerManagedIdentityProperties;
 }
 
+@removed(Versions.v2026_01_26_preview)
 @armResourceOperations
 interface GlobalRulestackResources {
   /**

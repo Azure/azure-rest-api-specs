@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
@@ -78,6 +79,7 @@ interface FirewallResources {
    * Get Global Rulestack associated with the Firewall
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_26_preview)
   @operationId("Firewalls_getGlobalRulestack")
   getGlobalRulestack is ArmResourceActionSync<
     FirewallResource,

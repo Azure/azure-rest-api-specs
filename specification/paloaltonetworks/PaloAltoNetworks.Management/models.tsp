@@ -533,6 +533,7 @@ model AzureResourceManagerUserAssignedIdentity {
 /**
  * The type used for update operations of the GlobalRulestackResource.
  */
+@removed(Versions.v2026_01_26_preview)
 model GlobalRulestackResourceUpdate {
   /**
    * Global Location
@@ -553,6 +554,7 @@ model GlobalRulestackResourceUpdate {
 /**
  * The updatable properties of the GlobalRulestackResource.
  */
+@removed(Versions.v2026_01_26_preview)
 model GlobalRulestackResourceUpdateProperties {
   /**
    * PanEtag info
@@ -1830,6 +1832,7 @@ model FirewallResourceUpdateProperties {
 /**
  * PAN Rulestack Describe Object
  */
+@removed(Versions.v2026_01_26_preview)
 model GlobalRulestackInfo {
   /**
    * rulestack description

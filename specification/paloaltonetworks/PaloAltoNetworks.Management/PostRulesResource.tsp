@@ -9,11 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PostRulestack rule list
  */
+@removed(Versions.v2026_01_26_preview)
 @parentResource(GlobalRulestackResource)
 model PostRulesResource
   is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
@@ -25,6 +27,7 @@ model PostRulesResource
   >;
 }
 
+@removed(Versions.v2026_01_26_preview)
 @armResourceOperations
 interface PostRulesResources {
   /**
