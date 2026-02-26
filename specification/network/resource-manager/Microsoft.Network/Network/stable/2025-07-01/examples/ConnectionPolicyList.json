@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "virtualHubName": "TestHub",
+    "api-version": "2025-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testpolicy",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/connectionPolicies/testpolicy",
+            "etag": "W/\"2b03e4fa-c9ed-403c-815f-d8bd6d40a37b\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enableInternetSecurity": true,
+              "associatedConnections": [],
+              "routingConfiguration": {
+                "associatedRouteTable": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/hubRouteTables/defaultRouteTable"
+                },
+                "propagatedRouteTables": {
+                  "labels": [
+                    "default"
+                  ],
+                  "ids": []
+                }
+              }
+            },
+            "type": "Microsoft.Network/virtualHubs/connectionPolicies"
+          },
+          {
+            "name": "testpolicy2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/connectionPolicies/testpolicy2",
+            "etag": "W/\"2b03e4fa-c9ed-403c-815f-d8bd6d40a37b\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enableInternetSecurity": true,
+              "associatedConnections": [],
+              "routingConfiguration": {
+                "associatedRouteTable": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/hubRouteTables/defaultRouteTable"
+                },
+                "propagatedRouteTables": {
+                  "labels": [
+                    "default"
+                  ],
+                  "ids": []
+                },
+                "inboundRouteMap": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/routeMaps/TestRouteMap"
+                },
+                "outboundRouteMap": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/TestHub/routeMaps/TestRouteMap"
+                }
+              }
+            },
+            "type": "Microsoft.Network/virtualHubs/connectionPolicies"
+          }
+        ]
+      }
+    }
+  }
+}

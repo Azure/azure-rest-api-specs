@@ -1722,6 +1722,246 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/connectionPolicies/{connectionPolicyName}": {
+      "get": {
+        "operationId": "ConnectionPolicies_Get",
+        "x-ms-examples": {
+          "ConnectionPolicyGet": {
+            "$ref": "./examples/ConnectionPolicyGet.json"
+          }
+        },
+        "description": "Retrieves the details of a ConnectionPolicy.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionPolicyName",
+            "in": "path",
+            "pattern": "^[A-Za-z0-9_]+",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConnectionPolicy."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the ConnectionPolicy retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectionPolicies_Delete",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionDelete": {
+            "$ref": "./examples/ConnectionPolicyDelete.json"
+          }
+        },
+        "description": "Deletes a ConnectionPolicy.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "pattern": "^[A-Za-z0-9_]+",
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConnectionPolicy."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request received successfully. ConnectionPolicy deletion is in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No ConnectionPolicy exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "operationId": "ConnectionPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "ConnectionPolicyPut": {
+            "$ref": "./examples/ConnectionPolicyPut.json"
+          }
+        },
+        "description": "Creates a ConnectionPolicy if it doesn't exist else updates the existing one.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ConnectionPolicy."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "connectionPolicyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionPolicy"
+            },
+            "description": "Parameters supplied to create or update a ConnectionPolicy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the ConnectionPolicy created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPolicy"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the ConnectionPolicy created.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/connectionPolicies": {
+      "get": {
+        "operationId": "ConnectionPolicies_List",
+        "x-ms-examples": {
+          "RouteMapList": {
+            "$ref": "./examples/ConnectionPolicyList.json"
+          }
+        },
+        "description": "Retrieves the details of all ConnectionPolicies of the hub.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the ConnectionPolicies for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListConnectionPoliciesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}": {
       "get": {
         "operationId": "RouteMaps_Get",
@@ -8124,6 +8364,10 @@
           "type": "boolean",
           "description": "Deprecated: Allow RemoteVnet to use Virtual Hub's gateways."
         },
+        "connectionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The resource id of the ConnectionPolicy associated with this HubVirtualNetworkConnection."
+        },
         "enableInternetSecurity": {
           "type": "boolean",
           "description": "Enable internet security."
@@ -8139,6 +8383,80 @@
         }
       },
       "description": "Parameters for HubVirtualNetworkConnection."
+    },
+    "ConnectionPolicyProperties": {
+      "properties": {
+        "enableInternetSecurity": {
+          "type": "boolean",
+          "description": "Enable internet security."
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the ConnectionPolicy resource."
+        },
+        "associatedConnections": {
+          "type": "array",
+          "description": "List of all connections associated with this ConnectionPolicy.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Parameters for ConnectionPolicy.",
+      "type": "object"
+    },
+    "ConnectionPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionPolicyProperties",
+          "description": "Properties of the ConnectionPolicy."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "ConnectionPolicy resource defined for VirtualHub.",
+      "type": "object"
+    },
+    "ListConnectionPoliciesResult": {
+      "description": "List of ConnectionPolicies and a URL nextLink to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionPolicy"
+          },
+          "description": "List of ConnectionPolicies."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     },
     "HubVirtualNetworkConnection": {
       "properties": {
