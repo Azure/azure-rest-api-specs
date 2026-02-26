@@ -906,7 +906,7 @@ interface BulkRestoreOperations {
      * PreCheck Restore Request
      */
     @bodyRoot
-    parameters: PreCheckRestoreRequest,
+    parameters: BulkRestoreRequest,
   ): ArmAcceptedResponse<
     "Accepted",
     ArmAsyncOperationHeader<FinalResult = PreCheckRestoreResponse> &

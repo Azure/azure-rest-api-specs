@@ -1121,7 +1121,7 @@
             "description": "PreCheck Restore Request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PreCheckRestoreRequest"
+              "$ref": "#/definitions/BulkRestoreRequest"
             }
           }
         ],
@@ -9022,6 +9022,33 @@
         }
       }
     },
+    "BulkRestoreRequestBase": {
+      "type": "object",
+      "description": "Base class for bulk restore request. Workload-specific bulk restore requests are derived from this class.",
+      "properties": {
+        "recoveryType": {
+          "$ref": "#/definitions/RecoveryType",
+          "description": "Type of this recovery. AlternateLocation/OriginalLocation/RestoreDisks"
+        },
+        "protectedItemRestoreDetails": {
+          "type": "array",
+          "description": "List of Workload specific details which are needed during the restore operation.",
+          "items": {
+            "$ref": "#/definitions/ProtectedItemRestoreDetailsBase"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "recoveryType",
+        "protectedItemRestoreDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      ]
+    },
     "BulkRestoreValidationResponse": {
       "type": "object",
       "description": "Bulk restore validation response containing validation results grouped by error category.",
@@ -10713,17 +10740,15 @@
       "type": "object",
       "description": "IaaS VM bulk restore request for At Scale restore operation.\nThe protectedItemRestoreDetails array should contain IAASVMProtectedItemRestoreDetails objects.",
       "properties": {
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery. AlternateLocation/OriginalLocation/RestoreDisks"
-        },
-        "protectedItemRestoreDetails": {
-          "type": "array",
-          "description": "List of Workload specific details which are needed during the restore operation.",
-          "items": {
-            "$ref": "#/definitions/ProtectedItemRestoreDetailsBase"
-          },
-          "x-ms-identifiers": []
+        "objectType": {
+          "type": "string",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "enum": [
+            "IaaSVMBulkRestoreRequest"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "targetResourceGroupId": {
           "type": "string",
@@ -10790,13 +10815,12 @@
         }
       },
       "required": [
-        "recoveryType",
-        "protectedItemRestoreDetails",
+        "objectType",
         "storageAccountId"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/BulkRestoreRequestBase"
         }
       ],
       "x-ms-discriminator-value": "IaaSVMBulkRestoreRequest"
@@ -12660,16 +12684,6 @@
         "message": {
           "type": "string",
           "description": "Message corresponding to the error code for the protectable item"
-        }
-      }
-    },
-    "PreCheckRestoreRequest": {
-      "type": "object",
-      "description": "Request body for PreCheckRestore bulk operation.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RestoreRequest",
-          "description": "Resource properties."
         }
       }
     },

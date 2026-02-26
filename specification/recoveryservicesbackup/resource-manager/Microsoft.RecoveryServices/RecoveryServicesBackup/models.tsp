@@ -8638,20 +8638,16 @@ alias BulkRestoreRequestBaseProperties = {
 };
 
 /**
- * IaaS VM bulk restore request for At Scale restore operation.
- * The protectedItemRestoreDetails array should contain IAASVMProtectedItemRestoreDetails objects.
+ * Base class for bulk restore request. Workload-specific bulk restore requests are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "BulkRestoreRequestBase is a proper base class for polymorphic bulk restore requests"
 @added(Versions.v2026_03_01)
-model IaaSVMBulkRestoreRequest extends RestoreRequest {
-  /**
-   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
-   */
-  objectType: "IaaSVMBulkRestoreRequest";
-
-  // Spread common bulk restore properties
+model BulkRestoreRequestBase extends RestoreRequest {
   ...BulkRestoreRequestBaseProperties;
+}
 
+alias IaaSVMBulkRestoreRequestProperties = {
   /**
    * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
    * For e.g. /subscriptions/{subId}/resourcegroups/{rg}
@@ -8729,7 +8725,24 @@ model IaaSVMBulkRestoreRequest extends RestoreRequest {
   /**
    * Skip the pre OLR backup if it is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OLR is an acronym and should remain uppercase"
   skipPreOLRBackup?: boolean;
+};
+
+/**
+ * IaaS VM bulk restore request for At Scale restore operation.
+ * The protectedItemRestoreDetails array should contain IAASVMProtectedItemRestoreDetails objects.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase as a polymorphic child"
+@added(Versions.v2026_03_01)
+model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "IaaSVMBulkRestoreRequest";
+
+  ...IaaSVMBulkRestoreRequestProperties;
 }
 
 /**
@@ -8903,17 +8916,6 @@ model GetRecoveryPointsResponse {
    */
   @nextLink
   nextLink?: string;
-}
-
-/**
- * Request body for PreCheckRestore bulk operation.
- */
-@added(Versions.v2026_03_01)
-model PreCheckRestoreRequest {
-  /**
-   * Resource properties.
-   */
-  properties?: RestoreRequest;
 }
 
 /**
