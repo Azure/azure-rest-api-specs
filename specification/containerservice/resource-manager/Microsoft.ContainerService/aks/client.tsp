@@ -689,8 +689,20 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 
+@@clientName(TrustedAccessRolesOperationGroup.list,
+  "GetTrustedAccessRoles",
+  "csharp"
+);
+@@clientName(ManagedClusters.privateLinkResourcesList,
+  "GetPrivateLinkResources",
+  "csharp"
+);
+@@clientName(ManagedClusters.resetAADProfile, "ResetAadProfile", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
+@@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedNamespace,
