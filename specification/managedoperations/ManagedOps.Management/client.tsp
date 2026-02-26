@@ -6,3 +6,8 @@ using Microsoft.ManagedOps;
 
 @@clientName(Microsoft.ManagedOps, "ManagedOpsMgmtClient", "python");
 @@clientName(ManagedOps, "ManagedOperations", "csharp");
+@@clientName(AzureMonitorInformation, "ManagedOpsAzureMonitorInformation", "csharp");
+@@clientName(ChangeTrackingInformation, "ManagedOpsChangeTrackingInformation", "csharp");
+@@clientName(EnablementState, "ManagedOpsEnablementStatus", "csharp");
+@@clientName(ProvisioningState, "ManagedOpsProvisioningState", "csharp");
+@@clientName(ServiceInformation, "ManagedOpsServiceInformation", "csharp");

@@ -88,13 +88,22 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias enablementState =
-  | "Enabled"
-  | "InProgress"
-  | "Failed"
-  | "Disabled"
-  | string;
+@doc("The enablement state of a service.")
+union EnablementState {
+  string,
+
+  @doc("Service is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Service enablement is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Service enablement has failed.")
+  Failed: "Failed",
+
+  @doc("Service is disabled.")
+  Disabled: "Disabled",
+}
 
 @doc("Change Tracking and Inventory service information.")
 model ChangeTrackingInformation {
@@ -106,7 +115,7 @@ model ChangeTrackingInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Azure Monitor Insights service information.")
@@ -119,31 +128,31 @@ model AzureMonitorInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Azure Update Manager service information.")
 model UpdateManagerInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Azure Policy and Machine Configuration service information.")
 model GuestConfigurationInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Defender for Servers service information.")
 model DefenderForServersInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Defender Cloud Security Posture Management (CSPM) service information.")
 model DefenderCspmInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
 }
 
 @doc("Specifies the service plan for this resource.")
