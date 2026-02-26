@@ -2474,6 +2474,11 @@ model OutboundVnetRouting {
    * Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled
    */
   backupRestoreTraffic?: boolean;
+
+  /**
+   * Enables Managed Identity operations over virtual network.
+   */
+  managedIdentityTraffic?: boolean;
 }
 
 /**
