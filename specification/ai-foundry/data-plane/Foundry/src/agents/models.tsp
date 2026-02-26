@@ -212,7 +212,7 @@ model PromptAgentDefinition extends AgentDefinition {
     where the model considers the results of the tokens with top_p probability
     mass. So 0.1 means only the tokens comprising the top 10% probability mass
     are considered.
-    
+
     We generally recommend altering this or `temperature` but not both.
     """)
   @minValue(0)
@@ -302,6 +302,41 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
+
+  @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+  telemetry_config?: TelemetryConfig;
+}
+
+@doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+model TelemetryConfig {
+  @doc("Customer-supplied telemetry export endpoint configurations.")
+  endpoints?: TelemetryEndpoint[];
+}
+
+@doc("A single telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpoint {
+  @doc("The telemetry export protocol kind")
+  kind: string;
+
+  @doc("Data types to export to this endpoint.")
+  data?: string[];
+
+  @doc("The OTLP collector endpoint URL.")
+  endpoint?: string;
+
+  @doc("The transport protocol: 'Http' or 'Grpc'.")
+  protocol?: string;
+
+  @doc("Optional authentication configuration.")
+  auth?: Record<string>;
 }
 
 @doc("The container app agent definition.")
