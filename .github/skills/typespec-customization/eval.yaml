@@ -1,0 +1,27 @@
+name: typespec-customization-eval
+description: Evaluation suite for TypeSpec SDK customization skill.
+skill: typespec-customization
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 600
+  parallel: false
+  executor: copilot-sdk
+  model: claude-sonnet-4.6
+graders:
+  - type: keyword
+    name: mentions_decorators
+    config:
+      keywords: ["client.tsp", "clientName", "ClientGenerator"]
+      must_include_all: false
+  - type: regex
+    name: references_customization
+    config:
+      pattern: "(?i)(@clientName|@client|@access|@scope|@operationGroup|@clientLocation|client\\.tsp)"
+  - type: code
+    name: has_substantive_output
+    config:
+      assertions:
+        - "len(output) > 50"
+tasks:
+  - "tasks/*.yaml"

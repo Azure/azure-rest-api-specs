@@ -1,0 +1,17 @@
+id: workflow-experiment-001
+name: Experimentation Path
+description: |
+  Test that the skill supports the experimentation path where a user
+  wants to iterate on TypeSpec and SDK locally before committing to release.
+tags:
+  - basic
+  - experimentation
+inputs:
+  prompt: "I want to experiment with TypeSpec and see what the generated SDK looks like before I decide to release anything."
+expected:
+  output_contains:
+    - "experiment"
+    - "local"
+  behavior:
+    max_tool_calls: 10
+    max_response_time_ms: 60000

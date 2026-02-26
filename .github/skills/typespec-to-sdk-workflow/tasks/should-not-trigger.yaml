@@ -1,0 +1,14 @@
+id: workflow-negative-001
+name: Should Not Trigger - Single Step Task
+description: |
+  Test that the workflow skill does NOT activate for simple single-step tasks
+  that should use specific sub-skills instead.
+tags:
+  - negative-test
+  - anti-trigger
+inputs:
+  prompt: "Just check if my azure-mgmt-compute Python package is ready for release."
+expected:
+  output_not_contains:
+    - "create a new TypeSpec"
+    - "full workflow"

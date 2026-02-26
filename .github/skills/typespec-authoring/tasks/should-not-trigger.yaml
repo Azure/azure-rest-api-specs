@@ -1,0 +1,14 @@
+id: authoring-negative-001
+name: Should Not Trigger - SDK Generation Request
+description: |
+  Test that the skill does NOT activate when the user asks about SDK generation
+  rather than TypeSpec authoring. SDK generation should be handled by generate-sdk-locally.
+tags:
+  - negative-test
+  - anti-trigger
+inputs:
+  prompt: "I need to generate the Python SDK from my TypeSpec project and run the tests locally."
+expected:
+  output_not_contains:
+    - "azsdk_init_typespec_project"
+    - "tsp-client convert"

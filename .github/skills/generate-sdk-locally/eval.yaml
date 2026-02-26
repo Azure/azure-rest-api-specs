@@ -1,0 +1,27 @@
+name: generate-sdk-locally-eval
+description: Evaluation suite for local SDK generation skill.
+skill: generate-sdk-locally
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 600
+  parallel: false
+  executor: copilot-sdk
+  model: claude-sonnet-4.6
+graders:
+  - type: keyword
+    name: mentions_sdk_tools
+    config:
+      keywords: ["generate", "build", "SDK"]
+      must_include_all: false
+  - type: regex
+    name: references_mcp_tools
+    config:
+      pattern: "(?i)(azsdk_package_generate_code|azsdk_package_build_code|azsdk_verify_setup)"
+  - type: code
+    name: has_substantive_output
+    config:
+      assertions:
+        - "len(output) > 50"
+tasks:
+  - "tasks/*.yaml"

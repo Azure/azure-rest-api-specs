@@ -1,0 +1,33 @@
+name: Run Skill Evaluations
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/skills/**'
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    name: Run Evaluations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Azure Developer CLI
+        uses: Azure/setup-azd@v2
+      - name: Install waza extension
+        run: |
+          azd config set alpha.extensions on
+          azd ext source add -n waza -t url -l https://raw.githubusercontent.com/spboyer/waza/main/registry.json
+          azd ext install microsoft.azd.waza
+      - name: Run evaluations
+        run: azd waza run --output-dir ./results
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: ./results
+          retention-days: 30

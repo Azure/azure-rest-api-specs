@@ -1,0 +1,20 @@
+id: authoring-basic-001
+name: Create New TypeSpec Project
+description: |
+  Test that the skill guides a user through creating a new TypeSpec project
+  with proper directory structure and initialization.
+tags:
+  - basic
+  - happy-path
+  - project-creation
+inputs:
+  prompt: "I need to create a new TypeSpec project for my Azure Compute service. It's a management plane (ARM) service under the Microsoft.Compute namespace."
+expected:
+  output_contains:
+    - "specification"
+    - "resource-manager"
+    - "tspconfig.yaml"
+    - "main.tsp"
+  behavior:
+    max_tool_calls: 5
+    max_response_time_ms: 30000

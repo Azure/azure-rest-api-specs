@@ -1,0 +1,27 @@
+name: typespec-to-sdk-workflow-eval
+description: Evaluation suite for the end-to-end TypeSpec to SDK release workflow.
+skill: typespec-to-sdk-workflow
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 600
+  parallel: false
+  executor: copilot-sdk
+  model: claude-sonnet-4.6
+graders:
+  - type: keyword
+    name: mentions_workflow_steps
+    config:
+      keywords: ["TypeSpec", "SDK", "release", "generate"]
+      must_include_all: false
+  - type: regex
+    name: references_workflow_concepts
+    config:
+      pattern: "(?i)(release plan|SDK generation|TypeSpec|API spec|pipeline)"
+  - type: code
+    name: has_substantive_output
+    config:
+      assertions:
+        - "len(output) > 100"
+tasks:
+  - "tasks/*.yaml"

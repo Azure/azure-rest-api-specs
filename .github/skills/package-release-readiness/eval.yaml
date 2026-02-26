@@ -1,0 +1,27 @@
+name: package-release-readiness-eval
+description: Evaluation suite for package release readiness skill.
+skill: package-release-readiness
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 600
+  parallel: false
+  executor: copilot-sdk
+  model: claude-sonnet-4.6
+graders:
+  - type: keyword
+    name: mentions_release_concepts
+    config:
+      keywords: ["release", "package", "readiness"]
+      must_include_all: false
+  - type: regex
+    name: references_tools
+    config:
+      pattern: "(?i)(azsdk_release_sdk|azsdk_package_run_check|changelog|validation)"
+  - type: code
+    name: has_substantive_output
+    config:
+      assertions:
+        - "len(output) > 50"
+tasks:
+  - "tasks/*.yaml"

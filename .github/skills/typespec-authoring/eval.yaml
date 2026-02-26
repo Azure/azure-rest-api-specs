@@ -1,0 +1,27 @@
+name: typespec-authoring-eval
+description: Evaluation suite for TypeSpec authoring and validation skill.
+skill: typespec-authoring
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: copilot-sdk
+  model: claude-sonnet-4.6
+graders:
+  - type: keyword
+    name: mentions_typespec_concepts
+    config:
+      keywords: ["TypeSpec", "tspconfig", "main.tsp"]
+      must_include_all: false
+  - type: regex
+    name: references_tools
+    config:
+      pattern: "(?i)(azsdk_init_typespec_project|azsdk_run_typespec_validation|tsp compile|tsp-client)"
+  - type: code
+    name: has_substantive_output
+    config:
+      assertions:
+        - "len(output) > 50"
+tasks:
+  - "tasks/*.yaml"

@@ -1,0 +1,33 @@
+---
+name: prepare-release-plan
+license: MIT
+metadata:
+  version: "1.0.0"
+description: |
+  **UTILITY SKILL**
+  Create and manage release plan work items for Azure SDK releases across languages.
+  USE FOR: "create release plan", "update release plan", "link SDK PR to plan", "namespace approval", "check release plan status".
+  DO NOT USE FOR: SDK generation (use generate-sdk-locally), TypeSpec authoring, package validation, releasing packages (use package-release-readiness).
+  INVOKES: azsdk_create_release_plan, azsdk_get_release_plan, azsdk_get_release_plan_for_spec_pr, azsdk_update_sdk_details_in_release_plan, azsdk_link_sdk_pull_request_to_release_plan, azsdk_link_namespace_approval_issue.
+  FOR SINGLE OPERATIONS: Use azsdk_get_release_plan directly to check plan status.
+---
+
+# Prepare Release Plan
+
+> Do not display Azure DevOps work item URLs. Only provide Release Plan Link and ID.
+
+## Steps
+
+1. **Prerequisites** — Check for API spec PR; prompt if unavailable.
+2. **Check Existing** — Query by plan number or spec PR link.
+3. **Gather Info** — Collect Service Tree IDs, timeline, API version, release type. See `references/release-plan-details.md`.
+4. **Create** — Run `azsdk_create_release_plan`.
+5. **SDK Details** — Map emitters to languages. See `references/release-plan-details.md`.
+6. **Namespace** — For mgmt plane first releases, link approval issue.
+7. **Link PRs** — Link SDK PRs to plan.
+
+## Related Skills
+
+- `generate-sdk-locally` — SDK generation
+- `package-release-readiness` — Package readiness
+- `typespec-to-sdk-workflow` — Full workflow

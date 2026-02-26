@@ -1,0 +1,19 @@
+id: sdk-local-edge-001
+name: Build Failure Recovery
+description: |
+  Test that the skill handles SDK build failures gracefully
+  and suggests TypeSpec customization if needed.
+tags:
+  - edge-case
+  - error-handling
+inputs:
+  prompt: "I generated the .NET SDK locally but the build is failing with compilation errors. The error says a type name conflicts with a reserved keyword."
+expected:
+  output_contains:
+    - "customiz"
+    - "client.tsp"
+  output_excludes:
+    - "cannot help"
+  behavior:
+    max_tool_calls: 5
+    max_response_time_ms: 30000

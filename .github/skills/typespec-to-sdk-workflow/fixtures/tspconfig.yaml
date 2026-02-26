@@ -1,0 +1,25 @@
+parameters:
+  service-dir:
+    default: sdk/compute
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-python":
+    package-dir: azure-mgmt-compute
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    namespace: Azure.ResourceManager.Compute
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: azure-resourcemanager-compute
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    packageDetails:
+      name: "@azure/arm-compute"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute"
+    flavor: azure

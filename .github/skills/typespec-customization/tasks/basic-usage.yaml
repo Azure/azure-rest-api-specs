@@ -1,0 +1,18 @@
+id: custom-basic-001
+name: Rename Type for SDK
+description: |
+  Test that the skill guides renaming a TypeSpec type for better SDK ergonomics
+  using @clientName decorator.
+tags:
+  - basic
+  - happy-path
+  - rename
+inputs:
+  prompt: "I need to rename my TypeSpec model 'ComputeResourceProvisioningState' to just 'ProvisioningState' in the generated SDKs. How do I do this?"
+expected:
+  output_contains:
+    - "clientName"
+    - "client.tsp"
+  behavior:
+    max_tool_calls: 3
+    max_response_time_ms: 15000

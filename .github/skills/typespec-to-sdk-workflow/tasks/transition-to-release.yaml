@@ -1,0 +1,18 @@
+id: workflow-transition-001
+name: Transition from Experimentation to Release
+description: |
+  Test that the skill handles transitioning from experimentation
+  to the full release workflow.
+tags:
+  - basic
+  - transition
+inputs:
+  prompt: "I've been experimenting with my TypeSpec and the generated SDK looks good. I'm now ready to create the API spec PR and release the SDKs."
+expected:
+  output_contains:
+    - "release"
+    - "PR"
+    - "plan"
+  behavior:
+    max_tool_calls: 15
+    max_response_time_ms: 60000
