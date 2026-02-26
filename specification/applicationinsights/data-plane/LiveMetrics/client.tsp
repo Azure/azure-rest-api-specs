@@ -83,37 +83,25 @@ using Azure.ClientGenerator.Core;
 @@clientName(Azure.Monitor.LiveMetrics.CollectionConfigurationError.Data,
   "data", "javascript");
 
+// ── camelCase client names for DocumentIngress (base model) ──
+@@clientName(Azure.Monitor.LiveMetrics.DocumentIngress.DocumentType,
+  "documentType", "javascript");
+@@clientName(Azure.Monitor.LiveMetrics.DocumentIngress.DocumentStreamIds,
+  "documentStreamIds", "javascript");
+@@clientName(Azure.Monitor.LiveMetrics.DocumentIngress.Properties,
+  "properties", "javascript");
+
 // ── camelCase client names for shared document properties (on each subtype) ──
 @@clientName(Azure.Monitor.LiveMetrics.Request.DocumentType,
   "documentType", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Request.DocumentStreamIds,
-  "documentStreamIds", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Request.Properties,
-  "properties", "javascript");
 @@clientName(Azure.Monitor.LiveMetrics.RemoteDependency.DocumentType,
   "documentType", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.RemoteDependency.DocumentStreamIds,
-  "documentStreamIds", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.RemoteDependency.Properties,
-  "properties", "javascript");
 @@clientName(Azure.Monitor.LiveMetrics.Exception.DocumentType,
   "documentType", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Exception.DocumentStreamIds,
-  "documentStreamIds", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Exception.Properties,
-  "properties", "javascript");
 @@clientName(Azure.Monitor.LiveMetrics.Event.DocumentType,
   "documentType", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Event.DocumentStreamIds,
-  "documentStreamIds", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Event.Properties,
-  "properties", "javascript");
 @@clientName(Azure.Monitor.LiveMetrics.Trace.DocumentType,
   "documentType", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Trace.DocumentStreamIds,
-  "documentStreamIds", "javascript");
-@@clientName(Azure.Monitor.LiveMetrics.Trace.Properties,
-  "properties", "javascript");
 
 // ── camelCase client names for Request ──
 @@clientName(Azure.Monitor.LiveMetrics.Request.Name,
