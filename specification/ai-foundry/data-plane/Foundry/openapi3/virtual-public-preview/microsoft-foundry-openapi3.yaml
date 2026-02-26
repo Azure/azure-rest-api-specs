@@ -1219,7 +1219,7 @@ paths:
         - name: agent_session_id
           in: query
           required: false
-          description: Optional session ID to group related invocations.
+          description: Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated.
           schema:
             type: string
           explode: false
@@ -1248,8 +1248,8 @@ paths:
               schema:
                 type: string
             x-agent-session-id:
-              required: false
-              description: Session ID if provided in the request, returned for confirmation.
+              required: true
+              description: Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.
               schema:
                 type: string
           content:
@@ -1326,6 +1326,132 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}:
+    get:
+      operationId: AgentInvocations_getAgentInvocation
+      description: |-
+        Retrieves the invocation with the given ID.
+        The response body is forwarded as raw bytes from the agent container.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: invocation_id
+          in: path
+          required: true
+          description: The unique identifier of the invocation.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}:cancel:
+    post:
+      operationId: AgentInvocations_cancelAgentInvocation
+      description: |-
+        Cancels an invocation.
+        The request and response bodies are forwarded as raw bytes to/from the agent container.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: invocation_id
+          in: path
+          required: true
+          description: The unique identifier of the invocation to cancel.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      requestBody:
+        required: false
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+        description: Optional raw request body to forward to the agent container.
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
