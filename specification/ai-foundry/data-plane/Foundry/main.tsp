@@ -1,5 +1,6 @@
 import "./src/agents/routes.tsp";
 import "./src/agents-containers/routes.tsp";
+import "./src/agents-invocations/routes.tsp";
 import "./src/common/custom-types.tsp";
 import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
@@ -11,7 +12,6 @@ import "./src/evaluations/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/indexes/routes.tsp";
 import "./src/insights/routes.tsp";
-import "./src/invoke/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/openai-conversations/routes.tsp";
 import "./src/openai-evaluations/routes.tsp";

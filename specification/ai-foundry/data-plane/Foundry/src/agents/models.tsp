@@ -139,6 +139,7 @@ union AgentKind {
   prompt: "prompt",
   hosted: "hosted",
   workflow: "workflow",
+
   @removed(Versions.v1)
   container_app: "container_app",
 }
@@ -222,7 +223,9 @@ model PromptAgentDefinitionTextOptions {
 @doc("The workflow agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.workflow_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionFeatureKeys.workflow_agents_v1_preview],
+  }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
@@ -248,6 +251,7 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "invoke", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   container_protocol_versions: ProtocolVersionRecord[];
@@ -277,7 +281,9 @@ model HostedAgentDefinition extends AgentDefinition {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
+    required_previews: #[
+      AgentDefinitionFeatureKeys.container_agents_v1_preview
+    ],
   }
 )
 @removed(Versions.v1)
@@ -372,7 +378,9 @@ model ToolArgumentBinding {
 @extension(
   "x-ms-foundry-meta",
   #{
-    required_previews: #[AgentDefinitionFeatureKeys.container_agents_v1_preview],
+    required_previews: #[
+      AgentDefinitionFeatureKeys.container_agents_v1_preview
+    ],
   }
 )
 union ContainerLogKind {
