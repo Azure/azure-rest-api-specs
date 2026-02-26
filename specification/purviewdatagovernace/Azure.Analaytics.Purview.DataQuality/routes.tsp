@@ -1642,7 +1642,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/assets")
-  @put
+  @patch(#{ implicitOptionality: true })
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
