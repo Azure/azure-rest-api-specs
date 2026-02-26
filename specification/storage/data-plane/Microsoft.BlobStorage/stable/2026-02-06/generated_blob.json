@@ -997,8 +997,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -1083,11 +1082,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -1755,8 +1749,7 @@
                 "enum": [
                   "rehydrate-pending-to-hot",
                   "rehydrate-pending-to-cool",
-                  "rehydrate-pending-to-cold",
-                  "rehydrate-pending-to-smart"
+                  "rehydrate-pending-to-cold"
                 ],
                 "x-ms-enum": {
                   "name": "ArchiveStatus",
@@ -1776,11 +1769,6 @@
                       "name": "RehydratePendingToCold",
                       "value": "rehydrate-pending-to-cold",
                       "description": "The archive status is rehydrating pending to cold."
-                    },
-                    {
-                      "name": "RehydratePendingToSmart",
-                      "value": "rehydrate-pending-to-smart",
-                      "description": "The archive status is rehydrating pending to smart."
                     }
                   ]
                 }
@@ -2099,10 +2087,6 @@
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-smart-access-tier": {
-                "type": "string",
-                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               },
               "x-ms-tag-count": {
                 "type": "integer",
@@ -2648,8 +2632,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -2734,11 +2717,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -3137,8 +3115,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -3223,11 +3200,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -4977,8 +4949,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -5063,11 +5034,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -5550,8 +5516,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -5636,11 +5601,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -11436,8 +11396,7 @@
               "Cool",
               "Archive",
               "Premium",
-              "Cold",
-              "Smart"
+              "Cold"
             ],
             "x-ms-enum": {
               "name": "AccessTier",
@@ -11522,11 +11481,6 @@
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
-                },
-                {
-                  "name": "Smart",
-                  "value": "Smart",
-                  "description": "The Smart access tier."
                 }
               ]
             },
@@ -13869,8 +13823,7 @@
         "Cool",
         "Archive",
         "Premium",
-        "Cold",
-        "Smart"
+        "Cold"
       ],
       "x-ms-enum": {
         "name": "AccessTier",
@@ -13955,11 +13908,6 @@
             "name": "Cold",
             "value": "Cold",
             "description": "The Cold access tier."
-          },
-          {
-            "name": "Smart",
-            "value": "Smart",
-            "description": "The Smart access tier."
           }
         ]
       }
@@ -14012,8 +13960,7 @@
       "enum": [
         "rehydrate-pending-to-hot",
         "rehydrate-pending-to-cool",
-        "rehydrate-pending-to-cold",
-        "rehydrate-pending-to-smart"
+        "rehydrate-pending-to-cold"
       ],
       "x-ms-enum": {
         "name": "ArchiveStatus",
@@ -14033,11 +13980,6 @@
             "name": "RehydratePendingToCold",
             "value": "rehydrate-pending-to-cold",
             "description": "The archive status is rehydrating pending to cold."
-          },
-          {
-            "name": "RehydratePendingToSmart",
-            "value": "rehydrate-pending-to-smart",
-            "description": "The archive status is rehydrating pending to smart."
           }
         ]
       }
@@ -14506,11 +14448,6 @@
           "$ref": "#/definitions/ArchiveStatus",
           "description": "The archive status of the blob.",
           "x-ms-client-name": "archiveStatus"
-        },
-        "SmartAccessTier": {
-          "$ref": "#/definitions/AccessTier",
-          "description": "The smart access tier of the blob.",
-          "x-ms-client-name": "smartAccessTier"
         },
         "CustomerProvidedKeySha256": {
           "type": "string",
