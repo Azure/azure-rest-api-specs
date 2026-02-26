@@ -72,7 +72,7 @@ op getReplace(
   "TrafficManagerEndpointSubnetInfo",
   "csharp"
 );
-@@clientName(HeatMapModel, "TrafficManagerHeatMap", "csharp");
+@@clientName(HeatMapModel, "TrafficManagerHeatMapData", "csharp");
 @@clientName(MonitorConfigCustomHeadersItem,
   "TrafficManagerMonitorConfigCustomHeaderInfo",
   "csharp"
@@ -103,7 +103,7 @@ op getReplace(
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(UserMetricsModel, "TrafficManagerUserMetrics", "csharp");
+@@clientName(UserMetricsModel, "TrafficManagerUserMetricData", "csharp");
 @@clientName(TrafficManagerNameAvailability.reason,
   "UnavailableReason",
   "csharp"
@@ -114,6 +114,35 @@ op getReplace(
 );
 @@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   "CheckTrafficManagerNameAvailabilityV2",
+  "csharp"
+);
+// Resource data type renames
+@@clientName(Endpoint, "TrafficManagerEndpointData", "csharp");
+@@clientName(Profile, "TrafficManagerProfileData", "csharp");
+@@clientName(TrafficManagerGeographicHierarchy,
+  "TrafficManagerGeographicHierarchyData",
+  "csharp"
+);
+// Model type renames (RP prefix)
+@@clientName(DnsConfig, "TrafficManagerDnsConfig", "csharp");
+@@clientName(MonitorConfig, "TrafficManagerMonitorConfig", "csharp");
+@@clientName(HeatMapEndpoint, "TrafficManagerHeatMapEndpoint", "csharp");
+@@clientName(Region, "TrafficManagerRegion", "csharp");
+// Enum/struct type renames (RP prefix)
+@@clientName(EndpointMonitorStatus,
+  "TrafficManagerEndpointMonitorStatus",
+  "csharp"
+);
+@@clientName(EndpointStatus, "TrafficManagerEndpointStatus", "csharp");
+@@clientName(MonitorProtocol, "TrafficManagerMonitorProtocol", "csharp");
+@@clientName(ProfileMonitorStatus,
+  "TrafficManagerProfileMonitorStatus",
+  "csharp"
+);
+@@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
+@@clientName(HeatMapType, "TrafficManagerHeatMapType", "csharp");
+@@clientName(Microsoft.Network.RecordType,
+  "TrafficManagerProfileRecordType",
   "csharp"
 );
 @@alternateType(TrafficManagerNameAvailability.type,
@@ -128,10 +157,6 @@ op getReplace(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-// @@clientName(Microsoft.Network.RecordType,
-//   "TrafficManagerProfileRecordType",
-//   "csharp"
-// );
 @@alternateType(Microsoft.Network.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
