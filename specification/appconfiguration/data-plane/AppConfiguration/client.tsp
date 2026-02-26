@@ -7,6 +7,9 @@ using AzureAppConfiguration;
 
 namespace SdkCustomizations;
 
+// Java specific customizations
+@@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
+
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
 @@clientName(CompositionType, "SnapshotComposition", "python");

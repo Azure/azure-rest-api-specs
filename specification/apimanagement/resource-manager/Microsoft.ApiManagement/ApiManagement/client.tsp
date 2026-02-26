@@ -70,6 +70,11 @@ using Azure.ResourceManager;
   "java"
 );
 
+@@clientName(CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+
 @@clientName(ExportFormat.Swagger, "SWAGGER_LINK", "java");
 @@clientName(ExportFormat.Wadl, "WADL_LINK", "java");
 @@clientName(ExportFormat.Wsdl, "WSDL_LINK", "java");
