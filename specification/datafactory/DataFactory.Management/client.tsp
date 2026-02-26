@@ -175,6 +175,31 @@ using Microsoft.DataFactory;
   "PrivateEndPointConnections",
   "java"
 );
+@@clientName(DataLakeAnalyticsUSQLActivity,
+  "DataLakeAnalyticsUsqlActivity",
+  "java"
+);
+@@clientName(DataLakeAnalyticsUSQLActivityTypeProperties,
+  "DataLakeAnalyticsUsqlActivityTypeProperties",
+  "java"
+);
+
+@@clientName(SSISLogLocation, "SsisLogLocation", "java");
+@@clientName(SSISAccessCredential, "SsisAccessCredential", "java");
+@@clientName(SSISChildPackage, "SsisChildPackage", "java");
+@@clientName(SSISPropertyOverride, "SsisPropertyOverride", "java");
+@@clientName(ExecuteSSISPackageActivity, "ExecuteSsisPackageActivity", "java");
+@@clientName(SSISExecutionParameter, "SsisExecutionParameter", "java");
+@@clientName(SSISExecutionCredential, "SsisExecutionCredential", "java");
+@@clientName(SSISPackageLocation, "SsisPackageLocation", "java");
+@@clientName(ExecuteSSISPackageActivityTypeProperties,
+  "ExecuteSsisPackageActivityTypeProperties",
+  "java"
+);
+@@clientName(SSISLogLocationTypeProperties,
+  "SsisLogLocationTypeProperties",
+  "java"
+);
 
 @@clientLocation(PrivateEndpointConnectionResources.listByFactory,
   "PrivateEndPointConnections",
