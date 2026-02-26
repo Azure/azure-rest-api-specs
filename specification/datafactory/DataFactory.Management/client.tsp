@@ -180,6 +180,10 @@ using Microsoft.DataFactory;
   "DataLakeAnalyticsUsqlActivity",
   "java"
 );
+@@clientName(DataLakeAnalyticsUSQLActivityTypeProperties,
+  "DataLakeAnalyticsUsqlActivityTypeProperties",
+  "java"
+);
 @@clientName(SSISLogLocation, "SsisLogLocation", "java");
 @@clientName(SSISAccessCredential, "SsisAccessCredential", "java");
 @@clientName(SSISChildPackage, "SsisChildPackage", "java");
@@ -190,6 +194,10 @@ using Microsoft.DataFactory;
 @@clientName(SSISPackageLocation, "SsisPackageLocation", "java");
 @@clientName(ExecuteSSISPackageActivityTypeProperties,
   "ExecuteSsisPackageActivityTypeProperties",
+  "java"
+);
+@@clientName(SSISLogLocationTypeProperties,
+  "SsisLogLocationTypeProperties",
   "java"
 );
 
