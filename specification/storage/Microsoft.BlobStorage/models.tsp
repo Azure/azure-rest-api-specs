@@ -1029,7 +1029,8 @@ model BlobProperties {
 
   /** The smart access tier of the blob. */
   @added(Versions.v2026_06_06)
-  @Xml.name("SmartAccessTier") smartAccessTier?: AccessTier;
+  @Xml.name("SmartAccessTier")
+  smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
