@@ -113,7 +113,7 @@ union ActivityType {
 scalar ChangeActivityEventResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
-      type: "Private.AzureChangeControl/changeActivityEvents",
+      type: "Microsoft.ChangeSafety/changeActivityEvents",
     }
   ]>;
 
