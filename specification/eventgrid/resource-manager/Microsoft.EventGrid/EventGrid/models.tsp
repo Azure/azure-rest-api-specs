@@ -12,29 +12,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.EventGrid;
 
 /**
- * ARM proxy resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
-@summary("Resource")
-model ProxyResource {
-  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
-  id?: armResourceIdentifier;
-
-  /** The name of the resource */
-  name?: string;
-
-  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
-  type?: armResourceType;
-
-  /** Azure Resource Manager metadata containing createdBy and modifiedBy information. */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * Result of the List Channels operation
  */
 model ChannelsListResult is ResourceListResult<Channel>;

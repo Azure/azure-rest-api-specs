@@ -17907,13 +17907,21 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Properties of the private link resource.",
           "x-ms-client-flatten": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -17958,31 +17966,6 @@
       "required": [
         "value"
       ]
-    },
-    "ProxyResource": {
-      "type": "object",
-      "title": "Resource",
-      "description": "ARM proxy resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace."
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
     },
     "PublicNetworkAccess": {
       "type": "string",

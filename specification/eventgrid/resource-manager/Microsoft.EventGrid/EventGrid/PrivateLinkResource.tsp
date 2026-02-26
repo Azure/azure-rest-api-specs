@@ -8,19 +8,32 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.EventGrid;
 /**
  * Information of the private link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkResource extends ProxyResource {
+@Azure.ResourceManager.Legacy.customAzureResource
+model PrivateLinkResource {
   /**
    * Properties of the private link resource.
    */
   properties?: PrivateLinkResourceProperties;
+
+  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
+  id?: armResourceIdentifier;
+
+  /** The name of the resource */
+  name?: string;
+
+  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
+  type?: armResourceType;
 }
 
 @armResourceOperations
