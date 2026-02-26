@@ -1,0 +1,11 @@
+- tool: TypeSpecValidation
+  paths:
+    - Discovery.Bookshelf/tspconfig.yaml
+    - Discovery.Workspace/tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  reason: >-
+    Discovery uses a unified multi-service SDK package pattern where Bookshelf and Workspace
+    TypeSpec projects generate into subdirectories (_bookshelf/_workspace) of a single SDK package.
+    The emitter-output-dir paths include subdirectory suffixes that don't match standard naming
+    conventions but are required for the unified package structure.
