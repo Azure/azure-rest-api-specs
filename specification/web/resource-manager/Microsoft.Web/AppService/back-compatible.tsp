@@ -2309,4 +2309,18 @@ using Microsoft.Web;
   "java"
 );
 
-@@alternateType(CloningInfo.correlationId, uuid, "java");
+@@alternateType(CloningInfo.correlationId, Azure.Core.uuid, "java");
+@@alternateType(SiteProperties.inProgressOperationId, Azure.Core.uuid, "java");
+@@alternateType(SitePatchResourceProperties.inProgressOperationId,
+  Azure.Core.uuid,
+  "java"
+);
+@@alternateType(Operation.geoMasterOperationId, Azure.Core.uuid, "java");
+@@alternateType(RecommendationProperties.recommendationId,
+  Azure.Core.uuid,
+  "java"
+);
+@@alternateType(RecommendationRuleProperties.recommendationId,
+  Azure.Core.uuid,
+  "java"
+);
