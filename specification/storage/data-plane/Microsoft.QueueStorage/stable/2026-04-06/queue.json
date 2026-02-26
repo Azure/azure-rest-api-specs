@@ -2278,24 +2278,11 @@
       ]
     },
     "SignedIdentifiers": {
-      "type": "object",
+      "type": "array",
       "description": "Represents an array of signed identifiers",
-      "properties": {
-        "SignedIdentifier": {
-          "type": "array",
-          "description": "The list of signed identifiers.",
-          "items": {
-            "$ref": "#/definitions/SignedIdentifier"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "items"
-        }
-      },
-      "required": [
-        "SignedIdentifier"
-      ]
+      "items": {
+        "$ref": "#/definitions/SignedIdentifier"
+      }
     },
     "StorageError": {
       "type": "object",
