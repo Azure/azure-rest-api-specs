@@ -1321,6 +1321,30 @@
     }
   },
   "definitions": {
+    "EncryptionInTransitRequired": {
+      "type": "string",
+      "description": "State of NFS encryption in transit.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionInTransitRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Encryption in Transit is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Encryption in Transit is disabled."
+          }
+        ]
+      }
+    },
     "FileShare": {
       "type": "object",
       "description": "File share resource",
@@ -2025,6 +2049,10 @@
         "rootSquash": {
           "$ref": "#/definitions/ShareRootSquash",
           "description": "Root squash defines how root users on clients are mapped to the NFS share."
+        },
+        "encryptionInTransitRequired": {
+          "$ref": "#/definitions/EncryptionInTransitRequired",
+          "description": "Encryption in transit defines whether data is encrypted for NFS shares."
         }
       }
     },
