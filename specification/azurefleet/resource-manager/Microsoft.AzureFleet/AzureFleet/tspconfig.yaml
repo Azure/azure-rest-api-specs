@@ -12,7 +12,6 @@ options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     output-file: "{version-status}/{version}/azurefleet.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -51,3 +50,6 @@ options:
     flavor: azure
     package-details:
       name: "@azure/arm-computefleet"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ComputeFleet"
+    emitter-output-dir: "{output-dir}/sdk/computefleet/{namespace}"

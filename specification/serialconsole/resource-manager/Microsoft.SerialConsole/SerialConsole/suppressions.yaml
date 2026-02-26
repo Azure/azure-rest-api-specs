@@ -7,3 +7,10 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-07-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: 'No existing SDK in Java. Will be removed once these SDKs are introduced'
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - tspconfig.yaml
