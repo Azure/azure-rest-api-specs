@@ -4352,9 +4352,11 @@ model KnowledgeBase {
   description?: string;
 
   /** Instructions considered by the knowledge base when developing query plan. */
+  @removed(Versions.v2026_04_01)
   retrievalInstructions?: string;
 
   /** Instructions considered by the knowledge base when generating answers. */
+  @removed(Versions.v2026_04_01)
   answerInstructions?: string;
 }
 
