@@ -93,6 +93,8 @@ interface Service {
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+
+      /** Storage service properties */
       @body storageServiceProperties: StorageServiceProperties;
     },
     {
@@ -145,6 +147,8 @@ interface Service {
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+
+      /** Key information */
       @body keyInfo: KeyInfo;
     },
     {
@@ -236,7 +240,9 @@ interface Share {
   @get
   getProperties is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -333,7 +339,9 @@ interface Share {
   @delete
   delete is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
 
@@ -355,15 +363,24 @@ interface Share {
   @put
   acquireLease is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
+
+      /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration: int32;
+
+      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
       @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
+
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 201;
+
+      /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -375,7 +392,9 @@ interface Share {
   @put
   releaseLease is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...LeaseIdParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
@@ -391,14 +410,20 @@ interface Share {
   @put
   changeLease is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...LeaseIdParameter;
+
+      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
       @header("x-ms-proposed-lease-id") proposedLeaseId: string;
+
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
+      /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -410,13 +435,16 @@ interface Share {
   @put
   renewLease is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...LeaseIdParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
+      /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -428,14 +456,21 @@ interface Share {
   @put
   breakLease is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
+
+      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
       @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 202;
+
+      /** Approximate time remaining in the lease period, in seconds. */
       @header("x-ms-lease-time") leaseTime?: string;
     }
   >;
@@ -447,13 +482,17 @@ interface Share {
   @put
   createSnapshot is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 201;
+
+      /** This header is a DateTime value that uniquely identifies the share snapshot. The value of this header may be used in subsequent requests to access the share snapshot. This value is opaque. */
       @header("x-ms-snapshot") snapshot: string;
     }
   >;
@@ -465,13 +504,17 @@ interface Share {
   @put
   createPermission is StorageOperationRequestBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
       @body permission: SharePermission;
     },
     {
       @statusCode statusCode: 201;
+
+      /** Key of the permission set for the directory/file. */
       @header("x-ms-file-permission-key") filePermissionKey: string;
     }
   >;
@@ -483,8 +526,12 @@ interface Share {
   @get
   getPermission is StorageOperationResponseBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey: string;
+
       ...TimeoutParameter;
 
       @header("x-ms-file-permission-format")
@@ -532,7 +579,9 @@ interface Share {
   @put
   setMetadata is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...LeaseIdParameter;
@@ -548,7 +597,9 @@ interface Share {
   @get
   getAccessPolicy is StorageOperationResponseBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -565,7 +616,9 @@ interface Share {
   @put
   setAccessPolicy is StorageOperationRequestBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -581,7 +634,9 @@ interface Share {
   @get
   getStatistics is StorageOperationResponseBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -598,7 +653,9 @@ interface Share {
   @put
   restore is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
       ...TimeoutParameter;
       @header("x-ms-deleted-share-name") deletedShareName?: string;
       @header("x-ms-deleted-share-version") deletedShareVersion?: string;
@@ -622,12 +679,21 @@ interface Directory {
   @put
   create is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
       ...TimeoutParameter;
       ...MetadataHeaders;
+
+      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission") filePermission?: string;
+
+      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
+
       @header("x-ms-file-attributes") fileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
@@ -663,8 +729,12 @@ interface Directory {
   @get
   getProperties is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -688,8 +758,12 @@ interface Directory {
   @delete
   delete is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
     },
@@ -705,11 +779,20 @@ interface Directory {
   @put
   setProperties is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
       ...TimeoutParameter;
+
+      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission") filePermission?: string;
+
+      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
+
       @header("x-ms-file-attributes") fileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
@@ -743,8 +826,12 @@ interface Directory {
   @put
   setMetadata is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
@@ -860,15 +947,26 @@ interface File {
   @put
   create is StorageOperationNoBody<
     {
+      /** The name of the target share. */
       @path shareName: string;
+
+      /** The path of the target directory. */
       @path directory: string;
+
+      /** The path of the target file. */
       @path fileName: string;
+
       @header("x-ms-content-length") contentLength: int64;
       ...TimeoutParameter;
       @header("x-ms-type") fileType?: string;
       ...MetadataHeaders;
+
+      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission") filePermission?: string;
+
+      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
+
       @header("x-ms-file-attributes") fileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
