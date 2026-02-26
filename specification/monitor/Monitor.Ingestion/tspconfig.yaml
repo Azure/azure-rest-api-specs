@@ -37,6 +37,11 @@ options:
     rawjson-as-bytes: true
     inject-spans: true
     generate-fakes: true
+  "@azure-tools/typespec-rust":
+    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+    crate-name: "azure_monitor_ingestion"
+    crate-version: "0.0.1"
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     package-name: "Azure.Monitor.Ingestion"
     namespace: "{package-name}"

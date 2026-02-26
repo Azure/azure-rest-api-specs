@@ -10,6 +10,8 @@ runs:
         # actions/github-script@v8 uses Node 24
         node-version: 24.x
         # "--no-audit": improves performance
+        # "--no-fund": improves performance
+        # "--prefer-offline": improves performance
         # "--omit dev": not needed at runtime, improves performance
-        install-command: "npm ci --no-audit --omit dev"
+        install-command: "npm ci --no-audit --no-fund --prefer-offline --omit dev"
         working-directory: ./.github
