@@ -2161,13 +2161,13 @@ model DqAssetResponse {
 /**
  * Paginated response for list DQ assets. Matches service DQAssetPaginatedResponse.
  */
-@doc("Paginated list of DQ assets with continuation token")
+@doc("Paginated list of DQ assets with next link")
 model DqAssetPaginatedResponse {
-  @doc("Token to fetch the next page of results")
-  continuationToken?: string;
-
   @doc("List of DQ assets for the current page")
-  response?: DqAssetResponse[];
+  value?: DqAssetResponse[];
+
+  @doc("Link to retrieve the next page of results")
+  nextLink?: string;
 }
 
 /**
@@ -2188,7 +2188,10 @@ model AssetScoreObject {
 @doc("List of asset scores for the requested assets")
 model AssetScoresResponse {
   @doc("List of asset id and score pairs")
-  response?: AssetScoreObject[];
+  value?: AssetScoreObject[];
+
+  @doc("Link to retrieve the next page of results")
+  nextLink?: string;
 }
 
 /**

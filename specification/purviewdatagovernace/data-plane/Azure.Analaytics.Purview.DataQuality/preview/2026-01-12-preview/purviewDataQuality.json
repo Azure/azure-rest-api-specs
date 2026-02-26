@@ -4175,12 +4175,16 @@
       "type": "object",
       "description": "List of asset scores for the requested assets",
       "properties": {
-        "response": {
+        "value": {
           "type": "array",
           "description": "List of asset id and score pairs",
           "items": {
             "$ref": "#/definitions/AssetScoreObject"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve the next page of results"
         }
       }
     },
@@ -4915,18 +4919,18 @@
     },
     "DqAssetPaginatedResponse": {
       "type": "object",
-      "description": "Paginated list of DQ assets with continuation token",
+      "description": "Paginated list of DQ assets with next link",
       "properties": {
-        "continuationToken": {
-          "type": "string",
-          "description": "Token to fetch the next page of results"
-        },
-        "response": {
+        "value": {
           "type": "array",
           "description": "List of DQ assets for the current page",
           "items": {
             "$ref": "#/definitions/DqAssetResponse"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve the next page of results"
         }
       }
     },
