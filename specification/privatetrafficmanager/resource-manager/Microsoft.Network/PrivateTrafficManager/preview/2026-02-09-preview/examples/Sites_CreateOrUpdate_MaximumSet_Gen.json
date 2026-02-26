@@ -1,0 +1,74 @@
+{
+  "title": "Sites_CreateOrUpdate_MaximumSet",
+  "operationId": "Sites_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "topologyMapName": "my-resource-name",
+    "siteName": "my-resource-name",
+    "resource": {
+      "properties": {
+        "probingGatewayIds": [
+          "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/ProbingGateways/myProbingGateway"
+        ],
+        "virtualNetworkIds": [
+          "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "probingGatewayIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/ProbingGateways/myProbingGateway"
+          ],
+          "virtualNetworkIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/topologyMaps/myTopologyMap/sites/mySite",
+        "name": "mySite",
+        "type": "Microsoft.Network/topologyMaps/sites",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "probingGatewayIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/ProbingGateways/myProbingGateway"
+          ],
+          "virtualNetworkIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/topologyMaps/myTopologyMap/sites/mySite",
+        "name": "mySite",
+        "type": "Microsoft.Network/topologyMaps/sites",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-18T10:05:58.139Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/privatetrafficmanager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{emitter-output-dir}/{version-status}/{version}/privateTrafficManager.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.privateTrafficManager"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.PrivateTrafficManager"
+    flavor:
+      "azure"
+      # The following options are required for generating the management plane SDKs. Please refer to https://aka.ms/azure-sdk/typespec for more details.
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-privatetrafficmanager"
+    namespace: "azure.mgmt.privatetrafficmanager"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-privatetrafficmanager"
+    namespace: "com.azure.resourcemanager.privatetrafficmanager"
+    service-name: "PrivateTrafficManager" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-privatetrafficmanager"
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: "@azure/arm-privatetrafficmanager"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/privatetrafficmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprivatetrafficmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatetrafficmanager"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
