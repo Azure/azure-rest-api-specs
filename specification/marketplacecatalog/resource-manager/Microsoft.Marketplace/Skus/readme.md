@@ -26,9 +26,6 @@ input-file:
   - stable/2025-05-01/openapi.json
 
 suppressions:
-  - code: PathResourceProviderMatchNamespace
-    from: openapi.json
-    reason: The TypeSpec project folder is Microsoft.Skus but the ARM provider namespace is Microsoft.Marketplace by design.
   - code: RequiredPropertiesMissingInResourceModel
     from: openapi.json
     where: $.definitions.SkuSummaryListResult
