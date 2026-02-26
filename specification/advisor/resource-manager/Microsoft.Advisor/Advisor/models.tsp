@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -237,6 +239,7 @@ union ReviewStatus {
   /**
    * Triaged
    */
+  @removed(Versions.v2026_03_01_preview)
   Triaged: "Triaged",
 
   /**
@@ -248,6 +251,7 @@ union ReviewStatus {
 /**
  * Recommendation priority name enum.
  */
+@removed(Versions.v2026_03_01_preview)
 union PriorityName {
   string,
 
@@ -270,6 +274,7 @@ union PriorityName {
 /**
  * Recommendation status name enum.
  */
+@removed(Versions.v2026_03_01_preview)
 union RecommendationStatusName {
   string,
 
@@ -292,6 +297,7 @@ union RecommendationStatusName {
 /**
  * Reason for rejecting recommendation name enum.
  */
+@removed(Versions.v2026_03_01_preview)
 union ReasonForRejectionName {
   string,
 
@@ -1154,12 +1160,14 @@ model ResiliencyReviewProperties {
 /**
  * Collection of Advisor triage recommendations.
  */
+@removed(Versions.v2026_03_01_preview)
 model TriageRecommendationCollection is Azure.Core.Page<TriageRecommendation>;
 
 /**
  * Triage recommendation properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_03_01_preview)
 model TriageRecommendationProperties {
   /**
    * Review id.
@@ -1225,6 +1233,7 @@ model TriageRecommendationProperties {
 /**
  * Recommendation reject body.
  */
+@removed(Versions.v2026_03_01_preview)
 model RecommendationRejectBody {
   /**
    * Reason for rejecting recommendation.
@@ -1236,6 +1245,7 @@ model RecommendationRejectBody {
  * Triage resource properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_03_01_preview)
 model TriageResourceProperties {
   /**
    * Unique identifier for the review resource this triageResource belongs to.
@@ -1283,6 +1293,7 @@ model TriageResourceProperties {
 /**
  * Collection of Advisor triage resources.
  */
+@removed(Versions.v2026_03_01_preview)
 model TriageResourceCollection is Azure.Core.Page<TriageResource>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
