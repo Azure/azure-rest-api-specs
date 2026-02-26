@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "name": "testSite",
+    "networkSecurityPerimeterAssociationReference": "6700F3F3-C5F0-464C-B432-39694F55A180.myAssociation",
+    "api-version": "2024-11-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "6700F3F3-C5F0-464C-B432-39694F55A180.myAssociation",
+        "type": "Microsoft.Web/sites/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/networkSecurityPerimeterConfigurations/6700F3F3-C5F0-464C-B432-39694F55A180.myAssociation",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "provisioningIssues": null,
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/079ae74b-9689-40ac-8ec1-64ec0ef64562/resourceGroups/stf-centraluseuap/providers/Microsoft.Network/networkSecurityPerimeters/stf-centraluseuap-perimeter",
+            "perimeterGuid": "6700F3F3-C5F0-464C-B432-39694F55A180",
+            "location": "centraluseuap"
+          },
+          "resourceAssociation": {
+            "name": "myAssociation",
+            "accessMode": "Enforced"
+          },
+          "profile": {
+            "accessRulesVersion": "2",
+            "diagnosticSettingsVersion": "2",
+            "name": "stf-centraluseuap-profile",
+            "accessRules": [
+              {
+                "name": "allow_serviceTags",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [],
+                  "subscriptions": [],
+                  "networkSecurityPerimeters": [],
+                  "fullyQualifiedDomainNames": [],
+                  "emailAddresses": [],
+                  "phoneNumbers": [],
+                  "serviceTags": [
+                    "1ESResourceManager",
+                    "AzureCloud",
+                    "CorpNetPublic"
+                  ],
+                  "appliesTo": [
+                    {
+                      "resourceType": "*",
+                      "features": [
+                        "*"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "enabledLogCategories": [
+              "NspPublicInboundPerimeterRulesAllowed",
+              "NspPublicInboundPerimeterRulesDenied",
+              "NspPublicInboundResourceRulesAllowed",
+              "NspPublicInboundResourceRulesDenied"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
