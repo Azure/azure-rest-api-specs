@@ -284,16 +284,33 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The resource provider namespace of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+            "name": "parentResource",
+            "in": "path",
+            "description": "The name of the parent resource.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -332,16 +349,33 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The resource provider namespace of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+            "name": "parentResource",
+            "in": "path",
+            "description": "The name of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "serialPort",
@@ -385,16 +419,33 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The resource provider namespace of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+            "name": "parentResource",
+            "in": "path",
+            "description": "The name of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "serialPort",
@@ -449,16 +500,33 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceGroupName"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The resource provider namespace of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+            "name": "parentResourceType",
+            "in": "path",
+            "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+            "name": "parentResource",
+            "in": "path",
+            "description": "The name of the parent resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "serialPort",
@@ -759,41 +827,5 @@
       }
     }
   },
-  "parameters": {
-    "ParentResourceParameters.parentResource": {
-      "name": "parentResource",
-      "in": "path",
-      "description": "The name of the parent resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ParentResourceParameters.parentResourceType": {
-      "name": "parentResourceType",
-      "in": "path",
-      "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
-    "ParentResourceParameters.resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 90,
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "x-ms-parameter-location": "method"
-    },
-    "ParentResourceParameters.resourceProviderNamespace": {
-      "name": "resourceProviderNamespace",
-      "in": "path",
-      "description": "The resource provider namespace of the parent resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
