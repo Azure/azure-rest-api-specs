@@ -21,21 +21,20 @@ compatibility: >-
 
 | Tool | Purpose |
 |------|---------|
-| `azsdk_check_service_label` | Check if a service label exists and get its status |
-| `azsdk_create_service_label` | Create a new service label PR |
+| `azsdk_check_service_label` | Check if a label exists |
+| `azsdk_create_service_label` | Create a new label PR |
+
+**Prerequisites**: azure-sdk-mcp server must be running. Without MCP, direct user to [Common Labels CSV](https://github.com/Azure/azure-sdk-tools/blob/main/tools/github/data/common-labels.csv) manually.
 
 ## Steps
 
-1. **Explain Importance** — Service labels enable automatic owner assignment, issue notifications, and PR reviewer assignment across Azure SDK repos.
-2. **Get Label** — Ask user for their service label. If unknown, direct them to the [Common Labels CSV](https://github.com/Azure/azure-sdk-tools/blob/main/tools/github/data/common-labels.csv).
-3. **Validate** — Run `azsdk_check_service_label`. Handle results:
-   - **Exists**: Success — proceed with release process.
-   - **InReview**: Pending approval — user can proceed.
-   - **DoesNotExist** or **NotAServiceLabel**: Go to step 4.
-4. **Create Label** — Generate a label name following guidelines: match official product name, Title Case, no "Microsoft/Azure" prefix, no service group separators. Confirm with user, then run `azsdk_create_service_label` with confirmed name and documentation link.
+1. **Get Label** — Ask user for their service label. If unknown, point to Common Labels CSV.
+2. **Validate** — Run `azsdk_check_service_label`:
+   - **Exists** or **InReview**: Proceed with release process.
+   - **DoesNotExist** or **NotAServiceLabel**: Go to step 3.
+3. **Create** — Generate label name (match product name, Title Case, no "Microsoft/Azure" prefix). Confirm with user, then run `azsdk_create_service_label` with name and docs link.
 
 ## Related Skills
 
-- `validate-codeowners` — Validate CODEOWNERS entries for SDK repos
-- `prepare-release-plan` — Create release plan (requires valid service label)
-- `typespec-to-sdk-workflow` — Full end-to-end release workflow
+- `validate-codeowners` — CODEOWNERS validation
+- `prepare-release-plan` — Requires valid service label

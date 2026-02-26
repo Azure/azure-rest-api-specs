@@ -31,8 +31,12 @@ compatibility: >-
    - Changelog completeness
    - Package name approval (for new preview packages)
    - Release date set in release tracker
-3. **Review Results** — If not ready, display each failing check and guide the user to resolve issues before proceeding.
-4. **Trigger Release** — Once ready, run `azsdk_release_sdk` with `checkReady: false` to trigger the release pipeline. Inform user they must approve the release stage in the pipeline after it is triggered.
+3. **Review Results** — If not ready, display failing checks and guide the user to resolve issues.
+4. **Trigger Release** — Once ready, run `azsdk_release_sdk` with `checkReady: false` to trigger the pipeline. Inform user they must approve the release stage after triggering.
+
+## Prerequisites
+
+Azure SDK MCP server must be running. No CLI fallback — if MCP is unavailable, prompt user to configure it.
 
 ## Related Skills
 

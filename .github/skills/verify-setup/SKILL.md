@@ -11,11 +11,17 @@ description: >-
   INVOKES: azsdk_verify_setup.
   FOR SINGLE OPERATIONS: Use azsdk_verify_setup directly with language and packagePath parameters.
 compatibility: >-
-  Requires: azure-sdk-mcp server.
+  Requires: azure-sdk-mcp server (provides azsdk_verify_setup tool).
   Optional: Language-specific SDKs (.NET, Java, Python, Node.js, Go) for full validation.
+  CLI fallback: When MCP is unavailable, manually check tool versions (dotnet, java, python, node, go).
 ---
 
 # Verify Developer Environment Setup
+
+## Prerequisites
+
+- **azure-sdk-mcp** server running (provides `azsdk_verify_setup`)
+- PowerShell installed on host
 
 ## MCP Tools
 
@@ -25,13 +31,17 @@ compatibility: >-
 
 ## Steps
 
-1. **Identify Context** — Determine the repo root path (e.g., `azure-sdk-for-js`). Map the repo to its language: .NET, Java, JavaScript, Python, Go.
-2. **Run Verification** — Call `azsdk_verify_setup` with `langs` (language list) and `packagePath` (repo root). To check all languages, pass all supported languages.
-3. **Present Results** — If all checks pass, confirm success. If requirements are missing, display step-by-step resolution instructions grouped by category.
-4. **Resolve Issues** — For each missing requirement, provide shell-specific install commands. For Python issues, mention the `AZSDKTOOLS_PYTHON_VENV_PATH` environment variable.
+1. **Identify Context** — Determine repo root path and map to language: .NET, Java, JavaScript, Python, Go.
+2. **Run Verification** — Call `azsdk_verify_setup` with `langs` and `packagePath`. Pass all supported languages to check everything.
+3. **Present Results** — Confirm success or display resolution instructions grouped by category.
+4. **Resolve Issues** — Provide install commands per missing requirement. For Python, mention `AZSDKTOOLS_PYTHON_VENV_PATH`.
+
+## When MCP Is Unavailable
+
+Fall back to manual checks: `dotnet --version`, `java -version`, `python --version`, `node --version`, `go version`.
 
 ## Related Skills
 
-- `check-package-validation` — Run package-level validation checks
-- `generate-sdk-locally` — Generate SDK code locally
-- `typespec-to-sdk-workflow` — Full end-to-end release workflow
+- `check-package-validation` — Package-level validation
+- `generate-sdk-locally` — Local SDK code generation
+- `typespec-to-sdk-workflow` — End-to-end release workflow

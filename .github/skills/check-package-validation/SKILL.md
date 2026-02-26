@@ -29,6 +29,7 @@ compatibility: >-
 2. **Execute** — Run `azsdk_package_run_check` with `packagePath` and `checkType`. Optionally set `fixCheckErrors: true` to auto-fix.
 3. **Present Results** — If all checks pass, confirm success. If failures occur, display each failing check with details and suggest fixes.
 4. **Iterate** — If user wants to fix issues, offer to re-run with `fixCheckErrors: true` or guide manual fixes, then re-run validation.
+5. **If MCP unavailable** — Inform user azure-sdk-mcp server is required; suggest `verify-setup` skill.
 
 ## Related Skills
 

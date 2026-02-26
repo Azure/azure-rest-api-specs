@@ -256,23 +256,35 @@ After the initial waza-based creation, sensei was used to score and improve all 
 
 ### Sensei Score Summary (Post-Improvement)
 
-| Skill | Tokens | Compliance | Spec | Advisory | Stars |
-|-------|--------|------------|------|----------|-------|
-| typespec-authoring | 491 | High | 8/8 ✅ | All pass ✅ | 🌟 module-count, 🌟 complexity |
-| typespec-customization | 465 | High | 8/8 ✅ | All pass ✅ | 🌟 module-count, 🌟 complexity |
-| generate-sdk-locally | 377 | High | 8/8 ✅ | All pass ✅ | 🌟 complexity |
-| package-release-readiness | 446 | High | 8/8 ✅ | All pass ✅ | 🌟 complexity |
-| prepare-release-plan | 393 | High | 8/8 ✅ | All pass ✅ | — |
-| apiview-feedback-resolution | 444 | High | 8/8 ✅ | All pass ✅ | 🌟 complexity |
-| pipeline-troubleshooting | 461 | High | 8/8 ✅ | All pass ✅ | 🌟 complexity |
-| typespec-to-sdk-workflow | 495 | High | 8/8 ✅ | All pass ✅ | 🌟 complexity |
+| Skill | Tokens | Compliance | Spec | MCP | Stars |
+|-------|--------|------------|------|-----|-------|
+| typespec-authoring | 493 | High | 8/8 ✅ | 2/4 | 🌟 module-count, 🌟 complexity |
+| typespec-customization | 469 | High | 8/8 ✅ | 2/4 | 🌟 module-count, 🌟 complexity |
+| generate-sdk-locally | 420 | High | 8/8 ✅ | 1/4 | 🌟 complexity |
+| package-release-readiness | 449 | High | 8/8 ✅ | 2/4 | 🌟 complexity |
+| prepare-release-plan | 421 | High | 8/8 ✅ | 3/4 | — |
+| apiview-feedback-resolution | 464 | High | 8/8 ✅ | 2/4 | 🌟 complexity |
+| pipeline-troubleshooting | 476 | High | 8/8 ✅ | 2/4 | 🌟 complexity |
+| typespec-to-sdk-workflow | 488 | High | 8/8 ✅ | 2/4 | 🌟 complexity |
 
-**Total tokens: 3572** (down from 3817 before sensei, -6.4%)
+### New Skills — Ralph Loop Results
+
+The following 5 skills were added from previously-excluded instruction files and ran through the Ralph loop:
+
+| Skill | Initial Tokens | Final Tokens | Compliance | Spec | MCP | Key Changes |
+|-------|---------------|--------------|------------|------|-----|-------------|
+| verify-setup | 407 | 460 | High | 8/8 ✅ | **4/4 ✅** | Added MCP prerequisites, CLI fallback, expanded compatibility |
+| validate-service-label | 476 | 419 | High | 8/8 ✅ | **4/4 ✅** | Added MCP docs, removed verbose step, compressed descriptions (-84 tokens) |
+| validate-codeowners | 446 | 445 | High | 8/8 ✅ | **4/4 ✅** | Added MCP tools table, prerequisites, CLI fallback, removed hardcoded URL |
+| check-package-validation | 465 | 491 | High | 8/8 ✅ | **4/4 ✅** | Added CLI fallback step |
+| sdk-release | 445 | 464 | High | 8/8 ✅ | **4/4 ✅** | Added prerequisites section, tightened step wording |
+
+**Total tokens (all 13 skills):** ~5851
 
 ### Remaining Advisory Notes
 
-- All 8 skills show `⚠️ spec-version` — this is a false positive; `metadata.version: "1.0.0"` is present but sensei looks for a different YAML path.
-- Waza MCP Integration checks (prerequisites, CLI fallback) are advisory only and don't affect compliance score.
+- All skills show `⚠️ spec-version` — this is a false positive; `metadata.version: "1.0.0"` is present but sensei looks for a different YAML path.
+- Original 8 skills have MCP Integration at 1-3/4 (advisory only, doesn't affect compliance). New 5 skills achieve 4/4 MCP Integration.
 
 ---
 
@@ -285,9 +297,9 @@ After the initial waza-based creation, sensei was used to score and improve all 
 | Instructions excluded | 3 (out-of-scope) |
 | Reference docs | 10 |
 | Eval suites | 13 |
-| Total eval tasks | 53 |
+| Total eval tasks | 53 (33 original + 20 new) |
 | Eval fixtures | 8 |
 | Compliance level | High (all 13 skills ✅) |
 | Eval pass rate | 91% (30/33 tasks, original 8 suites) |
-| Sensei improvements | 5 categories across original 8 skills |
-| Total tokens (all 13 skills) | ~5811 |
+| Ralph Loop passes | 2 (original 8 + new 5) |
+| Total tokens (all 13 skills) | ~5851 |

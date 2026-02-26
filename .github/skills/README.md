@@ -283,20 +283,25 @@ on pull requests that modify files under `.github/skills/`.
 
 ## Current Compliance Status
 
-| Skill | Type | Compliance | Tokens | Sensei Score | Eval |
-|-------|------|------------|--------|-------------|------|
-| typespec-to-sdk-workflow | Workflow | High | 490 ✅ | High | ✅ |
-| typespec-authoring | Utility | High | 491 ✅ | High | ✅ |
-| typespec-customization | Utility | High | 438 ✅ | High | ✅ |
-| generate-sdk-locally | Utility | High | 378 ✅ | High | ✅ |
-| prepare-release-plan | Utility | High | 380 ✅ | High | ✅ |
-| package-release-readiness | Utility | High | 413 ✅ | High | ✅ |
-| apiview-feedback-resolution | Utility | High | 427 ✅ | High | ✅ |
-| pipeline-troubleshooting | Utility | High | 441 ✅ | High | ✅ |
-| sensei | Meta | Medium-High | 2098 ❌ | Medium-High | ⚠️ |
-| skill-authoring | Meta | Medium | 675 ❌ | Medium | ⚠️ |
-| markdown-token-optimizer | Meta | Medium | 333 ✅ | Medium | ⚠️ |
-| file-test-bug | Meta | Medium | 606 ❌ | Medium | ⚠️ |
+| Skill | Type | Compliance | Tokens | MCP | Eval |
+|-------|------|------------|--------|-----|------|
+| typespec-to-sdk-workflow | Workflow | High | 488 ✅ | 2/4 | ✅ |
+| typespec-authoring | Utility | High | 493 ✅ | 2/4 | ✅ |
+| typespec-customization | Utility | High | 469 ✅ | 2/4 | ✅ |
+| generate-sdk-locally | Utility | High | 420 ✅ | 1/4 | ✅ |
+| prepare-release-plan | Utility | High | 421 ✅ | 3/4 | ✅ |
+| package-release-readiness | Utility | High | 449 ✅ | 2/4 | ✅ |
+| apiview-feedback-resolution | Utility | High | 464 ✅ | 2/4 | ✅ |
+| pipeline-troubleshooting | Utility | High | 476 ✅ | 2/4 | ✅ |
+| verify-setup | Utility | High | 460 ✅ | **4/4** ✅ | ✅ |
+| validate-service-label | Utility | High | 419 ✅ | **4/4** ✅ | ✅ |
+| validate-codeowners | Utility | High | 445 ✅ | **4/4** ✅ | ✅ |
+| check-package-validation | Utility | High | 491 ✅ | **4/4** ✅ | ✅ |
+| sdk-release | Utility | High | 464 ✅ | **4/4** ✅ | ✅ |
+| sensei | Meta | Medium-High | 2098 ❌ | — | ⚠️ |
+| skill-authoring | Meta | Medium | 675 ❌ | — | ⚠️ |
+| markdown-token-optimizer | Meta | Medium | 333 ✅ | — | ⚠️ |
+| file-test-bug | Meta | Medium | 606 ❌ | — | ⚠️ |
 
 The 4 meta/development skills were imported as-is from [microsoft/GitHub-Copilot-for-Azure](https://github.com/microsoft/GitHub-Copilot-for-Azure/tree/main/.github/skills).
 They intentionally have different compliance profiles — sensei's SKILL.md is large (2098 tokens)
