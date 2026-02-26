@@ -1259,7 +1259,9 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration: int32;
+      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
       @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -1304,7 +1306,9 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** The lease ID of the active lease. */
       @header("x-ms-lease-id") leaseId: string;
+      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
       @header("x-ms-proposed-lease-id") proposedLeaseId: string;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -1328,6 +1332,7 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
+      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
       @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
       ...FileRequestIntentParameter;
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
@@ -1336,6 +1341,7 @@ interface File {
       @statusCode statusCode: 202;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
+      /** Approximate time remaining in the lease period, in seconds. */
       @header("x-ms-lease-time") leaseTime?: string;
     }
   >;
@@ -1350,15 +1356,22 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. For an update operation, the range can be up to 4 MB in size. For a clear operation, the range can be up to the value of the file's full size. */
       @header("x-ms-range") targetRange: string;
+      /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write") fileRangeWrite: "update" | "clear";
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
+      /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. When the Content-MD5 header is specified, the File service compares the hash of the content that has arrived with the header value that was sent. */
       @header("Content-MD5") contentMd5?: string;
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
       ...FileRequestIntentParameter;
+      /** If true, the trailing dot will not be trimmed from the target URI. */
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      /** Optional. Used for structured put operations. */
       @header("x-ms-structured-body-put") structuredBodyPut?: string;
+      /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
       @body content?: bytes;
     },
@@ -1380,28 +1393,39 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("x-ms-range") targetRange: string;
+      /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
+      /** Bytes of source data in the specified range. */
       @header("x-ms-source-range") sourceRange: string;
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
+      /** Specify the CRC64 hash of the source content. */
       @header("x-ms-source-content-crc64") sourceContentCrc64?: string;
+      /** Specify the CRC64 hash value to check for source content integrity. */
       @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string;
 
+      /** Specify the CRC64 hash value to check for source content mismatch. */
       @header("x-ms-source-if-none-match-crc64")
       sourceIfNoneMatchCrc64?: string;
 
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
+      /** Specify the lease ID for the source if applicable. */
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
 
+      /** Only one of the x-ms-copy-source-authorization, x-ms-source-lease-id or x-ms-source-if-match-crc64 should be specified. */
       @header("x-ms-copy-source-authorization")
       copySourceAuthorization?: string;
 
       ...FileRequestIntentParameter;
 
+      /** If true, the trailing dot will not be trimmed from the source URI. */
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
 
+      /** If true, the trailing dot will not be trimmed from the target URI. */
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
@@ -1424,7 +1448,9 @@ interface File {
       @path fileName: string;
       @query sharesnapshot?: string;
       ...TimeoutParameter;
+      /** Return file data only from the specified byte range. */
       @header("Range") range?: string;
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
       ...FileRequestIntentParameter;
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
@@ -1432,6 +1458,7 @@ interface File {
     {
       @header("Last-Modified") lastModified: string;
       @header("ETag") etag: string;
+      /** The length of the file. */
       @header("x-ms-content-length") contentLength: int64;
       @body rangeList: ShareFileRangeList;
     }
@@ -1447,41 +1474,52 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
       ...TimeoutParameter;
       ...MetadataHeaders;
       @header("x-ms-file-permission") filePermission?: string;
       @header("x-ms-file-permission-key") filePermissionKey?: string;
 
+      /** Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key. */
       @header("x-ms-file-permission-copy-mode")
       filePermissionCopyMode?: PermissionCopyModeType;
 
+      /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
       @header("x-ms-file-copy-ignore-read-only")
       fileCopyIgnoreReadOnly?: boolean;
 
       @header("x-ms-file-attributes") fileAttributes?: string;
+      /** Specifies either the option to copy file attributes from a source file(source) to a target file or a list of attributes to set on a target file. */
       @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string;
       @header("x-ms-file-creation-time") fileCreationTime?: string;
 
+      /** Specifies either the option to copy file creation time from a source file(source) to a target file or a time value in ISO 8601 format to set as creation time on a target file. */
       @header("x-ms-file-copy-file-creation-time")
       fileCopyFileCreationTime?: string;
 
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
 
+      /** Specifies either the option to copy file last write time from a source file(source) to a target file or a time value in ISO 8601 format to set as last write time on a target file. */
       @header("x-ms-file-copy-file-last-write-time")
       fileCopyFileLastWriteTime?: string;
 
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
+      /** Specifies either the option to copy file change time from a source file(source) to a target file or a time value in ISO 8601 format to set as change time on a target file. */
       @header("x-ms-file-copy-file-change-time")
       fileCopyFileChangeTime?: string;
 
+      /** Optional. Sets the archive attribute on the destination file. This attribute is only valid when specified in a copy operation from Blob Storage to File Storage. */
       @header("x-ms-file-copy-set-archive-attribute")
       fileCopySetArchiveAttribute?: boolean;
 
+      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
       @header("x-ms-lease-id") leaseId?: string;
+      /** Required if the source file has an active lease. The lease ID specified for this header must match the lease ID of the source file. */
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
 
+      /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
       @header("x-ms-copy-source-authorization")
       copySourceAuthorization?: string;
 
@@ -1490,17 +1528,24 @@ interface File {
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
 
+      /** If true, the trailing dot will not be trimmed from the source URI. */
       @header("x-ms-source-allow-trailing-dot")
       sourceAllowTrailingDot?: boolean;
 
+      /** If true, the trailing dot will not be trimmed from the target URI. */
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      /** Optional, NFS only. The owner of the file or directory. */
       @header("x-ms-owner") owner?: string;
+      /** Optional, NFS only. The owning group of the file or directory. */
       @header("x-ms-group") group?: string;
+      /** Optional, NFS only. The file mode of the file or directory */
       @header("x-ms-mode") mode?: string;
 
+      /** Specifies mode copy option for the file. */
       @header("x-ms-file-copy-mode-copy-mode")
       fileCopyModeCopyMode?: ModeCopyMode;
 
+      /** Specifies owner copy option for the file. */
       @header("x-ms-file-copy-owner-copy-mode")
       fileCopyOwnerCopyMode?: OwnerCopyMode;
     },
@@ -1508,7 +1553,9 @@ interface File {
       @statusCode statusCode: 202;
       @header("ETag") etag: string;
       @header("Last-Modified") lastModified: string;
+      /** String identifier for this copy operation. Use with Get File or Get File Properties to check the status of this copy operation, or pass to Abort Copy File to abort a pending copy. */
       @header("x-ms-copy-id") copyId: string;
+      /** State of the copy operation identified by x-ms-copy-id. */
       @header("x-ms-copy-status") copyStatus: string;
     }
   >;
@@ -1523,7 +1570,9 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Must be the literal "abort" to abort the pending copy operation. */
       @header("x-ms-copy-action") copyActionAbort: "abort";
+      /** The copy identifier provided in the x-ms-copy-id header of the original Copy File operation. */
       @query copyid: string;
       ...TimeoutParameter;
       @header("x-ms-lease-id") leaseId?: string;
@@ -1548,6 +1597,7 @@ interface File {
       ...MarkerParameter;
       ...MaxResultsParameter;
       ...TimeoutParameter;
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
       ...FileRequestIntentParameter;
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
@@ -1567,6 +1617,7 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
       @header("x-ms-handle-id") handleId: string;
       ...TimeoutParameter;
       ...MarkerParameter;
@@ -1590,16 +1641,21 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
+      /** Required. Specifies the URI-style path of the source file, up to 2 KB in length. */
       @header("x-ms-rename-source") renameSource: string;
       ...TimeoutParameter;
 
+      /** Boolean. Default value is false. Set to true to indicate that the destination file should be overwritten, even if it already exists and has the read-only attribute set. */
       @header("x-ms-file-rename-replace-if-exists")
       renameReplaceIfExists?: boolean;
 
+      /** Boolean. Default value is false. Set to true to overwrite the destination file even if it has the read-only attribute set. */
       @header("x-ms-file-rename-ignore-read-only")
       renameIgnoreReadOnly?: boolean;
 
+      /** Required if the source file has an active lease. The lease ID specified for this header must match the lease ID of the source file. */
       @header("x-ms-source-lease-id") sourceLeaseId?: string;
+      /** Required if the destination file has an active lease. The lease ID specified must match the lease ID of the destination file. */
       @header("x-ms-destination-lease-id") destinationLeaseId?: string;
       ...FileRequestIntentParameter;
 
@@ -1638,9 +1694,13 @@ interface File {
       filePermissionFormat?: FilePermissionFormat;
 
       @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      /** Optional, NFS only. The owner of the file or directory. */
       @header("x-ms-owner") owner?: string;
+      /** Optional, NFS only. The owning group of the file or directory. */
       @header("x-ms-group") group?: string;
+      /** Optional, NFS only. The file mode of the file or directory */
       @header("x-ms-mode") mode?: string;
+      /** NFS only. Required. The path to the original file, the symbolic link is pointing to. The path is of type string which is not resolved and is stored as is. The path can be absolute path or the relative path depending on the content stored in the symbolic link file. */
       @header("x-ms-link-text") linkText: string;
     },
     {
@@ -1682,6 +1742,7 @@ interface File {
       @header("x-ms-file-permission-key") filePermissionKey?: string;
       @header("x-ms-file-id") fileId?: string;
       @header("x-ms-file-parent-id") fileParentId?: string;
+      /** The path to the original file, the symbolic link is pointing to. */
       @header("x-ms-link-text") linkText: string;
     }
   >;
