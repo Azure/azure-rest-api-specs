@@ -78,6 +78,24 @@ suppressions:
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: PathForResourceAction
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The pricings API uses a {scopeId} parameter which does not conform to the standard subscription/resourceGroup path patterns. The batchUpdate action is a POST on the pricings collection.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
+  - code: EnumInsteadOfBoolean
+    from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    reason: The success property is a simple success/failure indicator for batch results that will not need additional states.
+  - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PatchBodyParametersSchema
@@ -133,6 +151,7 @@ input-file:
   - preview/2025-10-01-preview/operations.json
   - preview/2025-10-01-preview/operationResults.json
   - preview/2025-10-01-preview/operationStatuses.json
+  - preview/2025-10-01-preview/pricings.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -665,6 +684,7 @@ input-file:
 - preview/2025-10-01-preview/operations.json
 - preview/2025-10-01-preview/operationResults.json
 - preview/2025-10-01-preview/operationStatuses.json
+- preview/2025-10-01-preview/pricings.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
 - stable/2019-08-01/deviceSecurityGroups.json
@@ -683,7 +703,6 @@ input-file:
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- stable/2024-01-01/pricings.json
 - stable/2024-08-01/securityStandards.json
 - stable/2024-08-01/standardAssignments.json
 - stable/2024-08-01/customRecommedations.json
