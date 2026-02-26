@@ -6840,6 +6840,452 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetFailoverAllTestsDetails",
+        "description": "This operation retrieves the details of all the failover tests performed on the Virtual Wan ExpressRoute gateways for different peering locations",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The type of failover test",
+            "enum": [
+              "SingleSiteFailover",
+              "MultiSiteFailover",
+              "All",
+              "LinkFailover"
+            ],
+            "x-ms-enum": {
+              "name": "FailoverTestType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "fetchLatest",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "description": "Fetch only the latest tests for each peering location"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover test details for the vwan expressRouteGateway.",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverAllTestsDetails"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayFailoverAllTestsDetails": {
+            "$ref": "./examples/VwanExpressRouteGatewayFailoverAllTestsDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetFailoverSingleTestDetails",
+        "description": "This operation retrieves the details of a particular failover test performed on the vwan expressRouteGateway based on the test Guid",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "name": "failoverTestId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The unique Guid value which identifies the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover test details for the vwan expressRouteGateway.",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverSingleTestDetailsObject"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayFailoverSingleTestDetails": {
+            "$ref": "./examples/VwanExpressRouteGatewayFailoverSingleTestDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_StartSiteFailoverTest",
+        "description": "This operation starts failover simulation on the vwan expressRouteGateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the express route gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation start failover simulation started on vwan expressRouteGateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayStartSiteFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStartSiteFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_StopSiteFailoverTest",
+        "description": "This operation stops an ongoing failover simulation on the vwan expressRouteGateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the express route gateway."
+          },
+          {
+            "name": "stopParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverStopApiParameters"
+            },
+            "description": "Vwan ExpressRoute Gateway stop simulation parameters supplied to stop failover simulation on vwan express route gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation stops failover simulation on vwan expressRouteGateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayStopSiteFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStopSiteFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetResiliencyInformation",
+        "description": "This operation retrieves the resiliency information for VWAN ExpressRoute Gateway, including the gateway's current resiliency score and recommendations to further improve the score",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Resiliency Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resiliency information for the gateway",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayResiliencyInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayGetResiliencyInformation": {
+            "$ref": "./examples/VwanExpressRouteGatewayGetResiliencyInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetRoutesInformation",
+        "description": "This operation retrieves the route set information for Vwan Express Route Gateway based on their resiliency",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Route Sets Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of route sets learned by the gateway based on their resiliency",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayRouteSetsInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayGetRoutesInformation": {
+            "$ref": "./examples/VwanExpressRouteGatewayGetRoutesInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
