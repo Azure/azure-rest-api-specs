@@ -11,3 +11,6 @@ using Microsoft.ManagedOps;
 @@clientName(EnablementState, "ManagedOpsEnablementStatus", "csharp");
 @@clientName(ProvisioningState, "ManagedOpsProvisioningState", "csharp");
 @@clientName(ServiceInformation, "ManagedOpsServiceInformation", "csharp");
+@@clientName(DesiredConfiguration, "ManagedOpsDesiredConfiguration", "csharp");
+@@clientName(DesiredConfigurationUpdate, "ManagedOpsDesiredConfigurationUpdate", "csharp");
+@@clientName(DesiredEnablementState, "ManagedOpsDesiredEnablementState", "csharp");

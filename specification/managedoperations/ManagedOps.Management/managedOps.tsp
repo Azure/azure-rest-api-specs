@@ -184,15 +184,23 @@ model DesiredConfiguration {
 
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: desiredEnablementState;
+  defenderForServers?: DesiredEnablementState;
 
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: desiredEnablementState;
+  defenderCspm?: DesiredEnablementState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias desiredEnablementState = "Enable" | "Disable" | string;
+@doc("The desired enablement state of a service.")
+union DesiredEnablementState {
+  string,
+
+  @doc("Enable the service.")
+  Enable: "Enable",
+
+  @doc("Disable the service.")
+  Disable: "Disable",
+}
 
 @doc("Configuration for the Change Tracking and Inventory service.")
 model ChangeTrackingConfiguration {
@@ -244,11 +252,11 @@ model ManagedOpUpdateProperties {
 model DesiredConfigurationUpdate {
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: desiredEnablementState;
+  defenderForServers?: DesiredEnablementState;
 
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: desiredEnablementState;
+  defenderCspm?: DesiredEnablementState;
 }
 
 /** The operations that can be performed on our resource */
