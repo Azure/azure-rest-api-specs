@@ -3,13 +3,16 @@ name: typespec-to-sdk-workflow
 license: MIT
 metadata:
   version: "1.0.0"
-description: |
+description: >-
   **WORKFLOW SKILL**
   INVOKES: typespec-authoring, typespec-customization, generate-sdk-locally, package-release-readiness, prepare-release-plan, apiview-feedback-resolution, pipeline-troubleshooting.
   Orchestrate the full TypeSpec to SDK release workflow for Azure services.
   USE FOR: "full SDK release workflow", "TypeSpec to SDK end to end", "guided SDK generation", "resume release workflow", "experiment with TypeSpec SDK".
   DO NOT USE FOR: single-step tasks like validate TypeSpec (use typespec-authoring), check readiness (use package-release-readiness), or generate SDK only (use generate-sdk-locally).
   FOR SINGLE OPERATIONS: Use the individual utility skills listed in INVOKES directly.
+compatibility: >-
+  Requires: azure-sdk-mcp server, TypeSpec project in Azure/azure-rest-api-specs, Git.
+  Optional: local SDK repo clones for experimentation path.
 ---
 
 # TypeSpec to SDK Release Workflow
@@ -39,7 +42,3 @@ Two paths: **Experimentation** (local) or **Release** (full workflow).
 9. **Release** — Use `package-release-readiness`.
 
 See `references/workflow-details.md` for resume points.
-
-## Related Skills
-
-- `typespec-authoring`, `typespec-customization`, `generate-sdk-locally`, `prepare-release-plan`, `package-release-readiness`, `apiview-feedback-resolution`

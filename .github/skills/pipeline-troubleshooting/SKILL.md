@@ -3,13 +3,16 @@ name: pipeline-troubleshooting
 license: MIT
 metadata:
   version: "1.0.0"
-description: |
+description: >-
   **UTILITY SKILL**
   Diagnose and resolve failures in Azure SDK CI pipelines and SDK generation pipelines.
   USE FOR: "pipeline failed", "build failure", "CI check failing", "SDK generation error", "reproduce pipeline locally", "debug SDK pipeline".
   DO NOT USE FOR: TypeSpec authoring (use typespec-authoring), release plans, APIView feedback (use apiview-feedback-resolution), package publishing.
   INVOKES: azsdk_analyze_pipeline, azsdk_verify_setup, azsdk_package_build_code, azsdk_package_run_check.
   FOR SINGLE OPERATIONS: Use azsdk_analyze_pipeline directly for quick failure analysis.
+compatibility: >-
+  Requires: azure-sdk-mcp server, Azure DevOps pipeline build ID.
+  Optional: local clone of SDK repo for reproducing failures.
 ---
 
 # PR and CI Pipeline Troubleshooting

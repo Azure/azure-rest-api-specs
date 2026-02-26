@@ -3,13 +3,16 @@ name: package-release-readiness
 license: MIT
 metadata:
   version: "1.0.0"
-description: |
+description: >-
   **UTILITY SKILL**
   Check SDK package release readiness, run validation, and trigger releases.
   USE FOR: "is package ready for release", "check release readiness", "run validation checks", "release SDK package", "verify changelog", "check API review status".
   DO NOT USE FOR: SDK generation (use generate-sdk-locally), TypeSpec authoring, creating release plans (use prepare-release-plan), pipeline troubleshooting.
   INVOKES: azsdk_release_sdk, azsdk_package_run_check, azsdk_package_update_changelog_content, azsdk_package_update_metadata, azsdk_package_update_version.
   FOR SINGLE OPERATIONS: Use azsdk_release_sdk with checkReady:true directly for quick checks.
+compatibility: >-
+  Requires: azure-sdk-mcp server, SDK package in azure-sdk-for-{language} repo.
+  Optional: API review approval in APIView.
 ---
 
 # Package Release Readiness
