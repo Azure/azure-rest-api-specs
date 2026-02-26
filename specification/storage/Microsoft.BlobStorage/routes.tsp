@@ -200,7 +200,7 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
@@ -439,7 +439,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ContentLengthParameter,
     ...TimeoutParameter,
