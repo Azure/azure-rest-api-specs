@@ -1,0 +1,780 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MicrosoftSerialConsoleClient",
+    "version": "2024-07-01",
+    "description": "The Azure Serial Console allows you to access the serial console of a Virtual Machine or VM scale set instance",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SerialPorts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SerialConsole/operations": {
+      "get": {
+        "operationId": "ListOperations",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Gets a list of Serial Console API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialConsoleOperations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Serial Console management operations supported by Serial Console RP": {
+            "$ref": "./examples/GetOperationsExample.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}": {
+      "get": {
+        "operationId": "GetConsoleStatus",
+        "summary": "Get the disabled status for a subscription",
+        "description": "Gets whether or not Serial Console is disabled for a given subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default parameter. Leave the value as \"default\".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialConsoleStatus"
+            }
+          },
+          "404": {
+            "description": "Subscription not found - returns a JSON object with error details",
+            "schema": {
+              "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the Serial Console disabled status for a subscription": {
+            "$ref": "./examples/SerialConsoleStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/disableConsole": {
+      "post": {
+        "operationId": "DisableConsole",
+        "summary": "Disable Serial Console for a subscription",
+        "description": "Disables the Serial Console service for all VMs and VM scale sets in the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default parameter. Leave the value as \"default\".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DisableSerialConsoleResult"
+            }
+          },
+          "404": {
+            "description": "Subscription not found - returns a JSON object with error details",
+            "schema": {
+              "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable Serial Console for a subscription": {
+            "$ref": "./examples/DisableConsoleExamples.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/enableConsole": {
+      "post": {
+        "operationId": "EnableConsole",
+        "summary": "Enable Serial Console for a subscription",
+        "description": "Enables the Serial Console service for all VMs and VM scale sets in the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default parameter. Leave the value as \"default\".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnableSerialConsoleResult"
+            }
+          },
+          "404": {
+            "description": "Subscription not found - returns a JSON object with error details",
+            "schema": {
+              "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable Serial Console for a subscription": {
+            "$ref": "./examples/EnableConsoleExamples.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/serialPorts": {
+      "get": {
+        "operationId": "SerialPorts_ListBySubscriptions",
+        "tags": [
+          "SerialPorts"
+        ],
+        "description": "Handles requests to list all SerialPort resources in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialPortListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Serial Ports for subscription": {
+            "$ref": "./examples/ListSerialPortSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts": {
+      "get": {
+        "operationId": "SerialPorts_List",
+        "tags": [
+          "SerialPorts"
+        ],
+        "description": "Lists all of the configured serial ports for a parent resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialPortListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Serial Ports for parent resources": {
+            "$ref": "./examples/ListSerialPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}": {
+      "get": {
+        "operationId": "SerialPorts_Get",
+        "tags": [
+          "SerialPorts"
+        ],
+        "description": "Gets the configured settings for a serial port",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+          },
+          {
+            "name": "serialPort",
+            "in": "path",
+            "description": "The name of the serial port to connect to.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialPort"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the serial port for a parent resource": {
+            "$ref": "./examples/GetSerialPort.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SerialPorts_Create",
+        "tags": [
+          "SerialPorts"
+        ],
+        "description": "Creates or updates a serial port",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+          },
+          {
+            "name": "serialPort",
+            "in": "path",
+            "description": "The name of the serial port to connect to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to create the serial port.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SerialPort"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'SerialPort' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SerialPort"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new serial port resource.": {
+            "$ref": "./examples/CreateSerialPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}/connect": {
+      "post": {
+        "operationId": "SerialPorts_Connect",
+        "tags": [
+          "SerialPorts"
+        ],
+        "description": "Connect to serial port of the target resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.resourceProviderNamespace"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResourceType"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceParameters.parentResource"
+          },
+          {
+            "name": "serialPort",
+            "in": "path",
+            "description": "The name of the serial port to connect to.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SerialPortConnectResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connect to a scale set instance serial port": {
+            "$ref": "./examples/SerialPortConnectVMSS.json"
+          },
+          "Connect to a virtual machine serial port": {
+            "$ref": "./examples/SerialPortConnectVM.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Cloud error body."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the Batch service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "x-ms-external": true
+    },
+    "DisableSerialConsoleResult": {
+      "type": "object",
+      "title": "Serial Console Disable Result",
+      "description": "Returns whether or not Serial Console is disabled.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DisableSerialConsoleResultProperties"
+        }
+      }
+    },
+    "DisableSerialConsoleResultProperties": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether or not Serial Console is disabled."
+        }
+      }
+    },
+    "EnableSerialConsoleResult": {
+      "type": "object",
+      "title": "Serial Console Enable Result",
+      "description": "Returns whether or not Serial Console is disabled (enabled).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnableSerialConsoleResultProperties"
+        }
+      }
+    },
+    "EnableSerialConsoleResultProperties": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether or not Serial Console is disabled."
+        }
+      }
+    },
+    "GetSerialConsoleSubscriptionNotFound": {
+      "type": "object",
+      "title": "Serial Console subscription not found",
+      "description": "Error saying that the provided subscription could not be found",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Subscription not found message"
+        }
+      }
+    },
+    "SerialConsoleOperations": {
+      "type": "object",
+      "title": "Serial Console operations",
+      "description": "Serial Console operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of Serial Console operations",
+          "items": {
+            "$ref": "#/definitions/SerialConsoleOperationsValueItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SerialConsoleOperationsValueItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/SerialConsoleOperationsValueItemDisplay"
+        }
+      }
+    },
+    "SerialConsoleOperationsValueItemDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "SerialConsoleStatus": {
+      "type": "object",
+      "title": "Serial Console GET Result",
+      "description": "Returns whether or not Serial Console is disabled.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SerialConsoleStatusProperties"
+        }
+      }
+    },
+    "SerialConsoleStatusProperties": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether or not Serial Console is disabled."
+        }
+      }
+    },
+    "SerialPort": {
+      "type": "object",
+      "title": "Serial port",
+      "description": "Represents the serial port of the parent resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SerialPortProperties",
+          "description": "The properties of the serial port.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SerialPortConnectResult": {
+      "type": "object",
+      "title": "Serial port connect result",
+      "description": "Returns a connection string to the serial port of the resource.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string to the serial port of the resource."
+        }
+      }
+    },
+    "SerialPortConnectionState": {
+      "type": "string",
+      "description": "Specifies whether the port is currently active.",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "x-ms-enum": {
+        "name": "SerialPortConnectionState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "active",
+            "value": "active",
+            "description": "active"
+          },
+          {
+            "name": "inactive",
+            "value": "inactive",
+            "description": "inactive"
+          }
+        ]
+      }
+    },
+    "SerialPortListResult": {
+      "type": "object",
+      "title": "Serial port list result",
+      "description": "The list serial ports operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of serial ports.",
+          "items": {
+            "$ref": "#/definitions/SerialPort"
+          }
+        }
+      }
+    },
+    "SerialPortProperties": {
+      "type": "object",
+      "description": "The properties of the serial port.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/SerialPortState",
+          "description": "Specifies whether the port is enabled for a serial console connection."
+        },
+        "connectionState": {
+          "$ref": "#/definitions/SerialPortConnectionState",
+          "description": "Specifies whether the port is currently active."
+        }
+      }
+    },
+    "SerialPortState": {
+      "type": "string",
+      "description": "Specifies whether the port is enabled for a serial console connection.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SerialPortState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "enabled",
+            "value": "enabled",
+            "description": "enabled"
+          },
+          {
+            "name": "disabled",
+            "value": "disabled",
+            "description": "disabled"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ParentResourceParameters.parentResource": {
+      "name": "parentResource",
+      "in": "path",
+      "description": "The name of the parent resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ParentResourceParameters.parentResourceType": {
+      "name": "parentResourceType",
+      "in": "path",
+      "description": "The resource type of the parent resource. For example: 'virtualMachines' or 'virtualMachineScaleSets'",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ParentResourceParameters.resourceProviderNamespace": {
+      "name": "resourceProviderNamespace",
+      "in": "path",
+      "description": "The resource provider namespace of the parent resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
