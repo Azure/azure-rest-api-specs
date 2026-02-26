@@ -26,8 +26,6 @@ using AzureMonitorExporter;
 @@clientName(DataPoint.ns, "namespace");
 @@clientName(DataPoint.kind, "dataPointType");
 
-@@access(AzureMonitorExporter, Access.internal, "csharp");
-
 // Some models not used in an operation should still be made public.
 
 @@usage(MessageData, Usage.output | Usage.json);
