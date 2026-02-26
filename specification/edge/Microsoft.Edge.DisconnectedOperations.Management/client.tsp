@@ -63,6 +63,11 @@ model CustomizedBillingConfiguration {
   upcoming?: BillingPeriod;
 }
 
+@@clientName(CustomizedBillingConfiguration,
+  "BillingConfiguration",
+  "javascript"
+);
+
 @@alternateType(DisconnectedOperationProperties.billingConfiguration,
   CustomizedBillingConfiguration,
   "javascript"
