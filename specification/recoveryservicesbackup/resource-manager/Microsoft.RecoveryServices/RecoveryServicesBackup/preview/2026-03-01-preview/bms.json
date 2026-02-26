@@ -4151,6 +4151,57 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSourceVaultMappings/{sourceVaultMappingName}": {
+      "get": {
+        "operationId": "CrossTenant_GetSourceVaultMapping",
+        "tags": [
+          "CrossTenantSourceVaultMappings"
+        ],
+        "description": "Gets a specific source vault mapping configuration for cross-tenant restore operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceVaultMappingName",
+            "in": "path",
+            "description": "Source vault mapping name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SourceVaultMappingResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Source Vault Mapping": {
+            "$ref": "./examples/CrossTenant/GetSourceVaultMapping.json"
+          }
+        }
+      },
       "put": {
         "operationId": "CrossTenant_ConfigureSourceVault",
         "tags": [

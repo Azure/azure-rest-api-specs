@@ -49,6 +49,13 @@ model SourceVaultMappingResource
 @armResourceOperations
 interface CrossTenantSourceVaultMappings {
   /**
+   * Gets a specific source vault mapping configuration for cross-tenant restore operations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
+  @operationId("CrossTenant_GetSourceVaultMapping")
+  getSourceVaultMapping is ArmResourceRead<SourceVaultMappingResource>;
+
+  /**
    * Configures the source vault for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */
