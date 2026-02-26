@@ -28,7 +28,132 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-2025-07-01
+```
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - stable/2025-07-01/applicationGateway.json
+  - stable/2025-07-01/applicationGatewayWafDynamicManifests.json
+  - stable/2025-07-01/applicationSecurityGroup.json
+  - stable/2025-07-01/availableDelegations.json
+  - stable/2025-07-01/availableServiceAliases.json
+  - stable/2025-07-01/azureFirewall.json
+  - stable/2025-07-01/azureFirewallFqdnTag.json
+  - stable/2025-07-01/azureWebCategory.json
+  - stable/2025-07-01/bastionHost.json
+  - stable/2025-07-01/checkDnsAvailability.json
+  - stable/2025-07-01/cloudServiceNetworkInterface.json
+  - stable/2025-07-01/cloudServicePublicIpAddress.json
+  - stable/2025-07-01/cloudServiceSwap.json
+  - stable/2025-07-01/customIpPrefix.json
+  - stable/2025-07-01/ddosCustomPolicy.json
+  - stable/2025-07-01/ddosProtectionPlan.json
+  - stable/2025-07-01/dscpConfiguration.json
+  - stable/2025-07-01/endpointService.json
+  - stable/2025-07-01/expressRouteCircuit.json
+  - stable/2025-07-01/expressRouteCrossConnection.json
+  - stable/2025-07-01/expressRoutePort.json
+  - stable/2025-07-01/expressRouteProviderPort.json
+  - stable/2025-07-01/firewallPolicy.json
+  - stable/2025-07-01/ipAddressManager.json
+  - stable/2025-07-01/ipAllocation.json
+  - stable/2025-07-01/ipGroups.json
+  - stable/2025-07-01/loadBalancer.json
+  - stable/2025-07-01/natGateway.json
+  - stable/2025-07-01/network.json
+  - stable/2025-07-01/networkInterface.json
+  - stable/2025-07-01/networkManager.json
+  - stable/2025-07-01/networkManagerActiveConfiguration.json
+  - stable/2025-07-01/networkManagerConnection.json
+  - stable/2025-07-01/networkManagerConnectivityConfiguration.json
+  - stable/2025-07-01/networkManagerEffectiveConfiguration.json
+  - stable/2025-07-01/networkManagerGroup.json
+  - stable/2025-07-01/networkManagerRoutingConfiguration.json
+  - stable/2025-07-01/networkManagerScopeConnection.json
+  - stable/2025-07-01/networkManagerSecurityAdminConfiguration.json
+  - stable/2025-07-01/networkManagerSecurityUserConfiguration.json
+  - stable/2025-07-01/networkProfile.json
+  - stable/2025-07-01/networkSecurityGroup.json
+  - stable/2025-07-01/networkSecurityPerimeter.json
+  - stable/2025-07-01/networkVerifier.json
+  - stable/2025-07-01/networkVirtualAppliance.json
+  - stable/2025-07-01/networkWatcher.json
+  - stable/2025-07-01/operation.json
+  - stable/2025-07-01/privateEndpoint.json
+  - stable/2025-07-01/privateLinkService.json
+  - stable/2025-07-01/publicIpAddress.json
+  - stable/2025-07-01/publicIpPrefix.json
+  - stable/2025-07-01/routeFilter.json
+  - stable/2025-07-01/routeTable.json
+  - stable/2025-07-01/securityPartnerProvider.json
+  - stable/2025-07-01/serviceCommunity.json
+  - stable/2025-07-01/serviceEndpointPolicy.json
+  - stable/2025-07-01/serviceGateway.json
+  - stable/2025-07-01/serviceTags.json
+  - stable/2025-07-01/usage.json
+  - stable/2025-07-01/virtualNetwork.json
+  - stable/2025-07-01/virtualNetworkAppliance.json
+  - stable/2025-07-01/virtualNetworkGateway.json
+  - stable/2025-07-01/virtualNetworkTap.json
+  - stable/2025-07-01/virtualRouter.json
+  - stable/2025-07-01/virtualWan.json
+  - stable/2025-07-01/vmssNetworkInterface.json
+  - stable/2025-07-01/vmssPublicIpAddress.json
+  - stable/2025-07-01/webapplicationfirewall.json
+suppressions:
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: serviceGateway.json
+    reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
 
 ### Tag: package-2025-05-01
