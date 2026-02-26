@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
@@ -91,18 +90,6 @@ union OperationState {
   string,
 }
 
-// ------------------ Common Values ---------------
-alias Params = {
-  ...ApiVersionParameter;
-  ...SubscriptionIdParameter;
-
-  @path
-  @minLength(1)
-  @segment("locations")
-  @doc("The location name.")
-  locationparameter: string;
-};
-
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -159,6 +146,10 @@ model RetryPolicy {
 
   @doc("Retry window in minutes for user request")
   retryWindowInMinutes?: int32;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+  @doc("Action to take on failure")
+  onFailureAction?: ResourceOperationType;
 }
 
 @doc("Extra details needed to run the user's request")
@@ -177,6 +168,19 @@ model ResourceOperationError {
 
   @doc("Detailed message about the error")
   errorDetails: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+@doc("Describes the fallback operation that was performed")
+model FallbackOperationInfo {
+  @doc("The last operation type that was performed as a fallback")
+  lastOpType: ResourceOperationType;
+
+  @doc("The status of the fallback operation")
+  status: string;
+
+  @doc("The error code if the fallback operation failed")
+  error?: ResourceOperationError;
 }
 
 @doc("The details of a response from an operation on a resource")
@@ -213,6 +217,10 @@ model ResourceOperationDetails {
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
+  @doc("Fallback operation details if a fallback was performed")
+  fallbackOperationInfo?: FallbackOperationInfo;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Time the operation was complete if errors are null")
@@ -451,7 +459,7 @@ model CreateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -469,7 +477,7 @@ model DeleteResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }

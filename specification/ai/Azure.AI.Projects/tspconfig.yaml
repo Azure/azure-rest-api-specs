@@ -11,8 +11,8 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-projects.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-projects"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
+    package-name: "azure-ai-projects"
     namespace: "azure.ai.projects"
     api-version: "2025-05-15-preview"
     flavor: azure
@@ -21,11 +21,10 @@ options:
   "@typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
-    api-version: "2025-05-15-preview"
-  "@azure-tools/typespec-ts":
-    package-dir: "ai-projects"
     api-version: "v1"
-    is-modular-library: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-projects"
+    api-version: "v1"
     generate-test: true
     generate-metadata: false
     package-details:
@@ -33,7 +32,7 @@ options:
       description: "Azure AI Projects Client"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-projects"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
     namespace: com.azure.ai.projects
     partial-update: true
     enable-sync-stack: true

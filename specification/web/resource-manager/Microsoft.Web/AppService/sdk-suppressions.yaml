@@ -1,0 +1,185 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: "@azure/arm-appservice"
+      breaking-changes:
+        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnection has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlot has a new signature
+        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlotAndWait has a new signature
+        - Interface Site no longer has parameter vnetBackupRestoreEnabled
+        - Interface Site no longer has parameter vnetContentShareEnabled
+        - Interface Site no longer has parameter vnetImagePullEnabled
+        - Interface Site no longer has parameter vnetRouteAllEnabled
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/appservice/armappservice
+      breaking-changes:
+        - Function `*EnvironmentsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+        - Function `*StaticSitesClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+        - Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnectionSlot` parameter(s) have been changed from `(context.Context, string, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)` to `(context.Context, string, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)`
+        - Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+        - Type of `FunctionsAlwaysReadyConfig.InstanceCount` has been changed from `*float32` to `*int32`
+        - Type of `FunctionsScaleAndConcurrency.InstanceMemoryMB` has been changed from `*float32` to `*int32`
+        - Type of `FunctionsScaleAndConcurrency.MaximumInstanceCount` has been changed from `*float32` to `*int32`
+        - Type of `FunctionsScaleAndConcurrencyTriggersHTTP.PerInstanceConcurrency` has been changed from `*float32` to `*int32`
+        - Enum `ActiveRevisionsMode` has been removed
+        - Enum `ContainerAppProvisioningState` has been removed
+        - Enum `IngressTransportMethod` has been removed
+        - Enum `RevisionHealthState` has been removed
+        - Enum `RevisionProvisioningState` has been removed
+        - Field `VnetBackupRestoreEnabled`, `VnetContentShareEnabled`, `VnetImagePullEnabled`, `VnetRouteAllEnabled` of struct `SiteProperties` has been removed
+        - Function `*ClientFactory.NewContainerAppsClient` has been removed
+        - Function `*ClientFactory.NewContainerAppsRevisionsClient` has been removed
+        - Function `*ContainerAppsClient.BeginCreateOrUpdate` has been removed
+        - Function `*ContainerAppsClient.BeginDelete` has been removed
+        - Function `*ContainerAppsClient.Get` has been removed
+        - Function `*ContainerAppsClient.ListSecrets` has been removed
+        - Function `*ContainerAppsClient.NewListByResourceGroupPager` has been removed
+        - Function `*ContainerAppsClient.NewListBySubscriptionPager` has been removed
+        - Function `*ContainerAppsRevisionsClient.ActivateRevision` has been removed
+        - Function `*ContainerAppsRevisionsClient.DeactivateRevision` has been removed
+        - Function `*ContainerAppsRevisionsClient.GetRevision` has been removed
+        - Function `*ContainerAppsRevisionsClient.NewListRevisionsPager` has been removed
+        - Function `*ContainerAppsRevisionsClient.RestartRevision` has been removed
+        - Function `NewContainerAppsClient` has been removed
+        - Function `NewContainerAppsRevisionsClient` has been removed
+        - Struct `Configuration` has been removed
+        - Struct `ContainerAppCollection` has been removed
+        - Struct `ContainerAppProperties` has been removed
+        - Struct `ContainerAppSecret` has been removed
+        - Struct `ContainerApp` has been removed
+        - Struct `Ingress` has been removed
+        - Struct `RegistryCredentials` has been removed
+        - Struct `RevisionCollection` has been removed
+        - Struct `RevisionProperties` has been removed
+        - Struct `Revision` has been removed
+        - Struct `Secret` has been removed
+        - Struct `SecretsCollection` has been removed
+        - Struct `TrafficWeight` has been removed
+        - Enum `CertificateOrderActionType` has been removed
+        - Enum `CertificateOrderStatus` has been removed
+        - Enum `CertificateProductType` has been removed
+        - Enum `DNSType` has been removed
+        - Enum `DomainStatus` has been removed
+        - Enum `DomainType` has been removed
+        - Enum `ResourceNotRenewableReason` has been removed
+        - Function `NewCertificateOrdersClient` has been removed
+        - Function `*CertificateOrdersClient.BeginCreateOrUpdate` has been removed
+        - Function `*CertificateOrdersClient.BeginCreateOrUpdateCertificate` has been removed
+        - Function `*CertificateOrdersClient.Delete` has been removed
+        - Function `*CertificateOrdersClient.DeleteCertificate` has been removed
+        - Function `*CertificateOrdersClient.Get` has been removed
+        - Function `*CertificateOrdersClient.GetCertificate` has been removed
+        - Function `*CertificateOrdersClient.NewListByResourceGroupPager` has been removed
+        - Function `*CertificateOrdersClient.NewListCertificatesPager` has been removed
+        - Function `*CertificateOrdersClient.NewListPager` has been removed
+        - Function `*CertificateOrdersClient.Reissue` has been removed
+        - Function `*CertificateOrdersClient.Renew` has been removed
+        - Function `*CertificateOrdersClient.ResendEmail` has been removed
+        - Function `*CertificateOrdersClient.ResendRequestEmails` has been removed
+        - Function `*CertificateOrdersClient.RetrieveCertificateActions` has been removed
+        - Function `*CertificateOrdersClient.RetrieveCertificateEmailHistory` has been removed
+        - Function `*CertificateOrdersClient.RetrieveSiteSeal` has been removed
+        - Function `*CertificateOrdersClient.Update` has been removed
+        - Function `*CertificateOrdersClient.UpdateCertificate` has been removed
+        - Function `*CertificateOrdersClient.ValidatePurchaseInformation` has been removed
+        - Function `*CertificateOrdersClient.VerifyDomainOwnership` has been removed
+        - Function `NewCertificateOrdersDiagnosticsClient` has been removed
+        - Function `*CertificateOrdersDiagnosticsClient.GetAppServiceCertificateOrderDetectorResponse` has been removed
+        - Function `*CertificateOrdersDiagnosticsClient.NewListAppServiceCertificateOrderDetectorResponsePager` has been removed
+        - Function `NewCertificateRegistrationProviderClient` has been removed
+        - Function `*CertificateRegistrationProviderClient.NewListOperationsPager` has been removed
+        - Function `*ClientFactory.NewCertificateOrdersClient` has been removed
+        - Function `*ClientFactory.NewCertificateOrdersDiagnosticsClient` has been removed
+        - Function `*ClientFactory.NewCertificateRegistrationProviderClient` has been removed
+        - Function `*ClientFactory.NewDomainRegistrationProviderClient` has been removed
+        - Function `*ClientFactory.NewDomainsClient` has been removed
+        - Function `*ClientFactory.NewTopLevelDomainsClient` has been removed
+        - Function `*ClientFactory.NewWebSiteManagementClient` has been removed
+        - Function `NewDomainRegistrationProviderClient` has been removed
+        - Function `*DomainRegistrationProviderClient.NewListOperationsPager` has been removed
+        - Function `NewDomainsClient` has been removed
+        - Function `*DomainsClient.CheckAvailability` has been removed
+        - Function `*DomainsClient.BeginCreateOrUpdate` has been removed
+        - Function `*DomainsClient.CreateOrUpdateOwnershipIdentifier` has been removed
+        - Function `*DomainsClient.Delete` has been removed
+        - Function `*DomainsClient.DeleteOwnershipIdentifier` has been removed
+        - Function `*DomainsClient.Get` has been removed
+        - Function `*DomainsClient.GetControlCenterSsoRequest` has been removed
+        - Function `*DomainsClient.GetOwnershipIdentifier` has been removed
+        - Function `*DomainsClient.NewListByResourceGroupPager` has been removed
+        - Function `*DomainsClient.NewListOwnershipIdentifiersPager` has been removed
+        - Function `*DomainsClient.NewListPager` has been removed
+        - Function `*DomainsClient.NewListRecommendationsPager` has been removed
+        - Function `*DomainsClient.Renew` has been removed
+        - Function `*DomainsClient.TransferOut` has been removed
+        - Function `*DomainsClient.Update` has been removed
+        - Function `*DomainsClient.UpdateOwnershipIdentifier` has been removed
+        - Function `NewTopLevelDomainsClient` has been removed
+        - Function `*TopLevelDomainsClient.Get` has been removed
+        - Function `*TopLevelDomainsClient.NewListAgreementsPager` has been removed
+        - Function `*TopLevelDomainsClient.NewListPager` has been removed
+        - Function `NewWebSiteManagementClient` has been removed
+        - Function `*WebSiteManagementClient.CheckNameAvailability` has been removed
+        - Function `*WebSiteManagementClient.GetPublishingUser` has been removed
+        - Function `*WebSiteManagementClient.GetSourceControl` has been removed
+        - Function `*WebSiteManagementClient.GetSubscriptionDeploymentLocations` has been removed
+        - Function `*WebSiteManagementClient.NewListAseRegionsPager` has been removed
+        - Function `*WebSiteManagementClient.NewListBillingMetersPager` has been removed
+        - Function `*WebSiteManagementClient.NewListCustomHostNameSitesPager` has been removed
+        - Function `*WebSiteManagementClient.NewListGeoRegionsPager` has been removed
+        - Function `*WebSiteManagementClient.NewListPremierAddOnOffersPager` has been removed
+        - Function `*WebSiteManagementClient.ListSKUs` has been removed
+        - Function `*WebSiteManagementClient.NewListSiteIdentifiersAssignedToHostNamePager` has been removed
+        - Function `*WebSiteManagementClient.NewListSourceControlsPager` has been removed
+        - Function `*WebSiteManagementClient.Move` has been removed
+        - Function `*WebSiteManagementClient.RegionalCheckNameAvailability` has been removed
+        - Function `*WebSiteManagementClient.UpdatePublishingUser` has been removed
+        - Function `*WebSiteManagementClient.UpdateSourceControl` has been removed
+        - Function `*WebSiteManagementClient.Validate` has been removed
+        - Function `*WebSiteManagementClient.ValidateMove` has been removed
+        - Function `*WebSiteManagementClient.VerifyHostingEnvironmentVnet` has been removed
+        - Struct `Address` has been removed
+        - Struct `Certificate` has been removed
+        - Struct `CertificateCollection` has been removed
+        - Struct `CertificateDetails` has been removed
+        - Struct `CertificateEmail` has been removed
+        - Struct `CertificateOrder` has been removed
+        - Struct `CertificateOrderAction` has been removed
+        - Struct `CertificateOrderCollection` has been removed
+        - Struct `CertificateOrderContact` has been removed
+        - Struct `CertificateOrderPatchResource` has been removed
+        - Struct `CertificateOrderPatchResourceProperties` has been removed
+        - Struct `CertificateOrderProperties` has been removed
+        - Struct `CertificatePatchResource` has been removed
+        - Struct `CertificateResource` has been removed
+        - Struct `Contact` has been removed
+        - Struct `Domain` has been removed
+        - Struct `DomainAvailabilityCheckResult` has been removed
+        - Struct `DomainCollection` has been removed
+        - Struct `DomainControlCenterSsoRequest` has been removed
+        - Struct `DomainOwnershipIdentifier` has been removed
+        - Struct `DomainOwnershipIdentifierCollection` has been removed
+        - Struct `DomainOwnershipIdentifierProperties` has been removed
+        - Struct `DomainPatchResource` has been removed
+        - Struct `DomainPatchResourceProperties` has been removed
+        - Struct `DomainProperties` has been removed
+        - Struct `DomainPurchaseConsent` has been removed
+        - Struct `DomainRecommendationSearchParameters` has been removed
+        - Struct `HostName` has been removed
+        - Struct `NameIdentifierCollection` has been removed
+        - Struct `ReissueCertificateOrderRequest` has been removed
+        - Struct `ReissueCertificateOrderRequestProperties` has been removed
+        - Struct `RenewCertificateOrderRequest` has been removed
+        - Struct `RenewCertificateOrderRequestProperties` has been removed
+        - Struct `SiteSeal` has been removed
+        - Struct `SiteSealRequest` has been removed
+        - Struct `TldLegalAgreement` has been removed
+        - Struct `TldLegalAgreementCollection` has been removed
+        - Struct `TopLevelDomain` has been removed
+        - Struct `TopLevelDomainAgreementOption` has been removed
+        - Struct `TopLevelDomainCollection` has been removed
+        - Struct `TopLevelDomainProperties` has been removed

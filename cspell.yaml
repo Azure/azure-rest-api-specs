@@ -5,6 +5,7 @@ flagWords:
 ignorePaths:
   - .github/CODEOWNERS*
   - .github/policies/**
+  - .gitignore
   - '**/examples/**'
   - '**/package-lock.json'
   - cspell.json
@@ -12,6 +13,9 @@ ignorePaths:
   - eng/**
   - node_modules/**
   - specification/suppressions.yaml
+  - .github/workflows/*.lock.yml
+  - .github/workflows/sdk-generation-agent.md
+  - .github/workflows/shared-github-aw-imports/global_networks_auth_import.md
 ignoreRegExpList:
   - Base64
   - email
@@ -53,3 +57,8 @@ words:
   - vmss
   - vnet
   - westus
+caseSensitive: false
+overrides:
+  - filename: '/README.md'
+    words:
+      - azsdk

@@ -12,6 +12,16 @@ options:
   "@azure-tools/typespec-providerhub-controller":
     emitter-output-dir: "{output-dir}/generated"
     code-kind: model
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/manufacturingplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmanufacturingplatform"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmanufacturingplatform"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

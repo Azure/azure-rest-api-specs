@@ -4,6 +4,10 @@ parameters:
 
 emit:
   - "@azure-tools/typespec-autorest"
+  # - "@azure-typespec/http-client-csharp"
+  # - "@azure-tools/typespec-python"
+  # - "@azure-tools/typespec-ts"
+  # - "@azure-tools/typespec-java"
 
 linter:
   extends:
@@ -16,21 +20,32 @@ options:
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ContentUnderstanding.json"
-  "@azure-tools/typespec-csharp":
-    namespace: "Azure.AI.ContentUnderstanding"
-    model-namespace: false
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.AI.ContentUnderstanding
     model-namespace: false
+    namespace: "Azure.AI.ContentUnderstanding"
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Content Understanding"
-    package-dir: "azure-ai-contentunderstanding"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
     namespace: "azure.ai.contentunderstanding"
-    package-version: 1.0.0
+    generate-test: false
+    generate-sample: false
     flavor: azure
-    generate-test: true
-    generate-sample: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-content-understanding"
+    package-details:
+      name: "@azure/ai-content-understanding"
+      description: "Azure Content Understanding Rest Client"
+    generate-test: false
+    generate-samples: false
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
+    namespace: com.azure.ai.contentunderstanding
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    partial-update: false
+    use-eclipse-language-server: false
+    flavor: azure
+    customization-class: customization/src/main/java/ContentUnderstandingCustomizations.java

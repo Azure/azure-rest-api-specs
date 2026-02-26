@@ -1,0 +1,260 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@typespec/openapi";
+
+using TypeSpec.Http;
+
+namespace AttestationService;
+
+interface Policy {
+  /**
+   * Retrieves the current policy for an attestation type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Retrieves the current policy for an attestation type.")
+  @route("/policies/{attestationType}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Specifies the trusted execution environment to be used to validate the evidence
+       */
+      @path
+      attestationType: AttestationType;
+    },
+    PolicyResponse
+  >;
+
+  /**
+   * Sets the policy for a given attestation type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @summary("Sets the policy for a given attestation type.")
+  @route("/policies/{attestationType}")
+  @put
+  set is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Specifies the trusted execution environment to be used to validate the evidence
+       */
+      @path
+      attestationType: AttestationType;
+
+      /**
+       * JWT Expressing the new policy whose body is a StoredAttestationPolicy object.
+       */
+      @bodyRoot
+      newAttestationPolicy: string;
+    },
+    PolicyResponse
+  >;
+
+  /**
+   * Resets the attestation policy for the specified tenant and reverts to the
+   * default policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("""
+    Resets the attestation policy for the specified tenant and reverts to the
+    default policy.
+    """)
+  @route("/policies/{attestationType}:reset")
+  @post
+  reset is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Specifies the trusted execution environment to be used to validate the evidence
+       */
+      @path
+      attestationType: AttestationType;
+
+      /**
+       * JSON Web Signature with an empty policy document
+       */
+      @bodyRoot
+      policyJws: string;
+    },
+    PolicyResponse
+  >;
+}
+
+interface PolicyCertificates {
+  /**
+   * Retrieves the set of certificates used to express policy for the current tenant.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Retrieves the set of certificates used to express policy for the current tenant.")
+  @route("/certificates")
+  @get
+  get is Azure.Core.Foundations.Operation<{}, PolicyCertificatesResponse>;
+
+  /**
+   * Adds a new attestation policy certificate to the set of policy management
+   * certificates.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("""
+    Adds a new attestation policy certificate to the set of policy management
+    certificates.
+    """)
+  @route("/certificates:add")
+  @post
+  add is Azure.Core.Foundations.Operation<
+    AddPolicyCertificateRequest,
+    PolicyCertificatesModifyResponse
+  >;
+
+  /**
+   * Removes the specified policy management certificate. Note that the final policy
+   * management certificate cannot be removed.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("""
+    Removes the specified policy management certificate. Note that the final policy
+    management certificate cannot be removed.
+    """)
+  @route("/certificates:remove")
+  @post
+  remove is Azure.Core.Foundations.Operation<
+    RemovePolicyCertificateRequest,
+    PolicyCertificatesModifyResponse
+  >;
+}
+
+interface Attestation {
+  /**
+   * Processes an OpenEnclave report , producing an artifact. The type of artifact
+   * produced is dependent upon attestation policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest to an SGX enclave.")
+  @route("/attest/OpenEnclave")
+  @post
+  attestOpenEnclave is Azure.Core.Foundations.Operation<
+    AttestOpenEnclaveRequest,
+    AttestationResponse
+  >;
+
+  /**
+   * Processes an SGX enclave quote, producing an artifact. The type of artifact
+   * produced is dependent upon attestation policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest to an SGX enclave.")
+  @route("/attest/SgxEnclave")
+  @post
+  attestSgxEnclave is Azure.Core.Foundations.Operation<
+    AttestSgxEnclaveRequest,
+    AttestationResponse
+  >;
+
+  /**
+   * Processes an Azure Guest TCG Log, producing an artifact. The type of artifact
+   * produced is dependent upon attestation policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest to an Azure Guest VM.")
+  @route("/attest/AzureGuest")
+  @post
+  attestAzureGuest is Azure.Core.Foundations.Operation<
+    AttestAzureGuestRequest,
+    SealedAttestationResponse
+  >;
+
+  /**
+   * Processes attestation evidence from a VBS enclave, producing an attestation
+   * result. The attestation result produced is dependent upon the attestation
+   * policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest a Virtualization-based Security (VBS) enclave.")
+  @route("/attest/Tpm")
+  @post
+  attestTpm is Azure.Core.Foundations.Operation<
+    TpmAttestationRequest,
+    TpmAttestationResponse
+  >;
+
+  /**
+   * Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon
+   * attestation policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest to an SEV SNP Virtual Machine.")
+  @route("/attest/SevSnpVm")
+  @post
+  attestSevSnpVm is Azure.Core.Foundations.Operation<
+    AttestSevSnpVmRequest,
+    AttestationResponse
+  >;
+
+  /**
+   * Processes an TDX quote, producing an artifact. The type of artifact produced is
+   * dependent upon attestation policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest to a TDX Virtual Machine.")
+  @route("/attest/TdxVm")
+  @post
+  attestTdxVm is Azure.Core.Foundations.Operation<
+    AttestTdxVmRequest,
+    AttestationResponse
+  >;
+}
+
+interface TcbBaselines {
+  /**
+   * Retrieves a list of all Azure supported baseline details for the a TEE type
+   * along with an indication of which one is in enforced for the attestation
+   * provider.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("""
+    Retrieves a list of all Azure supported baseline details for the a TEE type
+    along with an indication of which one is in enforced for the attestation
+    provider.
+    """)
+  @route("/tcbbaselines/{attestationType}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Specifies the trusted execution environment to be used to validate the evidence
+       */
+      @path
+      attestationType: AttestationType;
+    },
+    TcbBaselineResult
+  >;
+}
+
+interface SigningCertificates {
+  /**
+   * Retrieves metadata signing certificates in use by the attestation service
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Retrieves the attestation signing keys in use by the attestation service")
+  @route("/certs")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {},
+    JsonWebKeySet & {
+      @header
+      contentType: SigningCertificatesContentType;
+    }
+  >;
+}
+
+interface MetadataConfiguration {
+  /**
+   * Retrieves metadata about the attestation signing keys in use by the attestation
+   * service
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Retrieves the OpenID Configuration data for the Azure Attestation Service")
+  @route("/.well-known/openid-configuration")
+  @get
+  get is Azure.Core.Foundations.Operation<{}, OpenIDConfigurationResponse>;
+}

@@ -1,0 +1,697 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Preview Alert Rule API in Alerts Management Service Resource Provider",
+    "version": "2025-07-01-preview",
+    "description": "The Preview Alert Rule API provides the ability to retrieve the results of a simulated historical execution of an alert rule",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/{resourceId}/providers/microsoft.AlertsManagement/previewAlertRule": {
+      "post": {
+        "operationId": "PreviewAlertRule",
+        "description": "Retrieves the results of a simulated historical execution of an alert rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreviewAlertRuleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PreviewAlertRuleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Run preview of a dynamic threshold log search alert rule": {
+            "$ref": "./examples/previewDynamicThresholdLogSearchAlertRule.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertSeverity": {
+      "type": "number",
+      "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "x-ms-enum": {
+        "name": "AlertSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "0",
+            "value": 0,
+            "description": "0"
+          },
+          {
+            "name": "1",
+            "value": 1,
+            "description": "1"
+          },
+          {
+            "name": "2",
+            "value": 2,
+            "description": "2"
+          },
+          {
+            "name": "3",
+            "value": 3,
+            "description": "3"
+          },
+          {
+            "name": "4",
+            "value": 4,
+            "description": "4"
+          }
+        ]
+      }
+    },
+    "AlertState": {
+      "type": "string",
+      "description": "The state of the alert after the evaluation.",
+      "enum": [
+        "NoAlert",
+        "Fired",
+        "Firing",
+        "Resolving",
+        "Resolved"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoAlert",
+            "value": "NoAlert",
+            "description": "NoAlert"
+          },
+          {
+            "name": "Fired",
+            "value": "Fired",
+            "description": "Fired"
+          },
+          {
+            "name": "Firing",
+            "value": "Firing",
+            "description": "Firing"
+          },
+          {
+            "name": "Resolving",
+            "value": "Resolving",
+            "description": "Resolving"
+          },
+          {
+            "name": "Resolved",
+            "value": "Resolved",
+            "description": "Resolved"
+          }
+        ]
+      }
+    },
+    "ConditionOperator": {
+      "type": "string",
+      "description": "The criteria operator. Relevant and required only for rules of the kind LogAlert.",
+      "enum": [
+        "Equals",
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "LessThan",
+        "LessThanOrEqual",
+        "GreaterOrLessThan"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equals",
+            "value": "Equals",
+            "description": "Equals"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "GreaterThan"
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "GreaterThanOrEqual"
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "LessThan"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "LessThanOrEqual"
+          },
+          {
+            "name": "GreaterOrLessThan",
+            "value": "GreaterOrLessThan",
+            "description": "GreaterOrLessThan"
+          }
+        ]
+      }
+    },
+    "CriterionType": {
+      "type": "string",
+      "description": "Specifies the type of threshold criteria",
+      "enum": [
+        "StaticThresholdCriterion",
+        "DynamicThresholdCriterion"
+      ],
+      "x-ms-enum": {
+        "name": "CriterionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StaticThresholdCriterion",
+            "value": "StaticThresholdCriterion",
+            "description": "StaticThresholdCriterion"
+          },
+          {
+            "name": "DynamicThresholdCriterion",
+            "value": "DynamicThresholdCriterion",
+            "description": "DynamicThresholdCriterion"
+          }
+        ]
+      }
+    },
+    "DimensionNameAndValue": {
+      "type": "object",
+      "description": "Dimension name and value",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the dimension"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "DimensionOperator": {
+      "type": "string",
+      "description": "Operator for dimension values",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "DimensionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Include",
+            "value": "Include",
+            "description": "Include"
+          },
+          {
+            "name": "Exclude",
+            "value": "Exclude",
+            "description": "Exclude"
+          }
+        ]
+      }
+    },
+    "EvaluatedPeriod": {
+      "type": "object",
+      "description": "Details of the evaluated period.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the evaluated period."
+        },
+        "highThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The high threshold value for the evaluation period."
+        },
+        "lowThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The low threshold value for the evaluation period."
+        },
+        "metricValue": {
+          "type": "number",
+          "format": "double",
+          "description": "The metric value for the evaluation period."
+        },
+        "thresholdMet": {
+          "type": "boolean",
+          "description": "Indicates whether the threshold was met during the evaluation period."
+        }
+      }
+    },
+    "Evaluation": {
+      "type": "object",
+      "description": "An evaluation of the alert rule.",
+      "properties": {
+        "evaluationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the evaluation was performed."
+        },
+        "alertState": {
+          "$ref": "#/definitions/AlertState",
+          "description": "The state of the alert after the evaluation."
+        },
+        "evaluatedPeriods": {
+          "type": "array",
+          "description": "An array of evaluated periods.",
+          "items": {
+            "$ref": "#/definitions/EvaluatedPeriod"
+          },
+          "x-ms-identifiers": []
+        },
+        "thresholdMet": {
+          "type": "boolean",
+          "description": "Indicates whether the threshold was met for this evaluation."
+        }
+      }
+    },
+    "Kind": {
+      "type": "string",
+      "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
+      "enum": [
+        "LogAlert",
+        "EventLogAlert",
+        "LogToMetric"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogAlert",
+            "value": "LogAlert",
+            "description": "LogAlert"
+          },
+          {
+            "name": "EventLogAlert",
+            "value": "EventLogAlert",
+            "description": "EventLogAlert"
+          },
+          {
+            "name": "LogToMetric",
+            "value": "LogToMetric",
+            "description": "LogToMetric"
+          }
+        ]
+      }
+    },
+    "LogAlertRuleCondition": {
+      "type": "object",
+      "description": "A condition of the scheduled query rule.",
+      "properties": {
+        "criterionType": {
+          "$ref": "#/definitions/CriterionType",
+          "description": "Specifies the type of threshold criteria"
+        },
+        "query": {
+          "type": "string",
+          "description": "KQL log query alert"
+        },
+        "timeAggregation": {
+          "$ref": "#/definitions/TimeAggregation",
+          "description": "Aggregation type. Relevant and required only for rules of the kind LogAlert."
+        },
+        "metricMeasureColumn": {
+          "type": "string",
+          "description": "The column containing the metric measure number. Relevant only for rules of the kind LogAlert."
+        },
+        "resourceIdColumn": {
+          "type": "string",
+          "description": "The column containing the resource id. The content of the column must be a uri formatted as resource id. Relevant only for rules of the kind LogAlert."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "List of Dimensions conditions",
+          "items": {
+            "$ref": "#/definitions/LogAlertRuleDimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "operator": {
+          "$ref": "#/definitions/ConditionOperator",
+          "description": "The criteria operator. Relevant and required only for rules of the kind LogAlert."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "the criteria threshold value that activates the alert. Relevant and required only for static threshold rules of the kind LogAlert."
+        },
+        "alertSensitivity": {
+          "type": "string",
+          "description": "The extent of deviation required to trigger an alert. Allowed values are 'Low', 'Medium' and 'High'. This will affect how tight the threshold is to the metric series pattern. Relevant and required only for dynamic threshold rules of the kind LogAlert."
+        },
+        "ignoreDataBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format). Relevant only for dynamic threshold rules of the kind LogAlert."
+        },
+        "failingPeriods": {
+          "$ref": "#/definitions/LogAlertRuleConditionFailingPeriods",
+          "description": "The minimum number of violations required within the selected lookback time window required to raise an alert. Relevant only for rules of the kind LogAlert."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric to be sent. Relevant and required only for rules of the kind LogToMetric."
+        }
+      }
+    },
+    "LogAlertRuleConditionFailingPeriods": {
+      "type": "object",
+      "description": "The minimum number of violations required within the selected lookback time window required to raise an alert. Relevant only for rules of the kind LogAlert.",
+      "properties": {
+        "numberOfEvaluationPeriods": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points. Default value is 1",
+          "default": 1
+        },
+        "minFailingPeriodsToAlert": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1",
+          "default": 1
+        }
+      }
+    },
+    "LogAlertRuleCriteria": {
+      "type": "object",
+      "description": "The rule criteria that defines the conditions of the scheduled query rule.",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "description": "A list of conditions to evaluate against the specified scopes",
+          "items": {
+            "$ref": "#/definitions/LogAlertRuleCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogAlertRuleDimension": {
+      "type": "object",
+      "description": "Dimension splitting and filtering definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "operator": {
+          "$ref": "#/definitions/DimensionOperator",
+          "description": "Operator for dimension values"
+        },
+        "values": {
+          "type": "array",
+          "description": "List of dimension values",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "LogAlertRuleProperties": {
+      "type": "object",
+      "description": "scheduled query rule Definition",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the scheduled query rule."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the alert rule"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "The flag which indicates whether this scheduled query rule is enabled. Value should be true or false"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "The list of resource id's that this scheduled query rule is scoped to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evaluationFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "How often the scheduled query rule is evaluated represented in ISO 8601 duration format. Relevant and required only for rules of the kind LogAlert."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "The period of time (in ISO 8601 duration format) on which the Alert query will be executed (bin size). Relevant and required only for rules of the kind LogAlert."
+        },
+        "overrideQueryTimeRange": {
+          "type": "string",
+          "format": "duration",
+          "description": "If specified then overrides the query time range (default is WindowSize*NumberOfEvaluationPeriods). Relevant only for rules of the kind LogAlert."
+        },
+        "targetResourceTypes": {
+          "type": "array",
+          "description": "List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria. Relevant only for rules of the kind LogAlert",
+          "items": {
+            "type": "string"
+          }
+        },
+        "criteria": {
+          "$ref": "#/definitions/LogAlertRuleCriteria",
+          "description": "The rule criteria that defines the conditions of the scheduled query rule."
+        }
+      }
+    },
+    "LogAlertRuleResource": {
+      "type": "object",
+      "description": "The scheduled query rule resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "Indicates the type of scheduled query rule. The default is LogAlert."
+        },
+        "properties": {
+          "$ref": "#/definitions/LogAlertRuleProperties",
+          "description": "The rule properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
+    "PreviewAlertRuleRequest": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the rule resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/PreviewAlertRuleRequestProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
+    "PreviewAlertRuleRequestProperties": {
+      "type": "object",
+      "properties": {
+        "timespan": {
+          "type": "string",
+          "format": "duration",
+          "description": "Specifies the timespan of the preview in ISO 8601 duration format."
+        },
+        "scheduledQueryRuleProperties": {
+          "$ref": "#/definitions/LogAlertRuleResource",
+          "description": "The properties of the alert rule to preview."
+        }
+      },
+      "required": [
+        "timespan"
+      ]
+    },
+    "PreviewAlertRuleResponse": {
+      "type": "object",
+      "properties": {
+        "rulePreviewResults": {
+          "type": "array",
+          "description": "An array of rule preview results.",
+          "items": {
+            "$ref": "#/definitions/RulePreviewResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RulePreviewResult": {
+      "type": "object",
+      "description": "A rule preview result containing a dimension combination and an array of evaluations.",
+      "properties": {
+        "dimensionCombination": {
+          "type": "array",
+          "description": "The list of dimensions for the evaluation.",
+          "items": {
+            "$ref": "#/definitions/DimensionNameAndValue"
+          }
+        },
+        "evaluations": {
+          "type": "array",
+          "description": "An array of evaluations.",
+          "items": {
+            "$ref": "#/definitions/Evaluation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TimeAggregation": {
+      "type": "string",
+      "description": "Aggregation type. Relevant and required only for rules of the kind LogAlert.",
+      "enum": [
+        "Count",
+        "Average",
+        "Minimum",
+        "Maximum",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "TimeAggregation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count"
+          },
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum",
+            "description": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "Total"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

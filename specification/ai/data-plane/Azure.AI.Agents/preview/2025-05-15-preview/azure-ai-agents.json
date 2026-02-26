@@ -63,7 +63,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -591,7 +591,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -873,7 +873,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1183,7 +1183,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1560,7 +1560,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1770,7 +1770,7 @@
                   "type": "array",
                   "description": "A list of tools for which the outputs are being submitted",
                   "items": {
-                    "$ref": "#/definitions/ToolOutput"
+                    "$ref": "#/definitions/StructuredToolOutput"
                   },
                   "x-ms-client-name": "toolOutputs"
                 },
@@ -1867,7 +1867,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2360,7 +2360,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2514,7 +2514,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2922,6 +2922,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -2929,6 +2931,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -3297,7 +3301,8 @@
         "bing_custom_search",
         "connected_agent",
         "deep_research",
-        "mcp"
+        "mcp",
+        "computer_use_preview"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3357,6 +3362,11 @@
             "name": "mcp",
             "value": "mcp",
             "description": "Tool type `mcp`"
+          },
+          {
+            "name": "computerUsePreview",
+            "value": "computer_use_preview",
+            "description": "Tool type `computer_use_preview`"
           }
         ]
       }
@@ -3633,21 +3643,21 @@
         },
         "market": {
           "type": "string",
-          "description": "The market where the results come from."
+          "description": "The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change."
         },
         "set_lang": {
           "type": "string",
-          "description": "The language to use for user interface strings when calling Bing API.",
+          "description": "The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.\nFor a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).\nBing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.\nIf the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).\nTo specify the 2-letter code, set this parameter to an ISO 639-1 language code.\nTo specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.\nAlthough optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.",
           "x-ms-client-name": "setLang"
         },
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of search results to return in the bing api response"
+          "description": "The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. \n- It is possible for multiple pages to include some overlap in results. \n- This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing."
         },
         "freshness": {
           "type": "string",
-          "description": "Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters"
+          "description": "Filter search results by the following case-insensitive age values:\n- Day: Return webpages that Bing discovered within the last 24 hours.\n- Week: Return webpages that Bing discovered within the last 7 days.\n- Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`."
         }
       },
       "required": [
@@ -3704,21 +3714,21 @@
         },
         "market": {
           "type": "string",
-          "description": "The market where the results come from."
+          "description": "The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change."
         },
         "set_lang": {
           "type": "string",
-          "description": "The language to use for user interface strings when calling Bing API.",
+          "description": "The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.\nFor a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).\nBing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.\nIf the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).\nTo specify the 2-letter code, set this parameter to an ISO 639-1 language code.\nTo specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.\nAlthough optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.",
           "x-ms-client-name": "setLang"
         },
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of search results to return in the bing api response"
+          "description": "The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. \n- It is possible for multiple pages to include some overlap in results. \n- This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing."
         },
         "freshness": {
           "type": "string",
-          "description": "Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters"
+          "description": "Filter search results by the following case-insensitive age values:\n- Day: Return webpages that Bing discovered within the last 24 hours.\n- Week: Return webpages that Bing discovered within the last 7 days.\n- Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`."
         }
       },
       "required": [
@@ -3860,6 +3870,37 @@
         "connection"
       ]
     },
+    "ClickAction": {
+      "type": "object",
+      "description": "A click action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the click occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the click occurred."
+        },
+        "button": {
+          "$ref": "#/definitions/MouseButton",
+          "description": "Indicates which mouse button was pressed during the click."
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "button"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "click"
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
@@ -3894,6 +3935,161 @@
           "x-ms-client-name": "dataSources"
         }
       }
+    },
+    "ComputerScreenshot": {
+      "type": "object",
+      "description": "The output from a computer use tool representing a screenshot.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the event type. For a computer screenshot, this property is always set to computer_screenshot.",
+          "enum": [
+            "computer_screenshot"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "file_id": {
+          "type": "string",
+          "description": "The identifier of an uploaded file that contains the screenshot.",
+          "x-ms-client-name": "fileId"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "The URL of the screenshot image.",
+          "x-ms-client-name": "imageUrl"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ComputerToolOutput": {
+      "type": "object",
+      "description": "The output from a computer use tool to be submitted.",
+      "properties": {
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_call_output"
+    },
+    "ComputerUseAction": {
+      "type": "object",
+      "description": "An abstract representation of a computer use action.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of computer use action."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ComputerUseEnvironment": {
+      "type": "string",
+      "description": "The environment types supported by the computer use tool.",
+      "enum": [
+        "windows",
+        "mac",
+        "linux",
+        "browser"
+      ],
+      "x-ms-enum": {
+        "name": "ComputerUseEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "windows",
+            "value": "windows",
+            "description": "Windows environment"
+          },
+          {
+            "name": "mac",
+            "value": "mac",
+            "description": "Mac environment"
+          },
+          {
+            "name": "linux",
+            "value": "linux",
+            "description": "Linux environment"
+          },
+          {
+            "name": "browser",
+            "value": "browser",
+            "description": "Browser environment"
+          }
+        ]
+      }
+    },
+    "ComputerUseToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Computer Use tool as used to configure an agent.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/ComputerUseToolParameters",
+          "description": "The computer use tool parameters.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "ComputerUseToolParameters": {
+      "type": "object",
+      "description": "The computer use tool parameters.",
+      "properties": {
+        "display_width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The display width for the computer use tool.",
+          "minimum": 1,
+          "x-ms-client-name": "displayWidth"
+        },
+        "display_height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The display height for the computer use tool.",
+          "minimum": 1,
+          "x-ms-client-name": "displayHeight"
+        },
+        "environment": {
+          "$ref": "#/definitions/ComputerUseEnvironment",
+          "description": "The environment for the computer use tool."
+        }
+      },
+      "required": [
+        "display_width",
+        "display_height",
+        "environment"
+      ]
     },
     "ConnectedAgentDetails": {
       "type": "object",
@@ -3938,6 +4134,26 @@
       ],
       "x-ms-discriminator-value": "connected_agent"
     },
+    "CoordinatePoint": {
+      "type": "object",
+      "description": "A coordinate point with x and y values.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
     "CreateAgentOptions": {
       "type": "object",
       "description": "The request details to use when creating a new agent.",
@@ -3980,6 +4196,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -3987,6 +4205,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4055,6 +4275,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -4062,6 +4284,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4069,6 +4293,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -4076,6 +4301,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens\nspecified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -4171,6 +4397,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -4178,6 +4406,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4185,6 +4415,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -4192,6 +4423,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort\nto use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of\ncompletion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -4305,6 +4537,54 @@
           }
         ]
       }
+    },
+    "DoubleClickAction": {
+      "type": "object",
+      "description": "A double click action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the double click occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the double click occurred."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "double_click"
+    },
+    "DragAction": {
+      "type": "object",
+      "description": "A drag action.",
+      "properties": {
+        "path": {
+          "type": "array",
+          "description": "An array of coordinates representing the path of the drag action.",
+          "items": {
+            "$ref": "#/definitions/CoordinatePoint"
+          }
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "drag"
     },
     "ErrorEvent": {
       "type": "string",
@@ -4791,6 +5071,28 @@
           "x-ms-client-name": "indexName"
         }
       }
+    },
+    "KeyPressAction": {
+      "type": "object",
+      "description": "A collection of keypresses the model would like to perform.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "keypress"
     },
     "ListSortOrder": {
       "type": "string",
@@ -5819,6 +6121,74 @@
       ],
       "x-ms-discriminator-value": "fabric_dataagent"
     },
+    "MouseButton": {
+      "type": "string",
+      "description": "The mouse button types supported by click actions.",
+      "enum": [
+        "left",
+        "right",
+        "wheel",
+        "back",
+        "forward"
+      ],
+      "x-ms-enum": {
+        "name": "MouseButton",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "left",
+            "value": "left",
+            "description": "Left mouse button"
+          },
+          {
+            "name": "right",
+            "value": "right",
+            "description": "Right mouse button"
+          },
+          {
+            "name": "wheel",
+            "value": "wheel",
+            "description": "Mouse wheel button"
+          },
+          {
+            "name": "back",
+            "value": "back",
+            "description": "Back mouse button"
+          },
+          {
+            "name": "forward",
+            "value": "forward",
+            "description": "Forward mouse button"
+          }
+        ]
+      }
+    },
+    "MoveAction": {
+      "type": "object",
+      "description": "A mouse move action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate to move to."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate to move to."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "move"
+    },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi anonymous authentication",
@@ -6007,6 +6377,48 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "RequiredComputerUseToolCall": {
+      "type": "object",
+      "description": "A representation of a requested call to a Computer Use tool, needed by the model to continue evaluation of a run.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RequiredComputerUseToolCallDetails",
+          "description": "Detailed information about the computer use action to be executed.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "RequiredComputerUseToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information for a computer use tool invocation.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        }
+      },
+      "required": [
+        "action",
+        "pending_safety_checks"
       ]
     },
     "RequiredFunctionToolCall": {
@@ -6240,7 +6652,8 @@
         "cancelled",
         "failed",
         "completed",
-        "expired"
+        "expired",
+        "incomplete"
       ],
       "x-ms-enum": {
         "name": "RunStatus",
@@ -6285,6 +6698,11 @@
             "name": "expired",
             "value": "expired",
             "description": "Represents a run that expired before it could otherwise finish."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Represents a run that cannot be completed due to safety guardrails."
           }
         ]
       }
@@ -6673,6 +7091,61 @@
         "total_tokens"
       ]
     },
+    "RunStepComputerUseToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Computer Use tool, issued by the model in evaluation of a defined tool, that represents\nexecuted computer automation actions.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RunStepComputerUseToolCallDetails",
+          "description": "The detailed information about the computer use tool call.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "required": [
+        "computer_use_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
+    },
+    "RunStepComputerUseToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about a computer use tool call.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        },
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      },
+      "required": [
+        "action",
+        "pending_safety_checks",
+        "output"
+      ]
+    },
     "RunStepConnectedAgent": {
       "type": "object",
       "description": "The detailed information about connected agent tool call.",
@@ -6964,6 +7437,53 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepDeltaComputerUseDetails": {
+      "type": "object",
+      "description": "Represents the Computer Use tool call details in a streaming run step.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ComputerUseAction",
+          "description": "The action to be performed by the computer use tool."
+        },
+        "pending_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that are pending acknowledgment by the developer.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "pendingSafetyChecks"
+        },
+        "output": {
+          "$ref": "#/definitions/ComputerScreenshot",
+          "description": "The output from the computer use tool, null if outputs have not yet been submitted."
+        },
+        "acknowledged_safety_checks": {
+          "type": "array",
+          "description": "Safety checks that have been acknowledged by the developer, null if outputs have not yet been submitted.",
+          "items": {
+            "$ref": "#/definitions/SafetyCheck"
+          },
+          "x-ms-client-name": "acknowledgedSafetyChecks"
+        }
+      }
+    },
+    "RunStepDeltaComputerUseToolCall": {
+      "type": "object",
+      "description": "Represents the Computer Use tool call in a streaming run step.",
+      "properties": {
+        "computer_use_preview": {
+          "$ref": "#/definitions/RunStepDeltaComputerUseDetails",
+          "description": "The computer use data for the tool call.",
+          "x-ms-client-name": "computerUsePreview"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "computer_use_preview"
     },
     "RunStepDeltaConnectedAgentToolCall": {
       "type": "object",
@@ -7889,6 +8409,77 @@
         ]
       }
     },
+    "SafetyCheck": {
+      "type": "object",
+      "description": "Safety check that has been acknowledged by the developer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the pending safety check."
+        },
+        "code": {
+          "type": "string",
+          "description": "The type of the pending safety check."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details about the pending safety check."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ScreenshotAction": {
+      "type": "object",
+      "description": "A screenshot action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "screenshot"
+    },
+    "ScrollAction": {
+      "type": "object",
+      "description": "A scroll action.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The x-coordinate where the scroll occurred."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The y-coordinate where the scroll occurred."
+        },
+        "scroll_x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The horizontal scroll distance.",
+          "x-ms-client-name": "scrollX"
+        },
+        "scroll_y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vertical scroll distance.",
+          "x-ms-client-name": "scrollY"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "scroll_x",
+        "scroll_y"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "scroll"
+    },
     "SharepointGroundingToolParameters": {
       "type": "object",
       "description": "The sharepoint grounding tool parameters.",
@@ -7922,6 +8513,26 @@
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding"
+    },
+    "StructuredToolOutput": {
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output. Defaults to `function_call_output` if not provided.",
+          "default": "function_call_output"
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "SubmitToolApprovalAction": {
       "type": "object",
@@ -8299,6 +8910,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens specified to have been used over the course of the run.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -8306,6 +8918,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens specified to have been used over the course of the run.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -8463,18 +9076,19 @@
     },
     "ToolOutput": {
       "type": "object",
-      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "description": "The output from a function tool to be submitted.",
       "properties": {
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
-          "x-ms-client-name": "toolCallId"
-        },
         "output": {
           "type": "string",
-          "description": "The output from the tool to be submitted."
+          "description": "The output from the function tool to be submitted."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
     },
     "ToolResources": {
       "type": "object",
@@ -8537,6 +9151,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of most recent messages from the thread when constructing the context for the run.",
+          "minimum": 1,
           "x-nullable": true,
           "x-ms-client-name": "lastMessages"
         }
@@ -8568,6 +9183,25 @@
           }
         ]
       }
+    },
+    "TypeAction": {
+      "type": "object",
+      "description": "An action to type in text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to type."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "type"
     },
     "UpdateAgentOptions": {
       "type": "object",
@@ -8610,6 +9244,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -8617,6 +9253,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -9472,6 +10110,16 @@
           }
         }
       }
+    },
+    "WaitAction": {
+      "type": "object",
+      "description": "A wait action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputerUseAction"
+        }
+      ],
+      "x-ms-discriminator-value": "wait"
     }
   },
   "parameters": {

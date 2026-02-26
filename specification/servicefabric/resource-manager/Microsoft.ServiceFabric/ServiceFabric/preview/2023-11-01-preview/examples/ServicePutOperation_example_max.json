@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "parameters": {
+      "properties": {
+        "correlationScheme": [
+          {
+            "scheme": "Affinity",
+            "serviceName": "fabric:/app1/app1~svc1"
+          }
+        ],
+        "defaultMoveCost": "Medium",
+        "instanceCount": 5,
+        "partitionDescription": {
+          "partitionScheme": "Singleton"
+        },
+        "placementConstraints": "NodeType==frontend",
+        "serviceDnsName": "my.service.dns",
+        "serviceKind": "Stateless",
+        "serviceLoadMetrics": [
+          {
+            "name": "metric1",
+            "weight": "Low"
+          }
+        ],
+        "servicePackageActivationMode": "SharedProcess",
+        "servicePlacementPolicies": [],
+        "serviceTypeName": "myServiceType"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "resRg",
+    "serviceName": "myService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "services",
+        "eTag": "W/\"636462502183671258\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+        "location": "eastus",
+        "properties": {
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "placementConstraints": "NodeType==frontend",
+          "provisioningState": "Updating",
+          "serviceDnsName": "my.service.dns",
+          "serviceKind": "Stateless",
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "weight": "Low"
+            }
+          ],
+          "servicePackageActivationMode": "SharedProcess",
+          "servicePlacementPolicies": [],
+          "serviceTypeName": "myServiceType"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/2e633105-aadc-4928-9164-d76b974170a3?api-version=2023-11-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "Services_CreateOrUpdate",
+  "title": "Put a service with maximum parameters"
+}

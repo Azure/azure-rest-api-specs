@@ -74,6 +74,23 @@ union HostPoolProvisioningAction {
 }
 
 /**
+ * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+ */
+union AllowRDPShortPathWithPrivateLink {
+  string,
+
+  /**
+   * Blocks the use of RDPShortPath if the hostpool PublicNetworkAccess setting is configured to require private link.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Allows the use of RDPShortPath even if the hostpool PublicNetworkAccess is configured to require the use of private link.
+   */
+  Enabled: "Enabled",
+}
+
+/**
  * Provisioning state of the Session Host Configuration.
  */
 union ProvisioningStateSHC {
@@ -1242,6 +1259,23 @@ union DiffDiskPlacement {
 }
 
 /**
+ * DeploymentScope type for HostPool.
+ */
+union DeploymentScope {
+  string,
+
+  /**
+   * For geographical Broker and ArmProvider talking to Geographical SQL DB
+   */
+  Geographical: "Geographical",
+
+  /**
+   * For regional Broker and ArmProvider talking to regional SQL DB
+   */
+  Regional: "Regional",
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -1422,6 +1456,12 @@ model AppAttachPackageProperties {
    * Field that can be populated with custom data and filtered on in list GET calls
    */
   customData?: string;
+
+  /**
+   * DeploymentScope type for AppAttachPackage.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2148,6 +2188,27 @@ model SessionHostProvisioningConfigurationProperties {
 }
 
 /**
+ * The configuration for session host provisioning operations.
+ */
+model SessionHostProvisioningConfigurationPatchProperties {
+  /**
+   * Whether the session host should be set in drain mode following provisioning.
+   */
+  setDrainMode?: boolean;
+
+  /**
+   * The number of session hosts to exist in the Host Pool.
+   */
+  @minValue(1)
+  instanceCount?: int32;
+
+  /**
+   * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
+   */
+  canaryPolicy?: CanaryPolicy;
+}
+
+/**
  * Represents a SessionHostManagementPatch definition.
  */
 model SessionHostManagementPatchProperties {
@@ -2160,6 +2221,18 @@ model SessionHostManagementPatchProperties {
    * Parameters for a hostpool update.
    */
   update?: HostPoolUpdateConfigurationPatchProperties;
+
+  /**
+   * Parameters that apply when session hosts are provisioned.
+   */
+  @added(Versions.v2025_04_01_preview)
+  provisioning?: SessionHostProvisioningConfigurationPatchProperties;
+
+  /**
+   * The policy that should be applied when the Session Host provisioning operation fails.
+   */
+  @added(Versions.v2025_04_01_preview)
+  failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
 }
 /**
  * List of ApplicationGroup definitions.
@@ -2213,6 +2286,19 @@ model ApplicationGroupProperties {
    * Boolean representing whether the applicationGroup is show in the feed.
    */
   showInFeed?: boolean;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for ApplicationGroup.
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2523,6 +2609,25 @@ model HostPoolProperties {
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
    */
   managementType?: ManagementType;
+
+  /**
+   * DeploymentScope type for HostPool.
+   */
+  @added(Versions.v2025_08_01_preview)
+  deploymentScope?: DeploymentScope;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**
@@ -2537,6 +2642,7 @@ model RegistrationInfo {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 
   /**
@@ -2883,6 +2989,17 @@ model Time {
 }
 
 /**
+ * Request body for listing scoped registration tokens for a session host.
+ */
+@added(Versions.v2026_01_01_preview)
+model ScopedRegistrationTokenProperties {
+  /**
+   * Expiration time of the registration token in UTC.
+   */
+  expirationTimeInUtc: utcDateTime;
+}
+
+/**
  * Scaling plan reference to hostpool.
  */
 model ScalingHostPoolReference {
@@ -2944,6 +3061,18 @@ model WorkspaceProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for Workspace.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -3533,6 +3662,13 @@ model HostPoolPatchProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
+
+  /**
+   * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
+  @added(Versions.v2025_09_01_preview)
+  allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 }
 
 /**
@@ -3748,6 +3884,7 @@ model RegistrationTokenMinimal {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 }
 
@@ -3809,18 +3946,21 @@ model SessionHostProperties {
    * Number of active sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
+  @visibility(Lifecycle.Read)
   activeSessions?: int32;
 
   /**
    * Number of disconnected sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
+  @visibility(Lifecycle.Read)
   disconnectedSessions?: int32;
 
   /**
    * Number of pending sessions on SessionHost.
    */
   @added(Versions.v2025_04_01_preview)
+  @visibility(Lifecycle.Read)
   pendingSessions?: int32;
 
   /**
@@ -3832,16 +3972,19 @@ model SessionHostProperties {
   /**
    * Last heart beat from SessionHost.
    */
+  @visibility(Lifecycle.Read)
   lastHeartBeat?: utcDateTime;
 
   /**
    * Number of sessions on SessionHost.
    */
+  @visibility(Lifecycle.Read)
   sessions?: int32;
 
   /**
    * Version of agent on SessionHost.
    */
+  @visibility(Lifecycle.Read)
   agentVersion?: string;
 
   /**
@@ -3874,6 +4017,7 @@ model SessionHostProperties {
   /**
    * Status for a SessionHost.
    */
+  @visibility(Lifecycle.Read)
   status?: Status;
 
   /**
@@ -3885,17 +4029,20 @@ model SessionHostProperties {
   /**
    * The version of the OS on the session host.
    */
+  @visibility(Lifecycle.Read)
   osVersion?: string;
 
   /**
    * The version of the side by side stack on the session host.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SxS is a valid acronym"
+  @visibility(Lifecycle.Read)
   sxSStackVersion?: string;
 
   /**
    * Update state of a SessionHost.
    */
+  @visibility(Lifecycle.Read)
   updateState?: UpdateState;
 
   /**
@@ -3907,6 +4054,7 @@ model SessionHostProperties {
   /**
    * The error message.
    */
+  @visibility(Lifecycle.Read)
   updateErrorMessage?: string;
 
   /**

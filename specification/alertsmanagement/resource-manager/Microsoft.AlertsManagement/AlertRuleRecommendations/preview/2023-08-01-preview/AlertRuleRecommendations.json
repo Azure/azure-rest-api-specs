@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Alerts Management Service Resource Provider",
+    "version": "2023-08-01-preview",
+    "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AlertsManagement/alertRuleRecommendations": {
+      "get": {
+        "operationId": "AlertRuleRecommendations_ListByResource",
+        "description": "Retrieve alert rule recommendations for a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleRecommendationsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List alert rule recommendations for Monitoring accounts at resource level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetByResource_MAC.json"
+          },
+          "List alert rule recommendations for virtual machines at resource level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertRuleRecommendations": {
+      "get": {
+        "operationId": "AlertRuleRecommendations_ListByTargetType",
+        "description": "Retrieve alert rule recommendations for a target type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetType",
+            "in": "query",
+            "description": "The recommendations target type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleRecommendationsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List alert rule recommendations for Monitoring accounts at subscription level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_MAC.json"
+          },
+          "List alert rule recommendations for virtual machines at subscription level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_VM.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertRuleRecommendationProperties": {
+      "type": "object",
+      "description": "Describes the format of Alert Rule Recommendations response.",
+      "properties": {
+        "alertRuleType": {
+          "type": "string",
+          "description": "The recommendation alert rule type."
+        },
+        "category": {
+          "type": "string",
+          "description": "The recommendation alert rule category."
+        },
+        "displayInformation": {
+          "type": "object",
+          "description": "A dictionary that provides the display information for an alert rule recommendation.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ruleArmTemplate": {
+          "$ref": "#/definitions/RuleArmTemplate",
+          "description": "A complete ARM template to deploy the alert rules."
+        }
+      },
+      "required": [
+        "alertRuleType",
+        "displayInformation",
+        "ruleArmTemplate"
+      ]
+    },
+    "AlertRuleRecommendationResource": {
+      "type": "object",
+      "description": "A single alert rule recommendation resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertRuleRecommendationProperties",
+          "description": "recommendation properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertRuleRecommendationsListResponse": {
+      "type": "object",
+      "description": "List of alert rule recommendations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertRuleRecommendationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertRuleRecommendationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RuleArmTemplate": {
+      "type": "object",
+      "description": "A complete ARM template to deploy the alert rules.",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "description": "JSON schema reference"
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "A 4 number format for the version number of this template file. For example, 1.0.0.0",
+          "pattern": "(^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$)"
+        },
+        "variables": {
+          "description": "Variable definitions"
+        },
+        "parameters": {
+          "description": "Input parameter definitions"
+        },
+        "resources": {
+          "type": "array",
+          "description": "Alert rule resource definitions",
+          "items": {}
+        }
+      },
+      "required": [
+        "$schema",
+        "contentVersion",
+        "variables",
+        "parameters",
+        "resources"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

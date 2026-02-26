@@ -14,7 +14,7 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-vision-imageanalysis"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-imageanalysis"
     namespace: "azure.ai.vision.imageanalysis"
     flavor: azure
     generate-test: true
@@ -30,7 +30,7 @@ options:
     namespace: Azure.AI.Vision.ImageAnalysis
     model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-vision-imageanalysis"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-imageanalysis"
     namespace: "com.azure.ai.vision.imageanalysis"
     # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
@@ -38,7 +38,7 @@ options:
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "ai-vision-image-analysis-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-vision-image-analysis-rest"
     is-modular-library: false
     package-details:
       name: "@azure-rest/ai-vision-image-analysis"

@@ -48,11 +48,19 @@ namespace Microsoft.DBforMySQL;
  */
 enum Versions {
   /**
-   * The 2024-12-01-preview API version.
+   * The 2024-12-30 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_12_01_preview: "2024-12-01-preview",
+
+  /**
+   * The 2024-12-30 API version.
+   */
+  v2024_12_30: "2024-12-30",
+
+  /**
+   * The 2025-06-01-preview API version.
+   */
+  v2025_06_01_preview: "2025-06-01-preview",
 }
 
 interface Operations {
@@ -60,16 +68,11 @@ interface Operations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }

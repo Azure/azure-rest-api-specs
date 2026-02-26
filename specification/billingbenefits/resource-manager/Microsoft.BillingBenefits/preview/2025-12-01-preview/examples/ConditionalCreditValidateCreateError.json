@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Invalid CACO Test",
+            "productCode": "b8473ce57f1d",
+            "startAt": "2023-01-01T00:00:00Z",
+            "allowContributors": "Enabled",
+            "milestones": [
+              {
+                "name": "Milestone 1",
+                "spendTarget": {
+                  "amount": -1000,
+                  "currencyCode": "INVALID"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 100000,
+                    "currencyCode": "USD"
+                  },
+                  "startAt": "2022-01-01T00:00:00Z",
+                  "endAt": "2021-12-31T00:00:00Z"
+                },
+                "endAt": "2022-12-31T00:00:00Z"
+              }
+            ]
+          }
+        },
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Contributor",
+            "displayName": "Invalid Contributor CACO",
+            "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+            "startAt": "2023-01-01T00:00:00Z",
+            "primaryResourceId": "/subscriptions/invalid/resourceGroups/invalid/providers/Microsoft.BillingBenefits/conditionalCredits/nonexistent",
+            "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/nonexistent"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": false,
+            "reason": "The billing account resource ID is missing or invalid",
+            "reasonCode": "InvalidBillingAccountId"
+          },
+          {
+            "valid": false,
+            "reason": "Start date must be the first day of the current or a future month",
+            "reasonCode": "InvalidStartAt"
+          }
+        ]
+      }
+    }
+  }
+}

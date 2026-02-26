@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -16,7 +17,7 @@ scalar base64Bytes extends bytes;
 /** The error response. */
 @error
 @mediaTypeHint("application/xml")
-model StorageError {
+model Error {
   /** The error code. */
   @header("x-ms-error-code")
   errorCode?: string;
@@ -199,6 +200,18 @@ enum SkuName {
 
   /** The premium LRS SKU. */
   PremiumLRS: "Premium_LRS",
+
+  /** The standard GZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardGZRS: "Standard_GZRS",
+
+  /** The premium ZRS SKU. */
+  @added(Versions.v2026_04_06)
+  PremiumZRS: "Premium_ZRS",
+
+  /** The standard RAGZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardRAGZRS: "Standard_RAGZRS",
 }
 
 /** The list container segment response */
@@ -340,6 +353,11 @@ model KeyInfo {
 
   /** The date-time the key expires. */
   @Xml.name("Expiry") expiry: string;
+
+  /** The delegated user tenant id in Azure AD. */
+  @Xml.name("DelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  delegatedUserTid?: uuid;
 }
 
 /** A user delegation key. */
@@ -351,16 +369,25 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @Xml.name("SignedStart") signedStart: string;
+  @encode("rfc7231")
+  @Xml.name("SignedStart")
+  signedStart: utcDateTime;
 
   /** The date-time the key expires. */
-  @Xml.name("SignedExpiry") signedExpiry: string;
+  @encode("rfc7231")
+  @Xml.name("SignedExpiry")
+  signedExpiry: utcDateTime;
 
   /** Abbreviation of the Azure Storage service that accepts the key. */
   @Xml.name("SignedService") signedService: string;
 
   /** The service version that created the key. */
   @Xml.name("SignedVersion") signedVersion: string;
+
+  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  @Xml.name("SignedDelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  signedDelegatedUserTid?: uuid;
 
   /** The key as a base64 string. */
   @Xml.name("Value")
@@ -551,7 +578,7 @@ model BlobItemInternal {
   @Xml.name("ObjectReplicationMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
-  /** Whether the blog has versions only. */
+  /** Whether the blob has versions only. */
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
 }
 
@@ -570,7 +597,7 @@ model BlobPropertiesInternal {
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
 
-  /** The blog ETag. */
+  /** The blob ETag. */
   @Xml.name("Etag") eTag: string;
 
   /** The content length of the blob. */
@@ -630,10 +657,10 @@ model BlobPropertiesInternal {
   /** The copy status description of the blob. */
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
-  /** Whether the blog is encrypted on the server. */
+  /** Whether the blob is encrypted on the server. */
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
-  /** Whether the blog is incremental copy. */
+  /** Whether the blob is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
@@ -1477,8 +1504,15 @@ alias ServerEncryptedResponseHeaderPrivate = {
 };
 
 /** The legal hold response header. */
+alias LegalHoldOptionalResponseHeader = {
+  /** Indicates whether the blob has a legal hold. */
+  @header("x-ms-legal-hold")
+  legalHold?: boolean;
+};
+
+/** The legal hold response header. */
 alias LegalHoldResponseHeader = {
-  /** Specifies the legal hold status to set on the blob. */
+  /** Indicates whether the blob has a legal hold. */
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };
@@ -1653,6 +1687,27 @@ alias EtagResponseHeaderPrivate = {
   @access(Access.internal)
   @header("ETag")
   eTag: string;
+};
+
+alias SourceEncryptionKeyParameter = {
+  /** Optional. Specifies the source encryption key to use to encrypt the source data provided in the request. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key")
+  sourceEncryptionKey?: string;
+};
+
+alias SourceEncryptionKeySha256Parameter = {
+  /** The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key-sha256")
+  sourceEncryptionKeySha256?: string;
+};
+
+alias SourceEncryptionAlgorithmParameter = {
+  /** The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-algorithm")
+  sourceEncryptionAlgorithm?: EncryptionAlgorithmType;
 };
 
 /** The copy source tags header parameter. */
@@ -1964,6 +2019,22 @@ alias EncryptionKeyParameter = {
   encryptionKey?: string;
 };
 
+alias AccessTierIfModifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-modified-since")
+  @encode("rfc7231")
+  accessTierIfModifiedSince?: utcDateTime;
+};
+
+alias AccessTierIfUnmodifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-unmodified-since")
+  @encode("rfc7231")
+  accessTierIfUnmodifiedSince?: utcDateTime;
+};
+
 /** The If-Tags parameters. */
 alias IfTagsParameter = {
   /** Specify a SQL where clause on blob tags to operate only on blobs with a matching value. */
@@ -2242,7 +2313,6 @@ alias BodyParameter = {
 alias MultipartBodyParameter = {
   /** The body of the request. */
   @multipartBody body: {
-    name: HttpPart<string>;
     body: HttpPart<bytes>;
   };
 };
@@ -2320,4 +2390,41 @@ alias PageWriteParameter<TPageWrite extends string> = {
   /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
+};
+
+alias IfBlobMatchHeader = {
+  /** Specify an ETag value to operate only on blobs with a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-match")
+  ifMatch?: string;
+};
+
+alias IfBlobModifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-modified-since")
+  @encode("rfc7231")
+  ifModifiedSince?: utcDateTime;
+};
+
+alias IfBlobNoneMatchHeader = {
+  /** Specify an ETag value to operate only on blobs without a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-none-match")
+  ifNoneMatch?: string;
+};
+
+alias IfBlobUnmodifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-unmodified-since")
+  @encode("rfc7231")
+  ifUnmodifiedSince?: utcDateTime;
+};
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
 };

@@ -9,9 +9,12 @@ import:
 words:
   - ahub
   - azpodpolicy
+  - containerd
   - cuda
+  - cncf
   - dcos
   - ebpf
+  - nftables
   - gmsa
   - iloveyou
   - imds
@@ -22,7 +25,11 @@ words:
   - kata
   - keda
   - krustlet
+  - kubeconfig
+  - kubeconfigs
+  - kubefleet
   - kubelet
+  - kubelogin
   - kubenet
   - kubenet's
   - mshv
@@ -39,22 +46,11 @@ words:
   - sysctls
   - tcpkeepalive
   - vhds
+  - veth
   - wmem
 overrides:
   - filename: >-
-      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-03-30/containerService.json
-    words:
-      - ochestrator
-  - filename: >-
-      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-09-30/containerService.json
-    words:
-      - ochestrator
-  - filename: >-
-      **/specification/containerservice/resource-manager/Microsoft.ContainerInstance/stable/2021-10-01/containerInstance.json
-    words:
-      - noreuse
-  - filename: >-
-      **/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/**/*json
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/**/*.{json,tsp}
     words:
       - acnstls
       - aksadvancednetworking
@@ -63,8 +59,4 @@ overrides:
       - trustedlaunch
       - undrainable
       - vtpm
-  - filename: >-
-      **/specification/containerservice/resource-manager/Microsoft.ContainerService/**/*.json
-    words:
-      - containerd
-
+  

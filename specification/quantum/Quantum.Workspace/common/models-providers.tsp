@@ -8,6 +8,7 @@ import "./cost-estimates.tsp";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
@@ -74,4 +75,21 @@ model TargetStatus {
   /** A page with detailed status of the provider. */
   @visibility(Lifecycle.Read)
   statusPage?: string;
+
+  /** The qubit number. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(100000)
+  numQubits?: int32;
+
+  /** Target QIR profile. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  targetProfile?: string;
+
+  /** The metadata of this target. */
+  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  metadata?: {};
 }

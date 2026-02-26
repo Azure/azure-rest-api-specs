@@ -28,7 +28,7 @@ options:
     namespace: Azure.AI.OpenAI
     model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-openai"
     namespace: "com.azure.ai.openai"
     service-version-exclude-preview: false
     partial-update: true
@@ -41,10 +41,9 @@ options:
     custom-types: "UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/openai"
     generate-metadata: false
     generate-test: false
-    is-modular-library: true
     package-details:
       name: "@azure/openai"
     flavor: azure

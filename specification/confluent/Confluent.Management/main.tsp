@@ -42,16 +42,17 @@ enum Versions {
   /**
    * The 2024-07-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_01: "2024-07-01",
 
   /**
    * The 2025-07-17-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_07_17_preview: "2025-07-17-preview",
+
+  /**
+   * The 2025-08-18-preview API version.
+   */
+  v2025_08_18_preview: "2025-08-18-preview",
 }
 
 interface Operations {
@@ -60,17 +61,12 @@ interface Operations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
   @get
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ResourceProviderDefaultErrorResponse;
 }

@@ -12,28 +12,24 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/cloudhealth.json"
     emit-common-types-schema: "never"
   "@azure-tools/typespec-ts":
-    is-modular-library: true
     experimental-extensible-enums: true
-    package-dir: "arm-cloudhealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-cloudhealth"
     flavor: "azure"
     package-details:
       name: "@azure/arm-cloudhealth"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-cloudhealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cloudhealth"
     namespace: "azure.mgmt.cloudhealth"
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.CloudHealth"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cloudhealth"
-    package-dir: "armcloudhealth"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcloudhealth"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcloudhealth"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -41,7 +37,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-cloudhealth"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cloudhealth"
     namespace: "com.azure.resourcemanager.cloudhealth"
     service-name: "CloudHealth"
     flavor: "azure"

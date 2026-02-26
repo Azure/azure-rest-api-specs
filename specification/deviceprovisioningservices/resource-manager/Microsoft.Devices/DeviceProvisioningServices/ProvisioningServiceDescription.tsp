@@ -65,7 +65,7 @@ interface ProvisioningServiceDescriptionOperationOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
 
         /**
          * Name of the provisioning service to retrieve.
@@ -85,6 +85,14 @@ interface ProvisioningServiceDescriptionOperationOps
       ErrorDetails
     > {}
 
+alias GetOperationResultParameters = {
+  /**
+   * Async header used to poll on the status of the operation, obtained while creating the long running operation.
+   */
+  @query("asyncinfo")
+  asyncinfo: string = "true";
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProvisioningServiceDescriptionOperations {
   /**
@@ -92,13 +100,7 @@ interface ProvisioningServiceDescriptionOperations {
    */
   getOperationResult is ProvisioningServiceDescriptionOperationOps.Read<
     ProvisioningServiceDescription,
-    Parameters = {
-      /**
-       * Async header used to poll on the status of the operation, obtained while creating the long running operation.
-       */
-      @query("asyncinfo")
-      asyncinfo: string = "true";
-    },
+    Parameters = GetOperationResultParameters,
     Response = ArmResponse<AsyncOperationResult>
   >;
 }

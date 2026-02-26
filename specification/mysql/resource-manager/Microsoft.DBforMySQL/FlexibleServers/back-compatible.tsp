@@ -3,55 +3,75 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DBforMySQL;
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupAndExportResponse.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupAndExportResponse.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ValidateBackupResponse.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidateBackupResponse.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConfigurationForBatchUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationForBatchUpdate.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ServerForUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerForUpdate.properties);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdvancedThreatProtectionForUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtectionForUpdate.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(LogFile.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LogFile.properties);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MaintenanceUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceUpdate.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Provisioning.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Provisioning.properties);
 
 @@clientName(AzureADAdministrators.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AzureADAdministrator.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureADAdministrator.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ServerBackup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerBackup.properties);
 
 @@clientName(LongRunningBackup.create::parameters.resource, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ServerBackupV2.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerBackupV2.properties);
 
 @@clientName(Configurations.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Configurations.update::parameters.properties, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Configuration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Configuration.properties);
 
 @@clientName(Databases.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Database.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Database.properties);
 
 @@clientName(FirewallRules.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FirewallRule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FirewallRule.properties);
 
 @@clientName(Servers.create::parameters.resource, "parameters");
 @@clientName(Servers.update::parameters.properties, "parameters");
@@ -63,14 +83,17 @@ using Microsoft.DBforMySQL;
 @@clientName(Servers.restart::parameters.body, "parameters");
 @@clientName(Servers.resetGtid::parameters.body, "parameters");
 @@clientName(Servers.detachVNet::parameters.body, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Server.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Server.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
   "parameters"
@@ -78,18 +101,24 @@ using Microsoft.DBforMySQL;
 @@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdvancedThreatProtection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtection.properties
+);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Capability.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties);
 
 @@clientName(Maintenances.update::parameters.properties, "parameters");
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Maintenance.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Maintenance.properties);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(CheckNameAvailabilityWithoutLocation.execute::parameters.body,
   "nameAvailabilityRequest"

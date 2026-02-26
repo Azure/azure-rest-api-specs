@@ -10,27 +10,30 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
+
 /**
  * A schedule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Schedule extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("schedules")
-  name: string;
+model Schedule
+  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "scheduleName",
+    SegmentName = "schedules",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: ScheduleProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations
-interface ScheduleOps
+interface GlobalScheduleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -52,7 +55,7 @@ interface GlobalSchedules {
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ScheduleOps.Read<
+  get is GlobalScheduleOps.Read<
     Schedule,
     Parameters = {
       /**
@@ -67,7 +70,7 @@ interface GlobalSchedules {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ScheduleOps.CreateOrUpdateSync<Schedule>;
+  createOrUpdate is GlobalScheduleOps.CreateOrUpdateSync<Schedule>;
 
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
@@ -75,7 +78,7 @@ interface GlobalSchedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ScheduleOps.CustomPatchSync<
+  update is GlobalScheduleOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
   >;
@@ -84,13 +87,13 @@ interface GlobalSchedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is ScheduleOps.DeleteSync<Schedule>;
+  delete is GlobalScheduleOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByResourceGroup is ScheduleOps.List<
+  listByResourceGroup is GlobalScheduleOps.List<
     Schedule,
     Parameters = {
       /**
@@ -158,20 +161,32 @@ interface GlobalSchedules {
    * Execute a schedule. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  execute is ScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is GlobalScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Updates a schedule's target resource Id. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  retarget is ScheduleOps.ActionAsync<
+  retarget is GlobalScheduleOps.ActionAsync<
     Schedule,
     RetargetScheduleProperties,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 @armResourceOperations
-interface ScheduleOperationGroupOps
+interface ScheduleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -196,7 +211,7 @@ interface Schedules {
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ScheduleOperationGroupOps.Read<
+  get is ScheduleOps.Read<
     Schedule,
     Parameters = {
       /**
@@ -211,7 +226,7 @@ interface Schedules {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ScheduleOperationGroupOps.CreateOrUpdateSync<Schedule>;
+  createOrUpdate is ScheduleOps.CreateOrUpdateSync<Schedule>;
 
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
@@ -219,7 +234,7 @@ interface Schedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ScheduleOperationGroupOps.CustomPatchSync<
+  update is ScheduleOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
   >;
@@ -228,13 +243,13 @@ interface Schedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is ScheduleOperationGroupOps.DeleteSync<Schedule>;
+  delete is ScheduleOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is ScheduleOperationGroupOps.List<
+  list is ScheduleOps.List<
     Schedule,
     Parameters = {
       /**
@@ -267,13 +282,21 @@ interface Schedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ScheduleOperationGroupOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is ScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Lists all applicable schedules
    */
   @list
-  listApplicable is ScheduleOperationGroupOps.ActionSync<
+  listApplicable is ScheduleOps.ActionSync<
     Schedule,
     void,
     ArmResponse<ScheduleList>
@@ -377,7 +400,15 @@ interface ServiceFabricSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ServiceFabricScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is ServiceFabricScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 @armResourceOperations
 interface VirtualMachineScheduleOps
@@ -474,13 +505,21 @@ interface VirtualMachineSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is VirtualMachineScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is VirtualMachineScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(Schedule.name, "The name of the schedule.");
 @@doc(Schedule.properties, "The properties of the resource.");
-@@doc(Schedule.location, "The location of the resource.");
-@@doc(Schedule.tags, "The tags of the resource.");
+//@@doc(Schedule.location, "The location of the resource.");
+//@@doc(Schedule.tags, "The tags of the resource.");
 @@doc(GlobalSchedules.createOrUpdate::parameters.resource, "A schedule.");
 @@doc(GlobalSchedules.update::parameters.properties, "A schedule.");
 @@doc(GlobalSchedules.retarget::parameters.body,

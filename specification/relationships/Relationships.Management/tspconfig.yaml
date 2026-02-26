@@ -16,27 +16,26 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Relationships"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-relationships"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-relationships"
     namespace: "azure.mgmt.relationships"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-relationships"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-relationships"
     namespace: "com.azure.resourcemanager.relationships"
     service-name: "relationships"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-relationships"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-relationships"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-relationships"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/relationships"
-    package-dir: "armrelationships"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrelationships"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrelationships"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

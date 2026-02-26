@@ -25,13 +25,21 @@ parameters:
   - name: CreatePullRequest
     type: boolean
     default: false
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
   - name: SpecBatchTypes
     type: string
     default: ''
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
 
 stages:
-- stage: Build
-  displayName: 'SDK Generation'
+- stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
+  displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
+  # Explicitly set to no dependencies so multiple instances of this template can run in parallel when called in a loop
+  dependsOn: []
   jobs:
   - job:
     timeoutInMinutes: 2400
@@ -113,6 +121,12 @@ stages:
           $checkoutCommitish = '${{ parameters.SdkRepoBranch }}'
           Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
           Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          $prStatus = 'draft'
+          Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+          $releasePlanInfo = ''
+          Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+          $prUrl = ""
+          Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
         displayName: "Create Run Time Variables"
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
@@ -197,6 +211,7 @@ stages:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -247,6 +262,8 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
+        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          continueOnError: true
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -273,6 +290,20 @@ stages:
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
 
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - task: AzureCLI@2
+            displayName: "Get Release Plan details"
+            condition: succeeded()
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
+                Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+                Write-Host "Release Plan Info: $releasePlanInfo"
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
@@ -282,6 +313,14 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
+        - pwsh: |
+            $currentTitle = "$(PrTitle)"
+            $updatedTitle = "Failed-$currentTitle"
+            Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+            Write-Host "Updated PR Title to: '$updatedTitle'"
+          displayName: "Set PR title prefix on failures"
+          condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request
@@ -298,8 +337,42 @@ stages:
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-              -PRBody "$(GeneratedSDKInformation)"
+              -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $true
+        
+
+        - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - pwsh: |
+              $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
+              Write-Host "Pull request created: $prUrl"
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "draft"
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+            displayName: "Set pull request URL variable"
+
+          - pwsh: |
+              $prUrl = ""
+              Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
+              $prStatus = "Failed to generate SDK."
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
+            condition: failed()
+            displayName: "Set pull request generation failed status variable"
+
+          - task: AzureCLI@2
+            displayName: Link pull request to release plan
+            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+            continueOnError: true
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: scriptPath
+              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              arguments: >
+                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                -PullRequestUrl "$(PullRequestUrl)"
+                -Status "$(SdkPrStatus)"
+                -SdkRepoName "$(SdkRepoName)"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "123456",
+    "billingPeriodName": "201702"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "balanceId1",
+        "type": "Microsoft.Consumption/balances",
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.Billing/billingPeriods/201702/providers/Microsoft.Consumption/balances/balanceId1",
+        "properties": {
+          "adjustmentDetails": [
+            {
+              "name": "Promo Credit",
+              "value": 1.1
+            },
+            {
+              "name": "SIE Credit",
+              "value": 1
+            }
+          ],
+          "adjustments": 0,
+          "azureMarketplaceServiceCharges": 609.82,
+          "beginningBalance": 3396469.19,
+          "billingFrequency": "Month",
+          "chargesBilledSeparately": 0,
+          "currency": "USD  ",
+          "endingBalance": 2922371.02,
+          "newPurchases": 0,
+          "newPurchasesDetails": [
+            {
+              "name": "Promo Purchase",
+              "value": 1
+            }
+          ],
+          "overageRefund": 2012.61,
+          "priceHidden": false,
+          "serviceOverage": 0,
+          "totalOverage": 0,
+          "totalUsage": 474098.17,
+          "utilized": 474098.17
+        }
+      }
+    }
+  },
+  "operationId": "Balances_GetForBillingPeriodByBillingAccount",
+  "title": "Balances"
+}

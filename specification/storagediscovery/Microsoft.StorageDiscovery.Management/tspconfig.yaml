@@ -12,32 +12,30 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.StorageDiscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagediscovery"
     namespace: "com.azure.resourcemanager.storagediscovery"
     flavor: "azure"
     service-name: "Storage Discovery"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagediscovery"
     flavor: azure
     package-details:
       name: "@azure/arm-storagediscovery"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagediscovery"
     namespace: "azure.mgmt.storagediscovery"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagediscovery"
-    package-dir: "armstoragediscovery"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstoragediscovery"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragediscovery"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -49,7 +47,7 @@ options:
     package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
     clear-output-folder: true
     azure: true
-    module-version: 0.1.0
+    module-version: 1.0.0
     prefix: "Az"
     subject-prefix: "StorageDiscovery"
     service-name: StorageDiscovery

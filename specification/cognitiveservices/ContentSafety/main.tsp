@@ -29,16 +29,13 @@ using Azure.Core;
       Supported Cognitive Services endpoints (protocol and hostname, for example:
       https://<resource-name>.cognitiveservices.azure.com).
       """)
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("Analyze harmful content")
 namespace ContentSafety;
 
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_10_01: "2023-10-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_09_01: "2024-09-01",
 }

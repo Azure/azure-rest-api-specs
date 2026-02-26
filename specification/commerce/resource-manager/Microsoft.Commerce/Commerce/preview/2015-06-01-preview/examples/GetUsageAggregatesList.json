@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "aggregationGranularity": "Daily",
+    "api-version": "2015-06-01-preview",
+    "reportedEndTime": "2015-06-01T00:00:00+00:00",
+    "reportedStartTime": "2014-05-01T00:00:00+00:00",
+    "showDetails": "true",
+    "subscriptionId": "f68815e6-3c41-45ef-bbd8-5f83303c396b"
+  },
+  "title": "GetUsageAggregatesList",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Daily_BRSDT_20140501_0000",
+            "type": "Microsoft.Commerce/UsageAggregate",
+            "id": "/subscriptions/f68815e6-3c41-45ef-bbd8-5f83303c396b/providers/Microsoft.Commerce/UsageAggregates/Daily_BRSDT_20140501_0000",
+            "properties": {
+              "infoFields": {},
+              "meterCategory": "Storage",
+              "meterId": "0e9d0c9b-ab6d-4312-9c7e-3794e22af9c4",
+              "meterName": "Standard IO – Page Blob/Disk (GB)",
+              "meterSubCategory": "Geo Redundant",
+              "quantity": 0.057865,
+              "subscriptionId": "f68815e6-3c41-45ef-bbd8-5f83303c396b",
+              "unit": "GB",
+              "usageEndTime": "2015-03-04T00:00:00+00:00",
+              "usageStartTime": "2015-03-03T00:00:00+00:00"
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "body": {
+        "error": {
+          "code": "aaaaaaaaaaaaaaaaaaaaaa",
+          "message": "aaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  },
+  "operationId": "UsageAggregates_List"
+}

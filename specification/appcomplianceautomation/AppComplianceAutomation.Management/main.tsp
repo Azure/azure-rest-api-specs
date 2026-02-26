@@ -3,6 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models/models.tsp";
+import "./back-compatible.tsp";
 import "./resources/ReportResource.tsp";
 import "./resources/WebhookResource.tsp";
 import "./resources/SnapshotResource.tsp";
@@ -31,7 +32,5 @@ enum Versions {
   /**
    * The 2024-06-27 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_06_27: "2024-06-27",
 }

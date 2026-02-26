@@ -5249,12 +5249,11 @@
     },
     "AutonomousDatabase": {
       "type": "object",
-      "description": "Autonomous Database  resource model.",
+      "description": "Autonomous Database resource model.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBaseProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -12625,6 +12624,8 @@
       "description": "If provided, filters the results for the given shape",
       "required": false,
       "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
       "enum": [
         "Exadata.X9M",
         "Exadata.X11M",
@@ -12695,6 +12696,8 @@
       "description": "If provided, filters the results for the given shape",
       "required": false,
       "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
       "enum": [
         "Exadata.X9M",
         "Exadata.X11M",

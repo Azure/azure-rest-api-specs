@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://examplelink.com",
+        "value": [
+          {
+            "name": "myCluster",
+            "type": "applications",
+            "etag": "W/\"636462502180261858\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp",
+            "location": "eastus",
+            "properties": {
+              "metrics": [
+                {
+                  "name": "metric1",
+                  "maximumCapacity": 3,
+                  "reservationCapacity": 1,
+                  "totalApplicationCapacity": 5
+                }
+              ],
+              "provisioningState": "Updating",
+              "removeApplicationCapacity": false,
+              "typeName": "myAppType",
+              "typeVersion": "1.0"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Applications_List",
+  "title": "Get a list of application resources"
+}

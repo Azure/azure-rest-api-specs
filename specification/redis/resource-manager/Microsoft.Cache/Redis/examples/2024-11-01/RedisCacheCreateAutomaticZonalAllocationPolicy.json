@@ -1,0 +1,192 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "api-version": "2024-11-01",
+    "parameters": {
+      "location": "East US",
+      "properties": {
+        "enableNonSslPort": true,
+        "minimumTlsVersion": "1.2",
+        "redisConfiguration": {
+          "maxmemory-policy": "allkeys-lru"
+        },
+        "replicasPerPrimary": 2,
+        "shardCount": 2,
+        "sku": {
+          "name": "Premium",
+          "capacity": 1,
+          "family": "P"
+        },
+        "staticIP": "192.168.0.5",
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/network1/subnets/subnet1",
+        "zonalAllocationPolicy": "Automatic"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/Redis",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "East US",
+        "properties": {
+          "accessKeys": {
+            "primaryKey": "<primaryKey>",
+            "secondaryKey": "<secondaryKey>"
+          },
+          "enableNonSslPort": true,
+          "hostName": "cache1.redis.cache.windows.net",
+          "instances": [
+            {
+              "isMaster": true,
+              "isPrimary": true,
+              "nonSslPort": 13000,
+              "shardId": 0,
+              "sslPort": 15000
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13001,
+              "shardId": 0,
+              "sslPort": 15001
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13002,
+              "shardId": 0,
+              "sslPort": 15002
+            },
+            {
+              "isMaster": true,
+              "isPrimary": true,
+              "nonSslPort": 13003,
+              "shardId": 1,
+              "sslPort": 15003
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13004,
+              "shardId": 1,
+              "sslPort": 15004
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13005,
+              "shardId": 1,
+              "sslPort": 15005
+            }
+          ],
+          "minimumTlsVersion": "1.2",
+          "port": 6379,
+          "provisioningState": "Succeeded",
+          "redisConfiguration": {
+            "maxclients": "1000",
+            "maxmemory-delta": "50",
+            "maxmemory-reserved": "50"
+          },
+          "redisVersion": "6.0",
+          "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
+          "shardCount": 2,
+          "sku": {
+            "name": "Premium",
+            "capacity": 1,
+            "family": "P"
+          },
+          "sslPort": 6380,
+          "updateChannel": "Stable",
+          "zonalAllocationPolicy": "Automatic"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/Redis",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "East US",
+        "properties": {
+          "accessKeys": {
+            "primaryKey": "<primaryKey>",
+            "secondaryKey": "<secondaryKey>"
+          },
+          "enableNonSslPort": true,
+          "hostName": "cache1.redis.cache.windows.net",
+          "instances": [
+            {
+              "isMaster": true,
+              "isPrimary": true,
+              "nonSslPort": 13000,
+              "shardId": 0,
+              "sslPort": 15000
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13001,
+              "shardId": 0,
+              "sslPort": 15001
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13002,
+              "shardId": 0,
+              "sslPort": 15002
+            },
+            {
+              "isMaster": true,
+              "isPrimary": true,
+              "nonSslPort": 13003,
+              "shardId": 1,
+              "sslPort": 15003
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13004,
+              "shardId": 1,
+              "sslPort": 15004
+            },
+            {
+              "isMaster": false,
+              "isPrimary": false,
+              "nonSslPort": 13005,
+              "shardId": 1,
+              "sslPort": 15005
+            }
+          ],
+          "minimumTlsVersion": "1.2",
+          "port": 6379,
+          "provisioningState": "Succeeded",
+          "redisConfiguration": {
+            "maxmemory-policy": "allkeys-lru"
+          },
+          "redisVersion": "6.0",
+          "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
+          "shardCount": 2,
+          "sku": {
+            "name": "Premium",
+            "capacity": 1,
+            "family": "P"
+          },
+          "sslPort": 6380,
+          "updateChannel": "Stable",
+          "zonalAllocationPolicy": "Automatic"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Redis_Create",
+  "title": "RedisCacheCreateAutomaticZonalAllocationPolicy"
+}

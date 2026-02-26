@@ -19,6 +19,8 @@ import "./GalleryImage.tsp";
 import "./GalleryImageVersion.tsp";
 import "./GalleryApplication.tsp";
 import "./GalleryApplicationVersion.tsp";
+import "./GalleryScript.tsp";
+import "./GalleryScriptVersion.tsp";
 import "./GalleryInVMAccessControlProfile.tsp";
 import "./GalleryInVMAccessControlProfileVersion.tsp";
 import "./SharedGallery.tsp";
@@ -52,7 +54,10 @@ enum Versions {
   /**
    * The 2024-03-03 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_03: "2024-03-03",
+
+  /**
+   * The 2025-03-03 API version.
+   */
+  v2025_03_03: "2025-03-03",
 }

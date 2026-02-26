@@ -32,7 +32,16 @@ title: AzureMonitorAccountsClient
 description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-03-preview
+tag: package-2025-10-03-preview
+```
+
+### Tag: package-2025-10-03-preview
+
+These settings apply only when `--tag=package-2025-10-03-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2025-10-03-preview'
+input-file:
+- preview/2025-10-03-preview/azuremonitorworkspace.json
 ```
 
 ### Tag: package-2025-05-03-preview
@@ -83,4 +92,9 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
     from: azuremonitorworkspace.json
+  - code: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: azuremonitorworkspace.json
+    where:
+     - $.definitions["Azure.Core.uuid"].format
 ```

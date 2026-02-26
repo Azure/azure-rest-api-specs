@@ -22,8 +22,6 @@ namespace Microsoft.Purview;
 /** The available API versions. */
 enum Versions {
   /** 2023-06-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_06_01_preview: "2023-06-01-preview",
 }
 

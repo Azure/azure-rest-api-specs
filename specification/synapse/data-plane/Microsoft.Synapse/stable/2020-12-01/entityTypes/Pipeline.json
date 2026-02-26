@@ -6358,6 +6358,10 @@
         "firstRowOnly": {
           "type": "object",
           "description": "Whether to return first row or all rows. Default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatDecimalAsString": {
+          "type": "object",
+          "description": "Indicates whether to treat decimal values as strings to avoid value overflow issue. This option is enabled for SnowflakeV2 connector only. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -7674,6 +7678,10 @@
         "returnMultistatementResult": {
           "type": "object",
           "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatDecimalAsString": {
+          "type": "object",
+          "description": "Indicates whether to treat decimal values as strings to avoid value overflow issue. This option is enabled for SnowflakeV2 connector only. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -8209,6 +8217,10 @@
         "pageSize": {
           "type": "object",
           "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "Partition option for the SalesforceV2 connector in copy activity, AutoDetect or None. Type: string (or Expression with resultType string)."
         }
       }
     },

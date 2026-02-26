@@ -29,7 +29,6 @@ model AzureLargeStorageInstance
 @@added(AzureLargeStorageInstance.identity, Versions.v2024_08_01_preview);
 
 @armResourceOperations
-@clientName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
   @doc("""
     Gets an Azure Large Storage instance for the specified subscription, resource
@@ -41,6 +40,7 @@ interface AzureLargeStorageInstances {
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
     """)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     AzureLargeStorageInstance,
     AzureLargeStorageInstanceTagsUpdate

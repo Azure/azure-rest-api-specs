@@ -36,6 +36,14 @@ model Messaging {
   endpoints?: Record<MessagingEndpoint>;
 }
 
+@added(Versions.v2026_04_01)
+@doc("The namespace management endpoints model.")
+model Management {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Dictionary of management endpoints.")
+  endpoints?: Record<ManagementEndpoint>;
+}
+
 @added(Versions.v2025_07_01_preview)
 @doc("The namespace properties model.")
 model NamespaceProperties {
@@ -46,6 +54,11 @@ model NamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Assigned and unassigned management endpoints.")
+  @added(Versions.v2026_04_01)
+  management?: Management;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -65,6 +78,22 @@ model MessagingEndpoint {
   resourceId?: string;
 }
 
+@added(Versions.v2026_04_01)
+@doc("Namespace management endpoint model used by service to connect to device.")
+model ManagementEndpoint {
+  @doc("Type of connection used for management endpoint.")
+  endpointType: string;
+
+  @doc("The endpoint address to connect to.")
+  address: string;
+
+  @doc("The scope ID for the management endpoint.")
+  scopeId: string;
+
+  @doc("The messaging endpoint Azure resource Id.")
+  resourceId: string;
+}
+
 @added(Versions.v2025_07_01_preview)
 @doc("Request body for the migrate resources operation in to Namespace resource.")
 model NamespaceMigrateRequest {
@@ -79,7 +108,7 @@ model NamespaceMigrateRequest {
 @doc("Response for the migrate asset resources operation into Namespace resource.")
 model NamespaceMigrateResponse {
   @doc("List of migrate results containing result of each asset migrate operation.")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   migrateResults?: MigrateResult[];
 }
 
@@ -125,6 +154,7 @@ interface Namespaces {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Namespace,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -14,7 +14,7 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-contentsafety"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentsafety"
     package-version: "1.0.0"
     namespace: "azure.ai.contentsafety"
     package-pprint-name: '"Azure AI Content Safety"'
@@ -32,7 +32,7 @@ options:
     namespace: Azure.AI.ContentSafety
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "ai-content-safety-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-content-safety-rest"
     is-modular-library: false
     package-details:
       name: "@azure-rest/ai-content-safety"
@@ -40,7 +40,7 @@ options:
       description: "ContentSafety Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-contentsafety"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentsafety"
     namespace: com.azure.ai.contentsafety
     partial-update: true
     flavor: azure

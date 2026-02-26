@@ -41,8 +41,6 @@ model ScopingConfigurationResource
   /**
    * ScopingConfiguration property.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
   properties: ScopingConfigurationProperties;
 }
 

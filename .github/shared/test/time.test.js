@@ -1,5 +1,3 @@
-// @ts-check
-
 import { describe, expect, it } from "vitest";
 
 import { add, Duration, formatDuration, getDuration, subtract } from "../src/time.js";

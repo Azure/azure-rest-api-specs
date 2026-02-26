@@ -10,32 +10,25 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Qumulo.Storage.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     service-dir: "sdk/liftrqumulo"
-    package-dir: "arm-qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-qumulo"
     flavor: azure
     package-details:
       name: "@azure/arm-qumulo"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.Qumulo"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-qumulo"
     package-name: "azure-mgmt-qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-qumulo"
     namespace: "azure.mgmt.qumulo"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/liftrqumulo"
-    package-dir: "armqumulo"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armqumulo"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armqumulo"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -44,10 +37,13 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-qumulo"
     namespace: "com.azure.resourcemanager.qumulo"
     service-name: "Qumulo"
     flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Qumulo"
+    emitter-output-dir: "{output-dir}/sdk/qumulo/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

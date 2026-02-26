@@ -28,7 +28,25 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2024-12-01-preview
+tag: package-flexibleserver-2025-06-01-preview
+```
+
+### Tag: package-flexibleserver-2025-06-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
+input-file:
+- preview/2025-06-01-preview/openapi.json
+```
+
+### Tag: package-flexibleserver-2024-12-30
+
+These settings apply only when `--tag=package-flexibleserver-2024-12-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2024-12-30'
+input-file:
+- stable/2024-12-30/openapi.json
 ```
 
 ### Tag: package-flexibleserver-2024-12-01-preview
@@ -39,6 +57,7 @@ These settings apply only when `--tag=package-flexibleserver-2024-12-01-preview`
 input-file:
 - preview/2024-12-01-preview/openapi.json
 ```
+
 ### Tag: package-flexibleserver-2021-12-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2021-12-01-preview` is specified on the command line.

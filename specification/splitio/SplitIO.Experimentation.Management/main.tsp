@@ -3,6 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -22,7 +25,6 @@ namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
     @doc("2024-07-01-preview api version")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
     v24_07_preview: "2024-07-01-preview",
   }
 

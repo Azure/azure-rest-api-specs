@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "aksManagedNodeOSUpgradeSchedule",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedNodeOSUpgradeSchedule",
+            "properties": {
+              "maintenanceWindow": {
+                "durationHours": 10,
+                "schedule": {
+                  "daily": {
+                    "intervalDays": 5
+                  }
+                },
+                "startDate": "2023-01-01",
+                "startTime": "13:30",
+                "utcOffset": "-07:00"
+              }
+            }
+          },
+          {
+            "name": "aksManagedAutoUpgradeSchedule",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedAutoUpgradeSchedule",
+            "properties": {
+              "maintenanceWindow": {
+                "durationHours": 5,
+                "notAllowedDates": [
+                  {
+                    "end": "2023-02-25",
+                    "start": "2023-02-18"
+                  },
+                  {
+                    "end": "2024-01-05",
+                    "start": "2023-12-23"
+                  }
+                ],
+                "schedule": {
+                  "absoluteMonthly": {
+                    "dayOfMonth": 15,
+                    "intervalMonths": 3
+                  }
+                },
+                "startDate": "2023-01-01",
+                "startTime": "08:30",
+                "utcOffset": "+00:00"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MaintenanceConfigurations_ListByManagedCluster",
+  "title": "List maintenance configurations configured with maintenance window by Managed Cluster"
+}

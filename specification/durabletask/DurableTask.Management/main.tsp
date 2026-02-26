@@ -14,19 +14,29 @@ namespace Microsoft.DurableTask;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+model SchedulerPrivateLinkResource is PrivateLink;
+alias PrivateLinkOperations = PrivateLinks<SchedulerPrivateLinkResource>;
+
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-11-01")
+  v2025_11_01: "2025-11-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-02-01")
+  v2026_02_01: "2026-02-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -56,13 +66,23 @@ model SchedulerProperties {
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
+
+  @added(Versions.v2026_02_01)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /** The private endpoints exposed by this resource */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
   @doc("The name of the SKU")
-  name: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -70,6 +90,19 @@ model SchedulerSku {
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
   redundancyState?: RedundancyState;
+}
+
+@added(Versions.v2025_11_01)
+@doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
+union SchedulerSkuName {
+  string,
+
+  @doc("Dedicated SKU")
+  Dedicated: "Dedicated",
+
+  @doc("Consumption SKU")
+  @added(Versions.v2025_04_01_Preview)
+  Consumption: "Consumption",
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
@@ -127,10 +160,7 @@ model RetentionPolicyProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The orchestration retention policies")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["retentionPeriodInDays", "orchestrationState"]
-  )
+  @identifiers(#["retentionPeriodInDays", "orchestrationState"])
   retentionPolicies?: RetentionPolicyDetails[];
 }
 
@@ -142,6 +172,18 @@ model RetentionPolicyDetails {
 
   @doc("The orchestration state to which this policy applies. If omitted, the policy applies to all purgeable orchestration states.")
   orchestrationState?: PurgeableOrchestrationState;
+}
+
+@doc("State of the public network access.")
+@added(Versions.v2026_02_01)
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("Purgeable orchestration state to be used in retention policies")
@@ -200,12 +242,17 @@ model SchedulerPropertiesUpdate {
 
   @doc("SKU of the durable task scheduler")
   sku?: SchedulerSkuUpdate;
+
+  @added(Versions.v2026_02_01)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
 model SchedulerSkuUpdate {
   @doc("The name of the SKU")
-  name?: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name?: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -232,6 +279,29 @@ interface Schedulers {
   listByResourceGroup is ArmResourceListByParent<Scheduler>;
   @doc("List Schedulers by subscription")
   listBySubscription is ArmListBySubscription<Scheduler>;
+
+  @added(Versions.v2026_02_01)
+  @doc("Get a private link resource for the durable task scheduler")
+  getPrivateLink is PrivateLinkOperations.Read<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("List private link resources for the durable task scheduler")
+  listPrivateLinks is PrivateLinkOperations.ListByParent<Scheduler>;
+
+  @added(Versions.v2026_02_01)
+  @doc("Get a private endpoint connection for the durable task scheduler")
+  getPrivateEndpointConnection is PrivateEndpointOperations.Read<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Create or update a private endpoint connection for the durable task scheduler")
+  createOrUpdatePrivateEndpointConnection is PrivateEndpointOperations.CreateOrUpdateAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Update a private endpoint connection for the durable task scheduler")
+  updatePrivateEndpointConnection is PrivateEndpointOperations.CustomPatchAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Delete a private endpoint connection for the durable task scheduler")
+  deletePrivateEndpointConnection is PrivateEndpointOperations.DeleteAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("List private endpoint connections for the durable task scheduler")
+  listPrivateEndpointConnections is PrivateEndpointOperations.ListByParent<Scheduler>;
 }
 
 @armResourceOperations(TaskHub)

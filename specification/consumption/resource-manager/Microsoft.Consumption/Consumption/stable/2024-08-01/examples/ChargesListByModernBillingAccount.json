@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "endDate": "2019-10-31",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234:56789",
+    "startDate": "2019-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "chargeSummaryId1",
+            "type": "Microsoft.Consumption/charges",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+            "kind": "modern",
+            "properties": {
+              "azureCharges": {
+                "currency": "USD",
+                "value": 0
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Billing/billingPeriods/201910",
+              "billingProfileId": null,
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 265.09
+              },
+              "invoiceSectionId": null,
+              "isInvoiced": false,
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 0
+              },
+              "usageEnd": "2019-10-31",
+              "usageStart": "2019-09-01"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Charges_List",
+  "title": "ChargesListByBillingAccount-Modern"
+}

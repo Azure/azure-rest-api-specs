@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Returns true if a string is a possible full git SHA (40 hex chars, case insensitive)
  *

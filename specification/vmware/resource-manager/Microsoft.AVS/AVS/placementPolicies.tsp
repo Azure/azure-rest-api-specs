@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 
 @armResourceOperations
@@ -141,9 +140,9 @@ model PlacementPolicyProperties {
 
 @doc("An update of a DRS placement policy resource")
 model PlacementPolicyUpdate {
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The properties of a placement policy resource that may be updated")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: PlacementPolicyUpdateProperties;
 }
 

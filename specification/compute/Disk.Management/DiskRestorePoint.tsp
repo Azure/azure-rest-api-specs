@@ -94,7 +94,8 @@ interface DiskRestorePoints {
   revokeAccess is DiskRestorePointsOps.ActionAsync<
     DiskRestorePoint,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

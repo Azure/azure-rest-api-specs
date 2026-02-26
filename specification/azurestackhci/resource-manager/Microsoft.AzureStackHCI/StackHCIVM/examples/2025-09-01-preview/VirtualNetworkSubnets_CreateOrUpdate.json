@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "virtualNetworkName": "test-vnet",
+    "subnetName": "subnet1",
+    "resource": {
+      "properties": {
+        "addressPrefix": "10.0.0.0/28"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "subnet",
+        "type": "Microsoft.AzureStackHCI/virtualNetworks/subnets",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualNetworks/test-vnet/subnets/subnet1",
+        "properties": {
+          "addressPrefix": "10.0.0.0/28",
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-vnet",
+        "type": "Microsoft.AzureStackHCI/virtualNetworks",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualNetworks/test-vnet/subnets/subnet1",
+        "properties": {
+          "addressPrefix": "10.0.0.0/28",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkSubnets_CreateOrUpdate",
+  "title": "PutVirtualNetworkSubnet"
+}

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "parameters": {
+      "properties": {
+        "parameters": {
+          "param1": "value1"
+        },
+        "typeName": "myAppType",
+        "typeVersion": "1.0",
+        "upgradePolicy": {
+          "recreateApplication": true
+        }
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "applications",
+        "etag": "W/\"636462502180261859\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp",
+        "location": "eastus",
+        "properties": {
+          "parameters": {
+            "param1": "value1"
+          },
+          "provisioningState": "Updating",
+          "typeName": "myAppType",
+          "typeVersion": "1.0",
+          "upgradePolicy": {
+            "recreateApplication": true
+          }
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/9c2ce367-47ea-43de-b69e-c5a423da4557?api-version=2023-11-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "Applications_CreateOrUpdate",
+  "title": "Put an application with recreate option"
+}

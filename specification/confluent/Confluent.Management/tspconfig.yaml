@@ -17,26 +17,26 @@ options:
     namespace: "Azure.ResourceManager.Confluent"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-confluent"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-confluent"
     namespace: "azure.mgmt.confluent"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-confluent"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-confluent"
     namespace: "com.azure.resourcemanager.confluent"
     service-name: "Confluent" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-confluent"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-confluent"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-confluent"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/confluent"
-    package-dir: "armconfluent"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armconfluent"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armconfluent"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

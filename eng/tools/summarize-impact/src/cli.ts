@@ -1,5 +1,5 @@
+import * as core from "@actions/core";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
@@ -77,6 +77,8 @@ export async function main() {
   const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
+    gitOptions: ["--no-renames"],
     logger: defaultLogger,
     paths: ["specification"],
   });
@@ -93,20 +95,13 @@ export async function main() {
     ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
   });
 
-  const labels = (
-    await github.paginate(github.rest.issues.listLabelsOnIssue, {
-      owner,
-      repo,
-      issue_number: Number(prNumber),
-      per_page: 100,
-    })
-  ).map((label: any) => label.name);
-
   // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
   const mainSpecFolders = await getRPaaSFolderList(github, owner, repo);
 
   const labelContext: LabelContext = {
-    present: new Set(labels),
+    // summarize-impact only triggers on PR code changes, not label changes.  Since this code cannot depend
+    // on the state of any labels at the time it runs, initialize the "present" set of labels to empty.
+    present: new Set(),
     toAdd: new Set(),
     toRemove: new Set(),
   };
@@ -130,5 +125,5 @@ export async function main() {
   // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
   const summaryFile = resolve("summary.json");
   await writeFile(summaryFile, JSON.stringify(impact, null, 2));
-  setOutput("summary", summaryFile);
+  core.setOutput("summary", summaryFile);
 }

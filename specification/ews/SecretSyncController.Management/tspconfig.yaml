@@ -10,43 +10,44 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/secretsynccontroller.json"
     use-read-only-status-schema: true
     emit-common-types-schema: never
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
     flavor: azure
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.SecretsStoreExtension"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/secretsstoreextension/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"
     namespace: "azure.mgmt.secretsstoreextension"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"
     namespace: "com.azure.resourcemanager.secretsstoreextension"
     service-name: "Secrets Store Extension"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-secretsstoreextension"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-secretsstoreextension"
     flavor: "azure"
     package-details:
       name: "@azure/arm-secretsstoreextension"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/secretsstoreextension"
-    package-dir: "armsecretsstoreextension"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsecretsstoreextension"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsecretsstoreextension"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.SecretsStoreExtension"
+    emitter-output-dir: "{output-dir}/sdk/secretsstoreextension/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

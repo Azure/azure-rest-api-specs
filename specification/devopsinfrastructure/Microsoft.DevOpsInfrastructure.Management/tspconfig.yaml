@@ -13,18 +13,16 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/devopsinfrastructure.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-devopsinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-devopsinfrastructure"
     namespace: "azure.mgmt.devopsinfrastructure"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-devopsinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devopsinfrastructure"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.devopsinfrastructure"
     service-name: "DevOps Infrastructure"
@@ -33,24 +31,22 @@ options:
     clear-output-folder: true
     namespace: Microsoft.DevOpsInfrastructure
     model-namespace: false
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.DevOpsInfrastructure"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-devopsinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-devopsinfrastructure"
     flavor: azure
     package-details:
       name: "@azure/arm-devopsinfrastructure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devopsinfrastructure"
-    package-dir: "armdevopsinfrastructure"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdevopsinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevopsinfrastructure"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DevOpsInfrastructure"
+    emitter-output-dir: "{output-dir}/sdk/devopsinfrastructure/{namespace}"

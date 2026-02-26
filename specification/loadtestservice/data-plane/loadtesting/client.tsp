@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2025_03_01_preview)
+@useDependency(APIVersions.v2025_11_01_preview)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
@@ -128,6 +128,10 @@ namespace Customizations;
   "csharp"
 );
 
+// Make client names less generic for C#
+@@clientName(Trigger, "LoadTestingTrigger", "csharp");
+@@clientName(Recurrence, "LoadTestingRecurrence", "csharp");
+
 // Renames for properties that had unit of duration in name but will get converted to duration type
 @@clientName(AutoStopCriteria.errorRateTimeWindowInSeconds,
   "errorRateTimeWindow",
@@ -179,6 +183,9 @@ interface AdministrationOperations {
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
 
+  @action("generateTestPlanRecommendations")
+  generateTestPlanRecommendations is LoadTestAdministration.generateTestPlanRecommendations;
+
   getOperationStatus is Operations.getStatus;
 }
 
@@ -224,5 +231,6 @@ interface TestRunOperations {
   stopTestProfileRun is TestProfileRunAdministration.stop;
 
   getLatestTestRunInsights is LoadTestRun.getLatestInsights;
+  updateLatestTestRunInsights is LoadTestRun.updateLatestInsights;
   generateTestRunInsights is LoadTestRun.generateInsights;
 }

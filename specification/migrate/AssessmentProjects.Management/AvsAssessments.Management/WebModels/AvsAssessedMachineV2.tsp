@@ -1,5 +1,5 @@
 import "../Common/AvsEnums.tsp";
-import "../../Common/StandardizedContracts/AssessedWorkloadProperties.tsp";
+import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -55,12 +55,12 @@ model AvsAssessedMachinePropertiesV2
 model AvsAssessedMachineExtendedDetails {
   @doc("List of errors for this machine.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: Error[];
 
   @doc("List of Disks that were assessed as part of this machine's assessment.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disks?: AvsAssessedDiskV2[];
 
   @doc("""
@@ -68,7 +68,7 @@ model AvsAssessedMachineExtendedDetails {
     assessment.
     """)
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkAdapters?: AvsAssessedNetworkAdapter[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to mention GigaBytes and hence used GB, Gb would give Gigabits"

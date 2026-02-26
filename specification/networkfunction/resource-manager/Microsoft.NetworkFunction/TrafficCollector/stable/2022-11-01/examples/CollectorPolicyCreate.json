@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "azureTrafficCollectorName": "atc",
+    "collectorPolicyName": "cp1",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "emissionPolicies": [
+          {
+            "emissionDestinations": [
+              {
+                "destinationType": "AzureMonitor"
+              }
+            ],
+            "emissionType": "IPFIX"
+          }
+        ],
+        "ingestionPolicy": {
+          "ingestionSources": [
+            {
+              "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+              "sourceType": "Resource"
+            }
+          ],
+          "ingestionType": "IPFIX"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cp1",
+        "type": "Microsoft.NetworkFunction/azureTrafficCollectors/collectorPolicies",
+        "etag": "w/\\72090554-7e3b-43f2-80ad-99a9020dcb11\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/AzureTrafficCollector/atc/collectorPolicies/cp1",
+        "location": "westus",
+        "properties": {
+          "emissionPolicies": [
+            {
+              "emissionDestinations": [
+                {
+                  "destinationType": "AzureMonitor"
+                }
+              ],
+              "emissionType": "IPFIX"
+            }
+          ],
+          "ingestionPolicy": {
+            "ingestionSources": [
+              {
+                "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+                "sourceType": "Resource"
+              }
+            ],
+            "ingestionType": "IPFIX"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cp1",
+        "type": "Microsoft.NetworkFunction/azureTrafficCollectors/collectorPolicies",
+        "etag": "w/\\72090554-7e3b-43f2-80ad-99a9020dcb11\\",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/azureTrafficCollectors/atc/collectorPolicies/cp1",
+        "location": "westus",
+        "properties": {
+          "emissionPolicies": [
+            {
+              "emissionDestinations": [
+                {
+                  "destinationType": "AzureMonitor"
+                }
+              ],
+              "emissionType": "IPFIX"
+            }
+          ],
+          "ingestionPolicy": {
+            "ingestionSources": [
+              {
+                "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+                "sourceType": "Resource"
+              }
+            ],
+            "ingestionType": "IPFIX"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "CollectorPolicies_CreateOrUpdate",
+  "title": "Create a collection policy"
+}

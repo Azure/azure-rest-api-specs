@@ -10,37 +10,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/computeschedule.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computeschedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computeschedule"
     namespace: "azure.mgmt.computeschedule"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-computeschedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computeschedule"
     flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.ComputeSchedule"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computeschedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computeschedule"
     namespace: "com.azure.resourcemanager.computeschedule"
     flavor: "azure"
     service-name: "Compute Schedule"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computeschedule"
-    package-dir: "armcomputeschedule"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputeschedule"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcomputeschedule"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ComputeSchedule"
+    emitter-output-dir: "{output-dir}/sdk/computeschedule/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

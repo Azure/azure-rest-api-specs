@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://examplelink.com",
+        "value": [
+          {
+            "name": "myCluster",
+            "type": "services",
+            "eTag": "W/\"636462502183671257\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+            "location": "eastus",
+            "properties": {
+              "instanceCount": 1,
+              "partitionDescription": {
+                "partitionScheme": "Singleton"
+              },
+              "provisioningState": "Updating",
+              "serviceKind": "Stateless",
+              "serviceLoadMetrics": [
+                {
+                  "name": "metric1",
+                  "weight": "Low"
+                }
+              ],
+              "servicePackageActivationMode": "SharedProcess",
+              "serviceTypeName": "myServiceType"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Services_List",
+  "title": "Get a list of service resources"
+}

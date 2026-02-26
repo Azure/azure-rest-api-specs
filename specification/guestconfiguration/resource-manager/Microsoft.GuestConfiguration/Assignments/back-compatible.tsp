@@ -16,8 +16,9 @@ using Microsoft.GuestConfiguration;
   "parameters"
 );
 @@clientName(VmssvmInfo, "VMSSVMInfo");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(AssignmentReport, "CommonAssignmentReport", "go");
 
 // @@clientLocation decorators for operations with custom @operationId
@@ -33,13 +34,15 @@ using Microsoft.GuestConfiguration;
   "GuestConfigurationAssignmentReports"
 );
 @@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
-  "List"
+  "List",
+  "!csharp"
 );
 @@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "GuestConfigurationAssignmentReports"
 );
 @@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
-  "Get"
+  "Get",
+  "!csharp"
 );
 // GuestConfigurationHCRPAssignments interface operations
 @@clientLocation(GuestConfigurationHCRPAssignments.get,
@@ -58,13 +61,15 @@ using Microsoft.GuestConfiguration;
   "GuestConfigurationHCRPAssignmentReports"
 );
 @@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
-  "List"
+  "List",
+  "!csharp"
 );
 @@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "GuestConfigurationHCRPAssignmentReports"
 );
 @@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
-  "Get"
+  "Get",
+  "!csharp"
 );
 
 // GuestConfigurationAssignmentsVMSS interface operations
@@ -84,13 +89,15 @@ using Microsoft.GuestConfiguration;
   "GuestConfigurationAssignmentReportsVMSS"
 );
 @@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
-  "List"
+  "List",
+  "!csharp"
 );
 @@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "GuestConfigurationAssignmentReportsVMSS"
 );
 @@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
-  "Get"
+  "Get",
+  "!csharp"
 );
 
 // GuestConfigurationConnectedVMwarevSphereAssignments interface operations
@@ -98,13 +105,15 @@ using Microsoft.GuestConfiguration;
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
-  "List"
+  "List",
+  "!csharp"
 );
 @@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
-  "Get"
+  "Get",
+  "!csharp"
 );
 @@clientName(GuestConfigurationAssignmentsOperationGroup.rGList,
   "rg_list",

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "payload": {
+      "properties": {
+        "offerIds": [
+          "contoso.logger",
+          "contoso.monitor"
+        ],
+        "subscriptionIds": [
+          "b340914e-353d-453a-85fb-8f9b65b51f91"
+        ]
+      }
+    },
+    "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "createdAt": "2022-03-05T13:55:33.351Z",
+            "eTag": "\"9301f4fd-0000-0100-0000-5e248b350000\"",
+            "iconFileUris": {
+              "small": "https://some-images.contoso.com/image/apps.12345678-7654"
+            },
+            "modifiedAt": "2021-04-22T14:17:41.8520203Z",
+            "offerDisplayName": "Contoso Log4All",
+            "plans": [
+              {
+                "accessibility": "Public",
+                "altStackReference": null,
+                "planDisplayName": "Log4J",
+                "planId": "log4j",
+                "skuId": "001",
+                "stackType": "arm"
+              }
+            ],
+            "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406",
+            "publisherDisplayName": "Contoso",
+            "specificPlanIdsLimitation": [
+              "0002"
+            ],
+            "uniqueOfferId": "contoso.logger",
+            "updateSuppressedDueIdempotence": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateStore_QueryUserOffers",
+  "title": "QueryUserOffers"
+}

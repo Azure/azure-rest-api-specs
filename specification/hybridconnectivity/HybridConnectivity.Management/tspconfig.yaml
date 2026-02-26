@@ -14,20 +14,17 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/hybridconnectivity.json"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
+
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: "azure"
     namespace: "Azure.ResourceManager.HybridConnectivity"
-    clear-output-folder: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-hybridconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hybridconnectivity"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.hybridconnectivity"
     service-name: "Hybrid Connectivity"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-hybridconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridconnectivity"
     namespace: "azure.mgmt.hybridconnectivity"
     flavor: "azure"
     generate-test: true
@@ -37,13 +34,13 @@ options:
     experimental-extensible-enums: true
     typespec-title-map:
       HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
-    package-dir: "arm-hybridconnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridconnectivity"
     package-details:
       name: "@azure/arm-hybridconnectivity"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridconnectivity"
-    package-dir: "armhybridconnectivity"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridconnectivity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhybridconnectivity"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

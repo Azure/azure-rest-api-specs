@@ -18,12 +18,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/sites/{version-status}/{version}/sites.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sitemanager"
     namespace: "com.azure.resourcemanager.sitemanager"
     service-name: "Site Manager"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sitemanager"
     namespace: "azure.mgmt.sitemanager"
     generate-test: true
     generate-sample: true
@@ -31,25 +31,22 @@ options:
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     flavor: azure
-    package-dir: "arm-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sitemanager"
     package-details:
       name: "@azure/arm-sitemanager"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.ResourceManager.SiteManager"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/sitemanager"
-    package-dir: "armsitemanager"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsitemanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsitemanager"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.SiteManager"
+    emitter-output-dir: "{output-dir}/sdk/sitemanager/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

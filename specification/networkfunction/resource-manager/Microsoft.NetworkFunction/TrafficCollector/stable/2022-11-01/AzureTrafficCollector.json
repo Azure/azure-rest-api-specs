@@ -1,0 +1,1177 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Traffic Collector",
+    "version": "2022-11-01",
+    "description": "Azure Traffic Collector service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AzureTrafficCollectors"
+    },
+    {
+      "name": "CollectorPolicies"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NetworkFunction/operations": {
+      "get": {
+        "operationId": "NetworkFunction_ListOperations",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available NetworkFunction Rest API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkFunction/azureTrafficCollectors": {
+      "get": {
+        "operationId": "AzureTrafficCollectorsBySubscription_List",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Return list of Azure Traffic Collectors in a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Traffic Collectors by Subscription": {
+            "$ref": "./examples/AzureTrafficCollectorsBySubscriptionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkFunction/azureTrafficCollectors": {
+      "get": {
+        "operationId": "AzureTrafficCollectorsByResourceGroup_List",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Return list of Azure Traffic Collectors in a Resource Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Traffic Collectors by ResourceGroup": {
+            "$ref": "./examples/AzureTrafficCollectorsByResourceGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}": {
+      "get": {
+        "operationId": "AzureTrafficCollectors_Get",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Gets the specified Azure Traffic Collector in a specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Traffic Collector": {
+            "$ref": "./examples/AzureTrafficCollectorGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureTrafficCollectors_CreateOrUpdate",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Creates or updates a Azure Traffic Collector resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the created Azure Traffic Collector.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureTrafficCollector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollector"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureTrafficCollector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a traffic collector": {
+            "$ref": "./examples/AzureTrafficCollectorCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AzureTrafficCollector"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureTrafficCollectors_UpdateTags",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Updates the specified Azure Traffic Collector tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update Azure Traffic Collector tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Traffic Collector tags": {
+            "$ref": "./examples/AzureTrafficCollectorUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureTrafficCollectors_Delete",
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "description": "Deletes a specified Azure Traffic Collector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Traffic Collector": {
+            "$ref": "./examples/AzureTrafficCollectorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies": {
+      "get": {
+        "operationId": "CollectorPolicies_List",
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "description": "Return list of Collector policies in a Azure Traffic Collector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Collection Policies": {
+            "$ref": "./examples/CollectorPoliciesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}": {
+      "get": {
+        "operationId": "CollectorPolicies_Get",
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "description": "Gets the collector policy in a specified Traffic Collector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "description": "Collector Policy Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Collection Policy": {
+            "$ref": "./examples/CollectorPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CollectorPolicies_CreateOrUpdate",
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "description": "Creates or updates a Collector Policy resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "description": "Collector Policy Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide for the created Collector Policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CollectorPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'CollectorPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a collection policy": {
+            "$ref": "./examples/CollectorPolicyCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CollectorPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CollectorPolicies_UpdateTags",
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "description": "Updates the specified Collector Policy tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "description": "Collector Policy Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Collector Policy tags": {
+            "$ref": "./examples/CollectorPolicyUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CollectorPolicies_Delete",
+        "tags": [
+          "CollectorPolicies"
+        ],
+        "description": "Deletes a specified Collector Policy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "description": "Azure Traffic Collector name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "description": "Collector Policy Name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Collection Policy": {
+            "$ref": "./examples/CollectorPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureTrafficCollector": {
+      "type": "object",
+      "description": "Azure Traffic Collector resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureTrafficCollectorPropertiesFormat",
+          "description": "Properties of the Azure Traffic Collector.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureTrafficCollectorListResult": {
+      "type": "object",
+      "description": "The response of a AzureTrafficCollector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureTrafficCollector items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureTrafficCollector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureTrafficCollectorPropertiesFormat": {
+      "type": "object",
+      "description": "Azure Traffic Collector resource properties.",
+      "properties": {
+        "collectorPolicies": {
+          "type": "array",
+          "description": "Collector Policies for Azure Traffic Collector.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "readOnly": true
+        },
+        "virtualHub": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The virtualHub to which the Azure Traffic Collector belongs."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application rule collection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    },
+    "CollectorPolicy": {
+      "type": "object",
+      "description": "Collector policy resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectorPolicyPropertiesFormat",
+          "description": "Properties of the Collector Policy.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CollectorPolicyListResult": {
+      "type": "object",
+      "description": "The response of a CollectorPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CollectorPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/CollectorPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CollectorPolicyPropertiesFormat": {
+      "type": "object",
+      "description": "Collection policy properties.",
+      "properties": {
+        "ingestionPolicy": {
+          "$ref": "#/definitions/IngestionPolicyPropertiesFormat",
+          "description": "Ingestion policies."
+        },
+        "emissionPolicies": {
+          "type": "array",
+          "description": "Emission policies.",
+          "items": {
+            "$ref": "#/definitions/EmissionPoliciesPropertiesFormat"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "DestinationType": {
+      "type": "string",
+      "description": "Emission destination type.",
+      "enum": [
+        "AzureMonitor"
+      ],
+      "x-ms-enum": {
+        "name": "DestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureMonitor",
+            "value": "AzureMonitor",
+            "description": "AzureMonitor"
+          }
+        ]
+      }
+    },
+    "EmissionPoliciesPropertiesFormat": {
+      "type": "object",
+      "description": "Emission policy properties.",
+      "properties": {
+        "emissionType": {
+          "$ref": "#/definitions/EmissionType",
+          "description": "Emission format type."
+        },
+        "emissionDestinations": {
+          "type": "array",
+          "description": "Emission policy destinations.",
+          "items": {
+            "$ref": "#/definitions/EmissionPolicyDestination"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EmissionPolicyDestination": {
+      "type": "object",
+      "description": "Emission policy destination properties.",
+      "properties": {
+        "destinationType": {
+          "$ref": "#/definitions/DestinationType",
+          "description": "Emission destination type."
+        }
+      }
+    },
+    "EmissionType": {
+      "type": "string",
+      "description": "Emission format type.",
+      "enum": [
+        "IPFIX"
+      ],
+      "x-ms-enum": {
+        "name": "EmissionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPFIX",
+            "value": "IPFIX",
+            "description": "IPFIX"
+          }
+        ]
+      }
+    },
+    "IngestionPolicyPropertiesFormat": {
+      "type": "object",
+      "description": "Ingestion Policy properties.",
+      "properties": {
+        "ingestionType": {
+          "$ref": "#/definitions/IngestionType",
+          "description": "The ingestion type."
+        },
+        "ingestionSources": {
+          "type": "array",
+          "description": "Ingestion Sources.",
+          "items": {
+            "$ref": "#/definitions/IngestionSourcesPropertiesFormat"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IngestionSourcesPropertiesFormat": {
+      "type": "object",
+      "description": "Ingestion policy properties.",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/SourceType",
+          "description": "Ingestion source type."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "IngestionType": {
+      "type": "string",
+      "description": "The ingestion type.",
+      "enum": [
+        "IPFIX"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPFIX",
+            "value": "IPFIX",
+            "description": "IPFIX"
+          }
+        ]
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Azure Traffic Collector REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action",
+          "default": false
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft NetworkFunction."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "ResourceReference": {
+      "type": "object",
+      "description": "Resource reference properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        }
+      }
+    },
+    "SourceType": {
+      "type": "string",
+      "description": "Ingestion source type.",
+      "enum": [
+        "Resource"
+      ],
+      "x-ms-enum": {
+        "name": "SourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Resource",
+            "value": "Resource",
+            "description": "Resource"
+          }
+        ]
+      }
+    },
+    "TagsObject": {
+      "type": "object",
+      "description": "Tags object for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

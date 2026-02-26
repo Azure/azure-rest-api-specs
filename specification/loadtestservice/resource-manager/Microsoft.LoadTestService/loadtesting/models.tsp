@@ -270,9 +270,9 @@ model CheckQuotaAvailabilityResponse {
   @visibility(Lifecycle.Read)
   name?: string;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("Check quota availability response properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
@@ -287,8 +287,8 @@ model CheckQuotaAvailabilityResponseProperties {
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 }
@@ -326,3 +326,9 @@ model QuotaBucketRequestPropertiesDimensions {
 @doc("Values returned by the List operation.")
 model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
+
+model LoadTestResourceUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    LoadTestResource,
+    LoadTestProperties
+  >;

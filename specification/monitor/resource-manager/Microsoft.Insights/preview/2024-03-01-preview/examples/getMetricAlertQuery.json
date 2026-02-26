@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "gigtest",
+    "ruleName": "chiricutin",
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin",
+        "type": "Microsoft.Insights/metricAlerts",
+        "location": "eastus",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/2f1a501a-6e1d-4f37-a445-462d7f8a563d/resourceGroups/AdisTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/msi-test-euap": {
+              "clientId": "778f4d04-3c60-4622-a839-5cf05866c983",
+              "principalId": "669dd76d-cde8-4dc3-b882-1de566b0c628"
+            }
+          }
+        },
+        "properties": {
+          "description": "This is the description of the rule1",
+          "severity": 3,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.monitor/accounts/gigwadme"
+          ],
+          "evaluationFrequency": "PT1M",
+          "criteria": {
+            "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria",
+            "allOf": [
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
+              }
+            ]
+          },
+          "resolveConfiguration": {
+            "autoResolved": true,
+            "timeToResolve": "PT10M"
+          },
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

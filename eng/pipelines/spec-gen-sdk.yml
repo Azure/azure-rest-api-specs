@@ -29,6 +29,14 @@ parameters:
     type: boolean
     default: false
     displayName: 'Create SDK pull request'
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
+    displayName: 'Force create SDK pull request even with failures ("Create SDK Pull Request" must be checked)'
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+    displayName: 'Release plan work item id'
 
 trigger: none
 
@@ -43,3 +51,5 @@ extends:
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
+    ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}

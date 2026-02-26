@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
       Supported Azure Cognitive Services endpoints (protocol and host name, such as
       https://westus2.api.cognitive.microsoft.com).
       """)
-    Endpoint: string,
+    Endpoint: url,
 
     @doc("Api Version")
     @path
@@ -51,6 +51,5 @@ model AnomalyDetectorApiKeyAuth
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 enum APIVersion {
-  @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }

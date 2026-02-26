@@ -41,7 +41,8 @@ interface GalleryImages {
     GalleryImage,
     Response = ArmResourceUpdatedResponse<GalleryImage> | ArmResourceCreatedResponse<
       GalleryImage,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GalleryImage> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: GalleryImage;
@@ -56,7 +57,7 @@ interface GalleryImages {
     GalleryImage,
     PatchModel = GalleryImageUpdate,
     Response = ArmResponse<GalleryImage> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GalleryImage> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;

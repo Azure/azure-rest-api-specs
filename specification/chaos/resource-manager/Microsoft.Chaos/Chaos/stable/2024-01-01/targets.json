@@ -1,0 +1,250 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Chaos Management",
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets": {
+      "get": {
+        "description": "Get a list of Target resources that extend a tracked regional resource.",
+        "tags": [
+          "Targets"
+        ],
+        "operationId": "Targets_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Target resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/targets.json#/definitions/targetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Targets that extend a virtual machine resource.": {
+            "$ref": "./examples/ListTargets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}": {
+      "get": {
+        "description": "Get a Target resource that extends a tracked regional resource.",
+        "tags": [
+          "Targets"
+        ],
+        "operationId": "Targets_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Target resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/targets.json#/definitions/target"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/GetTarget.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a Target resource that extends a tracked regional resource.",
+        "tags": [
+          "Targets"
+        ],
+        "operationId": "Targets_Delete",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Target resource deletion was successful."
+          },
+          "204": {
+            "description": "Target resource deletion was successful."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/DeleteTarget.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a Target resource that extends a tracked regional resource.",
+        "tags": [
+          "Targets"
+        ],
+        "operationId": "Targets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          },
+          {
+            "name": "target",
+            "description": "Target resource to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/targets.json#/definitions/target"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Target resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/targets.json#/definitions/target"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update a Target that extends a virtual machine resource.": {
+            "$ref": "./examples/CreateUpdateTarget.json"
+          }
+        }
+      }
+    }
+  }
+}

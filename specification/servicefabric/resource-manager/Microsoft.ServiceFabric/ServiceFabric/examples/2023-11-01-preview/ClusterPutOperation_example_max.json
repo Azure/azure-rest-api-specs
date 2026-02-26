@@ -1,0 +1,621 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "clusterName": "myCluster",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "addOnFeatures": [
+          "RepairManager",
+          "DnsService",
+          "BackupRestoreService",
+          "ResourceMonitorService"
+        ],
+        "applicationTypeVersionsCleanupPolicy": {
+          "maxUnusedVersionsToKeep": 2
+        },
+        "azureActiveDirectory": {
+          "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75",
+          "clusterApplication": "5886372e-7bf4-4878-a497-8098aba608ae",
+          "tenantId": "6abcc6a0-8666-43f1-87b8-172cf86a9f9c"
+        },
+        "certificateCommonNames": {
+          "commonNames": [
+            {
+              "certificateCommonName": "abc.com",
+              "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+            }
+          ],
+          "x509StoreName": "My"
+        },
+        "clientCertificateCommonNames": [
+          {
+            "certificateCommonName": "abc.com",
+            "certificateIssuerThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+            "isAdmin": true
+          }
+        ],
+        "clientCertificateThumbprints": [
+          {
+            "certificateThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+            "isAdmin": true
+          }
+        ],
+        "clusterCodeVersion": "7.0.470.9590",
+        "diagnosticsStorageAccountConfig": {
+          "blobEndpoint": "https://diag.blob.core.windows.net/",
+          "protectedAccountKeyName": "StorageAccountKey1",
+          "queueEndpoint": "https://diag.queue.core.windows.net/",
+          "storageAccountName": "diag",
+          "tableEndpoint": "https://diag.table.core.windows.net/"
+        },
+        "enableHttpGatewayExclusiveAuthMode": true,
+        "eventStoreServiceEnabled": true,
+        "fabricSettings": [
+          {
+            "name": "UpgradeService",
+            "parameters": [
+              {
+                "name": "AppPollIntervalInSeconds",
+                "value": "60"
+              }
+            ]
+          }
+        ],
+        "infrastructureServiceManager": true,
+        "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
+        "nodeTypes": [
+          {
+            "name": "nt1vm",
+            "applicationPorts": {
+              "endPort": 30000,
+              "startPort": 20000
+            },
+            "clientConnectionEndpointPort": 19000,
+            "durabilityLevel": "Silver",
+            "ephemeralPorts": {
+              "endPort": 64000,
+              "startPort": 49000
+            },
+            "httpGatewayEndpointPort": 19007,
+            "httpGatewayTokenAuthEndpointPort": 19081,
+            "isPrimary": true,
+            "isStateless": false,
+            "multipleAvailabilityZones": true,
+            "vmInstanceCount": 5
+          }
+        ],
+        "notifications": [
+          {
+            "isEnabled": true,
+            "notificationCategory": "WaveProgress",
+            "notificationLevel": "Critical",
+            "notificationTargets": [
+              {
+                "notificationChannel": "EmailUser",
+                "receivers": [
+                  "****@microsoft.com",
+                  "****@microsoft.com"
+                ]
+              },
+              {
+                "notificationChannel": "EmailSubscription",
+                "receivers": [
+                  "Owner",
+                  "AccountAdmin"
+                ]
+              }
+            ]
+          },
+          {
+            "isEnabled": true,
+            "notificationCategory": "WaveProgress",
+            "notificationLevel": "All",
+            "notificationTargets": [
+              {
+                "notificationChannel": "EmailUser",
+                "receivers": [
+                  "****@microsoft.com",
+                  "****@microsoft.com"
+                ]
+              },
+              {
+                "notificationChannel": "EmailSubscription",
+                "receivers": [
+                  "Owner",
+                  "AccountAdmin"
+                ]
+              }
+            ]
+          }
+        ],
+        "reliabilityLevel": "Platinum",
+        "reverseProxyCertificateCommonNames": {
+          "commonNames": [
+            {
+              "certificateCommonName": "abc.com",
+              "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+            }
+          ],
+          "x509StoreName": "My"
+        },
+        "sfZonalUpgradeMode": "Hierarchical",
+        "upgradeDescription": {
+          "deltaHealthPolicy": {
+            "applicationDeltaHealthPolicies": {
+              "fabric:/myApp1": {
+                "defaultServiceTypeDeltaHealthPolicy": {
+                  "maxPercentDeltaUnhealthyServices": 0
+                },
+                "serviceTypeDeltaHealthPolicies": {
+                  "myServiceType1": {
+                    "maxPercentDeltaUnhealthyServices": 0
+                  }
+                }
+              }
+            },
+            "maxPercentDeltaUnhealthyApplications": 0,
+            "maxPercentDeltaUnhealthyNodes": 0,
+            "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+          },
+          "forceRestart": false,
+          "healthCheckRetryTimeout": "00:05:00",
+          "healthCheckStableDuration": "00:00:30",
+          "healthCheckWaitDuration": "00:00:30",
+          "healthPolicy": {
+            "applicationHealthPolicies": {
+              "fabric:/myApp1": {
+                "defaultServiceTypeHealthPolicy": {
+                  "maxPercentUnhealthyServices": 0
+                },
+                "serviceTypeHealthPolicies": {
+                  "myServiceType1": {
+                    "maxPercentUnhealthyServices": 100
+                  }
+                }
+              }
+            },
+            "maxPercentUnhealthyApplications": 0,
+            "maxPercentUnhealthyNodes": 0
+          },
+          "upgradeDomainTimeout": "00:15:00",
+          "upgradeReplicaSetCheckTimeout": "00:10:00",
+          "upgradeTimeout": "01:00:00"
+        },
+        "upgradeMode": "Manual",
+        "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+        "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+        "upgradeWave": "Wave1",
+        "vmImage": "Windows",
+        "vmssZonalUpgradeMode": "Parallel"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "etag": "W/\"636462502169240745\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "location": "eastus",
+        "properties": {
+          "addOnFeatures": [
+            "RepairManager",
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "applicationTypeVersionsCleanupPolicy": {
+            "maxUnusedVersionsToKeep": 2
+          },
+          "availableClusterVersions": [
+            {
+              "codeVersion": "7.0.470.9590",
+              "environment": "Windows",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999"
+            }
+          ],
+          "azureActiveDirectory": {
+            "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75",
+            "clusterApplication": "5886372e-7bf4-4878-a497-8098aba608ae",
+            "tenantId": "6abcc6a0-8666-43f1-87b8-172cf86a9f9c"
+          },
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateCommonNames": [
+            {
+              "certificateCommonName": "abc.com",
+              "certificateIssuerThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+              "isAdmin": true
+            }
+          ],
+          "clientCertificateThumbprints": [
+            {
+              "certificateThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+              "isAdmin": false
+            }
+          ],
+          "clusterCodeVersion": "7.0.470.9590",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterState": "WaitingForNodes",
+          "diagnosticsStorageAccountConfig": {
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "storageAccountName": "diag",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "enableHttpGatewayExclusiveAuthMode": true,
+          "eventStoreServiceEnabled": true,
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "infrastructureServiceManager": true,
+          "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "applicationPorts": {
+                "endPort": 30000,
+                "startPort": 20000
+              },
+              "clientConnectionEndpointPort": 19000,
+              "durabilityLevel": "Silver",
+              "ephemeralPorts": {
+                "endPort": 64000,
+                "startPort": 49000
+              },
+              "httpGatewayEndpointPort": 19007,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": true,
+              "isStateless": false,
+              "multipleAvailabilityZones": true,
+              "vmInstanceCount": 5
+            }
+          ],
+          "notifications": [
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "Critical",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            },
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "All",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "reliabilityLevel": "Platinum",
+          "reverseProxyCertificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "sfZonalUpgradeMode": "Hierarchical",
+          "upgradeDescription": {
+            "deltaHealthPolicy": {
+              "applicationDeltaHealthPolicies": {
+                "fabric:/myApp1": {
+                  "defaultServiceTypeDeltaHealthPolicy": {
+                    "maxPercentDeltaUnhealthyServices": 0
+                  },
+                  "serviceTypeDeltaHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentDeltaUnhealthyServices": 0
+                    }
+                  }
+                }
+              },
+              "maxPercentDeltaUnhealthyApplications": 0,
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+            },
+            "forceRestart": true,
+            "healthCheckRetryTimeout": "00:05:00",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthPolicy": {
+              "applicationHealthPolicies": {
+                "fabric:/myApp1": {
+                  "defaultServiceTypeHealthPolicy": {
+                    "maxPercentUnhealthyServices": 0
+                  },
+                  "serviceTypeHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentUnhealthyServices": 100
+                    }
+                  }
+                }
+              },
+              "maxPercentUnhealthyApplications": 0,
+              "maxPercentUnhealthyNodes": 0
+            },
+            "upgradeDomainTimeout": "00:15:00",
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "upgradeTimeout": "00:15:00"
+          },
+          "upgradeMode": "Manual",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradeWave": "Wave1",
+          "vmImage": "Windows",
+          "vmssZonalUpgradeMode": "Parallel"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2019-03-01",
+        "Retry-After": "10"
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "etag": "W/\"636462502169240745\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "location": "eastus",
+        "properties": {
+          "addOnFeatures": [
+            "RepairManager",
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "applicationTypeVersionsCleanupPolicy": {
+            "maxUnusedVersionsToKeep": 2
+          },
+          "availableClusterVersions": [
+            {
+              "codeVersion": "7.0.470.9590",
+              "environment": "Windows",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999"
+            }
+          ],
+          "azureActiveDirectory": {
+            "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75",
+            "clusterApplication": "5886372e-7bf4-4878-a497-8098aba608ae",
+            "tenantId": "6abcc6a0-8666-43f1-87b8-172cf86a9f9c"
+          },
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateCommonNames": [
+            {
+              "certificateCommonName": "abc.com",
+              "certificateIssuerThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+              "isAdmin": true
+            }
+          ],
+          "clientCertificateThumbprints": [
+            {
+              "certificateThumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
+              "isAdmin": false
+            }
+          ],
+          "clusterCodeVersion": "7.0.470.9590",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterState": "WaitingForNodes",
+          "diagnosticsStorageAccountConfig": {
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "storageAccountName": "diag",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "enableHttpGatewayExclusiveAuthMode": true,
+          "eventStoreServiceEnabled": true,
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "infrastructureServiceManager": true,
+          "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "applicationPorts": {
+                "endPort": 30000,
+                "startPort": 20000
+              },
+              "clientConnectionEndpointPort": 19000,
+              "durabilityLevel": "Silver",
+              "ephemeralPorts": {
+                "endPort": 64000,
+                "startPort": 49000
+              },
+              "httpGatewayEndpointPort": 19007,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": true,
+              "isStateless": false,
+              "multipleAvailabilityZones": true,
+              "vmInstanceCount": 5
+            }
+          ],
+          "notifications": [
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "Critical",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            },
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "All",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "reliabilityLevel": "Platinum",
+          "reverseProxyCertificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "sfZonalUpgradeMode": "Hierarchical",
+          "upgradeDescription": {
+            "deltaHealthPolicy": {
+              "applicationDeltaHealthPolicies": {
+                "fabric:/myApp1": {
+                  "defaultServiceTypeDeltaHealthPolicy": {
+                    "maxPercentDeltaUnhealthyServices": 0
+                  },
+                  "serviceTypeDeltaHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentDeltaUnhealthyServices": 0
+                    }
+                  }
+                }
+              },
+              "maxPercentDeltaUnhealthyApplications": 0,
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+            },
+            "forceRestart": true,
+            "healthCheckRetryTimeout": "00:05:00",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthPolicy": {
+              "applicationHealthPolicies": {
+                "fabric:/myApp1": {
+                  "defaultServiceTypeHealthPolicy": {
+                    "maxPercentUnhealthyServices": 0
+                  },
+                  "serviceTypeHealthPolicies": {
+                    "myServiceType1": {
+                      "maxPercentUnhealthyServices": 100
+                    }
+                  }
+                }
+              },
+              "maxPercentUnhealthyApplications": 0,
+              "maxPercentUnhealthyNodes": 0
+            },
+            "upgradeDomainTimeout": "00:15:00",
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "upgradeTimeout": "00:15:00"
+          },
+          "upgradeMode": "Manual",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradeWave": "Wave1",
+          "vmImage": "Windows",
+          "vmssZonalUpgradeMode": "Parallel"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2023-11-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Put a cluster with maximum parameters"
+}

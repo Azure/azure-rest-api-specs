@@ -23,7 +23,7 @@ import { isWindows } from "./test-util.js";
 import { vol } from "memfs";
 
 vi.mock("node:fs/promises", async () => {
-  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
   return {
     ...memfs.fs.promises,
   };
@@ -427,7 +427,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -486,7 +486,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -613,7 +613,7 @@ describe("generateLintDiffReport", () => {
         | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-        **[must fix]The following errors/warnings are intorduced by current PR:**
+        **[must fix]The following errors/warnings are introduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |

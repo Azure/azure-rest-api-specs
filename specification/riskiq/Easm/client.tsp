@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(Easm.Versions.v2024_10_01_preview)
 namespace Customizations;
 
@@ -127,4 +126,38 @@ interface EasmClient {
 @@clientName(Easm.DiscoGroupNameParameter,
   "DiscoveryGroupNameParameter",
   "csharp"
+);
+@@clientName(Easm.DeltaTypeResponse, "DeltaTypeResult", "csharp");
+@@clientName(Easm.ActionParameters, "ActionParametersContent", "csharp");
+@@clientName(Easm.AssetChainRequest, "AssetChainRequestContent", "csharp");
+@@clientName(Easm.AssetsExportRequest, "AssetsExportRequestContent", "csharp");
+@@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
+@@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
+@@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
+@@clientName(Easm.DiscoGroupSummaryResult,
+  "DiscoveryGroupSummaryResult",
+  "csharp"
+);
+@@clientName(Easm.Policy, "EasmPolicy", "csharp");
+@@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
+@@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
+@@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
+@@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
+@@clientName(EasmClient.createOrReplaceDiscoGroup,
+  "CreateOrReplaceDiscoveryGroup",
+  "csharp"
+);
+@@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listAssetResource, "GetAssetResources", "csharp");
+@@clientName(EasmClient.listDataConnection, "GetDataConnections", "csharp");
+@@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
+@@clientName(EasmClient.listPolicy, "GetPolicies", "csharp");
+@@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
+@@clientName(EasmClient.listTask, "GetTasks", "csharp");
+@@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
+
+// rename for duplicate model from Azure.Core.Foundations
+@@clientName(Azure.Core.Foundations.InnerError,
+  "CoreInnerError",
+  "java,go,python,csharp"
 );

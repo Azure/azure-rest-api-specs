@@ -594,7 +594,7 @@ model ScheduledOperationsTypeUpdate {
   scheduledStopTime?: string;
 }
 
-@doc("Autonomous Database  resource model.")
+@doc("Autonomous Database resource model.")
 model AutonomousDatabase is TrackedResource<AutonomousDatabaseBaseProperties> {
   @doc("The database name.")
   @key("autonomousdatabasename")
@@ -612,9 +612,9 @@ model AutonomousDatabaseUpdate
     AutonomousDatabase,
     "Name" | "name" | "properties"
   >>> {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   properties?: AutonomousDatabaseUpdateProperties;
 }
 
@@ -691,9 +691,16 @@ model AutonomousDatabaseUpdateProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   licenseModel?: LicenseModel;
 
+  @removed(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   scheduledOperations?: ScheduledOperationsTypeUpdate;
+
+  @added(Versions.v20250601_preview)
+  @doc("The list of scheduled operations.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @identifiers(#[])
+  scheduledOperationsList?: ScheduledOperationsTypeUpdate[];
 
   @doc("The Oracle Database Edition that applies to the Autonomous databases.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
@@ -729,6 +736,7 @@ model AutonomousDatabaseUpdateProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   whitelistedIps?: aclString[];
 }
+
 @doc("Autonomous Database resource model.")
 model AutonomousDatabaseProperties extends AutonomousDatabaseBaseProperties {
   @doc("Database type to be created.")
@@ -986,9 +994,16 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Read)
   lifecycleState?: AutonomousDatabaseLifecycleState;
 
+  @removed(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   scheduledOperations?: ScheduledOperationsType;
+
+  @added(Versions.v20250601_preview)
+  @doc("The list of scheduled operations.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @identifiers(#[])
+  scheduledOperationsList?: ScheduledOperationsType[];
 
   @doc("The private endpoint Ip address for the resource.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -1211,4 +1226,26 @@ model DisasterRecoveryConfigurationDetails {
 
   @doc("If true, 7 days worth of backups are replicated across regions for Cross-Region ADB or Backup-Based DR between Primary and Standby. If false, the backups taken on the Primary are not replicated to the Standby database.")
   isReplicateAutomaticBackups?: boolean;
+}
+
+@added(Versions.v20250601_preview)
+@doc("Autonomous Database Action Enum")
+union AutonomousDatabaseLifecycleActionEnum {
+  @doc("Start Autonomous Database")
+  Start: "Start",
+
+  @doc("Stop Autonomous Database")
+  Stop: "Stop",
+
+  @doc("Restart Autonomous Database")
+  Restart: "Restart",
+
+  string,
+}
+
+@added(Versions.v20250601_preview)
+@doc("Autonomous Database Action Object")
+model AutonomousDatabaseLifecycleAction {
+  @doc("Autonomous Database lifecycle action")
+  action: AutonomousDatabaseLifecycleActionEnum;
 }

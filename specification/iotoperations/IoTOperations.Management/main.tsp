@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "@typespec/openapi";
 import "./models/base.tsp";
 import "./models/common/aliases.tsp";
 import "./models/instance.tsp";
@@ -18,6 +18,7 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
+import "./models/akri/service.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -35,18 +36,23 @@ namespace Microsoft.IoTOperations;
 enum Versions {
   /** 2024-11-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-11-01`,
 
   /** 2025-04-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-04-01`,
 
   /** 2025-07-01-preview */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-07-01-preview`,
+
+  /** 2025-10-01 */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2025-10-01`,
+
+  /** 2026-03-01 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2026-03-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -166,4 +172,14 @@ interface AkriConnector {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
   listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
+}
+
+// /instance/akriService resource Operations
+@armResourceOperations
+@added(Versions.`2026-03-01`)
+interface AkriService {
+  get is ArmResourceRead<AkriServiceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriServiceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriServiceResource>;
+  listByInstanceResource is ArmResourceListByParent<AkriServiceResource>;
 }
