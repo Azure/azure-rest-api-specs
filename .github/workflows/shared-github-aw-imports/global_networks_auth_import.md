@@ -15,7 +15,7 @@ steps:
       script: |
         const token = await core.getIDToken('api://AzureADTokenExchange');
         const fs = require('fs');
-        fs.writeFileSync('/tmp/azure-oidc-token', token); 
+        fs.writeFileSync('/tmp/azure-oidc-token', token);
 ---
 
 ## Workflow Behavior
