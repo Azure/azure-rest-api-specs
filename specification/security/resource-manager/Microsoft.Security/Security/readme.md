@@ -88,7 +88,7 @@ suppressions:
     reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: PathForResourceAction
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
-    reason: The pricings API uses a {scopeId} parameter which does not conform to the standard subscription/resourceGroup path patterns. The batchUpdate action is a POST on the pricings collection.
+    reason: The pricings API uses a {scopeId} parameter instead of the standard /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/... path pattern. This is by design as the endpoint supports multiple scope types (subscription and resource-level scopes). The batch action is a POST on the pricings collection.
   - code: ParameterNotDefinedInGlobalParameters
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
     reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
