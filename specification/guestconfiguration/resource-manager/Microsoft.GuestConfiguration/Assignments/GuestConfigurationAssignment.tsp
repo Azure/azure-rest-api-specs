@@ -20,6 +20,12 @@ model GuestConfigurationAssignment extends ProxyResource {
    * Properties of the Guest configuration assignment.
    */
   properties?: GuestConfigurationAssignmentProperties;
+
+  /**
+   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 alias GuestConfigurationAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
