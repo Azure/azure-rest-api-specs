@@ -64,6 +64,10 @@ op getReplace(
   "TrafficManagerRelativeDnsNameAvailabilityContent",
   "csharp"
 );
+@@clientName(CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
+  "ResourceType",
+  "csharp"
+);
 @@clientName(EndpointPropertiesCustomHeadersItem,
   "TrafficManagerEndpointCustomHeaderInfo",
   "csharp"
@@ -140,18 +144,20 @@ op getReplace(
   "csharp"
 );
 @@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
-@@clientName(HeatMapType, "TrafficManagerHeatMapType", "csharp");
-@@clientName(HeatMapType.default, "Default", "csharp");
-// MonitorProtocol value renames (PascalCase to match old API)
 @@clientName(MonitorProtocol.HTTP, "Http", "csharp");
 @@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
 @@clientName(MonitorProtocol.TCP, "Tcp", "csharp");
-// @@clientName(Microsoft.Network.RecordType,
-//   "TrafficManagerProfileRecordType",
-//   "csharp"
-// );
+@@clientName(Microsoft.Network.Resource.type, "ResourceType", "csharp");
 @@alternateType(TrafficManagerNameAvailability.type,
   Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(EndpointPropertiesSubnetsItem.first,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(EndpointPropertiesSubnetsItem.last,
+  Azure.Core.ipV4Address,
   "csharp"
 );
 @@alternateType(CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
@@ -174,4 +180,16 @@ op getReplace(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(TrackedResource.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Microsoft.Network.TrackedResource.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(HeatMapType, TrafficManagerHeatMapType, "csharp");
+
+/**
+ * The type of the heatmap.
+ */
+union TrafficManagerHeatMapType {
+  HeatMapType,
+  string,
+}
