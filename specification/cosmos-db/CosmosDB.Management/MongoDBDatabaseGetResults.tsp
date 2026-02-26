@@ -96,3 +96,8 @@ interface MongoDBDatabaseGetResultsOperationGroup {
 @@doc(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
+@@visibility(MongoDBDatabaseGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

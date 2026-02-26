@@ -75,3 +75,8 @@ interface SqlTriggerGetResultsOperationGroup {
 @@doc(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
   "The parameters to provide for the current SQL trigger."
 );
+@@visibility(SqlTriggerGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

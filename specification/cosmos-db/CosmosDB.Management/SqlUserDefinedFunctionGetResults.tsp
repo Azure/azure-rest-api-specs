@@ -77,3 +77,8 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
 @@doc(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
   "The parameters to provide for the current SQL userDefinedFunction."
 );
+@@visibility(SqlUserDefinedFunctionGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

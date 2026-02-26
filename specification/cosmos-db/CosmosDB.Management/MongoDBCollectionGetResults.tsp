@@ -108,3 +108,8 @@ interface MongoDBCollectionGetResultsOperationGroup {
 @@doc(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
+@@visibility(MongoDBCollectionGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

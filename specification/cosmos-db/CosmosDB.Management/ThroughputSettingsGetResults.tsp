@@ -983,3 +983,8 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
 @@doc(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin graph."
 );
+@@visibility(ThroughputSettingsGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

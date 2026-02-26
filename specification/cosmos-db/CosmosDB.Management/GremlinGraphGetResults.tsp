@@ -87,3 +87,8 @@ interface GremlinGraphGetResultsOperationGroup {
 @@doc(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
+@@visibility(GremlinGraphGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

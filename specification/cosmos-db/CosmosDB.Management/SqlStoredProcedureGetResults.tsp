@@ -76,3 +76,8 @@ interface SqlStoredProcedureGetResultsOperationGroup {
 @@doc(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
   "The parameters to provide for the current SQL storedProcedure."
 );
+@@visibility(SqlStoredProcedureGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

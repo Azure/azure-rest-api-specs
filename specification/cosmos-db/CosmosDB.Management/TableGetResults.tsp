@@ -85,3 +85,8 @@ interface TableGetResultsOperationGroup {
 @@doc(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
+@@visibility(TableGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

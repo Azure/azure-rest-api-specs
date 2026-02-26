@@ -90,3 +90,8 @@ interface SqlResources {
 @@doc(SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
+@@visibility(SqlDatabaseGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

@@ -102,3 +102,8 @@ interface SqlContainerGetResultsOperationGroup {
 @@doc(SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
+@@visibility(SqlContainerGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

@@ -93,7 +93,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<OperationListResult>,
-      ErrorResponse
+      Azure.ResourceManager.CommonTypes.ErrorResponse
     > {}
 @@doc(Operations.list,
   "Lists all of the available Cosmos DB Resource Provider operations."

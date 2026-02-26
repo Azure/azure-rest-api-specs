@@ -75,3 +75,8 @@ interface GraphResources {
 @@doc(GraphResources.createUpdateGraph::parameters.resource,
   "The parameters to provide for the current graph."
 );
+@@visibility(GraphResourceGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

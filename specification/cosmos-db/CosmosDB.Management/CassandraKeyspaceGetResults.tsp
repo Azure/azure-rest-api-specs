@@ -74,3 +74,8 @@ interface CassandraKeyspaceGetResultsOperationGroup {
 @@doc(CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
   "The parameters to provide for the current Cassandra keyspace."
 );
+@@visibility(CassandraKeyspaceGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

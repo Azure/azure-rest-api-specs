@@ -45,7 +45,7 @@ interface NotebookWorkspaces {
     NotebookWorkspaceCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<NotebookWorkspace> &
       ArmLroLocationHeader<FinalResult = NotebookWorkspace>,
-    ErrorResponse = ErrorResponse
+    ErrorResponse = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
   /**

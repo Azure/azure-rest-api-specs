@@ -10,6 +10,24 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
+
+/**
+ * Error Response.
+ */
+@error
+@Azure.ClientGenerator.Core.clientName("CosmosDBErrorResult", "csharp")
+model ErrorResponse {
+  /**
+   * Error code.
+   */
+  code?: string;
+
+  /**
+   * Error message indicating why the operation failed.
+   */
+  message?: string;
+}
+
 model FleetspaceAccountListResult
   is ResourceListResult<FleetspaceAccountResource>;
 
@@ -1363,12 +1381,14 @@ model CopyJobProperties {
    * Error response for Faulted job
    */
   @visibility(Lifecycle.Read)
-  error?: ErrorResponse;
+  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Total Duration of Job
    */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @encode("duration-constant")
   duration?: string;
 
   /**

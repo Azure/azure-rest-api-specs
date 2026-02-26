@@ -76,3 +76,9 @@ interface CassandraViewGetResultsOperationGroup {
 @@doc(CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
   "The parameters to provide for the current Cassandra View."
 );
+
+@@visibility(CassandraViewGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

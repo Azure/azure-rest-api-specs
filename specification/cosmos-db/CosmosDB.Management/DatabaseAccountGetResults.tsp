@@ -52,7 +52,7 @@ interface DatabaseAccounts {
     DatabaseAccountCreateUpdateParameters,
     Response = ArmResponse<DatabaseAccountGetResults> &
       ArmLroLocationHeader<FinalResult = DatabaseAccountGetResults>,
-    ErrorResponse = ErrorResponse
+    ErrorResponse = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
   /**
@@ -756,4 +756,9 @@ interface DatabaseAccounts {
 );
 @@doc(DatabaseAccounts.regenerateKey::parameters.body,
   "The name of the key to regenerate."
+);
+@@visibility(DatabaseAccountGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
 );

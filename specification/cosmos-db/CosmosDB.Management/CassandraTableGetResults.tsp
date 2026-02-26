@@ -74,3 +74,8 @@ interface CassandraTableGetResultsOperationGroup {
 @@doc(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
   "The parameters to provide for the current Cassandra Table."
 );
+@@visibility(CassandraTableGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

@@ -74,3 +74,8 @@ interface GremlinDatabaseGetResultsOperationGroup {
 @@doc(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "The parameters to provide for the current Gremlin database."
 );
+@@visibility(GremlinDatabaseGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
