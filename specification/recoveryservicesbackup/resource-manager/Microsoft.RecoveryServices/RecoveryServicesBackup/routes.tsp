@@ -245,6 +245,39 @@ interface BackupChildJobs {
     @query("$skipToken")
     $skipToken?: string,
   ): ArmResponse<JobResourceList> | ErrorResponse;
+
+  /**
+   * Gets extended child job information associated with the parent job.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/backupChildJobs/{childJobName}")
+  @get
+  @tag("BackupChildJobs")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Name of the parent job.
+     */
+    @path
+    jobName: string,
+
+    /**
+     * Name of the child job whose details are to be fetched.
+     */
+    @path
+    childJobName: string,
+  ): ArmResponse<JobResource> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -8626,7 +8626,7 @@ model IAASVMProtectedItemRestoreDetails
  */
 alias BulkRestoreRequestBaseProperties = {
   /**
-   * Type of this recovery. ALR/OLR/RD
+   * Type of this recovery. AlternateLocation/OriginalLocation/RestoreDisks
    */
   recoveryType: RecoveryType;
 
@@ -8656,7 +8656,7 @@ model IaaSVMBulkRestoreRequest extends RestoreRequest {
    * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
    * For e.g. /subscriptions/{subId}/resourcegroups/{rg}
    */
-  targetResourceGroupId: string;
+  targetResourceGroupId?: string;
 
   /**
    * Fully qualified ARM ID of the storage account to which the VMs are to be restored.
