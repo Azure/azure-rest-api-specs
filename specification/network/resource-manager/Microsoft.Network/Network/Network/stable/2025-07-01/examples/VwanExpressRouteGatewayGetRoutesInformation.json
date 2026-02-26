@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "expressRouteGatewayName": "ergw",
+    "attemptRefresh": false
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    },
+    "200": {
+      "body": {
+        "lastComputedTime": "2/11/2026 8:44:21 AM UTC",
+        "nextEligibleComputeTime": "2/11/2026 9:44:21 AM UTC",
+        "routeSetVersion": "8721073a-8260-4250-b5a6-c79569fdfec3",
+        "routeSets": [
+          {
+            "name": "Set-1",
+            "locations": [
+              "Washington DC",
+              "London2"
+            ],
+            "details": {
+              "10.11.0.0/24": [
+                {
+                  "circuit": "x0",
+                  "pri": "1",
+                  "sec": "1"
+                },
+                {
+                  "circuit": "x1",
+                  "pri": "2",
+                  "sec": "2"
+                }
+              ],
+              "10.57.0.0/16": [
+                {
+                  "circuit": "x0",
+                  "pri": "1",
+                  "sec": "1"
+                },
+                {
+                  "circuit": "x1",
+                  "pri": "2",
+                  "sec": "2"
+                }
+              ]
+            }
+          }
+        ],
+        "circuitsMetadataMap": {
+          "x0": {
+            "name": "DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit1",
+            "link": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteCircuits/DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit1",
+            "location": "Hong Kong"
+          },
+          "x1": {
+            "name": "DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit2",
+            "link": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteCircuits/DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit2",
+            "location": "Hong Kong2"
+          }
+        }
+      }
+    }
+  }
+}

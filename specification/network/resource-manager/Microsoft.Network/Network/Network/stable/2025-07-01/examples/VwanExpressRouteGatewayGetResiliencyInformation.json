@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "expressRouteGatewayName": "ergw",
+    "attemptRefresh": true
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    },
+    "200": {
+      "body": {
+        "overallScore": "20",
+        "scoreChange": "0",
+        "minScoreFromRecommendations": "-",
+        "maxScoreFromRecommendations": "-",
+        "lastComputedTime": "2/11/2026 8:44:21 AM UTC",
+        "nextEligibleComputeTime": "2/11/2026 9:44:21 AM UTC",
+        "components": [
+          {
+            "name": "Disaster Recovery",
+            "currentScore": "-",
+            "maxScore": "-",
+            "recommendations": [
+              {
+                "recommendationTitle": "Site Failover Not Yet Validated",
+                "recommendationId": "6",
+                "severity": "High",
+                "recommendationText": "For one or more sites, the Resiliency Validation for site failover has not yet started. Use Resiliency Validation Tests at least once every 3 months to ensure business continuity during exigencies.",
+                "callToActionText": "For one or more sites, the Resiliency Validation for site failover has not yet started. Use Resiliency Validation Tests at least once every 3 months to ensure business continuity during exigencies.",
+                "callToActionLink": "https://learn.microsoft.com/en-us/azure/expressroute/resiliency-insights#-resiliency-validation-readiness-test-score",
+                "details": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
