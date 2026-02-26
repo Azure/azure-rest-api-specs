@@ -88,8 +88,8 @@ using Microsoft.DataFactory;
   "java"
 );
 @@clientName(SqlServerLinkedServiceTypeProperties.userName, "username", "java");
-@@clientName(SsisAccessCredential.userName, "username", "java");
-@@clientName(SsisExecutionCredential.userName, "username", "java");
+@@clientName(SSISAccessCredential.userName, "username", "java");
+@@clientName(SSISExecutionCredential.userName, "username", "java");
 @@clientName(TeamDeskLinkedServiceTypeProperties.userName, "username", "java");
 @@clientName(TwilioLinkedServiceTypeProperties.userName, "username", "java");
 @@clientName(ZendeskLinkedServiceTypeProperties.userName, "username", "java");
