@@ -15,37 +15,43 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-workspace"
-    namespace: "azure.discovery.workspace"
+    package-dir: "azure-ai-discovery"
+    package-name: "azure-ai-discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}/_workspace"
+    namespace: "azure.ai.discovery"
     omit-unreachable-types: true
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    # NOTE: /Azure.AI.Discovery suffix after _workspace is a workaround because @azure-typespec/http-client-csharp
+    # does not support package-dir. Without it, CI derives packageName from the last path segment (_workspace)
+    # instead of Azure.AI.Discovery, causing csproj and CHANGELOG lookup failures.
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
     omit-unreachable-types: true
-    namespace: Azure.Discovery.Workspace
-    package-name: "{namespace}"
+    namespace: Azure.AI.Discovery
+    package-name: Azure.AI.Discovery
     model-namespace: false
     flavor: azure
     examples-dir: "{project-dir}/examples"
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.Discovery.Workspace
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Discovery/_workspace/Azure.AI.Discovery"
+    namespace: Azure.AI.Discovery
     model-namespace: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-workspace"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-discovery-workspace"
     omit-unreachable-types: true
     is-modular-library: true
     experimental-extensible-enums: true
     flavor: azure
     package-details:
-      name: "@azure/discovery-workspace"
+      name: "@azure/ai-discovery-workspace"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-workspace"
+    package-dir: "azure-ai-discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}/_workspace"
     omit-unreachable-types: true
-    namespace: com.azure.discovery.workspace
+    namespace: com.azure.ai.discovery
     flavor: azure
   # "@azure-tools/typespec-go":
   #   module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azworkspace"
@@ -57,5 +63,4 @@ options:
   #   slice-elements-byval: true
   #   flavor: azure
   "@azure-tools/typespec-client-generator-cli":
-    additionalDirectories:
-      - "specification/discovery/Discovery.DataPlane.Shared/"
+    additionalDirectories: []

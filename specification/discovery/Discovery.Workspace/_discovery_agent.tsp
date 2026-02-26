@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Microsoft.Discovery.DataPlane.Shared;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
@@ -105,7 +104,7 @@ union ConfirmationState {
 @added(Versions.`2026-02-01-preview`)
 model ToolReference {
   @doc("The resource ID of the tool.")
-  toolId: Microsoft.Discovery.DataPlane.Shared.ToolId;
+  toolId: ToolId;
 
   @doc("Whether user confirmation is required before tool execution.")
   confirmation?: ConfirmationState;

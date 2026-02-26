@@ -1,9 +1,9 @@
-import "../Discovery.DataPlane.Shared/all.tsp";
+import "./shared.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
-using Microsoft.Discovery.DataPlane.Shared;
+using Microsoft.Discovery.Workspace;
 
 @doc("Enumeration for message sender.")
 union Sender {

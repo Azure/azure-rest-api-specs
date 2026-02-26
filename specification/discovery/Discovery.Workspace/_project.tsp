@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
-using Microsoft.Discovery.DataPlane.Shared;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Microsoft.Discovery.DataPlane.Shared;
 
 @versioned(Microsoft.Discovery.Bookshelf.Versions)
 namespace Microsoft.Discovery.Bookshelf;
@@ -22,7 +21,7 @@ model KnowledgeBaseVersion {
   @visibility(Lifecycle.Read)
   @key("versionName")
   @maxLength(24)
-  @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
+  @pattern(resourceNamePattern)
   name: string;
 
   ...BaseKnowledgeBase;
@@ -137,13 +136,13 @@ interface KnowledgeBaseVersions {
     @doc("The knowledgeBase name.")
     @path
     @maxLength(24)
-    @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
+    @pattern(resourceNamePattern)
     knowledgeBaseName: string,
 
     @doc("The version name.")
     @path
     @maxLength(24)
-    @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
+    @pattern(resourceNamePattern)
     versionName: string,
 
     @doc("The unique ID of the operation.")
@@ -169,8 +168,23 @@ interface KnowledgeBaseVersions {
   >;
 
   @doc("Delete a KnowledgeBaseVersion.")
-  @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
-  delete is LongRunningResourceDelete<KnowledgeBaseVersion>;
+  delete is ResourceDelete<KnowledgeBaseVersion>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Delete the most recent version of KnowledgeBase.")
+  @delete
+  @route("/knowledgeBases/{knowledgeBaseName}/versions/@latest")
+  deleteLatestVersion is Foundations.Operation<
+    {
+      /** Name of the KnowledgeBase */
+      @path
+      @maxLength(24)
+      knowledgeBaseName: string;
+    },
+    {
+      @statusCode _: 204;
+    }
+  >;
 
   //  @doc("Restore the KnowledgeBase to the state of this version.")
   //  restore is Operations.ResourceAction<KnowledgeBaseVersion, {}, KnowledgeBase>;

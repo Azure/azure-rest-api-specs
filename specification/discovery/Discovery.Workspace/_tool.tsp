@@ -7,7 +7,6 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using Azure.Core;
-using Microsoft.Discovery.DataPlane.Shared;
 using Azure.ClientGenerator.Core;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)

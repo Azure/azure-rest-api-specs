@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
+import "./shared.tsp";
 import "./_knowledgeBase.tsp";
 import "./_knowledgeBase_version.tsp";
 
@@ -37,9 +38,6 @@ namespace Microsoft.Discovery.Bookshelf;
 
 @doc("The Microsoft.Discovery.Bookshelf service versions.")
 enum Versions {
-  @useDependency(
-    Microsoft.Discovery.DataPlane.Shared.Versions.`2026-02-01-preview`
-  )
   @doc("The 2026-02-01-preview version of the Microsoft.Discovery.Bookshelf service data plane.")
   `2026-02-01-preview`,
 }

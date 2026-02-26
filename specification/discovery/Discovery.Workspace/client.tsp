@@ -33,11 +33,8 @@ using Azure.ClientGenerator.Core;
 );
 
 // Shared types
-@@clientName(Microsoft.Discovery.DataPlane.Shared.Tag,
-  "DiscoveryTag",
-  "csharp"
-);
-@@clientName(Microsoft.Discovery.DataPlane.Shared.ProvisioningState,
+@@clientName(Microsoft.Discovery.Workspace.Tag, "DiscoveryTag", "csharp");
+@@clientName(Microsoft.Discovery.Workspace.ProvisioningState,
   "DiscoveryProvisioningState",
   "csharp"
 );

@@ -99,78 +99,6 @@
         }
       }
     },
-    "/knowledgeBases/{knowledgeBaseName}": {
-      "delete": {
-        "operationId": "KnowledgeBases_Delete",
-        "description": "Delete a KnowledgeBase.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "knowledgeBaseName",
-            "in": "path",
-            "description": "The knowledgeBase name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "KnowledgeBases_Delete_MaximumSet": {
-            "$ref": "./examples/KnowledgeBases_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/knowledgeBases/{knowledgeBaseName}/versions": {
       "get": {
         "operationId": "KnowledgeBaseVersions_List",
@@ -189,7 +117,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Microsoft.Discovery.DataPlane.Shared.WithQueryCreatedSince"
+            "$ref": "#/parameters/WithQueryCreatedSince"
           }
         ],
         "responses": {
@@ -372,37 +300,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -421,8 +320,7 @@
           "KnowledgeBaseVersions_Delete_MaximumSet": {
             "$ref": "./examples/KnowledgeBaseVersions_Delete_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:startIndexing": {
@@ -791,6 +689,48 @@
             "$ref": "./examples/KnowledgeBaseVersions_GetLatestVersion_MaximumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "KnowledgeBaseVersions_DeleteLatestVersion",
+        "description": "Delete the most recent version of KnowledgeBase.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "Name of the KnowledgeBase",
+            "required": true,
+            "type": "string",
+            "maxLength": 24
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KnowledgeBaseVersions_DeleteLatestVersion_MaximumSet": {
+            "$ref": "./examples/KnowledgeBaseVersions_DeleteLatestVersion_MaximumSet_Gen.json"
+          },
+          "KnowledgeBaseVersions_DeleteLatestVersion_MinimumSet": {
+            "$ref": "./examples/KnowledgeBaseVersions_DeleteLatestVersion_MinimumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -897,121 +837,35 @@
         ]
       }
     },
-    "BaseKnowledgeBase": {
-      "type": "object",
-      "description": "A knowledgeBase.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID for the resource.",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "Version.",
-          "readOnly": true
-        },
-        "bookshelfName": {
-          "type": "string",
-          "description": "The name of the associated Bookshelf tracked resource.",
-          "readOnly": true
-        },
-        "storageAssetReferences": {
-          "type": "array",
-          "description": "Storage asset references to index.",
-          "items": {
-            "$ref": "#/definitions/StorageAssetReference"
+    "ByType": {
+      "type": "string",
+      "description": "Enum for entity type",
+      "enum": [
+        "User",
+        "Application",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A human user."
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "knowledgeBaseUrl": {
-          "type": "string",
-          "description": "URL to access the knowledge base.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ProvisioningState",
-          "description": "Provisioning state.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The ID of the user who created this resource.",
-          "readOnly": true
-        },
-        "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the resource was last updated",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The ID of the user who Updated this resource.",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
-          "description": "The type of user who Updated this resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "array",
-          "description": "The tags",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "The description",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "copilotInstruction": {
-          "type": "string",
-          "description": "The copilot instruction",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/IndexingStatus",
-          "description": "The status",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "version",
-        "bookshelfName",
-        "description",
-        "copilotInstruction"
-      ]
+          {
+            "name": "System",
+            "value": "System",
+            "description": "The backend system."
+          }
+        ]
+      }
     },
     "IndexingStatus": {
       "type": "string",
@@ -1099,7 +953,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state.",
           "readOnly": true
         },
@@ -1115,7 +969,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -1131,7 +985,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         },
@@ -1139,7 +993,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+            "$ref": "#/definitions/Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1249,7 +1103,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state.",
           "readOnly": true
         },
@@ -1265,7 +1119,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -1281,7 +1135,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         },
@@ -1289,7 +1143,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+            "$ref": "#/definitions/Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1349,7 +1203,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+            "$ref": "#/definitions/Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1377,37 +1231,49 @@
         }
       }
     },
-    "Microsoft.Discovery.DataPlane.Shared.ByType": {
-      "type": "string",
-      "description": "Enum for entity type",
-      "enum": [
-        "User",
-        "Application",
-        "System"
-      ],
-      "x-ms-enum": {
-        "name": "ByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "A human user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "System",
-            "value": "System",
-            "description": "The backend system."
+    "PagedKnowledgeBase": {
+      "type": "object",
+      "description": "Paged collection of KnowledgeBase items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeBase items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBase"
           }
-        ]
-      }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
-    "Microsoft.Discovery.DataPlane.Shared.ProvisioningState": {
+    "PagedKnowledgeBaseVersion": {
+      "type": "object",
+      "description": "Paged collection of KnowledgeBaseVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeBaseVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
       "enum": [
@@ -1461,62 +1327,6 @@
         ]
       }
     },
-    "Microsoft.Discovery.DataPlane.Shared.Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
-      }
-    },
-    "PagedKnowledgeBase": {
-      "type": "object",
-      "description": "Paged collection of KnowledgeBase items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KnowledgeBase items on this page",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBase"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedKnowledgeBaseVersion": {
-      "type": "object",
-      "description": "Paged collection of KnowledgeBaseVersion items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KnowledgeBaseVersion items on this page",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBaseVersion"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "StorageAssetReference": {
       "type": "object",
       "description": "Reference to a storage asset with identity information.",
@@ -1549,6 +1359,20 @@
       "required": [
         "id"
       ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
     },
     "WithNodePool": {
       "type": "object",
@@ -1621,7 +1445,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
     },
-    "Microsoft.Discovery.DataPlane.Shared.WithQueryCreatedSince": {
+    "WithQueryCreatedSince": {
       "name": "createdSince",
       "in": "query",
       "description": "The oldest creation timestamp to keep",

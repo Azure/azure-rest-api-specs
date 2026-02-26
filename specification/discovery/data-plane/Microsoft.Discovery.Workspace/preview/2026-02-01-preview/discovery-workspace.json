@@ -72,7 +72,7 @@
             "$ref": "#/parameters/WithQueryInvestigationName"
           },
           {
-            "$ref": "#/parameters/Microsoft.Discovery.DataPlane.Shared.WithQueryCreatedSince"
+            "$ref": "#/parameters/WithQueryCreatedSince"
           }
         ],
         "responses": {
@@ -317,7 +317,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Microsoft.Discovery.DataPlane.Shared.WithQueryCreatedSince"
+            "$ref": "#/parameters/WithQueryCreatedSince"
           }
         ],
         "responses": {
@@ -403,9 +403,76 @@
           }
         }
       },
+      "put": {
+        "operationId": "Investigations_CreateOrReplace",
+        "description": "Creates an Investigation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "investigationName",
+            "in": "path",
+            "description": "The investigation name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Investigation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Investigation"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Investigation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Investigations_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/Investigations_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        }
+      },
       "patch": {
         "operationId": "Investigations_CreateOrUpdate",
-        "description": "Creates or updates Investigation.",
+        "description": "Updates an Investigation.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1893,6 +1960,36 @@
         ]
       }
     },
+    "ByType": {
+      "type": "string",
+      "description": "Enum for entity type",
+      "enum": [
+        "User",
+        "Application",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A human user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "The backend system."
+          }
+        ]
+      }
+    },
     "ComputeUsage": {
       "type": "object",
       "description": "Overview of compute usage for a project.",
@@ -1932,7 +2029,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -1948,7 +2045,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         },
@@ -2098,7 +2195,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -2114,7 +2211,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         }
@@ -2185,7 +2282,7 @@
           "description": "Identifier of who created this entry (GUID for user | resourceId for application | arbitrary string for other types)."
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "Type of entity that created this entry (User, Application, System, or custom type)."
         },
         "summary": {
@@ -2267,7 +2364,7 @@
       "description": "Data URI and path where it will be mounted in the tool container.",
       "properties": {
         "storageUri": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.StorageUri",
+          "$ref": "#/definitions/StorageUri",
           "description": "URI of input data to mount."
         },
         "mountPath": {
@@ -2310,7 +2407,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -2326,7 +2423,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         },
@@ -2348,7 +2445,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+            "$ref": "#/definitions/Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -2390,7 +2487,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.Tag"
+            "$ref": "#/definitions/Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -2485,55 +2582,6 @@
         "storageAssetId"
       ]
     },
-    "Microsoft.Discovery.DataPlane.Shared.ByType": {
-      "type": "string",
-      "description": "Enum for entity type",
-      "enum": [
-        "User",
-        "Application",
-        "System"
-      ],
-      "x-ms-enum": {
-        "name": "ByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "A human user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "System",
-            "value": "System",
-            "description": "The backend system."
-          }
-        ]
-      }
-    },
-    "Microsoft.Discovery.DataPlane.Shared.StorageUri": {
-      "type": "string",
-      "description": "A URI that references data. There are two forms this can take:\n1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.",
-      "pattern": "^discovery://(storages|storageassets)/.*$"
-    },
-    "Microsoft.Discovery.DataPlane.Shared.Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
-      }
-    },
     "NodepoolUsage": {
       "type": "object",
       "description": "Overview of compute usage for a nodepool.",
@@ -2620,7 +2668,7 @@
       "description": "Definition of a mount for collecting tool output data.",
       "properties": {
         "storageUri": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.StorageUri",
+          "$ref": "#/definitions/StorageUri",
           "description": "URI of location to persist output to."
         },
         "mountPath": {
@@ -2638,7 +2686,7 @@
       "description": "Model for providing the URI of the output collected from a specific container path.",
       "properties": {
         "storageUri": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.StorageUri",
+          "$ref": "#/definitions/StorageUri",
           "description": "The URI of the output data."
         },
         "mountPath": {
@@ -2947,6 +2995,11 @@
         }
       }
     },
+    "StorageUri": {
+      "type": "string",
+      "description": "A URI that references data. There are two forms this can take:\n1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.",
+      "pattern": "^discovery://(storages|storageassets)/.*$"
+    },
     "Suggestion": {
       "type": "object",
       "description": "A suggestion for prompts in a conversation.",
@@ -3011,6 +3064,20 @@
         "pendingJobs",
         "nodePools"
       ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
     },
     "Task": {
       "type": "object",
@@ -3088,7 +3155,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -3104,7 +3171,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "The type of user who Updated this resource.",
           "readOnly": true
         },
@@ -3156,7 +3223,7 @@
           "description": "The unique identifier of the assignee."
         },
         "type": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "Type of assignee (User, Application, System, or custom type)."
         }
       },
@@ -3174,7 +3241,7 @@
           "description": "The unique identifier of the assignee."
         },
         "type": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "Type of assignee (User, Application, System, or custom type)."
         }
       }
@@ -3193,7 +3260,7 @@
           "description": "ID of the user or application who created the comment."
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "Type of creator (User, Application, System, or custom type)."
         },
         "text": {
@@ -3263,7 +3330,7 @@
           }
         },
         "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.DataPlane.Shared.ByType",
+          "$ref": "#/definitions/ByType",
           "description": "Type of entity that created the task (User, Application, System, or custom type)."
         },
         "investigationId": {
@@ -3617,15 +3684,6 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "Microsoft.Discovery.DataPlane.Shared.WithQueryCreatedSince": {
-      "name": "createdSince",
-      "in": "query",
-      "description": "The oldest creation timestamp to keep",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method"
-    },
     "WithOperationId": {
       "name": "operationId",
       "in": "path",
@@ -3643,6 +3701,15 @@
       "type": "string",
       "maxLength": 24,
       "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
+    },
+    "WithQueryCreatedSince": {
+      "name": "createdSince",
+      "in": "query",
+      "description": "The oldest creation timestamp to keep",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
       "x-ms-parameter-location": "method"
     },
     "WithQueryInvestigationName": {

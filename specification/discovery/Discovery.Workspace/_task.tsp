@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Microsoft.Discovery.DataPlane.Shared;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;

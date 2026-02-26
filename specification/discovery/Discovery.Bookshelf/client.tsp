@@ -13,11 +13,8 @@ using Azure.ClientGenerator.Core;
 // =============================================================================
 
 // Shared types - AZC0012 (generic) and AZC0034 (conflicts with Azure types)
-@@clientName(Microsoft.Discovery.DataPlane.Shared.Tag,
-  "BookshelfTag",
-  "csharp"
-);
-@@clientName(Microsoft.Discovery.DataPlane.Shared.ProvisioningState,
+@@clientName(Microsoft.Discovery.Bookshelf.Tag, "BookshelfTag", "csharp");
+@@clientName(Microsoft.Discovery.Bookshelf.ProvisioningState,
   "BookshelfProvisioningState",
   "csharp"
 );

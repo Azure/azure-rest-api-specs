@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Microsoft.Discovery.DataPlane.Shared;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
@@ -178,7 +177,10 @@ interface Investigations {
   @added(Versions.`2026-02-01-preview`)
   getOperationStatus is Operations.GetResourceOperationStatus<Investigation>;
 
-  @doc("Creates or updates Investigation.")
+  @doc("Creates an Investigation.")
+  createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Investigation>;
+
+  @doc("Updates an Investigation.")
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<Investigation>;
 
   @doc("Delete a Investigation.")

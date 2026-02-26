@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../Discovery.DataPlane.Shared/all.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Microsoft.Discovery.DataPlane.Shared;
 
 @versioned(Microsoft.Discovery.Bookshelf.Versions)
 namespace Microsoft.Discovery.Bookshelf;
@@ -90,7 +88,7 @@ model KnowledgeBase {
   @visibility(Lifecycle.Read)
   @key("knowledgeBaseName")
   @maxLength(24)
-  @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
+  @pattern(resourceNamePattern)
   name: string;
 
   ...BaseKnowledgeBase;
@@ -99,8 +97,4 @@ model KnowledgeBase {
 interface KnowledgeBases {
   @doc("List KnowledgeBase resources")
   list is ResourceList<KnowledgeBase>;
-
-  @doc("Delete a KnowledgeBase.")
-  @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
-  delete is LongRunningResourceDelete<KnowledgeBase>;
 }
