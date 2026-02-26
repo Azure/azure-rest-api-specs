@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "d2ad5196-2292-4080-b209-ce4399b0a807",
+    "resourceGroupName": "DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests",
+    "expressRouteGatewayName": "b982dc4450f5406ba6d4344e15575138-eastus-er-gw",
+    "type": "SingleSiteFailover",
+    "fetchLatest": true
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    },
+    "200": {
+      "body": [
+        {
+          "peeringLocation": "Hong Kong",
+          "circuits": [
+            {
+              "nrpResourceUri": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteCircuits/DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit1",
+              "name": "DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit1",
+              "connectionName": "ExRConnection-eastus-1770627861956"
+            }
+          ],
+          "status": "Completed",
+          "startTime": "2/11/2026 7:37:04 AM",
+          "endTime": "2/11/2026 8:41:50 AM",
+          "connections": [
+            {
+              "nrpResourceUri": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteGateways/b982dc4450f5406ba6d4344e15575138-eastus-er-gw/expressRouteConnections/ExRConnection-eastus-1770627861956",
+              "name": "ExRConnection-eastus-1770627861956",
+              "status": "Connected",
+              "lastUpdatedTime": "2/11/2026 8:41:49 AM"
+            }
+          ],
+          "testGuid": "16546d1a-0548-4d6d-84ca-7149f3af4403",
+          "testType": "SingleSiteFailover",
+          "issues": []
+        },
+        {
+          "peeringLocation": "Hong Kong2",
+          "circuits": [
+            {
+              "nrpResourceUri": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteCircuits/DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit2",
+              "name": "DO_NOT_DELETE_VWan_Failover_Playwright_Tests_Circuit2",
+              "connectionName": "ExRConnection-eastus-1770632063039"
+            }
+          ],
+          "status": "NotStarted",
+          "startTime": "",
+          "endTime": "",
+          "connections": [
+            {
+              "nrpResourceUri": "/subscriptions/d2ad5196-2292-4080-b209-ce4399b0a807/resourceGroups/DO_NOT_DELETE_ExpressRouteVWan_ResiliencyValidation_Playwright_Tests/providers/Microsoft.Network/expressRouteGateways/b982dc4450f5406ba6d4344e15575138-eastus-er-gw/expressRouteConnections/ExRConnection-eastus-1770632063039",
+              "name": "ExRConnection-eastus-1770632063039",
+              "status": "Connected"
+            }
+          ],
+          "testGuid": "00000000-0000-0000-0000-000000000000",
+          "testType": "SingleSiteFailover",
+          "issues": []
+        }
+      ]
+    }
+  }
+}
