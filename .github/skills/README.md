@@ -12,7 +12,7 @@ with TypeSpec API specifications and Azure SDK generation in this repository.
 
 | Skill | Triggers | Description |
 |-------|----------|-------------|
-| [typespec-to-sdk-workflow](typespec-to-sdk-workflow/SKILL.md) | "full SDK release workflow", "TypeSpec to SDK end to end" | Orchestrates the full TypeSpec → SDK release process, invoking all 7 utility skills below |
+| [typespec-to-sdk-workflow](typespec-to-sdk-workflow/SKILL.md) | "full SDK release workflow", "TypeSpec to SDK end to end" | Orchestrates the full TypeSpec → SDK release process, invoking all utility skills below |
 
 ### Utility Skills
 
@@ -25,6 +25,11 @@ with TypeSpec API specifications and Azure SDK generation in this repository.
 | [package-release-readiness](package-release-readiness/SKILL.md) | "is package ready for release", "release SDK package" | Check SDK package release readiness and trigger releases |
 | [apiview-feedback-resolution](apiview-feedback-resolution/SKILL.md) | "APIView comments", "resolve API review feedback" | Retrieve and resolve APIView review feedback |
 | [pipeline-troubleshooting](pipeline-troubleshooting/SKILL.md) | "pipeline failed", "build failure", "CI check failing" | Diagnose and resolve SDK CI and generation pipeline failures |
+| [verify-setup](verify-setup/SKILL.md) | "verify setup", "check environment", "missing tools" | Verify developer environment for SDK development |
+| [validate-service-label](validate-service-label/SKILL.md) | "check service label", "create service label" | Validate or create service labels for SDK repos |
+| [validate-codeowners](validate-codeowners/SKILL.md) | "validate codeowners", "check code owners" | Validate and manage CODEOWNERS entries |
+| [check-package-validation](check-package-validation/SKILL.md) | "run package check", "lint SDK", "format check" | Run SDK package validation checks |
+| [sdk-release](sdk-release/SKILL.md) | "release SDK", "trigger release pipeline" | Check release readiness and trigger SDK releases |
 
 ### Development & Meta Skills
 

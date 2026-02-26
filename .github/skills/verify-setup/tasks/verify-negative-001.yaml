@@ -1,0 +1,6 @@
+id: verify-negative-001
+name: Should Not Trigger - Unrelated Request
+prompt: "How do I create a TypeSpec project for my new Azure service?"
+expected:
+  - does NOT invoke azsdk_verify_setup
+  - recognizes this is a TypeSpec authoring task, not environment verification

@@ -1,0 +1,7 @@
+id: codeowners-basic-001
+name: Validate CODEOWNERS - Existing Entry
+prompt: "Validate the CODEOWNERS entry for the 'Event Hubs' service label in azure-sdk-for-python."
+expected:
+  - calls azsdk_check_service_label first to verify label
+  - calls azsdk_engsys_validate_codeowners_entry_for_service with serviceLabel and repo
+  - reports whether 2+ valid owners exist

@@ -1,0 +1,7 @@
+id: codeowners-create-001
+name: Create CODEOWNERS Entry - New Service
+prompt: "I need to add CODEOWNERS for my new service in the azure-sdk-for-net repo. My service label is 'Communication Rooms' and the path is /sdk/communication."
+expected:
+  - calls azsdk_engsys_codeowner_update with repo, serviceLabel, path, owners
+  - collects service owners and source owners from user
+  - enforces minimum 2 valid owners

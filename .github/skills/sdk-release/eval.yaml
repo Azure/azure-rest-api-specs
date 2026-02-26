@@ -1,0 +1,15 @@
+suite: sdk-release
+version: "1.0"
+tasks:
+  - release-basic-001
+  - release-readiness-001
+  - release-negative-001
+  - release-trigger-001
+grader:
+  type: keyword
+  keywords:
+    - azsdk_release_sdk
+    - release
+    - pipeline
+  regex: "release.*sdk|trigger.*release|release.*pipeline|check.*ready"
+timeout: 300

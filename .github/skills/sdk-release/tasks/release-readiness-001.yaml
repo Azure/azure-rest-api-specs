@@ -1,0 +1,7 @@
+id: release-readiness-001
+name: Check Release Readiness Only
+prompt: "Check if azure-messaging-eventhubs is ready for release in Java."
+expected:
+  - calls azsdk_release_sdk with checkReady=true
+  - reports API review status, changelog, package name approval, release date
+  - does NOT trigger release pipeline

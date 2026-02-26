@@ -53,15 +53,20 @@ Additional instruction files exist but are **not linked** from the tree:
 | **pipeline-troubleshooting** | Utility | `typespec-to-sdk.instructions.md` (pipeline sections) | Diagnose and fix CI/SDK generation pipeline failures |
 | **typespec-to-sdk-workflow** | Workflow | `sdk-generation.instructions.md`, `typespec-to-sdk.instructions.md`, `github-codingagent.instructions.md` | End-to-end orchestration invoking all 7 utility skills |
 
+### Additional Skills (Supporting Utilities)
+
+| Skill | Type | Source Instruction Files | Description |
+|-------|------|--------------------------|-------------|
+| **verify-setup** | Utility | `verify-setup.instructions.md` | Verify developer environment for SDK tooling |
+| **validate-service-label** | Utility | `validate-service-label.instructions.md` | Validate or create service labels for SDK repos |
+| **validate-codeowners** | Utility | `validate-codeowners.instructions.md` | Validate and manage CODEOWNERS entries |
+| **check-package-validation** | Utility | `check-package-validation.instructions.md` | Run SDK package validation checks (lint, format, changelog, etc.) |
+| **sdk-release** | Utility | `sdk-release.instructions.md` | Check release readiness and trigger SDK release pipelines |
+
 ### Instruction Files Not Converted to Skills
 
 | Instruction File | Reason |
 |------------------|--------|
-| `verify-setup.instructions.md` | Single MCP tool call (`azsdk_verify_setup`), not a multi-step skill |
-| `validate-service-label.instructions.md` | Single MCP tool call, not linked from tree |
-| `validate-codeowners.instructions.md` | Single MCP tool call, not linked from tree |
-| `check-package-validation.instructions.md` | Single MCP tool call, not linked from tree |
-| `sdk-release.instructions.md` | Not linked from tree |
 | `armapi-review.instructions.md` | Out of scope (ARM API review, not SDK workflow) |
 | `openapi-review.instructions.md` | Out of scope (OpenAPI review, not SDK workflow) |
 | `github-actions.instructions.md` | Out of scope (GitHub Actions development, not SDK workflow) |
@@ -276,13 +281,13 @@ After the initial waza-based creation, sensei was used to score and improve all 
 | Metric | Count |
 |--------|-------|
 | Instruction files analyzed | 19 |
-| Skills created | 8 (7 utility + 1 workflow) |
-| Instructions excluded | 11 (3 out-of-scope, 4 unlinked, 4 single-tool-call) |
+| Skills created | 13 (12 utility + 1 workflow) |
+| Instructions excluded | 3 (out-of-scope) |
 | Reference docs | 10 |
-| Eval suites | 8 |
-| Total eval tasks | 33 |
+| Eval suites | 13 |
+| Total eval tasks | 53 |
 | Eval fixtures | 8 |
-| Compliance level | High (all 8 skills ✅) |
-| Eval pass rate | 91% (30/33 tasks) |
-| Sensei improvements | 5 categories across all skills |
-| Total tokens (post-sensei) | 3572 (-6.4% from 3817) |
+| Compliance level | High (all 13 skills ✅) |
+| Eval pass rate | 91% (30/33 tasks, original 8 suites) |
+| Sensei improvements | 5 categories across original 8 skills |
+| Total tokens (all 13 skills) | ~5811 |

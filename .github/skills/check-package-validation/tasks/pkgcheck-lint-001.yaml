@@ -1,0 +1,7 @@
+id: pkgcheck-lint-001
+name: Run Linting Check Only
+prompt: "I just want to run the linting check on my .NET SDK package."
+expected:
+  - calls azsdk_package_run_check with checkType=Linting
+  - asks for package path if not provided
+  - presents linting results

@@ -1,0 +1,6 @@
+id: label-basic-001
+name: Check Service Label - Exists
+prompt: "Check if the service label 'Event Hubs' exists for my SDK release."
+expected:
+  - calls azsdk_check_service_label with serviceLabel
+  - reports label status (Exists, InReview, DoesNotExist, NotAServiceLabel)

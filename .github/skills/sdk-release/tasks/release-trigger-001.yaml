@@ -1,0 +1,7 @@
+id: release-trigger-001
+name: Trigger Release Pipeline
+prompt: "The readiness check passed. Go ahead and trigger the release pipeline for @azure/event-hubs JavaScript SDK."
+expected:
+  - calls azsdk_release_sdk with checkReady=false to trigger pipeline
+  - uses packageName=@azure/event-hubs and language=JavaScript
+  - informs user they must approve the release stage manually

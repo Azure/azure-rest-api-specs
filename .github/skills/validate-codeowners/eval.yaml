@@ -1,0 +1,15 @@
+suite: validate-codeowners
+version: "1.0"
+tasks:
+  - codeowners-basic-001
+  - codeowners-create-001
+  - codeowners-negative-001
+  - codeowners-fix-001
+grader:
+  type: keyword
+  keywords:
+    - azsdk_engsys_validate_codeowners_entry_for_service
+    - CODEOWNERS
+    - owners
+  regex: "codeowners|code.owners|validate.*owners|service.*owners"
+timeout: 300

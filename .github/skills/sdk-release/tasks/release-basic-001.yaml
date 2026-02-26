@@ -1,0 +1,8 @@
+id: release-basic-001
+name: Release SDK Package - Full Flow
+prompt: "I want to release my Azure Event Hubs Python SDK package."
+expected:
+  - asks for package name and language (or uses provided info)
+  - calls azsdk_release_sdk with checkReady=true first
+  - if ready, calls azsdk_release_sdk to trigger release pipeline
+  - informs user about manual approval step

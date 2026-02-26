@@ -1,0 +1,7 @@
+id: pkgcheck-basic-001
+name: Run All Package Checks
+prompt: "Run all validation checks on my SDK package at /home/user/azure-sdk-for-python/sdk/eventhub/azure-eventhub."
+expected:
+  - calls azsdk_package_run_check with checkType=All
+  - uses the provided package path
+  - presents results clearly
