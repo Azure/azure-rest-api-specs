@@ -43,6 +43,12 @@ interface QueueClient extends Storage.Queues.Queue {}
 
 @@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
 
-@@clientName(Storage.Queues.Queue.sendMessage, "sendMessageInternal", "rust");
-
 @@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
+
+@@alternateType(Storage.Queues.ListOfSentMessage,
+  Storage.Queues.SentMessage,
+  "rust"
+);
+// TODO: follow up why these don't preserve ListOfSentMessage as pub(crate)
+@@access(Storage.Queues.ListOfSentMessage, Access.internal);
+@@usage(Storage.Queues.ListOfSentMessage, Usage.output | Usage.xml);
