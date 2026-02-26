@@ -2091,3 +2091,220 @@ using Microsoft.Web;
 @@clientLocation(SourceControls.getSourceControl, Microsoft.Web, "python");
 @@clientLocation(SourceControls.listSourceControls, Microsoft.Web, "python");
 @@clientLocation(SourceControls.updateSourceControl, Microsoft.Web, "python");
+
+// Java client naming: fix HostName -> Hostname casing
+@@clientName(HostNameBinding, "HostnameBinding", "java");
+@@clientName(HostNameBindingCollection, "HostnameBindingCollection", "java");
+@@clientName(HostNameBindingProperties, "HostnameBindingProperties", "java");
+@@clientName(HostNameSslState, "HostnameSslState", "java");
+@@clientName(CustomHostNameDnsRecordType,
+  "CustomHostnameDnsRecordType",
+  "java"
+);
+@@clientName(HostNameType, "HostnameType", "java");
+@@clientName(HostNameBindingProperties.customHostNameDnsRecordType,
+  "customHostnameDnsRecordType",
+  "java"
+);
+@@clientName(HostNameBindingProperties.hostNameType, "hostnameType", "java");
+@@clientName(HostNameBindingProperties.virtualIP, "virtualIp", "java");
+@@clientName(RampUpRule.actionHostName, "actionHostname", "java");
+
+// Java client naming: fix property casing in HostNameSslState
+@@clientName(HostNameSslState.virtualIP, "virtualIp", "java");
+
+// Java client naming: fix TimeStamp -> Timestamp casing
+@@clientName(ContainerInfo.currentTimeStamp, "currentTimestamp", "java");
+@@clientName(ContainerInfo.previousTimeStamp, "previousTimestamp", "java");
+
+// Java client naming: fix ARM -> Arm casing
+@@clientName(RemotePrivateEndpointConnectionARMResource,
+  "RemotePrivateEndpointConnectionArmResource",
+  "java"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResourceProperties,
+  "RemotePrivateEndpointConnectionArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteARMResource, "StaticSiteArmResource", "java");
+@@clientName(StaticSiteResetPropertiesARMResource,
+  "StaticSiteResetPropertiesArmResource",
+  "java"
+);
+@@clientName(StaticSiteResetPropertiesARMResourceProperties,
+  "StaticSiteResetPropertiesArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteBasicAuthPropertiesARMResource,
+  "StaticSiteBasicAuthPropertiesArmResource",
+  "java"
+);
+@@clientName(StaticSiteBasicAuthPropertiesARMResourceProperties,
+  "StaticSiteBasicAuthPropertiesArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteBuildARMResource, "StaticSiteBuildArmResource", "java");
+@@clientName(StaticSiteBuildARMResourceProperties,
+  "StaticSiteBuildArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteCustomDomainOverviewARMResource,
+  "StaticSiteCustomDomainOverviewArmResource",
+  "java"
+);
+@@clientName(StaticSiteCustomDomainOverviewARMResourceProperties,
+  "StaticSiteCustomDomainOverviewArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteCustomDomainRequestPropertiesARMResource,
+  "StaticSiteCustomDomainRequestPropertiesArmResource",
+  "java"
+);
+@@clientName(StaticSiteCustomDomainRequestPropertiesARMResourceProperties,
+  "StaticSiteCustomDomainRequestPropertiesArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteFunctionOverviewARMResource,
+  "StaticSiteFunctionOverviewArmResource",
+  "java"
+);
+@@clientName(StaticSiteFunctionOverviewARMResourceProperties,
+  "StaticSiteFunctionOverviewArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteLinkedBackendARMResource,
+  "StaticSiteLinkedBackendArmResource",
+  "java"
+);
+@@clientName(StaticSiteLinkedBackendARMResourceProperties,
+  "StaticSiteLinkedBackendArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteUserARMResource, "StaticSiteUserArmResource", "java");
+@@clientName(StaticSiteUserARMResourceProperties,
+  "StaticSiteUserArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResource,
+  "StaticSiteUserProvidedFunctionAppArmResource",
+  "java"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResourceProperties,
+  "StaticSiteUserProvidedFunctionAppArmResourceProperties",
+  "java"
+);
+@@clientName(StaticSiteZipDeploymentARMResource,
+  "StaticSiteZipDeploymentArmResource",
+  "java"
+);
+
+// Java client naming: fix IP -> Ip and MetaData -> Metadata casing
+@@clientName(IPMode, "IpMode", "java");
+@@clientName(VirtualIPMapping, "VirtualIpMapping", "java");
+@@clientName(VirtualIPMapping.virtualIP, "virtualIp", "java");
+@@clientName(ResponseMetaData, "ResponseMetadata", "java");
+@@clientName(AnalysisData.detectorMetaData, "detectorMetadata", "java");
+@@clientName(DetectorAbnormalTimePeriod.metaData, "metadata", "java");
+
+// Java client naming: fix aksResourceID -> aksResourceId casing
+@@clientName(KubeEnvironmentProperties.aksResourceID, "aksResourceId", "java");
+@@clientName(KubeEnvironmentPatchResourceProperties.aksResourceID,
+  "aksResourceId",
+  "java"
+);
+@@clientName(ContainerAppsConfiguration.platformReservedDnsIP,
+  "platformReservedDnsIp",
+  "java"
+);
+@@clientName(SiteConfig.acrUserManagedIdentityID,
+  "acrUserManagedIdentityId",
+  "java"
+);
+
+// Java client naming: fix WWW -> Www casing
+@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
+  "disableWwwAuthenticate",
+  "java"
+);
+
+// Java client naming: fix property casing in SiteProperties
+@@clientName(SiteProperties.defaultHostName, "defaultHostname", "java");
+@@clientName(SiteProperties.hostNameSslStates, "hostnameSslStates", "java");
+
+// Java client naming: fix property casing in SitePatchResourceProperties
+@@clientName(SitePatchResourceProperties.defaultHostName,
+  "defaultHostname",
+  "java"
+);
+@@clientName(SitePatchResourceProperties.hostNameSslStates,
+  "hostnameSslStates",
+  "java"
+);
+
+// Java client naming: fix HostNameBinding operation casing
+@@clientName(HostNameBindings.getHostNameBinding, "getHostnameBinding", "java");
+@@clientName(HostNameBindings.createOrUpdateHostNameBinding,
+  "createOrUpdateHostnameBinding",
+  "java"
+);
+@@clientName(HostNameBindings.deleteHostNameBinding,
+  "deleteHostnameBinding",
+  "java"
+);
+@@clientName(HostNameBindings.listHostNameBindings,
+  "listHostnameBindings",
+  "java"
+);
+@@clientName(HostNameBindingOperationGroup.getHostNameBindingSlot,
+  "getHostnameBindingSlot",
+  "java"
+);
+@@clientName(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
+  "createOrUpdateHostnameBindingSlot",
+  "java"
+);
+@@clientName(HostNameBindingOperationGroup.deleteHostNameBindingSlot,
+  "deleteHostnameBindingSlot",
+  "java"
+);
+@@clientName(HostNameBindingOperationGroup.listHostNameBindingsSlot,
+  "listHostnameBindingsSlot",
+  "java"
+);
+@@clientName(listCustomHostNameSites, "listCustomHostnameSites", "java");
+
+// Java client naming: fix swapSlotSlot -> swapSlot
+@@clientName(WebApps.swapSlotSlot, "swapSlot", "java");
+
+// Java client location: move ResourceProvider-level operations to ResourceProviders client
+@@clientLocation(checkNameAvailability, "ResourceProviders", "java");
+@@clientLocation(getSubscriptionDeploymentLocations,
+  "ResourceProviders",
+  "java"
+);
+@@clientLocation(listAseRegions, "ResourceProviders", "java");
+@@clientLocation(listBillingMeters, "ResourceProviders", "java");
+@@clientLocation(listCustomHostNameSites, "ResourceProviders", "java");
+@@clientLocation(listGeoRegions, "ResourceProviders", "java");
+@@clientLocation(listPremierAddOnOffers, "ResourceProviders", "java");
+@@clientLocation(listSkus, "ResourceProviders", "java");
+@@clientLocation(listSiteIdentifiersAssignedToHostName,
+  "ResourceProviders",
+  "java"
+);
+@@clientLocation(move, "ResourceProviders", "java");
+@@clientLocation(regionalCheckNameAvailability, "ResourceProviders", "java");
+@@clientLocation(validate, "ResourceProviders", "java");
+@@clientLocation(validateMove, "ResourceProviders", "java");
+@@clientLocation(verifyHostingEnvironmentVnet, "ResourceProviders", "java");
+@@clientLocation(Users.getPublishingUser, "ResourceProviders", "java");
+@@clientLocation(Users.updatePublishingUser, "ResourceProviders", "java");
+@@clientLocation(SourceControls.getSourceControl, "ResourceProviders", "java");
+@@clientLocation(SourceControls.updateSourceControl,
+  "ResourceProviders",
+  "java"
+);
+@@clientLocation(SourceControls.listSourceControls,
+  "ResourceProviders",
+  "java"
+);
