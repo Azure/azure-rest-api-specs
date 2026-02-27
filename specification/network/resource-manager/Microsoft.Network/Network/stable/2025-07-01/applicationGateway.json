@@ -1339,6 +1339,20 @@
       },
       "description": "SKU of an application gateway."
     },
+    "ApplicationGatewayManagedHsm": {
+      "type": "object",
+      "properties": {
+        "keyId": {
+          "type": "string",
+          "description": "Key identifier of a key stored in Managed HSM.",
+          "format": "uri"
+        },
+        "publicCertData": {
+          "type": "string",
+          "description": "Base-64 encoded value of a base-64 public certificate."
+        }
+      }
+    },
     "ApplicationGatewaySslPolicy": {
       "properties": {
         "disabledSslProtocols": {
@@ -1617,6 +1631,10 @@
         "keyVaultSecretId": {
           "type": "string",
           "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
+        },
+        "hsm": {
+          "$ref": "#/definitions/ApplicationGatewayManagedHsm",
+          "description": "Managed HSM properties of the Application Gateway resource."
         },
         "provisioningState": {
           "readOnly": true,
