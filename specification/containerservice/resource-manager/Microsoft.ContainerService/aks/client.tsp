@@ -784,9 +784,14 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "NetIPv4TcpMaxTwBuckets",
   "csharp"
 );
+@@clientName(SysctlConfig.netIpv4IpLocalPortRange,
+  "NetIPv4IPLocalPortRange ",
+  "csharp"
+);
 @@clientName(SysctlConfig.netIpv4TcpTwReuse, "NetIPv4TcpTwReuse", "csharp");
 @@clientName(VmState, "ContainerServiceMachineVmState", "csharp");
 @@clientName(WorkloadRuntime.OCIContainer, "OciContainer", "csharp");
+@@clientName(UpgradeStrategy, "AgentPoolUpgradeStrategy", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
