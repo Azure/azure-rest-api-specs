@@ -52,7 +52,19 @@ using Microsoft.DocumentDB;
   "java"
 );
 @@clientName(GraphAPIComputeServiceResourceCreateUpdateProperties,
-  "GraphApiComputeServiceResourceCreateUpdateProperties",
+  "GraphApiComputeServiceResourceCreateUpdateParameters",
+  "java"
+);
+@@clientName(DataTransferServiceResourceCreateUpdateProperties,
+  "DataTransferServiceResourceCreateUpdateParameters",
+  "java"
+);
+@@clientName(MaterializedViewsBuilderServiceResourceCreateUpdateProperties,
+  "MaterializedViewsBuilderServiceResourceCreateUpdateParameters",
+  "java"
+);
+@@clientName(SqlDedicatedGatewayServiceResourceCreateUpdateProperties,
+  "SqlDedicatedGatewayServiceResourceCreateUpdateParameters",
   "java"
 );
 
