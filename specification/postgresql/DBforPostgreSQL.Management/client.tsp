@@ -45,8 +45,13 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-@@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
-  "PostgreSqlFlexibleServersHighAvailabilityMode",
+@@alternateType(Microsoft.DBforPostgreSQL.HighAvailability.mode,
+  HighAvailabilityMode,
+  "go"
+);
+
+@@alternateType(Microsoft.DBforPostgreSQL.HighAvailabilityForPatch.mode,
+  HighAvailabilityMode,
   "go"
 );
 
