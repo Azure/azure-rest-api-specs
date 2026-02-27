@@ -1,0 +1,13 @@
+- tool: TypeSpecRequirement
+  path: resource-manager/Microsoft.BareMetal/preview/2024-02-01/BootstrapRP.json
+  reason: Migration will be ready after 2024-02-01 APIs merged. ETA to start migration is end of June.
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: [Microsoft.BareMetal.Management/tspconfig.yaml]

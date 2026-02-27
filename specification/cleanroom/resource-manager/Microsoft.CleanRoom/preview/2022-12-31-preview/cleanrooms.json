@@ -1,0 +1,483 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-12-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/cleanrooms/{cleanRoomName}": {
+      "put": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_Create",
+        "description": "Create or update a clean room.",
+        "x-ms-examples": {
+          "Create a clean room": {
+            "$ref": "./examples/cleanrooms/CleanRooms_Create.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CleanRoomNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The clean room to create or update.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoom"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoom"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoom"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_Get",
+        "description": "Get a clean room.",
+        "x-ms-examples": {
+          "Get a clean room": {
+            "$ref": "./examples/cleanrooms/CleanRooms_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CleanRoomNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoom"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_Update",
+        "description": "Update tags on a clean room.",
+        "x-ms-examples": {
+          "Update tags on a clean room": {
+            "$ref": "./examples/cleanrooms/CleanRooms_Update.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CleanRoomNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "./commonTypes.json#/definitions/ResourceTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoom"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_Delete",
+        "description": "Deletes a clean room.",
+        "x-ms-examples": {
+          "Delete a clean room": {
+            "$ref": "./examples/cleanrooms/CleanRooms_Delete.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CleanRoomNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CleanRoom/cleanrooms": {
+      "get": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_ListBySubscription",
+        "description": "List clean rooms in a subscription.",
+        "x-ms-examples": {
+          "List clean rooms in subscription": {
+            "$ref": "./examples/cleanrooms/CleanRooms_ListBySubscription.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoomsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/cleanrooms": {
+      "get": {
+        "tags": [
+          "Cleanrooms"
+        ],
+        "operationId": "CleanRooms_ListByResourceGroup",
+        "description": "List clean rooms in a resource group.",
+        "x-ms-examples": {
+          "List clean rooms in resource group": {
+            "$ref": "./examples/cleanrooms/CleanRooms_ListByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CleanRoomsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CleanRoom": {
+      "description": "Defines the clean room.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/CleanRoomProperties"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CleanRoomsList": {
+      "description": "List of clean rooms.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of clean rooms.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of clean rooms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CleanRoom"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CleanRoomProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "providerType": {
+          "description": "Gets or sets the infrastructure provider for the clean room.",
+          "$ref": "#/definitions/CleanRoomProviderType"
+        },
+        "specification": {
+          "description": "Gets or sets the specification of the clean room to be deployed.",
+          "$ref": "#/definitions/CleanRoomSpecification"
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Gets or sets the managed resource group configuration.",
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "providerType",
+        "specification"
+      ]
+    },
+    "CleanRoomSpecification": {
+      "description": "Defines the clean room specification.",
+      "type": "object",
+      "properties": {
+        "networkAddressType": {
+          "description": "Gets or sets the type of IP address to be used for the clean room endpoint.",
+          "$ref": "./commonTypes.json#/definitions/NetworkAddressType"
+        },
+        "networkAddress": {
+          "description": "Gets or sets the IP address to be used for the clean room.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Gets or sets the port to be used for the clean room endpoint.",
+          "$ref": "./commonTypes.json#/definitions/NetworkPort"
+        }
+      },
+      "required": [
+        "networkAddressType"
+      ]
+    },
+    "CleanRoomProviderType": {
+      "type": "string",
+      "description": "Types of clean room infrastructure.",
+      "enum": [
+        "AKSPod",
+        "AKSConfidentialVirtualNode",
+        "AKSVirtualNode",
+        "ACIConfidential",
+        "ACI"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CleanRoomProviderType"
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "description": "Defines the managed resource group configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the managed resource group.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "location": {
+          "description": "Gets or sets the location of the managed resource group.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CleanRoomNameParameter": {
+      "name": "cleanRoomName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the clean room.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

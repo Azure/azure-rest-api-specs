@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -81,7 +84,7 @@ model AwsSageMakerAppProperties {
   resourceSpec?: ResourceSpec;
 
   @doc("A list of tags to apply to the app.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The user profile name.")

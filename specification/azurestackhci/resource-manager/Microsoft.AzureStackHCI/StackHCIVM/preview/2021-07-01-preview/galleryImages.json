@@ -3,7 +3,10 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview"
+    "version": "2021-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,7 +40,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryimagesName}": {
       "get": {
         "operationId": "galleryimages_Retrieve",
-        "description": "Lists all galleryimages under the resource group.",
         "x-ms-examples": {
           "GetGalleryImage": {
             "$ref": "./examples/GetGalleryImage.json"
@@ -74,7 +76,6 @@
       },
       "put": {
         "operationId": "galleryimages_CreateOrUpdate",
-        "description": "Create or update a galleryimage.",
         "x-ms-examples": {
           "PutGalleryImage": {
             "$ref": "./examples/PutGalleryImage.json"
@@ -101,7 +102,6 @@
             "name": "galleryimages",
             "in": "body",
             "required": true,
-            "description": "Spec of the to-be-created galleryimage resource",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
@@ -130,7 +130,6 @@
       },
       "delete": {
         "operationId": "galleryimages_Delete",
-        "description": "Delete a galleryimage.",
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/DeleteGalleryImage.json"
@@ -167,7 +166,6 @@
       },
       "patch": {
         "operationId": "galleryimages_Update",
-        "description": "Update a galleryimage.",
         "x-ms-examples": {
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
@@ -190,7 +188,6 @@
             "name": "galleryimages",
             "in": "body",
             "required": true,
-            "description": "Patch of the updated galleryimage resource",
             "schema": {
               "$ref": "#/definitions/galleryimagesPatch"
             }
@@ -208,6 +205,12 @@
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
+          },
+          "201": {
+            "description": "Updates the galleryimages resource.",
+            "schema": {
+              "$ref": "#/definitions/galleryimages"
+            }
           }
         }
       }
@@ -215,7 +218,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListByResourceGroup",
-        "description": "Lists all galleryimages under the resource group.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageByResourceGroup.json"
@@ -254,7 +256,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryimages": {
       "get": {
         "operationId": "galleryimages_ListBySubscription",
-        "description": "List all galleryimages under the subscription",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
@@ -314,49 +315,20 @@
           "description": "operating system type that the gallery image uses. Expected to be linux or windows"
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the gallery image.",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "InProgress",
-            "Accepted",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/GalleryImageStatus"
-        }
-      }
-    },
-    "GalleryImageStatus": {
-      "type": "object",
-      "description": "GalleryImageStatus defines the observed state of MOCGalleryImage",
-      "x-ms-client-flatten": true,
-      "readOnly": true,
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "GalleryImage provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
+          "type": "object",
+          "description": "MOCGalleryImageStatus defines the observed state of MOCGalleryImage"
         }
       }
     },
     "galleryimages": {
       "type": "object",
-      "description": "The galleryimages resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -364,16 +336,53 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/galleryimagesProperties"
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "required": [
+        "location"
+      ],
+      "description": "The galleryimages resource definition."
     },
     "galleryimagesPatch": {
       "type": "object",
@@ -390,7 +399,6 @@
     },
     "galleryimagesListResult": {
       "type": "object",
-      "description": "List of galleryimages.",
       "properties": {
         "value": {
           "type": "array",
@@ -399,9 +407,7 @@
           }
         },
         "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results.",
-          "readOnly": true
+          "type": "string"
         }
       }
     }
@@ -414,8 +420,7 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
-      "minLength": 3,
-      "description": "Name of the gallery image"
+      "minLength": 3
     }
   }
 }

@@ -1,0 +1,164 @@
+{
+  "title": "Jobs_DataQualityValidation_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "jobName": "data-quality-validation-job",
+    "resource": {
+      "kind": "DataQualityValidation",
+      "properties": {
+        "inputs": [
+          {
+            "dataset": {
+              "type": "ResourceId",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+            },
+            "name": "input-dataset"
+          }
+        ],
+        "metrics": {
+          "evaluations": [
+            {
+              "name": "tableRowCountMetric",
+              "evaluation": {
+                "evaluationType": "TableRowCount",
+                "metricType": "Count",
+                "metricUnit": "Count"
+              }
+            }
+          ],
+          "validations": [
+            {
+              "name": "tableRowCountValidation",
+              "validation": {
+                "validationType": "AnomalyValidation",
+                "metricEvaluationName": "tableRowCountMetric",
+                "anomalyDetectionParameters": {
+                  "sensitivity": 5,
+                  "lookbackWindowInDays": 7,
+                  "minimumDataPoints": 10
+                }
+              }
+            }
+          ]
+        },
+        "validationPolicy": {
+          "passCriteria": "AlwaysPass",
+          "validations": [
+            "tableRowCountValidation"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "DataQualityValidation",
+        "properties": {
+          "inputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "metrics": {
+            "evaluations": [
+              {
+                "name": "tableRowCountMetric",
+                "evaluation": {
+                  "evaluationType": "TableRowCount",
+                  "metricType": "Count",
+                  "metricUnit": "Count"
+                }
+              }
+            ],
+            "validations": [
+              {
+                "name": "tableRowCountValidation",
+                "validation": {
+                  "validationType": "AnomalyValidation",
+                  "metricEvaluationName": "tableRowCountMetric",
+                  "anomalyDetectionParameters": {
+                    "sensitivity": 5,
+                    "lookbackWindowInDays": 7,
+                    "minimumDataPoints": 10
+                  }
+                }
+              }
+            ]
+          },
+          "validationPolicy": {
+            "passCriteria": "AlwaysPass",
+            "validations": [
+              "tableRowCountValidation"
+            ]
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/data-quality-validation-job",
+        "name": "data-quality-validation-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    },
+    "201": {
+      "body": {
+        "kind": "DataQualityValidation",
+        "properties": {
+          "inputs": [
+            {
+              "dataset": {
+                "type": "ResourceId",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/datasets/resource-snapshot-dataset"
+              },
+              "name": "input-dataset"
+            }
+          ],
+          "metrics": {
+            "evaluations": [
+              {
+                "name": "tableRowCountMetric",
+                "evaluation": {
+                  "evaluationType": "TableRowCount",
+                  "metricType": "Count",
+                  "metricUnit": "Count",
+                  "filter": "",
+                  "columns": []
+                }
+              }
+            ],
+            "validations": [
+              {
+                "name": "tableRowCountValidation",
+                "validation": {
+                  "validationType": "AnomalyValidation",
+                  "metricEvaluationName": "tableRowCountMetric",
+                  "anomalyDetectionParameters": {
+                    "sensitivity": 5,
+                    "lookbackWindowInDays": 7,
+                    "minimumDataPoints": 10
+                  }
+                }
+              }
+            ]
+          },
+          "validationPolicy": {
+            "passCriteria": "AlwaysPass",
+            "validations": [
+              "tableRowCountValidation"
+            ]
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline/jobs/data-quality-validation-job",
+        "name": "data-quality-validation-job",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines/jobs"
+      }
+    }
+  }
+}

@@ -4,23 +4,41 @@
 
 # Spell checking is not case sensitive
 # Keep word lists in alphabetical order so the file is easier to manage
-version: '0.2'
 import:
   - ../../cspell.yaml
 words:
   - acss
   - ascs
+  - customised
+  - deviatiobns
+  - emfi
   - giga
   - hdbuserstore
   - iaasvm
   - ibmaix
+  - igsmux
+  - igspw
   - iloveyou
   - informix
   - issqlcompression
+  - kuiper
+  - mpsql
   - sapase
   - sapdb
   - sapsrv
+  - sdaf
   - sqldb
   - vmname
   - webdisp
+overrides:
+  - filename: >-
+      **/specification/workloads/resource-manager/Microsoft.Workloads/EpicVirtualInstance/**/*.json
+    words:
+      - emfi
+      - kuiper
+      - mpsql
+  - filename: >-
+      **/specification/workloads/resource-manager/Microsoft.Workloads/SAPVirtualInstance/**/*.json
+    words:
+      - sdaf
 

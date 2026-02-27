@@ -1,0 +1,158 @@
+{
+  "title": "SoftwareManifests_ListByParent",
+  "operationId": "SoftwareManifests_ListByParent",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "783fd652-64f3-4680-81e9-0b978c542005",
+    "resourceGroupName": "aumPatchRG",
+    "softwareCollectionName": "MySoftwareCollection"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "softwarekind": "Manual",
+              "softwareName": "Visual Studio Code",
+              "publisher": "Microsoft Corporation",
+              "softwareId": "vscode-stable",
+              "osType": "Windows",
+              "versions": [
+                {
+                  "version": "1.85.2",
+                  "installers": [
+                    {
+                      "architecture": "x64",
+                      "mediaLink": "https://example.com/vscode/1.85.2/VSCodeSetup-x64-1.85.2.exe",
+                      "productCode": "{C26E74D1-022E-4238-8B9D-1E7564A36CC9}",
+                      "upgradeCode": "{EA457B21-F73E-494C-ACAB-524FDE069978}",
+                      "settings": {
+                        "installScript": "VSCodeSetup-x64-1.85.2.exe /SILENT /NORESTART",
+                        "softwareFileName": "VSCodeSetup-x64-1.85.2.exe"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "collectionId": "collection-12345-abcde",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "category": "development-tools",
+              "environment": "production"
+            },
+            "location": "westus",
+            "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection/softwareManifests/VSCodeManifest",
+            "name": "VSCodeManifest",
+            "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          },
+          {
+            "properties": {
+              "softwarekind": "Manual",
+              "softwareName": "Git for Windows",
+              "publisher": "The Git Development Community",
+              "softwareId": "git-scm-windows",
+              "osType": "Windows",
+              "versions": [
+                {
+                  "version": "2.43.0",
+                  "installers": [
+                    {
+                      "architecture": "x64",
+                      "mediaLink": "https://example.com/git/2.43.0/Git-2.43.0-64-bit.exe",
+                      "productCode": "{7CCDF6AC-CFCC-44AD-991A-7C7E15A5C445}",
+                      "settings": {
+                        "installScript": "Git-2.43.0-64-bit.exe /SILENT /NORESTART",
+                        "softwareFileName": "Git-2.43.0-64-bit.exe"
+                      }
+                    },
+                    {
+                      "architecture": "x86",
+                      "mediaLink": "https://example.com/git/2.43.0/Git-2.43.0-32-bit.exe",
+                      "productCode": "{AC593C33-B90A-4036-8E1D-AC2E299E1C02}",
+                      "settings": {
+                        "installScript": "Git-2.43.0-32-bit.exe /SILENT /NORESTART",
+                        "softwareFileName": "Git-2.43.0-32-bit.exe"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "collectionId": "collection-12345-abcde",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "category": "development-tools",
+              "subcategory": "version-control"
+            },
+            "location": "westus",
+            "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection/softwareManifests/GitManifest",
+            "name": "GitManifest",
+            "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          },
+          {
+            "properties": {
+              "softwarekind": "Manual",
+              "softwareName": "PowerShell",
+              "publisher": "Microsoft Corporation",
+              "softwareId": "microsoft-powershell",
+              "osType": "Windows",
+              "versions": [
+                {
+                  "version": "7.4.1",
+                  "installers": [
+                    {
+                      "architecture": "x64",
+                      "mediaLink": "https://example.com/powershell/7.4.1/PowerShell-7.4.1-win-x64.msi",
+                      "productCode": "{F2E1C937-9CCA-4B7A-9B1C-82B3611F6E4D}",
+                      "packageFamilyName": "Microsoft.PowerShell_8wekyb3d8bbwe",
+                      "settings": {
+                        "installScript": "msiexec /i PowerShell-7.4.1-win-x64.msi /quiet /norestart",
+                        "softwareFileName": "PowerShell-7.4.1-win-x64.msi"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "collectionId": "collection-12345-abcde",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "category": "administration-tools",
+              "subcategory": "shell"
+            },
+            "location": "westus",
+            "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection/softwareManifests/PowerShellManifest",
+            "name": "PowerShellManifest",
+            "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

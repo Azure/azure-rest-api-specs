@@ -1,0 +1,901 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.GcpConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.GcpConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BigQueryDatasets"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GcpConnector/bigQueryDatasets": {
+      "get": {
+        "operationId": "BigQueryDatasets_ListBySubscription",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "List BigQueryDataset resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDatasetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_ListBySubscription": {
+            "$ref": "./examples/BigQueryDatasets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/bigQueryDatasets": {
+      "get": {
+        "operationId": "BigQueryDatasets_ListByResourceGroup",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "List BigQueryDataset resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDatasetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_ListByResourceGroup": {
+            "$ref": "./examples/BigQueryDatasets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/bigQueryDatasets/{name}": {
+      "get": {
+        "operationId": "BigQueryDatasets_Get",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "Get a BigQueryDataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BigQueryDataset",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_Get": {
+            "$ref": "./examples/BigQueryDatasets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BigQueryDatasets_CreateOrReplace",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "Create a big query dataset. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BigQueryDataset",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BigQueryDataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BigQueryDataset' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDataset"
+            }
+          },
+          "201": {
+            "description": "Resource 'BigQueryDataset' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDataset"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_CreateOrReplace": {
+            "$ref": "./examples/BigQueryDatasets_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BigQueryDatasets_Update",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "Update a BigQueryDataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BigQueryDataset",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BigQueryDatasetTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BigQueryDataset"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_Update": {
+            "$ref": "./examples/BigQueryDatasets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BigQueryDatasets_Delete",
+        "tags": [
+          "BigQueryDatasets"
+        ],
+        "description": "Delete a BigQueryDataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BigQueryDataset",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BigQueryDatasets_Delete": {
+            "$ref": "./examples/BigQueryDatasets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BigQueryDataset": {
+      "type": "object",
+      "description": "A Microsoft.GcpConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BigQueryDatasetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BigQueryDatasetListResult": {
+      "type": "object",
+      "description": "The response of a BigQueryDataset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BigQueryDataset items on this page",
+          "items": {
+            "$ref": "#/definitions/BigQueryDataset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BigQueryDatasetProperties": {
+      "type": "object",
+      "description": "Definition of BigQueryDatasetProperties",
+      "properties": {
+        "gcpProperties": {
+          "$ref": "#/definitions/GcpBigQueryDatasetProperties",
+          "description": "GCP Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "gcpProjectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "gcpProjectId": {
+          "type": "string",
+          "description": "GCP Project Id"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Fully qualified resource name of the GCP resource"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "gcpSourceSchema": {
+          "type": "string",
+          "description": "GCP Source Schema"
+        },
+        "gcpRegion": {
+          "type": "string",
+          "description": "GCP Region"
+        },
+        "gcpTags": {
+          "type": "object",
+          "description": "GCP Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BigQueryDatasetTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BigQueryDataset resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasetAccess": {
+      "type": "object",
+      "description": "Definition of DatasetAccess",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Access role granted to the entity"
+        },
+        "userByEmail": {
+          "type": "string",
+          "description": "User email address to grant access to"
+        },
+        "groupByEmail": {
+          "type": "string",
+          "description": "Group email address to grant access to"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain to grant access to"
+        },
+        "specialGroup": {
+          "type": "string",
+          "description": "Special group to grant access to"
+        },
+        "iamMember": {
+          "type": "string",
+          "description": "IAM member to grant access to"
+        },
+        "view": {
+          "$ref": "#/definitions/TableReference",
+          "description": "A view defined in a different dataset to grant access to"
+        },
+        "dataset": {
+          "$ref": "#/definitions/DatasetAccessEntry",
+          "description": "The dataset this entry applies to"
+        },
+        "routine": {
+          "$ref": "#/definitions/RoutineReference",
+          "description": "The routine this entry applies to"
+        },
+        "condition": {
+          "$ref": "#/definitions/Expr",
+          "description": "An IAM Condition for this access entry"
+        }
+      }
+    },
+    "DatasetAccessEntry": {
+      "type": "object",
+      "description": "Definition of DatasetAccessEntry",
+      "properties": {
+        "dataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "The dataset this entry applies to"
+        },
+        "targetTypes": {
+          "type": "array",
+          "description": "Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasetReference": {
+      "type": "object",
+      "description": "Definition of DatasetReference",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The ID of the dataset"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project containing this dataset"
+        }
+      },
+      "required": [
+        "datasetId",
+        "projectId"
+      ]
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "description": "Definition of EncryptionConfiguration",
+      "properties": {
+        "kmsKeyName": {
+          "type": "string",
+          "description": "Cloud KMS key name used for encryption"
+        }
+      }
+    },
+    "Expr": {
+      "type": "object",
+      "description": "Definition of Expr",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Textual representation of an expression"
+        },
+        "title": {
+          "type": "string",
+          "description": "Optional title for the expression"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the expression"
+        },
+        "location": {
+          "type": "string",
+          "description": "Optional location of the expression"
+        }
+      }
+    },
+    "ExternalCatalogDatasetOptions": {
+      "type": "object",
+      "description": "Definition of ExternalCatalogDatasetOptions",
+      "properties": {
+        "catalog": {
+          "type": "string",
+          "description": "The catalog name"
+        },
+        "schema": {
+          "type": "string",
+          "description": "The schema name"
+        }
+      }
+    },
+    "ExternalDatasetReference": {
+      "type": "object",
+      "description": "Definition of ExternalDatasetReference",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source of the external dataset"
+        },
+        "externalSource": {
+          "type": "string",
+          "description": "External source identifier"
+        }
+      }
+    },
+    "GcpBigQueryDatasetProperties": {
+      "type": "object",
+      "description": "Definition of GcpBigQueryDatasetProperties",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The resource type",
+          "default": "bigquery#dataset"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A hash of this resource"
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully-qualified, unique ID of the dataset"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "A URL that can be used to access this resource again"
+        },
+        "datasetReference": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "The reference to the dataset"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "A descriptive name for the dataset"
+        },
+        "description": {
+          "type": "string",
+          "description": "A user-friendly description of the dataset"
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels associated with this dataset",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location where the dataset resides"
+        },
+        "defaultTableExpirationMs": {
+          "type": "string",
+          "description": "Default expiration time for tables in milliseconds"
+        },
+        "defaultPartitionExpirationMs": {
+          "type": "string",
+          "description": "Default partition expiration time in milliseconds"
+        },
+        "defaultEncryptionConfiguration": {
+          "$ref": "#/definitions/EncryptionConfiguration",
+          "description": "The default encryption configuration for the dataset"
+        },
+        "defaultCollation": {
+          "type": "string",
+          "description": "Default collation for new string fields"
+        },
+        "defaultRoundingMode": {
+          "type": "string",
+          "description": "Default rounding mode for decimal fields"
+        },
+        "access": {
+          "type": "array",
+          "description": "An array of objects that define dataset access for one or more entities",
+          "items": {
+            "$ref": "#/definitions/DatasetAccess"
+          },
+          "x-ms-identifiers": []
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "The time when this dataset was created"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The time when this dataset was last modified"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the dataset"
+        },
+        "linkedDatasetSource": {
+          "$ref": "#/definitions/LinkedDatasetSource",
+          "description": "The linked dataset source"
+        },
+        "linkedDatasetMetadata": {
+          "$ref": "#/definitions/LinkedDatasetMetadata",
+          "description": "The linked dataset metadata"
+        },
+        "externalDatasetReference": {
+          "$ref": "#/definitions/ExternalDatasetReference",
+          "description": "The external dataset reference"
+        },
+        "externalCatalogDatasetOptions": {
+          "$ref": "#/definitions/ExternalCatalogDatasetOptions",
+          "description": "The external catalog dataset options"
+        },
+        "satisfiesPzs": {
+          "type": "boolean",
+          "description": "Whether this dataset satisfies Protected Zone Shared requirements"
+        },
+        "satisfiesPzi": {
+          "type": "boolean",
+          "description": "Whether this dataset satisfies Protected Zone Isolated requirements"
+        },
+        "isCaseInsensitive": {
+          "type": "boolean",
+          "description": "Whether this dataset is case insensitive"
+        },
+        "maxTimeTravelHours": {
+          "type": "string",
+          "description": "The maximum time travel hours for this dataset"
+        },
+        "tags": {
+          "type": "array",
+          "description": "The resource tags associated with this dataset",
+          "items": {
+            "$ref": "#/definitions/GcpTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "storageBillingModel": {
+          "type": "string",
+          "description": "The storage billing model for this dataset"
+        },
+        "resourceTags": {
+          "type": "object",
+          "description": "The resource tags associated with this dataset",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "datasetReference"
+      ]
+    },
+    "GcpTag": {
+      "type": "object",
+      "description": "Definition of GcpTag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Tag key in format tag_key_id/tag_key_name"
+        },
+        "value": {
+          "type": "string",
+          "description": "Tag value short name"
+        }
+      }
+    },
+    "LinkedDatasetMetadata": {
+      "type": "object",
+      "description": "Definition of LinkedDatasetMetadata",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the linked dataset"
+        }
+      }
+    },
+    "LinkedDatasetSource": {
+      "type": "object",
+      "description": "Definition of LinkedDatasetSource",
+      "properties": {
+        "sourceDataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "Reference to the source dataset"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RoutineReference": {
+      "type": "object",
+      "description": "Definition of RoutineReference",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project containing this routine"
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "The ID of the dataset containing this routine"
+        },
+        "routineId": {
+          "type": "string",
+          "description": "The ID of the routine"
+        }
+      },
+      "required": [
+        "projectId",
+        "datasetId",
+        "routineId"
+      ]
+    },
+    "TableReference": {
+      "type": "object",
+      "description": "Definition of TableReference",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project containing this table"
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "The ID of the dataset containing this table"
+        },
+        "tableId": {
+          "type": "string",
+          "description": "The ID of the table"
+        }
+      },
+      "required": [
+        "projectId",
+        "datasetId",
+        "tableId"
+      ]
+    }
+  },
+  "parameters": {}
+}

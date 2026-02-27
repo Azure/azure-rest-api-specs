@@ -30,13 +30,8 @@ interface GuestAgents {
   @doc("Implements GuestAgent GET method.")
   get is ArmResourceRead<GuestAgent>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create Or Update GuestAgent.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    GuestAgent,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
 
   @doc("Implements GuestAgent DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<GuestAgent>;

@@ -1,0 +1,60 @@
+parameters:
+  service-dir:
+    default: "sdk/zerotrustsegmentation"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-zerotrustsegmentation"
+    package-dir: "azure-resourcemanager-zerotrustsegmentation"
+    namespace: "com.azure.resourcemanager.zerotrustsegmentation"
+
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-zerotrustsegmentation"
+    experimental-extensible-enums: true
+    package-dir: "arm-zerotrustsegmentation"
+    package-details:
+      name: "@azure/arm-zerotrustsegmentation"
+
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/armzerotrustsegmentation"
+    service-dir: "sdk/resourcemanager/zerotrustsegmentation"
+    package-dir: "armzerotrustsegmentation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-zerotrustsegmentation"
+    package-dir: "azure-mgmt-zerotrustsegmentation"
+    namespace: "azure.mgmt.zerotrustsegmentation"
+    generate-test: true
+    generate-sample: true
+
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ZeroTrustSegmentation"
+    package-dir: "Azure.ResourceManager.ZeroTrustSegmentation"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

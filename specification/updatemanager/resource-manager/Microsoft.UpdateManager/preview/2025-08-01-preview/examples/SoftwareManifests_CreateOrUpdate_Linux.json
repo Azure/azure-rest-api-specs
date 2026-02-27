@@ -1,0 +1,199 @@
+{
+  "title": "SoftwareManifests_CreateOrUpdate_Linux",
+  "operationId": "SoftwareManifests_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "783fd652-64f3-4680-81e9-0b978c542005",
+    "resourceGroupName": "aumPatchRG",
+    "softwareCollectionName": "SoftwareCollection",
+    "softwareManifestName": "DockerEngineManifest",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "softwarekind": "Manual",
+        "softwareName": "Docker Engine",
+        "publisher": "Docker Inc.",
+        "softwareId": "docker-ce",
+        "osType": "Linux",
+        "versions": [
+          {
+            "version": "24.0.7",
+            "installers": [
+              {
+                "architecture": "x64",
+                "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_amd64.deb",
+                "settings": {
+                  "installScript": "dpkg -i docker-ce_24.0.7_amd64.deb && apt-get install -f",
+                  "softwareFileName": "docker-ce_24.0.7_amd64.deb"
+                }
+              },
+              {
+                "architecture": "arm64",
+                "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_arm64.deb",
+                "settings": {
+                  "installScript": "dpkg -i docker-ce_24.0.7_arm64.deb && apt-get install -f",
+                  "softwareFileName": "docker-ce_24.0.7_arm64.deb"
+                }
+              }
+            ]
+          },
+          {
+            "version": "25.0.0",
+            "installers": [
+              {
+                "architecture": "x64",
+                "mediaLink": "https://example.com/docker/25.0.0/docker-ce_25.0.0_amd64.deb",
+                "settings": {
+                  "installScript": "dpkg -i docker-ce_25.0.0_amd64.deb && apt-get install -f",
+                  "softwareFileName": "docker-ce_25.0.0_amd64.deb"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tags": {
+        "category": "container-runtime",
+        "platform": "linux",
+        "environment": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "softwarekind": "Manual",
+          "softwareName": "Docker Engine",
+          "publisher": "Docker Inc.",
+          "softwareId": "docker-ce",
+          "osType": "Linux",
+          "versions": [
+            {
+              "version": "24.0.7",
+              "installers": [
+                {
+                  "architecture": "x64",
+                  "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_amd64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_24.0.7_amd64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_24.0.7_amd64.deb"
+                  }
+                },
+                {
+                  "architecture": "arm64",
+                  "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_arm64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_24.0.7_arm64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_24.0.7_arm64.deb"
+                  }
+                }
+              ]
+            },
+            {
+              "version": "25.0.0",
+              "installers": [
+                {
+                  "architecture": "x64",
+                  "mediaLink": "https://example.com/docker/25.0.0/docker-ce_25.0.0_amd64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_25.0.0_amd64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_25.0.0_amd64.deb"
+                  }
+                }
+              ]
+            }
+          ],
+          "collectionId": "collection-linux-67890-fghij",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "category": "container-runtime",
+          "platform": "linux",
+          "environment": "production"
+        },
+        "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/SoftwareCollection/softwareManifests/DockerEngineManifest",
+        "name": "DockerEngineManifest",
+        "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourcegroups/aumPatchRG/providers/Microsoft.UpdateManager/operationstatuses/00000000-0000-0000-0000-000000000000?api-version=2025-08-01-preview"
+      },
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "softwarekind": "Manual",
+          "softwareName": "Docker Engine",
+          "publisher": "Docker Inc.",
+          "softwareId": "docker-ce",
+          "osType": "Linux",
+          "versions": [
+            {
+              "version": "24.0.7",
+              "installers": [
+                {
+                  "architecture": "x64",
+                  "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_amd64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_24.0.7_amd64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_24.0.7_amd64.deb"
+                  }
+                },
+                {
+                  "architecture": "arm64",
+                  "mediaLink": "https://example.com/docker/24.0.7/docker-ce_24.0.7_arm64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_24.0.7_arm64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_24.0.7_arm64.deb"
+                  }
+                }
+              ]
+            },
+            {
+              "version": "25.0.0",
+              "installers": [
+                {
+                  "architecture": "x64",
+                  "mediaLink": "https://example.com/docker/25.0.0/docker-ce_25.0.0_amd64.deb",
+                  "settings": {
+                    "installScript": "dpkg -i docker-ce_25.0.0_amd64.deb && apt-get install -f",
+                    "softwareFileName": "docker-ce_25.0.0_amd64.deb"
+                  }
+                }
+              ]
+            }
+          ],
+          "collectionId": "collection-linux-67890-fghij",
+          "provisioningState": "Provisioning"
+        },
+        "tags": {
+          "category": "container-runtime",
+          "platform": "linux",
+          "environment": "production"
+        },
+        "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/SoftwareCollection/softwareManifests/DockerEngineManifest",
+        "name": "DockerEngineManifest",
+        "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    }
+  }
+}

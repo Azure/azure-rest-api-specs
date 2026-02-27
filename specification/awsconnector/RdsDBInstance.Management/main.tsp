@@ -73,7 +73,7 @@ model AwsRdsDBInstanceProperties {
   allowMajorVersionUpgrade?: boolean;
 
   @doc("The IAMlong (IAM) roles associated with the DB instance.   *Amazon Aurora*  Not applicable. The associated roles are managed by the DB cluster.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   associatedRoles?: DBInstanceRole[];
 
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.")
@@ -249,7 +249,7 @@ model AwsRdsDBInstanceProperties {
   preferredMaintenanceWindow?: string;
 
   @doc("The number of CPU cores and the number of threads per core for the DB instance class of the DB instance. This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   processorFeatures?: ProcessorFeature[];
 
   @doc("The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*. This setting doesn't apply to RDS Custom DB instances. Default: ``1``  Valid Values: ``0 - 15``")
@@ -289,7 +289,7 @@ model AwsRdsDBInstanceProperties {
   storageType?: string;
 
   @doc("An optional array of key-value pairs to apply to this DB instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property tdeCredentialArn")

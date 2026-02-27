@@ -4,6 +4,7 @@ import "../models/AccessControlList.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -21,6 +22,14 @@ model AccessControlList
   name: string;
 
   /** The Access ControlList properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: AccessControlListProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("The Access ControlList properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: AccessControlListProperties;
 }
 
@@ -46,10 +55,24 @@ interface AccessControlLists {
   listBySubscription is ArmListBySubscription<AccessControlList>;
 
   @doc("Implements the operation to the underlying resources.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     AccessControlList,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    AccessControlList,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")
@@ -59,11 +82,25 @@ interface AccessControlLists {
     CommonPostActionResponseForStateUpdate
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Implements the operation to the underlying resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    AccessControlList,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     AccessControlList,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 }
 
@@ -71,6 +108,15 @@ interface AccessControlLists {
 @@doc(AccessControlLists.update::parameters.properties,
   "Access Control List properties to update."
 );
+@@doc(AccessControlLists.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
 @@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

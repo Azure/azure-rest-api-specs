@@ -1,0 +1,487 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor default settings API",
+    "version": "2025-06-03-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SettingsByServiceGroup"
+    },
+    {
+      "name": "SettingsBySubscription"
+    },
+    {
+      "name": "SettingsByResourceOperations"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Monitor/settings/default": {
+      "get": {
+        "operationId": "SettingsByResourceOperations_Get",
+        "tags": [
+          "SettingsByResourceOperations"
+        ],
+        "description": "Gets the Default Settings resource for the Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsByResourceOperations_Get_MaximumSet": {
+            "$ref": "./examples/SettingsByResourceOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/settings/default": {
+      "get": {
+        "operationId": "SettingsByServiceGroup_Get",
+        "tags": [
+          "SettingsByServiceGroup"
+        ],
+        "description": "Gets the Default Settings resource for the Service Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsByServiceGroup_Get_MaximumSet": {
+            "$ref": "./examples/SettingsByServiceGroup_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SettingsByServiceGroup_CreateOrUpdate",
+        "tags": [
+          "SettingsByServiceGroup"
+        ],
+        "description": "Creates or updates the Default Settings resource for the Service Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureMonitorSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureMonitorSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsByServiceGroup_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/SettingsByServiceGroup_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SettingsByServiceGroup_Delete",
+        "tags": [
+          "SettingsByServiceGroup"
+        ],
+        "description": "Deletes the Default Settings resource for the Service Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsByServiceGroup_Delete_MaximumSet": {
+            "$ref": "./examples/SettingsByServiceGroup_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/settings": {
+      "get": {
+        "operationId": "SettingsBySubscription_ListBySubscription",
+        "tags": [
+          "SettingsBySubscription"
+        ],
+        "description": "Lists all settings resources for the Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsBySubscription_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/SettingsBySubscription_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/settings/default": {
+      "get": {
+        "operationId": "SettingsBySubscription_Get",
+        "tags": [
+          "SettingsBySubscription"
+        ],
+        "description": "Gets the Default Settings resource for the Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsBySubscription_Get_MaximumSet": {
+            "$ref": "./examples/SettingsBySubscription_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SettingsBySubscription_CreateOrUpdate",
+        "tags": [
+          "SettingsBySubscription"
+        ],
+        "description": "Creates or updates the Default Settings resource for the Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureMonitorSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureMonitorSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsBySubscription_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/SettingsBySubscription_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SettingsBySubscription_Delete",
+        "tags": [
+          "SettingsBySubscription"
+        ],
+        "description": "Deletes the Default Settings resource for the Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsBySubscription_Delete_MaximumSet": {
+            "$ref": "./examples/SettingsBySubscription_Delete_MaximumSet_Gen.json"
+          },
+          "SettingsBySubscription_Delete_MinimumSet": {
+            "$ref": "./examples/SettingsBySubscription_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzureMonitorSettings": {
+      "type": "object",
+      "description": "The properties for Azure Monitor Settings.",
+      "properties": {
+        "defaultAzureMonitorWorkspace": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the default Azure monitor workspace account."
+        },
+        "defaultManagedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the default Managed identity."
+        },
+        "defaultActionGroup": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the default Action group."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "defaultAzureMonitorWorkspace"
+      ]
+    },
+    "AzureMonitorSettingsResource": {
+      "type": "object",
+      "description": "The resource for Azure Monitor Settings, including system data and tags.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorSettings",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureMonitorSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a AzureMonitorSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureMonitorSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ServiceGroupParameters.serviceGroupName": {
+      "name": "serviceGroupName",
+      "in": "path",
+      "description": "The name of the service group.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

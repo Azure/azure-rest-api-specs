@@ -68,7 +68,7 @@
             }
           },
           "200": {
-            "description": "Retrieved the marketplace gallery image resource.",
+            "description": "Retrieves the marketplacegalleryimages resource.",
             "schema": {
               "$ref": "#/definitions/marketplacegalleryimages"
             }
@@ -77,7 +77,7 @@
       },
       "put": {
         "operationId": "marketplacegalleryimages_CreateOrUpdate",
-        "description": "Creates or updates a marketplace gallery image",
+        "description": "Creates or updates a marketplacegalleryimage",
         "x-ms-examples": {
           "PutMarketplaceGalleryImage": {
             "$ref": "./examples/PutMarketplaceGalleryImage.json"
@@ -117,13 +117,13 @@
             }
           },
           "200": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
               "$ref": "#/definitions/marketplacegalleryimages"
             }
           },
           "201": {
-            "description": "Creates the marketplace gallery image resource.",
+            "description": "Creates the marketplacegalleryimages resource.",
             "schema": {
               "$ref": "#/definitions/marketplacegalleryimages"
             }
@@ -132,7 +132,7 @@
       },
       "delete": {
         "operationId": "marketplacegalleryimages_Delete",
-        "description": "Deletes a marketplace gallery image",
+        "description": "Deletes a marketplacegalleryimage",
         "x-ms-examples": {
           "DeleteMarketplaceGalleryImage": {
             "$ref": "./examples/DeleteMarketplaceGalleryImage.json"
@@ -160,7 +160,7 @@
             }
           },
           "200": {
-            "description": "Deletes the marketplace gallery image resource."
+            "description": "Deletes the marketplacegalleryimages resource."
           },
           "204": {
             "description": "No content"
@@ -169,7 +169,7 @@
       },
       "patch": {
         "operationId": "marketplacegalleryimages_Update",
-        "description": "Updates a marketplace gallery image",
+        "description": "Updates a marketplacegalleryimage",
         "x-ms-examples": {
           "UpdateMarketplaceGalleryImage": {
             "$ref": "./examples/UpdateMarketplaceGalleryImage.json"
@@ -205,13 +205,13 @@
             }
           },
           "200": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
               "$ref": "#/definitions/marketplacegalleryimages"
             }
           },
           "201": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "Updates the marketplacegalleryimages resource.",
             "schema": {
               "$ref": "#/definitions/marketplacegalleryimages"
             }
@@ -368,19 +368,19 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/MarketplaceGalleryImageStatus"
+          "$ref": "#/definitions/marketplaceGalleryImageStatus"
         }
       },
-      "description": "Properties of a marketplace gallery image resource"
+      "description": "marketplacegalleryimagesProperties defines a list of properties under marketplacegalleryimages"
     },
-    "MarketplaceGalleryImageStatus": {
+    "marketplaceGalleryImageStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Marketplace gallery image provisioning error code"
+          "description": "MarketplaceGalleryImage provisioning error code"
         },
         "errorMessage": {
           "type": "string",
@@ -426,7 +426,7 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "MarketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
+      "description": "marketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
     },
     "galleryImageIdentifier": {
       "type": "object",
@@ -508,7 +508,7 @@
     },
     "marketplacegalleryimages": {
       "type": "object",
-      "description": "The marketplace gallery image resource definition.",
+      "description": "The marketplacegalleryimages resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -517,8 +517,18 @@
           "$ref": "#/definitions/marketplacegalleryimagesProperties"
         },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "description": "The extendedLocation of the resource.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -541,7 +551,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "The marketplace gallery image resource patch definition."
+      "description": "The marketplacegalleryimages resource patch definition."
     },
     "marketplacegalleryimagesListResult": {
       "type": "object",

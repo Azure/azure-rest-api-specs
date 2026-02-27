@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/portalservices"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/copilots/{version-status}/{version}/copilots.json"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PortalServicesCopilots"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.PortalServicesCopilots"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-portalservicescopilots"
+    namespace: "azure.mgmt.portalservicescopilots"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-portalservicescopilots"
+    namespace: "com.azure.resourcemanager.portalservicescopilots"
+    service-name: "Portal Services Copilots"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-portalservicescopilots"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-portalservicescopilots"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/portalservicescopilots"
+    emitter-output-dir: "{output-dir}/{service-dir}/armportalservicescopilots"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armportalservicescopilots"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -85,7 +85,7 @@ model AwsIamServerCertificateProperties {
   serverCertificateName?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 

@@ -16,22 +16,21 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
+using OpenAPI;
 
 namespace Microsoft.Monitor;
 
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Extended location is not included in TrackedResource yet."
-  @doc("The extended location for given pipeline group.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation?: CommonTypes.ExtendedLocation;
+  ...ExtendedLocationProperty;
 }
 
 @doc("Properties that need to be specified to create a new pipeline group instance.")
@@ -40,22 +39,22 @@ model PipelineGroupProperties {
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   receivers: Receiver[];
 
   @doc("The processors specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   processors: Processor[];
 
   @doc("The exporters specified for a pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   exporters: Exporter[];
 
   @doc("The service section for a given pipeline group instance.")
   service: Service;
 
   @doc("Networking configurations for the pipeline group instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
@@ -153,7 +152,7 @@ union ExporterType {
 @doc("Service Info.")
 model Service {
   @doc("Pipelines belonging to a given pipeline group.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
@@ -183,8 +182,14 @@ model Pipeline {
 union PipelineType {
   string,
 
+  @added(Versions.v2024_10_01)
   @doc("Pipeline for logs telemetry.")
-  Logs: "logs",
+  Logs: "Logs",
+
+  @removed(Versions.v2024_10_01)
+  @renamedFrom(Versions.v2024_10_01, "Logs")
+  @doc("Pipeline for logs telemetry.")
+  LogsPreview: "logs",
 }
 
 @doc("Networking configuration for the pipeline group instance.")
@@ -197,7 +202,7 @@ model NetworkingConfiguration {
   host?: string;
 
   @doc("Networking routes configuration.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   routes: NetworkingRoute[];
 }
 
@@ -240,26 +245,14 @@ interface PipelineGroups {
   @doc("Returns the specific pipeline group instance.")
   get is ArmResourceRead<PipelineGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create or update a pipeline group instance.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    PipelineGroup,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PipelineGroup>;
 
   @doc("Delete a pipeline group instance.")
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    PipelineGroup,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      PipelineGroup,
-      PipelineGroupProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
 
   @doc("Lists all workspaces in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<PipelineGroup>;

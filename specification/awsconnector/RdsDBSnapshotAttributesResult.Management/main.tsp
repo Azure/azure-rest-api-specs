@@ -12,6 +12,9 @@ import "./back-compatible.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -74,7 +77,7 @@ model RdsDBSnapshotAttributesResultProperties {
 @doc("Definition of awsRdsDBSnapshotAttributesResult")
 model AwsRdsDBSnapshotAttributesResultProperties {
   @doc("<p>The list of attributes and values for the manual DB snapshot.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dbSnapshotAttributes?: DBSnapshotAttribute[];
 
   @doc("<p>The identifier of the manual DB snapshot that the attributes apply to.</p>")

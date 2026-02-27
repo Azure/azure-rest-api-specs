@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "rgName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1",
+            "location": "westus2",
+            "name": "fpProfile1",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "profileId": "7242119c753249d79dbbe22921d8c5fa",
+              "description": "Footprint profile test 1",
+              "startDelayMilliseconds": 5000,
+              "measurementCount": 3,
+              "coldPathSamplingPercentageRate": 100,
+              "scriptUri": "http://fp.msedge.net/conf/v2/7242119c753249d79dbbe22921d8c5fa/fpconfig.min.json",
+              "measurementEndpoints": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1"
+                }
+              ],
+              "reportingEndpoints": [
+                "fp.msedge.net/r.gif",
+                "odinvzc.azureedge.net/apc/trans.gif"
+              ],
+              "experiments": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/experiments/fpExp1"
+                }
+              ]
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "type": "Microsoft.FootprintMonitoring/profiles"
+          }
+        ]
+      }
+    }
+  }
+}

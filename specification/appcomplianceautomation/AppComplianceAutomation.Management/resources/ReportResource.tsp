@@ -1,15 +1,16 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
+import "../operations.tsp";
 
-using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -17,81 +18,85 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @tenantResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
-model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
+model ReportResource extends Foundations.ProxyResource {
   /**
    * Report Name.
    */
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
+  @path
   @key("reportName")
   @segment("reports")
   @visibility(Lifecycle.Read)
-  @path
   name: string;
 
   /**
    * Report property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @extension("x-ms-client-name", "properties")
   properties: ReportProperties;
+
+  @added(Versions.v2024_12_15_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface Report {
+interface ReportResources {
   /**
    * Get the AppComplianceAutomation report and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_Get")
+  @operationId("Reports_Get")
   get is ArmResourceRead<ReportResource>;
 
   /**
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @operationId("Report_CreateOrUpdate")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @operationId("Reports_CreateOrUpdate")
+  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    BaseParameters<ReportResource>
   >;
 
   /**
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @patch(#{ implicitOptionality: false })
-  @operationId("Report_Update")
+  @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 
   /**
    * Delete an AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_Delete")
+  @operationId("Reports_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 
   /**
    * Get the AppComplianceAutomation report list for the tenant.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_List")
+  @operationId("Reports_List")
   list is ArmResourceListByParent<
     ReportResource,
     {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ReportResource>;
+      ...BaseParameters<ReportResource>;
       ...QueryParameters;
     }
   >;
@@ -100,47 +105,47 @@ interface Report {
    * Synchronize attestation record from app compliance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_SyncCertRecord")
+  @operationId("Reports_SyncCertRecord")
   syncCertRecord is ArmResourceActionAsync<
     ReportResource,
     SyncCertRecordRequest,
     SyncCertRecordResponse,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 
   /**
    * Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_NestedResourceCheckNameAvailability")
+  @operationId("Reports_NestedResourceCheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
-    Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
-    Azure.ResourceManager.Foundations.CheckNameAvailabilityResponse
+    CheckNameAvailabilityRequest,
+    CheckNameAvailabilityResponse
   >;
 
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_Fix")
+  @operationId("Reports_Fix")
   fix is ArmResourceActionAsync<
     ReportResource,
     void,
     ReportFixResult,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Report_GetScopingQuestions")
+  @operationId("GetScopingQuestions")
   getScopingQuestions is ArmResourceActionSync<
     ReportResource,
     void,
     ScopingQuestions,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 
   /**
@@ -152,37 +157,24 @@ interface Report {
     ReportResource,
     void,
     ReportVerificationResult,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    BaseParameters<ReportResource>
   >;
 }
 
-@@doc(Report.createOrUpdate::parameters.resource,
+@@doc(ReportResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Report.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@clientName(Report.createOrUpdate::parameters.resource, "properties");
-
-@@doc(Report.update::parameters.properties,
+@@doc(ReportResources.update::parameters.properties,
   "Parameters for the create or update operation"
 );
-@@doc(Report.syncCertRecord::parameters.body,
+@@doc(ReportResources.syncCertRecord::parameters.body,
   "Parameters for synchronize certification record operation"
 );
-@@doc(Report.checkNameAvailability::parameters.body,
+@@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Report.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-
-@@encodedName(Report.syncCertRecord::parameters.body,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Deprecated: Using encodedName for the body property is meaningless."
+@@encodedName(ReportResources.update::parameters.properties,
   "application/json",
   "parameters"
 );

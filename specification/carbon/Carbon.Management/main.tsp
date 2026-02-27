@@ -21,7 +21,7 @@ namespace Microsoft.Carbon;
  */
 enum Versions {
   /**
-   * The 2025-04-01 API version.
+   * The 2024-02-01 API version.
    */
   v2025_04_01: "2025-04-01",
 }
@@ -486,6 +486,7 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: CarbonEmissionData[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
@@ -507,10 +508,12 @@ model CarbonEmissionDataAvailableDateRange {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
+  @list
+  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -522,6 +525,7 @@ interface CarbonService {
 
   @doc("API for query carbon emission data available date range")
   @post
+  @armResourceAction(CarbonEmissionDataAvailableDateRange)
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
   queryCarbonEmissionDataAvailableDateRange(
     ...ApiVersionParameter,

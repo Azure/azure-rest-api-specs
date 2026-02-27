@@ -1,0 +1,719 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.UpdateManager service",
+    "version": "2024-11-01-preview",
+    "description": "Microsoft.UpdateManager Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "UpdateRules"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.UpdateManager/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/updateRules": {
+      "get": {
+        "operationId": "UpdateRules_ListBySubscription",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "List UpdateRule resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_ListBySubscription": {
+            "$ref": "./examples/UpdateRules_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules": {
+      "get": {
+        "operationId": "UpdateRules_ListByResourceGroup",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "List UpdateRule resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_ListByResourceGroup": {
+            "$ref": "./examples/UpdateRules_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules/{updateRuleName}": {
+      "get": {
+        "operationId": "UpdateRules_Get",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Get a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Get": {
+            "$ref": "./examples/UpdateRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRules_CreateOrUpdate",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Create a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UpdateRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'UpdateRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_CreateOrUpdate": {
+            "$ref": "./examples/UpdateRules_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpdateRules_Update",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Update a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Update": {
+            "$ref": "./examples/UpdateRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UpdateRules_Delete",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Delete a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Delete": {
+            "$ref": "./examples/UpdateRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Availability": {
+      "type": "object",
+      "description": "Availability policy.",
+      "properties": {
+        "vmAvailabilitySet": {
+          "$ref": "#/definitions/VMAvailabilitySet",
+          "description": "The availability set."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LinuxParameters": {
+      "type": "object",
+      "description": "Linux parameters.",
+      "properties": {
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "description": "The package name masks to exclude.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "description": "The package name masks to include.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The classifications to include.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Policies": {
+      "type": "object",
+      "description": "Policies properties.",
+      "properties": {
+        "availability": {
+          "$ref": "#/definitions/Availability",
+          "description": "The availability policy."
+        },
+        "installWindowsPatchesAfter": {
+          "type": "string",
+          "description": "Approve windows patches after the mentioned date.",
+          "pattern": "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(([1-9]|1[0-4])(?!\\d))(?!\\w)"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request has been accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "UpdateRule": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UpdateRuleListResult": {
+      "type": "object",
+      "description": "The response of a UpdateRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateRule items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateRuleProperties": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSetting": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "rebootSetting"
+      ]
+    },
+    "UpdateRulePropertiesUpdate": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSetting": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
+        }
+      }
+    },
+    "UpdateRuleUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRulePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "VMAvailabilitySet": {
+      "type": "string",
+      "description": "VMAvailabilitySet property.",
+      "enum": [
+        "Bypass"
+      ],
+      "x-ms-enum": {
+        "name": "VMAvailabilitySet",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bypass",
+            "value": "Bypass",
+            "description": "Bypass the availability set."
+          }
+        ]
+      }
+    },
+    "WindowsParameters": {
+      "type": "object",
+      "description": "Windows parameters.",
+      "properties": {
+        "kbNumbersToExclude": {
+          "type": "array",
+          "description": "The KB numbers to exclude.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "description": "The KB numbers to include.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The classifications to include.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Exclude KBs requiring reboot."
+        }
+      }
+    },
+    "rebootSettings": {
+      "type": "string",
+      "description": "Reboot settings.",
+      "enum": [
+        "IfRequired",
+        "Never",
+        "Always"
+      ],
+      "x-ms-enum": {
+        "name": "rebootSettings",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IfRequired",
+            "value": "IfRequired",
+            "description": "Reboot if required"
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never reboot"
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always reboot"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

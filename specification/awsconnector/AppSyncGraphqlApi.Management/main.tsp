@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -66,7 +69,7 @@ model AppSyncGraphqlApiProperties {
 @doc("Definition of awsAppSyncGraphqlApi")
 model AwsAppSyncGraphqlApiProperties {
   @doc("<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   additionalAuthenticationProviders?: AdditionalAuthenticationProvider[];
 
   @doc("<p>The API ID.</p>")

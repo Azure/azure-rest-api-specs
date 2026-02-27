@@ -1,0 +1,74 @@
+{
+  "title": "TimeServerConfigurations_CreateOrUpdate",
+  "operationId": "TimeServerConfigurations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgconfigurations",
+    "configurationName": "aConfiguration",
+    "timeServerConfigurationName": "someName",
+    "resource": {
+      "properties": {
+        "scenario": "Provisioning",
+        "timezone": "GMT",
+        "ntpConfigurationChoice": "Automatic",
+        "ntpServerConfiguration": {
+          "ntpServer": "time.windows.net",
+          "alternateNtpServer": "time.azure.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scenario": "Provisioning",
+          "timezone": "GMT",
+          "ntpConfigurationChoice": "Automatic",
+          "ntpServerConfiguration": {
+            "ntpServer": "time.windows.net",
+            "alternateNtpServer": "time.azure.com"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgconfigurations/providers/Microsoft.Edge/configurations/aConfiguration/timeServerConfigurations/someName",
+        "name": "someName",
+        "type": "Microsoft.Edge/configurations/timeServerConfigurations",
+        "systemData": {
+          "createdBy": "kupa",
+          "createdByType": "User",
+          "createdAt": "2024-08-16T14:49:26.220Z",
+          "lastModifiedBy": "kupa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-16T14:49:26.220Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scenario": "Provisioning",
+          "timezone": "GMT",
+          "ntpConfigurationChoice": "Automatic",
+          "ntpServerConfiguration": {
+            "ntpServer": "time.windows.net",
+            "alternateNtpServer": "time.azure.com"
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgconfigurations/providers/Microsoft.Edge/configurations/aConfiguration/timeServerConfigurations/someName",
+        "name": "someName",
+        "type": "Microsoft.Edge/configurations/timeServerConfigurations",
+        "systemData": {
+          "createdBy": "kupa",
+          "createdByType": "User",
+          "createdAt": "2024-08-16T14:49:26.220Z",
+          "lastModifiedBy": "kupa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-16T14:49:26.220Z"
+        }
+      }
+    }
+  }
+}

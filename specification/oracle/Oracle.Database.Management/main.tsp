@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-client-generator-core";
 import "./operations/exadata/exadatainfrastructureOperations.tsp";
 import "./operations/exadata/dbServersOperations.tsp";
 import "./operations/exadata/vmclusterOperations.tsp";
@@ -26,7 +25,6 @@ import "./operations/anchors/resourceAnchorOperations.tsp";
 import "./operations/basedb/dbSystemOperations.tsp";
 import "./operations/basedb/dbVersionOperations.tsp";
 import "./versions.tsp";
-import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

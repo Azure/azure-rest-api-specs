@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -69,7 +72,7 @@ model AwsMacie2JobSummaryProperties {
   bucketCriteria?: S3BucketCriteriaForJob;
 
   @doc("<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   bucketDefinitions?: S3BucketDefinitionForJob[];
 
   @doc("<p>The date and time, in UTC and extended ISO 8601 format, when the job was created.</p>")
@@ -228,7 +231,7 @@ model UserPausedDetails {
 @doc("Definition of CriteriaBlockForJob")
 model CriteriaBlockForJob {
   @doc("<p>An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   and?: CriteriaForJob[];
 }
 
@@ -310,7 +313,7 @@ model TagCriterionForJob {
   comparator?: JobComparatorEnumValue;
 
   @doc("<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagValues?: TagCriterionPairForJob[];
 }
 

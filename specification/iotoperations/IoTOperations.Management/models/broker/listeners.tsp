@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -47,6 +48,7 @@ model BrokerListenerProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 

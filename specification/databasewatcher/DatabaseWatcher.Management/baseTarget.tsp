@@ -26,7 +26,7 @@ model Target is ProxyResource<TargetProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
 @doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {
@@ -36,9 +36,12 @@ model TargetProperties {
   @doc("To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored.")
   targetVault?: VaultSecret;
 
-  @doc("The FQDN host name of the server to use in the connection string when connecting to a target. For example, for an Azure SQL logical server in the Azure commercial cloud, the value might be 'sql-logical-server-22092780.database.windows.net'; for an Azure SQL managed instance in the Azure commercial cloud, the value might be 'sql-mi-39441134.767d5869f605.database.windows.net'. Port number and instance name must be specified separately.")
+  @doc("The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.")
   @maxLength(200)
   connectionServerName: string;
+
+  @doc("The target collection status.")
+  targetCollectionStatus?: TargetCollectionStatus;
 
   @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
@@ -47,7 +50,7 @@ model TargetProperties {
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The Azure resource ID of the Key Vault instance storing database authentication secrets.")
+  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
   akvResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";
@@ -55,13 +58,22 @@ model VaultSecret {
   ]>;
 
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
-  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetUser?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The path to the Key Vault secret storing the password for authentication to a target.")
-  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetPassword?: string;
+}
+
+@doc("The target states.")
+union TargetCollectionStatus {
+  string,
+
+  @doc("Denotes a target that is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Denotes a target that is disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("The type of authentication to use when connecting to a target.")

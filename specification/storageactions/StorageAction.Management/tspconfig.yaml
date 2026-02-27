@@ -11,8 +11,11 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageactions.json"
     examples-dir: "{project-root}/examples"
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.StorageActions"
+    clear-output-folder: true
+    model-namespace: true
     namespace: "Azure.ResourceManager.StorageActions"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storageactions"
@@ -27,6 +30,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-storageactions"
+    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

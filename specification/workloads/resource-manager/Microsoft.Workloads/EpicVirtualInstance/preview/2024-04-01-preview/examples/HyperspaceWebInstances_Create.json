@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "resource": {
+      "location": "westcentralus",
+      "properties": {},
+      "tags": {}
+    },
+    "epicVirtualInstanceName": "X00",
+    "hyperspaceWebInstanceName": "app01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "app01",
+        "type": "Microsoft.Workloads/epicVirtualInstances/hyperspacewebInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/epicVirtualInstances/X00/hyperspacewebInstances/app01",
+        "location": "westcentralus",
+        "properties": {
+          "errors": null,
+          "health": "Healthy",
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "vmDetails": [
+            {
+              "role": "HyperspaceWebRole",
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/app01-vm"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "app01",
+        "type": "Microsoft.Workloads/epicVirtualInstances/hyperspacewebInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/epicVirtualInstances/X00/hyperspacewebInstances/app01",
+        "location": "westcentralus",
+        "properties": {
+          "errors": null,
+          "health": "Unknown",
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "vmDetails": [
+            {
+              "role": "HyperspaceWebRole",
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/app01-vm"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "HyperspaceWebServerInstances_Create",
+  "title": "HyperspaceWebInstances_Create"
+}

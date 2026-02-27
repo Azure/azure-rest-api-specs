@@ -3,7 +3,10 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview"
+    "version": "2021-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -99,7 +102,6 @@
             "name": "networkinterfaces",
             "in": "body",
             "required": true,
-            "description": "Spec of the to-be-created networkinterfaces resource",
             "schema": {
               "$ref": "#/definitions/networkinterfaces"
             }
@@ -186,7 +188,6 @@
             "name": "networkinterfaces",
             "in": "body",
             "required": true,
-            "description": "Patch of the updated networkinterfaces resource",
             "schema": {
               "$ref": "#/definitions/networkinterfacesPatch"
             }
@@ -200,6 +201,12 @@
             }
           },
           "200": {
+            "description": "Updates the networkinterfaces resource.",
+            "schema": {
+              "$ref": "#/definitions/networkinterfaces"
+            }
+          },
+          "201": {
             "description": "Updates the networkinterfaces resource.",
             "schema": {
               "$ref": "#/definitions/networkinterfaces"
@@ -304,8 +311,7 @@
           "items": {
             "$ref": "#/definitions/ipConfiguration"
           },
-          "description": "IPConfigurations - A list of IPConfigurations of the network interface.",
-          "x-ms-identifiers": []
+          "description": "IPConfigurations - A list of IPConfigurations of the network interface."
         },
         "macAddress": {
           "type": "string",
@@ -316,45 +322,18 @@
           "description": "DNS Settings for the interface"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "InProgress",
-            "Accepted",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/NetworkInterfaceStatus"
+          "type": "object",
+          "description": "MOCNetworkInterfaceStatus defines the observed state of MOCNetworkInterface"
         }
       },
-      "description": "NetworkInterfaceSpec defines the desired state of NetworkInterface"
-    },
-    "NetworkInterfaceStatus": {
-      "type": "object",
-      "description": "NetworkInterfaceStatus defines the observed state of NetworkInterface",
-      "x-ms-client-flatten": true,
-      "readOnly": true,
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "NetworkInterface provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
-        }
-      }
+      "description": "MOCNetworkInterfaceSpec defines the desired state of MOCNetworkInterface"
     },
     "ipConfiguration": {
       "type": "object",
@@ -382,15 +361,7 @@
             },
             "privateIPAllocationMethod": {
               "type": "string",
-              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-              "enum": [
-                "Dynamic",
-                "Static"
-              ],
-              "x-ms-enum": {
-                "name": "PrivateIPAllocationMethodEnum",
-                "modelAsString": true
-              }
+              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'"
             },
             "subnet": {
               "type": "object",
@@ -410,7 +381,6 @@
     },
     "networkinterfaces": {
       "type": "object",
-      "description": "The networkinterfaces resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -418,16 +388,53 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/networkinterfacesProperties"
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "required": [
+        "location"
+      ],
+      "description": "The networkinterfaces resource definition."
     },
     "networkinterfacesPatch": {
       "type": "object",

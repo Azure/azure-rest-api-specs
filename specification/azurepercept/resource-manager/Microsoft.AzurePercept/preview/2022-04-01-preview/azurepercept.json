@@ -1,0 +1,2628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-04-01-preview",
+    "title": "AzurePerceptManagementClient",
+    "description": "Use these APIs to manage the Azure Percept instances in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AzurePercept/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all of the available Azure Percept REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePercept/accounts": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "List all Azure Percept accounts in a subscription.",
+        "operationId": "Accounts_ListBySubscription",
+        "x-ms-examples": {
+          "Accounts_ListBySubscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Azure Percept accounts in the subscription",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "List all Azure Percept accounts in a resource group.",
+        "operationId": "Accounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "Accounts_ListByResourceGroup": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the Azure Percept accounts in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get Azure Percept account metadata.",
+        "operationId": "Accounts_Get",
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the account metadata",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create or update the metadata of an Azure Percept account.",
+        "description": "Create or update the metadata of an Azure Percept account. Performs a full replacement of the editable properties.",
+        "operationId": "Accounts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Accounts_CreateOrUpdate": {
+            "$ref": "./examples/Accounts_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "Azure Percept account metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The resource was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "200": {
+            "description": "The resource was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PATCH"
+        ],
+        "summary": "Partially update an existing Azure Percept account",
+        "description": "Partially update an existing Azure Percept account.",
+        "operationId": "Accounts_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "Azure Percept account metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Azure Percept account was accepted"
+          },
+          "200": {
+            "description": "Azure Percept account was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete an Azure Percept account.",
+        "operationId": "Accounts_Delete",
+        "x-ms-examples": {
+          "Accounts_Delete": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was successfully deleted."
+          },
+          "204": {
+            "description": "The request was valid, but the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/devices": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of all the devices in an Azure Percept account.",
+        "operationId": "Devices_List",
+        "x-ms-examples": {
+          "Devices_List": {
+            "$ref": "./examples/Devices_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized array of all the devices linked to the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/devices/{deviceName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the details of a specific device in an Azure Percept account.",
+        "operationId": "Devices_Get",
+        "x-ms-examples": {
+          "Devices_Get": {
+            "$ref": "./examples/Devices_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/deviceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized description of the device in the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Link a new device to the Azure Percept account under a specific name or update an existing one.",
+        "operationId": "Devices_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Devices_CreateOrUpdate": {
+            "$ref": "./examples/Devices_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/deviceName"
+          },
+          {
+            "name": "device",
+            "in": "body",
+            "description": "Device object create or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCreateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device was successfully linked or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "201": {
+            "description": "The device was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PATCH"
+        ],
+        "summary": "Partially update an existing device inside an Azure Percept account.",
+        "operationId": "Devices_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Devices_Update": {
+            "$ref": "./examples/Devices_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/deviceName"
+          },
+          {
+            "name": "device",
+            "in": "body",
+            "description": "Device editable properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCreateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device inside the Azure Percept account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "202": {
+            "description": "The device inside the Azure Percept account was accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Unlink a device from an Azure Percept account.",
+        "operationId": "Devices_Delete",
+        "x-ms-examples": {
+          "Devices_Delete": {
+            "$ref": "./examples/Devices_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/deviceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device was successfully unlinked."
+          },
+          "204": {
+            "description": "The request is valid, but the device does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/solutions": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of all the solutions in an Azure Percept account.",
+        "operationId": "Solutions_List",
+        "x-ms-examples": {
+          "Solutions_List": {
+            "$ref": "./examples/Solutions_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized array of all the Solution associated with the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/solutions/{solutionName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the details of a specific solution in an Azure Percept account.",
+        "operationId": "Solutions_Get",
+        "x-ms-examples": {
+          "Solutions_Get": {
+            "$ref": "./examples/Solutions_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized description of the Solution in the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create a new solution in the Azure Percept account under a specific name or update an existing one.",
+        "operationId": "Solutions_CreateOrUpdate",
+        "x-ms-examples": {
+          "Solutions_CreateOrUpdate": {
+            "$ref": "./examples/Solutions_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "name": "solution",
+            "in": "body",
+            "description": "Solution object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Solution was successfully created or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PATCH"
+        ],
+        "summary": "Partially update an existing solution inside an Azure Percept account.",
+        "operationId": "Solutions_Update",
+        "x-ms-examples": {
+          "Solutions_Update": {
+            "$ref": "./examples/Solutions_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "name": "solution",
+            "in": "body",
+            "description": "Solution editable properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Solution inside the Azure Percept account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete a solution from an Azure Percept account.",
+        "operationId": "Solutions_Delete",
+        "x-ms-examples": {
+          "Solutions_Delete": {
+            "$ref": "./examples/Solutions_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Solution was successfully deleted."
+          },
+          "204": {
+            "description": "The request is valid, but the Solution does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/sensors": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of all the sensors in an Azure Percept account.",
+        "operationId": "Sensors_List",
+        "x-ms-examples": {
+          "Sensors_List": {
+            "$ref": "./examples/Sensors_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized array of all the sensors associated with the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/SensorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/sensors/{sensorName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the details of a specific sensor in an Azure Percept account.",
+        "operationId": "Sensors_Get",
+        "x-ms-examples": {
+          "Sensors_Get": {
+            "$ref": "./examples/Sensors_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized description of the sensor in the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create a new sensor in the Azure Percept device under a specific name or update an existing one.",
+        "operationId": "Sensors_CreateOrUpdate",
+        "x-ms-examples": {
+          "Sensors_CreateOrUpdate": {
+            "$ref": "./examples/Sensors_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          },
+          {
+            "name": "sensor",
+            "in": "body",
+            "description": "Sensor object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The sensor was successfully created or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PATCH"
+        ],
+        "summary": "Partially update an existing sensor inside an Azure Percept account.",
+        "operationId": "Sensors_Update",
+        "x-ms-examples": {
+          "Sensors_Update": {
+            "$ref": "./examples/Sensors_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          },
+          {
+            "name": "sensor",
+            "in": "body",
+            "description": "Sensor editable properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensorUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The sensor inside the Azure Percept account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete a sensor from an Azure Percept account.",
+        "operationId": "Sensors_Delete",
+        "x-ms-examples": {
+          "Sensors_Delete": {
+            "$ref": "./examples/Sensors_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The sensor was successfully deleted."
+          },
+          "204": {
+            "description": "The request is valid, but the sensor does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/sensors/{sensorName}/listSensorInfo": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "summary": "List sensors info.",
+        "operationId": "SensorsAction_ListSensorInfo",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Sensors_ActionListSensorInfo": {
+            "$ref": "./examples/SensorsAction_ListSensorInfo.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The action has been successfully accepted."
+          },
+          "200": {
+            "description": "The action was successfully executed.",
+            "schema": {
+              "$ref": "#/definitions/SensorInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/sensors/{sensorName}/fetchSensorData": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "summary": "Get data from the sensor in an Azure Percept account and uploads it to the associated storage container.",
+        "operationId": "SensorsAction_FetchSensorData",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SensorsAction_FetchSensorData": {
+            "$ref": "./examples/SensorsAction_FetchSensorData.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/sensorName"
+          },
+          {
+            "name": "fetchConfiguration",
+            "in": "body",
+            "description": "Fetch operation parameters.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SensorFetchDataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The async operation response contains the information where the sensor data is stored.",
+            "schema": {
+              "$ref": "#/definitions/SensorFetchDataCombinedResponse"
+            }
+          },
+          "202": {
+            "description": "The action has been successfully accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/solutioninstances": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of all the solution instances in an Azure Percept account.",
+        "operationId": "SolutionInstances_List",
+        "x-ms-examples": {
+          "SolutionInstances_List": {
+            "$ref": "./examples/SolutionInstances_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized array of all the Solution associated with the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePercept/accounts/{accountName}/solutioninstances/{solutionInstanceName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the details of a specific solutionInstance in an Azure Percept account.",
+        "operationId": "SolutionInstances_Get",
+        "x-ms-examples": {
+          "SolutionInstances_Get": {
+            "$ref": "./examples/SolutionInstances_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionInstanceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The response contains a JSON-serialized description of the SolutionInstance in the Azure Percept account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create a new solutionInstance in the Azure Percept account under a specific name or update an existing one.",
+        "operationId": "SolutionInstances_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SolutionInstances_CreateOrUpdate": {
+            "$ref": "./examples/SolutionInstances_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionInstanceName"
+          },
+          {
+            "name": "solutionInstance",
+            "in": "body",
+            "description": "SolutionInstance object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The SolutionInstance was successfully created or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "200": {
+            "description": "The SolutionInstance was successfully created or updated in the account.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PATCH"
+        ],
+        "summary": "Partially update an existing solutionInstance inside an Azure Percept account.",
+        "operationId": "SolutionInstances_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SolutionInstances_Update": {
+            "$ref": "./examples/SolutionInstances_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionInstanceName"
+          },
+          {
+            "name": "solutionInstance",
+            "in": "body",
+            "description": "SolutionInstance editable properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstanceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SolutionInstance inside the Azure Percept account was accepted."
+          },
+          "200": {
+            "description": "The SolutionInstance inside the Azure Percept account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete a solutionInstance from an Azure Percept account.",
+        "operationId": "SolutionInstances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SolutionInstances_Delete": {
+            "$ref": "./examples/SolutionInstances_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/solutionInstanceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SolutionInstance was successfully deleted."
+          },
+          "202": {
+            "description": "The SolutionInstance was successfully deleted."
+          },
+          "204": {
+            "description": "The request is valid, but the SolutionInstance does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePercept/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "summary": "Check if an Azure Percept account name is available",
+        "operationId": "CheckNameAvailability",
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "checkNameAvailabilityRequest",
+            "in": "body",
+            "description": "Set the name parameter in the request structure to the name of the Azure Percept account to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the account name is available. If the name is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Azure Percept operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.AzurePercept resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Account": {
+      "description": "The description of the Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the Azure Percept Account properties.",
+          "$ref": "#/definitions/AccountProperties"
+        },
+        "sku": {
+          "description": "Azure Percept account SKU.",
+          "$ref": "#/definitions/AccountSku"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "sku"
+      ]
+    },
+    "AccountProperties": {
+      "description": "Account properties",
+      "type": "object",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "description": "The ID of the application insights resource."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of account resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountUpdateParameters": {
+      "description": "The properties of an Azure Percept account to be updated.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the Azure Percept Account properties.",
+          "$ref": "#/definitions/AccountProperties"
+        },
+        "sku": {
+          "description": "Azure Percept account SKU.",
+          "$ref": "#/definitions/AccountSku"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        }
+      }
+    },
+    "AccountSku": {
+      "description": "Information about the SKU of the Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU. Required for account creation, optional for update.",
+          "enum": [
+            "F1"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "F1",
+                "description": "The Default SKU of the Azure Percept Account."
+              }
+            ]
+          },
+          "type": "string"
+        },
+        "tier": {
+          "description": "The billing tier for the Azure Percept account. Based on the SKU name",
+          "enum": [
+            "Free"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Free",
+                "description": "The Default billing tier of the Azure Percept Account."
+              }
+            ]
+          },
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AccountListResult": {
+      "description": "The JSON-serialized array of Account objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of Account objects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "description": "The next link, if any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Solution": {
+      "description": "The description of a Solution inside the Azure Percept account.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept solution properties.",
+          "$ref": "#/definitions/SolutionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionUpdateParameters": {
+      "description": "The properties of solution inside the Azure Percept account to be updated.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept Solution editable properties.",
+          "$ref": "#/definitions/SolutionProperties"
+        }
+      }
+    },
+    "SolutionParameter": {
+      "description": "Solution parameter declaration. Declared parameters can and must be referenced throughout the solution and can optionally have default values to be used when they are not defined in the solutionInstance.",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter.",
+          "maxLength": 64
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the parameter.",
+          "enum": [
+            "string",
+            "array",
+            "object"
+          ],
+          "x-ms-enum": {
+            "name": "parameterType",
+            "values": [
+              {
+                "value": "string",
+                "description": "The parameter's value is a string."
+              },
+              {
+                "value": "array",
+                "description": "The parameter's value is an array."
+              },
+              {
+                "value": "object",
+                "description": "The parameter's value is an object."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the parameter."
+        },
+        "stringDefault": {
+          "type": "string",
+          "description": "The default value for the parameter to be used if the solutionInstance does not specify a value."
+        },
+        "arrayDefault": {
+          "type": "array",
+          "description": "The default value for the parameter to be used if the solutionInstance does not specify a value.",
+          "items": {
+            "description": "Array item object.",
+            "type": "object"
+          },
+          "x-ms-identifiers": []
+        },
+        "objectDefault": {
+          "type": "object",
+          "description": "The default value for the parameter to be used if the solutionInstance does not specify a value."
+        }
+      }
+    },
+    "SolutionComponent": {
+      "description": "Solution Component information.",
+      "type": "object",
+      "properties": {
+        "componentName": {
+          "description": "Solution Component name.",
+          "type": "string"
+        },
+        "componentType": {
+          "description": "Solution Component type.",
+          "type": "string",
+          "enum": [
+            "IoTEdgeModule"
+          ],
+          "x-ms-enum": {
+            "name": "componentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IoTEdgeModule",
+                "description": "IoT Edge Module."
+              }
+            ]
+          }
+        },
+        "capabilities": {
+          "description": "User defined capabilities object for the solution component.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "configurations": {
+          "description": "Component configurations.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Capabilities": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "description": "key-value pair defining the capabilities needed for this component.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SolutionProperties": {
+      "description": "The properties of a Solution linked to the Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "List of the solutionInstance level parameter values for the user-defined solution parameters. Solution parameter without a default value must be defined in solutionInstance. Solution parameter with a default value can be optionally be overridden by providing the value of the parameter in solutionInstance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "components": {
+          "description": "Components associated with the Solution.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionComponent"
+          },
+          "x-ms-identifiers": [
+            "componentName"
+          ]
+        },
+        "routes": {
+          "description": "Route definition for the solution components.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "description": "Provisioning state of solution resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetConfig": {
+          "description": "Target configurations definition for the solution components.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SolutionListResult": {
+      "description": "The JSON-serialized array of Solution objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of Solution objects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        },
+        "nextLink": {
+          "description": "The next link, if any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Device": {
+      "description": "The description of a device inside the Azure Percept account.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept device properties.",
+          "$ref": "#/definitions/DeviceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceCreateUpdateParameters": {
+      "description": "The description of a device inside the Azure Percept account.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept device editable properties.",
+          "$ref": "#/definitions/DeviceEditableProperties"
+        }
+      }
+    },
+    "DeviceProperties": {
+      "description": "The properties of a device linked to an Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of device resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "ARM Resource ID for the Azure resource containing the device.",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "The device name/identifier from its source system. If the source is IoT Hub, for example, this would map to deviceId in the device twin object model.",
+          "type": "string"
+        },
+        "capabilities": {
+          "description": "The device capabilities pulled from the source device.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceEditableProperties"
+        }
+      ],
+      "required": [
+        "source",
+        "sourceId"
+      ]
+    },
+    "DeviceEditableProperties": {
+      "description": "Editable properties of a device inside the Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "ARM Resource ID for the Azure resource containing the device.",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "The device name/identifier from its source system. If the source is IoT Hub, for example, this would map to deviceId in the device twin object model.",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceListResult": {
+      "description": "The JSON-serialized array of Device objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of Device objects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "description": "The next link, if any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SensorGetThumbnailResponse": {
+      "description": "GetThumbnail response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "base64 encoded string for the thumbnail.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sensor": {
+      "description": "The description of a sensor inside the Azure Percept device.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept sensor properties.",
+          "$ref": "#/definitions/SensorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SensorFetchDataRequest": {
+      "description": "The FetchSensorData request object.",
+      "type": "object",
+      "properties": {
+        "timeout": {
+          "description": "Timeout in milliseconds",
+          "default": "30000",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 5000,
+          "maximum": 600000
+        },
+        "operationType": {
+          "description": "Operation type. High resolution image is captured in the blob location for FullData and Thumbnail is captured for SampleData option.",
+          "default": "FullData",
+          "type": "string",
+          "enum": [
+            "FullData",
+            "SampleData"
+          ],
+          "x-ms-enum": {
+            "name": "operationTypeOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "FullData",
+                "description": "High resolution image."
+              },
+              {
+                "value": "SampleData",
+                "description": "Thumbnail image."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SensorFetchDataCombinedResponse": {
+      "description": "Fetch sensor data combined response",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SensorFetchDataResponse"
+        },
+        {
+          "$ref": "#/definitions/SensorGetThumbnailResponse"
+        }
+      ]
+    },
+    "SensorFetchDataResponse": {
+      "description": "Fetch sensor data response",
+      "type": "object",
+      "properties": {
+        "sensorResourceId": {
+          "description": "Resource id of the sensor that produced the data.",
+          "type": "string"
+        },
+        "dataRecord": {
+          "description": "Information of the stored data location.",
+          "type": "object",
+          "properties": {
+            "deviceId": {
+              "description": "The id of the device that uploaded the file.",
+              "example": "mydevice",
+              "type": "string"
+            },
+            "blobUri": {
+              "description": "The URI of the uploaded file.",
+              "example": "https://contosostorageaccount.blob.core.windows.net/device-upload-container/mydevice/myfile.txt",
+              "type": "string"
+            },
+            "blobName": {
+              "description": "The name of the uploaded file. The name is in the following format: {device ID of the device}/{name of the blob}",
+              "example": "mydevice/myfile.txt",
+              "type": "string"
+            },
+            "lastUpdatedTime": {
+              "description": "Timestamp indicating when the file was last updated.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "blobSizeInBytes": {
+              "description": "An integer that represents the size of the uploaded file in bytes.",
+              "type": "integer",
+              "format": "int64"
+            },
+            "enqueuedTimeUtc": {
+              "description": "Timestamp indicating when the notification was created.",
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "SensorUpdateParameters": {
+      "description": "The description of a sensor inside the Azure Percept device.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept sensor editable properties.",
+          "$ref": "#/definitions/SensorEditableProperties"
+        }
+      }
+    },
+    "SensorEditableProperties": {
+      "description": "Editable properties of a sensor inside the Azure Percept device.",
+      "type": "object",
+      "properties": {
+        "sensorLocation": {
+          "description": "The sensor location.",
+          "type": "string"
+        },
+        "linkedDevices": {
+          "$ref": "#/definitions/LinkedDevice"
+        }
+      }
+    },
+    "SensorProperties": {
+      "description": "The properties of a sensor within an Azure Percept device.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of sensor resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "sensorLocation": {
+          "description": "The sensor location.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The sensor url.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The sensor userName.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The sensor password.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "kind": {
+          "$ref": "#/definitions/SensorKind"
+        },
+        "linkedDevices": {
+          "$ref": "#/definitions/LinkedDevice"
+        }
+      },
+      "required": [
+        "url",
+        "kind"
+      ]
+    },
+    "SensorKind": {
+      "description": "The sensor kind identifier.",
+      "enum": [
+        "Camera",
+        "Vision.RTSP",
+        "Vision.ONVIF"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SensorKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Camera",
+            "description": "Camera sensor kind. Deprecated, use \"Vision.ONVIF\" instead."
+          },
+          {
+            "value": "Vision.RTSP",
+            "description": "IP Camera sensor kind."
+          },
+          {
+            "value": "Vision.ONVIF",
+            "description": "ONVIF Camera sensor kind."
+          }
+        ]
+      }
+    },
+    "LinkedDevice": {
+      "description": "The linked devices.",
+      "type": "array",
+      "items": {
+        "description": "ARM resource id for the linked AzurePercept device.",
+        "type": "string"
+      }
+    },
+    "SensorListResult": {
+      "description": "The JSON-serialized array of Sensor objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of Sensor objects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Sensor"
+          }
+        },
+        "nextLink": {
+          "description": "The next link, if any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SensorInfo": {
+      "description": "The SensorInfo object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The sensor name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "description": "The sensor manufacturer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "model": {
+          "description": "The sensor model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hardwareId": {
+          "description": "The sensor hardwareId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sensorType": {
+          "description": "The sensor sensorType.",
+          "$ref": "#/definitions/SensorKind",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "sensor properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SolutionInstance": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionInstanceProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "description": "The SolutionInstance object."
+    },
+    "SolutionInstanceUpdateProperties": {
+      "description": "The properties of a SolutionInstance within a Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of solutioninstance resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The user provided description.",
+          "type": "string"
+        },
+        "desiredStatus": {
+          "$ref": "#/definitions/SolutionInstanceStatusDesired",
+          "description": "The desired status of the SolutionInstance resource."
+        },
+        "configurations": {
+          "description": "Component configurations.",
+          "type": "object",
+          "$ref": "#/definitions/SolutionInstanceConfiguration"
+        },
+        "enableLogs": {
+          "description": "True indicates device logs and telemetry will be captured in the ApplicationInsights resource provided during Percept Account creation, False indicates no logs will be captured.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "SolutionInstanceProperties": {
+      "description": "The properties of a SolutionInstance within a Azure Percept account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of solutioninstance resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The device resource to deploy the SolutionInstance.",
+          "type": "string"
+        },
+        "solution": {
+          "description": "The solution resource to be deployed.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user provided description.",
+          "type": "string"
+        },
+        "reportedStatus": {
+          "$ref": "#/definitions/SolutionInstanceStatus",
+          "description": "The current status of the SolutionInstance resource."
+        },
+        "desiredStatus": {
+          "$ref": "#/definitions/SolutionInstanceStatusDesired",
+          "description": "The desired status of the SolutionInstance resource."
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionInstanceAssociatedAccount"
+          },
+          "description": "The resources needed for solutionInstance deployment."
+        },
+        "enableLogs": {
+          "description": "True indicates device logs and telemetry will be captured in the ApplicationInsights resource provided during Percept Account creation, False indicates no logs will be captured.",
+          "type": "boolean",
+          "default": false
+        },
+        "configurations": {
+          "description": "Component configurations.",
+          "$ref": "#/definitions/SolutionInstanceConfiguration"
+        }
+      },
+      "required": [
+        "target",
+        "solution"
+      ]
+    },
+    "SolutionInstanceUpdateParameters": {
+      "description": "The properties of SolutionInstance inside the Azure Percept account to be updated.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure Percept SolutionInstance editable properties.",
+          "$ref": "#/definitions/SolutionInstanceUpdateProperties"
+        }
+      }
+    },
+    "SolutionInstanceConfiguration": {
+      "description": "The configurations defined for solutionInstance.",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "The array of solutionInstance parameters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionInstanceParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SolutionInstanceParameter": {
+      "description": "SolutionInstance parameter.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the parameter declared in the solution object.",
+          "maxLength": 64
+        },
+        "stringValue": {
+          "type": "string",
+          "description": "Value of the parameter declared in the solution object."
+        },
+        "arrayValue": {
+          "type": "array",
+          "description": "Value of the parameter declared in the solution object.",
+          "items": {
+            "description": "Array item object.",
+            "type": "object"
+          },
+          "x-ms-identifiers": []
+        },
+        "objectValue": {
+          "type": "object",
+          "description": "Value of the parameter declared in the solution object."
+        }
+      }
+    },
+    "SolutionInstanceAssociatedAccount": {
+      "description": "Metadata pertaining to status of the SolutionInstance resource.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The account kind.",
+          "enum": [
+            "computervision"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "computervision",
+                "description": "Computer vision kind."
+              }
+            ]
+          }
+        },
+        "accountResourceId": {
+          "type": "string",
+          "description": "ARM Resource ID of the associated account resource."
+        }
+      }
+    },
+    "SolutionInstanceStatusDesired": {
+      "description": "Metadata pertaining to desired deployment status of the SolutionInstance.",
+      "type": "object",
+      "readOnly": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The desired status code.",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "Solution instance desired deployment status - Active."
+              },
+              {
+                "value": "Inactive",
+                "description": "Solution instance desired deployment status - Inactive."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SolutionInstanceStatus": {
+      "description": "Metadata pertaining to deployment status of the SolutionInstance.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code.",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Failed",
+            "Activating",
+            "Deactivating"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "Solution instance deployment status - Active."
+              },
+              {
+                "value": "Inactive",
+                "description": "Solution instance deployment status - Inactive."
+              },
+              {
+                "value": "Failed",
+                "description": "Solution instance deployment status - Failed."
+              },
+              {
+                "value": "Activating",
+                "description": "Solution instance deployment status - Activating. Deployment is in progress."
+              },
+              {
+                "value": "Deactivating",
+                "description": "Solution instance deployment status - Deactivating."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The status message."
+        }
+      }
+    },
+    "SolutionInstanceListResult": {
+      "description": "The JSON-serialized array of SolutionInstance objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of SolutionInstance objects.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SolutionInstance"
+          }
+        },
+        "nextLink": {
+          "description": "The next link, if any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "description": "Name availability request.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Azure Percept account to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Fully qualified resource type which includes provider namespace, in this case Microsoft.AzurePercept/accounts.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "The properties indicating whether a given Azure Percept account name is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "Invalid indicates the name provided does not match the resource provider's naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "UnavailableReason",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "Invalid Account name."
+              },
+              {
+                "value": "AlreadyExists",
+                "description": "Account name already exists."
+              }
+            ]
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The name of the resource group that contains the Azure Percept account.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the Azure Percept account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "deviceName": {
+      "name": "deviceName",
+      "in": "path",
+      "description": "The device identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "solutionName": {
+      "name": "solutionName",
+      "in": "path",
+      "description": "The Solution identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sensorName": {
+      "name": "sensorName",
+      "in": "path",
+      "description": "The sensor identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "solutionInstanceName": {
+      "name": "solutionInstanceName",
+      "in": "path",
+      "description": "The solution instance identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

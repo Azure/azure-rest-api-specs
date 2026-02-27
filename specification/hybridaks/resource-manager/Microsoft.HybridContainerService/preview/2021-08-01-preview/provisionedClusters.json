@@ -1,0 +1,898 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "version": "2021-08-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "HybridContainerServiceClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{provisionedClustersName}": {
+      "get": {
+        "operationId": "provisionedClusters_Get",
+        "x-ms-examples": {
+          "GetProvisionedCluster": {
+            "$ref": "./examples/GetProvisionedCluster.json"
+          }
+        },
+        "summary": "Gets the provisioned cluster",
+        "description": "Gets the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/provisionedClustersNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "provisionedClusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutProvisionedCluster": {
+            "$ref": "./examples/PutProvisionedCluster.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Creates the provisioned cluster",
+        "description": "Creates the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/provisionedClustersNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "provisionedClusters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          },
+          "201": {
+            "description": "Creates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "provisionedClusters_Delete",
+        "x-ms-examples": {
+          "DeleteProvisionedCluster": {
+            "$ref": "./examples/DeleteProvisionedCluster.json"
+          }
+        },
+        "summary": "Deletes the provisioned cluster",
+        "description": "Deletes the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/provisionedClustersNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the provisionedClusters resource."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "provisionedClusters_Update",
+        "x-ms-examples": {
+          "UpdateProvisionedCluster": {
+            "$ref": "./examples/UpdateProvisionedCluster.json"
+          }
+        },
+        "summary": "Updates the provisioned cluster",
+        "description": "Updates the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/provisionedClustersNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "provisionedClusters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          },
+          "201": {
+            "description": "Updates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters": {
+      "get": {
+        "operationId": "provisionedClusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListProvisionedClusterByResourceGroup": {
+            "$ref": "./examples/ListProvisionedClusterByResourceGroup.json"
+          }
+        },
+        "summary": "Gets the provisioned clusters in a resource group",
+        "description": "Gets the Hybrid AKS provisioned cluster in a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all provisionedClusters under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/provisionedClusters": {
+      "get": {
+        "operationId": "provisionedClusters_ListBySubscription",
+        "x-ms-examples": {
+          "ListProvisionedClusterBySubscription": {
+            "$ref": "./examples/ListProvisionedClusterBySubscription.json"
+          }
+        },
+        "summary": "Gets the provisioned clusters in a subscription",
+        "description": "Gets the Hybrid AKS provisioned cluster in a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all provisionedClusters under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{provisionedClustersName}/listClusterAdminCredential": {
+      "post": {
+        "operationId": "provisionedClusters_ListClusterAdminCredentials",
+        "x-ms-examples": {
+          "ListProvisionedClusterAdminCredentials": {
+            "$ref": "./examples/ListProvisionedClusterAdminCredentials.json"
+          }
+        },
+        "summary": "Lists the admin credentials of a provisioned cluster.",
+        "description": "Lists the admin credentials of a Hybrid AKS provisioned cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/provisionedClustersNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HybridContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "provisionedClustersProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "addon": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonConfigs"
+          },
+          "description": "AddonProfiles - Profile of managed cluster add-on."
+        },
+        "controlPlane": {
+          "$ref": "#/definitions/NodePoolConfig",
+          "description": "ControlPlane - ControlPlane Configuration"
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "KubernetesVersion - Version of Kubernetes specified when creating the managed cluster."
+        },
+        "loadBalancer": {
+          "$ref": "#/definitions/NodePoolConfig",
+          "description": "LoadBalancer - LoadBalancer Configuration"
+        },
+        "clusterLocation": {
+          "type": "string",
+          "description": "Location - Resource location"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Name - Resource name"
+        },
+        "networkProfile": {
+          "type": "object",
+          "properties": {
+            "dnsServiceIP": {
+              "type": "string",
+              "description": "DNSServiceIP - An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr."
+            },
+            "dockerBridgeCidr": {
+              "type": "string",
+              "description": "DockerBridgeCidr - A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range."
+            },
+            "networkPlugin": {
+              "type": "string",
+              "description": "NetworkPlugin - Network plugin used for building Kubernetes network. Possible values include: 'calico', 'flannel'. Default is 'calico'",
+              "enum": [
+                "calico",
+                "flannel"
+              ],
+              "default": "calico",
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "networkPlugin"
+              }
+            },
+            "podCidr": {
+              "type": "string",
+              "description": "PodCidr - A CIDR notation IP range from which to assign pod IPs when kubenet is used."
+            },
+            "serviceCidr": {
+              "type": "string",
+              "description": "ServiceCidr - A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges."
+            }
+          },
+          "description": "NetworkProfile - Profile of network configuration."
+        },
+        "nodeResourceGroup": {
+          "type": "string",
+          "description": "NodeResourceGroup - Name of the resource group containing agent pool nodes."
+        },
+        "clusterTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags - provisioned cluster Tags"
+        },
+        "vnetSubnetID": {
+          "type": "string",
+          "description": "VnetSubnetID - VNet SubnetID specifies the VNet's subnet identifier."
+        },
+        "workerPool": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodePoolConfig"
+          },
+          "description": "WorkerPool -Worker pool References"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "InProgress",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "addonStatus": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/AddonStatus"
+              },
+              "description": "AddonStatus - Status of Addons"
+            },
+            "errorMessage": {
+              "type": "string",
+              "description": "ErrorMessage - Error messages during creation of cluster"
+            },
+            "powerState": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Code - Tells whether the cluster is Running or Stopped. Possible values include: 'Running', 'Stopped'",
+                  "enum": [
+                    "Running",
+                    "Stopped"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": true,
+                    "name": "code"
+                  }
+                }
+              },
+              "description": "PowerState - Represents the Power State of the cluster"
+            },
+            "provisioningStatus": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string"
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "description": "Contains Provisioning errors"
+            }
+          },
+          "description": "HybridAKSClusterStatus defines the observed state of HybridAKSCluster"
+        }
+      },
+      "description": "HybridAKSClusterSpec defines the desired state of HybridAKSCluster"
+    },
+    "provisionedClusters": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/provisionedClustersProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "description": "The provisionedClusters resource definition."
+    },
+    "provisionedClustersPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The provisionedClusters resource patch definition."
+    },
+    "provisionedClustersListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/provisionedClusters"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AddonConfigs": {
+      "properties": {
+        "config": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Config - Key-value pairs for configuring an add-on.",
+          "type": "object"
+        },
+        "enabled": {
+          "description": "Enabled - Whether the add-on is enabled or not.",
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "description": "Addon configurations"
+    },
+    "AddonStatus": {
+      "properties": {
+        "errorMessage": {
+          "description": "ErrorMessage will be set in the event that there is a terminal problem reconciling the AddOn and will contain a more verbose string suitable for logging and human consumption.",
+          "type": "string"
+        },
+        "phase": {
+          "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc.",
+          "type": "string"
+        },
+        "ready": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "description": "Status of the addon"
+    },
+    "NodePoolConfig": {
+      "type": "object",
+      "description": "NodePool configuration",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count - Number of agents to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.",
+          "default": 1
+        },
+        "hardwareConfig": {
+          "type": "object",
+          "properties": {
+            "customSize": {
+              "type": "object",
+              "properties": {
+                "cpuCount": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "memoryMB": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "description": "CustomSize Specifies cpu/memory information for custom VMSize types."
+            },
+            "vmSize": {
+              "type": "string",
+              "description": "VMSize - Size of agent VMs. Possible values"
+            }
+          },
+          "description": "HardwareConfig -  Specifies cpu/memory information for custom VMSize types."
+        },
+        "linuxProfile": {
+          "type": "object",
+          "properties": {
+            "adminUsername": {
+              "type": "string",
+              "description": "AdminUsername - The administrator username to use for Linux VMs."
+            },
+            "ssh": {
+              "type": "object",
+              "properties": {
+                "publicKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "keyData": {
+                        "type": "string",
+                        "description": "KeyData - Certificate public key used to authenticate with VMs through SSH. The certificate must be in PEM format with or without headers."
+                      }
+                    }
+                  },
+                  "description": "PublicKeys - The list of SSH public keys used to authenticate with Linux-based VMs. Only expect one key specified."
+                }
+              },
+              "description": "SSH - SSH configuration for Linux-based VMs running on Azure."
+            }
+          },
+          "description": "LinuxProfile - Profile for Linux VMs in the container service cluster."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Mode - AgentPoolMode represents mode of an agent pool. Possible values include: 'System', 'LB', 'User'. Default is 'User'",
+          "enum": [
+            "System",
+            "LB",
+            "User"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "mode"
+          },
+          "default": "User"
+        },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "NodeLabels - Agent pool node labels to be persisted across all nodes in agent pool."
+        },
+        "nodeTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NodeTaints - Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "osDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "OsDiskSizeGB - OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
+        },
+        "osType": {
+          "type": "string",
+          "description": "OsType - OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "osType"
+          },
+          "default": "Linux"
+        },
+        "nodeTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags - Agent pool tags to be persisted on the agent pool virtual machine scale set."
+        },
+        "windowsProfile": {
+          "type": "object",
+          "properties": {
+            "adminPassword": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "AdminPassword - Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\""
+            },
+            "adminUsername": {
+              "type": "string",
+              "description": "AdminUsername - Specifies the name of the administrator account. <br><br> **restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length:** 1 character <br><br> **Max-length:** 20 characters"
+            },
+            "enableCSIProxy": {
+              "type": "boolean",
+              "description": "EnableCSIProxy - Whether to enable CSI proxy."
+            },
+            "licenseType": {
+              "type": "string",
+              "description": "LicenseType - The licenseType to use for Windows VMs. Windows_Server is used to enable Azure Hybrid User Benefits for Windows VMs. Possible values include: 'None', 'Windows_Server'",
+              "enum": [
+                "Windows_Server",
+                "None"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "licenseType"
+              }
+            }
+          },
+          "description": "WindowsProfile - Profile for Windows VMs in the container service cluster."
+        }
+      }
+    },
+    "CredentialResults": {
+      "type": "object",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The list credential result response."
+    },
+    "CredentialResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the credential."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "readOnly": true,
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The credential result response."
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
+    }
+  },
+  "parameters": {
+    "provisionedClustersNameParameter": {
+      "name": "provisionedClustersName",
+      "description": "Parameter for the name of the provisioned cluster",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}

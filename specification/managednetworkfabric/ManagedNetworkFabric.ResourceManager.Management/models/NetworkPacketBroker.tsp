@@ -45,6 +45,15 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
+  @doc("ARM resource ID of the source Network Tap Rule.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  sourceNetworkTapRuleId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkTapRules";
+    }
+  ]>;
+
   @doc("Details of the last operation performed on the resource")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
@@ -53,7 +62,33 @@ model NetworkPacketBrokerProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2025_07_15)
+  @doc("Configuration state of the resource.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
+}
+
+@doc("The NetworkPacketBroker patch properties.")
+model NetworkPacketBrokerPatchProperties {
+  @doc("ARM resource ID of the source Network Tap Rule.")
+  @added(Versions.v2026_01_15_preview)
+  sourceNetworkTapRuleId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkTapRules";
+    }
+  ]>;
 }
 
 @doc("The NetworkPacketBroker patch resource definition.")
-model NetworkPacketBrokerPatch is TagsUpdate;
+model NetworkPacketBrokerPatch {
+  ...TagsUpdate;
+
+  @doc("NetworkPacketBroker patch properties.")
+  @added(Versions.v2026_01_15_preview)
+  properties?: NetworkPacketBrokerPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
+}

@@ -1,0 +1,55 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/plannedQuota.json"
+    use-read-only-status-schema: "true"
+  "@azure-tools/typespec-csharp":
+    service-name: "PlannedQuota"
+    package-dir: "Azure.ResourceManager.PlannedQuota"
+    namespace: "Azure.ResourceManager.PlannedQuota"
+    model-namespace: true
+    clear-output-folder: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PlannedQuota"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/plannedquota"
+    package-dir: "armplannedquota"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/armplannedquota"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-plannedquota"
+    namespace: "azure.mgmt.plannedquota"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-plannedquota"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-plannedquota"
+    namespace: "com.azure.resourcemanager.plannedquota"
+    service-name: "Planned Quota"
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-plannedquota"
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-plannedquota"
+    package-details:
+      name: "@azure/arm-plannedquota"
+    experimental-extensible-enums: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-plannedquota"
+parameters:
+  service-dir:
+    default: "sdk/plannedquota"

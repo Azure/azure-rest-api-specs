@@ -1,0 +1,103 @@
+{
+  "operationId": "NetworkContainers_List",
+  "title": "List Network Containers by locations",
+  "parameters": {
+    "location": "eastus",
+    "api-version": "2025-03-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.ContainerNetworking/locations/eastus/networkContainers/nc-sample01",
+            "name": "nc-sample01",
+            "type": "Microsoft.ContainerNetworking/locations/networkContainers",
+            "properties": {
+              "networkContainerId": "nc-sample01",
+              "version": "1",
+              "networkId": "network-12345",
+              "baseSubnetName": "default",
+              "associatedNodeId": "node-12345",
+              "associatedInterfaceId": "interface-67890",
+              "containerType": "containerType1",
+              "orchestratorContext": {
+                "podName": "mypod",
+                "podNamespace": "mynamespace"
+              },
+              "infraNetworkId": "infraNetwork-54321",
+              "allocatedIpSubnet": "10.0.0.0/24",
+              "secondaryIps": [
+                "10.0.0.5",
+                "10.0.0.6"
+              ],
+              "baseSubnet": "default-subnet",
+              "nodeInterfaceId": "node-interface-123",
+              "vlanId": 100,
+              "vnetVersion": "1",
+              "localIp": "10.0.0.4",
+              "greKey": 12345,
+              "orchestratorType": "Kubernetes",
+              "routingDomainId": "routing-domain-1",
+              "nodeInterfaceIpv6": "fd00::1234",
+              "subnetType": "AzVnet",
+              "nicType": "Default",
+              "networkInterfaceId": "nic-789",
+              "subnetId": "subnet-456",
+              "macAddress": "00-14-22-01-23-45",
+              "subnetAuthStrategy": "service matching",
+              "azrEnabled": true,
+              "azrHomeAzId": 1,
+              "disableSnat": false,
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.ContainerNetworking/locations/eastus/networkContainers/nc-sample02",
+            "name": "nc-sample02",
+            "type": "Microsoft.ContainerNetworking/locations/networkContainers",
+            "properties": {
+              "networkContainerId": "nc-sample02",
+              "version": "2",
+              "networkId": "network-98765",
+              "baseSubnetName": "custom-subnet",
+              "associatedNodeId": "node-54321",
+              "associatedInterfaceId": "interface-09876",
+              "containerType": "containerType2",
+              "orchestratorContext": {
+                "podName": "anotherpod",
+                "podNamespace": "anothernamespace"
+              },
+              "infraNetworkId": "infraNetwork-11111",
+              "allocatedIpSubnet": "10.1.0.0/24",
+              "secondaryIps": [
+                "10.1.0.5",
+                "10.1.0.6"
+              ],
+              "baseSubnet": "custom-base-subnet",
+              "nodeInterfaceId": "node-interface-321",
+              "vlanId": 200,
+              "vnetVersion": "2",
+              "localIp": "10.1.0.4",
+              "greKey": 54321,
+              "orchestratorType": "ServiceFabric",
+              "routingDomainId": "routing-domain-2",
+              "nodeInterfaceIpv6": "fd00::5678",
+              "subnetType": "AzOverlay",
+              "nicType": "SwiftV2",
+              "networkInterfaceId": "nic-654",
+              "subnetId": "subnet-789",
+              "macAddress": "00-25-96-FF-FE-12-34-56",
+              "subnetAuthStrategy": "token matching",
+              "azrEnabled": false,
+              "azrHomeAzId": 2,
+              "disableSnat": true,
+              "provisioningState": "Creating"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

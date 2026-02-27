@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -37,15 +38,21 @@ model AkriConnectorProperties {
 
   /** The allocated devices for the connector. */
   @visibility(Lifecycle.Read)
-  @added(Versions.`2025-10-01`)
+  @added(Versions.`2025-09-01-preview`)
   @identifiers(#["deviceInboundEndpointName", "deviceName"])
   allocatedDevices?: AkriConnectorAllocatedDevice[];
 
+  /** The status for the connector. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.`2025-12-01-preview`)
+  status?: AkriConnectorStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
 /** AkriConnector allocated device. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 model AkriConnectorAllocatedDevice {
   /** The name of the inbound endpoint for the device. */
   @visibility(Lifecycle.Read)
@@ -54,4 +61,12 @@ model AkriConnectorAllocatedDevice {
   /** The name of the device. */
   @visibility(Lifecycle.Read)
   deviceName: string;
+}
+
+/** AkriConnector status. */
+@added(Versions.`2025-12-01-preview`)
+model AkriConnectorStatus {
+  /** The health state of the AkriConnector. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

@@ -1,0 +1,31 @@
+{
+  "title": "Get a notification session",
+  "operationId": "NotificationsSessions_Get",
+  "description": "This example demonstrates getting an existing notification session.",
+  "parameters": {
+    "api-version": "2025-11-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "locationName": "westus2",
+    "notificationSessionName": "MyTestSession"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "name": "MyTestSession",
+        "type": "Microsoft.ResourceNotifications/notificationSessions",
+        "properties": {
+          "notificationSessionId": "1c90dad3-5936-4d9a-8c7e-ce6ed53ccea",
+          "description": "Test notification session for development purposes",
+          "status": "Active",
+          "maxDurationMinutes": 1440,
+          "startTime": "2025-03-27T14:30:00.000Z",
+          "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}",
+          "provisioningState": "Succeeded",
+          "createdAt": "2025-03-27T14:30:00.000Z",
+          "updatedAt": "2025-03-27T14:30:00.000Z"
+        }
+      }
+    }
+  }
+}

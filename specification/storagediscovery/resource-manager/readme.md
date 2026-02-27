@@ -29,8 +29,50 @@ These are the global settings for the storage discovery.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06-01-preview
+tag: package-2026-07-01-preview
 ```
+
+### Tag: package-2024-12-01-preview
+
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2024-12-01-preview/storageDiscoveryWorkspace.json
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2025-01-01-preview/storageDiscoveryWorkspace.json
+```
+
+---
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2025-03-01-preview/storageDiscoveryWorkspace.json
+```
+
+---
+
+### Tag: package-2025-04-01-preview
+
+These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2025-04-01-preview/storageDiscoveryWorkspace.json
+```
+
+---
 
 ### Tag: package-2025-06-01-preview
 
@@ -40,10 +82,10 @@ These settings apply only when `--tag=package-2025-06-01-preview` is specified o
 input-file:
   - Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
 suppressions:
-  - code: ArmResourcePropertiesBag
+  - code: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
-    where: $.definitions["StorageDiscoveryWorkspace"]
-    reason: The sku property name is critical. Present in already approved version.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
   - code: OperationIdNounVerb
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId
@@ -60,10 +102,30 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 input-file:
   - Microsoft.StorageDiscovery/stable/2025-09-01/storageDiscoveryWorkspace.json
 suppressions:
-  - code: ArmResourcePropertiesBag
+  - code: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
-    where: $.definitions["StorageDiscoveryWorkspace"]
-    reason: The sku property name is critical. Present in already approved version.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  - code: OperationIdNounVerb
+    from: storageDiscoveryWorkspace.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId
+    reason: The Report_GenerateReport operation follows established naming conventions for this service as per ARM review.
+```
+
+---
+
+### Tag: package-2026-07-01-preview
+
+These settings apply only when `--tag=package-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2026-07-01-preview/storageDiscoveryWorkspace.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: storageDiscoveryWorkspace.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
   - code: OperationIdNounVerb
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId

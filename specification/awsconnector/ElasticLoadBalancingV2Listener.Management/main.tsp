@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -77,11 +80,11 @@ model AwsElasticLoadBalancingV2ListenerProperties {
   alpnPolicy?: string[];
 
   @doc("The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   certificates?: Certificate[];
 
   @doc("The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   defaultActions?: Action[];
 
   @doc("Property listenerArn")
@@ -261,7 +264,7 @@ model ForwardConfig {
   targetGroupStickinessConfig?: TargetGroupStickinessConfig;
 
   @doc("Information about how traffic will be distributed between multiple target groups in a forward rule.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   targetGroups?: TargetGroupTuple[];
 }
 

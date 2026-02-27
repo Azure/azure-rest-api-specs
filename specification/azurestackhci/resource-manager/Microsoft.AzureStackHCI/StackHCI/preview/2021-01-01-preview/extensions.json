@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingsName}/extensions": {
       "get": {
-        "operationId": "Extensions_ListByArcSetting",
-        "description": "List all Extensions under ArcSetting resource.",
+        "operationId": "Extensions_ListByHCICluster",
+        "description": "Get all Arc Extensions of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -46,10 +46,10 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcSettingNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -70,8 +70,8 @@
           }
         },
         "x-ms-examples": {
-          "List Extensions under ArcSetting resource": {
-            "$ref": "./examples/ListExtensionsByArcSetting.json"
+          "Get Arc Extensions by HCI Cluster": {
+            "$ref": "./examples/ListExtensionsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -79,10 +79,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingsName}/extensions/{extensionName}": {
       "get": {
         "operationId": "Extensions_Get",
-        "description": "Get particular Arc Extension of HCI Cluster.",
+        "description": "Get particular Arc Extension of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -91,10 +91,10 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcSettingNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -134,10 +134,10 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcSettingNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -196,10 +196,10 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcSettingNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -243,7 +243,7 @@
       },
       "delete": {
         "operationId": "Extensions_Delete",
-        "description": "Delete particular Arc Extension of HCI Cluster.",
+        "description": "Delete particular Arc Extension of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -252,10 +252,10 @@
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcSettingNameParameter"
+            "$ref": "./arcSettings.json#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionNameParameter"
@@ -295,7 +295,7 @@
   },
   "definitions": {
     "Extension": {
-      "description": "Details of a particular extension in HCI Cluster.",
+      "description": "Details of a particular extension in HCI Cluster",
       "type": "object",
       "allOf": [
         {
@@ -304,10 +304,9 @@
       ],
       "properties": {
         "systemData": {
-          "description": "System data of Extension resource.",
+          "description": "System data of Extension resource",
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true,
-          "readOnly": true
+          "x-ms-client-flatten": true
         },
         "properties": {
           "description": "Describes Machine Extension Properties.",
@@ -317,11 +316,11 @@
       }
     },
     "ExtensionProperties": {
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "description": "Status of ArcExtension for a particular node in HCI Cluster",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the Extension proxy resource.",
+          "description": "Provisioning state of the ArcSettings proxy resource",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -331,21 +330,21 @@
             "Provisioning"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "provisioningState",
             "modelAsString": true
           },
           "readOnly": true
         },
         "extensionParameters": {
-          "description": "Parameters specific to this extension type.",
+          "description": "Parameters specific to this extension",
           "$ref": "#/definitions/ExtensionParameters",
           "x-ms-client-flatten": true
         },
         "aggregateState": {
-          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "description": "Aggregate state of ArcExtension across the nodes in this HCI cluster",
           "type": "string",
           "enum": [
-            "NotSpecified",
+            "Not Specified",
             "Error",
             "Succeeded",
             "Canceled",
@@ -362,40 +361,40 @@
             "InProgress"
           ],
           "x-ms-enum": {
-            "name": "ExtensionAggregateState",
+            "name": "aggregateExtensionState",
             "modelAsString": true
           },
           "readOnly": true
         },
         "perNodeExtensionDetails": {
-          "description": "State of Arc Extension in each of the nodes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PerNodeExtensionState"
           },
+          "description": "State of Arc extension in each of the nodes",
           "readOnly": true
         }
       }
     },
     "PerNodeExtensionState": {
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "description": "Status of ArcExtension for a particular node in HCI Cluster",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the node in HCI Cluster.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Name of the Node in HCI Cluster"
         },
         "extension": {
-          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node"
         },
         "state": {
-          "description": "State of Arc Extension in this node.",
+          "description": "State of ArcExtension in this node",
           "type": "string",
           "enum": [
-            "NotSpecified",
+            "Not Specified",
             "Error",
             "Succeeded",
             "Canceled",
@@ -409,7 +408,7 @@
             "Moving"
           ],
           "x-ms-enum": {
-            "name": "NodeExtensionState",
+            "name": "perNodeExtensionState",
             "modelAsString": true
           },
           "readOnly": true
@@ -417,16 +416,15 @@
       }
     },
     "ExtensionList": {
-      "description": "List of Extensions in HCI cluster.",
+      "description": "List of ArcExtensions in HCI cluster",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Extensions in HCI cluster.",
+          "description": "List of ArcExtensions in HCI cluster.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Extension"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results.",
@@ -436,13 +434,9 @@
       }
     },
     "ExtensionParameters": {
-      "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
+      "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute",
       "type": "object",
       "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
-        },
         "publisher": {
           "type": "string",
           "description": "The name of the extension handler publisher."
@@ -465,29 +459,18 @@
         },
         "protectedSettings": {
           "type": "object",
-          "description": "Protected settings (may contain secrets).",
+          "description": "Protected settings specific to the extension, these will not be returned in any calls",
           "x-ms-secret": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
         }
       }
     }
   },
   "parameters": {
-    "ClusterNameParameter": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the cluster.",
-      "x-ms-parameter-location": "method"
-    },
-    "ArcSettingNameParameter": {
-      "name": "arcSettingName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the proxy resource holding details of HCI ArcSetting information.",
-      "x-ms-parameter-location": "method"
-    },
     "ExtensionNameParameter": {
       "name": "extensionName",
       "in": "path",

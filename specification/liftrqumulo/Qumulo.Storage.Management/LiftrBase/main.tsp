@@ -7,6 +7,8 @@ import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Reflection;
+using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -84,9 +86,22 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
-  @OpenAPI.extension("x-ms-secret", true)
+  @secret
   email: string;
+}
+
+@doc("Base resource properties that can be extended for arm resources.")
+model BaseResourceProperties {
+  @doc("MarketplaceDetails of Qumulo FileSystem resource")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  marketplace: MarketplaceDetails;
+
+  @doc("User Details of Qumulo FileSystem resource")
+  user: UserDetails;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -132,6 +147,11 @@ union ProvisioningState {
    * File system resource is deleted
    */
   Deleted: "Deleted",
+
+  /**
+   * File system resource state is unknown
+   */
+  NotSpecified: "NotSpecified",
 
   string,
 }

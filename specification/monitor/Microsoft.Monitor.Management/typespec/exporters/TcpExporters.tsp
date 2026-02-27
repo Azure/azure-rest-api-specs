@@ -2,6 +2,8 @@
   Definitions of elements defined for different TCP exporters.
 */
 
+using OpenAPI;
+
 namespace Microsoft.Monitor;
 
 @doc("Base exporter using TCP as transport protocol.")

@@ -6282,7 +6282,7 @@
     },
     "AutonomousDatabase": {
       "type": "object",
-      "description": "Autonomous Database resource model.",
+      "description": "Autonomous Database  resource model.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBaseProperties",
@@ -6301,8 +6301,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -6430,7 +6429,7 @@
         "retentionPeriodInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Retention period, in days",
+          "description": "Retention period, in days, for long-term backups.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -6503,30 +6502,18 @@
     },
     "AutonomousDatabaseBackupUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AutonomousDatabaseBackup.",
+      "description": "AutonomousDatabaseBackup resource definition",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AutonomousDatabaseBackupUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AutonomousDatabaseBackupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AutonomousDatabaseBackup.",
-      "properties": {
-        "retentionPeriodInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period, in days",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     },
     "AutonomousDatabaseBaseProperties": {
       "type": "object",
@@ -7112,8 +7099,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseCharacterSetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -7533,8 +7519,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseNationalCharacterSetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -7629,8 +7614,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -7887,8 +7871,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutonomousDbVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -8137,8 +8120,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CloudExadataInfrastructureProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "zones": {
           "type": "array",
@@ -8507,8 +8489,7 @@
         },
         "properties": {
           "$ref": "#/definitions/CloudExadataInfrastructureUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -8577,8 +8558,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CloudVmClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -8750,7 +8730,7 @@
         },
         "hostname": {
           "type": "string",
-          "description": "The hostname for the cloud VM cluster.",
+          "description": "The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.",
           "minLength": 1,
           "maxLength": 23,
           "x-ms-mutability": [
@@ -9049,8 +9029,7 @@
         },
         "properties": {
           "$ref": "#/definitions/CloudVmClusterUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -9545,8 +9524,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DbNodeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -9843,8 +9821,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DbServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -10129,8 +10106,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DbSystemShapeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -10391,8 +10367,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DnsPrivateViewProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -10514,8 +10489,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DnsPrivateZoneProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -10716,8 +10690,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExadbVmClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "zones": {
           "type": "array",
@@ -11188,8 +11161,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ExadbVmClusterUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -11215,8 +11187,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExascaleDbNodeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -11364,8 +11335,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExascaleDbStorageVaultProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "zones": {
           "type": "array",
@@ -11590,8 +11560,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FlexComponentProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -11739,8 +11708,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GiMinorVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -11797,8 +11765,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GiVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -12005,6 +11972,13 @@
         ]
       }
     },
+    "LongTermBackUpRetentionPeriod": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Retention period, in days, for long-term backups",
+      "minimum": 90,
+      "maximum": 3650
+    },
     "LongTermBackUpScheduleDetails": {
       "type": "object",
       "description": "Details for the long-term backup schedule.",
@@ -12020,7 +11994,7 @@
         },
         "retentionPeriodInDays": {
           "$ref": "#/definitions/RetentionPeriod",
-          "description": "Retention period, in days, for backups."
+          "description": "Retention period, in days, for long-term backups"
         },
         "isDisabled": {
           "type": "boolean",
@@ -12205,8 +12179,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkAnchorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "zones": {
           "type": "array",
@@ -12331,8 +12304,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NetworkAnchorUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -12496,8 +12468,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OracleSubscriptionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "plan": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
@@ -12638,8 +12609,7 @@
         },
         "properties": {
           "$ref": "#/definitions/OracleSubscriptionUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -13045,8 +13015,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ResourceAnchorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -13462,8 +13431,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SystemVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -13655,8 +13623,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualNetworkAddressProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

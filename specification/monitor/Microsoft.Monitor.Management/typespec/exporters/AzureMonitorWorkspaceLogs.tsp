@@ -2,6 +2,8 @@
   Definitions of elements exclusively defined for the Azure Monitor Workspace for Logs exporter.
 */
 
+using OpenAPI;
+
 namespace Microsoft.Monitor;
 
 @doc("Azure Monitor Workspace Logs specific configurations.")

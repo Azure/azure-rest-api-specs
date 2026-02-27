@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -76,7 +79,7 @@ model AwsWafv2LoggingConfigurationProperties {
   managedByFirewallManager?: boolean;
 
   @doc("The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   redactedFields?: FieldToMatch[];
 
   @doc("The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.")
@@ -93,7 +96,7 @@ model LoggingFilterModelProperties {
   defaultBehavior?: DefaultBehavior;
 
   @doc("The filters that you want to apply to the logs.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   filters?: Filter[];
 }
 
@@ -137,7 +140,7 @@ model Filter {
   behavior?: FilterBehavior;
 
   @doc("Match conditions for the filter.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   conditions?: Condition[];
 
   @doc("Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.")

@@ -1,0 +1,331 @@
+{
+  "parameters": {
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterpool1",
+    "clusterName": "cluster1",
+    "HDInsightCluster": {
+      "location": "West US 2",
+      "properties": {
+        "clusterType": "spark",
+        "computeProfile": {
+          "nodes": [
+            {
+              "type": "worker",
+              "vmSize": "Standard_D3_v2",
+              "count": 4
+            }
+          ]
+        },
+        "clusterProfile": {
+          "clusterVersion": "0.0.1",
+          "ossVersion": "2.2.3",
+          "managedIdentityProfile": {
+            "identityList": [
+              {
+                "type": "cluster",
+                "resourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+                "clientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+                "objectId": "40491351-c240-4042-91e0-f644a1d2b441"
+              }
+            ]
+          },
+          "authorizationProfile": {
+            "userIds": [
+              "testuser1",
+              "testuser2"
+            ]
+          },
+          "serviceConfigsProfiles": [
+            {
+              "serviceName": "spark-service",
+              "configs": [
+                {
+                  "component": "spark-config",
+                  "files": [
+                    {
+                      "fileName": "spark-defaults.conf",
+                      "values": {
+                        "spark.eventLog.enabled": "true"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "serviceName": "yarn-service",
+              "configs": [
+                {
+                  "component": "yarn-config",
+                  "files": [
+                    {
+                      "fileName": "core-site.xml",
+                      "values": {
+                        "fs.defaultFS": "wasb://testcontainer@teststorage.dfs.core.windows.net/",
+                        "storage.name": "teststorage",
+                        "storage.protocol": "wasb",
+                        "storage.key": "test key",
+                        "storage.container": "testcontainer"
+                      }
+                    },
+                    {
+                      "fileName": "yarn-site.xml",
+                      "values": {
+                        "yarn.webapp.ui2.enable": "false"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "sparkProfile": {},
+          "sshProfile": {
+            "count": 2,
+            "vmSize": "Standard_D3_v2"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterType": "spark",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "worker",
+                "vmSize": "Standard_D3_v2",
+                "count": 4
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "0.0.1",
+            "ossVersion": "2.2.3",
+            "components": [
+              {
+                "name": "HDFS",
+                "version": "2.2.3"
+              }
+            ],
+            "managedIdentityProfile": {
+              "identityList": [
+                {
+                  "type": "cluster",
+                  "resourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+                  "clientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+                  "objectId": "40491351-c240-4042-91e0-f644a1d2b441"
+                }
+              ]
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "serviceConfigsProfiles": [
+              {
+                "serviceName": "spark-service",
+                "configs": [
+                  {
+                    "component": "spark-config",
+                    "files": [
+                      {
+                        "fileName": "spark-defaults.conf",
+                        "values": {
+                          "spark.eventLog.enabled": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "serviceName": "yarn-service",
+                "configs": [
+                  {
+                    "component": "yarn-config",
+                    "files": [
+                      {
+                        "fileName": "core-site.xml",
+                        "values": {
+                          "fs.defaultFS": "wasb://testcontainer@teststorage.dfs.core.windows.net/",
+                          "storage.name": "teststorage",
+                          "storage.protocol": "wasb",
+                          "storage.key": "test key",
+                          "storage.container": "testcontainer"
+                        }
+                      },
+                      {
+                        "fileName": "yarn-site.xml",
+                        "values": {
+                          "yarn.webapp.ui2.enable": "false"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "sparkProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "properties": {
+          "provisioningState": "Accepted",
+          "clusterType": "spark",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "worker",
+                "vmSize": "Standard_D3_v2",
+                "count": 4
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "0.0.1",
+            "ossVersion": "2.2.3",
+            "components": [
+              {
+                "name": "HDFS",
+                "version": "2.2.3"
+              }
+            ],
+            "managedIdentityProfile": {
+              "identityList": [
+                {
+                  "type": "cluster",
+                  "resourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+                  "clientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+                  "objectId": "40491351-c240-4042-91e0-f644a1d2b441"
+                }
+              ]
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "serviceConfigsProfiles": [
+              {
+                "serviceName": "spark-service",
+                "configs": [
+                  {
+                    "component": "spark-config",
+                    "files": [
+                      {
+                        "fileName": "spark-defaults.conf",
+                        "values": {
+                          "spark.eventLog.enabled": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "serviceName": "yarn-service",
+                "configs": [
+                  {
+                    "component": "yarn-config",
+                    "files": [
+                      {
+                        "fileName": "core-site.xml",
+                        "values": {
+                          "fs.defaultFS": "wasb://testcontainer@teststorage.dfs.core.windows.net/",
+                          "storage.name": "teststorage",
+                          "storage.protocol": "wasb",
+                          "storage.key": "test key",
+                          "storage.container": "testcontainer"
+                        }
+                      },
+                      {
+                        "fileName": "yarn-site.xml",
+                        "values": {
+                          "yarn.webapp.ui2.enable": "false"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "sparkProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode",
+              "vmSize": "Standard_D3_v2"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}

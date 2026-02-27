@@ -24,4 +24,19 @@ namespace Microsoft.PortalServices;
 enum Versions {
   @doc("Azure Portal Services Copilot Settings Management API version 2024-04-01-preview.")
   v2024_04_01_preview: "2024-04-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2024-07-01-preview.")
+  v2024_07_01_preview: "2024-07-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2024-08-01-preview.")
+  v2024_08_01_preview: "2024-08-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2024-09-01-preview.")
+  v2024_09_01_preview: "2024-09-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2025-08-01-preview.")
+  v2025_08_01_preview: "2025-08-01-preview",
+
+  @doc("Azure Portal Services Copilot Settings Management API version 2025-09-10-preview.")
+  v2025_09_10_preview: "2025-09-10-preview",
 }

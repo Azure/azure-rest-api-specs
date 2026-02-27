@@ -1,0 +1,24 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - resource-manager/Microsoft.MessagingCatalog/preview/2024-02-01-preview/messagingcatalog.json
+    - resource-manager/Microsoft.MessagingCatalog/preview/2024-03-01-preview/messagingcatalog.json
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths: [MessagingCatalog.Management/tspconfig.yaml]

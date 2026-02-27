@@ -1,0 +1,835 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-12-01-preview",
+    "title": "perceptionengine",
+    "description": "Description of the new service",
+    "x-ms-code-generation-settings": {
+      "name": "perceptionengineClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PerceptionEngine/AIWorkflows": {
+      "get": {
+        "operationId": "AIWorkflows_ListBySubscription",
+        "x-ms-examples": {
+          "AIWorkflows_ListBySubscription": {
+            "$ref": "./examples/AIWorkflows_ListBySubscription.json"
+          }
+        },
+        "tags": [
+          "Resource"
+        ],
+        "description": "List AI Workflows by Subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PerceptionEngine/AIWorkflows": {
+      "get": {
+        "operationId": "AIWorkflows_ListByResourceGroup",
+        "x-ms-examples": {
+          "AIWorkflows_ListByResourceGroup": {
+            "$ref": "./examples/AIWorkflows_ListByResourceGroup.json"
+          }
+        },
+        "description": "List AI Workflows by resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PerceptionEngine/AIWorkflows/{AIWorkflowName}": {
+      "delete": {
+        "operationId": "AIWorkflows_Delete",
+        "x-ms-examples": {
+          "AIWorkflows_Delete": {
+            "$ref": "./examples/AIWorkflows_Delete.json"
+          }
+        },
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete an AIWorkflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "AIWorkflows_Get",
+        "x-ms-examples": {
+          "AIWorkflows_Get": {
+            "$ref": "./examples/AIWorkflows_Get.json"
+          }
+        },
+        "tags": [
+          "Resource"
+        ],
+        "description": "Retrieve an AIWorkflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AIWorkflows_Patch",
+        "x-ms-examples": {
+          "AIWorkflows_Patch": {
+            "$ref": "./examples/AIWorkflows_Patch.json"
+          }
+        },
+        "tags": [
+          "Resource"
+        ],
+        "description": "Update an AIWorkflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AIWorkflows_Create",
+        "x-ms-examples": {
+          "AIWorkflows_Create": {
+            "$ref": "./examples/AIWorkflows_Create.json"
+          }
+        },
+        "tags": [
+          "Resource"
+        ],
+        "description": "Create an AIWorkflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PerceptionEngine/AIWorkflows/{AIWorkflowName}/publish": {
+      "post": {
+        "operationId": "AIWorkflows_Publish",
+        "x-ms-examples": {
+          "AIWorkflows_Publish": {
+            "$ref": "./examples/AIWorkflows_Publish.json"
+          }
+        },
+        "description": "Publish a workflow",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/publishInfoParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation was successfully started and will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PerceptionEngine/AIWorkflows/{AIWorkflowName}/listKeys": {
+      "post": {
+        "operationId": "AIWorkflows_ListKeys",
+        "x-ms-examples": {
+          "AIWorkflows_ListKeys": {
+            "$ref": "./examples/AIWorkflows_ListKeys.json"
+          }
+        },
+        "description": "Lists the keys for the specified AI Workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns with a response body containing the keys.",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PerceptionEngine/AIWorkflows/{AIWorkflowName}/regenerateKey": {
+      "post": {
+        "operationId": "AIWorkflows_RegenerateKey",
+        "x-ms-examples": {
+          "AIWorkflows_RegenerateKey": {
+            "$ref": "./examples/AIWorkflows_RegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the specified key for the specified AI Workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AIWorkflowNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/regenerateKeyInfo"
+            },
+            "description": "regenerate key parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AIWorkflowKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PerceptionEngine/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "ListOperations",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "managedServiceIdentity": {
+      "type": "object",
+      "description": "Managed Service Identity",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the Managed Service Identity.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "ID of the Azure Active Directory."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AIWorkflowResource": {
+      "description": "An Azure AI workflow resource.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Managed Service Identity for the resource",
+          "$ref": "#/definitions/managedServiceIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties",
+          "$ref": "#/definitions/AIWorkflowProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/resource"
+        }
+      ]
+    },
+    "AIWorkflowList": {
+      "description": "The List operation response, that contains the AI workflows and their properties.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AIWorkflowResource"
+          },
+          "description": "List of AI workflows and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "edge": {
+      "description": "An edge between 2 nodes",
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "pattern": "^[^. ]+(:[^. ]+$)?"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[^. ]+(:[^. ]+$)?"
+        }
+      }
+    },
+    "synchronizedEdgeGroup": {
+      "description": "Synchronized edge group is used to synchronize multiple inputs to a node",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "synchronizationPrecision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1073741824
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/edge"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "edges"
+      ]
+    },
+    "AIWorkflowProperties": {
+      "properties": {
+        "baseImageName": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "packageId": {
+                    "type": "string",
+                    "pattern": "^([a-z_A-Z][\\w\\-]+(?:\\.[a-z_A-Z][\\w\\-]+)*)$"
+                  },
+                  "settings": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "edges": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/edge"
+              }
+            },
+            "synchronizedEdgeGroups": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/synchronizedEdgeGroup"
+              }
+            }
+          }
+        }
+      },
+      "description": "AIWorkflow properties."
+    },
+    "restError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/restErrorBody"
+        }
+      },
+      "description": "An Error response."
+    },
+    "restErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/restErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from Azure."
+    },
+    "azureContainerRegistryInfo": {
+      "description": "Info of the azure container registry",
+      "properties": {
+        "dockerImageId": {
+          "type": "string",
+          "description": "Docker image id e.g. <server>.azurecr.io/<repo>:<Tag>"
+        }
+      }
+    },
+    "publishInfo": {
+      "description": "Publish operation info",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "IoTEdgeModule"
+          ],
+          "x-ms-enum": {
+            "name": "PublishType",
+            "modelAsString": true
+          }
+        },
+        "azureContainerRegistry": {
+          "$ref": "#/definitions/azureContainerRegistryInfo"
+        }
+      }
+    },
+    "tags": {
+      "description": "Tags are a list of key-value pairs that describe the resource.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "AIWorkflowKeys": {
+      "properties": {
+        "key1": {
+          "type": "string",
+          "description": "Gets the value of key 1."
+        },
+        "key2": {
+          "type": "string",
+          "description": "Gets the value of key 2."
+        }
+      },
+      "description": "The access keys for the AI Workflow."
+    },
+    "regenerateKeyInfo": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "key name to generate (Key1|Key2)",
+          "enum": [
+            "Key1",
+            "Key2"
+          ],
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyName"
+      ],
+      "description": "Regenerate key info."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.PerceptionEngine",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "description": "The API version to be used with the HTTP request.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    },
+    "AIWorkflowNameParameter": {
+      "name": "AIWorkflowName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an AI Workflow."
+    },
+    "AIWorkflowParameter": {
+      "name": "AIWorkflow",
+      "description": "AIWorkflow parameter.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/AIWorkflowResource"
+      },
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "publishInfoParameter": {
+      "name": "publishInfo",
+      "description": "publish info.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/publishInfo"
+      },
+      "x-ms-parameter-location": "method",
+      "required": true
+    }
+  }
+}

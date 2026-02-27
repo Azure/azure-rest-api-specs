@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testSite",
+            "type": "Microsoft.HybridNetwork/sites",
+            "id": "subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/sites/testSite",
+            "location": "westUs2",
+            "properties": {
+              "nfvis": [
+                {
+                  "name": "azureWestUs2",
+                  "location": "westUs2",
+                  "nfviType": "AzureCore"
+                }
+              ],
+              "provisioningState": "Accepted"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Sites_ListBySubscription",
+  "title": "List all hybrid network sites in a subscription."
+}

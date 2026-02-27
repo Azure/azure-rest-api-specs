@@ -1,0 +1,52 @@
+{
+  "operationId": "ThrottlingAccounts_ListBySubscription",
+  "title": "ThrottlingAccounts_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/throttlingAccounts/contoso",
+            "type": "Microsoft.Throttling/throttlingAccounts",
+            "name": "contoso",
+            "location": "westus3",
+            "kind": "direct",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hostName": "contoso.throttling.azure.com",
+              "authentication": {
+                "certificates": [
+                  {
+                    "subjectName": "contoso.throttling.azure.com"
+                  }
+                ],
+                "entra": [
+                  {
+                    "tenantId": "00000000-0000-0000-0000-000000000000",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                  }
+                ]
+              }
+            },
+            "tags": {
+              "key1": "value1"
+            },
+            "systemData": {
+              "createdBy": "example@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2022-05-05T19:48:34.573Z",
+              "lastModifiedBy": "example@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+            }
+          }
+        ],
+        "nextLink": "https://example.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Throttling/throttlingAccounts/"
+      }
+    }
+  }
+}

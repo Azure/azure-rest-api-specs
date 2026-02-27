@@ -1,0 +1,178 @@
+# Healthcare Interop Cloud
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for Microsoft HealthcareInterop Cloud service.
+
+## Getting Started
+
+To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+
+> `autorest readme.md`
+
+To see additional help and options, run:
+
+> `autorest --help`
+
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
+---
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for the Microsoft HealthcareInterop Cloud service.
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2025-11-01-preview
+```
+
+### Tag: package-2025-11-01-preview
+
+These settings apply only when `--tag=package-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/cloud.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels/{dicomDirectChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/{ddmsFhirEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/{ddmsFhirFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+```
+
+### Tag: package-2025-10-01-preview
+
+These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01-preview'
+input-file:
+  - preview/2025-10-01-preview/cloud.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels/{dicomDirectChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/ddmsFhirEventBatchChannels/{ddmsFhirEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+```
+
+### Tag: package-2025-06-01-preview
+
+These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01-preview'
+input-file:
+  - preview/2025-06-01-preview/cloud.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels/{dicomDirectChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+```
+
+### Tag: package-2025-05-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+  - preview/2025-05-01-preview/cloud.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: cloud.json
+    where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: (GitHub Issue 747) Rule AvoidAnonymousTypes raises a false-positive error on UserAssignedIdentity generated from TypeSpec.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+  - code: PatchBodyParametersSchema
+    from: cloud.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}"].patch.parameters[4].schema.properties.properties
+    reason: There are properties (connectorType, emrSystem, triggerType) used as discriminators to support polymorphic resource definitions. The discriminators need to be provided during PATCH to allow updates on certain polymorphic resource properties.
+```
+
+---
+
+# Code Generation
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+```yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
+```
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

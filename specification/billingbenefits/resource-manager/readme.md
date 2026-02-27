@@ -32,7 +32,7 @@ tag: package-preview-2025-12-01-preview
 
 ### Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: ProvisioningStateValidation
     from: billingbenefits.json
@@ -44,13 +44,13 @@ directive:
   - suppress: PatchSkuProperty
     from: billingbenefits.json
     reason: \'Sku\' is not a supported property in savings plan patch operation
-  - suppress: AllResourcesMustHaveDelete
+  - suppress: AllResourcesMustHaveDelete  
     from: billingbenefits.json
     reason: This service does not support deleting resources once created.
-  - suppress: TopLevelResourcesListBySubscription
+  - suppress: TopLevelResourcesListBySubscription 
     from: billingbenefits.json
     reason: Currently only list by tenant is supported.
-  - suppress: CreateOperationAsyncResponseValidation
+  - suppress: CreateOperationAsyncResponseValidation 
     from: billingbenefits.json
     reason: According to ARM's guide 200 is returned when PUT call finishes.
   - suppress: TrackedResourcePatchOperation
@@ -132,15 +132,6 @@ These settings apply only when `--tag=package-preview-2024-11-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-11-01-preview'
 input-file:
   - Microsoft.BillingBenefits/preview/2024-11-01-preview/billingbenefits.json
-```
-
-### Tag: package-2022-11-01
-
-These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-11-01'
-input-file:
-  - Microsoft.BillingBenefits/stable/2022-11-01/billingbenefits.json
 ```
 
 ---

@@ -1,0 +1,58 @@
+{
+  "title": "Snapshots_Get",
+  "operationId": "Snapshots_Get",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "api-version": "2022-11-01-preview",
+    "snapshotId": "6141c052-49b5-4b59-a49c-20cb4b58cfa0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourcegroups/test-healthmodels-rg/providers/Microsoft.HealthModel/healthmodels/myModel1/snapshots/6141c052-49b5-4b59-a49c-20cb4b58cfa0",
+        "type": "Microsoft.HealthModel/healthmodels/snapshots",
+        "name": "6141c052-49b5-4b59-a49c-20cb4b58cfa0",
+        "properties": {
+          "healthModelVersionNumber": "1677679737124",
+          "timeGenerated": "2023-03-02T10:40:04.6649679Z",
+          "overallState": "Healthy",
+          "executionDuration": "00:00:01",
+          "nodeStates": [
+            {
+              "nodeId": "0",
+              "timeGenerated": "2023-03-02T10:40:04.6567151Z",
+              "healthState": "Healthy",
+              "healthScore": 100
+            },
+            {
+              "nodeId": "07e19263-93c6-4b60-abe4-090c1ec08212",
+              "timeGenerated": "2023-03-02T10:40:04.664481Z",
+              "healthState": "Healthy",
+              "healthScore": 100
+            }
+          ],
+          "queryResults": [
+            {
+              "queryId": "cb5283a9-aae6-4670-89a3-5df0132780e6",
+              "nodeId": "07e19263-93c6-4b60-abe4-090c1ec08212",
+              "timeGenerated": "2023-03-02T10:40:03.7121731Z",
+              "queryExecutionDuration": "00:00:02",
+              "resultValue": "1",
+              "healthState": "Healthy"
+            },
+            {
+              "queryId": "21be748c-2879-4c83-869b-ed36d2dffbd8",
+              "nodeId": "07e19263-93c6-4b60-abe4-090c1ec08212",
+              "timeGenerated": "2023-03-02T10:40:03.7563017Z",
+              "queryExecutionDuration": "00:00:05",
+              "healthState": "Unknown",
+              "error": "Some error message"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

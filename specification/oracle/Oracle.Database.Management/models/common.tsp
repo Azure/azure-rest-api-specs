@@ -44,6 +44,10 @@ union WorkloadType {
   @doc("APEX - indicates an Autonomous Database with the Oracle APEX Application Development workload type.")
   APEX: "APEX",
 
+  @added(Versions.v20251115_preview)
+  @doc("LH - indicates an Oracle Autonomous AI Lakehouse database")
+  LH: "LH",
+
   string,
 }
 
@@ -75,12 +79,6 @@ model PortRange {
 model DayOfWeek {
   @doc("Name of the day of the week.")
   name: DayOfWeekName;
-}
-
-@doc("DayOfWeek resource properties")
-model DayOfWeekUpdate {
-  @doc("Name of the day of the week.")
-  name?: DayOfWeekName;
 }
 
 @doc("The [OCID](/Content/General/Concepts/identifiers.htm) of the resource.")

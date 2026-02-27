@@ -11,10 +11,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./service.tsp";
 import "./standbyContainerGroupPool.tsp";
 
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -37,10 +39,10 @@ model StandbyContainerGroupPoolRuntimeViewResource
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("Display status of the standby pool")
   @visibility(Lifecycle.Read)
   status?: PoolStatus;
@@ -48,36 +50,31 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("Displays the provisioning state of the standby pool")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-  @doc("Displays prediction information of the standby pool")
-  @visibility(Lifecycle.Read)
-  prediction?: StandbyContainerGroupPoolPrediction;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("The zone that the provided counts are in. It will not have a value if zones are not enabled.")
   zone?: int64;
 
-  @doc("The count of pooled resources in each state.")
-  @identifiers(#["state"])
-  @removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("The count of pooled container groups in each state.")
+  @Azure.ResourceManager.identifiers(#["state"])
+  @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @renamedFrom(
-    Microsoft.StandbyPool.Versions.`2025-03-01`,
+    Microsoft.StandbyPool.Versions.`2024-08-01-preview`,
     "instanceCountsByState"
   )
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled container groups in each state for the given zone.")
-  @identifiers(#["state"])
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @Azure.ResourceManager.identifiers(#["state"])
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   instanceCountsByState: PoolContainerGroupStateCount[];
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("The state of the pooled container groups.")
 union PoolContainerGroupState {
   @doc("The container group is up and running.")
@@ -92,7 +89,7 @@ union PoolContainerGroupState {
   string,
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("Displays the counts of pooled container groups in each state, as known by the StandbyPool resource provider.")
 model PoolContainerGroupStateCount {
   @doc("The state that the pooled container groups count is for.")
@@ -102,33 +99,9 @@ model PoolContainerGroupStateCount {
   count: int64;
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-@doc("Displays prediction information of the standby pool.")
-model StandbyContainerGroupPoolPrediction {
-  @doc("Displays the forecast information of the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastValues: StandbyContainerGroupPoolForecastValues;
-
-  @doc("Displays the UTC timestamp of when the prediction was retrieved for the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastStartTime: utcDateTime;
-
-  @doc("Displays additional information for the prediction of the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastInfo: string;
-}
-
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-@doc("Displays the forecast information of the standby pool.")
-model StandbyContainerGroupPoolForecastValues {
-  @doc("Displays the predicted count of instances to be requested from the standby pool.")
-  @visibility(Lifecycle.Read)
-  instancesRequestedCount: int64[];
-}
-
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @armResourceOperations
 interface StandbyContainerGroupPoolRuntimeViews {
   get is ArmResourceRead<StandbyContainerGroupPoolRuntimeViewResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyContainerGroupPoolRuntimeViewResource>;
+  listByStandbyContainerGroupPoolResource is ArmResourceListByParent<StandbyContainerGroupPoolRuntimeViewResource>;
 }

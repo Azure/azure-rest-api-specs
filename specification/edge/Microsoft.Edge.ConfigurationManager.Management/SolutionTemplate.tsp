@@ -83,13 +83,7 @@ interface SolutionTemplates {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionTemplate>;
 
   @doc("update a Solution Template Resource")
-  update is ArmCustomPatchSync<
-    SolutionTemplate,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      SolutionTemplate,
-      SolutionTemplateProperties
-    >
-  >;
+  update is ArmResourcePatchSync<SolutionTemplate, SolutionTemplateProperties>;
 
   @doc("Create a Solution Template Version Resource")
   createVersion is ArmResourceActionAsync<

@@ -1,0 +1,94 @@
+{
+  "operationId": "Forecasts_CreateOrUpdate",
+  "title": "Forecasts_CreateOrUpdate_MaximumSet",
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "255",
+    "resourceGroupName": "rgsecretmanagementsample",
+    "weatherForecastResourceName": "wfr2",
+    "resource": {
+      "properties": {
+        "weatherForecastProperties": [
+          {
+            "city": "seattle",
+            "date": "2022-07-01",
+            "highTemperatureF": 22,
+            "lowTemperatureF": 19,
+            "summary": "cold"
+          }
+        ]
+      },
+      "tags": {
+        "key7683": "kv"
+      },
+      "location": "seattle"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "weatherForecastProperties": [
+            {
+              "city": "seattle",
+              "date": "2022-07-01",
+              "highTemperatureF": 22,
+              "lowTemperatureF": 19,
+              "summary": "cold"
+            }
+          ]
+        },
+        "tags": {
+          "key7683": "keyValue"
+        },
+        "location": "seattle",
+        "id": "5",
+        "name": "matt",
+        "type": "typeA",
+        "systemData": {
+          "createdBy": "userA",
+          "createdByType": "User",
+          "createdAt": "2022-08-05T19:48:34.573Z",
+          "lastModifiedBy": "userB",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-08-05T19:48:34.573Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "weatherForecastProperties": [
+            {
+              "city": "seattle",
+              "date": "2022-07-01",
+              "highTemperatureF": 22,
+              "lowTemperatureF": 19,
+              "summary": "cold"
+            }
+          ]
+        },
+        "tags": {
+          "key7683": "kv"
+        },
+        "location": "seattle",
+        "id": "5",
+        "name": "matt",
+        "type": "typeA",
+        "systemData": {
+          "createdBy": "userA",
+          "createdByType": "User",
+          "createdAt": "2022-08-05T19:48:34.573Z",
+          "lastModifiedBy": "userB",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-08-05T19:48:34.573Z"
+        }
+      }
+    }
+  }
+}

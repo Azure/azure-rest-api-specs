@@ -12,6 +12,9 @@ import "./back-compatible.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -70,7 +73,7 @@ model AwsDynamoDBTableProperties {
   arn?: string;
 
   @doc("A list of attributes that describe the key schema for the table and indexes. This property is required to create a DDB table. Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   attributeDefinitions?: AttributeDefinition[];
 
   @doc("Specify how you are charged for read and write throughput and how you manage capacity. Valid values include:  +   ``PROVISIONED`` - We recommend using ``PROVISIONED`` for predictable workloads. ``PROVISIONED`` sets the billing mode to [Provisioned Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).  +   ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for unpredictable workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-Demand Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).   If not specified, the default is ``PROVISIONED``.")
@@ -83,21 +86,21 @@ model AwsDynamoDBTableProperties {
   deletionProtectionEnabled?: boolean;
 
   @doc("Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command. If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index.  Updates are not supported. The following are exceptions:  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   globalSecondaryIndexes?: GlobalSecondaryIndex[];
 
   @doc("Specifies the properties of data being imported from the S3 bucket source to the table.  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. Specifies the properties of data being imported from the S3 bucket source to the table.")
   importSourceSpecification?: ImportSourceSpecification;
 
   @doc("Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   keySchema?: KeySchema[];
 
   @doc("The Kinesis Data Streams configuration for the specified table. The Kinesis Data Streams configuration for the specified table.")
   kinesisStreamSpecification?: KinesisStreamSpecification;
 
   @doc("Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   localSecondaryIndexes?: LocalSecondaryIndex[];
 
   @doc("The settings used to enable point in time recovery. The settings used to enable point in time recovery.")
@@ -125,7 +128,7 @@ model AwsDynamoDBTableProperties {
   tableName?: string;
 
   @doc("An array of key-value pairs to apply to this resource. For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Specifies the Time to Live (TTL) settings for the table.  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide. Represents the settings used to enable or disable Time to Live (TTL) for the specified table.")
@@ -168,7 +171,7 @@ model GlobalSecondaryIndex {
   indexName?: string;
 
   @doc("The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:  +   ``HASH`` - partition key  +   ``RANGE`` - sort key    The partition key of an item is also known as its *hash attribute*. The term 'hash attribute' derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its *range attribute*. The term 'range attribute' derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   keySchema?: KeySchema[];
 
   @doc("Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.")
@@ -244,7 +247,7 @@ model LocalSecondaryIndex {
   indexName?: string;
 
   @doc("The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:  +   ``HASH`` - partition key  +   ``RANGE`` - sort key    The partition key of an item is also known as its *hash attribute*. The term 'hash attribute' derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its *range attribute*. The term 'range attribute' derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   keySchema?: KeySchema[];
 
   @doc("Represents attributes that are copied (projected) from the table into the local secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.")

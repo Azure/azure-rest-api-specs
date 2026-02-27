@@ -13,8 +13,12 @@ namespace Microsoft.StorageActions;
 /**
  * Represents Storage Task.
  */
-model StorageTask
-  is Azure.ResourceManager.TrackedResource<StorageTaskProperties, false> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Private.armResourceInternal(StorageTaskProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model StorageTask extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = StorageTask,
     KeyName = "storageTaskName",
@@ -27,6 +31,12 @@ model StorageTask
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties?: StorageTaskProperties;
 }
 
 @armResourceOperations
@@ -40,8 +50,6 @@ interface StorageTasks {
    * Asynchronously creates a new storage task resource with the specified parameters. If a storage task is already created and a subsequent create request is issued with different properties, the storage task properties will be updated. If a storage task is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     StorageTask,
     Response = ArmResourceUpdatedResponse<StorageTask> | ArmResourceCreatedResponse<
@@ -57,22 +65,13 @@ interface StorageTasks {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StorageTask,
-    PatchModel = StorageTaskUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    PatchModel = StorageTaskUpdateParameters
   >;
 
   /**
    * Delete the storage task resource.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    StorageTask,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<StorageTask>;
 
   /**
    * Lists all the storage tasks available under the given resource group.
@@ -95,8 +94,9 @@ interface StorageTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @action("reports")
   @list
+  @action("reports")
+  @operationId("StorageTasksReport_List")
   list is ArmResourceActionSync<
     StorageTask,
     void,
@@ -121,8 +121,9 @@ interface StorageTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @action("storageTaskAssignments")
   @list
+  @action("storageTaskAssignments")
+  @operationId("StorageTaskAssignment_List")
   storageTaskAssignmentList is ArmResourceActionSync<
     StorageTask,
     void,

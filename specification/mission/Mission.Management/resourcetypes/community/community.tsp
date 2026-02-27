@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "../shared/maintenancemodeconfiguration.tsp";
+import "../shared/monitoring.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -27,6 +28,17 @@ union FirewallSKU {
   Premium: "Premium",
 }
 
+@doc("Policy Override")
+union PolicyOverride {
+  string,
+
+  @doc("PolicyOverride Enclave.")
+  Enclave: "Enclave",
+
+  @doc("PolicyOverride None.")
+  None: "None",
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("Approval Policy.")
 union ApprovalPolicy {
@@ -46,9 +58,24 @@ model MandatoryApprover {
   approverEntraId: string;
 }
 
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Granular approval setting configuration with policy, minimum approvers, and mandatory approvers.")
+model ApprovalSettingConfiguration {
+  @doc("Approval policy (Required or NotRequired).")
+  approvalPolicy?: ApprovalPolicy;
+
+  @doc("Minimum number of approvers required for this approval setting.")
+  minimumApproversRequired?: int64;
+
+  @identifiers(#["approverEntraId"])
+  @doc("List of mandatory approvers for this approval setting.")
+  mandatoryApprovers?: MandatoryApprover[];
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-@doc("ApprovalSettings Properties")
-model ApprovalSettings {
+@removed(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Legacy ApprovalSettings Properties for versions before 2025-11-01-preview")
+model LegacyApprovalSettings {
   @doc("Approval required for endpoint creation (Required or NotRequired).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointCreation?: ApprovalPolicy;
@@ -115,8 +142,39 @@ model ApprovalSettings {
   minimumApproversRequired?: int64;
 }
 
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Granular ApprovalSettings Properties for 2025-11-01-preview and later versions")
+model ApprovalSettings {
+  @doc("Approval configuration for community endpoint updates.")
+  communityEndpointUpdate?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for enclave endpoint updates.")
+  enclaveEndpointUpdate?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for enclave creation.")
+  enclaveCreation?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for connection creation.")
+  connectionCreation?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for connection updates.")
+  connectionUpdate?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for community maintenance mode.")
+  communityMaintenanceMode?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for enclave maintenance mode.")
+  enclaveMaintenanceMode?: ApprovalSettingConfiguration;
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-@doc("ApprovalSettings Properties")
+@removed(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Legacy ApprovalSettings Patch Properties")
+model LegacyApprovalSettingsPatchProperties
+  is UpdateableProperties<OmitDefaults<LegacyApprovalSettings>>;
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Granular ApprovalSettings Patch Properties")
 model ApprovalSettingsPatchProperties
   is UpdateableProperties<OmitDefaults<ApprovalSettings>>;
 
@@ -159,10 +217,9 @@ model CommunityBaseModel {
   @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility - Existing union"
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
-  policyOverride?: "Enclave" | "None" | string;
+  policyOverride?: PolicyOverride;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
@@ -177,24 +234,72 @@ model CommunityBaseModel {
 @doc("Community Resource Properties")
 model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Approval requirements for various actions on the community's resources.")
-  approvalSettings?: ApprovalSettings;
+  @removed(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Legacy approval requirements for various actions on the community's resources.")
+  @encodedName("application/json", "approvalSettings")
+  legacyApprovalSettings?: LegacyApprovalSettings;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Granular approval requirements for various actions on the community's resources.")
+  @encodedName("application/json", "approvalSettings")
+  granularApprovalSettings?: ApprovalSettings;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @identifiers(#[])
+  @doc("DedicatedHub List.")
+  @visibility(Lifecycle.Read)
+  dedicatedHubList?: DedicatedHubResource[];
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsModel;
+
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
+  @doc("Address spaces list")
+  addressSpaces?: string[];
+}
+
+@added(Microsoft.Mission.Versions.v2024_12_01_preview)
+@removed(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Legacy Community Resource Properties without default values for versions before 2025-11-01-preview")
+model LegacyCommunityPatchProperties
+  is UpdateableProperties<OmitDefaults<CommunityBaseModel>> {
+  @doc("Legacy approval requirements for various actions on the community's resources.")
+  approvalSettings?: LegacyApprovalSettingsPatchProperties;
+
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 }
 
 @doc("Community Resource Properties without default values")
 model CommunityPatchProperties
   is UpdateableProperties<OmitDefaults<CommunityBaseModel>> {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Approval requirements for various actions on the community's resources.")
-  approvalSettings?: ApprovalSettingsPatchProperties;
+  @removed(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Legacy approval requirements for various actions on the community's resources.")
+  @encodedName("application/json", "approvalSettings")
+  legacyApprovalSettings?: LegacyApprovalSettingsPatchProperties;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Granular approval requirements for various actions on the community's resources.")
+  @encodedName("application/json", "approvalSettings")
+  granularApprovalSettings?: ApprovalSettingsPatchProperties;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
+  @doc("Address spaces list")
+  addressSpaces?: string[];
 }
 
 @doc("Community Patch Resource")

@@ -1,0 +1,130 @@
+{
+  "title": "AzureDataExplorerSourceConnector CreateOrUpdate",
+  "operationId": "ConnectorOperations_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resourceGroupName": "abcd",
+    "api-version": "2025-08-01-preview",
+    "name": "AzureDataExplorerSourceConnector1",
+    "resource": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "direction": "Source",
+        "converterConfig": {
+          "type": "JsonConverter"
+        },
+        "eventHubConfig": {
+          "namespaceHostName": "ns",
+          "eventHubName": "eh",
+          "authentication": {
+            "authenticationMode": "ConnectionString",
+            "connectionString": "connection1"
+          }
+        },
+        "maxTasks": 1,
+        "dataSourceProperties": {
+          "connectorType": "AzureDataExplorerSource",
+          "clusterUrl": "hostName.AzureDataExplorer.com",
+          "database": "databaseName1",
+          "tableNames": "tableName1,tableName2",
+          "authentication": {
+            "authenticationMode": "OAuth",
+            "accessToken": "accessToken1"
+          }
+        },
+        "scalingProperties": {
+          "scalingType": "StaticScaling",
+          "parallelism": 1
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/AzureDataExplorerSourceConnector1",
+        "name": "AzureDataExplorerSourceConnector1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "direction": "Source",
+          "converterConfig": {
+            "type": "JsonConverter"
+          },
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "authentication": {
+              "authenticationMode": "ConnectionString"
+            }
+          },
+          "maxTasks": 1,
+          "dataSourceProperties": {
+            "connectorType": "AzureDataExplorerSource",
+            "clusterUrl": "hostName.AzureDataExplorer.com",
+            "database": "databaseName1",
+            "tableNames": "tableName1,tableName2",
+            "authentication": {
+              "authenticationMode": "OAuth"
+            }
+          },
+          "scalingProperties": {
+            "scalingType": "StaticScaling",
+            "parallelism": 1
+          },
+          "connectorState": "Running",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/AzureDataExplorerSourceConnector1",
+        "name": "AzureDataExplorerSourceConnector1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "direction": "Source",
+          "converterConfig": {
+            "type": "JsonConverter"
+          },
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "authentication": {
+              "authenticationMode": "ConnectionString"
+            }
+          },
+          "maxTasks": 1,
+          "dataSourceProperties": {
+            "connectorType": "AzureDataExplorerSource",
+            "clusterUrl": "hostName.AzureDataExplorer.com",
+            "database": "databaseName1",
+            "tableNames": "tableName1,tableName2",
+            "authentication": {
+              "authenticationMode": "OAuth"
+            }
+          },
+          "scalingProperties": {
+            "scalingType": "StaticScaling",
+            "parallelism": 1
+          },
+          "connectorState": "Running",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

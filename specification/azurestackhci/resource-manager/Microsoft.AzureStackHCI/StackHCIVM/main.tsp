@@ -10,17 +10,18 @@ import "./MarketplaceGalleryImages.tsp";
 import "./NetworkInterfaces.tsp";
 import "./NetworkSecurityGroups.tsp";
 import "./SecurityRules.tsp";
+import "./Snapshots.tsp";
 import "./StorageContainers.tsp";
 import "./VirtualHardDisks.tsp";
 import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
-import "./back-compatible.tsp";
 import "./VirtualNetworks.tsp";
 import "./VirtualNetworkSubnets.tsp";
 import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
+import "./InboundRules.tsp";
 import "./LoadBalancers.tsp";
 import "./Operations.tsp";
 
@@ -50,14 +51,25 @@ enum Versions {
   v2024_02_01_preview: "2024-02-01-preview",
 
   /**
-   * The 2024-05-01-preview API version.
+   * The 2024-05-01-preview API version for internal testing only.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-version-format" "Version name approved by reviewers"
   v2024_05_01_preview: "2024-05-01-preview",
 
   /**
-   * The 2024-08-01-preview API version.
+   * The 2024-07-15-preview API version.
+   */
+  v2024_07_15_preview: "2024-07-15-preview",
+
+  /**
+   * The 2024-08-01-preview  API version.
    */
   v2024_08_01_preview: "2024-08-01-preview",
+
+  /**
+   * The 2024-09-01-preview API version.
+   */
+  v2024_09_01_preview: "2024-09-01-preview",
 
   /**
    * The 2024-10-01-preview API version.
@@ -83,4 +95,14 @@ enum Versions {
    * The 2025-09-01-preview API version.
    */
   v2025_09_01_preview: "2025-09-01-preview",
+
+  /**
+   * The 2026-02-01-preview API version.
+   */
+  v2026_02_01_preview: "2026-02-01-preview",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }

@@ -9,9 +9,12 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ConnectedCache.json"
-  "@azure-typespec/http-client-csharp-mgmt":
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ConnectedCache"
+    clear-output-folder: true
+    model-namespace: false
     namespace: "Azure.ResourceManager.ConnectedCache"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-connectedcache"
     namespace: "azure.mgmt.connectedcache"
@@ -25,7 +28,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-connectedcache"
-    flavor: azure
+    flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-connectedcache"
@@ -35,10 +38,11 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armconnectedcache"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: true
+    generate-examples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

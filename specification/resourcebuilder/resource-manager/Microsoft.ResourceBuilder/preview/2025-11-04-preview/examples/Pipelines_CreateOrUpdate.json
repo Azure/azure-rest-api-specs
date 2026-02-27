@@ -1,0 +1,179 @@
+{
+  "title": "Pipelines_CreateOrUpdate",
+  "operationId": "Pipelines_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline",
+    "resource": {
+      "properties": {
+        "state": "Enabled",
+        "recurrence": {
+          "type": "Periodic",
+          "periodicity": "01:00:00",
+          "timeout": "03:00:00"
+        },
+        "activities": [
+          {
+            "name": "data-processing",
+            "job": {
+              "type": "Reference",
+              "name": "data-processing-job"
+            },
+            "policy": {
+              "timeout": "03:00:00"
+            }
+          },
+          {
+            "name": "data-quality-validation",
+            "job": {
+              "type": "Reference",
+              "name": "data-quality-validation-job"
+            },
+            "dependsOn": [
+              {
+                "activity": "data-processing"
+              }
+            ],
+            "policy": {
+              "timeout": "02:00:00"
+            }
+          },
+          {
+            "name": "publish-to-adx",
+            "job": {
+              "type": "Reference",
+              "name": "publish-to-adx-job"
+            },
+            "dependsOn": [
+              {
+                "activity": "data-quality-validation"
+              }
+            ],
+            "policy": {
+              "timeout": "01:00:00"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "state": "Enabled",
+          "recurrence": {
+            "type": "Periodic",
+            "periodicity": "01:00:00",
+            "timeout": "03:00:00"
+          },
+          "activities": [
+            {
+              "name": "data-processing",
+              "job": {
+                "type": "Reference",
+                "name": "data-processing-job"
+              },
+              "policy": {
+                "timeout": "03:00:00"
+              }
+            },
+            {
+              "name": "data-quality-validation",
+              "job": {
+                "type": "Reference",
+                "name": "data-quality-validation-job"
+              },
+              "dependsOn": [
+                {
+                  "activity": "data-processing"
+                }
+              ],
+              "policy": {
+                "timeout": "02:00:00"
+              }
+            },
+            {
+              "name": "publish-to-adx",
+              "job": {
+                "type": "Reference",
+                "name": "publish-to-adx-job"
+              },
+              "dependsOn": [
+                {
+                  "activity": "data-quality-validation"
+                }
+              ],
+              "policy": {
+                "timeout": "01:00:00"
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline",
+        "name": "data-processing-pipeline",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "state": "Enabled",
+          "recurrence": {
+            "type": "Periodic",
+            "periodicity": "01:00:00",
+            "timeout": "03:00:00"
+          },
+          "activities": [
+            {
+              "name": "data-processing",
+              "job": {
+                "type": "Reference",
+                "name": "data-processing-job"
+              },
+              "policy": {
+                "timeout": "03:00:00"
+              }
+            },
+            {
+              "name": "data-quality-validation",
+              "job": {
+                "type": "Reference",
+                "name": "data-quality-validation-job"
+              },
+              "dependsOn": [
+                {
+                  "activity": "data-processing"
+                }
+              ],
+              "policy": {
+                "timeout": "02:00:00"
+              }
+            },
+            {
+              "name": "publish-to-adx",
+              "job": {
+                "type": "Reference",
+                "name": "publish-to-adx-job"
+              },
+              "dependsOn": [
+                {
+                  "activity": "data-quality-validation"
+                }
+              ],
+              "policy": {
+                "timeout": "01:00:00"
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline",
+        "name": "data-processing-pipeline",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines"
+      }
+    }
+  }
+}

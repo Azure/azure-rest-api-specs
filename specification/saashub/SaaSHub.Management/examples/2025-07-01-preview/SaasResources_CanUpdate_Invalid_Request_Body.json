@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "properties": {
+        "autoRenew": "Off",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 9
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalInfo": null,
+        "evaluateResult": "Failed",
+        "reason": "AutoRenew request requires AutoRenew.On to set scheduleActions",
+        "reasonCode": "InvalidRequestBody",
+        "updateScenario": "AutoRenew"
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "CanUpdate Invalid Request Body"
+}

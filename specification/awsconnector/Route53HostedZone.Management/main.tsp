@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -69,7 +72,7 @@ model AwsRoute53HostedZoneProperties {
   hostedZoneConfig?: HostedZoneConfig;
 
   @doc("Adds, edits, or deletes tags for a health check or a hosted zone. For information about using tags for cost allocation, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *User Guide*.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   hostedZoneTags?: HostedZoneTag[];
 
   @doc("Property id")
@@ -85,7 +88,7 @@ model AwsRoute53HostedZoneProperties {
   queryLoggingConfig?: QueryLoggingConfig;
 
   @doc("*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   vpCs?: VPC[];
 }
 

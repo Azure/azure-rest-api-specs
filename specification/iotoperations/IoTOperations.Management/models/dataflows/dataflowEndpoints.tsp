@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./dataflowEndpointOpenTelemetry.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -70,6 +69,7 @@ model DataflowEndpointProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 

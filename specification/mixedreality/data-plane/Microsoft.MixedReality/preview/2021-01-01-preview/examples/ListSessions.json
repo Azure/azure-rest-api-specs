@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "endpoint": "https://remoterendering.eastus.mixedreality.azure.com",
+    "api-version": "2021-01-01-preview",
+    "account_id": "30ea64bd-100f-4bf0-adc9-29fa45d4880c",
+    "conversion_id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "sessions": [
+          {
+            "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
+            "creationTime": "2020-11-11T11:11:11.111Z",
+            "arrInspectorPort": 50052,
+            "handshakePort": 50051,
+            "elapsedTimeMinutes": 59,
+            "hostname": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
+            "maxLeaseTimeMinutes": 60,
+            "size": "Standard",
+            "status": "Stopped",
+            "error": null,
+            "teraflops": 10.6
+          },
+          {
+            "id": "contoso-session-03c200ce-faf8-4238-8db9-872ac9dd501d",
+            "creationTime": "2021-01-01T11:11:11.111Z",
+            "arrInspectorPort": 50053,
+            "handshakePort": 50052,
+            "elapsedTimeMinutes": 12,
+            "hostname": "615854b8-1748-4f2e-9522-bf8523d7299c.remoterenderingvm.westus2.mixedreality.azure.com",
+            "maxLeaseTimeMinutes": 72,
+            "size": "Standard",
+            "status": "Ready",
+            "error": null,
+            "teraflops": 10.6
+          }
+        ]
+      }
+    },
+    "401": {
+      "headers": {
+        "WWW-Authenticate": "Bearer error=\"invalid_token\"",
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "403": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 15,
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "500": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred."
+        }
+      }
+    }
+  }
+}

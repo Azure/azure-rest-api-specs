@@ -5,27 +5,22 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile
 );
 
@@ -44,8 +39,7 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties
 );
 
@@ -85,7 +79,6 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "java");
 @@clientName(EndpointResources, "Endpoints", "java");
-@@clientName(AADProfileProperties, "AadProfileProperties", "java");
 
 @@clientName(Microsoft.HybridConnectivity,
   "HybridConnectivityManagementAPI",
@@ -97,10 +90,7 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
-@@clientName(Microsoft.HybridConnectivity,
-  "HybridConnectivityMgmtClient",
-  "python"
-);
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
 @@clientName(InventoryResource, "PublicCloudInventory", "csharp");
@@ -113,21 +103,12 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 @@clientName(HostType, "PublicCloudHostType", "csharp");
-@@clientName(GenerateAwsTemplateRequest,
-  "GenerateAwsTemplateContent",
-  "csharp"
-);
 @@alternateType(GenerateAwsTemplateRequest.connectorId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ListCredentialsRequest, "ListCredentialsContent", "csharp");
-@@clientName(ListIngressGatewayCredentialsRequest,
-  "ListIngressGatewayCredentialsContent",
-  "csharp"
-);
-@@clientName(ManagedProxyRequest, "ManagedProxyContent", "csharp");
 @@clientName(HostType.AWS, "Aws", "csharp");
+@@clientName(HostType.AWS, "Gcp", "csharp");
 @@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
 @@alternateType(InventoryProperties.azureResourceId,
   armResourceIdentifier,
@@ -177,9 +158,7 @@ namespace Microsoft.HybridConnectivity;
   "GenerateAwsTemplateResult",
   "csharp"
 );
-
-@@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate", "csharp");
-@@clientName(TrackedResourceUpdate,
-  "HybridConnectivityTrackedResourcePatch",
+@@clientName(GenerateGcpTemplateResponse,
+  "GenerateGcpTemplateResult",
   "csharp"
 );

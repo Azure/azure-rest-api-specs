@@ -116,7 +116,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   launchTemplate?: LaunchTemplateSpecification;
 
   @doc("One or more lifecycle hooks to add to the Auto Scaling group before instances are launched.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   lifecycleHookSpecificationList?: LifecycleHookSpecification[];
 
   @doc("A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the ``TargetGroupARNs`` property instead.")
@@ -129,7 +129,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   maxSize?: string;
 
   @doc("Enables the monitoring of group metrics of an Auto Scaling group. By default, these metrics are disabled.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   metricsCollection?: MetricsCollection[];
 
   @doc("The minimum size of the group.")
@@ -145,7 +145,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   notificationConfiguration?: NotificationConfiguration;
 
   @doc("Configures an Auto Scaling group to send notifications when specified events take place.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   notificationConfigurations?: NotificationConfiguration[];
 
   @doc("The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.")
@@ -155,7 +155,7 @@ model AwsAutoScalingAutoScalingGroupProperties {
   serviceLinkedRoleARN?: string;
 
   @doc("One or more tags. You can tag your Auto Scaling group and propagate the tags to the Amazon EC2 instances it launches. Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS volumes, specify the tags in a launch template but use caution. If the launch template specifies an instance tag with a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling overrides the value of that instance tag with the value specified by the Auto Scaling group. For more information, see [Tag Auto Scaling groups and instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: TagProperty[];
 
   @doc("The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the *Amazon EC2 Auto Scaling User Guide*.")
@@ -316,7 +316,7 @@ model LaunchTemplate {
   launchTemplateSpecification?: LaunchTemplateSpecification;
 
   @doc("Any properties that you specify override the same properties in the launch template.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   overrides?: LaunchTemplateOverrides[];
 }
 

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "name": "myResourceName",
+      "type": "Microsoft.SaaSHub/SaasResources",
+      "properties": {
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "MinimumAddOnLicensesNotIncluded",
+        "reason": "Minimum add on licenses were not included",
+        "additionalInfo": {
+          "addOn": {
+            "ineligibilityReasons": [
+              "MinimumAddOnLicensesNotIncluded"
+            ],
+            "eligibilityConstraints": [
+              {
+                "constraintType": "MinimumAddOnPercentageQuantityOfBase",
+                "isEligible": "Eligible"
+              }
+            ]
+          },
+          "promotion": null,
+          "futurePrice": null,
+          "coTermDates": null
+        }
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanCreate",
+  "title": "Purchase AddOn - Failed"
+}

@@ -1,0 +1,724 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureStackHCI",
+    "version": "2023-12-01-preview",
+    "description": "Azure Stack HCI service"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SecuritySettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings": {
+      "get": {
+        "operationId": "SecuritySettings_ListByClusters",
+        "tags": [
+          "SecuritySettings"
+        ],
+        "description": "List SecuritySetting resources by Clusters",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecuritySettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecuritySettings_ListByClusters_MaximumSet": {
+            "$ref": "./examples/SecuritySettings_ListByClusters_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}": {
+      "get": {
+        "operationId": "SecuritySettings_Get",
+        "tags": [
+          "SecuritySettings"
+        ],
+        "description": "Get a SecuritySetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettingsName",
+            "in": "path",
+            "description": "The name of the SecuritySetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecuritySetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecuritySettings_Get_MaximumSet": {
+            "$ref": "./examples/SecuritySettings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecuritySettings_CreateOrUpdate",
+        "tags": [
+          "SecuritySettings"
+        ],
+        "description": "Create a security setting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettingsName",
+            "in": "path",
+            "description": "The name of the SecuritySetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecuritySetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecuritySetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecuritySetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecuritySetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecuritySetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecuritySettings_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/SecuritySettings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SecuritySettings_Delete",
+        "tags": [
+          "SecuritySettings"
+        ],
+        "description": "Delete a SecuritySetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettingsName",
+            "in": "path",
+            "description": "The name of the SecuritySetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecuritySettings_Delete_MaximumSet": {
+            "$ref": "./examples/SecuritySettings_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}/remediate": {
+      "post": {
+        "operationId": "SecuritySettings_Remediate",
+        "tags": [
+          "SecuritySettings"
+        ],
+        "description": "Remediate a group of settings within SecuritySetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettingsName",
+            "in": "path",
+            "description": "The name of the SecuritySetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Recommendation"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SecuritySettings_Remediate_MaximumSet": {
+            "$ref": "./examples/SecuritySettings_Remediate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ComplianceAssignmentType": {
+      "type": "string",
+      "description": "Represents the compliance assignment type of a resource.",
+      "enum": [
+        "Audit",
+        "ApplyAndAutoCorrect"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceAssignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Report on the state of the machine, but don't make changes."
+          },
+          {
+            "name": "ApplyAndAutoCorrect",
+            "value": "ApplyAndAutoCorrect",
+            "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+          }
+        ]
+      }
+    },
+    "ComplianceStatus": {
+      "type": "string",
+      "description": "Represents the compliance status of a resource.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The resource is compliant"
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The resource is non-compliant"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The resource compliance status is pending"
+          }
+        ]
+      }
+    },
+    "DesiredSetting": {
+      "type": "object",
+      "description": "Desired security setting",
+      "properties": {
+        "settingName": {
+          "type": "string",
+          "description": "Name of the setting"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the setting"
+        }
+      },
+      "required": [
+        "settingName",
+        "value"
+      ]
+    },
+    "MachineComplianceState": {
+      "type": "object",
+      "description": "Compliance state on single machine",
+      "properties": {
+        "machineName": {
+          "type": "string",
+          "description": "Name of the machine",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Compliance state value of the setting",
+          "readOnly": true
+        },
+        "percentScore": {
+          "type": "string",
+          "description": "Compliance score of the setting",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the compliance state of the machine",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "machineName",
+        "value",
+        "reason"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Recommendation": {
+      "type": "object",
+      "description": "Name of the recommendation",
+      "properties": {
+        "recommendationName": {
+          "type": "string",
+          "description": "Name of the recommendation"
+        }
+      },
+      "required": [
+        "recommendationName"
+      ]
+    },
+    "ReportedComplianceState": {
+      "type": "object",
+      "description": "Reported compliance state of a security setting",
+      "properties": {
+        "settingName": {
+          "type": "string",
+          "description": "Name of the setting",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Aggregated compliance state value of the setting across all nodes of the cluster",
+          "readOnly": true
+        },
+        "perMachineStates": {
+          "type": "array",
+          "description": "Per machine compliance state value and reason for it",
+          "items": {
+            "$ref": "#/definitions/MachineComplianceState"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "settingName",
+        "value",
+        "perMachineStates"
+      ]
+    },
+    "SecurityBaseline": {
+      "type": "object",
+      "description": "Compliance state of security baseline",
+      "properties": {
+        "securityBaselineCompliance": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Status of compliance"
+        },
+        "percentScore": {
+          "type": "string",
+          "description": "Aggregated compliance score across cluster nodes",
+          "readOnly": true
+        },
+        "perMachineStates": {
+          "type": "array",
+          "description": "Per machine compliance state value and reason for it",
+          "items": {
+            "$ref": "#/definitions/MachineComplianceState"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "securityBaselineCompliance",
+        "percentScore",
+        "perMachineStates"
+      ]
+    },
+    "SecurityComplianceStatus": {
+      "type": "object",
+      "description": "Security compliance properties of the resource",
+      "properties": {
+        "securedCoreCompliance": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Indicates whether HCI hosts meets secured-core server requirements.",
+          "readOnly": true
+        },
+        "wdacCompliance": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.",
+          "readOnly": true
+        },
+        "dataAtRestEncrypted": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.",
+          "readOnly": true
+        },
+        "dataInTransitProtected": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Indicates whether HCI cluster has data in-transit protection.",
+          "readOnly": true
+        },
+        "securityBaseline": {
+          "$ref": "#/definitions/SecurityBaseline",
+          "description": "Contains details about HCI cluster's compliance with security baseline.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time in UTC when compliance status was last updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "securedCoreCompliance",
+        "wdacCompliance",
+        "dataAtRestEncrypted",
+        "dataInTransitProtected",
+        "securityBaseline",
+        "lastUpdated"
+      ]
+    },
+    "SecuritySetting": {
+      "type": "object",
+      "description": "Security settings proxy resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SecuritySettingListResult": {
+      "type": "object",
+      "description": "The response of a SecuritySetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecuritySetting items on this page",
+          "items": {
+            "$ref": "#/definitions/SecuritySetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityProperties": {
+      "type": "object",
+      "description": "Security properties of the resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "securityComplianceStatus": {
+          "$ref": "#/definitions/SecurityComplianceStatus",
+          "description": "Security Compliance Status",
+          "readOnly": true
+        },
+        "desiredSettings": {
+          "type": "array",
+          "description": "Desired security settings",
+          "items": {
+            "$ref": "#/definitions/DesiredSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "reportedComplianceStates": {
+          "type": "array",
+          "description": "Reported compliance states for security settings",
+          "items": {
+            "$ref": "#/definitions/ReportedComplianceState"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "securedCoreComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "Secured Core Compliance Assignment"
+        },
+        "wdacComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "WDAC Compliance Assignment"
+        },
+        "smbEncryptionForIntraClusterTrafficComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "SMB encryption for intra-cluster traffic Compliance Assignment"
+        }
+      },
+      "required": [
+        "securityComplianceStatus",
+        "desiredSettings",
+        "reportedComplianceStates"
+      ]
+    }
+  },
+  "parameters": {}
+}

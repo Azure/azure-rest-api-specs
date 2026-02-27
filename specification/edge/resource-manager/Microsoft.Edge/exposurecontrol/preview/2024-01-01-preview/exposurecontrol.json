@@ -1,0 +1,1968 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ExposureControlService",
+    "version": "2024-01-01-preview",
+    "description": "Exposure Control Resource Provider Service API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ExposureGroups"
+    },
+    {
+      "name": "ExposureFeatures"
+    },
+    {
+      "name": "ExposureWorkflowManifests"
+    },
+    {
+      "name": "ExposureWorkflows"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureFeatures": {
+      "get": {
+        "operationId": "ExposureFeatures_ListBySubscription",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "List ExposureFeature resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeatureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_ListBySubscription": {
+            "$ref": "./examples/ExposureFeatures_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflowManifests": {
+      "get": {
+        "operationId": "ExposureWorkflowManifests_ListBySubscription",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "List ExposureWorkflowManifest resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_ListBySubscription": {
+            "$ref": "./examples/ExposureWorkflowManifests_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflows": {
+      "get": {
+        "operationId": "ExposureWorkflows_ListBySubscription",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "List ExposureWorkflow resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_ListBySubscription": {
+            "$ref": "./examples/ExposureWorkflows_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/exposureGroups": {
+      "get": {
+        "operationId": "ExposureGroups_ListBySubscription",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "List ExposureGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_ListBySubscription": {
+            "$ref": "./examples/ExposureGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures": {
+      "get": {
+        "operationId": "ExposureFeatures_ListByResourceGroup",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "List ExposureFeature resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeatureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_ListByResourceGroup": {
+            "$ref": "./examples/ExposureFeatures_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures/{featureName}": {
+      "get": {
+        "operationId": "ExposureFeatures_Get",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "Get a ExposureFeature",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeature"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_Get": {
+            "$ref": "./examples/ExposureFeatures_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExposureFeatures_CreateOrUpdate",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "Create a ExposureFeature",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureFeature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExposureFeature' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeature"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExposureFeature' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureFeature"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_CreateOrUpdate": {
+            "$ref": "./examples/ExposureFeatures_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExposureFeatures_Delete",
+        "tags": [
+          "ExposureFeatures"
+        ],
+        "description": "Delete a ExposureFeature",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureFeatures_Delete": {
+            "$ref": "./examples/ExposureFeatures_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflowManifests": {
+      "get": {
+        "operationId": "ExposureWorkflowManifests_ListByExposureFeature",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "List ExposureWorkflowManifest resources by ExposureFeature",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_ListByExposureFeature": {
+            "$ref": "./examples/ExposureWorkflowManifests_ListByExposureFeature.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflowManifests/{exposureWorkflowManifestName}": {
+      "get": {
+        "operationId": "ExposureWorkflowManifests_Get",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "Get a ExposureWorkflowManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowManifestName",
+            "in": "path",
+            "description": "Name of exposure control manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_Get": {
+            "$ref": "./examples/ExposureWorkflowManifests_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExposureWorkflowManifests_CreateOrUpdate",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "Create a ExposureWorkflowManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowManifestName",
+            "in": "path",
+            "description": "Name of exposure control manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExposureWorkflowManifest' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifest"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExposureWorkflowManifest' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_CreateOrUpdate": {
+            "$ref": "./examples/ExposureWorkflowManifests_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExposureWorkflowManifests_Delete",
+        "tags": [
+          "ExposureWorkflowManifests"
+        ],
+        "description": "Delete a ExposureWorkflowManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowManifestName",
+            "in": "path",
+            "description": "Name of exposure control manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflowManifests_Delete": {
+            "$ref": "./examples/ExposureWorkflowManifests_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflows": {
+      "get": {
+        "operationId": "ExposureWorkflows_ListByExposureFeature",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "List ExposureWorkflow resources by ExposureFeature",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_ListByExposureFeature": {
+            "$ref": "./examples/ExposureWorkflows_ListByExposureFeature.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureFeatures/{featureName}/exposureWorkflows/{exposureWorkflowName}": {
+      "get": {
+        "operationId": "ExposureWorkflows_Get",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "Get a ExposureWorkflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowName",
+            "in": "path",
+            "description": "Name of Exposure Workflow",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_Get": {
+            "$ref": "./examples/ExposureWorkflows_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExposureWorkflows_CreateOrUpdate",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "Create a ExposureWorkflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowName",
+            "in": "path",
+            "description": "Name of Exposure Workflow",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExposureWorkflow' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflow"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExposureWorkflow' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflow"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_CreateOrUpdate": {
+            "$ref": "./examples/ExposureWorkflows_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExposureWorkflows_Update",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "Update a ExposureWorkflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowName",
+            "in": "path",
+            "description": "Name of Exposure Workflow",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflowUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureWorkflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_Update": {
+            "$ref": "./examples/ExposureWorkflows_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExposureWorkflows_Delete",
+        "tags": [
+          "ExposureWorkflows"
+        ],
+        "description": "Delete a ExposureWorkflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "description": "Name of Feature",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "exposureWorkflowName",
+            "in": "path",
+            "description": "Name of Exposure Workflow",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureWorkflows_Delete": {
+            "$ref": "./examples/ExposureWorkflows_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureGroups": {
+      "get": {
+        "operationId": "ExposureGroups_ListByResourceGroup",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "List ExposureGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_ListByResourceGroup": {
+            "$ref": "./examples/ExposureGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/exposureGroups/{groupName}": {
+      "get": {
+        "operationId": "ExposureGroups_Get",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "Get a ExposureGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of Exposure Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_Get": {
+            "$ref": "./examples/ExposureGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExposureGroups_CreateOrUpdate",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "Create a ExposureGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of Exposure Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExposureGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExposureGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExposureGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_CreateOrUpdate": {
+            "$ref": "./examples/ExposureGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExposureGroups_Delete",
+        "tags": [
+          "ExposureGroups"
+        ],
+        "description": "Delete a ExposureGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of Exposure Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureGroups_Delete": {
+            "$ref": "./examples/ExposureGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ExposureFeature": {
+      "type": "object",
+      "description": "An exposure control feature resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExposureFeatureProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExposureFeatureListResult": {
+      "type": "object",
+      "description": "The response of a ExposureFeature list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExposureFeature items on this page",
+          "items": {
+            "$ref": "#/definitions/ExposureFeature"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExposureFeatureProperties": {
+      "type": "object",
+      "description": "Exposure Feature Properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Exposure Feature description."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExposureGroup": {
+      "type": "object",
+      "description": "A exposure control group resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExposureGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExposureGroupListResult": {
+      "type": "object",
+      "description": "The response of a ExposureGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExposureGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ExposureGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExposureGroupProperties": {
+      "type": "object",
+      "description": "Group Properties",
+      "properties": {
+        "filterConditions": {
+          "type": "array",
+          "description": "filter conditions.",
+          "items": {
+            "$ref": "#/definitions/FilterCondition"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "filterConditions"
+      ]
+    },
+    "ExposureWorkflow": {
+      "type": "object",
+      "description": "A exposure workflow resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExposureWorkflowProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExposureWorkflowListResult": {
+      "type": "object",
+      "description": "The response of a ExposureWorkflow list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExposureWorkflow items on this page",
+          "items": {
+            "$ref": "#/definitions/ExposureWorkflow"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExposureWorkflowManifest": {
+      "type": "object",
+      "description": "A exposure control manifest resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExposureWorkflowManifestProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExposureWorkflowManifestListResult": {
+      "type": "object",
+      "description": "The response of a ExposureWorkflowManifest list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExposureWorkflowManifest items on this page",
+          "items": {
+            "$ref": "#/definitions/ExposureWorkflowManifest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExposureWorkflowManifestProperties": {
+      "type": "object",
+      "description": "Exposure workflow manifest definition Properties",
+      "properties": {
+        "manifestDiscriminator": {
+          "type": "string",
+          "description": "Manifest identifier expression."
+        },
+        "overrideDefaultStartRing": {
+          "type": "string",
+          "description": "Overrides default start ring."
+        },
+        "ringConfigurations": {
+          "type": "array",
+          "description": "ring configuration properties.",
+          "items": {
+            "$ref": "#/definitions/RingConfigurationProperties"
+          },
+          "x-ms-identifiers": [
+            "ringName"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "manifestDiscriminator",
+        "ringConfigurations"
+      ]
+    },
+    "ExposureWorkflowProperties": {
+      "type": "object",
+      "description": "Exposure workflow Properties",
+      "properties": {
+        "manifestDiscriminator": {
+          "type": "string",
+          "description": "Workflow manifest identifier expression."
+        },
+        "exposureWorkflowManifestId": {
+          "type": "string",
+          "description": "Workflow manifest Id."
+        },
+        "rings": {
+          "type": "array",
+          "description": "Ring configuration details.",
+          "items": {
+            "$ref": "#/definitions/ExposureWorkflowRingConfigurationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "ringName"
+          ]
+        },
+        "overrideDefaultStartRing": {
+          "type": "string",
+          "description": "overrides default start Ring."
+        },
+        "currentRingStatus": {
+          "$ref": "#/definitions/RingStatus",
+          "description": "Exposure workflow current ring status."
+        },
+        "workflowStatus": {
+          "$ref": "#/definitions/ExposureWorkflowStatus",
+          "description": "Exposure workflow status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "manifestDiscriminator",
+        "rings",
+        "workflowStatus"
+      ]
+    },
+    "ExposureWorkflowRingConfigurationProperties": {
+      "type": "object",
+      "description": "Exposure workflow ring configuration Properties",
+      "properties": {
+        "ringName": {
+          "type": "string",
+          "description": "Unique ring identifier.",
+          "readOnly": true
+        },
+        "exposureGroupProperties": {
+          "type": "array",
+          "description": "Exposure Group Properties.",
+          "items": {
+            "$ref": "#/definitions/ExposureGroupProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/RingStatus",
+          "description": "Ring status."
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retries attempted. Retry policy is service configured",
+          "readOnly": true
+        },
+        "progressionSetting": {
+          "$ref": "#/definitions/ProgressionSetting",
+          "description": "Progression settings.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ringName",
+        "exposureGroupProperties",
+        "status",
+        "retryAttempts",
+        "progressionSetting"
+      ]
+    },
+    "ExposureWorkflowStatus": {
+      "type": "string",
+      "description": "Exposure Workflow Status",
+      "enum": [
+        "Waiting",
+        "Active",
+        "Succeeded",
+        "Cancelled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ExposureWorkflowStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "Workflow status is waiting."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Workflow started or in-progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Workflow reached completion successfully."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Workflow is cancelled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "workflow reached completion with Failed status."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ExposureWorkflowUpdate": {
+      "type": "object",
+      "description": "Exposure workflow update object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExposureWorkflowUpdateProperties",
+          "description": "Exposure workflow update properties"
+        }
+      }
+    },
+    "ExposureWorkflowUpdateProperties": {
+      "type": "object",
+      "description": "Exposure workflow update properties",
+      "properties": {
+        "currentRingStatus": {
+          "$ref": "#/definitions/RingStatus",
+          "description": "Current Ring status"
+        }
+      }
+    },
+    "FilterCondition": {
+      "type": "object",
+      "description": "Filter Conditions defined per group",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "filter condition type."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "filter condition values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "conditions"
+      ]
+    },
+    "GateStatus": {
+      "type": "string",
+      "description": "Progression Gate status enum.",
+      "enum": [
+        "Open",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "GateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Gate status Open when ring is started/active."
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "Gate status Closed when ring is completed."
+          }
+        ]
+      }
+    },
+    "ProgressionMethod": {
+      "type": "object",
+      "description": "Ring progression method.",
+      "properties": {
+        "operationType": {
+          "$ref": "#/definitions/ProgressionType",
+          "description": "Operation type."
+        },
+        "gateDelay": {
+          "type": "string",
+          "format": "duration",
+          "description": "Gate delay."
+        },
+        "statusPollingInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "Defines interval for status polling."
+        }
+      },
+      "required": [
+        "operationType",
+        "gateDelay",
+        "statusPollingInterval"
+      ]
+    },
+    "ProgressionSetting": {
+      "type": "object",
+      "description": "Configuration for Ring Progression.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/ProgressionMethod",
+          "description": "Different types of progression method supported."
+        },
+        "gateStatus": {
+          "$ref": "#/definitions/GateStatus",
+          "description": "Ring progression Gate Status."
+        },
+        "onSuccessRing": {
+          "type": "string",
+          "description": "Specifies the next ring to be transitioned on success."
+        },
+        "onFailureRing": {
+          "type": "string",
+          "description": "Specifies the next ring to be transitioned on failure."
+        }
+      },
+      "required": [
+        "method",
+        "gateStatus",
+        "onSuccessRing",
+        "onFailureRing"
+      ]
+    },
+    "ProgressionType": {
+      "type": "string",
+      "description": "Progression type enum.",
+      "enum": [
+        "TimeBased",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "ProgressionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TimeBased",
+            "value": "TimeBased",
+            "description": "Fixed time based progression."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom defined progression."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RingConfigurationProperties": {
+      "type": "object",
+      "description": "Ring configuration Properties",
+      "properties": {
+        "ringName": {
+          "type": "string",
+          "description": "unique ring identifier."
+        },
+        "exposureGroupResourceIds": {
+          "type": "array",
+          "description": "Exposure Group ARM Id's.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/RingStatus",
+          "description": "Ring status."
+        },
+        "progressionSetting": {
+          "$ref": "#/definitions/ProgressionSetting",
+          "description": "Ring Progression settings."
+        }
+      },
+      "required": [
+        "ringName",
+        "exposureGroupResourceIds",
+        "status",
+        "progressionSetting"
+      ]
+    },
+    "RingStatus": {
+      "type": "string",
+      "description": "Ring status enum.",
+      "enum": [
+        "Waiting",
+        "Active",
+        "Completed",
+        "Cancelled",
+        "Failed",
+        "AutoPassed",
+        "Omitted"
+      ],
+      "x-ms-enum": {
+        "name": "RingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "Ring/Stage is waiting for its dependency."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Ring/Stage started and it is in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Ring/Stage reached completion."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Ring/Stage is cancelled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Ring/Stage is failed."
+          },
+          {
+            "name": "AutoPassed",
+            "value": "AutoPassed",
+            "description": "Ring/Stage is passed for business reasons."
+          },
+          {
+            "name": "Omitted",
+            "value": "Omitted",
+            "description": "Ring/Stage is skipped for business reasons."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

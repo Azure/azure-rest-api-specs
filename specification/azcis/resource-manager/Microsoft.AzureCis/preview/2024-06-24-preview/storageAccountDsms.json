@@ -1,0 +1,945 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2024-06-24-preview",
+    "description": "https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/storage-account",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "StorageAccountDsms"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations StorageAccountDsms": {
+            "$ref": "./examples/StorageAccountDsms_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/storageAccountDsms": {
+      "get": {
+        "operationId": "StorageAccountDsms_ListBySubscription",
+        "tags": [
+          "StorageAccountDsms"
+        ],
+        "description": "List StorageAccountDsmsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription StorageAccountDsms": {
+            "$ref": "./examples/StorageAccountDsms_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/storageAccountDsms": {
+      "get": {
+        "operationId": "StorageAccountDsms_ListByResourceGroup",
+        "tags": [
+          "StorageAccountDsms"
+        ],
+        "description": "List StorageAccountDsmsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup StorageAccountDsms": {
+            "$ref": "./examples/StorageAccountDsms_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/storageAccountDsms/{resourceName}": {
+      "get": {
+        "operationId": "StorageAccountDsms_Get",
+        "tags": [
+          "StorageAccountDsms"
+        ],
+        "description": "Get a StorageAccountDsmsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get StorageAccountDsms": {
+            "$ref": "./examples/StorageAccountDsms_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageAccountDsms_CreateOrUpdate",
+        "tags": [
+          "StorageAccountDsms"
+        ],
+        "description": "Create a StorageAccountDsmsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageAccountDsmsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'StorageAccountDsmsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountDsmsResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create StorageAccountDsms": {
+            "$ref": "./examples/StorageAccountDsms_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccountReplicationType": {
+      "type": "string",
+      "description": "Account replication type (SKU).",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "AccountReplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard Locally Redundant Storage."
+          },
+          {
+            "name": "Standard_GRS",
+            "value": "Standard_GRS",
+            "description": "Standard Geo Replicated Storage."
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "Standard Zone Redundant Storage."
+          },
+          {
+            "name": "Standard_RAGRS",
+            "value": "Standard_RAGRS",
+            "description": "Standard Read-Access Geo Replicated Storage."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Provisioned IO Locally Redundant Storage."
+          }
+        ]
+      }
+    },
+    "AccountSasInfo": {
+      "type": "object",
+      "description": "AccountSasInfo element contains Sas Key Information.",
+      "properties": {
+        "rootPath": {
+          "type": "string",
+          "description": "dSMS root folder."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Storage Account."
+        },
+        "dsmsLocation": {
+          "type": "string",
+          "description": "Path in Dsms endpoint. If this specified, then RootPath and Name should be ignored."
+        },
+        "signedPermissions": {
+          "type": "string",
+          "description": "The signed permissions for the account SAS. Acceptable values: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
+        },
+        "signedServices": {
+          "type": "string",
+          "description": "Services like blob (b), queue (q) and table (t)."
+        },
+        "signedResourceTypes": {
+          "type": "string",
+          "description": "The signed resource types that are accessible with the account SAS: Service (s) / Container (c) / Object (o)."
+        },
+        "regions": {
+          "type": "string",
+          "description": "List of regions where the SAS should be provisioned, separated by semicolon. May include both region names and DsmsDns names."
+        }
+      },
+      "required": [
+        "rootPath",
+        "name",
+        "dsmsLocation",
+        "signedPermissions",
+        "signedServices",
+        "signedResourceTypes",
+        "regions"
+      ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "BlobIndexMatch": {
+      "type": "object",
+      "description": "Blob Index Match filter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Filter tag name, can have 1 - 128 characters.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "operator": {
+          "type": "string",
+          "description": "Comparison operator used for object comparison and filtering. Currently only equality operator (\"==\") is supported.",
+          "enum": [
+            "=="
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Filter tag value used for tag based filtering, can have 0 - 256 characters.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "value"
+      ]
+    },
+    "DualStackEndpointPreference": {
+      "type": "object",
+      "description": "Dual Stack Endpoint Preference.",
+      "properties": {
+        "defaultDualStackEndpoints": {
+          "type": "boolean",
+          "description": "Enable default dual stack endpoints."
+        },
+        "publishIpv4Endpoint": {
+          "type": "boolean",
+          "description": "Publish IPv4 endpoint."
+        },
+        "publishIpv6Endpoint": {
+          "type": "boolean",
+          "description": "Publish IPv6 endpoint."
+        }
+      }
+    },
+    "LcmActionPolicy": {
+      "type": "object",
+      "description": "Lifecycle Management Policy details for a specific action in a rule.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action to be performed. Acceptable values: 'tierToCool', 'tierToArchive', 'tierToCold', 'tierToHot', 'delete'.",
+          "enum": [
+            "tierToCool",
+            "tierToArchive",
+            "tierToCold",
+            "tierToHot",
+            "delete"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "daysAfterModificationGreaterThan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days after modification greater than."
+        },
+        "daysAfterLastAccessTimeGreaterThan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days after last access time greater than."
+        },
+        "daysAfterLastTierChangeGreaterThan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days after last tier change greater than (specific to tierToArchive action)."
+        },
+        "daysAfterCreationGreaterThan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Days after creation greater than."
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "LifecycleManagementPolicyRule": {
+      "type": "object",
+      "description": "Lifecycle Management Policy Rule for Storage Account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the policy rule."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the rule is enabled."
+        },
+        "baseBlobPolicy": {
+          "type": "array",
+          "description": "Policy for base blobs.",
+          "items": {
+            "$ref": "#/definitions/LcmActionPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "snapshotPolicy": {
+          "type": "array",
+          "description": "Policy for snapshots.",
+          "items": {
+            "$ref": "#/definitions/LcmActionPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "versionPolicy": {
+          "type": "array",
+          "description": "Policy for versions.",
+          "items": {
+            "$ref": "#/definitions/LcmActionPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "blobTypesFilter": {
+          "type": "string",
+          "description": "A string, containing BlobTypes to filter, separated with a semicolon. Acceptable values: 'blockBlob', 'appendBlob'.",
+          "enum": [
+            "blockBlob",
+            "appendBlob"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "prefixMatchFilter": {
+          "type": "array",
+          "description": "List of prefixes to filter by.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blobIndexMatchFilter": {
+          "type": "array",
+          "description": "List of blob index match filters.",
+          "items": {
+            "$ref": "#/definitions/BlobIndexMatch"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "enabled"
+      ]
+    },
+    "Replicate": {
+      "type": "object",
+      "description": "Replicate element defines where the secret should be replicated to.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Replication type. 'Local': This secret is not replicated to other dSMS instance. 'AllDsmsRegions': This secret can be replicated to all dSMS instances. 'SpecifiedDsmsRegions': This secret can only be replicated to the specified dSMS instances.",
+          "enum": [
+            "Local",
+            "AllDsmsRegions",
+            "SpecifiedDsmsRegions"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "regions": {
+          "type": "string",
+          "description": "List of regions the secret will be replicated to, separated by semicolon. Applicable when the replication type is SpecifiedDsmsRegions."
+        }
+      },
+      "required": [
+        "type",
+        "regions"
+      ]
+    },
+    "ResilienciesProgressionId": {
+      "type": "string",
+      "description": "Resiliencies progression id.",
+      "enum": [
+        "Default",
+        "PremiumDefault",
+        "Zonal"
+      ],
+      "x-ms-enum": {
+        "name": "ResilienciesProgressionId",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default resiliencies progression: Standard_LRS, Standard_ZRS, Standard_GRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS."
+          },
+          {
+            "name": "PremiumDefault",
+            "value": "PremiumDefault",
+            "description": "PremiumDefault resiliencies progression: Premium_LRS, Premium_ZRS."
+          },
+          {
+            "name": "Zonal",
+            "value": "Zonal",
+            "description": "Zonal resiliencies progression: Standard_LRS, Standard_GRS, Standard_ZRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS."
+          }
+        ]
+      }
+    },
+    "ResourceProvider": {
+      "type": "string",
+      "description": "Storage Account resource provider.",
+      "enum": [
+        "Classic",
+        "ARM",
+        "Xstore",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Classic",
+            "value": "Classic",
+            "description": "Used to create RDFE Storage Account."
+          },
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "Used to create StorageV2 (General Purpose v2 / GPv2) Storage Account."
+          },
+          {
+            "name": "Xstore",
+            "value": "Xstore",
+            "description": "Used to create Xstore Storage Account."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Used to create a dummy account in dSMS."
+          }
+        ]
+      }
+    },
+    "StorageAccountDsmsProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountDsmsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StorageAccountDsmsResource": {
+      "type": "object",
+      "description": "StorageAccount Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountDsmsResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StorageAccountDsmsResourceListResult": {
+      "type": "object",
+      "description": "The response of a StorageAccountDsmsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageAccountDsmsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageAccountDsmsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageAccountDsmsResourceProperties": {
+      "type": "object",
+      "description": "StorageAccountDsms properties.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the Storage Account."
+        },
+        "rootPath": {
+          "type": "string",
+          "description": "Root path of the certificate."
+        },
+        "dsmsDns": {
+          "type": "string",
+          "description": "Defines in which region of dSMS to provision the Storage Account, such as global-dsms.dsms.%(HostNameSuffix), uswest-dsms.dsms.%(HostNameSuffix). Used only for provisioning Storage Account in non-home-dsms endpoint."
+        },
+        "subscriptionTenantId": {
+          "type": "string",
+          "description": "Subscription Tenant Id. If not set, will use default tenant id in global setting."
+        },
+        "accountReplicationType": {
+          "$ref": "#/definitions/AccountReplicationType",
+          "description": "Account replication type (SKU)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the XStore account."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Storage Account. Use RDFE location ID."
+        },
+        "label": {
+          "type": "string",
+          "description": "Label of the XStore account."
+        },
+        "xstoreBootstrapping": {
+          "type": "boolean",
+          "description": "If False, create Storage Account and dSMS object in Deferred Provisioning; if True, create dSMS object in Provisioning, then create Storage Account in Deferred Provisioning and refresh keys in dSMS. Optional, True by default."
+        },
+        "eventEmittedUponProvisioning": {
+          "type": "string",
+          "description": "Name of the event to emit once the XStore account is created."
+        },
+        "whitelists": {
+          "$ref": "#/definitions/Whitelists",
+          "description": "Storage account whitelist in dSMS."
+        },
+        "replicate": {
+          "$ref": "#/definitions/Replicate",
+          "description": "Storage account Replication in dSMS."
+        },
+        "blockAutoRollover": {
+          "type": "boolean",
+          "description": "Set to True to block auto key rollover. Optional, False by default."
+        },
+        "keyRenewalPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Key renewal period in days. Optional, 365 by default."
+        },
+        "releaseKeyToAgent": {
+          "type": "boolean",
+          "description": "Set to True to grant Access Control List (ACL) permissions to access this Storage Account to Autopilot or PilotFish environments. Optional, False by default."
+        },
+        "forceSyncGlobalDsmsSecret": {
+          "type": "boolean",
+          "description": "Set to True to force global sync of dSMS secret or False to skip it. Optional, False by default."
+        },
+        "resourceProvider": {
+          "$ref": "#/definitions/ResourceProvider",
+          "description": "Storage Account resource provider."
+        },
+        "pilotXstoreResourceProvider": {
+          "type": "boolean",
+          "description": "Set to True to pilot XStore resource provider. In new region or new cloud scenario, it can create Storage Account at earlier stage before ARM ready. This is mainly as a replacement for Classic resource provider which will be deprecated with RDFE."
+        },
+        "accountSasInfos": {
+          "type": "array",
+          "description": "Storage account shared access signature.",
+          "items": {
+            "$ref": "#/definitions/AccountSasInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "residencyBoundary": {
+          "type": "string",
+          "description": "Residency boundary. Acceptable values: 'Worldwide', 'National'.",
+          "enum": [
+            "Worldwide",
+            "National"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "resiliencyMinimum": {
+          "$ref": "#/definitions/AccountReplicationType",
+          "description": "Minimum account replication type, e.g. 'Standard_LRS'. If it's set, it will enable VRS feature for the Storage Account, and the 'AccountReplicationType' property will not be used."
+        },
+        "resiliencyMaximum": {
+          "$ref": "#/definitions/AccountReplicationType",
+          "description": "Maximum account replication type, e.g. 'Standard_ZRS'."
+        },
+        "resilienciesProgressionId": {
+          "$ref": "#/definitions/ResilienciesProgressionId",
+          "description": "Resiliencies progression controls how Storage Account is migrated by VRS."
+        },
+        "additionalLocations": {
+          "type": "string",
+          "description": "Additional locations to support resiliency, e.g. 'primary', separated by ',' or ';'."
+        },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "description": "Dual Stack Endpoint Preference."
+        },
+        "lifecycleManagementPolicy": {
+          "type": "array",
+          "description": "An array of Lifecycle Management Policy rules.",
+          "items": {
+            "$ref": "#/definitions/LifecycleManagementPolicyRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "Defines if Infrastructure Encryption is required."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties can be used to save customer key-value pairs associated with the dSMS secrets. Optional."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/StorageAccountDsmsProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "storageAccountDsmsName": {
+          "type": "string",
+          "description": "Storage Account dSMS object name; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "storageAccountDsmsResourceProviderName": {
+          "type": "string",
+          "description": "Storage Account dSMS object resource provider; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "storageAccountArmCreationTime": {
+          "type": "string",
+          "description": "Storage Account ARM creation time; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "storageAccountRdfeCreationTime": {
+          "type": "string",
+          "description": "Storage Account RDFE creation time; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "storageAccountXstoreCreationTime": {
+          "type": "string",
+          "description": "Storage Account XStore creation time; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "provisionStartTime_dsmsAccountTemplate": {
+          "type": "string",
+          "description": "DsmsAccountTemplate provision start time; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "provisionStartTime_storageAccountTemplate": {
+          "type": "string",
+          "description": "StorageAccountTemplate provision start time; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "provisionStartTime_storageAccountSyncTemplate": {
+          "type": "string",
+          "description": "StorageAccountSyncTemplate provision start time; a part of provisioning ResultData output.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountName",
+        "rootPath",
+        "resourceProvider"
+      ]
+    },
+    "Whitelist": {
+      "type": "object",
+      "description": "Whitelist element defines the whitelist for a secret.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the whitelist: 'ServiceID': whitelisting a service; 'SubscriptionID': whitelisting subscription ID for creating Storage Account objects; 'DnsDomain': whitelisting a DNS domain for creating chained certificates; 'ServiceTreeID': whitelisting a service tree ID.",
+          "enum": [
+            "ServiceID",
+            "SubscriptionID",
+            "DnsDomain",
+            "ServiceTreeID"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "string",
+          "description": "Values of the whitelist, separated by semicolon."
+        }
+      },
+      "required": [
+        "type",
+        "values"
+      ]
+    },
+    "Whitelists": {
+      "type": "object",
+      "description": "Whitelists element is a wrapper object over a collection of Whitelist elements.",
+      "properties": {
+        "whitelist": {
+          "type": "array",
+          "description": "Array of whitelists.",
+          "items": {
+            "$ref": "#/definitions/Whitelist"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "whitelist"
+      ]
+    }
+  },
+  "parameters": {}
+}

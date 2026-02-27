@@ -1,3 +1,4 @@
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SAPVirtualInstance.tsp";
@@ -5,6 +6,7 @@ import "./SAPVirtualInstance.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Workloads;
 /**
@@ -51,23 +53,32 @@ interface SAPCentralServerInstances {
   /**
    * Lists the SAP Central Services Instance resource for the given Virtual Instance for SAP solutions resource.
    */
+  @list
   list is ArmResourceListByParent<SAPCentralServerInstance>;
 
   /**
    * Starts the SAP Central Services Instance.
    */
-  start is CustomizedArmResourceActionAsync<
+  start is ArmResourceActionAsync<
     SAPCentralServerInstance,
-    StartRequest,
+    {
+      @doc("SAP Central Services instance start request body.")
+      @body
+      body?: StartRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
   /**
    * Stops the SAP Central Services Instance.
    */
-  stop is CustomizedArmResourceActionAsync<
+  stop is ArmResourceActionAsync<
     SAPCentralServerInstance,
-    StopRequest,
+    {
+      @doc("SAP Central Services instance stop request body.")
+      @body
+      body?: StopRequest;
+    },
     Foundations.OperationStatusResult
   >;
 }

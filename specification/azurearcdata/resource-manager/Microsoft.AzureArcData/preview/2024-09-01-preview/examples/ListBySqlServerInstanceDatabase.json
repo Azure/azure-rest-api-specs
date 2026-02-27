@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testSqlServerInstance",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "southeastasia",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/testdb",
+            "name": "testdb",
+            "type": "Microsoft.AzureArcData/sqlServerInstances/databases",
+            "properties": {
+              "collationName": "SQL_Latin1_General_CP1_CI_AS",
+              "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+              "compatibilityLevel": 150,
+              "state": "Online",
+              "isReadOnly": true,
+              "recoveryMode": "Full",
+              "sizeMB": 150.00,
+              "spaceAvailableMB": 100.00,
+              "databaseOptions": {
+                "isAutoCloseOn": true,
+                "isAutoShrinkOn": true,
+                "isAutoCreateStatsOn": true,
+                "isAutoUpdateStatsOn": true,
+                "isMemoryOptimizationEnabled": true,
+                "isRemoteDataArchiveEnabled": true,
+                "isEncrypted": true,
+                "isTrustworthyOn": true
+              },
+              "backupInformation": {
+                "lastFullBackup": "2022-05-05T16:26:33.883Z",
+                "lastLogBackup": "2022-05-10T16:26:33.883Z"
+              },
+              "backupPolicy": {
+                "retentionPeriodDays": 1,
+                "fullBackupDays": 1,
+                "differentialBackupHours": 12,
+                "transactionLogBackupMinutes": 30
+              },
+              "migration": {
+                "assessment": {
+                  "assessmentUploadTime": "2024-03-15T00:14:52.0000000Z",
+                  "databaseAssessments": [
+                    {
+                      "appliesToMigrationTargetPlatform": "AzureSqlDatabase",
+                      "featureId": "ServiceBroker",
+                      "issueCategory": "Issue",
+                      "moreInformation": ""
+                    }
+                  ],
+                  "targetReadiness": {
+                    "azureSqlDatabase": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "NotReady"
+                    },
+                    "azureSqlManagedInstance": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "Ready"
+                    },
+                    "azureSqlVirtualMachine": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "Ready"
+                    }
+                  }
+                }
+              },
+              "earliestRestoreDate": "2022-05-10T16:26:33.883Z",
+              "lastDatabaseUploadTime": "2023-03-29T14:13:12Z",
+              "createMode": "PointInTimeRestore",
+              "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+              "restorePointInTime": "2022-05-05T16:26:33.883Z"
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          },
+          {
+            "location": "southeastasia",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/testdb1",
+            "name": "testdb1",
+            "type": "Microsoft.AzureArcData/sqlServerInstances/databases",
+            "properties": {
+              "collationName": "SQL_Latin1_General_CP1_CI_AS",
+              "databaseCreationDate": "2022-04-05T16:26:33.883Z",
+              "compatibilityLevel": 150,
+              "state": "Online",
+              "isReadOnly": true,
+              "recoveryMode": "Full",
+              "sizeMB": 150.00,
+              "spaceAvailableMB": 100.00,
+              "databaseOptions": {
+                "isAutoCloseOn": true,
+                "isAutoShrinkOn": true,
+                "isAutoCreateStatsOn": true,
+                "isAutoUpdateStatsOn": true,
+                "isMemoryOptimizationEnabled": true,
+                "isRemoteDataArchiveEnabled": true,
+                "isEncrypted": true,
+                "isTrustworthyOn": true
+              },
+              "backupInformation": {
+                "lastFullBackup": "2022-05-05T16:26:33.883Z",
+                "lastLogBackup": "2022-05-10T16:26:33.883Z"
+              },
+              "backupPolicy": {
+                "retentionPeriodDays": 1,
+                "fullBackupDays": 1,
+                "differentialBackupHours": 12,
+                "transactionLogBackupMinutes": 30
+              },
+              "migration": {
+                "assessment": {
+                  "assessmentUploadTime": "2024-03-15T00:14:52.0000000Z",
+                  "databaseAssessments": [],
+                  "targetReadiness": {
+                    "azureSqlDatabase": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "Ready"
+                    },
+                    "azureSqlManagedInstance": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "Ready"
+                    },
+                    "azureSqlVirtualMachine": {
+                      "numOfBlockerIssues": 0,
+                      "recommendationStatus": "Ready"
+                    }
+                  }
+                }
+              },
+              "earliestRestoreDate": "2022-05-10T16:26:33.883Z",
+              "lastDatabaseUploadTime": "2023-03-29T14:13:12Z",
+              "createMode": "PointInTimeRestore",
+              "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/testSqlServerInstance/testsqlManagedInstance/databases/MyDatabase",
+              "restorePointInTime": "2022-05-05T16:26:33.883Z"
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

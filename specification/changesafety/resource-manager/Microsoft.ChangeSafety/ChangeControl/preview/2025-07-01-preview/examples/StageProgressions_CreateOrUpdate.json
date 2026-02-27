@@ -1,0 +1,219 @@
+{
+  "title": "StageProgressions_CreateOrUpdate",
+  "operationId": "StageProgressions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "stagingDeploymentChangeState",
+    "stageProgressionName": "stagingValidationProgression",
+    "resource": {
+      "properties": {
+        "stageReference": "staging-validation-stage",
+        "state": "Initialized",
+        "sequence": 2,
+        "stageVariables": {
+          "environment": "staging",
+          "replicas": 2,
+          "featureFlags": [
+            "debug-mode",
+            "verbose-logging"
+          ],
+          "stagingConfig": {
+            "loadTestEnabled": true,
+            "validationDuration": "PT2H"
+          }
+        },
+        "comments": "Staging validation stage progression for web application deployment. This stage performs integration testing, load validation, and feature verification before promoting to production environment.",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/WebApp/_workitems/edit/12346",
+            "description": "Staging validation work item for web application deployment"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/stg-789",
+            "description": "Staging deployment approval request with QA team sign-off"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC-790",
+            "description": "Related support incident for staging environment coordination"
+          },
+          "accessElevationRequest": {
+            "uri": "https://pim.contoso.com/requests/elev-322",
+            "description": "Staging environment access elevation for validation activities"
+          },
+          "relatedChangeState": {
+            "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/developmentChangeState",
+            "description": "Related development change state that completed successfully"
+          },
+          "testResults": {
+            "uri": "https://testing.contoso.com/results/staging-validation-655",
+            "description": "Staging validation test results including integration and load testing"
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/web-application",
+            "description": "Web application service catalog entry with staging procedures"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stageReference": "staging-validation-stage",
+          "state": "Initialized",
+          "sequence": 2,
+          "stageVariables": {
+            "environment": "staging",
+            "replicas": 2,
+            "featureFlags": [
+              "debug-mode",
+              "verbose-logging"
+            ],
+            "stagingConfig": {
+              "loadTestEnabled": true,
+              "validationDuration": "PT2H"
+            }
+          },
+          "comments": "Staging validation stage progression for web application deployment. This stage performs integration testing, load validation, and feature verification before promoting to production environment.",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/WebApp/_workitems/edit/12346",
+              "description": "Staging validation work item for web application deployment",
+              "lastModifiedBy": "helen.developer@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:30.442Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/stg-789",
+              "description": "Staging deployment approval request with QA team sign-off",
+              "lastModifiedBy": "ian.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:15.225Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-790",
+              "description": "Related support incident for staging environment coordination",
+              "lastModifiedBy": "jack.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:45.167Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://pim.contoso.com/requests/elev-322",
+              "description": "Staging environment access elevation for validation activities",
+              "lastModifiedBy": "kelly.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:20.889Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/developmentChangeState",
+              "description": "Related development change state that completed successfully",
+              "lastModifiedBy": "liam.devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:10.334Z"
+            },
+            "testResults": {
+              "uri": "https://testing.contoso.com/results/staging-validation-655",
+              "description": "Staging validation test results including integration and load testing",
+              "lastModifiedBy": "mia.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:35.556Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application",
+              "description": "Web application service catalog entry with staging procedures",
+              "lastModifiedBy": "noah.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:50:25.778Z"
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeploymentChangeState/stageProgressions/stagingValidationProgression",
+        "name": "stagingValidationProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "helen.developer@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "helen.developer@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:20:30.442Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "stageReference": "staging-validation-stage",
+          "state": "Initialized",
+          "sequence": 2,
+          "stageVariables": {
+            "environment": "staging",
+            "replicas": 2,
+            "featureFlags": [
+              "debug-mode",
+              "verbose-logging"
+            ],
+            "stagingConfig": {
+              "loadTestEnabled": true,
+              "validationDuration": "PT2H"
+            }
+          },
+          "comments": "Staging validation stage progression for web application deployment. This stage performs integration testing, load validation, and feature verification before promoting to production environment.",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/WebApp/_workitems/edit/12346",
+              "description": "Staging validation work item for web application deployment",
+              "lastModifiedBy": "helen.developer@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:30.442Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/stg-789",
+              "description": "Staging deployment approval request with QA team sign-off",
+              "lastModifiedBy": "ian.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:15.225Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-790",
+              "description": "Related support incident for staging environment coordination",
+              "lastModifiedBy": "jack.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:45.167Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://pim.contoso.com/requests/elev-322",
+              "description": "Staging environment access elevation for validation activities",
+              "lastModifiedBy": "kelly.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:20.889Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/developmentChangeState",
+              "description": "Related development change state that completed successfully",
+              "lastModifiedBy": "liam.devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:10.334Z"
+            },
+            "testResults": {
+              "uri": "https://testing.contoso.com/results/staging-validation-655",
+              "description": "Staging validation test results including integration and load testing",
+              "lastModifiedBy": "mia.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:35.556Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application",
+              "description": "Web application service catalog entry with staging procedures",
+              "lastModifiedBy": "noah.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:50:25.778Z"
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeploymentChangeState/stageProgressions/stagingValidationProgression",
+        "name": "stagingValidationProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "helen.developer@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T08:20:30.442Z",
+          "lastModifiedBy": "helen.developer@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:20:30.442Z"
+        }
+      }
+    }
+  }
+}

@@ -40,6 +40,9 @@
   },
   "tags": [
     {
+      "name": "ProviderAccounts"
+    },
+    {
       "name": "Operations"
     },
     {
@@ -193,6 +196,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/providerAccounts": {
+      "get": {
+        "operationId": "ProviderAccounts_ListBySubscription",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Gets the list of ProviderAccount within a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuantumProviderAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_ListBySubscription": {
+            "$ref": "./examples/ProviderAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/suiteOffers": {
       "get": {
         "operationId": "SuiteOffers_ListBySubscription",
@@ -269,6 +311,284 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/providerAccounts": {
+      "get": {
+        "operationId": "ProviderAccounts_ListByResourceGroup",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Gets the list of ProviderAccounts within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuantumProviderAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_ListByResourceGroup": {
+            "$ref": "./examples/ProviderAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/providerAccounts/{providerAccountName}": {
+      "get": {
+        "operationId": "ProviderAccounts_Get",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Returns the ProviderAccount resource associated with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerAccountName",
+            "in": "path",
+            "description": "The name of the Quantum ProviderAccount resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_Get": {
+            "$ref": "./examples/ProviderAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProviderAccounts_CreateOrUpdate",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Creates or updates a ProviderAccount resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerAccountName",
+            "in": "path",
+            "description": "The name of the Quantum ProviderAccount resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "ProviderAccount details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QuantumProviderAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'QuantumProviderAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_CreateOrUpdate": {
+            "$ref": "./examples/ProviderAccounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ProviderAccounts_Update",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Updates an existing ProviderAccount's properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerAccountName",
+            "in": "path",
+            "description": "The name of the Quantum ProviderAccount resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "ProviderAccount details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_Update": {
+            "$ref": "./examples/ProviderAccounts_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProviderAccounts_Delete",
+        "tags": [
+          "ProviderAccounts"
+        ],
+        "description": "Deletes a ProviderAccount resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerAccountName",
+            "in": "path",
+            "description": "The name of the Quantum ProviderAccount resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderAccounts_Delete": {
+            "$ref": "./examples/ProviderAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces": {
@@ -680,6 +1000,43 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "KeyType": {
       "type": "string",
       "description": "The API key type.",
@@ -814,6 +1171,313 @@
           "description": "Quota allocations associated with this provider. Available only for special providers."
         }
       }
+    },
+    "ProviderAccount.AccountProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Provisioning",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AccountProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          }
+        ]
+      }
+    },
+    "ProviderAccount.ProviderAccountProperties": {
+      "type": "object",
+      "description": "Properties of a ProviderAccount",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProviderAccount.AccountProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The ProviderId which will be referenced by and that can be added to Azure Quantum Workspaces.",
+          "minLength": 2,
+          "maxLength": 14,
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of this ProviderAccount.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this ProviderAccount.",
+          "default": "",
+          "maxLength": 240
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The name of the company that is providing this ProviderAccount.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
+          "items": {
+            "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
+          }
+        },
+        "queues": {
+          "type": "array",
+          "description": "List of Queues available in this ProviderAccount.",
+          "items": {
+            "$ref": "#/definitions/ProviderAccount.ProviderAccountQueue"
+          },
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "providerId",
+        "displayName",
+        "companyName"
+      ]
+    },
+    "ProviderAccount.ProviderAccountPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of a ProviderAccount",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "description": "The ProviderId which will be referenced by and that can be added to Azure Quantum Workspaces.",
+          "minLength": 2,
+          "maxLength": 14,
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of this ProviderAccount.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this ProviderAccount.",
+          "default": "",
+          "maxLength": 240
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The name of the company that is providing this ProviderAccount.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount.",
+          "items": {
+            "$ref": "#/definitions/ProviderAccount.ProviderAccountSubscription"
+          }
+        }
+      }
+    },
+    "ProviderAccount.ProviderAccountQueue": {
+      "type": "object",
+      "description": "A Queue associated with a ProviderAccount, in which jobs are queued in for execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the Queue.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the Queue.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "targets": {
+          "type": "array",
+          "description": "The targets associated with the Queue.",
+          "items": {
+            "$ref": "#/definitions/ProviderAccount.ProviderAccountTarget"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "targets"
+      ]
+    },
+    "ProviderAccount.ProviderAccountSubscription": {
+      "type": "object",
+      "description": "A subscription that is allowed to access resources from a ProviderAccount.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ProviderAccount.SubscriptionId",
+          "description": "The Azure subscription ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the Azure subscription.",
+          "default": "",
+          "maxLength": 50
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this subscription is enabled for access to the ProviderAccount resources.",
+          "default": true
+        },
+        "quotas": {
+          "$ref": "#/definitions/ProviderAccount.SubscriptionQuotaAllocations",
+          "description": "Quota allocations for this subscription."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ProviderAccount.ProviderAccountTarget": {
+      "type": "object",
+      "description": "A Target of a ProviderAccount, in which Workspace Jobs can be targeted at for execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The globally-unique ID of the Target.\n\nMust be prefixed by the `providerId` using the format `{providerId}.{target}`.\nThe `{target}` itself may include suffixes separated by `.` or `-`.\nValid examples:\n- \"my-provider.my-target\"\n- \"my-provider.my-target-01\"\n- \"my-provider.my-target.variant-01\"",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)(\\.([a-z0-9]+(-[a-z0-9]+)*))+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the Target.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Target.",
+          "default": "",
+          "maxLength": 240
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "ProviderAccount.QuantumProviderAccount": {
+      "type": "object",
+      "description": "The resource proxy definition object for Quantum ProviderAccount.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProviderAccount.ProviderAccountProperties",
+          "description": "Gets or sets the properties. Define Quantum provider account's specific properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProviderAccount.QuantumProviderAccountUpdate": {
+      "type": "object",
+      "description": "The resource proxy definition object for Quantum ProviderAccount.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProviderAccount.ProviderAccountPropertiesUpdate",
+          "description": "Gets or sets the properties. Define Quantum provider account's specific properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ProviderAccount.SubscriptionId": {
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    },
+    "ProviderAccount.SubscriptionQuotaAllocations": {
+      "type": "object",
+      "description": "Quota allocations with each field representing different quota type.",
+      "properties": {
+        "standardMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for standard priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        },
+        "highMinutesLifetime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit for high priority jobs execution in minutes for a lifetime of the subscription.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "standardMinutesLifetime"
+      ]
     },
     "ProviderDescription": {
       "type": "object",
@@ -975,6 +1639,27 @@
           }
         ]
       }
+    },
+    "QuantumProviderAccountListResult": {
+      "type": "object",
+      "description": "The response of a QuantumProviderAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuantumProviderAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/ProviderAccount.QuantumProviderAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "QuantumSuiteOffer": {
       "type": "object",
@@ -1414,7 +2099,7 @@
         },
         "workspaceKind": {
           "$ref": "#/definitions/WorkspaceKind",
-          "description": "Whether this workspace is V1 or V2."
+          "description": "Whether this workspace is v1 or v2."
         },
         "endpointUri": {
           "type": "string",

@@ -21,26 +21,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ``` yaml
 directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: sites.json
+    where: $.definitions["SiteAwareResourceType"]
+    reason: SiteAwareResourceTypes is an tenant-level resource hence not exposing subscription scoped list operation
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    from: sites.json
+    reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
   - suppress: OperationsAPIImplementation
     from: sites.json
-    reason: Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
+    reason: RP is in PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
   - suppress: TenantLevelAPIsNotAllowed
-    where:
-      - $.paths["/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}"]
     from: sites.json
     reason: Adding tenant level API to enable site creation on service groups, have got the case reviewed from ARM and PAS team as per documentation
+  - suppress: XmsPageableForListCalls
+    from: sites.json
+    reason: false-positive issue reported in Lintdiff. Because GET /providers/Microsoft.Edge/siteAwareResourceTypes/default isn't a list call and supposed to return single resource named default. Reference - [TypeSpec False Positives] EvenSegmentedPathForPutOperation and XmsPageableForListCalls with @singleton · Issue #646 · Azure/azure-openapi-validator (github.com)
   - suppress: AvoidAdditionalProperties
-    where:
-      - $.definitions.SiteProperties.properties.labels
-      - $.definitions.SiteUpdateProperties.properties.labels
     from: sites.json
     reason: labels describe user defined tags to be used on Sites.
-  - suppress: ExtensionResourcePathPattern
-    where:
-      - $.paths["/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}"]
-      - $.paths["/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites"]
-    from: sites.json
-    reason:  This approach was necessitated by the current limitations in TypeSpec, which does not support defining parent resources at the tenant level for extension resource types.
 ```
 
 ## Configuration
@@ -52,16 +51,7 @@ These are the global settings for the edgesites.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06-01
-```
-
-### Tag: package-2025-06-01
-
-These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-06-01'
-input-file:
-  - stable/2025-06-01/sites.json
+tag: package-2025-03-01-preview
 ```
 
 ### Tag: package-2025-03-01-preview
@@ -73,6 +63,24 @@ input-file:
   - preview/2025-03-01-preview/sites.json
 ```
 
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - preview/2025-02-01-preview/sites.json
+```
+
+### Tag: package-2024-12-01-preview
+
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01-preview'
+input-file:
+  - preview/2024-12-01-preview/sites.json
+```
+
 ### Tag: package-2024-02-01-preview
 
 These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
@@ -81,22 +89,72 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 input-file:
   - preview/2024-02-01-preview/sites.json
 ```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - preview/2023-08-01-preview/edgesites.json
+  - preview/2023-08-01-preview/siteAwareResourceTypes.json
+```
+
+### Tag: package-2023-07-01-preview
+
+These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-01-preview'
+input-file:
+  - preview/2023-07-01-preview/edgesites.json
+```
+
+### Tag: package-2023-06-01-preview
+
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-01-preview'
+input-file:
+  - preview/2023-06-01-preview/edgesites.json
+```
+
 ---
 
 # Code Generation
 
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+```yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net
+```
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)

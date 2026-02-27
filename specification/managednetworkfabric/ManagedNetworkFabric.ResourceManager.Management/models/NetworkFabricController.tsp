@@ -71,6 +71,15 @@ model NetworkFabricControllerProperties {
   @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("Operational state of networkFabricController indicating if the resources of the controller are reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
+  @doc("The VM profile configuration for the NFC's associated compute (VM) resources.")
+  @added(Versions.v2026_01_15_preview)
+  vmProfile?: VmProfile;
 }
 
 @doc("Network Fabric Controller services.")
@@ -111,7 +120,19 @@ model NetworkFabricControllerPatch {
   ...TagsUpdate;
 
   @doc("Network Fabric Controller patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkFabricControllerPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Fabric Controller patch properties.")
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @added(Versions.v2025_07_15)
   properties?: NetworkFabricControllerPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Network Fabric Controller patch properties.")
@@ -148,4 +169,11 @@ union NfcSku {
   HighPerformance: "HighPerformance",
 
   string,
+}
+
+@doc("The VM profile configuration for the NFC's associated compute (VM) resources.")
+@added(Versions.v2026_01_15_preview)
+model VmProfile {
+  @doc("The SKU that will be used for creating the VMS for AKS cluster.")
+  vmSkuName: string;
 }

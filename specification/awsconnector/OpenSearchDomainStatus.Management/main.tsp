@@ -133,7 +133,7 @@ model AwsOpenSearchDomainStatusProperties {
   logPublishingOptions?: Record<LogPublishingOption>;
 
   @doc("<p>Information about the domain properties that are currently being modified.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   modifyingProperties?: ModifyingProperties[];
 
   @doc("<p>Whether node-to-node encryption is enabled or disabled.</p>")

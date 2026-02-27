@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "0afefe50-734e-4610-8a82-a144ahf49dea",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "servicesHubResourceName1",
+    "spaceName": "West Joyce and Sons",
+    "api-version": "2023-10-20-preview",
+    "x-ms-engage-hub-token": "fsdfsdfsd",
+    "requestBody": {
+      "properties": {
+        "connectorName": "newtest",
+        "spaceId": "West Joyce and Sons",
+        "puid": null,
+        "logAnalyticsWorkspaces": [
+          {
+            "omsWorkspaceName": "LAW1",
+            "omsWorkspaceId": "LAW1",
+            "location": "eastus",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          },
+          {
+            "omsWorkspaceName": "LAW2",
+            "omsWorkspaceId": "LAW2",
+            "location": "westus",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          }
+        ],
+        "assessmentCount": 2
+      },
+      "location": "East US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {},
+        "id": "/subscriptions/0afefe50-734e-4610-8c82-a144aff49dea/resourceGroups/rgName/providers/Microsoft.ServicesHub/connectors/newtest",
+        "type": "Microsoft.ServicesHub/connectors",
+        "name": "484a7d5f-9729-4b87-bc9b-26610985a013"
+      }
+    }
+  }
+}

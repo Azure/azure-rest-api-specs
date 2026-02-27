@@ -3,7 +3,10 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview"
+    "version": "2021-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -202,6 +205,12 @@
             "schema": {
               "$ref": "#/definitions/virtualharddisks"
             }
+          },
+          "201": {
+            "description": "Updates the virtualharddisks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualharddisks"
+            }
           }
         }
       }
@@ -306,49 +315,21 @@
           "format": "int32"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "InProgress",
-            "Accepted",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/VirtualHardDiskStatus"
+          "type": "object",
+          "description": "MOCVirtualHardDiskStatus defines the observed state of MOCVirtualHardDisk"
         }
       },
-      "description": "VirtualHardDiskSpec defines the desired state of VirtualHardDisk"
-    },
-    "VirtualHardDiskStatus": {
-      "type": "object",
-      "description": "VirtualHardDiskStatus defines the observed state of VirtualHardDisk",
-      "x-ms-client-flatten": true,
-      "readOnly": true,
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "NetworkInterface provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
-        }
-      }
+      "description": "MOCVirtualHardDiskSpec defines the desired state of MOCVirtualHardDisk"
     },
     "virtualharddisks": {
       "type": "object",
-      "description": "The virtualharddisks resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -356,16 +337,53 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualharddisksProperties"
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "required": [
+        "location"
+      ],
+      "description": "The virtualharddisks resource definition."
     },
     "virtualharddisksPatch": {
       "type": "object",

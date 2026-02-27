@@ -97,7 +97,7 @@ model AwsCodeBuildProjectProperties {
   environment?: ProjectEnvironment;
 
   @doc("<p> An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   fileSystemLocations?: ProjectFileSystemLocation[];
 
   @doc("<p>When the build project's settings were last modified, expressed in Unix time format.</p>")
@@ -122,15 +122,15 @@ model AwsCodeBuildProjectProperties {
   resourceAccessRole?: string;
 
   @doc("<p>An array of <code>ProjectArtifacts</code> objects. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondaryArtifacts?: ProjectArtifacts[];
 
   @doc("<p>An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondarySourceVersions?: ProjectSourceVersion[];
 
   @doc("<p>An array of <code>ProjectSource</code> objects. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondarySources?: ProjectSource[];
 
   @doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>")
@@ -143,7 +143,7 @@ model AwsCodeBuildProjectProperties {
   sourceVersion?: string;
 
   @doc("<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>")
@@ -413,7 +413,7 @@ model ProjectEnvironment {
   computeType?: ComputeTypeEnumValue;
 
   @doc("<p>A set of environment variables to make available to builds for this build project.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   environmentVariables?: EnvironmentVariable[];
 
   @doc("<p>A ProjectFleet object to use for this build project.</p>")
@@ -748,7 +748,7 @@ model Webhook {
   buildType?: WebhookBuildTypeEnumValue;
 
   @doc("<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   filterGroups?: FilterGroup[];
 
   @doc("<p>A timestamp that indicates the last time a repository's secret token was modified. </p>")

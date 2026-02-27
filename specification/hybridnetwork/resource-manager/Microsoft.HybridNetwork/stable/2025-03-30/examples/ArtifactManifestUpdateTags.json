@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactManifestName": "TestManifest",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestManifest",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/microsoft.hybridnetwork/publishers/UnityCloud/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
+        "location": "eastus",
+        "properties": {
+          "artifactManifestState": "Uploaded",
+          "artifacts": [
+            {
+              "artifactName": "fed-rbac",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "1.0.0"
+            },
+            {
+              "artifactName": "nginx",
+              "artifactType": "OCIArtifact",
+              "artifactVersion": "v1"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "ArtifactManifests_Update",
+  "title": "Update a artifact manifest resource tags"
+}

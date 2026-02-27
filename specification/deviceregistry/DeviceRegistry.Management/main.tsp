@@ -5,22 +5,26 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./assets.tsp";
 import "./assetEndpointProfiles.tsp";
 import "./billings.tsp";
+import "./devices.tsp";
 import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
-import "./namespaces.tsp";
-import "./ns_credential.tsp";
-import "./back-compatible.tsp";
-import "./ns_policy.tsp";
-import "./ns_assets.tsp";
-import "./ns_devices.tsp";
-import "./ns_discoveredAssets.tsp";
-import "./ns_discoveredDevices.tsp";
 import "./schemaRegistries.tsp";
+import "./namespaces.tsp";
+import "./credential.tsp";
+import "./policy.tsp";
+import "./ns_devices.tsp";
+import "./ns_discoveredDevices.tsp";
+import "./ns_assets.tsp";
+import "./ns_discoveredAssets.tsp";
+import "./ns_assetEndpointProfiles.tsp";
+import "./ns_discoveredAssetEndpointProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.CommonTypes.Private;
+using Azure.ResourceManager.Private;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
@@ -29,44 +33,41 @@ using Azure.ResourceManager.Foundations;
 @versioned(Versions)
 namespace Microsoft.DeviceRegistry;
 
-/** API versions */
 @doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-10-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  v2023_11_01_preview: "2023-11-01-preview",
+  v2023_10_01_preview: "2023-10-01-preview",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-09-01-preview.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-07-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_09_01_preview: "2024-09-01-preview",
+  v2024_07_01_preview: "2024-07-01-preview",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-11-01.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-10-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_11_01: "2024-11-01",
+  v2024_10_01_preview: "2024-10-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-07-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_07_01_preview: "2025-07-01-preview",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-10-01.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-08-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_10_01: "2025-10-01",
+  v2025_08_01_preview: "2025-08-01-preview",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-11-01-preview.")
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-02-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-03-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_03_01_preview: "2026-03-01-preview",
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "existing api"
 @armResourceOperations
 interface OperationStatus {
   @doc("Returns the current status of an async operation.")
   @autoRoute
+  @armUpdateProviderNamespace
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -77,8 +78,23 @@ interface OperationStatus {
     provider: "Microsoft.DeviceRegistry",
 
     ...LocationParameter,
-    ...Foundations.OperationIdParameter,
+
+    @path
+    @segment("operationStatuses")
+    @minLength(1)
+    @doc("The ID of an ongoing async operation.")
+    @armCommonParameter(
+      "OperationIdParameter",
+      Azure.ResourceManager.CommonTypes.Versions.v3
+    )
+    @armCommonParameter(
+      "OperationIdParameter",
+      Azure.ResourceManager.CommonTypes.Versions.v4
+    )
+    @armCommonParameter(
+      "OperationIdParameter",
+      Azure.ResourceManager.CommonTypes.Versions.v5
+    )
+    operationId: string,
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
-
-@@segment(OperationStatus.get::parameters.operationId, "operationStatuses");

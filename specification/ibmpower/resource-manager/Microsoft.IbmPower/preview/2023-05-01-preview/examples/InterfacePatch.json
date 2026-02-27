@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "powerVmName": "myPowerVm",
+    "interfaceName": "interfaceName",
+    "interfaceObject": {
+      "etag": "f0e24442-4477-44c1-b906-0aa402de7c0d",
+      "location": "westcentralus",
+      "tags": {
+        "additionalProp1": "descriptiveTag"
+      },
+      "properties": {
+        "provisioningState": "Creating",
+        "ipAddress": "10.1.1.10",
+        "vlanId": "16"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pvm-1",
+        "id": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.IbmPower/powerVirtualMachines/pvm-1",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "etag": "f0e24442-4477-44c1-b906-0aa402de7c0d",
+        "type": "Microsoft.IbmPower/powerVirtualMachines",
+        "location": "westcentralus",
+        "tags": {
+          "additionalProp1": "descriptiveTag"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "ipAddress": "10.1.1.10",
+          "vlanId": "16"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/NORTHEUROPE/operationStatuses/sample-op-status?api-version=2022-10-15-preview"
+      }
+    }
+  }
+}

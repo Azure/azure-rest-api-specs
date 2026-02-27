@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testvi1",
+            "type": "Microsoft.Workloads/virtualInstances",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+            "location": "eastus2euap",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+              }
+            },
+            "kind": "sap",
+            "properties": {
+              "workloadInfo": {
+                "workloadType": "sap",
+                "workloadDefinitionName": "HighAvailability",
+                "workloadDefinitionVersion": "1.0"
+              },
+              "environmentType": "Production",
+              "systemLifecycleStage": "Active",
+              "systemPriority": 0,
+              "metadata": {
+                "SAPSID": "RS1"
+              },
+              "provisioningState": "Succeeded",
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "testvi2",
+            "type": "Microsoft.Workloads/virtualInstances",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi2",
+            "location": "eastus2euap",
+            "tags": {
+              "TestSystem": "true"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+              }
+            },
+            "kind": "sap",
+            "properties": {
+              "workloadInfo": {
+                "workloadType": "sap",
+                "workloadDefinitionName": "HighAvailability",
+                "workloadDefinitionVersion": "1.0"
+              },
+              "environmentType": "NonProduction",
+              "systemLifecycleStage": "Active",
+              "systemPriority": 3,
+              "metadata": {
+                "SAPSID": "RS2"
+              },
+              "linkedResources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+                  "linkType": "Dependency"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T01:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T16:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualInstances_ListByResourceGroup",
+  "title": "List virtual instances by resource group - sample 1"
+}

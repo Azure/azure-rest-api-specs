@@ -26,10 +26,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01_preview: "2024-10-01-preview",
-
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v2_preview)
-  v2024_10_01: "2024-10-01",
 }
 
 @doc("Partner's specific Properties")
@@ -44,9 +40,8 @@ model PartnerProperties {
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
 model OrganizationProperties is BaseResourceProperties {
-  @madeRequired(Versions.v2024_10_01)
   @doc("partner properties")
-  partnerProperties: PartnerProperties;
+  partnerProperties?: PartnerProperties;
 
   @doc("Single sign-on properties")
   singleSignOnProperties?: SingleSignOnPropertiesV2;

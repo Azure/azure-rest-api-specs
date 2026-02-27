@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "properties": {
+      "tags": {
+        "key1": "vie1"
+      }
+    },
+    "epicVirtualInstanceName": "X00",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "X00",
+        "type": "Microsoft.Workloads/epicVirtualInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/epicVirtualInstances/X00",
+        "location": "westcentralus",
+        "properties": {
+          "configuration": {
+            "configurationType": "Registration",
+            "wssServerInstance": {
+              "vmDetails": [
+                {
+                  "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/wssVm1",
+                  "role": "WBS"
+                }
+              ]
+            },
+            "databaseServerInstance": {
+              "vmDetails": [
+                {
+                  "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/dbVm1",
+                  "role": "ECP"
+                }
+              ]
+            },
+            "hyperspaceWebServerInstance": {
+              "vmDetails": [
+                {
+                  "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/hyperspaceVm1",
+                  "role": "HyperspaceWebRole"
+                }
+              ]
+            },
+            "presentationServerInstance": {
+              "vmDetails": [
+                {
+                  "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/presentationVm1",
+                  "role": "Hyperspace VDI"
+                }
+              ]
+            },
+            "sharedServerInstance": {
+              "vmDetails": [
+                {
+                  "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/sharedVm1",
+                  "role": "Kuiper"
+                }
+              ]
+            }
+          },
+          "environment": "NonProduction",
+          "health": "Healthy",
+          "managedResourceGroupConfiguration": {
+            "name": "managedResourceGroup1"
+          },
+          "provisioningState": "Succeeded",
+          "state": "RegistrationComplete",
+          "status": "Running"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "vie1"
+        }
+      }
+    }
+  },
+  "operationId": "EpicVirtualInstances_Update",
+  "title": "EpicVirtualInstances_Update"
+}

@@ -1,0 +1,65 @@
+{
+  "title": "HealthModelVersions_Get",
+  "operationId": "HealthModelVersions_Get",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "versionNumber": "1677679737124",
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourcegroups/test-healthmodels-rg/providers/Microsoft.HealthModel/healthmodels/myModel1/versions/1677679737124",
+        "type": "Microsoft.HealthModel/healthmodels/versions",
+        "name": "1677679737124",
+        "properties": {
+          "nodes": [
+            {
+              "nodeType": "AggregationNode",
+              "nodeId": "0",
+              "name": "root",
+              "childNodeIds": [
+                "cec16583-186b-4185-ad9d-4cbf42ce3034"
+              ],
+              "visual": {
+                "x": 0,
+                "y": 0
+              },
+              "healthTargetPercentage": 99
+            },
+            {
+              "nodeType": "AzureResourceNode",
+              "azureResourceId": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourceGroups/sample-rg/providers/Microsoft.Cache/Redis/my-redis-cache",
+              "nodeId": "cec16583-186b-4185-ad9d-4cbf42ce3034",
+              "name": "Redis",
+              "credentialId": "SystemAssigned",
+              "childNodeIds": [],
+              "queries": [
+                {
+                  "queryType": "ResourceMetricsQuery",
+                  "metricName": "usedmemorypercentage",
+                  "metricNamespace": "Microsoft.Cache/Redis",
+                  "aggregationType": "Average",
+                  "queryId": "02c3c17e-e8ea-45b2-8596-28df3ca8963b",
+                  "degradedThreshold": "75",
+                  "degradedOperator": "GreaterThan",
+                  "unhealthyThreshold": "85",
+                  "unhealthyOperator": "GreaterThan",
+                  "timeGrain": "PT30M",
+                  "dataUnit": "Percent",
+                  "enabledState": "Enabled"
+                }
+              ],
+              "visual": {
+                "x": 0,
+                "y": 165
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -5,10 +5,31 @@
     Comment: Suppress until we know the awsconnector folder uses these settings.
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-    - options.@azure-tools/typespec-go.*
   paths:
     - /**/tspconfig.yaml
+  
+- tool: TypeSpecValidation
+  reason: >
+    Rest-Only Specification: Does not generate SDKs by design.
+    Responsibility: No action required
+    Comment: Suppress until we know the awsconnector folder uses these settings.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - Awsconnector.Management/tspconfig.yaml
+    - BedrockAgent.Management/tspconfig.yaml
+    - BedrockAgentAlias.Management/tspconfig.yaml
+    - BedrockApplicationInferenceProfile.Management/tspconfig.yaml
+    - BedrockBlueprint.Management/tspconfig.yaml
+    - BedrockDataAutomationProject.Management/tspconfig.yaml
+    - BedrockDataSource.Management/tspconfig.yaml
+    - BedrockFlow.Management/tspconfig.yaml
+    - BedrockFlowAlias.Management/tspconfig.yaml
+    - BedrockGuardrail.Management/tspconfig.yaml
+    - BedrockKnowledgeBase.Management/tspconfig.yaml
+    - BedrockPrompt.Management/tspconfig.yaml

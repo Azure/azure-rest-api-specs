@@ -4,10 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.StorageActions;
@@ -116,6 +113,7 @@ model StorageTaskPreviewAction {
   /**
    * Properties of the storage task preview.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: StorageTaskPreviewActionProperties;
 }
 
@@ -386,6 +384,7 @@ model StorageTaskUpdateParameters {
   /**
    * Properties of the storage task.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: StorageTaskUpdateProperties;
 }
 

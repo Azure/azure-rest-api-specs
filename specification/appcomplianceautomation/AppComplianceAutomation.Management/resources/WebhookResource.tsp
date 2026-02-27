@@ -1,19 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
 using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
@@ -21,96 +16,86 @@ namespace Microsoft.AppComplianceAutomation;
  * A class represent an AppComplianceAutomation webhook resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @parentResource(ReportResource)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
-model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
+model WebhookResource extends Foundations.ProxyResource {
   /**
    * Webhook Name.
    */
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
+  @path
   @key("webhookName")
   @segment("webhooks")
   @visibility(Lifecycle.Read)
-  @path
   name: string;
 
   /**
    * Webhook property.
    */
-  properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @extension("x-ms-client-name", "properties")
+  properties: WebhookProperties;
 }
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface Webhook {
+interface WebhookResources {
   /**
    * Get the AppComplianceAutomation webhook and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_Get")
+  @operationId("Webhooks_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
+  @operationId("Webhooks_CreateOrUpdate")
+  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @patch(#{ implicitOptionality: false })
-  @operationId("Webhook_Update")
-  update is ArmCustomPatchSync<
-    WebhookResource,
-    WebhookResourcePatch,
-    Response = ArmResponse<WebhookResource>,
-    Error = ErrorResponse
-  >;
+  @operationId("Webhooks_Update")
+  update is ArmCustomPatchSync<WebhookResource, WebhookResourcePatch>;
 
   /**
    * Delete an AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_Delete")
+  @operationId("Webhooks_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
    * Get the AppComplianceAutomation webhook list.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Webhook_List")
+  @operationId("Webhooks_List")
   list is ArmResourceListByParent<
     WebhookResource,
     {
-      ...Azure.ResourceManager.Foundations.BaseParameters<WebhookResource>;
+      ...BaseParameters<WebhookResource>;
       ...QueryParameters;
     }
   >;
 }
 
-@@doc(Webhook.createOrUpdate::parameters.resource,
+@@doc(WebhookResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
-@@doc(Webhook.update::parameters.properties,
+@@doc(WebhookResources.update::parameters.properties,
   "Parameters for the create or update operation"
 );
 
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Webhook.update::parameters.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Deprecated: Using encodedName for the body property is meaningless."
+@@encodedName(WebhookResources.update::parameters.properties,
   "application/json",
   "parameters"
 );
-
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Webhook.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@clientName(Webhook.createOrUpdate::parameters.resource, "properties");

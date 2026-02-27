@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../common/destination.tsp";
 import "../common/extendedLocation.tsp";
 import "../common/provisioningState.tsp";
+import "../common/topic.tsp";
 import "../common/deviceRef.tsp";
 import "../common/status.tsp";
 
@@ -15,11 +16,15 @@ using Azure.ResourceManager;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the asset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceAssetProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
+
+  @doc("Resource path to asset type (model) definition.")
+  @removed(Versions.v2024_10_01_preview)
+  assetType?: string;
 
   @doc("Enabled/disabled status of the asset.")
   enabled?: boolean;
@@ -34,11 +39,19 @@ model NamespaceAssetProperties {
   @doc("Human-readable description of the asset.")
   description?: string;
 
+  @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_07_01_preview)
+  assetEndpointProfileRef: string;
+
   @doc("Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_07_01_preview)
   deviceRef: DeviceRef;
 
   @doc("URIs or type definition IDs.")
+  @added(Versions.v2025_07_01_preview)
   assetTypeRefs?: string[];
 
   @doc("An integer that is incremented each time the resource is modified.")
@@ -47,6 +60,7 @@ model NamespaceAssetProperties {
 
   @doc("A timestamp (in UTC) that is updated each time the resource is modified.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_01_preview)
   lastTransitionTime?: utcDateTime;
 
   @doc("Asset manufacturer.")
@@ -88,20 +102,30 @@ model NamespaceAssetProperties {
   defaultEventsConfiguration?: string;
 
   @doc("Stringified JSON that contains connector-specific default configuration for all streams. Each stream can have its own configuration that overrides the default settings here.")
+  @added(Versions.v2025_07_01_preview)
   defaultStreamsConfiguration?: string;
 
   @doc("Stringified JSON that contains connector-specific default configuration for all management groups. Each management group can have its own configuration that overrides the default settings here.")
+  @added(Versions.v2025_07_01_preview)
   defaultManagementGroupsConfiguration?: string;
 
+  @doc("Object that describes the default topic information for the asset.")
+  @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_07_01_preview)
+  defaultTopic?: Topic;
+
   @doc("Default destinations for a dataset.")
+  @added(Versions.v2025_07_01_preview)
   @identifiers(#[])
   defaultDatasetsDestinations?: DatasetDestination[];
 
   @doc("Default destinations for an event.")
+  @added(Versions.v2025_07_01_preview)
   @identifiers(#[])
   defaultEventsDestinations?: EventDestination[];
 
   @doc("Default destinations for a stream.")
+  @added(Versions.v2025_07_01_preview)
   @identifiers(#[])
   defaultStreamsDestinations?: StreamDestination[];
 
@@ -111,12 +135,12 @@ model NamespaceAssetProperties {
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
   @Azure.ResourceManager.identifiers(#[])
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
+  @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2026_02_01_preview)
   events?: NamespaceEvent[];
 
   @doc("Array of event groups that are part of the asset. Each event group can have per-event group configuration.")
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   @Azure.ResourceManager.identifiers(#[])
   eventGroups?: NamespaceEventGroup[];
 
@@ -140,37 +164,49 @@ model NamespaceAssetProperties {
 }
 
 @doc("Defines the dataset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceDataset {
   @doc("Name of the dataset.")
   name: string;
 
   @doc("Reference to a data source for a given dataset.")
+  @added(Versions.v2025_07_01_preview)
   dataSource?: string;
 
   @doc("URI or type definition ID.")
+  @added(Versions.v2025_07_01_preview)
   typeRef?: string;
 
   @doc("Stringified JSON that contains connector-specific JSON string that describes configuration for the specific dataset.")
   datasetConfiguration?: string;
 
+  @doc("Object that describes the topic information for the specific dataset.")
+  @removed(Versions.v2025_07_01_preview)
+  topic?: Topic;
+
   @doc("Destinations for a dataset.")
+  @added(Versions.v2025_07_01_preview)
   @identifiers(#[])
   destinations?: DatasetDestination[];
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
+  @typeChangedFrom(Versions.v2025_07_01_preview, NamespaceDataPoint[])
   @Azure.ResourceManager.identifiers(#[])
   dataPoints?: NamespaceDatasetDataPoint[];
 }
 
 @doc("Defines the data point properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceDataPoint {
   @doc("The name of the data point.")
   name: string;
 
   @doc("The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset.")
   dataSource: string;
+
+  @doc("An indication of how the data point should be mapped to OpenTelemetry.")
+  @removed(Versions.v2025_07_01_preview)
+  observabilityMode?: DataPointObservabilityMode = DataPointObservabilityMode.None;
 
   @doc("Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
   dataPointConfiguration?: string;
@@ -189,7 +225,7 @@ model NamespaceDatasetDataPoint is NamespaceDataPoint {
 model NamespaceEventDataPoint is NamespaceDataPoint;
 
 @doc("Defines the event group properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2026_02_01_preview)
 model NamespaceEventGroup {
   @doc("The name of the event group.")
   name: string;
@@ -213,33 +249,43 @@ model NamespaceEventGroup {
 }
 
 @doc("Defines the event properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceEvent {
   @doc("The name of the event.")
   name: string;
 
   @doc("Reference to a data source for a given event.")
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   dataSource?: string;
 
   @doc("The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset.")
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
+  @removed(Versions.v2026_02_01_preview)
   eventNotifier: string;
+
+  @doc("An indication of how the event should be mapped to OpenTelemetry.")
+  @removed(Versions.v2025_07_01_preview)
+  observabilityMode?: EventObservabilityMode = EventObservabilityMode.None;
 
   @doc("Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
   eventConfiguration?: string;
 
+  @doc("Object that describes the topic information for the specific event.")
+  @removed(Versions.v2025_07_01_preview)
+  topic?: Topic;
+
   @doc("Destinations for an event.")
+  @added(Versions.v2025_07_01_preview)
   @identifiers(#[])
   destinations?: EventDestination[];
 
   @doc("URI or type definition ID.")
+  @added(Versions.v2025_07_01_preview)
   typeRef?: string;
 
   @doc("Array of data points that are part of the event. Each data point can have a per-data point configuration.")
-  @removed(Versions.v2025_10_01)
+  @removed(Versions.v2026_02_01_preview)
   @identifiers(#[])
+  @added(Versions.v2025_07_01_preview)
   dataPoints?: NamespaceEventDataPoint[];
 }
 
@@ -267,7 +313,7 @@ model ManagementGroup {
   name: string;
 
   @doc("Reference to a data source for a given management group.")
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   dataSource?: string;
 
   @doc("Stringified JSON that contains connector-specific configuration for the management group.")
@@ -328,10 +374,22 @@ union ManagementActionType {
 }
 
 @doc("Defines the asset status properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceAssetStatus {
+  @doc("Array object to transfer and persist errors that originate from the Edge.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  @removed(Versions.v2025_07_01_preview)
+  errors?: NamespaceAssetStatusError[];
+
+  @doc("A read-only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (edge) state of the asset. Edge would be the only writer of this value and would sync back up to the cloud. In a steady state, this should equal the version.")
+  @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_07_01_preview)
+  version?: int64;
+
   @doc("Defines the asset status config properties.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_01_preview)
   config?: StatusConfig;
 
   @doc("Array of dataset statuses that describe the status of each dataset.")
@@ -340,30 +398,50 @@ model NamespaceAssetStatus {
   datasets?: NamespaceAssetStatusDataset[];
 
   @doc("Array of event group statuses that describe the status of each event group.")
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   eventGroups?: NamespaceAssetStatusEventGroup[];
 
   @doc("Array of event statuses that describe the status of each event.")
-  @removed(Versions.v2025_10_01)
+  @removed(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   events?: NamespaceAssetStatusEvent[];
 
   @doc("Array of stream statuses that describe the status of each stream.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_01_preview)
   @Azure.ResourceManager.identifiers(#[])
   streams?: NamespaceAssetStatusStream[];
 
   @doc("Array of management group statuses that describe the status of each management group.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_07_01_preview)
   @Azure.ResourceManager.identifiers(#[])
   managementGroups?: NamespaceAssetStatusManagementGroup[];
+
+  @doc("The details about the runtime health state of the asset.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState;
+}
+
+@doc("Defines the asset status error properties.")
+@added(Versions.v2024_10_01_preview)
+@removed(Versions.v2025_07_01_preview)
+model NamespaceAssetStatusError {
+  @doc("Error code for classification of errors (ex: 400, 404, 500, etc.).")
+  @visibility(Lifecycle.Read)
+  code?: int32;
+
+  @doc("Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist.”).")
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 @doc("Defines the asset status dataset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceAssetStatusDataset {
   @doc("The name of the dataset. Must be unique within the status.datasets array. This name is used to correlate between the spec and status dataset information.")
   @visibility(Lifecycle.Read)
@@ -374,12 +452,13 @@ model NamespaceAssetStatusDataset {
   messageSchemaReference?: NamespaceMessageSchemaReference;
 
   @doc("Object to transfer and persist errors that originate from the edge.")
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   error?: StatusError;
 }
 
 @doc("Defines the asset status event group properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2026_02_01_preview)
 model NamespaceAssetStatusEventGroup {
   @doc("The name of the event group. Must be unique within the status.eventGroups array. This name is used to correlate between the spec and status event group information.")
   @visibility(Lifecycle.Read)
@@ -392,7 +471,7 @@ model NamespaceAssetStatusEventGroup {
 }
 
 @doc("Defines the asset status event properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceAssetStatusEvent {
   @doc("The name of the event. Must be unique within the status.events array. This name is used to correlate between the spec and status event information.")
   @visibility(Lifecycle.Read)
@@ -403,6 +482,7 @@ model NamespaceAssetStatusEvent {
   messageSchemaReference?: NamespaceMessageSchemaReference;
 
   @doc("Object to transfer and persist errors that originate from the edge.")
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read)
   error?: StatusError;
 }
@@ -457,7 +537,7 @@ model NamespaceAssetStatusManagementAction {
 }
 
 @doc("Defines the message schema reference properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 model NamespaceMessageSchemaReference {
   @doc("The message schema registry namespace.")
   @visibility(Lifecycle.Read)

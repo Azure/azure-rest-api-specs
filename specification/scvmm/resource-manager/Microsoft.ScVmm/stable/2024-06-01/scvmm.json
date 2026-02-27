@@ -190,6 +190,10 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -607,6 +611,10 @@
               "$ref": "#/definitions/GuestAgent"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -940,7 +948,7 @@
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/StopVirtualMachineOptions"
             }
@@ -1715,6 +1723,10 @@
               "$ref": "#/definitions/Cloud"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2038,6 +2050,10 @@
               "$ref": "#/definitions/VirtualMachineTemplate"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2361,6 +2377,10 @@
               "$ref": "#/definitions/VirtualNetwork"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2684,6 +2704,10 @@
               "$ref": "#/definitions/VmmServer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3224,7 +3248,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3391,7 +3415,7 @@
           "x-ms-client-name": "storageQosPolicies"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3550,7 +3574,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -3818,7 +3842,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InventoryItemProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "kind": {
           "type": "string",
@@ -3891,7 +3916,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4210,12 +4235,7 @@
         },
         "productKey": {
           "type": "string",
-          "format": "password",
-          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx",
-          "x-ms-mutability": [
-            "create"
-          ],
-          "x-ms-secret": true
+          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
         },
         "timezone": {
           "type": "integer",
@@ -4288,7 +4308,7 @@
         ]
       }
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the resource.",
       "enum": [
@@ -4302,7 +4322,7 @@
         "Created"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -4618,10 +4638,7 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Gets or sets the extended location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -4696,7 +4713,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5003,7 +5020,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5108,7 +5125,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5178,7 +5195,7 @@
           "description": "Gets or sets the Public Key."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5290,7 +5307,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }

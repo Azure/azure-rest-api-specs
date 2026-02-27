@@ -1,0 +1,51 @@
+{
+  "title": "ListBySubscription PlannedQuota",
+  "operationId": "PlannedQuota_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "api-version": "2025-12-04-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/providers/Microsoft.Lionrock/plannedQuotas/planned-quota-test-provisioning",
+            "name": "planned-quota-test-provisioning",
+            "type": "Microsoft.Lionrock/plannedQuotas",
+            "properties": {
+              "plannedQuotaName": "planned-quota-test",
+              "contactEmail": "provisioning-test@microsoft.com",
+              "subscriptionNameInPlan": "DataSub1",
+              "blueprint": "GA",
+              "azureLocation": "useast",
+              "skipUnsupportedSilently": false,
+              "provisioningState": "Succeeded",
+              "requestId": "10728186",
+              "fulfilledPlan": {
+                "arm": {
+                  "vm": {
+                    "cores": {
+                      "DV2F": 228,
+                      "EV3F": 212
+                    }
+                  }
+                },
+                "rdfe": {
+                  "storage": {
+                    "accounts": 100
+                  }
+                },
+                "isAzEnabled": true
+              },
+              "alternatives": {
+                "DV2F": "DV3F",
+                "EV3F": "EV4F"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

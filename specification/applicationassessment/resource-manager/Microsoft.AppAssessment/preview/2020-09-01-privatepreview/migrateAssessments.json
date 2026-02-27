@@ -1,0 +1,851 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessments_ListByMigrateProject",
+        "description": "Lists all assessments in a migrate project",
+        "x-ms-examples": {
+          "migrateAssessment_list": {
+            "$ref": "./examples/migrateAssessment_listByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was found, response has list object of assessments.",
+            "schema": {
+              "$ref": "#/definitions/migrateAssessmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}": {
+      "put": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_create",
+        "description": "Creates a new migrate project assessment",
+        "x-ms-examples": {
+          "migrateAssessment_create": {
+            "$ref": "./examples/migrateAssessment_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Request body. Properties to define the assessment",
+            "schema": {
+              "$ref": "#/definitions/migrateAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was created/updated is only allowed when the assessment is in status Completed or Failed; attempting to update the assessment when it's in other states will lead to failure ",
+            "schema": {
+              "$ref": "#/definitions/migrateAssessment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_get",
+        "description": "Gets details of the migrate project assessment with name {assessmentName}",
+        "x-ms-examples": {
+          "migrateAssessment_get": {
+            "$ref": "./examples/migrateAssessment_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "assessment was found.",
+            "schema": {
+              "$ref": "#/definitions/migrateAssessment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_delete",
+        "description": "Deletes a migrate project assessment",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "migrateAssessment_delete": {
+            "$ref": "./examples/migrateAssessment_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was deleted"
+          },
+          "202": {
+            "description": "Delete assessment accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/updateMachinesToAssess": {
+      "post": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_updateMachinesToAssess",
+        "description": "Sets the machines in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_updateMachinesToAssess": {
+            "$ref": "./examples/migrateAssessment_updateMachinesToAssess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/bulkUpdateMachinesToAssessModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Machine list was updated"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/machinesToAssess": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "machinesToAssess_listByMigrateAssessment",
+        "description": "Gets the machines in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_listMachinesToAssess": {
+            "$ref": "./examples/migrateAssessment_listMachinesToAssess.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was found",
+            "schema": {
+              "$ref": "#/definitions/machineToAssessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/machinesToAssess/{machineId}": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_getMachineToAssessById",
+        "description": "Gets a machine in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_getMachineToAssess": {
+            "$ref": "./examples/migrateAssessment_getMachineToAssessById.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "machineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the machine in the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Machine was found",
+            "schema": {
+              "$ref": "#/definitions/machineToAssess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_createOrUpdateMachineToAssess",
+        "description": "Gets a machine in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_CreateOrUpdateMachineToAssess": {
+            "$ref": "./examples/migrateAssessment_createMachineToAssess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "machineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the machine in the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Request body. Properties to define the machine",
+            "schema": {
+              "$ref": "#/definitions/machineToAssess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Machine was updated",
+            "schema": {
+              "$ref": "#/definitions/machineToAssess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_deleteMachineToAssess",
+        "description": "Remove a machine in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_deleteMachineToAssess": {
+            "$ref": "./examples/migrateAssessment_deleteMachineToAssess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "machineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the machine in the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was deleted"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/calculate": {
+      "post": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_calculate",
+        "description": "Calculates the assessment",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "migrateAssessment_recalculate": {
+            "$ref": "./examples/migrateAssessment_calculate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calculate command completed successfully"
+          },
+          "202": {
+            "description": "Calculate command was received and is being worked on"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "migrateAssessment": {
+      "type": "object",
+      "description": "Migrate assessment info model",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Properties of the assessment resource",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "targetOsVersion": {
+              "type": "string",
+              "description": "The OS version user wants to migrate their apps to"
+            },
+            "status": {
+              "type": "string",
+              "description": "The status of the assessment",
+              "enum": [
+                "New",
+                "Initiated",
+                "Processing",
+                "Completed",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "modelAsString": false,
+                "name": "AssessmentStatus"
+              },
+              "readOnly": true
+            },
+            "dateCreated": {
+              "type": "string",
+              "description": "The date the assessment was created e.g. 2020-01-12T23:09:00Z",
+              "readOnly": true
+            },
+            "processingStartDate": {
+              "type": "string",
+              "description": "The date of the last assessment processing start date e.g. 2020-01-12T23:09:00Z",
+              "readOnly": true
+            },
+            "dateCompleted": {
+              "type": "string",
+              "description": "The date the assessment was completed (entered a terminal state completed|failed) e.g. 2020-01-12T23:09:00Z",
+              "readOnly": true
+            },
+            "summary": {
+              "type": "object",
+              "description": "Summary of the assessment, will be updated when the assessment is completed",
+              "properties": {
+                "numberOfMachines": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The number of machines in the request",
+                  "readOnly": true
+                },
+                "numberOfAssessedMachines": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of assessed machines",
+                  "readOnly": true
+                },
+                "numberOfAssessedApplications": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of unique applications in the assessment",
+                  "readOnly": true
+                },
+                "readinessByMachines": {
+                  "description": "Number of servers by readiness",
+                  "$ref": "#/definitions/readiness"
+                },
+                "readinessByApplications": {
+                  "description": "Number of applications by readiness",
+                  "$ref": "#/definitions/readiness",
+                  "readOnly": true
+                }
+              },
+              "readOnly": true
+            },
+            "dataValidityStatus": {
+              "type": "string",
+              "description": "Whether or not the assessment input data is still valid; either cause the underlying rules have been updated or we have received new machine data",
+              "enum": [
+                "Valid",
+                "Invalid"
+              ],
+              "x-ms-enum": {
+                "modelAsString": false,
+                "name": "AssessmentDataValidityStatus"
+              },
+              "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          },
+          "required": [
+            "targetOsVersion"
+          ]
+        }
+      }
+    },
+    "migrateAssessmentList": {
+      "type": "object",
+      "description": "List of object for assessments in a project",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of assessments in the project",
+          "items": {
+            "$ref": "#/definitions/migrateAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results, null if at end of results"
+        }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "description": "Readiness object",
+      "properties": {
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines with status ready i.e. the app/server can be migrated to the target os",
+          "readOnly": true
+        },
+        "readyWithConditions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines with status readyWithConditions i.e. the app/server can be migrated to the target os but with some extra work",
+          "readOnly": true
+        },
+        "notReady": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines with status notReady i.e. The app/server can not be migrated to the target os",
+          "readOnly": true
+        },
+        "unknown": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines with status unknown i.e. The app/server is unknown to app assessment service",
+          "readOnly": true
+        }
+      }
+    },
+    "machineToAssess": {
+      "type": "object",
+      "description": "Information about the machine to assess",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Properties of the machine to assess resource",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "siteMachineId": {
+              "type": "string",
+              "description": "The id of the machine under a site e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          }
+        }
+      }
+    },
+    "machineToAssessList": {
+      "type": "object",
+      "description": "List of machines in an assessment",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of machines in the assessment",
+          "items": {
+            "$ref": "#/definitions/machineToAssess"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results, null if at end of results"
+        }
+      }
+    },
+    "machineToAssessBulkInsertModel": {
+      "type": "object",
+      "description": "Bulk model for creating machine to assess resources",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "The id of the machine under the assessment. This will be used as the name of the arm resource. If not supplied then a new Guid will be generated and assigned"
+        },
+        "siteMachineId": {
+          "type": "string",
+          "description": "The id of the machine under a site e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+        }
+      },
+      "required": [
+        "siteMachineId"
+      ]
+    },
+    "bulkUpdateMachinesToAssessModel": {
+      "type": "object",
+      "description": "Update machines model",
+      "properties": {
+        "machines": {
+          "type": "array",
+          "description": "Array of machine ids to add to the assessment, updating the machines will cause the assessment to be re-calculated.",
+          "items": {
+            "$ref": "#/definitions/machineToAssessBulkInsertModel"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "title": "Jobs_CreateOrUpdate_MaximumSet",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "93795934-E6BB-4426-885B-D090A72FF26D",
+    "resourceGroupName": "rgazureimagetestingforlinux",
+    "jobName": "linux-image-test-job-1",
+    "resource": {
+      "properties": {
+        "jobTemplateName": "linux-test-template-1",
+        "jobTemplateInstance": {
+          "templateTags": [
+            "linux-server"
+          ],
+          "region": [
+            "eastus"
+          ],
+          "vmSize": [
+            "Standard_D2s_v3"
+          ],
+          "selections": [
+            {
+              "caseName": [
+                "test-case-1"
+              ],
+              "caseArea": [
+                "compute"
+              ],
+              "caseCategory": [
+                "functional"
+              ],
+              "casePriority": [
+                0
+              ],
+              "caseTags": [
+                "high-priority"
+              ],
+              "action": "include",
+              "testIterations": 23,
+              "retryCount": 24,
+              "useNewEnvironment": true,
+              "ignoreFailure": true
+            }
+          ],
+          "customParameters": {},
+          "concurrency": 10
+        },
+        "resourceGroupNamePrefix": "test-rg",
+        "repos": [
+          "https://github.com/linux/test-repo"
+        ],
+        "image": {
+          "type": "Image",
+          "vhdGeneration": 2,
+          "architecture": "x64"
+        },
+        "keepFailedEnvironment": true
+      },
+      "tags": {
+        "environment": "production",
+        "team": "platform"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobTemplateName": "linux-test-template-1",
+          "jobTemplateInstance": {
+            "templateTags": [
+              "linux-server"
+            ],
+            "region": [
+              "eastus"
+            ],
+            "vmSize": [
+              "Standard_D2s_v3"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "test-case-1"
+                ],
+                "caseArea": [
+                  "compute"
+                ],
+                "caseCategory": [
+                  "functional"
+                ],
+                "casePriority": [
+                  0
+                ],
+                "caseTags": [
+                  "high-priority"
+                ],
+                "action": "include",
+                "testIterations": 23,
+                "retryCount": 24,
+                "useNewEnvironment": true,
+                "ignoreFailure": true
+              }
+            ],
+            "customParameters": {},
+            "concurrency": 10,
+            "provisioningState": "Succeeded"
+          },
+          "resourceGroupNamePrefix": "test-rg",
+          "repos": [
+            "https://github.com/linux/test-repo"
+          ],
+          "image": {
+            "type": "Image",
+            "vhdGeneration": 2,
+            "architecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "provisioningState": "Succeeded",
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "resultId": "test-result-001",
+              "testName": "linux-performance-test",
+              "testCategory": "performance",
+              "testArea": "compute",
+              "testPriority": 19,
+              "status": "passed",
+              "message": "Test completed successfully",
+              "logUrl": "https://logs.azure.com/test-result-001",
+              "image": "ubuntu-20.04-lts",
+              "vmSize": "Standard_D2s_v3",
+              "location": "eastus",
+              "kernelVersion": "5.4.0-74-generic",
+              "distroVersion": "20.04",
+              "vhdGeneration": 3,
+              "walaVersion": "2.7.0.6",
+              "extraFields": {},
+              "duration": "PT45M",
+              "startTime": "2023-07-15T10:30:00Z",
+              "endTime": "2023-07-15T11:15:00Z"
+            }
+          ],
+          "duration": "PT45M",
+          "logUrl": "https://logs.azure.com/job/linux-image-test-job-1"
+        },
+        "tags": {
+          "environment": "production",
+          "team": "platform"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/93795934-E6BB-4426-885B-D090A72FF26D/resourceGroups/rgazureimagetestingforlinux/providers/Microsoft.AzureImageTestingForLinux/jobs/linux-image-test-job-1",
+        "name": "linux-image-test-job-1",
+        "type": "Microsoft.AzureImageTestingForLinux/jobs",
+        "systemData": {
+          "createdBy": "platform-admin",
+          "createdByType": "User",
+          "createdAt": "2023-07-15T10:00:00Z",
+          "lastModifiedBy": "platform-admin",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-15T10:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/93795934-E6BB-4426-885B-D090A72FF26D/providers/Microsoft.AzureImageTestingForLinux/locations/eastus/operationStatuses/12345"
+      },
+      "body": {
+        "properties": {
+          "jobTemplateName": "linux-test-template-1",
+          "jobTemplateInstance": {
+            "templateTags": [
+              "linux-server"
+            ],
+            "region": [
+              "eastus"
+            ],
+            "vmSize": [
+              "Standard_D2s_v3"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "test-case-1"
+                ],
+                "caseArea": [
+                  "compute"
+                ],
+                "caseCategory": [
+                  "functional"
+                ],
+                "casePriority": [
+                  0
+                ],
+                "caseTags": [
+                  "high-priority"
+                ],
+                "action": "include",
+                "testIterations": 23,
+                "retryCount": 24,
+                "useNewEnvironment": true,
+                "ignoreFailure": true
+              }
+            ],
+            "customParameters": {},
+            "concurrency": 10,
+            "provisioningState": "Succeeded"
+          },
+          "resourceGroupNamePrefix": "test-rg",
+          "repos": [
+            "https://github.com/linux/test-repo"
+          ],
+          "image": {
+            "type": "Image",
+            "vhdGeneration": 2,
+            "architecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "provisioningState": "Succeeded",
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "resultId": "test-result-001",
+              "testName": "linux-performance-test",
+              "testCategory": "performance",
+              "testArea": "compute",
+              "testPriority": 19,
+              "status": "passed",
+              "message": "Test completed successfully",
+              "logUrl": "https://logs.azure.com/test-result-001",
+              "image": "ubuntu-20.04-lts",
+              "vmSize": "Standard_D2s_v3",
+              "location": "eastus",
+              "kernelVersion": "5.4.0-74-generic",
+              "distroVersion": "20.04",
+              "vhdGeneration": 3,
+              "walaVersion": "2.7.0.6",
+              "extraFields": {},
+              "duration": "PT45M",
+              "startTime": "2023-07-15T10:30:00Z",
+              "endTime": "2023-07-15T11:15:00Z"
+            }
+          ],
+          "duration": "PT45M",
+          "logUrl": "https://logs.azure.com/job/linux-image-test-job-1"
+        },
+        "tags": {
+          "environment": "production",
+          "team": "platform"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/93795934-E6BB-4426-885B-D090A72FF26D/resourceGroups/rgazureimagetestingforlinux/providers/Microsoft.AzureImageTestingForLinux/jobs/linux-image-test-job-1",
+        "name": "linux-image-test-job-1",
+        "type": "Microsoft.AzureImageTestingForLinux/jobs",
+        "systemData": {
+          "createdBy": "platform-admin",
+          "createdByType": "User",
+          "createdAt": "2023-07-15T10:00:00Z",
+          "lastModifiedBy": "platform-admin",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-15T10:00:00Z"
+        }
+      }
+    }
+  }
+}

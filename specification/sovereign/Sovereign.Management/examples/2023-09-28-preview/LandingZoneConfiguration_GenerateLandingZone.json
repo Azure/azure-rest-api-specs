@@ -1,0 +1,33 @@
+{
+  "operationId": "LandingZonesConfigurations_GenerateLandingZone",
+  "title": "LandingZonesConfigurations_GenerateLandingZone_0",
+  "parameters": {
+    "api-version": "2023-09-28-preview",
+    "name": "LandingZoneConfiguration",
+    "body": {
+      "infrastructureAsCodeOutputOptions": "Bicep",
+      "subscriptionBillingScope": "/providers/Microsoft.Billing/BillingAccounts/123123/enrollmentAccounts/1232131",
+      "deploymentPrefix": "abc",
+      "deploymentSuffix": null,
+      "topLevelMgDisplayName": "Test",
+      "deploymentLocation": "eastus",
+      "organization": "Test",
+      "existingTopLevelMgParentId": null
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "topLevelMgDisplayName": "Microsoft Cloud for Sovereignity",
+        "landingZoneConfigurationName": "LandingZoneConfiguration",
+        "generatedCodeUrl": "https://storage-account.blob.core.windows.net"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": " https://api-dogfood.resources.windows-int.net/providers/Microsoft.Sovereign/locations/CENTRALUS/operationStatuses/5804f880-0ba5-4da5-9ec7-ad337f7f0739*36E779C3A2AE04B609753CCDC71BB0B5E55E3C342A8FD78D579F80FE8C83EF40?api-version=2023-09-28-preview"
+      }
+    }
+  }
+}

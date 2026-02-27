@@ -1,6 +1,8 @@
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Workloads;
 /**
@@ -29,14 +31,9 @@ interface SAPInstances {
   get is ArmResourceRead<SAPInstance>;
 
   /**
-   * Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
+   * Creates the SAP Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    SAPInstance,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<SAPInstance>;
 
   /**
    * Updates the SAP Instance resource.
@@ -45,15 +42,25 @@ interface SAPInstances {
   update is ArmTagsPatchSync<SAPInstance>;
 
   /**
-   * Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   * Deletes the SAP Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
    */
-  #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  delete is ArmResourceDeleteAsync<SAPInstance>;
+  #suppress "deprecated" ""
+  @removed(Versions.v2024_06_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2024_06_01_preview, "delete")
+  deleteOld is ArmResourceDeleteAsync<SAPInstance>;
+
+  /**
+   * Deletes the SAP Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<SAPInstance>;
 
   /**
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
+  @list
   ListBySapDiscoverySite is ArmResourceListByParent<SAPInstance>;
 }

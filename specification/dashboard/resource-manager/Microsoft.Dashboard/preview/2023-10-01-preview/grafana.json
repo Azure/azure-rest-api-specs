@@ -228,7 +228,7 @@
             }
           },
           "201": {
-            "description": "Creation started. The operation was successfully started and will complete asynchronously.",
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Operation URI for long running operation.",
@@ -359,7 +359,7 @@
             }
           },
           "204": {
-            "description": "No Content. The resource is not present or was already deleted."
+            "description": "No Content"
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -464,7 +464,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Creation started. The operation was successfully started and will complete asynchronously.",
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Operation URI for long running operation.",
@@ -529,7 +529,7 @@
             }
           },
           "204": {
-            "description": "No Content. The resource is not present or was already deleted."
+            "description": "NoContent"
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -984,7 +984,7 @@
             }
           },
           "201": {
-            "description": "Creation started. The operation was successfully started and will complete asynchronously.",
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Operation URI for long running operation.",
@@ -1081,7 +1081,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "ManagedPrivateEndpoints_Patch": {
+          "ManagedPrivateEndpoint_Create": {
             "$ref": "./examples/ManagedPrivateEndpoints_Patch.json"
           }
         }
@@ -1126,7 +1126,7 @@
             }
           },
           "204": {
-            "description": "No Content. The resource is not present or was already deleted."
+            "description": "No Content"
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -1283,7 +1283,7 @@
             }
           },
           "201": {
-            "description": "Creation started. The operation was successfully started and will complete asynchronously.",
+            "description": "Created. The operation was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Operation URI for long running operation.",
@@ -1355,7 +1355,7 @@
             }
           },
           "202": {
-            "description": "Accepted. The operation is accepted and will be completed asynchronously.",
+            "description": "Accepted",
             "headers": {
               "Location": {
                 "description": "Operation URI for long running operation.",
@@ -1416,7 +1416,7 @@
             }
           },
           "204": {
-            "description": "No Content. The resource is not present or was already deleted."
+            "description": "No Content"
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -2337,13 +2337,11 @@
         },
         "targetResourceId": {
           "description": "The resource Id of the Azure resource being integrated with Azure Managed Grafana. E.g., an Azure Kubernetes Service cluster.",
-          "type": "string",
-          "format": "arm-id"
+          "type": "string"
         },
         "dataSourceResourceId": {
           "description": "The resource Id of the Azure resource which is used to configure Grafana data source. E.g., an Azure Monitor Workspace, an Azure Data Explorer cluster, etc.",
-          "type": "string",
-          "format": "arm-id"
+          "type": "string"
         },
         "scenarios": {
           "description": "A list of integration scenarios covered by this integration fabric",

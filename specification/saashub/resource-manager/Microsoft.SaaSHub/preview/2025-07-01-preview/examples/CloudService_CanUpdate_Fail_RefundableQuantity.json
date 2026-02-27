@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "myResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "body": {
+      "properties": {
+        "quantity": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyRefundableQuantityConstraints",
+        "reason": "Failed to satisfy refundable quantity constraints",
+        "updateScenario": "ChangeQuantity",
+        "additionalInfo": {
+          "refundableQuantity": {
+            "totalRefundableQuantity": 4,
+            "refundableQuantities": [
+              {
+                "quantity": 3,
+                "returnWindowEndDateTime": "2023-03-12T00:00:00Z"
+              },
+              {
+                "quantity": 1,
+                "returnWindowEndDateTime": "2023-06-14T00:00:00Z"
+              }
+            ]
+          },
+          "coTermDates": null
+        }
+      }
+    }
+  },
+  "operationId": "CloudServices_CanUpdate",
+  "title": "Evaluate if a SaaSHub cloud service can be updated with refundable quantity - Failed"
+}

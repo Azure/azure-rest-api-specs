@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "5a87dd7e-200a-4e94-8cd6-a9461de63755",
+    "resourceGroupName": "myResGroup",
+    "instanceName": "myInstance",
+    "body": {
+      "filterProperties": {
+        "resourceType": "monitoredResources",
+        "name": "abcd",
+        "subscription": [
+          "subs1",
+          "subs2"
+        ],
+        "resourceGroup": [
+          "rg1",
+          "rg2"
+        ],
+        "location": [
+          "WESTUS",
+          "EASTUS"
+        ],
+        "healthStatus": [
+          "Critical",
+          "Healthy",
+          "Warning"
+        ],
+        "autoUpgrade": [
+          "Enabled",
+          "Disabled"
+        ],
+        "machineType": [
+          "Azure Virtual Machine",
+          "Azure Arc Machine"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "resourceSummary": {
+          "total": 3,
+          "error": 0,
+          "warning": 0,
+          "unknown": 0,
+          "success": 3
+        }
+      }
+    }
+  }
+}

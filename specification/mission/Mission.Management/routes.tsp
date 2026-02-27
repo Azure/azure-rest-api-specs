@@ -268,6 +268,27 @@ interface CommunityEndpoints {
   >;
 }
 
+@doc("DedicatedHub Interface")
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@armResourceOperations
+interface DedicatedHub {
+  get is ArmResourceRead<DedicatedHubResource>;
+  @useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DedicatedHubResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader
+  >;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    DedicatedHubResource,
+    PatchModel = DedicatedHubPatchModel
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DedicatedHubResource>;
+  listByCommunityResource is ArmResourceListByParent<DedicatedHubResource>;
+  listBySubscription is ArmListBySubscription<DedicatedHubResource>;
+}
+
 @doc("Approval Interface")
 @armResourceOperations
 interface Approval {

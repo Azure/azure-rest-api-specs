@@ -3,7 +3,10 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview"
+    "version": "2021-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -202,6 +205,12 @@
             "schema": {
               "$ref": "#/definitions/virtualmachines"
             }
+          },
+          "201": {
+            "description": "Updates the virtualmachines resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualmachines"
+            }
           }
         }
       }
@@ -211,7 +220,7 @@
         "operationId": "virtualmachines_Start",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "StartVirtualMachine": {
@@ -253,7 +262,7 @@
         "operationId": "virtualmachines_Stop",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "StopVirtualMachine": {
@@ -295,7 +304,7 @@
         "operationId": "virtualmachines_Restart",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "RestartVirtualMachine": {
@@ -458,7 +467,7 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "description": "Name of the network interface"
+                    "description": "ID - Resource Id"
                   }
                 }
               },
@@ -473,10 +482,7 @@
             "adminPassword": {
               "type": "string",
               "x-ms-secret": true,
-              "description": "AdminPassword - admin password",
-              "x-ms-mutability": [
-                "create"
-              ]
+              "description": "AdminPassword - admin password"
             },
             "adminUsername": {
               "type": "string",
@@ -503,7 +509,6 @@
                         "properties": {
                           "keyData": {
                             "type": "string",
-                            "x-ms-secret": true,
                             "description": "KeyData - SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Li      nux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
                           },
                           "path": {
@@ -512,8 +517,7 @@
                           }
                         }
                       },
-                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs.",
-                      "x-ms-identifiers": []
+                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs."
                     }
                   },
                   "description": "SSH - contains settings related to ssh configuration"
@@ -523,15 +527,7 @@
             },
             "osType": {
               "type": "string",
-              "description": "OsType - string specifying whether the OS is Linux or Windows",
-              "enum": [
-                "Linux",
-                "Windows"
-              ],
-              "x-ms-enum": {
-                "name": "OsTypeEnum",
-                "modelAsString": true
-              }
+              "description": "OsType - string specifying whether the OS is Linux or Windows"
             },
             "windowsConfiguration": {
               "type": "object",
@@ -559,11 +555,10 @@
                           }
                         }
                       },
-                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs.",
-                      "x-ms-identifiers": []
+                      "description": "PublicKeys - The list of SSH public keys used to authenticate with linux based VMs."
                     }
                   },
-                  "description": "SSH Configuration"
+                  "description": "AdditionalUnattendContent AdditionalUnattendContent *[]AdditionalUnattendContent `json:\"additionalUnattendContent,omitempty\"` SSH"
                 },
                 "timeZone": {
                   "type": "string",
@@ -601,10 +596,7 @@
                   }
                 }
               },
-              "description": "adds data disks to the virtual machine",
-              "x-ms-identifiers": [
-                "name"
-              ]
+              "description": "adds data disks to the virtual machine"
             },
             "imageReference": {
               "type": "object",
@@ -624,62 +616,17 @@
           "description": "StorageProfile - contains information about the disks and storage information for the virtual machine"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "InProgress",
-            "Accepted",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/VirtualMachineStatus"
+          "type": "object",
+          "description": "MOCVirtualMachineStatus defines the observed state of MOCVirtualMachine"
         }
       },
-      "description": "VirtualMachineSpec defines the desired state of VirtualMachine"
-    },
-    "VirtualMachineStatus": {
-      "type": "object",
-      "description": "VirtualMachineStatus defines the observed state of VirtualMachine",
-      "x-ms-client-flatten": true,
-      "readOnly": true,
-      "properties": {
-        "powerState": {
-          "type": "string",
-          "description": "PowerState of the VM",
-          "enum": [
-            "Deallocated",
-            "Deallocating",
-            "Running",
-            "Starting",
-            "Stopped",
-            "Stopping",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "PowerStateEnum",
-            "modelAsString": true
-          }
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "VM provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
-        }
-      }
+      "description": "MOCVirtualMachineSpec defines the desired state of MOCVirtualMachine"
     },
     "virtualmachines": {
       "type": "object",
-      "description": "The virtualmachines resource definition.",
       "x-ms-client-flatten": true,
       "x-ms-azure-resource": true,
       "properties": {
@@ -687,51 +634,59 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualmachinesProperties"
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "required": [
+        "location"
+      ],
+      "description": "The virtualmachines resource definition."
     },
     "hardwareProfileUpdate": {
       "type": "object",
       "properties": {
         "vmSize": {
-          "type": "string",
-          "enum": [
-            "Default",
-            "Standard_A2_v2",
-            "Standard_A4_v2",
-            "Standard_D2s_v3",
-            "Standard_D4s_v3",
-            "Standard_D8s_v3",
-            "Standard_D16s_v3",
-            "Standard_D32s_v3",
-            "Standard_DS2_v2",
-            "Standard_DS3_v2",
-            "Standard_DS4_v2",
-            "Standard_DS5_v2",
-            "Standard_DS13_v2",
-            "Standard_K8S_v1",
-            "Standard_K8S2_v1",
-            "Standard_K8S3_v1",
-            "Standard_K8S4_v1",
-            "Standard_NK6",
-            "Standard_NK12",
-            "Standard_NV6",
-            "Standard_NV12",
-            "Standard_K8S5_v1",
-            "Custom"
-          ],
-          "x-ms-enum": {
-            "name": "VmSizeEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "processors": {
           "type": "integer",
@@ -756,7 +711,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Name of the network interface"
+                "description": "ID - Resource Id"
               }
             }
           },
@@ -778,10 +733,7 @@
               }
             }
           },
-          "description": "adds data disks to the virtual machine for the update call",
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "description": "adds data disks to the virtual machine for the update call"
         }
       }
     },

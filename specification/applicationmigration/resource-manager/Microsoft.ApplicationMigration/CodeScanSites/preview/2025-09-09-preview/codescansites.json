@@ -1,0 +1,2305 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Migrate Service - CodeScanSites",
+    "version": "2025-09-09-preview",
+    "description": "Azure Application Migration CodeScanSites Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CodeScanSites"
+    },
+    {
+      "name": "CodeScanReports"
+    },
+    {
+      "name": "CodeScanIssues"
+    },
+    {
+      "name": "CodeScanMappings"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.ApplicationMigration/codeScanMappings": {
+      "get": {
+        "operationId": "CodeScanMappings_ListByResourceGroup",
+        "tags": [
+          "CodeScanMappings"
+        ],
+        "description": "List CodeScanMapping resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanMappingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanMappings_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CodeScanMappings_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ApplicationMigration/codeScanMappings/{codeScanMappingName}": {
+      "get": {
+        "operationId": "CodeScanMappings_Get",
+        "tags": [
+          "CodeScanMappings"
+        ],
+        "description": "Get a CodeScanMapping",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "codeScanMappingName",
+            "in": "path",
+            "description": "CodeScanMapping name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanMapping"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanMappings_Get_MaximumSet": {
+            "$ref": "./examples/CodeScanMappings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeScanMappings_CreateOrUpdate",
+        "tags": [
+          "CodeScanMappings"
+        ],
+        "description": "Create a CodeScanMapping",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "codeScanMappingName",
+            "in": "path",
+            "description": "CodeScanMapping name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeScanMapping"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeScanMapping' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanMapping"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeScanMapping' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanMapping"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanMappings_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CodeScanMappings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CodeScanMapping"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CodeScanMappings_Delete",
+        "tags": [
+          "CodeScanMappings"
+        ],
+        "description": "Delete a CodeScanMapping",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "codeScanMappingName",
+            "in": "path",
+            "description": "CodeScanMapping name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanMappings_Delete_MaximumSet": {
+            "$ref": "./examples/CodeScanMappings_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.ApplicationMigration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApplicationMigration/codeScanMappings": {
+      "get": {
+        "operationId": "CodeScanMappings_ListBySubscription",
+        "tags": [
+          "CodeScanMappings"
+        ],
+        "description": "List CodeScanMapping resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanMappingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanMappings_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CodeScanMappings_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApplicationMigration/codeScanSites": {
+      "get": {
+        "operationId": "CodeScanSites_ListBySubscription",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "List CodeScanSite resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSiteListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/codeScanReports": {
+      "get": {
+        "operationId": "CodeScanReports_ListBySubscription",
+        "tags": [
+          "CodeScanReports"
+        ],
+        "description": "List CodeScanReport resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanReportListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanReports_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CodeScanReports_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites": {
+      "get": {
+        "operationId": "CodeScanSites_ListByResourceGroup",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "List CodeScanSite resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSiteListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}": {
+      "get": {
+        "operationId": "CodeScanSites_Get",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "Get a CodeScanSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_Get_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeScanSites_CreateOrUpdate",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "Create a CodeScanSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeScanSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeScanSite' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSite"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeScanSite' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSite"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CodeScanSite"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CodeScanSites_Update",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "Update a CodeScanSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeScanSiteUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_Update_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CodeScanSites_Delete",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "Delete a CodeScanSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_Delete_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/codeScanReports": {
+      "get": {
+        "operationId": "CodeScanReports_ListByResourceGroup",
+        "tags": [
+          "CodeScanReports"
+        ],
+        "description": "List CodeScanReport resources by CodeScanSite",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanReportListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanReports_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CodeScanReports_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/codeScanReports/{reportId}": {
+      "get": {
+        "operationId": "CodeScanReports_Get",
+        "tags": [
+          "CodeScanReports"
+        ],
+        "description": "Get a CodeScanReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanReport"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanReports_Get_MaximumSet": {
+            "$ref": "./examples/CodeScanReports_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeScanReports_CreateOrUpdate",
+        "tags": [
+          "CodeScanReports"
+        ],
+        "description": "Create a CodeScanReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeScanReport"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeScanReport' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanReport"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeScanReport' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanReport"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanReports_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CodeScanReports_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CodeScanReport"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CodeScanReports_Delete",
+        "tags": [
+          "CodeScanReports"
+        ],
+        "description": "Delete a CodeScanReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanReports_Delete_MaximumSet": {
+            "$ref": "./examples/CodeScanReports_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/codeScanReports/{reportId}/codescanissues": {
+      "get": {
+        "operationId": "CodeScanIssues_ListByCodeScanReport",
+        "tags": [
+          "CodeScanIssues"
+        ],
+        "description": "List CodeScanIssue resources by CodeScanReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanIssueListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanIssues_ListByCodeScanReport_MaximumSet": {
+            "$ref": "./examples/CodeScanIssues_ListByCodeScanReport_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/codeScanReports/{reportId}/codescanissues/{codeScanIssueId}": {
+      "get": {
+        "operationId": "CodeScanIssues_Get",
+        "tags": [
+          "CodeScanIssues"
+        ],
+        "description": "Get a CodeScanIssue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "codeScanIssueId",
+            "in": "path",
+            "description": "CodeScanIssue name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_.]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeScanIssue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanIssues_Get_MaximumSet": {
+            "$ref": "./examples/CodeScanIssues_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CodeScanIssues_CreateOrUpdate",
+        "tags": [
+          "CodeScanIssues"
+        ],
+        "description": "Create a CodeScanIssue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "codeScanIssueId",
+            "in": "path",
+            "description": "CodeScanIssue name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_.]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeScanIssue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CodeScanIssue' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanIssue"
+            }
+          },
+          "201": {
+            "description": "Resource 'CodeScanIssue' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CodeScanIssue"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanIssues_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CodeScanIssues_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CodeScanIssue"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CodeScanIssues_Delete",
+        "tags": [
+          "CodeScanIssues"
+        ],
+        "description": "Delete a CodeScanIssue",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "description": "CodeScanReport name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "codeScanIssueId",
+            "in": "path",
+            "description": "CodeScanIssue name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_.]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanIssues_Delete_MaximumSet": {
+            "$ref": "./examples/CodeScanIssues_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/fetchSasUri": {
+      "post": {
+        "operationId": "CodeScanSites_FetchSasUri",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_FetchSasUri_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_FetchSasUri_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/codeScanSites/{codeScanSiteName}/processReportAsync": {
+      "post": {
+        "operationId": "CodeScanSites_ProcessReportAsync",
+        "tags": [
+          "CodeScanSites"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "codeScanSiteName",
+            "in": "path",
+            "description": "CodeScanSite name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProcessReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProcessReportOperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeScanSites_ProcessReportAsync_MaximumSet": {
+            "$ref": "./examples/CodeScanSites_ProcessReportAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ProcessReportOperationStatusResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzureTarget": {
+      "type": "string",
+      "description": "The target platform for migration.",
+      "enum": [
+        "AKS",
+        "AzureAppServiceContainer",
+        "AzureAppService"
+      ],
+      "x-ms-enum": {
+        "name": "AzureTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AKS",
+            "value": "AKS",
+            "description": "Azure Kubernetes Service."
+          },
+          {
+            "name": "AzureAppServiceContainer",
+            "value": "AzureAppServiceContainer",
+            "description": "App Service Container."
+          },
+          {
+            "name": "AzureAppService",
+            "value": "AzureAppService",
+            "description": "App Service Native."
+          }
+        ]
+      }
+    },
+    "CloudSuitability": {
+      "type": "string",
+      "description": "Cloud Suitability for Azure.",
+      "enum": [
+        "Unknown",
+        "NotSuitable",
+        "Suitable",
+        "ConditionallySuitable",
+        "ReadinessUnknown"
+      ],
+      "x-ms-enum": {
+        "name": "CloudSuitability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown. Indicates missing data."
+          },
+          {
+            "name": "NotSuitable",
+            "value": "NotSuitable",
+            "description": "Not Suitable for Azure."
+          },
+          {
+            "name": "Suitable",
+            "value": "Suitable",
+            "description": "Suitable for Azure."
+          },
+          {
+            "name": "ConditionallySuitable",
+            "value": "ConditionallySuitable",
+            "description": "Conditionally Suitable for Azure."
+          },
+          {
+            "name": "ReadinessUnknown",
+            "value": "ReadinessUnknown",
+            "description": "Unknown Readiness for Azure."
+          }
+        ]
+      }
+    },
+    "CodeScanIssue": {
+      "type": "object",
+      "description": "CodeScanIssue resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeScanIssueProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CodeScanIssueListResult": {
+      "type": "object",
+      "description": "The response of a CodeScanIssue list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeScanIssue items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeScanIssue"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeScanIssueProperties": {
+      "type": "object",
+      "description": "CodeScanIssue properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the CodeScanIssue.",
+          "readOnly": true
+        },
+        "ruleId": {
+          "type": "string",
+          "description": "The rule ID of the scan issue."
+        },
+        "ruleLabel": {
+          "type": "string",
+          "description": "The rule label of the scan issue."
+        },
+        "issueCategory": {
+          "$ref": "#/definitions/IssueCategory",
+          "description": "The issue category."
+        },
+        "storyPoints": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The story points for the issue."
+        },
+        "referenceLinks": {
+          "type": "array",
+          "description": "Reference links for the issue.",
+          "items": {
+            "$ref": "#/definitions/ReferenceLink"
+          },
+          "x-ms-identifiers": [
+            "url"
+          ]
+        },
+        "occurrences": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of occurrences of the issue."
+        },
+        "azureTargets": {
+          "type": "array",
+          "description": "The migration targets applicable for this issue.",
+          "items": {
+            "$ref": "#/definitions/AzureTarget"
+          }
+        }
+      },
+      "required": [
+        "ruleId",
+        "ruleLabel",
+        "issueCategory",
+        "storyPoints",
+        "occurrences",
+        "azureTargets"
+      ]
+    },
+    "CodeScanMapping": {
+      "type": "object",
+      "description": "CodeScanMapping resource - Extension resource under web app sites.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeScanMappingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CodeScanMappingConfigurations": {
+      "type": "object",
+      "description": "Configuration properties for the code scan mapping.",
+      "properties": {
+        "connectionArmId": {
+          "type": "string",
+          "description": "The ARM ID of the connection."
+        },
+        "externalAppName": {
+          "type": "string",
+          "description": "The external application name."
+        },
+        "azureTarget": {
+          "$ref": "#/definitions/AzureTarget",
+          "description": "The migration target."
+        }
+      },
+      "required": [
+        "azureTarget"
+      ]
+    },
+    "CodeScanMappingListResult": {
+      "type": "object",
+      "description": "The response of a CodeScanMapping list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeScanMapping items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeScanMapping"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeScanMappingProperties": {
+      "type": "object",
+      "description": "CodeScanMapping properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the CodeScanMapping.",
+          "readOnly": true
+        },
+        "configurations": {
+          "$ref": "#/definitions/CodeScanMappingConfigurations",
+          "description": "Configuration properties for the code scan mapping."
+        },
+        "reportDetails": {
+          "$ref": "#/definitions/CodeScanMappingReports",
+          "description": "Report information for the code scan mapping."
+        }
+      }
+    },
+    "CodeScanMappingReports": {
+      "type": "object",
+      "description": "Report information for the code scan mapping.",
+      "properties": {
+        "reportArmId": {
+          "type": "string",
+          "description": "The ARM ID of the report."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "The report name.",
+          "readOnly": true
+        },
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The report type.",
+          "readOnly": true
+        },
+        "migrateGartnerR": {
+          "type": "string",
+          "description": "The migrate Gartner R rating.",
+          "readOnly": true
+        },
+        "effortInHr": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The effort in hours.",
+          "readOnly": true
+        },
+        "cloudSuitability": {
+          "$ref": "#/definitions/CloudSuitability",
+          "description": "Cloud Suitability for Azure.",
+          "readOnly": true
+        },
+        "reportStatus": {
+          "$ref": "#/definitions/ReportStatus",
+          "description": "The status of the report.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "reportArmId"
+      ]
+    },
+    "CodeScanReport": {
+      "type": "object",
+      "description": "CodeScanReport resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeScanReportProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CodeScanReportConfigurations": {
+      "type": "object",
+      "description": "Configuration properties for the code scan report.",
+      "properties": {
+        "connectionArmId": {
+          "type": "string",
+          "description": "The ARM ID of the connection."
+        },
+        "issueId": {
+          "type": "string",
+          "description": "The issue ID."
+        },
+        "externalWebAppName": {
+          "type": "string",
+          "description": "The external web application name."
+        },
+        "reportFramework": {
+          "$ref": "#/definitions/ReportFramework",
+          "description": "The report framework."
+        },
+        "azureTargets": {
+          "type": "array",
+          "description": "The target platform for migration.",
+          "items": {
+            "$ref": "#/definitions/AzureTarget"
+          }
+        }
+      },
+      "required": [
+        "azureTargets"
+      ]
+    },
+    "CodeScanReportDetails": {
+      "type": "object",
+      "description": "Details of the code scan report.",
+      "properties": {
+        "reportId": {
+          "type": "string",
+          "description": "The report ID."
+        },
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The report type."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "The report name."
+        },
+        "reportFormat": {
+          "$ref": "#/definitions/ReportFormat",
+          "description": "The report format."
+        },
+        "status": {
+          "$ref": "#/definitions/ReportStatus",
+          "description": "The status of the report.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "reportId",
+        "reportType",
+        "reportName",
+        "reportFormat",
+        "status"
+      ]
+    },
+    "CodeScanReportListResult": {
+      "type": "object",
+      "description": "The response of a CodeScanReport list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeScanReport items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeScanReport"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeScanReportProperties": {
+      "type": "object",
+      "description": "CodeScanReport properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the CodeScanReport.",
+          "readOnly": true
+        },
+        "configurations": {
+          "$ref": "#/definitions/CodeScanReportConfigurations",
+          "description": "Configuration properties for the code scan report."
+        },
+        "reportDetails": {
+          "$ref": "#/definitions/CodeScanReportDetails",
+          "description": "Details of the code scan report."
+        },
+        "reportRecommendations": {
+          "type": "array",
+          "description": "The recommendations suggested by the code scan report.",
+          "items": {
+            "$ref": "#/definitions/ReportRecommendations"
+          },
+          "x-ms-identifiers": [
+            "azureTarget"
+          ]
+        }
+      },
+      "required": [
+        "configurations"
+      ]
+    },
+    "CodeScanSite": {
+      "type": "object",
+      "description": "CodeScanSite resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeScanSiteProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CodeScanSiteListResult": {
+      "type": "object",
+      "description": "The response of a CodeScanSite list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CodeScanSite items on this page",
+          "items": {
+            "$ref": "#/definitions/CodeScanSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeScanSiteProperties": {
+      "type": "object",
+      "description": "CodeScanSite properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the CodeScanSite.",
+          "readOnly": true
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Migrate project ID."
+        },
+        "assessmentProjectId": {
+          "type": "string",
+          "description": "Assessment project ID."
+        }
+      },
+      "required": [
+        "migrateProjectId",
+        "assessmentProjectId"
+      ]
+    },
+    "CodeScanSitePropertiesUpdate": {
+      "type": "object",
+      "description": "CodeScanSite properties.",
+      "properties": {
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Migrate project ID."
+        },
+        "assessmentProjectId": {
+          "type": "string",
+          "description": "Assessment project ID."
+        }
+      }
+    },
+    "CodeScanSiteUpdate": {
+      "type": "object",
+      "description": "CodeScanSite resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeScanSitePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "IssueCategory": {
+      "type": "string",
+      "description": "The issue category.",
+      "enum": [
+        "Issue",
+        "Warning",
+        "Internal",
+        "Information"
+      ],
+      "x-ms-enum": {
+        "name": "IssueCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Issue",
+            "value": "Issue",
+            "description": "Issue category."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning category."
+          },
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal category."
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Information category."
+          }
+        ]
+      }
+    },
+    "ProcessReportOperationStatus": {
+      "type": "string",
+      "description": "The status of the process report operation.",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "Succeeded",
+        "PartiallySucceeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessReportOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The import operation status - Accepted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The import operation status - InProgress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The process report operation status - Succeeded."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The import operation status - PartiallySucceeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The process report operation status - Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The process report operation status - Canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProcessReportOperationStatusProperties": {
+      "type": "object",
+      "description": "Model representing the properties of the process report operation status.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ProcessReportOperationStatus",
+          "description": "Status of the process report request."
+        },
+        "reportSuccessCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of reports validated successfully.",
+          "minimum": 0
+        },
+        "reportCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of reports processed.",
+          "minimum": 0
+        },
+        "summary": {
+          "type": "array",
+          "description": "The summary of the reports processed.",
+          "items": {
+            "$ref": "#/definitions/ProcessReportSummary"
+          },
+          "x-ms-identifiers": [
+            "reportName"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reportSuccessCount",
+        "reportCount",
+        "summary"
+      ]
+    },
+    "ProcessReportOperationStatusResponse": {
+      "type": "object",
+      "description": "Model representing the status of the process report operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProcessReportOperationStatusProperties",
+          "description": "Additional properties applicable for process report operation status result"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ProcessReportProperties": {
+      "type": "object",
+      "description": "Properties for processing the report.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The SAS URI of the report to process.",
+          "x-ms-secret": true
+        },
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of the report."
+        }
+      },
+      "required": [
+        "sasUri",
+        "reportType"
+      ]
+    },
+    "ProcessReportRequest": {
+      "type": "object",
+      "description": "Process report request model.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProcessReportProperties",
+          "description": "Properties for processing the report."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ProcessReportSummary": {
+      "type": "object",
+      "description": "Model representing the summary of the reports processed.",
+      "properties": {
+        "reportStatus": {
+          "$ref": "#/definitions/ProcessReportOperationStatus",
+          "description": "Status of the process report request."
+        },
+        "reportName": {
+          "type": "string",
+          "description": "The report name."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Contains error details if status is Failed/Canceled."
+        }
+      },
+      "required": [
+        "reportStatus",
+        "reportName"
+      ]
+    },
+    "ProcessStatus": {
+      "type": "string",
+      "description": "The status of the process operation.",
+      "enum": [
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation has been accepted."
+          }
+        ]
+      }
+    },
+    "ReferenceLink": {
+      "type": "object",
+      "description": "Reference link model.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the reference link."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label of the reference link."
+        }
+      },
+      "required": [
+        "url",
+        "label"
+      ]
+    },
+    "ReportFormat": {
+      "type": "string",
+      "description": "The report format.",
+      "enum": [
+        "JSON"
+      ],
+      "x-ms-enum": {
+        "name": "ReportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JSON",
+            "value": "JSON",
+            "description": "JSON format."
+          }
+        ]
+      }
+    },
+    "ReportFramework": {
+      "type": "string",
+      "description": "The report framework for code scanning.",
+      "enum": [
+        "Java",
+        "DOTNET"
+      ],
+      "x-ms-enum": {
+        "name": "ReportFramework",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Java",
+            "value": "Java",
+            "description": "Java framework."
+          },
+          {
+            "name": "DOTNET",
+            "value": "DOTNET",
+            "description": ".NET framework."
+          }
+        ]
+      }
+    },
+    "ReportRecommendations": {
+      "type": "object",
+      "description": "Report recommendations from the code scan analysis.",
+      "properties": {
+        "migrateGartnerR": {
+          "type": "string",
+          "description": "Gartner migration strategy recommendation."
+        },
+        "effortInHr": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Estimated effort required for migration in hours."
+        },
+        "cloudSuitability": {
+          "$ref": "#/definitions/CloudSuitability",
+          "description": "Cloud suitability assessment for the application."
+        },
+        "azureTarget": {
+          "$ref": "#/definitions/AzureTarget",
+          "description": "Recommended target platform for migration."
+        }
+      },
+      "required": [
+        "migrateGartnerR",
+        "effortInHr",
+        "cloudSuitability",
+        "azureTarget"
+      ]
+    },
+    "ReportStatus": {
+      "type": "string",
+      "description": "The status of the report.",
+      "enum": [
+        "Available",
+        "ScanRequested",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ReportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The report is available."
+          },
+          {
+            "name": "ScanRequested",
+            "value": "ScanRequested",
+            "description": "Scan has been requested."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Scan request is in progress."
+          }
+        ]
+      }
+    },
+    "ReportType": {
+      "type": "string",
+      "description": "The report type.",
+      "enum": [
+        "AppCAT"
+      ],
+      "x-ms-enum": {
+        "name": "ReportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AppCAT",
+            "value": "AppCAT",
+            "description": "AppCAT report type."
+          }
+        ]
+      }
+    },
+    "SasUriResponse": {
+      "type": "object",
+      "description": "SAS URI response model.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The SAS URI for uploading reports.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "connectorName": "C1",
+    "api-version": "2024-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Workloads/connectors/C1/sapVirtualInstanceMonitors/sapVirtualInstanceMonitor",
+            "name": "sapVirtualInstanceMonitor",
+            "type": "Microsoft.Workloads/connectors/sapVirtualInstanceMonitors",
+            "tags": {},
+            "location": "eastus",
+            "systemData": {
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "createdAt": "2024-02-12T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-12T15:10:46.196Z"
+            },
+            "properties": {
+              "monitorData": {
+                "monitorType": "NewSapMonitor",
+                "monitorId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Workloads/monitors/SapMonitor",
+                "managedResourceGroupConfiguration": {
+                  "name": "myManagedRg"
+                },
+                "routingPreference": "RouteAll",
+                "zoneRedundancyPreference": "Enabled",
+                "logAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+                "monitorSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

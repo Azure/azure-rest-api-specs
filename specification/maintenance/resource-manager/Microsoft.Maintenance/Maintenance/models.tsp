@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Maintenance;
 
@@ -75,11 +77,11 @@ union Visibility {
  */
 union RebootOptions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress documentation error for reboot"
   IfRequired: "IfRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress expected reboot errors"
   Never: "Never",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress documentation required errors"
   Always: "Always",
 }
 
@@ -167,13 +169,80 @@ enum TagOperators {
 }
 
 /**
- * Response of scheduled event acknowledge
+ * Response of ScheduledEvents acknowledge
  */
-model ScheduledEventApproveResponse {
+model ScheduledEventsApproveResponse {
   /**
    * Successfully Approved
    */
   value?: string;
+}
+
+/**
+ * ScheduledEvents Id List
+ */
+@added(Versions.v2025_10_01_preview)
+model ScheduledEventsIdList {
+  /**
+   * The list of ScheduledEvents Id.
+   */
+  @pageItems
+  value: string[];
+}
+
+/**
+ * An error response received from the Azure Maintenance service.
+ */
+@added(Versions.v2025_10_01_preview)
+@error
+model ScheduledEventsListAcknowledgeError {
+  /**
+   * Error response
+   */
+  error?: ScheduledEventsListAcknowledgeErrorDetails;
+}
+
+/**
+ * An error response details received from the Azure Maintenance service.
+ */
+@added(Versions.v2025_10_01_preview)
+model ScheduledEventsListAcknowledgeErrorDetails {
+  /**
+   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
+
+  /**
+   * Error details for each ScheduledEvents.
+   */
+  @identifiers(#[])
+  details?: ScheduledEventsAcknowledgeErrorDetails[];
+}
+
+/**
+ * An error response details received from the Azure Maintenance service for each ScheduledEvents.
+ */
+@added(Versions.v2025_10_01_preview)
+model ScheduledEventsAcknowledgeErrorDetails {
+  /**
+   * ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)
+   */
+  target?: string;
+
+  /**
+   * Status code for the ScheduledEvents acknowledge operation on the target ScheduledEvents Id.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
 }
 
 /**
@@ -222,7 +291,7 @@ model ListMaintenanceConfigurationsResult {
 /**
  * Properties for maintenance configuration
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected provisioning error"
 model MaintenanceConfigurationProperties {
   /**
    * Gets or sets namespace of the resource
@@ -232,7 +301,7 @@ model MaintenanceConfigurationProperties {
   /**
    * Gets or sets extensionProperties of the maintenanceConfiguration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected provisioning extension properties"
   extensionProperties?: Record<string>;
 
   /**
@@ -383,7 +452,7 @@ model Resource {
 /**
  * Properties for apply update
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected provisioning state"
 model ApplyUpdateProperties {
   /**
    * The status
@@ -405,7 +474,7 @@ model ApplyUpdateProperties {
 /**
  * Properties for configuration assignment
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected config state"
 model ConfigurationAssignmentProperties {
   /**
    * The maintenance configuration Id
@@ -460,7 +529,7 @@ model TagSettingsProperties {
   /**
    * Dictionary of tags with its list of values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress tag no record issue"
   tags?: Record<string[]>;
 
   /**

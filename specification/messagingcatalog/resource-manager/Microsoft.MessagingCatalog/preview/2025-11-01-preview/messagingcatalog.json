@@ -1,0 +1,1545 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.MessagingCatalog",
+    "version": "2025-11-01-preview",
+    "description": "Messaging Catalog management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "MessagingCatalogs"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinks"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.MessagingCatalog/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingCatalog/catalogs": {
+      "get": {
+        "operationId": "MessagingCatalogs_ListBySubscription",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "List MessagingCatalog resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs": {
+      "get": {
+        "operationId": "MessagingCatalogs_ListByResourceGroup",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "List MessagingCatalog resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}": {
+      "get": {
+        "operationId": "MessagingCatalogs_Get",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "Get a messaging catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Get_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MessagingCatalogs_Create",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "Create or update a messaging catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MessagingCatalog' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalog"
+            }
+          },
+          "201": {
+            "description": "Resource 'MessagingCatalog' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalog"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_Create_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Create_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_Create_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Create_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MessagingCatalogs_Update",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "Update a messaging catalogs",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalogUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MessagingCatalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_Update_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Update_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_Update_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MessagingCatalogs_Delete",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "Delete a messaging catalogs",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Delete_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/associate": {
+      "post": {
+        "operationId": "MessagingCatalogs_Associate",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Association"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Association"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_Associate_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Associate_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_Associate_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_Associate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/listAssociations": {
+      "post": {
+        "operationId": "MessagingCatalogs_ListAssociations",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssociationListRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssociationListResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_ListAssociations_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListAssociations_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_ListAssociations_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_ListAssociations_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List private endpoint connections on the given resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get a specific private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Create",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Create or update a private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Create_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete a private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinks_List",
+        "tags": [
+          "PrivateLinks"
+        ],
+        "description": "List private links on the given resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinks_List_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinks_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/removeAssociation": {
+      "post": {
+        "operationId": "MessagingCatalogs_RemoveAssociation",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssociationRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssociationDeleteResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_RemoveAssociation_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_RemoveAssociation_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_RemoveAssociation_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_RemoveAssociation_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}/updateFabricPrivateLinks": {
+      "post": {
+        "operationId": "MessagingCatalogs_UpdateFabricPrivateLinks",
+        "tags": [
+          "MessagingCatalogs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Messaging Catalog",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FabricPrivateLinksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricPrivateLinksResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MessagingCatalogs_UpdateFabricPrivateLinks_MaximumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_UpdateFabricPrivateLinks_MaximumSet_Gen.json"
+          },
+          "MessagingCatalogs_UpdateFabricPrivateLinks_MinimumSet_Gen": {
+            "$ref": "./examples/MessagingCatalogs_UpdateFabricPrivateLinks_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Association": {
+      "type": "object",
+      "description": "An association between external entities and catalog resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the association."
+        },
+        "associationType": {
+          "type": "string",
+          "description": "Type of association."
+        },
+        "definition": {
+          "$ref": "#/definitions/AssociationDefinition",
+          "description": "Details about the Association."
+        }
+      },
+      "required": [
+        "associationType",
+        "definition"
+      ]
+    },
+    "AssociationDefinition": {
+      "type": "object",
+      "description": "Details about the catalog association.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to associate."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace id to associate."
+        },
+        "artifactId": {
+          "type": "string",
+          "description": "The artifact id to associate."
+        },
+        "messageGroupId": {
+          "type": "string",
+          "description": "The message group id to associate."
+        },
+        "schemaGroupId": {
+          "type": "string",
+          "description": "The schema group id to associate."
+        }
+      }
+    },
+    "AssociationDeleteResponse": {
+      "type": "object",
+      "description": "An response of a association deletion.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A string detailing the result of the operation."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "AssociationListRequest": {
+      "type": "object",
+      "description": "An request to paginate a list of result.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many results to retrieve."
+        }
+      }
+    },
+    "AssociationListResponse": {
+      "type": "object",
+      "description": "An response of paginated associations.",
+      "properties": {
+        "associations": {
+          "type": "array",
+          "description": "List of associations.",
+          "items": {
+            "$ref": "#/definitions/Association"
+          }
+        }
+      },
+      "required": [
+        "associations"
+      ]
+    },
+    "AssociationRemoveRequest": {
+      "type": "object",
+      "description": "An request to remove an association.",
+      "properties": {
+        "associationId": {
+          "type": "string",
+          "description": "Id of the association, which by default is a guid."
+        }
+      },
+      "required": [
+        "associationId"
+      ]
+    },
+    "FabricPrivateLinksAction": {
+      "type": "string",
+      "description": "Fabric Private Links Actions",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "FabricPrivateLinksAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable private link."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable private link."
+          }
+        ]
+      }
+    },
+    "FabricPrivateLinksRequest": {
+      "type": "object",
+      "description": "A request to update Fabric Private Links on a Catalog.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/FabricPrivateLinksAction",
+          "description": "The action to perform on the Fabric Private Links."
+        },
+        "fabricFqdn": {
+          "type": "string",
+          "description": "The fully qualified domain name of the fabric dataplane endpoint."
+        }
+      },
+      "required": [
+        "action",
+        "fabricFqdn"
+      ]
+    },
+    "FabricPrivateLinksResponse": {
+      "type": "object",
+      "description": "An response of a Fabric Private Links request.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Fabric Private Links request."
+        },
+        "privateFqdn": {
+          "type": "string",
+          "description": "The private FQDN of the messaging catalog is redirecting to."
+        }
+      },
+      "required": [
+        "status",
+        "privateFqdn"
+      ]
+    },
+    "MessagingCatalog": {
+      "type": "object",
+      "description": "A Messaging Catalog resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MessagingCatalogProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MessagingCatalogListResult": {
+      "type": "object",
+      "description": "The response of a MessagingCatalog list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MessagingCatalog items on this page",
+          "items": {
+            "$ref": "#/definitions/MessagingCatalog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MessagingCatalogProperties": {
+      "type": "object",
+      "description": "Details of the Message Catalog.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "description": "A unique absolute URL for an catalog.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of the purpose of the catalog."
+        },
+        "documentation": {
+          "type": "string",
+          "description": "A URL to additional information about this catalog."
+        },
+        "labels": {
+          "type": "array",
+          "description": "An array of additional metadata about the catalog.",
+          "items": {
+            "$ref": "#/definitions/ResourceLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "endpointsUrl": {
+          "type": "string",
+          "description": "A unique absolute URL for the list of endpoints for this catalog.",
+          "readOnly": true
+        },
+        "endpointsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A count of the amount of endpoints in this catalog.",
+          "readOnly": true
+        },
+        "messageGroupsUrl": {
+          "type": "string",
+          "description": "A unique absolute URL for the list of message groups for this catalog.",
+          "readOnly": true
+        },
+        "messageGroupsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A count of the amount of message groups in this catalog.",
+          "readOnly": true
+        },
+        "schemaGroupsUrl": {
+          "type": "string",
+          "description": "A unique absolute URL for the list of schema groups for this catalog.",
+          "readOnly": true
+        },
+        "schemaGroupsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A count of the amount of schema groups in this catalog.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application rule collection resource.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets allow or disallow public network access to resource."
+        }
+      }
+    },
+    "MessagingCatalogUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Messaging Catalog.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/MessagingCatalogUpdateProperties",
+          "description": "The updatable properties of the Messaging Catalog."
+        }
+      }
+    },
+    "MessagingCatalogUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Messaging Catalog.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A summary of the purpose of the catalog."
+        },
+        "documentation": {
+          "type": "string",
+          "description": "A URL to additional information about this catalog."
+        },
+        "labels": {
+          "type": "array",
+          "description": "An array of additional metadata about the catalog.",
+          "items": {
+            "$ref": "#/definitions/ResourceLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "PrivateEndpointConnectionResource": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnectionResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnectionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Private Link Resource for MessagingCatalog",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "description": "Details about the error result.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of issue encountered."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of issue encountered."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Status code of issue encountered."
+        },
+        "detail": {
+          "type": "string",
+          "description": "Brief description of issue encountered."
+        },
+        "instance": {
+          "type": "string",
+          "description": "Details about the error result."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "State of the public network access.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The public network access is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The public network access is disabled."
+          }
+        ]
+      }
+    },
+    "ResourceLabel": {
+      "type": "object",
+      "description": "Additional metadata about the entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metadata label."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the metadata label."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

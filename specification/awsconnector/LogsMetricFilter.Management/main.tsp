@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -75,7 +78,7 @@ model AwsLogsMetricFilterProperties {
   logGroupName?: string;
 
   @doc("The metric transformations.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   metricTransformations?: MetricTransformation[];
 }
 
@@ -89,7 +92,7 @@ model MetricTransformation {
   defaultValue?: int32;
 
   @doc("The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dimensions?: Dimension[];
 
   @doc("The name of the CloudWatch metric.")

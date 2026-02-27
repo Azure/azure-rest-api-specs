@@ -1,14 +1,30 @@
 - tool: TypeSpecValidation
   reason: >
-    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
-    Responsibility: Spec owner would update missing configurations.
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
     More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+    Comment: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - parameters.service-dir.default
     - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths:
+  paths: 
+    - CopilotConnectors.Management/tspconfig.yaml
+    - AzureCoreExperiencesAssistant.Management/tspconfig.yaml
+    - CopilotSettings.Management/tspconfig.yaml
+    - Dashboard.Management/tspconfig.yaml
     - Extension.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+    Comment: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: [TenantSettings.Management/tspconfig.yaml]

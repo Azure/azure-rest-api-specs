@@ -1,0 +1,2038 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BingManagementClient",
+    "version": "2025-05-01-preview",
+    "description": "Bing Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CustomSearchConfigurations"
+    },
+    {
+      "name": "BingAccounts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Bing/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/accounts": {
+      "get": {
+        "operationId": "Accounts_List",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Accounts by Subscription": {
+            "$ref": "./examples/ListAccountsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/locations/{location}/checkSkuAvailability": {
+      "post": {
+        "operationId": "CheckSkuAvailability",
+        "description": "Check whether specific SKUs are available for the location and",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckSkuAvailabilityParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckSkuAvailabilityResultList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check SKU Availability": {
+            "$ref": "./examples/CheckSkuAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/skus": {
+      "get": {
+        "operationId": "Skus_List",
+        "description": "Gets the list of Microsoft.Bing SKUs available for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SKUs for Subscription": {
+            "$ref": "./examples/ListSkusForSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Accounts by Resource Group": {
+            "$ref": "./examples/ListAccountsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns a Bing account specified by the parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_Create",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Create a Bing account. Accounts is a resource group-wide resource type. It holds keys for developers to access Bing APIs and is the resource type for billing.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The parameters of the account to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BingAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'BingAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Account": {
+            "$ref": "./examples/CreateAccount.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Accounts_Update",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Updates a Bing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The parameters to update in the account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Account": {
+            "$ref": "./examples/UpdateAccount.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Deletes a Bing account from the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/customSearchConfigurations": {
+      "get": {
+        "operationId": "CustomSearchConfigurations_ListByAccount",
+        "tags": [
+          "CustomSearchConfigurations"
+        ],
+        "description": "Returns all the Bing Custom Search configurations for the specified Bing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomSearchConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Custom Search Configurations by Account": {
+            "$ref": "./examples/ListCustomSearchConfigurationsByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/customSearchConfigurations/{customSearchConfigurationName}": {
+      "get": {
+        "operationId": "CustomSearchConfiguration_Get",
+        "tags": [
+          "CustomSearchConfigurations"
+        ],
+        "description": "Returns a Bing Custom Search configuration specified by the parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "customSearchConfigurationName",
+            "in": "path",
+            "description": "The name of the Bing custom search configuration.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomSearchConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Custom Search Configuration": {
+            "$ref": "./examples/GetCustomSearchConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CustomSearchConfigurations_CreateOrUpdate",
+        "tags": [
+          "CustomSearchConfigurations"
+        ],
+        "description": "Creates or Updates a Bing Custom Search configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "customSearchConfigurationName",
+            "in": "path",
+            "description": "The name of the Bing custom search configuration.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]+$"
+          },
+          {
+            "name": "customSearchConfiguration",
+            "in": "body",
+            "description": "The parameters of the configuration to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomSearchConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CustomSearchConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomSearchConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'CustomSearchConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomSearchConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Custom Search Configuration": {
+            "$ref": "./examples/CreateOrUpdateCustomSearchConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CustomSearchConfiguration_Delete",
+        "tags": [
+          "CustomSearchConfigurations"
+        ],
+        "description": "Deletes a Bing Custom Search configuration from the Bing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "customSearchConfigurationName",
+            "in": "path",
+            "description": "The name of the Bing custom search configuration.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Custom Search Configuration": {
+            "$ref": "./examples/DeleteCustomSearchConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "Accounts_ListKeys",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Gets the keys to access the Bing APIs for the specified Bing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/regenerateKey": {
+      "post": {
+        "operationId": "Accounts_RegenerateKey",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Regenerates the specified account key for the specified Bing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Regenerate key parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regenerate Keys": {
+            "$ref": "./examples/RegenerateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/skus": {
+      "get": {
+        "operationId": "Accounts_ListSkus",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "List available SKUs for the requested Bing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountEnumerateSkusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SKUs for Account": {
+            "$ref": "./examples/ListSkusForAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/usages": {
+      "get": {
+        "operationId": "Accounts_ListUsages",
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "List usages for the requested Bing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the Bing account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllowedDomain": {
+      "type": "object",
+      "description": "An allowed domain for Bing Custom Search configuration.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "A domain string that can be used to specify allowed, blocked, or pinned domains in Bing Custom Search configuration.",
+          "pattern": "^\\s*(((https?:\\/\\/)|(?!(.*:\\/\\/)))((-\\.)?([^\\s\\/?\\.#]+\\.)([^\\s\\/?\\.#]+\\.?)+([^\\s\\/?\\.#]+)(\\/[^\\s]*)?))\\s*$"
+        },
+        "includeSubPages": {
+          "type": "boolean",
+          "description": "A flag to indicate whether subpages of the allowed domain should be included in the search result. If set to true (default), all subpages and nested paths under the specified domain will be included in the search result. If set to false, only the main domain will be included in the search result, excluding any subpages.",
+          "default": true
+        },
+        "boostLevel": {
+          "type": "string",
+          "description": "The boost level for the allowed domain.",
+          "default": "Default",
+          "enum": [
+            "Demoted",
+            "Default",
+            "Boosted",
+            "SuperBoost"
+          ],
+          "x-ms-enum": {
+            "name": "BoostLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Demoted",
+                "value": "Demoted"
+              },
+              {
+                "name": "Default",
+                "value": "Default"
+              },
+              {
+                "name": "Boosted",
+                "value": "Boosted"
+              },
+              {
+                "name": "SuperBoost",
+                "value": "SuperBoost"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "Availability": {
+      "type": "object",
+      "description": "Availability of the metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The time grain of the availability."
+        },
+        "retention": {
+          "type": "string",
+          "description": "The retention of the availability."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the availability blob."
+        }
+      }
+    },
+    "AvailableOperations": {
+      "type": "object",
+      "description": "Available operations of the service",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of available operation details",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BingAccount": {
+      "type": "object",
+      "description": "Bing Account is an Azure resource representing the provisioned account, its type, location and SKU.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Required. Indicates the type of Bing account."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/BingAccountProperties",
+          "description": "Properties of Bing account."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of Bing account."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BingAccountEnumerateSkusResult": {
+      "type": "object",
+      "description": "The list of Bing accounts operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets the list of Bing accounts and their properties.",
+          "items": {
+            "$ref": "#/definitions/BingResourceAndSku"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "BingAccountKeys": {
+      "type": "object",
+      "description": "The access keys for the Bing account.",
+      "properties": {
+        "key1": {
+          "type": "string",
+          "description": "Gets the value of key 1."
+        },
+        "key2": {
+          "type": "string",
+          "description": "Gets the value of key 2."
+        }
+      }
+    },
+    "BingAccountListResult": {
+      "type": "object",
+      "description": "The response of a BingAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BingAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/BingAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BingAccountProperties": {
+      "type": "object",
+      "description": "Properties of Bing account.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the Bing account at the time the operation was called.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier.",
+          "readOnly": true
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) A flag indicating whether Bing Statistics is enabled."
+        }
+      }
+    },
+    "BingResourceAndSku": {
+      "type": "object",
+      "description": "Bing resource type and SKU.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Namespace and Type"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of Bing account."
+        }
+      }
+    },
+    "BlockedDomain": {
+      "type": "object",
+      "description": "A blocked domain for Bing Custom Search configuration.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "A domain string that can be used to specify allowed, blocked, or pinned domains in Bing Custom Search configuration.",
+          "pattern": "^\\s*(((https?:\\/\\/)|(?!(.*:\\/\\/)))((-\\.)?([^\\s\\/?\\.#]+\\.)([^\\s\\/?\\.#]+\\.?)+([^\\s\\/?\\.#]+)(\\/[^\\s]*)?))\\s*$"
+        },
+        "includeSubPages": {
+          "type": "boolean",
+          "description": "A flag to indicate whether subpages of the blocked domain should be excluded from search results. If set to true (default), all subpages and nested paths under the specified domain will be excluded from search results. If set to false, only the main domain will be excluded from search results.",
+          "default": true
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "CheckSkuAvailabilityParameter": {
+      "type": "object",
+      "description": "The SKUs to check for availability in the specified subscription and location",
+      "properties": {
+        "skus": {
+          "type": "array",
+          "description": "The SKU of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Required. Indicates the type of Bing account."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "skus",
+        "kind",
+        "type"
+      ]
+    },
+    "CheckSkuAvailabilityResult": {
+      "type": "object",
+      "description": "Check SKU availability result.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Required. Indicates the type of Bing account."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "The name of SKU."
+        },
+        "skuAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional error message."
+        }
+      }
+    },
+    "CheckSkuAvailabilityResultList": {
+      "type": "object",
+      "description": "Check SKU availability result list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Check SKU availability result list.",
+          "items": {
+            "$ref": "#/definitions/CheckSkuAvailabilityResult"
+          }
+        }
+      }
+    },
+    "CustomConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of Bing Custom Search Configuration.",
+      "properties": {
+        "allowedDomains": {
+          "type": "array",
+          "description": "List of allowed domains for Bing Custom Search configuration. Total number of domains in Allowed List, Blocked List, and Pinned List combined cannot exceed 250.",
+          "items": {
+            "$ref": "#/definitions/AllowedDomain"
+          }
+        },
+        "blockedDomains": {
+          "type": "array",
+          "description": "List of blocked domains for Bing Custom Search configuration. Total number of domains in Allowed List, Blocked List, and Pinned List combined cannot exceed 250.",
+          "items": {
+            "$ref": "#/definitions/BlockedDomain"
+          }
+        },
+        "pinnedDomains": {
+          "type": "array",
+          "description": "List of pinned domains for Bing Custom Search configuration. Total number of domains in Allowed List, Blocked List, and Pinned List combined cannot exceed 250.",
+          "items": {
+            "$ref": "#/definitions/PinnedDomain"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the Bing Custom Search configuration at the time the operation was called.",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomSearchConfiguration": {
+      "type": "object",
+      "description": "Bing Custom Search Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, blocked domains and pinned domains.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomConfigurationProperties",
+          "description": "Properties of Bing Custom Search configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CustomSearchConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a CustomSearchConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CustomSearchConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/CustomSearchConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KeyName": {
+      "type": "string",
+      "description": "key name to generate (Key1|Key2)",
+      "enum": [
+        "Key1",
+        "Key2"
+      ],
+      "x-ms-enum": {
+        "name": "KeyName",
+        "modelAsString": false
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log"
+        }
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        }
+      }
+    },
+    "MetricName": {
+      "type": "object",
+      "description": "A metric name.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the metric.",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The friendly name of the metric.",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that makes sense for the metric"
+        },
+        "category": {
+          "type": "string",
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availability.",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Supported aggregation types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Supported time grain types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "OperationDetail": {
+      "type": "object",
+      "description": "Operation detail payload",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display payload",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider of the operation"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource of the operation"
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation"
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized friendly description for the operation"
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "PinnedDomain": {
+      "type": "object",
+      "description": "A pinned domain for Bing Custom Search configuration.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "A domain string that can be used to specify allowed, blocked, or pinned domains in Bing Custom Search configuration.",
+          "pattern": "^\\s*(((https?:\\/\\/)|(?!(.*:\\/\\/)))((-\\.)?([^\\s\\/?\\.#]+\\.)([^\\s\\/?\\.#]+\\.?)+([^\\s\\/?\\.#]+)(\\/[^\\s]*)?))\\s*$"
+        },
+        "query": {
+          "type": "string",
+          "description": "The search terms or keywords that trigger the pinned domain to appear at the top of the search results if the user's search query meets the condition specified."
+        },
+        "condition": {
+          "type": "string",
+          "description": "Defines how the query terms should match the search terms entered by the user. If set to Exact (default), the pinned domain appears only if the user's search query exactly matches the specified query. If set to StartsWith, the pinned domain appears if the user's search query starts with the specified query. If set to Contains, the pinned domain appears if the user's search query contains the specified query. If set to EndsWith, the pinned domain appears if the user's search query ends with the specified query.",
+          "default": "Exact",
+          "enum": [
+            "Exact",
+            "StartsWith",
+            "Contains",
+            "EndsWith"
+          ],
+          "x-ms-enum": {
+            "name": "PinnedDomainCondition",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Exact",
+                "value": "Exact"
+              },
+              {
+                "name": "StartsWith",
+                "value": "StartsWith"
+              },
+              {
+                "name": "Contains",
+                "value": "Contains"
+              },
+              {
+                "name": "EndsWith",
+                "value": "EndsWith"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "domain",
+        "query"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the Bing Custom Search configuration at the time the operation was called.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Moving",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      }
+    },
+    "QuotaUsageStatus": {
+      "type": "string",
+      "description": "Bing account quota usage status.",
+      "enum": [
+        "Included",
+        "Blocked",
+        "InOverage",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaUsageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Included",
+            "value": "Included"
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked"
+          },
+          {
+            "name": "InOverage",
+            "value": "InOverage"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          }
+        ]
+      }
+    },
+    "RegenerateKeyParameters": {
+      "type": "object",
+      "description": "Regenerate key parameters.",
+      "properties": {
+        "keyName": {
+          "$ref": "#/definitions/KeyName",
+          "description": "key name to generate (Key1|Key2)"
+        }
+      },
+      "required": [
+        "keyName"
+      ]
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "Describes an available Bing SKU.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the SKU applies to.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of SKU.",
+          "readOnly": true
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specifies the tier of Bing account.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The Kind of resources that are supported in this SKU.",
+          "readOnly": true
+        },
+        "locations": {
+          "type": "array",
+          "description": "The set of locations that the SKU is available.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "type": "array",
+          "description": "A list of locations and availability zones in those locations where the SKU is available.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "type": "array",
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the SKU",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "zoneDetails": {
+          "type": "array",
+          "description": "Details of capabilities available to a SKU in specific zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "description": "Information about the restriction where the SKU cannot be used.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations where the SKU is restricted",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "description": "Describes restrictions of a SKU.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsType",
+          "description": "The type of restrictions.",
+          "readOnly": true
+        },
+        "values": {
+          "type": "array",
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "description": "Information about the restriction where the SKU cannot be used.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/ResourceSkuRestrictionsReasonCode",
+          "description": "The reason for restriction.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkuRestrictionsReasonCode": {
+      "type": "string",
+      "description": "The reason for restriction.",
+      "enum": [
+        "QuotaId",
+        "NotAvailableForSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QuotaId",
+            "value": "QuotaId"
+          },
+          {
+            "name": "NotAvailableForSubscription",
+            "value": "NotAvailableForSubscription"
+          }
+        ]
+      }
+    },
+    "ResourceSkuRestrictionsType": {
+      "type": "string",
+      "description": "The type of restrictions.",
+      "enum": [
+        "Location",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSkuRestrictionsType",
+        "modelAsString": false
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "description": "Describes The zonal capabilities of a SKU.",
+      "properties": {
+        "name": {
+          "type": "array",
+          "description": "The set of zones that the SKU is available in with the specified capabilities.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones.",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSkusResult": {
+      "type": "object",
+      "description": "The list SKUs operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceSku items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Log for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The SKU of the Bing account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the SKU name. Required for account creation, optional for update."
+        },
+        "tier": {
+          "$ref": "#/definitions/SkuTier",
+          "description": "Gets the SKU tier. This is based on the SKU name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuCapability": {
+      "type": "object",
+      "description": "SkuCapability indicates the capability of a certain feature.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SkuCapability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SkuCapability."
+        }
+      }
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "Gets the SKU tier. This is based on the SKU name.",
+      "enum": [
+        "Free",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      }
+    },
+    "UnitType": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "name": "UnitType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent"
+          },
+          {
+            "name": "CountPerSecond",
+            "value": "CountPerSecond"
+          },
+          {
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond"
+          },
+          {
+            "name": "Milliseconds",
+            "value": "Milliseconds"
+          }
+        ]
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "description": "The usage data for a usage request.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "The quota period used to summarize the usage values.",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value for this metric.",
+          "readOnly": true
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value for this metric.",
+          "readOnly": true
+        },
+        "nextResetTime": {
+          "type": "string",
+          "description": "Next reset time for current quota.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/QuotaUsageStatus",
+          "description": "Bing account quota usage status."
+        }
+      }
+    },
+    "UsagesResult": {
+      "type": "object",
+      "description": "The response to a list usage request.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of usages for bing account.",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -258,13 +258,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -816,13 +816,13 @@
           "200": {
             "description": "OK - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "202": {
             "description": "Accepted - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatchable"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -1319,7 +1319,7 @@
     "/providers/Microsoft.Solutions/portalRegistryPackage": {
       "post": {
         "tags": [
-          "PortalRegistryPackage"
+          "PortalRegistryPackages"
         ],
         "operationId": "PortalRegistryPackage",
         "description": "Generates the registry package links for Managed Applications and Solution Templates.",
@@ -1330,7 +1330,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -1352,7 +1352,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1894,6 +1894,7 @@
         "offer",
         "publisher",
         "plan",
+        "version",
         "packageLinks"
       ],
       "description": "Information about an application definition request."
@@ -2204,7 +2205,7 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ApplicationLockLevel",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "ApplicationArtifactType": {
@@ -2744,27 +2745,27 @@
     },
     "UpdateAccessDefinition": {
       "properties": {
-        "approver": {
+        "Approver": {
           "type": "string",
           "description": "The approver name."
         },
-        "metadata": {
+        "Metadata": {
           "$ref": "#/definitions/JitRequestMetadata",
           "description": "The JIT request metadata."
         },
-        "status": {
+        "Status": {
           "$ref": "#/definitions/Status",
           "description": "The JIT status."
         },
-        "subStatus": {
+        "SubStatus": {
           "$ref": "#/definitions/SubStatus",
           "description": "The JIT status."
         }
       },
       "required": [
-        "metadata",
-        "status",
-        "subStatus"
+        "Metadata",
+        "Status",
+        "SubStatus"
       ],
       "description": "Update access request definition."
     },

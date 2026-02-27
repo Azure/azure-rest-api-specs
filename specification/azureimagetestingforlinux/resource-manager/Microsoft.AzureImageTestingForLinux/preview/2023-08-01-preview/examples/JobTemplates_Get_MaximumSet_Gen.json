@@ -1,0 +1,70 @@
+{
+  "title": "JobTemplates_Get_MaximumSet",
+  "operationId": "JobTemplates_Get",
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "93795934-E6BB-4426-885B-D090A72FF26D",
+    "resourceGroupName": "rgazureimagetestingforlinux",
+    "jobTemplateName": "linux-template-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "templateTags": [
+            "linux-server"
+          ],
+          "region": [
+            "eastus"
+          ],
+          "vmSize": [
+            "Standard_D2s_v3"
+          ],
+          "selections": [
+            {
+              "caseName": [
+                "performance-test"
+              ],
+              "caseArea": [
+                "compute"
+              ],
+              "caseCategory": [
+                "functional"
+              ],
+              "casePriority": [
+                0
+              ],
+              "caseTags": [
+                "high-priority"
+              ],
+              "action": "include",
+              "testIterations": 23,
+              "retryCount": 24,
+              "useNewEnvironment": true,
+              "ignoreFailure": true
+            }
+          ],
+          "customParameters": {},
+          "concurrency": 10,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "test",
+          "team": "platform"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/93795934-E6BB-4426-885B-D090A72FF26D/resourceGroups/rgazureimagetestingforlinux/providers/Microsoft.AzureImageTestingForLinux/jobTemplates/linux-template-1",
+        "name": "linux-template-1",
+        "type": "Microsoft.AzureImageTestingForLinux/jobTemplates",
+        "systemData": {
+          "createdBy": "platform-admin",
+          "createdByType": "User",
+          "createdAt": "2023-07-15T10:00:00Z",
+          "lastModifiedBy": "platform-admin",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-15T10:00:00Z"
+        }
+      }
+    }
+  }
+}

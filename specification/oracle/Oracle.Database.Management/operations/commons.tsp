@@ -1,5 +1,3 @@
-import "@typespec/openapi";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -65,10 +63,9 @@ interface ListActions {
   @post
   ArmResourceGetActionAsync<
     TResource extends Foundations.Resource,
-    TResponse extends {} | void,
+    TResponse,
     TBaseParameters = BaseParameters<TResource>
   >(
     ...ResourceInstanceParameters<TResource, TBaseParameters>,
-  ): ArmResponse<TResponse> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
-    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
+  ): ArmResponse<TResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }

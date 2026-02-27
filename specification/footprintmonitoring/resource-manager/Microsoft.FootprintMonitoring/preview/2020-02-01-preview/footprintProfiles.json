@@ -1,0 +1,1650 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-02-01-preview",
+    "title": "Profiles",
+    "description": "Microsoft Footprint active monitoring system REST API version 2020-02-01-preview.",
+    "contact": {
+      "name": "Map of The Internet (AFD) Team",
+      "url": "http://aka.ms/moiteams",
+      "email": "moicore@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user node"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.FootprintMonitoring/operations": {
+      "get": {
+        "tags": [
+          "API Operations"
+        ],
+        "operationId": "operations_List",
+        "x-ms-examples": {
+          "List all operations available.": {
+            "$ref": "./examples/operationsList.json"
+          }
+        },
+        "description": "Retrieves a list of available API operations",
+        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of operations under Microsoft.FootprintMonitoring resource provider.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.FootprintMonitoring/profiles": {
+      "get": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Get all Footprint profiles under a subscription.",
+        "description": "Retrieves the information about all Footprint profiles under a subscription.",
+        "operationId": "profiles_ListBySubscription",
+        "x-ms-examples": {
+          "List all Footprint profiles under a subscription.": {
+            "$ref": "./examples/profilesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the Footprint profiles found.",
+            "schema": {
+              "$ref": "#/definitions/ProfileList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles": {
+      "get": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Get all Footprint profiles under a resource group.",
+        "description": "Retrieves the information about all Footprint profiles under a resource group.",
+        "operationId": "profiles_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all Footprint profiles under a Resource Group.": {
+            "$ref": "./examples/profilesListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the Footprint profiles found.",
+            "schema": {
+              "$ref": "#/definitions/ProfileList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}": {
+      "get": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Get a Footprint profile resource.",
+        "description": "Retrieves the information about a single Footprint profile.",
+        "operationId": "profiles_Get",
+        "x-ms-examples": {
+          "Get the details of a Footprint profile.": {
+            "$ref": "./examples/profilesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the single Footprint profile's information.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Creates or updates a Footprint profile resource.",
+        "description": "Creates or updates a Footprint profile with the specified properties.",
+        "operationId": "profiles_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a Footprint profile.": {
+            "$ref": "./examples/profilesCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Footprint profile creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was updated and the response contains the updated Footprint profile's information.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "201": {
+            "description": "The request was successful. The resource was created and the response contains the created Footprint profile's information.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Deletes a Footprint profile resource.",
+        "description": "Deletes an existing Footprint profile.",
+        "operationId": "profiles_Delete",
+        "x-ms-examples": {
+          "Delete a Footprint profile.": {
+            "$ref": "./examples/profilesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was deleted."
+          },
+          "204": {
+            "description": "The request was successful, but the resource didn't exist anymore."
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Footprint Profiles"
+        ],
+        "summary": "Updates a Footprint profile resource.",
+        "description": "Updates an existing Footprint profile resource.",
+        "operationId": "profiles_Update",
+        "x-ms-examples": {
+          "Update a Footprint profile.": {
+            "$ref": "./examples/profilesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Footprint profile update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfilePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints": {
+      "get": {
+        "tags": [
+          "Footprint Measurement Endpoints"
+        ],
+        "summary": "Get all measurement endpoints under a Footprint profile.",
+        "description": "Retrieves the information about all measurement endpoints under a Footprint profile.",
+        "operationId": "measurementEndpoints_ListByProfile",
+        "x-ms-examples": {
+          "List all the measurement endpoints under a Footprint profile.": {
+            "$ref": "./examples/measurementEndpointsListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the Footprint measurement endpoints found.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}": {
+      "get": {
+        "tags": [
+          "Footprint Measurement Endpoints"
+        ],
+        "summary": "Get a measurement endpoint under a Footprint profile resource.",
+        "description": "Retrieves the information about a single measurement endpoint under a Footprint profile.",
+        "operationId": "measurementEndpoints_Get",
+        "x-ms-examples": {
+          "Get the details of a measurement endpoint.": {
+            "$ref": "./examples/measurementEndpointsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the single Footprint profile's measurement endpoint information.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Footprint Measurement Endpoints"
+        ],
+        "summary": "Creates or updates a single measurement endpoint under a Footprint profile resource.",
+        "description": "Creates or updates a single measurement endpoint under a Footprint profile with the specified properties.",
+        "operationId": "measurementEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a measurement endpoint.": {
+            "$ref": "./examples/measurementEndpointsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Footprint measurement endpoint creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was updated and the response contains the updated Footprint measurement endpoint's information.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "201": {
+            "description": "The request was successful. The resource was created and the response contains the created Footprint measurement endpoint's information.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Footprint Measurement Endpoints"
+        ],
+        "summary": "Deletes a measurement endpoint under a Footprint profile resource.",
+        "description": "Deletes an existing measurement endpoint under a Footprint profile.",
+        "operationId": "measurementEndpoints_Delete",
+        "x-ms-examples": {
+          "Delete a measurement endpoint.": {
+            "$ref": "./examples/measurementEndpointsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was deleted."
+          },
+          "204": {
+            "description": "The request was successful, but the resource didn't exist anymore."
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}/conditions": {
+      "get": {
+        "tags": [
+          "Footprint Measurement Endpoint Conditions"
+        ],
+        "summary": "Get all measurement endpoint conditions under a Footprint measurement endpoint.",
+        "description": "Retrieves the information about all measurement endpoint conditions under a Footprint measurement endpoint.",
+        "operationId": "measurementEndpointConditions_ListByMeasurementEndpoint",
+        "x-ms-examples": {
+          "List all conditions under a measurement endpoint.": {
+            "$ref": "./examples/measurementEndpointConditionsListByEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the Footprint measurement endpoint conditions found.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointConditionList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}/conditions/{conditionName}": {
+      "get": {
+        "tags": [
+          "Footprint Measurement Endpoint Conditions"
+        ],
+        "summary": "Get a measurement endpoint condition under a Footprint measurement endpoint resource.",
+        "description": "Retrieves the information about a single measurement endpoint condition under a Footprint measurement endpoint.",
+        "operationId": "measurementEndpointConditions_Get",
+        "x-ms-examples": {
+          "Get the details of a measurement endpoint condition.": {
+            "$ref": "./examples/measurementEndpointConditionGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointConditionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the single measurement endpoint condition under a Footprint measurement's information.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Footprint Measurement Endpoint Conditions"
+        ],
+        "summary": "Creates or updates a measurement endpoint condition under a Footprint measurement resource.",
+        "description": "Creates or updates a measurement endpoint condition under a Footprint measurement with the specified properties.",
+        "operationId": "measurementEndpointConditions_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a measurement endpoint condition.": {
+            "$ref": "./examples/measurementEndpointConditionCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointConditionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Footprint measurement condition creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was updated and the response contains the updated measurement endpoint condition information under a Footprint measurement.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "201": {
+            "description": "The request was successful. The resource was created and the response contains the created measurement endpoint condition information under a Footprint measurement.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Footprint Measurement Endpoint Conditions"
+        ],
+        "summary": "Deletes a measurement endpoint condition under a Footprint measurement resource.",
+        "description": "Deletes an existing measurement endpoint condition under a Footprint measurement.",
+        "operationId": "measurementEndpointConditions_Delete",
+        "x-ms-examples": {
+          "Delete a measurement endpoint condition.": {
+            "$ref": "./examples/measurementEndpointConditionDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeasurementEndpointConditionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was deleted."
+          },
+          "204": {
+            "description": "The request was successful, but the resource didn't exist anymore."
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/experiments": {
+      "get": {
+        "tags": [
+          "Footprint Experiments"
+        ],
+        "summary": "Get all experiments under a Footprint profile.",
+        "description": "Retrieves the information about all experiments under a Footprint profile.",
+        "operationId": "experiments_ListByProfile",
+        "x-ms-examples": {
+          "List all experiments under a Footprint profile.": {
+            "$ref": "./examples/experimentsListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the Footprint experiments found.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentList"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/experiments/{experimentName}": {
+      "get": {
+        "tags": [
+          "Footprint Experiments"
+        ],
+        "summary": "Get a Footprint experiment resource.",
+        "description": "Retrieves the information about a single Footprint experiment.",
+        "operationId": "experiments_Get",
+        "x-ms-examples": {
+          "Get the details of an experiment.": {
+            "$ref": "./examples/experimentsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The response contains the single Footprint experiment's information.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Footprint Experiments"
+        ],
+        "summary": "Creates or updates a Footprint experiment resource.",
+        "description": "Creates or updates a Footprint experiment with the specified properties.",
+        "operationId": "experiments_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update an experiment.": {
+            "$ref": "./examples/experimentsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Footprint experiment creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was updated and the response contains the updated Footprint experiment's information.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "201": {
+            "description": "The request was successful. The resource was created and the response contains the created Footprint experiment's information.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Footprint Experiments"
+        ],
+        "summary": "Deletes a Footprint experiment resource.",
+        "description": "Deletes an existing Footprint experiment.",
+        "operationId": "experiments_Delete",
+        "x-ms-examples": {
+          "Delete an experiment.": {
+            "$ref": "./examples/experimentsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. The resource was deleted."
+          },
+          "204": {
+            "description": "The request was successful, but the resource didn't exist anymore."
+          },
+          "default": {
+            "description": "A response with a status and optional error describing the reason for the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DefaultErrorResponse": {
+      "title": "Default Error Response",
+      "description": "The base response with an error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details, if any."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "title": "Error Definition",
+      "description": "The details of an error.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "title": "Resource Provider's Available Operations",
+      "description": "A list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "Resource provider operations list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page for list of Azure operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "title": "Resource Provider Operation",
+      "type": "object",
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "title": "The operation's name.",
+          "description": "Resource provider operation name.",
+          "type": "string"
+        },
+        "display": {
+          "title": "The operation's properties.",
+          "description": "Resource provider display properties.",
+          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "title": "Resource Provider Operation Properties",
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "description": "Name of the resource provider.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the resource provider operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the resource provider operation.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "title": "Azure Resource",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags for the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "location": {
+          "description": "Region where the Azure resource is located.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "An Azure resource that is child to another Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProfileList": {
+      "description": "Result of the request to list Footprint profiles. It contains a list of Footprint profile objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Profile"
+          },
+          "description": "A collection of Footprint profiles."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint profile objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "Profile": {
+      "title": "Footprint Profile",
+      "type": "object",
+      "description": "The Footprint profile resource.",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional Footprint profile properties.",
+          "title": "Footprint profile additional properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileProperties"
+        }
+      }
+    },
+    "ProfileProperties": {
+      "type": "object",
+      "title": "Footprint Profile Properties",
+      "description": "A model representing the Footprint profile resource.",
+      "required": [
+        "startDelayMilliseconds",
+        "measurementCount"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "profileId": {
+          "type": "string",
+          "title": "Profile Id",
+          "description": "The id of the Footprint profile.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "title": "Profile Description",
+          "description": "The description of the Footprint profile."
+        },
+        "startDelayMilliseconds": {
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 3600000,
+          "type": "integer",
+          "title": "Start Delay (ms)",
+          "description": "The delay in milliseconds that the clients should wait for until they start performing measurements."
+        },
+        "scriptUri": {
+          "type": "string",
+          "title": "Profile Script URL",
+          "description": "The URL where the script for the Footprint profile.",
+          "readOnly": true
+        },
+        "measurementCount": {
+          "format": "int32",
+          "minimum": 0,
+          "type": "integer",
+          "title": "Count of Measurements",
+          "description": "The number of measurements to perform."
+        },
+        "coldPathSamplingPercentageRate": {
+          "format": "float",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number",
+          "title": "Cold Path Sampling Percentage",
+          "description": "The default sampling percentage for cold path measurement storage."
+        },
+        "measurementEndpoints": {
+          "type": "array",
+          "title": "Measurement Endpoints",
+          "description": "The endpoints which to perform measurements to.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          }
+        },
+        "reportingEndpoints": {
+          "type": "array",
+          "title": "Reporting Endpoints",
+          "description": "The endpoints which to upload measurements to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experiments": {
+          "type": "array",
+          "title": "Experiments",
+          "description": "The experiments currently associated to this Footprint profile.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "MeasurementEndpointList": {
+      "description": "Result of the request to list Footprint measurement endpoints. It contains a list of Footprint measurement endpoints objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpoint"
+          },
+          "description": "A collection of Footprint measurement endpoints."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint measurement endpoints objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "MeasurementEndpoint": {
+      "type": "object",
+      "title": "Footprint Measurement Endpoint",
+      "description": "A model representing a Footprint measurement endpoint.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "title": "Footprint measurement endpoint additional properties",
+          "description": "Additional Footprint measurement endpoint properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MeasurementEndpointProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MeasurementEndpointProperties": {
+      "type": "object",
+      "title": "Footprint Measurement Endpoint Properties",
+      "description": "A model representing the Footprint Measurement Endpoint resource.",
+      "required": [
+        "endpoint",
+        "measurementType",
+        "weight"
+      ],
+      "properties": {
+        "endpointId": {
+          "title": "Measurement Endpoint Id",
+          "description": "The id of a measurement endpoint.",
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "title": "Measurement Endpoint Description",
+          "description": "The description of a measurement endpoint.",
+          "type": "string"
+        },
+        "endpoint": {
+          "title": "Measurement Endpoint",
+          "description": "The value of a measurement endpoint.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "pattern": "^[a-z0-9\\*]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?$",
+          "type": "string"
+        },
+        "measurementType": {
+          "title": "Measurement Endpoint Type",
+          "description": "The type of a measurement endpoint.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "weight": {
+          "title": "Measurement Endpoint Weight",
+          "description": "The weight of a measurement endpoint, higher weight means higher priority.",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 2147483647,
+          "type": "integer"
+        },
+        "experimentId": {
+          "title": "Measurement Endpoint Experiment Id",
+          "description": "The id of an experiment that a measurement endpoint is part of.",
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "type": "string"
+        },
+        "objectPath": {
+          "title": "Measurement Endpoint Object Path",
+          "description": "The path of the object that a measurement endpoint points to.",
+          "maxLength": 1024,
+          "minLength": 0,
+          "pattern": "^/[a-zA-Z0-9-._~%!$&()*+,;=@/]*$",
+          "type": "string"
+        },
+        "conditions": {
+          "title": "Measurement Endpoint Conditions",
+          "description": "The conditions of a measurement endpoint.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          }
+        },
+        "startTimeUTC": {
+          "title": "Measurement Endpoint Start Time",
+          "description": "The start time that a measurement endpoint should be served.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTimeUTC": {
+          "title": "Measurement Endpoint End Time",
+          "description": "The end time that a measurement endpoint should be served.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "hotPathSamplingPercentageRate": {
+          "title": "Measurement Endpoint Hot Path Sampling Rate",
+          "description": "The percentual sampling rate for the hot path logging of a measurement endpoint.",
+          "format": "float",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number"
+        },
+        "warmPathSamplingPercentageRate": {
+          "title": "Measurement Endpoint Warm Path Sampling Rate",
+          "description": "The percentual sampling rate for the warm path logging of a measurement endpoint.",
+          "format": "float",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number"
+        },
+        "coldPathSamplingPercentageRateOverride": {
+          "title": "Measurement Endpoint Cold Path Sampling Rate",
+          "description": "The percentual sampling rate for the cold path logging of a measurement endpoint.",
+          "format": "float",
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number"
+        },
+        "metadata": {
+          "title": "Measurement Endpoint Metadata",
+          "description": "The metadata of a measurement endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ExperimentList": {
+      "description": "Result of the request to list Footprint experiments. It contains a list of Footprint experiments objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Experiment"
+          },
+          "description": "A collection of Footprint experiments."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint experiment objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "Experiment": {
+      "type": "object",
+      "title": "Footprint Experiment",
+      "description": "A model representing the Footprint experiment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "title": "Footprint experiment additional properties",
+          "description": "Additional Footprint experiment properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExperimentProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExperimentProperties": {
+      "type": "object",
+      "title": "Footprint Experiment Properties",
+      "description": "A model representing the Footprint Experiment resource.",
+      "properties": {
+        "experimentId": {
+          "title": "Footprint Experiment Id",
+          "description": "The id of a Footprint experiment.",
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "title": "Footprint Experiment Description",
+          "description": "The description of a Footprint experiment.",
+          "type": "string"
+        },
+        "status": {
+          "title": "Footprint Experiment Status",
+          "description": "The status of a Footprint experiment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MeasurementEndpointConditionList": {
+      "description": "Result of the request to list Footprint measurement endpoint contidions. It contains a list of Footprint measurement endpoint contidions objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpointCondition"
+          },
+          "description": "A collection of Footprint measurement endpoint contidions."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint measurement endpoint contidion objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "MeasurementEndpointCondition": {
+      "type": "object",
+      "title": "Footprint Measurement Endpoint Condition",
+      "description": "A model representing the Footprint measurement endpoint condition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "title": "Footprint measurement endpoint condition additional properties",
+          "description": "Additional Footprint measurement endpoint condition properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MeasurementEndpointConditionProperties"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MeasurementEndpointConditionProperties": {
+      "type": "object",
+      "title": "Footprint Measurement Endpoint Condition Properties",
+      "description": "A model representing the Footprint Measurement Endpoint Condition resource.",
+      "required": [
+        "type",
+        "variable",
+        "operator",
+        "constant"
+      ],
+      "properties": {
+        "conditionId": {
+          "title": "Footprint Measurement Endpoint Condition Id",
+          "description": "The id of a Footprint measurement endpoint condition.",
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "title": "Footprint Measurement Endpoint Condition Type",
+          "description": "The type of a Footprint measurement endpoint condition.",
+          "type": "string",
+          "enum": [
+            "RequestHeader"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "variable": {
+          "title": "Footprint Measurement Endpoint Condition Variable",
+          "description": "The variable of a Footprint measurement endpoint condition.",
+          "type": "string"
+        },
+        "operator": {
+          "title": "Footprint Measurement Endpoint Condition Operator",
+          "description": "The operator of a Footprint measurement endpoint condition.",
+          "type": "string",
+          "enum": [
+            "IsExactValue",
+            "MatchValueIgnoreCasing",
+            "ContainsValue",
+            "ContainsValueIgnoreCasing",
+            "DoesNotContainValue",
+            "DoesNotContainValueIgnoreCasing"
+          ],
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": true
+          }
+        },
+        "constant": {
+          "title": "Footprint Measurement Endpoint Condition Constant",
+          "description": "The constant of a Footprint measurement endpoint condition.",
+          "type": "string"
+        }
+      }
+    },
+    "ProfilePatch": {
+      "type": "object",
+      "title": "Footprint Profile Update Model",
+      "description": "The model for patches on Footprint profile resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags for this resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "maxLength": 90,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ProfileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Footprint profile resource.",
+      "maxLength": 64,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "MeasurementEndpointNameParameter": {
+      "name": "measurementEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Footprint measurement endpoint resource.",
+      "maxLength": 64,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "MeasurementEndpointConditionNameParameter": {
+      "name": "conditionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Footprint measurement endpoint condition resource.",
+      "maxLength": 64,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "ExperimentNameParameter": {
+      "name": "experimentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Footprint experiment resource.",
+      "maxLength": 64,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

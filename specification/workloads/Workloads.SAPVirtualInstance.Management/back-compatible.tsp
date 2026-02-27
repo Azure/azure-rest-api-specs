@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Workloads;
+namespace Microsoft.Workloads;
 
 @@clientName(SAPVirtualInstances, "SapVirtualInstances", "autorest");
 @@clientName(SAPDatabaseInstances, "SapDatabaseInstances", "autorest");
@@ -9,31 +9,10 @@ using Microsoft.Workloads;
   "SapCentralServerInstances",
   "autorest"
 );
-@@clientName(SAPApplicationServerInstance,
-  "SAPApplicationServerInstance",
-  "autorest"
-);
 @@clientName(SAPApplicationServerInstances,
   "SapApplicationServerInstances",
   "autorest"
 );
-@@clientName(SAPVirtualInstances.getSizingRecommendations,
-  "InvokeSizingRecommendations",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getSapSupportedSku,
-  "InvokeSapSupportedSku",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getDiskConfigurations,
-  "InvokeDiskConfigurations",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
-  "InvokeAvailabilityZoneDetails",
-  "autorest"
-);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
   "autorest"
@@ -43,10 +22,10 @@ using Microsoft.Workloads;
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPVirtualInstance.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPDatabaseInstance.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPDatabaseInstance.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPVirtualInstance.properties,
   "autorest"
 );

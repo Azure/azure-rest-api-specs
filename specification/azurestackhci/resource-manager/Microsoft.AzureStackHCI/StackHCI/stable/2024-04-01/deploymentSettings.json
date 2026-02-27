@@ -242,14 +242,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -420,6 +420,62 @@
         }
       }
     },
+    "DeploymentSecuritySettings": {
+      "type": "object",
+      "description": "The SecuritySettings of AzureStackHCI Cluster.",
+      "properties": {
+        "hvciProtection": {
+          "type": "boolean",
+          "description": "By default, Hypervisor-protected Code Integrity is enabled on your Azure HCI cluster.",
+          "default": true
+        },
+        "drtmProtection": {
+          "type": "boolean",
+          "description": "By default, Secure Boot is enabled on your Azure HCI cluster. This setting is hardware dependent.",
+          "default": true
+        },
+        "driftControlEnforced": {
+          "type": "boolean",
+          "description": "When set to true, the security baseline is re-applied regularly.",
+          "default": true
+        },
+        "credentialGuardEnforced": {
+          "type": "boolean",
+          "description": "When set to true, Credential Guard is enabled.",
+          "default": false
+        },
+        "smbSigningEnforced": {
+          "type": "boolean",
+          "description": "When set to true, the SMB default instance requires sign in for the client and server services.",
+          "default": true
+        },
+        "smbClusterEncryption": {
+          "type": "boolean",
+          "description": "When set to true, cluster east-west traffic is encrypted.",
+          "default": false
+        },
+        "sideChannelMitigationEnforced": {
+          "type": "boolean",
+          "description": "When set to true, all the side channel mitigations are enabled",
+          "default": true
+        },
+        "bitlockerBootVolume": {
+          "type": "boolean",
+          "description": "When set to true, BitLocker XTS_AES 256-bit encryption is enabled for all data-at-rest on the OS volume of your Azure Stack HCI cluster. This setting is TPM-hardware dependent. ",
+          "default": true
+        },
+        "bitlockerDataVolumes": {
+          "type": "boolean",
+          "description": "When set to true, BitLocker XTS-AES 256-bit encryption is enabled for all data-at-rest on your Azure Stack HCI cluster shared volumes.",
+          "default": true
+        },
+        "wdacEnforced": {
+          "type": "boolean",
+          "description": "WDAC is enabled by default and limits the applications and the code that you can run on your Azure Stack HCI cluster.",
+          "default": true
+        }
+      }
+    },
     "DeploymentSetting": {
       "type": "object",
       "description": "Edge device resource",
@@ -485,11 +541,11 @@
         "operationType": {
           "type": "string",
           "description": "The intended operation for a cluster.",
+          "default": "ClusterProvisioning",
           "enum": [
             "ClusterProvisioning",
             "ClusterUpgrade"
           ],
-          "default": "ClusterProvisioning",
           "x-ms-enum": {
             "name": "OperationType",
             "modelAsString": true,
@@ -739,31 +795,22 @@
         }
       }
     },
-    "SbePartnerInfo": {
+    "SbeCredentials": {
       "type": "object",
-      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
       "properties": {
-        "sbeDeploymentInfo": {
-          "$ref": "#/definitions/SbeDeploymentInfo",
-          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
         },
-        "partnerProperties": {
-          "type": "array",
-          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
-          "items": {
-            "$ref": "#/definitions/SbePartnerProperties"
-          },
-          "x-ms-identifiers": []
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
         },
-        "credentialList": {
-          "type": "array",
-          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
-          "items": {
-            "$ref": "#/definitions/SbeCredentials"
-          },
-          "x-ms-identifiers": [
-            "secretName"
-          ]
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
         }
       }
     },
@@ -794,6 +841,34 @@
         }
       }
     },
+    "SbePartnerInfo": {
+      "type": "object",
+      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
+      "properties": {
+        "sbeDeploymentInfo": {
+          "$ref": "#/definitions/SbeDeploymentInfo",
+          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
+        },
+        "partnerProperties": {
+          "type": "array",
+          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbePartnerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "credentialList": {
+          "type": "array",
+          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbeCredentials"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      }
+    },
     "SbePartnerProperties": {
       "type": "object",
       "description": "Solution builder extension (SBE) partner properties object.",
@@ -805,25 +880,6 @@
         "value": {
           "type": "string",
           "description": "SBE partner property value."
-        }
-      }
-    },
-    "SbeCredentials": {
-      "type": "object",
-      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
-      "properties": {
-        "secretName": {
-          "type": "string",
-          "description": "secret name stored in keyvault."
-        },
-        "eceSecretName": {
-          "type": "string",
-          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
-        },
-        "secretLocation": {
-          "type": "string",
-          "format": "uri",
-          "description": "secret URI stored in keyvault."
         }
       }
     },
@@ -855,62 +911,6 @@
         "networkController": {
           "$ref": "#/definitions/NetworkController",
           "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
-        }
-      }
-    },
-    "DeploymentSecuritySettings": {
-      "type": "object",
-      "description": "The SecuritySettings of AzureStackHCI Cluster.",
-      "properties": {
-        "hvciProtection": {
-          "type": "boolean",
-          "description": "By default, Hypervisor-protected Code Integrity is enabled on your Azure HCI cluster.",
-          "default": true
-        },
-        "drtmProtection": {
-          "type": "boolean",
-          "description": "By default, Secure Boot is enabled on your Azure HCI cluster. This setting is hardware dependent.",
-          "default": true
-        },
-        "driftControlEnforced": {
-          "type": "boolean",
-          "description": "When set to true, the security baseline is re-applied regularly.",
-          "default": true
-        },
-        "credentialGuardEnforced": {
-          "type": "boolean",
-          "description": "When set to true, Credential Guard is enabled.",
-          "default": false
-        },
-        "smbSigningEnforced": {
-          "type": "boolean",
-          "description": "When set to true, the SMB default instance requires sign in for the client and server services.",
-          "default": true
-        },
-        "smbClusterEncryption": {
-          "type": "boolean",
-          "description": "When set to true, cluster east-west traffic is encrypted.",
-          "default": false
-        },
-        "sideChannelMitigationEnforced": {
-          "type": "boolean",
-          "description": "When set to true, all the side channel mitigations are enabled",
-          "default": true
-        },
-        "bitlockerBootVolume": {
-          "type": "boolean",
-          "description": "When set to true, BitLocker XTS_AES 256-bit encryption is enabled for all data-at-rest on the OS volume of your Azure Stack HCI cluster. This setting is TPM-hardware dependent. ",
-          "default": true
-        },
-        "bitlockerDataVolumes": {
-          "type": "boolean",
-          "description": "When set to true, BitLocker XTS-AES 256-bit encryption is enabled for all data-at-rest on your Azure Stack HCI cluster shared volumes.",
-          "default": true
-        },
-        "wdacEnforced": {
-          "type": "boolean",
-          "description": "WDAC is enabled by default and limits the applications and the code that you can run on your Azure Stack HCI cluster.",
-          "default": true
         }
       }
     },
@@ -990,9 +990,9 @@
     "ClusterNameParameter": {
       "name": "clusterName",
       "in": "path",
+      "description": "The name of the cluster.",
       "required": true,
       "type": "string",
-      "description": "The name of the cluster.",
       "x-ms-parameter-location": "method"
     }
   }

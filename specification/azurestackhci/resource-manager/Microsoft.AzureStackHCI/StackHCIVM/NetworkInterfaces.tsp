@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The network interface resource definition.")
 @extension("x-ms-azure-resource", true)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
@@ -35,13 +35,8 @@ interface NetworkInterfaces {
   @doc("Gets a network interface")
   get is ArmResourceRead<NetworkInterface>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkInterface,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
   @patch(#{ implicitOptionality: false })

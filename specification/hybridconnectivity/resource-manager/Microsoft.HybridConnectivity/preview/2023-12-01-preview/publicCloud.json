@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "version": "2023-12-01-preview",
+    "description": "REST API for public clouds.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "GenerateAwsTemplate"
+    },
+    {
+      "name": "TestPermissions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
+      "post": {
+        "operationId": "GenerateAwsTemplate_Post",
+        "tags": [
+          "GenerateAwsTemplate"
+        ],
+        "description": "Retrieve AWS Cloud Formation template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "generateAwsTemplateRequest",
+            "in": "body",
+            "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAwsTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateAwsTemplate_Post": {
+            "$ref": "./examples/GenerateAwsTemplate_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}/testPermissions": {
+      "post": {
+        "operationId": "TestPermissions_Post",
+        "tags": [
+          "TestPermissions"
+        ],
+        "description": "Test permissions of solution configurations of a connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "publicCloudConnectorId",
+            "in": "path",
+            "description": "ConnectorId to check permissions of.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestPermissionResponse"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestPermissions_Post": {
+            "$ref": "./examples/TestPermissions_Post.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "GenerateAwsTemplateRequest": {
+      "type": "object",
+      "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "The name of public cloud connector"
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "The list of solution types and their settings",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "connectorId"
+      ]
+    },
+    "SolutionSettings": {
+      "type": "object",
+      "description": "Solution settings",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SolutionType": {
+      "type": "string",
+      "description": "Solution types.",
+      "enum": [
+        "Microsoft.AssetManagement",
+        "Microsoft.HybridCompute.Onboard",
+        "Microsoft.HybridNetwork.VWan.Provision"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.AssetManagement",
+            "value": "Microsoft.AssetManagement",
+            "description": "Asset Management solution type"
+          },
+          {
+            "name": "Microsoft.HybridCompute.Onboard",
+            "value": "Microsoft.HybridCompute.Onboard",
+            "description": "Hybrid Compute Onboard solution type"
+          },
+          {
+            "name": "Microsoft.HybridNetwork.VWan.Provision",
+            "value": "Microsoft.HybridNetwork.VWan.Provision",
+            "description": "VWan Provisioning solution type"
+          }
+        ]
+      }
+    },
+    "SolutionTypePermissions": {
+      "type": "object",
+      "description": "Solution type permissions.",
+      "properties": {
+        "solutionType": {
+          "$ref": "#/definitions/SolutionType",
+          "description": "The name of solution Type"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status"
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The details of the status"
+        }
+      },
+      "required": [
+        "solutionType",
+        "status",
+        "statusDetails"
+      ]
+    },
+    "SolutionTypeProperties": {
+      "type": "object",
+      "description": "The properties of Solution Type",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      },
+      "required": [
+        "solutionType"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "Connection status.",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected status"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected status"
+          }
+        ]
+      }
+    },
+    "TestPermissionResponse": {
+      "type": "object",
+      "description": "Public connector permissions.",
+      "properties": {
+        "overallStatus": {
+          "$ref": "#/definitions/Status",
+          "description": "The name of public cloud connector"
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "Solution type permissions.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypePermissions"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "overallStatus",
+        "solutionTypes"
+      ]
+    }
+  },
+  "parameters": {}
+}

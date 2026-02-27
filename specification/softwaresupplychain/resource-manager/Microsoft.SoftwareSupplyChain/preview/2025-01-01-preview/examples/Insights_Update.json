@@ -1,0 +1,46 @@
+{
+  "title": "Insights_Update",
+  "operationId": "Insights_Update",
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "60148fd0-cd96-4510-89e6-36f8af5eee06",
+    "resourceGroupName": "contoso-supply-chain-rg",
+    "insightName": "contoso-supply-chain",
+    "properties": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/60148fd0-cd96-4510-89e6-36f8af5eee06/resourceGroups/contoso-supply-chain-rg/providers/Microsoft.SoftwareSupplyChain/insights/contoso-supply-chain",
+        "name": "contoso-supply-chain",
+        "type": "Microsoft.SoftwareSupplyChain/insights",
+        "systemData": {
+          "createdBy": "contoso-user",
+          "createdByType": "User",
+          "createdAt": "2024-12-06T18:10:11.000Z",
+          "lastModifiedBy": "contoso-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-12-06T18:10:11.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/60148fd0-cd96-4510-89e6-36f8af5eee06/providers/Microsoft.SoftwareSupplyChain/locations/westus2/operations/00000000-0000-0000-0000-000000000000?api-version=2025-01-01 -preview"
+      }
+    }
+  }
+}

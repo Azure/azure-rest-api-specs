@@ -530,7 +530,8 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Deleted"
+        "Deleted",
+        "NotSpecified"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -575,6 +576,11 @@
             "name": "Deleted",
             "value": "Deleted",
             "description": "File system resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "File system resource state is unknown"
           }
         ]
       },
@@ -638,6 +644,7 @@
         },
         "adminPassword": {
           "type": "string",
+          "format": "password",
           "description": "Initial administrator password of the resource",
           "x-ms-secret": true
         },
@@ -699,6 +706,7 @@
       "properties": {
         "email": {
           "type": "string",
+          "format": "password",
           "description": "User Email",
           "x-ms-secret": true
         }

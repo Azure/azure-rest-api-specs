@@ -276,7 +276,7 @@ op ArmResourceListActionSync<
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
   @doc("Agri solutions list.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   solutions: DataManagerForAgricultureSolution[];
 }
 

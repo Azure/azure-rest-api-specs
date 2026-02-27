@@ -1,0 +1,1630 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockDataSources"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockDataSources": {
+      "get": {
+        "operationId": "BedrockDataSources_ListBySubscription",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "List BedrockDataSource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockDataSources": {
+      "get": {
+        "operationId": "BedrockDataSources_ListByResourceGroup",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "List BedrockDataSource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockDataSources/{name}": {
+      "get": {
+        "operationId": "BedrockDataSources_Get",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "Get a BedrockDataSource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataSource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_Get_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockDataSources_CreateOrReplace",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "Create a BedrockDataSource. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataSource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockDataSource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSource"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockDataSource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockDataSources_Update",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "Update a BedrockDataSource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataSource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSourceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataSource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_Update_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockDataSources_Delete",
+        "tags": [
+          "BedrockDataSources"
+        ],
+        "description": "Delete a BedrockDataSource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataSource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataSources_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockDataSources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsBedrockDataSourceProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockDataSource",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "The time at which the data source was created."
+        },
+        "dataDeletionPolicy": {
+          "$ref": "#/definitions/DataDeletionPolicy",
+          "description": "The deletion policy for the data source."
+        },
+        "dataSourceConfiguration": {
+          "$ref": "#/definitions/DataSourceConfiguration",
+          "description": "Specifies a raw data source location to ingest."
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "Identifier for a resource."
+        },
+        "dataSourceStatus": {
+          "$ref": "#/definitions/DataSourceStatus",
+          "description": "The status of a data source."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Resource."
+        },
+        "failureReasons": {
+          "type": "array",
+          "description": "The details of the failure reasons related to the data source.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "knowledgeBaseId": {
+          "type": "string",
+          "description": "The unique identifier of the knowledge base to which to add the data source."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the data source."
+        },
+        "serverSideEncryptionConfiguration": {
+          "$ref": "#/definitions/ServerSideEncryptionConfiguration",
+          "description": "Contains details about the server-side encryption for the data source."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The time at which the knowledge base was last updated."
+        },
+        "vectorIngestionConfiguration": {
+          "$ref": "#/definitions/VectorIngestionConfiguration",
+          "description": "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried."
+        }
+      }
+    },
+    "BedrockDataAutomationConfiguration": {
+      "type": "object",
+      "description": "Definition of BedrockDataAutomationConfiguration",
+      "properties": {
+        "parsingModality": {
+          "$ref": "#/definitions/BedrockDataAutomationConfigurationParsingModality",
+          "description": "Determine how will parsed content be stored."
+        }
+      }
+    },
+    "BedrockDataAutomationConfigurationParsingModality": {
+      "type": "string",
+      "description": "BedrockDataAutomationConfigurationParsingModality enum",
+      "enum": [
+        "MULTIMODAL"
+      ],
+      "x-ms-enum": {
+        "name": "BedrockDataAutomationConfigurationParsingModality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MULTIMODAL",
+            "value": "MULTIMODAL",
+            "description": "BedrockDataAutomationConfigurationParsingModality enum MULTIMODAL"
+          }
+        ]
+      }
+    },
+    "BedrockDataSource": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockDataSourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockDataSourceListResult": {
+      "type": "object",
+      "description": "The response of a BedrockDataSource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockDataSource items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockDataSource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockDataSourceProperties": {
+      "type": "object",
+      "description": "Definition of BedrockDataSource",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockDataSourceProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockDataSourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockDataSource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BedrockFoundationModelConfiguration": {
+      "type": "object",
+      "description": "Definition of BedrockFoundationModelConfiguration",
+      "properties": {
+        "modelArn": {
+          "type": "string",
+          "description": "The model's ARN."
+        },
+        "parsingModality": {
+          "$ref": "#/definitions/BedrockFoundationModelConfigurationParsingModality",
+          "description": "Determine how will parsed content be stored."
+        },
+        "parsingPrompt": {
+          "$ref": "#/definitions/ParsingPrompt",
+          "description": "Instructions for interpreting the contents of a document."
+        }
+      }
+    },
+    "BedrockFoundationModelConfigurationParsingModality": {
+      "type": "string",
+      "description": "BedrockFoundationModelConfigurationParsingModality enum",
+      "enum": [
+        "MULTIMODAL"
+      ],
+      "x-ms-enum": {
+        "name": "BedrockFoundationModelConfigurationParsingModality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MULTIMODAL",
+            "value": "MULTIMODAL",
+            "description": "BedrockFoundationModelConfigurationParsingModality enum MULTIMODAL"
+          }
+        ]
+      }
+    },
+    "BedrockFoundationModelContextEnrichmentConfiguration": {
+      "type": "object",
+      "description": "Definition of BedrockFoundationModelContextEnrichmentConfiguration",
+      "properties": {
+        "enrichmentStrategyConfiguration": {
+          "$ref": "#/definitions/EnrichmentStrategyConfiguration",
+          "description": "Strategy to be used when using Bedrock Foundation Model for Context Enrichment."
+        },
+        "modelArn": {
+          "type": "string",
+          "description": "The model's ARN."
+        }
+      }
+    },
+    "ChunkingConfiguration": {
+      "type": "object",
+      "description": "Definition of ChunkingConfiguration",
+      "properties": {
+        "chunkingStrategy": {
+          "$ref": "#/definitions/ChunkingConfigurationChunkingStrategy",
+          "description": "Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk."
+        },
+        "fixedSizeChunkingConfiguration": {
+          "$ref": "#/definitions/FixedSizeChunkingConfiguration",
+          "description": "Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field."
+        },
+        "hierarchicalChunkingConfiguration": {
+          "$ref": "#/definitions/HierarchicalChunkingConfiguration",
+          "description": "Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field."
+        },
+        "semanticChunkingConfiguration": {
+          "$ref": "#/definitions/SemanticChunkingConfiguration",
+          "description": "Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field."
+        }
+      }
+    },
+    "ChunkingConfigurationChunkingStrategy": {
+      "type": "string",
+      "description": "ChunkingConfigurationChunkingStrategy enum",
+      "enum": [
+        "FIXED_SIZE",
+        "HIERARCHICAL",
+        "NONE",
+        "SEMANTIC"
+      ],
+      "x-ms-enum": {
+        "name": "ChunkingConfigurationChunkingStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FIXED_SIZE",
+            "value": "FIXED_SIZE",
+            "description": "ChunkingConfigurationChunkingStrategy enum FIXED_SIZE"
+          },
+          {
+            "name": "HIERARCHICAL",
+            "value": "HIERARCHICAL",
+            "description": "ChunkingConfigurationChunkingStrategy enum HIERARCHICAL"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ChunkingConfigurationChunkingStrategy enum NONE"
+          },
+          {
+            "name": "SEMANTIC",
+            "value": "SEMANTIC",
+            "description": "ChunkingConfigurationChunkingStrategy enum SEMANTIC"
+          }
+        ]
+      }
+    },
+    "ConfluenceCrawlerConfiguration": {
+      "type": "object",
+      "description": "Definition of ConfluenceCrawlerConfiguration",
+      "properties": {
+        "filterConfiguration": {
+          "$ref": "#/definitions/CrawlFilterConfiguration",
+          "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content."
+        }
+      }
+    },
+    "ConfluenceDataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of ConfluenceDataSourceConfiguration",
+      "properties": {
+        "crawlerConfiguration": {
+          "$ref": "#/definitions/ConfluenceCrawlerConfiguration",
+          "description": "The configuration of the Confluence content. For example, configuring specific types of Confluence content."
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/ConfluenceSourceConfiguration",
+          "description": "The endpoint information to connect to your Confluence data source."
+        }
+      }
+    },
+    "ConfluenceSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of ConfluenceSourceConfiguration",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/ConfluenceSourceConfigurationAuthType",
+          "description": "The supported authentication type to authenticate and connect to your Confluence instance."
+        },
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration."
+        },
+        "hostType": {
+          "$ref": "#/definitions/ConfluenceSourceConfigurationHostType",
+          "description": "The supported host type, whether online/cloud or server/on-premises."
+        },
+        "hostUrl": {
+          "type": "string",
+          "description": "The Confluence host URL or instance URL."
+        }
+      }
+    },
+    "ConfluenceSourceConfigurationAuthType": {
+      "type": "string",
+      "description": "ConfluenceSourceConfigurationAuthType enum",
+      "enum": [
+        "BASIC",
+        "OAUTH2_CLIENT_CREDENTIALS"
+      ],
+      "x-ms-enum": {
+        "name": "ConfluenceSourceConfigurationAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BASIC",
+            "value": "BASIC",
+            "description": "ConfluenceSourceConfigurationAuthType enum BASIC"
+          },
+          {
+            "name": "OAUTH2_CLIENT_CREDENTIALS",
+            "value": "OAUTH2_CLIENT_CREDENTIALS",
+            "description": "ConfluenceSourceConfigurationAuthType enum OAUTH2_CLIENT_CREDENTIALS"
+          }
+        ]
+      }
+    },
+    "ConfluenceSourceConfigurationHostType": {
+      "type": "string",
+      "description": "ConfluenceSourceConfigurationHostType enum",
+      "enum": [
+        "SAAS"
+      ],
+      "x-ms-enum": {
+        "name": "ConfluenceSourceConfigurationHostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAAS",
+            "value": "SAAS",
+            "description": "ConfluenceSourceConfigurationHostType enum SAAS"
+          }
+        ]
+      }
+    },
+    "ContextEnrichmentConfiguration": {
+      "type": "object",
+      "description": "Definition of ContextEnrichmentConfiguration",
+      "properties": {
+        "bedrockFoundationModelConfiguration": {
+          "$ref": "#/definitions/BedrockFoundationModelContextEnrichmentConfiguration",
+          "description": "Bedrock Foundation Model configuration to be used for Context Enrichment."
+        },
+        "type": {
+          "$ref": "#/definitions/ContextEnrichmentConfigurationType",
+          "description": "Enrichment type to be used for the vector database."
+        }
+      }
+    },
+    "ContextEnrichmentConfigurationType": {
+      "type": "string",
+      "description": "ContextEnrichmentConfigurationType enum",
+      "enum": [
+        "BEDROCK_FOUNDATION_MODEL"
+      ],
+      "x-ms-enum": {
+        "name": "ContextEnrichmentConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BEDROCK_FOUNDATION_MODEL",
+            "value": "BEDROCK_FOUNDATION_MODEL",
+            "description": "ContextEnrichmentConfigurationType enum BEDROCK_FOUNDATION_MODEL"
+          }
+        ]
+      }
+    },
+    "CrawlFilterConfiguration": {
+      "type": "object",
+      "description": "Definition of CrawlFilterConfiguration",
+      "properties": {
+        "patternObjectFilter": {
+          "$ref": "#/definitions/PatternObjectFilterConfiguration",
+          "description": "The configuration of specific filters applied to your data source content. You can filter out or include certain content."
+        },
+        "type": {
+          "$ref": "#/definitions/CrawlFilterConfigurationType",
+          "description": "The crawl filter type."
+        }
+      }
+    },
+    "CrawlFilterConfigurationType": {
+      "type": "string",
+      "description": "CrawlFilterConfigurationType enum",
+      "enum": [
+        "PATTERN"
+      ],
+      "x-ms-enum": {
+        "name": "CrawlFilterConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PATTERN",
+            "value": "PATTERN",
+            "description": "CrawlFilterConfigurationType enum PATTERN"
+          }
+        ]
+      }
+    },
+    "CustomTransformationConfiguration": {
+      "type": "object",
+      "description": "Definition of CustomTransformationConfiguration",
+      "properties": {
+        "intermediateStorage": {
+          "$ref": "#/definitions/IntermediateStorage",
+          "description": "A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline."
+        },
+        "transformations": {
+          "type": "array",
+          "description": "A list of Lambda functions that process documents.",
+          "items": {
+            "$ref": "#/definitions/Transformation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataDeletionPolicy": {
+      "type": "string",
+      "description": "DataDeletionPolicy enum",
+      "enum": [
+        "DELETE",
+        "RETAIN"
+      ],
+      "x-ms-enum": {
+        "name": "DataDeletionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "DataDeletionPolicy enum DELETE"
+          },
+          {
+            "name": "RETAIN",
+            "value": "RETAIN",
+            "description": "DataDeletionPolicy enum RETAIN"
+          }
+        ]
+      }
+    },
+    "DataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of DataSourceConfiguration",
+      "properties": {
+        "confluenceConfiguration": {
+          "$ref": "#/definitions/ConfluenceDataSourceConfiguration",
+          "description": "The configuration information to connect to Confluence as your data source."
+        },
+        "s3Configuration": {
+          "$ref": "#/definitions/S3DataSourceConfiguration",
+          "description": "The configuration information to connect to Amazon S3 as your data source."
+        },
+        "salesforceConfiguration": {
+          "$ref": "#/definitions/SalesforceDataSourceConfiguration",
+          "description": "The configuration information to connect to Salesforce as your data source."
+        },
+        "sharePointConfiguration": {
+          "$ref": "#/definitions/SharePointDataSourceConfiguration",
+          "description": "The configuration information to connect to SharePoint as your data source."
+        },
+        "type": {
+          "$ref": "#/definitions/DataSourceConfigurationType",
+          "description": "The type of the data source location."
+        },
+        "webConfiguration": {
+          "$ref": "#/definitions/WebDataSourceConfiguration",
+          "description": "Configures a web data source location."
+        }
+      }
+    },
+    "DataSourceConfigurationType": {
+      "type": "string",
+      "description": "DataSourceConfigurationType enum",
+      "enum": [
+        "CONFLUENCE",
+        "CUSTOM",
+        "REDSHIFT_METADATA",
+        "S3",
+        "SALESFORCE",
+        "SHAREPOINT",
+        "WEB"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CONFLUENCE",
+            "value": "CONFLUENCE",
+            "description": "DataSourceConfigurationType enum CONFLUENCE"
+          },
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "DataSourceConfigurationType enum CUSTOM"
+          },
+          {
+            "name": "REDSHIFT_METADATA",
+            "value": "REDSHIFT_METADATA",
+            "description": "DataSourceConfigurationType enum REDSHIFT_METADATA"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "DataSourceConfigurationType enum S3"
+          },
+          {
+            "name": "SALESFORCE",
+            "value": "SALESFORCE",
+            "description": "DataSourceConfigurationType enum SALESFORCE"
+          },
+          {
+            "name": "SHAREPOINT",
+            "value": "SHAREPOINT",
+            "description": "DataSourceConfigurationType enum SHAREPOINT"
+          },
+          {
+            "name": "WEB",
+            "value": "WEB",
+            "description": "DataSourceConfigurationType enum WEB"
+          }
+        ]
+      }
+    },
+    "DataSourceStatus": {
+      "type": "string",
+      "description": "DataSourceStatus enum",
+      "enum": [
+        "AVAILABLE",
+        "DELETE_UNSUCCESSFUL",
+        "DELETING"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AVAILABLE",
+            "value": "AVAILABLE",
+            "description": "DataSourceStatus enum AVAILABLE"
+          },
+          {
+            "name": "DELETE_UNSUCCESSFUL",
+            "value": "DELETE_UNSUCCESSFUL",
+            "description": "DataSourceStatus enum DELETE_UNSUCCESSFUL"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "DataSourceStatus enum DELETING"
+          }
+        ]
+      }
+    },
+    "EnrichmentStrategyConfiguration": {
+      "type": "object",
+      "description": "Definition of EnrichmentStrategyConfiguration",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/EnrichmentStrategyConfigurationMethod",
+          "description": "Enrichment Strategy method."
+        }
+      }
+    },
+    "EnrichmentStrategyConfigurationMethod": {
+      "type": "string",
+      "description": "EnrichmentStrategyConfigurationMethod enum",
+      "enum": [
+        "CHUNK_ENTITY_EXTRACTION"
+      ],
+      "x-ms-enum": {
+        "name": "EnrichmentStrategyConfigurationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CHUNK_ENTITY_EXTRACTION",
+            "value": "CHUNK_ENTITY_EXTRACTION",
+            "description": "EnrichmentStrategyConfigurationMethod enum CHUNK_ENTITY_EXTRACTION"
+          }
+        ]
+      }
+    },
+    "FixedSizeChunkingConfiguration": {
+      "type": "object",
+      "description": "Definition of FixedSizeChunkingConfiguration",
+      "properties": {
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to include in a chunk."
+        },
+        "overlapPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of overlap between adjacent chunks of a data source."
+        }
+      }
+    },
+    "HierarchicalChunkingConfiguration": {
+      "type": "object",
+      "description": "Definition of HierarchicalChunkingConfiguration",
+      "properties": {
+        "levelConfigurations": {
+          "type": "array",
+          "description": "Token settings for each layer.",
+          "items": {
+            "$ref": "#/definitions/HierarchicalChunkingLevelConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "overlapTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens to repeat across chunks in the same layer."
+        }
+      }
+    },
+    "HierarchicalChunkingLevelConfiguration": {
+      "type": "object",
+      "description": "Definition of HierarchicalChunkingLevelConfiguration",
+      "properties": {
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens that a chunk can contain in this layer."
+        }
+      }
+    },
+    "IntermediateStorage": {
+      "type": "object",
+      "description": "Definition of IntermediateStorage",
+      "properties": {
+        "s3Location": {
+          "$ref": "#/definitions/S3Location",
+          "description": "An Amazon S3 location."
+        }
+      }
+    },
+    "ParsingConfiguration": {
+      "type": "object",
+      "description": "Definition of ParsingConfiguration",
+      "properties": {
+        "bedrockDataAutomationConfiguration": {
+          "$ref": "#/definitions/BedrockDataAutomationConfiguration",
+          "description": "Settings for a Bedrock Data Automation used to parse documents for a data source."
+        },
+        "bedrockFoundationModelConfiguration": {
+          "$ref": "#/definitions/BedrockFoundationModelConfiguration",
+          "description": "Settings for a foundation model used to parse documents for a data source."
+        },
+        "parsingStrategy": {
+          "$ref": "#/definitions/ParsingConfigurationParsingStrategy",
+          "description": "The parsing strategy for the data source."
+        }
+      }
+    },
+    "ParsingConfigurationParsingStrategy": {
+      "type": "string",
+      "description": "ParsingConfigurationParsingStrategy enum",
+      "enum": [
+        "BEDROCK_DATA_AUTOMATION",
+        "BEDROCK_FOUNDATION_MODEL"
+      ],
+      "x-ms-enum": {
+        "name": "ParsingConfigurationParsingStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BEDROCK_DATA_AUTOMATION",
+            "value": "BEDROCK_DATA_AUTOMATION",
+            "description": "ParsingConfigurationParsingStrategy enum BEDROCK_DATA_AUTOMATION"
+          },
+          {
+            "name": "BEDROCK_FOUNDATION_MODEL",
+            "value": "BEDROCK_FOUNDATION_MODEL",
+            "description": "ParsingConfigurationParsingStrategy enum BEDROCK_FOUNDATION_MODEL"
+          }
+        ]
+      }
+    },
+    "ParsingPrompt": {
+      "type": "object",
+      "description": "Definition of ParsingPrompt",
+      "properties": {
+        "parsingPromptText": {
+          "type": "string",
+          "description": "Instructions for interpreting the contents of a document."
+        }
+      }
+    },
+    "PatternObjectFilter": {
+      "type": "object",
+      "description": "Definition of PatternObjectFilter",
+      "properties": {
+        "exclusionFilters": {
+          "type": "array",
+          "description": "A set of regular expression filter patterns for a type of object.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inclusionFilters": {
+          "type": "array",
+          "description": "A set of regular expression filter patterns for a type of object.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The supported object type or content type of the data source."
+        }
+      }
+    },
+    "PatternObjectFilterConfiguration": {
+      "type": "object",
+      "description": "Definition of PatternObjectFilterConfiguration",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "Contains information",
+          "items": {
+            "$ref": "#/definitions/PatternObjectFilter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "S3DataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of S3DataSourceConfiguration",
+      "properties": {
+        "bucketArn": {
+          "type": "string",
+          "description": "The ARN of the bucket that contains the data source."
+        },
+        "bucketOwnerAccountId": {
+          "type": "string",
+          "description": "The account ID for the owner of the S3 bucket."
+        },
+        "inclusionPrefixes": {
+          "type": "array",
+          "description": "A list of S3 prefixes that define the object containing the data sources.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "S3Location": {
+      "type": "object",
+      "description": "Definition of S3Location",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The location's URI"
+        }
+      }
+    },
+    "SalesforceCrawlerConfiguration": {
+      "type": "object",
+      "description": "Definition of SalesforceCrawlerConfiguration",
+      "properties": {
+        "filterConfiguration": {
+          "$ref": "#/definitions/CrawlFilterConfiguration",
+          "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content."
+        }
+      }
+    },
+    "SalesforceDataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of SalesforceDataSourceConfiguration",
+      "properties": {
+        "crawlerConfiguration": {
+          "$ref": "#/definitions/SalesforceCrawlerConfiguration",
+          "description": "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content."
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/SalesforceSourceConfiguration",
+          "description": "The endpoint information to connect to your Salesforce data source."
+        }
+      }
+    },
+    "SalesforceSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of SalesforceSourceConfiguration",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/SalesforceSourceConfigurationAuthType",
+          "description": "The supported authentication type to authenticate and connect to your Salesforce instance."
+        },
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration."
+        },
+        "hostUrl": {
+          "type": "string",
+          "description": "The Salesforce host URL or instance URL."
+        }
+      }
+    },
+    "SalesforceSourceConfigurationAuthType": {
+      "type": "string",
+      "description": "SalesforceSourceConfigurationAuthType enum",
+      "enum": [
+        "OAUTH2_CLIENT_CREDENTIALS"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceConfigurationAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OAUTH2_CLIENT_CREDENTIALS",
+            "value": "OAUTH2_CLIENT_CREDENTIALS",
+            "description": "SalesforceSourceConfigurationAuthType enum OAUTH2_CLIENT_CREDENTIALS"
+          }
+        ]
+      }
+    },
+    "SeedUrl": {
+      "type": "object",
+      "description": "Definition of SeedUrl",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A web url."
+        }
+      }
+    },
+    "SemanticChunkingConfiguration": {
+      "type": "object",
+      "description": "Definition of SemanticChunkingConfiguration",
+      "properties": {
+        "breakpointPercentileThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The dissimilarity threshold for splitting chunks."
+        },
+        "bufferSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The buffer size."
+        },
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens that a chunk can contain."
+        }
+      }
+    },
+    "ServerSideEncryptionConfiguration": {
+      "type": "object",
+      "description": "Definition of ServerSideEncryptionConfiguration",
+      "properties": {
+        "kmsKeyArn": {
+          "type": "string",
+          "description": "The ARN of the AWS KMS key used to encrypt the resource."
+        }
+      }
+    },
+    "SharePointCrawlerConfiguration": {
+      "type": "object",
+      "description": "Definition of SharePointCrawlerConfiguration",
+      "properties": {
+        "filterConfiguration": {
+          "$ref": "#/definitions/CrawlFilterConfiguration",
+          "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content."
+        }
+      }
+    },
+    "SharePointDataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of SharePointDataSourceConfiguration",
+      "properties": {
+        "crawlerConfiguration": {
+          "$ref": "#/definitions/SharePointCrawlerConfiguration",
+          "description": "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content."
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/SharePointSourceConfiguration",
+          "description": "The endpoint information to connect to your SharePoint data source."
+        }
+      }
+    },
+    "SharePointSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of SharePointSourceConfiguration",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/SharePointSourceConfigurationAuthType",
+          "description": "The supported authentication type to authenticate and connect to your SharePoint site/sites."
+        },
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of your SharePoint instance or site URL/URLs."
+        },
+        "hostType": {
+          "$ref": "#/definitions/SharePointSourceConfigurationHostType",
+          "description": "The supported host type, whether online/cloud or server/on-premises."
+        },
+        "siteUrls": {
+          "type": "array",
+          "description": "A list of one or more SharePoint site URLs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The identifier of your Microsoft 365 tenant."
+        }
+      }
+    },
+    "SharePointSourceConfigurationAuthType": {
+      "type": "string",
+      "description": "SharePointSourceConfigurationAuthType enum",
+      "enum": [
+        "OAUTH2_CLIENT_CREDENTIALS",
+        "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"
+      ],
+      "x-ms-enum": {
+        "name": "SharePointSourceConfigurationAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OAUTH2_CLIENT_CREDENTIALS",
+            "value": "OAUTH2_CLIENT_CREDENTIALS",
+            "description": "SharePointSourceConfigurationAuthType enum OAUTH2_CLIENT_CREDENTIALS"
+          },
+          {
+            "name": "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS",
+            "value": "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS",
+            "description": "SharePointSourceConfigurationAuthType enum OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"
+          }
+        ]
+      }
+    },
+    "SharePointSourceConfigurationHostType": {
+      "type": "string",
+      "description": "SharePointSourceConfigurationHostType enum",
+      "enum": [
+        "ONLINE"
+      ],
+      "x-ms-enum": {
+        "name": "SharePointSourceConfigurationHostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ONLINE",
+            "value": "ONLINE",
+            "description": "SharePointSourceConfigurationHostType enum ONLINE"
+          }
+        ]
+      }
+    },
+    "Transformation": {
+      "type": "object",
+      "description": "Definition of Transformation",
+      "properties": {
+        "stepToApply": {
+          "$ref": "#/definitions/TransformationStepToApply",
+          "description": "When the service applies the transformation."
+        },
+        "transformationFunction": {
+          "$ref": "#/definitions/TransformationFunction",
+          "description": "A Lambda function that processes documents."
+        }
+      }
+    },
+    "TransformationFunction": {
+      "type": "object",
+      "description": "Definition of TransformationFunction",
+      "properties": {
+        "transformationLambdaConfiguration": {
+          "$ref": "#/definitions/TransformationLambdaConfiguration",
+          "description": "A Lambda function that processes documents."
+        }
+      }
+    },
+    "TransformationLambdaConfiguration": {
+      "type": "object",
+      "description": "Definition of TransformationLambdaConfiguration",
+      "properties": {
+        "lambdaArn": {
+          "type": "string",
+          "description": "The function's ARN identifier."
+        }
+      }
+    },
+    "TransformationStepToApply": {
+      "type": "string",
+      "description": "TransformationStepToApply enum",
+      "enum": [
+        "POST_CHUNKING"
+      ],
+      "x-ms-enum": {
+        "name": "TransformationStepToApply",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "POST_CHUNKING",
+            "value": "POST_CHUNKING",
+            "description": "TransformationStepToApply enum POST_CHUNKING"
+          }
+        ]
+      }
+    },
+    "UrlConfiguration": {
+      "type": "object",
+      "description": "Definition of UrlConfiguration",
+      "properties": {
+        "seedUrls": {
+          "type": "array",
+          "description": "A list of web urls.",
+          "items": {
+            "$ref": "#/definitions/SeedUrl"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VectorIngestionConfiguration": {
+      "type": "object",
+      "description": "Definition of VectorIngestionConfiguration",
+      "properties": {
+        "chunkingConfiguration": {
+          "$ref": "#/definitions/ChunkingConfiguration",
+          "description": "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried."
+        },
+        "contextEnrichmentConfiguration": {
+          "$ref": "#/definitions/ContextEnrichmentConfiguration",
+          "description": "Additional Enrichment Configuration for example when using GraphRag."
+        },
+        "customTransformationConfiguration": {
+          "$ref": "#/definitions/CustomTransformationConfiguration",
+          "description": "Settings for customizing steps in the data source content ingestion pipeline."
+        },
+        "parsingConfiguration": {
+          "$ref": "#/definitions/ParsingConfiguration",
+          "description": "Settings for parsing document contents"
+        }
+      }
+    },
+    "WebCrawlerConfiguration": {
+      "type": "object",
+      "description": "Definition of WebCrawlerConfiguration",
+      "properties": {
+        "crawlerLimits": {
+          "$ref": "#/definitions/WebCrawlerLimits",
+          "description": "Limit settings for the web crawler."
+        },
+        "exclusionFilters": {
+          "type": "array",
+          "description": "A set of regular expression filter patterns for a type of object.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inclusionFilters": {
+          "type": "array",
+          "description": "A set of regular expression filter patterns for a type of object.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "$ref": "#/definitions/WebCrawlerConfigurationScope",
+          "description": "The scope that a web crawl job will be restricted to."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The suffix that will be included in the user agent header."
+        },
+        "userAgentHeader": {
+          "type": "string",
+          "description": "The full user agent header, including UUID and suffix."
+        }
+      }
+    },
+    "WebCrawlerConfigurationScope": {
+      "type": "string",
+      "description": "WebCrawlerConfigurationScope enum",
+      "enum": [
+        "HOST_ONLY",
+        "SUBDOMAINS"
+      ],
+      "x-ms-enum": {
+        "name": "WebCrawlerConfigurationScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HOST_ONLY",
+            "value": "HOST_ONLY",
+            "description": "WebCrawlerConfigurationScope enum HOST_ONLY"
+          },
+          {
+            "name": "SUBDOMAINS",
+            "value": "SUBDOMAINS",
+            "description": "WebCrawlerConfigurationScope enum SUBDOMAINS"
+          }
+        ]
+      }
+    },
+    "WebCrawlerLimits": {
+      "type": "object",
+      "description": "Definition of WebCrawlerLimits",
+      "properties": {
+        "maxPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of pages the crawler can crawl."
+        },
+        "rateLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Rate of web URLs retrieved per minute."
+        }
+      }
+    },
+    "WebDataSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of WebDataSourceConfiguration",
+      "properties": {
+        "crawlerConfiguration": {
+          "$ref": "#/definitions/WebCrawlerConfiguration",
+          "description": "Configuration for the web crawler."
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/WebSourceConfiguration",
+          "description": "A web source configuration."
+        }
+      }
+    },
+    "WebSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of WebSourceConfiguration",
+      "properties": {
+        "urlConfiguration": {
+          "$ref": "#/definitions/UrlConfiguration",
+          "description": "A url configuration."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

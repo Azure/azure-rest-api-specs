@@ -1289,7 +1289,7 @@ model VMExtensionPayload {
   /**
    * Ingestion key of the account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if the contents of this property should be kept private."
   ingestionKey?: string;
 }
 

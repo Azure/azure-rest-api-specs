@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -1353,7 +1356,7 @@ model RecordingMode {
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>An array of <code>recordingModeOverride</code> objects for you to specify your overrides for the recording mode. The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   recordingModeOverrides?: RecordingModeOverride[];
 }
 

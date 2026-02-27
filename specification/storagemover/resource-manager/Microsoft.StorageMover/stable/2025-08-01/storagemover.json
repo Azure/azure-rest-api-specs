@@ -2837,6 +2837,10 @@
           "$ref": "#/definitions/EndpointBaseProperties",
           "description": "The resource specific properties for the Storage Mover resource."
         },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity of the resource. This property is only available on the latest version."
@@ -3212,16 +3216,14 @@
         },
         "connections": {
           "type": "array",
-          "description": "List of connections associated to this job",
+          "description": "List of connections resourceId associated with the job.",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+            "type": "string"
           }
         },
         "dataIntegrityValidation": {
           "$ref": "#/definitions/DataIntegrityValidation",
-          "description": "Data Integrity Validation mode."
+          "description": "Data Integrity validation to be updated"
         }
       }
     },

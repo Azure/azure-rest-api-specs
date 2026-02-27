@@ -1,0 +1,154 @@
+import "./index.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
+@doc("CognitiveSearch Indexer Resource Provider management API.")
+@versioned(Versions)
+namespace Microsoft.CognitiveSearch;
+
+enum Versions {
+  `2023-05-01-preview`,
+}
+
+@parentResource(Index)
+@doc("An indexer resource is a child tracked resource of index")
+model Indexer is TrackedResource<IndexerProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "legacy"
+  @path
+  @key("indexerName")
+  @segment("indexers")
+  @visibility(Lifecycle.Read)
+  @doc("The name of the indexer resource.")
+  name: string;
+}
+
+@armResourceOperations
+interface IndexerOperations {
+  get is ArmResourceRead<Indexer>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Indexer>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Indexer,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Indexer,
+      IndexerProperties
+    >
+  >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "Legacy"
+  delete is ArmResourceDeleteAsync<Indexer>;
+}
+
+@doc("The properties of the indexer.")
+model IndexerProperties {
+  @doc("The description of the indexer resource.")
+  description?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The current provisioning state of the indexer.")
+  provisioningState?: ProvisioningState;
+
+  @doc("The failure policy.")
+  failurePolicy: FailurePolicy;
+
+  @doc("Connection and container information for DataSource")
+  dataSource: DataSource;
+}
+
+@doc("datasource object")
+model DataSource {
+  @doc("Data source Connection definition")
+  connection: Connection;
+
+  @doc("other datasource Properties")
+  properties: DataSourceProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+@discriminator("authenticationType")
+@doc("Parent connection")
+model Connection {}
+
+@doc("Credentials definition")
+model Credentials extends Connection {
+  @doc("Connection type")
+  authenticationType: "Credentials";
+
+  @doc("Connection string")
+  @secret
+  connectionString: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+@discriminator("kind")
+@doc("Datasource properties types")
+model DataSourceProperties {}
+
+@doc("CosmosDb/NoSql Datasource")
+model CosmosDbNoSql extends DataSourceProperties {
+  @doc("CosmosDb datasource type")
+  kind: "CosmosDb/NoSql";
+
+  @doc("CosmosDB/NoSql Database name")
+  collectionName: string;
+
+  @doc("Query information")
+  query: string;
+}
+
+@doc("Sql/AzureSql Datasource")
+model AzureSql extends DataSourceProperties {
+  @doc("Sql/AzureSql datasource type")
+  kind: "Sql/AzureSql";
+
+  @doc("Sql/AzureSql Database name")
+  tableOrViewName: string;
+}
+
+@doc("Storage Blob Datasource")
+model AzureStorageBlob extends DataSourceProperties {
+  @doc("AzureStorage Blob datasource type")
+  kind: "Storage/AzureBlob";
+
+  @doc("Azure Blob container name")
+  containerName: string;
+
+  @doc("Query information")
+  query: string;
+}
+
+@doc("AzureStorage Table Datasource")
+model AzureStorageTable extends DataSourceProperties {
+  @doc("AzureStorage Table datasource type")
+  kind: "Storage/AzureTable";
+
+  @doc("Azure Table container name")
+  containerName: string;
+
+  @doc("Query information")
+  query: string;
+}
+
+@doc("Failure policy parent")
+model FailurePolicy {
+  @doc("Failure policy type")
+  type: FailurePolicyType;
+}
+
+@doc("Supported Failure policy")
+union FailurePolicyType {
+  string,
+
+  @doc("Indexer will stop after the first failure.")
+  FailOnFirstFailure: "FailOnFirstFailure",
+
+  @doc("Indexer will not stop for the specified number of failures")
+  TolerateFailures: "TolerateFailures",
+}

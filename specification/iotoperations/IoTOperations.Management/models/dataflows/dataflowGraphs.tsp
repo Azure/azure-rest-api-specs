@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -49,6 +50,12 @@ model DataflowGraphProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  /** The status for the dataflow graph. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.`2025-12-01-preview`)
+  status?: DataflowGraphStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -156,17 +163,17 @@ model DataflowGraphDestinationNodeSettings {
 
   /** Headers for the output data. */
   @identifiers(#["actionType"])
-  @added(Versions.`2025-10-01`)
+  @added(Versions.`2025-09-01-preview`)
   headers?: DataflowGraphDestinationHeaderAction[];
 
   /** Output schema settings. */
-  @removed(Versions.`2025-10-01`)
+  @removed(Versions.`2025-09-01-preview`)
   outputSchemaSettings?: DataflowGraphDestinationSchemaSettings;
 }
 
 /** DataflowGraph destination node output schema settings. */
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
+@removed(Versions.`2025-09-01-preview`)
 model DataflowGraphDestinationSchemaSettings {
   /** The format of the output data. */
   serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
@@ -177,7 +184,7 @@ model DataflowGraphDestinationSchemaSettings {
 
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
+@removed(Versions.`2025-09-01-preview`)
 union DataflowGraphDestinationSchemaSerializationFormat {
   string,
 
@@ -189,7 +196,7 @@ union DataflowGraphDestinationSchemaSerializationFormat {
 }
 
 /** DataflowGraph Destination Header Action. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @discriminator("actionType")
 model DataflowGraphDestinationHeaderAction {
   /** The type of header operation to perform. */
@@ -197,7 +204,7 @@ model DataflowGraphDestinationHeaderAction {
 }
 
 /** DataflowGraph Destination Header Action Types. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 union DataflowGraphDestinationHeaderActionType {
   string,
 
@@ -212,7 +219,7 @@ union DataflowGraphDestinationHeaderActionType {
 }
 
 /** DataflowGraph Destination Add if not present HeaderAction properties. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 model DataflowGraphDestinationAddIfNotPresentHeaderAction
   extends DataflowGraphDestinationHeaderAction {
   actionType: AddIfNotPresent;
@@ -226,7 +233,7 @@ model DataflowGraphDestinationAddIfNotPresentHeaderAction
 }
 
 /** DataflowGraph Destination Remove HeaderAction properties. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 model DataflowGraphDestinationRemoveHeaderAction
   extends DataflowGraphDestinationHeaderAction {
   actionType: Remove;
@@ -237,7 +244,7 @@ model DataflowGraphDestinationRemoveHeaderAction
 }
 
 /** DataflowGraph Destination Add or Replace HeaderAction properties. */
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 model DataflowGraphDestinationAddOrReplaceHeaderAction
   extends DataflowGraphDestinationHeaderAction {
   actionType: AddOrReplace;
@@ -294,4 +301,12 @@ union DataflowGraphConnectionSchemaSerializationFormat {
 model DataflowGraphConnectionOutput {
   /** Name of the destination node. */
   name: string;
+}
+
+/** DataflowGraph status. */
+@added(Versions.`2025-12-01-preview`)
+model DataflowGraphStatus {
+  /** The health state of the DataflowGraph. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

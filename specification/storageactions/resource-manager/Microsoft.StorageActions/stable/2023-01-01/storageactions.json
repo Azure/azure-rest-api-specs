@@ -348,7 +348,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -390,18 +390,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'StorageTask' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -426,7 +422,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -459,12 +455,8 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -492,7 +484,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -828,19 +820,19 @@
       "type": "object",
       "description": "Represents Storage Task.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/StorageTaskProperties",
           "description": "Properties of the storage task.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identity of the resource."
         }
       },
       "required": [
-        "properties",
-        "identity"
+        "identity",
+        "properties"
       ],
       "allOf": [
         {

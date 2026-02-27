@@ -1,20 +1,75 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "@typespec/versioning";
-import "./main.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
-@doc("Site as ARM Resource")
-model Site is ProxyResource<SiteProperties> {
+@doc("Site properties")
+model SiteProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+
+  @doc("Provisioning state of last operation")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Site address properties")
+model SiteAddressProperties {
+  @doc("First line of the street address")
+  streetAddress1?: string;
+
+  @doc("Second line of the street address")
+  streetAddress2?: string;
+
+  @doc("City of the address")
+  city?: string;
+
+  @doc("State or province of the address")
+  stateOrProvince?: string;
+
+  @doc("Country of the address")
+  country?: string;
+
+  @doc("Postal or ZIP code of the address")
+  postalCode?: string;
+}
+
+@doc("The updatable properties of the Site.")
+model SiteUpdateProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+}
+
+@doc("The type used for update operations of the Site.")
+model SiteUpdate {
+  @doc("The updatable properties of the Site.")
+  properties?: SiteUpdateProperties;
+}
+
+@doc("Site as Extension Resource")
+model Site is ExtensionResource<SiteProperties> {
   ...ResourceNameParameter<
     Resource = Site,
     KeyName = "siteName",
@@ -23,81 +78,29 @@ model Site is ProxyResource<SiteProperties> {
   >;
 }
 
-alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  ResourceInstanceParameters<Extension.ResourceGroup>,
-  KeysOf<Site>
+@doc("Site operations as base operations which will be extended for each scopes")
+interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
+  list is Extension.ListByTarget<Scope, Site>;
+  get is Extension.Read<Scope, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Scope, Site>;
+  update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Scope, Site>;
+}
+
+@armResourceOperations
+interface Sites extends SiteOps<Extension.ResourceGroup> {}
+
+@armResourceOperations
+interface SitesBySubscription extends SiteOps<Extension.Subscription> {}
+
+alias ServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "servicegroupName",
+  NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$",
+  Description = "The name of the service group",
+  ParentType = "Tenant"
 >;
 
 @armResourceOperations
-interface Sites {
-  get is SiteOps.Read<Site>;
-  createOrUpdate is SiteOps.CreateOrUpdateAsync<Site>;
-  update is SiteOps.CustomPatchSync<Site, SiteUpdate>;
-  delete is SiteOps.DeleteSync<Site>;
-  listByResourceGroup is SiteOps.List<Site>;
-}
-
-alias SiteBySubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  ResourceInstanceParameters<Extension.Subscription>,
-  KeysOf<Site>
->;
-
-@armResourceOperations(#{ omitTags: true })
-interface SitesBySubscription {
-  /** List Site resources by subscription ID */
-  list is SiteBySubscriptionOps.List<Site>;
-  get is SiteBySubscriptionOps.Read<Site>;
-  createOrUpdate is SiteBySubscriptionOps.CreateOrUpdateAsync<Site>;
-  update is SiteBySubscriptionOps.CustomPatchSync<Site, SiteUpdate>;
-  delete is SiteBySubscriptionOps.DeleteSync<Site>;
-}
-
-alias SiteByServiceGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /**
-     * The name of the service group
-     */
-    @segment("serviceGroups")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    @key
-    @path
-    servicegroupName: string;
-  },
-  Extension.ExtensionProviderNamespace<Site>,
-  {
-    ...Extension.ExtensionProviderNamespace<Site>;
-    ...KeysOf<Site>;
-  }
->;
-
-@armResourceOperations(#{ omitTags: true })
-interface SitesByServiceGroup {
-  @doc("list Site at SG scope")
-  @added(Versions.v2025_03_01_preview)
-  @list
-  listByServiceGroup is SiteByServiceGroupOps.List<Site>;
-
-  @doc("Get Site at SG scope")
-  @added(Versions.v2025_03_01_preview)
-  get is SiteByServiceGroupOps.Read<Site>;
-
-  @doc("create or update Site at SG scope")
-  @added(Versions.v2025_03_01_preview)
-  createOrUpdate is SiteByServiceGroupOps.CreateOrUpdateAsync<Site>;
-
-  @doc("update Site at SG scope")
-  @added(Versions.v2025_03_01_preview)
-  update is SiteByServiceGroupOps.CustomPatchSync<Site, SiteUpdate>;
-
-  @doc("delete Site at SG scope")
-  @added(Versions.v2025_03_01_preview)
-  delete is SiteByServiceGroupOps.DeleteSync<Site>;
-}
+interface SitesByServiceGroup extends SiteOps<ServiceGroup> {}

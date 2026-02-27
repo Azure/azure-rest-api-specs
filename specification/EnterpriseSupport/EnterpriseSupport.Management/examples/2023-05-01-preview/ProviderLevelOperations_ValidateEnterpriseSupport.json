@@ -1,0 +1,55 @@
+{
+  "operationId": "ProviderLevelOperations_Validate",
+  "title": "ValidateEnterpriseSupportEligibility",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "body": {
+      "lineItems": [
+        {
+          "scope": "/providers/billingAccounts/ba1",
+          "upn": "base-upn",
+          "quantity": 1
+        },
+        {
+          "scope": "/providers/billingAccounts/ba1/billingProfiles/bg1",
+          "upn": "base-upn",
+          "quantity": 1
+        },
+        {
+          "scope": "/providers/billingAccounts/ba1/billingProfiles/bg1",
+          "upn": "addon-upn",
+          "quantity": 1
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "lineItems": [
+          {
+            "scope": "/providers/billingAccounts/ba1",
+            "upn": "base-upn",
+            "quantity": 1,
+            "isEligible": "undetermined",
+            "reason": "billing profile info is missing to determine eligibility"
+          },
+          {
+            "scope": "/providers/billingAccounts/ba1/billingProfiles/bg1",
+            "upn": "base-upn",
+            "quantity": 1,
+            "isEligible": "ineligible",
+            "reason": "Customer already has support base",
+            "reasonCode": 1
+          },
+          {
+            "scope": "/providers/billingAccounts/ba1/billingProfiles/bg1",
+            "upn": "addon-upn",
+            "quantity": 1,
+            "isEligible": "eligible"
+          }
+        ]
+      }
+    }
+  }
+}

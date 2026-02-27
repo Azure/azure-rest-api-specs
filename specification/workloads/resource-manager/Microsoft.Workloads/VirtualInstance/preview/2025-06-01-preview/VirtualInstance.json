@@ -1,0 +1,1260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2025-06-01-preview",
+    "description": "Workloads client provides access to various workload operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "VirtualInstances"
+    },
+    {
+      "name": "WorkloadComponents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/virtualInstances": {
+      "get": {
+        "operationId": "VirtualInstances_ListBySubscription",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Gets all Virtual Instance resources in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual instances by subscription - sample 1": {
+            "$ref": "./examples/VirtualInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances": {
+      "get": {
+        "operationId": "VirtualInstances_ListByResourceGroup",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Gets all Virtual Instance resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual instances by resource group - sample 1": {
+            "$ref": "./examples/VirtualInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}": {
+      "get": {
+        "operationId": "VirtualInstances_Get",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Gets a Virtual Instance resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a virtual instance - sample 1": {
+            "$ref": "./examples/VirtualInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualInstances_Create",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Creates a Virtual Instance resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body to create the Virtual Instance resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register a virtual instance - sample 1": {
+            "$ref": "./examples/VirtualInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualInstances_Update",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Updates a Virtual Instance resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request body to update the Virtual Instance resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a virtual instance - sample 1": {
+            "$ref": "./examples/VirtualInstances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualInstances_Delete",
+        "tags": [
+          "VirtualInstances"
+        ],
+        "description": "Deletes a Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a virtual instance - sample 1": {
+            "$ref": "./examples/VirtualInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}/components": {
+      "get": {
+        "operationId": "WorkloadComponents_List",
+        "tags": [
+          "WorkloadComponents"
+        ],
+        "description": "List all the workload components corresponding to the Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List workload components by virtual instance - sample 1": {
+            "$ref": "./examples/WorkloadComponents_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}/components/{componentName}": {
+      "get": {
+        "operationId": "WorkloadComponents_Get",
+        "tags": [
+          "WorkloadComponents"
+        ],
+        "description": "Gets the workload component corresponding to the Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "The name of the Workload Component resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workload component - sample 1": {
+            "$ref": "./examples/WorkloadComponents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadComponents_Create",
+        "tags": [
+          "WorkloadComponents"
+        ],
+        "description": "Creates a workload component corresponding to the Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "The name of the Workload Component resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body to create the Workload Component resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkloadComponent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponent"
+            }
+          },
+          "201": {
+            "description": "Resource 'WorkloadComponent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponent"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a workload component - sample 1": {
+            "$ref": "./examples/WorkloadComponents_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "WorkloadComponents_Update",
+        "tags": [
+          "WorkloadComponents"
+        ],
+        "description": "Updates a workload component corresponding to the Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "The name of the Workload Component resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadComponent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a workload component - sample 1": {
+            "$ref": "./examples/WorkloadComponents_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WorkloadComponents_Delete",
+        "tags": [
+          "WorkloadComponents"
+        ],
+        "description": "Deletes the workload component corresponding to the Virtual Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "The name of the Workload Component resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workload component - sample 1": {
+            "$ref": "./examples/WorkloadComponents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EnvironmentType": {
+      "type": "string",
+      "description": "Defines the environment type.",
+      "enum": [
+        "NonProduction",
+        "Production",
+        "DisasterRecovery"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonProduction",
+            "value": "NonProduction",
+            "description": "Non Production system."
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production system."
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery",
+            "description": "Disaster recovery system."
+          }
+        ]
+      }
+    },
+    "LinkType": {
+      "type": "string",
+      "description": "Defines the link type applicable for the linked resources.",
+      "enum": [
+        "Dependency",
+        "DisasterRecovery"
+      ],
+      "x-ms-enum": {
+        "name": "LinkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dependency",
+            "value": "Dependency",
+            "description": "Indicates the Dependency link type."
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery",
+            "description": "Indicates the Disaster Recovery link type."
+          }
+        ]
+      }
+    },
+    "LinkedResource": {
+      "type": "object",
+      "description": "Defines the linked Resource class.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/WorkloadResourceId",
+          "description": "ARM ID of the linked resource. The ARM IDs must belong to the resources of type 'Microsoft.Workloads/virtualInstances'."
+        },
+        "linkType": {
+          "$ref": "#/definitions/LinkType",
+          "description": "The type of the link."
+        }
+      },
+      "required": [
+        "resourceId",
+        "linkType"
+      ]
+    },
+    "ResourceConfiguration": {
+      "type": "object",
+      "description": "Defines the resource configuration.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM ID of the resource."
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "description": "Defines the resource provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The succeeded provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The updating provisioning state."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The Creating provisioning state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The Failed provisioning state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The Deleting provisioning state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The Canceled provisioning state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SystemLifecycleStage": {
+      "type": "string",
+      "description": "Defines the possible values for system lifecycle stage.",
+      "enum": [
+        "Active",
+        "InActive",
+        "InBuild"
+      ],
+      "x-ms-enum": {
+        "name": "SystemLifecycleStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The stage indicating that the workload system is fully built, and is up & running."
+          },
+          {
+            "name": "InActive",
+            "value": "InActive",
+            "description": "The stage indicating that the workload system is fully built but either not running or being decommissioned."
+          },
+          {
+            "name": "InBuild",
+            "value": "InBuild",
+            "description": "The stage indicating that the workload system is being built."
+          }
+        ]
+      }
+    },
+    "VirtualInstance": {
+      "type": "object",
+      "description": "Defines the Virtual Instance (VI) resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VirtualInstanceListResult": {
+      "type": "object",
+      "description": "The response of a VirtualInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualInstanceProperties": {
+      "type": "object",
+      "description": "Defines the Virtual Instance resource properties.",
+      "properties": {
+        "workloadInfo": {
+          "$ref": "#/definitions/WorkloadInfo",
+          "description": "The workload specific information including the workload type, definition ID and version.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "The type of environment in which the workload system is deployed - Production / Non Production.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "environmentLabel": {
+          "type": "string",
+          "description": "The user defined label indicating the sub category of the environment in which the workload system is deployed."
+        },
+        "systemPriority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the workload system. The value must be an integer between 0 (highest priority) and 9 (lowest priority).",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "systemLifecycleStage": {
+          "$ref": "#/definitions/SystemLifecycleStage",
+          "description": "The current stage in the lifecycle of the workload system.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata pertaining to the workload system.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "linkedResources": {
+          "type": "array",
+          "description": "The list of the linked resource objects.",
+          "items": {
+            "$ref": "#/definitions/LinkedResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "complianceState": {
+          "$ref": "#/definitions/WorkloadComplianceState",
+          "description": "Defines the compliance state of the virtual instance, as per the corresponding workload definition and architecture.",
+          "readOnly": true
+        },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the virtual instance, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the Virtual Instance resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Defines the virtual instance provisioning state.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any errors on the Virtual Instance resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualInstanceUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the Virtual Instance resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (user assigned identities)"
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualInstanceProperties",
+          "description": "The properties to be updated."
+        }
+      }
+    },
+    "WorkloadComplianceState": {
+      "type": "string",
+      "description": "Defines the Virtual Instance compliance state.",
+      "enum": [
+        "NonCompliant",
+        "Compliant"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "Not compliant as per the workload definition."
+          },
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "Compliant as per the workload definition."
+          }
+        ]
+      }
+    },
+    "WorkloadComponent": {
+      "type": "object",
+      "description": "Defines the Workload Component resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadComponentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkloadComponentListResult": {
+      "type": "object",
+      "description": "The response of a WorkloadComponent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadComponent items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadComponent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkloadComponentProperties": {
+      "type": "object",
+      "description": "Defines the workload component properties.",
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "description": "Type of the component. Allowed values change based on the workload type and will be defined in the workload definition. Examples include \"application\", \"database\", \"central\" etc.\nRequired on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "componentRole": {
+          "type": "string",
+          "description": "Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include \"pas\"/\"aas\" for application component, \"ascs\"/\"ers\" for central component, \"backup\", etc.\nRequired on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "description": "Resources that are part of the component. The entries in this list should be unique and correspond to a single Azure resource.\nRequired on create, optional on update.",
+          "items": {
+            "$ref": "#/definitions/ResourceConfiguration"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata pertaining to the component.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "complianceState": {
+          "$ref": "#/definitions/WorkloadComplianceState",
+          "description": "Defines the compliance state of the workload component, as per the corresponding workload definition and architecture.",
+          "readOnly": true
+        },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the workload component, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the workload component resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Defines the workload component provisioning state.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any errors on the workload component resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadComponentUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the workload component resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkloadComponentProperties",
+          "description": "The properties to be updated."
+        }
+      }
+    },
+    "WorkloadEnrollmentState": {
+      "type": "string",
+      "description": "Defines the enrollment state of a Virtual Instance / Component as per the workload definition.",
+      "enum": [
+        "NeedsAttention",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadEnrollmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "Indicates the state where the VI / Component isn't fully following the workload definition and thus, enrollment needing attention."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete."
+          }
+        ]
+      }
+    },
+    "WorkloadInfo": {
+      "type": "object",
+      "description": "Defines the workload information object.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The type of the workload. Required on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadDefinitionName": {
+          "type": "string",
+          "description": "The name of the corresponding workload definition. Required on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadDefinitionVersion": {
+          "type": "string",
+          "description": "The version selected for the corresponding workload definition. Can be updated.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "WorkloadResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Workloads/virtualInstances"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

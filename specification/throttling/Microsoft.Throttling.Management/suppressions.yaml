@@ -1,0 +1,13 @@
+- tool: TypeSpecValidation
+  reason: >
+    No SDK Support - TRP service does not provide SDK by design.  
+    Responsibility: Service team (Azure Migrate) with SDK team collaboration
+    Comment: TRP doesn't generate any SDKs yet
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-java.*
+  paths: 
+    - tspconfig.yaml

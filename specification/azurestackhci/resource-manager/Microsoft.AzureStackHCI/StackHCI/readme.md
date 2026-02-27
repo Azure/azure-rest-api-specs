@@ -29,29 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-12-01-preview
-
-directive:
-  - from: edgeDevices.json
-    where: $.definitions
-    transform: >
-      $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
-      $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
-      $.Intents['x-ms-client-name'] = 'HciEdgeDeviceIntents';
-      $.HostNetwork['x-ms-client-name'] = 'HciEdgeDeviceHostNetwork';
-      $.StorageNetworks['x-ms-client-name'] = 'HciEdgeDeviceStorageNetworks';
-      $.StorageAdapterIPInfo['x-ms-client-name'] = 'HciEdgeDeviceStorageAdapterIPInfo';
-      $.AdapterPropertyOverrides['x-ms-client-name'] = 'HciEdgeDeviceAdapterPropertyOverrides';
-      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'HciEdgeDeviceVirtualSwitchConfigurationOverrides';
-  - from: deploymentSettings.json
-    where: $.definitions
-    transform: >
-      $.Intents['x-ms-client-name'] = 'DeploymentSettingIntents';
-      $.HostNetwork['x-ms-client-name'] = 'DeploymentSettingHostNetwork';
-      $.StorageNetworks['x-ms-client-name'] = 'DeploymentSettingStorageNetworks';
-      $.StorageAdapterIPInfo['x-ms-client-name'] = 'DeploymentSettingStorageAdapterIPInfo';
-      $.AdapterPropertyOverrides['x-ms-client-name'] = 'DeploymentSettingAdapterPropertyOverrides';
-      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'DeploymentSettingVirtualSwitchConfigurationOverrides';
+tag: package-preview-2026-03-15-preview
 ```
 
 ## Suppression
@@ -81,9 +59,9 @@ suppressions:
     reason: Microsoft.AzureStackHCI was chosen over Microsoft.AzureStackHci or Microsoft.AzureStackHyperConvergedInfrastructure
     from:
       - arcSettings.json
+      - hci.json
       - clusters.json
       - extensions.json
-      - hci.json
       - operations.json
       - offers.json
       - publishers.json
@@ -93,9 +71,13 @@ suppressions:
       - updateSummaries.json
       - deploymentSettings.json
       - edgeDevices.json
-      - securitySettings.json
       - edgeDeviceJobs.json
+      - securitySettings.json
+      - edgeNodePool.json
       - validatedSolutionRecipes.json
+      - clusterJobs.json
+
+
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -111,6 +93,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - clusterJobs.json
 
   - code: ParametersInPointGet
     reason: already used in GA api version, fixing it will cause a breaking change
@@ -122,11 +105,18 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - clusters.json
-  
+
   - code: PatchBodyParametersSchema
-    reason: already used in GA api version, fixing it will cause breaking change
-    from:
-      - clusters.json
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/devicePools/{devicePoolName}"].patch.parameters[4].schema.properties.identity
+
+  - code: PatchBodyParametersSchema
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}"].patch.parameters[4].schema.properties.identity
 
   - code: PutResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -261,6 +251,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - edgeDevices.json
   
   - code: LroLocationHeader
     reason: already used in GA api version, fixing it will cause breaking change
@@ -276,6 +267,9 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+      - updates.json
+      - deploymentSettings.json
+      - securitySettings.json
       - edgeDeviceJobs.json
 
   - code: XmsPageableForListCalls
@@ -283,6 +277,7 @@ suppressions:
     from:
       - operations.json
       - updateSummaries.json
+      - hci.json
 
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     reason: these are not tracked resources, so tags are not needed
@@ -290,13 +285,23 @@ suppressions:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
-
+      - hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+  
   - code: TrackedResourcePatchOperation
     reason: these are not tracked resources, so no tags and corresponding patch operation is needed
     from:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - hci.json
+    where:
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+      - $.definitions.UpdateSummaries
 
   - code: AvoidAdditionalProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -312,6 +317,7 @@ suppressions:
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
+      - hci.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
@@ -320,6 +326,9 @@ suppressions:
       - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_SMB
       - $.definitions.SetInformationJobProperties.properties.bandwidthPercentage_SMB
 
+  - code: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties rule is mistakenly flagging paged responses #722
+
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 
@@ -327,6 +336,23 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+
+  - code: ProvisioningStateMustBeReadOnly
+    from:
+      - deploymentSettings.json
+      - edgeDevices.json
+      - securitySettings.json
+    reason: Changing it will break backward compatibility
+```
+
+
+### Tag: package-preview-2026-03-15-preview
+
+These settings apply only when `--tag=package-preview-2026-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-15-preview'
+input-file:
+  - preview/2026-03-15-preview/hci.json
 ```
 
 ### Tag: package-2026-02-01
@@ -347,20 +373,11 @@ input-file:
   - preview/2025-12-01-preview/hci.json
 ```
 
-### Tag: package-preview-2025-11-01-preview
+### Tag: package-2025-10
 
-These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-11-01-preview'
-input-file:
-  - preview/2025-11-01-preview/hci.json
-```
-
-### Tag: package-2025-10-01
-
-These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-10-01'
+```yaml $(tag) == 'package-2025-10'
 input-file:
   - stable/2025-10-01/arcSettings.json
   - stable/2025-10-01/clusters.json
@@ -379,6 +396,16 @@ input-file:
   - stable/2025-10-01/updateSummaries.json
   - stable/2025-10-01/validatedSolutionRecipes.json
 ```
+
+### Tag: package-preview-2025-09-22-preview
+
+These settings apply only when `--tag=package-preview-2025-09-22-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-22-preview'
+input-file:
+  - preview/2025-09-22-preview/hci.json
+```
+
 
 ### Tag: package-preview-2025-09-15-preview
 
@@ -404,6 +431,56 @@ input-file:
   - preview/2025-09-15-preview/validatedSolutionRecipes.json
 ```
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/arcSettings.json
+  - preview/2025-08-01-preview/clusters.json
+  - preview/2025-08-01-preview/deploymentSettings.json
+  - preview/2025-08-01-preview/edgeDeviceJobs.json
+  - preview/2025-08-01-preview/edgeDevices.json
+  - preview/2025-08-01-preview/extensions.json
+  - preview/2025-08-01-preview/hci.json
+  - preview/2025-08-01-preview/hciCommon.json
+  - preview/2025-08-01-preview/offers.json
+  - preview/2025-08-01-preview/operations.json
+  - preview/2025-08-01-preview/publishers.json
+  - preview/2025-08-01-preview/securitySettings.json
+  - preview/2025-08-01-preview/skus.json
+  - preview/2025-08-01-preview/updateRuns.json
+  - preview/2025-08-01-preview/updates.json
+  - preview/2025-08-01-preview/updateSummaries.json
+  - preview/2025-08-01-preview/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2025-06-01-preview
+
+These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - preview/2025-06-01-preview/arcSettings.json
+  - preview/2025-06-01-preview/clusters.json
+  - preview/2025-06-01-preview/clusterJobs.json
+  - preview/2025-06-01-preview/deploymentSettings.json
+  - preview/2025-06-01-preview/edgeDeviceJobs.json
+  - preview/2025-06-01-preview/edgeDevices.json
+  - preview/2025-06-01-preview/extensions.json
+  - preview/2025-06-01-preview/hciCommon.json
+  - preview/2025-06-01-preview/offers.json
+  - preview/2025-06-01-preview/operations.json
+  - preview/2025-06-01-preview/publishers.json
+  - preview/2025-06-01-preview/securitySettings.json
+  - preview/2025-06-01-preview/skus.json
+  - preview/2025-06-01-preview/updateRuns.json
+  - preview/2025-06-01-preview/updates.json
+  - preview/2025-06-01-preview/updateSummaries.json
+  - preview/2025-06-01-preview/validatedSolutionRecipes.json
+```
+
 ### Tag: package-preview-2025-02-01-preview
 
 These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
@@ -426,6 +503,30 @@ input-file:
   - preview/2025-02-01-preview/updates.json
   - preview/2025-02-01-preview/updateSummaries.json
   - preview/2025-02-01-preview/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - preview/2024-11-01-preview/arcSettings.json
+  - preview/2024-11-01-preview/clusters.json
+  - preview/2024-11-01-preview/deploymentSettings.json
+  - preview/2024-11-01-preview/edgeDevices.json
+  - preview/2024-11-01-preview/edgeDeviceJobs.json
+  - preview/2024-11-01-preview/hci.json
+  - preview/2024-11-01-preview/extensions.json
+  - preview/2024-11-01-preview/hciCommon.json
+  - preview/2024-11-01-preview/offers.json
+  - preview/2024-11-01-preview/operations.json
+  - preview/2024-11-01-preview/publishers.json
+  - preview/2024-11-01-preview/securitySettings.json
+  - preview/2024-11-01-preview/skus.json
+  - preview/2024-11-01-preview/updateRuns.json
+  - preview/2024-11-01-preview/updateSummaries.json
+  - preview/2024-11-01-preview/updates.json
 ```
 
 ### Tag: package-preview-2024-12-01-preview
@@ -474,6 +575,47 @@ input-file:
   - preview/2024-09-01-preview/updates.json
 ```
 
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - preview/2024-07-01-preview/hci.json
+  - preview/2024-07-01-preview/arcSettings.json
+  - preview/2024-07-01-preview/deploymentSettings.json
+  - preview/2024-07-01-preview/edgeDevices.json
+  - preview/2024-07-01-preview/extensions.json
+  - preview/2024-07-01-preview/offers.json
+  - preview/2024-07-01-preview/operations.json
+  - preview/2024-07-01-preview/publishers.json
+  - preview/2024-07-01-preview/skus.json
+  - preview/2024-07-01-preview/updateRuns.json
+  - preview/2024-07-01-preview/updateSummaries.json
+  - preview/2024-07-01-preview/updates.json
+  - preview/2024-07-01-preview/securitySettings.json
+  - preview/2024-06-01-preview/edgeNodePool.json
+```
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/edgeNodePool.json
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
+```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
@@ -495,6 +637,48 @@ input-file:
   - stable/2024-04-01/updateSummaries.json
   - stable/2024-04-01/updates.json
 ```
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
+```
+
+### Tag: package-preview-2024-03-15
+`
+These settings apply only when `--tag=package-preview-2024-03-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03-15'
+input-file:
+  - preview/2024-03-15-preview/arcSettings.json
+  - preview/2024-03-15-preview/clusters.json
+  - preview/2024-03-15-preview/deploymentSettings.json
+  - preview/2024-03-15-preview/edgeDevices.json
+  - preview/2024-03-15-preview/edgeNodePool.json
+  - preview/2024-03-15-preview/extensions.json
+  - preview/2024-03-15-preview/offers.json
+  - preview/2024-03-15-preview/operations.json
+  - preview/2024-03-15-preview/publishers.json
+  - preview/2024-03-15-preview/securitySettings.json
+  - preview/2024-03-15-preview/skus.json
+  - preview/2024-03-15-preview/updateRuns.json
+  - preview/2024-03-15-preview/updateSummaries.json
+  - preview/2024-03-15-preview/updates.json
+```
 
 ### Tag: package-preview-2024-02
 
@@ -510,12 +694,35 @@ input-file:
   - preview/2024-02-15-preview/offers.json
   - preview/2024-02-15-preview/operations.json
   - preview/2024-02-15-preview/publishers.json
-  - preview/2024-02-15-preview/securitySettings.json
   - preview/2024-02-15-preview/skus.json
   - preview/2024-02-15-preview/updateRuns.json
   - preview/2024-02-15-preview/updateSummaries.json
   - preview/2024-02-15-preview/updates.json
+  - preview/2024-02-15-preview/securitySettings.json
   - preview/2024-02-15-preview/hciCommon.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - preview/2023-12-01-preview/arcSettings.json
+  - preview/2023-12-01-preview/clusters.json
+  - preview/2023-12-01-preview/deploymentSettings.json
+  - preview/2023-12-01-preview/edgeDevices.json
+  - preview/2023-12-01-preview/extensions.json
+  - preview/2023-12-01-preview/offers.json
+  - preview/2023-12-01-preview/operations.json
+  - preview/2023-12-01-preview/publishers.json
+  - preview/2023-12-01-preview/skus.json
+  - preview/2023-12-01-preview/updateRuns.json
+  - preview/2023-12-01-preview/updateSummaries.json
+  - preview/2023-12-01-preview/updates.json
+  - preview/2023-12-01-preview/hci.json
+  - preview/2023-12-01-preview/hciCommon.json
+  - preview/2023-12-01-preview/securitySettings.json
 ```
 
 ### Tag: package-2024-01
@@ -532,11 +739,11 @@ input-file:
   - stable/2024-01-01/offers.json
   - stable/2024-01-01/operations.json
   - stable/2024-01-01/publishers.json
-  - stable/2024-01-01/securitySettings.json
   - stable/2024-01-01/skus.json
   - stable/2024-01-01/updateRuns.json
   - stable/2024-01-01/updateSummaries.json
   - stable/2024-01-01/updates.json
+  - stable/2024-01-01/securitySettings.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -560,26 +767,6 @@ input-file:
   - preview/2023-11-01-preview/updates.json
 ```
 
-### Tag: package-preview-2023-08
-
-These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-08'
-input-file:
-  - preview/2023-08-01-preview/arcSettings.json
-  - preview/2023-08-01-preview/clusters.json
-  - preview/2023-08-01-preview/extensions.json
-  - preview/2023-08-01-preview/offers.json
-  - preview/2023-08-01-preview/operations.json
-  - preview/2023-08-01-preview/publishers.json
-  - preview/2023-08-01-preview/skus.json
-  - preview/2023-08-01-preview/updateRuns.json
-  - preview/2023-08-01-preview/updateSummaries.json
-  - preview/2023-08-01-preview/updates.json
-  - preview/2023-08-01-preview/deploymentSettings.json
-  - preview/2023-08-01-preview/edgeDevices.json
-```
-
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
@@ -596,6 +783,26 @@ input-file:
   - stable/2023-08-01/updateRuns.json
   - stable/2023-08-01/updateSummaries.json
   - stable/2023-08-01/updates.json
+```
+
+### Tag: package-preview-2023-08-01
+
+These settings apply only when `--tag=package-preview-2023-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08-01'
+input-file:
+  - preview/2023-08-01-preview/arcSettings.json
+  - preview/2023-08-01-preview/clusters.json
+  - preview/2023-08-01-preview/extensions.json
+  - preview/2023-08-01-preview/offers.json
+  - preview/2023-08-01-preview/operations.json
+  - preview/2023-08-01-preview/publishers.json
+  - preview/2023-08-01-preview/skus.json
+  - preview/2023-08-01-preview/updateRuns.json
+  - preview/2023-08-01-preview/updateSummaries.json
+  - preview/2023-08-01-preview/updates.json
+  - preview/2023-08-01-preview/deploymentSettings.json
+  - preview/2023-08-01-preview/edgeDevices.json
 ```
 
 ### Tag: package-2023-06
@@ -688,34 +895,55 @@ input-file:
   - stable/2022-12-01/updates.json
 ```
 
-### Tag: package-preview-2022-10
+### Tag: package-preview-2022-12
 
-These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-10'
+``` yaml $(tag) == 'package-preview-2022-12'
 input-file:
-  - stable/2022-10-01/arcSettings.json
-  - stable/2022-10-01/clusters.json
-  - stable/2022-10-01/extensions.json
-  - stable/2022-10-01/operations.json
-  - stable/2022-10-01/offers.json
-  - stable/2022-10-01/publishers.json
-  - stable/2022-10-01/skus.json
-  - stable/2022-10-01/updateRuns.json
-  - stable/2022-10-01/updateSummaries.json
-  - stable/2022-10-01/updates.json
+  - preview/2022-12-01-preview/arcSettings.json
+  - preview/2022-12-01-preview/clusters.json
+  - preview/2022-12-01-preview/extensions.json
+  - preview/2022-12-01-preview/offers.json
+  - preview/2022-12-01-preview/operations.json
+  - preview/2022-12-01-preview/publishers.json
+  - preview/2022-12-01-preview/skus.json
+  - preview/2022-12-01-preview/updateRuns.json
+  - preview/2022-12-01-preview/updateSummaries.json
+  - preview/2022-12-01-preview/updates.json
 ```
 
-### Tag: package-2022-09
+### Tag: package-preview-2022-11
 
-These settings apply only when `--tag=package-2022-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - stable/2022-09-01/arcSettings.json
-  - stable/2022-09-01/clusters.json
-  - stable/2022-09-01/extensions.json
-  - stable/2022-09-01/operations.json
+  - preview/2022-11-01-preview/arcSettings.json
+  - preview/2022-11-01-preview/clusters.json
+  - preview/2022-11-01-preview/extensions.json
+  - preview/2022-11-01-preview/operations.json
+  - preview/2022-11-01-preview/offers.json
+  - preview/2022-11-01-preview/skus.json
+  - preview/2022-11-01-preview/publishers.json
+  - preview/2022-11-01-preview/updateRuns.json
+  - preview/2022-11-01-preview/updateSummaries.json
+  - preview/2022-11-01-preview/updates.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - preview/2022-08-01-preview/arcSettings.json
+  - preview/2022-08-01-preview/clusters.json
+  - preview/2022-08-01-preview/extensions.json
+  - preview/2022-08-01-preview/operations.json
+  - preview/2022-08-01-preview/updates.json
+  - preview/2022-08-01-preview/updateRuns.json
+  - preview/2022-08-01-preview/updateSummaries.json
 ```
 
 ### Tag: package-2022-05
@@ -730,6 +958,21 @@ input-file:
   - stable/2022-05-01/operations.json
 ```
 
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - preview/2022-04-01-preview/arcSettings.json
+  - preview/2022-04-01-preview/clusters.json
+  - preview/2022-04-01-preview/extensions.json
+  - preview/2022-04-01-preview/operations.json
+  - preview/2022-04-01-preview/offers.json
+  - preview/2022-04-01-preview/skus.json
+  - preview/2022-04-01-preview/publishers.json
+```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
@@ -740,18 +983,6 @@ input-file:
   - stable/2022-03-01/clusters.json
   - stable/2022-03-01/extensions.json
   - stable/2022-03-01/operations.json
-```
-
-### Tag: package-2022-01
-
-These settings apply only when `--tag=package-2022-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-01'
-input-file:
-  - stable/2022-01-01/arcSettings.json
-  - stable/2022-01-01/clusters.json
-  - stable/2022-01-01/extensions.json
-  - stable/2022-01-01/operations.json
 ```
 
 ### Tag: package-preview-2021-09
@@ -778,6 +1009,18 @@ input-file:
   - stable/2021-09-01/operations.json
 ```
 
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - preview/2021-07-01-preview/arcSettings.json
+  - preview/2021-07-01-preview/clusters.json
+  - preview/2021-07-01-preview/extensions.json
+  - preview/2021-07-01-preview/operations.json
+```
+
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
@@ -790,13 +1033,14 @@ input-file:
   - preview/2021-01-01-preview/operations.json
 ```
 
-### Tag: package-2020-10-01
+### Tag: package-2020-11-01-preview
 
-These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2020-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+``` yaml $(tag) == 'package-2020-11-01-preview'
 input-file:
-  - stable/2020-10-01/azurestackhci.json
+  - preview/2020-11-01-preview/operations.json
+  - preview/2020-11-01-preview/azurestackhci.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -807,6 +1051,7 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 input-file:
   - preview/2020-03-01-preview/azurestackhci.json
 ```
+
 ---
 
 # Code Generation
@@ -818,10 +1063,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python-track2
+#  - repo: azure-sdk-for-java
+#  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurestackhci']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js azurestackhci/resource-manager
@@ -840,6 +1088,10 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
@@ -851,4 +1103,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

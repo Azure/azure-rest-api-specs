@@ -1,0 +1,48 @@
+{
+  "title": "Switches_PacketCapture",
+  "operationId": "Switches_PacketCapture",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "supercomputerName": "MySupercomputer",
+    "switchName": "0000-0000-00t0",
+    "body": {
+      "destinationLocation": "https://mystorageaccount.blob.core.windows.net/mycontainer/packetcapture",
+      "durationInSeconds": 60,
+      "interfaces": [
+        "Ethernet 1",
+        "Ethernet 4"
+      ],
+      "matchRules": [
+        {
+          "destinationIpPrefix": "2603:10b0:12e:a401::102:0/128",
+          "protocol": "Ipv6",
+          "sourceIpPrefix": "2603:10b0:12e:a401::10f:0/128"
+        },
+        {
+          "destinationIpPrefix": "2603:10b0:12e:a401::103:0/128",
+          "destinationPort": 9090,
+          "dscp": 1,
+          "protocol": "Ipv6",
+          "sourceIpPrefix": "2603:10b0:12e:a401::10g:0/128",
+          "sourcePort": 8080,
+          "tcpFlags": 1
+        }
+      ],
+      "trafficDirection": "Ingress"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

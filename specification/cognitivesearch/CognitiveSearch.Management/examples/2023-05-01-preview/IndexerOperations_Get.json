@@ -1,0 +1,37 @@
+{
+  "operationId": "IndexerOperations_Get",
+  "title": "IndexerOperations_Get",
+  "parameters": {
+    "subscriptionId": "b55eab7e-f8f9-4ea7-83d4-200c69b8e58c",
+    "resourceGroupName": "rgName",
+    "api-version": "2023-05-01-preview",
+    "name": "my-index",
+    "indexerName": "my-indexer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/b55eab7e-f8f9-4ea7-83d4-200c69b8e58c/resourceGroups/rgName/providers/Microsoft.CognitiveSearch/indexes/my-index/indexers/my-indexer",
+        "type": "Microsoft.CognitiveSearch/indexes",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Test indexer",
+          "failurePolicy": {
+            "type": "TolerateFailures"
+          },
+          "dataSource": {
+            "connection": {
+              "authenticationType": "Credentials"
+            },
+            "properties": {
+              "kind": "CosmosDb/NoSql",
+              "collectionName": "testCosmosCollectionName",
+              "query": "test query"
+            }
+          }
+        }
+      }
+    }
+  }
+}

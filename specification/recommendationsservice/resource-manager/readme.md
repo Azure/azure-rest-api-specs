@@ -27,17 +27,16 @@ These are the global settings for the recommendationsservice.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-03-01-preview
+tag: package-2023-02-01-preview
 ```
 
+### Tag: package-2021-02-01-preview
 
-### Tag: package-2022-02-01
+These settings apply only when `--tag={package-version}` is specified on the command line.
 
-These settings apply only when `--tag=package-2022-02-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-02-01'
+```yaml $(tag) == 'package-2021-02-01-preview'
 input-file:
-  - Microsoft.RecommendationsService/stable/2022-02-01/recommendationsservice.json
+  - Microsoft.RecommendationsService/preview/2021-02-01-preview/recommendationsservice.json
 ```
 
 ### Tag: package-2022-03-01-preview
@@ -47,6 +46,19 @@ input-file:
   - Microsoft.RecommendationsService/preview/2022-03-01-preview/recommendationsservice.json
 ```
 
+### Tag: package-2022-09-01-preview
+
+```yaml $(tag) == 'package-2022-09-01-preview'
+input-file:
+  - Microsoft.RecommendationsService/preview/2022-09-01-preview/recommendationsservice.json
+```
+
+### Tag: package-2023-02-01-preview
+
+```yaml $(tag) == 'package-2023-02-01-preview'
+input-file:
+  - Microsoft.RecommendationsService/preview/2023-02-01-preview/recommendationsservice.json
+```
 ---
 
 # Code Generation
@@ -58,10 +70,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
@@ -78,4 +91,3 @@ See configuration in [readme.go.md](./readme.go.md)
 See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 See configuration in [readme.typescript.md](./readme.typescript.md)
-

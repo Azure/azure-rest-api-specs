@@ -1,0 +1,88 @@
+{
+  "title": "StageMaps_UpdateAtSubscriptionLevel_MaximumSet",
+  "operationId": "StageMaps_UpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "stageMapName": "testChangeState",
+    "properties": {
+      "properties": {
+        "stages": [
+          {
+            "name": "testChangeState",
+            "sequence": 23,
+            "stageVariables": {
+              "environment": "subscription-wide",
+              "region": "eastus",
+              "tier": "premium",
+              "enableMonitoring": true
+            },
+            "nestedStageMap": {
+              "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscription-deployment-stages"
+            }
+          }
+        ],
+        "parameters": {
+          "deploymentEngine": {
+            "type": "string",
+            "defaultValue": "kubernetes",
+            "allowedValues": [
+              "kubernetes",
+              "docker-swarm",
+              "nomad"
+            ],
+            "metadata": {
+              "description": "Container orchestration engine",
+              "category": "infrastructure"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {},
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+              }
+            }
+          ],
+          "parameters": {
+            "deploymentEngine": {
+              "type": "string",
+              "defaultValue": "kubernetes",
+              "allowedValues": [
+                "kubernetes",
+                "docker-swarm",
+                "nomad"
+              ],
+              "metadata": {
+                "description": "Container orchestration engine",
+                "category": "infrastructure"
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "devops@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "devops@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

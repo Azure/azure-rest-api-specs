@@ -11,10 +11,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./service.tsp";
 import "./standbyVMPool.tsp";
 
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -35,12 +37,12 @@ model StandbyVirtualMachinePoolRuntimeViewResource
 @doc("Contains information about a standby pool as last known by the StandbyPool resource provider.")
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 model StandbyVirtualMachinePoolRuntimeViewResourceProperties {
-  @doc("A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider. If zones are not enabled on the attached VMSS, the list will contain a single entry without zone values. Note: any resources in the Running state may still be installing extensions / not fully provisioned.")
+  @doc("A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry without zone values.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   instanceCountSummary: VirtualMachineInstanceCountSummary[];
 
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("Display status of the standby pool")
   @visibility(Lifecycle.Read)
   status?: PoolStatus;
@@ -48,35 +50,30 @@ model StandbyVirtualMachinePoolRuntimeViewResourceProperties {
   @doc("Displays the provisioning state of the standby pool")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-  @doc("Displays prediction information of the standby pool")
-  @visibility(Lifecycle.Read)
-  prediction?: StandbyVirtualMachinePoolPrediction;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
-@doc("Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.")
+@doc("Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.")
 model VirtualMachineInstanceCountSummary {
   @doc("The zone that the provided counts are in. It will not have a value if zones are not enabled on the attached VMSS.")
   zone?: int64;
 
-  @doc("The count of pooled resources in each state for the given zone.")
-  @identifiers(#["state"])
-  @removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("The count of pooled virtual machines in each state for the given zone.")
+  @Azure.ResourceManager.identifiers(#["state"])
+  @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @renamedFrom(
-    Microsoft.StandbyPool.Versions.`2025-03-01`,
+    Microsoft.StandbyPool.Versions.`2024-08-01-preview`,
     "instanceCountsByState"
   )
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled virtual machines in each state for the given zone.")
-  @identifiers(#["state"])
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @Azure.ResourceManager.identifiers(#["state"])
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   instanceCountsByState: PoolVirtualMachineStateCount[];
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("The state of the pooled virtual machines.")
 union PoolVirtualMachineState {
   @doc("The virtual machine is up and running.")
@@ -106,7 +103,7 @@ union PoolVirtualMachineState {
   string,
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("Displays the counts of pooled virtual machines in each state, as known by the StandbyPool resource provider.")
 model PoolVirtualMachineStateCount {
   @doc("The state that the pooled virtual machines count is for.")
@@ -116,33 +113,9 @@ model PoolVirtualMachineStateCount {
   count: int64;
 }
 
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-@doc("Displays prediction information of the standby pool.")
-model StandbyVirtualMachinePoolPrediction {
-  @doc("Displays the forecast information of the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastValues: StandbyVirtualMachinePoolForecastValues;
-
-  @doc("Displays the UTC timestamp of when the prediction was retrieved for the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastStartTime: utcDateTime;
-
-  @doc("Displays additional information for the prediction of the standby pool.")
-  @visibility(Lifecycle.Read)
-  forecastInfo: string;
-}
-
-@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
-@doc("Displays the forecast information of the standby pool.")
-model StandbyVirtualMachinePoolForecastValues {
-  @doc("Displays the predicted count of instances to be requested from the standby pool.")
-  @visibility(Lifecycle.Read)
-  instancesRequestedCount: int64[];
-}
-
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @armResourceOperations
 interface StandbyVirtualMachinePoolRuntimeViews {
   get is ArmResourceRead<StandbyVirtualMachinePoolRuntimeViewResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyVirtualMachinePoolRuntimeViewResource>;
+  listByStandbyVirtualMachinePoolResource is ArmResourceListByParent<StandbyVirtualMachinePoolRuntimeViewResource>;
 }

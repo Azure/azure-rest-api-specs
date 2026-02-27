@@ -1,0 +1,41 @@
+{
+  "operationId": "IndexOperations_Get",
+  "title": "IndexOperations_Get",
+  "parameters": {
+    "subscriptionId": "b55eab7e-f8f9-4ea7-83d4-200c69b8e58c",
+    "resourceGroupName": "rgName",
+    "api-version": "2023-05-01-preview",
+    "name": "my-index"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/b55eab7e-f8f9-4ea7-83d4-200c69b8e58c/resourceGroups/rgName/providers/Microsoft.CognitiveSearch/indexes/my-index",
+        "name": "my-index",
+        "type": "Microsoft.CognitiveSearch/indexes",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "queryCapacity": {
+            "minVCores": 1,
+            "maxVCores": 16,
+            "autoPause": {
+              "type": "Delay",
+              "duration": "PT5M"
+            }
+          },
+          "indexingCapacity": {
+            "minVCores": 2,
+            "maxVCores": 8,
+            "autoPause": {
+              "type": "None"
+            }
+          },
+          "authOption": "AadOnly",
+          "endpoint": "https://my-index-a1b2c3d4.zo1.westus.search.azure.com"
+        }
+      }
+    }
+  }
+}

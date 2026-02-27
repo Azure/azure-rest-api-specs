@@ -36,6 +36,11 @@ model SolutionTemplateVersionProperties {
   @doc("Orchestrator type")
   orchestratorType?: OrchestratorType;
 
+  @added(Versions.v2025_08_01)
+  @doc("Internal State of resource")
+  @visibility(Lifecycle.Read)
+  internalState?: InternalState;
+
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -58,10 +63,34 @@ model BulkDeploySolutionParameter {
   @doc("Targets to which solution needs to be deployed")
   @Azure.ResourceManager.identifiers(#[])
   targets: BulkDeployTargetDetails[];
+
+  @removed(Versions.v2025_06_01)
+  @doc("Name of the solution instance")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
 }
 
 @doc("Bulk deploy target details")
 model BulkDeployTargetDetails {
+  @removed(Versions.v2025_06_01)
+  @doc("ArmId of Target")
+  targetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Targets";
+    }
+  ]>;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Name of the solution instance")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @added(Versions.v2025_06_01)
   @doc("ArmId of Target Solution Version")
   solutionVersionId: Azure.Core.armResourceIdentifier<[
     {
@@ -97,6 +126,11 @@ model BulkPublishTargetDetails {
       type: "Microsoft.Edge/Targets";
     }
   ]>;
+
+  @added(Versions.v2025_08_01)
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
 
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
@@ -143,6 +177,11 @@ model BulkReviewTargetDetails {
       type: "Microsoft.Edge/Targets";
     }
   ]>;
+
+  @added(Versions.v2025_08_01)
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
 
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")

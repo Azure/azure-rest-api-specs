@@ -90,7 +90,7 @@ model AwsCloudFormationStackProperties {
   notificationARNs?: string[];
 
   @doc("Property outputs")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   outputs?: Output[];
 
   @doc("Property parameters")
@@ -124,7 +124,7 @@ model AwsCloudFormationStackProperties {
   stackStatusReason?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property templateBody")

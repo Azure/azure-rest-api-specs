@@ -1,0 +1,72 @@
+{
+  "title": "SoftwareManifests_Update",
+  "operationId": "SoftwareManifests_Update",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "783fd652-64f3-4680-81e9-0b978c542005",
+    "resourceGroupName": "aumPatchRG",
+    "softwareCollectionName": "MySoftwareCollection",
+    "softwareManifestName": "VSCodeManifest",
+    "properties": {
+      "tags": {
+        "category": "development-tools",
+        "owner": "dev-team",
+        "environment": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "properties": {
+          "softwarekind": "Manual",
+          "softwareName": "Visual Studio Code",
+          "publisher": "Microsoft Corporation",
+          "softwareId": "vscode-stable",
+          "osType": "Windows",
+          "versions": [
+            {
+              "version": "1.85.2",
+              "installers": [
+                {
+                  "architecture": "x64",
+                  "mediaLink": "https://example.com/vscode/1.85.2/VSCodeSetup-x64-1.85.2.exe",
+                  "productCode": "{C26E74D1-022E-4238-8B9D-1E7564A36CC9}",
+                  "upgradeCode": "{EA457B21-F73E-494C-ACAB-524FDE069978}",
+                  "settings": {
+                    "installScript": "VSCodeSetup-x64-1.85.2.exe /SILENT /NORESTART",
+                    "softwareFileName": "VSCodeSetup-x64-1.85.2.exe"
+                  }
+                }
+              ]
+            }
+          ],
+          "collectionId": "collection-12345-abcde",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "category": "development-tools",
+          "owner": "dev-team",
+          "environment": "production"
+        },
+        "id": "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection/softwareManifests/VSCodeManifest",
+        "name": "VSCodeManifest",
+        "type": "Microsoft.UpdateManager/SoftwareCollections/softwareManifests",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourcegroups/aumPatchRG/providers/Microsoft.UpdateManager/operationstatuses/00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

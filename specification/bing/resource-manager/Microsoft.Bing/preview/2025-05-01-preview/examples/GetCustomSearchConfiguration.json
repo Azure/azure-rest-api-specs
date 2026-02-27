@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2025-05-01-preview",
+    "customSearchConfigurationName": "MyCustomSearchConfiguration",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyCustomSearchConfiguration",
+        "type": "Microsoft.Bing/accounts/customSearchConfigurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyCustomSearchConfiguration",
+        "properties": {
+          "allowedDomains": [
+            {
+              "boostLevel": "Default",
+              "domain": "www.example.com",
+              "includeSubPages": true
+            }
+          ],
+          "blockedDomains": [
+            {
+              "domain": "www.blockedexample.com",
+              "includeSubPages": true
+            }
+          ],
+          "pinnedDomains": [
+            {
+              "condition": "Contains",
+              "domain": "www.pinnedexample.com",
+              "query": "example query"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2023-05-05T13:54:37.8072169Z",
+          "createdBy": "user@domain.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-05-05T13:54:37.8072169Z",
+          "lastModifiedBy": "user@domain.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "CustomSearchConfiguration_Get",
+  "title": "Get Custom Search Configuration"
+}

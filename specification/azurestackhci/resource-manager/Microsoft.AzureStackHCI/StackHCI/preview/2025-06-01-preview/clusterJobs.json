@@ -1,0 +1,729 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HCI Cluster Jobs",
+    "version": "2025-06-01-preview",
+    "description": "Azure Stack HCI Cluster Jobs"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ClusterJobs"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
+      "get": {
+        "operationId": "ClusterJobs_ListByCluster",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "List ClusterJob resources by Clusters",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_ListByCluster": {
+            "$ref": "./examples/ClusterJobs_ListByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs/{jobsName}": {
+      "get": {
+        "operationId": "ClusterJobs_Get",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Get a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Get_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ClusterJobs_CreateOrUpdate",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Create a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobsNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ClusterJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'ClusterJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate_ConfigureArcGateway": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureCVM": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ClusterJobs_Delete",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Delete a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobsNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Delete": {
+            "$ref": "./examples/ClusterJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ClusterJob": {
+      "type": "object",
+      "description": "Cluster Jobs resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterJobListResult": {
+      "type": "object",
+      "description": "The response of a ClusterJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterJobProperties": {
+      "type": "object",
+      "description": "Cluster Job properties",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/HciJobType",
+          "description": "Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentMode": {
+          "type": "string",
+          "description": "Deployment mode to trigger job.",
+          "default": "Deploy",
+          "enum": [
+            "Validate",
+            "Deploy"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Validate",
+                "value": "Validate",
+                "description": "Validate ECE action deployment for a cluster."
+              },
+              {
+                "name": "Deploy",
+                "value": "Deploy",
+                "description": "Deploy ECE action deployment for a cluster."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "A unique and immutable identifier automatically generated by the system.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/JobReportedProperties",
+          "description": "Reported properties for job",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "HciJobType": {
+      "type": "string",
+      "description": "ClusterJob Type supported.",
+      "enum": [
+        "ConfigureArcGateway",
+        "ConfigureCVM",
+        "ConfigureSdnIntegration"
+      ],
+      "x-ms-enum": {
+        "name": "HciJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConfigureArcGateway",
+            "value": "ConfigureArcGateway",
+            "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "ConfigureCVM",
+            "value": "ConfigureCVM",
+            "description": "Job to configure cvm (Confidential VM) intent for the cluster."
+          },
+          {
+            "name": "ConfigureSdnIntegration",
+            "value": "ConfigureSdnIntegration",
+            "description": "Job to configure SDN integration for the cluster."
+          }
+        ]
+      }
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "description": "Deployment mode to trigger job.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "EceActionStatus": {
+      "type": "object",
+      "description": "Validation / deployment status details for Job.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Job status.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of Edge device job.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "HciConfigureArcGatewayJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring arc gateway to a cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureArcGateway"
+    },
+    "HciConfigureCVMJobProperties": {
+      "type": "object",
+      "properties": {
+        "confidentialVmIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
+          "description": "Defines the customer's intent for updating confidential VM properties"
+        }
+      },
+      "required": [
+        "confidentialVmIntent"
+      ],
+      "description": "Properties for configuring CVM (Confidential VM) intent for the cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureCVM"
+    },
+    "HciConfigureSdnIntegrationJobProperties": {
+      "type": "object",
+      "properties": {
+        "sdnIntegrationIntent": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SdnIntegrationIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Enable SDN integration for the deployment."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Disable SDN integration for the deployment."
+              }
+            ]
+          },
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment."
+        },
+        "sdnPrefix": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$",
+          "description": "A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules: Must not be empty or contain only whitespace. Must be 8 characters or fewer. Allowed characters: letters (A–Z, a–z), digits (0–9), and hyphens (-). Cannot end with a hyphen. Cannot contain consecutive hyphens."
+        }
+      },
+      "required": [
+        "sdnIntegrationIntent"
+      ],
+      "description": "Properties for configuring SDN integration intent for the cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureSdnIntegration"
+    },
+    "JobReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for job triggered from cloud.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Represents the various statuses a job can have throughout its lifecycle.",
+      "enum": [
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Paused",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The job status has not been specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "The job is currently undergoing validation."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "The job has successfully passed validation."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "The job has failed validation."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "The job's deployment is currently in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "The job's deployment has failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "The job has been successfully deployed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job has been canceled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The job is paused."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job is scheduled to run."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the Cluster",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "JobsNameParameter": {
+      "name": "jobsName",
+      "in": "path",
+      "description": "Name of ClusterJob",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

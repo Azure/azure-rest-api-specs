@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
@@ -32,6 +33,12 @@ model StandbyVirtualMachinePoolResource
 
 @doc("Details of the StandbyVirtualMachinePool.")
 model StandbyVirtualMachinePoolResourceProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
+  @doc("Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.")
+  @maxValue(2000)
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  maxReadyCapacity: int64;
+
   @doc("Specifies the elasticity profile of the standby virtual machine pools.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
@@ -39,9 +46,14 @@ model StandbyVirtualMachinePoolResourceProperties {
   @doc("Specifies the desired state of virtual machines in the pool.")
   virtualMachineState: VirtualMachineState;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
+  @doc("Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.")
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  attachedVirtualMachineScaleSetIds?: string[];
+
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
@@ -54,67 +66,40 @@ model StandbyVirtualMachinePoolResourceProperties {
 
 @doc("State of standby virtual machines")
 union VirtualMachineState {
-  string,
-
   @doc("The virtual machine is up and running.")
   Running: "Running",
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated: "Deallocated",
 
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
   Hibernated: "Hibernated",
+
+  string,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the elasticity profile.")
 model StandbyVirtualMachinePoolElasticityProfile {
   @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
-  @minValue(0)
   @maxValue(2000)
-  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @renamedFrom(Microsoft.StandbyPool.Versions.`2025-10-01`, "maxReadyCapacity")
-  oldMaxReadyCapacity: int64;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
   @minValue(0)
   maxReadyCapacity: int64;
 
   @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
   @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
-  @minValue(0)
   @maxValue(2000)
-  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @renamedFrom(Microsoft.StandbyPool.Versions.`2025-10-01`, "minReadyCapacity")
-  oldMinReadyCapacity?: int64;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
   @minValue(0)
   minReadyCapacity?: int64;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @doc("Specifies the duration to wait after virtual machine provisioning before the virtual machine becomes available for use. The duration should be specified in ISO 8601 format (e.g., PT2S for 2 seconds).")
-  postProvisioningDelay?: string;
-
-  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
-  @doc("Specifies the dynamic sizing configuration.")
-  dynamicSizing?: DynamicSizing;
 }
 
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    StandbyVirtualMachinePoolResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  @patch(#{ implicitOptionality: false })
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -122,6 +107,8 @@ interface StandbyVirtualMachinePools {
       StandbyVirtualMachinePoolResourceProperties
     >
   >;
+  @list
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
+  @list
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;
 }

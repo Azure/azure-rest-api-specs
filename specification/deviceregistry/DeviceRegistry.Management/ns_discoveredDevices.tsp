@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
+import "./common/authenticationMethod.tsp";
 import "./properties/ns_discoveredDeviceProperties.tsp";
 
 using TypeSpec.Http;
@@ -40,9 +41,6 @@ model NamespaceDiscoveredDevice
 interface NamespaceDiscoveredDevices {
   get is ArmResourceRead<NamespaceDiscoveredDevice>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredDevice>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceDiscoveredDevice,
@@ -53,4 +51,6 @@ interface NamespaceDiscoveredDevices {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredDevice>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDiscoveredDevice>;
+  @removed(Versions.v2025_07_01_preview)
+  listBySubscription is ArmListBySubscription<NamespaceDiscoveredDevice>;
 }

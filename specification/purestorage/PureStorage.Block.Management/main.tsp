@@ -1040,9 +1040,9 @@ interface VolumeGroups {
 
   @doc("Get connection parameters for ISCSI connection to the volume group")
   @armResourceAction(VolumeGroup)
-  @action("getConnectionParameters")
+  @action("listConnectionParameters")
   @post
-  getConnectionParameters(
+  listConnectionParameters(
     ...ResourceInstanceParameters<VolumeGroup>,
   ): ArmResponse<ConnectionParametersResponse> | ErrorResponse;
 
@@ -1092,6 +1092,10 @@ model AzureVolumeProperties {
   @doc("Azure resource ID of the source volume for cloning")
   @visibility(Lifecycle.Create)
   sourceVolumeResourceId?: string;
+
+  @doc("Azure Resource ID of the source volume group to clone from.")
+  @visibility(Lifecycle.Create)
+  sourceVolumeGroupResourceId?: string;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)

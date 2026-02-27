@@ -1,0 +1,487 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContosoManagementClient",
+    "description": "The Microsoft.Contoso Rest API spec.",
+    "version": "2020-01-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "ContosoClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Contoso/extensionClusters/{extensionClustersName}": {
+      "get": {
+        "operationId": "extensionClusters_Retrieve",
+        "x-ms-examples": {
+          "Retrieves extension cluster resource": {
+            "$ref": "examples/getExtensionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionClustersNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the clusters resource.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "extensionClusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update extension clusters resource": {
+            "$ref": "examples/createOrUpdateExtensionCluster.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionClustersNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "extensionClusters",
+            "description": "The clusters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the clusters resource.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          },
+          "201": {
+            "description": "Creates the clusters resource.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "extensionClusters_Delete",
+        "x-ms-examples": {
+          "Deletes the extension cluster resource": {
+            "$ref": "examples/deleteExtensionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionClustersNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Deletes the clusters resource.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Deletes the clusters resource."
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "extensionClusters_Update",
+        "x-ms-examples": {
+          "Patches extension cluster resource": {
+            "$ref": "examples/updateExtensionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionClustersNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "extensionClusters",
+            "description": "The clusters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionClustersPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the clusters resource.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          },
+          "201": {
+            "description": "Updates the clusters resource.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClusters"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Contoso/extensionClusters": {
+      "get": {
+        "operationId": "extensionClusters_List",
+        "x-ms-examples": {
+          "List extension clusters by resource group": {
+            "$ref": "examples/listExtensionCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all clusters under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionClustersListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExtensionClusterProperties": {
+      "type": "object",
+      "description": "Cluster properties.",
+      "properties": {
+        "cluster": {
+          "type": "string",
+          "description": "The cluster."
+        },
+        "datacenter": {
+          "type": "string",
+          "description": "The datacenter."
+        },
+        "dummyVolume": {
+          "type": "object",
+          "description": "The dummy volume.",
+          "properties": {
+            "medium": {
+              "type": "string",
+              "description": "The medium."
+            },
+            "sizeLimit": {
+              "type": "string",
+              "description": "The size limit."
+            }
+          }
+        },
+        "nodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes."
+        },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "The service account name."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state."
+        }
+      }
+    },
+    "ExtensionClusters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionClusterProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "description": "The extended location.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The clusters resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "ExtensionClustersPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExtensionClusterProperties"
+        }
+      },
+      "description": "The clusters resource patch definition."
+    },
+    "ExtensionClustersListResult": {
+      "type": "object",
+      "description": "The clusters list result.",
+      "properties": {
+        "value": {
+          "description": "Clusters list property values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionClusters"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link."
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Resource provider operation value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link."
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "description": "Default error response for resource provider",
+      "title": "ResourceProviderDefaultErrorResponse",
+      "properties": {
+        "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExtensionClustersNameParameter": {
+      "name": "extensionClustersName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 3,
+      "description": "The cluster name.",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource uri."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

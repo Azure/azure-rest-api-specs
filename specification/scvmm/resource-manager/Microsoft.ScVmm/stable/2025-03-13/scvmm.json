@@ -190,6 +190,10 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -607,6 +611,10 @@
               "$ref": "#/definitions/GuestAgent"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1715,6 +1723,10 @@
               "$ref": "#/definitions/Cloud"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2038,6 +2050,10 @@
               "$ref": "#/definitions/VirtualMachineTemplate"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2361,6 +2377,10 @@
               "$ref": "#/definitions/VirtualNetwork"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2684,6 +2704,10 @@
               "$ref": "#/definitions/VmmServer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4628,10 +4652,7 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Gets or sets the extended location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -4771,15 +4792,15 @@
           "description": "Gets os version.",
           "readOnly": true
         },
-        "powerState": {
-          "type": "string",
-          "description": "Gets the power state of the virtual machine.",
-          "readOnly": true
-        },
         "generation": {
           "type": "integer",
           "format": "int64",
           "description": "Gets vm generation.",
+          "readOnly": true
+        },
+        "powerState": {
+          "type": "string",
+          "description": "Gets the power state of the virtual machine.",
           "readOnly": true
         },
         "ipAddresses": {

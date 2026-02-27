@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "resourceGroupName": "rg1",
+    "siteName": "testSite",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSite",
+        "type": "Microsoft.HybridNetwork/sites",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/sites/testSite",
+        "location": "westUs2",
+        "properties": {
+          "nfvis": [
+            {
+              "name": "nfvi1",
+              "location": "westUs2",
+              "nfviType": "AzureCore"
+            },
+            {
+              "name": "nfvi2",
+              "customLocationReference": {
+                "id": "/subscriptions/subid/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation1"
+              },
+              "nfviType": "AzureArcKubernetes"
+            },
+            {
+              "name": "nfvi3",
+              "customLocationReference": {
+                "id": "/subscriptions/subid/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation2"
+              },
+              "nfviType": "AzureOperatorNexus"
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Sites_Get",
+  "title": "Get network site"
+}

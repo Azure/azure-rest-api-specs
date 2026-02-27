@@ -4,10 +4,13 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using LiftrBase.Data;
 
-namespace Neon.Postgres;
+namespace Neon.Postgres.Models;
 
 // Define a reusable base resource model for all sub entities
 @doc("Base model for all tracked resources")
@@ -31,7 +34,7 @@ model BaseEntity {
   provisioningState?: ResourceProvisioningState;
 
   @doc("Additional attributes for the entity")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   attributes?: Attributes[];
 }
 
@@ -54,8 +57,8 @@ model PgVersion {
 
 @doc("Response model for PostgreSQL versions")
 @added(Neon.Postgres.Versions.v2_preview)
-model PgVersionsResult {
+model PgVersionsResponse {
   @doc("List of PostgreSQL versions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   versions: PgVersion[];
 }

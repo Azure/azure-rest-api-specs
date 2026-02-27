@@ -13,15 +13,42 @@ options:
       "{azure-resource-provider-folder}/{service-name}/{version-status}/\
       {version}/quantum.json"
     examples-dir: "{project-root}/examples"
-  "@azure-typespec/http-client-csharp-mgmt":
-    use-legacy-resource-detection: false
-    namespace: "Azure.ResourceManager.Quantum"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-quantum"
+    package-name: "azure-mgmt-quantum"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    namespace: azure.mgmt.quantum #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-quantum"
     namespace: "com.azure.resourcemanager.quantum"
-    service-name: "Azure Quantum"
+    service-name: "quantum"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/quantum"
+    emitter-output-dir: "{output-dir}/{service-dir}/armquantum"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armquantum"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Quantum"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.Quantum"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-quantum"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-quantum"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

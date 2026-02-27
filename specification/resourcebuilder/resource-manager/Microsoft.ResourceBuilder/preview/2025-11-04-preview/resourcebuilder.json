@@ -1,0 +1,2653 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ResourceBuilder",
+    "version": "2025-11-04-preview",
+    "description": "Microsoft.ResourceBuilder Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Workspaces"
+    },
+    {
+      "name": "Datasets"
+    },
+    {
+      "name": "Pipelines"
+    },
+    {
+      "name": "Jobs"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ResourceBuilder/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceBuilder/workspaces": {
+      "get": {
+        "operationId": "Workspaces_ListBySubscription",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "List Workspace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_ListBySubscription": {
+            "$ref": "./examples/Workspaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces": {
+      "get": {
+        "operationId": "Workspaces_List",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "List Workspace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_List": {
+            "$ref": "./examples/Workspaces_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "Workspaces_Get",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Get a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Get": {
+            "$ref": "./examples/Workspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workspaces_CreateOrUpdate",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Create a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Workspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_CreateOrUpdate": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Workspaces_Update",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Update a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Update": {
+            "$ref": "./examples/Workspaces_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workspaces_Delete",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Delete a Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Delete": {
+            "$ref": "./examples/Workspaces_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "operationId": "Datasets_List",
+        "tags": [
+          "Datasets"
+        ],
+        "description": "List Dataset resources by Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_List": {
+            "$ref": "./examples/Datasets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/datasets/{datasetName}": {
+      "get": {
+        "operationId": "Datasets_Get",
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Get a Dataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The name of the dataset.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Get": {
+            "$ref": "./examples/Datasets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Datasets_CreateOrUpdate",
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Create a Dataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The name of the dataset.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Dataset' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "201": {
+            "description": "Resource 'Dataset' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_AzureStorageAccountDatastore_CreateOrUpdate": {
+            "$ref": "./examples/Datasets_AzureStorageAccountDatastore_CreateOrUpdate.json"
+          },
+          "Datasets_CreateOrUpdate": {
+            "$ref": "./examples/Datasets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Datasets_Delete",
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Delete a Dataset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The name of the dataset.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Delete": {
+            "$ref": "./examples/Datasets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/pipelines": {
+      "get": {
+        "operationId": "Pipelines_List",
+        "tags": [
+          "Pipelines"
+        ],
+        "description": "List Pipeline resources by Workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_List": {
+            "$ref": "./examples/Pipelines_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/pipelines/{pipelineName}": {
+      "get": {
+        "operationId": "Pipelines_Get",
+        "tags": [
+          "Pipelines"
+        ],
+        "description": "Get a Pipeline",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "./examples/Pipelines_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pipelines_CreateOrUpdate",
+        "tags": [
+          "Pipelines"
+        ],
+        "description": "Create a Pipeline",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pipeline' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "201": {
+            "description": "Resource 'Pipeline' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_CreateOrUpdate": {
+            "$ref": "./examples/Pipelines_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Pipelines_Delete",
+        "tags": [
+          "Pipelines"
+        ],
+        "description": "Delete a Pipeline",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "./examples/Pipelines_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/pipelines/{pipelineName}/jobs": {
+      "get": {
+        "operationId": "Jobs_List",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "List Job resources by Pipeline",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_List": {
+            "$ref": "./examples/Jobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceBuilder/workspaces/{workspaceName}/pipelines/{pipelineName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Get a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Get": {
+            "$ref": "./examples/Jobs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_CreateOrUpdate",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Create a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Job' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "201": {
+            "description": "Resource 'Job' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_AzureDataExplorerPublish_CreateOrUpdate": {
+            "$ref": "./examples/Jobs_AzureDataExplorerPublish_CreateOrUpdate.json"
+          },
+          "Jobs_Batch_CreateOrUpdate": {
+            "$ref": "./examples/Jobs_Batch_CreateOrUpdate.json"
+          },
+          "Jobs_DataQualityValidation_CreateOrUpdate": {
+            "$ref": "./examples/Jobs_DataQualityValidation_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Delete a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Delete": {
+            "$ref": "./examples/Jobs_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnomalyDetectionStrategy": {
+      "type": "string",
+      "description": "Anomaly detection strategy",
+      "enum": [
+        "BidirectionalAnomaly",
+        "PositiveAnomaly",
+        "NegativeAnomaly"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyDetectionStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BidirectionalAnomaly",
+            "value": "BidirectionalAnomaly",
+            "description": "Detects anomalies in either the negative or positive direction."
+          },
+          {
+            "name": "PositiveAnomaly",
+            "value": "PositiveAnomaly",
+            "description": "Detects anomalies only in the positive direction."
+          },
+          {
+            "name": "NegativeAnomaly",
+            "value": "NegativeAnomaly",
+            "description": "Detects anomalies only in the negative direction."
+          }
+        ]
+      }
+    },
+    "AutoDataQualityParameters": {
+      "type": "object",
+      "description": "Auto data quality parameters",
+      "properties": {
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90."
+        },
+        "anomalyDetectionStrategy": {
+          "$ref": "#/definitions/AnomalyDetectionStrategy",
+          "description": "Anomaly detection strategy."
+        },
+        "lookbackWindowInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Lookback window in days."
+        },
+        "minimumDataPoints": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum data points required for executing anomaly detection."
+        },
+        "maximumDataPoints": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum data points required for executing anomaly detection."
+        },
+        "maxAllowedMargin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allowed margin."
+        },
+        "maxAllowedMarginPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allowed margin in percent."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzureDataExplorerSink": {
+      "type": "object",
+      "description": "Azure Data Explorer sink",
+      "properties": {
+        "azureDataExplorerClusterConnection": {
+          "type": "string",
+          "description": "Connection string or identifier for the Azure Data Explorer cluster."
+        },
+        "azureDataExplorerClusterDatabase": {
+          "type": "string",
+          "description": "Name of the database within the Azure Data Explorer cluster."
+        },
+        "publishMode": {
+          "$ref": "#/definitions/PublishMode",
+          "description": "Publish mode, which determines how data is written to the sink. Defaults to Overwrite."
+        },
+        "folderName": {
+          "type": "string",
+          "description": "Folder name of the Azure Data Explorer table."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Table name of the Azure Data Explorer table."
+        }
+      },
+      "required": [
+        "azureDataExplorerClusterConnection",
+        "azureDataExplorerClusterDatabase"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetSink"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDataExplorerSink"
+    },
+    "DataQualityMetricEvaluation": {
+      "type": "object",
+      "description": "Data quality metric evaluation",
+      "properties": {
+        "evaluationType": {
+          "$ref": "#/definitions/DataQualityMetricEvaluationType",
+          "description": "Metric evaluation type."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Filter of the metric evaluation."
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns of the metric evaluation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metricType": {
+          "$ref": "#/definitions/DataQualityMetricType",
+          "description": "Metric type of the evaluation."
+        },
+        "metricUnit": {
+          "$ref": "#/definitions/DataQualityMetricUnit",
+          "description": "Metric unit of the evaluation. Defaults to Count."
+        },
+        "startTimeMetricColumn": {
+          "type": "string",
+          "description": "Column name for the start time metric."
+        },
+        "endTimeMetricColumn": {
+          "type": "string",
+          "description": "Column name for the end time metric."
+        }
+      },
+      "required": [
+        "evaluationType",
+        "metricType"
+      ]
+    },
+    "DataQualityMetricEvaluationEntry": {
+      "type": "object",
+      "description": "Data quality metric evaluation entry with name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric evaluation."
+        },
+        "evaluation": {
+          "$ref": "#/definitions/DataQualityMetricEvaluation",
+          "description": "Metric evaluation details."
+        }
+      },
+      "required": [
+        "name",
+        "evaluation"
+      ]
+    },
+    "DataQualityMetricEvaluationType": {
+      "type": "string",
+      "description": "Data quality metric evaluation type",
+      "enum": [
+        "Unknown",
+        "TableRowCount",
+        "NonNullColumnCount",
+        "Latency",
+        "Size"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityMetricEvaluationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown evaluation type."
+          },
+          {
+            "name": "TableCount",
+            "value": "TableRowCount",
+            "description": "Table count evaluation type."
+          },
+          {
+            "name": "NonNullColumnCount",
+            "value": "NonNullColumnCount",
+            "description": "Non-null column count evaluation type."
+          },
+          {
+            "name": "Latency",
+            "value": "Latency",
+            "description": "Latency evaluation type."
+          },
+          {
+            "name": "Size",
+            "value": "Size",
+            "description": "Size evaluation type."
+          }
+        ]
+      }
+    },
+    "DataQualityMetricType": {
+      "type": "string",
+      "description": "Data quality metric type",
+      "enum": [
+        "Unknown",
+        "Count",
+        "Minimum",
+        "Maximum",
+        "P50",
+        "P90",
+        "DistinctCount"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityMetricType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown metric type."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count metric type."
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum",
+            "description": "Minimum metric type."
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum metric type."
+          },
+          {
+            "name": "P50",
+            "value": "P50",
+            "description": "P50 metric type."
+          },
+          {
+            "name": "P90",
+            "value": "P90",
+            "description": "P90 metric type."
+          },
+          {
+            "name": "DistinctCount",
+            "value": "DistinctCount",
+            "description": "Distinct count metric type."
+          }
+        ]
+      }
+    },
+    "DataQualityMetricUnit": {
+      "type": "string",
+      "description": "Data quality metric unit",
+      "enum": [
+        "Count",
+        "Seconds",
+        "Minutes",
+        "Hours"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityMetricUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count unit."
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds",
+            "description": "Seconds unit."
+          },
+          {
+            "name": "Minutes",
+            "value": "Minutes",
+            "description": "Minutes unit."
+          },
+          {
+            "name": "Hours",
+            "value": "Hours",
+            "description": "Hours unit."
+          }
+        ]
+      }
+    },
+    "DataQualityMetricValidation": {
+      "type": "object",
+      "description": "Data quality metric validation",
+      "properties": {
+        "validationType": {
+          "$ref": "#/definitions/DataQualityMetricValidationType",
+          "description": "Data quality metric validation type."
+        },
+        "metricEvaluationName": {
+          "type": "string",
+          "description": "Data quality metric evaluation name."
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns to validate.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "denominator": {
+          "type": "string",
+          "description": "Denominator for validation."
+        },
+        "upperThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Upper threshold for validation."
+        },
+        "lowerThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Lower threshold for validation."
+        },
+        "anomalyDetectionParameters": {
+          "$ref": "#/definitions/AutoDataQualityParameters",
+          "description": "Anomaly detection parameters."
+        }
+      }
+    },
+    "DataQualityMetricValidationEntry": {
+      "type": "object",
+      "description": "Data quality metric validation entry with name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric validation."
+        },
+        "validation": {
+          "$ref": "#/definitions/DataQualityMetricValidation",
+          "description": "Metric validation details."
+        }
+      },
+      "required": [
+        "name",
+        "validation"
+      ]
+    },
+    "DataQualityMetricValidationType": {
+      "type": "string",
+      "description": "Data quality metric validation type",
+      "enum": [
+        "Unknown",
+        "AnomalyValidation",
+        "RatioValidation",
+        "ThresholdValidation"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityMetricValidationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown validation type."
+          },
+          {
+            "name": "AnomalyValidation",
+            "value": "AnomalyValidation",
+            "description": "Anomaly validation type."
+          },
+          {
+            "name": "RatioValidation",
+            "value": "RatioValidation",
+            "description": "Ratio validation type."
+          },
+          {
+            "name": "ThresholdValidation",
+            "value": "ThresholdValidation",
+            "description": "Threshold validation type."
+          }
+        ]
+      }
+    },
+    "DataQualityMetrics": {
+      "type": "object",
+      "description": "Data quality metrics",
+      "properties": {
+        "evaluations": {
+          "type": "array",
+          "description": "Metric evaluations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
+          }
+        },
+        "validations": {
+          "type": "array",
+          "description": "Metric validations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricValidationEntry"
+          }
+        }
+      },
+      "required": [
+        "evaluations",
+        "validations"
+      ]
+    },
+    "DataQualityValidationPolicy": {
+      "type": "object",
+      "description": "Data quality validation policy",
+      "properties": {
+        "passCriteria": {
+          "$ref": "#/definitions/DataQualityValidationPolicyPassCriteria",
+          "description": "Dataset validation condition."
+        },
+        "validations": {
+          "type": "array",
+          "description": "Validations to perform.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "passCriteria",
+        "validations"
+      ]
+    },
+    "DataQualityValidationPolicyPassCriteria": {
+      "type": "string",
+      "description": "Data quality validation condition",
+      "enum": [
+        "AlwaysPass",
+        "PassIfAnySucceed",
+        "PassIfAllSucceed"
+      ],
+      "x-ms-enum": {
+        "name": "DataQualityValidationPolicyPassCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AlwaysPass",
+            "value": "AlwaysPass",
+            "description": "Always succeed condition."
+          },
+          {
+            "name": "PassIfAnySucceed",
+            "value": "PassIfAnySucceed",
+            "description": "Any validation succeeds condition."
+          },
+          {
+            "name": "PassIfAllSucceed",
+            "value": "PassIfAllSucceed",
+            "description": "All validations succeed condition."
+          }
+        ]
+      }
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Dataset resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatasetProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind",
+          "description": "Dataset kind discriminator. Determines which properties are valid for this dataset.\n- Custom: Custom user-defined dataset.\n- ArmResource: ARM (Azure Resource Manager) managed resource dataset."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatasetColumn": {
+      "type": "object",
+      "description": "Dataset column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column."
+        },
+        "type": {
+          "$ref": "#/definitions/DatasetColumnType",
+          "description": "Data type of the column."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the column."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DatasetColumnType": {
+      "type": "string",
+      "description": "Dataset column type",
+      "enum": [
+        "String",
+        "Integer",
+        "Boolean",
+        "DateTime",
+        "Dynamic",
+        "Guid",
+        "Long",
+        "Real",
+        "Timespan",
+        "Decimal"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetColumnType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String column type."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "Integer column type."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean column type."
+          },
+          {
+            "name": "DateTime",
+            "value": "DateTime",
+            "description": "DateTime column type."
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamic column type."
+          },
+          {
+            "name": "Guid",
+            "value": "Guid",
+            "description": "Guid column type."
+          },
+          {
+            "name": "Long",
+            "value": "Long",
+            "description": "Long column type."
+          },
+          {
+            "name": "Real",
+            "value": "Real",
+            "description": "Real column type."
+          },
+          {
+            "name": "Timespan",
+            "value": "Timespan",
+            "description": "Timespan column type."
+          },
+          {
+            "name": "Decimal",
+            "value": "Decimal",
+            "description": "Decimal column type."
+          }
+        ]
+      }
+    },
+    "DatasetKind": {
+      "type": "string",
+      "description": "Dataset kind discriminator",
+      "enum": [
+        "Custom",
+        "ArmResource"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom user-defined dataset."
+          },
+          {
+            "name": "ArmResource",
+            "value": "ArmResource",
+            "description": "ARM (Azure Resource Manager) managed resource dataset."
+          }
+        ]
+      }
+    },
+    "DatasetListResult": {
+      "type": "object",
+      "description": "The response of a Dataset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Dataset items on this page",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatasetProperties": {
+      "type": "object",
+      "description": "Dataset properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the dataset.",
+          "readOnly": true
+        },
+        "schema": {
+          "type": "array",
+          "description": "Dataset schema definition.",
+          "items": {
+            "$ref": "#/definitions/DatasetColumn"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "description": "Azure regions where the dataset exists.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasetReference": {
+      "type": "object",
+      "description": "Dataset reference",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the dataset. Required when type is ResourceId."
+        },
+        "canonicalName": {
+          "type": "string",
+          "description": "Canonical name of the dataset. Required when type is Catalog."
+        },
+        "type": {
+          "$ref": "#/definitions/DatasetReferenceType",
+          "description": "Reference type. Determines which field (id or canonicalName) is required."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DatasetReferenceType": {
+      "type": "string",
+      "description": "Dataset reference type",
+      "enum": [
+        "ResourceId",
+        "Catalog"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetReferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceId",
+            "value": "ResourceId",
+            "description": "Resource ID reference type."
+          },
+          {
+            "name": "Catalog",
+            "value": "Catalog",
+            "description": "Catalog reference type."
+          }
+        ]
+      }
+    },
+    "DatasetSink": {
+      "type": "object",
+      "description": "Dataset sink base model",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SinkType",
+          "description": "Sink type discriminator."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the sink."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "InlinePipelineJob": {
+      "type": "object",
+      "description": "Inline pipeline job",
+      "properties": {
+        "definition": {
+          "$ref": "#/definitions/Job",
+          "description": "Job definition."
+        }
+      },
+      "required": [
+        "definition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineJobBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Inline"
+    },
+    "Job": {
+      "type": "object",
+      "description": "Job resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/JobKind",
+          "description": "Job kind discriminator. Determines which properties are valid for this job."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobDataset": {
+      "type": "object",
+      "description": "Job dataset reference",
+      "properties": {
+        "dataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "Dataset reference."
+        },
+        "name": {
+          "type": "string",
+          "description": "View name of the dataset. Note: this can be used in the view name of the processing job logic of the job."
+        },
+        "lookbackStartOffset": {
+          "type": "string",
+          "description": "Lookback start offset of the dataset, which defines how far back in time the dataset should consider data."
+        },
+        "lookbackEndOffset": {
+          "type": "string",
+          "description": "Lookback end offset of the dataset, which defines the end of the time range for the dataset's data."
+        },
+        "missingPartitionPolicy": {
+          "$ref": "#/definitions/MissingPartitionPolicy",
+          "description": "Policy for handling missing partitions. Defaults to Fail."
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    },
+    "JobKind": {
+      "type": "string",
+      "description": "Job kind",
+      "enum": [
+        "Batch",
+        "Stream",
+        "AzureStorageAccountIngestion",
+        "AzureDataExplorerPublish",
+        "AzureDataExplorerIngestion",
+        "DataQualityValidation",
+        "AzureResourceNotificationPublish",
+        "AzureResourceGraph_Galaxy"
+      ],
+      "x-ms-enum": {
+        "name": "JobKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch job kind."
+          },
+          {
+            "name": "Stream",
+            "value": "Stream",
+            "description": "Stream job kind."
+          },
+          {
+            "name": "AzureStorageAccountIngestion",
+            "value": "AzureStorageAccountIngestion",
+            "description": "Azure Storage Account Ingestion job kind."
+          },
+          {
+            "name": "AzureDataExplorerPublish",
+            "value": "AzureDataExplorerPublish",
+            "description": "Azure Data Explorer Publish job kind."
+          },
+          {
+            "name": "AzureDataExplorerIngestion",
+            "value": "AzureDataExplorerIngestion",
+            "description": "Azure Data Explorer Ingestion job kind."
+          },
+          {
+            "name": "DataQualityValidation",
+            "value": "DataQualityValidation",
+            "description": "Data Quality Validation job kind."
+          },
+          {
+            "name": "AzureResourceNotificationPublish",
+            "value": "AzureResourceNotificationPublish",
+            "description": "Azure Resource Notification Publish job kind."
+          },
+          {
+            "name": "AzureResourceGraph_Galaxy",
+            "value": "AzureResourceGraph_Galaxy",
+            "description": "Azure Resource Graph Galaxy job kind."
+          }
+        ]
+      }
+    },
+    "JobListResult": {
+      "type": "object",
+      "description": "The response of a Job list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Job items on this page",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobProperties": {
+      "type": "object",
+      "description": "Job properties - properties vary by kind.\nEach job kind has specific required and optional properties as documented below.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the job.",
+          "readOnly": true
+        },
+        "inputs": {
+          "type": "array",
+          "description": "Input datasets for the job. Required for AzureDataExplorerPublish and DataQualityValidation jobs.",
+          "items": {
+            "$ref": "#/definitions/JobDataset"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Output datasets for the job.",
+          "items": {
+            "$ref": "#/definitions/JobDataset"
+          }
+        },
+        "processingLogic": {
+          "$ref": "#/definitions/ProcessingLogic",
+          "description": "Processing logic for the job. Required for Batch jobs."
+        },
+        "primaryKeyAttributes": {
+          "type": "array",
+          "description": "Primary key attributes for the batch job.",
+          "items": {
+            "$ref": "#/definitions/PrimaryKeyAttribute"
+          },
+          "x-ms-identifiers": [
+            "keyAttribute"
+          ]
+        },
+        "snapshotMergeStrategy": {
+          "$ref": "#/definitions/SnapshotMergeStrategy",
+          "description": "Snapshot merge strategy. Used by Batch jobs."
+        },
+        "lookbackStartOffset": {
+          "type": "string",
+          "description": "Lookback start offset for merging with previous snapshot. Used by Batch jobs."
+        },
+        "retentionWindow": {
+          "type": "string",
+          "description": "Retention window to evict latest records. Used by Batch jobs."
+        },
+        "outputDatasetName": {
+          "type": "string",
+          "description": "Name of the output dataset for the job. Required for AzureStorageAccountIngestion and AzureDataExplorerIngestion jobs."
+        },
+        "blobPartitionPath": {
+          "type": "string",
+          "description": "Path to the blob partition used for data ingestion. Required for AzureStorageAccountIngestion jobs."
+        },
+        "timeOffset": {
+          "type": "string",
+          "description": "Time offset for the job execution. Used by AzureStorageAccountIngestion jobs."
+        },
+        "sink": {
+          "$ref": "#/definitions/AzureDataExplorerSink",
+          "description": "Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs."
+        },
+        "metrics": {
+          "$ref": "#/definitions/DataQualityMetrics",
+          "description": "Data quality metrics evaluations and validations. Required for DataQualityValidation jobs."
+        },
+        "validationPolicy": {
+          "$ref": "#/definitions/DataQualityValidationPolicy",
+          "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
+        },
+        "resourceType": {
+          "$ref": "#/definitions/ResourceNotificationResourceType",
+          "description": "Resource type (resource or relationship). Required for AzureResourceNotificationPublish jobs."
+        }
+      }
+    },
+    "MissingPartitionPolicy": {
+      "type": "string",
+      "description": "Missing partition policy",
+      "enum": [
+        "Fail",
+        "Skip"
+      ],
+      "x-ms-enum": {
+        "name": "MissingPartitionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fail",
+            "value": "Fail",
+            "description": "Fail policy."
+          },
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Ignore policy."
+          }
+        ]
+      }
+    },
+    "Pipeline": {
+      "type": "object",
+      "description": "Pipeline resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PipelineActivity": {
+      "type": "object",
+      "description": "Pipeline activity",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Activity name."
+        },
+        "job": {
+          "$ref": "#/definitions/PipelineJobBase",
+          "description": "Job associated with the activity."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Activities this activity depends on.",
+          "items": {
+            "$ref": "#/definitions/PipelineActivityDependency"
+          },
+          "x-ms-identifiers": [
+            "activity"
+          ]
+        },
+        "policy": {
+          "$ref": "#/definitions/PipelineActivityPolicy",
+          "description": "Activity policy."
+        }
+      },
+      "required": [
+        "name",
+        "job"
+      ]
+    },
+    "PipelineActivityDependency": {
+      "type": "object",
+      "description": "Pipeline activity dependency",
+      "properties": {
+        "activity": {
+          "type": "string",
+          "description": "Name of the activity this depends on."
+        },
+        "dependencyConditions": {
+          "type": "array",
+          "description": "Dependency conditions.",
+          "items": {
+            "$ref": "#/definitions/PipelineDependencyCondition"
+          }
+        }
+      },
+      "required": [
+        "activity"
+      ]
+    },
+    "PipelineActivityPolicy": {
+      "type": "object",
+      "description": "Pipeline activity policy",
+      "properties": {
+        "timeout": {
+          "type": "string",
+          "description": "Timeout for the activity."
+        }
+      }
+    },
+    "PipelineDependencyCondition": {
+      "type": "string",
+      "description": "Pipeline dependency condition",
+      "enum": [
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineDependencyCondition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded condition."
+          }
+        ]
+      }
+    },
+    "PipelineJobBase": {
+      "type": "object",
+      "description": "Pipeline job base",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PipelineJobType",
+          "description": "Job type discriminator"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PipelineJobType": {
+      "type": "string",
+      "description": "Pipeline job type",
+      "enum": [
+        "Reference",
+        "Inline"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reference",
+            "value": "Reference",
+            "description": "Reference job type."
+          },
+          {
+            "name": "Inline",
+            "value": "Inline",
+            "description": "Inline job type."
+          }
+        ]
+      }
+    },
+    "PipelineListResult": {
+      "type": "object",
+      "description": "The response of a Pipeline list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pipeline items on this page",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PipelineProperties": {
+      "type": "object",
+      "description": "Pipeline properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the pipeline.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/PipelineState",
+          "description": "Pipeline state."
+        },
+        "activities": {
+          "type": "array",
+          "description": "Pipeline activities.",
+          "items": {
+            "$ref": "#/definitions/PipelineActivity"
+          }
+        },
+        "recurrence": {
+          "$ref": "#/definitions/PipelineRecurrence",
+          "description": "Pipeline recurrence schedule."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "PipelineRecurrence": {
+      "type": "object",
+      "description": "Pipeline recurrence",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ScheduleType",
+          "description": "Recurrence type."
+        },
+        "periodicity": {
+          "type": "string",
+          "description": "Periodicity of the recurrence."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "Timeout for the recurrence."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PipelineState": {
+      "type": "string",
+      "description": "Pipeline state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled state."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled state."
+          }
+        ]
+      }
+    },
+    "PrimaryKeyAttribute": {
+      "type": "object",
+      "description": "Primary key attributes for batch job",
+      "properties": {
+        "keyAttribute": {
+          "type": "string",
+          "description": "The key attribute."
+        },
+        "timestampAttribute": {
+          "type": "string",
+          "description": "The timestamp attribute."
+        }
+      },
+      "required": [
+        "keyAttribute",
+        "timestampAttribute"
+      ]
+    },
+    "ProcessingLogic": {
+      "type": "object",
+      "description": "Processing logic for a job",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value or script to be executed as part of the processing logic (e.g., SQL, KQL, etc.)."
+        },
+        "type": {
+          "$ref": "#/definitions/ProcessingLogicType",
+          "description": "The type of processing logic to be executed by the job."
+        }
+      },
+      "required": [
+        "value",
+        "type"
+      ]
+    },
+    "ProcessingLogicType": {
+      "type": "string",
+      "description": "Processing logic type",
+      "enum": [
+        "SparkSQL",
+        "KQL",
+        "ARG_KQL"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessingLogicType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SparkSQL",
+            "value": "SparkSQL",
+            "description": "Spark SQL processing logic type."
+          },
+          {
+            "name": "KQL",
+            "value": "KQL",
+            "description": "KQL processing logic type."
+          },
+          {
+            "name": "ARG_KQL",
+            "value": "ARG_KQL",
+            "description": "Azure Resource Graph KQL processing logic type."
+          }
+        ]
+      }
+    },
+    "PublishMode": {
+      "type": "string",
+      "description": "Publish mode",
+      "enum": [
+        "Overwrite",
+        "Append"
+      ],
+      "x-ms-enum": {
+        "name": "PublishMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Overwrite",
+            "value": "Overwrite",
+            "description": "Overwrite publish mode."
+          },
+          {
+            "name": "Append",
+            "value": "Append",
+            "description": "Append publish mode."
+          }
+        ]
+      }
+    },
+    "ReferencePipelineJob": {
+      "type": "object",
+      "description": "Reference pipeline job",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Job name reference."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineJobBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Reference"
+    },
+    "ResourceNotificationResourceType": {
+      "type": "string",
+      "description": "Resource notification resource type",
+      "enum": [
+        "Default",
+        "Resource",
+        "Relationship"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceNotificationResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default resource notification type."
+          },
+          {
+            "name": "Resource",
+            "value": "Resource",
+            "description": "Resource notification for a resource."
+          },
+          {
+            "name": "Relationship",
+            "value": "Relationship",
+            "description": "Resource notification for a relationship."
+          }
+        ]
+      }
+    },
+    "ResourceNotificationSink": {
+      "type": "object",
+      "description": "Resource Notification sink",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetSink"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceNotificationSink"
+    },
+    "ScheduleType": {
+      "type": "string",
+      "description": "Schedule type",
+      "enum": [
+        "Periodic",
+        "ManualTrigger"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Periodic",
+            "value": "Periodic",
+            "description": "Periodic schedule type."
+          },
+          {
+            "name": "ManualTrigger",
+            "value": "ManualTrigger",
+            "description": "Manual trigger schedule type."
+          }
+        ]
+      }
+    },
+    "SinkType": {
+      "type": "string",
+      "description": "Sink type",
+      "enum": [
+        "AzureDataExplorerSink",
+        "ResourceNotificationSink"
+      ],
+      "x-ms-enum": {
+        "name": "SinkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDataExplorerSink",
+            "value": "AzureDataExplorerSink",
+            "description": "Azure Data Explorer sink type."
+          },
+          {
+            "name": "ResourceNotificationSink",
+            "value": "ResourceNotificationSink",
+            "description": "Resource Notification sink type."
+          }
+        ]
+      }
+    },
+    "SnapshotMergeStrategy": {
+      "type": "string",
+      "description": "Snapshot merge strategy",
+      "enum": [
+        "NoMerge",
+        "IncrementalMerge"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotMergeStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoMerge",
+            "value": "NoMerge",
+            "description": "No merge strategy."
+          },
+          {
+            "name": "IncrementalMerge",
+            "value": "IncrementalMerge",
+            "description": "Incremental merge strategy."
+          }
+        ]
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Workspace resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a Workspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Workspace items on this page",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "Workspace properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceUpdate": {
+      "type": "object",
+      "description": "Workspace resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

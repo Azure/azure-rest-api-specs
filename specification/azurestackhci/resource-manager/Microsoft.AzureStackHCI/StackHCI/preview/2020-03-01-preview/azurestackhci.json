@@ -3,7 +3,10 @@
   "info": {
     "version": "2020-03-01-preview",
     "title": "AzureStackHCI",
-    "description": "Azure Stack HCI management service"
+    "description": "Azure Stack HCI management service",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -55,13 +58,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AvailableOperations"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -97,7 +100,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -139,7 +142,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -184,7 +187,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -233,7 +236,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -282,7 +285,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -322,7 +325,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -392,9 +395,7 @@
           "description": "Status of the cluster agent.",
           "type": "string",
           "enum": [
-            "NotYetRegistered",
-            "ConnectedRecently",
-            "NotConnectedRecently",
+            "Connected",
             "Disconnected",
             "Error"
           ],
@@ -429,24 +430,6 @@
         "billingModel": {
           "description": "Type of billing applied to the resource.",
           "type": "string",
-          "readOnly": true
-        },
-        "registrationTimestamp": {
-          "description": "First cluster sync timestamp.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "lastSyncTimestamp": {
-          "description": "Most recent cluster sync timestamp.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "lastBillingTimestamp": {
-          "description": "Most recent billing meter timestamp.",
-          "type": "string",
-          "format": "date-time",
           "readOnly": true
         }
       }
@@ -550,76 +533,60 @@
         }
       }
     },
-    "AvailableOperations": {
-      "description": "Available operations of the service",
+    "OperationList": {
+      "description": "List of available operations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of available operation details",
-          "uniqueItems": false,
+          "description": "List of operations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationDetail"
+            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "OperationDetail": {
-      "description": "Operation detail payload",
+    "Operation": {
+      "description": "Operation details.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
-          "description": "Display of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Properties of the operation"
+          "description": "Operation properties."
         }
       }
     },
     "OperationDisplay": {
-      "description": "Operation display payload",
+      "description": "Operation properties.",
       "type": "object",
       "properties": {
         "provider": {
-          "description": "Resource provider of the operation",
+          "description": "Resource provider name.",
           "type": "string"
         },
         "resource": {
-          "description": "Resource of the operation",
+          "description": "Resource type name.",
           "type": "string"
         },
         "operation": {
-          "description": "Localized friendly name for the operation",
+          "description": "Operation name.",
           "type": "string"
         },
         "description": {
-          "description": "Localized friendly description for the operation",
+          "description": "Operation description.",
           "type": "string"
         }
       }
-    },
-    "OperationProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {}
     }
   },
   "parameters": {

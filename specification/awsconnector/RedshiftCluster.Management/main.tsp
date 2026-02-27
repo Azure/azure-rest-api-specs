@@ -226,7 +226,7 @@ model AwsRedshiftClusterProperties {
   snapshotIdentifier?: string;
 
   @doc("The list of tags for the cluster parameter group.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.")

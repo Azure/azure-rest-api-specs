@@ -1,0 +1,1577 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockKnowledgeBases"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockKnowledgeBases": {
+      "get": {
+        "operationId": "BedrockKnowledgeBases_ListBySubscription",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "List BedrockKnowledgeBase resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockKnowledgeBases": {
+      "get": {
+        "operationId": "BedrockKnowledgeBases_ListByResourceGroup",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "List BedrockKnowledgeBase resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockKnowledgeBases/{name}": {
+      "get": {
+        "operationId": "BedrockKnowledgeBases_Get",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "Get a BedrockKnowledgeBase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockKnowledgeBase",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_Get_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockKnowledgeBases_CreateOrReplace",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "Create a BedrockKnowledgeBase. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockKnowledgeBase",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockKnowledgeBase' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBase"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockKnowledgeBase' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBase"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockKnowledgeBases_Update",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "Update a BedrockKnowledgeBase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockKnowledgeBase",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBaseTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockKnowledgeBase"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_Update_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockKnowledgeBases_Delete",
+        "tags": [
+          "BedrockKnowledgeBases"
+        ],
+        "description": "Delete a BedrockKnowledgeBase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockKnowledgeBase",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockKnowledgeBases_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockKnowledgeBases_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsBedrockKnowledgeBaseProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockKnowledgeBase",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "The time at which the knowledge base was created."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Resource."
+        },
+        "failureReasons": {
+          "type": "array",
+          "description": "A list of reasons that the API operation on the knowledge base failed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "knowledgeBaseArn": {
+          "type": "string",
+          "description": "The ARN of the knowledge base."
+        },
+        "knowledgeBaseConfiguration": {
+          "$ref": "#/definitions/KnowledgeBaseConfiguration",
+          "description": "Contains details about the embeddings model used for the knowledge base."
+        },
+        "knowledgeBaseId": {
+          "type": "string",
+          "description": "The unique identifier of the knowledge base."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge base."
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of a knowledge base."
+        },
+        "storageConfiguration": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "The vector store service in which the knowledge base is stored."
+        },
+        "tags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The time at which the knowledge base was last updated."
+        }
+      }
+    },
+    "BedrockEmbeddingModelConfiguration": {
+      "type": "object",
+      "description": "Definition of BedrockEmbeddingModelConfiguration",
+      "properties": {
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The dimensions details for the vector configuration used on the Bedrock embeddings model."
+        },
+        "embeddingDataType": {
+          "$ref": "#/definitions/BedrockEmbeddingModelConfigurationEmbeddingDataType",
+          "description": "The data type for the vectors when using a model to convert text into vector embeddings."
+        }
+      }
+    },
+    "BedrockEmbeddingModelConfigurationEmbeddingDataType": {
+      "type": "string",
+      "description": "BedrockEmbeddingModelConfigurationEmbeddingDataType enum",
+      "enum": [
+        "BINARY",
+        "FLOAT32"
+      ],
+      "x-ms-enum": {
+        "name": "BedrockEmbeddingModelConfigurationEmbeddingDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BINARY",
+            "value": "BINARY",
+            "description": "BedrockEmbeddingModelConfigurationEmbeddingDataType enum BINARY"
+          },
+          {
+            "name": "FLOAT32",
+            "value": "FLOAT32",
+            "description": "BedrockEmbeddingModelConfigurationEmbeddingDataType enum FLOAT32"
+          }
+        ]
+      }
+    },
+    "BedrockKnowledgeBase": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockKnowledgeBaseProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockKnowledgeBaseListResult": {
+      "type": "object",
+      "description": "The response of a BedrockKnowledgeBase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockKnowledgeBase items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockKnowledgeBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockKnowledgeBaseProperties": {
+      "type": "object",
+      "description": "Definition of BedrockKnowledgeBase",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockKnowledgeBaseProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockKnowledgeBaseTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockKnowledgeBase resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CuratedQuery": {
+      "type": "object",
+      "description": "Definition of CuratedQuery",
+      "properties": {
+        "naturalLanguage": {
+          "type": "string",
+          "description": "Question for the curated query"
+        },
+        "sql": {
+          "type": "string",
+          "description": "Answer for the curated query"
+        }
+      }
+    },
+    "EmbeddingModelConfiguration": {
+      "type": "object",
+      "description": "Definition of EmbeddingModelConfiguration",
+      "properties": {
+        "bedrockEmbeddingModelConfiguration": {
+          "$ref": "#/definitions/BedrockEmbeddingModelConfiguration",
+          "description": "The vector configuration details for the Bedrock embeddings model."
+        }
+      }
+    },
+    "KendraKnowledgeBaseConfiguration": {
+      "type": "object",
+      "description": "Definition of KendraKnowledgeBaseConfiguration",
+      "properties": {
+        "kendraIndexArn": {
+          "type": "string",
+          "description": "Arn of a Kendra index"
+        }
+      }
+    },
+    "KnowledgeBaseConfiguration": {
+      "type": "object",
+      "description": "Definition of KnowledgeBaseConfiguration",
+      "properties": {
+        "kendraKnowledgeBaseConfiguration": {
+          "$ref": "#/definitions/KendraKnowledgeBaseConfiguration",
+          "description": "Configurations for a Kendra knowledge base"
+        },
+        "sqlKnowledgeBaseConfiguration": {
+          "$ref": "#/definitions/SqlKnowledgeBaseConfiguration",
+          "description": "Configurations for a SQL knowledge base"
+        },
+        "type": {
+          "$ref": "#/definitions/KnowledgeBaseConfigurationType",
+          "description": "The type of a knowledge base."
+        },
+        "vectorKnowledgeBaseConfiguration": {
+          "$ref": "#/definitions/VectorKnowledgeBaseConfiguration",
+          "description": "Contains details about the model used to create vector embeddings for the knowledge base."
+        }
+      }
+    },
+    "KnowledgeBaseConfigurationType": {
+      "type": "string",
+      "description": "KnowledgeBaseConfigurationType enum",
+      "enum": [
+        "KENDRA",
+        "SQL",
+        "VECTOR"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeBaseConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KENDRA",
+            "value": "KENDRA",
+            "description": "KnowledgeBaseConfigurationType enum KENDRA"
+          },
+          {
+            "name": "SQL",
+            "value": "SQL",
+            "description": "KnowledgeBaseConfigurationType enum SQL"
+          },
+          {
+            "name": "VECTOR",
+            "value": "VECTOR",
+            "description": "KnowledgeBaseConfigurationType enum VECTOR"
+          }
+        ]
+      }
+    },
+    "MongoDbAtlasConfiguration": {
+      "type": "object",
+      "description": "Definition of MongoDbAtlasConfiguration",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the collection within MongoDB Atlas."
+        },
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database within MongoDB Atlas."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "MongoDB Atlas endpoint."
+        },
+        "endpointServiceName": {
+          "type": "string",
+          "description": "MongoDB Atlas endpoint service name."
+        },
+        "fieldMapping": {
+          "$ref": "#/definitions/MongoDbAtlasFieldMapping",
+          "description": "Contains the names of the fields to which to map information about the vector store."
+        },
+        "textIndexName": {
+          "type": "string",
+          "description": "Name of a MongoDB Atlas text index."
+        },
+        "vectorIndexName": {
+          "type": "string",
+          "description": "Name of a MongoDB Atlas index."
+        }
+      }
+    },
+    "MongoDbAtlasFieldMapping": {
+      "type": "object",
+      "description": "Definition of MongoDbAtlasFieldMapping",
+      "properties": {
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        },
+        "vectorField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources."
+        }
+      }
+    },
+    "NeptuneAnalyticsConfiguration": {
+      "type": "object",
+      "description": "Definition of NeptuneAnalyticsConfiguration",
+      "properties": {
+        "fieldMapping": {
+          "$ref": "#/definitions/NeptuneAnalyticsFieldMapping",
+          "description": "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields."
+        },
+        "graphArn": {
+          "type": "string",
+          "description": "ARN for Neptune Analytics graph database."
+        }
+      }
+    },
+    "NeptuneAnalyticsFieldMapping": {
+      "type": "object",
+      "description": "Definition of NeptuneAnalyticsFieldMapping",
+      "properties": {
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        }
+      }
+    },
+    "OpenSearchManagedClusterConfiguration": {
+      "type": "object",
+      "description": "Definition of OpenSearchManagedClusterConfiguration",
+      "properties": {
+        "domainArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the OpenSearch domain."
+        },
+        "domainEndpoint": {
+          "type": "string",
+          "description": "The endpoint URL the OpenSearch domain."
+        },
+        "fieldMapping": {
+          "$ref": "#/definitions/OpenSearchManagedClusterFieldMapping",
+          "description": "A mapping of Bedrock Knowledge Base fields to OpenSearch Managed Cluster field names"
+        },
+        "vectorIndexName": {
+          "type": "string",
+          "description": "The name of the vector store."
+        }
+      }
+    },
+    "OpenSearchManagedClusterFieldMapping": {
+      "type": "object",
+      "description": "Definition of OpenSearchManagedClusterFieldMapping",
+      "properties": {
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        },
+        "vectorField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources."
+        }
+      }
+    },
+    "OpenSearchServerlessConfiguration": {
+      "type": "object",
+      "description": "Definition of OpenSearchServerlessConfiguration",
+      "properties": {
+        "collectionArn": {
+          "type": "string",
+          "description": "The ARN of the OpenSearch Service vector store."
+        },
+        "fieldMapping": {
+          "$ref": "#/definitions/OpenSearchServerlessFieldMapping",
+          "description": "A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names"
+        },
+        "vectorIndexName": {
+          "type": "string",
+          "description": "The name of the vector store."
+        }
+      }
+    },
+    "OpenSearchServerlessFieldMapping": {
+      "type": "object",
+      "description": "Definition of OpenSearchServerlessFieldMapping",
+      "properties": {
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        },
+        "vectorField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources."
+        }
+      }
+    },
+    "PineconeConfiguration": {
+      "type": "object",
+      "description": "Definition of PineconeConfiguration",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The endpoint URL for your index management page."
+        },
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Pinecone API key."
+        },
+        "fieldMapping": {
+          "$ref": "#/definitions/PineconeFieldMapping",
+          "description": "Contains the names of the fields to which to map information about the vector store."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace to be used to write new data to your database."
+        }
+      }
+    },
+    "PineconeFieldMapping": {
+      "type": "object",
+      "description": "Definition of PineconeFieldMapping",
+      "properties": {
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QueryGenerationColumn": {
+      "type": "object",
+      "description": "Definition of QueryGenerationColumn",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description for the attached entity"
+        },
+        "inclusion": {
+          "$ref": "#/definitions/QueryGenerationColumnInclusion",
+          "description": "Include or Exclude status for an entity"
+        },
+        "name": {
+          "type": "string",
+          "description": "Query generation column name"
+        }
+      }
+    },
+    "QueryGenerationColumnInclusion": {
+      "type": "string",
+      "description": "QueryGenerationColumnInclusion enum",
+      "enum": [
+        "EXCLUDE",
+        "INCLUDE"
+      ],
+      "x-ms-enum": {
+        "name": "QueryGenerationColumnInclusion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EXCLUDE",
+            "value": "EXCLUDE",
+            "description": "QueryGenerationColumnInclusion enum EXCLUDE"
+          },
+          {
+            "name": "INCLUDE",
+            "value": "INCLUDE",
+            "description": "QueryGenerationColumnInclusion enum INCLUDE"
+          }
+        ]
+      }
+    },
+    "QueryGenerationConfiguration": {
+      "type": "object",
+      "description": "Definition of QueryGenerationConfiguration",
+      "properties": {
+        "executionTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max query execution timeout"
+        },
+        "generationContext": {
+          "$ref": "#/definitions/QueryGenerationContext",
+          "description": "Context used to improve query generation"
+        }
+      }
+    },
+    "QueryGenerationContext": {
+      "type": "object",
+      "description": "Definition of QueryGenerationContext",
+      "properties": {
+        "curatedQueries": {
+          "type": "array",
+          "description": "List of example queries and results",
+          "items": {
+            "$ref": "#/definitions/CuratedQuery"
+          },
+          "x-ms-identifiers": []
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of tables used for Redshift query generation context",
+          "items": {
+            "$ref": "#/definitions/QueryGenerationTable"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryGenerationTable": {
+      "type": "object",
+      "description": "Definition of QueryGenerationTable",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "List of Redshift query generation columns",
+          "items": {
+            "$ref": "#/definitions/QueryGenerationColumn"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the attached entity"
+        },
+        "inclusion": {
+          "$ref": "#/definitions/QueryGenerationTableInclusion",
+          "description": "Include or Exclude status for an entity"
+        },
+        "name": {
+          "type": "string",
+          "description": "Query generation table name. Must follow three-part notation"
+        }
+      }
+    },
+    "QueryGenerationTableInclusion": {
+      "type": "string",
+      "description": "QueryGenerationTableInclusion enum",
+      "enum": [
+        "EXCLUDE",
+        "INCLUDE"
+      ],
+      "x-ms-enum": {
+        "name": "QueryGenerationTableInclusion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EXCLUDE",
+            "value": "EXCLUDE",
+            "description": "QueryGenerationTableInclusion enum EXCLUDE"
+          },
+          {
+            "name": "INCLUDE",
+            "value": "INCLUDE",
+            "description": "QueryGenerationTableInclusion enum INCLUDE"
+          }
+        ]
+      }
+    },
+    "RdsConfiguration": {
+      "type": "object",
+      "description": "Definition of RdsConfiguration",
+      "properties": {
+        "credentialsSecretArn": {
+          "type": "string",
+          "description": "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon RDS database."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of your Amazon RDS database."
+        },
+        "fieldMapping": {
+          "$ref": "#/definitions/RdsFieldMapping",
+          "description": "Contains the names of the fields to which to map information about the vector store."
+        },
+        "resourceArn": {
+          "type": "string",
+          "description": "The ARN of the vector store."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The name of the table in the database."
+        }
+      }
+    },
+    "RdsFieldMapping": {
+      "type": "object",
+      "description": "Definition of RdsFieldMapping",
+      "properties": {
+        "customMetadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores custom metadata about the vector store."
+        },
+        "metadataField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        },
+        "primaryKeyField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the ID for each entry."
+        },
+        "textField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        },
+        "vectorField": {
+          "type": "string",
+          "description": "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources."
+        }
+      }
+    },
+    "RedshiftConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftConfiguration",
+      "properties": {
+        "queryEngineConfiguration": {
+          "$ref": "#/definitions/RedshiftQueryEngineConfiguration",
+          "description": "Configurations for Redshift query engine"
+        },
+        "queryGenerationConfiguration": {
+          "$ref": "#/definitions/QueryGenerationConfiguration",
+          "description": "Configurations for generating Redshift engine queries"
+        },
+        "storageConfigurations": {
+          "type": "array",
+          "description": "List of configurations for available Redshift query engine storage types",
+          "items": {
+            "$ref": "#/definitions/RedshiftQueryEngineStorageConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RedshiftProvisionedAuthConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftProvisionedAuthConfiguration",
+      "properties": {
+        "databaseUser": {
+          "type": "string",
+          "description": "Redshift database user"
+        },
+        "type": {
+          "$ref": "#/definitions/RedshiftProvisionedAuthConfigurationType",
+          "description": "Provisioned Redshift auth type"
+        },
+        "usernamePasswordSecretArn": {
+          "type": "string",
+          "description": "Arn of a SecretsManager Secret"
+        }
+      }
+    },
+    "RedshiftProvisionedAuthConfigurationType": {
+      "type": "string",
+      "description": "RedshiftProvisionedAuthConfigurationType enum",
+      "enum": [
+        "IAM",
+        "USERNAME",
+        "USERNAME_PASSWORD"
+      ],
+      "x-ms-enum": {
+        "name": "RedshiftProvisionedAuthConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IAM",
+            "value": "IAM",
+            "description": "RedshiftProvisionedAuthConfigurationType enum IAM"
+          },
+          {
+            "name": "USERNAME",
+            "value": "USERNAME",
+            "description": "RedshiftProvisionedAuthConfigurationType enum USERNAME"
+          },
+          {
+            "name": "USERNAME_PASSWORD",
+            "value": "USERNAME_PASSWORD",
+            "description": "RedshiftProvisionedAuthConfigurationType enum USERNAME_PASSWORD"
+          }
+        ]
+      }
+    },
+    "RedshiftProvisionedConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftProvisionedConfiguration",
+      "properties": {
+        "authConfiguration": {
+          "$ref": "#/definitions/RedshiftProvisionedAuthConfiguration",
+          "description": "Configurations for Redshift query engine provisioned auth setup"
+        },
+        "clusterIdentifier": {
+          "type": "string",
+          "description": "Redshift cluster identifier"
+        }
+      }
+    },
+    "RedshiftQueryEngineAwsDataCatalogStorageConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftQueryEngineAwsDataCatalogStorageConfiguration",
+      "properties": {
+        "tableNames": {
+          "type": "array",
+          "description": "List of table names in AWS Data Catalog. Must follow two part notation",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RedshiftQueryEngineConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftQueryEngineConfiguration",
+      "properties": {
+        "provisionedConfiguration": {
+          "$ref": "#/definitions/RedshiftProvisionedConfiguration",
+          "description": "Configurations for provisioned Redshift query engine"
+        },
+        "serverlessConfiguration": {
+          "$ref": "#/definitions/RedshiftServerlessConfiguration",
+          "description": "Configurations for serverless Redshift query engine"
+        },
+        "type": {
+          "$ref": "#/definitions/RedshiftQueryEngineConfigurationType",
+          "description": "Redshift query engine type"
+        }
+      }
+    },
+    "RedshiftQueryEngineConfigurationType": {
+      "type": "string",
+      "description": "RedshiftQueryEngineConfigurationType enum",
+      "enum": [
+        "PROVISIONED",
+        "SERVERLESS"
+      ],
+      "x-ms-enum": {
+        "name": "RedshiftQueryEngineConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PROVISIONED",
+            "value": "PROVISIONED",
+            "description": "RedshiftQueryEngineConfigurationType enum PROVISIONED"
+          },
+          {
+            "name": "SERVERLESS",
+            "value": "SERVERLESS",
+            "description": "RedshiftQueryEngineConfigurationType enum SERVERLESS"
+          }
+        ]
+      }
+    },
+    "RedshiftQueryEngineRedshiftStorageConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftQueryEngineRedshiftStorageConfiguration",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Redshift database name"
+        }
+      }
+    },
+    "RedshiftQueryEngineStorageConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftQueryEngineStorageConfiguration",
+      "properties": {
+        "awsDataCatalogConfiguration": {
+          "$ref": "#/definitions/RedshiftQueryEngineAwsDataCatalogStorageConfiguration",
+          "description": "Configurations for Redshift query engine AWS Data Catalog backed storage"
+        },
+        "redshiftConfiguration": {
+          "$ref": "#/definitions/RedshiftQueryEngineRedshiftStorageConfiguration",
+          "description": "Configurations for Redshift query engine Redshift backed storage"
+        },
+        "type": {
+          "$ref": "#/definitions/RedshiftQueryEngineStorageConfigurationType",
+          "description": "Redshift query engine storage type"
+        }
+      }
+    },
+    "RedshiftQueryEngineStorageConfigurationType": {
+      "type": "string",
+      "description": "RedshiftQueryEngineStorageConfigurationType enum",
+      "enum": [
+        "AWS_DATA_CATALOG",
+        "REDSHIFT"
+      ],
+      "x-ms-enum": {
+        "name": "RedshiftQueryEngineStorageConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AWS_DATA_CATALOG",
+            "value": "AWS_DATA_CATALOG",
+            "description": "RedshiftQueryEngineStorageConfigurationType enum AWS_DATA_CATALOG"
+          },
+          {
+            "name": "REDSHIFT",
+            "value": "REDSHIFT",
+            "description": "RedshiftQueryEngineStorageConfigurationType enum REDSHIFT"
+          }
+        ]
+      }
+    },
+    "RedshiftServerlessAuthConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftServerlessAuthConfiguration",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RedshiftServerlessAuthConfigurationType",
+          "description": "Serverless Redshift auth type"
+        },
+        "usernamePasswordSecretArn": {
+          "type": "string",
+          "description": "Arn of a SecretsManager Secret"
+        }
+      }
+    },
+    "RedshiftServerlessAuthConfigurationType": {
+      "type": "string",
+      "description": "RedshiftServerlessAuthConfigurationType enum",
+      "enum": [
+        "IAM",
+        "USERNAME_PASSWORD"
+      ],
+      "x-ms-enum": {
+        "name": "RedshiftServerlessAuthConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IAM",
+            "value": "IAM",
+            "description": "RedshiftServerlessAuthConfigurationType enum IAM"
+          },
+          {
+            "name": "USERNAME_PASSWORD",
+            "value": "USERNAME_PASSWORD",
+            "description": "RedshiftServerlessAuthConfigurationType enum USERNAME_PASSWORD"
+          }
+        ]
+      }
+    },
+    "RedshiftServerlessConfiguration": {
+      "type": "object",
+      "description": "Definition of RedshiftServerlessConfiguration",
+      "properties": {
+        "authConfiguration": {
+          "$ref": "#/definitions/RedshiftServerlessAuthConfiguration",
+          "description": "Configurations for Redshift query engine serverless auth setup"
+        },
+        "workgroupArn": {
+          "type": "string",
+          "description": "Workgroup arn"
+        }
+      }
+    },
+    "S3Location": {
+      "type": "object",
+      "description": "Definition of S3Location",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The location's URI"
+        }
+      }
+    },
+    "SqlKnowledgeBaseConfiguration": {
+      "type": "object",
+      "description": "Definition of SqlKnowledgeBaseConfiguration",
+      "properties": {
+        "redshiftConfiguration": {
+          "$ref": "#/definitions/RedshiftConfiguration",
+          "description": "Configurations for a Redshift knowledge base"
+        },
+        "type": {
+          "$ref": "#/definitions/SqlKnowledgeBaseConfigurationType",
+          "description": "SQL query engine type"
+        }
+      }
+    },
+    "SqlKnowledgeBaseConfigurationType": {
+      "type": "string",
+      "description": "SqlKnowledgeBaseConfigurationType enum",
+      "enum": [
+        "REDSHIFT"
+      ],
+      "x-ms-enum": {
+        "name": "SqlKnowledgeBaseConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "REDSHIFT",
+            "value": "REDSHIFT",
+            "description": "SqlKnowledgeBaseConfigurationType enum REDSHIFT"
+          }
+        ]
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "DELETE_UNSUCCESSFUL",
+        "DELETING",
+        "FAILED",
+        "UPDATING"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "Status enum ACTIVE"
+          },
+          {
+            "name": "CREATING",
+            "value": "CREATING",
+            "description": "Status enum CREATING"
+          },
+          {
+            "name": "DELETE_UNSUCCESSFUL",
+            "value": "DELETE_UNSUCCESSFUL",
+            "description": "Status enum DELETE_UNSUCCESSFUL"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "Status enum DELETING"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Status enum FAILED"
+          },
+          {
+            "name": "UPDATING",
+            "value": "UPDATING",
+            "description": "Status enum UPDATING"
+          }
+        ]
+      }
+    },
+    "StorageConfiguration": {
+      "type": "object",
+      "description": "Definition of StorageConfiguration",
+      "properties": {
+        "mongoDbAtlasConfiguration": {
+          "$ref": "#/definitions/MongoDbAtlasConfiguration",
+          "description": "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud."
+        },
+        "neptuneAnalyticsConfiguration": {
+          "$ref": "#/definitions/NeptuneAnalyticsConfiguration",
+          "description": "Contains the configurations to use Neptune Analytics as Vector Store."
+        },
+        "opensearchManagedClusterConfiguration": {
+          "$ref": "#/definitions/OpenSearchManagedClusterConfiguration",
+          "description": "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service."
+        },
+        "opensearchServerlessConfiguration": {
+          "$ref": "#/definitions/OpenSearchServerlessConfiguration",
+          "description": "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service."
+        },
+        "pineconeConfiguration": {
+          "$ref": "#/definitions/PineconeConfiguration",
+          "description": "Contains the storage configuration of the knowledge base in Pinecone."
+        },
+        "rdsConfiguration": {
+          "$ref": "#/definitions/RdsConfiguration",
+          "description": "Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageConfigurationType",
+          "description": "The storage type of a knowledge base."
+        }
+      }
+    },
+    "StorageConfigurationType": {
+      "type": "string",
+      "description": "StorageConfigurationType enum",
+      "enum": [
+        "MONGO_DB_ATLAS",
+        "NEPTUNE_ANALYTICS",
+        "OPENSEARCH_MANAGED_CLUSTER",
+        "OPENSEARCH_SERVERLESS",
+        "PINECONE",
+        "RDS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MONGO_DB_ATLAS",
+            "value": "MONGO_DB_ATLAS",
+            "description": "StorageConfigurationType enum MONGO_DB_ATLAS"
+          },
+          {
+            "name": "NEPTUNE_ANALYTICS",
+            "value": "NEPTUNE_ANALYTICS",
+            "description": "StorageConfigurationType enum NEPTUNE_ANALYTICS"
+          },
+          {
+            "name": "OPENSEARCH_MANAGED_CLUSTER",
+            "value": "OPENSEARCH_MANAGED_CLUSTER",
+            "description": "StorageConfigurationType enum OPENSEARCH_MANAGED_CLUSTER"
+          },
+          {
+            "name": "OPENSEARCH_SERVERLESS",
+            "value": "OPENSEARCH_SERVERLESS",
+            "description": "StorageConfigurationType enum OPENSEARCH_SERVERLESS"
+          },
+          {
+            "name": "PINECONE",
+            "value": "PINECONE",
+            "description": "StorageConfigurationType enum PINECONE"
+          },
+          {
+            "name": "RDS",
+            "value": "RDS",
+            "description": "StorageConfigurationType enum RDS"
+          }
+        ]
+      }
+    },
+    "SupplementalDataStorageConfiguration": {
+      "type": "object",
+      "description": "Definition of SupplementalDataStorageConfiguration",
+      "properties": {
+        "supplementalDataStorageLocations": {
+          "type": "array",
+          "description": "List of supplemental data storage locations.",
+          "items": {
+            "$ref": "#/definitions/SupplementalDataStorageLocation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SupplementalDataStorageLocation": {
+      "type": "object",
+      "description": "Definition of SupplementalDataStorageLocation",
+      "properties": {
+        "s3Location": {
+          "$ref": "#/definitions/S3Location",
+          "description": "An Amazon S3 location."
+        },
+        "supplementalDataStorageLocationType": {
+          "$ref": "#/definitions/SupplementalDataStorageLocationSupplementalDataStorageLocationType",
+          "description": "Supplemental data storage location type."
+        }
+      }
+    },
+    "SupplementalDataStorageLocationSupplementalDataStorageLocationType": {
+      "type": "string",
+      "description": "SupplementalDataStorageLocationSupplementalDataStorageLocationType enum",
+      "enum": [
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "SupplementalDataStorageLocationSupplementalDataStorageLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "SupplementalDataStorageLocationSupplementalDataStorageLocationType enum S3"
+          }
+        ]
+      }
+    },
+    "VectorKnowledgeBaseConfiguration": {
+      "type": "object",
+      "description": "Definition of VectorKnowledgeBaseConfiguration",
+      "properties": {
+        "embeddingModelArn": {
+          "type": "string",
+          "description": "The ARN of the model used to create vector embeddings for the knowledge base."
+        },
+        "embeddingModelConfiguration": {
+          "$ref": "#/definitions/EmbeddingModelConfiguration",
+          "description": "The embeddings model configuration details for the vector model used in Knowledge Base."
+        },
+        "supplementalDataStorageConfiguration": {
+          "$ref": "#/definitions/SupplementalDataStorageConfiguration",
+          "description": "Configurations for supplemental data storage."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

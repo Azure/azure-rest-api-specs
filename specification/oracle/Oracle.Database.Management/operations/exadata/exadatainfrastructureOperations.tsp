@@ -1,10 +1,10 @@
 import "../commons.tsp";
 import "../../models/exadata/exadatainfra.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
+using TypeSpec.Versioning;
 namespace Oracle.Database;
 
 @armResourceOperations(CloudExadataInfrastructure)

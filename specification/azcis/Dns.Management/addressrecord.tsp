@@ -1,0 +1,66 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using Autorest;
+
+namespace Microsoft.AzureCis;
+
+@doc("AddressRecord properties")
+@added(Versions.v2024_06_24_preview)
+model AddressRecordResourceProperties {
+  @doc("Gets or sets the DNS name")
+  dnsName: string;
+
+  @doc("Gets or sets the IP Address in String format")
+  ipAddress: string;
+
+  @doc("Gets or sets the TTL")
+  ttl: string;
+
+  @doc("The Azure location")
+  azureLocation?: azureLocation;
+
+  @doc("Provisioning status of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: AddressRecordProvisioningState;
+}
+
+@doc("AddressRecord Resource")
+@added(Versions.v2024_06_24_preview)
+model AddressRecordResource is ProxyResource<AddressRecordResourceProperties> {
+  @doc("The name of resource.")
+  @pattern("^[a-zA-Z0-9-]{3,80}$")
+  @key("resourceName")
+  @segment("addressRecords") // start with lower case
+  @visibility(Lifecycle.Read)
+  @path
+  name: string;
+}
+
+@doc("Provisioning status of the resource.")
+@added(Versions.v2024_06_24_preview)
+union AddressRecordProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("Accepted State")
+  Accepted: "Accepted",
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+@armResourceOperations
+@added(Versions.v2024_06_24_preview)
+interface AddressRecord {
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AddressRecordResource>;
+  listBySubscription is ArmListBySubscription<AddressRecordResource>;
+  listByResourceGroup is ArmResourceListByParent<AddressRecordResource>;
+  get is ArmResourceRead<AddressRecordResource>;
+}

@@ -28,7 +28,25 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-06-01
+tag: package-2025-06-20-preview
+```
+
+### Tag: package-2025-02-07-preview
+
+These settings apply only when `--tag=package-2025-02-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-07-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-02-07-preview/fluidrelay.json
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2021-03-01-preview/fluidrelay.json
 ```
 
 ### Tag: package-2021-03-12-preview
@@ -64,7 +82,16 @@ These settings apply only when `--tag=package-2021-09-10-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-09-10-preview'
 input-file:
-  - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json
+  - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json  
+```
+
+### Tag: package-2022-02-16-preview
+
+These settings apply only when `--tag=package-2022-02-16-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-16-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2022-02-16-preview/fluidrelay.json  
 ```
 
 ### Tag: package-2022-02-15
@@ -74,6 +101,24 @@ These settings apply only when `--tag=package-2022-02-15` is specified on the co
 ```yaml $(tag) == 'package-2022-02-15'
 input-file:
   - Microsoft.FluidRelay/stable/2022-02-15/fluidrelay.json
+```
+
+### Tag: package-2022-02-23-preview
+
+These settings apply only when `--tag=package-2022-02-23-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-02-23-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2022-02-23-preview/fluidrelay.json
+```
+
+### Tag: package-2022-04-03
+
+These settings apply only when `--tag=package-2022-04-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-03'
+input-file:
+  - Microsoft.FluidRelay/stable/2022-04-03/fluidrelay.json
 ```
 
 ### Tag: package-2022-04-21
@@ -112,6 +157,38 @@ input-file:
   - Microsoft.FluidRelay/stable/2022-06-01/fluidrelay.json
 ```
 
+### Tag: package-2025-03-10-preview
+
+These settings apply only when `--tag=package-2025-03-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-10-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-03-10-preview/fluidrelay.json
+suppressions:
+  - code: PathContainsResourceGroup
+    from: fluidrelay.json
+    reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
+  - code: ResourceNameRestriction
+    from: fluidrelay.json
+    reason: Keep existing APIs the same (they were not changed with this version)
+```
+
+### Tag: package-2025-05-14-preview
+
+These settings apply only when `--tag=package-2025-05-14-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-14-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-05-14-preview/fluidrelay.json
+suppressions:
+  - code: PathContainsResourceGroup
+    from: fluidrelay.json
+    reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
+  - code: ResourceNameRestriction
+    from: fluidrelay.json
+    reason: Keep existing fluidRelayServerName in the APIs the same (this was not changed with this version)
+```
+
 ### Tag: package-2025-06-20-preview
 
 These settings apply only when `--tag=package-2025-06-20-preview` is specified on the command line.
@@ -139,7 +216,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2025-11-20-preview",
+    "profileName": "profileA",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "properties": {
+          "certificates": [
+            {
+              "createdDate": "3/14/2023 5:27:49 PM",
+              "expiryDate": "3/17/2023 5:27:49 PM",
+              "enhancedKeyUsage": "1.3.6.1.4.1.311.yy.xxxxxxxx.xxxxxxxx.xxxxxxxxx.xxxxxxxx",
+              "serialNumber": "xxxxxxxxxxxxxxxxxx",
+              "status": "Active",
+              "subjectName": "CN=Contoso Inc, O=Contoso Inc, L=New York, S=New York, C=US",
+              "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            }
+          ],
+          "identityValidationId": "123456",
+          "includeCity": false,
+          "includeCountry": false,
+          "includePostalCode": true,
+          "includeState": false,
+          "includeStreetAddress": false,
+          "profileType": "PublicTrust",
+          "provisioningState": "Succeeded",
+          "status": "Active"
+        }
+      }
+    }
+  },
+  "operationId": "CertificateProfiles_Get",
+  "title": "Get details of a certificate profile."
+}

@@ -10,6 +10,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
@@ -77,7 +80,7 @@ model AwsEksClusterProperties {
   createdAt?: utcDateTime;
 
   @doc("<p>The encryption configuration for the cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   encryptionConfig?: EncryptionConfig[];
 
   @doc("<p>The endpoint for your Kubernetes API server.</p>")
@@ -245,7 +248,7 @@ model EncryptionConfig {
 @doc("Definition of ClusterHealth")
 model ClusterHealth {
   @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   issues?: ClusterIssue[];
 }
 
@@ -303,7 +306,7 @@ model IpFamilyEnumValue {
 @doc("Definition of Logging")
 model Logging {
   @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   clusterLogging?: LogSetup[];
 }
 

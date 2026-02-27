@@ -12,6 +12,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./QuantumProviderAccount.tsp";
 import "./QuantumWorkspace.tsp";
 import "./routes.tsp";
 
@@ -28,7 +29,6 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service(#{ title: "Azure Quantum Management API" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Quantum;
 
 /**
@@ -46,6 +46,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_01_01_preview: "2025-01-01-preview",
+
+  /**
+   * The 2025-02-15-preview API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_02_15_preview: "2025-02-15-preview",
 
   /**
    * The 2025-08-11-preview API version.

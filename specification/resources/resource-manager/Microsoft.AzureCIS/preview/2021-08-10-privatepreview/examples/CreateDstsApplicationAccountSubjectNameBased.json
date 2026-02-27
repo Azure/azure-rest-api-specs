@@ -1,0 +1,178 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "dstsApplicationResourceName": "prodUSEastAzcis",
+    "api-version": "2021-08-10-privatepreview",
+    "DstsApplication": {
+      "location": "eastus",
+      "properties": {
+        "applicationAccount": {
+          "dstsInstance": "test.dsts.com",
+          "name": "myApplicationAccount",
+          "serviceTreeId": "474ab7bb-ba1f-4843-83a9-35b44b22e7a0",
+          "realms": [
+            "realm1"
+          ],
+          "servicePrincipalNames": [
+            "spn1"
+          ],
+          "replyToAddresses": [
+            "address"
+          ],
+          "groupId": "87894e2d-16f7-4c41-9093-b6e4040670b7",
+          "groupName": "mygroup",
+          "isMfaEnabled": true,
+          "sawDeviceEnforcement": "Full",
+          "isElevatedAccess": true,
+          "isProduction": true,
+          "claimRules": [
+            {
+              "clientIdentifier": {
+                "type": "http://sts.msft.net/user/Group",
+                "value": "GroupName"
+              },
+              "claim": {
+                "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                "value": "PlatformServiceViewer"
+              },
+              "clientIdentityOrigin": "fzwrvhqecggfpywoljzkswdvfpr",
+              "isRegionalEnforced": true
+            }
+          ],
+          "applicationClientIdentity": {
+            "type": "SubjectName",
+            "subjectNameBasedIdentity": {
+              "subjectNames": [
+                "mysubject.core.windows.net"
+              ]
+            },
+            "clientTokenIpRangeRestrictions": [
+              {
+                "toIpAddress": "rmvzsqhesxgcjahhukcnylcbz"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dstsApplications/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/dstsApplications",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Failed",
+          "applicationAccount": {
+            "dstsInstance": "test.dsts.com",
+            "name": "myApplicationAccount",
+            "serviceTreeId": "474ab7bb-ba1f-4843-83a9-35b44b22e7a0",
+            "realms": [
+              "realm1"
+            ],
+            "servicePrincipalNames": [
+              "spn1"
+            ],
+            "replyToAddresses": [
+              "address"
+            ],
+            "groupId": "87894e2d-16f7-4c41-9093-b6e4040670b7",
+            "groupName": "mygroup",
+            "isMfaEnabled": true,
+            "sawDeviceEnforcement": "Full",
+            "isElevatedAccess": true,
+            "isProduction": true,
+            "claimRules": [
+              {
+                "clientIdentifier": {
+                  "type": "http://sts.msft.net/user/Group",
+                  "value": "GroupName"
+                },
+                "claim": {
+                  "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "value": "PlatformServiceViewer"
+                },
+                "clientIdentityOrigin": "fzwrvhqecggfpywoljzkswdvfpr",
+                "isRegionalEnforced": true
+              }
+            ],
+            "applicationClientIdentity": {
+              "type": "SubjectName",
+              "subjectNameBasedIdentity": {
+                "subjectNames": [
+                  "mysubject.core.windows.net"
+                ]
+              },
+              "clientTokenIpRangeRestrictions": [
+                {
+                  "toIpAddress": "rmvzsqhesxgcjahhukcnylcbz"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dstsApplications/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/dstsApplications",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Failed",
+          "applicationAccount": {
+            "dstsInstance": "test.dsts.com",
+            "name": "myApplicationAccount",
+            "serviceTreeId": "474ab7bb-ba1f-4843-83a9-35b44b22e7a0",
+            "realms": [
+              "realm1"
+            ],
+            "servicePrincipalNames": [
+              "spn1"
+            ],
+            "replyToAddresses": [
+              "address"
+            ],
+            "groupId": "87894e2d-16f7-4c41-9093-b6e4040670b7",
+            "groupName": "mygroup",
+            "isMfaEnabled": true,
+            "sawDeviceEnforcement": "Full",
+            "isElevatedAccess": true,
+            "isProduction": true,
+            "claimRules": [
+              {
+                "clientIdentifier": {
+                  "type": "http://sts.msft.net/user/Group",
+                  "value": "GroupName"
+                },
+                "claim": {
+                  "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "value": "PlatformServiceViewer"
+                },
+                "clientIdentityOrigin": "fzwrvhqecggfpywoljzkswdvfpr",
+                "isRegionalEnforced": true
+              }
+            ],
+            "applicationClientIdentity": {
+              "type": "SubjectName",
+              "subjectNameBasedIdentity": {
+                "subjectNames": [
+                  "mysubject.core.windows.net"
+                ]
+              },
+              "clientTokenIpRangeRestrictions": [
+                {
+                  "toIpAddress": "rmvzsqhesxgcjahhukcnylcbz"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

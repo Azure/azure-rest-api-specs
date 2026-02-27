@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -117,7 +120,7 @@ model AwsEksNodegroupProperties {
   tags?: Record<string>;
 
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   taints?: Taint[];
 
   @doc("The node group update configuration. The node group update configuration.")

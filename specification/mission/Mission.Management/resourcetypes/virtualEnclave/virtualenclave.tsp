@@ -26,6 +26,31 @@ union DiagnosticDestination {
 
   @doc("DiagnosticDestination Type Both")
   Both: "Both",
+
+  @doc("DiagnosticDestination Type Unspecified")
+  Unspecified: "Unspecified",
+}
+
+@doc("Rbac Inheritance Mode")
+union RbacInheritanceMode {
+  string,
+
+  @doc("RbacInheritanceMode Type Enabled")
+  Enabled: "Enabled",
+
+  @doc("RbacInheritanceMode Type Disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Resource Visibility Mode")
+union ResourceVisibilityMode {
+  string,
+
+  @doc("ResourceVisibilityMode Type Enabled")
+  Enabled: "Enabled",
+
+  @doc("ResourceVisibilityMode Type Disabled")
+  Disabled: "Disabled",
 }
 
 @doc("Subnet Configuration")
@@ -117,6 +142,27 @@ model EnclaveAddressSpacesModel {
   managedAddressSpace?: string;
 }
 
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Virtual Enclave ApprovalSettings Properties for 2025-11-01-preview and later versions")
+model VirtualEnclaveApprovalSettings {
+  @doc("Approval configuration for enclave endpoint updates.")
+  enclaveEndpointUpdate?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for connection creation.")
+  connectionCreation?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for connection updates.")
+  connectionUpdate?: ApprovalSettingConfiguration;
+
+  @doc("Approval configuration for enclave maintenance mode.")
+  enclaveMaintenanceMode?: ApprovalSettingConfiguration;
+}
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("Virtual Enclave ApprovalSettings Patch Properties")
+model VirtualEnclaveApprovalSettingsPatchProperties
+  is UpdateableProperties<OmitDefaults<VirtualEnclaveApprovalSettings>>;
+
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveBaseModel {
   @doc("Provisioning State.")
@@ -158,6 +204,14 @@ model VirtualEnclaveBaseModel {
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean = false;
 
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Specifies whether resources in the workload resource group(s) are visible through standard RBAC")
+  workloadResourceVisibility?: ResourceVisibilityMode = ResourceVisibilityMode.Disabled;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Controls whether standard Azure RBAC role inheritance applies to the workload resource group(s)")
+  rbacInheritance?: RbacInheritanceMode = RbacInheritanceMode.Disabled;
+
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Enclave role assignments")
   @identifiers(#[])
@@ -181,6 +235,18 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
 
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("DedicatedHub Resource ID.")
+  dedicatedHubResourceId?: DedicatedHubResourceId;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Approval requirements for various actions on the enclave's resources.")
+  approvalSettings?: VirtualEnclaveApprovalSettings;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsModel;
 }
 
 @doc("Virtual Enclave Patchable Properties")
@@ -191,6 +257,18 @@ model VirtualEnclavePatchProperties
 
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("DedicatedHub Resource ID.")
+  dedicatedHubResourceId?: DedicatedHubResourceId;
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Approval requirements for various actions on the enclave's resources.")
+  approvalSettings?: VirtualEnclaveApprovalSettingsPatchProperties;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsPatchModel;
 }
 
 @doc("Virtual Enclave Patch Model")

@@ -9,12 +9,11 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Schema registry definition.")
 model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @doc("Schema registry name parameter.")
@@ -29,12 +28,10 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   ...ManagedSystemAssignedIdentityProperty;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -59,9 +56,7 @@ model SchemaRegistryProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @parentResource(SchemaRegistry)
 @doc("Schema definition.")
 model Schema is ProxyResource<SchemaProperties> {
@@ -75,12 +70,10 @@ model Schema is ProxyResource<SchemaProperties> {
   name: string;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema properties.")
 model SchemaProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -108,9 +101,7 @@ model SchemaProperties {
   tags?: Record<string>;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema format.")
 union Format {
   @doc("JSON Schema version draft 7 format")
@@ -122,9 +113,7 @@ union Format {
   string,
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema type.")
 union SchemaType {
   @doc("Message Schema schema type")
@@ -133,9 +122,7 @@ union SchemaType {
   string,
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @parentResource(Schema)
 @doc("Schema version's definition.")
 model SchemaVersion is ProxyResource<SchemaVersionProperties> {
@@ -149,12 +136,10 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
   name: string;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -174,66 +159,46 @@ model SchemaVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface SchemaRegistries {
   get is ArmResourceRead<SchemaRegistry>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<SchemaRegistry>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    SchemaRegistry,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      SchemaRegistry,
-      SchemaRegistryProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<SchemaRegistry, SchemaRegistryProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<SchemaRegistry>;
   listByResourceGroup is ArmResourceListByParent<SchemaRegistry>;
   listBySubscription is ArmListBySubscription<SchemaRegistry>;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface Schemas {
   get is ArmResourceRead<Schema>;
   createOrReplace is ArmResourceCreateOrReplaceSync<Schema>;
-  @added(Versions.v2024_09_01_preview)
-  @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
+  @added(Versions.v2024_07_01_preview)
+  @removed(Versions.v2026_02_01_preview)
   @sharedRoute
-  @renamedFrom(Versions.v2025_10_01, "delete")
+  @renamedFrom(Versions.v2026_02_01_preview, "delete")
   deleteSync is ArmResourceDeleteSync<Schema>;
 
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Schema>;
   listBySchemaRegistry is ArmResourceListByParent<Schema>;
 }
 
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;
   createOrReplace is ArmResourceCreateOrReplaceSync<SchemaVersion>;
-  @added(Versions.v2024_09_01_preview)
-  @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
+  @added(Versions.v2024_07_01_preview)
+  @removed(Versions.v2026_02_01_preview)
   @sharedRoute
-  @renamedFrom(Versions.v2025_10_01, "delete")
+  @renamedFrom(Versions.v2026_02_01_preview, "delete")
   deleteSync is ArmResourceDeleteSync<SchemaVersion>;
 
-  @added(Versions.v2025_10_01)
+  @added(Versions.v2026_02_01_preview)
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<SchemaVersion>;
   listBySchema is ArmResourceListByParent<SchemaVersion>;

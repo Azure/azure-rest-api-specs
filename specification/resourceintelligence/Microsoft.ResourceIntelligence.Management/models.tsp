@@ -107,7 +107,7 @@ union AllowToolUse {
 union ResumePolicy {
   string,
 
-  /** No specific policy — default behavior, starts the run */
+  /** No specific policy - default behavior, starts the run */
   None: "none",
 
   /** Resume the run */
@@ -148,7 +148,7 @@ model RunRequest {
    * Optional model URL override. When specified, this URL is used for all agents
    * instead of the model URL from the agent definitions.
    */
-  // "model" is a TypeSpec keyword — use @encodedName to keep the wire name as "model"
+  // "model" is a TypeSpec keyword - use @encodedName to keep the wire name as "model"
   @encodedName("application/json", "model")
   modelUrl?: string;
 }

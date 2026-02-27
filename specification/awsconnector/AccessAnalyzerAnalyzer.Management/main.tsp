@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -73,14 +76,14 @@ model AwsAccessAnalyzerAnalyzerProperties {
   analyzerName?: string;
 
   @doc("Property archiveRules")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   archiveRules?: ArchiveRule[];
 
   @doc("Amazon Resource Name (ARN) of the analyzer")
   arn?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS")
@@ -104,7 +107,7 @@ model UnusedAccessConfiguration {
 @doc("Definition of ArchiveRule")
 model ArchiveRule {
   @doc("Property filter")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   filter?: Filter[];
 
   @doc("The archive rule name")

@@ -51,6 +51,12 @@ model DataflowProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow.")
+  @added(Versions.`2025-12-01-preview`)
+  status?: DataflowStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -225,11 +231,11 @@ model DataflowDestinationOperationSettings {
 
   @doc("Headers for the output data.")
   @identifiers(#["actionType"])
-  @added(Versions.`2025-10-01`)
+  @added(Versions.`2025-09-01-preview`)
   headers?: DataflowDestinationHeaderAction[];
 }
 
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Header Action properties")
 @discriminator("actionType")
 model DataflowDestinationHeaderAction {
@@ -237,7 +243,7 @@ model DataflowDestinationHeaderAction {
   actionType: DataflowHeaderActionType;
 }
 
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Header Action Types")
 union DataflowHeaderActionType {
   string,
@@ -252,7 +258,7 @@ union DataflowHeaderActionType {
   AddOrReplace,
 }
 
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Add if not present HeaderAction properties")
 model DataflowDestinationAddIfNotPresentHeaderAction
   extends DataflowDestinationHeaderAction {
@@ -267,7 +273,7 @@ model DataflowDestinationAddIfNotPresentHeaderAction
   value: string;
 }
 
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Remove HeaderAction properties")
 model DataflowDestinationRemoveHeaderAction
   extends DataflowDestinationHeaderAction {
@@ -279,7 +285,7 @@ model DataflowDestinationRemoveHeaderAction
   key: string;
 }
 
-@added(Versions.`2025-10-01`)
+@added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Add or Replace HeaderAction properties")
 model DataflowDestinationAddOrReplaceHeaderAction
   extends DataflowDestinationHeaderAction {
@@ -310,4 +316,12 @@ model DataflowSourceOperationSettings {
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   dataSources: NonEmptyString[];
+}
+
+/** DataflowStatus status. */
+@added(Versions.`2025-12-01-preview`)
+model DataflowStatus {
+  /** The health state of the Dataflow. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

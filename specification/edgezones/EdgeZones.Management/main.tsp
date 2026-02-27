@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "./back-compatible.tsp";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -13,13 +12,17 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.EdgeZones")
 @service(#{ title: "Microsoft.EdgeZones" })
 @versioned(Versions)
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
 
 /** Api versions */
 enum Versions {
   /** 2024-04-01-preview api version */
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
   `2024-04-01-preview`,
+
+  /** 2024-08-01 api version */
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
+  `2024-08-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -118,6 +121,19 @@ model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
   name: string;
 }
 
+// We will use this in an interface
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
+@autoRoute
+@armResourceAction(TResource)
+@post
+@doc("Arm Resource Action Taking no request body object and returning result object")
+op ArmResourceActionNoBodySync<
+  TResource extends Azure.ResourceManager.CommonTypes.Resource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+): ArmResponse<TResource> | ErrorResponse;
+
 @doc("ExtendedZone operations")
 @armResourceOperations
 interface ExtendedZones {
@@ -128,8 +144,8 @@ interface ExtendedZones {
   listBySubscription is ArmListBySubscription<ExtendedZone>;
 
   @doc("Registers a subscription for an Extended Zone")
-  register is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
+  register is ArmResourceActionNoBodySync<ExtendedZone>;
 
   @doc("Unregisters a subscription for an Extended Zone")
-  unregister is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
+  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
 }

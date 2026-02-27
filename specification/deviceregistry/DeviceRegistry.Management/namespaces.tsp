@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 @doc("Namespace definition.")
 model Namespace is TrackedResource<NamespaceProperties> {
   @doc("The name of the namespace.")
@@ -28,7 +28,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
   ...ManagedSystemAssignedIdentityProperty;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 @doc("The namespace messaging endpoints model.")
 model Messaging {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
@@ -36,7 +36,15 @@ model Messaging {
   endpoints?: Record<MessagingEndpoint>;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_02_01_preview)
+@doc("The namespace management endpoints model.")
+model Management {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Dictionary of management endpoints.")
+  endpoints?: Record<ManagementEndpoint>;
+}
+
+@added(Versions.v2024_10_01_preview)
 @doc("The namespace properties model.")
 model NamespaceProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
@@ -47,22 +55,49 @@ model NamespaceProperties {
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Assigned and unassigned management endpoints.")
+  @added(Versions.v2026_02_01_preview)
+  management?: Management;
+
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 @doc("Namespace messaging endpoint model used by a device to connect to a service.")
 model MessagingEndpoint {
   @doc("Type of connection used for messaging endpoint.")
+  @removed(Versions.v2025_07_01_preview)
+  type?: string;
+
+  @doc("Type of connection used for messaging endpoint.")
+  @added(Versions.v2025_07_01_preview)
   endpointType?: string;
 
+  @added(Versions.v2025_07_01_preview)
   @doc("The endpoint address to connect to.")
   address: string;
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Namespace management endpoint model used by service to connect to device.")
+model ManagementEndpoint {
+  @doc("Type of connection used for management endpoint.")
+  endpointType: string;
+
+  @doc("The endpoint address to connect to.")
+  address: string;
+
+  @doc("The scope ID for the management endpoint.")
+  scopeId: string;
+
+  @doc("The messaging endpoint Azure resource Id.")
+  resourceId: string;
 }
 
 @added(Versions.v2025_07_01_preview)
@@ -117,22 +152,12 @@ union Scope {
   string,
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2024_10_01_preview)
 @armResourceOperations
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Namespace>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    Namespace,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Namespace,
-      NamespaceProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;

@@ -1,0 +1,681 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2024-06-24-preview",
+    "description": "AzCopy Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AzCopy"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations AzCopy": {
+            "$ref": "./examples/AzCopy_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/azCopies": {
+      "get": {
+        "operationId": "AzCopy_ListBySubscription",
+        "tags": [
+          "AzCopy"
+        ],
+        "description": "List AzCopyResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzCopyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription AzCopy": {
+            "$ref": "./examples/AzCopy_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/azCopies": {
+      "get": {
+        "operationId": "AzCopy_ListByResourceGroup",
+        "tags": [
+          "AzCopy"
+        ],
+        "description": "List AzCopyResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzCopyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup AzCopy": {
+            "$ref": "./examples/AzCopy_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/azCopies/{resourceName}": {
+      "get": {
+        "operationId": "AzCopy_Get",
+        "tags": [
+          "AzCopy"
+        ],
+        "description": "Get a AzCopyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzCopyResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get AzCopy": {
+            "$ref": "./examples/AzCopy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzCopy_CreateOrUpdate",
+        "tags": [
+          "AzCopy"
+        ],
+        "description": "Create a AzCopyResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzCopyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzCopyResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzCopyResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzCopyResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzCopyResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create AzCopy": {
+            "$ref": "./examples/AzCopy_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzCopyProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "AzCopyProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzCopyResource": {
+      "type": "object",
+      "description": "AzCopy Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzCopyResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzCopyResourceListResult": {
+      "type": "object",
+      "description": "The response of a AzCopyResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzCopyResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AzCopyResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzCopyResourceProperties": {
+      "type": "object",
+      "description": "azCopy properties",
+      "properties": {
+        "command": {
+          "$ref": "#/definitions/CommandType",
+          "description": "Specifies the azcopy command to run. Acceptable values: cp, copy. Default: cp."
+        },
+        "source": {
+          "type": "string",
+          "description": "The storage resource URI for the source object. This can target an account, container, virtual directory, or blob."
+        },
+        "destination": {
+          "type": "string",
+          "description": "The storage resource URI for the destination object. This can target an account, container, virtual directory, or blob."
+        },
+        "sourceSasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The full SAS URI for the source object, marked secret. This can target an account, container, virtual directory, or blob.",
+          "x-ms-secret": true
+        },
+        "destinationSasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The full SAS URI for the destination object, marked secret. This can target an account, container, virtual directory, or blob.",
+          "x-ms-secret": true
+        },
+        "fromTo": {
+          "$ref": "#/definitions/FromToType",
+          "description": "Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob)."
+        },
+        "blobType": {
+          "$ref": "#/definitions/BlobType",
+          "description": "Only for Blob-Blob transfers. Specifies the blob type to use when uploading blobs. Acceptable values: BlockBlob, PageBlob, AppendBlob."
+        },
+        "asSubdir": {
+          "type": "boolean",
+          "description": "Specifies whether the root of the source is considered a part of the transfer."
+        },
+        "overwrite": {
+          "$ref": "#/definitions/OverwriteType",
+          "description": "Overwrite Options."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AzCopyProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "azCopy": {
+          "type": "string",
+          "description": "Raw value of AzCopy result response message.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "command",
+        "fromTo",
+        "blobType"
+      ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "BlobType": {
+      "type": "string",
+      "description": "Blob Type",
+      "enum": [
+        "Detect",
+        "BlockBlob",
+        "PageBlob",
+        "AppendBlob"
+      ],
+      "x-ms-enum": {
+        "name": "BlobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Detect",
+            "value": "Detect",
+            "description": "Detect type"
+          },
+          {
+            "name": "BlockBlob",
+            "value": "BlockBlob",
+            "description": "BlockBlob type"
+          },
+          {
+            "name": "PageBlob",
+            "value": "PageBlob",
+            "description": "PageBlob type"
+          },
+          {
+            "name": "AppendBlob",
+            "value": "AppendBlob",
+            "description": "AppendBlob type"
+          }
+        ]
+      }
+    },
+    "CommandType": {
+      "type": "string",
+      "description": "Command Type",
+      "enum": [
+        "cp",
+        "copy"
+      ],
+      "x-ms-enum": {
+        "name": "CommandType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "cp",
+            "value": "cp",
+            "description": "Copying"
+          },
+          {
+            "name": "copy",
+            "value": "copy",
+            "description": "Copying"
+          }
+        ]
+      }
+    },
+    "FromToType": {
+      "type": "string",
+      "description": "FromTo Type",
+      "enum": [
+        "BlobBlob",
+        "BlobBlobFS",
+        "BlobFSBlob",
+        "BlobFSBlobFS",
+        "BlobFSFile",
+        "BlobFSLocal",
+        "BlobFile",
+        "BlobLocal",
+        "BlobPipe",
+        "FileBlob",
+        "FileBlobFS",
+        "FileFile",
+        "FileLocal",
+        "FilePipe",
+        "GCPBlob",
+        "LocalBlob",
+        "LocalBlobFS",
+        "LocalFile",
+        "PipeBlob",
+        "PipeFile",
+        "S3Blob",
+        "BlobTrash",
+        "FileTrash",
+        "BlobFSTrash"
+      ],
+      "x-ms-enum": {
+        "name": "FromToType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BlobBlob",
+            "value": "BlobBlob",
+            "description": "Copying from Blob to Blob"
+          },
+          {
+            "name": "BlobBlobFS",
+            "value": "BlobBlobFS",
+            "description": "Copying from Blob to BlobFS"
+          },
+          {
+            "name": "BlobFSBlob",
+            "value": "BlobFSBlob",
+            "description": "Copying from BlobFS to Blob"
+          },
+          {
+            "name": "BlobFSBlobFS",
+            "value": "BlobFSBlobFS",
+            "description": "Copying from BlobFS to BlobFS"
+          },
+          {
+            "name": "BlobFSFile",
+            "value": "BlobFSFile",
+            "description": "Copying from BlobFS to File"
+          },
+          {
+            "name": "BlobFSLocal",
+            "value": "BlobFSLocal",
+            "description": "Copying from BlobFS to Local"
+          },
+          {
+            "name": "BlobFile",
+            "value": "BlobFile",
+            "description": "Copying from Blob to File"
+          },
+          {
+            "name": "BlobLocal",
+            "value": "BlobLocal",
+            "description": "Copying from Blob to Local"
+          },
+          {
+            "name": "BlobPipe",
+            "value": "BlobPipe",
+            "description": "Copying from Blob to Pipe"
+          },
+          {
+            "name": "FileBlob",
+            "value": "FileBlob",
+            "description": "Copying from File to Blob"
+          },
+          {
+            "name": "FileBlobFS",
+            "value": "FileBlobFS",
+            "description": "Copying from File to BlobFS"
+          },
+          {
+            "name": "FileFile",
+            "value": "FileFile",
+            "description": "Copying from File to File"
+          },
+          {
+            "name": "FileLocal",
+            "value": "FileLocal",
+            "description": "Copying from File to Local"
+          },
+          {
+            "name": "FilePipe",
+            "value": "FilePipe",
+            "description": "Copying from File to Pipe"
+          },
+          {
+            "name": "GCPBlob",
+            "value": "GCPBlob",
+            "description": "Copying from GCP to Blob"
+          },
+          {
+            "name": "LocalBlob",
+            "value": "LocalBlob",
+            "description": "Copying from Local to Blob"
+          },
+          {
+            "name": "LocalBlobFS",
+            "value": "LocalBlobFS",
+            "description": "Copying from Local to BlobFS"
+          },
+          {
+            "name": "LocalFile",
+            "value": "LocalFile",
+            "description": "Copying from Local to File"
+          },
+          {
+            "name": "PipeBlob",
+            "value": "PipeBlob",
+            "description": "Copying from Pipe to Blob"
+          },
+          {
+            "name": "PipeFile",
+            "value": "PipeFile",
+            "description": "Copying from Pipe to File"
+          },
+          {
+            "name": "S3Blob",
+            "value": "S3Blob",
+            "description": "Copying from S3 to Blob"
+          },
+          {
+            "name": "BlobTrash",
+            "value": "BlobTrash",
+            "description": "Copying from Blob to Trash"
+          },
+          {
+            "name": "FileTrash",
+            "value": "FileTrash",
+            "description": "Copying from File to Trash"
+          },
+          {
+            "name": "BlobFSTrash",
+            "value": "BlobFSTrash",
+            "description": "Copying from BlobFS to Trash"
+          }
+        ]
+      }
+    },
+    "OverwriteType": {
+      "type": "string",
+      "description": "Overwrite Type",
+      "enum": [
+        "True",
+        "False",
+        "IfSourceNewer"
+      ],
+      "x-ms-enum": {
+        "name": "OverwriteType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "True value"
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "False value"
+          },
+          {
+            "name": "IfSourceNewer",
+            "value": "IfSourceNewer",
+            "description": "IfSourceNewer value"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

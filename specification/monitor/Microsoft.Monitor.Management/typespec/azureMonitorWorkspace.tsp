@@ -9,6 +9,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
+using OpenAPI;
 
 namespace Microsoft.Monitor;
 
@@ -54,7 +56,7 @@ model AzureMonitorWorkspaceProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 }
 
-@doc("Information about metrics for the workspace")
+@doc("Information about metrics for the Azure Monitor workspace.")
 model Metrics {
   @doc("The Prometheus query endpoint for the workspace")
   @visibility(Lifecycle.Read)
@@ -65,7 +67,7 @@ model Metrics {
   internalId?: string;
 }
 
-@doc("Settings for data ingestion")
+@doc("The Data Collection Rule and Endpoint used for ingestion by default.")
 model IngestionSettings {
   @doc("The Azure resource Id of the default data collection rule for this workspace.")
   @visibility(Lifecycle.Read)
@@ -91,21 +93,12 @@ union PublicNetworkAccess {
 interface AzureMonitorWorkspaces {
   @doc("Returns the specific Azure Monitor workspace")
   get is ArmResourceRead<AzureMonitorWorkspace>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create or update a workspace")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    AzureMonitorWorkspace,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureMonitorWorkspace>;
   @doc("Updates part of a workspace")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmResourcePatchSync<
     AzureMonitorWorkspace,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      AzureMonitorWorkspace,
-      AzureMonitorWorkspaceProperties
-    >
+    AzureMonitorWorkspaceProperties
   >;
   @doc("Delete a workspace")
   delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorWorkspace>;

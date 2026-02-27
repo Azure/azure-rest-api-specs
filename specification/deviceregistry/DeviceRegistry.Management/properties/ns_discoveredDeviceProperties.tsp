@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../common/extendedLocation.tsp";
 import "../common/provisioningState.tsp";
 import "../common/authenticationMethod.tsp";
+import "./deviceProperties.tsp";
 
 using TypeSpec.Versioning;
 

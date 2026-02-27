@@ -4,6 +4,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Oracle.Database;
 
@@ -91,6 +92,16 @@ model ExascaleDbStorageVaultProperties {
   @visibility(Lifecycle.Read)
   @maxItems(2)
   attachedShapeAttributes?: ShapeAttribute[];
+
+  @added(Versions.v20251201_preview)
+  @doc("Indicates if autoscale feature is enabled for the Storage Vault. The default value is: false.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAutoscaleEnabled?: boolean = false;
+
+  @added(Versions.v20251201_preview)
+  @doc("Maximum limit storage size in gigabytes, that is applicable for the Database Storage Vault.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  autoscaleLimitInGbs?: int32;
 }
 
 @added(Versions.v20241201_preview)

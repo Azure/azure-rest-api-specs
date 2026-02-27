@@ -41,7 +41,7 @@
         ],
         "operationId": "Clusters_ListBySubscription",
         "x-ms-examples": {
-          "List clusters in a given subscription": {
+          "List Clusters in a given subscription": {
             "$ref": "./examples/ListClustersBySubscription.json"
           }
         },
@@ -80,7 +80,7 @@
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
-          "List clusters in a given resource group": {
+          "List Clusters in a given resource group": {
             "$ref": "./examples/ListClustersByResourceGroup.json"
           }
         },
@@ -122,7 +122,7 @@
         ],
         "operationId": "Clusters_Get",
         "x-ms-examples": {
-          "Get cluster": {
+          "Get Clusters": {
             "$ref": "./examples/GetCluster.json"
           }
         },
@@ -162,7 +162,7 @@
         ],
         "operationId": "Clusters_Create",
         "x-ms-examples": {
-          "Create cluster": {
+          "Create Clusters": {
             "$ref": "./examples/CreateCluster.json"
           }
         },
@@ -211,7 +211,7 @@
         ],
         "operationId": "Clusters_Update",
         "x-ms-examples": {
-          "Update cluster": {
+          "Update Cluster": {
             "$ref": "./examples/UpdateCluster.json"
           }
         },
@@ -260,7 +260,7 @@
         ],
         "operationId": "Clusters_Delete",
         "x-ms-examples": {
-          "Delete cluster": {
+          "Delete Cluster": {
             "$ref": "./examples/DeleteCluster.json"
           }
         },
@@ -325,10 +325,7 @@
       ],
       "properties": {
         "systemData": {
-          "description": "System data of Cluster resource",
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true,
-          "readOnly": true
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
           "description": "Cluster properties.",
@@ -412,10 +409,13 @@
           "description": "Tenant id of cluster AAD identity.",
           "type": "string"
         },
+        "desiredProperties": {
+          "description": "Desired properties of the cluster.",
+          "$ref": "#/definitions/ClusterDesiredProperties"
+        },
         "reportedProperties": {
           "description": "Properties reported by cluster agent.",
-          "$ref": "#/definitions/ClusterReportedProperties",
-          "readOnly": true
+          "$ref": "#/definitions/ClusterReportedProperties"
         },
         "trialDaysRemaining": {
           "description": "Number of days remaining in the trial period.",
@@ -454,6 +454,36 @@
         "cloudManagementEndpoint": {
           "type": "string",
           "description": "Endpoint configured for management from the Azure portal"
+        },
+        "aadClientId": {
+          "description": "App id of cluster AAD identity.",
+          "type": "string"
+        },
+        "aadTenantId": {
+          "description": "Tenant id of cluster AAD identity.",
+          "type": "string"
+        },
+        "desiredProperties": {
+          "description": "Desired properties of the cluster.",
+          "$ref": "#/definitions/ClusterDesiredProperties"
+        }
+      }
+    },
+    "ClusterDesiredProperties": {
+      "description": "Desired properties of the cluster.",
+      "type": "object",
+      "properties": {
+        "windowsServerSubscription": {
+          "description": "Desired state of Windows Server Subscription.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -489,6 +519,19 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "imdsAttestation": {
+          "description": "IMDS attestation status of the cluster.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ImdsAttestation",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
@@ -504,6 +547,19 @@
         "id": {
           "description": "Id of the node in the cluster.",
           "type": "number",
+          "readOnly": true
+        },
+        "windowsServerSubscription": {
+          "description": "State of Windows Server Subscription.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsServerSubscription",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "manufacturer": {

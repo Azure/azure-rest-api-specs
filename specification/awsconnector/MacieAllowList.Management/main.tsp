@@ -84,7 +84,7 @@ model AwsMacieAllowListProperties {
   status?: Status;
 
   @doc("A collection of tags associated with a resource")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 

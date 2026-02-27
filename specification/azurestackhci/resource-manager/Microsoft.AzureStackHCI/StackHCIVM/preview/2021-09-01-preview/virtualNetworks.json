@@ -67,7 +67,7 @@
             }
           },
           "200": {
-            "description": "Retrieved the virtual network resource.",
+            "description": "Retrieves the virtualnetworks resource.",
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
@@ -121,7 +121,7 @@
             }
           },
           "201": {
-            "description": "Creates the virtual networks resource.",
+            "description": "Creates the virtualnetworks resource.",
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
@@ -157,7 +157,7 @@
             }
           },
           "200": {
-            "description": "Deletes the virtual network resource."
+            "description": "Deletes the virtualnetworks resource."
           },
           "204": {
             "description": "No content"
@@ -201,13 +201,13 @@
             }
           },
           "200": {
-            "description": "Updates the virtual network resource.",
+            "description": "Updates the virtualnetworks resource.",
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
           },
           "201": {
-            "description": "Updates the virtual network resource.",
+            "description": "Updates the virtualnetworks resource.",
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
@@ -242,7 +242,7 @@
             }
           },
           "200": {
-            "description": "Lists all virtual networks under the resource group.",
+            "description": "Lists all virtualnetworks under the resource group.",
             "schema": {
               "$ref": "#/definitions/virtualnetworksListResult"
             }
@@ -277,7 +277,7 @@
             }
           },
           "200": {
-            "description": "Lists all virtual networks under the subscription.",
+            "description": "Lists all virtualnetworks under the subscription.",
             "schema": {
               "$ref": "#/definitions/virtualnetworksListResult"
             }
@@ -462,12 +462,12 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/VirtualNetworkStatus"
+          "$ref": "#/definitions/virtualNetworkStatus"
         }
       },
-      "description": "Properties of a virtual network resource"
+      "description": "virtualnetworksProperties defines a list of properties under virtualnetworks"
     },
-    "VirtualNetworkStatus": {
+    "virtualNetworkStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
@@ -504,7 +504,7 @@
           }
         }
       },
-      "description": "VirtualNetworkStatus defines the observed state of virtual networks"
+      "description": "virtualNetworkStatus defines the observed state of virtualnetworks"
     },
     "IPPoolInfo": {
       "type": "object",
@@ -551,7 +551,7 @@
     },
     "virtualnetworks": {
       "type": "object",
-      "description": "The virtual network resource definition.",
+      "description": "The virtualnetworks resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -560,8 +560,17 @@
           "$ref": "#/definitions/virtualnetworksProperties"
         },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -584,7 +593,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "The virtual network resource patch definition."
+      "description": "The virtualnetworks resource patch definition."
     },
     "virtualnetworksListResult": {
       "type": "object",

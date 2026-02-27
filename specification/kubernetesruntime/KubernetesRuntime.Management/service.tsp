@@ -3,7 +3,6 @@ import "./common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesRuntime;
@@ -12,7 +11,7 @@ namespace Microsoft.KubernetesRuntime;
 model ServiceProperties {
   @doc("The object id of the service principal of the RP provisioned in the tenant")
   @visibility(Lifecycle.Read)
-  rpObjectId?: uuid;
+  rpObjectId?: string;
 
   @doc("Resource provision state")
   @visibility(Lifecycle.Read)
@@ -34,5 +33,5 @@ interface Services {
   get is ArmResourceRead<ServiceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<ServiceResource>;
   delete is ArmResourceDeleteSync<ServiceResource>;
-  list is ArmResourceListByParent<ServiceResource>;
+  listByParent is ArmResourceListByParent<ServiceResource>;
 }

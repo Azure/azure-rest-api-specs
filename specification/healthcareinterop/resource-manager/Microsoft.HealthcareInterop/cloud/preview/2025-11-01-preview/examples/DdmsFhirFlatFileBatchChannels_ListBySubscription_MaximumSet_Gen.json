@@ -1,0 +1,145 @@
+{
+  "title": "DdmsFhirFlatFileBatchChannels_ListBySubscription_MaximumSet",
+  "operationId": "DdmsFhirFlatFileBatchChannels_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "486949B6-5A50-4884-B12D-271498C14DE3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hubResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+              "sourceConfiguration": {
+                "connectorType": "StorageAccountConnector",
+                "storageAccountConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/storageAccountConnectors/storageConn1"
+              },
+              "transformationConfiguration": {
+                "fhirQueryConfiguration": {
+                  "fhirServerConfiguration": {
+                    "emrSystem": "Epic",
+                    "serviceEndpoint": "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4",
+                    "authenticationConfiguration": {
+                      "authorizationEndpoint": "https://fhir.epic.com/test-fhir-oauth/oauth2/token",
+                      "clientId": "epic-client-id",
+                      "clientSecret": {
+                        "type": "KeyVaultKey",
+                        "keyVaultKeyIdentifier": "https://keyvaultname.vault.azure.net/keys/testkeyname"
+                      }
+                    }
+                  }
+                }
+              },
+              "destinationConfiguration": {
+                "connectorType": "DdmsConnector",
+                "ddmsConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/ddmsConnectors/ddmsConnector1"
+              },
+              "jobConfiguration": {
+                "trigger": {
+                  "triggerType": "RecurringScheduleTrigger",
+                  "state": "Enabled",
+                  "startDateTimeUtc": "2025-02-03T18:24:34.138Z",
+                  "activeHours": [
+                    0,
+                    2,
+                    4,
+                    6,
+                    8,
+                    10,
+                    12,
+                    14,
+                    16,
+                    18,
+                    20,
+                    22
+                  ],
+                  "activeDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                  ]
+                }
+              }
+            },
+            "tags": {
+              "environment": "production",
+              "channel": "ddms-fhir-flatfile-batch"
+            },
+            "location": "eastus2",
+            "id": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/ddmsFlatFileChannel1",
+            "name": "ddmsFlatFileChannel1",
+            "type": "Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-01-15T10:30:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-01-15T10:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "hubResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud2/providers/Microsoft.HealthcareInterop/hubs/testhub2",
+              "sourceConfiguration": {
+                "connectorType": "StorageAccountConnector",
+                "storageAccountConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud2/providers/Microsoft.HealthcareInterop/storageAccountConnectors/storageConn2"
+              },
+              "transformationConfiguration": {
+                "fhirQueryConfiguration": {
+                  "fhirServerConfiguration": {
+                    "emrSystem": "Epic",
+                    "serviceEndpoint": "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4",
+                    "authenticationConfiguration": {
+                      "authorizationEndpoint": "https://fhir.epic.com/test-fhir-oauth/oauth2/token",
+                      "clientId": "epic-client-id-2",
+                      "clientSecret": {
+                        "type": "KeyVaultKey",
+                        "keyVaultKeyIdentifier": "https://keyvaultname2.vault.azure.net/keys/testkeyname2"
+                      }
+                    }
+                  }
+                }
+              },
+              "destinationConfiguration": {
+                "connectorType": "DdmsConnector",
+                "ddmsConnectorResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud2/providers/Microsoft.HealthcareInterop/ddmsConnectors/ddmsConnector2"
+              },
+              "jobConfiguration": {
+                "trigger": {
+                  "triggerType": "AdhocTrigger",
+                  "state": "Disabled"
+                }
+              }
+            },
+            "tags": {
+              "environment": "development",
+              "channel": "ddms-fhir-flatfile-batch"
+            },
+            "location": "westus2",
+            "id": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud2/providers/Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels/ddmsFlatFileChannel2",
+            "name": "ddmsFlatFileChannel2",
+            "type": "Microsoft.HealthcareInterop/ddmsFhirFlatFileBatchChannels",
+            "systemData": {
+              "createdBy": "developer@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-01-16T09:15:00.000Z",
+              "lastModifiedBy": "developer@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-01-16T09:15:00.000Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

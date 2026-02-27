@@ -1,0 +1,42 @@
+﻿{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "parameters": {
+      "name": "myResourceName",
+      "type": "Microsoft.SaaSHub/CloudServices",
+      "properties": {
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "MinimumAddOnLicensesNotIncluded",
+        "reason": "Minimum add on licenses were not included",
+        "additionalInfo": {
+          "addOn": {
+            "ineligibilityReasons": [
+              "MinimumAddOnLicensesNotIncluded"
+            ],
+            "eligibilityConstraints": [
+              {
+                "constraintType": "MinimumAddOnPercentageQuantityOfBase",
+                "isEligible": "Eligible"
+              }
+            ]
+          },
+          "promotion": null,
+          "futurePrice": null,
+          "coTermDates": null
+        }
+      }
+    }
+  },
+  "operationId": "CloudServices_CanCreate",
+  "title": "Evaluate if a SaaSHub cloud service add-on can be created - Failed"
+}

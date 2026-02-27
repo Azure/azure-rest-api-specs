@@ -3,7 +3,10 @@
   "info": {
     "title": "AzureStackHCI",
     "description": "The Microsoft.AzureStackHCI Rest API spec.",
-    "version": "2021-07-01-preview"
+    "version": "2021-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureStackHCIClient"
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -202,6 +205,12 @@
             "schema": {
               "$ref": "#/definitions/virtualnetworks"
             }
+          },
+          "201": {
+            "description": "Updates the virtualnetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualnetworks"
+            }
           }
         }
       }
@@ -287,22 +296,7 @@
       "properties": {
         "networkType": {
           "type": "string",
-          "description": "Type of the network",
-          "enum": [
-            "NAT",
-            "Transparent",
-            "L2Bridge",
-            "L2Tunnel",
-            "ICS",
-            "Private",
-            "Overlay",
-            "Internal",
-            "Mirrored"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkTypeEnum",
-            "modelAsString": true
-          }
+          "description": "Type of the network"
         },
         "subnets": {
           "type": "array",
@@ -330,15 +324,7 @@
                   },
                   "ipAllocationMethod": {
                     "type": "string",
-                    "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-                    "enum": [
-                      "Dynamic",
-                      "Static"
-                    ],
-                    "x-ms-enum": {
-                      "name": "IpAllocationMethodEnum",
-                      "modelAsString": true
-                    }
+                    "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'"
                   },
                   "ipConfigurationReferences": {
                     "type": "array",
@@ -347,12 +333,11 @@
                       "properties": {
                         "ID": {
                           "type": "string",
-                          "description": "Name of the Ip Configuration"
+                          "description": "IPConfigurationID"
                         }
                       },
                       "description": "IPConfigurationReference - Describes a IPConfiguration under the virtual network"
                     },
-                    "x-ms-identifiers": [],
                     "description": "IPConfigurationReferences - list of IPConfigurationReferences"
                   },
                   "routeTable": {
@@ -360,7 +345,7 @@
                     "properties": {
                       "id": {
                         "type": "string",
-                        "description": "route ID - ID of the IP route"
+                        "description": "Etag - Gets a unique read-only string that changes whenever the resource is updated."
                       },
                       "name": {
                         "type": "string",
@@ -397,8 +382,7 @@
                               },
                               "description": "Route is associated with a subnet."
                             },
-                            "description": "Routes - Collection of routes contained within a route table.",
-                            "x-ms-identifiers": []
+                            "description": "Routes - Collection of routes contained within a route table."
                           }
                         },
                         "description": "RouteTablePropertiesFormat route Table resource."
@@ -415,8 +399,7 @@
                     "description": "network associated pool of IP Addresses",
                     "items": {
                       "$ref": "#/definitions/IPPool"
-                    },
-                    "x-ms-identifiers": []
+                    }
                   },
                   "vlan": {
                     "type": "integer",
@@ -429,49 +412,21 @@
             },
             "description": "Subnet subnet in a virtual network resource."
           },
-          "description": "Subnet - list of subnets under the virtual network",
-          "x-ms-identifiers": []
+          "description": "Subnet - list of subnets under the virtual network"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "InProgress",
-            "Accepted",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "resourceName": {
           "type": "string",
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/VirtualNetworkStatus"
+          "type": "object",
+          "description": "MOCVirtualNetworkStatus defines the observed state of MOCVirtualNetwork"
         }
       },
-      "description": "VirtualNetworkSpec defines the desired state of VirtualNetwork"
-    },
-    "VirtualNetworkStatus": {
-      "type": "object",
-      "description": "VirtualNetworkStatus defines the observed state of VirtualNetwork",
-      "x-ms-client-flatten": true,
-      "readOnly": true,
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "VirtualNetwork provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
-        }
-      }
+      "description": "MOCVirtualNetworkSpec defines the desired state of MOCVirtualNetwork"
     },
     "IPPoolInfo": {
       "type": "object",
@@ -505,11 +460,11 @@
         },
         "start": {
           "type": "string",
-          "description": "First IP in the pool"
+          "description": "start of the ip address pool"
         },
         "end": {
           "type": "string",
-          "description": "Last IP in the pool"
+          "description": "end of the ip address pool"
         },
         "info": {
           "$ref": "#/definitions/IPPoolInfo"
@@ -518,7 +473,6 @@
     },
     "virtualnetworks": {
       "type": "object",
-      "description": "The virtualnetworks resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -526,16 +480,53 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/virtualnetworksProperties"
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "required": [
+        "location"
+      ],
+      "description": "The virtualnetworks resource definition."
     },
     "virtualnetworksPatch": {
       "type": "object",

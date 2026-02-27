@@ -1,0 +1,751 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Qumulo.QaaS",
+    "version": "2022-03-10-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Storages"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Qumulo.QaaS/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Qumulo.QaaS/storages": {
+      "get": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_ListBySubscription",
+        "description": "List StorageResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Storages_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Storages_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.QaaS/storages": {
+      "get": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_ListByResourceGroup",
+        "description": "List StorageResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Storages_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Storages_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.QaaS/storages/{storageName}": {
+      "get": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_Get",
+        "description": "Get a StorageResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageResource.storageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_Get_MaximumSet_Gen.json"
+          },
+          "Storages_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_CreateOrUpdate",
+        "description": "Create a StorageResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageResource.storageName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Storages_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Storages_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_Update",
+        "description": "Update a StorageResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageResource.storageName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/StorageResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_Update_MaximumSet_Gen.json"
+          },
+          "Storages_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Storages"
+        ],
+        "operationId": "Storages_Delete",
+        "description": "Delete a StorageResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageResource.storageName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Storages_Delete_MaximumSet_Gen.json"
+          },
+          "Storages_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Storages_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CompanyDetails": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office Address"
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country or Region of operation"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the company"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business of the company"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Employees"
+        }
+      },
+      "description": "Company details of Qumulo FileSystem resource",
+      "required": [
+        "companyName"
+      ]
+    },
+    "MarketplaceDetails": {
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        }
+      },
+      "description": "MarketplaceDetails of Qumulo FileSystem resource",
+      "required": [
+        "marketplaceSubscriptionId",
+        "planId",
+        "offerId",
+        "publisherId",
+        "marketplaceSubscriptionStatus"
+      ]
+    },
+    "MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of the storage resource",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Fulfillment has not started"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace offer is subscribed"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Marketplace offer is suspended because of non payment"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Marketplace offer is unsubscribed"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the storage resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Storage resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Storage resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Storage resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Storage resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Storage resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Storage resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Storage resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Storage resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Storage resource state is unknown"
+          }
+        ]
+      }
+    },
+    "StorageResourceProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Azure Tenant Id"
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User Details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "Cluster login url of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Private IPs of the resource"
+        }
+      },
+      "description": "Properties specific to the Qumulo File System resource",
+      "required": [
+        "tenantId",
+        "marketplaceDetails",
+        "provisioningState",
+        "userDetails",
+        "delegatedSubnetId"
+      ]
+    },
+    "StorageResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A Storage Resource by Qumulo",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageResource"
+          },
+          "x-cadl-name": "StorageResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a StorageResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "StorageResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the StorageResource."
+    },
+    "StorageResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User Details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "File system Id of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Private IPs of the resource"
+        }
+      },
+      "description": "The updatable properties of the StorageResource."
+    },
+    "UserDetails": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User Email"
+        },
+        "alternateEmail": {
+          "type": "string",
+          "description": "Alternate Email address"
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of user"
+        },
+        "contactPhoneNumber": {
+          "type": "string",
+          "description": "Contact phone number"
+        }
+      },
+      "description": "User Details of Qumulo FileSystem resource",
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "parameters": {
+    "StorageResource.storageName": {
+      "name": "storageName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the storage resource",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

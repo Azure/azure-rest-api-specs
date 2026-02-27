@@ -1,0 +1,22 @@
+{
+  "operationId": "Rules_Delete",
+  "title": "Rules_Delete",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgthrottling",
+    "throttlingAccountName": "contoso",
+    "ruleName": "rule1"
+  },
+  "responses": {
+    "202": {
+      "description": "Resource deletion accepted.",
+      "headers": {
+        "Location": "https://management.azure.com/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-03-01-preview"
+      }
+    },
+    "204": {
+      "description": "Resource does not exist."
+    }
+  }
+}

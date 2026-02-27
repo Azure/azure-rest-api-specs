@@ -1,0 +1,35 @@
+{
+  "title": "NetworkOperations_Update_MaximumSet",
+  "operationId": "NetworkOperations_Update",
+  "parameters": {
+    "properties": {
+      "properties": {
+        "siteName": "Site-002",
+        "startingIpAddress": "10.0.0.5",
+        "size": "/26",
+        "mtu": 1400
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "accessPointAccountName": "testAccessPointAccount",
+    "networkName": "testNetwork",
+    "api-version": "2024-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/networks/testNetwork",
+        "name": "testNetwork",
+        "type": "microsoft.accesspoint/accesspointaccounts/networks",
+        "properties": {
+          "siteName": "Site-001",
+          "startingIpAddress": "10.0.0.5",
+          "size": "/24",
+          "mtu": 1500,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

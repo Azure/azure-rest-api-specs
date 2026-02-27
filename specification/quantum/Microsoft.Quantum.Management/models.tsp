@@ -3,11 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Quantum;
@@ -409,7 +406,7 @@ model WorkspaceResourceProperties {
   /**
    * List of Providers selected for this Workspace
    */
-  @identifiers(#["providerId"])
+  @Azure.ResourceManager.identifiers(#["providerId"])
   providers?: Provider[];
 
   /**
@@ -431,7 +428,7 @@ model WorkspaceResourceProperties {
   storageAccount?: StorageAccountResourceId;
 
   /**
-   * Whether this workspace is V1 or V2.
+   * Whether this workspace is v1 or v2.
    */
   @added(Versions.v2025_11_01_preview)
   workspaceKind?: WorkspaceKind;
@@ -464,8 +461,8 @@ model WorkspaceResourceProperties {
   /**
    * DEPRECATED: This field is deprecated and will be removed in future versions. Please use the quotas under providers instead.
    */
-  @removed(Versions.v2025_12_15_preview)
   @added(Versions.v2025_08_11_preview)
+  @removed(Versions.v2025_12_15_preview)
   quotas?: QuotaAllocations;
 }
 
@@ -599,7 +596,7 @@ model ApiKeys {
 }
 
 /** A Quantum Suite Offer that is available to a subscription. */
-@added(Versions.v2025_08_11_preview)
+@added(Versions.v2025_02_15_preview)
 model QuantumSuiteOffer
   is Azure.ResourceManager.ProxyResource<QuantumSuiteOfferProperties> {
   ...ResourceNameParameter<
@@ -611,7 +608,7 @@ model QuantumSuiteOffer
 
 /** Properties of a Quantum Suite Offer */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Only offers that are fully provisioned as available to subscriptions."
-@added(Versions.v2025_08_11_preview)
+@added(Versions.v2025_02_15_preview)
 model QuantumSuiteOfferProperties {
   /** The provider ID of the offer. */
   providerId: string;
@@ -631,5 +628,6 @@ model QuantumSuiteOfferProperties {
   /**
    * Quota allocations associated with this offer.
    */
+  @added(Versions.v2025_08_11_preview)
   quotas?: QuotaAllocations;
 }

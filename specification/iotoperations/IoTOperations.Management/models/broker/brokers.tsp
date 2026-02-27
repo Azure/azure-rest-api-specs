@@ -64,6 +64,12 @@ model BrokerProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the broker.")
+  @added(Versions.`2025-12-01-preview`)
+  status?: BrokerStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -85,7 +91,7 @@ model BrokerPersistence {
     Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. 
     Optionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'.
     """)
-  @removed(Versions.`2025-10-01`)
+  @removed(Versions.`2025-09-01-preview`)
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.")
@@ -233,7 +239,7 @@ union BrokerStateStoreKeyType {
 
 @doc("Dynamic settings of the persistence.")
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
+@removed(Versions.`2025-09-01-preview`)
 model BrokerPersistenceDynamicSettings {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The user property key to enable persistence.")
@@ -271,7 +277,7 @@ model BrokerSubscriberQueueCustomPolicySettings {
   dynamic?: BrokerSubscriberQueueDynamic;
 
   @doc("List of topics under which messages would be persisted to disk for each subscriber. Wildcards # and + supported.")
-  @removed(Versions.`2025-10-01`)
+  @removed(Versions.`2025-09-01-preview`)
   topics?: string[];
 }
 
@@ -617,4 +623,12 @@ union SubscriberMessageDropStrategy {
 
   @doc("The oldest message is dropped.")
   DropOldest: "DropOldest",
+}
+
+/** BrokerStatus status. */
+@added(Versions.`2025-12-01-preview`)
+model BrokerStatus {
+  /** The health state of the Broker. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

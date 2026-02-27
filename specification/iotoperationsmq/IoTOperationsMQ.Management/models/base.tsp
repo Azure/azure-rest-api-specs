@@ -22,29 +22,26 @@ model ExtendedLocationProperty {
 }
 
 @doc("The enum defining type of ExtendedLocation accepted.")
-union ExtendedLocationType {
-  string,
-
+enum ExtendedLocationType {
   @doc("CustomLocation type")
-  "CustomLocation",
+  CustomLocation,
 }
 
 @doc("The enum defining status of resource.")
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum ProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned.")
-  Provisioning: "Provisioning",
+  Provisioning,
 
   @doc("Resource is Updating.")
-  Updating: "Updating",
+  Updating,
 
   @doc("Resource is Deleting.")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("Resource has been Accepted.")
-  Accepted: "Accepted",
+  Accepted,
 }
 
 @doc("Defines the Docker image details")
@@ -67,7 +64,6 @@ model NodeTolerations {
   @doc("Toleration effect.")
   effect: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Toleration key.")
   key: string;
 
@@ -119,21 +115,19 @@ model CertManagerIssuerRef {
 @doc("SANs for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
-  dns: string[] = #[];
+  dns: string[] = [];
 
   @doc("IP address SANs.")
-  ip: string[] = #[];
+  ip: string[] = [];
 }
 
 @doc("Mqtt Protocol types")
-union MqttProtocol {
-  string,
-
+enum MqttProtocol {
   @doc("Mqttv3")
-  "v3",
+  v3,
 
   @doc("Mqttv5")
-  "v5",
+  v5,
 }
 
 @doc("Mqtt Local Broker ConnectionSpec details")

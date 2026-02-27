@@ -112,8 +112,7 @@ interface NewRelicMonitorResources {
   switchBilling is ArmResourceActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
-    ArmResponse<NewRelicMonitorResource> | (AcceptedResponse &
-      Azure.Core.Foundations.RetryAfterHeader) | NoContentResponse
+    ArmResponse<NewRelicMonitorResource> | AcceptedResponse | NoContentResponse
   >;
 
   /**

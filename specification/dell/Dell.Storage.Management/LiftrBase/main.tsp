@@ -160,13 +160,13 @@ union ResourceEncryptionType {
   /**
    * Microsoft managed keys (Default)
    */
-  `Microsoft-managed keys (MMK)`: "Microsoft-managed keys (MMK)",
+  "Microsoft-managed keys (MMK)",
 
   /**
    * Customer managed keys
    * (CMK) - Only UserAssigned identity is supported
    */
-  `Customer-managed keys (CMK)`: "Customer-managed keys (CMK)",
+  "Customer-managed keys (CMK)",
 }
 
 /**
@@ -263,7 +263,7 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Replace this with @secret if this is a field that should eb kept private."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Mark as @secret if this content should be kept private."
   @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }

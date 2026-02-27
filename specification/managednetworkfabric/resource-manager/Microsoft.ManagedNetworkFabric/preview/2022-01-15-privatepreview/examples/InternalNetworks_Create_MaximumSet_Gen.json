@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2022-01-15-privatepreview",
+    "l3IsolationDomainName": "example-l3domain",
+    "internalNetworkName": "example-internalnetwork",
+    "body": {
+      "properties": {
+        "vlanId": 1001,
+        "mtu": 1500,
+        "connectedIPv4Subnets": [
+          {
+            "prefix": "10.0.0.0/24",
+            "gateway": "10.0.0.1"
+          }
+        ],
+        "bgpConfiguration": {
+          "bfdConfiguration": {
+            "interval": 3,
+            "multiplier": 5
+          },
+          "defaultRouteOriginate": true,
+          "fabricASN": 65048,
+          "peerASN": 65047,
+          "ipv4Prefix": "10.0.0.0/28"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "vlanId": 1001,
+          "mtu": 1500,
+          "connectedIPv4Subnets": [
+            {
+              "prefix": "10.0.0.0/24",
+              "gateway": "10.0.0.1"
+            }
+          ],
+          "bgpConfiguration": {
+            "bfdConfiguration": {
+              "administrativeState": "null",
+              "interval": 3,
+              "multiplier": 5
+            },
+            "defaultRouteOriginate": true,
+            "fabricASN": 65048,
+            "peerASN": 65047,
+            "ipv4Prefix": "10.0.0.0/28"
+          }
+        },
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/lexample-l3domain/internalNetworks/example-internalnetwork"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "vlanId": 1001,
+          "mtu": 1500,
+          "connectedIPv4Subnets": [
+            {
+              "prefix": "10.0.0.0/24",
+              "gateway": "10.0.0.1"
+            }
+          ],
+          "bgpConfiguration": {
+            "bfdConfiguration": {
+              "administrativeState": "null",
+              "interval": 3,
+              "multiplier": 5
+            },
+            "defaultRouteOriginate": true,
+            "fabricASN": 65048,
+            "peerASN": 65047,
+            "ipv4Prefix": "10.0.0.0/28"
+          }
+        },
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/lexample-l3domain/internalNetworks/example-internalnetwork"
+      }
+    }
+  }
+}

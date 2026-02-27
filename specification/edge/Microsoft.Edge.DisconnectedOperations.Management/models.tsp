@@ -80,6 +80,105 @@ union RegistrationStatus {
   string,
 }
 
+/**
+ * Auto renew status
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union AutoRenew {
+  /**
+   * Auto renew is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Auto renew is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+/**
+ * Pricing model
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union PricingModel {
+  /**
+   * Trial pricing model.
+   */
+  Trial: "Trial",
+
+  string,
+
+  /**
+   * Annual pricing model.
+   */
+  Annual: "Annual",
+
+  string,
+}
+
+/**
+ * Billing status
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union BillingStatus {
+  /**
+   * Billing is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Billing is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+
+  /**
+   * Billing is stopped.
+   */
+  Stopped: "Stopped",
+
+  string,
+}
+
+/**
+ * Benefit plans status
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union BenefitPlanStatus {
+  /**
+   * Benefit plan is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Benefit plan is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("The benefit plans")
+@added(Microsoft.Edge.Versions.v2026_01_01)
+model BenefitPlans {
+  @doc("Azure Hybrid Windows Server Benefit plan")
+  azureHybridWindowsServerBenefit?: BenefitPlanStatus;
+
+  @doc("Number of Windows Server VMs to license under the Azure Hybrid Benefit plan")
+  @added(Microsoft.Edge.Versions.v2026_03_01)
+  @minValue(1)
+  windowsServerVmCount?: int32;
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -87,13 +186,20 @@ model DisconnectedOperationProperties {
   provisioningState?: ResourceProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique GUID of the stamp")
+  @doc("The unique Id of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
   @doc("The billing model")
   billingModel: BillingModel;
 
+  @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "connectionIntent")
+  @removed(Microsoft.Edge.Versions.v2026_01_01)
+  @doc("The connection intent")
+  oldConnectionIntent: ConnectionIntent;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
 
@@ -108,12 +214,20 @@ model DisconnectedOperationProperties {
   @doc("The device version")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
+
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2025_08_01)
+  billingConfiguration?: BillingConfiguration;
+
+  @doc("The benefit plans")
+  @added(Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 @doc("The disconnected operation manifest")
 model DisconnectedOperationDeploymentManifest {
   @visibility(Lifecycle.Read)
-  @doc("The resource identifier of the disconnected operations resource")
+  @doc("The resource Id of the disconnected operations resource")
   resourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Edge/disconnectedOperations";
@@ -125,7 +239,7 @@ model DisconnectedOperationDeploymentManifest {
   resourceName: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique GUID of the stamp")
+  @doc("The unique Id of the stamp")
   stampId: string;
 
   @visibility(Lifecycle.Read)
@@ -144,6 +258,16 @@ model DisconnectedOperationDeploymentManifest {
   @doc("The cloud in which the resource is registered")
   @added(Microsoft.Edge.Versions.v2025_06_01)
   cloud?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  billingConfiguration?: BillingConfiguration;
+
+  @visibility(Lifecycle.Read)
+  @doc("The benefit plans")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 /**
@@ -163,6 +287,50 @@ union ReleaseType {
   Update: "Update",
 
   string,
+}
+
+/**
+ * System Reboot
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union SystemReboot {
+  /**
+   * System reboot is required.
+   */
+  Required: "Required",
+
+  string,
+
+  /**
+   * System reboot is not required.
+   */
+  NotRequired: "NotRequired",
+
+  string,
+}
+
+@added(Microsoft.Edge.Versions.v2026_01_01)
+@doc("The update properties of the Update Release type Image")
+model ImageUpdateProperties {
+  @visibility(Lifecycle.Read)
+  @doc("Indicates if a system reboot is required after applying the update.")
+  systemReboot: SystemReboot;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of security updates included in this image release.")
+  securityUpdates: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The operating system version provided by this image update.")
+  osVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The version(s) of the agent software included in this image update.")
+  agentVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of feature updates included in this image release.")
+  featureUpdates: string;
 }
 
 @doc("The image properties")
@@ -194,18 +362,42 @@ model ImageProperties {
   @visibility(Lifecycle.Read)
   @doc("The versions that are compatible for this update package.")
   compatibleVersions?: Array<string>;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  @doc("Image update properties for update release type image.")
+  updateProperties?: ImageUpdateProperties;
 }
 
 @doc("The image download properties")
+@removed(Microsoft.Edge.Versions.v2025_05_01)
+model ImageDownloadResponse {
+  ...ImageProperties;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unique Id of the download")
+  transactionId: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download uri")
+  downloadLink: url;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download link expiry time")
+  linkExpiry: utcDateTime;
+}
+
+@doc("The image download properties")
+@renamedFrom(Microsoft.Edge.Versions.v2025_05_01, "ImageDownloadResponse")
 model ImageDownloadResult {
   ...ImageProperties;
 
   @visibility(Lifecycle.Read)
-  @doc("The unique identifier of the download")
+  @doc("The unique Id of the download")
   transactionId: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The download URI")
+  @doc("The download uri")
   downloadLink: url;
 
   @visibility(Lifecycle.Read)
@@ -214,6 +406,7 @@ model ImageDownloadResult {
 }
 
 @doc("The artifact properties")
+@added(Microsoft.Edge.Versions.v2025_05_01)
 model ArtifactProperties {
   @visibility(Lifecycle.Read)
   @doc("The resource provisioning state")
@@ -237,14 +430,86 @@ model ArtifactProperties {
 }
 
 @doc("The artifact download properties")
+@added(Microsoft.Edge.Versions.v2025_05_01)
 model ArtifactDownloadResult {
   ...ArtifactProperties;
 
   @visibility(Lifecycle.Read)
-  @doc("The download URI")
+  @doc("The download uri")
   downloadLink: url;
 
   @visibility(Lifecycle.Read)
   @doc("The download link expiry time")
   linkExpiry: utcDateTime;
+}
+
+@doc("The hardware setting properties")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model HardwareSettingProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("The total number of cores")
+  totalCores: int32;
+
+  @doc("The disk space in GB")
+  diskSpaceInGb: int32;
+
+  @doc("The memory in GB")
+  memoryInGb: int32;
+
+  @doc("The OEM")
+  oem: string;
+
+  @doc("The hardware SKU")
+  hardwareSku: string;
+
+  @doc("The number of nodes")
+  nodes: int32;
+
+  @doc("The active version at registration")
+  versionAtRegistration: string;
+
+  @doc("The solution builder extension at registration")
+  solutionBuilderExtension: string;
+
+  @doc("The unique Id of the device")
+  deviceId: string;
+}
+
+@doc("The billing period")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingPeriod {
+  @doc("The number of cores")
+  cores: int32;
+
+  @doc("The pricing model")
+  pricingModel: PricingModel;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing start date")
+  startDate?: plainDate;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing end date")
+  endDate?: plainDate;
+}
+
+@doc("The billing configuration")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingConfiguration {
+  @doc("The auto renew setting")
+  autoRenew: AutoRenew;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing status")
+  billingStatus: BillingStatus;
+
+  @doc("The current billing configuration")
+  current: BillingPeriod;
+
+  @doc("The upcoming billing configuration")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  upcoming?: BillingPeriod;
 }

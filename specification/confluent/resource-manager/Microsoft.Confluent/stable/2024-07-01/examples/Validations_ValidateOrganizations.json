@@ -1,74 +1,72 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
     "body": {
-      "location": "West US",
       "properties": {
         "offerDetail": {
+          "publisherId": "string",
           "id": "string",
           "planId": "string",
           "planName": "string",
+          "termUnit": "string",
           "privateOfferId": "string",
           "privateOfferIds": [
             "string"
-          ],
-          "publisherId": "string",
-          "termUnit": "string"
+          ]
         },
         "userDetail": {
-          "aadEmail": "abc@microsoft.com",
-          "emailAddress": "abc@microsoft.com",
           "firstName": "string",
           "lastName": "string",
-          "userPrincipalName": "abc@microsoft.com"
+          "emailAddress": "abc@microsoft.com",
+          "userPrincipalName": "abc@microsoft.com",
+          "aadEmail": "abc@microsoft.com"
         }
       },
       "tags": {
         "Environment": "Dev"
-      }
-    },
-    "organizationName": "myOrganization",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+      },
+      "location": "West US"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization",
         "name": "myOrganization",
         "type": "Microsoft.Confluent/organizations",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization",
-        "location": "West US",
         "properties": {
           "createdTime": "2020-05-09T14:28:47.284Z",
+          "provisioningState": "Succeeded",
+          "organizationId": "string",
+          "ssoUrl": "string",
           "offerDetail": {
+            "publisherId": "string",
             "id": "string",
             "planId": "string",
             "planName": "string",
+            "termUnit": "string",
             "privateOfferId": "string",
             "privateOfferIds": [
               "string"
             ],
-            "publisherId": "string",
-            "status": "Started",
-            "termUnit": "string"
+            "status": "Started"
           },
-          "organizationId": "string",
-          "provisioningState": "Succeeded",
-          "ssoUrl": "string",
           "userDetail": {
-            "aadEmail": "abc@microsoft.com",
-            "emailAddress": "abc@microsoft.com",
             "firstName": "string",
             "lastName": "string",
-            "userPrincipalName": "abc@microsoft.com"
+            "emailAddress": "abc@microsoft.com",
+            "userPrincipalName": "abc@microsoft.com",
+            "aadEmail": "abc@microsoft.com"
           }
         },
         "tags": {
           "Environment": "Dev"
-        }
+        },
+        "location": "West US"
       }
     }
-  },
-  "operationId": "Validations_ValidateOrganization",
-  "title": "Validations_ValidateOrganizations"
+  }
 }

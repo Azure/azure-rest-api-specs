@@ -1,0 +1,385 @@
+{
+  "operationId": "Dashboards_CreateOrUpdate",
+  "title": "Create a dashboard with navigation and policy tiles.",
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2024-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "My NavigationTile",
+                "subtitle": "My subtitle",
+                "type": "NavigationTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 4,
+                  "height": 4
+                },
+                "actions": {
+                  "onClick": {
+                    "type": "openBlade",
+                    "blade": {
+                      "name": "ArgQueryBlade",
+                      "extension": "HubsExtension"
+                    }
+                  }
+                },
+                "data": {
+                  "icon": {
+                    "type": 0,
+                    "data": "<img>ResourceGroups</img>"
+                  },
+                  "description": "Go to resource groups"
+                }
+              },
+              {
+                "title": "My NavigationTile2",
+                "subtitle": "My subtitle",
+                "type": "NavigationTile",
+                "layout": {
+                  "x": 0,
+                  "y": 5,
+                  "width": 4,
+                  "height": 4
+                },
+                "actions": {
+                  "onClick": {
+                    "type": "openBlade",
+                    "assetId": {
+                      "assetType": "Browse",
+                      "extensionName": "HubsExtension",
+                      "assetId": "myAssetId"
+                    }
+                  }
+                },
+                "data": {
+                  "icon": {
+                    "type": 0,
+                    "data": "<img>ResourceGroups</img>"
+                  },
+                  "description": "Go to resource groups"
+                }
+              },
+              {
+                "title": "My NavigationTile3",
+                "subtitle": "My subtitle",
+                "type": "NavigationTile",
+                "layout": {
+                  "x": 0,
+                  "y": 10,
+                  "width": 4,
+                  "height": 4
+                },
+                "actions": {
+                  "onClick": {
+                    "type": "openBlade",
+                    "deepLink": "myDeeplink"
+                  }
+                },
+                "data": {
+                  "icon": {
+                    "type": 0,
+                    "data": "<img>ResourceGroups</img>"
+                  },
+                  "description": "Go to resource groups"
+                }
+              },
+              {
+                "title": "My PolicyTile",
+                "type": "PolicyTile",
+                "layout": {
+                  "x": 0,
+                  "y": 15,
+                  "width": 6,
+                  "height": 4
+                },
+                "data": {
+                  "kind": "policy",
+                  "usedParameters": [
+                    "sampleLocationParameter"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "title": "Location",
+            "kind": "location",
+            "parameterNames": [
+              "sampleLocationParameter"
+            ],
+            "defaultValues": [
+              "eastus"
+            ],
+            "showOnPages": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "My NavigationTile",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "blade": {
+                        "name": "ArgQueryBlade",
+                        "extension": "HubsExtension"
+                      }
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My NavigationTile2",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 5,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "assetId": {
+                        "assetType": "Browse",
+                        "extensionName": "HubsExtension",
+                        "assetId": "myAssetId"
+                      }
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My NavigationTile3",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 10,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "deepLink": "myDeeplink"
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My PolicyTile",
+                  "type": "PolicyTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 15,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "policy",
+                    "usedParameters": [
+                      "sampleLocationParameter"
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "My NavigationTile",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "blade": {
+                        "name": "ArgQueryBlade",
+                        "extension": "HubsExtension"
+                      }
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My NavigationTile2",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 5,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "assetId": {
+                        "assetType": "Browse",
+                        "extensionName": "HubsExtension",
+                        "assetId": "myAssetId"
+                      }
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My NavigationTile3",
+                  "subtitle": "My subtitle",
+                  "type": "NavigationTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 10,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "openBlade",
+                      "deepLink": "myDeeplink"
+                    }
+                  },
+                  "data": {
+                    "icon": {
+                      "type": 0,
+                      "data": "<img>ResourceGroups</img>"
+                    },
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "My PolicyTile",
+                  "type": "PolicyTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 15,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "policy",
+                    "usedParameters": [
+                      "sampleLocationParameter"
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}

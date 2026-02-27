@@ -92,14 +92,14 @@ model AwsCloudFormationStackSetProperties {
   operationPreferences?: OperationPreferences;
 
   @doc("The input parameters for the stack set template.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: Parameter[];
 
   @doc("Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.")
   permissionModel?: PermissionModel;
 
   @doc("A group of stack instances with parameters in some specific accounts and regions.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   stackInstancesGroup?: StackInstances[];
 
   @doc("The ID of the stack set that you're creating.")
@@ -109,7 +109,7 @@ model AwsCloudFormationStackSetProperties {
   stackSetName?: string;
 
   @doc("The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.")
@@ -225,7 +225,7 @@ model StackInstances {
   deploymentTargets?: DeploymentTargets;
 
   @doc("A list of stack set parameters whose values you want to override in the selected stack instances.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   parameterOverrides?: Parameter[];
 
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")

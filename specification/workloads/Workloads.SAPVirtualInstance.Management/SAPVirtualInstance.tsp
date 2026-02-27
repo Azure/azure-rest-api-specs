@@ -3,6 +3,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Workloads;
 /**
@@ -16,7 +17,7 @@ model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
     SegmentName = "sapVirtualInstances",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9]{2}$"
   >;
-  ...SAPVirtualInstanceIdentityProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
@@ -49,101 +50,83 @@ interface SAPVirtualInstances {
   /**
    * Gets all Virtual Instances for SAP solutions resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<SAPVirtualInstance>;
 
   /**
    * Gets all Virtual Instances for SAP solutions resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<SAPVirtualInstance>;
 
   /**
    * Starts the SAP application, that is the Central Services instance and Application server instances.
    */
-  start is CustomizedArmResourceActionAsync<
+  start is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StartRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource start request body.")
+      @body
+      body?: StartRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
   /**
    * Stops the SAP Application, that is the Application server instances and Central Services instance.
    */
-  stop is CustomizedArmResourceActionAsync<
+  stop is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StopRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource stop request body.")
+      @body
+      body?: StopRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
   /**
    * Gets the sizing recommendations.
    */
-  getSizingRecommendations is ArmResourceActionSync<
-    SubscriptionLocationResource,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSizingRecommendations")
+  getSizingRecommendations is VirtualResourceActionSync<
+    SAPVirtualInstanceMetadata,
     SAPSizingRecommendationRequest,
-    SAPSizingRecommendationResult,
-    Parameters = {
-      /**
-       * The default variable.
-       */
-      @path
-      @segment("sapVirtualInstanceMetadata")
-      @key
-      name: "default";
-    }
+    SAPSizingRecommendationResult
   >;
 
   /**
    * Get a list of SAP supported SKUs for ASCS, Application and Database tier.
    */
-  getSapSupportedSku is ArmResourceActionSync<
-    SubscriptionLocationResource,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSapSupportedSku")
+  getSapSupportedSku is VirtualResourceActionSync<
+    SAPVirtualInstanceMetadata,
     SAPSupportedSkusRequest,
-    SAPSupportedResourceSkusResult,
-    Parameters = {
-      /**
-       * The default variable.
-       */
-      @path
-      @segment("sapVirtualInstanceMetadata")
-      @key
-      name: "default";
-    }
+    SAPSupportedResourceSkusResult
   >;
 
   /**
    * Get the SAP Disk Configuration Layout prod/non-prod SAP System.
    */
-  getDiskConfigurations is ArmResourceActionSync<
-    SubscriptionLocationResource,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeDiskConfigurations")
+  getDiskConfigurations is VirtualResourceActionSync<
+    SAPVirtualInstanceMetadata,
     SAPDiskConfigurationsRequest,
-    SAPDiskConfigurationsResult,
-    Parameters = {
-      /**
-       * The default variable.
-       */
-      @path
-      @segment("sapVirtualInstanceMetadata")
-      @key
-      name: "default";
-    }
+    SAPDiskConfigurationsResult
   >;
 
   /**
    * Get the recommended SAP Availability Zone Pair Details for your region.
    */
-  getAvailabilityZoneDetails is ArmResourceActionSync<
-    SubscriptionLocationResource,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeAvailabilityZoneDetails")
+  getAvailabilityZoneDetails is VirtualResourceActionSync<
+    SAPVirtualInstanceMetadata,
     SAPAvailabilityZoneDetailsRequest,
-    SAPAvailabilityZoneDetailsResult,
-    Parameters = {
-      /**
-       * The default variable.
-       */
-      @path
-      @segment("sapVirtualInstanceMetadata")
-      @key
-      name: "default";
-    }
+    SAPAvailabilityZoneDetailsResult
   >;
 }
 

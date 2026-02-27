@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/appcomplianceautomation"
-  "dependencies":
-    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,38 +8,34 @@ options:
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/appcomplianceautomation.json"
-  "@azure-tools/typespec-ts":
-    experimental-extensible-enums: true
+  "@azure-tools/typespec-python":
     flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appcomplianceautomation"
+    package-name: "azure-mgmt-appcomplianceautomation"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Microsoft.ResourceManager.AppComplianceAutomation"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Microsoft.ResourceManager.AppComplianceAutomation"
+  "@azure-tools/typespec-ts":
+    azure-sdk-for-js: true
+    is-modular-library: true
+    generate-metadata: true
+    hierarchy-client: false
+    experimental-extensible-enums: true
+    enable-operation-group: true
+    flavor: azure
+    examples-directory: "{project-root}/examples"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appcomplianceautomation"
     package-details:
       name: "@azure/arm-appcomplianceautomation"
-  "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appcomplianceautomation"
-    namespace: "azure.mgmt.appcomplianceautomation"
-    flavor: "azure"
-    generate-test: true
-    generate-sample: true
-  "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appcomplianceautomation"
-    namespace: "com.azure.resourcemanager.appcomplianceautomation"
-    service-name: "App Compliance Automation"
-    flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/appcomplianceautomation"
+    service-dir: sdk/resourcemanager/appcomplianceautomation
     emitter-output-dir: "{output-dir}/{service-dir}/armappcomplianceautomation"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappcomplianceautomation"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.AppComplianceAutomation"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armappcomplianceautomation
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

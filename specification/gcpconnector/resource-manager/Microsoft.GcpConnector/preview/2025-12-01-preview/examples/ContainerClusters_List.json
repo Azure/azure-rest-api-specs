@@ -1,0 +1,144 @@
+{
+  "title": "ContainerClusters_List",
+  "operationId": "ContainerClusters_List",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "resourceUri": "eu"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "gcpProperties": {
+                "name": "example-gke-cluster",
+                "description": "Example GKE cluster for testing",
+                "initialNodeCount": 3,
+                "nodeConfig": {
+                  "machineType": "e2-medium",
+                  "diskSizeGb": 100,
+                  "oauthScopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ],
+                  "serviceAccount": "default",
+                  "metadata": {
+                    "disable-legacy-endpoints": "true"
+                  },
+                  "imageType": "COS_CONTAINERD",
+                  "labels": {
+                    "env": "production"
+                  },
+                  "tags": [
+                    "gke-node"
+                  ],
+                  "preemptible": false
+                },
+                "masterAuth": {
+                  "clusterCaCertificate": "LS0tLS1CRUdJTi=="
+                },
+                "loggingService": "logging.googleapis.com/kubernetes",
+                "monitoringService": "monitoring.googleapis.com/kubernetes",
+                "network": "projects/example-project/global/networks/default",
+                "clusterIpv4Cidr": "10.0.0.0/14",
+                "subnetwork": "projects/example-project/regions/us-central1/subnetworks/default",
+                "locations": [
+                  "us-central1-a",
+                  "us-central1-b",
+                  "us-central1-c"
+                ],
+                "enableKubernetesAlpha": false,
+                "resourceLabels": {
+                  "environment": "production",
+                  "team": "platform"
+                },
+                "labelFingerprint": "abc123def456",
+                "legacyAbac": {
+                  "enabled": false,
+                  "provider": "gcp"
+                },
+                "networkPolicy": {
+                  "enabled": true,
+                  "provider": "CALICO"
+                },
+                "ipAllocationPolicy": {
+                  "useIpAliases": true,
+                  "clusterIpv4CidrBlock": "10.0.0.0/14",
+                  "servicesIpv4CidrBlock": "10.4.0.0/19",
+                  "clusterSecondaryRangeName": "gke-cluster-pods",
+                  "servicesSecondaryRangeName": "gke-cluster-services"
+                },
+                "masterAuthorizedNetworksConfig": {
+                  "enabled": true,
+                  "cidrBlocks": [
+                    {
+                      "displayName": "Office Network",
+                      "cidrBlock": "203.0.113.0/24"
+                    }
+                  ]
+                },
+                "addonsConfig": {
+                  "httpLoadBalancing": {
+                    "disabled": false
+                  },
+                  "horizontalPodAutoscaling": {
+                    "disabled": false
+                  },
+                  "networkPolicyConfig": {
+                    "disabled": false
+                  }
+                },
+                "selfLink": "https://container.googleapis.com/v1/projects/example-project/zones/us-central1/clusters/example-gke-cluster",
+                "zone": "us-central1",
+                "endpoint": "203.0.113.100",
+                "initialClusterVersion": "1.27.3-gke.100",
+                "currentMasterVersion": "1.27.3-gke.100",
+                "currentNodeVersion": "1.27.3-gke.100",
+                "createTime": "2023-06-19T10:00:00.000Z",
+                "status": "RUNNING",
+                "statusMessage": "Cluster is running",
+                "nodeIpv4CidrSize": 24,
+                "servicesIpv4Cidr": "10.4.0.0/19",
+                "currentNodeCount": 3,
+                "location": "us-central1",
+                "enableTpu": false,
+                "conditions": [
+                  {
+                    "code": "RUNNING",
+                    "message": "Cluster is healthy"
+                  }
+                ],
+                "autopilot": {
+                  "enabled": false
+                },
+                "id": "example-gke-cluster-12345",
+                "etag": "BwXhqQY-KuY="
+              },
+              "publicCloudConnectorsResourceId": "siilqwhsmldrvezs",
+              "gcpProjectNumber": "dulaageahihlvokvhlquc",
+              "resourceName": "nnczpspvaz",
+              "publicCloudResourceName": "yxjfmhqt",
+              "gcpSourceSchema": "asgbfmepnkauoizxpxt",
+              "gcpRegion": "xrxjlshmnbbw",
+              "gcpTags": {},
+              "provisioningState": "Succeeded",
+              "gcpProjectId": "lvknddutseiexgbnso"
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/{resource}/{resourceName}",
+            "name": "efcwp",
+            "type": "pqhrpqgnrnl",
+            "systemData": {
+              "createdBy": "bjmh",
+              "createdByType": "User",
+              "createdAt": "2025-06-19T20:20:18.481Z",
+              "lastModifiedBy": "hstlhzyrvommfcwiuxpt",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-06-19T20:20:18.481Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

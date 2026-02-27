@@ -1,0 +1,86 @@
+{
+  "title": "EdgeMachineExtensions_ListByEdgeMachine",
+  "operationId": "EdgeMachineExtensions_ListByEdgeMachine",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/extensions/CustomScriptExtension",
+            "name": "BareMetalHostExtension",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/extensions",
+            "systemData": {
+              "createdBy": "user1@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-20T10:20:30.123Z",
+              "lastModifiedBy": "user2@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-25T11:00:00.456Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "extensionParameters": {
+                "publisher": "Microsoft.Compute",
+                "type": "string",
+                "typeHandlerVersion": "1.10.3",
+                "autoUpgradeMinorVersion": false,
+                "settings": {
+                  "workspaceId": "xx"
+                }
+              },
+              "perNodeExtensionDetails": [
+                {
+                  "name": "EdgeMachine01",
+                  "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
+                  "state": "Connected"
+                }
+              ],
+              "managedBy": "Azure"
+            }
+          },
+          {
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/extensions/MonitoringAgent",
+            "name": "MonitoringAgent",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/extensions",
+            "systemData": {
+              "createdBy": "serviceprincipal@azure.com",
+              "createdByType": "ServicePrincipal",
+              "createdAt": "2025-09-22T09:40:00Z",
+              "lastModifiedBy": "serviceprincipal@azure.com",
+              "lastModifiedByType": "ServicePrincipal",
+              "lastModifiedAt": "2025-09-29T10:00:00Z"
+            },
+            "properties": {
+              "provisioningState": "InProgress",
+              "extensionParameters": {
+                "publisher": "Microsoft.Azure.Monitoring",
+                "type": "MonitoringAgent",
+                "typeHandlerVersion": "2.1",
+                "autoUpgradeMinorVersion": false,
+                "enableAutomaticUpgrade": true,
+                "settings": {
+                  "workspaceId": "abcd1234-ef56-7890-gh12-ijklmnopqrst"
+                }
+              },
+              "perNodeExtensionDetails": [
+                {
+                  "name": "EdgeMachine01",
+                  "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MonitoringAgent",
+                  "state": "Installing"
+                }
+              ],
+              "managedBy": "Azure"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

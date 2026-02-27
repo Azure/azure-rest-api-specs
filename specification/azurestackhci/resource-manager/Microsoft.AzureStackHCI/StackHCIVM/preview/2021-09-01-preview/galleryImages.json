@@ -68,7 +68,7 @@
             }
           },
           "200": {
-            "description": "Retrieved the gallery image resource.",
+            "description": "Retrieves the galleryimages resource.",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
@@ -77,7 +77,7 @@
       },
       "put": {
         "operationId": "galleryimages_CreateOrUpdate",
-        "description": "Create or update a gallery image.",
+        "description": "Create or update a galleryimage.",
         "x-ms-examples": {
           "PutGalleryImage": {
             "$ref": "./examples/PutGalleryImage.json"
@@ -117,13 +117,13 @@
             }
           },
           "200": {
-            "description": "Updates the gallery image resource.",
+            "description": "Updates the galleryimages resource.",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
           },
           "201": {
-            "description": "Creates the gallery image resource.",
+            "description": "Creates the galleryimages resource.",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
@@ -132,7 +132,7 @@
       },
       "delete": {
         "operationId": "galleryimages_Delete",
-        "description": "Delete a gallery image.",
+        "description": "Delete a galleryimage.",
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/DeleteGalleryImage.json"
@@ -160,7 +160,7 @@
             }
           },
           "200": {
-            "description": "Deletes the gallery image resource."
+            "description": "Deletes the galleryimages resource."
           },
           "204": {
             "description": "No content"
@@ -169,7 +169,7 @@
       },
       "patch": {
         "operationId": "galleryimages_Update",
-        "description": "Update a gallery image.",
+        "description": "Update a galleryimage.",
         "x-ms-examples": {
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
@@ -205,13 +205,13 @@
             }
           },
           "200": {
-            "description": "Updates the gallery image resource.",
+            "description": "Updates the galleryimages resource.",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
           },
           "201": {
-            "description": "Updates the gallery image resource.",
+            "description": "Updates the galleryimages resource.",
             "schema": {
               "$ref": "#/definitions/galleryimages"
             }
@@ -372,19 +372,19 @@
           "description": "name of the object to be used in moc"
         },
         "status": {
-          "$ref": "#/definitions/GalleryImageStatus"
+          "$ref": "#/definitions/galleryImageStatus"
         }
       },
-      "description": "Properties of a gallery image resource"
+      "description": "galleryimagesProperties defines a list of properties under galleryimages"
     },
-    "GalleryImageStatus": {
+    "galleryImageStatus": {
       "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Gallery image provisioning error code"
+          "description": "GalleryImage provisioning error code"
         },
         "errorMessage": {
           "type": "string",
@@ -430,7 +430,7 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "GalleryImageStatus defines the observed state of galleryimages"
+      "description": "galleryImageStatus defines the observed state of galleryimages"
     },
     "galleryImageIdentifier": {
       "type": "object",
@@ -512,7 +512,7 @@
     },
     "galleryimages": {
       "type": "object",
-      "description": "The gallery image resource definition.",
+      "description": "The galleryimages resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
       "properties": {
@@ -521,8 +521,18 @@
           "$ref": "#/definitions/galleryimagesProperties"
         },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
-          "description": "The extendedLocation of the resource."
+          "type": "object",
+          "description": "The extendedLocation of the resource.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -545,7 +555,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "The gallery image resource patch definition."
+      "description": "The galleryimages resource patch definition."
     },
     "galleryimagesListResult": {
       "type": "object",

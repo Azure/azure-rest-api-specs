@@ -3,9 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
-
-import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -24,8 +21,8 @@ namespace SplitIO {
 namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
-    @doc("2024-07-01-preview api version")
-    v24_07_preview: "2024-07-01-preview",
+    @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+    v1_preview: "2024-07-01-preview",
   }
 
   interface Operations extends Azure.ResourceManager.Operations {}
@@ -48,7 +45,6 @@ namespace SplitIO.Experimentation {
     @doc("Application id used for access to the experimentation workspace.")
     applicationId: string;
 
-    @added(Versions.v24_07_preview)
     @doc("A default role given to a user calling the Split.IO data plane when the user has no assigned role.")
     defaultRole?: DataPlaneRole;
 
@@ -123,9 +119,13 @@ namespace SplitIO.Experimentation {
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
     create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
-    update is ArmResourcePatchAsync<
+    @patch(#{ implicitOptionality: true })
+    update is ArmCustomPatchAsync<
       ExperimentationWorkspace,
-      ExperimentationWorkspaceProperties
+      Azure.ResourceManager.Foundations.ResourceUpdateModel<
+        ExperimentationWorkspace,
+        ExperimentationWorkspaceProperties
+      >
     >;
     delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
     listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;

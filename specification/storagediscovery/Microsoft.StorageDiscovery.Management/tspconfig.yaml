@@ -12,9 +12,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
-  "@azure-typespec/http-client-csharp-mgmt":
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.StorageDiscovery"
+    flavor: azure
+    clear-output-folder: true
     namespace: "Azure.ResourceManager.StorageDiscovery"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagediscovery"
     namespace: "com.azure.resourcemanager.storagediscovery"
@@ -44,7 +46,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-powershell":
     service-dir: "src"
-    package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
+    emitter-output-dir: "{output-dir}/{service-dir}/StorageDiscovery/StorageDiscovery.Autorest"
     clear-output-folder: true
     azure: true
     module-version: 1.0.0

@@ -1,0 +1,3695 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SaaSHubResourcesClient",
+    "version": "2025-07-01-preview",
+    "description": "SaaSHub Resource Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SaasResources"
+    },
+    {
+      "name": "CloudServices"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ProviderLevelActions"
+    },
+    {
+      "name": "ResourceGroupLevelProviderActions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SaaSHub/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available SaaSHub REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources": {
+      "get": {
+        "operationId": "SaasResources_ListByTenant",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Lists the SaaSHub Saas resource under the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SaasResources By Tenant": {
+            "$ref": "./examples/SaasResources_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}": {
+      "get": {
+        "operationId": "SaasResources_Get",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Gets a SaaSHub Saas resource by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SaasResource": {
+            "$ref": "./examples/SaasResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SaasResources_Create",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Creates or updates a SaaSHub Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request parameters that are provided to the create SaaSHub Saas resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SaasResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SaasResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SaaSResource - Microsoft Customer Agreement Enterprise scenario": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Microsoft_Customer_Agreement_Enterprise.json"
+          },
+          "Create SaasResource": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource.json"
+          },
+          "Create SaasResource With Coterminous": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Coterminous.json"
+          },
+          "Create SaasResource With Future Start Date": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Future_Start_Date.json"
+          },
+          "Create SaasResource With Original SaasResource": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Original_SaaS_Resource.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SaasResources_Update",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Updates the properties of a SaaSHub Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request parameters that are provided to the update SaaSHub Saas resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Change Quantity": {
+            "$ref": "./examples/SaasResources_Update_Change_Quantity.json"
+          },
+          "Coterminous": {
+            "$ref": "./examples/SaasResources_Update_Coterminous.json"
+          },
+          "Extend Trial": {
+            "$ref": "./examples/SaasResources_Update_Extend_Trial.json"
+          },
+          "Sku or Term Update": {
+            "$ref": "./examples/SaasResources_Update_Sku_Or_Term_Update.json"
+          },
+          "Sku or Term Update with Quantity Change": {
+            "$ref": "./examples/SaasResources_Update_Sku_Or_Term_Update_With_Quantity_Change.json"
+          },
+          "Turn Auto Renew Off": {
+            "$ref": "./examples/SaasResources_Update_Turn_Auto_Renew_Off.json"
+          },
+          "Turn Auto Renew On": {
+            "$ref": "./examples/SaasResources_Update_Turn_Auto_Renew_On.json"
+          },
+          "Update Auto Renew and Update Scheduled Actions at the same time": {
+            "$ref": "./examples/SaasResources_Update_Update_Auto_Renew_And_Update_Scheduled_Actions_NextTerm.json"
+          },
+          "Update Auto Renew and Update Scheduled Actions with absolute effectiveDate": {
+            "$ref": "./examples/SaasResources_Update_Update_Auto_Renew_And_Update_Scheduled_Actions_MidTerm.json"
+          },
+          "Update Provisioning Tenant": {
+            "$ref": "./examples/SaasResources_Update_Update_Provisioning_Tenant.json"
+          },
+          "Update a SaaSHub saas resource with schedule actions": {
+            "$ref": "./examples/SaasResources_Update_ScheduleActions.json"
+          },
+          "Update a SaaSHub saas resource with schedule actions for scheduled merges": {
+            "$ref": "./examples/SaasResources_Update_ScheduleActions_WithMerge.json"
+          },
+          "Update a SaaSHub saas resource with schedule actions for scheduled splits": {
+            "$ref": "./examples/SaasResources_Update_ScheduleActions_WithSplit.json"
+          },
+          "Update renewal term - Microsoft Customer Agreement Enterprise scenario": {
+            "$ref": "./examples/SaasResources_Update_Microsoft_Customer_Agreement_Enterprise_Renewal.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SaasResources_Delete",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Deletes a SaaSHub Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SaasResource": {
+            "$ref": "./examples/SaasResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/canCancel": {
+      "post": {
+        "operationId": "SaasResources_CanCancel",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Evaluates whether an existing Saas resource can be cancelled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanCancelResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CanCancel Invalid Request Body": {
+            "$ref": "./examples/SaasResources_CanCancel_Invalid_Request_Body.json"
+          },
+          "Cancel Failed": {
+            "$ref": "./examples/SaasResources_CanCancel_Cancel_Failed.json"
+          },
+          "Cancel Passed": {
+            "$ref": "./examples/SaasResources_CanCancel_Cancel_Passed.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/canMerge": {
+      "post": {
+        "operationId": "SaasResources_CanMerge",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Evaluates whether the source Saas resource can be merged to target Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the merge SaaSHub Saas resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MergeSaasResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanMergeResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CanMerge Invalid Request Body": {
+            "$ref": "./examples/SaasResources_CanMerge_Invalid_Request_Body.json"
+          },
+          "Merge Failed": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed.json"
+          },
+          "Merge Failed Caused by Source SaasResource": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Source_Cloud_Service.json"
+          },
+          "Merge Failed Caused by having multiple Source SaasResource": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Having_Multiple_Source_Cloud_Service.json"
+          },
+          "Merge Pass": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Pass.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/canUpdate": {
+      "post": {
+        "operationId": "SaasResources_CanUpdate",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Evaluates whether the request payload can update an existing Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the update SaaSHub Saas resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanUpdateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CanUpdate Invalid Request Body": {
+            "$ref": "./examples/SaasResources_CanUpdate_Invalid_Request_Body.json"
+          },
+          "Update Failed Caused by Coterm": {
+            "$ref": "./examples/SaasResources_CanUpdate_Update_Failed_Caused_By_Coterm.json"
+          },
+          "Update Failed Caused by Refundable Quantity": {
+            "$ref": "./examples/SaasResources_CanUpdate_Update_Failed_Caused_By_Refundable_Quantity.json"
+          },
+          "Update Failed With No Additional Info": {
+            "$ref": "./examples/SaasResources_CanUpdate_Update_Failed_With_No_Additional_Info.json"
+          },
+          "Update Passed": {
+            "$ref": "./examples/SaasResources_CanUpdate_Update_Passed.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/cancel": {
+      "post": {
+        "operationId": "SaasResources_Cancel",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Cancels a SaaSHub Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel SaasResource": {
+            "$ref": "./examples/SaasResources_Cancel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/merge": {
+      "post": {
+        "operationId": "SaasResources_Merge",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Merges multiple Saas resources into one target Saas resource. The resource name in URL is the target, and the list of source Saas resource and quantity will be specified in request payload",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the merge SaaSHub Saas resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MergeSaasResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Merge SaasResource": {
+            "$ref": "./examples/SaasResources_Merge.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.SaaSHub/saasResources/{saasResourceName}/refundableQuantity": {
+      "post": {
+        "operationId": "SaasResources_RefundableQuantity",
+        "tags": [
+          "SaasResources"
+        ],
+        "description": "Gets the refundable quantity for a SaaSHub Saas resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "saasResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub Saas resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetRefundableQuantityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRefundableQuantity for SaaS Resource": {
+            "$ref": "./examples/SaasResources_GetRefundableQuantity.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/tenantLevelCanCreate": {
+      "post": {
+        "operationId": "ProviderLevelActions_TenantLevelCanCreate",
+        "tags": [
+          "ProviderLevelActions"
+        ],
+        "description": "Evaluates whether the request payload can create a new SaaS resource.\nNot available in API versions 2023-01-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the create SaaSHub SaaS resource operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CanCreateSaasResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanCreateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "New Purchase - Passed": {
+            "$ref": "./examples/SaasResources_CanCreate_NewPurchase_Pass.json"
+          },
+          "New Purchase with original resource - Passed": {
+            "$ref": "./examples/SaasResources_CanCreate_WithOriginal_Pass.json"
+          },
+          "Purchase AddOn - Failed": {
+            "$ref": "./examples/SaasResources_CanCreate_Fail_AddOn.json"
+          },
+          "Purchase Promotion - Failed": {
+            "$ref": "./examples/SaasResources_CanCreate_Fail_Promotion.json"
+          },
+          "Purchase failed due to invalid request body": {
+            "$ref": "./examples/SaasResources_CanCreate_InvalidRequestBody.json"
+          },
+          "Purchase with Coterm - Failed": {
+            "$ref": "./examples/SaasResources_CanCreate_Fail_Coterm.json"
+          },
+          "Purchase with Future Price - Failed": {
+            "$ref": "./examples/SaasResources_CanCreate_Fail_FuturePrice.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/tenantLevelCanTransact": {
+      "post": {
+        "operationId": "ProviderLevelActions_TenantLevelCanTransact",
+        "tags": [
+          "ProviderLevelActions"
+        ],
+        "description": "Evaluates whether multiple transaction requests can be processed at tenant level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the tenant level canTransact operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantLevelCanTransactBulkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelCanTransactBulkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluates multiple transaction operations for SaasResources at tenant level": {
+            "$ref": "./examples/TenantLevelCanTransact_MultipleOperations.json"
+          },
+          "Tenant Level CanTransact - Single SaasResource CanCreate - Passed": {
+            "$ref": "./examples/TenantLevelCanTransact_SingleSaasResource_CanCreate_Pass.json"
+          },
+          "TenantLevelCanTransact with AdditionalInfo - Multiple Operations": {
+            "$ref": "./examples/TenantLevelCanTransact_WithAdditionalInfo.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaSHub/tenantLevelCoterminousDates": {
+      "post": {
+        "operationId": "ProviderLevelActions_TenantLevelGetCotermEndDates",
+        "tags": [
+          "ProviderLevelActions"
+        ],
+        "description": "Gets coterm end dates for multiple resources at tenant level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the GetCotermEndDates operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CotermEndDatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CotermResponseItem"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TenantLevelGetCotermEndDates for Provider Level": {
+            "$ref": "./examples/ProviderLevelActions_TenantLevelGetCotermEndDates.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaSHub/cloudServices": {
+      "get": {
+        "operationId": "CloudServices_ListBySubscription",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Lists the SaaSHub cloud services under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all SaaSHub cloud services under the subscription": {
+            "$ref": "./examples/CloudService_List_BySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/canCreate": {
+      "post": {
+        "operationId": "ResourceGroupLevelProviderActions_CanCreate",
+        "tags": [
+          "ResourceGroupLevelProviderActions"
+        ],
+        "description": "Evaluates whether the request payload can create a new cloud service resource.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the create SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CanCreateCloudServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanCreateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check if a cloud service can be created at resource group level": {
+            "$ref": "./examples/ResourceGroupLevelProviderActions_CanCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/canTransact": {
+      "post": {
+        "operationId": "ResourceGroupLevelProviderActions_CanTransact",
+        "tags": [
+          "ResourceGroupLevelProviderActions"
+        ],
+        "description": "Evaluates whether multiple transaction requests can be processed at resource group level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the resource group level canTransact operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupLevelCanTransactBulkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupLevelCanTransactBulkResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluates multiple transaction operations for CloudServices at resource group level": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_MultipleOperations.json"
+          },
+          "Resource Group Level CanTransact - Single CloudService CanCreate - Passed": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_SingleCloudService_CanCreate_Pass.json"
+          },
+          "ResourceGroupLevelCanTransact with AdditionalInfo - CloudServices": {
+            "$ref": "./examples/ResourceGroupLevelCanTransact_WithAdditionalInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices": {
+      "get": {
+        "operationId": "CloudServices_ListByResourceGroup",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Lists the SaaSHub cloud services under the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all SaaSHub cloud services under the resource group": {
+            "$ref": "./examples/CloudService_List_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}": {
+      "get": {
+        "operationId": "CloudServices_Get",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Gets a SaaSHub cloud service by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a SaaSHub cloud service": {
+            "$ref": "./examples/CloudService_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudServices_Create",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Creates or updates a SaaSHub cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request parameters that are provided to the create SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a SaaSHub cloud service": {
+            "$ref": "./examples/CloudService_Create.json"
+          },
+          "Create a SaaSHub cloud service with future start date": {
+            "$ref": "./examples/CloudService_Create_FutureStartDate.json"
+          },
+          "Create a SaaSHub cloud service with original resource reference": {
+            "$ref": "./examples/CloudService_Create_WithOriginal.json"
+          },
+          "Create a coterminous SaaSHub cloud service": {
+            "$ref": "./examples/CloudService_Create_Coterminous.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudServices_Update",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Updates the properties of a SaaSHub cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request parameters that are provided to the update SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudServiceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a SaaSHub cloud service - change quantity": {
+            "$ref": "./examples/CloudService_Update_ChangeQuantity.json"
+          },
+          "Update a SaaSHub cloud service - coterminous update": {
+            "$ref": "./examples/CloudService_Update_Coterminous.json"
+          },
+          "Update a SaaSHub cloud service - extend trial": {
+            "$ref": "./examples/CloudService_Update_ExtendTrial.json"
+          },
+          "Update a SaaSHub cloud service - provisioning tenant": {
+            "$ref": "./examples/CloudService_Update_ProvisioningTenant.json"
+          },
+          "Update a SaaSHub cloud service - quantity and term update": {
+            "$ref": "./examples/CloudService_Update_QuantityTermUpdate.json"
+          },
+          "Update a SaaSHub cloud service - term update": {
+            "$ref": "./examples/CloudService_Update_TermUpdate.json"
+          },
+          "Update a SaaSHub cloud service - turn off auto renew": {
+            "$ref": "./examples/CloudService_Update_AutoRenew_Off.json"
+          },
+          "Update a SaaSHub cloud service - turn on auto renew": {
+            "$ref": "./examples/CloudService_Update_AutoRenew_On.json"
+          },
+          "Update a SaaSHub cloud service - update renewal term details with auto renew on": {
+            "$ref": "./examples/CloudService_Update_AutoRenew_On_UpdateNextTerm.json"
+          },
+          "Update a SaaSHub cloud service - update renewal term details with auto renew once": {
+            "$ref": "./examples/CloudService_Update_AutoRenew_Once_UpdateMidTerm.json"
+          },
+          "Update a SaaSHub cloud service with schedule actions": {
+            "$ref": "./examples/CloudService_Update_ScheduleActions.json"
+          },
+          "Update a SaaSHub cloud service with schedule actions for scheduled merges": {
+            "$ref": "./examples/CloudService_Update_ScheduleActions_WithMerge.json"
+          },
+          "Update a SaaSHub cloud service with schedule actions for scheduled splits": {
+            "$ref": "./examples/CloudService_Update_ScheduleActions_WithSplit.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudServices_Delete",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Deletes a SaaSHub cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SaaSHub cloud service": {
+            "$ref": "./examples/CloudService_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/canCancel": {
+      "post": {
+        "operationId": "CloudServices_CanCancel",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Evaluates whether an existing cloud service can be cancelled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanCancelResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluate if a SaaSHub cloud service can be cancelled - Failed": {
+            "$ref": "./examples/CloudService_CanCancel_Fail.json"
+          },
+          "Evaluate if a SaaSHub cloud service can be cancelled - Invalid Request": {
+            "$ref": "./examples/CloudService_CanCancel_InvalidRequestBody.json"
+          },
+          "Evaluate if a SaaSHub cloud service can be cancelled - Passed": {
+            "$ref": "./examples/CloudService_CanCancel_Pass.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/canMerge": {
+      "post": {
+        "operationId": "CloudServices_CanMerge",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Evaluates whether the source cloud service can be merged to target cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the merge SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MergeCloudServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudServiceCanMergeResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluate if SaaSHub cloud services can be merged (multiple sources) - Failed": {
+            "$ref": "./examples/CloudService_CanMerge_Fail_MultiSource.json"
+          },
+          "Evaluate if SaaSHub cloud services can be merged (source issue) - Failed": {
+            "$ref": "./examples/CloudService_CanMerge_Fail_SourceCloudService.json"
+          },
+          "Evaluate if SaaSHub cloud services can be merged - Failed": {
+            "$ref": "./examples/CloudService_CanMerge_Fail.json"
+          },
+          "Evaluate if SaaSHub cloud services can be merged - Invalid Request": {
+            "$ref": "./examples/CloudService_CanMerge_InvalidRequestBody.json"
+          },
+          "Evaluate if SaaSHub cloud services can be merged - Passed": {
+            "$ref": "./examples/CloudService_CanMerge_Pass.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/canUpdate": {
+      "post": {
+        "operationId": "CloudServices_CanUpdate",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Evaluates whether the request payload can update an existing cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the update SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudServiceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CanUpdateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluate if a SaaSHub cloud service can be updated - Failed (No additional info)": {
+            "$ref": "./examples/CloudService_CanUpdate_FailWithNoAdditionalInfo.json"
+          },
+          "Evaluate if a SaaSHub cloud service can be updated - Invalid Request": {
+            "$ref": "./examples/CloudService_CanUpdate_InvalidRequestBody.json"
+          },
+          "Evaluate if a SaaSHub cloud service can be updated - Passed": {
+            "$ref": "./examples/CloudService_CanUpdate_Pass.json"
+          },
+          "Evaluate if a SaaSHub cloud service can be updated with refundable quantity - Failed": {
+            "$ref": "./examples/CloudService_CanUpdate_Fail_RefundableQuantity.json"
+          },
+          "Evaluate if a coterminous SaaSHub cloud service can be updated - Failed": {
+            "$ref": "./examples/CloudService_CanUpdate_Fail_Coterm.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/cancel": {
+      "post": {
+        "operationId": "CloudServices_Cancel",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Cancels a SaaSHub cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a SaaSHub cloud service": {
+            "$ref": "./examples/CloudService_Cancel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/merge": {
+      "post": {
+        "operationId": "CloudServices_Merge",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Merges multiple cloud services into one target cloud service. The resource name in URL is the target, and the list of source cloud service and quantity will be specified in request payload",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the merge SaaSHub cloud service operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MergeCloudServiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudService"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Merge SaaSHub cloud services": {
+            "$ref": "./examples/CloudService_Merge.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/cloudServices/{cloudServiceResourceName}/refundableQuantity": {
+      "post": {
+        "operationId": "CloudServices_RefundableQuantity",
+        "tags": [
+          "CloudServices"
+        ],
+        "description": "Gets the refundable quantity for a SaaSHub cloud service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudServiceResourceName",
+            "in": "path",
+            "description": "The name that uniquely identifies a SaaSHub cloud service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[-_0-9a-zA-Z]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetRefundableQuantityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRefundableQuantity for Cloud Service": {
+            "$ref": "./examples/CloudService_GetRefundableQuantity.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/coterminousDates": {
+      "post": {
+        "operationId": "ResourceGroupLevelProviderActions_GetCotermEndDates",
+        "tags": [
+          "ResourceGroupLevelProviderActions"
+        ],
+        "description": "Gets coterm end dates for multiple resources at resource group level.\nOnly available in API version 2025-07-01-preview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request parameters that are provided to the GetCotermEndDates operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CotermEndDatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CotermResponseItem"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCotermEndDates for Resource Group Level": {
+            "$ref": "./examples/ResourceGroupLevelProviderActions_GetCotermEndDates.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalInfoItem": {
+      "type": "object",
+      "description": "Additional information key-value pair",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the additional information item."
+        },
+        "key": {
+          "type": "string",
+          "description": "The key of the additional information item."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the additional information item."
+        }
+      }
+    },
+    "AutoRenew": {
+      "type": "string",
+      "description": "Indicates whether auto renewal is turned on or off for a SaaSHub saas resource. The default value will be 'On' for products that support autorenew.",
+      "enum": [
+        "Off",
+        "On",
+        "Once"
+      ],
+      "x-ms-enum": {
+        "name": "AutoRenew",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Auto renew is turned off"
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Auto renew is turned on"
+          },
+          {
+            "name": "Once",
+            "value": "Once",
+            "description": "Auto renew is turned on for the next term only"
+          }
+        ]
+      }
+    },
+    "CanCancelResult": {
+      "type": "object",
+      "description": "Validation result for canCancel operation.",
+      "properties": {
+        "evaluateResult": {
+          "$ref": "#/definitions/EvaluateResult",
+          "description": "Whether the validation passed/failed.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "ReasonCode for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "$ref": "#/definitions/CanCancelResultAdditionalInfo",
+          "description": "Additional information for failed validation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CanCancelResultAdditionalInfo": {
+      "type": "object",
+      "description": "Additional information for failed validation.",
+      "properties": {
+        "cancellationWindowEndTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date in UTC time by when the self-serve cancellation ends.",
+          "readOnly": true
+        }
+      }
+    },
+    "CanCreateCloudServiceRequest": {
+      "type": "object",
+      "description": "Request to check if the cloud service can be created",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name of the saas hub resource to be created."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type to be created, currently only supports CloudService resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/CloudServiceProperties",
+          "description": "The properties of the saas hub resource to be created."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "CanCreateResult": {
+      "type": "object",
+      "description": "Validation result for canCreate operation.",
+      "properties": {
+        "evaluateResult": {
+          "$ref": "#/definitions/EvaluateResult",
+          "description": "Whether the validation passed/failed.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "ReasonCode for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "$ref": "#/definitions/CanCreateResultAdditionalInfo",
+          "description": "Additional information for failed validation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CanCreateResultAddOnInfo": {
+      "type": "object",
+      "description": "Additional detail when request payload failed addOn constraints. Null when constraints passed or not applicable.",
+      "properties": {
+        "ineligibilityReasons": {
+          "type": "array",
+          "description": "AddOn ineligible reasons.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "eligibilityConstraints": {
+          "type": "array",
+          "description": "AddOn eligibility constraints.",
+          "items": {
+            "$ref": "#/definitions/EligibilityConstraint"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CanCreateResultAdditionalInfo": {
+      "type": "object",
+      "description": "Additional information for failed validation.",
+      "properties": {
+        "addOn": {
+          "$ref": "#/definitions/CanCreateResultAddOnInfo",
+          "description": "Additional detail when request payload failed addOn constraints. Null when constraints passed or not applicable.",
+          "readOnly": true
+        },
+        "promotion": {
+          "type": "array",
+          "description": "Additional detail when request payload failed promotion constraints. Null when constraints passed or not applicable.",
+          "items": {
+            "$ref": "#/definitions/CanCreateResultPromotionInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "futurePrice": {
+          "type": "array",
+          "description": "Additional evaluation eligibility result for qualifying co-term resources for a future price concession. Null when constraints passed or not applicable.",
+          "items": {
+            "$ref": "#/definitions/CanCreateResultFuturePriceInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "coTermDates": {
+          "type": "array",
+          "description": "Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable.",
+          "items": {
+            "$ref": "#/definitions/CoTermDateEligibilityResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CanCreateResultFuturePriceInfo": {
+      "type": "object",
+      "description": "Model to present additional info about future price eligibility",
+      "properties": {
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The term end date in UTC time, for resources in this group.",
+          "readOnly": true
+        },
+        "totalQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total cumulative quantity of licenses for resources in this group.",
+          "readOnly": true
+        },
+        "isEligible": {
+          "$ref": "#/definitions/EligibilityResult",
+          "description": "Whether the future price concession eligibility is satisfied by subscriptions in this group",
+          "readOnly": true
+        },
+        "qualifyingResources": {
+          "type": "array",
+          "description": "List of qualifying resources for the future price concession",
+          "items": {
+            "$ref": "#/definitions/CanCreateResultFuturePriceQualifyingResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "futurePriceConcessionTypes": {
+          "type": "array",
+          "description": "Types of future price concession. E.g. FuturePriceNotToExceedCap, PercentageDiscount",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "minimumQuantityRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of seats required to be eligible for the future price concession",
+          "readOnly": true
+        }
+      }
+    },
+    "CanCreateResultFuturePriceQualifyingResource": {
+      "type": "object",
+      "description": "Model to represent the future price qualified resource",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "Qualifying resource names",
+          "readOnly": true
+        }
+      }
+    },
+    "CanCreateResultPromotionInfo": {
+      "type": "object",
+      "description": "Model to present promotion eligibility info.",
+      "properties": {
+        "promotionId": {
+          "type": "string",
+          "description": "Promotion id.",
+          "readOnly": true
+        },
+        "isEligible": {
+          "$ref": "#/definitions/EligibilityResult",
+          "description": "True if user is eligible for this promotion, false otherwise",
+          "readOnly": true
+        },
+        "ineligibilityReasons": {
+          "type": "array",
+          "description": "Promotion ineligible reasons.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "eligibilityConstraints": {
+          "type": "array",
+          "description": "Promotion eligibility constraints.",
+          "items": {
+            "$ref": "#/definitions/EligibilityConstraint"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CanCreateSaasResourceRequest": {
+      "type": "object",
+      "description": "Request to check if the saas resource can be created",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name of the saas hub resource to be created."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type to be created, currently only supports SaaS resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "The properties of the saas hub resource to be created."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "CanMergeResult": {
+      "type": "object",
+      "description": "Validation result for canMerge operation.",
+      "properties": {
+        "evaluateResult": {
+          "$ref": "#/definitions/EvaluateResult",
+          "description": "Whether the validation passed/failed.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "ReasonCode for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information for failed validation.",
+          "items": {
+            "$ref": "#/definitions/MergeSourceSaasResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CanTransactCanCancelResponse": {
+      "type": "object",
+      "description": "Response for canCancel operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanCancelResult",
+          "description": "The result of the canCancel operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canCancel"
+    },
+    "CanTransactCanCreateResponse": {
+      "type": "object",
+      "description": "Response for canCreate operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanCreateResult",
+          "description": "The result of the canCreate operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canCreate"
+    },
+    "CanTransactCanMergeResponse": {
+      "type": "object",
+      "description": "Response for canMerge operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanMergeResult",
+          "description": "The result of the canMerge operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canMerge"
+    },
+    "CanTransactCanUpdateResponse": {
+      "type": "object",
+      "description": "Response for canUpdate operation evaluation.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/CanUpdateResult",
+          "description": "The result of the canUpdate operation evaluation.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CanTransactResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "canUpdate"
+    },
+    "CanTransactCloudServicesRequest": {
+      "type": "object",
+      "description": "Request model for CanTransact operation with CloudServices.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource for the transaction evaluation."
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Optional token for the evaluation request."
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation to evaluate for the transaction."
+        },
+        "properties": {
+          "$ref": "#/definitions/CloudServiceProperties",
+          "description": "Resource properties for the transaction evaluation.\nSupports CloudServices only."
+        },
+        "mergeRequest": {
+          "$ref": "#/definitions/MergeCloudServiceRequest",
+          "description": "Full merge request payload used for canMerge operations."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information as key-value pairs",
+          "items": {
+            "$ref": "#/definitions/AdditionalInfoItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
+    "CanTransactOperationType": {
+      "type": "string",
+      "description": "The type of operation being evaluated in a CanTransact request.",
+      "enum": [
+        "canCreate",
+        "canCancel",
+        "canUpdate",
+        "canMerge"
+      ],
+      "x-ms-enum": {
+        "name": "CanTransactOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "canCreate",
+            "value": "canCreate",
+            "description": "Create operation type"
+          },
+          {
+            "name": "canCancel",
+            "value": "canCancel",
+            "description": "Cancel operation type"
+          },
+          {
+            "name": "canUpdate",
+            "value": "canUpdate",
+            "description": "Update operation type"
+          },
+          {
+            "name": "canMerge",
+            "value": "canMerge",
+            "description": "Merge operation type"
+          }
+        ]
+      }
+    },
+    "CanTransactResponse": {
+      "type": "object",
+      "description": "Base response model for CanTransact operation result.\nThe operationType discriminator determines which specific result structure is used.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource that was evaluated.",
+          "readOnly": true
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Proof of successful evaluation.",
+          "readOnly": true
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation that was evaluated.",
+          "readOnly": true
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Dependencies for the transaction evaluation.",
+          "items": {
+            "$ref": "#/definitions/DependsOnValue"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "operationType",
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
+    "CanTransactSaasResourcesRequest": {
+      "type": "object",
+      "description": "Request model for CanTransact operation.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the resource for the transaction evaluation."
+        },
+        "approvalCode": {
+          "type": "string",
+          "description": "Optional token for the evaluation request."
+        },
+        "operationType": {
+          "$ref": "#/definitions/CanTransactOperationType",
+          "description": "The type of operation to evaluate for the transaction."
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "Resource properties for the transaction evaluation.\nSupports SaasResources only."
+        },
+        "mergeRequest": {
+          "$ref": "#/definitions/MergeSaasResourcesRequest",
+          "description": "Full merge request payload used for canMerge operations."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information as key-value pairs",
+          "items": {
+            "$ref": "#/definitions/AdditionalInfoItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourceUri",
+        "operationType"
+      ]
+    },
+    "CanUpdateResult": {
+      "type": "object",
+      "description": "Validation result for canUpdate operation.",
+      "properties": {
+        "evaluateResult": {
+          "$ref": "#/definitions/EvaluateResult",
+          "description": "Whether the validation passed/failed.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "ReasonCode for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "updateScenario": {
+          "type": "string",
+          "description": "Update scenario that was identified based on the canUpdate request body values.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "$ref": "#/definitions/CanUpdateResultAdditionalInfo",
+          "description": "Additional information for failed validation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CanUpdateResultAdditionalInfo": {
+      "type": "object",
+      "description": "Additional information for failed validation.",
+      "properties": {
+        "refundableQuantity": {
+          "$ref": "#/definitions/RefundableQuantityResult",
+          "description": "Additional detail when request payload failed refundableQuantity constraints. Null when constraints passed or not applicable. Relevant scenarios: remove quantity.",
+          "readOnly": true
+        },
+        "coTermDates": {
+          "type": "array",
+          "description": "Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable. Relevant scenarios: coterm, scheduled conversion with coterm.",
+          "items": {
+            "$ref": "#/definitions/CoTermDateEligibilityResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Cancellation": {
+      "type": "string",
+      "description": "The policy override for the resource indicates whether the self-serve cancellation or seat reduction is allowed.",
+      "enum": [
+        "Allowed",
+        "NotAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "Cancellation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Cancellation is allowed"
+          },
+          {
+            "name": "NotAllowed",
+            "value": "NotAllowed",
+            "description": "Cancellation is not allowed"
+          }
+        ]
+      }
+    },
+    "CloudService": {
+      "type": "object",
+      "description": "A SaaSHub cloud service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudServiceProperties",
+          "description": "The properties of a SaaSHub cloud service."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudServiceCanMergeResult": {
+      "type": "object",
+      "description": "Validation result for canMerge operation on cloud service.",
+      "properties": {
+        "evaluateResult": {
+          "$ref": "#/definitions/EvaluateResult",
+          "description": "Whether the validation passed/failed.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "ReasonCode for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for why the request payload failed validation. Null when validation passed.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional information for failed validation.",
+          "items": {
+            "$ref": "#/definitions/MergeSourceCloudService"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "evaluateResult"
+      ]
+    },
+    "CloudServiceListResult": {
+      "type": "object",
+      "description": "The response of a CloudService list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudService items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudServiceProperties": {
+      "type": "object",
+      "description": "The properties of a SaaSHub cloud service.",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "Indicates whether auto renewal is turned on or off for a seat-based resource. The default value will be 'On' for products that support autorenew."
+        },
+        "endCustomerBillingAccount": {
+          "type": "string",
+          "description": "The end customer billing account in CSP scenario, will full format like /providers/Microsoft.Billing/billingAccounts/1111:2222"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the seat-based resource."
+        },
+        "productType": {
+          "type": "string",
+          "description": "Type of the product for which the resource is purchased",
+          "readOnly": true
+        },
+        "linkedResources": {
+          "$ref": "#/definitions/LinkedResources",
+          "description": "Linked resources for the resource"
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Type of the offer for which the resource is purchased",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Universal Product Number of the product"
+        },
+        "licenseData": {
+          "type": "string",
+          "description": "License data of the product",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the seat-based resource at the time the operation was called.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of licenses purchased for the resource"
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "The SKU description of the product for which the resource is purchased.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SeatBasedResourceStatus",
+          "description": "The status of the seat-based resource.",
+          "readOnly": true
+        },
+        "suspensionReasons": {
+          "type": "array",
+          "description": "The suspension reason for a resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "term": {
+          "$ref": "#/definitions/TermDetails",
+          "description": "Term details of the resource."
+        },
+        "provisioningTenantId": {
+          "type": "string",
+          "description": "The Id of the tenant where licenses will be provisioned for this resource. It will only be populated if licenses are provisioned in a different tenant."
+        },
+        "externalId": {
+          "type": "string",
+          "description": "An external Id which could be used to reference other commerce system entity, such as OMS sub id or proposal id. ExternalId value will have \"{externalSystem}:{externalId}\", e.g. \"oms:1111-2222-444-666\""
+        },
+        "systemOverrides": {
+          "$ref": "#/definitions/SystemOverrides",
+          "description": "System imposed policies that regulate behavior of the resource."
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes.",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "scheduleActions": {
+          "type": "array",
+          "description": "Schedule actions for future terms and changes",
+          "items": {
+            "$ref": "#/definitions/ScheduleAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "originalResourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The original resource uri, if the new resource will be created by splitting part of the licenses from an existing resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.SaaSHub/cloudServices"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CloudServiceUpdate": {
+      "type": "object",
+      "description": "A SaaSHub cloud service update model for patch and canUpdate operations.\n\nThis model uses composition to include:\n1. CloudServiceProperties (resource-specific properties)\n2. TrackedResourceUpdateFields (updateable fields from TrackedResource)\n\nThis ensures both PATCH and canUpdate operations use identical request bodies\nwithout requiring the 'location' field.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudServiceProperties",
+          "description": "The properties of a SaaSHub cloud service."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CoTermDateEligibilityResult": {
+      "type": "object",
+      "description": "Additional information for failed validation.",
+      "properties": {
+        "coTermTarget": {
+          "type": "string",
+          "description": "Target cloud resource or contract name to coTerm to.",
+          "readOnly": true
+        },
+        "coTermTargetType": {
+          "$ref": "#/definitions/CoTermTargetType",
+          "description": "Whether the target is cloud resource or contract.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "CoTerm end date in UTC time.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "CoTerm error details",
+          "readOnly": true
+        }
+      }
+    },
+    "CoTermTargetType": {
+      "type": "string",
+      "description": "Whether the target is cloud resource or contract.",
+      "enum": [
+        "Resource",
+        "Contract"
+      ],
+      "x-ms-enum": {
+        "name": "CoTermTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Resource",
+            "value": "Resource",
+            "description": "Resource co-term type"
+          },
+          {
+            "name": "Contract",
+            "value": "Contract",
+            "description": "Contract co-term type"
+          }
+        ]
+      }
+    },
+    "CotermEndDateItem": {
+      "type": "object",
+      "description": "End date information for coterm calculation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the end date entry."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date in UTC time."
+        },
+        "termDuration": {
+          "type": "string",
+          "description": "Term duration for this specific end date."
+        }
+      },
+      "required": [
+        "id",
+        "endDate",
+        "termDuration"
+      ]
+    },
+    "CotermEndDatesRequest": {
+      "type": "object",
+      "description": "Request model for GetCotermEndDates operation.",
+      "properties": {
+        "endDates": {
+          "type": "array",
+          "description": "List of end dates to calculate coterm targets for.",
+          "items": {
+            "$ref": "#/definitions/CotermEndDateItem"
+          }
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date for the coterm calculation in UTC time."
+        },
+        "termDuration": {
+          "type": "string",
+          "description": "Term duration for the coterm calculation.\nAn ISO 8601 duration using exactly one of the year, month or day designators. E.g. P1Y, P1M."
+        }
+      },
+      "required": [
+        "endDates",
+        "startDate",
+        "termDuration"
+      ]
+    },
+    "CotermResponseItem": {
+      "type": "object",
+      "description": "Response model for GetCotermEndDates operation.",
+      "properties": {
+        "coTermTarget": {
+          "type": "string",
+          "description": "Target cloud resource or contract name to coterm to.",
+          "readOnly": true
+        },
+        "coTermTargetType": {
+          "type": "string",
+          "description": "Whether the target is cloud resource or contract.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Term end date in UTC time.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Error code if coterm calculation failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "coTermTarget",
+        "coTermTargetType",
+        "errorCode"
+      ]
+    },
+    "DependsOnValue": {
+      "type": "object",
+      "description": "Dependency value containing type and value for dependency tracking purposes.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the dependency value."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the dependency."
+        }
+      }
+    },
+    "EligibilityConstraint": {
+      "type": "object",
+      "description": "Shared eligibility constraint model.",
+      "properties": {
+        "constraintType": {
+          "type": "string",
+          "description": "The failed eligibility constraint type.",
+          "readOnly": true
+        },
+        "isEligible": {
+          "$ref": "#/definitions/EligibilityResult",
+          "description": "true if eligibility is satisfied, false otherwise",
+          "readOnly": true
+        }
+      }
+    },
+    "EligibilityResult": {
+      "type": "string",
+      "description": "True if user is eligible for this promotion, false otherwise",
+      "enum": [
+        "Ineligible",
+        "Eligible"
+      ],
+      "x-ms-enum": {
+        "name": "EligibilityResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ineligible",
+            "value": "Ineligible",
+            "description": "Ineligible for promotion"
+          },
+          {
+            "name": "Eligible",
+            "value": "Eligible",
+            "description": "Eligible for promotion"
+          }
+        ]
+      }
+    },
+    "EvaluateResult": {
+      "type": "string",
+      "description": "Whether the validation passed/failed.",
+      "enum": [
+        "Unknown",
+        "Passed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluateResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Validation result is unknown"
+          },
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "Validation result is passed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation result is failed"
+          }
+        ]
+      }
+    },
+    "GetRefundableQuantityInfo": {
+      "type": "object",
+      "description": "Model to present detailed refundable quantity information with event details.",
+      "properties": {
+        "eventDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the event occurred that created this refundable quantity.",
+          "readOnly": true
+        },
+        "deltaQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The change in quantity from this event.",
+          "readOnly": true
+        },
+        "returnWindowEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date and time in UTC when the refund window ends for this quantity.\nOptional - may be null if there is no specific window limit.",
+          "readOnly": true
+        }
+      }
+    },
+    "GetRefundableQuantityResponse": {
+      "type": "object",
+      "description": "Response model for GetRefundableQuantity operation.",
+      "properties": {
+        "refundableQuantities": {
+          "type": "array",
+          "description": "List of refundable quantity information with event details.",
+          "items": {
+            "$ref": "#/definitions/GetRefundableQuantityInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "totalRefundableQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total refundable quantity across all events.",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedResources": {
+      "type": "object",
+      "description": "Linked resources for the saas resource",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "The resources ids which will be linked to current resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operationType": {
+          "$ref": "#/definitions/OriginResourceOperationType",
+          "description": "The link operation type."
+        }
+      }
+    },
+    "MergeCloudServiceRequest": {
+      "type": "object",
+      "description": "Request to merge multiple cloud service resources into one target cloud service resource",
+      "properties": {
+        "sourceResources": {
+          "type": "array",
+          "description": "List of source resources to be merged into target resource.",
+          "items": {
+            "$ref": "#/definitions/MergeSourceCloudService"
+          }
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes (for merge target).",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "sourceResources"
+      ]
+    },
+    "MergeSaasResourcesRequest": {
+      "type": "object",
+      "description": "Request to merge multiple saas resource resources into one target saas resource resource",
+      "properties": {
+        "sourceResources": {
+          "type": "array",
+          "description": "List of source resources to be merged into target resource.",
+          "items": {
+            "$ref": "#/definitions/MergeSourceSaasResource"
+          }
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes (for merge target).",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
+    "MergeSourceCloudService": {
+      "type": "object",
+      "description": "Cloud service to be used in merge operation as source.",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The quantity of license to be merged"
+        },
+        "validationError": {
+          "type": "string",
+          "description": "The validation error it ran into. Null when validation passed.",
+          "readOnly": true
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes (for merge source).",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Id of the cloud service",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.SaaSHub/cloudServices"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MergeSourceSaasResource": {
+      "type": "object",
+      "description": "Saas resource to be used in merge operation as source.",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The quantity of license to be merged"
+        },
+        "validationError": {
+          "type": "string",
+          "description": "The validation error it ran into. Null when validation passed.",
+          "readOnly": true
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes (for merge source).",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Id of the saas resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.SaaSHub/saasResources"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "OriginResourceOperationType": {
+      "type": "string",
+      "description": "The operation type for the linked resources",
+      "enum": [
+        "Renew",
+        "Merge"
+      ],
+      "x-ms-enum": {
+        "name": "OriginResourceOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Renew",
+            "value": "Renew",
+            "description": "Renew operation type"
+          },
+          {
+            "name": "Merge",
+            "value": "Merge",
+            "description": "Merge operation type"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the SaaSHub saas resource at the time the operation was called.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Processing",
+        "Updating",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource provisioning request is accepted"
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "Resource provisioning request is being processed"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource provisioning request is being updating"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Resource provisioning request status is unknown"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RefundableQuantityResult": {
+      "type": "object",
+      "description": "Shared refundable quantity constraint model.",
+      "properties": {
+        "totalRefundableQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total refundable quantity at the time of the evaluation.",
+          "readOnly": true
+        },
+        "refundableQuantities": {
+          "type": "array",
+          "description": "Batches of refundable quantity with their respective refund window end date.",
+          "items": {
+            "$ref": "#/definitions/RefundableQuantityResultRefundableQuantitiesInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RefundableQuantityResultRefundableQuantitiesInfo": {
+      "type": "object",
+      "description": "Model to present the refundable license information",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Refundable quantity within this window.",
+          "readOnly": true
+        },
+        "returnWindowEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date in UTC time by when the refund window ends.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceGroupLevelCanTransactBulkRequest": {
+      "type": "object",
+      "description": "Bulk request model for ResourceGroupLevelCanTransact operation.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of transaction requests to evaluate.",
+          "items": {
+            "$ref": "#/definitions/CanTransactCloudServicesRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "ResourceGroupLevelCanTransactBulkResponse": {
+      "type": "object",
+      "description": "Bulk response model for ResourceGroupLevelCanTransact operation with pagination support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CanTransactResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/CanTransactResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceToken": {
+      "type": "object",
+      "description": "Resource token containing type and value for various authorization and context purposes.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource token. Examples: \"availabilityToken\", \"billingToken\""
+        },
+        "value": {
+          "type": "string",
+          "description": "Encoded resource token."
+        }
+      }
+    },
+    "SaasResource": {
+      "type": "object",
+      "description": "A SaaSHub Saas resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "The properties of a SaaSHub Saas resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SaasResourceListResult": {
+      "type": "object",
+      "description": "The response of a SaasResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SaasResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SaasResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SaasResourceProperties": {
+      "type": "object",
+      "description": "The properties of a SaaSHub saas resource.",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "Indicates whether auto renewal is turned on or off for a seat-based resource. The default value will be 'On' for products that support autorenew."
+        },
+        "endCustomerBillingAccount": {
+          "type": "string",
+          "description": "The end customer billing account in CSP scenario, will full format like /providers/Microsoft.Billing/billingAccounts/1111:2222"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the seat-based resource."
+        },
+        "productType": {
+          "type": "string",
+          "description": "Type of the product for which the resource is purchased",
+          "readOnly": true
+        },
+        "linkedResources": {
+          "$ref": "#/definitions/LinkedResources",
+          "description": "Linked resources for the resource"
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Type of the offer for which the resource is purchased",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Universal Product Number of the product"
+        },
+        "licenseData": {
+          "type": "string",
+          "description": "License data of the product",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the seat-based resource at the time the operation was called.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of licenses purchased for the resource"
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "The SKU description of the product for which the resource is purchased.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SeatBasedResourceStatus",
+          "description": "The status of the seat-based resource.",
+          "readOnly": true
+        },
+        "suspensionReasons": {
+          "type": "array",
+          "description": "The suspension reason for a resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "term": {
+          "$ref": "#/definitions/TermDetails",
+          "description": "Term details of the resource."
+        },
+        "provisioningTenantId": {
+          "type": "string",
+          "description": "The Id of the tenant where licenses will be provisioned for this resource. It will only be populated if licenses are provisioned in a different tenant."
+        },
+        "externalId": {
+          "type": "string",
+          "description": "An external Id which could be used to reference other commerce system entity, such as OMS sub id or proposal id. ExternalId value will have \"{externalSystem}:{externalId}\", e.g. \"oms:1111-2222-444-666\""
+        },
+        "systemOverrides": {
+          "$ref": "#/definitions/SystemOverrides",
+          "description": "System imposed policies that regulate behavior of the resource."
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes.",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "scheduleActions": {
+          "type": "array",
+          "description": "Schedule actions for future terms and changes",
+          "items": {
+            "$ref": "#/definitions/ScheduleAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "billingScope": {
+          "type": "string",
+          "description": "The billing scope to use for purchasing the resource. Needs full billing scope to invoice section level like: providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}"
+        },
+        "billingSubscriptionId": {
+          "type": "string",
+          "description": "The billing subscription id linked to this resource, with full format like /providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id",
+          "readOnly": true
+        },
+        "originalResourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The original resource uri, if the new resource will be created by splitting part of the licenses from an existing resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.SaaSHub/saasResources"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SaasResourceUpdate": {
+      "type": "object",
+      "description": "A SaaSHub Saas resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SaasResourceProperties",
+          "description": "The properties of a SaaSHub Saas resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScheduleAction": {
+      "type": "object",
+      "description": "Schedule action for resource operations",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of schedule action"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The effective date for the schedule action"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for the schedule action"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The quantity for the schedule action"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date for the schedule action"
+        },
+        "linkedResource": {
+          "$ref": "#/definitions/ScheduleActionLinkedResource",
+          "description": "Linked resource for the scheduled action.\nOptional property."
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Type of the offer for which the schedule action is applied",
+          "readOnly": true
+        },
+        "resourceTokens": {
+          "type": "array",
+          "description": "Resource tokens for various authorization and context purposes.",
+          "items": {
+            "$ref": "#/definitions/ResourceToken"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
+    "ScheduleActionLinkedResource": {
+      "type": "object",
+      "description": "Linked resource for scheduled actions",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI of the target resource for the scheduled action"
+        },
+        "billingScope": {
+          "type": "string",
+          "description": "The billing scope for the linked resource. Only applicable for SaaS resources.\nFormat: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}"
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The link operation type."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type for the linked resource."
+        }
+      }
+    },
+    "SeatBasedResourceStatus": {
+      "type": "string",
+      "description": "The status of a seat-based resource.",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Disabled",
+        "Deleted",
+        "PastDue",
+        "Expiring",
+        "Expired",
+        "AutoRenew",
+        "Cancelled",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "SeatBasedResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Resource status is unknown"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource status is active"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Resource status is disabled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Resource status is deleted"
+          },
+          {
+            "name": "PastDue",
+            "value": "PastDue",
+            "description": "Resource status is past due"
+          },
+          {
+            "name": "Expiring",
+            "value": "Expiring",
+            "description": "Resource status is expiring"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Resource status is expired"
+          },
+          {
+            "name": "AutoRenew",
+            "value": "AutoRenew",
+            "description": "Resource status is auto renew"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Resource status is cancelled"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Resource status is suspended"
+          }
+        ]
+      }
+    },
+    "SystemOverrides": {
+      "type": "object",
+      "description": "System imposed policies that regulate behavior of the resource.",
+      "properties": {
+        "cancellation": {
+          "$ref": "#/definitions/Cancellation",
+          "description": "The policy override for the resource indicates whether the self-serve cancellation or seat reduction is allowed.",
+          "readOnly": true
+        },
+        "cancellationAllowedEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date in UTC time by when the self-serve cancellation ends.",
+          "readOnly": true
+        },
+        "systemId": {
+          "type": "string",
+          "description": "Represents an dependency-generated ID unique per instance of this resource.",
+          "readOnly": true
+        },
+        "systemVersion": {
+          "type": "string",
+          "description": "Represents a system entity version for the resource, used for concurrency control.",
+          "readOnly": true
+        },
+        "renewalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times the resource has been renewed.",
+          "default": 0,
+          "readOnly": true
+        },
+        "startDateOnCurrentProductCode": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date in UTC time on the current product code.",
+          "readOnly": true
+        },
+        "licenseReassignmentDuration": {
+          "type": "string",
+          "description": "Duration of license reassignment period for the current term. Value is an ISO 8601 duration string.\nExpected to be P0D (0 days) or greater.",
+          "readOnly": true
+        },
+        "dataRetentionDuration": {
+          "type": "string",
+          "description": "ISO 8601 duration string representing the data retention period for the resource.\nRead-only property.",
+          "readOnly": true
+        },
+        "productUrl": {
+          "type": "string",
+          "description": "URL pointing to the product information in the Catalog endpoint.\nRead-only property.",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantLevelCanTransactBulkRequest": {
+      "type": "object",
+      "description": "Bulk request model for TenantLevelCanTransact operation.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of transaction requests to evaluate.",
+          "items": {
+            "$ref": "#/definitions/CanTransactSaasResourcesRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "items"
+      ]
+    },
+    "TenantLevelCanTransactBulkResponse": {
+      "type": "object",
+      "description": "Bulk response model for TenantLevelCanTransact operation with pagination support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CanTransactResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/CanTransactResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TermDetails": {
+      "type": "object",
+      "description": "Term details of the saas resource.",
+      "properties": {
+        "billingFrequency": {
+          "type": "string",
+          "description": "Billing frequency of the product under the saas resource. Example P1Y and P1M",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The duration for which you can use the saas resource. Example P1Y and P1M",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support future start date scenario. The time part passed in will be ignored"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support co-term scenario. When there is a value passed in for PATCH scenario, it is to support extend trial scenario. The time part passed in will be ignored"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

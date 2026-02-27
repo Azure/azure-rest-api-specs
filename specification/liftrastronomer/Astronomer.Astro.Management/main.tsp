@@ -1,11 +1,12 @@
 import "./LiftrBase.Data/main.tsp";
-import "./back-compatible.tsp";
 
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -54,8 +55,8 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations

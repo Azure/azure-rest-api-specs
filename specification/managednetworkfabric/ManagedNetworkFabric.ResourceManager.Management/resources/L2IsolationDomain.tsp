@@ -2,8 +2,9 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -23,7 +24,21 @@ model L2IsolationDomain
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @doc("The L2IsolationDomain properties")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: L2IsolationDomainProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("The L2IsolationDomain properties")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: L2IsolationDomainProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -48,17 +63,45 @@ interface L2IsolationDomains {
   listBySubscription is ArmListBySubscription<L2IsolationDomain>;
 
   @doc("Enables isolation domain across the fabric or on specified racks.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     L2IsolationDomain,
     UpdateAdministrativeState,
     CommonPostActionResponseForDeviceUpdate
   >;
 
+  @doc("Enables isolation domain across the fabric or on specified racks.")
+  @added(Versions.v2025_07_15)
+  @action("updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    L2IsolationDomain,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
+  >;
+
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    L2IsolationDomain,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
   validateConfiguration is ArmResourceActionAsync<
     L2IsolationDomain,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 
   @doc("Commits the configuration of the given resources.")
@@ -73,6 +116,15 @@ interface L2IsolationDomains {
 @@doc(L2IsolationDomains.update::parameters.properties,
   "API to update certain properties of the L2 Isolation Domain resource.."
 );
+@@doc(L2IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
 @@doc(L2IsolationDomains.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(L2IsolationDomains.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(L2IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

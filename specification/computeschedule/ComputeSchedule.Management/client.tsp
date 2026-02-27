@@ -152,10 +152,7 @@ using Azure.ResourceManager;
   "errorDetailsTimestamp",
   "csharp,javascript"
 );
-@@clientName(Versions.`2024-10-01`,
-  "$DO_NOT_NORMALIZE$V2024-10-01",
-  "javascript"
-);
+
 @@clientName(DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
@@ -222,10 +219,7 @@ using Azure.ResourceManager;
   "RecurringActionsResourceOperationResult",
   "javascript,go,python,java"
 );
-@@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
-  "V2025-05-01",
-  "javascript"
-);
+
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
 
 @@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent");

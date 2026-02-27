@@ -1,0 +1,46 @@
+parameters:
+  "service-dir":
+    default: "sdk/hybridnetwork"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-hybridnetwork"
+    namespace: "azure.mgmt.hybridnetwork"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridnetwork"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hybridnetwork"
+    namespace: "com.azure.resourcemanager.hybridnetwork"
+    service-name: "HybridNetwork"
+    flavor: azure
+    client-side-validations: true
+    uuid-as-string: false
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/hybridnetwork"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridnetwork"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhybridnetwork"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridnetwork"
+    package-details:
+      name: "@azure/arm-hybridnetwork"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

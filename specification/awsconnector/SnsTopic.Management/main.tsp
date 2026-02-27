@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -75,7 +78,7 @@ model AwsSnsTopicProperties {
   dataProtectionPolicy?: unknown;
 
   @doc("Property deliveryStatusLogging")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   deliveryStatusLogging?: LoggingConfig[];
 
   @doc("The display name to use for an SNS topic with SMS subscriptions. The display name must be maximum 100 characters long, including hyphens (-), underscores (_), spaces, and tabs.")
@@ -91,11 +94,11 @@ model AwsSnsTopicProperties {
   signatureVersion?: string;
 
   @doc("The SNS subscriptions (endpoints) for this topic.  If you specify the ``Subscription`` property in the ``AWS::SNS::Topic`` resource and it creates an associated subscription resource, the associated subscription is not deleted when the ``AWS::SNS::Topic`` resource is deleted.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   subscription?: Subscription[];
 
   @doc("The list of tags to add to a new topic.  To be able to tag a topic on creation, you must have the ``sns:CreateTopic`` and ``sns:TagResource`` permissions.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property topicArn")

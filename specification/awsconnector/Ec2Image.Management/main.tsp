@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -69,7 +72,7 @@ model AwsEc2ImageProperties {
   architecture?: ArchitectureValuesEnumValue;
 
   @doc("<p>Any block device mapping entries.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   blockDeviceMappings?: BlockDeviceMapping[];
 
   @doc("<p>The boot mode of the image. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
@@ -127,7 +130,7 @@ model AwsEc2ImageProperties {
   platformDetails?: string;
 
   @doc("<p>Any product codes associated with the AMI.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   productCodes?: ProductCode[];
 
   @doc("<p>Indicates whether the image has public launch permissions. The value is <code>true</code> if this image has public launch permissions or <code>false</code> if it has only implicit and explicit launch permissions.</p>")
@@ -155,7 +158,7 @@ model AwsEc2ImageProperties {
   stateReason?: StateReason;
 
   @doc("<p>Any tags assigned to the image.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>If the image is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")

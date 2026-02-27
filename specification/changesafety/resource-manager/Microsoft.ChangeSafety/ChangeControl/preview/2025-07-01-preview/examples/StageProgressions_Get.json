@@ -1,0 +1,88 @@
+{
+  "title": "StageProgressions_Get",
+  "operationId": "StageProgressions_Get",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "webApplicationChangeState",
+    "stageProgressionName": "securityValidationProgression"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stageReference": "security-validation-stage",
+          "state": "Completed",
+          "sequence": 1,
+          "stageVariables": {
+            "scanTypes": [
+              "static-analysis",
+              "dependency-check",
+              "container-scan"
+            ],
+            "environment": "staging",
+            "complianceLevel": "high"
+          },
+          "comments": "Security validation stage progression for web application deployment. This stage performs comprehensive security scanning including static code analysis, dependency vulnerability checks, and container security scanning.",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/WebApp/_workitems/edit/12350",
+              "description": "Web application security validation work item for deployment safety verification",
+              "lastModifiedBy": "karen.security@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:40:30.442Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/sec-893",
+              "description": "Security validation approval request with security team sign-off",
+              "lastModifiedBy": "leo.security@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:35:15.225Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-794",
+              "description": "Related support incident for security validation environment coordination",
+              "lastModifiedBy": "mike.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:30:45.167Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://pim.contoso.com/requests/elev-326",
+              "description": "Security validation environment access elevation for scanning activities",
+              "lastModifiedBy": "nina.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:20.889Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/codeValidationChangeState",
+              "description": "Related code validation change state that completed successfully before security validation",
+              "lastModifiedBy": "oscar.dev@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:10.334Z"
+            },
+            "testResults": {
+              "uri": "https://testing.contoso.com/results/security-validation-659",
+              "description": "Security validation test results with vulnerability reports and compliance assessments",
+              "lastModifiedBy": "petra.testing@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:35.556Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application-security",
+              "description": "Web application security service catalog entry with validation procedures and security baselines",
+              "lastModifiedBy": "quinn.catalog@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:25.778Z"
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/webApplicationChangeState/stageProgressions/securityValidationProgression",
+        "name": "securityValidationProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "karen.security@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "karen.security@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:40:30.442Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "title": "DeviceServiceLinkOperations_ListByParent_MaximumSet",
+  "operationId": "DeviceServiceLinkOperations_ListByParent",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "accessPointAccountName": "testAccessPointAccount",
+    "api-version": "2024-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/deviceServiceLinks/testDeviceServiceLink",
+            "name": "testDeviceServiceLink",
+            "type": "microsoft.accesspoint/accesspointaccounts/deviceservicelinks",
+            "properties": {
+              "deviceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/devices/testDevice",
+              "serviceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/azureVirtualDesktops/testAzureVirtualDesktop",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

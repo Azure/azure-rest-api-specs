@@ -1,0 +1,346 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM managed instances and monitored resources.",
+    "version": "2024-06-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "instanceName": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the SCOM managed instance.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    },
+    "linkedGrafanaInstanceName": {
+      "name": "linkedGrafanaInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The linked Grafana instance name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/linkedGrafanaInstances/{linkedGrafanaInstanceName}": {
+      "get": {
+        "operationId": "LinkedGrafanaInstances_Get",
+        "description": "Retrieve the details of the linked Grafana instance resource.",
+        "tags": [
+          "Linked Grafana Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/linkedGrafanaInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Linked Grafana instance retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedGrafanaInstance"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkedGrafanaInstance_Get": {
+            "$ref": "./examples/LinkedGrafanaInstance_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LinkedGrafanaInstances_CreateOrUpdate",
+        "description": "Create or update a linked grafana resource.",
+        "tags": [
+          "Linked Grafana Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/linkedGrafanaInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "LinkedGrafanaInstance",
+            "description": "Azure Managed Grafana instance linked to SCOM MI",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedGrafanaInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Linked Grafana instance is already created.",
+            "schema": {
+              "$ref": "#/definitions/LinkedGrafanaInstance"
+            }
+          },
+          "201": {
+            "description": "Linked Grafana instance create request successful.",
+            "schema": {
+              "$ref": "#/definitions/LinkedGrafanaInstance"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "LinkedGrafanaInstance_CreateOrUpdate": {
+            "$ref": "./examples/LinkedGrafanaInstance_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LinkedGrafanaInstances_Delete",
+        "description": "Remove a linked grafana resource.",
+        "tags": [
+          "Linked Grafana Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/linkedGrafanaInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The deletion operation has been accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No content, resource to be deleted not found."
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "LinkedGrafanaInstance_Delete": {
+            "$ref": "./examples/LinkedGrafanaInstance_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/linkedGrafanaInstances": {
+      "get": {
+        "operationId": "LinkedGrafanaInstances_ListByManagedInstance",
+        "description": "A list of all linked grafana instance resources within a SCOM managed instance.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Linked Grafana Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedGrafanaInstances"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkedGrafanaInstances_ListByResourceGroup": {
+            "$ref": "./examples/LinkedGrafanaInstances_ListByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedGrafanaInstance": {
+      "type": "object",
+      "description": "A linked grafana resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a linked grafana resource.",
+          "$ref": "#/definitions/LinkedGrafanaInstanceProperties"
+        }
+      }
+    },
+    "LinkedGrafanaInstanceProperties": {
+      "type": "object",
+      "description": "The properties of a linked grafana resource.",
+      "required": [
+        "managedGrafanaResourceId"
+      ],
+      "properties": {
+        "managedGrafanaResourceId": {
+          "description": "ArmId of the AMG resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Dashboard/grafana"
+              }
+            ]
+          }
+        },
+        "grafanaEndpoint": {
+          "description": "Grafana endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSourceName": {
+          "description": "Name of the data source.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedGrafanaInstances": {
+      "type": "object",
+      "description": "A paginated list of linked Grafana instances.",
+      "properties": {
+        "value": {
+          "description": "The contents displayed on the page.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/LinkedGrafanaInstance"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

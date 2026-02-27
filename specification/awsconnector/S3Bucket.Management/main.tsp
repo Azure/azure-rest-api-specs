@@ -11,6 +11,9 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -133,7 +136,7 @@ model AwsS3BucketProperties {
   replicationConfiguration?: ReplicationConfiguration;
 
   @doc("An arbitrary set of tags (key-value pairs) for this S3 bucket.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them. Describes the versioning state of an Amazon S3 bucket. For more information, see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html) in the *Amazon S3 API Reference*.")
@@ -212,7 +215,7 @@ model AnalyticsConfiguration {
   storageClassAnalysis?: StorageClassAnalysis;
 
   @doc("The tags to use when evaluating an analytics filter. The analytics only includes objects that meet the filter's criteria. If no filter is specified, all of the contents of the bucket are included in the analysis.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagFilters?: TagFilter[];
 }
 
@@ -223,7 +226,7 @@ model AnalyticsConfiguration {
 @doc("Definition of BucketEncryption")
 model BucketEncryption {
   @doc("Specifies the default server-side-encryption configuration.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   serverSideEncryptionConfiguration?: ServerSideEncryptionRule[];
 }
 
@@ -254,11 +257,11 @@ model IntelligentTieringConfiguration {
   status?: IntelligentTieringConfigurationStatus;
 
   @doc("A container for a key-value pair.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagFilters?: TagFilter[];
 
   @doc("Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tierings?: Tiering[];
 }
 
@@ -416,7 +419,7 @@ model MetricsConfiguration {
   prefix?: string;
 
   @doc("Specifies a list of tag filters to use as a metrics configuration filter. The metrics configuration includes only objects that meet the filter's criteria.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagFilters?: TagFilter[];
 }
 
@@ -430,15 +433,15 @@ model NotificationConfiguration {
   eventBridgeConfiguration?: EventBridgeConfiguration;
 
   @doc("Describes the LAMlong functions to invoke and the events for which to invoke them.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   lambdaConfigurations?: LambdaConfiguration[];
 
   @doc("The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   queueConfigurations?: QueueConfiguration[];
 
   @doc("The topic to which notifications are sent and the events for which notifications are generated.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   topicConfigurations?: TopicConfiguration[];
 }
 
@@ -462,7 +465,7 @@ model ObjectLockConfiguration {
 @doc("Definition of OwnershipControls")
 model OwnershipControls {
   @doc("Specifies the container element for Object Ownership rules.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   rules?: OwnershipControlsRule[];
 }
 
@@ -549,7 +552,7 @@ model WebsiteConfiguration {
   redirectAllRequestsTo?: RedirectAllRequestsTo;
 
   @doc("Rules that define when a redirect is applied and the redirect behavior.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   routingRules?: RoutingRule[];
 }
 
@@ -722,7 +725,7 @@ model Rule {
   noncurrentVersionTransition?: NoncurrentVersionTransition;
 
   @doc("For buckets with versioning enabled (or suspended), one or more transition rules that specify when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransition`` property.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   noncurrentVersionTransitions?: NoncurrentVersionTransition[];
 
   @doc("Specifies the minimum object size in bytes for this rule to apply to. Objects must be larger than this value in bytes. For more information about size based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.")
@@ -738,14 +741,14 @@ model Rule {
   status?: RuleStatus;
 
   @doc("Tags to use to identify a subset of objects to which the lifecycle rule applies.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagFilters?: TagFilter[];
 
   @doc("(Deprecated.) Specifies when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transitions`` property. Specifies when an object transitions to a specified storage class. For more information about Amazon S3 lifecycle configuration rules, see [Transitioning Objects Using Amazon S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html) in the *Amazon S3 User Guide*.")
   transition?: Transition;
 
   @doc("One or more transition rules that specify when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transition`` property.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   transitions?: Transition[];
 }
 
@@ -1303,7 +1306,7 @@ model RoutingRuleCondition {
 @doc("Definition of S3KeyFilter")
 model S3KeyFilter {
   @doc("A list of containers for the key-value pair that defines the criteria for the filter rule.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   rules?: FilterRule[];
 }
 
@@ -1385,7 +1388,7 @@ model ReplicationRuleAndOperator {
   prefix?: string;
 
   @doc("An array of tags containing key and value pairs.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tagFilters?: TagFilter[];
 }
 

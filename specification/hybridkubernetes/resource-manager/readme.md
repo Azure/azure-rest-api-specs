@@ -1,3 +1,4 @@
+
 # KubernetesConnect
 
 > see https://aka.ms/autorest
@@ -24,143 +25,37 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Kubernetes Connect RP.
 
-``` yaml
+```yaml
 openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2025-12-01-preview
-```
-### Tag: package-2025-12-01-preview
-
-These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-12-01-preview'
-input-file:
-  - Microsoft.Kubernetes/preview/2025-12-01-preview/connectedClusters.json
-```
-
-### Tag: package-2025-08-01-preview
-
-These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-08-01-preview'
-input-file:
-  - Microsoft.Kubernetes/preview/2025-08-01-preview/connectedClusters.json
-```
-
-### Tag: package-2024-12-01-preview
-
-These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12-01-preview'
-input-file:
-  - Microsoft.Kubernetes/preview/2024-12-01-preview/connectedClusters.json
-```
-
-### Tag: package-2024-07-15-preview
-
-These settings apply only when `--tag=package-2024-07-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-07-15-preview'
-input-file:
-  - Microsoft.Kubernetes/preview/2024-07-15-preview/connectedClusters.json
-```
-
-### Tag: package-2024-07-01-preview
-
-These settings apply only when `--tag=package-2024-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-07-01-preview'
-input-file:
-  - Microsoft.Kubernetes/preview/2024-07-01-preview/connectedClusters.json
-```
-
-### Tag: package-preview-2024-06-01
-
-These settings apply only when `--tag=package-preview-2024-06-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-06-01'
-input-file:
-  - Microsoft.Kubernetes/preview/2024-06-01-preview/connectedClusters.json
-```
-
-### Tag: package-preview-2024-02-01
-
-These settings apply only when `--tag=package-preview-2024-02-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-02-01'
-input-file:
-  - Microsoft.Kubernetes/preview/2024-02-01-preview/connectedClusters.json
-```
-
-### Tag: package-2024-01
-
-These settings apply only when `--tag=package-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01'
-input-file:
-  - Microsoft.Kubernetes/stable/2024-01-01/connectedClusters.json
-```
-### Tag: package-preview-2023-11
-
-These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-11'
-input-file:
-  - Microsoft.Kubernetes/preview/2023-11-01-preview/connectedClusters.json
+tag: package-2020-01-01-preview
 ```
 
 ### Tag: package-2020-01-01-preview
 
 These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-01-preview'
+```yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
 - Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 ```
 
-### Tag: package-2021-04-01-preview
 
-These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+### Tag: package-2019-11-01-preview
 
-``` yaml $(tag) == 'package-2021-04-01-preview'
+These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
-- Microsoft.Kubernetes/preview/2021-04-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
 ```
 
-### Tag: package-2021-03-01
+### Tag: package-2019-09-01-privatepreview
 
-These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2019-09-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01'
+```yaml $(tag) == 'package-2019-09-01-privatepreview'
 input-file:
-- Microsoft.Kubernetes/stable/2021-03-01/connectedClusters.json
-```
-
-### Tag: package-2021-10-01
-
-These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-10-01'
-input-file:
-- Microsoft.Kubernetes/stable/2021-10-01/connectedClusters.json
-```
-
-### Tag: package-2022-05-01-preview
-
-These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-05-01-preview'
-input-file:
-- Microsoft.Kubernetes/preview/2022-05-01-preview/connectedClusters.json
-```
-
-### Tag: package-2022-10-01-preview
-
-These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-10-01-preview'
-input-file:
-- Microsoft.Kubernetes/preview/2022-10-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-09-01-privatepreview/connectedClusters.json
 ```
 
 ---
@@ -172,7 +67,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -181,7 +76,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridkubernetes']
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
 
@@ -205,12 +99,28 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Suppression
+## Multi-API/Profile support for AutoRest v3 generators 
 
-``` yaml
-suppressions:
-  - code: DefinitionsPropertiesNamesCamelCase
-    from: connectedClusters.json
-    where: $.definitions.AadProfile.properties.enableAzureRBAC
-    reason: enableAzureRBAC is already used in Managed Clusters. so to ensure consistency between Managed Clusters and Connected Clusters usage of aadProfile.    
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+- Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-09-01-privatepreview/connectedClusters.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/preview/2019-09-01-privatepreview/somefile.json
 ```

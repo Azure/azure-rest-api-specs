@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "deploymentName": "MyDeployment1",
+    "api-version": "2022-02-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The details of an Azure Sphere deployment.",
+      "body": {
+        "name": "MyDeployment1",
+        "properties": {
+          "deployedImages": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup1/providers/Microsoft.AzureSphere/catalogs/myCatalog1/images/myImageId1",
+              "name": "myImageName",
+              "type": "Microsoft.AzureSphere/catalogs/images",
+              "properties": {
+                "uri": "myImageUri",
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "deploymentDateUtc": "2021-09-30T21:51:39.2698729Z"
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import "@typespec/http";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.CommonTypes;
 
@@ -195,6 +194,12 @@ union SAPConfigurationType {
    * SAP system will be deployed by service. OS configurations will be done.
    */
   DeploymentWithOSConfig: "DeploymentWithOSConfig",
+
+  /**
+   * SAP system will be deployed by service using SAP Deployment automation framework.
+   */
+  @added(Versions.v2024_10_01_preview)
+  SdafDeployment: "SdafDeployment",
 }
 
 /**
@@ -640,7 +645,7 @@ model SAPSupportedResourceSkusResult {
   /**
    * Gets the list of SAP supported SKUs.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   supportedSkus?: SAPSupportedSku[];
 }
 
@@ -726,7 +731,7 @@ model SAPDiskConfiguration {
   /**
    * The list of supported disks for a given VM Sku.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   supportedConfigurations?: DiskDetails[];
 }
 
@@ -831,7 +836,7 @@ model SAPAvailabilityZoneDetailsResult {
   /**
    * Gets the list of availability zone pairs.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   availabilityZonePairs?: SAPAvailabilityZonePair[];
 }
 
@@ -968,7 +973,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: ErrorDefinition[];
 }
 
@@ -1015,7 +1020,7 @@ model UpdateSAPVirtualInstanceRequest {
   /**
    * Managed service identity (user assigned identities)
    */
-  identity?: SAPVirtualInstanceIdentity;
+  identity?: CommonTypes.ManagedServiceIdentity;
 
   /**
    * The update properties.
@@ -1093,7 +1098,7 @@ model SAPCentralServerProperties {
    * The list of virtual machines corresponding to the Central Services instance.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: CentralServerVmDetails[];
 
   /**
@@ -1358,7 +1363,7 @@ model SAPDatabaseProperties {
    * The list of virtual machines corresponding to the Database resource.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: DatabaseVmDetails[];
 
   /**
@@ -1491,7 +1496,7 @@ model SAPApplicationServerProperties {
    * The list of virtual machines.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: ApplicationServerVmDetails[];
 
   /**
@@ -1649,12 +1654,12 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   publicKeys?: SshPublicKey[];
 }
 
 /**
- * Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://learn.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
+ * Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://learn.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
  */
 model LinuxConfiguration extends OSConfiguration {
   /**
@@ -1679,7 +1684,7 @@ model LinuxConfiguration extends OSConfiguration {
 }
 
 /**
- * The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
+ * The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
  */
 model SshKeyPair {
   /**
@@ -1801,7 +1806,7 @@ model VirtualMachineConfiguration {
 }
 
 /**
- * Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)
+ * Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)
  */
 model SingleServerConfiguration extends InfrastructureConfiguration {
   /**
@@ -2029,7 +2034,7 @@ model StorageConfiguration {
 }
 
 /**
- * Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)
+ * Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)
  */
 model ThreeTierConfiguration extends InfrastructureConfiguration {
   /**
@@ -2116,7 +2121,7 @@ model VirtualMachineResourceNames {
   /**
    * The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
   /**
@@ -2178,7 +2183,7 @@ model CentralServerFullResourceNames {
   /**
    * The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2224,7 +2229,7 @@ model ApplicationServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2240,7 +2245,7 @@ model DatabaseServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2469,6 +2474,33 @@ model DeploymentWithOSConfiguration extends SAPConfiguration {
 }
 
 /**
+ * Deployment along with OS Configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OS represents the Operation System."
+@added(Versions.v2024_10_01_preview)
+model SdafDeployment extends SAPConfiguration {
+  /**
+   * The workload zone variables blob.
+   */
+  workloadZoneVariablesBlob: string;
+
+  /**
+   * The sap system variables blob.
+   */
+  systemVariablesBlob: string;
+
+  /**
+   * The blob file path containing the custom resource names.
+   */
+  customResourceNamesBlob?: string;
+
+  /**
+   * The configuration Type.
+   */
+  configurationType: SAPConfigurationType.SdafDeployment;
+}
+
+/**
  * Defines the OS and SAP Configurations for Deployment
  */
 model OsSapConfiguration {
@@ -2496,40 +2528,4 @@ model DeployerVmPackages {
    * The deployer VM packages storage account id
    */
   storageAccountId?: string;
-}
-
-/**
- * Managed service identity (user assigned identities)
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
-model SAPVirtualInstanceIdentity {
-  /** The type of managed identity assigned to this resource. */
-  type: SAPVirtualInstanceIdentityType;
-
-  /** The identities assigned to this resource by the user. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
-}
-
-/**
- * Type of managed service identity (where only None and UserAssigned types are allowed).
- */
-union SAPVirtualInstanceIdentityType {
-  /** No managed identity. */
-  None: "None",
-
-  /** User assigned managed identity. */
-  UserAssigned: "UserAssigned",
-
-  string,
-}
-
-/**
- * The managed service identities envelope."
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
-model SAPVirtualInstanceIdentityProperty {
-  /** The managed service identities assigned to this resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  identity?: SAPVirtualInstanceIdentity;
 }

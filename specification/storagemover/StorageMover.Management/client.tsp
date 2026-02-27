@@ -5,11 +5,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageMover;
 using Azure.Core;
 
-@@alternateType(Azure.ResourceManager.ProxyResource.id,
-  armResourceIdentifier,
-  "csharp"
-);
-
 @@clientName(Endpoint, "StorageMoverEndpoint", "csharp");
 @@clientName(EndpointBaseUpdateParameters,
   "StorageMoverEndpointPatch",
@@ -30,10 +25,6 @@ using Azure.Core;
 @@clientName(WeeklyRecurrence, "ScheduleWeeklyRecurrence", "csharp");
 @@clientName(Recurrence, "ScheduleRecurrence", "csharp");
 @@clientName(Time, "ScheduleTime", "csharp");
-@@clientName(JobRunResourceId.jobRunResourceId,
-  "JobRunResourceIdValue",
-  "csharp"
-);
 
 @@alternateType(JobDefinitionProperties.agentResourceId,
   armResourceIdentifier,
@@ -80,18 +71,7 @@ using Azure.Core;
   "UsernameUriString",
   "csharp"
 );
-@@clientName(ConnectionProperties,
-  "StorageMoverConnectionProperties",
-  "csharp"
-);
-@@clientName(Connection, "StorageMoverConnection", "csharp");
-@@clientName(ConnectionStatus, "StorageMoverConnectionStatus", "csharp");
-
-@@clientName(Minute.`0`, "Zero", "csharp,go,python,javascript");
-@@clientName(Minute.`30`, "Thirty", "csharp,go,python,javascript");
+@@clientName(Minute.`0`, "Zero", "csharp,go");
+@@clientName(Minute.`30`, "Thirty", "csharp,go");
 @@usage(JobRun, Usage.input, "csharp");
 @@usage(JobRunError, Usage.output, "csharp");
-@@clientName(Microsoft.StorageMover, "StorageMoverMgmtClient", "python");
-
-// Java SDK migration fixes
-@@clientName(AgentProperties.localIPAddress, "localIpAddress", "java");

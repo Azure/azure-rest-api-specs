@@ -1,0 +1,2253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for MySQLDiscovery",
+    "description": "The Microsoft.MySQLDiscovery Rest API spec.",
+    "version": "2025-03-30-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}": {
+      "get": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_Get",
+        "summary": "Retrieve MySQL discovery site details",
+        "description": "Retrieves detailed information about a specific MySQL discovery site, including its configuration, associated resources, and current operational status.",
+        "x-ms-examples": {
+          "MySQLSites_Get": {
+            "$ref": "./examples/MySQLSites_Get.json"
+          },
+          "MySQLSites_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_Get_MaximumSet_Gen.json"
+          },
+          "MySQLSites_Get_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_Get_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the MySQL discovery site information, including site configuration, linked master site, and migrate project details.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_CreateOrUpdate",
+        "summary": "Create or update MySQL discovery site",
+        "description": "Creates a new MySQL discovery site or updates an existing one. This operation establishes the discovery environment for MySQL servers and configures the association with master sites and migration projects.",
+        "x-ms-examples": {
+          "MySQLSites_Create": {
+            "$ref": "./examples/MySQLSites_Create.json"
+          },
+          "MySQLSites_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "MySQLSites_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The MySQL discovery site configuration including master site reference, migrate project association, and extended location details.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery site was successfully updated with the new configuration parameters.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSite"
+            }
+          },
+          "201": {
+            "description": "A new MySQL discovery site was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_Delete",
+        "summary": "Delete MySQL discovery site",
+        "description": "Permanently removes a MySQL discovery site and all its associated discovery data. This operation cannot be undone and will stop all ongoing discovery processes for the site.",
+        "x-ms-examples": {
+          "MySQLSites_Delete": {
+            "$ref": "./examples/MySQLSites_Delete.json"
+          },
+          "MySQLSites_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_Delete_MaximumSet_Gen.json"
+          },
+          "MySQLSites_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery site has been successfully deleted along with all associated discovery data and configurations."
+          },
+          "204": {
+            "description": "The MySQL discovery site was not found or has already been deleted. No action was performed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_Update",
+        "summary": "Update MySQL discovery site properties",
+        "description": "Partially updates specific properties of an existing MySQL discovery site without replacing the entire resource. Use this operation to modify tags or update site configuration parameters.",
+        "x-ms-examples": {
+          "MySQLSites_Update": {
+            "$ref": "./examples/MySQLSites_Update.json"
+          },
+          "MySQLSites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MySQLSitesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery site properties were successfully updated and are now active.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSite"
+            }
+          },
+          "202": {
+            "description": "The update request for the MySQL discovery site has been accepted and is being processed. Check the operation status using the provided location header.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh": {
+      "post": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_TriggerRefresh",
+        "summary": "Implements Refresh POST method.",
+        "description": "Trigger Refresh Refresh action",
+        "x-ms-examples": {
+          "MySQLSites_TriggerRefresh": {
+            "$ref": "./examples/MySQLSites_TriggerRefresh.json"
+          },
+          "MySQLSites_TriggerRefresh_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_TriggerRefresh_MaximumSet_Gen.json"
+          },
+          "MySQLSites_TriggerRefresh_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_TriggerRefresh_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The refresh operation has been accepted and initiated.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites": {
+      "get": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_ListByResourceGroup",
+        "summary": "List MySQL discovery sites in resource group",
+        "description": "Retrieves all MySQL discovery sites within a specific resource group, providing an overview of discovery environments and their current status.",
+        "x-ms-examples": {
+          "MySQLSites_ListByResourceGroup": {
+            "$ref": "./examples/MySQLSites_ListByResourceGroup.json"
+          },
+          "MySQLSites_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "MySQLSites_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the MySQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MySQLDiscovery/MySQLSites": {
+      "get": {
+        "tags": [
+          "MySQLSites"
+        ],
+        "operationId": "MySQLSites_ListBySubscription",
+        "summary": "List MySQL discovery sites in subscription",
+        "description": "Retrieves all MySQL discovery sites across all resource groups within a subscription, providing a comprehensive view of MySQL discovery environments.",
+        "x-ms-examples": {
+          "MySQLSites_ListBySubscription": {
+            "$ref": "./examples/MySQLSites_ListBySubscription.json"
+          },
+          "MySQLSites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLSites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MySQLSites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLSites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the MySQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/MySQLSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}": {
+      "get": {
+        "tags": [
+          "MySQLServers"
+        ],
+        "operationId": "MySQLServers_Get",
+        "summary": "Retrieve discovered MySQL server details",
+        "description": "Retrieves comprehensive information about a specific discovered MySQL server, including version details, database count, host machine properties, and current support status.",
+        "x-ms-examples": {
+          "MySQLServers_Get": {
+            "$ref": "./examples/MySQLServers_Get.json"
+          },
+          "MySQLServers_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLServers_Get_MaximumSet_Gen.json"
+          },
+          "MySQLServers_Get_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLServers_Get_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the MySQLServers resource.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MySQLServers"
+        ],
+        "operationId": "MySQLServers_CreateOrUpdate",
+        "summary": "Create or update discovered MySQL server information",
+        "description": "Creates or updates the discovery record for a MySQL server with detailed configuration, version information, database metrics, and host machine properties.",
+        "x-ms-examples": {
+          "MySQLServers_Create": {
+            "$ref": "./examples/MySQLServers_Create.json"
+          },
+          "MySQLServers_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLServers_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "MySQLServers_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLServers_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The MySQL server discovery information including host details, version, databases, and machine properties.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL server discovery information was successfully updated with the latest configuration and metrics.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServer"
+            }
+          },
+          "201": {
+            "description": "A new MySQL server discovery record was successfully created with the provided configuration and properties.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MySQLServers"
+        ],
+        "operationId": "MySQLServers_Delete",
+        "summary": "Remove MySQL server from discovery",
+        "description": "Removes a MySQL server from the discovery inventory, deleting all associated discovery data and metrics for the specified server.",
+        "x-ms-examples": {
+          "MySQLServers_Delete": {
+            "$ref": "./examples/MySQLServers_Delete.json"
+          },
+          "MySQLServers_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLServers_Delete_MaximumSet_Gen.json"
+          },
+          "MySQLServers_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLServers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL server was successfully removed from discovery inventory along with all associated data and metrics."
+          },
+          "204": {
+            "description": "The MySQL server was not found in the discovery inventory or has already been removed. No action was performed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MySQLServers"
+        ],
+        "operationId": "MySQLServers_Update",
+        "summary": "Update MySQL server discovery properties",
+        "description": "Partially updates specific properties of a discovered MySQL server without replacing the entire discovery record. Use this operation to update tags, labels, or specific server metrics.",
+        "x-ms-examples": {
+          "MySQLServers_Update": {
+            "$ref": "./examples/MySQLServers_Update.json"
+          },
+          "MySQLServers_Update_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLServers_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The updated properties for the MySQL server discovery record, including modified tags, labels, or server-specific attributes.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MySQLServerResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL server discovery properties were successfully updated and are now active in the inventory.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServer"
+            }
+          },
+          "202": {
+            "description": "The update request for the MySQL server discovery record has been accepted and is being processed.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers": {
+      "get": {
+        "tags": [
+          "MySQLServers"
+        ],
+        "operationId": "MySQLServers_ListBySite",
+        "summary": "List discovered MySQL servers in discovery site",
+        "description": "Retrieves all MySQL servers discovered within a specific discovery site.",
+        "x-ms-examples": {
+          "MySQLServers_ListBySite": {
+            "$ref": "./examples/MySQLServers_ListBySite.json"
+          },
+          "MySQLServers_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/MySQLServers_ListBySite_MaximumSet_Gen.json"
+          },
+          "MySQLServers_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/MySQLServers_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the MySQLServers resource.",
+            "schema": {
+              "$ref": "#/definitions/MySQLServerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Get",
+        "summary": "Retrieve MySQL discovery summary report",
+        "description": "Retrieves a comprehensive summary report for MySQL discovery operations within a site, including the total number of discovered servers and any errors encountered during discovery.",
+        "x-ms-examples": {
+          "Summaries_Get": {
+            "$ref": "./examples/Summaries_Get.json"
+          },
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The unique identifier name of the summary report to retrieve from the discovery site."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListBySite",
+        "summary": "List MySQL discovery summary reports",
+        "description": "Retrieves all available summary reports for a MySQL discovery site, providing an overview of discovery statistics.",
+        "x-ms-examples": {
+          "Summaries_ListBySite": {
+            "$ref": "./examples/Summaries_ListBySite.json"
+          },
+          "Summaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "Summaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/SummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries/{errorSummaryName}": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Get",
+        "summary": "Retrieve MySQL discovery error summary",
+        "description": "Retrieves detailed error summary information for MySQL discovery operations, including the count of affected objects and specific error details encountered during discovery processes.",
+        "x-ms-examples": {
+          "ErrorSummaries_Get": {
+            "$ref": "./examples/ErrorSummaries_Get.json"
+          },
+          "ErrorSummaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The unique identifier name of the error summary report to retrieve from the discovery site."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_ListBySite",
+        "summary": "List MySQL discovery error summaries",
+        "description": "Retrieves all error summary reports for a MySQL discovery site, providing comprehensive information about discovery issues, affected objects, and troubleshooting details.",
+        "x-ms-examples": {
+          "ErrorSummaries_ListBySite": {
+            "$ref": "./examples/ErrorSummaries_ListBySite.json"
+          },
+          "ErrorSummaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/agents/{agentName}": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Get",
+        "summary": "Retrieve MySQL discovery agent details",
+        "description": "Retrieves detailed information about a specific MySQL discovery agent, including its health status, service principal configuration, and associated appliance details.",
+        "x-ms-examples": {
+          "Agents_Get": {
+            "$ref": "./examples/Agents_Get.json"
+          },
+          "Agents_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_Get_MaximumSet_Gen.json"
+          },
+          "Agents_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_Get_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Agents resource.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_CreateOrUpdate",
+        "summary": "Create or update MySQL discovery agent",
+        "description": "Creates a new MySQL discovery agent or updates an existing one with service principal credentials, appliance configuration, and fabric site association for performing MySQL discovery operations.",
+        "x-ms-examples": {
+          "Agents_Create": {
+            "$ref": "./examples/Agents_Create.json"
+          },
+          "Agents_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Agents_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The discovery agent configuration including service principal identity details, appliance name, and fabric site information for MySQL discovery operations.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery agent was successfully updated with the new configuration and is ready for discovery operations.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "A new MySQL discovery agent was successfully created and configured for performing discovery operations within the site.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Delete",
+        "summary": "Remove MySQL discovery agent",
+        "description": "Permanently removes a MySQL discovery agent from the site, stopping all discovery operations performed by this agent and cleaning up associated configurations.",
+        "x-ms-examples": {
+          "Agents_Delete": {
+            "$ref": "./examples/Agents_Delete.json"
+          },
+          "Agents_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_Delete_MaximumSet_Gen.json"
+          },
+          "Agents_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery agent was successfully removed and all associated discovery operations have been stopped."
+          },
+          "204": {
+            "description": "The MySQL discovery agent was not found or has already been removed. No action was performed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Update",
+        "summary": "Update MySQL discovery agent properties",
+        "description": "Partially updates specific properties of a MySQL discovery agent, such as health details or configuration parameters, without replacing the entire agent resource.",
+        "x-ms-examples": {
+          "Agents_Update": {
+            "$ref": "./examples/Agents_Update.json"
+          },
+          "Agents_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_Update_MaximumSet_Gen.json"
+          },
+          "Agents_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_Update_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The updated properties for the MySQL discovery agent, such as modified health details or configuration parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MySQL discovery agent properties were successfully updated and the changes are now active.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_ListBySite",
+        "summary": "List MySQL discovery agents in site",
+        "description": "Retrieves all MySQL discovery agents configured within a specific discovery site, including their health status, configuration details, and operational information.",
+        "x-ms-examples": {
+          "Agents_ListBySite": {
+            "$ref": "./examples/Agents_ListBySite.json"
+          },
+          "Agents_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_ListBySite_MaximumSet_Gen.json"
+          },
+          "Agents_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Agents resource.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/agents/{agentName}/refresh": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_TriggerRefresh",
+        "summary": "Refresh MySQL discovery agent operations",
+        "description": "Initiates a refresh operation for a specific MySQL discovery agent to re-discover MySQL servers, update configurations, and synchronize with the latest environment state.",
+        "x-ms-examples": {
+          "Agents_TriggerRefresh": {
+            "$ref": "./examples/Agents_TriggerRefresh.json"
+          },
+          "Agents_TriggerRefresh_MaximumSet_Gen": {
+            "$ref": "./examples/Agents_TriggerRefresh_MaximumSet_Gen.json"
+          },
+          "Agents_TriggerRefresh_MinimumSet_Gen": {
+            "$ref": "./examples/Agents_TriggerRefresh_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The agent refresh operation has been accepted and initiated. Use the Location header URL to monitor the progress of the discovery refresh process.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.MySQLDiscovery/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Retrieves a comprehensive list of all available operations for the MySQL Discovery Service, including operation details, descriptions, and supported HTTP methods.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the complete list of MySQL Discovery Service operations with their descriptions and capabilities.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Indicates the current provisioning state of the MySQL Discovery resource, representing the progress and status of resource deployment operations.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The provisioning state is unknown or has not been determined yet."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The provisioning operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning operation has been canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          }
+        ]
+      }
+    },
+    "SupportStatus": {
+      "type": "string",
+      "description": "Indicates the current support lifecycle status of the MySQL server version, helping determine migration urgency and available support options.",
+      "enum": [
+        "OutOfSupport",
+        "Extended",
+        "Mainstream",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "SupportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OutOfSupport",
+            "value": "OutOfSupport",
+            "description": "The MySQL version is no longer supported by the vendor and should be migrated to a supported version urgently."
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "The MySQL version is in extended support phase with limited updates and should be planned for migration."
+          },
+          {
+            "name": "Mainstream",
+            "value": "Mainstream",
+            "description": "The MySQL version is actively supported with regular updates and security patches."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The support status of the MySQL version could not be determined or is not available."
+          }
+        ]
+      }
+    },
+    "Edition": {
+      "type": "string",
+      "description": "Specifies the MySQL server edition, indicating the feature set, licensing model, and capabilities available in the discovered MySQL instance.",
+      "enum": [
+        "Community",
+        "Enterprise",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "Edition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "MySQL Community Edition - the open-source version with standard features and community support."
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise",
+            "description": "MySQL Enterprise Edition - the commercial version with advanced features, tools, and enterprise support."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The Edition of the MySQL version could not be determined or is not available."
+          }
+        ]
+      }
+    },
+    "BoolValue": {
+      "type": "string",
+      "description": "Represents an Enum with boolean values.",
+      "enum": [
+        "Unknown",
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "BoolValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Represents an unknown value."
+          },
+          {
+            "name": "True",
+            "value": "True",
+            "description": "Represents a true boolean value."
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "Represents a false boolean value."
+          }
+        ]
+      }
+    },
+    "CustomProperties": {
+      "type": "object",
+      "description": "Represents a custom property with a key and value.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name/key of the custom property."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the custom property."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "SoftwareAttributes": {
+      "type": "object",
+      "description": "Contains software-related attributes and metadata for the discovered MySQL server instance.",
+      "properties": {
+        "softwareName": {
+          "type": "string",
+          "description": "The name of the MySQL software or distribution."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "The name of the software provider or vendor."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The version of the MySQL software."
+        },
+        "softwareId": {
+          "type": "string",
+          "description": "A unique identifier for the software instance."
+        },
+        "customProperties": {
+          "type": "array",
+          "description": "Additional custom properties as key-value pairs.",
+          "items": {
+            "$ref": "#/definitions/CustomProperties"
+          }
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "Defines the extended location configuration for MySQL Discovery resources deployed outside of Azure, enabling hybrid and on-premises discovery scenarios.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of extended location (e.g., EdgeZone, CustomLocation) where the MySQL Discovery resource is deployed."
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique name identifier of the extended location where the MySQL Discovery resource is deployed."
+        }
+      }
+    },
+    "MySQLSiteList": {
+      "type": "object",
+      "description": "A paginated collection of MySQL discovery sites, allowing efficient retrieval of large sets of discovery environment configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of MySQL discovery sites returned in the current page of results, each containing site configuration and status information.",
+          "items": {
+            "$ref": "#/definitions/MySQLSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL link to retrieve the next page of MySQL discovery sites if more results are available beyond the current page."
+        }
+      }
+    },
+    "SummaryList": {
+      "type": "object",
+      "description": "A paged collection of Summary resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of Summary resources for the current page.",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next page of Summary resources, if any."
+        }
+      }
+    },
+    "ErrorSummaryList": {
+      "type": "object",
+      "description": "A paged collection of ErrorSummary resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of ErrorSummary resources for the current page.",
+          "items": {
+            "$ref": "#/definitions/ErrorSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next page of ErrorSummary resources, if any."
+        }
+      }
+    },
+    "HostMachineProperties": {
+      "type": "object",
+      "description": "Contains detailed hardware specifications and resource information for the physical or virtual machine hosting the discovered MySQL server instance.",
+      "properties": {
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total number of virtual CPU cores available on the host machine running the MySQL server."
+        },
+        "memoryInMb": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total amount of physical memory (RAM) in megabytes available on the host machine running the MySQL server."
+        },
+        "totalStorageInGb": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total storage capacity in gigabytes available on the host machine for MySQL server data and operations."
+        },
+        "mySqlServersCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of MySQL server instances currently running or installed on this host machine, indicating server density and resource sharing."
+        }
+      }
+    },
+    "MySQLServerList": {
+      "type": "object",
+      "description": "List of Servers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of MySQLServer resources for the current page.",
+          "items": {
+            "$ref": "#/definitions/MySQLServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next page of MySQLServer resources, if any."
+        }
+      }
+    },
+    "MySQLSite": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/MySQLSiteProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a MySQL discovery site resource that serves as the primary container for organizing and managing MySQL server discovery operations within a specific environment or location."
+    },
+    "MySQLSiteProperties": {
+      "type": "object",
+      "description": "Configuration properties and metadata for a MySQL discovery site, including associations with master sites and migration projects.",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/masterSites"
+              }
+            ]
+          },
+          "description": "This property holds the Azure Resource Manager (ARM) identifier for the master site that is mapped to the current MySQL site. It serves as a unique reference to the corresponding master site within the Azure OffAzure infrastructure. The value must be a valid ARM ID that points to a resource of type Microsoft.OffAzure/masterSites. This linkage ensures that the MySQL site is correctly associated with its master site."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects"
+              }
+            ]
+          },
+          "description": "The mapped migrate project Id."
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "masterSiteId",
+        "migrateProjectId"
+      ]
+    },
+    "MySQLServer": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/MySQLServerProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a discovered MySQL server instance with comprehensive metadata including version information, database metrics, host machine properties, and support lifecycle status."
+    },
+    "Summary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/SummariesProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The Summary resource definition."
+    },
+    "ErrorSummary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ErrorSummariesProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The ErrorSummary resource definition."
+    },
+    "SummariesProperties": {
+      "type": "object",
+      "description": "Summaries properties",
+      "properties": {
+        "discoveredServers": {
+          "description": "The number of discovered server.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ErrorSummariesProperties": {
+      "type": "object",
+      "description": "Error summaries properties",
+      "properties": {
+        "affectedObjectsCount": {
+          "description": "The number of affected objects.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "MySQLServerProperties": {
+      "type": "object",
+      "description": "Detailed configuration and metadata properties for a discovered MySQL server, including network settings, version details, database information, and host machine specifications.",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "The Server IP/host name."
+        },
+        "hostIp": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Server IP/host name."
+        },
+        "hostMachineProperties": {
+          "$ref": "#/definitions/HostMachineProperties",
+          "description": "The host machine properties."
+        },
+        "machineId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/serverSites/machines"
+              }
+            ]
+          },
+          "description": "discovery Machine Id"
+        },
+        "portNumber": {
+          "type": "string",
+          "description": "MySQL Server port number"
+        },
+        "mysqlVersion": {
+          "type": "string",
+          "description": "The mysql server version."
+        },
+        "numberOfDatabase": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of database."
+        },
+        "supportStatus": {
+          "description": "mysql version support status.",
+          "$ref": "#/definitions/SupportStatus"
+        },
+        "edition": {
+          "description": "mysql server edition.",
+          "$ref": "#/definitions/Edition"
+        },
+        "supportEndIn": {
+          "description": "Time when mysql version support end.",
+          "type": "string",
+          "format": "date"
+        },
+        "totalDbSizeInGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of databases."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "deepDiscoveryPerformed": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether Deep Discovery has been performed on the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource labels."
+        },
+        "softwareAttributes": {
+          "$ref": "#/definitions/SoftwareAttributes",
+          "description": "Software-related attributes and metadata for the discovered MySQL server instance."
+        }
+      },
+      "required": [
+        "hostName",
+        "portNumber"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "description": "The error ID.",
+          "type": "string"
+        },
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "summaryMessage": {
+          "description": "The summarized error message.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "The account ID used to login.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The detailed error message.",
+          "type": "string"
+        },
+        "possibleCause": {
+          "description": "The error possible cause.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "Gets description of the checkpoint.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Gets description of the severity.",
+          "type": "string"
+        },
+        "updatedTimeStamp": {
+          "description": "Time when this error was last updated.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "MySQLServerResourcePatch": {
+      "type": "object",
+      "description": "PATCH payload for MySQLServer.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/MySQLServerPatchProperties",
+          "description": "Updatable MySQLServer properties."
+        }
+      }
+    },
+    "MySQLSitesResourcePatch": {
+      "type": "object",
+      "description": "PATCH payload for MySQLSite.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/MySQLSitePatchProperties",
+          "description": "Updatable MySQLSite properties."
+        }
+      }
+    },
+    "AgentList": {
+      "type": "object",
+      "description": "List of Agents.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of Agent resources for the current page.",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next page of Agent resources, if any."
+        }
+      }
+    },
+    "Agent": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/AgentProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The Agent resource definition."
+    },
+    "AgentProperties": {
+      "type": "object",
+      "description": "Agent properties",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "$ref": "#/definitions/AgentSpnProperties",
+          "description": "Service principal identity details used by agent for communication to the service."
+        },
+        "migrateApplianceName": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "type": "string",
+          "description": "Name of the appliance on which agent is running."
+        },
+        "fabricSiteName": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "type": "string",
+          "description": "Name of the site which enables fabric discovery."
+        },
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "servicePrincipalIdentityDetails",
+        "migrateApplianceName",
+        "fabricSiteName"
+      ]
+    },
+    "AgentResourcePatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/AgentResourcePatchProperties",
+          "description": "The Agent properties resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "AgentResourcePatchProperties": {
+      "type": "object",
+      "description": "Agent resource patch properties",
+      "properties": {
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        }
+      }
+    },
+    "AgentSpnProperties": {
+      "description": "Class for agent spn properties.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        }
+      }
+    },
+    "AgentHealthProperties": {
+      "description": "Class for agent health properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the agent.",
+          "type": "string"
+        },
+        "lastHeartBeatUtc": {
+          "format": "date-time",
+          "description": "Last heartbeat time of the agent in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "MySQLSitePatchProperties": {
+      "type": "object",
+      "description": "Patch properties for MySQLSite. All properties optional.",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {},
+          "description": "The mapped master Site Id."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {},
+          "description": "The mapped migrate project Id."
+        }
+      }
+    },
+    "MySQLServerPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for MySQLServer. All properties optional.",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "The Server IP/host name."
+        },
+        "hostIp": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Server IP/host names."
+        },
+        "hostMachineProperties": {
+          "$ref": "#/definitions/HostMachineProperties",
+          "description": "The host machine properties."
+        },
+        "machineId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {},
+          "description": "Discovery Machine Id."
+        },
+        "portNumber": {
+          "type": "string",
+          "description": "MySQL Server port number."
+        },
+        "mysqlVersion": {
+          "type": "string",
+          "description": "The MySQL server version."
+        },
+        "numberOfDatabase": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of databases."
+        },
+        "supportStatus": {
+          "description": "MySQL version support status.",
+          "$ref": "#/definitions/SupportStatus"
+        },
+        "edition": {
+          "description": "mysql server edition.",
+          "$ref": "#/definitions/Edition"
+        },
+        "supportEndIn": {
+          "type": "string",
+          "format": "date",
+          "description": "Time when MySQL version support ends."
+        },
+        "totalDbSizeInGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of databases."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "deepDiscoveryPerformed": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether Deep Discovery has been performed on the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource labels."
+        },
+        "softwareAttributes": {
+          "$ref": "#/definitions/SoftwareAttributes",
+          "description": "Software-related attributes and metadata for the discovered MySQL server instance."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The unique name identifier of the MySQL discovery site resource within the resource group."
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The unique name identifier of the discovered MySQL server resource within the discovery site."
+    },
+    "AgentNameParameter": {
+      "name": "agentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The unique name identifier of the MySQL discovery agent resource within the discovery site."
+    }
+  }
+}

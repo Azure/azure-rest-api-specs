@@ -9,6 +9,9 @@ import "@typespec/openapi";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
@@ -22,6 +25,9 @@ namespace Microsoft.AwsConnector;
 enum Versions {
   /** 2024-12-01 api version */
   `2024-12-01`,
+
+  /** 2025-12-01-preview api version */
+  `2025-12-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

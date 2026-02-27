@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+            "name": "mySolution",
+            "type": "Microsoft.AzurePercept/accounts/solutions",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "components": [
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "avaedge",
+                  "capabilities": {},
+                  "configurations": {
+                    "readOnly": {
+                      "properties.desired": {
+                        "key1": "value1",
+                        "type": "type"
+                      },
+                      "graphTopologies": [
+                        {
+                          "topologyName": "topology1"
+                        },
+                        {
+                          "topologyName": "topology2"
+                        },
+                        {
+                          "topologyName": "topology3"
+                        }
+                      ]
+                    },
+                    "readWrite": {
+                      "edgeAgent.properties.desired": {
+                        "settings": {
+                          "SettingsName": "Settings1"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/myOtherSolution",
+            "name": "myOtherSolution",
+            "type": "Microsoft.AzurePercept/accounts/solutions",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "components": [
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "avaedge",
+                  "capabilities": {},
+                  "configurations": {
+                    "readOnly": {
+                      "properties.desired": {
+                        "key1": "value1",
+                        "type": "type"
+                      },
+                      "graphTopologies": [
+                        {
+                          "topologyName": "topology1"
+                        },
+                        {
+                          "topologyName": "topology2"
+                        },
+                        {
+                          "topologyName": "topology3"
+                        }
+                      ]
+                    },
+                    "readWrite": {
+                      "edgeAgent.properties.desired": {
+                        "settings": {
+                          "SettingsName": "Settings1"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

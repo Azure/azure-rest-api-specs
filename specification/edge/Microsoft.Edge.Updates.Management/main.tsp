@@ -1,0 +1,29 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
+import "./Update.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
+@armProviderNamespace
+@service(#{ title: "Microsoft.Edge" })
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.Edge;
+
+/**
+ * The available API versions.
+ */
+enum Versions {
+  /**
+   * The 2024-02-01-preview API version.
+   */
+  v2024_02_01_preview: "2024-02-01-preview",
+}
