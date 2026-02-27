@@ -143,8 +143,12 @@ using Azure.AI.Projects;
 
 // Note the third one which extends OpenAI.TextResponseFormatConfiguration is OpenAI.TextResponseFormatJsonSchema (already has a good name)
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText, "TextResponseFormatText");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject, "TextResponseFormatJsonObject");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
 
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
