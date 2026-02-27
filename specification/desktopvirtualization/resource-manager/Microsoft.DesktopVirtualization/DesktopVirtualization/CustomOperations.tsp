@@ -89,37 +89,3 @@ op ArmCustomPatchAsync<
   ...Request,
   ...EndParameters,
 ): Response | Error;
-
-/**
- * A synchronous resource action.
- * @template Resource The resource being acted upon
- * @template Request The request model for the action
- * @template Response The response model for the action
- * @template BaseParameters Optional. Allows overriding the parameters for the operation
- * @template Parameters Optional. Additional parameters after the path parameters
- * @template Error Optional. The error response, if non-standard.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
-@autoRoute
-@armResourceAction(Resource)
-@post
-@returnsDoc("Azure operation completed successfully.")
-op ArmResourceActionSync<
-  Resource extends Azure.ResourceManager.Foundations.Resource,
-  Request extends TypeSpec.Reflection.Model | void,
-  Response extends TypeSpec.Reflection.Model | void,
-  BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
-  Parameters extends {} = {},
-  Error extends {} = ErrorResponse,
-  RequestBody extends {} = {
-    /** The content of the action request */
-    @bodyRoot
-    body: Request;
-  },
-  EndParameters extends {} = {}
->(
-  ...ResourceInstanceParameters<Resource, BaseParameters>,
-  ...Parameters,
-  ...RequestBody,
-  ...EndParameters,
-): Response | Error;

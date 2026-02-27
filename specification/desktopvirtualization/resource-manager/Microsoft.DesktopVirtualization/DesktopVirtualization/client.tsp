@@ -329,7 +329,6 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-// Category B fixes: managedBy alternateType decorators
 @@alternateType(HostPool.managedBy, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(ScalingPlan.managedBy,
   Azure.Core.armResourceIdentifier,
@@ -344,7 +343,6 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-// Breaking #1 fix: ETag type from string to Azure.ETag
 @@alternateType(HostPool.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ScalingPlan.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ApplicationGroup.etag, Azure.Core.eTag, "csharp");
@@ -515,17 +513,21 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-// Experiment: alternateType on sendMessage request property
 @@alternateType(SendMessageRequest, SendMessage, "csharp");
 
-// Fix: Make MsixImageUri type public (it becomes internal when wrapped in action body)
-@@access(MSIXImageURI, Access.public, "csharp");
-
-// Fix: PrivateEndpointId should be ResourceIdentifier, not string
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
-// Fix: Rename privateLinkServiceConnectionState back to ConnectionState for compat
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
-  "ConnectionState", "csharp"
+  "ConnectionState",
+  "csharp"
 );
 
+@@clientName(AppAttachPackageInfo.`import`,
+  "importAppAttachPackageInfos",
+  "csharp"
+);
+@@clientName(MSIXImages.expand, "expandMsixImages", "csharp");
+@@clientName(PrivateLinkResources.listByHostPool,
+  "getPrivateLinkResources",
+  "csharp"
+);

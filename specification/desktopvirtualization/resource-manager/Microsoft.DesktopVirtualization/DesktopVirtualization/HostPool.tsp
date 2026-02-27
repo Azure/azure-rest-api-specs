@@ -38,12 +38,7 @@ interface AppAttachPackageInfo {
   @list
   `import` is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Information to import app attach package
-       */
-      @bodyRoot importPackageInfoRequest: ImportPackageInfoRequest;
-    },
+    Request = ImportPackageInfoRequest,
     Response = AppAttachPackageList
   >;
 }
@@ -60,12 +55,7 @@ interface MSIXImages {
   @list
   expand is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Represents URI referring to MSIX Image
-       */
-      @bodyRoot msixImageURI: MSIXImageURI;
-    },
+    Request = MSIXImageURI,
     Response = ExpandMsixImageList
   >;
 }
