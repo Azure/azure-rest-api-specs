@@ -74,39 +74,42 @@ interface Runs {
    * Deletes a run.
    */
   delete is ArmResourceDeleteSync<Run>;
-}
 
-// ============================================
-// LATEST RUN (SINGLETON)
-// ============================================
-
-/**
- * Singleton resource representing the latest run.
- * Provides PUT endpoint for ARM/Bicep compatibility at runs/latest.
- */
-@parentResource(Agent)
-@singleton("latest")
-model LatestRun is ProxyResource<RunProperties> {
   /**
-   * The name of the singleton resource (always "latest").
+   * Lists runs for an agent.
    */
-  @key("runId")
-  @segment("runs")
-  @pattern("^latest$")
-  @path
-  name: string;
+  listByParent is ArmResourceListByParent<Run>;
 }
+
+// ============================================
+// LATEST RUN OPERATIONS
+// ============================================
 
 @armResourceOperations
 interface LatestRuns {
   /**
    * Gets the latest run.
    */
-  get is ArmResourceRead<LatestRun>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/latest")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupNameParameter,
+    @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
+  ): Run | ErrorResponse;
 
   /**
    * Creates or updates a run via PUT for ARM/Bicep compatibility.
    * The "latest" name is a logical identifier — the actual run ID is generated server-side.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<LatestRun>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/latest")
+  @put
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupNameParameter,
+    @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
+    @body body: RunRequest,
+  ): RunResponse | { @statusCode statusCode: 201; @body body: RunResponse } | ErrorResponse;
 }

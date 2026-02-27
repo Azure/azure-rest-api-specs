@@ -398,7 +398,57 @@
         },
         "x-ms-long-running-operation": true
       }
-    },    
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs": {
+      "get": {
+        "operationId": "Runs_ListByParent",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Lists runs for an agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Runs for an Agent": {
+            "$ref": "./examples/Runs_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/{runId}": {
       "get": {
         "operationId": "Runs_Get",
@@ -658,7 +708,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LatestRun"
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -699,26 +749,26 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The content of the run request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LatestRun"
+              "$ref": "#/definitions/RunRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'LatestRun' update operation succeeded",
+            "description": "Run update operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/LatestRun"
+              "$ref": "#/definitions/RunResponse"
             }
           },
           "201": {
-            "description": "Resource 'LatestRun' create operation succeeded",
+            "description": "Run create operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/LatestRun"
+              "$ref": "#/definitions/RunResponse"
             }
           },
           "default": {
@@ -845,21 +895,6 @@
           }
         ]
       }
-    },
-    "LatestRun": {
-      "type": "object",
-      "description": "Singleton resource representing the latest run.\nProvides PUT endpoint for ARM/Bicep compatibility at runs/latest.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RunProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "Message": {
       "type": "object",
