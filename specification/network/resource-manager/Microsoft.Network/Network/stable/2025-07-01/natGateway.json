@@ -148,6 +148,9 @@
           },
           "Get nat gateway with service gateway": {
             "$ref": "./examples/NatGatewayWithServiceGatewayGet.json"
+          },
+          "Get nat gateway with Nat64": {
+            "$ref": "./examples/NatGatewayWithNat64Get.json"
           }
         }
       },
@@ -220,6 +223,9 @@
           },
           "Create nat gateway with service gateway": {
             "$ref": "./examples/NatGatewayWithServiceGatewayCreateOrUpdate.json"
+          },
+          "Create nat gateway with Nat64": {
+            "$ref": "./examples/NatGatewayWithNat64CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -452,6 +458,19 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the NAT gateway resource."
+        },
+        "nat64": {
+          "type": "string",
+          "description": "Whether Nat64 is enabled for the NAT gateway resource.",
+          "enum": [
+            "None",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "Nat64State",
+            "modelAsString": true
+          }
         }
       },
       "description": "Nat Gateway properties."
