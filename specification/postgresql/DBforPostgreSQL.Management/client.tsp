@@ -45,6 +45,11 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+@@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
+  "PostgreSqlFlexibleServersHighAvailabilityMode",
+  "go"
+);
+
 @@clientName(PostgresMajorVersion.`11`, "Eleven", "go");
 @@clientName(PostgresMajorVersion.`12`, "Twelve", "go");
 @@clientName(PostgresMajorVersion.`13`, "Thirteen", "go");
