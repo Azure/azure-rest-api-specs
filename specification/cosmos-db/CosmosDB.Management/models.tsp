@@ -1148,7 +1148,7 @@ union ServiceType {
 /**
  * Describes the status of a service.
  */
-union ServiceResourceStatus {
+union ServiceStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
@@ -1306,7 +1306,8 @@ model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 /**
  * A request object to enable/disable the chaos fault.
  */
-model ChaosFaultProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model chaosFaultProperties {
   /**
    * Indicates whether what action to take for the Chaos Fault.
    */
@@ -1930,6 +1931,16 @@ model RestoreParameters extends RestoreParametersBase {
    * Describes the mode of the restore.
    */
   restoreMode?: RestoreMode;
+
+  /**
+   * The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}
+   */
+  restoreSource?: string;
+
+  /**
+   * Time to which the account has to be restored (ISO-8601 format).
+   */
+  restoreTimestampInUtc?: utcDateTime;
 
   /**
    * List of specific databases available for restore.
@@ -2652,6 +2663,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.
    */
+  @visibility(Lifecycle.Read)
   keysMetadata?: DatabaseAccountKeysMetadata;
 
   /**
@@ -5673,6 +5685,8 @@ model DataTransferJobProperties {
   /**
    * Total Duration of Job
    */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @encode("duration-constant")
   @visibility(Lifecycle.Read)
   duration?: string;
 
@@ -8067,7 +8081,7 @@ model ServiceResourceProperties {
    * Describes the status of a service.
    */
   @visibility(Lifecycle.Read)
-  status?: ServiceResourceStatus;
+  status?: ServiceStatus;
 }
 
 /**
@@ -9134,7 +9148,7 @@ model RegionalServiceResource {
    * Describes the status of a service.
    */
   @visibility(Lifecycle.Read)
-  status?: ServiceResourceStatus;
+  status?: ServiceStatus;
 }
 
 /**

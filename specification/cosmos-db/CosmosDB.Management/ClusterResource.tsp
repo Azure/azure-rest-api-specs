@@ -244,3 +244,8 @@ interface ClusterResources {
 @@doc(ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
 );
+@@visibility(ClusterResource.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

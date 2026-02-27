@@ -21986,33 +21986,6 @@
         }
       }
     },
-    "ChaosFaultProperties": {
-      "type": "object",
-      "description": "A request object to enable/disable the chaos fault.",
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/SupportedActions",
-          "description": "Indicates whether what action to take for the Chaos Fault."
-        },
-        "region": {
-          "type": "string",
-          "description": "Region of the account where the Chaos Fault is to be enabled/disabled."
-        },
-        "databaseName": {
-          "type": "string",
-          "description": "Database name."
-        },
-        "containerName": {
-          "type": "string",
-          "description": "Container name."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "A provisioning state of the Chaos Fault.",
-          "readOnly": true
-        }
-      }
-    },
     "ClientEncryptionIncludedPath": {
       "type": "object",
       "description": ".",
@@ -22241,6 +22214,7 @@
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -23781,6 +23755,7 @@
         },
         "duration": {
           "type": "string",
+          "format": "duration-constant",
           "description": "Total Duration of Job",
           "readOnly": true
         },
@@ -24080,7 +24055,8 @@
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
-          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account."
+          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
+          "readOnly": true
         },
         "enablePartitionMerge": {
           "type": "boolean",
@@ -29143,7 +29119,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/ServiceResourceStatus",
+          "$ref": "#/definitions/ServiceStatus",
           "description": "Describes the status of a service.",
           "readOnly": true
         }
@@ -30366,6 +30342,15 @@
           "$ref": "#/definitions/RestoreMode",
           "description": "Describes the mode of the restore."
         },
+        "restoreSource": {
+          "type": "string",
+          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
+        },
+        "restoreTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time to which the account has to be restored (ISO-8601 format)."
+        },
         "databasesToRestore": {
           "type": "array",
           "description": "List of specific databases available for restore.",
@@ -30667,7 +30652,7 @@
           "description": "ServiceType for the service."
         },
         "status": {
-          "$ref": "#/definitions/ServiceResourceStatus",
+          "$ref": "#/definitions/ServiceStatus",
           "description": "Describes the status of a service.",
           "readOnly": true
         }
@@ -30678,7 +30663,34 @@
       ],
       "additionalProperties": {}
     },
-    "ServiceResourceStatus": {
+    "ServiceSize": {
+      "type": "string",
+      "description": "Instance type for the service.",
+      "enum": [
+        "Cosmos.D4s",
+        "Cosmos.D8s",
+        "Cosmos.D16s"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CosmosD4S",
+            "value": "Cosmos.D4s"
+          },
+          {
+            "name": "CosmosD8S",
+            "value": "Cosmos.D8s"
+          },
+          {
+            "name": "CosmosD16S",
+            "value": "Cosmos.D16s"
+          }
+        ]
+      }
+    },
+    "ServiceStatus": {
       "type": "string",
       "description": "Describes the status of a service.",
       "enum": [
@@ -30690,7 +30702,7 @@
         "Stopped"
       ],
       "x-ms-enum": {
-        "name": "ServiceResourceStatus",
+        "name": "ServiceStatus",
         "modelAsString": true,
         "values": [
           {
@@ -30716,33 +30728,6 @@
           {
             "name": "Stopped",
             "value": "Stopped"
-          }
-        ]
-      }
-    },
-    "ServiceSize": {
-      "type": "string",
-      "description": "Instance type for the service.",
-      "enum": [
-        "Cosmos.D4s",
-        "Cosmos.D8s",
-        "Cosmos.D16s"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CosmosD4S",
-            "value": "Cosmos.D4s"
-          },
-          {
-            "name": "CosmosD8S",
-            "value": "Cosmos.D8s"
-          },
-          {
-            "name": "CosmosD16S",
-            "value": "Cosmos.D16s"
           }
         ]
       }
@@ -33219,12 +33204,39 @@
         "value"
       ]
     },
+    "chaosFaultProperties": {
+      "type": "object",
+      "description": "A request object to enable/disable the chaos fault.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/SupportedActions",
+          "description": "Indicates whether what action to take for the Chaos Fault."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region of the account where the Chaos Fault is to be enabled/disabled."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "A provisioning state of the Chaos Fault.",
+          "readOnly": true
+        }
+      }
+    },
     "chaosFaultResource": {
       "type": "object",
       "description": "A request object to enable/disable the chaos fault",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ChaosFaultProperties",
+          "$ref": "#/definitions/chaosFaultProperties",
           "description": "A request object to enable/disable the chaos fault.",
           "x-ms-client-flatten": true
         }

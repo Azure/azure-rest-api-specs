@@ -18,7 +18,7 @@ namespace Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model chaosFaultResource
-  is Azure.ResourceManager.ProxyResource<ChaosFaultProperties> {
+  is Azure.ResourceManager.ProxyResource<chaosFaultProperties> {
   ...ResourceNameParameter<
     Resource = chaosFaultResource,
     KeyName = "chaosFault",
