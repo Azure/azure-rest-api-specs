@@ -141,7 +141,7 @@ using Azure.AI.Projects;
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
-// Note the third one which extends OpenAI.TextResponseFormatConfiguration is OpenAI.TextResponseFormatJsonSchema (already has a good name)
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
 @@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText"
