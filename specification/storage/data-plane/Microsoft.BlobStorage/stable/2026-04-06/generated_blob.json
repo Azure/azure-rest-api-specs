@@ -384,27 +384,27 @@
                 "type": "string",
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
-                  "mutable",
-                  "locked",
-                  "unlocked"
+                  "Mutable",
+                  "Locked",
+                  "Unlocked"
                 ],
                 "x-ms-enum": {
-                  "name": "ImmutabilityPolicyMode",
+                  "name": "BlobImmutabilityPolicyMode",
                   "modelAsString": false,
                   "values": [
                     {
                       "name": "Mutable",
-                      "value": "mutable",
-                      "description": "The immutability policy is mutable. Should never be set, only returned."
+                      "value": "Mutable",
+                      "description": "The immutability policy is mutable."
                     },
                     {
                       "name": "Locked",
-                      "value": "locked",
+                      "value": "Locked",
                       "description": "The immutability policy is locked."
                     },
                     {
                       "name": "Unlocked",
-                      "value": "unlocked",
+                      "value": "Unlocked",
                       "description": "The immutability policy is unlocked."
                     }
                   ]
@@ -750,27 +750,27 @@
                 "type": "string",
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
-                  "mutable",
-                  "locked",
-                  "unlocked"
+                  "Mutable",
+                  "Locked",
+                  "Unlocked"
                 ],
                 "x-ms-enum": {
-                  "name": "ImmutabilityPolicyMode",
+                  "name": "BlobImmutabilityPolicyMode",
                   "modelAsString": false,
                   "values": [
                     {
                       "name": "Mutable",
-                      "value": "mutable",
-                      "description": "The immutability policy is mutable. Should never be set, only returned."
+                      "value": "Mutable",
+                      "description": "The immutability policy is mutable."
                     },
                     {
                       "name": "Locked",
-                      "value": "locked",
+                      "value": "Locked",
                       "description": "The immutability policy is locked."
                     },
                     {
                       "name": "Unlocked",
-                      "value": "unlocked",
+                      "value": "Unlocked",
                       "description": "The immutability policy is unlocked."
                     }
                   ]
@@ -1923,27 +1923,27 @@
                 "type": "string",
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
-                  "mutable",
-                  "locked",
-                  "unlocked"
+                  "Mutable",
+                  "Locked",
+                  "Unlocked"
                 ],
                 "x-ms-enum": {
-                  "name": "ImmutabilityPolicyMode",
+                  "name": "BlobImmutabilityPolicyMode",
                   "modelAsString": false,
                   "values": [
                     {
                       "name": "Mutable",
-                      "value": "mutable",
-                      "description": "The immutability policy is mutable. Should never be set, only returned."
+                      "value": "Mutable",
+                      "description": "The immutability policy is mutable."
                     },
                     {
                       "name": "Locked",
-                      "value": "locked",
+                      "value": "Locked",
                       "description": "The immutability policy is locked."
                     },
                     {
                       "name": "Unlocked",
-                      "value": "unlocked",
+                      "value": "Unlocked",
                       "description": "The immutability policy is unlocked."
                     }
                   ]
@@ -6295,27 +6295,27 @@
                 "type": "string",
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
-                  "mutable",
-                  "locked",
-                  "unlocked"
+                  "Mutable",
+                  "Locked",
+                  "Unlocked"
                 ],
                 "x-ms-enum": {
-                  "name": "ImmutabilityPolicyMode",
+                  "name": "BlobImmutabilityPolicyMode",
                   "modelAsString": false,
                   "values": [
                     {
                       "name": "Mutable",
-                      "value": "mutable",
-                      "description": "The immutability policy is mutable. Should never be set, only returned."
+                      "value": "Mutable",
+                      "description": "The immutability policy is mutable."
                     },
                     {
                       "name": "Locked",
-                      "value": "locked",
+                      "value": "Locked",
                       "description": "The immutability policy is locked."
                     },
                     {
                       "name": "Unlocked",
-                      "value": "unlocked",
+                      "value": "Unlocked",
                       "description": "The immutability policy is unlocked."
                     }
                   ]
@@ -14376,6 +14376,36 @@
         "Blob"
       ]
     },
+    "BlobImmutabilityPolicyMode": {
+      "type": "string",
+      "description": "The immutability policy mode.",
+      "enum": [
+        "Mutable",
+        "Locked",
+        "Unlocked"
+      ],
+      "x-ms-enum": {
+        "name": "BlobImmutabilityPolicyMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Mutable",
+            "value": "Mutable",
+            "description": "The immutability policy is mutable."
+          },
+          {
+            "name": "Locked",
+            "value": "Locked",
+            "description": "The immutability policy is locked."
+          },
+          {
+            "name": "Unlocked",
+            "value": "Unlocked",
+            "description": "The immutability policy is unlocked."
+          }
+        ]
+      }
+    },
     "BlobItem": {
       "type": "object",
       "description": "An Azure Storage Blob",
@@ -14701,7 +14731,7 @@
           "x-ms-client-name": "immutabilityPolicyUntilDate"
         },
         "ImmutabilityPolicyMode": {
-          "$ref": "#/definitions/ImmutabilityPolicyMode",
+          "$ref": "#/definitions/BlobImmutabilityPolicyMode",
           "description": "The immutability policy mode of the blob.",
           "x-ms-client-name": "immutabilityPolicyMode"
         },

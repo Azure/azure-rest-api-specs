@@ -1061,7 +1061,7 @@ model BlobProperties {
 
   /** The immutability policy mode of the blob. */
   @Xml.name("ImmutabilityPolicyMode")
-  immutabilityPolicyMode?: ImmutabilityPolicyMode;
+  immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
 
   /** Whether the blob is under legal hold. */
   @Xml.name("LegalHold") legalHold?: boolean;
@@ -1078,6 +1078,19 @@ enum ImmutabilityPolicyMode {
 
   /** The immutability policy is unlocked. */
   Unlocked: "unlocked",
+}
+
+/** The immutability policy mode. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobImmutabilityPolicyMode {
+  /** The immutability policy is mutable. */
+  Mutable: "Mutable",
+
+  /** The immutability policy is locked. */
+  Locked: "Locked",
+
+  /** The immutability policy is unlocked. */
+  Unlocked: "Unlocked",
 }
 
 /** The blob type. */
@@ -1873,7 +1886,7 @@ alias LegalHoldRequiredParameter = {
 alias ImmutabilityPolicyModeResponseHeader = {
   /** Indicates the immutability policy mode of the blob. */
   @header("x-ms-immutability-policy-mode")
-  immutabilityPolicyMode: ImmutabilityPolicyMode;
+  immutabilityPolicyMode: BlobImmutabilityPolicyMode;
 };
 
 /** The immutability policy mode response header. */
@@ -1881,7 +1894,7 @@ alias ImmutabilityPolicyModeResponseHeaderPrivate = {
   /** Indicates the immutability policy mode of the blob. */
   @access(Access.internal)
   @header("x-ms-immutability-policy-mode")
-  immutabilityPolicyMode: ImmutabilityPolicyMode;
+  immutabilityPolicyMode: BlobImmutabilityPolicyMode;
 };
 
 /** The blob sequence number response header. */
