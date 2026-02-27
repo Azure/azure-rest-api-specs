@@ -68,7 +68,7 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefintionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
