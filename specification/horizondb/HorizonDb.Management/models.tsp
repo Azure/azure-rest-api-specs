@@ -91,7 +91,7 @@ model HorizonDbClusterProperties {
 }
 
 @doc("Properties of a HorizonDb cluster for update operations")
-model HorizonDbClusterPropertiesForUpdate {
+model HorizonDbClusterPropertiesForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @secret
@@ -238,15 +238,9 @@ model HorizonDbReplicaProperties {
 }
 
 @doc("Properties of a HorizonDb replica for update operations")
-model HorizonDbReplicaPropertiesForUpdate {
+model HorizonDbReplicaPropertiesForPatchUpdate {
   @doc("Role of the replica")
   role?: ReplicaRole;
-}
-
-@doc("Represents a HorizonDb replica resource for update operations")
-model HorizonDbReplicaForPatch {
-  @doc("The properties of the replica for update")
-  properties?: HorizonDbReplicaPropertiesForUpdate;
 }
 
 @doc("Properties of a HorizonDb firewall rule")
@@ -269,7 +263,7 @@ model HorizonDbFirewallRuleProperties {
 }
 
 @doc("Properties of a HorizonDb firewall rule for update operations")
-model HorizonDbFirewallRulePropertiesForUpdate {
+model HorizonDbFirewallRulePropertiesForPatchUpdate {
   @doc("The start IP address of the firewall rule")
   startIpAddress?: string;
 
@@ -278,12 +272,6 @@ model HorizonDbFirewallRulePropertiesForUpdate {
 
   @doc("The description of the firewall rule")
   description?: string;
-}
-
-@doc("Represents a HorizonDb firewall rule resource for update operations")
-model HorizonDbFirewallRuleForPatch {
-  @doc("The properties of the firewall rule for update")
-  properties?: HorizonDbFirewallRulePropertiesForUpdate;
 }
 
 @doc("The mode to create a new HorizonDb cluster")

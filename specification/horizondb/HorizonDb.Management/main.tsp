@@ -94,7 +94,7 @@ interface HorizonDbClusters {
   @doc("Updates an existing HorizonDb cluster (e.g., tags, vCores, replica count)")
   update is ArmCustomPatchAsync<
     HorizonDbCluster,
-    HorizonDbClusterPropertiesForUpdate
+    HorizonDbClusterPropertiesForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb cluster")
@@ -129,7 +129,10 @@ interface HorizonDbReplicas {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbReplica>;
 
   @doc("Updates an existing HorizonDb replica (e.g., role)")
-  update is ArmCustomPatchAsync<HorizonDbReplica, HorizonDbReplicaForPatch>;
+  update is ArmCustomPatchAsync<
+    HorizonDbReplica,
+    HorizonDbReplicaPropertiesForPatchUpdate
+  >;
 
   @doc("Deletes a HorizonDb replica")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbReplica>;
@@ -150,7 +153,7 @@ interface HorizonDbFirewallRules {
   @doc("Updates an existing HorizonDb firewall rule (e.g., IP ranges)")
   update is ArmCustomPatchAsync<
     HorizonDbFirewallRule,
-    HorizonDbFirewallRuleForPatch
+    HorizonDbFirewallRulePropertiesForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb firewall rule")

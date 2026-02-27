@@ -331,7 +331,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterPropertiesForUpdate"
+              "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate"
             }
           }
         ],
@@ -828,7 +828,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRuleForPatch"
+              "$ref": "#/definitions/HorizonDbFirewallRulePropertiesForPatchUpdate"
             }
           }
         ],
@@ -1234,7 +1234,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbReplicaForPatch"
+              "$ref": "#/definitions/HorizonDbReplicaPropertiesForPatchUpdate"
             }
           }
         ],
@@ -1645,7 +1645,7 @@
         "administratorLogin"
       ]
     },
-    "HorizonDbClusterPropertiesForUpdate": {
+    "HorizonDbClusterPropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties of a HorizonDb cluster for update operations",
       "properties": {
@@ -1687,16 +1687,6 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "HorizonDbFirewallRuleForPatch": {
-      "type": "object",
-      "description": "Represents a HorizonDb firewall rule resource for update operations",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbFirewallRulePropertiesForUpdate",
-          "description": "The properties of the firewall rule for update"
-        }
-      }
     },
     "HorizonDbFirewallRuleListResult": {
       "type": "object",
@@ -1758,7 +1748,7 @@
         "endIpAddress"
       ]
     },
-    "HorizonDbFirewallRulePropertiesForUpdate": {
+    "HorizonDbFirewallRulePropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties of a HorizonDb firewall rule for update operations",
       "properties": {
@@ -1909,16 +1899,6 @@
         }
       ]
     },
-    "HorizonDbReplicaForPatch": {
-      "type": "object",
-      "description": "Represents a HorizonDb replica resource for update operations",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbReplicaPropertiesForUpdate",
-          "description": "The properties of the replica for update"
-        }
-      }
-    },
     "HorizonDbReplicaListResult": {
       "type": "object",
       "description": "The response of a HorizonDbReplica list operation.",
@@ -1978,7 +1958,7 @@
         }
       }
     },
-    "HorizonDbReplicaPropertiesForUpdate": {
+    "HorizonDbReplicaPropertiesForPatchUpdate": {
       "type": "object",
       "description": "Properties of a HorizonDb replica for update operations",
       "properties": {
