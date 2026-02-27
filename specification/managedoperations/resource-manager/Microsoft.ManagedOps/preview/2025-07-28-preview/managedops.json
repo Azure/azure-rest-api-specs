@@ -404,8 +404,17 @@
           }
         },
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -451,8 +460,17 @@
           }
         },
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -465,8 +483,17 @@
       "description": "Defender Cloud Security Posture Management (CSPM) service information.",
       "properties": {
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -478,8 +505,17 @@
       "description": "Defender for Servers service information.",
       "properties": {
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -523,8 +559,15 @@
           }
         },
         "defenderForServers": {
-          "$ref": "#/definitions/DesiredEnablementState",
+          "type": "string",
           "description": "Desired enablement state of the Defender For Servers service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -532,8 +575,15 @@
           ]
         },
         "defenderCspm": {
-          "$ref": "#/definitions/DesiredEnablementState",
+          "type": "string",
           "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -549,11 +599,18 @@
     },
     "DesiredConfigurationUpdate": {
       "type": "object",
-      "description": "Updatable parameters in the Desired configuration input.",
+      "description": "Desired configuration input by the user.",
       "properties": {
         "defenderForServers": {
-          "$ref": "#/definitions/DesiredEnablementState",
+          "type": "string",
           "description": "Desired enablement state of the Defender For Servers service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -561,8 +618,15 @@
           ]
         },
         "defenderCspm": {
-          "$ref": "#/definitions/DesiredEnablementState",
+          "type": "string",
           "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -571,73 +635,22 @@
         }
       }
     },
-    "DesiredEnablementState": {
-      "type": "string",
-      "description": "The desired enablement state of a service.",
-      "enum": [
-        "Enable",
-        "Disable"
-      ],
-      "x-ms-enum": {
-        "name": "DesiredEnablementState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Enable the service."
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "Disable the service."
-          }
-        ]
-      }
-    },
-    "EnablementState": {
-      "type": "string",
-      "description": "The enablement state of a service.",
-      "enum": [
-        "Enabled",
-        "InProgress",
-        "Failed",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "EnablementState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Service is enabled."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Service enablement is in progress."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Service enablement has failed."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Service is disabled."
-          }
-        ]
-      }
-    },
     "GuestConfigurationInformation": {
       "type": "object",
       "description": "Azure Policy and Machine Configuration service information.",
       "properties": {
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -682,17 +695,17 @@
     },
     "ManagedOpUpdate": {
       "type": "object",
-      "description": "ManagedOps model for update operations",
+      "description": "The type used for update operations of the ManagedOp.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedOpUpdateProperties",
-          "description": "Updatable properties in the ManagedOps resource."
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
     "ManagedOpUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties in the ManagedOps resource.",
+      "description": "The updatable properties of the ManagedOp.",
       "properties": {
         "desiredConfiguration": {
           "$ref": "#/definitions/DesiredConfigurationUpdate",
@@ -866,8 +879,17 @@
       "description": "Azure Update Manager service information.",
       "properties": {
         "enablementStatus": {
-          "$ref": "#/definitions/EnablementState",
-          "description": "Indicates whether the service is enabled."
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [

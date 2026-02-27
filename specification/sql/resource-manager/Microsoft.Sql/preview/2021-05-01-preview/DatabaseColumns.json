@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/columns": {
+      "get": {
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "List database columns",
+        "operationId": "DatabaseColumns_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "table",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "column",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved database columns.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseColumnListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UnsupportedColumnOrderByProperty - The order-by property '{0}' is not supported. Allowed properties are: {1}.\n\n * 400 UnsupportedColumnSortDirection - The column sort direction '{0}' is not supported. Allowed values are: {1}.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List database columns": {
+            "$ref": "./examples/ColumnsListByDatabaseMin.json"
+          },
+          "Filter database columns": {
+            "$ref": "./examples/ColumnsListByDatabaseMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns": {
+      "get": {
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "List database columns",
+        "operationId": "DatabaseColumns_ListByTable",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved database columns.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseColumnListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-odata": "#/definitions/DatabaseColumn",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List database columns": {
+            "$ref": "./examples/DatabaseColumnListByTable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
+      "get": {
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "Get database column",
+        "operationId": "DatabaseColumns_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved database column.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseColumn"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Get database column": {
+            "$ref": "./examples/DatabaseColumnGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseColumnListResult": {
+      "description": "A list of database columns.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseColumn"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseColumnProperties": {
+      "description": "Database column properties.",
+      "type": "object",
+      "properties": {
+        "columnType": {
+          "description": "The column data type.",
+          "enum": [
+            "image",
+            "text",
+            "uniqueidentifier",
+            "date",
+            "time",
+            "datetime2",
+            "datetimeoffset",
+            "tinyint",
+            "smallint",
+            "int",
+            "smalldatetime",
+            "real",
+            "money",
+            "datetime",
+            "float",
+            "sql_variant",
+            "ntext",
+            "bit",
+            "decimal",
+            "numeric",
+            "smallmoney",
+            "bigint",
+            "hierarchyid",
+            "geometry",
+            "geography",
+            "varbinary",
+            "varchar",
+            "binary",
+            "char",
+            "timestamp",
+            "nvarchar",
+            "nchar",
+            "xml",
+            "sysname"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ColumnDataType",
+            "modelAsString": true
+          }
+        },
+        "temporalType": {
+          "description": "The table temporal type.",
+          "enum": [
+            "NonTemporalTable",
+            "HistoryTable",
+            "SystemVersionedTemporalTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TableTemporalType",
+            "modelAsString": true
+          }
+        },
+        "memoryOptimized": {
+          "description": "Whether or not the column belongs to a memory optimized table.",
+          "type": "boolean"
+        },
+        "isComputed": {
+          "description": "Whether or not the column is computed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatabaseColumn": {
+      "description": "A database column resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseColumnProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

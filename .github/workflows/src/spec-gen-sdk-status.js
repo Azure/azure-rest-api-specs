@@ -2,6 +2,7 @@ import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/g
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
+import { writeToActionsSummary } from "./github.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -210,7 +211,7 @@ async function processResult({ checkRuns, core }) {
   }
 
   // Write to the summary page
-  await core.summary.addRaw(summaryContent).write();
+  await writeToActionsSummary(summaryContent, core);
 
   return {
     state,

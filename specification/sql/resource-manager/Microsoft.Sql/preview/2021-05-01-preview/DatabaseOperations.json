@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel": {
+      "post": {
+        "tags": [
+          "DatabaseOperations"
+        ],
+        "description": "Cancels the asynchronous operation on the database.",
+        "operationId": "DatabaseOperations_Cancel",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request for cancel has been executed successfully."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 TierChangeUnsupportedDueToMemoryOptimizedObject - The database cannot update its sku because it has memory-optimized objects.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidDatabaseCreateMode - Invalid request to create a database.\n\n * 400 InvalidAddSecondaryPermission - User does not have sufficient permission to add secondary on the specified server.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 IsLedgerDatabaseIsNotSupportedOnResourceType - Changing the ledger property is not supported for this resource type.\n\n * 400 InvalidBackupStorageAccountType - User passed zrs/lrs during create/update of a database but it failed either because the customer is not whitelisted or because zrs is not available in the specified region.\n\n * 400 CannotUpdateToFreeDatabase - Updating a database to the free sku is not supported.\n\n * 400 DatabaseInvalidSkuPropertyCombination - The properties of the requested sku are inconsistent. Please check that a valid combination is specified. See https://docs.microsoft.com/en-us/rest/api/sql/capabilities/listbylocation#serviceobjectivecapability for more details.\n\n * 400 DatabaseNamedReplicaPerDatabaseLimitExceeded - User tried create a named replica that would exceed the allowed number per primary database\n\n * 400 DatabaseIsCurrentlyPinned - Microsoft has pinned your database SQL Server engine version. To ensure your database does not hit production issues, any future scale operations on your database will be blocked until it has been un-pinned. Please contact Microsoft support for assistance with scaling.\n\n * 400 RestoreTargetEditionSizeInsufficient - User attempted to restore a database to an edition that is a smaller size than the current allocated size of the source.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 InvalidIdentityId - One or more identity id(s) provided are not valid ARM resource id(s). Please input valid id(s) and try again.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OfferDisabledOnSubscription - Subscription offer type is restricted from provisioning the requested resource.\n\n * 400 InvalidNumberOfIdentities - Only one user assigned managed identity is supported at the Database Level.\n\n * 400 DatabaseNamedReplicaChainingNotAllowed - User tried to create a named replica of a named replica which is not allowed.\n\n * 400 DatabaseNamedReplicaInvalidOperation - User attempted an unsupported operation on a named replica.\n\n * 400 DatabaseNamedReplicaInvalidSourceDatabase - User attempted to create a named replica in a different subscription or region than the source database.\n\n * 400 InvalidTargetSubregion - The target server of a non-readable secondary is not in a DR paired Azure region.\n\n * 400 DatabaseCreationBlockedForNonActivatedCMKServer - SQL Pool creations are blocked for CMK enabled workspaces until the workspace is activated. First, enable purge protection and grant the workspace Managed Identity the required permissions (Get, Wrap Key, Unwrap Key) on the Azure Key Vault of the workspace key.  Next, activate your workspace after you have granted access.\n\n * 400 PartnerServerNotCompatible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 400 TargetElasticPoolDoesNotExist - The elastic pool does not exist on a server.\n\n * 400 CannotAssignIdentityToMaster - Cannot assign an identity to a system database. Database identity cannot be assigned to 'master', 'model', 'tempdb', 'msdb', or 'resource' databases.\n\n * 400 ElasticPoolSkuCombinationInvalid - Elastic pool and sku can be specified together only if sku is specified as 'ElasticPool'.\n\n * 400 ElasticPoolTierCombinationInvalid - The database tier is different than the elastic pool service tier.\n\n * 400 ElasticPoolNameRequired - User tried to create or update database to elastic pool service objective without specifying the name of the elastic pool.\n\n * 400 MissingThumbprintCrm - The restore operation of a CRM database failed because a required TDE certificate was missing. Please retry the restore operation to an existing elastic pool.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 TierChangeUnsupportedDueToCDCEnabledDatabase - The database cannot update its sku because it is enabled for CDC.\n\n * 400 ElasticPoolDatabaseCountOverLimit - Attempting to create or add database to elastic pool when the database count limit of the elastic pool has been reached.\n\n * 400 CannotChangeToOrFromDataWarehouseTier - User attempted to change the sku of a database from DataWarehouse tier to non DataWarehouse tiers or vice versa.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 InvalidMaxSizeTierCombination - The specified tier does not support the specified database max size.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 InvalidReadScaleEdition - User attempted to enable read scale on a database type that does not support it.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 GeoSecondaryMaxSizeUpdateFailed - The geo-secondary database is of a SLO that does not support the requested maxsize value or the geo-secondary is in an unsupported region or an update operation is already in progress on the geo-secondary database.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 RequestedDatabaseSizeRequiresShrink - User attempted to ALTER DATABASE MODIFY MAXSIZE to modify the MAXSIZE for a database to a smaller size then the current size.\n\n * 400 CurrentDatabaseSizeExceedsDbMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 UpdateNotAllowedInCurrentReplicationState - The operation is disallowed on the database in its current replication state.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 GeoReplicaLimitReached - The per-replica replication limit was reached.\n\n * 400 UnsupportedCapacity - User tried to create or update database with capacity which is not supported.\n\n * 400 ReplicationSourceAndTargetMustHaveSameName - The replication source and target databases must have the same name.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ReplicationSourceAndTargetMustBeInDifferentServers - The replication source and target databases must be in different logical servers.\n\n * 400 CannotUpdateIsLedgerDatabase - The ledger property of an existing database cannot be updated.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 RemoteDatabaseCopyPermission - User does not have sufficient permission to create a database copy on the specified server.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 RestoreToFreeEditionNotSupported - Restore and GeoRestore target cannot be free database.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 RestoreNotSupportedForFreeEdition - Restore and GeoRestore are not supported for free database.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 InvalidDroppedDatabase - Source database dropped does not exist on server within the supported recovery period.\n\n * 400 InvalidLiveDatabase - Source database does not exist on server within the supported recovery period. If restoring a dropped database, please specify its deletion date.\n\n * 400 InvalidVldbRecoverySlo - The Hyperscale edition recovery requires both source and target databases to use Hyperscale service level objective.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 InvalidVldbRestoreSlo - The Hyperscale edition Point-In-Time restore requires both source and target databases to use Hyperscale service level objective.\n\n * 400 CannotSpecifyPoolOrSlo - Specifying an elastic pool and/or changing the service level objective or edition is not supported for edition.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 MaintenanceWindowNotSupportedForNamedReplica - User tried to create or update named replica with non-default maintenance window which is not supported.\n\n * 400 ChangeUnsupportedOnEntity - User attempted an unsupported create/update/delete operation on a given entity.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 FreeDbAlreadyExists - Only one free database can exist for a subscription per region.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictRequestToUpdateBackupRedundancy - A conflict request to change backup storage redundancy is still in progress.\n\n * 409 SkuAssignmentInProgress - The current assignment request cannot be processed because a previous request has not completed.\n\n * 409 DatabaseElasticPoolMaintenanceConflict - User tried to create or update a database with a specified maintenance configuration that conflicted with that of the elastic pool of the database.\n\n * 409 ServerDtuQuotaExceeded - Could not perform the operation because server would exceed the allowed Database Throughput Unit quota.\n\n * 409 UnableToAlterDatabaseInReplication - User altered edition on a database in a replication relationship.\n\n * 409 CurrentMemoryUsageExceedsSkuQuota - User attempted an sku update operation that cannot be completed due to the higher resource consumption.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 UpdateSloFailedDatabaseTooBusy - Update SLO operation could not complete because database was too busy.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 TargetElasticPoolBeingUpdated - The update of elastic pool cannot be started because there is copy operation in progress for one of the databases in this elastic pool\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidOperationForDatabaseInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 DatabaseCopyLimitPerReplicaReached - User reached the limit of concurrent database copies.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Cancel the database management operation": {
+            "$ref": "./examples/CancelDatabaseOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations": {
+      "get": {
+        "tags": [
+          "DatabaseOperations"
+        ],
+        "description": "Gets a list of operations performed on the database.",
+        "operationId": "DatabaseOperations_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request for getting database operations has been executed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 TierChangeUnsupportedDueToMemoryOptimizedObject - The database cannot update its sku because it has memory-optimized objects.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.\n\n * 400 InvalidDatabaseCreateMode - Invalid request to create a database.\n\n * 400 InvalidAddSecondaryPermission - User does not have sufficient permission to add secondary on the specified server.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 IsLedgerDatabaseIsNotSupportedOnResourceType - Changing the ledger property is not supported for this resource type.\n\n * 400 InvalidBackupStorageAccountType - User passed zrs/lrs during create/update of a database but it failed either because the customer is not whitelisted or because zrs is not available in the specified region.\n\n * 400 CannotUpdateToFreeDatabase - Updating a database to the free sku is not supported.\n\n * 400 DatabaseInvalidSkuPropertyCombination - The properties of the requested sku are inconsistent. Please check that a valid combination is specified. See https://docs.microsoft.com/en-us/rest/api/sql/capabilities/listbylocation#serviceobjectivecapability for more details.\n\n * 400 DatabaseNamedReplicaPerDatabaseLimitExceeded - User tried create a named replica that would exceed the allowed number per primary database\n\n * 400 DatabaseIsCurrentlyPinned - Microsoft has pinned your database SQL Server engine version. To ensure your database does not hit production issues, any future scale operations on your database will be blocked until it has been un-pinned. Please contact Microsoft support for assistance with scaling.\n\n * 400 RestoreTargetEditionSizeInsufficient - User attempted to restore a database to an edition that is a smaller size than the current allocated size of the source.\n\n * 400 InvalidSku - The user specified an invalid sku.\n\n * 400 InvalidTierSkuCombination - The specified tier does not support the specified sku.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 InvalidIdentityId - One or more identity id(s) provided are not valid ARM resource id(s). Please input valid id(s) and try again.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OfferDisabledOnSubscription - Subscription offer type is restricted from provisioning the requested resource.\n\n * 400 InvalidNumberOfIdentities - Only one user assigned managed identity is supported at the Database Level.\n\n * 400 DatabaseNamedReplicaChainingNotAllowed - User tried to create a named replica of a named replica which is not allowed.\n\n * 400 DatabaseNamedReplicaInvalidOperation - User attempted an unsupported operation on a named replica.\n\n * 400 DatabaseNamedReplicaInvalidSourceDatabase - User attempted to create a named replica in a different subscription or region than the source database.\n\n * 400 InvalidTargetSubregion - The target server of a non-readable secondary is not in a DR paired Azure region.\n\n * 400 DatabaseCreationBlockedForNonActivatedCMKServer - SQL Pool creations are blocked for CMK enabled workspaces until the workspace is activated. First, enable purge protection and grant the workspace Managed Identity the required permissions (Get, Wrap Key, Unwrap Key) on the Azure Key Vault of the workspace key.  Next, activate your workspace after you have granted access.\n\n * 400 PartnerServerNotCompatible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.\n\n * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.\n\n * 400 TargetElasticPoolDoesNotExist - The elastic pool does not exist on a server.\n\n * 400 CannotAssignIdentityToMaster - Cannot assign an identity to a system database. Database identity cannot be assigned to 'master', 'model', 'tempdb', 'msdb', or 'resource' databases.\n\n * 400 ElasticPoolSkuCombinationInvalid - Elastic pool and sku can be specified together only if sku is specified as 'ElasticPool'.\n\n * 400 ElasticPoolTierCombinationInvalid - The database tier is different than the elastic pool service tier.\n\n * 400 ElasticPoolNameRequired - User tried to create or update database to elastic pool service objective without specifying the name of the elastic pool.\n\n * 400 MissingThumbprintCrm - The restore operation of a CRM database failed because a required TDE certificate was missing. Please retry the restore operation to an existing elastic pool.\n\n * 400 ElasticPoolInconsistentDtuGuaranteeSettings - Attempting to provide DTU min for databases in the elastic pool that exceeds requested DTUs of the elastic pool.\n\n * 400 TierChangeUnsupportedDueToCDCEnabledDatabase - The database cannot update its sku because it is enabled for CDC.\n\n * 400 ElasticPoolDatabaseCountOverLimit - Attempting to create or add database to elastic pool when the database count limit of the elastic pool has been reached.\n\n * 400 CannotChangeToOrFromDataWarehouseTier - User attempted to change the sku of a database from DataWarehouse tier to non DataWarehouse tiers or vice versa.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 400 ElasticPoolDecreaseStorageLimitBelowUsage - Attempting to decrease the storage limit of the elastic pool below its storage usage.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 ElasticPoolInconsistentVcoreGuaranteeSettings - The number of databases and VCore min per database cannot exceed requested VCores of the elastic pool.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 400 InvalidMaxSizeTierCombination - The specified tier does not support the specified database max size.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 400 InvalidReadScaleEdition - User attempted to enable read scale on a database type that does not support it.\n\n * 400 InvalidReadScaleUnits - User attempted to provide a read scale value that is not supported.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 GeoSecondaryMaxSizeUpdateFailed - The geo-secondary database is of a SLO that does not support the requested maxsize value or the geo-secondary is in an unsupported region or an update operation is already in progress on the geo-secondary database.\n\n * 400 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 400 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 400 InvalidTier - The user specified an invalid tier.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 RequestedDatabaseSizeRequiresShrink - User attempted to ALTER DATABASE MODIFY MAXSIZE to modify the MAXSIZE for a database to a smaller size then the current size.\n\n * 400 CurrentDatabaseSizeExceedsDbMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 SourceDatabaseEditionCouldNotBeUpgraded - The source database cannot have higher edition than the target database.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 TargetDatabaseEditionCouldNotBeDowngraded - The target database cannot have lower edition than the source database.\n\n * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 or 3072 and Key Type is RSA or RSA-HSM.\n\n * 400 ElasticPoolOverFileSpace - Insufficient file space in the elastic pool.\n\n * 400 PartnerDBNotCompatibleForSGXEnclave - Attempt to set GeoDR link or update SLO for enclave enabled database is only supported when both database are running on DC-series hardware.\n\n * 400 UpdateNotAllowedInCurrentReplicationState - The operation is disallowed on the database in its current replication state.\n\n * 400 InvalidLicenseType - User tried to create or update a database or elastic pool with unsupported license type.\n\n * 400 GeoReplicaLimitReached - The per-replica replication limit was reached.\n\n * 400 UnsupportedCapacity - User tried to create or update database with capacity which is not supported.\n\n * 400 ReplicationSourceAndTargetMustHaveSameName - The replication source and target databases must have the same name.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ReplicationSourceAndTargetMustBeInDifferentServers - The replication source and target databases must be in different logical servers.\n\n * 400 CannotUpdateIsLedgerDatabase - The ledger property of an existing database cannot be updated.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 RemoteDatabaseCopyPermission - User does not have sufficient permission to create a database copy on the specified server.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 RestoreToFreeEditionNotSupported - Restore and GeoRestore target cannot be free database.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 RestoreNotSupportedForFreeEdition - Restore and GeoRestore are not supported for free database.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 InvalidDroppedDatabase - Source database dropped does not exist on server within the supported recovery period.\n\n * 400 InvalidLiveDatabase - Source database does not exist on server within the supported recovery period. If restoring a dropped database, please specify its deletion date.\n\n * 400 InvalidVldbRecoverySlo - The Hyperscale edition recovery requires both source and target databases to use Hyperscale service level objective.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 InvalidVldbRestoreSlo - The Hyperscale edition Point-In-Time restore requires both source and target databases to use Hyperscale service level objective.\n\n * 400 CannotSpecifyPoolOrSlo - Specifying an elastic pool and/or changing the service level objective or edition is not supported for edition.\n\n * 400 InvalidPublicMaintenanceConfiguration - User tried to specify public maintenance configuration which cannot be converted to internal id (malformed or wrong region).\n\n * 400 MaintenanceWindowNotSupportedForNamedReplica - User tried to create or update named replica with non-default maintenance window which is not supported.\n\n * 400 ChangeUnsupportedOnEntity - User attempted an unsupported create/update/delete operation on a given entity.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 405 UnsupportedReplicationOperation - An unsupported replication operation was initiated on the database.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 FreeDbAlreadyExists - Only one free database can exist for a subscription per region.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictRequestToUpdateBackupRedundancy - A conflict request to change backup storage redundancy is still in progress.\n\n * 409 SkuAssignmentInProgress - The current assignment request cannot be processed because a previous request has not completed.\n\n * 409 DatabaseElasticPoolMaintenanceConflict - User tried to create or update a database with a specified maintenance configuration that conflicted with that of the elastic pool of the database.\n\n * 409 ServerDtuQuotaExceeded - Could not perform the operation because server would exceed the allowed Database Throughput Unit quota.\n\n * 409 UnableToAlterDatabaseInReplication - User altered edition on a database in a replication relationship.\n\n * 409 CurrentMemoryUsageExceedsSkuQuota - User attempted an sku update operation that cannot be completed due to the higher resource consumption.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 UpdateSloInProgress - User tried to initiate an incompatible operation while a SLO update was in progress.\n\n * 409 UpdateSloFailedDatabaseTooBusy - Update SLO operation could not complete because database was too busy.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 SimultaneousSkuChangeNotAllowed - Service objective change operations cannot run on both databases of a replication relationship at the same time.\n\n * 409 TargetElasticPoolBeingUpdated - The update of elastic pool cannot be started because there is copy operation in progress for one of the databases in this elastic pool\n\n * 409 InvalidOperationForDatabaseNotInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 InvalidOperationForDatabaseInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship.\n\n * 409 DuplicateGeoDrRelation - The databases are already in a replication relation. This is a duplicate request.\n\n * 409 DatabaseCopyLimitPerReplicaReached - User reached the limit of concurrent database copies.\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List the database management operations": {
+            "$ref": "./examples/ListDatabaseOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseOperationListResult": {
+      "description": "The response to a list database operations request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseOperation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseOperationProperties": {
+      "description": "The properties of a database operation.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "The name of the database the operation is being performed on.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationFriendlyName": {
+          "description": "The friendly name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "The percentage of the operation completed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "The name of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The operation state.",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "CancelInProgress",
+            "Cancelled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ManagementOperationState",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "The operation error code.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorDescription": {
+          "description": "The operation error description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "format": "int32",
+          "description": "The operation error severity.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isUserError": {
+          "description": "Whether or not the error is a user error.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "estimatedCompletionTime": {
+          "format": "date-time",
+          "description": "The estimated completion time of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The operation description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isCancellable": {
+          "description": "Whether the operation can be cancelled.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseOperation": {
+      "description": "A database operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -35,6 +35,8 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Report property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!java")
   properties: ReportProperties;
 }
 

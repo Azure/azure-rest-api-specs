@@ -1,132 +1,133 @@
 {
   "parameters": {
-    "agentPoolName": "agentpool1",
     "api-version": "2025-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1",
     "machineName": "machine1",
     "parameters": {
+      "zones": [
+        "1"
+      ],
       "properties": {
+        "operatingSystem": {
+          "osType": "Linux",
+          "osSKU": "Ubuntu",
+          "enableFIPS": false
+        },
         "hardware": {
           "vmSize": "Standard_DS1_v2"
         },
         "kubernetes": {
-          "kubeletDiskType": "OS",
-          "maxPods": 110,
+          "orchestratorVersion": "1.30",
           "nodeLabels": {
             "key1": "val1"
           },
           "nodeTaints": [
             "Key1=Value1:NoSchedule"
           ],
-          "orchestratorVersion": "1.30"
+          "kubeletDiskType": "OS",
+          "maxPods": 110
         },
-        "mode": "User",
-        "operatingSystem": {
-          "enableFIPS": false,
-          "osSKU": "Ubuntu",
-          "osType": "Linux"
-        },
-        "priority": "Spot",
         "tags": {
           "name1": "val1"
-        }
+        },
+        "priority": "Spot",
+        "mode": "User"
       }
-    },
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "machine1",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/machines/machine1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
+        "name": "machine1",
+        "zones": [
+          "1"
+        ],
         "properties": {
+          "provisioningState": "Succeeded",
+          "operatingSystem": {
+            "osType": "Linux",
+            "osSKU": "Ubuntu",
+            "enableFIPS": false
+          },
           "hardware": {
             "vmSize": "Standard_DS1_v2"
           },
           "kubernetes": {
+            "orchestratorVersion": "1.30",
             "currentOrchestratorVersion": "1.30.6",
-            "kubeletDiskType": "OS",
-            "maxPods": 110,
             "nodeLabels": {
               "key1": "val1"
             },
-            "nodeName": "aks-nodepool1-machine1-25481572-vm0",
             "nodeTaints": [
               "Key1=Value1:NoSchedule"
             ],
-            "orchestratorVersion": "1.30"
+            "kubeletDiskType": "OS",
+            "maxPods": 110,
+            "nodeName": "aks-nodepool1-machine1-25481572-vm0"
           },
-          "mode": "User",
-          "nodeImageVersion": "AKSUbuntu:1604:2023.03.11",
-          "operatingSystem": {
-            "enableFIPS": false,
-            "osSKU": "Ubuntu",
-            "osType": "Linux"
+          "tags": {
+            "name1": "val1"
           },
-          "priority": "Spot",
-          "provisioningState": "Succeeded",
           "status": {
             "creationTimestamp": "2025-04-02T12:00:00Z",
             "driftAction": "Synced",
             "vmState": "Running"
           },
-          "tags": {
-            "name1": "val1"
-          }
-        },
-        "zones": [
-          "1"
-        ]
+          "priority": "Spot",
+          "mode": "User",
+          "nodeImageVersion": "AKSUbuntu:1604:2023.03.11"
+        }
       }
     },
     "201": {
       "body": {
-        "name": "machine1",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/machines/machine1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
+        "name": "machine1",
+        "zones": [
+          "1"
+        ],
         "properties": {
+          "provisioningState": "Creating",
+          "operatingSystem": {
+            "osType": "Linux",
+            "osSKU": "Ubuntu",
+            "enableFIPS": false
+          },
           "hardware": {
             "vmSize": "Standard_DS1_v2"
           },
           "kubernetes": {
+            "orchestratorVersion": "1.30",
             "currentOrchestratorVersion": "1.30.6",
-            "kubeletDiskType": "OS",
-            "maxPods": 110,
             "nodeLabels": {
               "key1": "val1"
             },
-            "nodeName": "aks-nodepool1-machine1-25481572-vm0",
             "nodeTaints": [
               "Key1=Value1:NoSchedule"
             ],
-            "orchestratorVersion": "1.30"
+            "kubeletDiskType": "OS",
+            "maxPods": 110,
+            "nodeName": "aks-nodepool1-machine1-25481572-vm0"
           },
-          "mode": "User",
-          "nodeImageVersion": "AKSUbuntu:1604:2023.03.11",
-          "operatingSystem": {
-            "enableFIPS": false,
-            "osSKU": "Ubuntu",
-            "osType": "Linux"
+          "tags": {
+            "name1": "val1"
           },
-          "priority": "Spot",
-          "provisioningState": "Creating",
           "status": {
             "creationTimestamp": "2025-04-02T12:00:00Z",
             "driftAction": "Synced",
             "vmState": "Running"
           },
-          "tags": {
-            "name1": "val1"
-          }
-        },
-        "zones": [
-          "1"
-        ]
+          "priority": "Spot",
+          "mode": "User",
+          "nodeImageVersion": "AKSUbuntu:1604:2023.03.11"
+        }
       }
     }
-  },
-  "operationId": "Machines_CreateOrUpdate",
-  "title": "Create/Update Machine"
+  }
 }

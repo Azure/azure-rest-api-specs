@@ -1,6 +1,8 @@
 {
   "parameters": {
     "api-version": "2022-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "azureTrafficCollectorName": "atc",
     "collectorPolicyName": "cp1",
     "parameters": {
@@ -8,38 +10,36 @@
         "key1": "value1",
         "key2": "value2"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "subid"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "atc",
-        "type": "Microsoft.NetworkFunction/azureTrafficCollectors/collectorPolicies",
-        "etag": "w/\\72090554-7e3b-43f2-80ad-99a9020dcb11\\",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/azureTrafficCollectors/atc/collectorPolicies/cp1",
+        "etag": "w/\\72090554-7e3b-43f2-80ad-99a9020dcb11\\",
+        "type": "Microsoft.NetworkFunction/azureTrafficCollectors/collectorPolicies",
         "location": "westus",
         "properties": {
-          "emissionPolicies": [
-            {
-              "emissionDestinations": [
-                {
-                  "destinationType": "AzureMonitor"
-                }
-              ],
-              "emissionType": "IPFIX"
-            }
-          ],
           "ingestionPolicy": {
+            "ingestionType": "IPFIX",
             "ingestionSources": [
               {
                 "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
                 "sourceType": "Resource"
               }
-            ],
-            "ingestionType": "IPFIX"
+            ]
           },
+          "emissionPolicies": [
+            {
+              "emissionType": "IPFIX",
+              "emissionDestinations": [
+                {
+                  "destinationType": "AzureMonitor"
+                }
+              ]
+            }
+          ],
           "provisioningState": "Succeeded"
         },
         "tags": {
@@ -48,7 +48,5 @@
         }
       }
     }
-  },
-  "operationId": "CollectorPolicies_UpdateTags",
-  "title": "Update Collector Policy tags"
+  }
 }

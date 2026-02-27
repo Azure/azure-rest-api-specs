@@ -10,21 +10,19 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Represents a Shared Access Signature (SAS) token response for accessing Azure Blob Storage.
  */
-@summary("Managed Storage Shared Access Signature (SAS) Token")
-model SharedAccessSignatureToken {
+@summary("SasToken")
+model SasToken {
   /**
    * The expiration date and time of the SAS token in UTC.
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  expiresOn: utcDateTime;
+  msftExpiry: utcDateTime;
 
   /**
    * The SAS token string used for authentication.
    */
-  @pattern("^[A-Za-z0-9+/=&%?-]+$")
-  @summary("Token")
-  token: string;
+  @summary("Token") token: string;
 }
 
 /**
@@ -32,24 +30,24 @@ model SharedAccessSignatureToken {
  * The expiry field will be null for unsigned links.
  */
 @summary("UnsignedLink")
-model SharedAccessSignatureSignedLink {
+model UnsignedLink {
   /**
    * The expiry date of the signed link. This indicates when the link will no longer be valid.
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  expiresOn?: utcDateTime;
+  msftExpiry?: utcDateTime;
 
   /**
    * The URL of the unsigned link.
    */
-  @summary("Href") href: url;
+  @summary("Href") href: string;
 }
 
 /**
  * Successful Response
  */
-model SharedAccessSignatureTokenResponse {
+model TokenResponse {
   /**
    * Status code
    */
@@ -59,13 +57,13 @@ model SharedAccessSignatureTokenResponse {
    * Response body
    */
   @body
-  body: SharedAccessSignatureToken;
+  body: SasToken;
 }
 
 /**
  * Successful Response
  */
-model SharedAccessSignatureSignedHrefResponse {
+model SignedHrefResponse {
   /**
    * Status code
    */
@@ -77,12 +75,12 @@ model SharedAccessSignatureSignedHrefResponse {
    */
   @summary("Response Signed Href Api Sign Get")
   @body
-  body?: SharedAccessSignatureSignedLink;
+  body?: UnsignedLink;
 }
 
 interface Sas {
   /**
-   * Generate a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
+   * Generate a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
    * for the given storage account and container. The storage account and container
    * must be associated with a Planetary Computer dataset indexed by the STAC API.
    */
@@ -108,19 +106,19 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query("duration")
-    durationInMinutes?: int32,
-  ): SharedAccessSignatureTokenResponse | ErrorResponse;
+    @query
+    duration?: int64,
+  ): TokenResponse | ErrorResponse;
 
   /**
-   * Revoke a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
+   * Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
    * for managed storage account of this GeoCatalog.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
   @route("/sas/token/revoke")
   @post
-  @summary("Revoke SAS token for the managed storage account of this GeoCatalog.")
+  @summary("revoke a SAS Token for the given Azure Blob storage account")
   revokeToken(
     /**
      * The API version to use.
@@ -131,19 +129,19 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query("duration")
-    durationInMinutes?: int32,
+    @query
+    duration?: int64,
   ): OkResponse | ErrorResponse;
 
   /**
-   * Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com//azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).
+   * Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).
    * If the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @tag("Sign an HREF for read access")
   @route("/sas/sign")
   @get
-  @summary("sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse")
+  @summary("sign an HREF in the format of a URL and returns a SingedLink")
   getSign(
     /**
      * The API version to use.
@@ -155,13 +153,13 @@ interface Sas {
      */
     @summary("Href")
     @query
-    href: url,
+    href: string,
 
     /**
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query("duration")
-    durationInMinutes?: int32,
-  ): SharedAccessSignatureSignedHrefResponse | ErrorResponse;
+    @query
+    duration?: int64,
+  ): SignedHrefResponse | ErrorResponse;
 }

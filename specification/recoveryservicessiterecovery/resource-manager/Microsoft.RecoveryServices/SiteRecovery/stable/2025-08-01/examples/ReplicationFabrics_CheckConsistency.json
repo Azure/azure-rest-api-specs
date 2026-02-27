@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-08-01",
     "fabricName": "cloud1",
-    "resourceGroupName": "resourceGroupPS1",
+    "api-version": "2025-08-01",
     "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
     "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
   },
   "responses": {
@@ -13,20 +13,20 @@
         "type": "Microsoft.RecoveryServices/vaults/replicationFabrics",
         "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1",
         "properties": {
+          "friendlyName": "cloud1",
+          "encryptionDetails": {
+            "kekState": "None"
+          },
+          "rolloverEncryptionDetails": {
+            "kekState": "None"
+          },
+          "internalIdentifier": "6d224fc6-f326-5d35-96de-fbf51efb3179",
           "bcdrState": "Valid",
           "customDetails": {
             "instanceType": "HyperVSite"
           },
-          "encryptionDetails": {
-            "kekState": "None"
-          },
-          "friendlyName": "cloud1",
-          "health": "Normal",
           "healthErrorDetails": [],
-          "internalIdentifier": "6d224fc6-f326-5d35-96de-fbf51efb3179",
-          "rolloverEncryptionDetails": {
-            "kekState": "None"
-          }
+          "health": "Normal"
         }
       },
       "headers": {
@@ -39,7 +39,5 @@
         "Retry-After": 30
       }
     }
-  },
-  "operationId": "ReplicationFabrics_CheckConsistency",
-  "title": "Checks the consistency of the ASR fabric."
+  }
 }

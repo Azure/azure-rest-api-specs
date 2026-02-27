@@ -1,19 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "resourceName": "clustername1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "istio",
-            "type": "Microsoft.ContainerService/managedClusters/meshUpgradeProfiles",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/meshUpgradeProfiles/istio",
+            "type": "Microsoft.ContainerService/managedClusters/meshUpgradeProfiles",
+            "name": "istio",
             "properties": {
+              "revision": "asm-1-17",
+              "upgrades": [
+                "1-18"
+              ],
               "compatibleWith": [
                 {
                   "name": "kubernetes",
@@ -24,17 +28,11 @@
                     "1.26"
                   ]
                 }
-              ],
-              "revision": "asm-1-17",
-              "upgrades": [
-                "1-18"
               ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ManagedClusters_ListMeshUpgradeProfiles",
-  "title": "Lists version compatibility and upgrade profile for all service meshes in a cluster"
+  }
 }

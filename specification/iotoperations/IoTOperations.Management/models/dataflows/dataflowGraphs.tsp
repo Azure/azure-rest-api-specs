@@ -49,12 +49,6 @@ model DataflowGraphProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** The status for the dataflow graph. */
-  @visibility(Lifecycle.Read)
-  @added(Versions.`2026-03-01`)
-  status?: DataflowGraphStatus;
-
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -300,12 +294,4 @@ union DataflowGraphConnectionSchemaSerializationFormat {
 model DataflowGraphConnectionOutput {
   /** Name of the destination node. */
   name: string;
-}
-
-/** DataflowGraph status. */
-@added(Versions.`2026-03-01`)
-model DataflowGraphStatus {
-  /** The health state of the DataflowGraph. */
-  @visibility(Lifecycle.Read)
-  healthState?: ResourceHealthStatus;
 }

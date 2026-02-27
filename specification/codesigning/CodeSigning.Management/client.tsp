@@ -5,21 +5,21 @@ using Azure.ClientGenerator.Core;
 using Microsoft.CodeSigning;
 using Azure.Core;
 
-@@clientName(Microsoft.CodeSigning, "ArtifactSigningMgmtClient", "python");
-@@clientName(Microsoft.CodeSigning, "ArtifactSigningManagementClient", "java");
+@@clientName(Microsoft.CodeSigning, "TrustedSigningMgmtClient", "python");
+@@clientName(Microsoft.CodeSigning, "TrustedSigningManagementClient", "java");
 
-@@clientName(AccountSku, "ArtifactSigningAccountSku", "csharp");
-@@clientName(Certificate, "ArtifactSigningCertificate", "csharp");
-@@clientName(CertificateProfile, "ArtifactSigningCertificateProfile", "csharp");
-@@clientName(CertificateStatus, "ArtifactSigningCertificateStatus", "csharp");
-@@clientName(ProvisioningState, "ArtifactSigningProvisioningState", "csharp");
+@@clientName(AccountSku, "TrustedSigningAccountSku", "csharp");
+@@clientName(Certificate, "TrustedSigningCertificate", "csharp");
+@@clientName(CertificateProfile, "TrustedSigningCertificateProfile", "csharp");
+@@clientName(CertificateStatus, "TrustedSigningCertificateStatus", "csharp");
+@@clientName(ProvisioningState, "TrustedSigningProvisioningState", "csharp");
 @@clientName(CheckNameAvailability,
-  "ArtifactSigningAccountNameAvailabilityContent",
+  "TrustedSigningAccountNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailability.type, "ResourceType", "csharp");
 @@clientName(CheckNameAvailabilityResult,
-  "ArtifactSigningAccountNameAvailabilityResult",
+  "TrustedSigningAccountNameAvailabilityResult",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityResult.nameAvailable,
@@ -27,10 +27,10 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(NameUnavailabilityReason,
-  "ArtifactSigningAccountNameUnavailabilityReason",
+  "TrustedSigningAccountNameUnavailabilityReason",
   "csharp"
 );
-@@clientName(CodeSigningAccount, "ArtifactSigningAccount", "csharp");
+@@clientName(CodeSigningAccount, "TrustedSigningAccount", "csharp");
 @@clientName(ProfileType, "CertificateProfileType", "csharp");
 @@clientName(ProfileType.VBSEnclave, "VbsEnclave", "csharp");
 @@clientName(RevocationStatus, "CertificateRevocationStatus", "csharp");
@@ -40,7 +40,7 @@ using Azure.Core;
 @@clientName(Revocation.status, "RevocationStatus", "csharp");
 
 @@clientName(CodeSigningAccounts.checkNameAvailability,
-  "CheckArtifactSigningAccountNameAvailability",
+  "CheckTrustedSigningAccountNameAvailability",
   "csharp"
 );
 @@clientName(CodeSigningAccounts.checkNameAvailability::parameters.body,

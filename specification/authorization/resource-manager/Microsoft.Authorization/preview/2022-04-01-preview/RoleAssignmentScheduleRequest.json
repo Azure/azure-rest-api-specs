@@ -1,0 +1,642 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2022-04-01-preview",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}": {
+      "put": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_Create",
+        "description": "Creates a role assignment schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment schedule request to create. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A GUID for the role assignment to create. The name must be unique and different for each role assignment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            },
+            "description": "Parameters for the role assignment schedule request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutRoleAssignmentScheduleRequest": {
+            "$ref": "./examples/PutRoleAssignmentScheduleRequest.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_Get",
+        "description": "Get the specified role assignment schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment schedule request.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name (guid) of the role assignment schedule request to get."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment schedule request.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRoleAssignmentScheduleRequestByName": {
+            "$ref": "./examples/GetRoleAssignmentScheduleRequestByName.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests": {
+      "get": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_ListForScope",
+        "description": "Gets role assignment schedule requests for a scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignments schedule requests.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of role assignments schedule requests.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/RoleAssignmentScheduleRequestFilter",
+        "x-ms-examples": {
+          "GetRoleAssignmentScheduleRequestByScope": {
+            "$ref": "./examples/GetRoleAssignmentScheduleRequestByScope.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/cancel": {
+      "post": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_Cancel",
+        "description": "Cancels a pending role assignment schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment request to cancel.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment request to cancel."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CancelRoleAssignmentScheduleRequestByName": {
+            "$ref": "./examples/CancelRoleAssignmentScheduleRequestByName.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate": {
+      "post": {
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "operationId": "RoleAssignmentScheduleRequests_Validate",
+        "description": "Validates a new role assignment schedule request.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment request to validate.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment request to validate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            },
+            "description": "Parameters for the role assignment schedule request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment request.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateRoleAssignmentScheduleRequestByName": {
+            "$ref": "./examples/ValidateRoleAssignmentScheduleRequestByName.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleAssignmentScheduleRequestFilter": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment requests of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role assignment requests of the specific role definition."
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "Returns role assignment requests created by specific principal."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role assignment requests of specific status."
+        }
+      },
+      "type": "object",
+      "description": "Role assignment schedule request filter"
+    },
+    "RoleAssignmentScheduleRequestProperties": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment schedule request scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal type of the assigned principal ID.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal",
+            "ForeignGroup",
+            "Device"
+          ],
+          "x-ms-enum": {
+            "name": "principalType",
+            "modelAsString": true
+          }
+        },
+        "requestType": {
+          "type": "string",
+          "description": "The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc",
+          "enum": [
+            "AdminAssign",
+            "AdminRemove",
+            "AdminUpdate",
+            "AdminExtend",
+            "AdminRenew",
+            "SelfActivate",
+            "SelfDeactivate",
+            "SelfExtend",
+            "SelfRenew"
+          ],
+          "x-ms-enum": {
+            "name": "RequestType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the role assignment schedule request.",
+          "enum": [
+            "Accepted",
+            "PendingEvaluation",
+            "Granted",
+            "Denied",
+            "PendingProvisioning",
+            "Provisioned",
+            "PendingRevocation",
+            "Revoked",
+            "Canceled",
+            "Failed",
+            "PendingApprovalProvisioning",
+            "PendingApproval",
+            "FailedAsResourceIsLocked",
+            "PendingAdminDecision",
+            "AdminApproved",
+            "AdminDenied",
+            "TimedOut",
+            "ProvisioningStarted",
+            "Invalid",
+            "PendingScheduleCreation",
+            "ScheduleCreated",
+            "PendingExternalProvisioning"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "approvalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The approvalId of the role assignment schedule request."
+        },
+        "targetRoleAssignmentScheduleId": {
+          "type": "string",
+          "description": "The resultant role assignment schedule id or the role assignment schedule id being updated"
+        },
+        "targetRoleAssignmentScheduleInstanceId": {
+          "type": "string",
+          "description": "The role assignment schedule instance id being updated"
+        },
+        "scheduleInfo": {
+          "properties": {
+            "startDateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Start DateTime of the role assignment schedule."
+            },
+            "expiration": {
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Type of the role assignment schedule expiration",
+                  "enum": [
+                    "AfterDuration",
+                    "AfterDateTime",
+                    "NoExpiration"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Type",
+                    "modelAsString": true
+                  }
+                },
+                "endDateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "End DateTime of the role assignment schedule."
+                },
+                "duration": {
+                  "type": "string",
+                  "description": "Duration of the role assignment schedule in TimeSpan."
+                }
+              },
+              "type": "object",
+              "description": "Expiration of the role assignment schedule"
+            }
+          },
+          "type": "object",
+          "description": "Schedule info of the role assignment schedule"
+        },
+        "linkedRoleEligibilityScheduleId": {
+          "type": "string",
+          "description": "The linked role eligibility schedule id - to activate an eligibility."
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the role assignment"
+        },
+        "ticketInfo": {
+          "properties": {
+            "ticketNumber": {
+              "type": "string",
+              "description": "Ticket number for the role assignment"
+            },
+            "ticketSystem": {
+              "type": "string",
+              "description": "Ticket system name for the role assignment"
+            }
+          },
+          "type": "object",
+          "description": "Ticket Info of the role assignment"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "DateTime when role assignment schedule request was created"
+        },
+        "requestorId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of the user who created this request"
+        },
+        "expandedProperties": {
+          "type": "object",
+          "readOnly": true,
+          "description": "Additional properties of principal, scope and role definition",
+          "$ref": "#/definitions/ExpandedProperties"
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId",
+        "requestType"
+      ],
+      "type": "object",
+      "description": "Role assignment schedule request properties with scope."
+    },
+    "RoleAssignmentScheduleRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment schedule request ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment schedule request name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment schedule request type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleAssignmentScheduleRequestProperties",
+          "description": "Role assignment schedule request properties."
+        }
+      },
+      "type": "object",
+      "description": "Role Assignment schedule request"
+    },
+    "RoleAssignmentScheduleRequestListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+          },
+          "description": "Role assignment schedule request list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "type": "object",
+      "description": "Role assignment schedule request list operation result."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "type": "object",
+      "description": "An error response from the service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "type": "object",
+      "description": "An error response from the service."
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "principal": {
+          "type": "object",
+          "description": "Details of the principal",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the principal"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the principal"
+            },
+            "email": {
+              "type": "string",
+              "description": "Email id of the principal"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the principal"
+            }
+          }
+        }
+      },
+      "type": "object",
+      "description": "Expanded info of resource, role and principal"
+    }
+  }
+}

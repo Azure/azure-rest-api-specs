@@ -1,18 +1,16 @@
 {
   "parameters": {
+    "url": "acrapi.azurecr.io",
     "name": "newimage",
-    "from": "sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39",
     "mount": "prod/bash",
-    "url": "acrapi.azurecr.io"
+    "from": "sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39"
   },
   "responses": {
     "201": {
       "headers": {
-        "Docker-Content-Digest": "sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39",
-        "Location": "/v2/somethingnew/blobs/sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39"
+        "Location": "/v2/somethingnew/blobs/sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39",
+        "Docker-Content-Digest": "sha256:16463e0c481e161aabb735437d30b3c9c7391c2747cc564bb927e843b73dcb39"
       }
     }
-  },
-  "operationId": "ContainerRegistryBlob_MountBlob",
-  "title": "Mount a blob from repository"
+  }
 }

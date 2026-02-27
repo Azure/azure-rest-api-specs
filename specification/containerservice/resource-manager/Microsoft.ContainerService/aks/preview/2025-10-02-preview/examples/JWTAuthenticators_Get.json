@@ -1,31 +1,25 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "jwtAuthenticatorName": "jwt1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "jwtAuthenticatorName": "jwt1"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "jwt1",
-        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/jwtAuthenticators/jwt1",
+        "type": "Microsoft.ContainerService/managedClusters/jwtAuthenticators",
+        "name": "jwt1",
         "properties": {
-          "claimMappings": {
-            "extra": [
-              {
-                "key": "example.com/extrakey",
-                "valueExpression": "claims.customfield"
-              }
-            ],
-            "groups": {
-              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
-            },
-            "username": {
-              "expression": "'aks:jwt:' + claims.sub"
-            }
+          "provisioningState": "Succeeded",
+          "issuer": {
+            "url": "https://example.com",
+            "audiences": [
+              "https://example.com/audience1",
+              "https://example.com/audience2"
+            ]
           },
           "claimValidationRules": [
             {
@@ -37,14 +31,20 @@
               "message": "Sub cannot be empty"
             }
           ],
-          "issuer": {
-            "audiences": [
-              "https://example.com/audience1",
-              "https://example.com/audience2"
-            ],
-            "url": "https://example.com"
+          "claimMappings": {
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            },
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
+            "extra": [
+              {
+                "key": "example.com/extrakey",
+                "valueExpression": "claims.customfield"
+              }
+            ]
           },
-          "provisioningState": "Succeeded",
           "userValidationRules": [
             {
               "expression": "user.groups.all(group, group.startsWith('aks:jwt:admin:'))",
@@ -54,7 +54,5 @@
         }
       }
     }
-  },
-  "operationId": "JWTAuthenticators_Get",
-  "title": "Get JWT Authenticator"
+  }
 }

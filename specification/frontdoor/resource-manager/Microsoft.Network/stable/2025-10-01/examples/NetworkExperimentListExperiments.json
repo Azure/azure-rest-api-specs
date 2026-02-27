@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
-    "profileName": "MyProfile",
+    "subscriptionId": "subid",
     "resourceGroupName": "MyResourceGroup",
-    "subscriptionId": "subid"
+    "profileName": "MyProfile"
   },
   "responses": {
     "200": {
@@ -14,7 +14,6 @@
             "id": "/subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/Experiments",
             "properties": {
               "description": "this is my first experiment!",
-              "enabledState": "Enabled",
               "endpointA": {
                 "name": "endpoint A",
                 "endpoint": "endpointA.net"
@@ -23,15 +22,14 @@
                 "name": "endpoint B",
                 "endpoint": "endpointB.net"
               },
+              "enabledState": "Enabled",
               "resourceState": "Creating",
-              "scriptFileUri": "www.myScript.com",
-              "status": "ongoing"
+              "status": "ongoing",
+              "scriptFileUri": "www.myScript.com"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "Experiments_ListByProfile",
-  "title": "Gets a list of Experiments"
+  }
 }

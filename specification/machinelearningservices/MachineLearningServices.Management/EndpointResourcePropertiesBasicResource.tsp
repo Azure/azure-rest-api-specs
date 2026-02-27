@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -10,9 +9,19 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
+
+@parentResource(Workspace)
+model EndpointResourcePropertiesBasicResource
+  is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
+  ...ResourceNameParameter<
+    Resource = EndpointResourcePropertiesBasicResource,
+    KeyName = "endpointName",
+    SegmentName = "endpoints",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
+  >;
+}
 
 alias EndpointResourceListParameters = {
   /**
@@ -21,15 +30,15 @@ alias EndpointResourceListParameters = {
   @query("endpointType")
   endpointType?: EndpointType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include online endpoints"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("includeOnlineEndpoints")
   includeOnlineEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include serverless endpoints"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("includeServerlessEndpoints")
   includeServerlessEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include connections"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("includeConnections")
   includeConnections?: boolean = false;
 
@@ -46,26 +55,7 @@ alias EndpointResourceListParameters = {
   $expand?: string;
 };
 
-/**
- * EndpointResourcePropertiesBasicResource is a preview-only resource.
- */
-@removed(Versions.v2025_12_01)
-@parentResource(Workspace)
-model EndpointResourcePropertiesBasicResource
-  is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
-  ...ResourceNameParameter<
-    Resource = EndpointResourcePropertiesBasicResource,
-    KeyName = "endpointName",
-    SegmentName = "endpoints",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-  >;
-}
-
-/**
- * EndpointResourcePropertiesBasicResources interface is preview-only.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource does not support delete operation"
-@removed(Versions.v2025_12_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
   /**
@@ -77,7 +67,7 @@ interface EndpointResourcePropertiesBasicResources {
   /**
    * Create or update endpoint resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update endpoint resource with the specified parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EndpointResourcePropertiesBasicResource,

@@ -5,6 +5,7 @@ import "./models.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -18,17 +19,20 @@ model OperationIdHeader {
   operationId?: string;
 }
 
-alias AllowReplaceParameter = {
-  @added(Versions.v2025_11_01)
-  @doc("Allow the operation to replace an existing resource.")
-  @query
-  allowReplace?: boolean = false;
-};
+alias AllowReplaceTrait = QueryParametersTrait<
+  {
+    @added(Versions.v2025_11_01)
+    @doc("Allow the operation to replace an existing resource.")
+    @query
+    allowReplace?: boolean = false;
+  },
+  TraitContext.Create | TraitContext.Action
+>;
 
 alias ServiceTraits = Traits.NoRepeatableRequests &
   Traits.NoConditionalRequests &
   Traits.SupportsClientRequestId;
-alias Operations = ResourceOperations<ServiceTraits>;
+alias Operations<Trait> = ResourceOperations<ServiceTraits & Trait>;
 
 interface ContentAnalyzers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
@@ -51,30 +55,11 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
-  // To work around bug https://github.com/Azure/typespec-azure/issues/3630,
-  // we rewrite createOrReplace not to use LongRunningResourceCreateReplace.  No behavioral change.
-  // @doc("Create a new analyzer asynchronously.")
-  // @pollingOperation(ContentAnalyzers.getOperationStatus)
-  // createOrReplace is Operations.LongRunningResourceCreateOrReplace<
-  //   ContentAnalyzer,
-  //   AllowReplaceTrait
-  // >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Create a new analyzer asynchronously.")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
-  @put
-  @finalOperation(ContentAnalyzers.get)
-  @route("/analyzers/{analyzerId}")
-  createOrReplace is Foundations.Operation<
-    Foundations.ItemKeysOf<ContentAnalyzer> & {
-      ...AllowReplaceParameter;
-      ...ClientRequestIdHeader;
-    } & Foundations.ResourceBody<ContentAnalyzer>,
-    Foundations.ResourceCreatedOrOkResponse<ContentAnalyzer &
-      Foundations.LongRunningStatusLocation<ContentAnalyzer> &
-      ClientRequestIdHeader>,
-    ServiceTraits
+  createOrReplace is Operations.LongRunningResourceCreateOrReplace<
+    ContentAnalyzer,
+    AllowReplaceTrait
   >;
 
   @doc("Update analyzer properties.")
@@ -89,37 +74,21 @@ interface ContentAnalyzers {
   @doc("List analyzers.")
   list is Operations.ResourceList<ContentAnalyzer>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Use named model for 202 response to avoid status monitor limitation."
   @doc("Extract content and fields from input.")
   @pollingOperation(ContentAnalyzers.getResult)
-  @post
-  @route("/analyzers/{analyzerId}:analyze")
-  analyze is Foundations.Operation<
-    Foundations.ItemKeysOf<ContentAnalyzer> & {
-      ...AnalyzeRequest;
-      ...ClientRequestIdHeader;
-    },
-    Foundations.AcceptedResponse<ContentAnalyzerAnalyzeOperationStatus> &
-      Foundations.LongRunningStatusLocation<ContentAnalyzerAnalyzeOperationStatus> &
-      ClientRequestIdHeader,
-    ServiceTraits
+  analyze is Operations.LongRunningResourceAction<
+    ContentAnalyzer,
+    AnalyzeRequest,
+    AnalyzeResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Use named model for 202 response to avoid status monitor limitation."
   @added(Versions.v2025_11_01)
   @doc("Extract content and fields from input.")
   @pollingOperation(ContentAnalyzers.getResult)
-  @post
-  @route("/analyzers/{analyzerId}:analyzeBinary")
-  analyzeBinary is Foundations.Operation<
-    Foundations.ItemKeysOf<ContentAnalyzer> & {
-      ...AnalyzeBinaryRequest;
-      ...ClientRequestIdHeader;
-    },
-    Foundations.AcceptedResponse<ContentAnalyzerAnalyzeOperationStatus> &
-      Foundations.LongRunningStatusLocation<ContentAnalyzerAnalyzeOperationStatus> &
-      ClientRequestIdHeader,
-    ServiceTraits
+  analyzeBinary is Operations.LongRunningResourceAction<
+    ContentAnalyzer,
+    AnalyzeBinaryRequest,
+    AnalyzeResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
@@ -210,22 +179,15 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @added(Versions.v2025_11_01)
   @doc("Create a copy of the source analyzer to the current location.")
-  @action("copy")
-  @actionSeparator(":")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
-  copy is Foundations.ResourceOperation<
+  copy is Operations.LongRunningResourceAction<
     ContentAnalyzer,
-    CopyRequest & {
-      ...AllowReplaceParameter;
-      ...ClientRequestIdHeader;
-    },
-    Foundations.ResourceCreatedOrOkResponse<ContentAnalyzer &
-      Foundations.LongRunningStatusLocation<ContentAnalyzer> &
-      ClientRequestIdHeader>,
-    ServiceTraits
+    CopyRequest,
+    ContentAnalyzer,
+    Foundations.Error,
+    AllowReplaceTrait
   >;
 
   @added(Versions.v2025_11_01)
@@ -249,7 +211,7 @@ interface ContentAnalyzers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @added(Versions.v2025_11_01)
-  @doc("Update default settings for this Content Understanding resource.")
+  @doc("Return default settings for this Content Understanding resource.")
   @route("/defaults")
   @patch
   updateDefaults is Foundations.Operation<

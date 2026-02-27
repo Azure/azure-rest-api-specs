@@ -1,59 +1,57 @@
 {
   "parameters": {
+    "managementGroupName": "72f988bf-86f1-41af-91ab-2d7cd011db47",
     "alertRuleName": "SampleActivityLogAlertSHRuleOnTenantLevel",
     "api-version": "2023-04-01-preview",
-    "managementGroupName": "72f988bf-86f1-41af-91ab-2d7cd011db47",
     "tenantActivityLogAlertRulePatch": {
-      "properties": {
-        "enabled": false
-      },
       "tags": {
         "key1": "value1",
         "key2": "value2"
+      },
+      "properties": {
+        "enabled": false
       }
     }
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "name": "SampleActivityLogAlertSHRuleOnTenantLevel",
-        "type": "Microsoft.AlertsManagement/TenantActivityLogAlerts",
         "id": "/providers/Microsoft.Management/ManagementGroups/72f988bf-86f1-41af-91ab-2d7cd011db47/providers/Microsoft.AlertsManagement/TenantActivityLogAlerts/SampleActivityLogAlertSHRuleOnTenantLevel",
+        "type": "Microsoft.AlertsManagement/TenantActivityLogAlerts",
+        "name": "SampleActivityLogAlertSHRuleOnTenantLevel",
         "location": "Global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
         "properties": {
-          "description": "Description of sample Activity Log Alert service health rule on tenant level events.",
+          "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "condition": {
+            "allOf": [
+              {
+                "field": "category",
+                "equals": "ServiceHealth"
+              }
+            ]
+          },
           "actions": {
             "actionGroups": [
               {
                 "actionGroupId": "/providers/Microsoft.Management/ManagementGroups/72f988bf-86f1-41af-91ab-2d7cd011db47/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
-                "actionProperties": {
-                  "Email.Title": "my email title"
-                },
                 "webhookProperties": {
                   "sampleWebhookProperty": "SamplePropertyValue"
+                },
+                "actionProperties": {
+                  "Email.Title": "my email title"
                 }
               }
             ]
           },
-          "condition": {
-            "allOf": [
-              {
-                "equals": "ServiceHealth",
-                "field": "category"
-              }
-            ]
-          },
           "enabled": false,
-          "tenantScope": "72f988bf-86f1-41af-91ab-2d7cd011db47"
-        },
-        "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "description": "Description of sample Activity Log Alert service health rule on tenant level events."
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "TenantActivityLogAlerts_Update",
-  "title": "Patch a Tenant Activity Log Alert rule"
+  }
 }

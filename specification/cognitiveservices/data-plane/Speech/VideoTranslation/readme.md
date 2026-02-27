@@ -7,21 +7,12 @@ Configuration for generating VideoTranslation SDK.
 The current release for the VideoTranslation.
 
 ``` yaml
-tag: release_2026_03_01
+tag: release_2025_05_20
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
-
-## VideoTranslation 2026-03-01
-
-These settings apply only when `--tag=release_2026_03_01` is specified on the command line.
-
-```yaml $(tag) == 'release_2026_03_01'
-input-file:
-  - stable/2026-03-01/VideoTranslation.json
-```
 
 ## VideoTranslation 2024-05-20-preview
 

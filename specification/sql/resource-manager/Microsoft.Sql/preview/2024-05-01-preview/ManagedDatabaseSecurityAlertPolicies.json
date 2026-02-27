@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Gets a list of managed database's security alert policies.",
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database for which the security alert policies are defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the managed database security alert policies.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 UpdateNotAllowedOnServerContainingPausedDWDatabase - Setting server Threat Detection settings is not allowed on a server with a paused Data Warehouse database\n\n * 400 SecurityAlertPoliciesInsufficientDiskSpace - Insufficient disk space to save security alert policy metadata in the database\n\n * 400 SecurityAlertPoliciesInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 SecurityAlertPoliciesStorageAccountIsDisabled - The storage account provided in the threat detection policy is disabled.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of the database's threat detection policies.": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Gets a managed database's security alert policy.",
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database for which the security alert policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the managed database security alert policy.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 UpdateNotAllowedOnServerContainingPausedDWDatabase - Setting server Threat Detection settings is not allowed on a server with a paused Data Warehouse database\n\n * 400 SecurityAlertPoliciesInsufficientDiskSpace - Insufficient disk space to save security alert policy metadata in the database\n\n * 400 SecurityAlertPoliciesInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 SecurityAlertPoliciesStorageAccountIsDisabled - The storage account provided in the threat detection policy is disabled.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database's threat detection policy": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Creates or updates a database's security alert policy.",
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database for which the security alert policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database security alert policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the managed database security alert policy.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Successfully created the managed database security alert policy.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a database's threat detection policy with minimal parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertCreateMin.json"
+          },
+          "Update a database's threat detection policy with all parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertCreateMax.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedDatabaseSecurityAlertPolicy": {
+      "description": "A managed database security alert policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedDatabaseSecurityAlertPolicyListResult": {
+      "description": "A list of the managed database's security alert policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityAlertPolicyProperties": {
+      "description": "Properties of a security alert policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
+          "enum": [
+            "New",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecurityAlertPolicyState",
+            "modelAsString": false
+          }
+        },
+        "disabledAlerts": {
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "description": "Specifies that the alert is sent to the account administrators.",
+          "type": "boolean"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+          "type": "integer"
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

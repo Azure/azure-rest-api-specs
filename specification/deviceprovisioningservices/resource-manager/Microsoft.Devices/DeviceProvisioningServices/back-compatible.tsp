@@ -113,12 +113,10 @@ using Microsoft.Devices;
 
 // ProvisioningServiceDescriptionOperations interface operations
 @@clientLocation(ProvisioningServiceDescriptionOperations.getOperationResult,
-  "IotDpsResource",
-  "!csharp"
+  "IotDpsResource"
 );
 
 // IotDpsResourceOperationGroup interface operations
 @@clientLocation(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
-  "IotDpsResource",
-  "!csharp"
+  "IotDpsResource"
 );

@@ -13,21 +13,20 @@ namespace Microsoft.DevTestLab;
 /**
  * A lab.
  */
-model Lab is Azure.ResourceManager.ProxyResource<LabProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Lab,
-    KeyName = "labName",
-    SegmentName = "labs",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Lab extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("labs")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: LabProperties;
 }
 
 @armResourceOperations
@@ -58,7 +57,6 @@ interface Labs {
   /**
    * Allows modifying tags of labs. All other properties will be ignored.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Lab, PatchModel = LabFragment>;
 
@@ -140,15 +138,7 @@ interface Labs {
   /**
    * Claim a random claimable virtual machine in the lab. This operation can take a while to complete.
    */
-  claimAnyVm is ArmResourceActionAsync<
-    Lab,
-    void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
-  >;
+  claimAnyVm is ArmResourceActionAsync<Lab, void, OkResponse>;
 
   /**
    * Create virtual machines in a lab. This operation can take a while to complete.
@@ -156,11 +146,7 @@ interface Labs {
   createEnvironment is ArmResourceActionAsync<
     Lab,
     LabVirtualMachineCreationParameter,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
@@ -169,11 +155,7 @@ interface Labs {
   exportResourceUsage is ArmResourceActionAsync<
     Lab,
     ExportResourceUsageParameters,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
@@ -191,11 +173,7 @@ interface Labs {
   importVirtualMachine is ArmResourceActionAsync<
     Lab,
     ImportLabVirtualMachineRequest,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**

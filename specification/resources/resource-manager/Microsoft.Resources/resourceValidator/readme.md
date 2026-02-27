@@ -23,7 +23,7 @@ These are the global settings.
 
 ``` yaml
 title: ResourceValidationClient
-description: Resource Validator
+description: Resource Validation Client
 openapi-type: arm
 tag: package-2022-06
 ```

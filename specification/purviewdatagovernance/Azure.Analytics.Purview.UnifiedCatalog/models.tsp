@@ -186,16 +186,16 @@ model CatalogApiServiceOrderBy {
 
 @doc("Filter configuration for searching managed attributes.")
 model SharedSearchManageAttributeSearchFilter {
-  @doc("The field name to filter on. Example: 'All Attributes Types.AttributeName'")
+  @doc("The field name to filter on.")
   field?: string;
 
-  @doc("The comparison operator to use for filtering. Example: 'ne' , 'eq' ,'gt' , 'ge' , 'lt' , 'le', 'contains' ,'notcontains', 'prefix','eq-any'")
+  @doc("The comparison operator to use for filtering.")
   operator?: string;
 
-  @doc("The value to compare against. Example: '2', 'LAST_24H', LAST_7D','LAST_30D',LAST_365D','MORE_THAN_365D'")
+  @doc("The value to compare against.")
   value?: string;
 
-  @doc("The data type of the filter value. Example: 'int','date','double','float',richtext','short','string','boolean','multiChoice'")
+  @doc("The data type of the filter value.")
   type?: string;
 }
 
@@ -492,9 +492,6 @@ model DataAssetQueryRequest {
 
   @doc("To filter by data map asset Ids.")
   dataMapAssetIds?: string[];
-
-  @doc("includingOrphans true or false")
-  includingOrphans?: boolean;
 }
 
 @doc("FacetValue.")
@@ -1239,9 +1236,6 @@ model ObjectiveQueryRequest {
 
   @doc("Filter by objective owners.")
   owners?: string[];
-
-  @doc("To filter by managed attributes.")
-  managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
 
 @doc("Objective facet request model.")

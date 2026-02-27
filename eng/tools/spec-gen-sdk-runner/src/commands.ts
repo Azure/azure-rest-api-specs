@@ -15,7 +15,7 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
+import { SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
@@ -54,8 +54,8 @@ export async function generateSdkForSingleSpec(): Promise<number> {
 
   // Always set the pipeline variables for the SDK pull request even if
   // there are failures in the generation process since we allow the PR creation for such cases.
-  let packageName: string;
-  let installationInstructions: string;
+  let packageName = "";
+  let installationInstructions = "";
   if (executionReport) {
     packageName =
       executionReport.packages[0]?.packageName ??
@@ -65,7 +65,6 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     installationInstructions = executionReport.packages[0]?.installationInstructions ?? "";
   } else {
     packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
-    installationInstructions = "";
   }
 
   packageName = packageName.replace("/", "-");
@@ -94,16 +93,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
   const changedSpecs = detectChangedSpecConfigFiles(commandInput);
 
   let statusCode = 0;
-  let pushedSpecConfigCount: number;
-  let executionReport: ExecutionReport | undefined;
-  let changedSpecPathText: string;
+  let pushedSpecConfigCount;
+  let executionReport;
+  let changedSpecPathText = "";
   let hasManagementPlaneSpecs = false;
   let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
-  let currentRunHasBreakingChange: boolean;
+  let currentRunHasBreakingChange = false;
   let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
-  let currentExecutionResult: string;
+  let currentExecutionResult = "";
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
 

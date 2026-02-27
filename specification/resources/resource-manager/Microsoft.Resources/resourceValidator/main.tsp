@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
 @armProviderNamespace("Microsoft.Resources")
-@service(#{ title: "Resource Validator" })
+@service(#{ title: "Resource Validation Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace ResourceValidationClient;

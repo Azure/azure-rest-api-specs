@@ -66,7 +66,6 @@ model InstanceProperties {
   @added(Versions.`2025-07-01-preview`)
   adrNamespaceRef?: AzureDeviceRegistryNamespaceRef;
 
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 

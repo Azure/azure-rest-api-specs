@@ -79,7 +79,7 @@ interface ArmDisasterRecoveries {
   @action("failover")
   failOver is ArmResourceActionSync<
     ArmDisasterRecovery,
-    NamespaceFailoverProperties,
+    FailoverProperties,
     OkResponse,
     OptionalRequestBody = true,
     Error = ErrorResponse

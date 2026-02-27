@@ -1,0 +1,924 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-10-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "LocationCapabilities"
+        ],
+        "description": "Gets the subscription capabilities available for the specified location.",
+        "operationId": "Capabilities_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location name whose capabilities are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "If specified, restricts the response to only include the selected item.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "supportedEditions",
+              "supportedElasticPoolEditions",
+              "supportedManagedInstanceVersions"
+            ],
+            "x-ms-enum": {
+              "name": "CapabilityGroup",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription location capabilities.",
+            "schema": {
+              "$ref": "#/definitions/LocationCapabilities"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified."
+          }
+        },
+        "x-ms-examples": {
+          "Get location capabilities": {
+            "$ref": "./examples/CapabilitiesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocationCapabilities": {
+      "description": "The location capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The location name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "description": "The list of supported server versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedManagedInstanceVersions": {
+          "description": "The list of supported managed instance versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceVersionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerVersionCapability": {
+      "description": "The server capability",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The server version name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "description": "The list of supported database editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedElasticPoolEditions": {
+          "description": "The list of supported elastic pool editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceVersionCapability": {
+      "description": "The managed instance capability",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The server version name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "description": "The list of supported managed instance editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "EditionCapability": {
+      "description": "The edition capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The database edition name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedServiceLevelObjectives": {
+          "description": "The list of supported service objectives for the edition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceObjectiveCapability"
+          },
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticPoolEditionCapability": {
+      "description": "The elastic pool edition capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The elastic pool edition name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedElasticPoolPerformanceLevels": {
+          "description": "The list of supported elastic pool DTU levels for the edition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceEditionCapability": {
+      "description": "The managed server capability",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The managed server version name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedFamilies": {
+          "description": "The supported families.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceFamilyCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ServiceObjectiveCapability": {
+      "description": "The service objectives capability.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "The unique ID of the service objective.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The service objective name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedMaxSizes": {
+          "description": "The list of supported maximum database sizes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "performanceLevel": {
+          "$ref": "#/definitions/PerformanceLevelCapability",
+          "description": "The performance level.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "description": "List of supported license types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticPoolPerformanceLevelCapability": {
+      "description": "The Elastic Pool performance level capability.",
+      "type": "object",
+      "properties": {
+        "performanceLevel": {
+          "$ref": "#/definitions/PerformanceLevelCapability",
+          "description": "The performance level for the pool.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "description": "List of supported license types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "maxDatabaseCount": {
+          "format": "int32",
+          "description": "The maximum number of databases supported.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size for this performance level.",
+          "readOnly": true
+        },
+        "supportedMaxSizes": {
+          "description": "The list of supported max sizes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedPerDatabaseMaxSizes": {
+          "description": "The list of supported per database max sizes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedPerDatabaseMaxPerformanceLevels": {
+          "description": "The list of supported per database max performance levels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMaxPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceFamilyCapability": {
+      "description": "The managed server family capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Family name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "SKU name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "description": "List of supported license types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedVcoresValues": {
+          "description": "List of supported virtual cores values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceVcoresCapability"
+          },
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Included size.",
+          "readOnly": true
+        },
+        "supportedStorageSizes": {
+          "description": "Storage size ranges.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "MaxSizeRangeCapability": {
+      "description": "The maximum size range capability.",
+      "type": "object",
+      "properties": {
+        "minValue": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Minimum value.",
+          "readOnly": true
+        },
+        "maxValue": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Maximum value.",
+          "readOnly": true
+        },
+        "scaleSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Scale/step size for discrete values between the minimum value and the maximum value.",
+          "readOnly": true
+        },
+        "logSize": {
+          "$ref": "#/definitions/LogSizeCapability",
+          "description": "Size of transaction log.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "PerformanceLevelCapability": {
+      "description": "The performance level capability.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Performance level value.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit type used to measure performance level.",
+          "enum": [
+            "DTU",
+            "VCores"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PerformanceLevelUnit",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LicenseTypeCapability": {
+      "description": "The license type capability",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "License type identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "MaxSizeCapability": {
+      "description": "The maximum size capability.",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "format": "int32",
+          "description": "The maximum size limit (see 'unit' for the units).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The units that the limit is expressed in.",
+          "enum": [
+            "Megabytes",
+            "Gigabytes",
+            "Terabytes",
+            "Petabytes"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MaxSizeUnit",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ElasticPoolPerDatabaseMaxPerformanceLevelCapability": {
+      "description": "The max per-database performance level capability.",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "format": "double",
+          "description": "The maximum performance level per database.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit type used to measure performance level.",
+          "enum": [
+            "DTU",
+            "VCores"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PerformanceLevelUnit",
+            "modelAsString": true
+          }
+        },
+        "supportedPerDatabaseMinPerformanceLevels": {
+          "description": "The list of supported min database performance levels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMinPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceVcoresCapability": {
+      "description": "The managed instance virtual cores capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The virtual cores identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "format": "int32",
+          "description": "The virtual cores value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "LogSizeCapability": {
+      "description": "The log size capability.",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "format": "int32",
+          "description": "The log size limit (see 'unit' for the units).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The units that the limit is expressed in.",
+          "enum": [
+            "Megabytes",
+            "Gigabytes",
+            "Terabytes",
+            "Petabytes",
+            "Percent"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "LogSizeUnit",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ElasticPoolPerDatabaseMinPerformanceLevelCapability": {
+      "description": "The minimum per-database performance level capability.",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "format": "double",
+          "description": "The minimum performance level per database.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit type used to measure performance level.",
+          "enum": [
+            "DTU",
+            "VCores"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PerformanceLevelUnit",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

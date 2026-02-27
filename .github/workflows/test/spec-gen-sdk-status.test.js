@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.js";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import * as artifacts from "../src/artifacts.js";
+import * as github from "../src/github.js";
 import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
@@ -15,6 +16,9 @@ describe("spec-gen-sdk-status", () => {
 
   /** @type {import("vitest").MockInstance} */
   let getAzurePipelineArtifactMock;
+
+  /** @type {import("vitest").MockInstance} */
+  let writeToActionsSummaryMock;
 
   /** @type {import("vitest").MockInstance} */
   let appendFileSyncMock;
@@ -40,6 +44,14 @@ describe("spec-gen-sdk-status", () => {
         });
       });
 
+    writeToActionsSummaryMock = vi
+      .spyOn(github, "writeToActionsSummary")
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .mockImplementation((content, core) => {
+        // Implementation that just returns
+        return Promise.resolve();
+      });
+
     appendFileSyncMock = vi.spyOn(fs, "appendFileSync").mockImplementation(vi.fn());
 
     // Reset mock call counts
@@ -52,6 +64,7 @@ describe("spec-gen-sdk-status", () => {
   afterEach(() => {
     // Restore mocks
     getAzurePipelineArtifactMock.mockRestore();
+    writeToActionsSummaryMock.mockRestore();
     appendFileSyncMock.mockRestore();
   });
 
@@ -244,9 +257,8 @@ describe("spec-gen-sdk-status", () => {
     });
 
     // Verify summary was written
-    expect(mockCore.summary.addRaw).toHaveBeenCalled();
-    expect(mockCore.summary.addRaw.mock.calls[0][0]).toContain("SDK Validation CI Checks Result");
-    expect(mockCore.summary.write).toHaveBeenCalled();
+    expect(writeToActionsSummaryMock).toHaveBeenCalled();
+    expect(writeToActionsSummaryMock.mock.calls[0][0]).toContain("SDK Validation CI Checks Result");
   });
 
   it("should handle artifact download failures", async () => {

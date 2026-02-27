@@ -1,0 +1,1534 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location.",
+        "operationId": "LongTermRetentionBackups_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location.": {
+            "$ref": "./examples/LongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server.",
+        "operationId": "LongTermRetentionBackups_ListByServer",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server.": {
+            "$ref": "./examples/LongTermRetentionBackupListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database.",
+        "operationId": "LongTermRetentionBackups_ListByDatabase",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/LongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Get",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Delete",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Change a long term retention backup access tier.",
+        "operationId": "LongTermRetentionBackups_ChangeAccessTier",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeLongTermRetentionBackupAccessTierParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully changed the long term retention backup access tier.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Change the long term retention backup storage access tier.": {
+            "$ref": "./examples/ChangeLongTermRetentionBackupAccessTier.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Copy an existing long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Copy",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters needed for long term retention copy request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyLongTermRetentionBackupParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully copied the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Copying the backup is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Copy the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupCopy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Updates an existing long term retention backup.",
+        "operationId": "LongTermRetentionBackups_Update",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested backup resource state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLongTermRetentionBackupParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Updating the backup is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the long term retention backup.": {
+            "$ref": "./examples/LongTermRetentionBackupUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given location based on resource group.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupLocation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the location based on resource group.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists the long term retention backups for a given server based on resource groups.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the server based on resource group.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Lists all long term retention backups for a database based on a particular resource group.",
+        "operationId": "LongTermRetentionBackups_ListByResourceGroupDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest backup for each database.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "databaseState",
+            "in": "query",
+            "description": "Whether to query against just live databases, just deleted databases, or all databases.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Live",
+              "Deleted"
+            ],
+            "x-ms-enum": {
+              "name": "databaseState",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of backups.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all long term retention backups under the database.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Gets a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_GetByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Deletes a long term retention backup.",
+        "operationId": "LongTermRetentionBackups_DeleteByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the backup."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Change a long term retention backup access tier.",
+        "operationId": "LongTermRetentionBackups_ChangeAccessTierByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeLongTermRetentionBackupAccessTierParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully changed the long term retention backup access tier.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Change the long term retention backup storage access tier for a resource group.": {
+            "$ref": "./examples/ResourceGroupBasedChangeLongTermRetentionBackupAccessTier.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Copy an existing long term retention backup to a different server.",
+        "operationId": "LongTermRetentionBackups_CopyByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters needed for long term retention copy request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyLongTermRetentionBackupParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Copied the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Copying the backup is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Copy the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupCopy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update": {
+      "post": {
+        "tags": [
+          "LongTermRetentionBackups"
+        ],
+        "description": "Updates an existing long term retention backup.",
+        "operationId": "LongTermRetentionBackups_UpdateByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionServerName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longTermRetentionDatabaseName",
+            "in": "path",
+            "description": "The name of the database",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested backup resource state",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLongTermRetentionBackupParameters"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the backup.",
+            "schema": {
+              "$ref": "#/definitions/LongTermRetentionBackupOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidLongTermRetentionBackupId - Invalid long term retention backup identifier for SQL DBs.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 LongTermRetentionMismatchingSubscriptionId - The provided subscription id did not match the id in the other input\n\n * 400 LongTermRetentionMismatchingResourceGroupName - The provided resource group name did not match the name in the other input\n\n * 400 LongTermRetentionMismatchingServerName - The provided server name did not match the name in the other input\n\n * 400 DeleteLtrSubscriptionMissing - The subscription ID is required to delete a long-term retention backup.\n\n * 400 DeleteLtrServerMissing - The server name is required to delete a long-term retention backup.\n\n * 400 DeleteLtrDatabaseMissing - The database name is required to delete a long-term retention backup.\n\n * 400 LtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 UpdateBackupStorageAccessTierLTRFailedOnZoneRedundantBackupStorage - Archiving long-term retention backups on zone redundant backup storage is not supported. Use locally redundant or geo-redundant storage types instead.\n\n * 400 UpdateBackupStorageAccessTierLtrSubscriptionMissing - The subscription ID is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrServerMissing - The server name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrDatabaseMissing - The database name is required to update the long-term retention backup.\n\n * 400 UpdateBackupStorageAccessTierLtrBackupResourceIdIncorrect - The provided long-term retention backup resource ID or backup name is incorrect.\n\n * 400 LongTermRetentionMigrationBackupStorageRedundancyNotAllowed - Changing backup storage redundancy is not allowed for LTR Copy operations.\n\n * 400 LtrRestoreFailedArchiveStorageTier - Restoring archived long-term retention backup is not supported. Restore can be performed only on rehydrated or regular long-term retention backups.\n\n * 400 LtrArchiveStorageTierNotEnabled - Archiving long-term retention backups is not enabled.\n\n * 400 LtrArchiveWrongParameters - ChangeLongTermRetentionBackupAccessTier is not supported for the desired (backupStorageAccessTier, operationMode) combination. Only (Archive, Move) and (Hot, Copy) are allowed.\n\n * 400 LTRArchiveRedundancyChangeFailed - Updating the backup storage redundancy type to zone-redundant storage is not supported when a long-term retention policy with the 'archive' backup storage access tier is set\n\n * 400 LongTermRetentionMigrationSubscriptionNotFound - The subscription could not be found.\n\n * 400 LtrOperationFailedBackupImmutable - Deleting Long Term Retention backup failed because the backup is immutable.\n\n * 400 LongTermRetentionMigrationRequestNotSupported - Subscription is not allowed LTR backup Migration feature.\n\n * 400 LongTermRetentionMigrationCrossClusterRequestNotSupported - Source and target subscriptions are not allowed to communicate for LTR backup copy feature.\n\n * 400 LongTermRetentionMigrationParameterMissing - Required parameter missing for the operation.\n\n * 400 LongTermRetentionMigrationSameServerNotSupported - LTR Copy feature is not supported to copy LTR backups within same server.\n\n * 400 LongTermRetentionMigrationTargetServerNotFound - Target server does not exists or is not ready for LTR backup copy operation.\n\n * 400 LongTermRetentionMigrationTargetDatabaseNotFound - Target Database does not exists on the server.\n\n * 400 LongTermRetentionMigrationStorageTypeNotSupported - Specified Backup Storage Redundancy is not supported in target region.\n\n * 400 LongTermRetentionMigrationStorageMismatch - Active backup redundancy of database does not match backup redundancy requested by customer.\n\n * 400 LongTermRetentionMigrationDatabaseTypeNotSupported - LTR migration is only supported for managed instance and Azure SQL DB LTR backups.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 LongTermRetentionMigrationBackupNotFound - LTR backup specified does not exists.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 LongTermRetentionMigrationRequestConflict - A conflict operation on this LTR backup is still in progress.\n\n * 409 LongTermRetentionMigrationBackupConflict - Another LTR backup with same backup time for target database exists.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 LongTermRetentionMigrationRequestCopyFailed - Copy operation failed for LTR backup blobs.\n\n * 500 LongTermRetentionMigrationRestoreVerExceeded - Restore verification failed after max attempts were reached.\n\n * 500 LongTermRetentionMigrationRestoreVerFailed - Restore verification failed.\n\n * 500 LongTermRetentionMigrationRequestFailedToStartOnTarget - Failed to start LTR backup copy request in target region.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Updating the backup is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the long term retention backup.": {
+            "$ref": "./examples/ResourceGroupBasedLongTermRetentionBackupUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChangeLongTermRetentionBackupAccessTierParameters": {
+      "description": "Contains the information necessary to change long term retention backup access tier and related operation mode.",
+      "required": [
+        "backupStorageAccessTier",
+        "operationMode"
+      ],
+      "type": "object",
+      "properties": {
+        "backupStorageAccessTier": {
+          "description": "The long term retention backup storage access tier",
+          "type": "string"
+        },
+        "operationMode": {
+          "description": "The operation mode when updating ltr backup storage access tier",
+          "type": "string"
+        }
+      }
+    },
+    "CopyLongTermRetentionBackupParameters": {
+      "description": "Contains the information necessary to perform long term retention backup copy operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CopyLongTermRetentionBackupParametersProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CopyLongTermRetentionBackupParametersProperties": {
+      "description": "Contains the properties to perform long term retention backup copy operation.",
+      "type": "object",
+      "properties": {
+        "targetSubscriptionId": {
+          "description": "The subscription that owns the target server",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetResourceGroup": {
+          "description": "The resource group that owns the target server",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetServerResourceId": {
+          "description": "The resource Id of the target server that owns the database",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetServerFullyQualifiedDomainName": {
+          "description": "The fully qualified domain name of the target server",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetDatabaseName": {
+          "description": "The name of the database owns the copied backup.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "targetBackupStorageRedundancy": {
+          "description": "The storage redundancy type of the copied backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "LongTermRetentionBackup": {
+      "description": "A long term retention backup.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionBackupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LongTermRetentionBackupListResult": {
+      "description": "A list of long term retention backups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongTermRetentionBackup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongTermRetentionBackupOperationResult": {
+      "description": "A LongTermRetentionBackup operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LongTermRetentionOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LongTermRetentionBackupProperties": {
+      "description": "Properties of a long term retention backup",
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "description": "The server name that the backup database belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCreateTime": {
+          "format": "date-time",
+          "description": "The create time of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "The name of the database the backup belong to",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseDeletionTime": {
+          "format": "date-time",
+          "description": "The delete time of the database",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupTime": {
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupExpirationTime": {
+          "format": "date-time",
+          "description": "The time the long term retention backup will expire.",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "description": "The storage redundancy type of the backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          }
+        },
+        "requestedBackupStorageRedundancy": {
+          "description": "The storage redundancy type of the backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "isBackupImmutable": {
+          "description": "The setting whether the LTR backup is immutable",
+          "type": "boolean"
+        },
+        "backupStorageAccessTier": {
+          "description": "The BackupStorageAccessTier for the LTR backup",
+          "enum": [
+            "Hot",
+            "Archive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageAccessTier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LongTermRetentionOperationResultProperties": {
+      "description": "Contains the operation result properties for long term retention backup operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationType": {
+          "description": "Operation type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fromBackupResourceId": {
+          "description": "Source backup resource id",
+          "type": "string",
+          "readOnly": true
+        },
+        "toBackupResourceId": {
+          "description": "Target backup resource id",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetBackupStorageRedundancy": {
+          "description": "The storage redundancy type of the copied backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Operation status",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Progress message",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateLongTermRetentionBackupParameters": {
+      "description": "Contains the information necessary to perform long term retention backup update operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateLongTermRetentionBackupParametersProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateLongTermRetentionBackupParametersProperties": {
+      "description": "Contains the properties to perform long term retention backup copy operation.",
+      "type": "object",
+      "properties": {
+        "requestedBackupStorageRedundancy": {
+          "description": "The storage redundancy type of the copied backup",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone",
+            "GeoZone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupStorageRedundancy",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

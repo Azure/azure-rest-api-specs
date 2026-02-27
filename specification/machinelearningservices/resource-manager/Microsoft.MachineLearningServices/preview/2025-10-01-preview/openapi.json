@@ -7640,7 +7640,7 @@
         "tags": [
           "ComputeResources"
         ],
-        "description": "Updates the custom services list. The list of custom services provided shall be overwritten.",
+        "description": "Updates the custom services list. The list of custom services provided shall be overwritten",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7704,7 +7704,7 @@
         "tags": [
           "ComputeResources"
         ],
-        "description": "Returns supported virtual machine sizes for resize.",
+        "description": "Returns supported virtual machine sizes for resize",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11289,7 +11289,7 @@
           "Workspaces"
         ],
         "summary": "Get all the deployments under the workspace scope",
-        "description": "Get all the deployments under the workspace scope.",
+        "description": "Get all the deployments under the workspace scope",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -29098,10 +29098,8 @@
       "properties": {
         "password": {
           "type": "string",
-          "format": "password",
           "description": "DockerCredential user password",
-          "x-nullable": true,
-          "x-ms-secret": true
+          "x-nullable": true
         },
         "userName": {
           "type": "string",
@@ -29334,25 +29332,21 @@
       "properties": {
         "primaryKey": {
           "type": "string",
-          "format": "password",
           "description": "The primary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "secondaryKey": {
           "type": "string",
-          "format": "password",
           "description": "The secondary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         }
       }
     },
@@ -29389,10 +29383,8 @@
       "properties": {
         "accessToken": {
           "type": "string",
-          "format": "password",
           "description": "Access token for endpoint authentication.",
-          "x-nullable": true,
-          "x-ms-secret": true
+          "x-nullable": true
         },
         "expiryTimeUtc": {
           "type": "integer",
@@ -29526,7 +29518,7 @@
     },
     "EndpointDeploymentResourcePropertiesBasicResource": {
       "type": "object",
-      "description": "EndpointDeploymentResourcePropertiesBasicResource is preview-only.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointDeploymentResourceProperties"
@@ -29927,7 +29919,7 @@
     },
     "EndpointResourcePropertiesBasicResource": {
       "type": "object",
-      "description": "EndpointResourcePropertiesBasicResource is a preview-only resource.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointResourceProperties"
@@ -30252,7 +30244,7 @@
         },
         "imageDetails": {
           "$ref": "#/definitions/ImageDetails",
-          "description": "Environment image details."
+          "description": "Environment image details"
         },
         "inferenceConfig": {
           "$ref": "#/definitions/InferenceContainerProperties",
@@ -33357,7 +33349,7 @@
     },
     "InferenceEndpoint": {
       "type": "object",
-      "description": "InferenceEndpoint is a preview-only resource.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferenceEndpointProperties",
@@ -33450,7 +33442,7 @@
     },
     "InferenceGroup": {
       "type": "object",
-      "description": "InferenceGroup is a preview-only resource.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferenceGroupProperties",
@@ -33537,7 +33529,7 @@
     },
     "InferencePool": {
       "type": "object",
-      "description": "InferencePool is a preview-only resource.",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferencePoolProperties",
@@ -35183,7 +35175,7 @@
     },
     "ManagedNetworkSettingsPropertiesBasicResource": {
       "type": "object",
-      "description": "ManagedNetworkSettingsPropertiesBasicResource is a preview-only resource.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedNetworkSettingsProperties",
@@ -35343,7 +35335,8 @@
       "properties": {
         "principalId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Identity principal Id"
+          "description": "Identity principal Id",
+          "readOnly": true
         }
       }
     },
@@ -38947,7 +38940,7 @@
     },
     "RaiBlocklistItemPropertiesBasicResource": {
       "type": "object",
-      "description": "RaiBlocklistItemPropertiesBasicResource is a preview-only resource.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RaiBlocklistItemProperties",
@@ -39012,7 +39005,7 @@
     },
     "RaiBlocklistPropertiesBasicResource": {
       "type": "object",
-      "description": "RaiBlocklistPropertiesBasicResource is a preview-only resource.",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RaiBlocklistProperties",
@@ -44641,9 +44634,7 @@
       "type": "object",
       "properties": {
         "password": {
-          "type": "string",
-          "format": "password",
-          "x-ms-secret": true
+          "type": "string"
         },
         "securityToken": {
           "type": "string",

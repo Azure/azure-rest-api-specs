@@ -13,31 +13,48 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
-@parentResource(Lab)
-model VirtualNetwork
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkProperties, false> {
-  ...ResourceNameParameter<
-    Resource = VirtualNetwork,
-    KeyName = "virtualnetworkName",
-    SegmentName = "virtualnetworks",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("virtualnetworks")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: VirtualNetworkProperties;
 }
+
+@armResourceOperations
+interface VirtualNetworkOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = VirtualNetwork,
+        KeyName = "name",
+        SegmentName = "virtualnetworks",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface VirtualNetworks {
   /**
    * Get virtual network.
    */
-  get is ArmResourceRead<
+  get is VirtualNetworkOps.Read<
     VirtualNetwork,
     Parameters = {
       /**
@@ -51,7 +68,7 @@ interface VirtualNetworks {
   /**
    * Create or replace an existing virtual network. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is VirtualNetworkOps.CreateOrUpdateAsync<
     VirtualNetwork,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualNetwork> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -62,7 +79,7 @@ interface VirtualNetworks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is VirtualNetworkOps.CustomPatchSync<
     VirtualNetwork,
     PatchModel = VirtualNetworkFragment
   >;
@@ -71,7 +88,7 @@ interface VirtualNetworks {
    * Delete virtual network. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is VirtualNetworkOps.DeleteWithoutOkAsync<
     VirtualNetwork,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -79,7 +96,7 @@ interface VirtualNetworks {
   /**
    * List virtual networks in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is VirtualNetworkOps.List<
     VirtualNetwork,
     Parameters = {
       /**

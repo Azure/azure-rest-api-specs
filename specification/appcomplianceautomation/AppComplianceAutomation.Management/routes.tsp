@@ -24,11 +24,7 @@ alias ArmProviderActionAsync<
   Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
-  LroHeaders = ArmLroLocationHeader<
-    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-    Response,
-    string
-  >
+  LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
 >;
 
 alias ArmProviderActionSync<

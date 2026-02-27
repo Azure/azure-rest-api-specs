@@ -30,9 +30,9 @@ interface TilerStaticImages {
        * Image request body
        */
       @body
-      body: ImageParameters;
+      body: ImageRequest;
     },
-    ImageResponse
+    TileResponse
   >;
   /**
    * Fetch an existing image export by ID
@@ -60,6 +60,6 @@ interface TilerStaticImages {
       @pattern(".*")
       id: string;
     },
-    ImagePngResponse
+    ImagePngResponse | NoContentResponse
   >;
 }

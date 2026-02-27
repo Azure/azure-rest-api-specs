@@ -1,38 +1,38 @@
 {
   "parameters": {
-    "agentPoolName": "wnp2",
     "api-version": "2025-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "wnp2",
     "parameters": {
       "properties": {
-        "count": 3,
         "orchestratorVersion": "1.23.8",
-        "osSKU": "Windows2022",
-        "osType": "Windows",
+        "count": 3,
         "vmSize": "Standard_D4s_v3",
+        "osType": "Windows",
+        "osSKU": "Windows2022",
         "windowsProfile": {
           "disableOutboundNat": true
         }
       }
-    },
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "wnp2",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "wnp2",
         "properties": {
-          "count": 3,
-          "currentOrchestratorVersion": "1.23.8",
-          "maxPods": 110,
-          "orchestratorVersion": "1.23.8",
-          "osSKU": "Windows2022",
-          "osType": "Windows",
           "provisioningState": "Succeeded",
+          "orchestratorVersion": "1.23.8",
+          "currentOrchestratorVersion": "1.23.8",
+          "count": 3,
           "vmSize": "Standard_D4s_v3",
+          "maxPods": 110,
+          "osType": "Windows",
+          "osSKU": "Windows2022",
           "windowsProfile": {
             "disableOutboundNat": true
           }
@@ -41,25 +41,23 @@
     },
     "201": {
       "body": {
-        "name": "wnp2",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "wnp2",
         "properties": {
-          "count": 3,
-          "currentOrchestratorVersion": "1.23.8",
-          "maxPods": 110,
-          "orchestratorVersion": "1.23.8",
-          "osSKU": "Windows2022",
-          "osType": "Windows",
           "provisioningState": "Creating",
+          "orchestratorVersion": "1.23.8",
+          "currentOrchestratorVersion": "1.23.8",
+          "count": 3,
           "vmSize": "Standard_D4s_v3",
+          "maxPods": 110,
+          "osType": "Windows",
+          "osSKU": "Windows2022",
           "windowsProfile": {
             "disableOutboundNat": true
           }
         }
       }
     }
-  },
-  "operationId": "AgentPools_CreateOrUpdate",
-  "title": "Create Windows Agent Pool with disabling OutboundNAT"
+  }
 }

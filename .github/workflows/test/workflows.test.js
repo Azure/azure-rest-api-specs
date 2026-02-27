@@ -7,17 +7,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
-  it("should be named *.yaml or *.md", async () => {
+  it("should be named *.yaml", async () => {
     const entries = await readdir(workflowsDir, { withFileTypes: true });
 
-    const disallowedFiles = entries
+    const nonYamlFiles = entries
       .filter((e) => e.isFile())
       .map((e) => e.name)
-      .filter((f) => {
-        const extension = extname(f);
-        return extension !== ".yaml" && extension !== ".yml" && extension !== ".md";
-      });
+      .filter((f) => extname(f) !== ".yaml");
 
-    expect(disallowedFiles, "workflow files must use extension '.yaml' or '.md'").toEqual([]);
+    expect(nonYamlFiles, "workflow files must use extension '.yaml'").toEqual([]);
   });
 });

@@ -1,26 +1,37 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
     "parameters": {
       "location": "location1",
+      "tags": {
+        "tier": "production",
+        "archv2": ""
+      },
+      "sku": {
+        "name": "Basic",
+        "tier": "Free"
+      },
       "properties": {
-        "agentPoolProfiles": [
-          {
-            "name": "nodepool1",
-            "type": "VirtualMachineScaleSets",
-            "count": 3,
-            "enableFIPS": true,
-            "enableNodePublicIP": true,
-            "mode": "System",
-            "osType": "Linux",
-            "vmSize": "Standard_DS2_v2"
-          }
-        ],
+        "kubernetesVersion": "",
+        "dnsPrefix": "dnsprefix1",
         "creationData": {
           "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1"
         },
-        "dnsPrefix": "dnsprefix1",
-        "kubernetesVersion": "",
+        "agentPoolProfiles": [
+          {
+            "name": "nodepool1",
+            "count": 3,
+            "vmSize": "Standard_DS2_v2",
+            "osType": "Linux",
+            "type": "VirtualMachineScaleSets",
+            "enableNodePublicIP": true,
+            "mode": "System",
+            "enableFIPS": true
+          }
+        ],
         "linuxProfile": {
           "adminUsername": "azureuser",
           "ssh": {
@@ -35,51 +46,44 @@
           "clientId": "clientid",
           "secret": "secret"
         }
-      },
-      "sku": {
-        "name": "Basic",
-        "tier": "Free"
-      },
-      "tags": {
-        "archv2": "",
-        "tier": "production"
       }
-    },
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "clustername1",
-        "type": "Microsoft.ContainerService/ManagedClusters",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
         "location": "location1",
+        "name": "clustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/ManagedClusters",
         "properties": {
-          "agentPoolProfiles": [
-            {
-              "name": "nodepool1",
-              "type": "VirtualMachineScaleSets",
-              "count": 3,
-              "enableFIPS": true,
-              "enableNodePublicIP": true,
-              "maxPods": 110,
-              "mode": "System",
-              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
-              "orchestratorVersion": "1.9.6",
-              "osType": "Linux",
-              "provisioningState": "Succeeded",
-              "vmSize": "Standard_DS2_v2"
-            }
-          ],
+          "provisioningState": "Succeeded",
           "creationData": {
             "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1"
           },
-          "dnsPrefix": "dnsprefix1",
-          "enableRBAC": true,
-          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "maxAgentPools": 1,
           "kubernetesVersion": "1.9.6",
+          "dnsPrefix": "dnsprefix1",
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "count": 3,
+              "vmSize": "Standard_DS2_v2",
+              "maxPods": 110,
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "orchestratorVersion": "1.9.6",
+              "type": "VirtualMachineScaleSets",
+              "enableNodePublicIP": true,
+              "mode": "System",
+              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+              "enableFIPS": true
+            }
+          ],
           "linuxProfile": {
             "adminUsername": "azureuser",
             "ssh": {
@@ -90,14 +94,34 @@
               ]
             }
           },
-          "maxAgentPools": 1,
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "enableRBAC": true,
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
           "networkProfile": {
+            "loadBalancerSku": "basic",
+            "networkPlugin": "kubenet",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16",
             "dnsServiceIP": "10.0.0.10",
+            "outboundType": "loadBalancer",
+            "podCidrs": [
+              "10.244.0.0/16"
+            ],
+            "serviceCidrs": [
+              "10.0.0.0/16"
+            ],
             "ipFamilies": [
               "IPv4"
             ],
             "loadBalancerProfile": {
               "allocatedOutboundPorts": 2000,
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              },
               "effectiveOutboundIPs": [
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
@@ -105,64 +129,45 @@
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
                 }
-              ],
-              "idleTimeoutInMinutes": 10,
-              "managedOutboundIPs": {
-                "count": 2
-              }
-            },
-            "loadBalancerSku": "basic",
-            "networkPlugin": "kubenet",
-            "outboundType": "loadBalancer",
-            "podCidr": "10.244.0.0/16",
-            "podCidrs": [
-              "10.244.0.0/16"
-            ],
-            "serviceCidr": "10.0.0.0/16",
-            "serviceCidrs": [
-              "10.0.0.0/16"
-            ]
-          },
-          "nodeResourceGroup": "MC_rg1_clustername1_location1",
-          "provisioningState": "Succeeded",
-          "servicePrincipalProfile": {
-            "clientId": "clientid"
+              ]
+            }
           }
-        },
-        "tags": {
-          "archv2": "",
-          "tier": "production"
         }
       }
     },
     "201": {
       "body": {
-        "name": "clustername1",
-        "type": "Microsoft.ContainerService/ManagedClusters",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
         "location": "location1",
+        "name": "clustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/ManagedClusters",
         "properties": {
-          "agentPoolProfiles": [
-            {
-              "name": "nodepool1",
-              "type": "VirtualMachineScaleSets",
-              "count": 3,
-              "enableFIPS": true,
-              "enableNodePublicIP": true,
-              "maxPods": 110,
-              "mode": "System",
-              "orchestratorVersion": "1.9.6",
-              "osType": "Linux",
-              "provisioningState": "Creating",
-              "vmSize": "Standard_DS2_v2"
-            }
-          ],
+          "provisioningState": "Creating",
           "creationData": {
             "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1"
           },
-          "dnsPrefix": "dnsprefix1",
-          "enableRBAC": true,
+          "maxAgentPools": 1,
           "kubernetesVersion": "1.9.6",
+          "dnsPrefix": "dnsprefix1",
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "count": 3,
+              "vmSize": "Standard_DS2_v2",
+              "maxPods": 110,
+              "osType": "Linux",
+              "provisioningState": "Creating",
+              "orchestratorVersion": "1.9.6",
+              "type": "VirtualMachineScaleSets",
+              "enableNodePublicIP": true,
+              "mode": "System",
+              "enableFIPS": true
+            }
+          ],
           "linuxProfile": {
             "adminUsername": "azureuser",
             "ssh": {
@@ -173,14 +178,33 @@
               ]
             }
           },
-          "maxAgentPools": 1,
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "enableRBAC": true,
           "networkProfile": {
+            "networkPlugin": "kubenet",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16",
             "dnsServiceIP": "10.0.0.10",
+            "loadBalancerSku": "standard",
+            "outboundType": "loadBalancer",
+            "podCidrs": [
+              "10.244.0.0/16"
+            ],
+            "serviceCidrs": [
+              "10.0.0.0/16"
+            ],
             "ipFamilies": [
               "IPv4"
             ],
             "loadBalancerProfile": {
               "allocatedOutboundPorts": 2000,
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              },
               "effectiveOutboundIPs": [
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
@@ -188,37 +212,11 @@
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
                 }
-              ],
-              "idleTimeoutInMinutes": 10,
-              "managedOutboundIPs": {
-                "count": 2
-              }
-            },
-            "loadBalancerSku": "standard",
-            "networkPlugin": "kubenet",
-            "outboundType": "loadBalancer",
-            "podCidr": "10.244.0.0/16",
-            "podCidrs": [
-              "10.244.0.0/16"
-            ],
-            "serviceCidr": "10.0.0.0/16",
-            "serviceCidrs": [
-              "10.0.0.0/16"
-            ]
-          },
-          "nodeResourceGroup": "MC_rg1_clustername1_location1",
-          "provisioningState": "Creating",
-          "servicePrincipalProfile": {
-            "clientId": "clientid"
+              ]
+            }
           }
-        },
-        "tags": {
-          "archv2": "",
-          "tier": "production"
         }
       }
     }
-  },
-  "operationId": "ManagedClusters_CreateOrUpdate",
-  "title": "Create Managed Cluster using a managed cluster snapshot"
+  }
 }

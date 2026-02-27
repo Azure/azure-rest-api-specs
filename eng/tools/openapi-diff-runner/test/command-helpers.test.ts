@@ -347,16 +347,16 @@ describe("command-helpers", () => {
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
 
+      // Expected result should have renames added to additions and deletions, and no renames property
       const expectedResult = {
-        additions: mockResult.additions,
+        additions: [...mockResult.additions, ...mockResult.renames.map((rename) => rename.to)],
         modifications: mockResult.modifications,
-        deletions: mockResult.deletions,
-        renames: mockResult.renames,
+        deletions: [...mockResult.deletions, ...mockResult.renames.map((rename) => rename.from)],
         total:
           mockResult.additions.length +
           mockResult.modifications.length +
           mockResult.deletions.length +
-          mockResult.renames.length,
+          mockResult.renames.length * 2,
       };
 
       expect(result).toEqual(expectedResult);
@@ -364,7 +364,6 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
-        logger: expect.anything(),
         paths: ["specification"],
       });
     });
@@ -376,7 +375,6 @@ describe("command-helpers", () => {
         additions: [],
         modifications: [],
         deletions: [],
-        renames: [],
         total: 0,
       });
     });
@@ -417,16 +415,17 @@ describe("command-helpers", () => {
 
       // Only Swagger files should be returned, with renames added to additions and deletions
       expect(result).toEqual({
-        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
-        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
-        renames: [
-          {
-            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
-            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
-          },
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from valid rename
         ],
-        total: 5, // 3 additions + 1 modification + 2 deletions (including rename files)
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from valid rename
+        ],
+        total: 6, // 3 additions + 1 modification + 2 deletions (including rename files)
       });
     });
 
@@ -447,7 +446,6 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
-        logger: expect.anything(),
         paths: ["specification"],
       });
     });
@@ -476,20 +474,18 @@ describe("command-helpers", () => {
 
       // Renames should be added to additions and deletions, not returned as renames
       expect(result).toEqual({
-        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
-        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
-        renames: [
-          {
-            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
-            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
-          },
-          {
-            from: "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json",
-            to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
-          },
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename.to
+          "specification/newapi/data-plane/stable/2023-01-01/newapi.json", // from rename.to
         ],
-        total: 5, // 1 additions + 1 modification + 1 deletions + 2 renames
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename.from
+          "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json", // from rename.from
+        ],
+        total: 7, // 3 additions + 1 modification + 3 deletions (including from renames)
       });
     });
   });
@@ -608,15 +604,15 @@ describe("command-helpers", () => {
 
   describe("logFullOadMessagesList", () => {
     it("should log all messages individually", async () => {
-      const { logMessage, logMessageAsync } = await import("../src/log.js");
+      const { logMessage } = await import("../src/log.js");
       const msgs = createMockMessages();
 
-      await logFullOadMessagesList(msgs);
+      logFullOadMessagesList(msgs);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
-      expect(logMessageAsync).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
-      expect(logMessageAsync).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
+      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
+      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith("]");
       expect(logMessage).toHaveBeenCalledWith(
         "---- End of full list of messages ----",
@@ -627,7 +623,7 @@ describe("command-helpers", () => {
     it("should handle empty message list", async () => {
       const { logMessage } = await import("../src/log.js");
 
-      await logFullOadMessagesList([]);
+      logFullOadMessagesList([]);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");

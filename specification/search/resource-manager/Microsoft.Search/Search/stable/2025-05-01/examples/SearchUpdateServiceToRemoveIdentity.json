@@ -1,68 +1,66 @@
 {
   "parameters": {
-    "api-version": "2025-05-01",
-    "resourceGroupName": "rg1",
     "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-05-01",
+    "subscriptionId": "subid",
     "service": {
-      "identity": {
-        "type": "None"
-      },
       "sku": {
         "name": "standard"
+      },
+      "identity": {
+        "type": "None"
       }
-    },
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
         "name": "mysearchservice",
-        "type": "Microsoft.Search/searchServices",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
         "location": "westus",
-        "properties": {
-          "authOptions": {
-            "apiKeyOnly": {}
-          },
-          "computeType": "Default",
-          "dataExfiltrationProtections": [],
-          "disableLocalAuth": false,
-          "encryptionWithCmk": {
-            "encryptionComplianceStatus": "Compliant",
-            "enforcement": "Unspecified"
-          },
-          "endpoint": "https://mysearchservice.search.windows.net/",
-          "hostingMode": "Default",
-          "networkRuleSet": {
-            "bypass": "None",
-            "ipRules": []
-          },
-          "partitionCount": 1,
-          "privateEndpointConnections": [],
-          "provisioningState": "succeeded",
-          "publicNetworkAccess": "Enabled",
-          "replicaCount": 3,
-          "serviceUpgradedAt": null,
-          "sharedPrivateLinkResources": [],
-          "status": "running",
-          "statusDetails": "",
-          "upgradeAvailable": "notAvailable"
-        },
+        "type": "Microsoft.Search/searchServices",
+        "tags": {},
         "sku": {
           "name": "standard"
         },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "endpoint": "https://mysearchservice.search.windows.net/",
+          "status": "running",
+          "statusDetails": "",
+          "hostingMode": "Default",
+          "computeType": "Default",
+          "provisioningState": "succeeded",
+          "publicNetworkAccess": "Enabled",
+          "networkRuleSet": {
+            "ipRules": [],
+            "bypass": "None"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "apiKeyOnly": {}
+          },
+          "dataExfiltrationProtections": [],
+          "upgradeAvailable": "notAvailable",
+          "serviceUpgradedAt": null
+        },
         "systemData": {
-          "createdAt": "2024-01-01T00:00:00Z",
           "createdBy": "My e-commerce app",
           "createdByType": "Application",
-          "lastModifiedAt": "2024-11-01T00:00:00Z",
+          "createdAt": "2024-01-01T00:00:00Z",
           "lastModifiedBy": "fakeuser@contoso.com",
-          "lastModifiedByType": "User"
-        },
-        "tags": {}
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-01T00:00:00Z"
+        }
       }
     }
-  },
-  "operationId": "Services_Update",
-  "title": "SearchUpdateServiceToRemoveIdentity"
+  }
 }

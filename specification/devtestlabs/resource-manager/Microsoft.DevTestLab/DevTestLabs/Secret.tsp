@@ -13,30 +13,51 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
-@parentResource(User)
-model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Secret,
-    KeyName = "secretName",
-    SegmentName = "secrets",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Secret extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("secrets")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: SecretProperties;
 }
+
+@armResourceOperations
+interface SecretOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the user profile. */
+        @path @segment("users") userName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Secret,
+        KeyName = "name",
+        SegmentName = "secrets",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface Secrets {
   /**
    * Get secret.
    */
-  get is ArmResourceRead<
+  get is SecretOps.Read<
     Secret,
     Parameters = {
       /**
@@ -50,7 +71,7 @@ interface Secrets {
   /**
    * Create or replace an existing secret. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is SecretOps.CreateOrUpdateAsync<
     Secret,
     LroHeaders = ArmLroLocationHeader<FinalResult = Secret> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -61,17 +82,17 @@ interface Secrets {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Secret, PatchModel = SecretFragment>;
+  update is SecretOps.CustomPatchSync<Secret, PatchModel = SecretFragment>;
 
   /**
    * Delete secret.
    */
-  delete is ArmResourceDeleteSync<Secret>;
+  delete is SecretOps.DeleteSync<Secret>;
 
   /**
    * List secrets in a given user profile.
    */
-  list is ArmResourceListByParent<
+  list is SecretOps.List<
     Secret,
     Parameters = {
       /**

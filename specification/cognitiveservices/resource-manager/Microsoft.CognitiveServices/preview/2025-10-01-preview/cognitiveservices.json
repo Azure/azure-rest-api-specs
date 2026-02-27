@@ -5532,7 +5532,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CapabilityHostResource"
             }
           },
           "default": {
@@ -5582,7 +5582,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CapabilityHostResource"
             }
           }
         ],
@@ -5590,13 +5590,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CapabilityHostResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CapabilityHostResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -5784,7 +5784,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHost"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "default": {
@@ -5837,7 +5837,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHost"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           }
         ],
@@ -5845,13 +5845,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHost"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHost"
+              "$ref": "#/definitions/ProjectCapabilityHostResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -6919,7 +6919,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgentApplicationResource"
             }
           },
           "default": {
@@ -6977,7 +6977,7 @@
             "description": "Agent Application definition object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgentApplicationResource"
             }
           }
         ],
@@ -6985,13 +6985,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgentApplicationResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/AgentApplication"
+              "$ref": "#/definitions/AgentApplicationResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -7374,7 +7374,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgentDeployment"
+              "$ref": "#/definitions/AgentDeploymentResource"
             }
           },
           "default": {
@@ -7430,7 +7430,7 @@
             "description": "Agent Deployment definition object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentDeployment"
+              "$ref": "#/definitions/AgentDeploymentResource"
             }
           }
         ],
@@ -7438,13 +7438,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/AgentDeployment"
+              "$ref": "#/definitions/AgentDeploymentResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/AgentDeployment"
+              "$ref": "#/definitions/AgentDeploymentResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -11942,7 +11942,7 @@
           "description": "An array of objects of type Capability Host.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CapabilityHost"
+            "$ref": "#/definitions/CapabilityHostResource"
           },
           "x-nullable": true
         }
@@ -11962,14 +11962,14 @@
           "description": "An array of objects of type Project Capability Host.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectCapabilityHost"
+            "$ref": "#/definitions/ProjectCapabilityHostResource"
           },
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "CapabilityHost": {
+    "CapabilityHostResource": {
       "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
@@ -11983,12 +11983,13 @@
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/CapabilityHostProperties"
+          "$ref": "#/definitions/CapabilityHost"
         }
       },
+      "x-ms-client-name": "CapabilityHost",
       "additionalProperties": false
     },
-    "CapabilityHostProperties": {
+    "CapabilityHost": {
       "type": "object",
       "allOf": [
         {
@@ -12050,6 +12051,7 @@
           "description": "Whether public hosting environment is enabled for the capability host"
         }
       },
+      "x-ms-client-name": "CapabilityHostProperties",
       "additionalProperties": false
     },
     "CapabilityHostProvisioningState": {
@@ -12106,7 +12108,7 @@
       },
       "additionalProperties": false
     },
-    "ProjectCapabilityHost": {
+    "ProjectCapabilityHostResource": {
       "description": "Azure Resource Manager resource envelope for Project CapabilityHost.",
       "required": [
         "properties"
@@ -12120,12 +12122,13 @@
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/ProjectCapabilityHostProperties"
+          "$ref": "#/definitions/ProjectCapabilityHost"
         }
       },
+      "x-ms-client-name": "ProjectCapabilityHost",
       "additionalProperties": false
     },
-    "ProjectCapabilityHostProperties": {
+    "ProjectCapabilityHost": {
       "type": "object",
       "properties": {
         "aiServicesConnections": {
@@ -12169,6 +12172,7 @@
           ]
         }
       },
+      "x-ms-client-name": "ProjectCapabilityHostProperties",
       "additionalProperties": false
     },
     "ResourceBase": {
@@ -12770,7 +12774,7 @@
         "modelAsString": true
       }
     },
-    "AgentApplication": {
+    "AgentApplicationResource": {
       "description": "Agent Application resource",
       "required": [
         "properties"
@@ -12784,9 +12788,10 @@
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgenticApplicationProperties"
+          "$ref": "#/definitions/AgenticApplication"
         }
       },
+      "x-ms-client-name": "AgentApplication",
       "additionalProperties": false
     },
     "AgentApplicationResourceArmPaginatedResult": {
@@ -12802,14 +12807,14 @@
           "description": "An array of objects of type Agent Application.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentApplication"
+            "$ref": "#/definitions/AgentApplicationResource"
           },
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "AgentReference": {
+    "AgentReferenceResource": {
       "description": "Agent Reference resource",
       "required": [
         "properties"
@@ -12823,9 +12828,10 @@
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgentReferenceProperties"
+          "$ref": "#/definitions/AgentReference"
         }
       },
+      "x-ms-client-name": "AgentReference",
       "additionalProperties": false
     },
     "AgentReferenceResourceArmPaginatedResult": {
@@ -12841,14 +12847,14 @@
           "description": "An array of objects of type Agent Reference.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentReference"
+            "$ref": "#/definitions/AgentReferenceResource"
           },
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "AgentDeployment": {
+    "AgentDeploymentResource": {
       "description": "Agent Deployment resource",
       "required": [
         "properties"
@@ -12862,9 +12868,10 @@
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgentDeploymentProperties"
+          "$ref": "#/definitions/AgentDeployment"
         }
       },
+      "x-ms-client-name": "AgentDeployment",
       "additionalProperties": false
     },
     "AgentDeploymentResourceArmPaginatedResult": {
@@ -12880,14 +12887,14 @@
           "description": "An array of objects of type Agent Deployment.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentDeployment"
+            "$ref": "#/definitions/AgentDeploymentResource"
           },
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "AgenticApplicationProperties": {
+    "AgenticApplication": {
       "description": "Resource type representing an agentic application as a management construct.",
       "type": "object",
       "allOf": [
@@ -12910,7 +12917,7 @@
           "description": "The list of agent definitions comprising this application, returned as references to the objects under the parent project; use this to obtain a flat list of all agent-version pairs represented by this application.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentReferenceProperties"
+            "$ref": "#/definitions/AgentReference"
           },
           "x-nullable": true
         },
@@ -12947,7 +12954,7 @@
       },
       "additionalProperties": false
     },
-    "AgentDeploymentProperties": {
+    "AgentDeployment": {
       "description": "Type representing an agent deployment as a management construct.",
       "type": "object",
       "discriminator": "deploymentType",
@@ -13015,7 +13022,7 @@
       "x-ms-discriminator-value": "Managed",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentDeploymentProperties"
+          "$ref": "#/definitions/AgentDeployment"
         }
       ],
       "additionalProperties": false
@@ -13026,7 +13033,7 @@
       "x-ms-discriminator-value": "Hosted",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentDeploymentProperties"
+          "$ref": "#/definitions/AgentDeployment"
         }
       ],
       "properties": {
@@ -13045,7 +13052,7 @@
       },
       "additionalProperties": false
     },
-    "AgentReferenceProperties": {
+    "AgentReference": {
       "description": "Type modeling a reference to a version of an agent definition.",
       "type": "object",
       "properties": {
@@ -13067,7 +13074,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentReferenceProperties"
+          "$ref": "#/definitions/AgentReference"
         }
       ],
       "properties": {

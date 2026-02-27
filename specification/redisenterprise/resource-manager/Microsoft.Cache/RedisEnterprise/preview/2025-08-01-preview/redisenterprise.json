@@ -3250,10 +3250,12 @@
       "properties": {
         "sasUris": {
           "type": "array",
+          "format": "password",
           "description": "SAS URIs for the target blobs to import from",
           "items": {
-            "$ref": "#/definitions/SecretUri"
-          }
+            "type": "string"
+          },
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -3985,11 +3987,6 @@
           }
         ]
       }
-    },
-    "SecretUri": {
-      "type": "string",
-      "format": "password",
-      "x-ms-secret": true
     },
     "Sku": {
       "type": "object",

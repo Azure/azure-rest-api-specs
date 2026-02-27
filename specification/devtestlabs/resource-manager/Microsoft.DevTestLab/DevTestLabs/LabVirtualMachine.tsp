@@ -13,24 +13,41 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
-@parentResource(Lab)
-model LabVirtualMachine
-  is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties, false> {
-  ...ResourceNameParameter<
-    Resource = LabVirtualMachine,
-    KeyName = "virtualMachineName",
-    SegmentName = "virtualmachines",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LabVirtualMachine extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("virtualmachines")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: LabVirtualMachineProperties;
 }
+
+@armResourceOperations
+interface LabVirtualMachineOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = LabVirtualMachine,
+        KeyName = "name",
+        SegmentName = "virtualmachines",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface VirtualMachines {
@@ -38,7 +55,7 @@ interface VirtualMachines {
    * Get virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ArmResourceRead<
+  get is LabVirtualMachineOps.Read<
     LabVirtualMachine,
     Parameters = {
       /**
@@ -53,7 +70,7 @@ interface VirtualMachines {
    * Create or replace an existing virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is LabVirtualMachineOps.CreateOrUpdateAsync<
     LabVirtualMachine,
     LroHeaders = ArmLroLocationHeader<FinalResult = LabVirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -65,7 +82,7 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is LabVirtualMachineOps.CustomPatchSync<
     LabVirtualMachine,
     PatchModel = LabVirtualMachineFragment
   >;
@@ -75,7 +92,7 @@ interface VirtualMachines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is LabVirtualMachineOps.DeleteWithoutOkAsync<
     LabVirtualMachine,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -84,7 +101,7 @@ interface VirtualMachines {
    * List virtual machines in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is ArmResourceListByParent<
+  list is LabVirtualMachineOps.List<
     LabVirtualMachine,
     Parameters = {
       /**
@@ -118,63 +135,47 @@ interface VirtualMachines {
    * Attach a new or existing data disk to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  addDataDisk is ArmResourceActionAsync<
+  addDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DataDiskProperties,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Apply artifacts to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  applyArtifacts is ArmResourceActionAsync<
+  applyArtifacts is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ApplyArtifactsRequest,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Take ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  claim is ArmResourceActionAsync<
+  claim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Detach the specified disk from the virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  detachDataDisk is ArmResourceActionAsync<
+  detachDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DetachDataDiskProperties,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Gets a string that represents the contents of the RDP file for the virtual machine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  getRdpFileContents is ArmResourceActionSync<
+  getRdpFileContents is LabVirtualMachineOps.ActionSync<
     LabVirtualMachine,
     void,
     ArmResponse<RdpConnection>
@@ -184,7 +185,7 @@ interface VirtualMachines {
    * Lists the applicable start/stop schedules, if any.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listApplicableSchedules is ArmResourceActionSync<
+  listApplicableSchedules is LabVirtualMachineOps.ActionSync<
     LabVirtualMachine,
     void,
     ArmResponse<ApplicableSchedule>
@@ -194,98 +195,66 @@ interface VirtualMachines {
    * Redeploy a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  redeploy is ArmResourceActionAsync<
+  redeploy is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Resize Virtual Machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  resize is ArmResourceActionAsync<
+  resize is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ResizeLabVirtualMachineProperties,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Restart a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  restart is ArmResourceActionAsync<
+  restart is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Start a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  start is ArmResourceActionAsync<
+  start is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Stop a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  stop is ArmResourceActionAsync<
-    LabVirtualMachine,
-    void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
-  >;
+  stop is LabVirtualMachineOps.ActionAsync<LabVirtualMachine, void, OkResponse>;
 
   /**
    * Transfers all data disks attached to the virtual machine to be owned by the current user. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  transferDisks is ArmResourceActionAsync<
+  transferDisks is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 
   /**
    * Release ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  unClaim is ArmResourceActionAsync<
+  unClaim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
-    {
-      @body body: void;
-    },
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+    OkResponse
   >;
 }
 

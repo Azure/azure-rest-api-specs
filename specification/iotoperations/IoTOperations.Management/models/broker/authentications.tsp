@@ -43,7 +43,6 @@ model BrokerAuthenticationProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 

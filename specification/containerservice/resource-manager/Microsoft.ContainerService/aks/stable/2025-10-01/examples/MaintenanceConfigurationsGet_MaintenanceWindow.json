@@ -1,42 +1,40 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
-    "configName": "aksManagedNodeOSUpgradeSchedule",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "configName": "aksManagedNodeOSUpgradeSchedule"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "aksManagedNodeOSUpgradeSchedule",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedNodeOSUpgradeSchedule",
+        "name": "aksManagedNodeOSUpgradeSchedule",
         "properties": {
           "maintenanceWindow": {
-            "durationHours": 4,
-            "notAllowedDates": [
-              {
-                "end": "2023-02-25",
-                "start": "2023-02-18"
-              },
-              {
-                "end": "2024-01-05",
-                "start": "2023-12-23"
-              }
-            ],
             "schedule": {
               "daily": {
                 "intervalDays": 3
               }
             },
+            "durationHours": 4,
+            "utcOffset": "-07:00",
             "startDate": "2023-01-01",
             "startTime": "09:30",
-            "utcOffset": "-07:00"
+            "notAllowedDates": [
+              {
+                "start": "2023-02-18",
+                "end": "2023-02-25"
+              },
+              {
+                "start": "2023-12-23",
+                "end": "2024-01-05"
+              }
+            ]
           }
         }
       }
     }
-  },
-  "operationId": "MaintenanceConfigurations_Get",
-  "title": "Get Maintenance Configuration Configured With Maintenance Window"
+  }
 }

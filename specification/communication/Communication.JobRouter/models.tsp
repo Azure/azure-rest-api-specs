@@ -1286,7 +1286,6 @@ model DeclineJobOfferResultWithOkResponse {
 alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
-  @pageSize
   maxpagesize?: int32;
 };
 

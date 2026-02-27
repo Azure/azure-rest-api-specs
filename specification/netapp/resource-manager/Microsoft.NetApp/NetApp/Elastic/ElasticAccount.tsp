@@ -18,8 +18,6 @@ namespace Microsoft.NetApp;
  * NetApp elastic account resource
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticAccount is TrackedResource<ElasticAccountProperties> {
   ...ResourceNameParameter<
     Resource = ElasticAccount,
@@ -35,8 +33,6 @@ model ElasticAccount is TrackedResource<ElasticAccountProperties> {
  * NetApp elastic account properties
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticAccountProperties {
   /**
    * Azure lifecycle management.
@@ -52,8 +48,6 @@ model ElasticAccountProperties {
  * Encryption settings
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticEncryption {
   /** The encryption keySource (provider). Possible values (case-insensitive): Microsoft.NetApp, Microsoft.KeyVault */
   keySource?: KeySource;
@@ -69,8 +63,6 @@ model ElasticEncryption {
  * Properties of key vault.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticKeyVaultProperties {
   /** The Uri of KeyVault. */
   keyVaultUri?: url;
@@ -97,8 +89,6 @@ model ElasticKeyVaultProperties {
  * KeyVault status
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 union ElasticKeyVaultStatus {
   string,
 
@@ -122,8 +112,6 @@ union ElasticKeyVaultStatus {
  * Identity used to authenticate with key vault.
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticEncryptionIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
@@ -135,32 +123,20 @@ model ElasticEncryptionIdentity {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
-
-  /**
-   * ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults.
-   */
-  @added(Versions.v2025_12_15_preview)
-  federatedClientId?: string;
 }
 
 @armResourceOperations
 interface ElasticAccounts {
   /** Get the NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticAccount>;
 
   /** Create or update the specified NetApp Elastic Account within the resource group */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticAccount>;
 
   /** Patch the specified NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticAccount,
@@ -174,20 +150,14 @@ interface ElasticAccounts {
 
   /** Delete the specified NetApp elastic account */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the resource group. */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   listByResourceGroup is ArmResourceListByParent<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the subscription. */
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   listBySubscription is ArmListBySubscription<ElasticAccount>;
 }
 

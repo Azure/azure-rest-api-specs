@@ -14,6 +14,7 @@ namespace Microsoft.SignalRService;
 /**
  * Describes a Shared Private Link Resource
  */
+@parentResource(Replica)
 model SharedPrivateLinkResource
   is Azure.ResourceManager.ProxyResource<SharedPrivateLinkResourceProperties> {
   ...ResourceNameParameter<

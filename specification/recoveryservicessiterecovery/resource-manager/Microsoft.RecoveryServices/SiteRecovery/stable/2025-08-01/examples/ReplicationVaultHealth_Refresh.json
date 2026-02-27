@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-08-01",
-    "resourceGroupName": "resourceGroupPS1",
     "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
     "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
   },
   "responses": {
@@ -12,15 +12,15 @@
         "type": "Microsoft.RecoveryServices/vaults/replicationVaultHealth",
         "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationVaultHealth/Default",
         "properties": {
-          "fabricsHealth": {
-            "issues": [],
-            "resourceCount": 1
-          },
+          "vaultErrors": [],
           "protectedItemsHealth": {
-            "issues": [],
-            "resourceCount": 2
+            "resourceCount": 2,
+            "issues": []
           },
-          "vaultErrors": []
+          "fabricsHealth": {
+            "resourceCount": 1,
+            "issues": []
+          }
         }
       },
       "headers": {
@@ -33,7 +33,5 @@
         "Retry-After": 30
       }
     }
-  },
-  "operationId": "ReplicationVaultHealth_Refresh",
-  "title": "Refreshes health summary of the vault."
+  }
 }

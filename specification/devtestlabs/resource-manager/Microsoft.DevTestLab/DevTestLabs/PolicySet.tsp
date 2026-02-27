@@ -14,6 +14,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A Policy set
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model PolicySet {
   /** Name of the policy set */
   @visibility(Lifecycle.Read)
@@ -47,8 +53,11 @@ interface PolicySets {
   /**
    * Evaluates lab policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @post
+  @operationId("PolicySets_EvaluatePolicies")
   evaluatePolicies is PolicySetOps.ActionSync<
-    Lab,
+    PolicySet,
     EvaluatePoliciesRequest,
     ArmResponse<EvaluatePoliciesResponse>
   >;

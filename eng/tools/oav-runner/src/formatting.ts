@@ -1,4 +1,4 @@
-import * as core from "@actions/core";
+import { annotateFileError, setSummary } from "@azure-tools/specs-shared/error-reporting";
 
 export interface ReportableOavError {
   message: string;
@@ -19,12 +19,12 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]) {
     // we only attempt an in-place annotation if we have the line and column associated with the error
     // otherwise we just depend upon the summary report to show the error
     if (error.line && error.column) {
-      core.error(msg, { file: error.file, startLine: error.line, startColumn: error.column });
+      annotateFileError(error.file, msg, error.line, error.column);
     }
   });
 }
 
-export async function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
+export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
   const builtLines: string[] = [];
 
   builtLines.push(`## All specifications passed ${reportName}`);
@@ -37,13 +37,13 @@ export async function outputSuccessSummary(swaggerFiles: string[], reportName: s
   const summaryResult = builtLines.join("\n");
 
   if (process.env.GITHUB_STEP_SUMMARY) {
-    await core.summary.addRaw(summaryResult).write({ overwrite: true });
+    setSummary(summaryResult);
   } else {
     console.log(summaryResult);
   }
 }
 
-export async function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
+export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
   const builtLines: string[] = [];
   let checkName: string = "";
 
@@ -81,7 +81,7 @@ export async function outputErrorSummary(errors: ReportableOavError[], reportNam
   const summaryResult = builtLines.join("\n");
 
   if (process.env.GITHUB_STEP_SUMMARY) {
-    await core.summary.addRaw(summaryResult).write({ overwrite: true });
+    setSummary(summaryResult);
   } else {
     console.log(summaryResult);
   }

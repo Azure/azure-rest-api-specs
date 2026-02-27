@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
       Supported Azure Cognitive Services endpoints (protocol and host name, such as
       https://westus2.api.cognitive.microsoft.com).
       """)
-    Endpoint: url,
+    Endpoint: string,
 
     @doc("Api Version")
     @path

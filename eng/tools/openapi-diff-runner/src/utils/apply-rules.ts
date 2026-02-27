@@ -14,7 +14,7 @@ import {
 import { OadMessage } from "../types/oad-types.js";
 
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { logMessage, logMessageAsync, logWarning } from "../log.js";
+import { logMessage, logWarning } from "../log.js";
 import {
   OadMessageRule,
   fallbackLabel,
@@ -30,11 +30,11 @@ import {
  *
  * This function is invoked by the BreakingChangeDetector.doBreakingChangeDetection()
  */
-export async function applyRules(
+export function applyRules(
   oadMessages: OadMessage[],
   scenario: BreakingChangesCheckType,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): Promise<OadMessage[]> {
+): OadMessage[] {
   logMessage("ENTER definition applyRules");
   let outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
@@ -45,14 +45,14 @@ export async function applyRules(
     );
 
     if (rule !== undefined) {
-      outputOadMessage = await applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
+      outputOadMessage = applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
     } else {
       logWarning(
         `ASSERTION VIOLATION! No rule found for scenario: '${scenario}', oadMessage: '${JSON.stringify(
           oadMessage,
         )}'. Using fallback rule: '${JSON.stringify(fallbackOadMessageRule)}'.`,
       );
-      outputOadMessage = await applyRule(
+      outputOadMessage = applyRule(
         oadMessage,
         { ...fallbackOadMessageRule, scenario },
         previousApiVersionLifecycleStage,
@@ -72,11 +72,11 @@ export async function applyRules(
   return outputOadMessages;
 }
 
-async function applyRule(
+function applyRule(
   oadMessage: OadMessage,
   rule: Omit<OadMessageRule, "code">,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
-): Promise<OadMessage> {
+): OadMessage {
   const isSameVersionOnPreview =
     previousApiVersionLifecycleStage === "preview" &&
     rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
@@ -123,8 +123,7 @@ async function applyRule(
     type: appliedSeverity,
   };
 
-  // Use async, backpressure-aware log method to ensure all messages written despite stdout backpressure
-  await logMessageAsync(
+  logMessage(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
       rule,
     )}', outputOadMessage: '${JSON.stringify(outputOadMessage)}'.`,

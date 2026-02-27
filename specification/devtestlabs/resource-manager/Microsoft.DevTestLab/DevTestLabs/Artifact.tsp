@@ -7,36 +7,57 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
-@parentResource(ArtifactSource)
-model Artifact
-  is Azure.ResourceManager.ProxyResource<ArtifactProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Artifact,
-    KeyName = "artifactName",
-    SegmentName = "artifacts",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Artifact extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("artifacts")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: ArtifactProperties;
 }
+
+@armResourceOperations
+interface ArtifactOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the artifact source. */
+        @path @segment("artifactsources") artifactSourceName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Artifact,
+        KeyName = "name",
+        SegmentName = "artifacts",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface Artifacts {
   /**
    * Get artifact.
    */
-  get is ArmResourceRead<
+  get is ArtifactOps.Read<
     Artifact,
     Parameters = {
       /**
@@ -50,7 +71,7 @@ interface Artifacts {
   /**
    * List artifacts in a given artifact source.
    */
-  list is ArmResourceListByParent<
+  list is ArtifactOps.List<
     Artifact,
     Parameters = {
       /**
@@ -83,7 +104,7 @@ interface Artifacts {
   /**
    * Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.
    */
-  generateArmTemplate is ArmResourceActionSync<
+  generateArmTemplate is ArtifactOps.ActionSync<
     Artifact,
     GenerateArmTemplateRequest,
     ArmResponse<ArmTemplateInfo>

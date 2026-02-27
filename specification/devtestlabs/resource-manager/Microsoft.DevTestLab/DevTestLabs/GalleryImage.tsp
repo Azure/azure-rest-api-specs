@@ -12,31 +12,53 @@ namespace Microsoft.DevTestLab;
 /**
  * A gallery image.
  */
-@parentResource(Lab)
-model GalleryImage
-  is Azure.ResourceManager.ProxyResource<GalleryImageProperties, false> {
-  ...ResourceNameParameter<
-    Resource = GalleryImage,
-    KeyName = "galleryImageName",
-    SegmentName = "galleryimages",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model GalleryImage extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("galleryimages")
+  name: string;
 
   /**
-   * The geo-location where the resource lives
+   * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties: GalleryImageProperties;
 }
+
+@armResourceOperations
+interface GalleryImageOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = GalleryImage,
+        KeyName = "name",
+        SegmentName = "galleryimages",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface GalleryImages {
   /**
    * List gallery images in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is GalleryImageOps.List<
     GalleryImage,
     Parameters = {
       /**

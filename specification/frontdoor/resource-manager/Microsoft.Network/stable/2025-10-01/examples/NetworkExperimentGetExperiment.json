@@ -1,20 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
-    "experimentName": "MyExperiment",
-    "profileName": "MyProfile",
+    "subscriptionId": "subid",
     "resourceGroupName": "MyResourceGroup",
-    "subscriptionId": "subid"
+    "profileName": "MyProfile",
+    "experimentName": "MyExperiment"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "MyExperiment",
         "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/Experiments/MyExperiment",
+        "name": "MyExperiment",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
         "location": "WestUs",
         "properties": {
           "description": "this is my first experiment!",
-          "enabledState": "Enabled",
           "endpointA": {
             "name": "endpoint A",
             "endpoint": "endpointA.net"
@@ -23,17 +26,12 @@
             "name": "endpoint B",
             "endpoint": "endpointB.net"
           },
+          "enabledState": "Enabled",
           "resourceState": "Creating",
-          "scriptFileUri": "www.myScript.com",
-          "status": "ongoing"
-        },
-        "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "status": "ongoing",
+          "scriptFileUri": "www.myScript.com"
         }
       }
     }
-  },
-  "operationId": "Experiments_Get",
-  "title": "Gets an Experiment by ExperimentName"
+  }
 }

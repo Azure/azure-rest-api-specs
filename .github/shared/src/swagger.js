@@ -436,7 +436,6 @@ export class Swagger {
     try {
       return await func();
     } catch (error) {
-      /* v8 ignore else -- defensive rethrow */
       if (error instanceof Error) {
         throw new SpecModelError(`${message}: ${this.#path}`, {
           cause: error,
@@ -444,9 +443,10 @@ export class Swagger {
           tag: this.#tag?.name,
           readme: this.#tag?.readme?.path,
         });
-      } else {
+      } /* v8 ignore start: defensive rethrow */ else {
         throw error;
       }
+      /* v8 ignore stop */
     }
   }
 }

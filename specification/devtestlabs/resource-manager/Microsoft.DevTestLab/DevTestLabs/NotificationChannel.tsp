@@ -12,31 +12,48 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
-@parentResource(Lab)
-model NotificationChannel
-  is Azure.ResourceManager.ProxyResource<NotificationChannelProperties, false> {
-  ...ResourceNameParameter<
-    Resource = NotificationChannel,
-    KeyName = "notificationChannelName",
-    SegmentName = "notificationchannels",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NotificationChannel extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("notificationchannels")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: NotificationChannelProperties;
 }
+
+@armResourceOperations
+interface NotificationChannelOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = NotificationChannel,
+        KeyName = "name",
+        SegmentName = "notificationchannels",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface NotificationChannels {
   /**
    * Get notification channel.
    */
-  get is ArmResourceRead<
+  get is NotificationChannelOps.Read<
     NotificationChannel,
     Parameters = {
       /**
@@ -50,14 +67,14 @@ interface NotificationChannels {
   /**
    * Create or replace an existing notification channel.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationChannel>;
+  createOrUpdate is NotificationChannelOps.CreateOrUpdateSync<NotificationChannel>;
 
   /**
    * Allows modifying tags of notification channels. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is NotificationChannelOps.CustomPatchSync<
     NotificationChannel,
     PatchModel = NotificationChannelFragment
   >;
@@ -65,12 +82,12 @@ interface NotificationChannels {
   /**
    * Delete notification channel.
    */
-  delete is ArmResourceDeleteSync<NotificationChannel>;
+  delete is NotificationChannelOps.DeleteSync<NotificationChannel>;
 
   /**
    * List notification channels in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is NotificationChannelOps.List<
     NotificationChannel,
     Parameters = {
       /**
@@ -103,7 +120,7 @@ interface NotificationChannels {
   /**
    * Send notification to provided channel.
    */
-  notify is ArmResourceActionSync<
+  notify is NotificationChannelOps.ActionSync<
     NotificationChannel,
     NotifyParameters,
     OkResponse

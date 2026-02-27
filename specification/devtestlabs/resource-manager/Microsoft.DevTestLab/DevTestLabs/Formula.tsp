@@ -13,30 +13,48 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
-@parentResource(Lab)
-model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Formula,
-    KeyName = "formulaName",
-    SegmentName = "formulas",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Formula extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("formulas")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: FormulaProperties;
 }
+
+@armResourceOperations
+interface FormulaOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Formula,
+        KeyName = "name",
+        SegmentName = "formulas",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface Formulas {
   /**
    * Get formula.
    */
-  get is ArmResourceRead<
+  get is FormulaOps.Read<
     Formula,
     Parameters = {
       /**
@@ -50,7 +68,7 @@ interface Formulas {
   /**
    * Create or replace an existing formula. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is FormulaOps.CreateOrUpdateAsync<
     Formula,
     LroHeaders = ArmLroLocationHeader<FinalResult = Formula> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -61,17 +79,17 @@ interface Formulas {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Formula, PatchModel = FormulaFragment>;
+  update is FormulaOps.CustomPatchSync<Formula, PatchModel = FormulaFragment>;
 
   /**
    * Delete formula.
    */
-  delete is ArmResourceDeleteSync<Formula>;
+  delete is FormulaOps.DeleteSync<Formula>;
 
   /**
    * List formulas in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is FormulaOps.List<
     Formula,
     Parameters = {
       /**

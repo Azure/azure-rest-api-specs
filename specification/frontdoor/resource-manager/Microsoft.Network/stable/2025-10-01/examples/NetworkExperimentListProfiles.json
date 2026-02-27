@@ -1,31 +1,29 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
-    "resourceGroupName": "MyResourceGroup",
-    "subscriptionId": "subid"
+    "subscriptionId": "subid",
+    "resourceGroupName": "MyResourceGroup"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/",
             "name": "MyProfile",
             "type": "Microsoft.Network/NetworkExperimentprofiles",
-            "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/",
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
             "location": "WestUs",
             "properties": {
               "enabledState": "Enabled",
               "resourceState": "Creating"
-            },
-            "tags": {
-              "key1": "value1",
-              "key2": "value2"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "NetworkExperimentProfiles_List",
-  "title": "List NetworkExperiment Profiles in a Resource Group"
+  }
 }

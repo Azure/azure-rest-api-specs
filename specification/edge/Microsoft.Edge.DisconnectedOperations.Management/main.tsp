@@ -6,7 +6,6 @@ import "./models.tsp";
 import "./disconnectedOperations.tsp";
 import "./images.tsp";
 import "./artifacts.tsp";
-import "./hardwareSettings.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -26,7 +25,4 @@ namespace Microsoft.Edge;
 enum Versions {
   @doc("Version 2025-06-01-preview")
   v2025_06_01: "2025-06-01-preview",
-
-  @doc("Version 2026-03-15")
-  v2026_03_15: "2026-03-15",
 }

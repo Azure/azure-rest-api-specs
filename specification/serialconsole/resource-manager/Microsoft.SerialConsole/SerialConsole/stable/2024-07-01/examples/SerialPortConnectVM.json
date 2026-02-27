@@ -1,12 +1,12 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
-    "parentResource": "myVM",
-    "parentResourceType": "virtualMachines",
+    "subscriptionId": "00000000-00000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceProviderNamespace": "Microsoft.Compute",
-    "serialPort": "0",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "parentResourceType": "virtualMachines",
+    "parentResource": "myVM",
+    "serialPort": "0"
   },
   "responses": {
     "200": {
@@ -14,7 +14,5 @@
         "connectionString": "wss://eastus.gateway.serialconsole.azure.com/n/connector/{containerid}/sessions/{sessionId}/client"
       }
     }
-  },
-  "operationId": "SerialPorts_Connect",
-  "title": "Connect to a virtual machine serial port"
+  }
 }

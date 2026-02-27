@@ -86,14 +86,7 @@ interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
   update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    EdgeAction,
-    Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
-    {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
 
@@ -123,43 +116,21 @@ interface EdgeActionVersions {
       EdgeActionVersionProperties
     >
   >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    EdgeActionVersion,
-    Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
-    {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeActionVersion>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
     EdgeActionVersionProperties
   >;
-
-  /** Get the version code for the edge action version. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
   getVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     void,
-    VersionCode,
-    Parameters = {
-      /** Content type */
-      @header contentType: "application/json";
-    }
+    VersionCode
   >;
 
-  /** Swap the default version for the edge action. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
-  swapDefault is ArmResourceActionNoContentAsync<
-    EdgeActionVersion,
-    void,
-    Parameters = {
-      /** Content type */
-      @header contentType: "application/json";
-    }
-  >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
+  swapDefault is ArmResourceActionNoContentAsync<EdgeActionVersion, void>;
 }
 
 @armResourceOperations
@@ -173,13 +144,6 @@ interface EdgeActionExecutionFilters {
       EdgeActionExecutionFilterProperties
     >
   >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    EdgeActionExecutionFilter,
-    Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
-    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
-    {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeActionExecutionFilter>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

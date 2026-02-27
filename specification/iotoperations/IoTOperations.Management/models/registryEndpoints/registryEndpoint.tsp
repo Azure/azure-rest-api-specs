@@ -43,7 +43,6 @@ model RegistryEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 
   /** Trust settings for the registry endpoint */

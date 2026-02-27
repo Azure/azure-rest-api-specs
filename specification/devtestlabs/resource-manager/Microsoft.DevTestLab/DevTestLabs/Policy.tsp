@@ -13,21 +13,20 @@ namespace Microsoft.DevTestLab;
 /**
  * A Policy.
  */
-model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Policy,
-    KeyName = "policyName",
-    SegmentName = "policies",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Policy extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("policies")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: PolicyProperties;
 }
 
 @armResourceOperations
@@ -46,7 +45,7 @@ interface PolicyOps
         @path @segment("policysets") policySetName: string,
       },
       KeysOf<ResourceNameParameter<
-        Resource = Policy,
+        Resource = Schedule,
         KeyName = "name",
         SegmentName = "policies",
         NamePattern = ""

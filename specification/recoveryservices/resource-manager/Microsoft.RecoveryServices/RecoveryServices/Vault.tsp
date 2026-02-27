@@ -150,7 +150,6 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Vaults {
   /**
@@ -212,11 +211,21 @@ interface Vaults {
    * Uploads a certificate for a resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
-    Vault,
-    CertificateRequest,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Vault>,
-    Parameters = {
+  @put
+  create is Azure.ResourceManager.Legacy.UpdateOperation<
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...Azure.ResourceManager.Legacy.Provider;
+
+      /**
+       * The name of the recovery services vault.
+       */
+      @path
+      @segment("vaults")
+      vaultName: string;
+
       /**
        * Certificate friendly name.
        */
@@ -224,8 +233,9 @@ interface Vaults {
       @segment("certificates")
       certificateName: string;
     },
-    Response = ArmResourceUpdatedResponse<VaultCertificateResponse>,
-    Error = ErrorResponse
+    CertificateRequest,
+    ArmResourceUpdatedResponse<VaultCertificateResponse>,
+    ErrorResponse
   >;
 
   /**
@@ -330,6 +340,6 @@ op getOperationResult is GetOperationResultOps.Read<
   "Recovery Services Vault to be created."
 );
 
-@@doc(Vaults.create::parameters.resource,
+@@doc(Vaults.create::parameters.properties,
   "Input parameters for uploading the vault certificate."
 );

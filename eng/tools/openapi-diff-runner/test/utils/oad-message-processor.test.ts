@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { logMessage, logMessageSafeAsync } from "../../src/log.js";
+import { logMessage, logMessageSafe } from "../../src/log.js";
 import { ApiVersionLifecycleStage, Context } from "../../src/types/breaking-change.js";
 import { MessageLevel } from "../../src/types/message.js";
 import { OadMessage } from "../../src/types/oad-types.js";
@@ -144,7 +144,7 @@ vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
 describe("oad-message-processor", () => {
   const mockAppendFileSync = vi.mocked(fs.appendFileSync);
   const mockLogMessage = vi.mocked(logMessage);
-  const mockLogMessageSafeAsync = vi.mocked(logMessageSafeAsync);
+  const mockLogMessageSafe = vi.mocked(logMessageSafe);
   const mockContext = createMockContext();
 
   // Helper functions with access to mocks
@@ -155,8 +155,8 @@ describe("oad-message-processor", () => {
   function expectLogMessage(message: string) {
     expect(mockLogMessage).toHaveBeenCalledWith(expect.stringContaining(message));
   }
-  function expectLogMessageSafeAsync(message: string) {
-    expect(mockLogMessageSafeAsync).toHaveBeenCalledWith(expect.stringContaining(message));
+  function expectLogMessageSafe(message: string) {
+    expect(mockLogMessageSafe).toHaveBeenCalledWith(expect.stringContaining(message));
   }
 
   beforeEach(() => {
@@ -363,23 +363,23 @@ describe("oad-message-processor", () => {
   });
 
   describe("appendToLogFile", () => {
-    it("should append message to log file with newline", async () => {
+    it("should append message to log file with newline", () => {
       const message = "Test log message";
 
-      await appendToLogFile(TEST_CONSTANTS.LOG_PATH, message);
+      appendToLogFile(TEST_CONSTANTS.LOG_PATH, message);
 
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       expectAppendFileSync(1, TEST_CONSTANTS.LOG_PATH, message);
       expectAppendFileSync(2, TEST_CONSTANTS.LOG_PATH, "\n");
-      expectLogMessageSafeAsync("oad-message-processor.appendMsg: " + message);
+      expectLogMessageSafe("oad-message-processor.appendMsg: " + message);
     });
   });
 
   describe("appendMarkdownToLog", () => {
-    it("should append markdown with default error level", async () => {
+    it("should append markdown with default error level", () => {
       const context = createProcessorContext();
 
-      await appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.ERROR);
+      appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.ERROR);
 
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
@@ -394,10 +394,10 @@ describe("oad-message-processor", () => {
       });
     });
 
-    it("should append markdown with custom level", async () => {
+    it("should append markdown with custom level", () => {
       const context = createProcessorContext();
 
-      await appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.WARNING, "Warning");
+      appendMarkdownToLog(context, TEST_CONSTANTS.MESSAGES.WARNING, "Warning");
 
       const appendedContent = mockAppendFileSync.mock.calls[0][1] as string;
       const parsedContent = JSON.parse(appendedContent);
@@ -407,13 +407,13 @@ describe("oad-message-processor", () => {
   });
 
   describe("processAndAppendOadMessages", () => {
-    it("should process and append new messages", async () => {
+    it("should process and append new messages", () => {
       // Reset message cache for this test
       mockContext.oadMessageProcessorContext.messageCache = [];
 
       const oadMessages = [createMockOadMessage()];
 
-      const result = await processAndAppendOadMessages(
+      const result = processAndAppendOadMessages(
         mockContext,
         oadMessages,
         TEST_CONSTANTS.BRANCH.MAIN,
@@ -425,7 +425,7 @@ describe("oad-message-processor", () => {
       expectLogMessage("oad-message-processor.processAndAppendOadMessages");
     });
 
-    it("should deduplicate messages", async () => {
+    it("should deduplicate messages", () => {
       // Reset message cache for this test
       mockContext.oadMessageProcessorContext.messageCache = [];
 
@@ -433,7 +433,7 @@ describe("oad-message-processor", () => {
       const differentMessage = createMockOadMessage({ code: TEST_CONSTANTS.RULES.ADDED_PROPERTY });
       const oadMessages = [baseMessage, differentMessage];
 
-      const result = await processAndAppendOadMessages(
+      const result = processAndAppendOadMessages(
         mockContext,
         oadMessages,
         TEST_CONSTANTS.BRANCH.MAIN,
@@ -444,7 +444,7 @@ describe("oad-message-processor", () => {
       expectLogMessage("duplicateOadMessages.length: 0");
     });
 
-    it("should test actual deduplication with cache", async () => {
+    it("should test actual deduplication with cache", () => {
       // First, add a message to the cache
       const existingMessage = createMockOadMessage();
       mockContext.oadMessageProcessorContext.messageCache = [existingMessage];
@@ -454,7 +454,7 @@ describe("oad-message-processor", () => {
       const differentMessage = createMockOadMessage({ code: TEST_CONSTANTS.RULES.ADDED_PROPERTY });
       const oadMessages = [sameMessage, differentMessage];
 
-      const result = await processAndAppendOadMessages(
+      const result = processAndAppendOadMessages(
         mockContext,
         oadMessages,
         TEST_CONSTANTS.BRANCH.MAIN,
@@ -465,13 +465,13 @@ describe("oad-message-processor", () => {
       expectLogMessage("duplicateOadMessages.length: 1");
     });
 
-    it("should not process messages already in cache", async () => {
+    it("should not process messages already in cache", () => {
       const existingMessage = createMockOadMessage();
       mockContext.oadMessageProcessorContext.messageCache = [existingMessage];
 
       const oadMessages = [createMockOadMessage()]; // Same as existing
 
-      const result = await processAndAppendOadMessages(
+      const result = processAndAppendOadMessages(
         mockContext,
         oadMessages,
         TEST_CONSTANTS.BRANCH.MAIN,
@@ -482,14 +482,14 @@ describe("oad-message-processor", () => {
       expectLogMessage("duplicateOadMessages.length: 1");
     });
 
-    it("should log processing statistics", async () => {
+    it("should log processing statistics", () => {
       mockContext.oadMessageProcessorContext.messageCache = [];
 
       const message1 = createMockOadMessage();
       const message2 = createMockOadMessage({ code: TEST_CONSTANTS.RULES.ADDED_PROPERTY });
       const oadMessages = [message1, message2];
 
-      await processAndAppendOadMessages(mockContext, oadMessages, TEST_CONSTANTS.BRANCH.DEVELOP);
+      processAndAppendOadMessages(mockContext, oadMessages, TEST_CONSTANTS.BRANCH.DEVELOP);
 
       expect(mockLogMessage).toHaveBeenCalledWith(
         `oad-message-processor.processAndAppendOadMessages: PR:${TEST_CONSTANTS.PR_URL}, ` +

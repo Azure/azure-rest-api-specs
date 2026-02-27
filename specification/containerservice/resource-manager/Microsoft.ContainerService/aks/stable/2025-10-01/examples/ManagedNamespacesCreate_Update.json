@@ -1,102 +1,100 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
     "managedNamespaceName": "namespace1",
     "parameters": {
+      "tags": {
+        "tagKey1": "tagValue1"
+      },
       "properties": {
-        "adoptionPolicy": "IfIdentical",
+        "labels": {
+          "kubernetes.io/metadata.name": "true"
+        },
         "annotations": {
           "annatationKey": "annatationValue"
         },
-        "defaultNetworkPolicy": {
-          "egress": "AllowAll",
-          "ingress": "AllowSameNamespace"
-        },
         "defaultResourceQuota": {
-          "cpuLimit": "3m",
           "cpuRequest": "3m",
-          "memoryLimit": "5Gi",
-          "memoryRequest": "5Gi"
+          "cpuLimit": "3m",
+          "memoryRequest": "5Gi",
+          "memoryLimit": "5Gi"
         },
-        "deletePolicy": "Keep",
-        "labels": {
-          "kubernetes.io/metadata.name": "true"
-        }
-      },
-      "tags": {
-        "tagKey1": "tagValue1"
+        "defaultNetworkPolicy": {
+          "ingress": "AllowSameNamespace",
+          "egress": "AllowAll"
+        },
+        "adoptionPolicy": "IfIdentical",
+        "deletePolicy": "Keep"
       }
-    },
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/namespace1",
         "name": "namespace1",
         "type": "Microsoft.ContainerService/managedClusters/managedNamespaces",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/namespace1",
         "location": "eastus2",
+        "tags": {
+          "tagKey1": "tagValue1"
+        },
         "properties": {
-          "adoptionPolicy": "IfIdentical",
-          "annotations": {
-            "annatationKey": "annatationValue"
-          },
-          "defaultNetworkPolicy": {
-            "egress": "AllowAll",
-            "ingress": "AllowSameNamespace"
-          },
-          "defaultResourceQuota": {
-            "cpuLimit": "3m",
-            "cpuRequest": "3m",
-            "memoryLimit": "5Gi",
-            "memoryRequest": "5Gi"
-          },
-          "deletePolicy": "Keep",
           "labels": {
             "kubernetes.io/metadata.name": "true"
           },
-          "provisioningState": "Succeeded"
-        },
-        "tags": {
-          "tagKey1": "tagValue1"
+          "annotations": {
+            "annatationKey": "annatationValue"
+          },
+          "provisioningState": "Succeeded",
+          "defaultResourceQuota": {
+            "cpuRequest": "3m",
+            "cpuLimit": "3m",
+            "memoryRequest": "5Gi",
+            "memoryLimit": "5Gi"
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          },
+          "adoptionPolicy": "IfIdentical",
+          "deletePolicy": "Keep"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/namespace1",
         "name": "namespace1",
         "type": "Microsoft.ContainerService/managedClusters/managedNamespaces",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/namespace1",
         "location": "eastus2",
+        "tags": {
+          "tagKey1": "tagValue1"
+        },
         "properties": {
-          "adoptionPolicy": "IfIdentical",
-          "annotations": {
-            "annatationKey": "annatationValue"
-          },
-          "defaultNetworkPolicy": {
-            "egress": "AllowAll",
-            "ingress": "AllowSameNamespace"
-          },
-          "defaultResourceQuota": {
-            "cpuLimit": "3m",
-            "cpuRequest": "3m",
-            "memoryLimit": "5Gi",
-            "memoryRequest": "5Gi"
-          },
-          "deletePolicy": "Keep",
           "labels": {
             "kubernetes.io/metadata.name": "true"
           },
-          "provisioningState": "Updating"
-        },
-        "tags": {
-          "tagKey1": "tagValue1"
+          "annotations": {
+            "annatationKey": "annatationValue"
+          },
+          "provisioningState": "Updating",
+          "defaultResourceQuota": {
+            "cpuRequest": "3m",
+            "cpuLimit": "3m",
+            "memoryRequest": "5Gi",
+            "memoryLimit": "5Gi"
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          },
+          "adoptionPolicy": "IfIdentical",
+          "deletePolicy": "Keep"
         }
       }
     }
-  },
-  "operationId": "ManagedNamespaces_CreateOrUpdate",
-  "title": "Create/Update Managed Namespace"
+  }
 }

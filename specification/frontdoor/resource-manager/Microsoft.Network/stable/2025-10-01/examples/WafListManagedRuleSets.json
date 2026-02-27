@@ -9,63 +9,61 @@
         "value": [
           {
             "name": "DefaultRuleSet_1.0",
-            "type": "Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets",
             "id": "/subscriptions/subid/providers/Microsoft.Network/FrontDoorWebApplicationFirewallManagedRuleSets",
+            "type": "Microsoft.Network/frontdoorwebapplicationfirewallmanagedrulesets",
             "properties": {
               "provisioningState": "Succeeded",
+              "ruleSetId": "8125d145-ddc5-4d90-9bc3-24c5f2de69a2",
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "1.0",
               "ruleGroups": [
                 {
-                  "description": "SQL injection",
                   "ruleGroupName": "SQLI",
+                  "description": "SQL injection",
                   "rules": [
                     {
+                      "ruleId": "942100",
                       "description": "SQL Injection Attack Detected via libinjection",
-                      "defaultAction": "Block",
                       "defaultState": "Enabled",
-                      "ruleId": "942100"
+                      "defaultAction": "Block"
                     },
                     {
+                      "ruleId": "942110",
                       "description": "SQL Injection Attack: Common Injection Testing Detected",
-                      "defaultAction": "Block",
                       "defaultState": "Enabled",
-                      "ruleId": "942110"
+                      "defaultAction": "Block"
                     }
                   ]
                 },
                 {
-                  "description": "Cross-site scripting",
                   "ruleGroupName": "XSS",
+                  "description": "Cross-site scripting",
                   "rules": [
                     {
+                      "ruleId": "941100",
                       "description": "XSS Attack Detected via libinjection",
-                      "defaultAction": "Block",
                       "defaultState": "Enabled",
-                      "ruleId": "941100"
+                      "defaultAction": "Block"
                     },
                     {
+                      "ruleId": "941101",
                       "description": "XSS Attack Detected via libinjection",
-                      "defaultAction": "Block",
                       "defaultState": "Enabled",
-                      "ruleId": "941101"
+                      "defaultAction": "Block"
                     },
                     {
+                      "ruleId": "941110",
                       "description": "XSS Filter - Category 1: Script Tag Vector",
-                      "defaultAction": "Block",
                       "defaultState": "Enabled",
-                      "ruleId": "941110"
+                      "defaultAction": "Block"
                     }
                   ]
                 }
-              ],
-              "ruleSetId": "8125d145-ddc5-4d90-9bc3-24c5f2de69a2",
-              "ruleSetType": "DefaultRuleSet",
-              "ruleSetVersion": "1.0"
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ManagedRuleSets_List",
-  "title": "List Policies ManagedRuleSets in a Resource Group"
+  }
 }

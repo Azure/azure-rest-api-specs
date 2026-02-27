@@ -88,22 +88,13 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
-@doc("The enablement state of a service.")
-union EnablementState {
-  string,
-
-  @doc("Service is enabled.")
-  Enabled: "Enabled",
-
-  @doc("Service enablement is in progress.")
-  InProgress: "InProgress",
-
-  @doc("Service enablement has failed.")
-  Failed: "Failed",
-
-  @doc("Service is disabled.")
-  Disabled: "Disabled",
-}
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
+alias enablementState =
+  | "Enabled"
+  | "InProgress"
+  | "Failed"
+  | "Disabled"
+  | string;
 
 @doc("Change Tracking and Inventory service information.")
 model ChangeTrackingInformation {
@@ -115,7 +106,7 @@ model ChangeTrackingInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Azure Monitor Insights service information.")
@@ -128,31 +119,31 @@ model AzureMonitorInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Azure Update Manager service information.")
 model UpdateManagerInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Azure Policy and Machine Configuration service information.")
 model GuestConfigurationInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Defender for Servers service information.")
 model DefenderForServersInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Defender Cloud Security Posture Management (CSPM) service information.")
 model DefenderCspmInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: EnablementState;
+  enablementStatus: enablementState;
 }
 
 @doc("Specifies the service plan for this resource.")
@@ -184,23 +175,15 @@ model DesiredConfiguration {
 
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: DesiredEnablementState;
+  defenderForServers?: desiredEnablementState;
 
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: DesiredEnablementState;
+  defenderCspm?: desiredEnablementState;
 }
 
-@doc("The desired enablement state of a service.")
-union DesiredEnablementState {
-  string,
-
-  @doc("Enable the service.")
-  Enable: "Enable",
-
-  @doc("Disable the service.")
-  Disable: "Disable",
-}
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
+alias desiredEnablementState = "Enable" | "Disable" | string;
 
 @doc("Configuration for the Change Tracking and Inventory service.")
 model ChangeTrackingConfiguration {
@@ -235,30 +218,6 @@ union ProvisioningState {
   Deleting: "Deleting",
 }
 
-@doc("ManagedOps model for update operations")
-model ManagedOpUpdate {
-  @doc("Updatable properties in the ManagedOps resource.")
-  properties?: ManagedOpUpdateProperties;
-}
-
-@doc("Updatable properties in the ManagedOps resource.")
-model ManagedOpUpdateProperties {
-  @doc("Desired configuration input by the user.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  desiredConfiguration?: DesiredConfigurationUpdate;
-}
-
-@doc("Updatable parameters in the Desired configuration input.")
-model DesiredConfigurationUpdate {
-  @doc("Desired enablement state of the Defender For Servers service.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: DesiredEnablementState;
-
-  @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: DesiredEnablementState;
-}
-
 /** The operations that can be performed on our resource */
 @armResourceOperations(ManagedOp)
 interface ManagedOps {
@@ -273,7 +232,13 @@ interface ManagedOps {
 
   @doc("Updates the ManagedOps instance with the supplied fields.")
   @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<ManagedOp, ManagedOpUpdate>;
+  update is ArmCustomPatchAsync<
+    ManagedOp,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ManagedOp,
+      ManagedOpsProperties
+    >
+  >;
 
   @doc("Deletes the ManagedOps instance.")
   delete is ArmResourceDeleteWithoutOkAsync<ManagedOp>;

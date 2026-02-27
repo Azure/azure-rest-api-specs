@@ -1,47 +1,45 @@
 {
   "parameters": {
-    "api-version": "2024-11-01-preview",
-    "extensionTypeName": "extensionType1",
+    "subscriptionId": "subId1",
     "location": "westus2",
-    "subscriptionId": "subId1"
+    "extensionTypeName": "extensionType1",
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "description": "Details of the extension type",
       "body": {
+        "id": "aaaa",
         "name": "bbbb",
         "type": "cccc",
-        "id": "aaaa",
         "properties": {
-          "description": "My extension type!",
-          "isManagedIdentityRequired": true,
           "isSystemExtension": false,
-          "planInfo": {
-            "offerId": "myOfferId",
-            "planId": "myPlanId",
-            "publisherId": "myPublisherId"
-          },
+          "isManagedIdentityRequired": true,
+          "description": "My extension type!",
           "publisher": "Microsoft",
+          "planInfo": {
+            "publisherId": "myPublisherId",
+            "planId": "myPlanId",
+            "offerId": "myOfferId"
+          },
           "supportedClusterTypes": [
             "connectedClusters"
           ],
           "supportedScopes": {
+            "defaultScope": "cluster",
             "clusterScopeSettings": {
-              "name": "bbbbbbbbbbbbb",
-              "type": "ccccccccccccccccccccccccc",
-              "id": "aaaaaaaaaaaaaaaaaa",
               "properties": {
                 "allowMultipleInstances": true,
                 "defaultReleaseNamespace": "kube-system"
-              }
-            },
-            "defaultScope": "cluster"
+              },
+              "id": "aaaaaaaaaaaaaaaaaa",
+              "name": "bbbbbbbbbbbbb",
+              "type": "ccccccccccccccccccccccccc"
+            }
           }
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ExtensionTypes_LocationGet",
-  "title": "Get Extension Type"
+  }
 }

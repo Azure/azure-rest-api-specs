@@ -108,10 +108,10 @@ model ContentAnalyzer {
 @doc("Chat completion and embedding models supported by the analyzer.")
 model SupportedModels {
   @doc("Chat completion models supported by the analyzer.")
-  completion?: string[];
+  completion: Record<string>;
 
   @doc("Embedding models supported by the analyzer.")
-  embedding?: string[];
+  embedding: Record<string>;
 }
 
 @doc("Status of a resource.")
@@ -538,10 +538,13 @@ model AnalyzeRequest {
 
   // @added(Versions.v2025_05_01_preview)
   @doc("Inputs to analyze.  Currently, only pro mode supports multiple inputs.")
-  inputs: AnalysisInput[];
+  inputs?: AnalyzeInput[];
 
   @added(Versions.v2025_11_01)
-  @doc("Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.")
+  @doc("""
+    Override default mapping of model names to deployments.
+    Ex. { "gpt-4.1": "myGpt41Deployment", "text-embedding-3-large": "myTextEmbedding3LargeDeployment" }.
+    """)
   modelDeployments?: Record<string>;
 }
 
@@ -554,7 +557,7 @@ scalar RangeExpression extends string;
 
 // @added(Versions.v2025_05_01_preview)
 @doc("Additional input to analyze.")
-model AnalysisInput {
+model AnalyzeInput {
   @doc("The URL of the input to analyze.  Only one of url or data should be specified.")
   url?: url;
 
@@ -596,7 +599,7 @@ model AnalyzeBinaryRequest {
 model GetResultParameters {}
 
 @doc("Analyze operation result.")
-model AnalysisResult {
+model AnalyzeResult {
   @doc("The unique identifier of the analyzer.")
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
   @minLength(1)
@@ -620,11 +623,11 @@ model AnalysisResult {
   stringEncoding?: string = "codePoint";
 
   @doc("The extracted content.")
-  contents: AnalysisContent[];
+  contents: MediaContent[];
 }
 
 @doc("Kind of media content.")
-union AnalysisContentKind {
+union MediaContentKind {
   string,
 
   @doc("Document content, such as pdf, image, txt, etc.")
@@ -636,9 +639,9 @@ union AnalysisContentKind {
 
 @doc("Media content base class.")
 @discriminator("kind")
-model AnalysisContent {
+model MediaContent {
   @doc("Content kind.")
-  kind: AnalysisContentKind;
+  kind: MediaContentKind;
 
   // @added(Versions.v2025_05_01_preview)
   @doc("Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc.")
@@ -837,7 +840,7 @@ model ContentAnalyzerOperationStatus {
 
 @doc("Provides status details for analyze operations.")
 model ContentAnalyzerAnalyzeOperationStatus {
-  ...Azure.Core.Foundations.OperationStatus<AnalysisResult>;
+  ...Azure.Core.Foundations.OperationStatus<AnalyzeResult>;
 
   @added(Versions.v2025_11_01)
   @doc("Usage details of the analyze operation.")
@@ -845,9 +848,12 @@ model ContentAnalyzerAnalyzeOperationStatus {
 }
 
 @added(Versions.v2025_11_01)
-@doc("Default settings for this Content Understanding resource.")
+@doc("default settings for this Content Understanding resource.")
 model ContentUnderstandingDefaults {
-  @doc("Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.")
+  @doc("""
+    Mapping of model names to deployments.
+    Ex. { "gpt-4.1": "myGpt41Deployment", "text-embedding-3-large": "myTextEmbedding3LargeDeployment" }.
+    """)
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   modelDeployments: Record<string>;
 }

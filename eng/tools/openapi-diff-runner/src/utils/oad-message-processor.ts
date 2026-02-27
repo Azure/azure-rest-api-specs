@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { logMessage, logMessageSafeAsync } from "../log.js";
+import { logMessage, logMessageSafe } from "../log.js";
 import { Context, logFileName } from "../types/breaking-change.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { OadMessage } from "../types/oad-types.js";
@@ -108,20 +108,20 @@ export function createMessageKey(message: OadMessage): string {
 /**
  * Append a message to the log file
  */
-export async function appendToLogFile(logFilePath: string, msg: string): Promise<void> {
+export function appendToLogFile(logFilePath: string, msg: string): void {
   fs.appendFileSync(logFilePath, msg);
   fs.appendFileSync(logFilePath, "\n");
-  await logMessageSafeAsync("oad-message-processor.appendMsg: " + msg);
+  logMessageSafe("oad-message-processor.appendMsg: " + msg);
 }
 
 /**
  * Append markdown content to the log file
  */
-export async function appendMarkdownToLog(
+export function appendMarkdownToLog(
   context: OadMessageProcessorContext,
   errorMsg: string,
   levelType = "Error",
-): Promise<void> {
+): void {
   const markdownRecord = JSON.stringify({
     type: "Markdown",
     mode: "append",
@@ -129,18 +129,18 @@ export async function appendMarkdownToLog(
     message: errorMsg,
     time: new Date(),
   });
-  await appendToLogFile(context.logFilePath, markdownRecord);
+  appendToLogFile(context.logFilePath, markdownRecord);
 }
 
 /**
  * Process and deduplicate OAD messages, then append to log
  * This function is invoked by BreakingChangeDetector.doBreakingChangeDetection()
  */
-export async function processAndAppendOadMessages(
+export function processAndAppendOadMessages(
   context: Context,
   oadMessages: OadMessage[],
   baseBranch: string,
-): Promise<ResultMessageRecord[]> {
+): ResultMessageRecord[] {
   // Use Set for O(1) lookup instead of O(n) array operations
   const cacheKeys = new Set(
     context.oadMessageProcessorContext.messageCache.map((msg) => createMessageKey(msg)),
@@ -172,7 +172,7 @@ export async function processAndAppendOadMessages(
     baseBranch,
   );
 
-  await appendToLogFile(context.oadMessageProcessorContext.logFilePath, JSON.stringify(msgs));
+  appendToLogFile(context.oadMessageProcessorContext.logFilePath, JSON.stringify(msgs));
 
   return msgs;
 }

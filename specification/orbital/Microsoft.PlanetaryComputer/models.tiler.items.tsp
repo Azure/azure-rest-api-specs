@@ -32,20 +32,18 @@ model StatisticsQueryParameters {
   categorical?: boolean;
 
   /**
-   * List of pixel categorical values for which to report counts.
+   * List of values for which to report counts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query("c")
   @query(#{ explode: true })
-  categoriesPixels?: string[];
+  c?: string[];
 
   /**
    * List of percentile values (default to [2, 98]).
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query("p")
   @query(#{ explode: true })
-  percentiles?: int32[];
+  p?: int32[];
 
   /**
    *
@@ -168,9 +166,14 @@ model BoundingBoxPathParameters {
 }
 
 /**
+ * Point model.
+ *
+ * response model for `/point` endpoints
+ */
+/**
  * Response model for point query operations providing values at a specific location
  */
-model TilerCoreModelsResponsesPoint {
+model TitilerCoreModelsResponsesPoint {
   /**
    * Geographic coordinates [longitude, latitude] of the queried point
    */
@@ -189,6 +192,22 @@ model TilerCoreModelsResponsesPoint {
 }
 
 /**
+ * Return dataset's basic info or the list of available assets.
+ */
+model InfoOperationResponse {
+  /**
+   * status code for info operation response
+   */
+  @statusCode statusCode: 200;
+
+  /**
+   * body for info operation response
+   */
+  @summary("Response Info Api Collections  Collection Id  Items  Item Id  Info Get")
+  data: TilerInfo;
+}
+
+/**
  * Dataset Info.
  */
 @summary("TilerInfo")
@@ -199,7 +218,7 @@ model TilerInfo {
   @minItems(4)
   @maxItems(4)
   @summary("Bounds")
-  bounds: float32[];
+  bounds: float64[];
 
   /**
    * Band Metadata
@@ -226,73 +245,74 @@ model TilerInfo {
    */
   @summary("Nodata Type")
   @encodedName("application/json", "nodata_type")
-  noDataType?: NoDataType;
+  nodataType?: NoDataType;
 
   /**
    * Color interpretation
    */
-  @encodedName("application/json", "colorinterp")
-  colorInterpretation?: string[];
+  @summary("Colorinterp")
+  colorinterp?: string[];
 
   /**
    * Driver
    */
+  @summary("Driver")
   driver?: string;
 
   /**
    * Count
    */
+  @summary("Count")
   count?: int32;
 
   /**
    * Width
    */
+  @summary("Width")
   width?: int32;
 
   /**
    * Height
    */
+  @summary("Height")
   height?: int32;
 
   /**
    * Overviews
    */
-  overviews?: int32[];
+  @summary("Overviews")
+  overviews?: string[];
 
   /**
    * Scales
    */
-  scales?: int32[];
+  @summary("Scales")
+  scales?: int64[];
 
   /**
    * Offsets
    */
-  offsets?: int32[];
+  @summary("Offsets")
+  offsets?: int64[];
 
   /**
    * Colormap
    */
+  @summary("Colormap")
   colormap?: Record<string[]>;
 
   /**
    * Minzoom
    */
-  @encodedName("application/json", "minzoom")
-  minZoom?: int32;
+  @summary("Minzoom")
+  minzoom?: int64;
 
   /**
    * Maxzoom
    */
-  @encodedName("application/json", "maxzoom")
-  maxZoom?: int32;
-
-  /**
-   * Coordinate Reference System
-   */
-  @encodedName("application/json", "crs")
-  coordinateReferenceSystem?: string;
+  @summary("Maxzoom")
+  maxzoom?: int64;
 }
-
 /**
  * Union type for band metadata elements
  */
@@ -337,7 +357,7 @@ union NoDataType {
 /**
  * Return a list of supported assets.
  */
-model AvailableAssets {
+model AvailableAssetsResponse {
   /**
    * status code for available assets response
    */
@@ -352,20 +372,35 @@ model AvailableAssets {
 }
 
 /**
+ * Return dataset's statistics.
+ */
+model AssetStatisticsResponse {
+  /**
+   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
+   */
+  @statusCode
+  statusCode: 200;
+
+  /**
+   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
+   */
+  @summary("Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get")
+  data: Record<BandStatistics>;
+}
+
+/**
  * Statistical information about a data band.
  */
 model BandStatistics {
   /**
    * Minimum value in the band.
    */
-  @encodedName("application/json", "min")
-  minimum: float32;
+  min: float32;
 
   /**
    * Maximum value in the band.
    */
-  @encodedName("application/json", "max")
-  maximum: float32;
+  max: float32;
 
   /**
    * Mean value of the band.
@@ -448,12 +483,12 @@ model BandStatistics {
 /**
  * Return dataset's statistics.
  */
-model TilerStacItemStatistics is Record<BandStatistics>;
+model StatisticsResponse is Record<BandStatistics>;
 
 /**
  * Successful Response
  */
-model WmtsCapabilities {
+model WmtsCapabilitiesResponse {
   /**
    * status code for wmts capabilities
    */
@@ -471,32 +506,114 @@ model WmtsCapabilities {
 }
 
 /**
- * Properties for STAC Item statistics GeoJSON Feature
+ *
+ * https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md
  */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model StacItemStatisticsGeoJsonProperties {
-  ...Record<unknown>;
+/**
+ * Collection of STAC items with statistical information
+ */
+model GeoJsonStatisticsItemCollectionResponse {
+  /**
+   * GeoJSON type identifier for ItemCollection
+   */
+  type: ItemCollectionType;
 
   /**
-   * Statistical information for each band in the asset
+   * Array of STAC items with statistics
    */
-  statistics: Record<BandStatistics>;
+  features: GeoJsonStatisticsItemResponse[];
+
+  /**
+   * Bounding box coordinates [west, south, east, north]
+   */
+  bbox?: float64[];
+
+  /**
+   * Stac Version
+   */
+  @minLength(1)
+  @encodedName("application/json", "stac_version")
+  stacVersion?: string = "1.0.0";
+
+  /**
+   * MSFT Created
+   */
+  @encodedName("application/json", "msft:_created")
+  msftCreated?: string;
+
+  /**
+   * MSFT Updated
+   */
+  @encodedName("application/json", "msft:_updated")
+  msftUpdated?: string;
+
+  /**
+   * MSFT Short Description
+   */
+  @maxLength(300)
+  @encodedName("application/json", "msft:short_description")
+  msftShortDescription?: string;
+
+  /**
+   * List of STAC extension URLs used by this item collection
+   */
+  @encodedName("application/json", "stac_extensions")
+  stacExtensions?: url[];
+
+  /**
+   * Related links for the item collection
+   */
+  links?: Link[];
+
+  /**
+   *
+   * https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification
+   *
+   * Pagination context for the response
+   */
+  context?: ContextExtension;
 }
 
 /**
  * STAC Item representing a spatiotemporal asset with statistical information
  */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model StacItemStatisticsGeoJson {
-  ...FeatureBase;
+model GeoJsonStatisticsItemResponse {
+  ...Feature;
+  ...MicrosoftStacProperties;
 
   /**
-   * GeoJSON type identifier for Feature
+   * Stac Version
    */
-  type: FeatureType;
+  @minLength(1)
+  @encodedName("application/json", "stac_version")
+  stacVersion?: string = "1.0.0";
 
   /**
-   * Feature properties
+   * ID of the STAC collection this item belongs to
    */
-  properties?: StacItemStatisticsGeoJsonProperties;
+  collection?: string;
+
+  /**
+   * Properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  properties: ItemProperties;
+
+  /**
+   * MSFT Timestamp
+   */
+  @encodedName("application/json", "_msft:ts")
+  msftTimestamp?: string;
+
+  /**
+   * MSFT ETag
+   */
+  @encodedName("application/json", "_msft:etag")
+  msftEtag?: string;
+
+  /**
+   * List of STAC extension URLs used by this item
+   */
+  @encodedName("application/json", "stac_extensions")
+  stacExtensions?: url[];
 }

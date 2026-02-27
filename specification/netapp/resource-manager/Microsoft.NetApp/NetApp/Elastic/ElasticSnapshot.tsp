@@ -18,8 +18,6 @@ namespace Microsoft.NetApp;
  * NetApp Elastic Snapshot under an Elastic Volume
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 @parentResource(ElasticVolume)
 model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
   ...ResourceNameParameter<
@@ -34,8 +32,6 @@ model ElasticSnapshot is ProxyResource<ElasticSnapshotProperties> {
  * Elastic Snapshot properties
  */
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
 model ElasticSnapshotProperties {
   /** Azure lifecycle management. */
   @visibility(Lifecycle.Read)
@@ -45,20 +41,12 @@ model ElasticSnapshotProperties {
 @armResourceOperations
 interface ElasticSnapshots {
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ElasticSnapshot>;
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshot>;
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticSnapshot>;
   @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
-  @added(Versions.v2025_12_15_preview)
   listByElasticVolume is ArmResourceListByParent<ElasticSnapshot>;
 }
 

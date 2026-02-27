@@ -1,44 +1,42 @@
 {
   "parameters": {
-    "api-version": "2023-11-01-preview",
-    "applicationName": "myApp",
-    "clusterName": "myCluster",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
     "serviceName": "myService",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2023-11-01-preview"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "name": "myCluster",
         "type": "services",
-        "eTag": "W/\"636462502183671258\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
         "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applications/myApp/services/myService",
+        "name": "myCluster",
+        "tags": {},
+        "etag": "W/\"636462502183671258\"",
         "properties": {
-          "defaultMoveCost": "Medium",
-          "instanceCount": 5,
+          "provisioningState": "Updating",
+          "serviceKind": "Stateless",
+          "placementConstraints": "NodeType==frontend",
+          "serviceTypeName": "myServiceType",
           "partitionDescription": {
             "partitionScheme": "Singleton"
           },
-          "placementConstraints": "NodeType==frontend",
-          "provisioningState": "Updating",
-          "serviceKind": "Stateless",
           "serviceLoadMetrics": [
             {
               "name": "metric1",
               "weight": "Low"
             }
           ],
-          "servicePackageActivationMode": "SharedProcess",
           "servicePlacementPolicies": [],
-          "serviceTypeName": "myServiceType"
-        },
-        "tags": {}
-      },
-      "headers": {}
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "servicePackageActivationMode": "SharedProcess"
+        }
+      }
     }
-  },
-  "operationId": "Services_Get",
-  "title": "Get a service"
+  }
 }

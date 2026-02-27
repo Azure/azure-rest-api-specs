@@ -13,22 +13,20 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
-@parentResource(Lab)
-model ServiceRunner is Azure.ResourceManager.ProxyResource<never, false> {
-  ...ResourceNameParameter<
-    Resource = ServiceRunner,
-    KeyName = "serviceRunnerName",
-    SegmentName = "servicerunners",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ServiceRunner extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("servicerunners")
+  name: string;
 
   /**
    * The identity of the resource.
@@ -38,21 +36,41 @@ model ServiceRunner is Azure.ResourceManager.ProxyResource<never, false> {
 }
 
 @armResourceOperations
+interface ServiceRunnerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ServiceRunner,
+        KeyName = "name",
+        SegmentName = "servicerunners",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ServiceRunners {
   /**
    * Get service runner.
    */
-  get is ArmResourceRead<ServiceRunner>;
+  get is ServiceRunnerOps.Read<ServiceRunner>;
 
   /**
    * Create or replace an existing service runner.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ServiceRunner>;
+  createOrUpdate is ServiceRunnerOps.CreateOrUpdateSync<ServiceRunner>;
 
   /**
    * Delete service runner.
    */
-  delete is ArmResourceDeleteSync<ServiceRunner>;
+  delete is ServiceRunnerOps.DeleteSync<ServiceRunner>;
 }
 
 @@doc(ServiceRunner.name, "The name of the service runner.");

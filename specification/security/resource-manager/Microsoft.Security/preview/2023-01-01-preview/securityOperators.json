@@ -1,0 +1,265 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/securityOperators": {
+      "get": {
+        "x-ms-examples": {
+          "List SecurityOperators": {
+            "$ref": "./examples/SecurityOperators/ListSecurityOperators_example.json"
+          }
+        },
+        "tags": [
+          "SecurityOperators"
+        ],
+        "description": "Lists Microsoft Defender for Cloud securityOperators in the subscription.",
+        "operationId": "SecurityOperators_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityOperatorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}/securityOperators/{securityOperatorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specific security operator by scope and securityOperatorName": {
+            "$ref": "./examples/SecurityOperators/GetSecurityOperatorByName_example.json"
+          }
+        },
+        "tags": [
+          "SecurityOperators"
+        ],
+        "description": "Get a specific security operator for the requested scope.",
+        "operationId": "SecurityOperators_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/SecurityOperatorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityOperator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a security operator on the given scope": {
+            "$ref": "./examples/SecurityOperators/PutSecurityOperatorByName_example.json"
+          }
+        },
+        "tags": [
+          "SecurityOperators"
+        ],
+        "description": "Creates Microsoft Defender for Cloud security operator on the given scope.",
+        "operationId": "SecurityOperators_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/SecurityOperatorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to put Security Operator.",
+            "schema": {
+              "$ref": "#/definitions/SecurityOperator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete SecurityOperator on subscription": {
+            "$ref": "./examples/SecurityOperators/DeleteSecurityOperatorByName_example.json"
+          }
+        },
+        "tags": [
+          "SecurityOperators"
+        ],
+        "description": "Delete Microsoft Defender for Cloud securityOperator in the subscription.",
+        "operationId": "SecurityOperators_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/SecurityOperatorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Security Operator was deleted"
+          },
+          "204": {
+            "description": "No Content - Security Operator does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityOperatorList": {
+      "type": "object",
+      "description": "List of SecurityOperator response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SecurityOperator configurations",
+          "items": {
+            "$ref": "#/definitions/SecurityOperator"
+          }
+        }
+      }
+    },
+    "SecurityOperator": {
+      "type": "object",
+      "description": "Security operator under a given subscription and pricing",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityOperatorName": {
+      "name": "securityOperatorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the securityOperator",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityOperator": {
+      "name": "SecurityOperator",
+      "in": "body",
+      "required": true,
+      "description": "SecurityOperator object",
+      "schema": {
+        "$ref": "#/definitions/SecurityOperator"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

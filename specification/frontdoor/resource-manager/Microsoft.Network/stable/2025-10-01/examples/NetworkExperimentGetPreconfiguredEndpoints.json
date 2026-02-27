@@ -1,29 +1,27 @@
 {
   "parameters": {
     "api-version": "2025-10-01",
-    "profileName": "MyProfile",
+    "subscriptionId": "subid",
     "resourceGroupName": "MyResourceGroup",
-    "subscriptionId": "subid"
+    "profileName": "MyProfile"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/preconfiguredEndpoints?api-version=2025-10-01&$skipToken=nextPageToken",
         "value": [
           {
-            "name": "Endpoint 1",
             "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/preconfiguredEndpoints/endpoint1",
+            "name": "Endpoint 1",
             "properties": {
-              "description": "this is the endpoint 1 preconfigured endpoint.",
-              "backend": "WESTUS",
               "endpoint": "endpoint1.net",
-              "endpointType": "AFD"
+              "description": "this is the endpoint 1 preconfigured endpoint.",
+              "endpointType": "AFD",
+              "backend": "WESTUS"
             }
           }
-        ]
+        ],
+        "nextLink": "string"
       }
     }
-  },
-  "operationId": "PreconfiguredEndpoints_List",
-  "title": "Gets a list of Preconfigured Endpoints"
+  }
 }

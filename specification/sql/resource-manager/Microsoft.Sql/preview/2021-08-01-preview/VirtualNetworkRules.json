@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a virtual network rule.",
+        "operationId": "VirtualNetworkRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "description": "The name of the virtual network rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Creates or updates an existing virtual network rule.",
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "description": "The name of the virtual network rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested virtual Network Rule Resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 400 FirewallChangesDeniedBecausePublicEndpointDisabled - Unable to create or modify firewall rules when public network access for the server is disabled. (https://docs.microsoft.com/en-us/azure/azure-sql/database/connectivity-settings#deny-public-network-access)\n\n * 400 VirtualNetworkRuleBadRequest - Azure SQL Server Virtual Network Rule encountered an user error\n\n * 400 VirtualNetworkRuleWithFailoverGroupsNotSupported - Virtual network firewall rules are not currently supported on servers with failover groups configured with automatic failover policy. Please configure the failover groups on the server with manual failover policy.\n\n * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null\n\n * 403 VirtualNetworkRuleAccessDenied - Azure SQL Server Virtual Network Rule encountered permissions error\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 VirtualNetworkRuleNotEnabled - Azure SQL Server Virtual Network Rule feature is not enabled\n\n * 404 VirtualNetworkRuleResourceNotFound - Azure SQL Server Virtual Network Rule encountered a resource not found error\n\n * 404 VirtualNetworkRuleSubscriptionNotFound - Azure SQL Server Virtual Network Subscription id not found or is in disabled state \n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 504 VirtualNetworkRuleTimedOut - Azure SQL Server Virtual Network Rule encountered a timeout"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Deletes the virtual network rule with the given name.",
+        "operationId": "VirtualNetworkRules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "description": "The name of the virtual network rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the virtual network rule."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified virtual network rule does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a list of virtual network rules in a server.",
+        "operationId": "VirtualNetworkRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtual network rules": {
+            "$ref": "./examples/VirtualNetworkRulesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetworkRuleProperties": {
+      "description": "Properties of a virtual network rule.",
+      "required": [
+        "virtualNetworkSubnetId"
+      ],
+      "type": "object",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "description": "The ARM resource id of the virtual network subnet.",
+          "type": "string"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled.",
+          "type": "boolean"
+        },
+        "state": {
+          "description": "Virtual Network Rule State",
+          "enum": [
+            "Initializing",
+            "InProgress",
+            "Ready",
+            "Failed",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VirtualNetworkRuleState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "A virtual network rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualNetworkRuleListResult": {
+      "description": "A list of virtual network rules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

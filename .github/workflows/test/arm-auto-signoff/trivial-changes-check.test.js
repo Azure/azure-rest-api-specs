@@ -44,7 +44,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -72,7 +71,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: true,
@@ -98,7 +96,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: true, // Non-RM changes block ARM auto-signoff even when there are no RM changes
@@ -122,7 +119,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true, // New spec files are functional
       rmOther: false,
       other: false,
@@ -146,7 +142,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true, // Deleted spec files are functional
       rmOther: false,
       other: false,
@@ -171,7 +166,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true, // Renamed spec files are functional
       rmOther: false,
       other: false,
@@ -196,7 +190,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -221,7 +214,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: true,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -246,7 +238,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: true,
       other: false,
@@ -295,7 +286,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -345,7 +335,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -396,7 +385,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -432,7 +420,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -459,7 +446,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -524,7 +510,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -584,7 +569,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -610,7 +594,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -631,7 +614,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -666,7 +648,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -701,7 +682,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -748,7 +728,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -795,157 +774,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: false,
-      rmOther: false,
-      other: false,
-    });
-  });
-
-  it("treats typespec-only changes as trivial", async () => {
-    const tspFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/models.tsp",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: [],
-      modifications: tspFiles,
-      deletions: [],
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: false,
-      rmExamples: false,
-      rmTypeSpec: true,
-      rmFunctional: false,
-      rmOther: false,
-      other: false,
-    });
-    expect(result.isTrivial()).toBe(true);
-  });
-
-  it("treats tspconfig.yaml changes as trivial", async () => {
-    const tspFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/tspconfig.yaml",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: [],
-      modifications: tspFiles,
-      deletions: [],
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: false,
-      rmExamples: false,
-      rmTypeSpec: true,
-      rmFunctional: false,
-      rmOther: false,
-      other: false,
-    });
-    expect(result.isTrivial()).toBe(true);
-  });
-
-  it("treats mixed typespec and documentation changes as trivial", async () => {
-    const mixedFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
-      "specification/someservice/resource-manager/Microsoft.Service/README.md",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: [],
-      modifications: mixedFiles,
-      deletions: [],
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: true,
-      rmExamples: false,
-      rmTypeSpec: true,
-      rmFunctional: false,
-      rmOther: false,
-      other: false,
-    });
-    expect(result.isTrivial()).toBe(true);
-  });
-
-  it("detects functional changes when new typespec files are added", async () => {
-    const tspFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: tspFiles,
-      modifications: [],
-      deletions: [],
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: false,
-      rmExamples: false,
-      rmTypeSpec: false,
-      rmFunctional: true,
-      rmOther: false,
-      other: false,
-    });
-  });
-
-  it("detects functional changes when typespec files are deleted", async () => {
-    const tspFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/models.tsp",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: [],
-      modifications: [],
-      deletions: tspFiles,
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: false,
-      rmExamples: false,
-      rmTypeSpec: false,
-      rmFunctional: true,
-      rmOther: false,
-      other: false,
-    });
-  });
-
-  it("detects functional changes when tspconfig.yaml is added", async () => {
-    const tspFiles = [
-      "specification/someservice/resource-manager/Microsoft.Service/SomeService/tspconfig.yaml",
-    ];
-
-    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
-      additions: tspFiles,
-      modifications: [],
-      deletions: [],
-      renames: [],
-      total: 0,
-    });
-
-    const result = await checkTrivialChanges(core);
-    expect(result).toMatchObject({
-      rmDocumentation: false,
-      rmExamples: false,
-      rmTypeSpec: false,
-      rmFunctional: true,
       rmOther: false,
       other: false,
     });
@@ -982,7 +811,6 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
-      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,

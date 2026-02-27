@@ -1,5 +1,4 @@
-import * as core from "@actions/core";
-import { log as logAsync } from "@azure-tools/specs-shared/console";
+import { appendFileSync } from "node:fs";
 
 /**
  * Log prefix for all messages from openapi-diff-runner
@@ -57,47 +56,6 @@ export function logMessage(message: string, level?: LogLevel): void {
 }
 
 /**
- * Logs a message to the console with GitHub Actions workflow commands.
- * Uses the async, backpressure-aware log() from .github/shared/src/console.js instead of console.log(),
- * to ensure all messages written despite stdout backpressure.
- * @param message The message to log.
- * @param level The log level (e.g., LogLevel.Group, LogLevel.EndGroup, LogLevel.Debug, LogLevel.Error).
- */
-export async function logMessageAsync(message: string, level?: LogLevel): Promise<void> {
-  switch (level) {
-    case LogLevel.Group: {
-      await logAsync(`::group::${message}`);
-      break;
-    }
-    case LogLevel.EndGroup: {
-      await logAsync(`::endgroup::`);
-      break;
-    }
-    case LogLevel.Debug: {
-      await logAsync(`::debug::${message}`);
-      break;
-    }
-    case LogLevel.Error: {
-      await logAsync(`::error::${message}`);
-      break;
-    }
-    case LogLevel.Warn: {
-      await logAsync(`::warning::${message}`);
-      break;
-    }
-    case LogLevel.Notice: {
-      await logAsync(`::notice::${message}`);
-      break;
-    }
-    case LogLevel.Info:
-    default: {
-      await logAsync(message);
-      break;
-    }
-  }
-}
-
-/**
  * Log an error with file location information for GitHub Actions
  * Automatically prefixes messages with LOG_PREFIX.
  * @param message Error message
@@ -139,18 +97,38 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
  * @param value Output parameter value
  */
 export function setOutput(name: string, value: string): void {
-  core.setOutput(name, value);
+  if (process.env.GITHUB_OUTPUT) {
+    appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
+  } else {
+    // Fallback to older syntax
+    console.log(`::set-output name=${name}::${value}`);
+  }
 }
 
 /**
  * Add content to the GitHub Actions job summary
  * @param content Content to add to summary
  */
-export async function addToSummary(content: string): Promise<void> {
+export function addToSummary(content: string): void {
   if (process.env.GITHUB_STEP_SUMMARY) {
-    await core.summary.addRaw(content).write();
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, content);
   }
   // Do nothing if GITHUB_STEP_SUMMARY is not available
+}
+
+/**
+ * Create a collapsible group in logs
+ * @param title Group title
+ * @param content Function that logs the group content
+ */
+export async function logGroup<T>(title: string, content: () => Promise<T> | T): Promise<T> {
+  logMessage(title, LogLevel.Group);
+  try {
+    const result = await content();
+    return result;
+  } finally {
+    logMessage("", LogLevel.EndGroup);
+  }
 }
 
 /**
@@ -164,7 +142,7 @@ const MAX_LOG_LINE_LENGTH = 60 * 1024; // 60KB to leave some buffer
  * @param prefix Optional prefix to include in the truncation message
  * @returns The original message if under limit, or truncated message with info
  */
-function truncateLogMessage(message: string, prefix?: string): string {
+export function truncateLogMessage(message: string, prefix?: string): string {
   if (message.length <= MAX_LOG_LINE_LENGTH) {
     return message;
   }
@@ -177,17 +155,12 @@ function truncateLogMessage(message: string, prefix?: string): string {
 }
 
 /**
- * Logs a message with automatic truncation if it exceeds GitHub Actions limits.
- * Uses the async, backpressure-aware log() to ensure all messages written despite stdout backpressure.
+ * Logs a message with automatic truncation if it exceeds GitHub Actions limits
  * @param message The message to log
  * @param level The log level
  * @param prefix Optional prefix for truncation message
  */
-export async function logMessageSafeAsync(
-  message: string,
-  level?: LogLevel,
-  prefix?: string,
-): Promise<void> {
+export function logMessageSafe(message: string, level?: LogLevel, prefix?: string): void {
   const safeMessage = truncateLogMessage(message, prefix);
-  await logMessageAsync(safeMessage, level);
+  logMessage(safeMessage, level);
 }

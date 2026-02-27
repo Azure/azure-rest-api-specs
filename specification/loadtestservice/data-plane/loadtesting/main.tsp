@@ -15,7 +15,7 @@ using Azure.Core;
   "https://{endpoint}",
   "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
   {
-    endpoint: url,
+    endpoint: string,
   }
 )
 @doc("""
@@ -45,9 +45,6 @@ enum APIVersions {
 
   @doc("The 2025-03-01-preview version of the Azure Load Testing API.")
   v2025_03_01_preview: "2025-03-01-preview",
-
-  @doc("The 2025-11-01-preview version of the Azure Load Testing API.")
-  v2025_11_01_preview: "2025-11-01-preview",
 }
 
 @doc("OAuth 2.0 Flow with Microsoft Entra ID.")

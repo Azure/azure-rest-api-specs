@@ -21,9 +21,7 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string",
-        "format": "uri",
-        "x-ms-skip-url-encoding": true
+        "type": "string"
       }
     ]
   },
@@ -3124,7 +3122,7 @@
         "executedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Test run initiated time. This is legacy, new developments should use createdDateTime.",
+          "description": "Test run initiated time.",
           "readOnly": true
         },
         "portalUrl": {
@@ -3834,7 +3832,7 @@
     "ListTestRunQueryParams.orderby": {
       "name": "orderby",
       "in": "query",
-      "description": "Sort on the supported fields in (field asc/desc) format. eg: createdDateTime asc.\nSupported fields - createdDateTime, executedDateTime (legacy)",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime\nasc. Supported fields - executedDateTime",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

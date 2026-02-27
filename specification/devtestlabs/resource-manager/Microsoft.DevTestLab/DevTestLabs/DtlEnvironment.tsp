@@ -13,24 +13,44 @@ namespace Microsoft.DevTestLab;
 /**
  * An environment, which is essentially an ARM template deployment.
  */
-@parentResource(User)
-model DtlEnvironment
-  is Azure.ResourceManager.ProxyResource<EnvironmentProperties, false> {
-  ...ResourceNameParameter<
-    Resource = DtlEnvironment,
-    KeyName = "environmentName",
-    SegmentName = "environments",
-    NamePattern = ""
-  >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model DtlEnvironment extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("environments")
+  name: string;
 
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
+  properties: EnvironmentProperties;
 }
+
+@armResourceOperations
+interface EnvironmentOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the user profile. */
+        @path @segment("users") userName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = DtlEnvironment,
+        KeyName = "name",
+        SegmentName = "environments",
+        NamePattern = ""
+      >>
+    > {}
 
 @armResourceOperations
 interface Environments {
@@ -38,7 +58,7 @@ interface Environments {
    * Get environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ArmResourceRead<
+  get is EnvironmentOps.Read<
     DtlEnvironment,
     Parameters = {
       /**
@@ -53,7 +73,7 @@ interface Environments {
    * Create or replace an existing environment. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is EnvironmentOps.CreateOrUpdateAsync<
     DtlEnvironment,
     LroHeaders = ArmLroLocationHeader<FinalResult = DtlEnvironment> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -65,7 +85,7 @@ interface Environments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is EnvironmentOps.CustomPatchSync<
     DtlEnvironment,
     PatchModel = DtlEnvironmentFragment
   >;
@@ -75,7 +95,7 @@ interface Environments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is EnvironmentOps.DeleteWithoutOkAsync<
     DtlEnvironment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -84,7 +104,7 @@ interface Environments {
    * List environments in a given user profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is ArmResourceListByParent<
+  list is EnvironmentOps.List<
     DtlEnvironment,
     Parameters = {
       /**

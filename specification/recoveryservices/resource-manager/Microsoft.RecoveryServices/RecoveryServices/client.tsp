@@ -62,7 +62,6 @@ namespace Microsoft.RecoveryServices;
   "RecoveryServicesPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(DNSZone, "DnsZone", "csharp");
 @@clientName(DNSZoneResponse, "DnsZoneResult", "csharp");
 @@alternateType(CmkKekIdentity.userAssignedIdentity,
   armResourceIdentifier,
@@ -71,7 +70,10 @@ namespace Microsoft.RecoveryServices;
 @@clientName(CapabilitiesResponse, "CapabilitiesResult", "csharp");
 @@alternateType(VaultExtendedInfoResource.etag, eTag, "csharp");
 @@clientName(MonitoringSettings, "VaultMonitoringSettings", "csharp");
-
+@@clientName(PrivateEndpointConnectionVaultProperties,
+  "RecoveryServicesPrivateEndpointConnectionVaultProperties",
+  "csharp"
+);
 @@alternateType(PrivateEndpointConnectionVaultProperties.location,
   azureLocation,
   "csharp"
@@ -89,8 +91,8 @@ namespace Microsoft.RecoveryServices;
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(UpgradeDetails.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
+@@clientName(VaultCertificateResponse, "VaultCertificateResult", "csharp");
 @@clientName(TriggerType, "VaultUpgradeTriggerType", "csharp");
 @@clientName(SoftDeleteSettings,
   "RecoveryServicesSoftDeleteSettings",
@@ -126,9 +128,6 @@ namespace Microsoft.RecoveryServices;
   "DeleteRegisteredIdentity",
   "csharp"
 );
-@@clientName(Vaults.list, "GetReplicationUsages", "csharp");
-@@clientName(Vaults.listByVaults, "GetUsagesByVaults", "csharp");
-@@clientName(Vaults.create, "CreateVaultCertificate", "csharp");
 @@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
   "CheckRecoveryServicesNameAvailability",
   "csharp"
@@ -148,7 +147,6 @@ namespace Microsoft.RecoveryServices;
 @@scope(Operations.list, "!csharp");
 @@scope(getOperationStatus, "!csharp");
 @@scope(getOperationResult, "!csharp");
-@@scope(DeletedVaults.getOperationStatus, "!csharp");
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
 @@clientName(AssociatedIdentity,
   "RecoveryServicesAssociatedIdentity",
@@ -168,27 +166,6 @@ namespace Microsoft.RecoveryServices;
 );
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
-@@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
-@@clientName(DeletedVaultUndeleteInput, "DeletedVaultRestoreInput", "csharp");
-@@clientName(DeletedVaultUndeleteInputProperties,
-  "DeletedVaultRestoreInputProperties",
-  "csharp"
-);
-@@clientName(DeletedVaults.undelete, "restoreDeletedVault", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(PatchVault.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-@@alternateType(Vault.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
 @@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
 
 // Java SDK backward compatibility fixes
@@ -198,70 +175,4 @@ namespace Microsoft.RecoveryServices;
 @@clientName(ResourceCertificateAndAcsDetails.globalAcsHostName,
   "globalAcsHostname",
   "java"
-);
-
-/**
- * Patch Resource information, as returned by the resource provider.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
-model PatchVaultWithEtag
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Properties of the vault.
-   */
-  properties?: VaultProperties;
-
-  /**
-   * Identifies the unique system identifier for each Azure resource.
-   */
-  sku?: Sku;
-
-  /**
-   * Identity for the resource.
-   */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-
-  /**
-   * Optional ETag.
-   */
-  etag?: eTag;
-}
-
-@@alternateType(PatchVault, PatchVaultWithEtag, "csharp");
-
-/**
- * Information to be stored in Vault properties as an element of privateEndpointConnections List.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
-model PrivateEndpointConnectionVaultPropertiesReplacement
-  extends Azure.ResourceManager.CommonTypes.Resource {
-  ...OmitProperties<
-    PrivateEndpointConnectionVaultProperties,
-    "id" | "name" | "type"
-  >;
-}
-@@alternateType(PrivateEndpointConnectionVaultProperties,
-  PrivateEndpointConnectionVaultPropertiesReplacement,
-  "csharp"
-);
-@@clientName(PrivateEndpointConnectionVaultPropertiesReplacement,
-  "RecoveryServicesPrivateEndpointConnectionVaultProperties",
-  "csharp"
-);
-
-/**
- * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
-model VaultCertificateResponseReplacement
-  extends Azure.ResourceManager.CommonTypes.Resource {
-  ...OmitProperties<VaultCertificateResponse, "id" | "name" | "type">;
-}
-@@alternateType(VaultCertificateResponse,
-  VaultCertificateResponseReplacement,
-  "csharp"
-);
-@@clientName(VaultCertificateResponseReplacement,
-  "VaultCertificateResult",
-  "csharp"
 );

@@ -21,7 +21,7 @@ export async function main() {
   if (!existsSync(logFolder)) {
     mkdirSync(logFolder, { recursive: true });
   }
-  let statusCode: number;
+  let statusCode = 0;
   if (batchType) {
     statusCode = await generateSdkForBatchSpecs(batchType);
   } else if (pullRequestNumber) {

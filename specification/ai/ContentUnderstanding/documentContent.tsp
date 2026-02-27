@@ -11,9 +11,9 @@ using TypeSpec.Versioning;
 namespace ContentUnderstanding;
 
 @doc("Document content.  Ex. text/plain, application/pdf, image/jpeg.")
-model DocumentContent extends AnalysisContent {
+model DocumentContent extends MediaContent {
   @doc("Content kind.")
-  kind: AnalysisContentKind.document;
+  kind: MediaContentKind.document;
 
   @doc("Start page number (1-indexed) of the content.")
   startPageNumber: int32;
