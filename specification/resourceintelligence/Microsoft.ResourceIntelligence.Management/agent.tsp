@@ -84,5 +84,5 @@ interface Agents {
    * Creates a new run for the agent. Returns 202 Accepted with run tracking info.
    * The client should poll GET runs/{runId} for completion.
    */
-  run is ArmResourceActionAsync<Agent, RunRequest, RunResponse>;
+  run is ArmResourceActionAsync<Agent, RunRequest, Run>;
 }

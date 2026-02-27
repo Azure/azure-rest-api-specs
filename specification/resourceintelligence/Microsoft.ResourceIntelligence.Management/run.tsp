@@ -111,5 +111,5 @@ interface LatestRuns {
     ...ResourceGroupNameParameter,
     @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
     @body body: RunRequest,
-  ): RunResponse | { @statusCode statusCode: 201; @body body: RunResponse } | ErrorResponse;
+  ): Run | { @statusCode statusCode: 201; @body body: Run } | ErrorResponse;
 }

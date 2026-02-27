@@ -363,7 +363,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RunResponse"
+              "$ref": "#/definitions/Run"
             }
           },
           "202": {
@@ -394,7 +394,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/RunResponse"
+          "final-state-schema": "#/definitions/Run"
         },
         "x-ms-long-running-operation": true
       }
@@ -762,13 +762,13 @@
           "200": {
             "description": "Run update operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/RunResponse"
+              "$ref": "#/definitions/Run"
             }
           },
           "201": {
             "description": "Run create operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/RunResponse"
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -1172,24 +1172,6 @@
           "x-ms-client-name": "modelUrl"
         }
       }
-    },
-    "RunResponse": {
-      "type": "object",
-      "description": "Response body returned when a run is accepted.",
-      "properties": {
-        "runId": {
-          "type": "string",
-          "description": "The ID of the created run."
-        },
-        "status": {
-          "type": "string",
-          "description": "The current status of the run."
-        }
-      },
-      "required": [
-        "runId",
-        "status"
-      ]
     },
     "RunStatus": {
       "type": "string",

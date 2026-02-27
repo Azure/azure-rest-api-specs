@@ -152,18 +152,3 @@ model RunRequest {
   @encodedName("application/json", "model")
   modelUrl?: string;
 }
-
-/**
- * Response body returned when a run is accepted.
- */
-model RunResponse {
-  /**
-   * The ID of the created run.
-   */
-  runId: string;
-
-  /**
-   * The current status of the run.
-   */
-  status: string;
-}
