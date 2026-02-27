@@ -10516,6 +10516,81 @@
         ],
         "description": "Represents a target specifying an Azure AI agent."
       },
+      "AzureAIBenchmarkDataSourceConfig": {
+        "type": "object",
+        "required": [
+          "scenario",
+          "benchmark_name"
+        ],
+        "properties": {
+          "scenario": {
+            "type": "string",
+            "enum": [
+              "benchmark_preview"
+            ],
+            "description": "Data schema scenario, always `benchmark` for benchmark evaluations."
+          },
+          "benchmark_name": {
+            "type": "string",
+            "description": "The name of the benchmark specification."
+          },
+          "benchmark_version": {
+            "type": "string",
+            "description": "The version of the benchmark specification (e.g., '0.1'). Latest version if not specified."
+          },
+          "grader_model": {
+            "type": "string",
+            "description": "Optional grader model for benchmarks that use model graders, Required when the benchmark's testing_criteria uses a model grader type."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureAIDataSourceConfig"
+          }
+        ],
+        "description": "Data source configuration for benchmark evaluations."
+      },
+      "AzureAIBenchmarkPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_benchmark_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_benchmark_preview`."
+          },
+          "input_messages": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
+              }
+            ],
+            "description": "Input messages configuration."
+          },
+          "target": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureAIModelTarget"
+              },
+              {
+                "$ref": "#/components/schemas/AzureAIAgentTarget"
+              }
+            ],
+            "description": "The target model or agent to evaluate against the benchmark.\nWhen using `azure_ai_model` target, `sampling_params` must not be provided;\ninference parameters are auto-filled from the benchmark specification stored in eval group properties."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a data source for benchmark evaluation runs."
+      },
       "AzureAIDataSourceConfig": {
         "type": "object",
         "required": [
@@ -10536,9 +10611,16 @@
               "red_team",
               "responses",
               "traces_preview",
-              "synthetic_data_gen_preview"
+              "synthetic_data_gen_preview",
+              "benchmark_preview"
             ],
             "description": "Data schema scenario."
+          }
+        },
+        "discriminator": {
+          "propertyName": "scenario",
+          "mapping": {
+            "benchmark_preview": "#/components/schemas/AzureAIBenchmarkDataSourceConfig"
           }
         },
         "allOf": [
@@ -12281,6 +12363,9 @@
               },
               {
                 "$ref": "#/components/schemas/AzureAIDataSourceConfig"
+              },
+              {
+                "$ref": "#/components/schemas/AzureAIBenchmarkDataSourceConfig"
               }
             ],
             "description": "The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation."
@@ -12941,6 +13026,9 @@
               },
               {
                 "$ref": "#/components/schemas/AzureAIDataSourceConfig"
+              },
+              {
+                "$ref": "#/components/schemas/AzureAIBenchmarkDataSourceConfig"
               }
             ],
             "description": "Configuration of data sources used in runs of the evaluation."
@@ -13290,7 +13378,8 @@
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "csv": "#/components/schemas/EvalCsvRunDataSource",
-            "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource"
+            "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
+            "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."

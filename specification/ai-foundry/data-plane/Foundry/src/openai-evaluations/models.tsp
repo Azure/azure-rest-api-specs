@@ -69,6 +69,7 @@ model DataSourceConfig {
   schema: Record<unknown>;
 }
 
+@discriminator("scenario")
 model AzureAIDataSourceConfig extends DataSourceConfig {
   /** The object type, which is always `azure_ai_source`. */
   type: "azure_ai_source";
