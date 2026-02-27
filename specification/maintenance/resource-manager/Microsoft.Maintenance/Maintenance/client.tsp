@@ -147,3 +147,8 @@ using Microsoft.Maintenance;
   "csharp"
 );
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
+
+// csharp: rename Updates.list to avoid GetAll name collision with ConfigurationAssignment list
+// Both generate GetAll(string, string, string, string, CancellationToken) on SubscriptionResource
+// but return different types (Update vs ConfigurationAssignmentResource)
+@@clientName(UpdatesOperationGroup.list, "GetUpdates", "csharp");
