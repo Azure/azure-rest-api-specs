@@ -273,10 +273,6 @@ suppressions:
   - code: LroErrorContent
     from: search.json
     reason: Agreement with ARM reviewers to update in next API version.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: search.json
-    where: $.definitions["OfferingsListResult"]
-    reason: OfferingsListResult is a list/result container, not an ARM resource; it intentionally does not include readOnly 'name', 'id', 'type'.
   - code: PatchBodyParametersSchema
     from: search.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}"].patch.parameters[5].schema.properties.properties

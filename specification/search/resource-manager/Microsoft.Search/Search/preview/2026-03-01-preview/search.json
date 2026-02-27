@@ -135,6 +135,46 @@
         }
       }
     },
+    "/providers/Microsoft.Search/offerings/{regionName}": {
+      "get": {
+        "operationId": "Offerings_Get",
+        "tags": [
+          "Offerings"
+        ],
+        "description": "Gets the features and SKUs offered by the Azure AI Search service in a specific region.",
+        "parameters": [
+          {
+            "name": "regionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure region."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the features and SKUs offered in the specified region.",
+            "schema": {
+              "$ref": "#/definitions/OfferingsByRegion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchGetOffering": {
+            "$ref": "./examples/SearchGetOffering.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability": {
       "post": {
         "operationId": "Services_CheckNameAvailability",
@@ -3884,13 +3924,32 @@
     },
     "OfferingsByRegion": {
       "type": "object",
+      "description": "Describes the features and SKUs offered in a specific region.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfferingsByRegionProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the offerings in this region."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OfferingsByRegionProperties": {
+      "type": "object",
+      "description": "The properties describing features and SKUs offered in a region.",
       "properties": {
         "regionName": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the region."
         },
         "features": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/FeatureOffering"
           },
@@ -3899,6 +3958,7 @@
         },
         "skus": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SkuOffering"
           },
