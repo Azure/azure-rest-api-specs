@@ -42,7 +42,7 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(Microsoft.DBforPostgreSQL.ServerSkuCapability.supportedHaMode,
   PostgreSqlFlexibleServerHighAvailabilityMode[],
-  "java"
+  "java,go"
 );
 
 @@clientName(PostgresMajorVersion.`11`, "Eleven", "go");
