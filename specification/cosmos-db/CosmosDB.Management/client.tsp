@@ -5,5 +5,5 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.DocumentDB;
 
-@@clientName(ErrorResponse, "CosmosDBErrorResult", "csharp,java");
+@@clientName(ErrorResponse, "CosmosDBErrorResult", "csharp,java,javascript");
 @@clientName(Microsoft.DocumentDB, "CosmosDBManagementClient", "javascript");
