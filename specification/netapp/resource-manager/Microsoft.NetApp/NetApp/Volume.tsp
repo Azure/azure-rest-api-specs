@@ -964,6 +964,7 @@ model VolumePropertiesDataProtection {
   /**
    * Advanced Ransomware Protection settings
    */
+  @added(Versions.v2025_12_01)
   ransomwareProtection?: RansomwareProtectionSettings;
 }
 
@@ -1371,6 +1372,7 @@ model VolumePatchPropertiesDataProtection {
   /**
    * Advanced Ransomware Protection updatable settings
    */
+  @added(Versions.v2025_12_01)
   ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
 
@@ -2100,6 +2102,7 @@ model QuotaReportFilterRequest {
 /**
  * * Result of ListQuotaReportResponse
  */
+@added(Versions.v2025_12_01)
 model ListQuotaReportResult {
   /**
    * Represents the properties of the ListQuotaReport.
@@ -2110,6 +2113,7 @@ model ListQuotaReportResult {
 /**
  * Quota Report for volume
  */
+@added(Versions.v2025_12_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
@@ -2121,6 +2125,7 @@ model ListQuotaReportResponse {
 /**
  * Quota report record properties
  */
+@added(Versions.v2025_12_01)
 model QuotaReport {
   /**
    * Type of quota
@@ -2156,6 +2161,7 @@ model QuotaReport {
 /**
  * Advanced Ransomware Protection reports (ARP) settings
  */
+@added(Versions.v2025_12_01)
 model RansomwareProtectionSettings {
   /**
    * The desired value of the Advanced Ransomware Protection feature state available to the volume
@@ -2172,6 +2178,7 @@ model RansomwareProtectionSettings {
 /**
  * Advanced Ransomware Protection reports (ARP) updatable settings
  */
+@added(Versions.v2025_12_01)
 model RansomwareProtectionPatchSettings {
   /**
    * The desired value of the ARP feature state available to the volume
@@ -2182,6 +2189,7 @@ model RansomwareProtectionPatchSettings {
 /**
  * The desired state of the Advanced Ransomware Protection feature
  */
+@added(Versions.v2025_12_01)
 union DesiredRansomwareProtectionState {
   string,
 
@@ -2199,6 +2207,7 @@ union DesiredRansomwareProtectionState {
 /**
  * The actual state of the Advanced Ransomware Protection feature
  */
+@added(Versions.v2025_12_01)
 union ActualRansomwareProtectionState {
   string,
 
@@ -2563,6 +2572,7 @@ interface Volumes {
    */
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @added(Versions.v2025_12_01)
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     /**
