@@ -615,7 +615,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "csharp"
 );
-@@clientName(ManagedClusterIdentity.type, "ResourceIdentityType", "csharp");
+@@clientName(ManagedClusterIdentity.type, "IdentityType", "csharp");
 @@clientName(ManagedClusterHTTPProxyConfig,
   "ManagedClusterHttpProxyConfig",
   "csharp"
