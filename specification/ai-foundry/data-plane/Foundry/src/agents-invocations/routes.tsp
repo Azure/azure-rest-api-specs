@@ -5,10 +5,10 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-alias AgentInvocationPreviewHeader = WithRequiredFoundryPreviewHeader<AgentDefinitionFeatureKeys.hosted_agents_v1_preview>;
+alias AgentInvocationPreviewHeader = WithRequiredFoundryPreviewHeader<AgentDefintionOptInKeys.hosted_agents_v1_preview>;
 
 const AgentInvocationRequiredPreviews = #{
-  required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview],
+  required_previews: #[AgentDefintionOptInKeys.hosted_agents_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
