@@ -144,7 +144,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(IPAddressType, "IpAddressType", "java");
 @@clientName(PublicIPAddressConfiguration,
   "IpConfigurationPublicIpAddressConfiguration",
-  "java"
+  "java,python"
 );
 @@clientName(PrivateIPAddressVersion, "PrivateIpAddressVersion", "java");
 @@clientName(PublicIPAddressVersion, "PublicIpAddressVersion", "java");
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Models {
 
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
-  "go, javascript, python"
+  "go, javascript"
 );
 
 /**
