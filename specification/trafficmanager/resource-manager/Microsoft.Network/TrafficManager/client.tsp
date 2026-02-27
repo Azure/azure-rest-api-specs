@@ -95,6 +95,7 @@ op getReplace(
 );
 @@clientName(QueryExperience, "TrafficManagerHeatMapQueryExperience", "csharp");
 @@clientName(TrafficFlow, "TrafficManagerHeatMapTrafficFlow", "csharp");
+@@clientName(TrafficFlow.sourceIp, "SourceIP", "csharp");
 @@clientName(Microsoft.Network.TrackedResource,
   "TrafficManagerTrackedResourceData",
   "csharp"
@@ -107,11 +108,12 @@ op getReplace(
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(UserMetricsModel, "TrafficManagerUserMetric", "csharp");
 @@clientName(TrafficManagerNameAvailability.reason,
   "UnavailableReason",
   "csharp"
 );
+@@clientName(TrafficManagerNameAvailability.type, "ResourceType", "csharp");
+@@clientName(UserMetricsModel, "TrafficManagerUserMetric", "csharp");
 @@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   "CheckTrafficManagerRelativeDnsNameAvailability",
   "csharp"
@@ -120,19 +122,17 @@ op getReplace(
   "CheckTrafficManagerNameAvailabilityV2",
   "csharp"
 );
-// Resource data type renames
 @@clientName(Endpoint, "TrafficManagerEndpoint", "csharp");
 @@clientName(Profile, "TrafficManagerProfile", "csharp");
-@@clientName(TrafficManagerGeographicHierarchy,
-  "TrafficManagerGeographicHierarchy",
-  "csharp"
-);
-// Model type renames (RP prefix)
 @@clientName(DnsConfig, "TrafficManagerDnsConfig", "csharp");
 @@clientName(MonitorConfig, "TrafficManagerMonitorConfig", "csharp");
 @@clientName(HeatMapEndpoint, "TrafficManagerHeatMapEndpoint", "csharp");
 @@clientName(Region, "TrafficManagerRegion", "csharp");
-// Enum/struct type renames (RP prefix)
+@@clientName(EndpointType, "TrafficManagerEndpointType", "csharp");
+@@clientName(DeleteOperationResult,
+  "TrafficManagerDeleteOperationResult",
+  "csharp"
+);
 @@clientName(EndpointMonitorStatus,
   "TrafficManagerEndpointMonitorStatus",
   "csharp"
@@ -152,6 +152,7 @@ op getReplace(
   Azure.Core.armResourceType,
   "csharp"
 );
+@@alternateType(TrafficFlow.sourceIp, Azure.Core.ipV4Address, "csharp");
 @@alternateType(EndpointPropertiesSubnetsItem.first,
   Azure.Core.ipV4Address,
   "csharp"
@@ -185,6 +186,13 @@ op getReplace(
   "csharp"
 );
 @@alternateType(HeatMapType, TrafficManagerHeatMapType, "csharp");
+@@usage(Region, Usage.input, "csharp");
+@@usage(TrafficFlow, Usage.input, "csharp");
+@@usage(QueryExperience, Usage.input, "csharp");
+@@usage(HeatMapModel, Usage.input, "csharp");
+@@usage(HeatMapEndpoint, Usage.input, "csharp");
+@@usage(UserMetricsModel, Usage.input, "csharp");
+@@usage(TrafficManagerGeographicHierarchy, Usage.input, "csharp");
 
 /**
  * The type of the heatmap.
