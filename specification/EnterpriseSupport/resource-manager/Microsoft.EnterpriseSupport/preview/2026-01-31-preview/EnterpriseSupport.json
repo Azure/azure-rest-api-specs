@@ -458,56 +458,6 @@
     }
   },
   "definitions": {
-    "EnterpriseSupportsResponseProperties": {
-      "type": "object",
-      "description": "Details of the ESRP EnterpriseSupport.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning status",
-          "readOnly": true
-        },
-        "billingAccountId": {
-          "type": "string",
-          "description": "Billing Account ID"
-        },
-        "billingGroupId": {
-          "type": "string",
-          "description": "Billing Group ID"
-        },
-        "projectId": {
-          "type": "string",
-          "description": "Invoice section for the billing account"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Quantity for the purchase"
-        },
-        "serviceStartDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Service start date for  Enterprise Support"
-        },
-        "csam": {
-          "type": "string",
-          "description": "CSAM for the  Enterprise Support"
-        },
-        "upn": {
-          "type": "string",
-          "description": "Product UPN"
-        }
-      },
-      "required": [
-        "billingAccountId",
-        "billingGroupId",
-        "projectId",
-        "quantity",
-        "serviceStartDate",
-        "csam",
-        "upn"
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -606,12 +556,16 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning status",
+          "description": "Provisioning state",
           "readOnly": true
         },
         "upn": {
           "type": "string",
-          "description": "Product UPN"
+          "description": "Product UPN",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "quantity": {
           "type": "integer",
@@ -676,10 +630,6 @@
       "type": "object",
       "description": "The updatable properties of the SupportPlan.",
       "properties": {
-        "upn": {
-          "type": "string",
-          "description": "Product UPN"
-        },
         "quantity": {
           "type": "integer",
           "format": "int64",
