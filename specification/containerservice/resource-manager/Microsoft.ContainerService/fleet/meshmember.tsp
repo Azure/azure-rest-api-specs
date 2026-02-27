@@ -31,7 +31,7 @@ model MeshProperties {
 @added(Versions.v2026_03_02_preview)
 @doc("The Cilium specific properties of the member cluster.")
 model CiliumProperties {
-  @doc("Cilium requires each cluster to be assigned a unique numeric cluster id. The id is managed by Fleet and cannot be set by the user.")
+  @doc("Cilium requires each cluster to be assigned a unique numeric cluster id from 1 - 255. The id is managed by Fleet and cannot be set by the user.")
   @visibility(Lifecycle.Read)
   id: int32;
 
