@@ -208,6 +208,8 @@ interface Service {
     ...ContentLengthParameter,
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
+    @statusCode statusCode: 202;
+
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
