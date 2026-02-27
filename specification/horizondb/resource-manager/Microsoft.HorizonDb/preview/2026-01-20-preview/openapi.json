@@ -98,7 +98,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "List HorizonDbCluster resources by subscription ID",
+        "description": "Lists all HorizonDb clusters in a subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -137,7 +137,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "List HorizonDbCluster resources by resource group",
+        "description": "Lists all HorizonDb clusters in a resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -179,7 +179,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Get a HorizonDbCluster",
+        "description": "Gets information about a HorizonDb cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -226,7 +226,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Create a HorizonDbCluster",
+        "description": "Creates a new HorizonDb cluster or updates an existing cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -304,7 +304,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Update a HorizonDbCluster",
+        "description": "Updates an existing HorizonDb cluster (e.g., tags, vCores, replica count)",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -379,7 +379,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Delete a HorizonDbCluster",
+        "description": "Deletes a HorizonDb cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -546,251 +546,6 @@
             "$ref": "./examples/Pools_Get.json"
           }
         }
-      },
-      "put": {
-        "operationId": "HorizonDbPools_CreateOrUpdate",
-        "tags": [
-          "HorizonDbPools"
-        ],
-        "description": "Creates a new HorizonDb pool or updates an existing pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDb cluster",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDb pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HorizonDbPool"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'HorizonDbPool' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbPool"
-            }
-          },
-          "201": {
-            "description": "Resource 'HorizonDbPool' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbPool"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a HorizonDb pool": {
-            "$ref": "./examples/Pools_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/HorizonDbPool"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "HorizonDbPools_Update",
-        "tags": [
-          "HorizonDbPools"
-        ],
-        "description": "Updates an existing HorizonDb pool (e.g., replica count)",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDb cluster",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDb pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/HorizonDbPoolForPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HorizonDbPool"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a HorizonDb pool": {
-            "$ref": "./examples/Pools_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/HorizonDbPool"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "HorizonDbPools_Delete",
-        "tags": [
-          "HorizonDbPools"
-        ],
-        "description": "Deletes a HorizonDb pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDb cluster",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDb pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a HorizonDb pool": {
-            "$ref": "./examples/Pools_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules": {
@@ -2036,16 +1791,6 @@
         }
       ]
     },
-    "HorizonDbPoolForPatch": {
-      "type": "object",
-      "description": "Represents a HorizonDb pool resource for update operations",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HorizonDbPoolPropertiesForUpdate",
-          "description": "The properties of the pool for update"
-        }
-      }
-    },
     "HorizonDbPoolListResult": {
       "type": "object",
       "description": "The response of a HorizonDbPool list operation.",
@@ -2146,19 +1891,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the pool",
           "readOnly": true
-        }
-      }
-    },
-    "HorizonDbPoolPropertiesForUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDb pool for update operations",
-      "properties": {
-        "replicaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of replicas in the pool",
-          "minimum": 0,
-          "maximum": 20
         }
       }
     },

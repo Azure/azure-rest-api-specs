@@ -216,20 +216,6 @@ model MaintenanceWindowOptions {
   startMinute?: int32;
 }
 
-@doc("Properties of a HorizonDb pool for update operations")
-model HorizonDbPoolPropertiesForUpdate {
-  @doc("Number of replicas in the pool")
-  @minValue(0)
-  @maxValue(20)
-  replicaCount?: int32;
-}
-
-@doc("Represents a HorizonDb pool resource for update operations")
-model HorizonDbPoolForPatch {
-  @doc("The properties of the pool for update")
-  properties?: HorizonDbPoolPropertiesForUpdate;
-}
-
 @doc("Properties of a HorizonDb replica")
 model HorizonDbReplicaProperties {
   /**
