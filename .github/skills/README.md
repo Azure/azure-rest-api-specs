@@ -40,7 +40,7 @@ These skills (from [microsoft/GitHub-Copilot-for-Azure](https://github.com/micro
 | [sensei](sensei/SKILL.md) | "run sensei", "improve skill", "fix frontmatter" | Iteratively improve skill frontmatter compliance using the Ralph loop |
 | [skill-authoring](skill-authoring/SKILL.md) | "create a skill", "new skill", "skill template" | Guidelines for writing Agent Skills per agentskills.io spec |
 | [markdown-token-optimizer](markdown-token-optimizer/SKILL.md) | "optimize markdown", "reduce tokens", "token count" | Analyze markdown files for token efficiency |
-| [file-test-bug](file-test-bug/SKILL.md) | "file test bug", "report test failure" | File GitHub issues for integration test failures |
+| [report-test-bug](report-test-bug/SKILL.md) | "file test bug", "report test failure" | File GitHub issues for integration test failures |
 
 ### Skill Anatomy
 
@@ -301,7 +301,7 @@ on pull requests that modify files under `.github/skills/`.
 | sensei | Meta | Medium-High | 2098 ❌ | — | ⚠️ |
 | skill-authoring | Meta | Medium | 675 ❌ | — | ⚠️ |
 | markdown-token-optimizer | Meta | Medium | 333 ✅ | — | ⚠️ |
-| file-test-bug | Meta | Medium | 606 ❌ | — | ⚠️ |
+| report-test-bug | Meta | Medium | 606 ❌ | — | ⚠️ |
 
 All 13 TypeSpec-to-SDK skills now pass 4/4 MCP Integration checks (prerequisites + CLI fallback documented).
 

@@ -1,5 +1,5 @@
 ---
-name: file-test-bug
+name: report-test-bug
 description: "File a GitHub issue for local integration test failures. TRIGGERS: file test bug, report test failure, create bug for test, integration test failed, test failure issue, junit failure"
 ---
 
