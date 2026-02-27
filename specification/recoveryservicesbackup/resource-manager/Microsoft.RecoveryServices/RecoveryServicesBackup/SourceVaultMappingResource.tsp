@@ -51,8 +51,16 @@ interface CrossTenantSourceVaultMappings {
   /**
    * Gets a specific source vault mapping configuration for cross-tenant restore operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId required for service contract compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
   @operationId("CrossTenant_GetSourceVaultMapping")
+  @extension(
+    "x-ms-examples",
+    #{
+      GetSourceVaultMapping: #{
+        $ref: "./examples/CrossTenant/GetSourceVaultMapping.json",
+      },
+    }
+  )
   getSourceVaultMapping is ArmResourceRead<SourceVaultMappingResource>;
 
   /**
