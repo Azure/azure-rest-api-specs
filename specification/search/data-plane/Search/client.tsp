@@ -3023,10 +3023,10 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceErrorRecord,
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceErrorRecord,
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
