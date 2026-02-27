@@ -186,6 +186,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
+@@clientName(Schedule.id, "schedule_id");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
