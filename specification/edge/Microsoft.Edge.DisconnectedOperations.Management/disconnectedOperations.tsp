@@ -37,10 +37,7 @@ interface DisconnectedOperations
       DisconnectedOperationProperties
     > {
   get is ArmResourceRead<DisconnectedOperation>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    DisconnectedOperationCreateOrUpdate,
-    DisconnectedOperation
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DisconnectedOperationCreateOrUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<DisconnectedOperation>;
   @doc("get deployment manifest.")
   listDeploymentManifest is ArmResourceActionSync<
