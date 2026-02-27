@@ -12003,7 +12003,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/mSDeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/MSDeploy": {
       "get": {
         "operationId": "WebApps_GetMSDeployStatus",
         "tags": [
@@ -12114,7 +12114,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/mSDeploy/log": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/MSDeploy/log": {
       "get": {
         "operationId": "WebApps_GetMSDeployLog",
         "tags": [
@@ -15265,7 +15265,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/mSDeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "operationId": "WebApps_GetInstanceMsDeployStatus",
         "tags": [
@@ -15390,7 +15390,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/mSDeploy/log": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy/log": {
       "get": {
         "operationId": "WebApps_GetInstanceMSDeployLog",
         "tags": [
@@ -24260,7 +24260,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/mSDeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/MSDeploy": {
       "get": {
         "operationId": "WebApps_GetMSDeployStatusSlot",
         "tags": [
@@ -24385,7 +24385,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/mSDeploy/log": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/MSDeploy/log": {
       "get": {
         "operationId": "WebApps_GetMSDeployLogSlot",
         "tags": [
@@ -26056,7 +26056,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/mSDeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "operationId": "WebApps_GetInstanceMsDeployStatusSlot",
         "tags": [
@@ -26195,7 +26195,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/mSDeploy/log": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log": {
       "get": {
         "operationId": "WebApps_GetInstanceMSDeployLogSlot",
         "tags": [
@@ -47400,7 +47400,7 @@
       "description": "MSDeploy ARM PUT information",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MSDeployCore",
+          "$ref": "#/definitions/MSDeployProperties",
           "description": "Core resource properties",
           "x-ms-client-flatten": true
         }
@@ -47513,6 +47513,27 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "MSDeployProperties": {
+      "type": "object",
+      "description": "MSDeploy ARM PUT information properties",
+      "properties": {
+        "addOnPackages": {
+          "type": "array",
+          "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
+          "items": {
+            "$ref": "#/definitions/MSDeployCore"
+          },
+          "x-ms-identifiers": [
+            "packageUri"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MSDeployCore"
+        }
+      ]
     },
     "MSDeployProvisioningState": {
       "type": "string",
