@@ -1,10 +1,12 @@
 import "./main.tsp";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
+using TypeSpec.Versioning;
 
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 
@@ -74,5 +76,60 @@ model CustomizedBillingConfiguration {
 );
 @@alternateType(DisconnectedOperationDeploymentManifest.billingConfiguration,
   CustomizedBillingConfiguration,
+  "javascript"
+);
+
+@doc("The disconnected operation properties")
+model CustomizedDisconnectedOperationProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unique GUID of the stamp")
+  stampId?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing model")
+  billingModel?: BillingModel;
+
+  @renamedFrom(Microsoft.Edge.Versions.v2026_03_15, "connectionIntent")
+  @removed(Microsoft.Edge.Versions.v2026_03_15)
+  @doc("The connection intent")
+  oldConnectionIntent: ConnectionIntent;
+
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The connection intent")
+  connectionIntent: ConnectionIntent;
+
+  @visibility(Lifecycle.Read)
+  @doc("The connection status")
+  connectionStatus?: ConnectionStatus;
+
+  @doc("The registration intent")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  registrationStatus?: RegistrationStatus;
+
+  @doc("The device version")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  deviceVersion?: string;
+
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  billingConfiguration?: CustomizedBillingConfiguration;
+
+  @doc("The benefit plans")
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  benefitPlans?: BenefitPlans;
+}
+
+@@clientName(CustomizedDisconnectedOperationProperties,
+  "DisconnectedOperationProperties",
+  "javascript"
+);
+
+@@alternateType(DisconnectedOperation.properties,
+  CustomizedDisconnectedOperationProperties,
   "javascript"
 );
