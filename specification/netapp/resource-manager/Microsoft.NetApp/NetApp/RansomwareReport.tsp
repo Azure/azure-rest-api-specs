@@ -2,20 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./Volume.tsp";
 
 using Rest;
 using Azure.ResourceManager;
-using Versioning;
 
 namespace Microsoft.NetApp;
 
 /**
  * File extension with length constraints
  */
-@added(Versions.v2025_09_01_preview)
 @maxLength(1024)
 @minLength(1)
 scalar Extensions extends string;
@@ -26,7 +23,6 @@ scalar Extensions extends string;
  * ARP reports are created with a list of suspected files when it detects any combination of high data entropy, abnormal volume activity with data encryption, and unusual file extensions.
  * ARP creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of these ARP snapshots or another snapshot of your volume to restore data.
  */
-@added(Versions.v2025_09_01_preview)
 @parentResource(Volume)
 model RansomwareReport
   is Azure.ResourceManager.ProxyResource<RansomwareReportProperties> {
@@ -41,7 +37,6 @@ model RansomwareReport
 /**
  * List of Advanced Ransomware Protection (ARP) reports
  */
-@added(Versions.v2025_09_01_preview)
 model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
 
 /**
@@ -51,7 +46,6 @@ model RansomwareReportsList is Azure.Core.Page<RansomwareReport>;
  *
  * Advanced Ransomware Protection (ARP) creates snapshots named Anti_ransomware_backup when it detects a potential ransomware threat. You can use one of the ARP snapshots or another snapshot of your volume to restore data.
  */
-@added(Versions.v2025_09_01_preview)
 model RansomwareReportProperties {
   /**
    * The creation date and time of the report
@@ -101,7 +95,6 @@ model RansomwareReportProperties {
 /**
  * Clear suspects for Advanced Ransomware Protection (ARP) report
  */
-@added(Versions.v2025_09_01_preview)
 model RansomwareSuspectsClearRequest {
   /**
    * ARP report suspect resolution
@@ -118,7 +111,6 @@ model RansomwareSuspectsClearRequest {
 /**
  * List of suspects identified in an Advanced Ransomware Protection (ARP) report
  */
-@added(Versions.v2025_09_01_preview)
 model RansomwareSuspects {
   /**
    * Suspect File extension
@@ -149,7 +141,6 @@ model RansomwareSuspects {
 /**
  * Suspect file information
  */
-@added(Versions.v2025_09_01_preview)
 model SuspectFile {
   /**
    * Suspect filename
@@ -167,7 +158,6 @@ model SuspectFile {
 /**
  * Severity of the Advanced Ransomware Protection (ARP) report
  */
-@added(Versions.v2025_09_01_preview)
 union RansomwareReportSeverity {
   string,
 
@@ -195,7 +185,6 @@ union RansomwareReportSeverity {
 /**
  * State of the Advanced Ransomware Protection (ARP) report
  */
-@added(Versions.v2025_09_01_preview)
 union RansomwareReportState {
   string,
 
@@ -213,7 +202,6 @@ union RansomwareReportState {
 /**
  * ARP report suspect resolution
  */
-@added(Versions.v2025_09_01_preview)
 union RansomwareSuspectResolution {
   string,
 
@@ -228,7 +216,6 @@ union RansomwareSuspectResolution {
   FalsePositive: "FalsePositive",
 }
 
-@added(Versions.v2025_09_01_preview)
 @armResourceOperations
 interface RansomwareReports {
   /**

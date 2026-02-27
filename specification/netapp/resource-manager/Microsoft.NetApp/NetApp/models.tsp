@@ -39,13 +39,11 @@ union CheckNameResourceTypes {
   /**
    * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
    */
-  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
 
   /**
    * ANF Backup under a Backup Vault
    */
-  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
@@ -77,13 +75,11 @@ union CheckQuotaNameResourceTypes {
   /**
    * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
    */
-  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
 
   /**
    * ANF Backup under a Backup Vault
    */
-  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
@@ -243,8 +239,6 @@ union KeySource {
 /**
  * The encryption keySource (provider) for ANF Elastic resources. Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 union ElasticKeySource {
   string,
@@ -285,7 +279,6 @@ union NetAppProvisioningState {
   /**
    * Resource is updating
    */
-  @added(Versions.v2025_09_01)
   Updating: "Updating",
 
   /**
