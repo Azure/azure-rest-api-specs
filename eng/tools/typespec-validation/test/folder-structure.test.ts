@@ -36,7 +36,7 @@ describe("folder-structure", function () {
       {
         tool: "TypeSpecValidation",
         paths: ["."],
-        reason: "test suppression reason 2",
+        reason: "foo",
         rules: ["FolderStructure"],
       },
     ]);
@@ -45,6 +45,7 @@ describe("folder-structure", function () {
     assert(result.success);
     assert(result.stdOutput?.includes("suppressed"));
     assert(result.stdOutput?.includes("test suppression reason"));
+    assert(!result.stdOutput?.includes("foo"));
   });
 
   it("should not suppress when suppression targets a different rule", async function () {
