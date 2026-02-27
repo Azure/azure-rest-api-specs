@@ -90,7 +90,7 @@ using Azure.AI.Projects;
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 @@access(FoundryFeaturesOptInKeys, Access.public);
-@@access(AgentDefintionOptInKeys, Access.public);
+@@access(AgentDefinitionOptInKeys, Access.public);
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);

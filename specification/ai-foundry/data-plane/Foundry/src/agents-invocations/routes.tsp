@@ -6,10 +6,10 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias AgentInvocationPreviewHeader = WithRequiredFoundryPreviewHeader<AgentDefintionOptInKeys.hosted_agents_v1_preview>;
+alias AgentInvocationPreviewHeader = WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.hosted_agents_v1_preview>;
 
 const AgentInvocationRequiredPreviews = #{
-  required_previews: #[AgentDefintionOptInKeys.hosted_agents_v1_preview],
+  required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
