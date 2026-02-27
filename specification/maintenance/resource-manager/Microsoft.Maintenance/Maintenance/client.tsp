@@ -58,6 +58,8 @@ using Microsoft.Maintenance;
   "csharp"
 );
 @@clientName(Visibility, "MaintenanceConfigurationVisibility", "csharp");
+@@clientName(MaintenanceScope.SQLDB, "SqlDB", "csharp");
+@@clientName(MaintenanceScope.SQLManagedInstance, "SqlManagedInstance", "csharp");
 @@clientName(ApplyUpdateProperties.lastUpdateTime, "LastUpdatedOn", "csharp");
 @@clientName(InputPatchConfiguration,
   "MaintenancePatchConfiguration",
@@ -138,15 +140,16 @@ using Microsoft.Maintenance;
   "DeleteEx",
   "csharp"
 );
-@@clientName(MaintenanceConfiguration,
-  "MaintenancePublicConfiguration",
-  "csharp"
-);
+// csharp: keep MaintenanceConfiguration data type name (matches old SDK)
 @@clientName(MaintenanceConfigurationOperationGroup,
   "MaintenanceConfiguration",
   "csharp"
 );
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
+@@clientName(ApplyUpdate, "MaintenanceApplyUpdate", "csharp");
+@@clientName(ImpactType, "MaintenanceImpactType", "csharp");
+@@clientName(Microsoft.Maintenance.Update, "MaintenanceUpdate", "csharp");
+@@clientName(UpdateStatus, "MaintenanceUpdateStatus", "csharp");
 
 // csharp: rename Updates.list to avoid GetAll name collision with ConfigurationAssignment list
 // Both generate GetAll(string, string, string, string, CancellationToken) on SubscriptionResource
