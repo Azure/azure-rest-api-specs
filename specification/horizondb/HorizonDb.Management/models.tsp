@@ -20,6 +20,7 @@ model HorizonDbClusterProperties {
   @secret
   @minLength(8)
   @maxLength(128)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   administratorLoginPassword?: string;
 
   @doc("The version of the HorizonDb cluster")
@@ -91,11 +92,13 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @minLength(8)
   @maxLength(128)
   @doc("The administrator login password")
+  @visibility(Lifecycle.Update)
   administratorLoginPassword?: string;
 
   @doc("Number of vCores")
   @minValue(1)
   @maxValue(96)
+  @visibility(Lifecycle.Update)
   vCores?: int32;
 }
 
@@ -106,7 +109,7 @@ model HorizonDbPoolProperties {
   sku?: string;
 
   @doc("The location of the HorizonDb pool")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   @doc("Current state of the pool")
@@ -160,11 +163,11 @@ model HorizonDbReplicaProperties {
   role?: ReplicaRole;
 
   @doc("Current status of the replica")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   status?: State;
 
   @doc("The fully qualified domain name of the replica")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
   @doc("The provisioning state of the replica")
@@ -174,6 +177,7 @@ model HorizonDbReplicaProperties {
 
 @doc("Properties of a HorizonDb replica for update operations")
 model HorizonDbReplicaPropertiesForPatchUpdate {
+  @visibility(Lifecycle.Update)
   @doc("Role of the replica")
   role?: ReplicaRole;
 }
@@ -199,12 +203,15 @@ model HorizonDbFirewallRuleProperties {
 
 @doc("Properties of a HorizonDb firewall rule for update operations")
 model HorizonDbFirewallRulePropertiesForPatchUpdate {
+  @visibility(Lifecycle.Update)
   @doc("The start IP address of the firewall rule")
   startIpAddress?: string;
 
+  @visibility(Lifecycle.Update)
   @doc("The end IP address of the firewall rule")
   endIpAddress?: string;
 
+  @visibility(Lifecycle.Update)
   @doc("The description of the firewall rule")
   description?: string;
 }

@@ -1484,6 +1484,10 @@
           "description": "The administrator login password",
           "minLength": 8,
           "maxLength": 128,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "version": {
@@ -1597,6 +1601,9 @@
           "description": "The administrator login password",
           "minLength": 8,
           "maxLength": 128,
+          "x-ms-mutability": [
+            "update"
+          ],
           "x-ms-secret": true
         },
         "vCores": {
@@ -1604,7 +1611,10 @@
           "format": "int32",
           "description": "Number of vCores",
           "minimum": 1,
-          "maximum": 96
+          "maximum": 96,
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -1689,15 +1699,24 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the firewall rule"
+          "description": "The start IP address of the firewall rule",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the firewall rule"
+          "description": "The end IP address of the firewall rule",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "The description of the firewall rule"
+          "description": "The description of the firewall rule",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -1749,7 +1768,10 @@
         "location": {
           "type": "string",
           "description": "The location of the HorizonDb pool",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "state": {
           "$ref": "#/definitions/State",
@@ -1848,20 +1870,12 @@
         "status": {
           "$ref": "#/definitions/State",
           "description": "Current status of the replica",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "fullyQualifiedDomainName": {
           "type": "string",
           "description": "The fully qualified domain name of the replica",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1876,7 +1890,10 @@
       "properties": {
         "role": {
           "$ref": "#/definitions/ReplicaRole",
-          "description": "Role of the replica"
+          "description": "Role of the replica",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
