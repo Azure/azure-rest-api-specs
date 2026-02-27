@@ -3,6 +3,9 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
+@@changePropertyType(OpenAI.Message.content, string | OpenAI.MessageContent[]);
+
 @clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace OpenAI {
   alias ItemResourceType = OutputItemType;
