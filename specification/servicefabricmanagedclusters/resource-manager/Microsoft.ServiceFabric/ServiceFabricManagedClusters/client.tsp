@@ -156,6 +156,10 @@ namespace Azure.ResourceManager.Models {
   "IPConfigurationPublicIPAddressConfiguration",
   "go, javascript"
 );
+@@clientName(PublicIPAddressConfiguration,
+  "IpConfigurationPublicIPAddressConfiguration",
+  "python"
+);
 
 /**
  * Dotnet Operation and Model Renaming/Retyping
