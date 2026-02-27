@@ -25,12 +25,18 @@ describe("folder-structure", function () {
     vi.clearAllMocks();
   });
 
-  it("should succeed with suppression reason when rule is suppressed", async function () {
+  it("should succeed with first suppression reason when rule is suppressed", async function () {
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([
       {
         tool: "TypeSpecValidation",
         paths: ["."],
         reason: "test suppression reason",
+        rules: ["FolderStructure"],
+      },
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "test suppression reason 2",
         rules: ["FolderStructure"],
       },
     ]);
@@ -43,7 +49,12 @@ describe("folder-structure", function () {
 
   it("should not suppress when suppression targets a different rule", async function () {
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([
-      { tool: "TypeSpecValidation", paths: ["."], reason: "other reason", rules: ["OtherRule"] },
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "test other reason",
+        rules: ["OtherRule"],
+      },
     ]);
     fileExistsSpy.mockResolvedValue(false);
 
