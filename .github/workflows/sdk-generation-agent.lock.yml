@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"037602e34175336a0b91b14cf688e13a9c47247ab49a942383035bda7ccf65c2","compiler_version":"v0.50.4"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"8bcf2d83042a6584b73629694981b728dcb22604da18868899b3a2855423e78f","compiler_version":"v0.50.4"}
 
 name: "SDK Generation Agent"
 "on":
@@ -300,48 +300,10 @@ jobs:
         name: Acquire OIDC token for Azure
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
-          script: |
+          script: |-
             const token = await core.getIDToken('api://AzureADTokenExchange');
             const fs = require('fs');
             fs.writeFileSync('/tmp/azure-oidc-token', token);
-      - name: Verify Azure CLI authentication
-        run: "set -euo pipefail\nif ! command -v az >/dev/null 2>&1; then\n  echo \"Azure CLI (az) is not installed on this runner.\" >&2\n  exit 1\nfi\n\nif [[ -z \"${AZURE_CLIENT_ID:-}\" || -z \"${AZURE_TENANT_ID:-}\" || -z \"${AZURE_FEDERATED_TOKEN_FILE:-}\" ]]; then\n  echo \"Azure federated authentication variables are missing.\" >&2\n  exit 1\nfi\n\nFED_TOKEN=$(cat \"$AZURE_FEDERATED_TOKEN_FILE\")\nif [[ -z \"$FED_TOKEN\" ]]; then\n  echo \"Federated token file $AZURE_FEDERATED_TOKEN_FILE is empty.\" >&2\n  exit 1\nfi\n\necho \"Ensuring Azure CLI session is authenticated using workload identity...\"\naz login --service-principal \\\n  --username \"$AZURE_CLIENT_ID\" \\\n  --tenant \"$AZURE_TENANT_ID\" \\\n  --federated-token \"$FED_TOKEN\" \\\n  --allow-no-subscriptions >/tmp/az-login.json\n\nif az account show --output json > /tmp/az-account.json 2>/tmp/az-account.err; then\n  echo \"Azure CLI authentication verified. Active subscription (if any):\"\n  jq -r '\"- \" + (.name // \"No subscription\") + \" (\" + (.id // \"n/a\") + \")\"' /tmp/az-account.json || cat /tmp/az-account.json\nelse\n  echo \"Unable to verify Azure CLI login status:\" >&2\n  cat /tmp/az-account.err >&2 || true\n  exit 1\nfi\n"
-        shell: bash
-      - name: Install GitHub CLI
-        run: |
-          set -euo pipefail
-          if ! command -v gh >/dev/null 2>&1; then
-            echo "GitHub CLI is required." >&2
-            exit 1
-          fi
-          gh extension install github/gh-aw
-        shell: bash
-      - id: fetch_secret
-        name: Fetch secrets and persist COPILOT token
-        run: |-
-          set -euo pipefail
-          AZURESDK_GITHUB_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-github-pat" --query value -o tsv)
-          AZURESDK_COPILOT_TOKEN=$(az keyvault secret show --vault-name "AzureSDKEngKeyVault" --name "azuresdk-copilot-github-pat" --query value -o tsv)
-
-          if [[ -z "${AZURESDK_GITHUB_TOKEN}" ]]; then
-            echo "Unable to retrieve azuresdk-github-pat secret." >&2
-            exit 1
-          fi
-
-          if [[ -z "${AZURESDK_COPILOT_TOKEN}" ]]; then
-            echo "Unable to retrieve azuresdk-copilot-github-pat secret." >&2
-            exit 1
-          fi
-
-          echo "::add-mask::${AZURESDK_GITHUB_TOKEN}"
-          echo "::add-mask::${AZURESDK_COPILOT_TOKEN}"
-
-          printf '%s' "${AZURESDK_GITHUB_TOKEN}" | gh auth login --hostname github.com --with-token
-          gh config set prompt disabled >/dev/null
-          pushd "${GITHUB_WORKSPACE}" >/dev/null
-          gh aw secrets set COPILOT_GITHUB_TOKEN --value "${AZURESDK_COPILOT_TOKEN}"
-          popd >/dev/null
-        shell: bash
 
       - name: Configure Git credentials
         env:
@@ -1067,7 +1029,7 @@ jobs:
           GH_AW_WORKFLOW_ID: "sdk-generation-agent"
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.agent.outputs.secret_verification_result }}
           GH_AW_CHECKOUT_PR_SUCCESS: ${{ needs.agent.outputs.checkout_pr_success }}
-          GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for sdk generation."}'
+          GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for Azure sdk generation."}'
           GH_AW_GROUP_REPORTS: "false"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -1141,7 +1103,7 @@ jobs:
     timeout-minutes: 15
     env:
       GH_AW_ENGINE_ID: "copilot"
-      GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for sdk generation."}'
+      GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for Azure sdk generation."}'
       GH_AW_WORKFLOW_ID: "sdk-generation-agent"
       GH_AW_WORKFLOW_NAME: "SDK Generation Agent"
     outputs:
