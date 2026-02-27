@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "expressRouteCircuitName": "erckt",
+    "fetchLatest": true,
+    "failoverTestType": "All"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+      }
+    },
+    "200": {
+      "body": [
+        {
+          "status": "Completed",
+          "startTime": "1/6/2026 9:23:21 AM",
+          "endTime": "1/6/2026 9:29:20 AM",
+          "testGuid": "0197cc6a-2f79-4e62-8ca3-8e99cfd9a0f7",
+          "testType": "LinkFailover",
+          "issues": [],
+          "wasSimulationSuccessful": true,
+          "circuitTestCategory": "BgpDisconnect",
+          "linkType": "Primary",
+          "bgpStatus": [
+            {
+              "bgpStatusType": "IPv4",
+              "link": "Primary",
+              "status": "Connected",
+              "checkTime": "1/6/2026 9:29:27 AM"
+            },
+            {
+              "bgpStatusType": "IPv4",
+              "link": "Secondary",
+              "status": "Connected",
+              "checkTime": "1/6/2026 9:29:27 AM"
+            },
+            {
+              "bgpStatusType": "IPv6",
+              "link": "Primary",
+              "status": "Undefined",
+              "checkTime": "1/6/2026 9:29:27 AM"
+            },
+            {
+              "bgpStatusType": "IPv6",
+              "link": "Secondary",
+              "status": "Undefined",
+              "checkTime": "1/6/2026 9:29:27 AM"
+            }
+          ]
+        },
+        {
+          "status": "Expired",
+          "startTime": "11/6/2025 11:23:14 AM",
+          "endTime": "11/6/2025 11:31:57 AM",
+          "testGuid": "e06a11d4-0a4e-4f5f-985d-7993f86876a1",
+          "testType": "LinkFailover",
+          "issues": [
+            "Attestation has expired for this test"
+          ],
+          "wasSimulationSuccessful": false,
+          "circuitTestCategory": "BgpDisconnect",
+          "linkType": "Secondary",
+          "bgpStatus": [
+            {
+              "bgpStatusType": "IPv4",
+              "link": "Primary",
+              "status": "Connected",
+              "checkTime": "11/6/2025 11:32:04 AM"
+            },
+            {
+              "bgpStatusType": "IPv4",
+              "link": "Secondary",
+              "status": "Connected",
+              "checkTime": "11/6/2025 11:32:04 AM"
+            },
+            {
+              "bgpStatusType": "IPv6",
+              "link": "Primary",
+              "status": "Undefined",
+              "checkTime": "11/6/2025 11:32:04 AM"
+            },
+            {
+              "bgpStatusType": "IPv6",
+              "link": "Secondary",
+              "status": "Undefined",
+              "checkTime": "11/6/2025 11:32:04 AM"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -4713,6 +4713,9 @@ directive:
     where:
       - $.definitions.GatewayRouteSet.properties.details
       - $.definitions.GatewayRouteSetsInformation.properties.circuitsMetadataMap
+  - suppress: ParametersInPost
+    from: expressRouteCircuit.json
+    reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Express Route Circuit APIs.
 ```
 
 ---
