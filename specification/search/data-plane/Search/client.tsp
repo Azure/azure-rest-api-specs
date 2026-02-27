@@ -415,6 +415,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(ListIndexStatsSummary, Access.internal, "csharp");
 @@access(ListSkillsetsResult, Access.internal, "csharp");
 @@access(ListSynonymMapsResult, Access.internal, "csharp");
+@@access(LuceneStandardTokenizer, Access.internal, "csharp");
+@@clientName(LuceneStandardTokenizer,
+  "DeprecatedLuceneStandardTokenizer",
+  "csharp"
+);
+@@clientName(LuceneStandardTokenizerV2, "LuceneStandardTokenizer", "csharp");
 @@clientName(PIIDetectionSkill, "PiiDetectionSkill", "csharp");
 @@clientName(RegexFlags, "RegexFlag", "csharp");
 @@clientName(SkillNames, "ResetSkillsOptions", "csharp");
