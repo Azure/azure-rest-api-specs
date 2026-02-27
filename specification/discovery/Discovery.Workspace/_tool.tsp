@@ -459,7 +459,7 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @doc("Examine compute usage.")
+  @doc("Examine compute usage.")
   @route("/tools/projects/{projectName}/computeUsage")
   getComputeUsage is Foundations.Operation<WithProjectNamePath, ComputeUsage>;
 }
