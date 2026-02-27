@@ -47,3 +47,20 @@ using Microsoft.DocumentDB;
   "GraphApiComputeServiceResourceProperties",
   "java"
 );
+@@clientName(GraphAPIComputeServiceResource,
+  "GraphApiComputeServiceResource",
+  "java"
+);
+@@clientName(GraphAPIComputeServiceResourceCreateUpdateProperties,
+  "GraphApiComputeServiceResourceCreateUpdateProperties",
+  "java"
+);
+
+@@clientName(ClusterResources.invokeCommandAsync,
+  "invokeCommandAsyncResource",
+  "java"
+);
+@@clientName(ClusterResources.getCommandAsync,
+  "getCommandAsyncResource",
+  "java"
+);
