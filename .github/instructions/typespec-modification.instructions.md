@@ -17,7 +17,7 @@ This repository (`Azure/azure-rest-api-specs`) hosts Azure REST API specificatio
 
 Before modifying a TypeSpec specification:
 
-1. Install [Node.js](https://nodejs.org/en/download) (LTS 18+)
+1. Install [Node.js](https://nodejs.org/en/download) (v20 or above, LTS recommended)
 2. From the repository root, install dependencies:
    ```bash
    npm ci
@@ -62,7 +62,7 @@ Use `specification/widget/` as a canonical reference for both ARM and data-plane
 
 - Folder names directly under `specification/` **MUST** be lowercase
 - Service folder names **MUST** be PascalCase (e.g., `Widget`, `NetApp`)
-- ARM package folders **MUST** end with `.Management` when using the v1 structure (e.g., `Storage.Management`)
+- ARM package folders **MUST** end with `.Management` when using the legacy single-level structure under `specification/<orgName>/` (e.g., `Storage.Management`)
 - TypeSpec files **MUST** only import from the same service folder — cross-service imports are forbidden
 - Import paths **MUST** be relative (`./`, `../`) or package references
 
@@ -218,6 +218,7 @@ union WidgetStatus {
 - Model and union names: `PascalCase`
 - Operation names: `camelCase`
 - Enum/union member names: `PascalCase`
+- File names: `camelCase` (e.g., `main.tsp`, `models.tsp`, `employee.tsp`, `client.tsp`)
 - String values in enums/unions: preserve as-is (do not change casing of string values)
 
 ### Client Customizations
