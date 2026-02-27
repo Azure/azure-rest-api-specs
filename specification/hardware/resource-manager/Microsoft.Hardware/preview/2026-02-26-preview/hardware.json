@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Hardware Resource Provider",
-    "version": "2025-12-04-preview",
+    "version": "2026-02-26-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -46,6 +46,12 @@
     },
     {
       "name": "OrderPreviewInterface"
+    },
+    {
+      "name": "ReturnOrders"
+    },
+    {
+      "name": "ReturnPreviewInterface"
     }
   ],
   "paths": {
@@ -58,20 +64,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -94,10 +100,10 @@
         "description": "Enables preview of hardware order for passed order lines by populating fees, taxes, shipping estimates.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "bodyRoot",
@@ -119,7 +125,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -139,10 +145,10 @@
         "description": "List Order resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -155,13 +161,97 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Orders_ListBySubscription": {
             "$ref": "./examples/Orders_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Hardware/returnPreview": {
+      "post": {
+        "operationId": "ReturnPreviewInterface_ReturnPreview",
+        "tags": [
+          "ReturnPreviewInterface"
+        ],
+        "description": "Preview a return order before placing it",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "bodyRoot",
+            "in": "body",
+            "description": "Return order details to preview",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnPreviewInterface_ReturnPreview": {
+            "$ref": "./examples/ReturnPreviewInterface_ReturnPreview.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Hardware/returns": {
+      "get": {
+        "operationId": "ReturnOrders_ListBySubscription",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "List ReturnOrder resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_ListBySubscription": {
+            "$ref": "./examples/ReturnOrders_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -178,13 +268,13 @@
         "description": "List Order resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -197,7 +287,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,13 +310,13 @@
         "description": "Get a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -246,7 +336,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -264,13 +354,13 @@
         "description": "Create a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -316,7 +406,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -338,13 +428,13 @@
         "description": "Update a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -373,7 +463,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -391,13 +481,13 @@
         "description": "Delete a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -417,13 +507,272 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Orders_Delete": {
             "$ref": "./examples/Orders_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/returns": {
+      "get": {
+        "operationId": "ReturnOrders_ListByResourceGroup",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "List ReturnOrder resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_ListByResourceGroup": {
+            "$ref": "./examples/ReturnOrders_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/returns/{name}": {
+      "get": {
+        "operationId": "ReturnOrders_Get",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "Get a ReturnOrder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the ReturnOrder",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_Get": {
+            "$ref": "./examples/ReturnOrders_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReturnOrders_Create",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "Create a ReturnOrder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the ReturnOrder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ReturnOrder' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          },
+          "201": {
+            "description": "Resource 'ReturnOrder' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_Create": {
+            "$ref": "./examples/ReturnOrders_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ReturnOrders_Update",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "Update a ReturnOrder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the ReturnOrder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReturnOrderUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReturnOrder"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_Update": {
+            "$ref": "./examples/ReturnOrders_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ReturnOrders_Delete",
+        "tags": [
+          "ReturnOrders"
+        ],
+        "description": "Delete a ReturnOrder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the ReturnOrder",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReturnOrders_Delete": {
+            "$ref": "./examples/ReturnOrders_Delete.json"
           }
         }
       }
@@ -445,7 +794,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -458,7 +807,8 @@
         "Captured",
         "CaptureFailed",
         "PendingRefund",
-        "Refunded"
+        "Refunded",
+        "RefundFailed"
       ],
       "x-ms-enum": {
         "name": "BillingState",
@@ -493,6 +843,11 @@
             "name": "Refunded",
             "value": "Refunded",
             "description": "The payment has been refunded."
+          },
+          {
+            "name": "RefundFailed",
+            "value": "RefundFailed",
+            "description": "The payment refund failed."
           }
         ]
       }
@@ -597,7 +952,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1085,6 +1440,400 @@
       },
       "readOnly": true
     },
+    "ReturnExceptionCode": {
+      "type": "string",
+      "description": "Return Exception Codes",
+      "enum": [
+        "ExceptionResolved",
+        "WrongProduct",
+        "NoProduct",
+        "NonMSFTProduct",
+        "DamagedProduct",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ReturnExceptionCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExceptionResolved",
+            "value": "ExceptionResolved",
+            "description": "The exception resolved"
+          },
+          {
+            "name": "WrongProduct",
+            "value": "WrongProduct",
+            "description": "Wrong Product"
+          },
+          {
+            "name": "NoProduct",
+            "value": "NoProduct",
+            "description": "No Product"
+          },
+          {
+            "name": "NonMSFTProduct",
+            "value": "NonMSFTProduct",
+            "description": "The non Microsoft product"
+          },
+          {
+            "name": "DamagedProduct",
+            "value": "DamagedProduct",
+            "description": "The damaged product"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other Exception Code"
+          }
+        ]
+      }
+    },
+    "ReturnLine": {
+      "type": "object",
+      "description": "Hardware Return Order Line",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "This is a unique identifier for return line, that can be assigned during return order creation. This is not the same as referenceOrderLineId which refers to the original order line that is being returned."
+        },
+        "referenceOrderId": {
+          "type": "string",
+          "description": "Id of the forward order where the device was purchased which is being returned as part of this return in this return line"
+        },
+        "billingState": {
+          "$ref": "#/definitions/BillingState",
+          "description": "Billing State",
+          "readOnly": true
+        },
+        "referenceOrderLineId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "LineId of the forward order line where the device was purchased which is being returned as part of this return in this return line"
+        },
+        "senderAddress": {
+          "$ref": "#/definitions/ShipTo",
+          "description": "Sender address for return shipment"
+        },
+        "quantity": {
+          "$ref": "#/definitions/OrderLineQuantity",
+          "description": "Return line quantity"
+        },
+        "product": {
+          "$ref": "#/definitions/Product",
+          "description": "Product being returned"
+        },
+        "refundedAmount": {
+          "$ref": "#/definitions/Price",
+          "description": "Refunded amount for this return line",
+          "readOnly": true
+        },
+        "estimatedRefundAmount": {
+          "$ref": "#/definitions/Price",
+          "description": "Estimated refund amount",
+          "readOnly": true
+        },
+        "returnReasons": {
+          "type": "array",
+          "description": "Reasons for return",
+          "items": {
+            "$ref": "#/definitions/ReturnReason"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/OrderLineStatus",
+          "description": "Return line status",
+          "readOnly": true
+        },
+        "warrantyDeprovisionRequestId": {
+          "type": "string",
+          "description": "Warranty deprovision request ID"
+        },
+        "warrantyDeprovisionStatus": {
+          "$ref": "#/definitions/WarrantyDeprovisionStatus",
+          "description": "Warranty deprovision status"
+        },
+        "warrantyDeprovisionedSerialNumbers": {
+          "type": "array",
+          "description": "Warranty deprovisioned serial numbers",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "referenceOrderId",
+        "referenceOrderLineId",
+        "senderAddress",
+        "quantity",
+        "product",
+        "returnReasons"
+      ]
+    },
+    "ReturnOrder": {
+      "type": "object",
+      "description": "A Hardware Resource Provider Return Order resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReturnOrderProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ReturnOrderListResult": {
+      "type": "object",
+      "description": "The response of a ReturnOrder list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReturnOrder items on this page",
+          "items": {
+            "$ref": "#/definitions/ReturnOrder"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReturnOrderProperties": {
+      "type": "object",
+      "description": "Hardware Return Order Properties",
+      "properties": {
+        "customerOrder": {
+          "$ref": "#/definitions/CustomerOrder",
+          "description": "Customer PurchaseOrder"
+        },
+        "status": {
+          "$ref": "#/definitions/OrderStatus",
+          "description": "Return order status",
+          "readOnly": true
+        },
+        "returnLines": {
+          "type": "array",
+          "description": "Return order lines",
+          "items": {
+            "$ref": "#/definitions/ReturnLine"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "rmaId": {
+          "type": "string",
+          "description": "RMA (Return Merchandise Authorization) ID - this is an alphanumeric string id which is assigned by the system when the return order is created",
+          "readOnly": true
+        },
+        "returnLabel": {
+          "type": "string",
+          "description": "Return label",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "returnLines"
+      ]
+    },
+    "ReturnOrderPropertiesUpdate": {
+      "type": "object",
+      "description": "Hardware Return Order Properties",
+      "properties": {
+        "customerOrder": {
+          "$ref": "#/definitions/CustomerOrderUpdate",
+          "description": "Customer PurchaseOrder"
+        },
+        "returnLines": {
+          "type": "array",
+          "description": "Return order lines",
+          "items": {
+            "$ref": "#/definitions/ReturnLine"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "ReturnOrderUpdate": {
+      "type": "object",
+      "description": "A Hardware Resource Provider Return Order resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReturnOrderPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ReturnReason": {
+      "type": "object",
+      "description": "Return reason",
+      "properties": {
+        "serialNumbers": {
+          "type": "array",
+          "description": "Serial numbers associated with this return reason",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/ReturnReasonCode",
+          "description": "Return reason code"
+        },
+        "additionalComments": {
+          "type": "string",
+          "description": "Additional comments for the return reason"
+        },
+        "exceptionCode": {
+          "$ref": "#/definitions/ReturnExceptionCode",
+          "description": "Exception code for the return"
+        }
+      },
+      "required": [
+        "reasonCode"
+      ]
+    },
+    "ReturnReasonCode": {
+      "type": "string",
+      "description": "Return Reason Codes",
+      "enum": [
+        "productsatisfaction",
+        "customersatisfaction",
+        "incorrectproductattribute",
+        "defectiveitem",
+        "cancelattemptedbutshipped",
+        "betterpriceavailable",
+        "damagedintransit",
+        "duplicateorder",
+        "incorrectproduct",
+        "customererror",
+        "vendorapprovedreturn",
+        "refusedorder",
+        "missingitems",
+        "fraud",
+        "onbehalfoferror",
+        "damagedproduct",
+        "trialproduct",
+        "orderedwithoutapproval"
+      ],
+      "x-ms-enum": {
+        "name": "ReturnReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ProductSatisfaction",
+            "value": "productsatisfaction",
+            "description": "Product satisfaction"
+          },
+          {
+            "name": "CustomerSatisfaction",
+            "value": "customersatisfaction",
+            "description": "Customer satisfaction"
+          },
+          {
+            "name": "IncorrectProductAttribute",
+            "value": "incorrectproductattribute",
+            "description": "Incorrect Product Attribute"
+          },
+          {
+            "name": "DefectiveItem",
+            "value": "defectiveitem",
+            "description": "Defective Item"
+          },
+          {
+            "name": "CancelAttemptedButShipped",
+            "value": "cancelattemptedbutshipped",
+            "description": "Cancel Attempted But Shipped"
+          },
+          {
+            "name": "BetterPriceAvailable",
+            "value": "betterpriceavailable",
+            "description": "Better Price Available"
+          },
+          {
+            "name": "DamagedInTransit",
+            "value": "damagedintransit",
+            "description": "Damaged In Transit"
+          },
+          {
+            "name": "DuplicateOrder",
+            "value": "duplicateorder",
+            "description": "Duplicate Order"
+          },
+          {
+            "name": "IncorrectProduct",
+            "value": "incorrectproduct",
+            "description": "Incorrect Product"
+          },
+          {
+            "name": "CustomerError",
+            "value": "customererror",
+            "description": "Customer Error"
+          },
+          {
+            "name": "VendorApprovedReturn",
+            "value": "vendorapprovedreturn",
+            "description": "Vendor Approved Return"
+          },
+          {
+            "name": "RefusedOrder",
+            "value": "refusedorder",
+            "description": "Refused Order"
+          },
+          {
+            "name": "MissingItems",
+            "value": "missingitems",
+            "description": "Missing Items"
+          },
+          {
+            "name": "Fraud",
+            "value": "fraud",
+            "description": "Fraud Reason Code"
+          },
+          {
+            "name": "OnBehalfOfError",
+            "value": "onbehalfoferror",
+            "description": "On Behalf Of Error"
+          },
+          {
+            "name": "DamagedProduct",
+            "value": "damagedproduct",
+            "description": "Damaged Product"
+          },
+          {
+            "name": "TrialProduct",
+            "value": "trialproduct",
+            "description": "Trial Product"
+          },
+          {
+            "name": "OrderedWithoutApproval",
+            "value": "orderedwithoutapproval",
+            "description": "Ordered Without Approval"
+          }
+        ]
+      }
+    },
     "ShipTo": {
       "type": "object",
       "description": "Ship-To id",
@@ -1125,6 +1874,39 @@
             "description": "Partner External-Id"
           }
         ]
+      }
+    },
+    "ShipmentDetail": {
+      "type": "object",
+      "description": "Shipment detail",
+      "properties": {
+        "carrierName": {
+          "type": "string",
+          "description": "Shipping carrier name"
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "Shipment tracking number"
+        },
+        "trackingLink": {
+          "type": "string",
+          "description": "Tracking link URL"
+        },
+        "shippedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when item was shipped"
+        },
+        "deliveredDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when item was delivered"
+        },
+        "estimatedDeliverByDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Estimated delivery date"
+        }
       }
     },
     "ShippingMethod": {
@@ -1235,6 +2017,24 @@
             "name": "Shipping",
             "value": "Shipping",
             "description": "Tax on shipping cost"
+          }
+        ]
+      }
+    },
+    "WarrantyDeprovisionStatus": {
+      "type": "string",
+      "description": "Warranty deprovision status values",
+      "enum": [
+        "unfulfilled"
+      ],
+      "x-ms-enum": {
+        "name": "WarrantyDeprovisionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unfulfilled",
+            "value": "unfulfilled",
+            "description": "Warranty deprovision request has not been fulfilled"
           }
         ]
       }
