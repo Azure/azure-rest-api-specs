@@ -332,7 +332,7 @@
           "description": "A list of IPConfigurations of the virtual network appliance."
         },
         "privateIPAddressVersion": {
-          "type": "string",
+          "$ref": "./network.json#/definitions/IPVersion",
           "description": "Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4."
         },
         "provisioningState": {
@@ -424,7 +424,7 @@
           "description": "The provisioning state of the private link service IP configuration resource."
         },
         "privateIPAddressVersion": {
-          "$ref": "./network.json#/definitions/IPVersion",
+          "$ref": "./network.json#/definitions/VirtualNetworkApplianceIpVersionType",
           "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         }
       },
@@ -447,6 +447,18 @@
         }
       },
       "description": "Response for the ListVirtualNetworkAppliance API service call."
+    },
+    "VirtualNetworkApplianceIpVersionType": {
+      "type": "string",
+      "description": "IP address version.",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkApplianceIpVersionType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
