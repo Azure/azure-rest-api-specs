@@ -1,12 +1,10 @@
 import "./main.tsp";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
-using TypeSpec.Versioning;
 
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 
