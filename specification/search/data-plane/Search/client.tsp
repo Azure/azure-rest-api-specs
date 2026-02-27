@@ -378,13 +378,17 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(BlobIndexerPDFTextRotationAlgorithm,
+  "BlobIndexerPdfTextRotationAlgorithm",
+  "csharp"
+);
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
 @@access(DataSourceCredentials, Access.internal, "csharp");
-@@alternateType(Search.DocumentExtractionSkill.dataToExtract,
+@@alternateType(DocumentExtractionSkill.dataToExtract,
   BlobIndexerDataToExtract,
   "csharp"
 );
-@@alternateType(Search.DocumentExtractionSkill.parsingMode,
+@@alternateType(DocumentExtractionSkill.parsingMode,
   BlobIndexerParsingMode,
   "csharp"
 );
@@ -824,10 +828,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
-);
-@@clientName(Search.BlobIndexerPDFTextRotationAlgorithm,
-  "BlobIndexerPdfTextRotationAlgorithm",
-  "csharp"
 );
 @@clientNamespace(Search.IndexerExecutionEnvironment,
   "Azure.Search.Documents.Indexes"
