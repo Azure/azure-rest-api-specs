@@ -1,0 +1,58 @@
+{
+  "operationId": "ResourceSubscriptions_Update",
+  "title": "Update a resource subscription",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "api-version": "2025-11-19-preview",
+    "properties": {
+      "tags": {
+        "environment": "staging",
+        "team": "platform"
+      },
+      "properties": {
+        "query": "resources | where type == 'microsoft.compute/virtualmachines' and location == 'eastus'"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription",
+        "name": "example-subscription",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "eastus",
+        "tags": {
+          "environment": "staging",
+          "team": "platform"
+        },
+        "properties": {
+          "query": "resources | where type == 'microsoft.compute/virtualmachines' and location == 'eastus'",
+          "scope": {
+            "kind": "tenant",
+            "tenantId": "12345678-1234-1234-1234-123456789012",
+            "servicePrincipal": "sp-example"
+          },
+          "partitioningConfiguration": {
+            "kind": "arnLocation",
+            "partitions": [
+              {
+                "name": "partition1",
+                "regions": [
+                  "eastus",
+                  "westus"
+                ]
+              }
+            ]
+          },
+          "options": [
+            "enablePeriodicSnapshots",
+            "enableDeltas"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
