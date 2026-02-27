@@ -60,3 +60,72 @@ using Microsoft.AzureStackHCI;
   "default",
   "python"
 );
+
+// C# clientName decorators for backward compatibility with old SDK type names
+
+// CS0234 fixes: rename types to match old C# SDK names
+@@clientName(Microsoft.AzureStackHCI.ProvisioningState,
+  "HciProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.PerNodeState, "PerNodeArcState", "csharp");
+@@clientName(Microsoft.AzureStackHCI.AccessLevel,
+  "HciClusterAccessLevel",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.DeviceConfiguration,
+  "HciEdgeDeviceConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.DeviceState, "HciEdgeDeviceState", "csharp");
+@@clientName(Microsoft.AzureStackHCI.HciOsProfile, "HciOSProfile", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SwitchDetail,
+  "HciEdgeDeviceSwitchDetail",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ComplianceStatus,
+  "HciClusterComplianceStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView,
+  "HciExtensionInstanceView",
+  "csharp"
+);
+
+// CS0051 fixes: rename internal types to old public names + make them public
+@@clientName(Microsoft.AzureStackHCI.State, "HciUpdateState", "csharp");
+@@clientName(Microsoft.AzureStackHCI.RebootRequirement,
+  "HciNodeRebootRequirement",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.AvailabilityType,
+  "HciAvailabilityType",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.Step, "HciUpdateStep", "csharp");
+
+@@access(Microsoft.AzureStackHCI.State, Access.public, "csharp");
+@@access(Microsoft.AzureStackHCI.RebootRequirement, Access.public, "csharp");
+@@access(Microsoft.AzureStackHCI.AvailabilityType, Access.public, "csharp");
+@@access(Microsoft.AzureStackHCI.Step, Access.public, "csharp");
+@@access(Microsoft.AzureStackHCI.ExtensionProfile, Access.public, "csharp");
+@@access(Microsoft.AzureStackHCI.ExtensionInstanceView, Access.public, "csharp");
+
+// Additional type renames for backward compat
+@@clientName(Microsoft.AzureStackHCI.NicDetail, "HciEdgeDeviceNicDetail", "csharp");
+@@clientName(Microsoft.AzureStackHCI.PackageVersionInfo,
+  "HciPackageVersionInfo",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HealthState, "HciHealthState", "csharp");
+@@clientName(Microsoft.AzureStackHCI.PrecheckResult, "HciPrecheckResult", "csharp");
+
+// CS0542 fix: KubernetesVersionProperties.version flattens to property named
+// same as enclosing type KubernetesVersion
+@@clientName(Microsoft.AzureStackHCI.KubernetesVersionProperties.version,
+  "kubernetesVersionValue",
+  "csharp"
+);
+
+// CS0108 fix: UpdateRun.name hides ResourceData.Name
+@@clientName(Microsoft.AzureStackHCI.UpdateRun.name, "updateRunName", "csharp");
