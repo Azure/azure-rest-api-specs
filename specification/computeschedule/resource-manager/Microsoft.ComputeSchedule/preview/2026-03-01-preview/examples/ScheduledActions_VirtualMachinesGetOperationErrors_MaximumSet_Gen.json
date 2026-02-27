@@ -1,0 +1,38 @@
+{
+  "title": "ScheduledActions_VirtualMachinesGetOperationErrors_MaximumSet",
+  "operationId": "ScheduledActions_VirtualMachinesGetOperationErrors",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "locationparameter": "eastus",
+    "requestBody": {
+      "operationIds": [
+        "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "operationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "creationTime": "2025-06-15T09:00:00.000Z",
+            "activationTime": "2025-06-15T09:05:00.000Z",
+            "completedAt": "2025-06-15T09:30:00.000Z",
+            "operationErrors": [
+              {
+                "errorCode": "ResourceNotFound",
+                "errorDetails": "The specified resource was not found",
+                "timestamp": "2025-06-15T09:20:00.000Z",
+                "azureOperationName": "a1b2c3d4-e5f6-7890-abcd-000000000001"
+              }
+            ],
+            "requestErrorCode": "PartialSuccess",
+            "requestErrorDetails": "Some resources encountered errors during the operation"
+          }
+        ]
+      }
+    }
+  }
+}

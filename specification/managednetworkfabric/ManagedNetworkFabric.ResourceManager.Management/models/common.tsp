@@ -53,6 +53,18 @@ union ConfigurationState {
   @doc("PendingAdministrativeUpdate State")
   PendingAdministrativeUpdate: "PendingAdministrativeUpdate",
 
+  @doc("Updated configuration is pushed to the selected CE device during staged commit operation")
+  @added(Versions.v2026_01_15_preview)
+  CommitStaged: "CommitStaged",
+
+  @doc("Pushing the updated configuration to the selected CE device failed during staged commit operation")
+  @added(Versions.v2026_01_15_preview)
+  CommitStageFailed: "CommitStageFailed",
+
+  @doc("Rollback of configuration failed during staged commit rollback operation")
+  @added(Versions.v2026_01_15_preview)
+  CommitRollbackFailed: "CommitRollbackFailed",
+
   string,
 }
 
@@ -99,6 +111,24 @@ union AdministrativeState {
   @added(Versions.v2025_07_15)
   @doc("EnabledDegraded Administrative State.")
   EnabledDegraded: "EnabledDegraded",
+
+  string,
+}
+
+@doc("Operational State represents the current runtime condition of a networking resource. It reflects the actual health, reachability, and availability of the resource at a given point in time.")
+@added(Versions.v2026_01_15_preview)
+union OperationalState {
+  @doc("Operational State Unknown indicates the state of the resource cannot be determined.")
+  Unknown: "Unknown",
+
+  @doc("Operational State Up indicates the resource is operational and functioning normally and all required control-plane and (where applicable) data-plane operations are healthy.")
+  Up: "Up",
+
+  @doc("Operational State Down indicates the resource is not functioning or not reachable and no meaningful operations can be performed.")
+  Down: "Down",
+
+  @doc("Operational State Degraded indicates the resource is partially functional, some capabilities may be impaired, but the resource is still operational.")
+  Degraded: "Degraded",
 
   string,
 }
@@ -541,9 +571,30 @@ model CommonPostActionResponseForStateUpdate {
 }
 
 @doc("The response of the action validate configuration.")
+@removed(Versions.v2026_01_15_preview)
 model ValidateConfigurationResponse {
   ...ErrorResponse;
 
+  @doc("Gets the configuration state.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
+
+  @doc("URL for the details of the response.")
+  url?: string;
+}
+
+@doc("The response of the action validate configuration.")
+@added(Versions.v2026_01_15_preview)
+model ValidateConfigurationResponseV2 {
+  ...OperationStatusResult;
+
+  @doc("Network Device Run Rw Command Response properties.")
+  properties?: ValidateConfigurationResponseProperties;
+}
+
+@added(Versions.v2026_01_15_preview)
+@doc("The response of the action validate configuration.")
+model ValidateConfigurationResponseProperties {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
@@ -1328,4 +1379,61 @@ model UpdateAdministrativeStateResponseProperties {
 
   @doc("List of ARM Resource IDs for which the given action failed to apply.")
   failedResources?: Azure.Core.armResourceIdentifier<[]>[];
+}
+
+@doc("Configuration Regeneration Type used for refresh configuration")
+@added(Versions.v2026_01_15_preview)
+union ConfigurationRegenerationType {
+  @doc("Partial configuration regeneration indicates that the last known good configuration will be reapplied.")
+  Partial: "Partial",
+
+  string,
+}
+
+@doc("NetworkDeviceRole is the device role: Example: CE | ToR.")
+union NetworkDeviceRole {
+  @doc("NetworkDeviceRole-CE(Customer Edge)")
+  CE: "CE",
+
+  @doc("NetworkDeviceRole-ToR(top of rack)")
+  ToR: "ToR",
+
+  @doc("NetworkDeviceRole-NPB(Network Packet Broker)")
+  NPB: "NPB",
+
+  @doc("NetworkDeviceRole-TS(Terminal Server)")
+  TS: "TS",
+
+  @doc("NetworkDeviceRole-Management")
+  Management: "Management",
+
+  string,
+}
+
+@doc("Device types for which the refresh configuration action will be applied: Example: CE | ToR | NPB | ManagementSwitch.")
+union NetworkFabricRefreshDeviceTypes {
+  @doc("DeviceType-CE(Customer Edge)")
+  CE: "CE",
+
+  @doc("DeviceType-ToR(top of rack)")
+  ToR: "ToR",
+
+  @doc("DeviceType-NPB(Network Packet Broker)")
+  NPB: "NPB",
+
+  @doc("DeviceType-ManagementSwitch")
+  ManagementSwitch: "ManagementSwitch",
+
+  string,
+}
+
+@doc("Allowed types for generate base configuration during network fabric refresh")
+union GenerateBaseConfiguration {
+  @doc("Disabled indicates that base configuration should not be generated during network fabric refresh")
+  Disabled: "Disabled",
+
+  @doc("Enabled indicates that base configuration should be generated during network fabric refresh")
+  Enabled: "Enabled",
+
+  string,
 }

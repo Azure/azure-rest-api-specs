@@ -135,6 +135,7 @@ model NamespaceAssetProperties {
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
   @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2024_10_01_preview)
   @removed(Versions.v2026_02_01_preview)
   events?: NamespaceEvent[];
 
