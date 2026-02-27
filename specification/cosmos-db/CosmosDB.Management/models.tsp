@@ -15,7 +15,6 @@ namespace Microsoft.DocumentDB;
  * Error Response.
  */
 @error
-@Azure.ClientGenerator.Core.clientName("CosmosDBErrorResult", "csharp")
 model ErrorResponse {
   /**
    * Error code.
