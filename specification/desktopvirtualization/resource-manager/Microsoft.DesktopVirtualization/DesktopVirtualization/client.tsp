@@ -71,8 +71,6 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-@@clientName(SendMessage, "UserSessionMessage", "csharp");
-
 @@clientName(SessionState, "UserSessionState", "csharp");
 
 @@clientName(SSOSecretType, "HostPoolSsoSecretType", "csharp");
@@ -514,6 +512,12 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@alternateType(SendMessageRequest, SendMessage, "csharp");
+@@clientName(SendMessage, "UserSessionMessage", "csharp");
+@@clientName(UserSessions.sendMessage::parameters.body,
+  "sendMessage",
+  "csharp"
+);
+@@clientName(MSIXImages.expand::parameters.body, "msixImageUri", "csharp");
 
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
