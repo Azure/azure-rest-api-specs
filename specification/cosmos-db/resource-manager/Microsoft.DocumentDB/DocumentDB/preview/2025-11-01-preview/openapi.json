@@ -22593,21 +22593,6 @@
         ]
       }
     },
-    "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of user assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client id of user assigned identity.",
-          "readOnly": true
-        }
-      }
-    },
     "ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems": {
       "type": "object",
       "properties": {
@@ -26895,7 +26880,7 @@
           "type": "object",
           "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "#/definitions/Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties"
+            "$ref": "#/definitions/UserassignedidentitiesAdditionalproperties"
           }
         }
       }
@@ -33019,6 +33004,21 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      }
+    },
+    "UserassignedidentitiesAdditionalproperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
         }
       }
     },
