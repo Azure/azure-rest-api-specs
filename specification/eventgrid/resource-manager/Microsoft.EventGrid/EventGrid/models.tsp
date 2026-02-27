@@ -2324,29 +2324,6 @@ model CaCertificateProperties {
 }
 
 /**
- * Definition of a Resource.
- */
-model Resource {
-  /**
-   * Fully qualified identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * Properties of the Channel.
  */
 model ChannelProperties {
@@ -5154,7 +5131,7 @@ model EventTypesListResult {
  * Event Type for a subject under a topic
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EventType extends Resource {
+model EventType extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Properties of the event type.
    */
