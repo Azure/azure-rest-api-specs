@@ -828,10 +828,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Recipe"
-              }
+              "$ref": "#/definitions/PaginatedRecipes"
             }
           },
           "default": {
@@ -846,6 +843,10 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "Get all recipes": {
@@ -1422,10 +1423,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BaseModel"
-              }
+              "$ref": "#/definitions/PaginatedBaseModels"
             }
           },
           "default": {
@@ -1440,6 +1438,10 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "Get base models": {
@@ -2397,6 +2399,27 @@
         "modelAsString": true
       }
     },
+    "PaginatedBaseModels": {
+      "description": "Paginated base model list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Base model list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseModel"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
     "PaginatedConsents": {
       "description": "Paginated consent list",
       "required": [
@@ -2451,6 +2474,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Model"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedRecipes": {
+      "description": "Paginated recipe list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Recipe list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
           }
         },
         "nextLink": {
