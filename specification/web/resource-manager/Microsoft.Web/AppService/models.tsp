@@ -2475,10 +2475,10 @@ model OutboundVnetRouting {
    */
   backupRestoreTraffic?: boolean;
 
-  @added(Versions.v2026_03_01_preview)
   /**
    * Enables Managed Identity operations over virtual network.
    */
+  @added(Versions.v2026_03_01_preview)
   managedIdentityTraffic?: boolean;
 }
 
