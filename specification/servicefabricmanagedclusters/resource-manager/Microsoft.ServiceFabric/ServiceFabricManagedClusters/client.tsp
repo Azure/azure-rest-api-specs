@@ -144,7 +144,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(IPAddressType, "IpAddressType", "java");
 @@clientName(PublicIPAddressConfiguration,
   "IpConfigurationPublicIpAddressConfiguration",
-  "java,python"
+  "java"
 );
 @@clientName(PrivateIPAddressVersion, "PrivateIpAddressVersion", "java");
 @@clientName(PublicIPAddressVersion, "PublicIpAddressVersion", "java");
