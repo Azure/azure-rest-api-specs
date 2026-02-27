@@ -155,3 +155,12 @@ using Microsoft.Maintenance;
 // Both generate GetAll(string, string, string, string, CancellationToken) on SubscriptionResource
 // but return different types (Update vs ConfigurationAssignmentResource)
 @@clientName(UpdatesOperationGroup.list, "GetUpdates", "csharp");
+
+// csharp: convert Duration from string to TimeSpan for backward compatibility
+@@alternateType(MaintenanceWindow.duration, duration, "csharp");
+
+// csharp: convert Location from string to AzureLocation for backward compatibility
+@@alternateType(ConfigurationAssignment.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
