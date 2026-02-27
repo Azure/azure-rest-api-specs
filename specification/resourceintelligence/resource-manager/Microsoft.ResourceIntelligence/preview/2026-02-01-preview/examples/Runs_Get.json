@@ -1,20 +1,21 @@
 {
-  "operationId": "LatestThreadRuns_Get",
-  "title": "Get the latest thread run",
+  "operationId": "Runs_Get",
+  "title": "Get a Run",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "agentName": "myAgent",
-    "threadId": "550e8400-e29b-41d4-a716-446655440000"
+    "runId": "run-001"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/550e8400-e29b-41d4-a716-446655440000/threadRuns/latest",
-        "name": "latest",
-        "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/run-001",
+        "name": "run-001",
+        "type": "Microsoft.ResourceIntelligence/agents/runs",
         "properties": {
+          "status": "completed",
           "startTime": "2026-02-01T12:00:00Z",
           "endTime": "2026-02-01T12:01:30Z"
         },

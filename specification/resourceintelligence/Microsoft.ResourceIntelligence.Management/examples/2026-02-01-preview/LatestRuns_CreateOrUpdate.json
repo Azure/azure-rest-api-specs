@@ -1,12 +1,11 @@
 {
-  "operationId": "LatestThreadRuns_CreateOrUpdate",
-  "title": "Create a thread run via PUT (ARM/Bicep compatibility)",
+  "operationId": "LatestRuns_CreateOrUpdate",
+  "title": "Create a run via PUT (ARM/Bicep compatibility)",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "agentName": "myAgent",
-    "threadId": "550e8400-e29b-41d4-a716-446655440000",
     "resource": {
       "properties": {}
     }
@@ -14,10 +13,11 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/550e8400-e29b-41d4-a716-446655440000/threadRuns/latest",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/latest",
         "name": "latest",
-        "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns",
+        "type": "Microsoft.ResourceIntelligence/agents/runs",
         "properties": {
+          "status": "running",
           "startTime": "2026-02-01T12:00:00Z"
         },
         "systemData": {
@@ -29,10 +29,11 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/550e8400-e29b-41d4-a716-446655440000/threadRuns/latest",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/latest",
         "name": "latest",
-        "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns",
+        "type": "Microsoft.ResourceIntelligence/agents/runs",
         "properties": {
+          "status": "running",
           "startTime": "2026-02-01T12:00:00Z"
         },
         "systemData": {

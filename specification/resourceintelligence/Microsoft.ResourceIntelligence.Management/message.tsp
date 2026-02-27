@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./threadRun.tsp";
+import "./run.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Rest;
@@ -16,9 +16,9 @@ namespace Microsoft.ResourceIntelligence;
 // ============================================
 
 /**
- * A message within a thread run. Records the conversation history.
+ * A message within a run. Records the conversation history.
  */
-@parentResource(ThreadRun)
+@parentResource(Run)
 model Message is ProxyResource<MessageProperties> {
   /**
    * The unique identifier of the message.
@@ -71,7 +71,7 @@ interface Messages {
   get is ArmResourceRead<Message>;
 
   /**
-   * Lists messages for a thread run.
+   * Lists messages for a run.
    */
   listByParent is ArmResourceListByParent<Message>;
 }

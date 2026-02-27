@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./thread.tsp";
+import "./agent.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Rest;
@@ -12,28 +12,34 @@ using TypeSpec.Versioning;
 namespace Microsoft.ResourceIntelligence;
 
 // ============================================
-// THREAD RUN RESOURCE
+// RUN RESOURCE
 // ============================================
 
 /**
- * A single execution run on a thread. Tracks run status, timing, and results.
+ * A single execution run on an agent. Tracks run status, timing, and results.
  */
-@parentResource(Thread)
-model ThreadRun is ProxyResource<ThreadRunProperties> {
+@parentResource(Agent)
+model Run is ProxyResource<RunProperties> {
   /**
-   * The unique identifier of the thread run.
+   * The unique identifier of the run.
    */
   @key("runId")
-  @segment("threadRuns")
+  @segment("runs")
   @pattern("^[a-zA-Z0-9-]{1,64}$")
   @path
   name: string;
 }
 
 /**
- * Properties of a ThreadRun resource.
+ * Properties of a Run resource.
  */
-model ThreadRunProperties {
+model RunProperties {
+  /**
+   * The lifecycle status of the run.
+   */
+  @visibility(Lifecycle.Read)
+  status?: RunStatus;
+
   /**
    * The timestamp when the run started.
    */
@@ -54,58 +60,53 @@ model ThreadRunProperties {
 }
 
 // ============================================
-// THREAD RUN OPERATIONS
+// RUN OPERATIONS
 // ============================================
 
 @armResourceOperations
-interface ThreadRuns {
+interface Runs {
   /**
-   * Gets a thread run by ID.
+   * Gets a run by ID.
    */
-  get is ArmResourceRead<ThreadRun>;
+  get is ArmResourceRead<Run>;
 
   /**
-   * Deletes a thread run.
+   * Deletes a run.
    */
-  delete is ArmResourceDeleteSync<ThreadRun>;
-
-  /**
-   * Lists thread runs for a thread.
-   */
-  listByParent is ArmResourceListByParent<ThreadRun>;
+  delete is ArmResourceDeleteSync<Run>;
 }
 
 // ============================================
-// LATEST THREAD RUN (SINGLETON)
+// LATEST RUN (SINGLETON)
 // ============================================
 
 /**
- * Singleton resource representing the latest thread run.
- * Provides PUT endpoint for ARM/Bicep compatibility at threadRuns/latest.
+ * Singleton resource representing the latest run.
+ * Provides PUT endpoint for ARM/Bicep compatibility at runs/latest.
  */
-@parentResource(Thread)
+@parentResource(Agent)
 @singleton("latest")
-model LatestThreadRun is ProxyResource<ThreadRunProperties> {
+model LatestRun is ProxyResource<RunProperties> {
   /**
    * The name of the singleton resource (always "latest").
    */
   @key("runId")
-  @segment("threadRuns")
+  @segment("runs")
   @pattern("^latest$")
   @path
   name: string;
 }
 
 @armResourceOperations
-interface LatestThreadRuns {
+interface LatestRuns {
   /**
-   * Gets the latest thread run.
+   * Gets the latest run.
    */
-  get is ArmResourceRead<LatestThreadRun>;
+  get is ArmResourceRead<LatestRun>;
 
   /**
-   * Creates or updates a thread run via PUT for ARM/Bicep compatibility.
+   * Creates or updates a run via PUT for ARM/Bicep compatibility.
    * The "latest" name is a logical identifier — the actual run ID is generated server-side.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<LatestThreadRun>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LatestRun>;
 }

@@ -4,8 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./agent.tsp";
-import "./thread.tsp";
-import "./threadRun.tsp";
+import "./run.tsp";
 import "./message.tsp";
 
 using TypeSpec.Rest;

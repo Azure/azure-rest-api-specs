@@ -8,31 +8,31 @@ using TypeSpec.Http;
 namespace Microsoft.ResourceIntelligence;
 
 // ============================================
-// THREAD STATUS
+// RUN STATUS
 // ============================================
 
 /**
- * The lifecycle status of a thread.
+ * The lifecycle status of a run.
  */
-union ThreadStatus {
+union RunStatus {
   string,
 
-  /** The thread is idle and not currently running */
+  /** The run is idle and not currently executing */
   Idle: "idle",
 
-  /** The thread is actively running */
+  /** The run is actively executing */
   Running: "running",
 
-  /** The thread execution is paused */
+  /** The run execution is paused */
   Paused: "paused",
 
-  /** The thread is awaiting user input */
+  /** The run is awaiting user input */
   AwaitingInput: "awaitingInput",
 
-  /** The thread has completed execution */
+  /** The run has completed execution */
   Completed: "completed",
 
-  /** The thread execution failed */
+  /** The run execution failed */
   Failed: "failed",
 }
 
@@ -41,7 +41,7 @@ union ThreadStatus {
 // ============================================
 
 /**
- * The type of message in a thread run.
+ * The type of message in a run.
  */
 union MessageType {
   string,
@@ -85,11 +85,11 @@ union MessageSource {
 }
 
 // ============================================
-// THREAD RUN REQUEST / RESPONSE
+// RUN REQUEST / RESPONSE
 // ============================================
 
 /**
- * Whether tool invocation is permitted during a thread run.
+ * Whether tool invocation is permitted during a run.
  */
 union AllowToolUse {
   string,
@@ -102,28 +102,28 @@ union AllowToolUse {
 }
 
 /**
- * The resume policy for a thread run.
+ * The resume policy for a run.
  */
 union ResumePolicy {
   string,
 
-  /** No specific policy — default behavior, starts the thread run */
+  /** No specific policy — default behavior, starts the run */
   None: "none",
 
-  /** Resume the thread run */
+  /** Resume the run */
   Resume: "resume",
 
-  /** Pause the thread run */
+  /** Pause the run */
   Pause: "pause",
 
-  /** Cancel the thread run */
+  /** Cancel the run */
   Cancel: "cancel",
 }
 
 /**
- * Request body for creating and running a thread.
+ * Request body for creating and running an agent.
  */
-model ThreadRunRequest {
+model RunRequest {
   /**
    * Whether tool invocation is permitted during the run. Defaults to enabled.
    */
@@ -154,14 +154,9 @@ model ThreadRunRequest {
 }
 
 /**
- * Response body returned when a thread run is accepted.
+ * Response body returned when a run is accepted.
  */
-model ThreadRunResponse {
-  /**
-   * The ID of the thread.
-   */
-  threadId: string;
-
+model RunResponse {
   /**
    * The ID of the created run.
    */

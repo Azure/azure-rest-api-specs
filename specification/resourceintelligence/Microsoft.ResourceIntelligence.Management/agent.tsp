@@ -15,7 +15,7 @@ namespace Microsoft.ResourceIntelligence;
 // ============================================
 
 /**
- * An AI Agent resource that can execute runs within threads.
+ * An AI Agent resource that can execute runs.
  */
 model Agent is TrackedResource<AgentProperties> {
   /**
@@ -81,8 +81,8 @@ interface Agents {
   listBySubscription is ArmListBySubscription<Agent>;
 
   /**
-   * Creates a new thread and run for the agent. Returns 202 Accepted with run tracking info.
-   * The client should poll GET threadRuns/{runId} for completion.
+   * Creates a new run for the agent. Returns 202 Accepted with run tracking info.
+   * The client should poll GET runs/{runId} for completion.
    */
-  run is ArmResourceActionAsync<Agent, ThreadRunRequest, ThreadRunResponse>;
+  run is ArmResourceActionAsync<Agent, RunRequest, RunResponse>;
 }
