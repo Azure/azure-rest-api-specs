@@ -535,3 +535,12 @@ using Microsoft.DesktopVirtualization;
   "getPrivateLinkResources",
   "csharp"
 );
+
+@@Azure.ClientGenerator.Core.alternateType(CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
+  PrivateEndpointConnection,
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.alternateType(CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
+  PrivateEndpointConnection,
+  "csharp"
+);
