@@ -70,6 +70,11 @@ using Azure.ResourceManager;
   "java"
 );
 
+@@clientName(CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "java"
+);
+
 @@clientName(ExportFormat.Swagger, "SWAGGER_LINK", "java");
 @@clientName(ExportFormat.Wadl, "WADL_LINK", "java");
 @@clientName(ExportFormat.Wsdl, "WSDL_LINK", "java");
@@ -90,6 +95,10 @@ using Azure.ResourceManager;
 @@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
   Microsoft.ApiManagement,
   "python"
+);
+@@clientName(CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "python,go"
 );
 
 /**
