@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace KeyVault;
 

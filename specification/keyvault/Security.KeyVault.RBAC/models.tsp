@@ -8,8 +8,8 @@ import "../Security.KeyVault.Common/common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 

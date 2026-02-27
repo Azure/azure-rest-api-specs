@@ -5,6 +5,7 @@ import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using TypeSpec.Http;
 
 namespace KeyVault;
