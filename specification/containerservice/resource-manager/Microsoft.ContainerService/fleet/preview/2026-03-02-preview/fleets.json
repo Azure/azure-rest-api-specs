@@ -3474,7 +3474,7 @@
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "Cilium requires each cluster to be assigned a unique numeric cluster id. The id is managed by Fleet and cannot be set by the user.",
+          "description": "Cilium requires each cluster to be assigned a unique numeric cluster id from 1 - 255. The id is managed by Fleet and cannot be set by the user.",
           "readOnly": true
         },
         "name": {
@@ -3538,10 +3538,9 @@
           "description": "The provisioning state of the cluster mesh profile.",
           "readOnly": true
         },
-        "memberLabelSelector": {
-          "type": "string",
-          "description": "Kubernetes-style label selector for selecting Fleet members to join the mesh, e.g. `env=production`. If empty or not specified, no Fleet members will be selected to join the mesh.",
-          "maxLength": 512,
+        "memberSelector": {
+          "$ref": "#/definitions/MemberSelector",
+          "description": "Select the members of the mesh.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected to join the mesh.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4783,6 +4782,24 @@
           "description": "The default network policy for the fleet managed namespace."
         }
       }
+    },
+    "MemberSelector": {
+      "type": "object",
+      "description": "Select members of a fleet.",
+      "properties": {
+        "byLabel": {
+          "type": "string",
+          "description": "Kubernetes-style label selector for selecting Fleet members, e.g. `env=production`.",
+          "maxLength": 512,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "byLabel"
+      ]
     },
     "MemberUpdateStatus": {
       "type": "object",
