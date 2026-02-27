@@ -10,7 +10,9 @@
     "clusterMeshProfileName": "clustermeshprofile1",
     "resource": {
       "properties": {
-        "memberLabelSelector": "env=production"
+        "memberSelector": {
+          "byLabel": "env=production"
+        }
       }
     }
   },
@@ -18,8 +20,10 @@
     "200": {
       "body": {
         "properties": {
-          "memberLabelSelector": "env=production",
           "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "env=production"
+          },
           "status": {
             "state": "Connected",
             "lastAppliedMemberLabelSelector": "env=production",
@@ -43,8 +47,10 @@
     "201": {
       "body": {
         "properties": {
-          "memberLabelSelector": "env=production",
           "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "env=production"
+          },
           "status": {
             "state": "NotConnected"
           }
