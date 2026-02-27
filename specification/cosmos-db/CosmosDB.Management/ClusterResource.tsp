@@ -96,7 +96,8 @@ interface ClusterResources {
   invokeCommand is ArmResourceActionAsyncBase<
     ClusterResource,
     CommandPostBody,
-    ArmAcceptedLroResponse & {
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommandOutput> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: CommandOutput;
     },
