@@ -741,7 +741,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(PodLinkLocalAccess.IMDS, "Imds", "csharp");
 @@clientName(ProxyRedirectionMechanism.CNIChaining, "CniChaining", "csharp");
 @@clientName(RebalanceLoadBalancersRequestBody,
-  "RebalanceLoadBalancersRequestContent",
+  "RebalanceLoadBalancersContent",
   "csharp"
 );
 @@clientName(SysctlConfig.netIpv4IpLocalPortRange,
