@@ -93,6 +93,9 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 
   /** The version of the benchmark specification (e.g., '0.1'). Latest version if not specified. */
   benchmark_version?: string;
+
+  /** Optional grader model for benchmarks that use model graders, Required when the benchmark's testing_criteria uses a model grader type. */
+  grader_model?: string;
 }
 
 /** Adding Azure AI Source type to data source for foundry extension. */
