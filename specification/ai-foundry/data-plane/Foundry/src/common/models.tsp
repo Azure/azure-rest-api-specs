@@ -49,7 +49,7 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
-/** Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents. */
+/** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
 union AgentDefintionOptInKeys {
   string,
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
