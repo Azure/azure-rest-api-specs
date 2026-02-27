@@ -179,6 +179,40 @@ model BenefitPlans {
   windowsServerVmCount?: int32;
 }
 
+model DisconnectedOperationPropertiesCreateOrUpdate {
+  @renamedFrom(Microsoft.Edge.Versions.v2026_03_15, "connectionIntent")
+  @removed(Microsoft.Edge.Versions.v2026_03_15)
+  @doc("The connection intent")
+  oldConnectionIntent: ConnectionIntent;
+
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The connection intent")
+  connectionIntent: ConnectionIntent;
+
+  @doc("The device version")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  deviceVersion?: string;
+
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  billingConfiguration?: BillingConfigurationCreateCreateOrUpdate;
+
+  @doc("The benefit plans")
+  @added(Microsoft.Edge.Versions.v2026_03_15)
+  benefitPlans?: BenefitPlans;
+}
+
+@doc("The billing configuration")
+@added(Microsoft.Edge.Versions.v2026_03_15)
+model BillingConfigurationCreateCreateOrUpdate {
+  @doc("The auto renew setting")
+  autoRenew: AutoRenew;
+
+  @doc("The current billing configuration")
+  current: BillingPeriod;
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)

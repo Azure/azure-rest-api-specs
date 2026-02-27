@@ -9,6 +9,16 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.Edge;
+
+model DisconnectedOperationCreateOrUpdate
+  is TrackedResource<DisconnectedOperationPropertiesCreateOrUpdate> {
+  @doc("Name of the resource")
+  @path
+  @key("name")
+  @segment("disconnectedOperations")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+  name: string;
+}
 @doc("Disconnected operation resource.")
 model DisconnectedOperation
   is TrackedResource<DisconnectedOperationProperties> {
@@ -27,7 +37,10 @@ interface DisconnectedOperations
       DisconnectedOperationProperties
     > {
   get is ArmResourceRead<DisconnectedOperation>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DisconnectedOperation>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DisconnectedOperationCreateOrUpdate,
+    DisconnectedOperation
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<DisconnectedOperation>;
   @doc("get deployment manifest.")
   listDeploymentManifest is ArmResourceActionSync<
