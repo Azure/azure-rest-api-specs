@@ -2931,6 +2931,7 @@ op regionalCheckNameAvailabilityCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
 
   /**
    * Resource name to verify.
