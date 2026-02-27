@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2025-12-01-preview",
+    "description": "Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}/action": {
+      "post": {
+        "tags": [
+          "AttributeNamespaces"
+        ],
+        "operationId": "AttributeNamespaces_Create",
+        "description": "Creates a new attribute namespace.",
+        "parameters": [
+          {
+            "name": "attributeNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the attribute namespace to create."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttributeNamespaceCreateRequest"
+            },
+            "description": "Parameters for creating the attribute namespace."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the updated attribute namespace.",
+            "schema": {
+              "$ref": "#/definitions/AttributeNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateAttributeNamespace": {
+            "$ref": "./examples/CreateAttributeNamespace.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}": {
+      "get": {
+        "tags": [
+          "AttributeNamespaces"
+        ],
+        "operationId": "AttributeNamespaces_Get",
+        "description": "Gets the specified attribute namespace.",
+        "parameters": [
+          {
+            "name": "attributeNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the attribute namespace to get."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the attribute namespace.",
+            "schema": {
+              "$ref": "#/definitions/AttributeNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAttributeNamespace": {
+            "$ref": "./examples/GetAttributeNamespace.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AttributeNamespaces"
+        ],
+        "operationId": "AttributeNamespaces_Delete",
+        "description": "Deletes the specified attribute namespace.",
+        "parameters": [
+          {
+            "name": "attributeNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the attribute namespace to delete."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The attribute namespace was successfully deleted."
+          },
+          "204": {
+            "description": "No Content - The attribute namespace does not exist or was already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAttributeNamespace": {
+            "$ref": "./examples/DeleteAttributeNamespace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttributeNamespaceCreateRequest": {
+      "type": "object",
+      "description": "Request body for creating an attribute namespace.",
+      "properties": {
+        "namespaceOwnerPrincipalId": {
+          "type": "string",
+          "description": "The principal ID of the namespace owner."
+        }
+      },
+      "required": [
+        "namespaceOwnerPrincipalId"
+      ]
+    },
+    "AttributeNamespace": {
+      "type": "object",
+      "description": "An attribute namespace resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The fully qualified resource ID of the attribute namespace. For example, /providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the attribute namespace."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource. For example, Microsoft.Authorization/attributeNamespaces."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "x-ms-external": true,
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      }
+    }
+  }
+}

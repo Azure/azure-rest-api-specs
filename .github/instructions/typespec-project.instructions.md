@@ -1,3 +1,7 @@
+---
+excludeAgent: "code-review"
+---
+
 Before creating or initializing a TypeSpec project, you must know your org name, service name, and the type of service: data-plane or control-plane (ARM).
 
 Then create a new project directory under the `specification/<orgName>/resource-manager/<RPNamespace>/<ServiceName>` or `specification/<orgName>/data-plane/<ServiceName>` path, following the guidelines below.
