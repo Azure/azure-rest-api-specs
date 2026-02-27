@@ -482,6 +482,18 @@ model SubjectAlternativeNames {
    * User principal names.
    */
   upns?: string[];
+
+  /**
+   * Uniform Resource Identifiers.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  uris?: string[];
+
+  /**
+   * IP addresses; supports IPv4 and IPv6.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  ipAddresses?: string[];
 }
 
 /**

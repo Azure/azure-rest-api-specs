@@ -28,6 +28,8 @@ using KeyVault;
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
+@@clientName(SubjectAlternativeNames.uris, "uris", "java");
+@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
 // Go configuration
 
