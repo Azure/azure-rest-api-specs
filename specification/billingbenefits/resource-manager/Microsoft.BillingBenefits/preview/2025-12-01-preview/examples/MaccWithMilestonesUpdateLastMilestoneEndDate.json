@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "properties": {
+        "milestones": [
+          {
+            "endAt": "2026-03-31T23:59:59Z",
+            "milestoneId": "33333333-3333-3333-3333-333333333333"
+          }
+        ]
+      }
+    },
+    "maccName": "macc_20250614",
+    "resourceGroupName": "resource_group_name_01",
+    "subscriptionId": "10000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "macc_20250614",
+        "type": "Microsoft.BillingBenefits/maccs",
+        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20250614",
+        "location": "global",
+        "properties": {
+          "allowContributors": true,
+          "automaticShortfall": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "commitment": {
+            "amount": 30000,
+            "currencyCode": "USD",
+            "grain": "FullTerm"
+          },
+          "displayName": "macc 20250614",
+          "endAt": "2026-04-30T23:59:59Z",
+          "entityType": "Primary",
+          "milestones": [
+            {
+              "automaticShortfall": "Enabled",
+              "commitment": {
+                "amount": 10000,
+                "currencyCode": "USD"
+              },
+              "endAt": "2026-01-31T23:59:59Z",
+              "milestoneId": "11111111-1111-1111-1111-111111111111",
+              "status": "Completed"
+            },
+            {
+              "automaticShortfall": "Enabled",
+              "commitment": {
+                "amount": 10000,
+                "currencyCode": "USD"
+              },
+              "endAt": "2026-02-28T23:59:59Z",
+              "milestoneId": "22222222-2222-2222-2222-222222222222",
+              "status": "Completed"
+            },
+            {
+              "automaticShortfall": "Enabled",
+              "commitment": {
+                "amount": 10000,
+                "currencyCode": "USD"
+              },
+              "endAt": "2026-03-31T23:59:59Z",
+              "milestoneId": "33333333-3333-3333-3333-333333333333",
+              "status": "Completed"
+            }
+          ],
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "provisioningState": "Succeeded",
+          "startAt": "2025-11-01T00:00:00Z",
+          "status": "Active",
+          "systemId": "13810867107109238"
+        },
+        "systemData": {
+          "createdAt": "2025-06-14T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2026-03-01T02:15:30.2080047Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Location": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "Maccs_Update",
+  "title": "MaccWithMilestonesUpdateLastMilestoneEndDate"
+}
