@@ -1388,6 +1388,8 @@ op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   configreferences: "configreferences",
 ): ArmResponse<ApiKVReference>;
 
@@ -1440,6 +1442,8 @@ op webAppsGetConfigurationSnapshotSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   web: "web",
 ): ArmResponse<SiteConfigResource>;
 
@@ -2091,6 +2095,8 @@ op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   configreferences: "configreferences",
 ): ArmResponse<ApiKVReference>;
 
@@ -2603,6 +2609,8 @@ op webAppsRecoverSiteConfigurationSnapshotSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
   web: "web",
 
   @body
