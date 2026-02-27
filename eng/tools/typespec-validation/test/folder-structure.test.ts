@@ -25,6 +25,32 @@ describe("folder-structure", function () {
     vi.clearAllMocks();
   });
 
+  it("should succeed with suppression reason when rule is suppressed", async function () {
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "test suppression reason",
+        rules: ["FolderStructure"],
+      },
+    ]);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(result.success);
+    assert(result.stdOutput?.includes("suppressed"));
+    assert(result.stdOutput?.includes("test suppression reason"));
+  });
+
+  it("should not suppress when suppression targets a different rule", async function () {
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      { tool: "TypeSpecValidation", paths: ["."], reason: "other reason", rules: ["OtherRule"] },
+    ]);
+    fileExistsSpy.mockResolvedValue(false);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(!result.success);
+  });
+
   it("should fail if folder doesn't exist", async function () {
     fileExistsSpy.mockResolvedValue(false);
 
