@@ -44,3 +44,22 @@ using Azure.ClientGenerator.Core;
   PostgreSqlFlexibleServerHighAvailabilityMode[],
   "java"
 );
+
+@@alternateType(Microsoft.DBforPostgreSQL.HighAvailability.mode,
+  HighAvailabilityMode,
+  "go"
+);
+
+@@alternateType(Microsoft.DBforPostgreSQL.HighAvailabilityForPatch.mode,
+  HighAvailabilityMode,
+  "go"
+);
+
+@@clientName(PostgresMajorVersion.`11`, "Eleven", "go");
+@@clientName(PostgresMajorVersion.`12`, "Twelve", "go");
+@@clientName(PostgresMajorVersion.`13`, "Thirteen", "go");
+@@clientName(PostgresMajorVersion.`14`, "Fourteen", "go");
+@@clientName(PostgresMajorVersion.`15`, "Fifteen", "go");
+@@clientName(PostgresMajorVersion.`16`, "Sixteen", "go");
+@@clientName(PostgresMajorVersion.`17`, "Seventeen", "go");
+@@clientName(PostgresMajorVersion.`18`, "Eighteen", "go");
