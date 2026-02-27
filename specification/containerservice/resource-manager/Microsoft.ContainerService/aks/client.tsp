@@ -40,6 +40,13 @@ using Microsoft.ContainerService;
 );
 @@clientName(LinuxOSConfig.swapFileSizeMB, "SwapFileSizeInMB", "csharp");
 @@clientName(ManagedClusterAADProfile, "ManagedClusterAadProfile", "csharp");
+@@clientName(ManagedClusterAADProfile.adminGroupObjectIDs,
+  "AdminGroupObjectIds",
+  "csharp"
+);
+@@clientName(ManagedClusterAADProfile.clientAppID, "ClientAppId", "csharp");
+@@clientName(ManagedClusterAADProfile.serverAppID, "ServerAppId", "csharp");
+@@clientName(ManagedClusterAADProfile.tenantID, "TenantId", "csharp");
 @@clientName(ManagedClusterAADProfile.managed, "IsManagedAadEnabled", "csharp");
 @@clientName(ManagedClusterAADProfile.enableAzureRBAC,
   "IsAzureRbacEnabled",
@@ -54,6 +61,10 @@ using Microsoft.ContainerService;
 @@clientName(LicenseType, "WindowsVmLicenseType", "csharp");
 @@clientName(ManagedClusterPropertiesAutoScalerProfile,
   "ManagedClusterAutoScalerProfile",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesAutoScalerProfile.`scan-interval`,
+  "ScanIntervalInSeconds",
   "csharp"
 );
 @@clientName(Snapshot, "AgentPoolSnapshot", "csharp");
@@ -126,8 +137,10 @@ using Microsoft.ContainerService;
 @@clientName(RunCommandResult, "ManagedClusterRunCommandResult", "csharp");
 @@alternateType(UserAssignedIdentity.objectId, uuid, "csharp");
 @@alternateType(UserAssignedIdentity.clientId, uuid, "csharp");
+@@alternateType(ManagedClusterAADProfile.adminGroupObjectIDs, uuid[], "csharp");
 @@alternateType(ManagedClusterAADProfile.serverAppID, uuid, "csharp");
 @@alternateType(ManagedClusterAADProfile.clientAppID, uuid, "csharp");
+@@alternateType(ManagedClusterAADProfile.tenantID, uuid, "csharp");
 @@clientName(ManagedClusterSecurityProfileDefenderSecurityMonitoring.enabled,
   "IsSecurityMonitoringEnabled",
   "csharp"
@@ -262,6 +275,7 @@ using Microsoft.ContainerService;
   "ManagedClusterAdvancedNetworkPolicy",
   "csharp"
 );
+@@clientName(AdvancedNetworkPolicies.FQDN, "Fqdn", "csharp");
 @@clientName(AdvancedNetworkingObservability.enabled,
   "IsObservabilityEnabled",
   "csharp"
@@ -407,6 +421,10 @@ using Microsoft.ContainerService;
   "ManagedClusterLoadBalancerLabelSelectorRequirement",
   "csharp"
 );
+@@clientName(ManagedClusterAgentPoolProfileProperties.type,
+  "AgentPoolType",
+  "csharp"
+);
 @@clientName(ManagedClusterAgentPoolProfileProperties.osType,
   "OSType",
   "csharp"
@@ -439,10 +457,6 @@ using Microsoft.ContainerService;
   "VnetSubnetId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.type,
-  "TypePropertiesType",
-  "csharp"
-);
 @@clientName(ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
   "EnableUltraSsd",
   "csharp"
@@ -471,6 +485,7 @@ using Microsoft.ContainerService;
   "IsArtifactStreamingEnabled",
   "csharp"
 );
+@@clientName(MachineNetworkProperties.ipAddresses, "IPAddresses", "csharp");
 @@clientName(MachineNetworkProperties.vnetSubnetID, "VnetSubnetId", "csharp");
 @@clientName(MachineNetworkProperties.podSubnetID, "PodSubnetId", "csharp");
 @@clientName(MachineNetworkProperties.nodePublicIPPrefixID,
@@ -494,6 +509,14 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusterAPIServerAccessProfile,
   "ManagedClusterApiServerAccessProfile",
+  "csharp"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+  "EnablePrivateClusterPublicFqdn",
+  "csharp"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.privateDNSZone,
+  "PrivateDnsZone",
   "csharp"
 );
 @@clientName(ManagedClusterProperties.privateFQDN, "PrivateFqdn", "csharp");
@@ -597,6 +620,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterHttpProxyConfig",
   "csharp"
 );
+@@clientName(ManagedClusterHTTPProxyConfig.trustedCa, "TrustedCA", "csharp");
 @@clientName(LocalDNSMode, "LocalDnsMode", "csharp");
 @@clientName(LocalDNSState, "LocalDnsState", "csharp");
 @@clientName(LocalDNSQueryLogging, "LocalDnsQueryLogging", "csharp");
@@ -688,6 +712,10 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterJwtAuthenticatorValidationRule",
   "csharp"
 );
+@@clientName(ManagedClusterPodIdentityProvisioningErrorBody,
+  "ManagedClusterPodIdentityProvisioningErrorDetail",
+  "csharp"
+);
 
 @@clientName(TrustedAccessRolesOperationGroup.list,
   "GetTrustedAccessRoles",
@@ -698,6 +726,67 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(ManagedClusters.resetAADProfile, "ResetAadProfile", "csharp");
+@@clientName(NodeProvisioningDefaultNodePools,
+  "NodeProvisioningDefaultNodePool",
+  "csharp"
+);
+@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+  "IsCsiProxyEnabled",
+  "csharp"
+);
+@@clientName(Mode, "ContainerServiceNetworkKubeProxyMode", "csharp");
+@@clientName(Mode.IPTABLES, "IPTables", "csharp");
+@@clientName(Mode.IPVS, "Ipvs", "csharp");
+@@clientName(Mode.NFTABLES, "NFTables", "csharp");
+@@clientName(PodLinkLocalAccess.IMDS, "Imds", "csharp");
+@@clientName(ProxyRedirectionMechanism.CNIChaining, "CniChaining", "csharp");
+@@clientName(RebalanceLoadBalancersRequestBody,
+  "RebalanceLoadBalancersRequestContent",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4IpLocalPortRange,
+  "NetIpv4IPLocalPortRange",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh1,
+  "NetIPv4NeighDefaultGcThresh1",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh2,
+  "NetIPv4NeighDefaultGcThresh2",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh3,
+  "NetIPv4NeighDefaultGcThresh3",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpFinTimeout,
+  "NetIPv4TcpFinTimeout",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpkeepaliveIntvl,
+  "NetIPv4TcpKeepaliveIntvl",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpKeepaliveProbes,
+  "NetIPv4TcpKeepaliveProbes",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpKeepaliveTime,
+  "NetIPv4TcpKeepaliveTime",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpMaxSynBacklog,
+  "NetIPv4TcpMaxSynBacklog",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpMaxTwBuckets,
+  "NetIPv4TcpMaxTwBuckets",
+  "csharp"
+);
+@@clientName(SysctlConfig.netIpv4TcpTwReuse, "NetIPv4TcpTwReuse", "csharp");
+@@clientName(VmState, "ContainerServiceMachineVmState", "csharp");
+@@clientName(WorkloadRuntime.OCIContainer, "OciContainer", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
@@ -718,3 +807,29 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
 @@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(Operations.list, "!csharp");
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model WritableSubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
+@@alternateType(ManagedClusterLoadBalancerProfile.effectiveOutboundIPs,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(ManagedClusterLoadBalancerProfileOutboundIPs.publicIPs,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(ManagedClusterNATGatewayProfile.effectiveOutboundIPs,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
