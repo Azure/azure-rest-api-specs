@@ -23,12 +23,31 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model Error {
   /** The error code. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Code?: StorageErrorCode;
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  xMsCopySourceErrorCode?: string;
+
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  xMsCopySourceStatusCode?: int32;
+
+  /** The error code. */
+  @Xml.name("Code") code?: StorageErrorCode;
 
   /** The error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Message?: string;
+  @Xml.name("Message") message?: string;
+
+  /** Copy source status code */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
+
+  /** Copy source error code */
+  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
+
+  /** Copy source error message */
+  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
 /** Error codes returned by the Azure Blob Storage service. */
