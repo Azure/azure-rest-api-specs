@@ -30,7 +30,7 @@ using Azure.ClientGenerator.Core;
   "geoBackupKeyUri",
   "java"
 );
-@@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java");
+@@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java,go");
 
 @@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
   "HighAvailabilityMode",
