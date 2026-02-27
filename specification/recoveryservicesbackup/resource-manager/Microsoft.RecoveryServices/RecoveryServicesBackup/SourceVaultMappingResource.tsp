@@ -11,6 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
@@ -22,9 +23,11 @@ namespace Microsoft.RecoveryServices;
 /**
  * Source vault mapping resource for cross-tenant restore.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @added(Versions.v2026_03_01_preview)
 @parentResource(VaultResource)
-model SourceVaultMappingResource is ProxyResource<SourceVaultMapping> {
+model SourceVaultMappingResource
+  is TrackedResourceWithOptionalLocation<SourceVaultMapping> {
   ...ResourceNameParameter<
     Resource = SourceVaultMappingResource,
     KeyName = "sourceVaultMappingName",
