@@ -2,7 +2,7 @@
   "parameters": {
     "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "api-version": "2024-02-01-preview"
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
@@ -14,6 +14,7 @@
             "kind": "Default",
             "description": "Model updated with a robust vocoder for higher audio quality. 15-50 compute hours estimated for each training.",
             "minUtteranceCount": 300,
+            "minDurationInSeconds": 3600.0,
             "datasetLocales": [
               "en-US",
               "en-GB",
@@ -26,6 +27,7 @@
             "kind": "MultiStyle",
             "description": "Basic version to adapt the voice to speak with multiple emotional styles, or create your own speaking style with custom style training data. 25-50 computer hours estimated for each training. Style degree tuning supported.",
             "minUtteranceCount": 300,
+            "minDurationInSeconds": 3600.0,
             "minStyleUtteranceCount": 100,
             "maxCustomStyleNum": 5,
             "datasetLocales": [

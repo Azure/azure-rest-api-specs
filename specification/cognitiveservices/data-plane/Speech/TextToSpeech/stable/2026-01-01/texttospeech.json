@@ -7,7 +7,7 @@
       "name": "Azure AI - Speech Services",
       "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
     },
-    "version": "2024-02-01-preview"
+    "version": "2026-01-01"
   },
   "paths": {
     "/projects": {
@@ -1704,8 +1704,9 @@
           {
             "in": "formData",
             "name": "audioData",
-            "description": "Audio files.",
-            "type": "file"
+            "description": "Audio files. Maximum file size is 30MB.",
+            "type": "file",
+            "x-ms-max-length": 31457280
           },
           {
             "in": "formData",
@@ -1988,6 +1989,9 @@
         "kind": {
           "$ref": "#/definitions/DatasetKind"
         },
+        "processAs": {
+          "$ref": "#/definitions/DatasetProcessAs"
+        },
         "audios": {
           "$ref": "#/definitions/AzureBlobContentSource"
         },
@@ -2007,6 +2011,28 @@
       "x-ms-enum": {
         "name": "DatasetKind",
         "modelAsString": true
+      }
+    },
+    "DatasetProcessAs": {
+      "description": "Dataset processing method. If not specified, the default processing method will be used.",
+      "enum": [
+        "Segmented",
+        "Contextual"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetProcessAs",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Segmented",
+            "description": "The default processing mode that works with all supported languages."
+          },
+          {
+            "value": "Contextual",
+            "description": "An enhanced mode that retains the audio as a whole to keep the contextual information for more natural intonations."
+          }
+        ]
       }
     },
     "Endpoint": {
@@ -2243,7 +2269,9 @@
         "InaccessibleCustomerStorage",
         "SpeakerVerificationFailed",
         "TerminateByUser",
-        "Internal"
+        "Internal",
+        "DataNotReady",
+        "DataNotEnough"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2265,6 +2293,14 @@
           {
             "value": "Internal",
             "description": "Custom Voice Service error."
+          },
+          {
+            "value": "DataNotReady",
+            "description": "Training data is not ready for model training."
+          },
+          {
+            "value": "DataNotEnough",
+            "description": "Training data is not enough for model training."
           }
         ]
       }
@@ -2308,6 +2344,23 @@
         },
         "failureReason": {
           "$ref": "#/definitions/ModelFailureReason"
+        },
+        "failedTrainingsets": {
+          "description": "IDs of failed training sets.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "secondaryLocales": {
+          "description": "Secondary locales that this model can speak. Locale code follows BCP-47.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "en-GB"
+          },
+          "readOnly": true
         }
       }
     },
@@ -2512,6 +2565,11 @@
         "kind": {
           "$ref": "#/definitions/ProjectKind"
         },
+        "locale": {
+          "description": "The locale of this project. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
         "createdDateTime": {
           "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
@@ -2591,6 +2649,12 @@
           "additionalProperties": {
             "$ref": "#/definitions/PresetStyleItem"
           },
+          "readOnly": true
+        },
+        "minDurationInSeconds": {
+          "description": "Minimum audio duration in seconds required to train a voice model with this recipe.",
+          "format": "double",
+          "type": "number",
           "readOnly": true
         }
       }
@@ -2677,6 +2741,15 @@
           "description": "Utterance count in this training set",
           "format": "int32",
           "type": "integer"
+        },
+        "durationInSeconds": {
+          "description": "Total duration of audio in seconds in this training set",
+          "format": "double",
+          "type": "number"
+        },
+        "isContextual": {
+          "description": "Indicates whether the training set is composed of contextual data",
+          "type": "boolean"
         }
       },
       "readOnly": true
