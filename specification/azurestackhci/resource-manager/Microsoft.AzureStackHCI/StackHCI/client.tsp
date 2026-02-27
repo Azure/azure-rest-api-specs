@@ -491,3 +491,85 @@ using Microsoft.AzureStackHCI;
   Azure.Core.uuid,
   "csharp"
 );
+// ClusterProperties identity/AAD fields
+@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadApplicationObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadServicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// ClusterPatchProperties identity/AAD fields
+@@alternateType(Microsoft.AzureStackHCI.ClusterPatchProperties.aadClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterPatchProperties.aadTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// ClusterIdentityResponseProperties
+@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadServicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadApplicationObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// ArcSettingProperties
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcServicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// ArcIdentityResponseProperties
+@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcServicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// PerNodeState
+@@alternateType(Microsoft.AzureStackHCI.PerNodeState.arcNodeServicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
