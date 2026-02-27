@@ -22,7 +22,7 @@ model HorizonDbClusterProperties {
   @maxLength(128)
   administratorLoginPassword?: string;
 
-  @doc("The version of the Orion Db")
+  @doc("The version of the HorizonDb cluster")
   version?: string;
 
   @doc("The mode to create a new HorizonDb cluster")
@@ -39,9 +39,8 @@ model HorizonDbClusterProperties {
   poolName?: string;
 
   @doc("Number of replicas")
-  @minValue(0)
-  @maxValue(20)
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @minValue(1)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   replicaCount?: int32;
 
   @doc("Number of vCores")
@@ -50,20 +49,14 @@ model HorizonDbClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
 
-  @doc("The availability zone of the Orion Db")
+  @doc("The availability zone of the HorizonDb cluster")
   availabilityZone?: string;
 
-  @doc("The processor type for the Orion Db cluster")
+  @doc("The processor type for the HorizonDb cluster")
   processorType?: string;
 
   @doc("The network related info")
   network?: Network;
-
-  @doc("The high availability related info")
-  highAvailability?: HighAvailability;
-
-  @doc("The maintenance window related info")
-  maintenanceWindow?: MaintenanceWindowOptions;
 
   @doc("Current state of the cluster")
   @visibility(Lifecycle.Read)
@@ -85,9 +78,9 @@ model HorizonDbClusterProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("The zone placement policy")
+  @doc("Defines how replicas are placed across availability zones")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  zonePlacementPolicy?: string;
+  zonePlacementPolicy?: ZonePlacementPolicy;
 }
 
 @doc("Properties of a HorizonDb cluster for update operations")
@@ -108,12 +101,12 @@ model HorizonDbClusterPropertiesForPatchUpdate {
 
 @doc("Properties of a HorizonDb pool")
 model HorizonDbPoolProperties {
-  @doc("The SKU for the OrionDb pool")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The SKU for the HorizonDb pool")
+  @visibility(Lifecycle.Read)
   sku?: string;
 
-  @doc("The location of the OrionDb pool")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The location of the HorizonDb pool")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   @doc("Current state of the pool")
@@ -121,28 +114,28 @@ model HorizonDbPoolProperties {
   state?: State;
 
   @doc("Number of replicas in the pool")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   replicaCount?: int32;
 
   @doc("The administrator login for the pool")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   administratorLogin?: string;
 
   @doc("The administrator login password for the pool")
   @secret
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   administratorLoginPassword?: string;
 
-  @doc("The version of the OrionDb pool")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The version of the HorizonDb pool")
+  @visibility(Lifecycle.Read)
   version?: string;
 
-  @doc("The tags for the OrionDb pool")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The tags for the HorizonDb pool")
+  @visibility(Lifecycle.Read)
   tags?: string;
 
   @doc("The create mode for the pool")
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   createMode?: CreateModePool;
 
   @doc("The provisioning state of the pool")
@@ -156,64 +149,6 @@ model Network {
   @doc("The flag indicating whether public ip is requested")
   @visibility(Lifecycle.Read)
   publicNetworkAccess?: string;
-
-  @doc("The customer provided delegated subnet full ARM resource ID")
-  delegatedSubnetResourceId?: string;
-
-  @doc("The customer provided private DNS zone full ARM resource ID")
-  privateDnsZoneArmResourceId?: string;
-}
-
-@doc("High availability properties")
-model HighAvailability {
-  @doc("The HA mode for the server")
-  mode?: HighAvailabilityMode;
-
-  @doc("The user visible HA state of the server")
-  @visibility(Lifecycle.Read)
-  state?: string;
-
-  @doc("The availability zone of the standby server")
-  @visibility(Lifecycle.Read)
-  standbyAvailabilityZone?: string;
-
-  @doc("The fully qualified domain name of the standby server")
-  @visibility(Lifecycle.Read)
-  fullyQualifiedStandbyDomainName?: string;
-}
-@doc("Modes of high availability supported for this compute.")
-union HighAvailabilityMode {
-  string,
-
-  /** High availability is disabled */
-  Disabled: "Disabled",
-
-  /** Zone redundant high availability */
-  ZoneRedundant: "ZoneRedundant",
-
-  /** Same zone high availability */
-  SameZone: "SameZone",
-}
-
-@doc("Maintenance window properties")
-model MaintenanceWindowOptions {
-  @doc("Indicates whether the window is customer or system default")
-  customWindow?: string;
-
-  @doc("The day of the week for the maintenance to occur (0-6, where 0 is Sunday)")
-  @minValue(0)
-  @maxValue(6)
-  dayOfWeek?: int32;
-
-  @doc("The hour to start the maintenance (0-23)")
-  @minValue(0)
-  @maxValue(23)
-  startHour?: int32;
-
-  @doc("The minute to start the maintenance (0-59)")
-  @minValue(0)
-  @maxValue(59)
-  startMinute?: int32;
 }
 
 @doc("Properties of a HorizonDb replica")
@@ -253,7 +188,7 @@ model HorizonDbFirewallRuleProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   endIpAddress: string;
 
-  @doc("The description of the OrionDb firewall rule")
+  @doc("The description of the HorizonDb firewall rule")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
 
@@ -303,6 +238,17 @@ union CreateModePool {
 
   /** Update an existing pool */
   Update: "Update",
+}
+
+@doc("The zone redundancy option for the cluster")
+union ZonePlacementPolicy {
+  string,
+
+  /** Enforce zonal redundancy */
+  Strict: "Strict",
+
+  /** Best-effort placement (default) */
+  BestEffort: "BestEffort",
 }
 
 @doc("Current states")

@@ -1428,61 +1428,6 @@
         ]
       }
     },
-    "HighAvailability": {
-      "type": "object",
-      "description": "High availability properties",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/HighAvailabilityMode",
-          "description": "The HA mode for the server"
-        },
-        "state": {
-          "type": "string",
-          "description": "The user visible HA state of the server",
-          "readOnly": true
-        },
-        "standbyAvailabilityZone": {
-          "type": "string",
-          "description": "The availability zone of the standby server",
-          "readOnly": true
-        },
-        "fullyQualifiedStandbyDomainName": {
-          "type": "string",
-          "description": "The fully qualified domain name of the standby server",
-          "readOnly": true
-        }
-      }
-    },
-    "HighAvailabilityMode": {
-      "type": "string",
-      "description": "Modes of high availability supported for this compute.",
-      "enum": [
-        "Disabled",
-        "ZoneRedundant",
-        "SameZone"
-      ],
-      "x-ms-enum": {
-        "name": "HighAvailabilityMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "High availability is disabled"
-          },
-          {
-            "name": "ZoneRedundant",
-            "value": "ZoneRedundant",
-            "description": "Zone redundant high availability"
-          },
-          {
-            "name": "SameZone",
-            "value": "SameZone",
-            "description": "Same zone high availability"
-          }
-        ]
-      }
-    },
     "HorizonDbCluster": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1543,7 +1488,7 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of the Orion Db"
+          "description": "The version of the HorizonDb cluster"
         },
         "createMode": {
           "$ref": "#/definitions/CreateModeCluster",
@@ -1566,11 +1511,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of replicas",
-          "minimum": 0,
-          "maximum": 20,
+          "minimum": 1,
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1588,23 +1531,15 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "The availability zone of the Orion Db"
+          "description": "The availability zone of the HorizonDb cluster"
         },
         "processorType": {
           "type": "string",
-          "description": "The processor type for the Orion Db cluster"
+          "description": "The processor type for the HorizonDb cluster"
         },
         "network": {
           "$ref": "#/definitions/Network",
           "description": "The network related info"
-        },
-        "highAvailability": {
-          "$ref": "#/definitions/HighAvailability",
-          "description": "The high availability related info"
-        },
-        "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindowOptions",
-          "description": "The maintenance window related info"
         },
         "state": {
           "$ref": "#/definitions/State",
@@ -1633,8 +1568,8 @@
           "readOnly": true
         },
         "zonePlacementPolicy": {
-          "type": "string",
-          "description": "The zone placement policy",
+          "$ref": "#/definitions/ZonePlacementPolicy",
+          "description": "Defines how replicas are placed across availability zones",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1731,7 +1666,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the OrionDb firewall rule",
+          "description": "The description of the HorizonDb firewall rule",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1808,19 +1743,13 @@
       "properties": {
         "sku": {
           "type": "string",
-          "description": "The SKU for the OrionDb pool",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The SKU for the HorizonDb pool",
+          "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "The location of the OrionDb pool",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The location of the HorizonDb pool",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/State",
@@ -1831,51 +1760,34 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of replicas in the pool",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "administratorLogin": {
           "type": "string",
           "description": "The administrator login for the pool",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
           "description": "The administrator login password for the pool",
-          "x-ms-mutability": [
-            "update"
-          ],
+          "readOnly": true,
           "x-ms-secret": true
         },
         "version": {
           "type": "string",
-          "description": "The version of the OrionDb pool",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The version of the HorizonDb pool",
+          "readOnly": true
         },
         "tags": {
           "type": "string",
-          "description": "The tags for the OrionDb pool",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The tags for the HorizonDb pool",
+          "readOnly": true
         },
         "createMode": {
           "$ref": "#/definitions/CreateModePool",
           "description": "The create mode for the pool",
-          "x-ms-mutability": [
-            "update"
-          ]
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1968,37 +1880,6 @@
         }
       }
     },
-    "MaintenanceWindowOptions": {
-      "type": "object",
-      "description": "Maintenance window properties",
-      "properties": {
-        "customWindow": {
-          "type": "string",
-          "description": "Indicates whether the window is customer or system default"
-        },
-        "dayOfWeek": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The day of the week for the maintenance to occur (0-6, where 0 is Sunday)",
-          "minimum": 0,
-          "maximum": 6
-        },
-        "startHour": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The hour to start the maintenance (0-23)",
-          "minimum": 0,
-          "maximum": 23
-        },
-        "startMinute": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minute to start the maintenance (0-59)",
-          "minimum": 0,
-          "maximum": 59
-        }
-      }
-    },
     "Network": {
       "type": "object",
       "description": "Network properties",
@@ -2007,14 +1888,6 @@
           "type": "string",
           "description": "The flag indicating whether public ip is requested",
           "readOnly": true
-        },
-        "delegatedSubnetResourceId": {
-          "type": "string",
-          "description": "The customer provided delegated subnet full ARM resource ID"
-        },
-        "privateDnsZoneArmResourceId": {
-          "type": "string",
-          "description": "The customer provided private DNS zone full ARM resource ID"
         }
       }
     },
@@ -2140,6 +2013,30 @@
             "name": "Healthy",
             "value": "Healthy",
             "description": "Is healthy"
+          }
+        ]
+      }
+    },
+    "ZonePlacementPolicy": {
+      "type": "string",
+      "description": "The zone redundancy option for the cluster",
+      "enum": [
+        "Strict",
+        "BestEffort"
+      ],
+      "x-ms-enum": {
+        "name": "ZonePlacementPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Strict",
+            "value": "Strict",
+            "description": "Enforce zonal redundancy"
+          },
+          {
+            "name": "BestEffort",
+            "value": "BestEffort",
+            "description": "Best-effort placement (default)"
           }
         ]
       }
