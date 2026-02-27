@@ -6,3 +6,4 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DocumentDB;
 
 @@clientName(ErrorResponse, "CosmosDBErrorResult", "csharp");
+@@clientName(Microsoft.DocumentDB, "CosmosDBManagementClient", "javascript");
