@@ -12,9 +12,9 @@ using Azure.ClientGenerator.Core;
 // Client name customizations to avoid .NET naming conflicts (AZC0012/AZC0034)
 // =============================================================================
 
-// Shared types - AZC0012 (generic) and AZC0034 (conflicts with Azure types)
-@@clientName(Microsoft.Discovery.Bookshelf.Tag, "BookshelfTag", "csharp");
-@@clientName(Microsoft.Discovery.Bookshelf.ProvisioningState,
-  "BookshelfProvisioningState",
+// Shared types
+@@clientName(Microsoft.Discovery.Common.Tag, "DiscoveryTag", "csharp");
+@@clientName(Microsoft.Discovery.Common.ProvisioningState,
+  "DiscoveryProvisioningState",
   "csharp"
 );

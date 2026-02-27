@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "./versions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -9,8 +10,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-@versioned(Microsoft.Discovery.Bookshelf.Versions)
-namespace Microsoft.Discovery.Bookshelf;
+namespace Microsoft.Discovery.Common;
 
 /** The resource provisioning state. */
 @lroStatus
@@ -45,13 +45,12 @@ alias ServiceTraits = SupportsRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@access(Access.internal)
-@doc("For adding ID.")
-model WithId {
+/** For adding ID. */
+alias WithId = {
   @doc("The ID for the resource.")
   @visibility(Lifecycle.Read)
   id?: string;
-}
+};
 
 @doc("Definition of Tag")
 model Tag {
@@ -62,37 +61,33 @@ model Tag {
   value?: string;
 }
 
-@access(Access.internal)
-@doc("For adding tags.")
-model WithTags {
+/** For adding tags. */
+alias WithTags = {
   @doc("The tags")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Tag[];
-}
+};
 
-@access(Access.internal)
-@doc("For adding copilot instruction.")
-model WithCopilotInstruction {
+/** For adding copilot instruction. */
+alias WithCopilotInstruction = {
   @doc("The copilot instruction")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   copilotInstruction: string;
-}
+};
 
-@access(Access.internal)
-@doc("For adding status.")
-model WithStatus<T> {
+/** For adding status. */
+alias WithStatus<T> = {
   @doc("The status")
   @visibility(Lifecycle.Read)
   status?: T;
-}
+};
 
-@access(Access.internal)
-@doc("For adding status reason")
-model WithStatusReason {
+/** For adding status reason. */
+alias WithStatusReason = {
   @doc("The reason for the current status")
   @visibility(Lifecycle.Read)
   statusReason?: string;
-}
+};
 
 @doc("Enum for entity type")
 union ByType {
@@ -108,84 +103,65 @@ union ByType {
   string,
 }
 
-@access(Access.internal)
-@doc("For adding creation timestamp.")
-model WithCreatedAt {
+/** For adding creation timestamp. */
+alias WithCreatedAt = {
   @doc("The timestamp when the resource was created")
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking who created a resource.")
-model WithCreatedBy {
+/** For tracking who created a resource. */
+alias WithCreatedBy = {
   @doc("The ID of the user who created this resource.")
   @visibility(Lifecycle.Read)
   createdBy?: string;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking type of who created a resource.")
-model WithCreatedByType {
+/** For tracking type of who created a resource. */
+alias WithCreatedByType = {
   @doc("The type of user who created this resource.")
   @visibility(Lifecycle.Read)
   createdByType?: ByType;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking resource creation data.")
-model WithCreated {
-  ...WithCreatedAt;
-  ...WithCreatedBy;
-  ...WithCreatedByType;
-}
+/** For tracking resource creation data. */
+alias WithCreated = WithCreatedAt & WithCreatedBy & WithCreatedByType;
 
-@access(Access.internal)
-@doc("For adding last update timestamp.")
-model WithLastModifiedAt {
+/** For adding last update timestamp. */
+alias WithLastModifiedAt = {
   @doc("The timestamp when the resource was last updated")
   @visibility(Lifecycle.Read)
   lastModifiedAt?: utcDateTime;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking who Updated a resource.")
-model WithLastModifiedBy {
-  @doc("The ID of the user who Updated this resource.")
+/** For tracking who updated a resource. */
+alias WithLastModifiedBy = {
+  @doc("The ID of the user who updated this resource.")
   @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking type of who Updated a resource.")
-model WithLastModifiedByType {
-  @doc("The type of user who Updated this resource.")
+/** For tracking type of who updated a resource. */
+alias WithLastModifiedByType = {
+  @doc("The type of user who updated this resource.")
   @visibility(Lifecycle.Read)
   lastModifiedByType?: ByType;
-}
+};
 
-@access(Access.internal)
-@doc("For tracking resource modification data.")
-model WithLastModified {
-  ...WithLastModifiedAt;
-  ...WithLastModifiedBy;
-  ...WithLastModifiedByType;
-}
+/** For tracking resource modification data. */
+alias WithLastModified = WithLastModifiedAt &
+  WithLastModifiedBy &
+  WithLastModifiedByType;
 
-@access(Access.internal)
-@doc("For searching items created after specified timestamp.")
-model WithQueryCreatedSince {
+/** For searching items created after specified timestamp. */
+alias WithQueryCreatedSince = {
   @doc("The oldest creation timestamp to keep")
   @TypeSpec.Http.query
   createdSince?: utcDateTime;
-}
+};
 
-@access(Access.internal)
-@doc("For searching items created after specified timestamp.")
-model DataPlaneResource {
-  ...WithCreated;
-  ...WithLastModified;
-}
+/** Common data plane resource tracking properties. */
+alias DataPlaneResource = WithCreated & WithLastModified;
 
 @access(Access.internal)
 @doc("For region information about Control plane resource proxy.")
@@ -290,48 +266,20 @@ model DataPlaneResourceNameParameter<
   name: Type;
 }
 
-/**
- * A URI that references data. There are three forms this can take:
- *  1. discovery://storages/<storageArmId>/paths/<path> to reference data on Discovery Storage.
- *  2. discovery://dataassets/<dataAssetArmId> to reference a Discovery Data Asset.
- *  3. discovery://dataassets/<dataAssetArmId>/paths/<path> to reference a subpath within a Discovery Data Asset.
- *
- * Note that in the discovery://storages/<storageArmId>/paths/<path>, the <path> is not an absolute path within
- * the underlying NFS volume. Rather, the service creates a subdirectory on each storage for storing job
- * artifacts, and the <path> is relative to that subdirectory. The location of the subdirectory is not published,
- * nor is it guaranteed to be stable over time, but we do guarantee that a given discovery://storages/ URI will
- * always point to the same logical data. We do not expect API consumers to build these URIs from scratch,
- * but to use the output URI (or a subpath of it) from an earlier API call as the input to a later API call.
- */
-@removed(Versions.`2026-02-01-preview`)
-@pattern("^discovery://(storages|dataassets)/.*$")
-scalar DataUri extends string;
-
-/**
- * A URI that references data. There are two forms this can take:
- *  1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.
- *  2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.
- */
-@added(Versions.`2026-02-01-preview`)
-@pattern("^discovery://(storages|storageassets)/.*$")
-scalar StorageUri extends string;
-
 // ============================================================================
 // Data Plane specific models
 // ============================================================================
 
-@access(Access.internal)
-@doc("For adding title to display instead of name.")
-model WithTitle {
+/** For adding title to display instead of name. */
+alias WithTitle = {
   @doc("The title")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   displayName: string;
-}
+};
 
-@access(Access.internal)
-@doc("For adding description.")
-model WithDescription {
+/** For adding description. */
+alias WithDescription = {
   @doc("The description")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   description: string;
-}
+};

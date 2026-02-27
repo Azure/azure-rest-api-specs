@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
+using Microsoft.Discovery.Common;
 using Microsoft.Discovery.Workspace;
 
 @doc("Enumeration for message sender.")
@@ -16,59 +17,38 @@ union Sender {
   string,
 }
 
-@doc("For adding message sender.")
-model WithSender {
+/** For adding message sender. */
+alias WithSender = {
   @doc("The sender")
   @visibility(Lifecycle.Read)
   @removed(Versions.`2026-02-01-preview`)
   sender: Sender;
-}
+};
 
-@doc("For adding version ID.")
-model WithVersionId {
-  @doc("The version ID")
-  @visibility(Lifecycle.Read)
-  versionId: string;
-}
-
-@doc("For project reference.")
-model WithProjectId {
-  @doc("The ID of the associated Project")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  projectId: string;
-}
-
-@doc("For investigation reference.")
-model WithInvestigationId {
-  @doc("The ID of the associated Investigation")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  investigationId: string;
-}
-
-@doc("For investigation reference.")
-model WithInvestigationNameOptional {
+/** For investigation reference. */
+alias WithInvestigationNameOptional = {
   @doc("The Name of the associated Investigation")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   investigationName?: string;
-}
+};
 
-@doc("For project name reference.")
-model WithProjectNameOptional {
+/** For project name reference. */
+alias WithProjectNameOptional = {
   @doc("The name of the associated Project")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   projectName?: string;
-}
+};
 
-@doc("For required project name reference.")
-model WithProjectName {
+/** For required project name reference. */
+alias WithProjectName = {
   @doc("The name of the associated Project")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   projectName: string;
-}
+};
 
-@doc("For searching by Investigation.")
-model WithQueryInvestigationName {
+/** For searching by Investigation. */
+alias WithQueryInvestigationName = {
   @doc("The name of the associated Investigation")
   @TypeSpec.Http.query
   investigationName?: string;
-}
+};

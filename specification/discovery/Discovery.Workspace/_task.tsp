@@ -10,6 +10,8 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+using Microsoft.Discovery.Common;
+
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
@@ -138,142 +140,74 @@ model Task {
   name: string;
 
   @doc("The title of the task.")
-  title: string;
-
-  @doc("The priority of the task (higher numbers = higher priority).")
-  @minValue(1)
-  priority?: int32;
-
-  @doc("The description of the task.")
-  description?: string;
-
-  @doc("Array of validation requirements for the task.")
-  validationRequirements?: string[];
-
-  @doc("ID of the parent task if this is a subtask.")
-  parentId?: string;
-
-  @doc("IDs of tasks that must complete before this task can be executed.")
-  dependsOn?: string[];
-
-  @doc("IDs of tasks that are related to this task.")
-  relatedTo?: string[];
-
-  @doc("Application or user assigned to this task.")
-  assignedTo?: TaskAssignee;
-
-  @doc("Comments or notes about the task.")
-  comments?: TaskComment[];
-
-  @doc("The current status of the task.")
-  status: TaskStatus;
-
-  ...DataPlaneResource;
-
-  @doc("History of execution events for this task.")
-  executionHistory?: ExecutionHistoryEntry[];
-
-  @doc("The investigation identifier associated with the task.")
-  investigationId: string;
-
-  @doc("Task execution result with text and storage assets.")
-  result?: TaskResult;
-
-  @doc("List of storage assets related to the task.")
-  @added(Versions.`2026-02-01-preview`)
-  storageAssetIds?: StorageAssetId[];
-
-  @doc("List of data assets related to the task.")
-  @removed(Versions.`2026-02-01-preview`)
-  dataAssetIds?: string[];
-}
-
-@doc("Task creation request.")
-model TaskCreate {
-  @doc("The title of the task.")
-  title: string;
-
-  @doc("The priority of the task (higher numbers = higher priority).")
-  @minValue(1)
-  priority?: int32;
-
-  @doc("The description of the task.")
-  description?: string;
-
-  @doc("Array of validation requirements for the task.")
-  validationRequirements?: string[];
-
-  @doc("ID of the parent task if this is a subtask.")
-  parentId?: string;
-
-  @doc("IDs of tasks that must complete before this task can be executed.")
-  dependsOn?: string[];
-
-  @doc("IDs of tasks that are related to this task.")
-  relatedTo?: string[];
-
-  @doc("Application or user assigned to this task.")
-  assignedTo?: TaskAssignee;
-
-  @doc("Comments or notes about the task.")
-  comments?: TaskComment[];
-
-  @doc("Type of entity that created the task (User, Application, System, or custom type).")
-  createdByType: ByType;
-
-  @doc("The investigation identifier associated with the task.")
-  investigationId: string;
-
-  @doc("List of storage assets related to the task.")
-  @added(Versions.`2026-02-01-preview`)
-  storageAssetIds?: StorageAssetId[];
-
-  @doc("List of data assets related to the task.")
-  @removed(Versions.`2026-02-01-preview`)
-  dataAssetIds?: string[];
-}
-
-@doc("Task update request.")
-model TaskUpdate {
-  @doc("The title of the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   title?: string;
 
   @doc("The priority of the task (higher numbers = higher priority).")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minValue(1)
   priority?: int32;
 
   @doc("The description of the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   description?: string;
 
   @doc("Array of validation requirements for the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   validationRequirements?: string[];
 
   @doc("ID of the parent task if this is a subtask.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   parentId?: string;
 
   @doc("IDs of tasks that must complete before this task can be executed.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   dependsOn?: string[];
 
   @doc("IDs of tasks that are related to this task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   relatedTo?: string[];
 
   @doc("Application or user assigned to this task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   assignedTo?: TaskAssignee;
 
   @doc("Comments or notes about the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   comments?: TaskComment[];
 
   @doc("The current status of the task.")
-  status?: TaskStatus;
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  status: TaskStatus;
+
+  ...WithCreatedAt;
+  ...WithCreatedBy;
+
+  @doc("Type of entity that created the resource (User, Application, System, or custom type).")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  createdByType?: ByType;
+
+  ...WithLastModified;
+
+  @doc("History of execution events for this task.")
+  @visibility(Lifecycle.Read)
+  executionHistory?: ExecutionHistoryEntry[];
+
+  @doc("The investigation identifier associated with the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  investigationId?: string;
 
   @doc("Task execution result with text and storage assets.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   result?: TaskResult;
 
   @doc("List of storage assets related to the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @added(Versions.`2026-02-01-preview`)
   storageAssetIds?: StorageAssetId[];
 
   @doc("List of data assets related to the task.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @removed(Versions.`2026-02-01-preview`)
   dataAssetIds?: string[];
 }
@@ -310,7 +244,7 @@ interface Tasks {
 
       @doc("Task creation request.")
       @body
-      body: TaskCreate;
+      body: Task;
     },
     Task
   >;

@@ -12,6 +12,8 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Experimental;
 
+using Microsoft.Discovery.Common;
+
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
@@ -71,14 +73,13 @@ model ConversationResponseResource {
 }
 */
 
-@doc("For adding DataAsset ID")
-@removed(Versions.`2026-02-01-preview`)
-model WithDataAssetId {
+/** For adding DataAsset ID. */
+alias WithDataAssetId = {
   /** ID of the related data asset */
   @visibility(Lifecycle.Read)
   @removed(Versions.`2026-02-01-preview`)
   dataAssetId: DataAssetId;
-}
+};
 
 /*
 @doc("For adding StorageAsset ID")
@@ -91,12 +92,12 @@ model WithStorageAssetId {
 }
 */
 
-@doc("For adding key")
-model WithKey {
+/** For adding key. */
+alias WithKey = {
   /** Key used as identifier */
   @visibility(Lifecycle.Read)
   key: string;
-}
+};
 
 @doc("Copilot citation")
 @removed(Versions.`2026-02-01-preview`)

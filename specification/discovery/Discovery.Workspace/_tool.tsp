@@ -9,6 +9,8 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
+using Microsoft.Discovery.Common;
+
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
@@ -35,6 +37,32 @@ union RunStatus {
 
   string,
 }
+
+/**
+ * A URI that references data. There are three forms this can take:
+ *  1. discovery://storages/<storageArmId>/paths/<path> to reference data on Discovery Storage.
+ *  2. discovery://dataassets/<dataAssetArmId> to reference a Discovery Data Asset.
+ *  3. discovery://dataassets/<dataAssetArmId>/paths/<path> to reference a subpath within a Discovery Data Asset.
+ *
+ * Note that in the discovery://storages/<storageArmId>/paths/<path>, the <path> is not an absolute path within
+ * the underlying NFS volume. Rather, the service creates a subdirectory on each storage for storing job
+ * artifacts, and the <path> is relative to that subdirectory. The location of the subdirectory is not published,
+ * nor is it guaranteed to be stable over time, but we do guarantee that a given discovery://storages/ URI will
+ * always point to the same logical data. We do not expect API consumers to build these URIs from scratch,
+ * but to use the output URI (or a subpath of it) from an earlier API call as the input to a later API call.
+ */
+@removed(Versions.`2026-02-01-preview`)
+@pattern("^discovery://(storages|dataassets)/.*$")
+scalar DataUri extends string;
+
+/**
+ * A URI that references data. There are two forms this can take:
+ *  1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.
+ *  2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.
+ */
+@added(Versions.`2026-02-01-preview`)
+@pattern("^discovery://(storages|storageassets)/.*$")
+scalar StorageUri extends string;
 
 /** Data URI and path where it will be mounted in the tool container. */
 model InputDataMount {
@@ -251,12 +279,11 @@ model InfraOverrides {
 }
 
 /** For tracking when it completed. */
-@access(Access.internal)
-model WithCompletedAt {
+alias WithCompletedAt = {
   @visibility(Lifecycle.Read)
   @doc("The time the run completed.")
   completedAt?: utcDateTime;
-}
+};
 
 @doc("Run result")
 model RunResult {
@@ -432,7 +459,7 @@ interface Tools {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Examine compute usage.")
+    @doc("Examine compute usage.")
   @route("/tools/projects/{projectName}/computeUsage")
   getComputeUsage is Foundations.Operation<WithProjectNamePath, ComputeUsage>;
 }

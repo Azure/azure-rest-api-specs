@@ -3,12 +3,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./_knowledgeBase.tsp";
+import "./shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Microsoft.Discovery.Common;
 
 @versioned(Microsoft.Discovery.Bookshelf.Versions)
 namespace Microsoft.Discovery.Bookshelf;

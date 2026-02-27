@@ -69,10 +69,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithQueryInvestigationName"
+            "name": "investigationName",
+            "in": "query",
+            "description": "The name of the associated Investigation",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/WithQueryCreatedSince"
+            "name": "createdSince",
+            "in": "query",
+            "description": "The oldest creation timestamp to keep",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -317,7 +326,12 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/WithQueryCreatedSince"
+            "name": "createdSince",
+            "in": "query",
+            "description": "The oldest creation timestamp to keep",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -1148,7 +1162,7 @@
             "description": "Task creation request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TaskCreate"
+              "$ref": "#/definitions/Task"
             }
           }
         ],
@@ -1960,36 +1974,6 @@
         ]
       }
     },
-    "ByType": {
-      "type": "string",
-      "description": "Enum for entity type",
-      "enum": [
-        "User",
-        "Application",
-        "System"
-      ],
-      "x-ms-enum": {
-        "name": "ByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "A human user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "System",
-            "value": "System",
-            "description": "The backend system."
-          }
-        ]
-      }
-    },
     "ComputeUsage": {
       "type": "object",
       "description": "Overview of compute usage for a project.",
@@ -2029,7 +2013,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -2041,12 +2025,12 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         },
         "displayName": {
@@ -2195,7 +2179,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -2207,12 +2191,12 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         }
       },
@@ -2282,7 +2266,7 @@
           "description": "Identifier of who created this entry (GUID for user | resourceId for application | arbitrary string for other types)."
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "Type of entity that created this entry (User, Application, System, or custom type)."
         },
         "summary": {
@@ -2407,7 +2391,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -2419,12 +2403,12 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         },
         "status": {
@@ -2445,7 +2429,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Microsoft.Discovery.Common.Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -2487,7 +2471,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Microsoft.Discovery.Common.Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -2581,6 +2565,50 @@
       "required": [
         "storageAssetId"
       ]
+    },
+    "Microsoft.Discovery.Common.ByType": {
+      "type": "string",
+      "description": "Enum for entity type",
+      "enum": [
+        "User",
+        "Application",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A human user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "The backend system."
+          }
+        ]
+      }
+    },
+    "Microsoft.Discovery.Common.Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
     },
     "NodepoolUsage": {
       "type": "object",
@@ -3065,20 +3093,6 @@
         "nodePools"
       ]
     },
-    "Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
-      }
-    },
     "Task": {
       "type": "object",
       "description": "Task resource.",
@@ -3091,57 +3105,106 @@
         },
         "title": {
           "type": "string",
-          "description": "The title of the task."
+          "description": "The title of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "priority": {
           "type": "integer",
           "format": "int32",
           "description": "The priority of the task (higher numbers = higher priority).",
-          "minimum": 1
+          "minimum": 1,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "The description of the task."
+          "description": "The description of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "validationRequirements": {
           "type": "array",
           "description": "Array of validation requirements for the task.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "parentId": {
           "type": "string",
-          "description": "ID of the parent task if this is a subtask."
+          "description": "ID of the parent task if this is a subtask.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "dependsOn": {
           "type": "array",
           "description": "IDs of tasks that must complete before this task can be executed.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "relatedTo": {
           "type": "array",
           "description": "IDs of tasks that are related to this task.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "assignedTo": {
           "$ref": "#/definitions/TaskAssignee",
-          "description": "Application or user assigned to this task."
+          "description": "Application or user assigned to this task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "comments": {
           "type": "array",
           "description": "Comments or notes about the task.",
           "items": {
             "$ref": "#/definitions/TaskComment"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "status": {
           "$ref": "#/definitions/TaskStatus",
-          "description": "The current status of the task."
+          "description": "The current status of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "createdAt": {
           "type": "string",
@@ -3155,9 +3218,12 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "Type of entity that created the resource (User, Application, System, or custom type).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "lastModifiedAt": {
           "type": "string",
@@ -3167,12 +3233,12 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         },
         "executionHistory": {
@@ -3180,15 +3246,24 @@
           "description": "History of execution events for this task.",
           "items": {
             "$ref": "#/definitions/ExecutionHistoryEntry"
-          }
+          },
+          "readOnly": true
         },
         "investigationId": {
           "type": "string",
-          "description": "The investigation identifier associated with the task."
+          "description": "The investigation identifier associated with the task.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "result": {
           "$ref": "#/definitions/TaskResult",
-          "description": "Task execution result with text and storage assets."
+          "description": "Task execution result with text and storage assets.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "storageAssetIds": {
           "type": "array",
@@ -3204,14 +3279,17 @@
                 }
               ]
             }
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
         "name",
-        "title",
-        "status",
-        "investigationId"
+        "status"
       ]
     },
     "TaskAssignee": {
@@ -3223,7 +3301,7 @@
           "description": "The unique identifier of the assignee."
         },
         "type": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "Type of assignee (User, Application, System, or custom type)."
         }
       },
@@ -3241,7 +3319,7 @@
           "description": "The unique identifier of the assignee."
         },
         "type": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "Type of assignee (User, Application, System, or custom type)."
         }
       }
@@ -3260,7 +3338,7 @@
           "description": "ID of the user or application who created the comment."
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "Type of creator (User, Application, System, or custom type)."
         },
         "text": {
@@ -3275,163 +3353,136 @@
         "text"
       ]
     },
-    "TaskCreate": {
-      "type": "object",
-      "description": "Task creation request.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of the task."
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the task (higher numbers = higher priority).",
-          "minimum": 1
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the task."
-        },
-        "validationRequirements": {
-          "type": "array",
-          "description": "Array of validation requirements for the task.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "parentId": {
-          "type": "string",
-          "description": "ID of the parent task if this is a subtask."
-        },
-        "dependsOn": {
-          "type": "array",
-          "description": "IDs of tasks that must complete before this task can be executed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "relatedTo": {
-          "type": "array",
-          "description": "IDs of tasks that are related to this task.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "assignedTo": {
-          "$ref": "#/definitions/TaskAssignee",
-          "description": "Application or user assigned to this task."
-        },
-        "comments": {
-          "type": "array",
-          "description": "Comments or notes about the task.",
-          "items": {
-            "$ref": "#/definitions/TaskComment"
-          }
-        },
-        "createdByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "Type of entity that created the task (User, Application, System, or custom type)."
-        },
-        "investigationId": {
-          "type": "string",
-          "description": "The investigation identifier associated with the task."
-        },
-        "storageAssetIds": {
-          "type": "array",
-          "description": "List of storage assets related to the task.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Discovery/StorageContainers/StorageAssets"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "required": [
-        "title",
-        "createdByType",
-        "investigationId"
-      ]
-    },
     "TaskCreateOrUpdate": {
       "type": "object",
       "description": "Task resource.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "The title of the task."
+          "description": "The title of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "priority": {
           "type": "integer",
           "format": "int32",
           "description": "The priority of the task (higher numbers = higher priority).",
-          "minimum": 1
+          "minimum": 1,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "The description of the task."
+          "description": "The description of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "validationRequirements": {
           "type": "array",
           "description": "Array of validation requirements for the task.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "parentId": {
           "type": "string",
-          "description": "ID of the parent task if this is a subtask."
+          "description": "ID of the parent task if this is a subtask.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "dependsOn": {
           "type": "array",
           "description": "IDs of tasks that must complete before this task can be executed.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "relatedTo": {
           "type": "array",
           "description": "IDs of tasks that are related to this task.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "assignedTo": {
           "$ref": "#/definitions/TaskAssigneeCreateOrUpdate",
-          "description": "Application or user assigned to this task."
+          "description": "Application or user assigned to this task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "comments": {
           "type": "array",
           "description": "Comments or notes about the task.",
           "items": {
             "$ref": "#/definitions/TaskComment"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "status": {
           "$ref": "#/definitions/TaskStatus",
-          "description": "The current status of the task."
+          "description": "The current status of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
-        "executionHistory": {
-          "type": "array",
-          "description": "History of execution events for this task.",
-          "items": {
-            "$ref": "#/definitions/ExecutionHistoryEntry"
-          }
+        "createdByType": {
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "Type of entity that created the resource (User, Application, System, or custom type).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "investigationId": {
           "type": "string",
-          "description": "The investigation identifier associated with the task."
+          "description": "The investigation identifier associated with the task.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "result": {
           "$ref": "#/definitions/TaskResult",
-          "description": "Task execution result with text and storage assets."
+          "description": "Task execution result with text and storage assets.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "storageAssetIds": {
           "type": "array",
@@ -3447,7 +3498,12 @@
                 }
               ]
             }
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -3701,23 +3757,6 @@
       "type": "string",
       "maxLength": 24,
       "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "x-ms-parameter-location": "method"
-    },
-    "WithQueryCreatedSince": {
-      "name": "createdSince",
-      "in": "query",
-      "description": "The oldest creation timestamp to keep",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method"
-    },
-    "WithQueryInvestigationName": {
-      "name": "investigationName",
-      "in": "query",
-      "description": "The name of the associated Investigation",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

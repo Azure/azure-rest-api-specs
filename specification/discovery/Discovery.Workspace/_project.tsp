@@ -9,6 +9,8 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+using Microsoft.Discovery.Common;
+
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
@@ -23,6 +25,5 @@ model Project {
   name: string;
 }
 
-// TODO: Remove un-needed route prefix!
 @route("/projects")
 interface Projects {}

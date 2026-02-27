@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./shared.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Microsoft.Discovery.Common;
 
 @versioned(Microsoft.Discovery.Bookshelf.Versions)
 namespace Microsoft.Discovery.Bookshelf;
@@ -43,10 +45,8 @@ model StorageAssetReference {
   userAssignedIdentity?: UserAssignedIdentityId;
 }
 
-@doc("A knowledgeBase.")
-model BaseKnowledgeBase {
-  ...WithId;
-
+/** Base knowledgeBase properties. */
+alias BaseKnowledgeBase = WithId & {
   @doc("Version.")
   @visibility(Lifecycle.Read)
   version: string;
@@ -67,19 +67,16 @@ model BaseKnowledgeBase {
 
   @doc("URL to access the knowledge base.")
   @visibility(Lifecycle.Read)
-  // TODO: Should this be in KnowledgeBaseDefinition?
   knowledgeBaseUrl?: string;
 
   /** Provisioning state. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  ...DataPlaneResource;
-  ...WithTags;
-  ...WithDescription;
-  ...WithCopilotInstruction;
-  ...WithStatus<IndexingStatus>;
-}
+} & DataPlaneResource &
+  WithTags &
+  WithDescription &
+  WithCopilotInstruction &
+  WithStatus<IndexingStatus>;
 
 @doc("A knowledgeBase.")
 @resource("knowledgeBases")

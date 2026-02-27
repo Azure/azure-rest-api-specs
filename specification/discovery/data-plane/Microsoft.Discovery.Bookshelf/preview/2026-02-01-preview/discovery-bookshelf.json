@@ -117,7 +117,12 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/WithQueryCreatedSince"
+            "name": "createdSince",
+            "in": "query",
+            "description": "The oldest creation timestamp to keep",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -837,36 +842,6 @@
         ]
       }
     },
-    "ByType": {
-      "type": "string",
-      "description": "Enum for entity type",
-      "enum": [
-        "User",
-        "Application",
-        "System"
-      ],
-      "x-ms-enum": {
-        "name": "ByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "A human user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "System",
-            "value": "System",
-            "description": "The backend system."
-          }
-        ]
-      }
-    },
     "IndexingStatus": {
       "type": "string",
       "description": "Enum for IndexingStatus",
@@ -953,7 +928,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ProvisioningState",
           "description": "Provisioning state.",
           "readOnly": true
         },
@@ -969,7 +944,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -981,19 +956,19 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         },
         "tags": {
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Microsoft.Discovery.Common.Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1103,7 +1078,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ProvisioningState",
           "description": "Provisioning state.",
           "readOnly": true
         },
@@ -1119,7 +1094,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/ByType",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
           "description": "The type of user who created this resource.",
           "readOnly": true
         },
@@ -1131,19 +1106,19 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who Updated this resource.",
+          "description": "The ID of the user who updated this resource.",
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/ByType",
-          "description": "The type of user who Updated this resource.",
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource.",
           "readOnly": true
         },
         "tags": {
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Microsoft.Discovery.Common.Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1203,7 +1178,7 @@
           "type": "array",
           "description": "The tags",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Microsoft.Discovery.Common.Tag"
           },
           "x-ms-mutability": [
             "read",
@@ -1231,49 +1206,37 @@
         }
       }
     },
-    "PagedKnowledgeBase": {
-      "type": "object",
-      "description": "Paged collection of KnowledgeBase items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KnowledgeBase items on this page",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBase"
+    "Microsoft.Discovery.Common.ByType": {
+      "type": "string",
+      "description": "Enum for entity type",
+      "enum": [
+        "User",
+        "Application",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A human user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "The backend system."
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
+        ]
+      }
     },
-    "PagedKnowledgeBaseVersion": {
-      "type": "object",
-      "description": "Paged collection of KnowledgeBaseVersion items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The KnowledgeBaseVersion items on this page",
-          "items": {
-            "$ref": "#/definitions/KnowledgeBaseVersion"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProvisioningState": {
+    "Microsoft.Discovery.Common.ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
       "enum": [
@@ -1327,6 +1290,62 @@
         ]
       }
     },
+    "Microsoft.Discovery.Common.Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    },
+    "PagedKnowledgeBase": {
+      "type": "object",
+      "description": "Paged collection of KnowledgeBase items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeBase items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedKnowledgeBaseVersion": {
+      "type": "object",
+      "description": "Paged collection of KnowledgeBaseVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeBaseVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "StorageAssetReference": {
       "type": "object",
       "description": "Reference to a storage asset with identity information.",
@@ -1359,20 +1378,6 @@
       "required": [
         "id"
       ]
-    },
-    "Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
-      }
     },
     "WithNodePool": {
       "type": "object",
@@ -1444,15 +1449,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
-    },
-    "WithQueryCreatedSince": {
-      "name": "createdSince",
-      "in": "query",
-      "description": "The oldest creation timestamp to keep",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method"
     }
   }
 }
