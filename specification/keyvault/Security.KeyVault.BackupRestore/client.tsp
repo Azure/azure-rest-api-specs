@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
 namespace ClientCustomizations;
