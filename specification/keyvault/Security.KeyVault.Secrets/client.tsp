@@ -83,8 +83,8 @@ op getSecret is KeyVaultOperation<
   SecretBundle
 >;
 
-@@override(KeyVault.updateSecret, updateSecret);
-@@override(KeyVault.getSecret, getSecret);
+@@override(KeyVault.updateSecret, updateSecret, "!rust");
+@@override(KeyVault.getSecret, getSecret, "!rust");
 
 // go renames
 
