@@ -331,7 +331,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterForPatch"
+              "$ref": "#/definitions/HorizonDbClusterPropertiesForUpdate"
             }
           }
         ],
@@ -1743,23 +1743,6 @@
         }
       ]
     },
-    "HorizonDbClusterForPatch": {
-      "type": "object",
-      "description": "Represents a HorizonDb cluster resource for update operations",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/HorizonDbClusterPropertiesForUpdate",
-          "description": "The properties of the cluster for update"
-        }
-      }
-    },
     "HorizonDbClusterListResult": {
       "type": "object",
       "description": "The response of a HorizonDbCluster list operation.",
@@ -1911,6 +1894,13 @@
       "type": "object",
       "description": "Properties of a HorizonDb cluster for update operations",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
@@ -2303,7 +2293,7 @@
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
-          "description": "The flag indicating whether public ip is requested for the server",
+          "description": "The flag indicating whether public ip is requested",
           "readOnly": true
         },
         "delegatedSubnetResourceId": {

@@ -33,9 +33,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 model HorizonDbCluster
   is Azure.ResourceManager.TrackedResource<HorizonDbClusterProperties> {
-  /**
-   * The name of the HorizonDb cluster
-   */
+  @doc("The name of the HorizonDb cluster")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -48,9 +46,7 @@ model HorizonDbCluster
 @parentResource(HorizonDbCluster)
 model HorizonDbPool
   is Azure.ResourceManager.ProxyResource<HorizonDbPoolProperties> {
-  /**
-   * The name of the HorizonDb pool
-   */
+  @doc("The name of the HorizonDb pool")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -63,9 +59,7 @@ model HorizonDbPool
 @parentResource(HorizonDbPool)
 model HorizonDbReplica
   is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
-  /**
-   * The name of the HorizonDb replica
-   */
+  @doc("The name of the HorizonDb replica")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -78,9 +72,7 @@ model HorizonDbReplica
 @parentResource(HorizonDbPool)
 model HorizonDbFirewallRule
   is Azure.ResourceManager.ProxyResource<HorizonDbFirewallRuleProperties> {
-  /**
-   * The name of the HorizonDb firewall rule
-   */
+  @doc("The name of the HorizonDb firewall rule")
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(128)
@@ -95,7 +87,10 @@ interface HorizonDbClusters {
   get is ArmResourceRead<HorizonDbCluster>;
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbCluster>;
-  update is ArmCustomPatchAsync<HorizonDbCluster, HorizonDbClusterForPatch>;
+  update is ArmCustomPatchAsync<
+    HorizonDbCluster,
+    HorizonDbClusterPropertiesForUpdate
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbCluster>;
   listByResourceGroup is ArmResourceListByParent<HorizonDbCluster>;
   listBySubscription is ArmListBySubscription<HorizonDbCluster>;

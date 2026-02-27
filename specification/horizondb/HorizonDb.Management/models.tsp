@@ -8,282 +8,180 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-/**
- * Properties of a HorizonDb cluster
- */
+@doc("Properties of a HorizonDb cluster")
 model HorizonDbClusterProperties {
-  /**
-   * The administrator login name
-   */
+  @doc("The administrator login name")
   @minLength(1)
   @maxLength(63)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin: string;
 
-  /**
-   * The administrator login password
-   */
+  @doc("The administrator login password")
   @secret
   @minLength(8)
   @maxLength(128)
   administratorLoginPassword?: string;
 
-  /**
-   * The version of the Orion Db
-   */
+  @doc("The version of the Orion Db")
   version?: string;
 
-  /**
-   * The mode to create a new HorizonDb cluster
-   */
+  @doc("The mode to create a new HorizonDb cluster")
   createMode?: CreateModeCluster;
 
-  /**
-   * Restore point creation time (ISO8601 format), specifying the time to restore from
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Restore point creation time (ISO8601 format), specifying the time to restore from")
   pointInTimeUTC?: utcDateTime;
 
-  /**
-   * The source HorizonDb cluster resource identifier for read replica or point in time restore scenarios
-   */
+  @doc("The source HorizonDb cluster resource identifier for read replica or point in time restore scenarios")
   sourceOrionDbResourceId?: string;
 
-  /**
-   * The pool name for restore or replica operations
-   */
+  @doc("The pool name for restore or replica operations")
   poolName?: string;
 
-  /**
-   * Number of replicas
-   */
+  @doc("Number of replicas")
   @minValue(0)
   @maxValue(20)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   replicaCount?: int32;
 
-  /**
-   * Number of vCores
-   */
+  @doc("Number of vCores")
   @minValue(1)
   @maxValue(96)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   vCores?: int32;
 
-  /**
-   * The availability zone of the Orion Db
-   */
+  @doc("The availability zone of the Orion Db")
   availabilityZone?: string;
 
-  /**
-   * The processor type for the Orion Db cluster
-   */
+  @doc("The processor type for the Orion Db cluster")
   processorType?: string;
 
-  /**
-   * The network related info
-   */
+  @doc("The network related info")
   network?: Network;
 
-  /**
-   * The high availability related info
-   */
+  @doc("The high availability related info")
   highAvailability?: HighAvailability;
 
-  /**
-   * The maintenance window related info
-   */
+  @doc("The maintenance window related info")
   maintenanceWindow?: MaintenanceWindowOptions;
 
-  /**
-   * Current state of the cluster
-   */
+  @doc("Current state of the cluster")
   @visibility(Lifecycle.Read)
   state?: State;
 
-  /**
-   * The fully qualified domain name of the cluster
-   */
+  @doc("The fully qualified domain name of the cluster")
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainName?: string;
 
-  /**
-   * The fully qualified domain name used for readonly endpoint for the cluster
-   */
+  @doc("The fully qualified domain name used for readonly endpoint for the cluster")
   @visibility(Lifecycle.Read)
   readonlyEndpoint?: string;
 
-  /**
-   * The earliest restore point time (ISO8601 format) for the cluster
-   */
+  @doc("The earliest restore point time (ISO8601 format) for the cluster")
   @visibility(Lifecycle.Read)
   earliestRestoreDate?: utcDateTime;
 
-  /**
-   * The provisioning state of the cluster
-   */
+  @doc("The provisioning state of the cluster")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /**
-   * The zone placement policy
-   */
+  @doc("The zone placement policy")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zonePlacementPolicy?: string;
 }
 
-/**
- * Properties of a HorizonDb cluster for update operations
- */
+@doc("Properties of a HorizonDb cluster for update operations")
 model HorizonDbClusterPropertiesForUpdate {
-  /**
-   * The administrator login password
-   */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   @secret
   @minLength(8)
   @maxLength(128)
+  @doc("The administrator login password")
   administratorLoginPassword?: string;
 
-  /**
-   * Number of vCores
-   */
+  @doc("Number of vCores")
   @minValue(1)
   @maxValue(96)
   vCores?: int32;
 }
 
-/**
- * Represents a HorizonDb cluster resource for update operations
- */
-model HorizonDbClusterForPatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The properties of the cluster for update
-   */
-  properties?: HorizonDbClusterPropertiesForUpdate;
-}
-
-/**
- * Properties of a HorizonDb pool
- */
+@doc("Properties of a HorizonDb pool")
 model HorizonDbPoolProperties {
-  /**
-   * The SKU for the OrionDb pool
-   */
+  @doc("The SKU for the OrionDb pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   sku?: string;
 
-  /**
-   * The location of the OrionDb pool
-   */
+  @doc("The location of the OrionDb pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
-  /**
-   * Current state of the pool
-   */
   @doc("Current state of the pool")
   @visibility(Lifecycle.Read)
   state?: State;
 
-  /**
-   * Number of replicas in the pool
-   */
+  @doc("Number of replicas in the pool")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   replicaCount?: int32;
 
-  /**
-   * The administrator login for the pool
-   */
+  @doc("The administrator login for the pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   administratorLogin?: string;
 
-  /**
-   * The administrator login password for the pool
-   */
+  @doc("The administrator login password for the pool")
   @secret
   @visibility(Lifecycle.Update)
   administratorLoginPassword?: string;
 
-  /**
-   * The version of the OrionDb pool
-   */
+  @doc("The version of the OrionDb pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   version?: string;
 
-  /**
-   * The tags for the OrionDb pool
-   */
+  @doc("The tags for the OrionDb pool")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   tags?: string;
 
-  /**
-   * The create mode for the pool
-   */
+  @doc("The create mode for the pool")
   @visibility(Lifecycle.Update)
   createMode?: CreateModePool;
 
-  /**
-   * The provisioning state of the pool
-   */
   @doc("The provisioning state of the pool")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Network properties
- */
+@doc("Network properties")
 model Network {
-  /**
-   * The flag indicating whether public ip is requested for the server
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
+  @doc("The flag indicating whether public ip is requested")
   @visibility(Lifecycle.Read)
   publicNetworkAccess?: string;
 
-  /**
-   * The customer provided delegated subnet full ARM resource ID
-   */
+  @doc("The customer provided delegated subnet full ARM resource ID")
   delegatedSubnetResourceId?: string;
 
-  /**
-   * The customer provided private DNS zone full ARM resource ID
-   */
+  @doc("The customer provided private DNS zone full ARM resource ID")
   privateDnsZoneArmResourceId?: string;
 }
 
-/**
- * High availability properties
- */
+@doc("High availability properties")
 model HighAvailability {
-  /**
-   * The HA mode for the server
-   */
+  @doc("The HA mode for the server")
   mode?: HighAvailabilityMode;
 
-  /**
-   * The user visible HA state of the server
-   */
+  @doc("The user visible HA state of the server")
   @visibility(Lifecycle.Read)
   state?: string;
 
-  /**
-   * The availability zone of the standby server
-   */
+  @doc("The availability zone of the standby server")
   @visibility(Lifecycle.Read)
   standbyAvailabilityZone?: string;
 
-  /**
-   * The fully qualified domain name of the standby server
-   */
+  @doc("The fully qualified domain name of the standby server")
   @visibility(Lifecycle.Read)
   fullyQualifiedStandbyDomainName?: string;
 }
-/**
- * Modes of high availability supported for this compute.
- */
+@doc("Modes of high availability supported for this compute.")
 union HighAvailabilityMode {
   string,
 
@@ -297,62 +195,42 @@ union HighAvailabilityMode {
   SameZone: "SameZone",
 }
 
-/**
- * Maintenance window properties
- */
+@doc("Maintenance window properties")
 model MaintenanceWindowOptions {
-  /**
-   * Indicates whether the window is customer or system default
-   */
+  @doc("Indicates whether the window is customer or system default")
   customWindow?: string;
 
-  /**
-   * The day of the week for the maintenance to occur (0-6, where 0 is Sunday)
-   */
+  @doc("The day of the week for the maintenance to occur (0-6, where 0 is Sunday)")
   @minValue(0)
   @maxValue(6)
   dayOfWeek?: int32;
 
-  /**
-   * The hour to start the maintenance (0-23)
-   */
+  @doc("The hour to start the maintenance (0-23)")
   @minValue(0)
   @maxValue(23)
   startHour?: int32;
 
-  /**
-   * The minute to start the maintenance (0-59)
-   */
+  @doc("The minute to start the maintenance (0-59)")
   @minValue(0)
   @maxValue(59)
   startMinute?: int32;
 }
 
-/**
- * Properties of a HorizonDb pool for update operations
- */
+@doc("Properties of a HorizonDb pool for update operations")
 model HorizonDbPoolPropertiesForUpdate {
-  /**
-   * Number of replicas in the pool
-   */
+  @doc("Number of replicas in the pool")
   @minValue(0)
   @maxValue(20)
   replicaCount?: int32;
 }
 
-/**
- * Represents a HorizonDb pool resource for update operations
- */
+@doc("Represents a HorizonDb pool resource for update operations")
 model HorizonDbPoolForPatch {
-  /**
-   * The properties of the pool for update
-   */
+  @doc("The properties of the pool for update")
   properties?: HorizonDbPoolPropertiesForUpdate;
 }
 
-/**
- * Properties of a HorizonDb replica
- */
+@doc("Properties of a HorizonDb replica")
 model HorizonDbReplicaProperties {
   /**
    * Role of the replica
@@ -360,108 +238,69 @@ model HorizonDbReplicaProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   role?: ReplicaRole;
 
-  /**
-   * Current status of the replica
-   */
+  @doc("Current status of the replica")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   status?: State;
 
-  /**
-   * The fully qualified domain name of the replica
-   */
+  @doc("The fully qualified domain name of the replica")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   fullyQualifiedDomainName?: string;
 
-  /**
-   * The provisioning state of the replica
-   */
+  @doc("The provisioning state of the replica")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Properties of a HorizonDb replica for update operations
- */
+@doc("Properties of a HorizonDb replica for update operations")
 model HorizonDbReplicaPropertiesForUpdate {
-  /**
-   * Role of the replica
-   */
+  @doc("Role of the replica")
   role?: ReplicaRole;
 }
 
-/**
- * Represents a HorizonDb replica resource for update operations
- */
+@doc("Represents a HorizonDb replica resource for update operations")
 model HorizonDbReplicaForPatch {
-  /**
-   * The properties of the replica for update
-   */
+  @doc("The properties of the replica for update")
   properties?: HorizonDbReplicaPropertiesForUpdate;
 }
 
-/**
- * Properties of a HorizonDb firewall rule
- */
+@doc("Properties of a HorizonDb firewall rule")
 model HorizonDbFirewallRuleProperties {
-  /**
-   * The start IP address of the firewall rule
-   */
+  @doc("The start IP address of the firewall rule")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   startIpAddress: string;
 
-  /**
-   * The end IP address of the firewall rule
-   */
+  @doc("The end IP address of the firewall rule")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   endIpAddress: string;
 
-  /**
-   * The description of the OrionDb firewall rule
-   */
+  @doc("The description of the OrionDb firewall rule")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
 
-  /**
-   * The provisioning state of the firewall rule
-   */
   @doc("The provisioning state of the firewall rule")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Properties of a HorizonDb firewall rule for update operations
- */
+@doc("Properties of a HorizonDb firewall rule for update operations")
 model HorizonDbFirewallRulePropertiesForUpdate {
-  /**
-   * The start IP address of the firewall rule
-   */
+  @doc("The start IP address of the firewall rule")
   startIpAddress?: string;
 
-  /**
-   * The end IP address of the firewall rule
-   */
+  @doc("The end IP address of the firewall rule")
   endIpAddress?: string;
 
-  /**
-   * The description of the firewall rule
-   */
+  @doc("The description of the firewall rule")
   description?: string;
 }
 
-/**
- * Represents a HorizonDb firewall rule resource for update operations
- */
+@doc("Represents a HorizonDb firewall rule resource for update operations")
 model HorizonDbFirewallRuleForPatch {
-  /**
-   * The properties of the firewall rule for update
-   */
+  @doc("The properties of the firewall rule for update")
   properties?: HorizonDbFirewallRulePropertiesForUpdate;
 }
 
-/**
- * The mode to create a new HorizonDb cluster
- */
+@doc("The mode to create a new HorizonDb cluster")
 union CreateModeCluster {
   string,
 
@@ -481,9 +320,7 @@ union CreateModeCluster {
   ReviveDropped: "ReviveDropped",
 }
 
-/**
- * The mode to create a new HorizonDb cluster
- */
+@doc("The mode to create a new HorizonDb cluster")
 union CreateModePool {
   string,
 
@@ -494,9 +331,7 @@ union CreateModePool {
   Update: "Update",
 }
 
-/**
- * Current states
- */
+@doc("Current states")
 union State {
   string,
 
@@ -525,9 +360,7 @@ union State {
   Healthy: "Healthy",
 }
 
-/**
- * Role of the replica
- */
+@doc("Role of the replica")
 union ReplicaRole {
   string,
 
@@ -538,9 +371,7 @@ union ReplicaRole {
   ReadWrite: "Read/Write",
 }
 
-/**
- * The provisioning state
- */
+@doc("The provisioning state")
 union ProvisioningState {
   string,
 
