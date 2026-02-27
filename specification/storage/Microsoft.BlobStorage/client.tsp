@@ -168,6 +168,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(ContainerProperties.deletedTime, "deletedOn", "javascript");
 @@clientName(ContainerProperties.eTag, "etag", "javascript");
 @@clientName(EtagResponseHeader.eTag, "etag", "javascript");
+@@clientName(EtagResponseHeaderPrivate.eTag, "etag", "javascript");
 @@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
 @@clientName(KeyInfo.start, "startsOn", "javascript");
 @@clientName(KeyInfo.expiry, "expiresOn", "javascript");
