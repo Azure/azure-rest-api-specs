@@ -45,4 +45,13 @@ interface QueueClient extends Storage.Queues.Queue {}
 
 @@clientName(Storage.Queues.Queue.sendMessage, "sendMessageInternal", "rust");
 
+@@clientName(Storage.Queues.SentMessage, "SentMessageInternal", "rust");
+
+@@alternateType(Storage.Queues.ListOfSentMessage,
+  {
+    identity: "crate::models::SentMessage",
+  },
+  "rust"
+);
+
 @@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
