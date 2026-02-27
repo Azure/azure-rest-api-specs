@@ -19,8 +19,8 @@ compatibility: >-
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                | Purpose                                                     |
+| ------------------- | ----------------------------------------------------------- |
 | `azsdk_release_sdk` | Check release readiness and/or trigger the release pipeline |
 
 ## Steps

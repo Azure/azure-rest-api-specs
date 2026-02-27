@@ -23,12 +23,12 @@ Requires `azure-sdk-mcp` MCP server for pipeline analysis and local reproduction
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_analyze_pipeline` | Analyze pipeline failures |
-| `azsdk_verify_setup` | Verify local environment |
-| `azsdk_package_build_code` | Reproduce build locally |
-| `azsdk_package_run_check` | Run validation checks |
+| Tool                       | Purpose                   |
+| -------------------------- | ------------------------- |
+| `azsdk_analyze_pipeline`   | Analyze pipeline failures |
+| `azsdk_verify_setup`       | Verify local environment  |
+| `azsdk_package_build_code` | Reproduce build locally   |
+| `azsdk_package_run_check`  | Run validation checks     |
 
 ## Steps
 

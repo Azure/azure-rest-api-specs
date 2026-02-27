@@ -23,10 +23,10 @@ Requires `azure-sdk-mcp` server connected and authenticated. Provides customizat
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_package_customize_code` | Apply customizations for SDK generation |
-| `azsdk_run_typespec_validation` | Validate TypeSpec after changes |
+| Tool                            | Purpose                                 |
+| ------------------------------- | --------------------------------------- |
+| `azsdk_package_customize_code`  | Apply customizations for SDK generation |
+| `azsdk_run_typespec_validation` | Validate TypeSpec after changes         |
 
 ## CLI Fallback
 

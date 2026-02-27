@@ -4,12 +4,12 @@ Best practices for writing Agent Skills per the [Agent Skills Specification](htt
 
 ## Quick Reference
 
-| Constraint | Limit | Notes |
-|------------|-------|-------|
-| `name` field | 1-64 chars | Lowercase, hyphens only, no consecutive hyphens |
-| `description` field | 1-1024 chars | Describe what AND when to use |
-| SKILL.md body | < 5000 tokens | ~500 lines max |
-| Reference files | < 1000 tokens | Load on demand |
+| Constraint          | Limit         | Notes                                           |
+| ------------------- | ------------- | ----------------------------------------------- |
+| `name` field        | 1-64 chars    | Lowercase, hyphens only, no consecutive hyphens |
+| `description` field | 1-1024 chars  | Describe what AND when to use                   |
+| SKILL.md body       | < 5000 tokens | ~500 lines max                                  |
+| Reference files     | < 1000 tokens | Load on demand                                  |
 
 ## Sections
 

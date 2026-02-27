@@ -20,14 +20,14 @@ compatibility: >-
 
 ## Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_create_release_plan` | Create release plan |
-| `azsdk_get_release_plan` | Get plan details |
-| `azsdk_get_release_plan_for_spec_pr` | Find plan by PR |
-| `azsdk_update_sdk_details_in_release_plan` | Update SDK info |
-| `azsdk_link_sdk_pull_request_to_release_plan` | Link SDK PR |
-| `azsdk_link_namespace_approval_issue` | Link namespace issue |
+| Tool                                          | Purpose              |
+| --------------------------------------------- | -------------------- |
+| `azsdk_create_release_plan`                   | Create release plan  |
+| `azsdk_get_release_plan`                      | Get plan details     |
+| `azsdk_get_release_plan_for_spec_pr`          | Find plan by PR      |
+| `azsdk_update_sdk_details_in_release_plan`    | Update SDK info      |
+| `azsdk_link_sdk_pull_request_to_release_plan` | Link SDK PR          |
+| `azsdk_link_namespace_approval_issue`         | Link namespace issue |
 
 ## Steps
 

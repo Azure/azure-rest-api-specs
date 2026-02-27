@@ -26,11 +26,11 @@ Without MCP: `tsp compile .` for validation, `npx tsp-client convert --swagger-r
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_init_typespec_project` | Init project |
-| `azsdk_run_typespec_validation` | Validate spec |
-| `azsdk_typespec_generate_authoring_plan` | Plan changes |
+| Tool                                     | Purpose       |
+| ---------------------------------------- | ------------- |
+| `azsdk_init_typespec_project`            | Init project  |
+| `azsdk_run_typespec_validation`          | Validate spec |
+| `azsdk_typespec_generate_authoring_plan` | Plan changes  |
 
 ## Steps
 
@@ -38,4 +38,3 @@ Without MCP: `tsp compile .` for validation, `npx tsp-client convert --swagger-r
 2. **Author** — Define `@service`, `@server`, `@useAuth`, `@versioned`. Use `union` for enums, `/** */` docs. Convert: `npx tsp-client convert --swagger-readme <path>`. See `references/authoring-steps.md`.
 3. **Validate** — Run `azsdk_run_typespec_validation`. Fix errors, re-validate.
 4. **Practices** — camelCase operations, customizations in `client.tsp` only.
-

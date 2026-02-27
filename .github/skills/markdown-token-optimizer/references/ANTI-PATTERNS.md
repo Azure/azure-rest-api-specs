@@ -7,6 +7,7 @@ Patterns that inflate token counts without adding value.
 ### Excessive Emojis
 
 **Bad:**
+
 ```markdown
 # 🚀 Getting Started 🎉
 
@@ -15,11 +16,13 @@ Welcome! 👋 Let's get you set up! 💪
 ## 📋 Prerequisites ✨
 
 You'll need: 🔧
+
 - Node.js 🟢
 - Azure CLI ☁️
 ```
 
 **Good:**
+
 ```markdown
 # Getting Started
 
@@ -32,27 +35,33 @@ You'll need: 🔧
 **Token cost:** ~2 tokens per emoji. 10 decorative emojis = 20 wasted tokens.
 
 **When emojis ARE appropriate:**
+
 - Status indicators in tables
 - Actual meaning (not decoration)
 
 ### Horizontal Rules Overuse
 
 **Bad:**
+
 ```markdown
 ## Section One
-Content here.
----
+
+## Content here.
+
 ## Section Two
-More content.
----
+
+## More content.
 ```
 
 **Good:**
+
 ```markdown
 ## Section One
+
 Content here.
 
 ## Section Two
+
 More content.
 ```
 
@@ -63,14 +72,18 @@ More content.
 ### Repeated Introductions
 
 **Bad:**
+
 ```markdown
 ## Prerequisites
+
 Before you begin, ensure these are installed:
+
 - Node.js (with redundant explanations)
 - Azure CLI (with redundant explanations)
 ```
 
 **Good:**
+
 ```markdown
 ## Prerequisites
 
@@ -81,6 +94,7 @@ Before you begin, ensure these are installed:
 ### Echo Headers
 
 **Bad:**
+
 ```markdown
 ## Troubleshooting
 
@@ -92,11 +106,12 @@ Here are some common issues you might encounter.
 ```
 
 **Good:**
+
 ```markdown
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
+| Issue      | Solution       |
+| ---------- | -------------- |
 | Auth fails | Run `az login` |
 ```
 
@@ -105,13 +120,15 @@ Here are some common issues you might encounter.
 ### Filler Words
 
 **Bad:**
+
 ```markdown
-To successfully deploy your application to Azure, 
-you will first need to make sure that you have properly 
+To successfully deploy your application to Azure,
+you will first need to make sure that you have properly
 configured all of the necessary prerequisites.
 ```
 
 **Good:**
+
 ```markdown
 Before deploying to Azure, configure these prerequisites:
 ```
@@ -121,6 +138,7 @@ Before deploying to Azure, configure these prerequisites:
 ### Unnecessary Qualifiers
 
 **Bad:**
+
 ```markdown
 - It's very important to always remember to...
 - You should definitely make sure to...
@@ -128,6 +146,7 @@ Before deploying to Azure, configure these prerequisites:
 ```
 
 **Good:**
+
 ```markdown
 - Remember to...
 - Ensure...
@@ -139,16 +158,21 @@ Before deploying to Azure, configure these prerequisites:
 ### Inline Documentation That Should Be Referenced
 
 **Bad (in SKILL.md):**
+
 ```markdown
 ## Complete API Reference
+
 ### GET /users
+
 Returns all users. Accepts params...
 [continues for 200 more lines]
 ```
 
 **Good:**
+
 ```markdown
 ## API Reference
+
 See [references/API.md](references/API.md) for endpoints.
 Key endpoints: `GET /users`, `POST /users`, `GET /users/:id`
 ```
@@ -158,8 +182,10 @@ Key endpoints: `GET /users`, `POST /users`, `GET /users/:id`
 **Bad:** Three separate examples with 95% identical base command
 
 **Good:**
+
 ```markdown
 ## Examples
+
 Basic: `az storage account create -n NAME -g RG -l LOCATION`
 Options: `--tags env=dev`, `--sku Standard_GRS`
 

@@ -27,7 +27,7 @@ Creates a GitHub issue in `microsoft/github-copilot-for-azure` for integration t
    - Suggest potential fixes (update skill, update test, or update fixtures)
 7. Create issue via `github-mcp-server-create_issue`:
 
-```
+````
 owner: microsoft
 repo: github-copilot-for-azure
 title: Integration test failure in <skill-name>
@@ -35,15 +35,15 @@ labels: ["bug", "integration-test"]
 body: |
   ## Failed Tests
   - <test-name>: <error message>
-  
+
   ## Diagnosis
-  
+
   ### Root Cause
   <1-2 sentences explaining WHY the test failed based on agent-metadata.md analysis>
-  
+
   ### Analysis per Test
   - **<test-name>**: <what agent did vs what test expected>
-  
+
   ### Suggested Fix
   <one of: update skill, update test assertions, provide test fixtures>
 
@@ -53,8 +53,8 @@ body: |
   **Location:** <file:line>
   ```typescript
   <actual line of code from the test file at the specified line number>
-  ```
-  
+````
+
   <details>
   <summary>agent-metadata.md</summary>
   

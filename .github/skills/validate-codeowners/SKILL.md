@@ -19,11 +19,11 @@ compatibility: >-
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| azsdk_check_service_label | Verify label exists |
-| azsdk_engsys_validate_codeowners_entry_for_service | Validate entry |
-| azsdk_engsys_codeowner_update | Add/remove owners |
+| Tool                                               | Purpose             |
+| -------------------------------------------------- | ------------------- |
+| azsdk_check_service_label                          | Verify label exists |
+| azsdk_engsys_validate_codeowners_entry_for_service | Validate entry      |
+| azsdk_engsys_codeowner_update                      | Add/remove owners   |
 
 **Prerequisites**: azure-sdk-mcp server. **No CLI fallback**.
 

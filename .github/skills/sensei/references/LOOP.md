@@ -106,6 +106,7 @@ The Ralph loop is an iterative improvement cycle inspired by the ["Ralph Wiggum"
 **Action:** Load the skill's current state
 
 **Files to read:**
+
 ```
 plugin/skills/{skill-name}/SKILL.md    # Required
 tests/{skill-name}/unit.test.ts        # If exists
@@ -114,6 +115,7 @@ tests/{skill-name}/integration.test.ts # If exists
 ```
 
 **Extract:**
+
 - Frontmatter (name, description, compatibility)
 - Current trigger/anti-trigger phrases
 - Existing test prompts
@@ -123,6 +125,7 @@ tests/{skill-name}/integration.test.ts # If exists
 **Action:** Evaluate frontmatter compliance per the [agentskills.io specification](https://agentskills.io/specification)
 
 **Checks:**
+
 1. **Name validation** (spec-required):
    - Lowercase alphanumeric + hyphens only
    - No consecutive hyphens (`--`)
@@ -147,13 +150,15 @@ tests/{skill-name}/integration.test.ts # If exists
 **Action:** Create test directory from template
 
 **Commands:**
+
 ```bash
 cp -r tests/_template tests/{skill-name}
 ```
 
 **Then update in each test file:**
+
 ```javascript
-const SKILL_NAME = '{skill-name}';  // Replace placeholder
+const SKILL_NAME = "{skill-name}"; // Replace placeholder
 ```
 
 ### Step 4: IMPROVE FRONTMATTER
@@ -161,21 +166,24 @@ const SKILL_NAME = '{skill-name}';  // Replace placeholder
 **Action:** Enhance the SKILL.md frontmatter
 
 **Goals:**
+
 1. Add "USE FOR:" section with trigger phrases
 2. Add "DO NOT USE FOR:" section with anti-triggers
 3. Keep description under 1024 characters
 4. Maintain clarity and usefulness
 
 **Strategy:**
+
 - Read skill content to understand purpose
 - Identify related skills for anti-triggers
 - Extract keywords that should trigger this skill
 - Identify scenarios that should NOT trigger this skill
 
 **Template:**
+
 ```yaml
 ---
-name: {skill-name}
+name: { skill-name }
 description: >-
   [What the skill does - 1-2 sentences]
   USE FOR: [phrase1], [phrase2], [phrase3], [phrase4], [phrase5]
@@ -188,6 +196,7 @@ description: >-
 **Action:** Update test prompts to match new frontmatter
 
 **Files to update:**
+
 - `tests/{skill-name}/triggers.test.ts`
 
 **Updates needed:**
@@ -208,6 +217,7 @@ description: >-
 **Action:** Run tests to ensure changes work
 
 **Command:**
+
 ```bash
 # Standard (unit + trigger tests only - fast)
 cd tests && npm test -- --testPathPattern={skill-name} --testPathIgnorePatterns=integration
@@ -219,6 +229,7 @@ cd tests && npm test -- --testPathPattern={skill-name}
 **Skip Integration Tests Flag:**
 
 When invoking Sensei, you can skip integration tests for faster iteration:
+
 ```
 Run sensei on azure-deploy --skip-integration
 ```
@@ -228,10 +239,12 @@ This runs only unit and trigger tests, which are fast and don't require the Copi
 > ⚠️ **Note:** Skipping integration tests may affect confidence in skill quality. Consider running full tests before final commit.
 
 **Expected outcome:**
+
 - All tests pass
 - Snapshots may need updating (auto-update is OK)
 
 **If tests fail:**
+
 - Analyze failure
 - Adjust frontmatter or test prompts
 - Re-run (counts as sub-iteration)
@@ -241,25 +254,30 @@ This runs only unit and trigger tests, which are fast and don't require the Copi
 **Action:** Check that all markdown links in skill files are valid and don't escape the skill directory
 
 **Command:**
+
 ```bash
 cd scripts && npm run references {skill-name}
 ```
 
 **What it checks:**
+
 1. Every local markdown link points to an actual file or directory
 2. Every local markdown link stays within the skill's own directory
 3. External links (http://, https://, mailto:) are ignored
 4. Fragment-only links (#anchor) are ignored
 
 **Expected outcome:**
+
 - ✅ All references are valid and contained within skill directory
 
 **If validation fails:**
+
 - Review broken or escaped references
 - Fix invalid links or move referenced files into skill directory
 - Re-run validation (counts as sub-iteration)
 
 **Example issues caught:**
+
 - Broken link: `[CLI Commands](references/CLI-COMMANDS.md)` when file doesn't exist
 - Escaped reference: `[Other skill](../../other-skill/SKILL.md)` crosses skill boundary
 
@@ -268,22 +286,27 @@ cd scripts && npm run references {skill-name}
 **Action:** Analyze token usage, line count, and gather optimization suggestions
 
 **Commands:**
+
 ```bash
 cd scripts && npm run tokens -- check plugin/skills/{skill-name}/SKILL.md
 cd scripts && npm run tokens -- suggest plugin/skills/{skill-name}/SKILL.md
 ```
 
 **Line count check (per spec):**
+
 ```bash
 wc -l plugin/skills/{skill-name}/SKILL.md
 ```
+
 Report a warning if SKILL.md exceeds 500 lines (spec recommendation).
 
 **Token Budgets** (from [skill-authoring](/.github/skills/skill-authoring)):
+
 - SKILL.md: < 500 tokens (soft limit), < 5000 (hard limit)
-- references/*.md: < 1000 tokens each
+- references/\*.md: < 1000 tokens each
 
 **Capture:**
+
 - Current token count
 - Token delta from start
 - Optimization suggestions (for summary)
@@ -297,6 +320,7 @@ See [TOKEN-INTEGRATION.md](TOKEN-INTEGRATION.md) for details on token optimizati
 **Action:** Generate before/after comparison for user review
 
 **Display format:**
+
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║  SENSEI SUMMARY: {skill-name}                                    ║
@@ -320,6 +344,7 @@ See [TOKEN-INTEGRATION.md](TOKEN-INTEGRATION.md) for details on token optimizati
 ```
 
 **Captured metrics:**
+
 - Score change (Low → Medium-High)
 - Token delta (+/- tokens)
 - Trigger count change
@@ -332,6 +357,7 @@ See [TOKEN-INTEGRATION.md](TOKEN-INTEGRATION.md) for details on token optimizati
 **Action:** Ask user how to proceed with changes
 
 **Options:**
+
 ```
 Choose an action:
   [C] Commit changes - Save improvements with "sensei: improve {skill-name}"
@@ -340,6 +366,7 @@ Choose an action:
 ```
 
 **Commit flow:**
+
 ```bash
 git add plugin/skills/{skill-name}/SKILL.md
 git add tests/{skill-name}/
@@ -353,6 +380,7 @@ git commit -m "sensei: improve {skill-name} frontmatter
 
 **Issue flow:**
 Creates a GitHub issue with:
+
 - Title: `[sensei] Token optimization suggestions for {skill-name}`
 - Body: Summary table + unimplemented suggestions
 - Labels: `enhancement`, `skill-quality`
@@ -362,11 +390,13 @@ Creates a GitHub issue with:
 **Check:** Has the target been reached?
 
 **Exit conditions (move to next skill):**
+
 - Score >= Medium-High AND tests pass
 - Iteration count >= 5 (timeout)
 - Unrecoverable error
 
 **Continue condition:**
+
 - Score < Medium-High OR tests failing
 - Iteration count < 5
 

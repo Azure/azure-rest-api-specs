@@ -19,8 +19,8 @@ compatibility: >-
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                      | Purpose                                 |
+| ------------------------- | --------------------------------------- |
 | `azsdk_package_run_check` | Run validation checks on an SDK package |
 
 ## Steps

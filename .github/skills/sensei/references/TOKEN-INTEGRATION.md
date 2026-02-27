@@ -6,11 +6,11 @@ Sensei integrates with the token management system to ensure skills stay within 
 
 From the [skill-authoring](/.github/skills/skill-authoring) skill:
 
-| File Type | Soft Limit | Hard Limit |
-|-----------|------------|------------|
-| SKILL.md | 500 tokens | 5000 tokens |
-| references/*.md | 1000 tokens | - |
-| Total skill | 2000 tokens | - |
+| File Type        | Soft Limit  | Hard Limit  |
+| ---------------- | ----------- | ----------- |
+| SKILL.md         | 500 tokens  | 5000 tokens |
+| references/\*.md | 1000 tokens | -           |
+| Total skill      | 2000 tokens | -           |
 
 ## Token Commands
 
@@ -32,6 +32,7 @@ cd scripts && npm run tokens -- suggest plugin/skills/{skill-name}/SKILL.md
 ### 1. READ Phase (Capture Baseline)
 
 At loop start, capture initial token count:
+
 ```bash
 cd scripts && npm run tokens -- count plugin/skills/{skill-name}/SKILL.md --json
 ```
@@ -41,6 +42,7 @@ Store: `beforeTokens = result.tokens`
 ### 2. CHECK TOKENS Phase (After Improvements)
 
 After frontmatter improvements pass tests:
+
 ```bash
 # Get current count
 cd scripts && npm run tokens -- count plugin/skills/{skill-name}/SKILL.md --json
@@ -50,6 +52,7 @@ cd scripts && npm run tokens -- suggest plugin/skills/{skill-name}/SKILL.md --js
 ```
 
 Store:
+
 - `afterTokens = result.tokens`
 - `tokenDelta = afterTokens - beforeTokens`
 - `suggestions = suggestResult.suggestions`
@@ -57,6 +60,7 @@ Store:
 ### 3. SUMMARY Phase (Report)
 
 Include in summary:
+
 - Token count before/after
 - Delta (+/- tokens)
 - Suggestions not implemented (for user review)
@@ -70,29 +74,32 @@ For detailed optimization guidance, reference the [markdown-token-optimizer](/.g
 
 ### Quick Reference: Common Optimizations
 
-| Pattern | Savings | Example |
-|---------|---------|---------|
-| Remove emojis | 1-3 tokens each | `✅` → (remove) |
-| Shorten headings | 2-5 tokens | `## Step 1: Configuration` → `## Configuration` |
-| Remove filler words | 1-2 tokens each | "In order to" → "To" |
-| Consolidate lists | 5-10 tokens | Multiple bullets → single sentence |
-| Use abbreviations | 1-2 tokens | "Application Insights" → "App Insights" |
+| Pattern             | Savings         | Example                                         |
+| ------------------- | --------------- | ----------------------------------------------- |
+| Remove emojis       | 1-3 tokens each | `✅` → (remove)                                 |
+| Shorten headings    | 2-5 tokens      | `## Step 1: Configuration` → `## Configuration` |
+| Remove filler words | 1-2 tokens each | "In order to" → "To"                            |
+| Consolidate lists   | 5-10 tokens     | Multiple bullets → single sentence              |
+| Use abbreviations   | 1-2 tokens      | "Application Insights" → "App Insights"         |
 
 ## When to Apply Token Suggestions
 
 Sensei captures token optimization suggestions but does **not** auto-apply them. The user decides:
 
 **Apply immediately if:**
+
 - Skill exceeds soft limit (500 tokens)
 - Suggestions don't reduce clarity
 - Changes are straightforward
 
 **Create issue if:**
+
 - Suggestions require careful review
 - Multiple skills need same optimization
 - Changes might affect functionality
 
 **Skip if:**
+
 - Skill is well under budget
 - Suggestions trade clarity for brevity
 - Time constraints

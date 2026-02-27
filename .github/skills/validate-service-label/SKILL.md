@@ -19,10 +19,10 @@ compatibility: >-
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_check_service_label` | Check if a label exists |
-| `azsdk_create_service_label` | Create a new label PR |
+| Tool                         | Purpose                 |
+| ---------------------------- | ----------------------- |
+| `azsdk_check_service_label`  | Check if a label exists |
+| `azsdk_create_service_label` | Create a new label PR   |
 
 **Prerequisites**: azure-sdk-mcp server must be running. Without MCP, direct user to [Common Labels CSV](https://github.com/Azure/azure-sdk-tools/blob/main/tools/github/data/common-labels.csv) manually.
 

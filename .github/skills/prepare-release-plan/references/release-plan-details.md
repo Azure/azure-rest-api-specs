@@ -5,6 +5,7 @@
 ## Required Information
 
 Collect these details (do not use temporary values):
+
 - **Service Tree ID**: GUID format - confirm with user
 - **Product Service Tree ID**: GUID format - confirm with user
 - **Expected Release Timeline**: "Month YYYY" format
@@ -14,6 +15,7 @@ Collect these details (do not use temporary values):
 ## SDK Details Update
 
 Identify languages from `tspconfig.yaml` emitter configuration:
+
 - Map emitter names to languages (.NET, Java, Python, JavaScript, Go)
 - Extract package names per language
 - **Validate package names:**
@@ -24,6 +26,7 @@ Identify languages from `tspconfig.yaml` emitter configuration:
 ## Namespace Approval (Management Plane Only)
 
 For first release of management plane SDK:
+
 1. Check if namespace approval issue already exists
 2. If not, collect GitHub issue from Azure/azure-sdk repo
 3. Run `azsdk_link_namespace_approval_issue`
@@ -31,5 +34,6 @@ For first release of management plane SDK:
 ## Linking SDK Pull Requests
 
 If SDK PRs exist:
+
 1. Ensure GitHub CLI authentication (`gh auth login`)
 2. Run `azsdk_link_sdk_pull_request_to_release_plan` for each PR

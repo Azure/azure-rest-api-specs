@@ -23,6 +23,7 @@ Sensei automates the improvement of [Agent Skills](https://agentskills.io) front
 ### The Problem
 
 The [frontmatter audit](https://gist.github.com/spboyer/28c31bf0cafb87489406832633aa31a7) revealed that all Azure skills have:
+
 - **0% High adherence** - No skills have triggers + anti-triggers + compatibility
 - **46% Low adherence** - 12 skills have minimal descriptions without clear triggers
 - **0/26 anti-triggers** - No skills tell agents when NOT to use them
@@ -32,6 +33,7 @@ This leads to **skill collision** - agents invoking the wrong skill for a given 
 ### The Solution
 
 Sensei implements the "Ralph Wiggum" technique:
+
 1. **Read** - Load the skill's current state and token count
 2. **Score** - Evaluate frontmatter compliance
 3. **Improve** - Add triggers, anti-triggers, compatibility
@@ -47,34 +49,39 @@ Sensei implements the "Ralph Wiggum" technique:
 ## Quick Start
 
 ### Single Skill
+
 ```
 Run sensei on appinsights-instrumentation
 ```
 
 ### Single Skill (Fast Mode)
+
 ```
 Run sensei on appinsights-instrumentation --skip-integration
 ```
 
 ### Multiple Skills
+
 ```
 Run sensei on azure-security, azure-observability
 ```
 
 ### All Low-Adherence Skills
+
 ```
 Run sensei on all Low-adherence skills
 ```
 
 ### All Skills
+
 ```
 Run sensei on all skills
 ```
 
 ### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                 | Description                                                             |
+| -------------------- | ----------------------------------------------------------------------- |
 | `--skip-integration` | Skip integration tests for faster iteration (unit + trigger tests only) |
 
 > ⚠️ **Note:** Using `--skip-integration` speeds up the loop significantly but may miss runtime issues. Consider running full tests before final commit.
@@ -86,11 +93,13 @@ Run sensei on all skills
 ### Required
 
 1. **Copilot CLI** - Installed and authenticated
+
    ```bash
    copilot --version
    ```
 
 2. **Node.js** - For running tests
+
    ```bash
    node --version  # v18+ recommended
    ```
@@ -207,6 +216,7 @@ npm test -- --testPathPattern=azure-validation
 ### Batch Processing
 
 When running on multiple skills:
+
 1. Skills are processed sequentially
 2. Each skill goes through the full loop
 3. User prompted after each skill: Commit, Create Issue, or Skip
@@ -216,14 +226,14 @@ When running on multiple skills:
 
 ## Configuration
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| Max iterations | 5 | Per-skill iteration limit before moving on |
-| Target score | Medium-High | Minimum compliance level |
-| Token soft limit | 500 | SKILL.md target token count |
-| User prompt | After each skill | Commit, Create Issue, or Skip |
-| Continue on failure | Yes | Process remaining skills if one fails |
-| Skip integration | No | Use `--skip-integration` to run only unit/trigger tests |
+| Setting             | Default          | Description                                             |
+| ------------------- | ---------------- | ------------------------------------------------------- |
+| Max iterations      | 5                | Per-skill iteration limit before moving on              |
+| Target score        | Medium-High      | Minimum compliance level                                |
+| Token soft limit    | 500              | SKILL.md target token count                             |
+| User prompt         | After each skill | Commit, Create Issue, or Skip                           |
+| Continue on failure | Yes              | Process remaining skills if one fails                   |
+| Skip integration    | No               | Use `--skip-integration` to run only unit/trigger tests |
 
 ---
 
@@ -231,12 +241,12 @@ When running on multiple skills:
 
 ### Adherence Levels
 
-| Level | Description | Criteria |
-|-------|-------------|----------|
-| **Low** | Basic description | No explicit triggers, no anti-triggers, often < 150 chars |
-| **Medium** | Has trigger keywords | Description > 150 chars, implicit or explicit trigger phrases |
-| **Medium-High** | Has triggers + anti-triggers | "USE FOR:" present AND "DO NOT USE FOR:" present |
-| **High** | Full compliance | Triggers + anti-triggers + compatibility field |
+| Level           | Description                  | Criteria                                                      |
+| --------------- | ---------------------------- | ------------------------------------------------------------- |
+| **Low**         | Basic description            | No explicit triggers, no anti-triggers, often < 150 chars     |
+| **Medium**      | Has trigger keywords         | Description > 150 chars, implicit or explicit trigger phrases |
+| **Medium-High** | Has triggers + anti-triggers | "USE FOR:" present AND "DO NOT USE FOR:" present              |
+| **High**        | Full compliance              | Triggers + anti-triggers + compatibility field                |
 
 ### Rule-Based Checks
 
@@ -276,6 +286,7 @@ Per the [agentskills.io specification](https://agentskills.io/specification):
 ### Target: Medium-High
 
 To reach Medium-High, a skill must have:
+
 - ✅ Description > 150 characters
 - ✅ Explicit trigger phrases ("USE FOR:" or equivalent)
 - ✅ Anti-triggers ("DO NOT USE FOR:" or clear scope limitation)
@@ -284,8 +295,9 @@ To reach Medium-High, a skill must have:
 ### Token Budget
 
 From [skill-authoring](/.github/skills/skill-authoring):
+
 - **SKILL.md:** < 500 tokens (soft), < 5000 (hard)
-- **references/*.md:** < 1000 tokens each
+- **references/\*.md:** < 1000 tokens each
 - Check with: `cd scripts && npm run tokens -- check plugin/skills/{skill}/SKILL.md`
 
 ---
@@ -297,11 +309,12 @@ From [skill-authoring](/.github/skills/skill-authoring):
 ```yaml
 ---
 name: appinsights-instrumentation
-description: 'Instrument a webapp to send useful telemetry data to Azure App Insights'
+description: "Instrument a webapp to send useful telemetry data to Azure App Insights"
 ---
 ```
 
 **Problems:**
+
 - Only 71 characters
 - No trigger phrases
 - No anti-triggers
@@ -322,6 +335,7 @@ description: >-
 ```
 
 **Improvements:**
+
 - ~350 characters (informative but under limit)
 - Clear description of purpose
 - Explicit trigger phrases
@@ -330,27 +344,29 @@ description: >-
 ### Test Updates
 
 **Before (empty):**
+
 ```javascript
 const shouldTriggerPrompts = [];
 const shouldNotTriggerPrompts = [];
 ```
 
 **After:**
+
 ```javascript
 const shouldTriggerPrompts = [
-  'Add App Insights to my web app',
-  'Instrument my ASP.NET Core app for monitoring',
-  'Set up telemetry for my Node.js application',
-  'How do I track requests in Application Insights?',
-  'Add monitoring to my webapp',
+  "Add App Insights to my web app",
+  "Instrument my ASP.NET Core app for monitoring",
+  "Set up telemetry for my Node.js application",
+  "How do I track requests in Application Insights?",
+  "Add monitoring to my webapp",
 ];
 
 const shouldNotTriggerPrompts = [
-  'Query my Application Insights logs',
-  'Create an alert for high CPU usage',
-  'Show me my App Insights dashboard',
-  'How much does App Insights cost?',
-  'Help me with AWS CloudWatch',
+  "Query my Application Insights logs",
+  "Create an alert for high CPU usage",
+  "Show me my App Insights dashboard",
+  "How much does App Insights cost?",
+  "Help me with AWS CloudWatch",
 ];
 ```
 
@@ -363,6 +379,7 @@ const shouldNotTriggerPrompts = [
 **Symptom:** Tests fail after frontmatter changes
 
 **Solution:**
+
 1. Check that `shouldTriggerPrompts` match the new trigger phrases
 2. Check that `shouldNotTriggerPrompts` match the new anti-triggers
 3. Run tests manually to see specific failures:
@@ -376,6 +393,7 @@ const shouldNotTriggerPrompts = [
 **Symptom:** Ralph loops 5 times without reaching Medium-High
 
 **Possible causes:**
+
 1. Description too long (> 1024 chars) - trim content
 2. Anti-triggers not in recognized format - use "DO NOT USE FOR:"
 3. Conflicting triggers with other skills - make more specific
@@ -422,6 +440,7 @@ The Sensei skill lives at `.github/skills/sensei/`. To improve it:
 ### Reporting Issues
 
 If Sensei produces unexpected results:
+
 1. Note the skill name and starting state
 2. Capture the commit history: `git log --oneline -10`
 3. Open an issue with reproduction steps
@@ -437,7 +456,7 @@ If Sensei produces unexpected results:
 
 ---
 
-*Sensei - "The path to compliance begins with a single trigger."* 🥋
+_Sensei - "The path to compliance begins with a single trigger."_ 🥋
 
 ### Related Skills
 

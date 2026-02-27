@@ -2,13 +2,13 @@
 
 ## Language Repository Mapping
 
-| Language | Repository |
-|----------|-----------|
-| .NET | `azure-sdk-for-net` |
-| Java | `azure-sdk-for-java` |
-| JavaScript | `azure-sdk-for-js` |
-| Python | `azure-sdk-for-python` |
-| Go | `azure-sdk-for-go` |
+| Language   | Repository             |
+| ---------- | ---------------------- |
+| .NET       | `azure-sdk-for-net`    |
+| Java       | `azure-sdk-for-java`   |
+| JavaScript | `azure-sdk-for-js`     |
+| Python     | `azure-sdk-for-python` |
+| Go         | `azure-sdk-for-go`     |
 
 ## Configuration File Paths
 
@@ -18,5 +18,6 @@
 ## Build Failure Resolution
 
 If build fails:
+
 - Check for TypeSpec customization needs → use `typespec-customization` skill
 - Regenerate SDK after fixing issues

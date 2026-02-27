@@ -7,40 +7,42 @@ Before and after examples of frontmatter improvements, including token counts.
 ### Before (Low Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: appinsights-instrumentation
-description: 'Instrument a webapp to send useful telemetry data to Azure App Insights'
+description: "Instrument a webapp to send useful telemetry data to Azure App Insights"
 ---
 ```
 
 **Metrics:**
+
 - Score: Low
 - Tokens: ~142
 - Triggers: 0
 - Anti-triggers: 0
 
 **Problems:**
+
 - ❌ Only 71 characters - too brief
 - ❌ No trigger phrases
 - ❌ No anti-triggers
 - ❌ Agent doesn't know when to activate
 
 **triggers.test.ts:**
+
 ```javascript
 const shouldTriggerPrompts = [
   // Empty - no test coverage
 ];
 
-const shouldNotTriggerPrompts = [
-  'What is the weather today?',
-  'Help me write a poem',
-];
+const shouldNotTriggerPrompts = ["What is the weather today?", "Help me write a poem"];
 ```
 
 ### After (Medium-High Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: appinsights-instrumentation
@@ -55,36 +57,39 @@ description: >-
 ```
 
 **Metrics:**
+
 - Score: Medium-High ✅
 - Tokens: ~385 (under 500 budget ✅)
 - Triggers: 7
 - Anti-triggers: 4
 
 **Improvements:**
+
 - ✅ 385 characters - informative but under 1024 limit
 - ✅ Clear description of purpose
 - ✅ Explicit "USE FOR:" trigger phrases
 - ✅ "DO NOT USE FOR:" anti-triggers prevent collision
 
 **triggers.test.ts:**
+
 ```javascript
 const shouldTriggerPrompts = [
-  'Add Application Insights to my web app',
-  'Instrument my ASP.NET Core application for monitoring',
-  'Set up telemetry for my Node.js app',
-  'How do I track requests in App Insights?',
-  'Add Application Insights monitoring to my project',
-  'Configure App Insights for my Azure web app',
+  "Add Application Insights to my web app",
+  "Instrument my ASP.NET Core application for monitoring",
+  "Set up telemetry for my Node.js app",
+  "How do I track requests in App Insights?",
+  "Add Application Insights monitoring to my project",
+  "Configure App Insights for my Azure web app",
 ];
 
 const shouldNotTriggerPrompts = [
-  'What is the weather today?',
-  'Help me write a poem',
-  'Query my Application Insights logs',  // → azure-observability
-  'Create an alert in Azure Monitor',     // → azure-observability
-  'Show me my App Insights dashboard',    // → azure-observability
-  'How much does App Insights cost?',     // → azure-cost-optimization
-  'Help me with AWS CloudWatch',          // Wrong cloud provider
+  "What is the weather today?",
+  "Help me write a poem",
+  "Query my Application Insights logs", // → azure-observability
+  "Create an alert in Azure Monitor", // → azure-observability
+  "Show me my App Insights dashboard", // → azure-observability
+  "How much does App Insights cost?", // → azure-cost-optimization
+  "Help me with AWS CloudWatch", // Wrong cloud provider
 ];
 ```
 
@@ -95,14 +100,16 @@ const shouldNotTriggerPrompts = [
 ### Before (Low Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: azure-security
-description: 'Azure Security Services including Key Vault, Managed Identity, RBAC, Entra ID, and Defender. Provides secrets management, credential-free authentication, role-based access control, and threat protection.'
+description: "Azure Security Services including Key Vault, Managed Identity, RBAC, Entra ID, and Defender. Provides secrets management, credential-free authentication, role-based access control, and threat protection."
 ---
 ```
 
 **Problems:**
+
 - ❌ Catalog-style description (lists services, not actions)
 - ❌ No trigger phrases
 - ❌ No anti-triggers
@@ -111,6 +118,7 @@ description: 'Azure Security Services including Key Vault, Managed Identity, RBA
 ### After (Medium-High Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: azure-security
@@ -125,6 +133,7 @@ description: >-
 ```
 
 **Improvements:**
+
 - ✅ Reframed as "overview/concepts" skill
 - ✅ Explicit triggers for educational queries
 - ✅ Clear anti-triggers pointing to specialized skills
@@ -136,6 +145,7 @@ description: >-
 ### Before (Medium Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: azure-deploy
@@ -148,12 +158,14 @@ description: >-
 ```
 
 **Status:**
+
 - ✅ Good trigger phrases
 - ❌ Missing anti-triggers (collision with azure-create-app, azure-deployment-preflight)
 
 ### After (Medium-High Adherence)
 
 **SKILL.md frontmatter:**
+
 ```yaml
 ---
 name: azure-deploy
@@ -168,6 +180,7 @@ description: >-
 ```
 
 **Improvements:**
+
 - ✅ Added "DO NOT USE FOR:" section
 - ✅ Clear handoff to related skills
 - ✅ Prevents deployment vs. setup confusion
@@ -180,17 +193,17 @@ description: >-
 
 ```javascript
 // Specific and actionable
-'Deploy my Node.js app to Azure App Service'
-'How do I publish a React app to Azure Static Web Apps?'
-'Set up Azure Functions for my Python project'
+"Deploy my Node.js app to Azure App Service";
+"How do I publish a React app to Azure Static Web Apps?";
+"Set up Azure Functions for my Python project";
 
 // Uses skill keywords
-'Run azd up to deploy my application'
-'Host my web app on Azure'
+"Run azd up to deploy my application";
+"Host my web app on Azure";
 
 // Natural variations
-'I need to get my app running on Azure'
-'Can you help me deploy to the cloud?'
+"I need to get my app running on Azure";
+"Can you help me deploy to the cloud?";
 ```
 
 ### Good Anti-Trigger Prompts
@@ -218,6 +231,7 @@ description: >-
 ## Example 5: Commit Message
 
 **Good commit message:**
+
 ```
 sensei: improve appinsights-instrumentation frontmatter
 
@@ -229,6 +243,7 @@ sensei: improve appinsights-instrumentation frontmatter
 ```
 
 **Minimal commit message (also acceptable):**
+
 ```
 sensei: improve appinsights-instrumentation frontmatter
 ```
@@ -292,8 +307,8 @@ USE FOR: "deploy to Azure", "host on Azure"
 ```javascript
 // But triggers.test.ts has:
 const shouldTriggerPrompts = [
-  'Create a new Azure project',  // Wrong! This is azure-create-app
-  'Validate my Bicep file',      // Wrong! This is azure-deployment-preflight
+  "Create a new Azure project", // Wrong! This is azure-create-app
+  "Validate my Bicep file", // Wrong! This is azure-deployment-preflight
 ];
 ```
 
@@ -361,29 +376,31 @@ When token optimizations are available:
 **If user chooses [I] Create issue:**
 
 Creates GitHub issue:
+
 - **Title:** `[sensei] Token optimization suggestions for azure-deploy`
 - **Labels:** `enhancement`, `skill-quality`
 - **Body:**
+
   ```markdown
   ## Summary
-  
+
   Sensei improved `azure-deploy` frontmatter but identified token optimization opportunities.
-  
-  | Metric | Before | After |
-  |--------|--------|-------|
-  | Score | Medium | Medium-High |
-  | Tokens | 623 | 589 |
-  | Status | ⚠️ Above soft limit | |
-  
+
+  | Metric | Before              | After       |
+  | ------ | ------------------- | ----------- |
+  | Score  | Medium              | Medium-High |
+  | Tokens | 623                 | 589         |
+  | Status | ⚠️ Above soft limit |             |
+
   ## Suggestions
-  
+
   - [ ] Remove bullet point decorators (-8 tokens)
   - [ ] Shorten "In order to deploy" → "To deploy" (-12 tokens)
   - [ ] Consolidate example list into paragraph (-18 tokens)
-  
+
   **Potential savings:** ~38 tokens → 551 tokens (under 500 soft limit)
-  
+
   ## References
-  
+
   - [OPTIMIZATION-PATTERNS.md](/.github/skills/markdown-token-optimizer/references/OPTIMIZATION-PATTERNS.md)
   ```

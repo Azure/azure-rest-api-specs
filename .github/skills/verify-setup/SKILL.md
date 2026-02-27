@@ -25,8 +25,8 @@ compatibility: >-
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                 | Purpose                                                          |
+| -------------------- | ---------------------------------------------------------------- |
 | `azsdk_verify_setup` | Validate dev environment for SDK tools and language requirements |
 
 ## Steps

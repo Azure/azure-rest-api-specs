@@ -19,7 +19,7 @@ This skill provides guidance for writing Agent Skills that comply with the [agen
 - `name`: 1-64 chars, lowercase + hyphens, match directory
 - `description`: 1-1024 chars, explain WHAT and WHEN
 - SKILL.md: <500 tokens (soft), <5000 (hard)
-- references/*.md: <1000 tokens each
+- references/\*.md: <1000 tokens each
 
 ## Structure
 
@@ -36,6 +36,7 @@ Metadata (~100 tokens) loads at startup. SKILL.md (<5000 tokens) loads on activa
 ## Reference Loading
 
 References are JIT (just-in-time) loaded:
+
 - Only files explicitly linked via `[text](references/file.md)` load
 - **Link to files, not folders** - `[Recipes](references/recipes/README.md)` not `[Recipes](references/recipes/)`
 - Each file loads in full (not sections)
@@ -56,6 +57,7 @@ npm run tokens -- check         # Check token limits
 ### Integrity Checks
 
 When reviewing or authoring skills, verify:
+
 1. **No broken links** - All referenced files exist
 2. **No orphaned references** - All reference files are linked
 3. **Token budgets** - References under 1000 tokens (split if exceeded)

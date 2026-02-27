@@ -4,11 +4,11 @@
 
 Skills use a three-tier loading model:
 
-| Tier | Content | When Loaded |
-|------|---------|-------------|
-| **Metadata** | `name` + `description` | Startup (all skills) |
-| **Instructions** | SKILL.md body | On activation |
-| **Resources** | `references/`, `scripts/` | On demand |
+| Tier             | Content                   | When Loaded          |
+| ---------------- | ------------------------- | -------------------- |
+| **Metadata**     | `name` + `description`    | Startup (all skills) |
+| **Instructions** | SKILL.md body             | On activation        |
+| **Resources**    | `references/`, `scripts/` | On demand            |
 
 **Key principle:** Keep SKILL.md lean, move details to references.
 
@@ -20,6 +20,7 @@ References load **only when explicitly linked** - NOT when the skill activates:
 - ❌ "Error docs are in references/" → Agent won't find files
 
 Per [agentskills Issue #97](https://github.com/agentskills/agentskills/issues/97):
+
 - References are re-read each time (no caching)
 - Write each reference as a **self-contained unit**
 - The **entire file** loads when referenced (not sections)
@@ -27,9 +28,9 @@ Per [agentskills Issue #97](https://github.com/agentskills/agentskills/issues/97
 ## DO: Use Tables for Dense Information
 
 ```markdown
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `az login` | Authenticate | `az login --tenant ID` |
+| Command          | Purpose          | Example                  |
+| ---------------- | ---------------- | ------------------------ |
+| `az login`       | Authenticate     | `az login --tenant ID`   |
 | `az account set` | Set subscription | `az account set -s NAME` |
 ```
 
@@ -58,9 +59,11 @@ Use relative paths from the skill root with descriptive link text:
 
 ```markdown
 <!-- ✅ Good: descriptive text -->
+
 See [the API reference](references/api-reference.md) for details.
 
 <!-- ❌ Bad: path as text wastes tokens -->
+
 See [references/api-reference.md](references/api-reference.md) for details.
 ```
 
@@ -72,12 +75,14 @@ Embed links in existing columns instead of adding reference columns:
 
 ```markdown
 <!-- ❌ Wasteful: extra column for links -->
-| Error | Fix | Reference |
-|-------|-----|-----------|
+
+| Error       | Fix      | Reference                                |
+| ----------- | -------- | ---------------------------------------- |
 | Auth failed | Re-login | [references/auth.md](references/auth.md) |
 
 <!-- ✅ Better: link inline -->
-| Error | Fix |
-|-------|-----|
+
+| Error                             | Fix      |
+| --------------------------------- | -------- |
 | [Auth failed](references/auth.md) | Re-login |
 ```

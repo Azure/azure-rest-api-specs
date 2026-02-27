@@ -21,12 +21,12 @@ Requires `azure-sdk-mcp` server. Run `azsdk_verify_setup` to confirm.
 
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
+| Tool                          | Purpose                    |
+| ----------------------------- | -------------------------- |
 | `azsdk_package_generate_code` | Generate SDK from TypeSpec |
-| `azsdk_package_build_code` | Build package |
-| `azsdk_package_run_check` | Validate package |
-| `azsdk_package_run_tests` | Run tests |
+| `azsdk_package_build_code`    | Build package              |
+| `azsdk_package_run_check`     | Validate package           |
+| `azsdk_package_run_tests`     | Run tests                  |
 
 ## Steps
 

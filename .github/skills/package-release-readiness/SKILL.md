@@ -19,13 +19,13 @@ compatibility: >-
 
 ## MCP Tools Used
 
-| MCP Tool | Purpose |
-|----------|---------|
-| `azsdk_release_sdk` | Check readiness or trigger release |
-| `azsdk_package_run_check` | Run validation checks |
-| `azsdk_package_update_changelog_content` | Update changelog |
-| `azsdk_package_update_metadata` | Update metadata |
-| `azsdk_package_update_version` | Update version |
+| MCP Tool                                 | Purpose                            |
+| ---------------------------------------- | ---------------------------------- |
+| `azsdk_release_sdk`                      | Check readiness or trigger release |
+| `azsdk_package_run_check`                | Run validation checks              |
+| `azsdk_package_update_changelog_content` | Update changelog                   |
+| `azsdk_package_update_metadata`          | Update metadata                    |
+| `azsdk_package_update_version`           | Update version                     |
 
 ## Steps
 

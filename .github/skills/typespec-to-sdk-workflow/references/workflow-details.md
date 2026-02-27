@@ -4,27 +4,29 @@
 
 The workflow detects current state and resumes appropriately:
 
-| Scenario | Resume Point |
-|----------|-------------|
-| Release plan + API spec PR exist | Step 6 (SDK Generation) |
-| API spec PR exists, no release plan | Create plan, then Step 6 |
-| Pipeline SDK generation failed | Switch to local generation |
-| SDK generated, needs package prep | Step 9 (Release) |
+| Scenario                            | Resume Point               |
+| ----------------------------------- | -------------------------- |
+| Release plan + API spec PR exist    | Step 6 (SDK Generation)    |
+| API spec PR exists, no release plan | Create plan, then Step 6   |
+| Pipeline SDK generation failed      | Switch to local generation |
+| SDK generated, needs package prep   | Step 9 (Release)           |
 
 ## SDK Languages by Service Type
 
-| Service Type | Required Languages |
-|-------------|-------------------|
+| Service Type     | Required Languages                 |
+| ---------------- | ---------------------------------- |
 | Management Plane | .NET, Java, JavaScript, Python, Go |
-| Data Plane | .NET, Java, JavaScript, Python |
+| Data Plane       | .NET, Java, JavaScript, Python     |
 
 ## SDK Generation Methods
 
 **Local generation:**
+
 - Use skill: `generate-sdk-locally`
 - Faster iteration, debug locally
 
 **Pipeline generation:**
+
 - Run `azsdk_run_generate_sdk` for each language
 - Monitor pipeline status (~15-20 minutes)
 - PRs created automatically

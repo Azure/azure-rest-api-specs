@@ -19,11 +19,15 @@ Find repeated content that can be extracted into a shared reference.
 
 ```markdown
 # Before (in multiple files)
+
 ## Authentication
+
 Run `az login` to authenticate...
 [same 10 lines repeated]
 
 # After
+
 ## Authentication
+
 See [Authentication Setup](common/authentication.md) for details.
 ```

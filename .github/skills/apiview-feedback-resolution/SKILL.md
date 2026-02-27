@@ -19,12 +19,12 @@ compatibility: >-
 
 ## MCP Tools Used
 
-| MCP Tool | Purpose |
-|----------|---------|
-| `azsdk_apiview_get_comments` | Retrieve APIView comments |
+| MCP Tool                                   | Purpose                     |
+| ------------------------------------------ | --------------------------- |
+| `azsdk_apiview_get_comments`               | Retrieve APIView comments   |
 | `azsdk_typespec_delegate_apiview_feedback` | AI-resolve APIView feedback |
-| `azsdk_run_typespec_validation` | Validate TypeSpec changes |
-| `azsdk_package_generate_code` | Regenerate SDK |
+| `azsdk_run_typespec_validation`            | Validate TypeSpec changes   |
+| `azsdk_package_generate_code`              | Regenerate SDK              |
 
 ## Steps
 

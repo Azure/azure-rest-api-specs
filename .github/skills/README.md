@@ -10,37 +10,37 @@ with TypeSpec API specifications and Azure SDK generation in this repository.
 
 ### Workflow Skill
 
-| Skill | Triggers | Description |
-|-------|----------|-------------|
+| Skill                                                         | Triggers                                                  | Description                                                                             |
+| ------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [typespec-to-sdk-workflow](typespec-to-sdk-workflow/SKILL.md) | "full SDK release workflow", "TypeSpec to SDK end to end" | Orchestrates the full TypeSpec → SDK release process, invoking all utility skills below |
 
 ### Utility Skills
 
-| Skill | Triggers | Description |
-|-------|----------|-------------|
-| [typespec-authoring](typespec-authoring/SKILL.md) | "create TypeSpec project", "convert swagger to TypeSpec", "validate TypeSpec" | Create, modify, and validate TypeSpec API specifications |
-| [typespec-customization](typespec-customization/SKILL.md) | "rename type for SDK", "@clientName", "client.tsp" | Apply SDK-specific customizations via `client.tsp` decorators |
-| [generate-sdk-locally](generate-sdk-locally/SKILL.md) | "generate SDK locally", "build SDK", "run SDK tests" | Generate, build, and test Azure SDKs locally from TypeSpec |
-| [prepare-release-plan](prepare-release-plan/SKILL.md) | "create release plan", "link SDK PR to plan" | Create and manage release plan work items |
-| [package-release-readiness](package-release-readiness/SKILL.md) | "is package ready for release", "release SDK package" | Check SDK package release readiness and trigger releases |
-| [apiview-feedback-resolution](apiview-feedback-resolution/SKILL.md) | "APIView comments", "resolve API review feedback" | Retrieve and resolve APIView review feedback |
-| [pipeline-troubleshooting](pipeline-troubleshooting/SKILL.md) | "pipeline failed", "build failure", "CI check failing" | Diagnose and resolve SDK CI and generation pipeline failures |
-| [verify-setup](verify-setup/SKILL.md) | "verify setup", "check environment", "missing tools" | Verify developer environment for SDK development |
-| [validate-service-label](validate-service-label/SKILL.md) | "check service label", "create service label" | Validate or create service labels for SDK repos |
-| [validate-codeowners](validate-codeowners/SKILL.md) | "validate codeowners", "check code owners" | Validate and manage CODEOWNERS entries |
-| [check-package-validation](check-package-validation/SKILL.md) | "run package check", "lint SDK", "format check" | Run SDK package validation checks |
-| [sdk-release](sdk-release/SKILL.md) | "release SDK", "trigger release pipeline" | Check release readiness and trigger SDK releases |
+| Skill                                                               | Triggers                                                                      | Description                                                   |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [typespec-authoring](typespec-authoring/SKILL.md)                   | "create TypeSpec project", "convert swagger to TypeSpec", "validate TypeSpec" | Create, modify, and validate TypeSpec API specifications      |
+| [typespec-customization](typespec-customization/SKILL.md)           | "rename type for SDK", "@clientName", "client.tsp"                            | Apply SDK-specific customizations via `client.tsp` decorators |
+| [generate-sdk-locally](generate-sdk-locally/SKILL.md)               | "generate SDK locally", "build SDK", "run SDK tests"                          | Generate, build, and test Azure SDKs locally from TypeSpec    |
+| [prepare-release-plan](prepare-release-plan/SKILL.md)               | "create release plan", "link SDK PR to plan"                                  | Create and manage release plan work items                     |
+| [package-release-readiness](package-release-readiness/SKILL.md)     | "is package ready for release", "release SDK package"                         | Check SDK package release readiness and trigger releases      |
+| [apiview-feedback-resolution](apiview-feedback-resolution/SKILL.md) | "APIView comments", "resolve API review feedback"                             | Retrieve and resolve APIView review feedback                  |
+| [pipeline-troubleshooting](pipeline-troubleshooting/SKILL.md)       | "pipeline failed", "build failure", "CI check failing"                        | Diagnose and resolve SDK CI and generation pipeline failures  |
+| [verify-setup](verify-setup/SKILL.md)                               | "verify setup", "check environment", "missing tools"                          | Verify developer environment for SDK development              |
+| [validate-service-label](validate-service-label/SKILL.md)           | "check service label", "create service label"                                 | Validate or create service labels for SDK repos               |
+| [validate-codeowners](validate-codeowners/SKILL.md)                 | "validate codeowners", "check code owners"                                    | Validate and manage CODEOWNERS entries                        |
+| [check-package-validation](check-package-validation/SKILL.md)       | "run package check", "lint SDK", "format check"                               | Run SDK package validation checks                             |
+| [sdk-release](sdk-release/SKILL.md)                                 | "release SDK", "trigger release pipeline"                                     | Check release readiness and trigger SDK releases              |
 
 ### Development & Meta Skills
 
 These skills (from [microsoft/GitHub-Copilot-for-Azure](https://github.com/microsoft/GitHub-Copilot-for-Azure)) help with skill development itself:
 
-| Skill | Triggers | Description |
-|-------|----------|-------------|
-| [sensei](sensei/SKILL.md) | "run sensei", "improve skill", "fix frontmatter" | Iteratively improve skill frontmatter compliance using the Ralph loop |
-| [skill-authoring](skill-authoring/SKILL.md) | "create a skill", "new skill", "skill template" | Guidelines for writing Agent Skills per agentskills.io spec |
-| [markdown-token-optimizer](markdown-token-optimizer/SKILL.md) | "optimize markdown", "reduce tokens", "token count" | Analyze markdown files for token efficiency |
-| [report-test-bug](report-test-bug/SKILL.md) | "file test bug", "report test failure" | File GitHub issues for integration test failures |
+| Skill                                                         | Triggers                                            | Description                                                           |
+| ------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------- |
+| [sensei](sensei/SKILL.md)                                     | "run sensei", "improve skill", "fix frontmatter"    | Iteratively improve skill frontmatter compliance using the Ralph loop |
+| [skill-authoring](skill-authoring/SKILL.md)                   | "create a skill", "new skill", "skill template"     | Guidelines for writing Agent Skills per agentskills.io spec           |
+| [markdown-token-optimizer](markdown-token-optimizer/SKILL.md) | "optimize markdown", "reduce tokens", "token count" | Analyze markdown files for token efficiency                           |
+| [report-test-bug](report-test-bug/SKILL.md)                   | "file test bug", "report test failure"              | File GitHub issues for integration test failures                      |
 
 ### Skill Anatomy
 
@@ -67,10 +67,10 @@ For the full mapping between original instruction files and these skills, see
 
 Two tools are used together to develop, score, and test skills:
 
-| Tool | Purpose | Install |
-|------|---------|---------|
-| [**waza**](https://spboyer.github.io/waza/getting-started/) | Scaffold skills, run evals, check compliance | `go install github.com/spboyer/waza/cmd/waza@latest` |
-| [**sensei**](https://github.com/spboyer/sensei) | Score frontmatter quality, count tokens, suggest improvements | `git clone` + `npm ci` in `scripts/` |
+| Tool                                                        | Purpose                                                       | Install                                              |
+| ----------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------- |
+| [**waza**](https://spboyer.github.io/waza/getting-started/) | Scaffold skills, run evals, check compliance                  | `go install github.com/spboyer/waza/cmd/waza@latest` |
+| [**sensei**](https://github.com/spboyer/sensei)             | Score frontmatter quality, count tokens, suggest improvements | `git clone` + `npm ci` in `scripts/`                 |
 
 ### Installing waza
 
@@ -99,6 +99,7 @@ node --import ~/.copilot/skills/sensei/scripts/node_modules/tsx/dist/loader.mjs 
 ```
 
 > **Tip:** Create a shell alias for convenience:
+>
 > ```bash
 > alias sensei-tokens='node --import ~/.copilot/skills/sensei/scripts/node_modules/tsx/dist/loader.mjs ~/.copilot/skills/sensei/scripts/src/tokens/cli.ts'
 > ```
@@ -137,6 +138,7 @@ description: |
 ```
 
 **Key rules:**
+
 - Keep total SKILL.md **under 500 tokens** (offload detail to `references/*.md`)
 - Use quoted trigger phrases in `USE FOR:` for routing accuracy
 - Include `(use <skill-name>)` redirects in `DO NOT USE FOR:`
@@ -158,12 +160,12 @@ mkdir -p my-skill/references
 
 Create 4–5 task YAML files in `my-skill/tasks/`:
 
-| Task Type | Purpose | Example |
-|-----------|---------|---------|
-| `basic` | Happy-path usage | "Create a new TypeSpec project for ARM service" |
-| `edge` | Error handling / uncommon scenarios | "Fix TypeSpec compilation errors" |
-| `negative` | Should NOT trigger for out-of-scope requests | "Generate SDK for Python" (wrong skill) |
-| `domain` | Domain-specific complex scenario | "Convert swagger with multiple API versions" |
+| Task Type  | Purpose                                      | Example                                         |
+| ---------- | -------------------------------------------- | ----------------------------------------------- |
+| `basic`    | Happy-path usage                             | "Create a new TypeSpec project for ARM service" |
+| `edge`     | Error handling / uncommon scenarios          | "Fix TypeSpec compilation errors"               |
+| `negative` | Should NOT trigger for out-of-scope requests | "Generate SDK for Python" (wrong skill)         |
+| `domain`   | Domain-specific complex scenario             | "Convert swagger with multiple API versions"    |
 
 Task YAML format:
 
@@ -242,6 +244,7 @@ for s in */; do echo "=== $(basename $s) ===" && sensei-tokens score "$s"; done
 ```
 
 **Sensei checks:**
+
 - **Spec compliance** — frontmatter structure, name, description, license, version
 - **Advisory** — module count (2–3 optimal), complexity tier (detailed = best), procedural content, negative-delta risk, over-specificity
 
@@ -264,13 +267,13 @@ READ → SCORE → CHECK → IMPROVE → TEST → TOKENS → SUMMARY → REPEAT
 
 ### Common improvements
 
-| Issue | Fix |
-|-------|-----|
-| ⚠️ Over 500 tokens | Move detail to `references/*.md`, remove MCP tools table, compress steps |
-| ⚠️ Declarative-only | Add action verbs: "Create", "Apply", "Run", "Generate" in description |
-| ⚠️ Missing routing triggers | Add quoted phrases in `USE FOR:` and `DO NOT USE FOR:` |
-| ⚠️ No cross-skill routing | Add `(use <skill-name>)` redirects in `DO NOT USE FOR:` |
-| Missing `INVOKES:` | List all MCP tools and CLI commands the skill uses |
+| Issue                       | Fix                                                                      |
+| --------------------------- | ------------------------------------------------------------------------ |
+| ⚠️ Over 500 tokens          | Move detail to `references/*.md`, remove MCP tools table, compress steps |
+| ⚠️ Declarative-only         | Add action verbs: "Create", "Apply", "Run", "Generate" in description    |
+| ⚠️ Missing routing triggers | Add quoted phrases in `USE FOR:` and `DO NOT USE FOR:`                   |
+| ⚠️ No cross-skill routing   | Add `(use <skill-name>)` redirects in `DO NOT USE FOR:`                  |
+| Missing `INVOKES:`          | List all MCP tools and CLI commands the skill uses                       |
 
 ---
 
@@ -283,25 +286,25 @@ on pull requests that modify files under `.github/skills/`.
 
 ## Current Compliance Status
 
-| Skill | Type | Compliance | Tokens | MCP | Eval |
-|-------|------|------------|--------|-----|------|
-| typespec-to-sdk-workflow | Workflow | High | 500 ✅ | **4/4** ✅ | ✅ |
-| typespec-authoring | Utility | High | 489 ✅ | **4/4** ✅ | ✅ |
-| typespec-customization | Utility | High | 466 ✅ | **4/4** ✅ | ✅ |
-| generate-sdk-locally | Utility | High | 488 ✅ | **4/4** ✅ | ✅ |
-| prepare-release-plan | Utility | High | 472 ✅ | **4/4** ✅ | ✅ |
-| package-release-readiness | Utility | High | 461 ✅ | **4/4** ✅ | ✅ |
-| apiview-feedback-resolution | Utility | High | 465 ✅ | **4/4** ✅ | ✅ |
-| pipeline-troubleshooting | Utility | High | 449 ✅ | **4/4** ✅ | ✅ |
-| verify-setup | Utility | High | 460 ✅ | **4/4** ✅ | ✅ |
-| validate-service-label | Utility | High | 419 ✅ | **4/4** ✅ | ✅ |
-| validate-codeowners | Utility | High | 445 ✅ | **4/4** ✅ | ✅ |
-| check-package-validation | Utility | High | 491 ✅ | **4/4** ✅ | ✅ |
-| sdk-release | Utility | High | 464 ✅ | **4/4** ✅ | ✅ |
-| sensei | Meta | Medium-High | 2098 ❌ | — | ⚠️ |
-| skill-authoring | Meta | Medium | 675 ❌ | — | ⚠️ |
-| markdown-token-optimizer | Meta | Medium | 333 ✅ | — | ⚠️ |
-| report-test-bug | Meta | Medium | 606 ❌ | — | ⚠️ |
+| Skill                       | Type     | Compliance  | Tokens  | MCP        | Eval |
+| --------------------------- | -------- | ----------- | ------- | ---------- | ---- |
+| typespec-to-sdk-workflow    | Workflow | High        | 500 ✅  | **4/4** ✅ | ✅   |
+| typespec-authoring          | Utility  | High        | 489 ✅  | **4/4** ✅ | ✅   |
+| typespec-customization      | Utility  | High        | 466 ✅  | **4/4** ✅ | ✅   |
+| generate-sdk-locally        | Utility  | High        | 488 ✅  | **4/4** ✅ | ✅   |
+| prepare-release-plan        | Utility  | High        | 472 ✅  | **4/4** ✅ | ✅   |
+| package-release-readiness   | Utility  | High        | 461 ✅  | **4/4** ✅ | ✅   |
+| apiview-feedback-resolution | Utility  | High        | 465 ✅  | **4/4** ✅ | ✅   |
+| pipeline-troubleshooting    | Utility  | High        | 449 ✅  | **4/4** ✅ | ✅   |
+| verify-setup                | Utility  | High        | 460 ✅  | **4/4** ✅ | ✅   |
+| validate-service-label      | Utility  | High        | 419 ✅  | **4/4** ✅ | ✅   |
+| validate-codeowners         | Utility  | High        | 445 ✅  | **4/4** ✅ | ✅   |
+| check-package-validation    | Utility  | High        | 491 ✅  | **4/4** ✅ | ✅   |
+| sdk-release                 | Utility  | High        | 464 ✅  | **4/4** ✅ | ✅   |
+| sensei                      | Meta     | Medium-High | 2098 ❌ | —          | ⚠️   |
+| skill-authoring             | Meta     | Medium      | 675 ❌  | —          | ⚠️   |
+| markdown-token-optimizer    | Meta     | Medium      | 333 ✅  | —          | ⚠️   |
+| report-test-bug             | Meta     | Medium      | 606 ❌  | —          | ⚠️   |
 
 All 13 TypeSpec-to-SDK skills now pass 4/4 MCP Integration checks (prerequisites + CLI fallback documented).
 

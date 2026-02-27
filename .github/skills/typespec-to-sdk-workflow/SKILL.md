@@ -29,11 +29,11 @@ Without MCP, use `tsp compile .` to validate and `npx tsp-client` for SDK genera
 
 ## MCP Tools
 
-| Tool | Use |
-|------|-----|
+| Tool                            | Use      |
+| ------------------------------- | -------- |
 | `azsdk_run_typespec_validation` | Validate |
-| `azsdk_run_generate_sdk` | Generate |
-| `azsdk_create_release_plan` | Plan |
+| `azsdk_run_generate_sdk`        | Generate |
+| `azsdk_create_release_plan`     | Plan     |
 
 ## Steps
 

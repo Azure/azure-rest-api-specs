@@ -12,12 +12,12 @@ Identify guidance that seems misplaced - typically when generic content contains
 
 ## Examples
 
-| Context | Misplaced Content | Why It's Misplaced |
-|---------|-------------------|-------------------|
-| Generic `azd up` workflow | "Note: For Cosmos DB, add `--no-prompt` flag" | Service-specific workaround in generic flow |
-| General authentication docs | "If using Azure SQL, also grant db_owner role" | SQL-specific step in auth overview |
-| Container Apps deployment | "Redis requires minimum 1GB memory allocation" | Redis-specific detail in general deploy |
-| Generic error handling | "PostgreSQL connections may timeout after 30s" | DB-specific behavior in general errors |
+| Context                     | Misplaced Content                              | Why It's Misplaced                          |
+| --------------------------- | ---------------------------------------------- | ------------------------------------------- |
+| Generic `azd up` workflow   | "Note: For Cosmos DB, add `--no-prompt` flag"  | Service-specific workaround in generic flow |
+| General authentication docs | "If using Azure SQL, also grant db_owner role" | SQL-specific step in auth overview          |
+| Container Apps deployment   | "Redis requires minimum 1GB memory allocation" | Redis-specific detail in general deploy     |
+| Generic error handling      | "PostgreSQL connections may timeout after 30s" | DB-specific behavior in general errors      |
 
 ## Procedure
 
@@ -38,14 +38,18 @@ Identify guidance that seems misplaced - typically when generic content contains
 
 ```markdown
 # Before (in generic workflow)
+
 ## Deploy Application
+
 1. Run `azd up`
 2. Wait for provisioning
 3. Note: For Cosmos DB deployments, set throughput before deploy
 4. Verify deployment
 
 # After
+
 ## Deploy Application
+
 1. Run `azd up`
 2. Wait for provisioning
 3. Verify deployment

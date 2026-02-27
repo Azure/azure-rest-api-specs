@@ -3,11 +3,13 @@
 ## Setting Up client.tsp
 
 Ensure `client.tsp` exists in the project root with:
+
 ```typespec
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 ```
+
 Add `namespace ClientCustomizations;` if defining new types.
 
 ## Decorator Patterns
@@ -35,10 +37,10 @@ Need to customize SDK?
 
 ## Language-Specific Code Customization (when TypeSpec isn't enough)
 
-| Language | Guide |
-|----------|-------|
-| C# | Partial classes with `[CodeGenType]` attributes |
-| Python | `_patch.py` files at models, operations, client levels |
-| Java | `Customization` class with `customizeAst()` method |
+| Language   | Guide                                                     |
+| ---------- | --------------------------------------------------------- |
+| C#         | Partial classes with `[CodeGenType]` attributes           |
+| Python     | `_patch.py` files at models, operations, client levels    |
+| Java       | `Customization` class with `customizeAst()` method        |
 | JavaScript | Copy `src/` to `generated/`, add customizations in `src/` |
-| Go | Custom wrapper files for advanced cases |
+| Go         | Custom wrapper files for advanced cases                   |

@@ -65,21 +65,25 @@ When user says "sensei help" or asks how to use sensei, show this:
 ## Invocation Modes
 
 ### Single Skill
+
 ```
 Run sensei on azure-deploy
 ```
 
 ### Multiple Skills
+
 ```
 Run sensei on azure-security, azure-observability
 ```
 
 ### By Adherence Level
+
 ```
 Run sensei on all Low-adherence skills
 ```
 
 ### All Skills
+
 ```
 Run sensei on all skills
 ```
@@ -108,17 +112,18 @@ For each skill, execute this loop until score >= Medium-High AND tests pass:
 
 Sensei validates skills against the [agentskills.io specification](https://agentskills.io/specification). See [SCORING.md](references/SCORING.md) for full details.
 
-| Score | Requirements |
-|-------|--------------|
-| **Invalid** | Name fails spec validation (consecutive hyphens, start/end hyphen, uppercase, etc.) |
-| **Low** | Basic description, no explicit triggers, no anti-triggers |
-| **Medium** | Has trigger keywords/phrases, description > 150 chars |
-| **Medium-High** | Has "USE FOR:" triggers AND "DO NOT USE FOR:" anti-triggers |
-| **High** | Triggers + anti-triggers + compatibility field |
+| Score           | Requirements                                                                        |
+| --------------- | ----------------------------------------------------------------------------------- |
+| **Invalid**     | Name fails spec validation (consecutive hyphens, start/end hyphen, uppercase, etc.) |
+| **Low**         | Basic description, no explicit triggers, no anti-triggers                           |
+| **Medium**      | Has trigger keywords/phrases, description > 150 chars                               |
+| **Medium-High** | Has "USE FOR:" triggers AND "DO NOT USE FOR:" anti-triggers                         |
+| **High**        | Triggers + anti-triggers + compatibility field                                      |
 
 **Target: Medium-High** (triggers + anti-triggers present)
 
 **Strongly recommended** (reported as suggestions if missing):
+
 - `license` — identifies the license applied to the skill
 - `metadata.version` — tracks the skill version for consumers
 
@@ -155,11 +160,13 @@ cp -r tests/_template tests/{skill-name}
 ```
 
 Then update:
+
 1. `SKILL_NAME` constant in all test files
 2. `shouldTriggerPrompts` - 5+ prompts matching new frontmatter triggers
 3. `shouldNotTriggerPrompts` - 5+ prompts matching anti-triggers
 
 **Commit Messages:**
+
 ```
 sensei: improve {skill-name} frontmatter
 ```
@@ -176,8 +183,8 @@ sensei: improve {skill-name} frontmatter
 
 ## Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag                 | Description                                                                    |
+| -------------------- | ------------------------------------------------------------------------------ |
 | `--skip-integration` | Skip integration tests for faster iteration. Only runs unit and trigger tests. |
 
 > ⚠️ Skipping integration tests speeds up the loop but may miss runtime issues. Consider running full tests before final commit.

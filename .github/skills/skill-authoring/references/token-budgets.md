@@ -4,11 +4,11 @@ Central reference for token limits across all skill files.
 
 ## Limits
 
-| File Type | Soft Limit | Hard Limit | Action if Exceeded |
-|-----------|------------|------------|-------------------|
-| SKILL.md | 500 tokens | 5000 tokens | Split into references |
-| references/*.md | 1000 tokens | 2000 tokens | Split into folder with README.md |
-| docs/*.md | 1500 tokens | 3000 tokens | Restructure |
+| File Type        | Soft Limit  | Hard Limit  | Action if Exceeded               |
+| ---------------- | ----------- | ----------- | -------------------------------- |
+| SKILL.md         | 500 tokens  | 5000 tokens | Split into references            |
+| references/\*.md | 1000 tokens | 2000 tokens | Split into folder with README.md |
+| docs/\*.md       | 1500 tokens | 3000 tokens | Restructure                      |
 
 ## Splitting Large References
 

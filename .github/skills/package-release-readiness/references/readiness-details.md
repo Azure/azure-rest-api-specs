@@ -3,6 +3,7 @@
 ## Readiness Check Results
 
 The `azsdk_release_sdk` tool with `checkReady: true` checks:
+
 - API review status
 - Changelog status
 - Package name approval (if new preview package)

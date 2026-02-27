@@ -24,7 +24,7 @@ See [ANTI-PATTERNS.md](references/ANTI-PATTERNS.md) for detection patterns and [
 
 ## Rules
 
-- Suggest only (no auto-modification)  
+- Suggest only (no auto-modification)
 - Preserve clarity in all optimizations
 - SKILL.md target: <500 tokens, references: <1000 tokens
 

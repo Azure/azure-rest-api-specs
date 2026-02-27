@@ -16,12 +16,12 @@ my-skill/
 
 ## Folder Purposes
 
-| Folder | Purpose | Naming |
-|--------|---------|--------|
+| Folder        | Purpose                         | Naming                 |
+| ------------- | ------------------------------- | ---------------------- |
 | `references/` | Detailed docs, loaded on-demand | `lowercase-hyphens.md` |
-| `templates/` | Output format templates | `lowercase-hyphens.md` |
-| `scripts/` | Executable code | Language conventions |
-| `assets/` | Data files, configs | File type conventions |
+| `templates/`  | Output format templates         | `lowercase-hyphens.md` |
+| `scripts/`    | Executable code                 | Language conventions   |
+| `assets/`     | Data files, configs             | File type conventions  |
 
 ## Recipes Pattern
 
