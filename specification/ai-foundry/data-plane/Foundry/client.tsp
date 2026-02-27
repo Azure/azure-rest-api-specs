@@ -143,7 +143,7 @@ using Azure.AI.Projects;
 
 // Note the third one which extends OpenAI.TextResponseFormatConfiguration is OpenAI.TextResponseFormatJsonSchema (already has a good name)
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText, "TextResponseFormatTest");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText, "TextResponseFormatText");
 @@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject, "TextResponseFormatJsonObject");
 
 // --------------------------------------------------------------------------------
@@ -151,6 +151,10 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 
+// --------------------------------------------------------------------------------
+// Insights sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
