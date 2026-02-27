@@ -3164,6 +3164,7 @@ model SearchIndexer {
 
   /** Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   cache?: SearchIndexerCache | null;
 }
 
@@ -3282,6 +3283,7 @@ model FieldMappingFunction {
 }
 
 /** The type of the cache. */
+@removed(Versions.v2026_04_01)
 model SearchIndexerCache {
   /** A guid for the SearchIndexerCache. */
   id?: string;
@@ -3813,6 +3815,7 @@ model SearchIndex {
 
   /** A value indicating whether permission filtering is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   permissionFilterOption?: SearchIndexPermissionFilterOption | null;
 
   /** A value indicating whether Purview is enabled for the index. */
@@ -3881,10 +3884,12 @@ model SearchIndexResponse {
 
   /** A value indicating whether permission filtering is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   permissionFilterOption?: SearchIndexPermissionFilterOption | null;
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
 
   /** The ETag of the index. */

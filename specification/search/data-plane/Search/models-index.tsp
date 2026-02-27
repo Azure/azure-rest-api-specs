@@ -78,6 +78,7 @@ union QueryDebugMode {
 }
 
 /** The language of the query. */
+@removed(Versions.v2026_04_01)
 union QueryLanguage {
   string,
 
@@ -299,6 +300,7 @@ union QueryLanguage {
 }
 
 /** Improve search recall by spell-correcting individual search query terms. */
+@removed(Versions.v2026_04_01)
 union QuerySpellerType {
   string,
 
@@ -850,9 +852,11 @@ model SearchRequest {
   searchMode?: SearchMode;
 
   /** A value that specifies the language of the search query. */
+  @removed(Versions.v2026_04_01)
   queryLanguage?: QueryLanguage;
 
   /** A value that specifies the type of the speller to use to spell-correct individual search query terms. */
+  @removed(Versions.v2026_04_01)
   speller?: QuerySpellerType;
 
   /** The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. */
@@ -904,6 +908,7 @@ model SearchRequest {
   vectorFilterMode?: VectorFilterMode;
 
   /** The query parameters to configure hybrid search behaviors. */
+  @removed(Versions.v2026_04_01)
   hybridSearch?: HybridSearch;
 }
 
@@ -946,6 +951,7 @@ model VectorThreshold {
 }
 
 /** The query parameters to configure hybrid search behaviors. */
+@removed(Versions.v2026_04_01)
 model HybridSearch {
   /** Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000. */
   maxTextRecallSize?: int32;
