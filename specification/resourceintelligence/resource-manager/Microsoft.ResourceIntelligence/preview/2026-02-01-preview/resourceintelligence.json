@@ -330,7 +330,7 @@
         "tags": [
           "Agents"
         ],
-        "description": "Creates a new run for the agent. Returns 202 Accepted with run tracking info.\nThe client should poll GET runs/{runId} for completion.",
+        "description": "Creates a new run for the agent.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -366,18 +366,10 @@
               "$ref": "#/definitions/Run"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "201": {
+            "description": "Run create operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -391,12 +383,7 @@
           "Create a new run for an agent": {
             "$ref": "./examples/Agents_Run.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Run"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs": {

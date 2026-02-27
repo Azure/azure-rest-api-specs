@@ -81,8 +81,7 @@ interface Agents {
   listBySubscription is ArmListBySubscription<Agent>;
 
   /**
-   * Creates a new run for the agent. Returns 202 Accepted with run tracking info.
-   * The client should poll GET runs/{runId} for completion.
+   * Creates a new run for the agent.
    */
-  run is ArmResourceActionAsync<Agent, RunRequest, Run>;
+  run is ArmResourceActionSync<Agent, RunRequest, Run>;
 }
