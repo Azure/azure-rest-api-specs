@@ -2050,7 +2050,7 @@ alias DateResponseHeaderPrivate = {
 /** The ETag response header */
 alias EtagResponseHeader = {
   /** The ETag contains a value that you can use to perform operations conditionally. */
-  @header("ETag") eTag: string;
+  @header("ETag") eTag: Azure.Core.eTag;
 };
 
 /** The private ETag response header */
@@ -2058,7 +2058,7 @@ alias EtagResponseHeaderPrivate = {
   /** The ETag contains a value that you can use to perform operations conditionally. */
   @access(Access.internal)
   @header("ETag")
-  eTag: string;
+  eTag: Azure.Core.eTag;
 };
 
 /** The copy source tags header parameter. */
@@ -2138,14 +2138,14 @@ alias SourceIfTagsParameter = {
 alias SourceIfMatchParameter = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @header("x-ms-source-if-match")
-  sourceIfMatch?: string;
+  sourceIfMatch?: Azure.Core.eTag;
 };
 
 /** The source if none match parameter. */
 alias SourceIfNoneMatchParameter = {
   /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
   @header("x-ms-source-if-none-match")
-  sourceIfNoneMatch?: string;
+  sourceIfNoneMatch?: Azure.Core.eTag;
 };
 
 /** The source if modified since parameter. */
@@ -2417,14 +2417,14 @@ alias IfTagsParameter = {
 alias IfMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @header("If-Match")
-  ifMatch?: string;
+  ifMatch?: Azure.Core.eTag;
 };
 
 /** The If-None-Match parameter. */
 alias IfNoneMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @header("If-None-Match")
-  ifNoneMatch?: string;
+  ifNoneMatch?: Azure.Core.eTag;
 };
 
 /** The range parameter. */
@@ -2769,7 +2769,7 @@ alias IfBlobMatchHeader = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-match")
-  ifMatch?: string;
+  ifMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobModifiedSinceHeader = {
@@ -2784,7 +2784,7 @@ alias IfBlobNoneMatchHeader = {
   /** Specify an ETag value to operate only on blobs without a matching value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-none-match")
-  ifNoneMatch?: string;
+  ifNoneMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobUnmodifiedSinceHeader = {
