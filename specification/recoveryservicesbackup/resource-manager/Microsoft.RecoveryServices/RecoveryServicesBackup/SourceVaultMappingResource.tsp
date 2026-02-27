@@ -24,8 +24,7 @@ namespace Microsoft.RecoveryServices;
  */
 @added(Versions.v2026_03_01_preview)
 @parentResource(VaultResource)
-model SourceVaultMappingResource
-  is ProxyResource<SourceVaultMapping> {
+model SourceVaultMappingResource is ProxyResource<SourceVaultMapping> {
   ...ResourceNameParameter<
     Resource = SourceVaultMappingResource,
     KeyName = "sourceVaultMappingName",
@@ -329,10 +328,7 @@ interface CrossTenantOperations {
     operationId: string,
 
     ...ApiVersionParameter,
-  ):
-    | ArmResponse<ProtectedItemResource>
-    | ArmAcceptedLroResponse
-    | ErrorResponse;
+  ): ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse | ErrorResponse;
 
   /**
    * Fetches the status of a cross-tenant operation such as triggering a restore.
