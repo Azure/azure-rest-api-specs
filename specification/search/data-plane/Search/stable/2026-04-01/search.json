@@ -7075,21 +7075,6 @@
         ]
       }
     },
-    "HybridSearch": {
-      "type": "object",
-      "description": "TThe query parameters to configure hybrid search behaviors.",
-      "properties": {
-        "maxTextRecallSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000."
-        },
-        "countAndFacetMode": {
-          "$ref": "#/definitions/HybridCountAndFacetMode",
-          "description": "Determines whether the count and facets should includes all documents that matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize' window."
-        }
-      }
-    },
     "ImageAnalysisSkill": {
       "type": "object",
       "description": "A skill that analyzes image files. It extracts a rich set of visual features based on the image content.",
@@ -13587,450 +13572,6 @@
         ]
       }
     },
-    "QueryLanguage": {
-      "type": "string",
-      "description": "The language of the query.",
-      "enum": [
-        "none",
-        "en-us",
-        "en-gb",
-        "en-in",
-        "en-ca",
-        "en-au",
-        "fr-fr",
-        "fr-ca",
-        "de-de",
-        "es-es",
-        "es-mx",
-        "zh-cn",
-        "zh-tw",
-        "pt-br",
-        "pt-pt",
-        "it-it",
-        "ja-jp",
-        "ko-kr",
-        "ru-ru",
-        "cs-cz",
-        "nl-be",
-        "nl-nl",
-        "hu-hu",
-        "pl-pl",
-        "sv-se",
-        "tr-tr",
-        "hi-in",
-        "ar-sa",
-        "ar-eg",
-        "ar-ma",
-        "ar-kw",
-        "ar-jo",
-        "da-dk",
-        "no-no",
-        "bg-bg",
-        "hr-hr",
-        "hr-ba",
-        "ms-my",
-        "ms-bn",
-        "sl-sl",
-        "ta-in",
-        "vi-vn",
-        "el-gr",
-        "ro-ro",
-        "is-is",
-        "id-id",
-        "th-th",
-        "lt-lt",
-        "uk-ua",
-        "lv-lv",
-        "et-ee",
-        "ca-es",
-        "fi-fi",
-        "sr-ba",
-        "sr-me",
-        "sr-rs",
-        "sk-sk",
-        "nb-no",
-        "hy-am",
-        "bn-in",
-        "eu-es",
-        "gl-es",
-        "gu-in",
-        "he-il",
-        "ga-ie",
-        "kn-in",
-        "ml-in",
-        "mr-in",
-        "fa-ae",
-        "pa-in",
-        "te-in",
-        "ur-pk"
-      ],
-      "x-ms-enum": {
-        "name": "QueryLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Query language not specified."
-          },
-          {
-            "name": "EnUs",
-            "value": "en-us",
-            "description": "Query language value for English (United States)."
-          },
-          {
-            "name": "EnGb",
-            "value": "en-gb",
-            "description": "Query language value for English (Great Britain)."
-          },
-          {
-            "name": "EnIn",
-            "value": "en-in",
-            "description": "Query language value for English (India)."
-          },
-          {
-            "name": "EnCa",
-            "value": "en-ca",
-            "description": "Query language value for English (Canada)."
-          },
-          {
-            "name": "EnAu",
-            "value": "en-au",
-            "description": "Query language value for English (Australia)."
-          },
-          {
-            "name": "FrFr",
-            "value": "fr-fr",
-            "description": "Query language value for French (France)."
-          },
-          {
-            "name": "FrCa",
-            "value": "fr-ca",
-            "description": "Query language value for French (Canada)."
-          },
-          {
-            "name": "DeDe",
-            "value": "de-de",
-            "description": "Query language value for German (Germany)."
-          },
-          {
-            "name": "EsEs",
-            "value": "es-es",
-            "description": "Query language value for Spanish (Spain)."
-          },
-          {
-            "name": "EsMx",
-            "value": "es-mx",
-            "description": "Query language value for Spanish (Mexico)."
-          },
-          {
-            "name": "ZhCn",
-            "value": "zh-cn",
-            "description": "Query language value for Chinese (China)."
-          },
-          {
-            "name": "ZhTw",
-            "value": "zh-tw",
-            "description": "Query language value for Chinese (Taiwan)."
-          },
-          {
-            "name": "PtBr",
-            "value": "pt-br",
-            "description": "Query language value for Portuguese (Brazil)."
-          },
-          {
-            "name": "PtPt",
-            "value": "pt-pt",
-            "description": "Query language value for Portuguese (Portugal)."
-          },
-          {
-            "name": "ItIt",
-            "value": "it-it",
-            "description": "Query language value for Italian (Italy)."
-          },
-          {
-            "name": "JaJp",
-            "value": "ja-jp",
-            "description": "Query language value for Japanese (Japan)."
-          },
-          {
-            "name": "KoKr",
-            "value": "ko-kr",
-            "description": "Query language value for Korean (Korea)."
-          },
-          {
-            "name": "RuRu",
-            "value": "ru-ru",
-            "description": "Query language value for Russian (Russia)."
-          },
-          {
-            "name": "CsCz",
-            "value": "cs-cz",
-            "description": "Query language value for Czech (Czech Republic)."
-          },
-          {
-            "name": "NlBe",
-            "value": "nl-be",
-            "description": "Query language value for Dutch (Belgium)."
-          },
-          {
-            "name": "NlNl",
-            "value": "nl-nl",
-            "description": "Query language value for Dutch (Netherlands)."
-          },
-          {
-            "name": "HuHu",
-            "value": "hu-hu",
-            "description": "Query language value for Hungarian (Hungary)."
-          },
-          {
-            "name": "PlPl",
-            "value": "pl-pl",
-            "description": "Query language value for Polish (Poland)."
-          },
-          {
-            "name": "SvSe",
-            "value": "sv-se",
-            "description": "Query language value for Swedish (Sweden)."
-          },
-          {
-            "name": "TrTr",
-            "value": "tr-tr",
-            "description": "Query language value for Turkish (Turkey)."
-          },
-          {
-            "name": "HiIn",
-            "value": "hi-in",
-            "description": "Query language value for Hindi (India)."
-          },
-          {
-            "name": "ArSa",
-            "value": "ar-sa",
-            "description": "Query language value for Arabic (Saudi Arabia)."
-          },
-          {
-            "name": "ArEg",
-            "value": "ar-eg",
-            "description": "Query language value for Arabic (Egypt)."
-          },
-          {
-            "name": "ArMa",
-            "value": "ar-ma",
-            "description": "Query language value for Arabic (Morocco)."
-          },
-          {
-            "name": "ArKw",
-            "value": "ar-kw",
-            "description": "Query language value for Arabic (Kuwait)."
-          },
-          {
-            "name": "ArJo",
-            "value": "ar-jo",
-            "description": "Query language value for Arabic (Jordan)."
-          },
-          {
-            "name": "DaDk",
-            "value": "da-dk",
-            "description": "Query language value for Danish (Denmark)."
-          },
-          {
-            "name": "NoNo",
-            "value": "no-no",
-            "description": "Query language value for Norwegian (Norway)."
-          },
-          {
-            "name": "BgBg",
-            "value": "bg-bg",
-            "description": "Query language value for Bulgarian (Bulgaria)."
-          },
-          {
-            "name": "HrHr",
-            "value": "hr-hr",
-            "description": "Query language value for Croatian (Croatia)."
-          },
-          {
-            "name": "HrBa",
-            "value": "hr-ba",
-            "description": "Query language value for Croatian (Bosnia and Herzegovina)."
-          },
-          {
-            "name": "MsMy",
-            "value": "ms-my",
-            "description": "Query language value for Malay (Malaysia)."
-          },
-          {
-            "name": "MsBn",
-            "value": "ms-bn",
-            "description": "Query language value for Malay (Brunei Darussalam)."
-          },
-          {
-            "name": "SlSl",
-            "value": "sl-sl",
-            "description": "Query language value for Slovenian (Slovenia)."
-          },
-          {
-            "name": "TaIn",
-            "value": "ta-in",
-            "description": "Query language value for Tamil (India)."
-          },
-          {
-            "name": "ViVn",
-            "value": "vi-vn",
-            "description": "Query language value for Vietnamese (Viet Nam)."
-          },
-          {
-            "name": "ElGr",
-            "value": "el-gr",
-            "description": "Query language value for Greek (Greece)."
-          },
-          {
-            "name": "RoRo",
-            "value": "ro-ro",
-            "description": "Query language value for Romanian (Romania)."
-          },
-          {
-            "name": "IsIs",
-            "value": "is-is",
-            "description": "Query language value for Icelandic (Iceland)."
-          },
-          {
-            "name": "IdId",
-            "value": "id-id",
-            "description": "Query language value for Indonesian (Indonesia)."
-          },
-          {
-            "name": "ThTh",
-            "value": "th-th",
-            "description": "Query language value for Thai (Thailand)."
-          },
-          {
-            "name": "LtLt",
-            "value": "lt-lt",
-            "description": "Query language value for Lithuanian (Lithuania)."
-          },
-          {
-            "name": "UkUa",
-            "value": "uk-ua",
-            "description": "Query language value for Ukrainian (Ukraine)."
-          },
-          {
-            "name": "LvLv",
-            "value": "lv-lv",
-            "description": "Query language value for Latvian (Latvia)."
-          },
-          {
-            "name": "EtEe",
-            "value": "et-ee",
-            "description": "Query language value for Estonian (Estonia)."
-          },
-          {
-            "name": "CaEs",
-            "value": "ca-es",
-            "description": "Query language value for Catalan."
-          },
-          {
-            "name": "FiFi",
-            "value": "fi-fi",
-            "description": "Query language value for Finnish (Finland)."
-          },
-          {
-            "name": "SrBa",
-            "value": "sr-ba",
-            "description": "Query language value for Serbian (Bosnia and Herzegovina)."
-          },
-          {
-            "name": "SrMe",
-            "value": "sr-me",
-            "description": "Query language value for Serbian (Montenegro)."
-          },
-          {
-            "name": "SrRs",
-            "value": "sr-rs",
-            "description": "Query language value for Serbian (Serbia)."
-          },
-          {
-            "name": "SkSk",
-            "value": "sk-sk",
-            "description": "Query language value for Slovak (Slovakia)."
-          },
-          {
-            "name": "NbNo",
-            "value": "nb-no",
-            "description": "Query language value for Norwegian (Norway)."
-          },
-          {
-            "name": "HyAm",
-            "value": "hy-am",
-            "description": "Query language value for Armenian (Armenia)."
-          },
-          {
-            "name": "BnIn",
-            "value": "bn-in",
-            "description": "Query language value for Bengali (India)."
-          },
-          {
-            "name": "EuEs",
-            "value": "eu-es",
-            "description": "Query language value for Basque."
-          },
-          {
-            "name": "GlEs",
-            "value": "gl-es",
-            "description": "Query language value for Galician."
-          },
-          {
-            "name": "GuIn",
-            "value": "gu-in",
-            "description": "Query language value for Gujarati (India)."
-          },
-          {
-            "name": "HeIl",
-            "value": "he-il",
-            "description": "Query language value for Hebrew (Israel)."
-          },
-          {
-            "name": "GaIe",
-            "value": "ga-ie",
-            "description": "Query language value for Irish (Ireland)."
-          },
-          {
-            "name": "KnIn",
-            "value": "kn-in",
-            "description": "Query language value for Kannada (India)."
-          },
-          {
-            "name": "MlIn",
-            "value": "ml-in",
-            "description": "Query language value for Malayalam (India)."
-          },
-          {
-            "name": "MrIn",
-            "value": "mr-in",
-            "description": "Query language value for Marathi (India)."
-          },
-          {
-            "name": "FaAe",
-            "value": "fa-ae",
-            "description": "Query language value for Persian (U.A.E.)."
-          },
-          {
-            "name": "PaIn",
-            "value": "pa-in",
-            "description": "Query language value for Punjabi (India)."
-          },
-          {
-            "name": "TeIn",
-            "value": "te-in",
-            "description": "Query language value for Telugu (India)."
-          },
-          {
-            "name": "UrPk",
-            "value": "ur-pk",
-            "description": "Query language value for Urdu (Pakistan)."
-          }
-        ]
-      }
-    },
     "QueryResultDocumentInnerHit": {
       "type": "object",
       "description": "Detailed scoring information for an individual element of a complex collection.",
@@ -14117,30 +13658,6 @@
           "description": "The BM25 or Classic score for the text portion of the query.",
           "readOnly": true
         }
-      }
-    },
-    "QuerySpellerType": {
-      "type": "string",
-      "description": "Improve search recall by spell-correcting individual search query terms.",
-      "enum": [
-        "none",
-        "lexicon"
-      ],
-      "x-ms-enum": {
-        "name": "QuerySpellerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Speller not enabled."
-          },
-          {
-            "name": "Lexicon",
-            "value": "lexicon",
-            "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
-          }
-        ]
       }
     },
     "QueryType": {
@@ -14916,11 +14433,6 @@
           "description": "Contains configuration options related to vector search.",
           "x-nullable": true
         },
-        "permissionFilterOption": {
-          "$ref": "#/definitions/SearchIndexPermissionFilterOption",
-          "description": "A value indicating whether permission filtering is enabled for the index.",
-          "x-nullable": true
-        },
         "@odata.etag": {
           "type": "string",
           "description": "The ETag of the index.",
@@ -15038,12 +14550,12 @@
           {
             "name": "Enabled",
             "value": "enabled",
-            "description": "enabled."
+            "description": "Permission filtering is enabled for the index."
           },
           {
             "name": "Disabled",
             "value": "disabled",
-            "description": "disabled."
+            "description": "Permission filtering is disabled for the index."
           }
         ]
       }
@@ -15144,16 +14656,6 @@
           "description": "Contains configuration options related to vector search.",
           "x-nullable": true
         },
-        "permissionFilterOption": {
-          "$ref": "#/definitions/SearchIndexPermissionFilterOption",
-          "description": "A value indicating whether permission filtering is enabled for the index.",
-          "x-nullable": true
-        },
-        "purviewEnabled": {
-          "type": "boolean",
-          "description": "A value indicating whether Purview is enabled for the index.",
-          "x-nullable": true
-        },
         "@odata.etag": {
           "type": "string",
           "description": "The ETag of the index.",
@@ -15227,11 +14729,6 @@
           "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "x-nullable": true
-        },
-        "cache": {
-          "$ref": "#/definitions/SearchIndexerCache",
-          "description": "Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time.",
-          "x-nullable": true
         }
       },
       "required": [
@@ -15239,30 +14736,6 @@
         "dataSourceName",
         "targetIndexName"
       ]
-    },
-    "SearchIndexerCache": {
-      "type": "object",
-      "description": "The type of the cache.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A guid for the SearchIndexerCache."
-        },
-        "storageConnectionString": {
-          "type": "string",
-          "description": "The connection string to the storage account where the cache data will be persisted."
-        },
-        "enableReprocessing": {
-          "type": "boolean",
-          "description": "Specifies whether incremental reprocessing is enabled.",
-          "x-nullable": true
-        },
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
-          "x-nullable": true
-        }
-      }
     },
     "SearchIndexerDataContainer": {
       "type": "object",
@@ -15997,14 +15470,6 @@
           "$ref": "#/definitions/SearchMode",
           "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match."
         },
-        "queryLanguage": {
-          "$ref": "#/definitions/QueryLanguage",
-          "description": "A value that specifies the language of the search query."
-        },
-        "speller": {
-          "$ref": "#/definitions/QuerySpellerType",
-          "description": "A value that specifies the type of the speller to use to spell-correct individual search query terms."
-        },
         "select": {
           "type": "string",
           "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
@@ -16055,10 +15520,6 @@
         "vectorFilterMode": {
           "$ref": "#/definitions/VectorFilterMode",
           "description": "Determines whether or not filters are applied before or after the vector search is performed. Default is 'preFilter' for new indexes."
-        },
-        "hybridSearch": {
-          "$ref": "#/definitions/HybridSearch",
-          "description": "The query parameters to configure hybrid search behaviors."
         }
       }
     },
