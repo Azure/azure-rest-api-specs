@@ -27,9 +27,13 @@ options:
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmosdb"
-    namespace: com.azure.resourcemanager.cosmosdb
+    service-dir: "sdk/cosmos"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmos"
+    namespace: com.azure.resourcemanager.cosmos
     flavor: azure
+    premium: true
+    client-side-validations: true
+    enable-sync-stack: false
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos"
     service-dir: "sdk/resourcemanager/cosmos"
