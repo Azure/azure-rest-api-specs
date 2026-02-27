@@ -36,6 +36,14 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_DownloadPending")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      FindSecurityDomainDownloadOperationStatus: #{
+        $ref: "./examples/securitydomainoperationstatus-example.json",
+      },
+    }
+  )
   @route("/securitydomain/download/pending")
   @get
   downloadPending is KeyVaultOperation<{}, SecurityDomainOperationStatus>;
@@ -46,6 +54,14 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   @OpenAPI.operationId("HSMSecurityDomain_Download")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      RetrieveSecurityDomain: #{
+        $ref: "./examples/securitydomaindownloadpost-example.json",
+      },
+    }
+  )
   @pollingOperation(HsmSecurityDomain.downloadPending)
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/download")
@@ -75,6 +91,14 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_TransferKey")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      RetrieveSecurityDomainTransferKey: #{
+        $ref: "./examples/securitydomaintransferkey-example.json",
+      },
+    }
+  )
   @route("/securitydomain/upload")
   @get
   transferKey is KeyVaultOperation<{}, TransferKey>;
@@ -85,6 +109,14 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   @OpenAPI.operationId("HSMSecurityDomain_Upload")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      SecurityDomainUploadOperation: #{
+        $ref: "./examples/securitydomainuploadoperation-example.json",
+      },
+    }
+  )
   @pollingOperation(HsmSecurityDomain.uploadPending)
   @finalOperation(HsmSecurityDomain.uploadPending)
   @useFinalStateVia("azure-async-operation")
@@ -120,6 +152,14 @@ interface HsmSecurityDomain {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_UploadPending")
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      FindSecurityDomainUploadOperationStatus: #{
+        $ref: "./examples/securitydomainuploadstatus-example.json",
+      },
+    }
+  )
   @route("/securitydomain/upload/pending")
   @get
   uploadPending is KeyVaultOperation<{}, SecurityDomainOperationStatus>;
