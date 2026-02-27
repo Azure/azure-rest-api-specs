@@ -1187,7 +1187,7 @@ union FleetspacePropertiesFleetspaceApiKind {
 /**
  * Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.
  */
-union FleetspacePropertiesThroughputPoolConfigurationServiceTier {
+union FleetspacePropertiesServiceTier {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GeneralPurpose: "GeneralPurpose",
@@ -8471,7 +8471,7 @@ model FleetspaceProperties {
   /**
    * Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.
    */
-  serviceTier?: FleetspacePropertiesThroughputPoolConfigurationServiceTier;
+  serviceTier?: FleetspacePropertiesServiceTier;
 
   /**
    * List of data regions assigned to the fleetspace. Eg [westus2]

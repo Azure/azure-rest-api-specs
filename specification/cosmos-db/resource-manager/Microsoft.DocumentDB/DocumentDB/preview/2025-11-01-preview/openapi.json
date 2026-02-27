@@ -25166,7 +25166,7 @@
           "description": "The kind of API this fleetspace belongs to. Acceptable values: 'NoSQL'"
         },
         "serviceTier": {
-          "$ref": "#/definitions/FleetspacePropertiesThroughputPoolConfigurationServiceTier",
+          "$ref": "#/definitions/FleetspacePropertiesServiceTier",
           "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
         },
         "dataRegions": {
@@ -25200,6 +25200,28 @@
         ]
       }
     },
+    "FleetspacePropertiesServiceTier": {
+      "type": "string",
+      "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.",
+      "enum": [
+        "GeneralPurpose",
+        "BusinessCritical"
+      ],
+      "x-ms-enum": {
+        "name": "FleetspacePropertiesServiceTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GeneralPurpose",
+            "value": "GeneralPurpose"
+          },
+          {
+            "name": "BusinessCritical",
+            "value": "BusinessCritical"
+          }
+        ]
+      }
+    },
     "FleetspacePropertiesThroughputPoolConfiguration": {
       "type": "object",
       "description": "Configuration for throughput pool in the fleetspace.",
@@ -25224,28 +25246,6 @@
           "format": "int64",
           "description": "Maximum consumable throughput (RU/s) for fleetspace. Represents the maximum throughput that resources in the fleetspace can consume from the fleetspace's pool in 1 region."
         }
-      }
-    },
-    "FleetspacePropertiesThroughputPoolConfigurationServiceTier": {
-      "type": "string",
-      "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region.",
-      "enum": [
-        "GeneralPurpose",
-        "BusinessCritical"
-      ],
-      "x-ms-enum": {
-        "name": "FleetspacePropertiesThroughputPoolConfigurationServiceTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GeneralPurpose",
-            "value": "GeneralPurpose"
-          },
-          {
-            "name": "BusinessCritical",
-            "value": "BusinessCritical"
-          }
-        ]
       }
     },
     "FleetspaceResource": {
