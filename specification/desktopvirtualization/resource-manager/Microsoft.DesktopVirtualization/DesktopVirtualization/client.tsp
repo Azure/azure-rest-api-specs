@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
+@@scope(Operations.list, "!csharp");
+
 @@clientName(AgentUpdatePatchProperties,
   "SessionHostAgentUpdatePatchProperties",
   "csharp"
