@@ -7,7 +7,7 @@ description: >-
   **UTILITY SKILL**
   Check SDK package release readiness and trigger the release pipeline for Azure SDK packages.
   USE FOR: "release SDK", "trigger release", "check release readiness", "release pipeline", "publish package", "ship SDK".
-  DO NOT USE FOR: package validation checks (use check-package-validation), release plan creation (use prepare-release-plan), SDK generation (use generate-sdk-locally).
+  DO NOT USE FOR: release plan creation (use prepare-release-plan), SDK generation.
   INVOKES: azsdk_release_sdk.
   FOR SINGLE OPERATIONS: Use azsdk_release_sdk with checkReady=true for readiness check only.
 compatibility: >-
@@ -32,7 +32,7 @@ compatibility: >-
    - Package name approval (for new preview packages)
    - Release date set in release tracker
 3. **Review Results** — If not ready, display failing checks and guide the user to resolve issues.
-4. **Trigger Release** — Once ready, run `azsdk_release_sdk` with `checkReady: false` to trigger the pipeline. Inform user they must approve the release stage after triggering.
+4. **Trigger Release** — Once ready, run `azsdk_release_sdk` with `checkReady: false` to trigger the pipeline. Show the release pipeline link to the user and inform them they must approve the release stage after triggering.
 
 ## Prerequisites
 
@@ -40,7 +40,4 @@ Azure SDK MCP server must be running. No CLI fallback — if MCP is unavailable,
 
 ## Related Skills
 
-- `package-release-readiness` — Detailed release readiness checks
-- `check-package-validation` — Run package validation checks
 - `prepare-release-plan` — Create release plan work item
-- `typespec-to-sdk-workflow` — Full end-to-end release workflow

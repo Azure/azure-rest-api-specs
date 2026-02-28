@@ -7,7 +7,7 @@ description: >-
   **UTILITY SKILL**
   Diagnose and resolve failures in Azure SDK CI pipelines and SDK generation pipelines.
   USE FOR: "pipeline failed", "build failure", "CI check failing", "SDK generation error", "reproduce pipeline locally", "debug SDK pipeline".
-  DO NOT USE FOR: TypeSpec authoring (use typespec-authoring), release plans, APIView feedback (use apiview-feedback-resolution), package publishing.
+  DO NOT USE FOR: TypeSpec authoring, release plans, APIView feedback (use apiview-feedback-resolution), package publishing.
   INVOKES: azsdk_analyze_pipeline, azsdk_verify_setup, azsdk_package_build_code, azsdk_package_run_check.
   FOR SINGLE OPERATIONS: Use azsdk_analyze_pipeline directly for quick failure analysis.
 compatibility: >-
@@ -35,7 +35,7 @@ Requires `azure-sdk-mcp` MCP server for pipeline analysis and local reproduction
 1. **Identify Failure** — Get build ID, run `azsdk_analyze_pipeline`. Categorize failure type.
 2. **Analyze Root Cause** — See `references/failure-patterns.md` for common patterns.
 3. **Reproduce Locally** — Run `azsdk_verify_setup`, then `azsdk_package_build_code` or `azsdk_package_run_check`.
-4. **Apply Fixes** — Use `typespec-customization` for TypeSpec changes, direct edits for code fixes.
+4. **Apply Fixes** — Use direct edits for code fixes or TypeSpec changes.
 5. **Verify** — Confirm fix locally, push changes, monitor pipeline re-run.
 
 ## CLI Fallback

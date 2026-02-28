@@ -7,7 +7,7 @@ description: >-
   **UTILITY SKILL**
   Create and manage release plan work items for Azure SDK releases across languages.
   USE FOR: "create release plan", "update release plan", "link SDK PR to plan", "namespace approval", "check release plan status".
-  DO NOT USE FOR: SDK generation (use generate-sdk-locally), TypeSpec authoring, package validation, releasing packages (use package-release-readiness).
+  DO NOT USE FOR: SDK generation, TypeSpec authoring, package validation, releasing packages (use sdk-release).
   FOR SINGLE OPERATIONS: Use azsdk_get_release_plan directly to check plan status.
 compatibility: >-
   Requires: azure-sdk-mcp server, API spec pull request in Azure/azure-rest-api-specs.
@@ -41,6 +41,4 @@ compatibility: >-
 
 ## Related Skills
 
-- `generate-sdk-locally` — SDK generation
-- `package-release-readiness` — Package readiness
-- `typespec-to-sdk-workflow` — Full workflow
+- `sdk-release` — Trigger release pipeline

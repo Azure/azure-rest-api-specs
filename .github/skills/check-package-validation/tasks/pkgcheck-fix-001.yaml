@@ -1,7 +1,0 @@
-id: pkgcheck-fix-001
-name: Fix Validation Errors - Auto-Fix
-prompt: "My package failed the format check. Can you fix the formatting issues automatically?"
-expected:
-  - calls azsdk_package_run_check with checkType=Format and fixCheckErrors=true
-  - asks for package path if not provided
-  - re-runs validation to confirm fix

@@ -7,7 +7,7 @@ description: >-
   **UTILITY SKILL**
   Retrieve and resolve feedback from APIView reviews on Azure SDK packages.
   USE FOR: "APIView comments", "resolve API review feedback", "rename type per reviewer", "SDK API surface changes", "regenerate SDK after review".
-  DO NOT USE FOR: creating TypeSpec projects (use typespec-authoring), SDK generation from scratch, release plan management, package publishing.
+  DO NOT USE FOR: creating TypeSpec projects, SDK generation from scratch, release plan management, package publishing.
   INVOKES: azsdk_apiview_get_comments, azsdk_typespec_delegate_apiview_feedback, azsdk_run_typespec_validation, azsdk_package_generate_code.
   FOR SINGLE OPERATIONS: Use azsdk_apiview_get_comments directly to fetch comments.
 compatibility: >-
