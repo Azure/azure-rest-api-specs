@@ -138,10 +138,6 @@ using Microsoft.Maintenance;
   "DeleteEx",
   "csharp"
 );
-@@clientName(MaintenanceConfiguration,
-  "MaintenancePublicConfiguration",
-  "csharp"
-);
 @@clientName(MaintenanceConfigurationOperationGroup,
   "MaintenanceConfiguration",
   "csharp"
