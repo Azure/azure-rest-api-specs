@@ -98,12 +98,6 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.MCPToolRequireApproval, Access.internal);
   @@clientName(OpenAI.MCPToolRequireApproval, "InternalMCPToolRequireApproval");
 
-  @@access(OpenAI.WebSearchPreviewTool, Access.internal);
-  @@clientName(OpenAI.WebSearchPreviewTool, "InternalWebSearchPreviewTool");
-
-  @@access(OpenAI.WebSearchTool, Access.internal);
-  @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
-
   @@access(OpenAI.WebSearchActionFind, Access.internal);
   @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
 

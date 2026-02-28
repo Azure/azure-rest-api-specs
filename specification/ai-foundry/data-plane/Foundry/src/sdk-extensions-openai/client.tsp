@@ -3,12 +3,6 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
-// --------------------------------------------------------------------------------
-// Fix the xref.
-// --------------------------------------------------------------------------------
-@@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
-@@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
-
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Extensions.OpenAI")
 namespace Azure.AI.Projects {
@@ -53,6 +47,12 @@ namespace Azure.AI.Projects {
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
+
+  // --------------------------------------------------------------------------------
+  // Fix the xref.
+  // --------------------------------------------------------------------------------
+  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
