@@ -6,9 +6,10 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
 
+@@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 @@clientName(Microsoft.Edge,
-  "DisconnectedOperationsMgmtClient",
-  "python, javascript"
+  "DisconnectedOperationsManagementClient",
+  "javascript"
 );
 
 @@clientName(Artifact, "DisconnectedOperationsArtifact", "csharp");
