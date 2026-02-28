@@ -42,6 +42,15 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(LoadBalancerType, "HostPoolLoadBalancerType", "csharp");
 
+@@clientName(ScalingPlanPooledScheduleProperties.name,
+  "scheduleName",
+  "csharp"
+);
+@@clientName(ScalingPlanPooledScheduleProperties.name,
+  "scheduleName",
+  "csharp"
+);
+
 @@clientName(MaintenanceWindowProperties,
   "SessionHostMaintenanceWindowProperties",
   "csharp"

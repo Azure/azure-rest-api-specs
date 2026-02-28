@@ -4753,7 +4753,7 @@ model ScalingPlanPooledSchedulePatchProperties {
    * Name of the ScalingPlanPooledSchedule
    */
   @visibility(Lifecycle.Read)
-  scheduleName?: string;
+  name?: string;
 
   /**
    * Set of days of the week on which this schedule is active.
