@@ -147,3 +147,17 @@ using Microsoft.Maintenance;
   "csharp"
 );
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
+@@clientName(ApplyUpdate, "MaintenanceApplyUpdate", "csharp");
+@@clientName(ImpactType, "MaintenanceImpactType", "csharp");
+@@clientName(Microsoft.Maintenance.Update, "MaintenanceUpdate", "csharp");
+@@clientName(UpdateStatus, "MaintenanceUpdateStatus", "csharp");
+@@clientName(MaintenanceScope.SQLDB, "SqlDB", "csharp");
+@@clientName(MaintenanceScope.SQLManagedInstance,
+  "SqlManagedInstance",
+  "csharp"
+);
+@@alternateType(MaintenanceWindow.duration, duration, "csharp");
+@@alternateType(ConfigurationAssignment.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
