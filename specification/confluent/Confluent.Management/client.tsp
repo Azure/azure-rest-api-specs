@@ -39,8 +39,8 @@ using Microsoft.Confluent;
 @@clientName(OfferDetail, "ConfluentOfferDetail", "csharp");
 @@clientName(SaaSOfferStatus, "ConfluentSaaSOfferStatus", "csharp");
 @@clientName(APIKeyRecord, "ConfluentApiKeyRecord", "csharp");
-
 @@clientName(OrganizationResource, "ConfluentOrganization", "csharp");
+@@clientName(OrganizationResources, "ConfluentOrganization", "csharp");
 @@alternateType(OrganizationResourceProperties.organizationId, uuid, "csharp");
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
 @@clientName(ConfluentAgreementProperties.accepted, "IsAccepted", "csharp");
