@@ -137,6 +137,16 @@ using Microsoft.Datadog;
   "ResubscribeOrganization",
   "csharp"
 );
+@@clientName(ConnectorAction, "DatadogConnectorAction", "csharp");
+@@clientName(MarketplaceOfferDetails,
+  "DatadogMarketplaceOfferDetails",
+  "csharp"
+);
+@@clientName(SreAgentConfiguration, "DatadogSreAgentConfiguration", "csharp");
+@@alternateType(SreAgentConfiguration.mcpConnectorResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(MonitoredResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -147,9 +157,21 @@ using Microsoft.Datadog;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(LatestLinkedSaaSResponse.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SaaSData.saaSResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
+@@alternateType(ActivateSaaSParameterRequest.saaSGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(DatadogMonitorResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
