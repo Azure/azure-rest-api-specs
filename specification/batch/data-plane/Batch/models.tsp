@@ -1961,9 +1961,6 @@ model DataDisk {
 
   @doc("The managed disk parameters.")
   managedDisk?: ManagedDisk;
-
-  @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
-  storageAccountType?: StorageAccountType;
 }
 
 @doc("The configuration for container-enabled Pools.")
@@ -3793,7 +3790,7 @@ model AutomaticOsUpgradePolicy {
   disableAutomaticRollback?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-  @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.")
+  @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pools/create-pool#windowsconfiguration) cannot be set to true.")
   @clientName("enableAutomaticOsUpgrade")
   enableAutomaticOSUpgrade?: boolean;
 

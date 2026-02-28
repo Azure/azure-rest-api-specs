@@ -903,8 +903,9 @@ interface Tasks {
 interface Nodes {
   @summary("Adds a user Account to the specified Compute Node.")
   @doc("""
-    You can add a user Account to a Compute Node only when it is in the idle or
-    running state.
+    You can add a user Account to a Compute Node only when it is in the idle or 
+    running state. Before you can remotely login to a Compute Node you must configure access ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration
+    
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   createNodeUser is CreateOperation<
@@ -918,7 +919,8 @@ interface Nodes {
   @summary("Deletes a user Account from the specified Compute Node.")
   @doc("""
     You can delete a user Account to a Compute Node only when it is in the idle or
-    running state.
+    running state. Before you can remotely login to a Compute Node you must configure 
+    access ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   deleteNodeUser is DeleteOperation<
@@ -1041,8 +1043,7 @@ interface Nodes {
 
   @summary("Gets the settings required for remote login to a Compute Node.")
   @doc("""
-    Before you can remotely login to a Compute Node using the remote login settings, 
-    you must create a user Account on the Compute Node.
+    Before you can remotely login to a Compute Node using the remote login settings, you must create a user Account on the Compute Node and configure access ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   getNodeRemoteLoginSettings is ReadOperation<
