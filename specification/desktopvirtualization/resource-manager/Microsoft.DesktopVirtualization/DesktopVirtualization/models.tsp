@@ -4636,7 +4636,7 @@ model ScalingPlanPooledScheduleProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
   @visibility(Lifecycle.Read)
-  scheduleName?: string;
+  name?: string;
 
   /**
    * Set of days of the week on which this schedule is active.
