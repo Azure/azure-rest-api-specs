@@ -120,6 +120,20 @@ When validation succeeds, execute the following steps in order.
 3. If failed, add a comment indicating failure and include pipeline link and failure summary (fallback to `noop` only when comments are unavailable).
 4. Add a final status update by commenting one line per language using the exact format `sdk pr for  <language>: <Link to sdk pull request>` (fallback to `noop` only if commenting fails).
 
+## Failure Troubleshooting Comment
+
+If any SDK generation pipeline fails for one or more languages, add a comment on the issue with the following information:
+
+1. List each language whose SDK generation pipeline failed.
+2. For each failed language, include the full, non-redacted pipeline run URL so the user can inspect logs directly.
+3. Include the following troubleshooting guidance in the comment:
+
+   > To troubleshoot SDK generation failures locally:
+   >
+   > 1. Clone the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repository.
+   > 2. Open the cloned repository in VS Code and use GitHub Copilot Chat with a prompt like "generate SDK locally for \<failed language\>" to troubleshoot the error.
+   > 3. Make any required TypeSpec changes to fix the SDK generation errors, then re-trigger SDK generation.
+
 ## Output Requirements
 
 - Always leave a visible status outcome when validation succeeds (triggered, failed, or completed).
