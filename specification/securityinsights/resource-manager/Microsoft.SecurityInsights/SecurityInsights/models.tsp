@@ -14855,6 +14855,71 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
    */
   @visibility(Lifecycle.Read)
   protocols?: string[];
+
+  /**
+   * A list of owners of the IoTDevice entity.
+   */
+  @visibility(Lifecycle.Read)
+  owners?: string[];
+
+  /**
+   * A list of Nic entity ids of the IoTDevice entity.
+   */
+  @visibility(Lifecycle.Read)
+  nicEntityIds?: string[];
+
+  /**
+   * The site of the device
+   */
+  @visibility(Lifecycle.Read)
+  site?: string;
+
+  /**
+   * The zone location of the device within a site
+   */
+  @visibility(Lifecycle.Read)
+  zone?: string;
+
+  /**
+   * The sensor the device is monitored by
+   */
+  @visibility(Lifecycle.Read)
+  sensor?: string;
+
+  /**
+   * The subType of the device ('PLC', 'HMI', 'EWS', etc.)
+   */
+  @visibility(Lifecycle.Read)
+  deviceSubType?: string;
+
+  /**
+   * Device importance, determines if the device classified as 'crown jewel'
+   */
+  importance?: DeviceImportance;
+
+  /**
+   * The Purdue Layer of the device
+   */
+  @visibility(Lifecycle.Read)
+  purdueLayer?: string;
+
+  /**
+   * Determines whether the device classified as authorized device
+   */
+  @visibility(Lifecycle.Read)
+  isAuthorized?: boolean;
+
+  /**
+   * Determines whether the device classified as programming device
+   */
+  @visibility(Lifecycle.Read)
+  isProgramming?: boolean;
+
+  /**
+   * Is the device classified as a scanner device
+   */
+  @visibility(Lifecycle.Read)
+  isScanner?: boolean;
 }
 
 /**
