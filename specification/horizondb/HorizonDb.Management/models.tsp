@@ -185,15 +185,15 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
 @doc("Properties of a HorizonDb firewall rule")
 model HorizonDbFirewallRuleProperties {
   @doc("The start IP address of the firewall rule")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: string;
 
   @doc("The end IP address of the firewall rule")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: string;
 
   @doc("The description of the HorizonDb firewall rule")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: string;
 
   @doc("The provisioning state of the firewall rule")
