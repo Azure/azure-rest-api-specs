@@ -159,6 +159,10 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "javascript"
 );
 @@clientName(BlobProperties.creationTime, "createdOn", "javascript");
+@@clientName(CreationTimeResponseHeader.creationTime,
+  "createdOn",
+  "javascript"
+);
 @@clientName(BlobProperties.copyCompletionTime,
   "copyCompletedOn",
   "javascript"
