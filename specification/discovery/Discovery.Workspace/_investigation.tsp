@@ -122,7 +122,7 @@ model DiscoveryEngine {
   status: DiscoveryEngineStatus;
 
   @doc("The system prompt.")
-  systemPrompt: string;
+  systemPrompt?: string;
 
   @doc("The Discovery Engine configuration.")
   configuration?: Record<unknown>;
