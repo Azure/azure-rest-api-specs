@@ -362,18 +362,7 @@ using Microsoft.AzureStackHCI;
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.PackageVersionInfo.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SecurityComplianceStatus.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SoftwareAssuranceProperties.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
+
 @@clientName(Microsoft.AzureStackHCI.DeploymentStep.startTimeUtc,
   "StartOn",
   "csharp"
@@ -537,6 +526,14 @@ using Microsoft.AzureStackHCI;
 // same as enclosing type KubernetesVersion
 @@clientName(Microsoft.AzureStackHCI.KubernetesVersionProperties.version,
   "kubernetesVersionValue",
+  "csharp"
+);
+
+// CS0102 fix: Step.lastUpdatedTimeUtc → LastUpdatedOn collides with
+// UpdateRunProperties.lastUpdatedTime → LastUpdatedOn (generator naming bug)
+// Fix: rename UpdateRunProperties.lastUpdatedTime to LastCompletedOn (matches old SDK name)
+@@clientName(Microsoft.AzureStackHCI.UpdateRunProperties.lastUpdatedTime,
+  "LastCompletedOn",
   "csharp"
 );
 
