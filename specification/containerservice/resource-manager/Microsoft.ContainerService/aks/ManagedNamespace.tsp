@@ -20,22 +20,13 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage pattern is required for backward compatibility with existing API versions."
 @parentResource(ManagedCluster)
 model ManagedNamespace
-  is Azure.ResourceManager.ProxyResource<NamespaceProperties> {
+  is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   ...ResourceNameParameter<
     Resource = ManagedNamespace,
     KeyName = "managedNamespaceName",
     SegmentName = "managedNamespaces",
     NamePattern = "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
-
   ...Azure.ResourceManager.EntityTagProperty;
 }
 

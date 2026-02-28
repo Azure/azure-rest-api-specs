@@ -799,11 +799,6 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedNamespace,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AgentPoolAvailableVersions,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
