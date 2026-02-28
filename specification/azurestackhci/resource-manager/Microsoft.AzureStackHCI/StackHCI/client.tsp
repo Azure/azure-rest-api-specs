@@ -470,6 +470,68 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 
+// ==================== Property casing renames (backward compat) ====================
+@@clientName(Microsoft.AzureStackHCI.DeploymentSettingHostNetwork.enableStorageAutoIp,
+  "EnableStorageAutoIP",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceHostNetwork.enableStorageAutoIp,
+  "EnableStorageAutoIP",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.PhysicalNodes.ipv4Address, "IPv4Address", "csharp");
+@@clientName(Microsoft.AzureStackHCI.DeploymentSettingStorageAdapterIPInfo.ipv4Address,
+  "IPv4Address",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceStorageAdapterIPInfo.ipv4Address,
+  "IPv4Address",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.bandwidthPercentage_SMB,
+  "BandwidthPercentageSmb",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.priorityValue8021Action_SMB,
+  "PriorityValue8021ActionSmb",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ClusterNode.osDisplayVersion,
+  "OSDisplayVersion",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ClusterNode.osName, "OSName", "csharp");
+@@clientName(Microsoft.AzureStackHCI.ClusterNode.osVersion, "OSVersion", "csharp");
+@@clientName(Microsoft.AzureStackHCI.InfrastructureNetwork.ipPools, "IPPools", "csharp");
+@@clientName(Microsoft.AzureStackHCI.PrecheckResult.targetResourceID,
+  "TargetResourceId",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciReportedProperties.osProfile,
+  "OSProfile",
+  "csharp"
+);
+
+// ==================== Enum value casing renames ====================
+@@clientName(Microsoft.AzureStackHCI.EceSecrets.AzureStackLCMUserCredential,
+  "AzureStackLcmUserCredential",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EceSecrets.DefaultARBApplication,
+  "DefaultArbApplication",
+  "csharp"
+);
+
+// ==================== Property name renames (backward compat) ====================
+@@clientName(Microsoft.AzureStackHCI.ExtensionParameters.type,
+  "ArcExtensionType",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ExtensionParameters.autoUpgradeMinorVersion,
+  "ShouldAutoUpgradeMinorVersion",
+  "csharp"
+);
+
 // ==================== Misc fixes ====================
 // CS0542 fix: KubernetesVersionProperties.version flattens to property named
 // same as enclosing type KubernetesVersion
