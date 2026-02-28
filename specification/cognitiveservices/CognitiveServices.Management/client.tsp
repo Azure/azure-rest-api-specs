@@ -93,6 +93,6 @@ op calculateModelCapacityCustom(
   "java"
 );
 
-@@clientLocation(checkDomainAvailabilityCustom, "ManagementClient", "go");
-@@clientLocation(checkSkuAvailabilityCustom, "ManagementClient", "go");
-@@clientLocation(calculateModelCapacityCustom, "ManagementClient", "go");
+@@clientLocation(checkDomainAvailability, "ManagementClient", "go");
+@@clientLocation(checkSkuAvailability, "ManagementClient", "go");
+@@clientLocation(calculateModelCapacity, "ManagementClient", "go");
