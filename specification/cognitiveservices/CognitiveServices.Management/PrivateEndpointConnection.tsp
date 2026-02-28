@@ -71,7 +71,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the private endpoint connections associated with the Cognitive Services account.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>
   >;
