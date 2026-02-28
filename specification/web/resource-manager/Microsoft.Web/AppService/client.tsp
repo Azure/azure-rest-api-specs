@@ -2963,3 +2963,75 @@ op regionalCheckNameAvailabilityCustomized(
   regionalCheckNameAvailabilityCustomized,
   "javascript"
 );
+
+@@clientName(AppServiceEnvironmentResources.changeVnet,
+  "listChangeVnet",
+  "javascript"
+);
+@@clientName(AppServiceEnvironmentResources.resume, "listResume", "javascript");
+@@clientName(AppServiceEnvironmentResources.suspend,
+  "listSuspend",
+  "javascript"
+);
+@@clientName(AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
+  "listInboundNetworkDependenciesEndpoints",
+  "javascript"
+);
+@@clientName(AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
+  "listOutboundNetworkDependenciesEndpoints",
+  "javascript"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+
+@@clientName(ProviderOperationGroup.getAvailableStacks,
+  "listAvailableStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getAvailableStacksOnPrem,
+  "listAvailableStacksOnPrem",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getFunctionAppStacks,
+  "listFunctionAppStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getFunctionAppStacksForLocation,
+  "listFunctionAppStacksForLocation",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getWebAppStacks,
+  "listWebAppStacks",
+  "javascript"
+);
+@@clientName(ProviderOperationGroup.getWebAppStacksForLocation,
+  "listWebAppStacksForLocation",
+  "javascript"
+);
+
+@@clientName(DatabaseConnections.getBuildDatabaseConnections,
+  "listBuildDatabaseConnections",
+  "javascript"
+);
+@@clientName(StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
+  "listBuildDatabaseConnectionsWithDetails",
+  "javascript"
+);
+@@clientName(DatabaseConnectionOperationGroup.getDatabaseConnections,
+  "listDatabaseConnections",
+  "javascript"
+);
+@@clientName(StaticSiteARMResources.getDatabaseConnectionsWithDetails,
+  "listDatabaseConnectionsWithDetails",
+  "javascript"
+);
+@@clientName(StaticSiteLinkedBackendARMResources.getLinkedBackends,
+  "listLinkedBackends",
+  "javascript"
+);
+@@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
+  "listLinkedBackendsForBuild",
+  "javascript"
+);
