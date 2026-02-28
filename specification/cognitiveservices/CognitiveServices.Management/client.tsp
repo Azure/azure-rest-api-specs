@@ -77,6 +77,7 @@ op calculateModelCapacityCustom(
   @identifiers(#[])
   workloads?: ModelCapacityCalculatorWorkload[],
 ): CalculateModelCapacityResult;
+
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
 
 @@clientName(Microsoft.CognitiveServices.PATAuthTypeConnectionProperties,
@@ -91,3 +92,7 @@ op calculateModelCapacityCustom(
   "AadAuthTypeConnectionProperties",
   "java"
 );
+
+@@clientLocation(checkDomainAvailabilityCustom, "ManagementClient", "go");
+@@clientLocation(checkSkuAvailabilityCustom, "ManagementClient", "go");
+@@clientLocation(calculateModelCapacityCustom, "ManagementClient", "go");
