@@ -169,3 +169,30 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
+
+/** operation sets one or more user-defined name-value pairs for the specified container. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@sharedRoute
+@route("?restype=container&comp=metadata")
+op setMetadataRequiredMetadata is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+
+    /** The metadata headers. */
+    @alternateType(Record<string>, "rust")
+    @header("x-ms-meta")
+    metadata: string;
+
+    ...IfModifiedSinceParameter;
+  },
+  {
+    ...EtagResponseHeaderPrivate;
+    ...LastModifiedResponseHeaderPrivate;
+  }
+>;
+
+@@override(Container.setMetadata, setMetadataRequiredMetadata, "rust,python");
