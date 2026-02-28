@@ -362,15 +362,7 @@ using Microsoft.AzureStackHCI;
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.PackageVersionInfo.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
 @@clientName(Microsoft.AzureStackHCI.SecurityComplianceStatus.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SoftwareAssuranceProperties.lastUpdated,
   "LastUpdatedOn",
   "csharp"
 );
