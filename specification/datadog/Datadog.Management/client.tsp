@@ -104,6 +104,19 @@ using Microsoft.Datadog;
   "DatadogMonitorPatch",
   "csharp"
 );
+@@clientName(ActivateSaaSParameterRequest,
+  "DatadogActivateSaaSParameterContent",
+  "csharp"
+);
+@@clientName(SaaSResourceDetailsResponse,
+  "DatadogSaaSResourceDetailsResult",
+  "csharp"
+);
+@@clientName(LatestLinkedSaaSResponse,
+  "DatadogLatestLinkedSaaSResult",
+  "csharp"
+);
+@@clientName(SaaSData, "DatadogSaaSInfo", "csharp");
 @@clientName(SreAgentConfigurationListResponse,
   "DatadogSreAgentConfigurationListResult",
   "csharp"
