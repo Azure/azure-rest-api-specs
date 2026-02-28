@@ -43,3 +43,14 @@ using Azure.ClientGenerator.Core;
 @@clientName(HostEntityProperties.azureID, "azureId", "java");
 @@clientName(HostEntityProperties.hostName, "hostname", "java");
 @@clientName(IncidentEntitiesResponse.metaData, "metadata", "java");
+
+@@clientLocation(AlertRules.triggerRuleRun, "AlertRule", "python");
+@@clientLocation(triggeredAnalyticsRuleRun.get,
+  "TriggeredAnalyticsRuleRun",
+  "python"
+);
+@@clientLocation(triggeredAnalyticsRuleRun.list,
+  "GetTriggeredAnalyticsRuleRuns",
+  "python"
+);
+@@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");

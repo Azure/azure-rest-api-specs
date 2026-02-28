@@ -25,17 +25,21 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.SecurityInsights"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-securityinsights"
-    namespace: "azure.mgmt.securityinsights"
+    service-dir: "sdk/securityinsight"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-securityinsight"
+    namespace: "azure.mgmt.securityinsight"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-securityinsights"
+    service-dir: "sdk/securityinsight"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-securityinsight"
     flavor: azure
+    typespec-title-map:
+      SecurityInsightsClient: SecurityInsights
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-securityinsights"
+      name: "@azure/arm-securityinsight"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/securityinsights"
     emitter-output-dir: "{output-dir}/{service-dir}/armsecurityinsights"
