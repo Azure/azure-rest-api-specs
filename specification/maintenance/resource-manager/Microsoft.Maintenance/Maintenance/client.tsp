@@ -58,8 +58,6 @@ using Microsoft.Maintenance;
   "csharp"
 );
 @@clientName(Visibility, "MaintenanceConfigurationVisibility", "csharp");
-@@clientName(MaintenanceScope.SQLDB, "SqlDB", "csharp");
-@@clientName(MaintenanceScope.SQLManagedInstance, "SqlManagedInstance", "csharp");
 @@clientName(ApplyUpdateProperties.lastUpdateTime, "LastUpdatedOn", "csharp");
 @@clientName(InputPatchConfiguration,
   "MaintenancePatchConfiguration",
@@ -140,27 +138,12 @@ using Microsoft.Maintenance;
   "DeleteEx",
   "csharp"
 );
-// csharp: keep MaintenanceConfiguration data type name (matches old SDK)
+@@clientName(MaintenanceConfiguration,
+  "MaintenancePublicConfiguration",
+  "csharp"
+);
 @@clientName(MaintenanceConfigurationOperationGroup,
   "MaintenanceConfiguration",
   "csharp"
 );
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
-@@clientName(ApplyUpdate, "MaintenanceApplyUpdate", "csharp");
-@@clientName(ImpactType, "MaintenanceImpactType", "csharp");
-@@clientName(Microsoft.Maintenance.Update, "MaintenanceUpdate", "csharp");
-@@clientName(UpdateStatus, "MaintenanceUpdateStatus", "csharp");
-
-// csharp: rename Updates.list to avoid GetAll name collision with ConfigurationAssignment list
-// Both generate GetAll(string, string, string, string, CancellationToken) on SubscriptionResource
-// but return different types (Update vs ConfigurationAssignmentResource)
-@@clientName(UpdatesOperationGroup.list, "GetUpdates", "csharp");
-
-// csharp: convert Duration from string to TimeSpan for backward compatibility
-@@alternateType(MaintenanceWindow.duration, duration, "csharp");
-
-// csharp: convert Location from string to AzureLocation for backward compatibility
-@@alternateType(ConfigurationAssignment.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
