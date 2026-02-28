@@ -96,6 +96,15 @@ using Microsoft.Cdn;
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
 @@clientName(HostNameOperator, "HostnameOperator", "java");
+@@clientName(RequestMethodMatchValue,
+  "RequestMethodMatchConditionParametersMatchValuesItem",
+  "java"
+);
+@@clientName(CheckHostNameAvailabilityInput.hostName, "hostname", "java");
+@@clientName(AFDDomainProperties.hostName, "hostname", "java");
+@@clientName(AFDEndpointProperties.hostName, "hostname", "java");
+@@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
+@@clientName(OriginProperties.hostName, "hostname", "java");
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",
