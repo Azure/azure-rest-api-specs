@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 using Microsoft.PlanetaryComputer;
 
-@useDependency(Versions.v2025_04_30_Preview)
+@useDependency(Versions.v2025_04_30_Preview, Versions.v2026_04_15)
 @client({
   name: "PlanetaryComputerProClient",
   service: Microsoft.PlanetaryComputer,
@@ -93,6 +93,19 @@ interface Ingestion {
   getSource is IngestionSources.get;
   listSources is IngestionSources.list;
   listManagedIdentities is IngestionSources.listManagedIdentities;
+
+  // INMA STAC-Proxied Collection operations (stable only)
+  @added(Versions.v2026_04_15)
+  listCollections is InmaCollections.list;
+  @added(Versions.v2026_04_15)
+  getCollection is InmaCollections.get;
+
+  // INMA STAC-Proxied Item operations (stable only)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listItems is InmaItems.list;
+  @added(Versions.v2026_04_15)
+  getItem is InmaItems.get;
 }
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
@@ -267,6 +280,58 @@ interface Data {
   // Mosaic WMTS Capabilities
   getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
   // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
+
+  // === New endpoints in stable version 2026-04-15 ===
+
+  // Item Tileset List and Metadata
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listTilesets is TilerTileSetList.get;
+  @added(Versions.v2026_04_15)
+  getTilesetMetadata is TilerTileSetMetadata.get;
+
+  // Item Tile Variants (TileMatrixSetId as path)
+  @added(Versions.v2026_04_15)
+  getTilePlain is TilerTileMatrixSetsPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getTileByFormat is TilerTileMatrixSetsFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getTileByScale is TilerTileMatrixSetsScale.getZxyByScale;
+
+  // Item Tile Variants (without TileMatrixSetId in path)
+  @added(Versions.v2026_04_15)
+  getTileNoTmsPlain is TilerTilesPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getTileNoTmsByFormat is TilerTilesFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getTileNoTmsByScale is TilerTilesScale.getZxyByScale;
+
+  // GeoJSON Crop (bare, no format)
+  @added(Versions.v2026_04_15)
+  cropGeoJsonBare is TilerGeoJsonsCrop.crop;
+
+  // Mosaic Tileset List and Metadata
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listMosaicsTilesets is MosaicsTileSetList.get;
+  @added(Versions.v2026_04_15)
+  getMosaicsTilesetMetadata is MosaicsTileSetMetadata.get;
+
+  // Mosaic Tile Variants (TileMatrixSetId as path)
+  @added(Versions.v2026_04_15)
+  getMosaicsTilePlain is MosaicsTileMatrixSetsPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getMosaicsTileByFormat is MosaicsTileMatrixSetsFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getMosaicsTileByScale is MosaicsTileMatrixSetsScale.getZxyByScale;
+
+  // Mosaic Tile Variants (without TileMatrixSetId in path)
+  @added(Versions.v2026_04_15)
+  getMosaicsTileNoTmsPlain is MosaicsTilesPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getMosaicsTileNoTmsByFormat is MosaicsTilesFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getMosaicsTileNoTmsByScale is MosaicsTilesScale.getZxyByScale;
 }
 
 // === Shared Access Signature (SAS) ===

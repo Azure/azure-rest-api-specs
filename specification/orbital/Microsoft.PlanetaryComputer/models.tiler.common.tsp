@@ -1,9 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.common.colormaps.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -573,3 +576,169 @@ alias TileResponse =
   | ImageJp2Response
   | ImageTiffResponse
   | ApplicationXbinaryResponse;
+
+/**
+ * A link object used in OGC tile resources
+ */
+@added(Versions.v2026_04_15)
+model TileSetLink {
+  /**
+   * The URL target of the link
+   */
+  href: string;
+
+  /**
+   * The relationship type of the link
+   */
+  rel: string;
+
+  /**
+   * The media type of the linked resource
+   */
+  type?: string;
+
+  /**
+   * Human-readable title of the link
+   */
+  title?: string;
+}
+
+/**
+ * Bounding box for a tile set
+ */
+@added(Versions.v2026_04_15)
+model TileSetBoundingBox {
+  /**
+   * Lower-left corner coordinates [x, y]
+   */
+  lowerLeft: float64[];
+
+  /**
+   * Upper-right corner coordinates [x, y]
+   */
+  upperRight: float64[];
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+}
+
+/**
+ * Summary information about a single tileset within a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetEntry {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles (e.g., 'map', 'vector')
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+}
+
+/**
+ * Response containing a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetList {
+  /**
+   * Array of available tilesets
+   */
+  tilesets: TileSetEntry[];
+}
+
+/**
+ * Limits for a specific tile matrix within a tileset, defining the valid row/column range
+ */
+@added(Versions.v2026_04_15)
+model TileMatrixSetLimitsEntry {
+  /**
+   * Identifier of the tile matrix level
+   */
+  tileMatrix: string;
+
+  /**
+   * Minimum tile row index at this zoom level
+   */
+  minTileRow: int32;
+
+  /**
+   * Maximum tile row index at this zoom level
+   */
+  maxTileRow: int32;
+
+  /**
+   * Minimum tile column index at this zoom level
+   */
+  minTileCol: int32;
+
+  /**
+   * Maximum tile column index at this zoom level
+   */
+  maxTileCol: int32;
+}
+
+/**
+ * Detailed metadata about a specific tileset, including tile matrix set limits
+ */
+@added(Versions.v2026_04_15)
+model TileSetMetadata {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+
+  /**
+   * Limits for each tile matrix level in the tileset
+   */
+  tileMatrixSetLimits?: TileMatrixSetLimitsEntry[];
+}

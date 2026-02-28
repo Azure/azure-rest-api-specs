@@ -1,11 +1,14 @@
 // Tiles for STAC Collections Mosaics interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.tiler.mosaics.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -551,5 +554,332 @@ interface MosaicsAssetsForPoints {
       coordinateReferenceSystem?: string;
     },
     StacItemPointAsset[]
+  >;
+}
+
+// =====================================================================
+// New interfaces added in stable version 2026-04-15
+// =====================================================================
+
+@added(Versions.v2026_04_15)
+interface MosaicsTileSetList {
+  /**
+   * Return a list of available tilesets for a mosaic search.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tileset List")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+    },
+    TileSetList
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTileSetMetadata {
+  /**
+   * Return metadata for a specific tileset of a mosaic search.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tileset Metadata")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+    },
+    TileSetMetadata
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTileMatrixSetsPlain {
+  /**
+   * Create map tile (with TileMatrixSetId in path, without scale or format).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Tilematrixsetid Plain")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}")
+  @get
+  getZxy is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      ...ZxyPathParameters;
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTileMatrixSetsFormat {
+  /**
+   * Create map tile (with TileMatrixSetId and format in path, without scale).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Tilematrixsetid Format")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}.{format}")
+  @get
+  getZxyByFormat is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      ...ZxyPathParameters;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTileMatrixSetsScale {
+  /**
+   * Create map tile (with TileMatrixSetId and scale in path, without format).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Tilematrixsetid Scale")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x")
+  @get
+  getZxyByScale is Azure.Core.Foundations.Operation<
+    {
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      tileMatrixSetId: string;
+
+      ...ZxyPathParameters;
+
+      /**
+       * Numeric scale factor for the tile. Higher values produce larger tiles
+       */
+      @path
+      scale: float32;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTilesPlain {
+  /**
+   * Create map tile (without TileMatrixSetId, scale or format in path).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Plain")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}")
+  @get
+  getZxy is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+      ...ZxyPathParameters;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTilesFormat {
+  /**
+   * Create map tile (with format in path, without TileMatrixSetId or scale).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Format")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}.{format}")
+  @get
+  getZxyByFormat is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+      ...ZxyPathParameters;
+
+      /**
+       * Output format for the tile or image (e.g., png, jpeg, webp)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
+  >;
+}
+
+@added(Versions.v2026_04_15)
+interface MosaicsTilesScale {
+  /**
+   * Create map tile (with scale in path, without TileMatrixSetId or format).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Mosaic Tile Scale")
+  @tag("Tiles for STAC Collections Mosaics")
+  @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x")
+  @get
+  getZxyByScale is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Search Id (pgSTAC Search Hash)
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
+      ...AssetQueryParameters;
+      ...MosaicSearchQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+      ...ZxyPathParameters;
+
+      /**
+       * Numeric scale factor for the tile. Higher values produce larger tiles
+       */
+      @path
+      scale: float32;
+
+      /**
+       * Identifier selecting one of the TileMatrixSetId supported (default:
+       * 'WebMercatorQuad')
+       */
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
+      ...MosaicTileQueryParameters;
+      ...MiscTileQueryParameters;
+    },
+    TileResponse
   >;
 }
