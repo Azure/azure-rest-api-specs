@@ -76,6 +76,20 @@ using Microsoft.DocumentDB;
   "getCommandAsyncResource",
   "java"
 );
+
+@@clientName(ServerVersion.Three2, "THREE_TWO", "java");
+@@clientName(ServerVersion.Three6, "THREE_SIX", "java");
+@@clientName(ServerVersion.Four0, "FOUR_ZERO", "java");
+@@clientName(ServerVersion.Four2, "FOUR_TWO", "java");
+@@clientName(ServerVersion.Five0, "FIVE_ZERO", "java");
+@@clientName(ServerVersion.Six0, "SIX_ZERO", "java");
+@@clientName(ServerVersion.Seven0, "SEVEN_ZERO", "java");
+
+@@clientName(FleetspacePropertiesThroughputPoolConfigurationServiceTier,
+  "FleetspacePropertiesServiceTier",
+  "java"
+);
+
 /**
  *  The subscription resource ID for an access rule.
  */
