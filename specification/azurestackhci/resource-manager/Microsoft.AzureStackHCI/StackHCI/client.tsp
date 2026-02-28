@@ -644,3 +644,16 @@ using Microsoft.AzureStackHCI;
   Azure.Core.uuid,
   "csharp"
 );
+// Location: string -> azureLocation for backward compatibility
+@@alternateType(Microsoft.AzureStackHCI.Update.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.UpdateRun.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.UpdateSummaries.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
