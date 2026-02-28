@@ -46,7 +46,8 @@ using Microsoft.DesktopVirtualization;
   "scheduleName",
   "csharp"
 );
-@@clientName(ScalingPlanPooledScheduleProperties.name,
+
+@@clientName(ScalingPlanPooledSchedulePatchProperties.name,
   "scheduleName",
   "csharp"
 );
