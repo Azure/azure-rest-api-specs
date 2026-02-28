@@ -178,7 +178,7 @@ model Task {
 
   @doc("The current status of the task.")
   @visibility(Lifecycle.Read, Lifecycle.Update)
-  status: TaskStatus;
+  status?: TaskStatus;
 
   ...WithCreatedAt;
   ...WithCreatedBy;
