@@ -2407,6 +2407,16 @@
           "type": "string",
           "readOnly": true
         },
+        "deviceHostName": {
+          "description": "The name of the device host. Supports secure connections over TLS 1.3.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceHostName": {
+          "description": "The name of the service host. Supports secure connections over TLS 1.3.",
+          "type": "string",
+          "readOnly": true
+        },
         "eventHubEndpoints": {
           "description": "The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.",
           "type": "object",
@@ -2502,6 +2512,11 @@
         "deviceRegistry": {
           "description": "Represents properties related to the Azure Device Registry (ADR).",
           "$ref": "#/definitions/DeviceRegistry"
+        },
+        "iotHubDetails": {
+          "description": "Set of additional read-only properties for the IoT hub.",
+          "readOnly": true,
+          "$ref": "#/definitions/IotHubDetails"
         }
       }
     },
@@ -4656,6 +4671,25 @@
           "type": "string",
           "format": "arm-id",
           "description": "The identity used to manage the ADR namespace from the data plane. "
+        }
+      }
+    },
+    "IotHubDetails": {
+      "description": "Set of additional read-only properties for the IoT hub.",
+      "type": "object",
+      "properties": {
+        "gatewayVersion": {
+          "description": "The IoT hub Gateway version.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GatewayVersion",
+            "modelAsString": true
+          }
         }
       }
     }
