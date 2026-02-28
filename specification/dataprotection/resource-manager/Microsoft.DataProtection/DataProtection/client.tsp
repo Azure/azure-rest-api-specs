@@ -369,6 +369,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
+@@clientName(IdentityDetails.userAssignedIdentityArmUrl, "UserAssignedIdentityId", "csharp");
 @@alternateType(IdentityDetails.userAssignedIdentityArmUrl,
   armResourceIdentifier,
   "csharp"
