@@ -364,6 +364,7 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
+        logger: expect.anything(),
         paths: ["specification"],
       });
     });
@@ -446,6 +447,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+        logger: expect.anything(),
         paths: ["specification"],
       });
     });
@@ -606,15 +608,15 @@ describe("command-helpers", () => {
 
   describe("logFullOadMessagesList", () => {
     it("should log all messages individually", async () => {
-      const { logMessage } = await import("../src/log.js");
+      const { logMessage, logMessageAsync } = await import("../src/log.js");
       const msgs = createMockMessages();
 
-      logFullOadMessagesList(msgs);
+      await logFullOadMessagesList(msgs);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
-      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
-      expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
+      expect(logMessageAsync).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
+      expect(logMessageAsync).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith("]");
       expect(logMessage).toHaveBeenCalledWith(
         "---- End of full list of messages ----",
@@ -625,7 +627,7 @@ describe("command-helpers", () => {
     it("should handle empty message list", async () => {
       const { logMessage } = await import("../src/log.js");
 
-      logFullOadMessagesList([]);
+      await logFullOadMessagesList([]);
 
       expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");

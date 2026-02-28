@@ -533,7 +533,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -899,7 +899,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -949,7 +949,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1324,17 +1324,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-requires-sync",
-            "in": "header",
-            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
-            "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ],
-            "x-ms-client-name": "requiresSync"
           }
         ],
         "responses": {
@@ -1418,7 +1407,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1629,7 +1618,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2159,7 +2148,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -2224,7 +2213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2375,7 +2364,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2618,7 +2607,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2727,7 +2716,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2849,7 +2838,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2981,7 +2970,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3141,7 +3130,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3245,7 +3234,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3349,7 +3338,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3425,12 +3414,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -3458,7 +3441,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3603,7 +3586,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3753,7 +3736,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3890,7 +3873,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4031,7 +4014,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4174,7 +4157,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4323,7 +4306,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4523,7 +4506,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4730,7 +4713,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4906,7 +4889,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5004,7 +4987,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5160,7 +5143,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5371,7 +5354,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5565,7 +5548,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5678,7 +5661,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5787,7 +5770,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -5803,7 +5786,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6030,7 +6013,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6214,7 +6197,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6385,7 +6368,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6560,7 +6543,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6743,7 +6726,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6920,7 +6903,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7143,7 +7126,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7636,7 +7619,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7764,7 +7747,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8047,7 +8030,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8233,7 +8216,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8399,7 +8382,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8582,7 +8565,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8941,7 +8924,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9281,7 +9264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9559,7 +9542,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9945,7 +9928,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10141,7 +10124,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10352,7 +10335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10569,7 +10552,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10775,7 +10758,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10972,7 +10955,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11285,7 +11268,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11653,7 +11636,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11815,7 +11798,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12336,7 +12319,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12894,7 +12877,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13138,7 +13121,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13428,7 +13411,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13906,7 +13889,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14078,7 +14061,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14826,7 +14809,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14895,12 +14878,6 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -14933,7 +14910,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15071,7 +15048,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15210,7 +15187,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15379,7 +15356,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15464,7 +15441,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15543,7 +15520,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15627,7 +15604,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15720,7 +15697,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -17002,6 +16979,38 @@
         ]
       }
     },
+    "Error": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The error code.",
+          "x-ms-client-name": "code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "The error message.",
+          "x-ms-client-name": "message"
+        },
+        "CopySourceStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Copy source status code",
+          "x-ms-client-name": "copySourceStatusCode"
+        },
+        "CopySourceErrorCode": {
+          "type": "string",
+          "description": "Copy source error code",
+          "x-ms-client-name": "copySourceErrorCode"
+        },
+        "CopySourceErrorMessage": {
+          "type": "string",
+          "description": "Copy source error message",
+          "x-ms-client-name": "copySourceErrorMessage"
+        }
+      }
+    },
     "FileShareTokenIntent": {
       "type": "string",
       "description": "The file share token intent types.",
@@ -18143,38 +18152,6 @@
         "Enabled"
       ]
     },
-    "StorageError": {
-      "type": "object",
-      "description": "The error response.",
-      "properties": {
-        "Code": {
-          "type": "string",
-          "description": "The error code.",
-          "x-ms-client-name": "code"
-        },
-        "Message": {
-          "type": "string",
-          "description": "The error message.",
-          "x-ms-client-name": "message"
-        },
-        "CopySourceStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Copy source status code",
-          "x-ms-client-name": "copySourceStatusCode"
-        },
-        "CopySourceErrorCode": {
-          "type": "string",
-          "description": "Copy source error code",
-          "x-ms-client-name": "copySourceErrorCode"
-        },
-        "CopySourceErrorMessage": {
-          "type": "string",
-          "description": "Copy source error message",
-          "x-ms-client-name": "copySourceErrorMessage"
-        }
-      }
-    },
     "StorageServiceProperties": {
       "type": "object",
       "description": "The service properties.",
@@ -18249,11 +18226,13 @@
         },
         "SignedStart": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "signedStart"
         },
         "SignedExpiry": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "signedExpiry"
         },
