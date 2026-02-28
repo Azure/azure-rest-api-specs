@@ -69,7 +69,10 @@ interface NamespaceResources {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("$top")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(100, "javascript")
       $top?: int32 = 100;
     },
     Response = NamespaceListResult
@@ -90,7 +93,10 @@ interface NamespaceResources {
       /**
        * Maximum number of results to return.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("$top")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(100, "javascript")
       $top?: int32 = 100;
     },
     Response = NamespaceListResult

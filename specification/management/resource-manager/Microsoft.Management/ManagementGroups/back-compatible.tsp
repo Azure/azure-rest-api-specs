@@ -135,7 +135,13 @@ op getSubscriptionCustomized is Azure.ResourceManager.Foundations.ArmReadOperati
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     },
   Azure.ResourceManager.ArmResponse<Microsoft.Management.SubscriptionUnderManagementGroup>,
@@ -161,7 +167,13 @@ op putSubscriptionCustomized is Azure.ResourceManager.Legacy.CreateOperation<
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     },
   void,
@@ -188,7 +200,13 @@ op deleteSubscriptionCustomized is SubscriptionUnderManagementGroupOperations.Ar
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     },
   Azure.ResourceManager.ArmDeletedResponse,

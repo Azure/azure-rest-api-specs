@@ -38,7 +38,13 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     }
   >;
@@ -58,7 +64,13 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     },
     Response = ArmResourceUpdatedResponse<SubscriptionUnderManagementGroup>
@@ -77,7 +89,13 @@ interface SubscriptionUnderManagementGroups {
        * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @header("Cache-Control")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+        "no-cache",
+        "javascript"
+      )
       `Cache-Control`?: string = "no-cache";
     }
   >;

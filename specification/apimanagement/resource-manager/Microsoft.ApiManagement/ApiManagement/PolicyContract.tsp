@@ -81,7 +81,10 @@ interface PolicyContracts {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -215,7 +218,10 @@ interface GraphQLApiResolverPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -339,7 +345,10 @@ interface ApiPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -454,7 +463,10 @@ interface Policy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -577,7 +589,10 @@ interface ProductPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -701,7 +716,10 @@ interface WorkspacePolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -842,7 +860,10 @@ interface WorkspaceApiOperationPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -975,7 +996,10 @@ interface WorkspaceApiPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
@@ -1107,7 +1131,10 @@ interface WorkspaceProductPolicy {
       /**
        * Policy Export Format.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("format")
+      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue("xml", "javascript")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     },
     Response = ArmResponse<PolicyContract> & {
