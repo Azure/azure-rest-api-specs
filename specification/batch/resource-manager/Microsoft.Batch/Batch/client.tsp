@@ -466,6 +466,15 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
+@@clientName(LocationOperationGroup.checkNameAvailability,
+  "CheckBatchNameAvailability",
+  "csharp"
+);
+@@clientName(LocationOperationGroup.getQuotas, "GetBatchQuotas", "csharp");
+@@clientName(LocationOperationGroup.listSupportedVirtualMachineSkus,
+  "GetBatchSupportedVirtualMachineSkus",
+  "csharp"
+);
 @@alternateType(BatchAccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
