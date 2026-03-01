@@ -36,4 +36,13 @@ These settings apply only when `--tag=package-2026-03-02-preview` is specified o
 ```yaml $(tag) == 'package-2026-03-preview'
 input-file:
   - preview/2026-03-02-preview/aimanagers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AiManagerNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AiManagerNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
 ```

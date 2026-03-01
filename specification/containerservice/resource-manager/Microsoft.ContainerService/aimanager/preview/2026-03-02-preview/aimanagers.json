@@ -324,7 +324,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AIManagerUpdate"
+              "$ref": "#/definitions/AiManagerPatch"
             }
           }
         ],
@@ -457,38 +457,12 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "server-fqdn",
-            "in": "query",
-            "description": "Server FQDN type for credentials to be returned.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "serverFqdn"
-          },
-          {
-            "name": "format",
-            "in": "query",
-            "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "azure",
-              "exec"
-            ],
-            "x-ms-enum": {
-              "name": "Format",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "azure",
-                  "value": "azure",
-                  "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26."
-                },
-                {
-                  "name": "exec",
-                  "value": "exec",
-                  "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
-                }
-              ]
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListClusterUserCredentialRequest"
             }
           }
         ],
@@ -974,7 +948,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
           "description": "Managed identity."
         }
       },
@@ -1103,25 +1077,6 @@
       },
       "readOnly": true
     },
-    "AIManagerUpdate": {
-      "type": "object",
-      "description": "The AI Manager resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AiManagerProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed identity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "AdoptionPolicy": {
       "type": "string",
       "description": "Action if Kubernetes namespace with same name already exists.",
@@ -1215,11 +1170,10 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "ManagedNamespaceID": {
+        "managedNamespaceId": {
           "type": "string",
           "description": "The underlying managed namespace ID in the Kubernetes cluster.",
-          "readOnly": true,
-          "x-ms-client-name": "managedNamespaceId"
+          "readOnly": true
         },
         "labels": {
           "type": "object",
@@ -1253,6 +1207,27 @@
         }
       }
     },
+    "AiManagerPatch": {
+      "type": "object",
+      "description": "The AI Manager resource patch model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
+          "description": "Managed identity."
+        },
+        "properties": {
+          "$ref": "#/definitions/AiManagerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
     "AiManagerProperties": {
       "type": "object",
       "description": "AI Manager properties.",
@@ -1262,26 +1237,32 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "ClusterID": {
+        "clusterId": {
           "type": "string",
           "description": "The underlying cluster ID of the AI Manager.",
-          "readOnly": true,
-          "x-ms-client-name": "clusterId"
+          "readOnly": true
         },
-        "SystemNodeSubnetID": {
+        "systemNodeSubnetId": {
           "type": "string",
-          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
-          "x-ms-client-name": "systemNodeSubnetId"
+          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
         },
-        "NodeSubnetID": {
+        "nodeSubnetId": {
           "type": "string",
-          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
-          "x-ms-client-name": "nodeSubnetId"
+          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
         },
-        "ApiserverSubnetID": {
+        "apiserverSubnetId": {
           "type": "string",
-          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
-          "x-ms-client-name": "apiserverSubnetId"
+          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+        }
+      }
+    },
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -1339,6 +1320,44 @@
             "description": "Delete both the ARM resource and the Kubernetes namespace together."
           }
         ]
+      }
+    },
+    "Format": {
+      "type": "string",
+      "description": "The format of the kubeconfig credential.",
+      "enum": [
+        "azure",
+        "exec"
+      ],
+      "x-ms-enum": {
+        "name": "Format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azure",
+            "value": "azure",
+            "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26."
+          },
+          {
+            "name": "exec",
+            "value": "exec",
+            "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
+          }
+        ]
+      }
+    },
+    "ListClusterUserCredentialRequest": {
+      "type": "object",
+      "description": "The request body for listing cluster user credentials.",
+      "properties": {
+        "serverFqdn": {
+          "type": "string",
+          "description": "Server FQDN type for credentials to be returned."
+        },
+        "format": {
+          "$ref": "#/definitions/Format",
+          "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path."
+        }
       }
     },
     "NetworkPolicies": {

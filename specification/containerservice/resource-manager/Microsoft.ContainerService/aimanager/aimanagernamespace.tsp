@@ -35,7 +35,6 @@ model AiManagerNamespaceProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The underlying managed namespace ID in the Kubernetes cluster.")
-  @encodedName("application/json", "ManagedNamespaceID")
   managedNamespaceId?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
@@ -90,7 +89,6 @@ union PolicyRule {
   @doc("Allow traffic within the same namespace.")
   AllowSameNamespace: "AllowSameNamespace",
 }
-
 
 @doc("Default network policy of the namespace, specifying ingress and egress rules.")
 model NetworkPolicies {
