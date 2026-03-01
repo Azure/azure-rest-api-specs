@@ -565,3 +565,109 @@ using Microsoft.DesktopVirtualization;
   "controlSessionHostProvisioning",
   "csharp"
 );
+@@clientName(ControlSessionHostUpdate.post,
+  "controlSessionHostUpdate",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(SessionHosts.listSingleSessionHostRegistrationTokens
+);
+
+@@clientName(type, "DesktopVirtualizationImageType", "csharp");
+@@clientName(updateStatus,
+  "SessionHostManagementUpdateOperationStatus",
+  "csharp"
+);
+@@clientName(CanaryPolicy, "DesktopVirtualizationCanaryPolicy", "csharp");
+@@clientName(DeploymentScope, "DesktopVirtualizationDeploymentScope", "csharp");
+@@clientName(CreateDeleteProperties,
+  "DesktopVirtualizationCreateDeleteProperties",
+  "csharp"
+);
+@@clientName(DiffDiskOption, "DesktopVirtualizationDiffDiskOption", "csharp");
+@@clientName(DiffDiskPlacement,
+  "DesktopVirtualizationDiffDiskPlacement",
+  "csharp"
+);
+@@clientName(DiffDiskProperties,
+  "DesktopVirtualizationDiffDiskProperties",
+  "csharp"
+);
+@@clientName(DirectUDP, "DesktopVirtualizationDirectUDP", "csharp");
+@@clientName(DiskInfoProperties,
+  "DesktopVirtualizationDiskInfoProperties",
+  "csharp"
+);
+@@clientName(DomainInfoProperties,
+  "DesktopVirtualizationDomainInfoProperties",
+  "csharp"
+);
+@@clientName(DomainJoinType, "DesktopVirtualizationDomainJoinType", "csharp");
+@@clientName(ImageInfoProperties,
+  "DesktopVirtualizationImageInfoProperties",
+  "csharp"
+);
+@@clientName(ImageInfoPatchProperties,
+  "DesktopVirtualizationImageInfoPatchProperties",
+  "csharp"
+);
+@@clientName(KeyVaultCredentialsPatchProperties,
+  "DesktopVirtualizationKeyVaultCredentialsPatchProperties",
+  "csharp"
+);
+@@clientName(KeyVaultCredentialsProperties,
+  "DesktopVirtualizationKeyVaultCredentialsProperties",
+  "csharp"
+);
+@@clientName(ManagedPrivateUDP,
+  "DesktopVirtualizationManagedPrivateUDP",
+  "csharp"
+);
+@@clientName(NetworkInfoPatchProperties,
+  "DesktopVirtualizationNetworkInfoPatchProperties",
+  "csharp"
+);
+@@clientName(ManagementType, "DesktopVirtualizationManagementType", "csharp");
+@@clientName(NetworkInfoProperties,
+  "DesktopVirtualizationNetworkInfoProperties",
+  "csharp"
+);
+@@clientName(PublicUDP, "DesktopVirtualizationPublicUDP", "csharp");
+@@clientName(ProvisioningStateSHC,
+  "DesktopVirtualizationProvisioningStateSHC",
+  "csharp"
+);
+@@clientName(RegistrationTokenList,
+  "DesktopVirtualizationRegistrationTokenList",
+  "csharp"
+);
+@@clientName(RegistrationTokenMinimal,
+  "DesktopVirtualizationRegistrationTokenMinimal",
+  "csharp"
+);
+@@clientName(RelayUDP, "DesktopVirtualizationRelayUDP", "csharp");
+@@clientName(ScalingMethodType,
+  "DesktopVirtualizationScalingMethodType",
+  "csharp"
+);
+@@clientName(SecurityInfoPatchProperties,
+  "DesktopVirtualizationSecurityInfoPatchProperties",
+  "csharp"
+);
+@@clientName(SecurityInfoProperties,
+  "DesktopVirtualizationSecurityInfoProperties",
+  "csharp"
+);
+@@clientName(UpdateSessionHostsRequestBody,
+  "DesktopVirtualizationUpdateSessionHostsRequestBody",
+  "csharp"
+);
+@@clientName(VirtualMachineDiskType,
+  "DesktopVirtualizationVirtualMachineDiskType",
+  "csharp"
+);
+@@clientName(VirtualMachineSecurityType,
+  "DesktopVirtualizationVirtualMachineSecurityType",
+  "csharp"
+);
