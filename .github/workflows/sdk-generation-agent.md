@@ -147,3 +147,4 @@ If any SDK generation pipeline fails for one or more languages, add a comment on
 - Always leave a visible status outcome when validation succeeds (triggered, failed, or completed).
 - Keep comments concise and actionable.
 - If no SDK PR links are found after completion, explicitly state that no SDK PR links were discovered and include the pipeline link for manual inspection.
+- Create a consolidated comment to show SDK pull request status and any troubleshooting and failure details in one comment.
