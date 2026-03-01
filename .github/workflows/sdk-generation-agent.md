@@ -101,6 +101,7 @@ When validation succeeds, execute the following steps in order.
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
+- **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 5.
 
 5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
 
@@ -127,7 +128,14 @@ If any SDK generation pipeline fails for one or more languages, add a comment on
 
 1. List each language whose SDK generation pipeline failed.
 2. For each failed language, include the full, non-redacted pipeline run URL so the user can inspect logs directly.
-3. Include the following troubleshooting guidance in the comment:
+3. For each failed language, run the pipeline analysis command **once per language** to identify the root cause:
+
+   - Execute `azsdk azp analyze <build-id> -a false` where `<build-id>` is the pipeline build ID for that language.
+   - Run this command only once per failed language — do not retry or re-run the analysis for the same build.
+   - Review the analysis output and extract a concise summary of the core error (e.g. compilation error, missing dependency, TypeSpec validation failure).
+   - Include the error summary under each failed language in the issue comment so users can understand the failure without inspecting pipeline logs.
+
+4. Include the following troubleshooting guidance in the comment:
 
    > To troubleshoot SDK generation failures locally:
    >
