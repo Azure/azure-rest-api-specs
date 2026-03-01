@@ -27720,7 +27720,7 @@ model ExpressionV2 {
 /**
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
-model MultiplePipelineTrigger is Trigger {
+model MultiplePipelineTrigger extends Trigger {
   ...MultiplePipelineTriggerProperties;
 }
 
@@ -27737,7 +27737,6 @@ alias MultiplePipelineTriggerProperties = {
  */
 #suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MultiplePipelineTrigger)
 model ScheduleTrigger extends Trigger {
   ...MultiplePipelineTriggerProperties;
 
