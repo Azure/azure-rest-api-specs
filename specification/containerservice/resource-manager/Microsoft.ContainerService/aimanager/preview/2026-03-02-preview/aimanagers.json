@@ -46,7 +46,7 @@
       "name": "AIManagers"
     },
     {
-      "name": "AIManagerNamespaces"
+      "name": "AiManagerNamespaces"
     }
   ],
   "paths": {
@@ -515,11 +515,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces": {
       "get": {
-        "operationId": "AIManagerNamespaces_ListByAIManager",
+        "operationId": "AiManagerNamespaces_ListByAiManager",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
-        "description": "List AIManagerNamespace resources by AIManager",
+        "description": "List AiManagerNamespace resources by AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -545,7 +545,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespaceListResult"
+              "$ref": "#/definitions/AiManagerNamespaceListResult"
             }
           },
           "default": {
@@ -555,11 +555,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List AI Manager namespaces": {
-            "$ref": "./examples/AIManagerNamespaces_ListByAIManager.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -567,11 +562,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}": {
       "get": {
-        "operationId": "AIManagerNamespaces_Get",
+        "operationId": "AiManagerNamespaces_Get",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
-        "description": "Get a AIManagerNamespace",
+        "description": "Get a AiManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -607,7 +602,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
+              "$ref": "#/definitions/AiManagerNamespace"
             }
           },
           "default": {
@@ -616,19 +611,14 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get an AI Manager namespace": {
-            "$ref": "./examples/AIManagerNamespaces_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "AIManagerNamespaces_CreateOrUpdate",
+        "operationId": "AiManagerNamespaces_CreateOrUpdate",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
-        "description": "Create a AIManagerNamespace",
+        "description": "Create a AiManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -681,21 +671,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
+              "$ref": "#/definitions/AiManagerNamespace"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AIManagerNamespace' update operation succeeded",
+            "description": "Resource 'AiManagerNamespace' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
+              "$ref": "#/definitions/AiManagerNamespace"
             }
           },
           "201": {
-            "description": "Resource 'AIManagerNamespace' create operation succeeded",
+            "description": "Resource 'AiManagerNamespace' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
+              "$ref": "#/definitions/AiManagerNamespace"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -716,22 +706,17 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create or update an AI Manager namespace": {
-            "$ref": "./examples/AIManagerNamespaces_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AIManagerNamespaces_Update",
+        "operationId": "AiManagerNamespaces_Update",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
-        "description": "Update a AIManagerNamespace",
+        "description": "Update a AiManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -776,7 +761,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespacePatch"
+              "$ref": "#/definitions/AiManagerNamespacePatch"
             }
           }
         ],
@@ -784,7 +769,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
+              "$ref": "#/definitions/AiManagerNamespace"
             }
           },
           "202": {
@@ -808,22 +793,17 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Update an AI Manager namespace": {
-            "$ref": "./examples/AIManagerNamespaces_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AIManagerNamespaces_Delete",
+        "operationId": "AiManagerNamespaces_Delete",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
-        "description": "Delete a AIManagerNamespace",
+        "description": "Delete a AiManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -888,11 +868,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete an AI Manager namespace": {
-            "$ref": "./examples/AIManagerNamespaces_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -901,9 +876,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/listCredential": {
       "post": {
-        "operationId": "AIManagerNamespaces_ListCredential",
+        "operationId": "AiManagerNamespaces_ListCredential",
         "tags": [
-          "AIManagerNamespaces"
+          "AiManagerNamespaces"
         ],
         "description": "Lists the credentials of an AI Manager namespace.",
         "parameters": [
@@ -950,11 +925,6 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List namespace credentials": {
-            "$ref": "./examples/AIManagerNamespaces_ListCredential.json"
-          }
         }
       }
     }
@@ -965,7 +935,7 @@
       "description": "The AI Manager resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AIManagerProperties",
+          "$ref": "#/definitions/AiManagerProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -1004,106 +974,6 @@
       "required": [
         "value"
       ]
-    },
-    "AIManagerNamespace": {
-      "type": "object",
-      "description": "An AI Manager namespace.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AIManagerNamespaceProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "AIManagerNamespaceListResult": {
-      "type": "object",
-      "description": "The response of a AIManagerNamespace list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AIManagerNamespace items on this page",
-          "items": {
-            "$ref": "#/definitions/AIManagerNamespace"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AIManagerNamespacePatch": {
-      "type": "object",
-      "description": "The properties of an AI Manager namespace that can be patched.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AIManagerNamespaceProperties": {
-      "type": "object",
-      "description": "The properties of an AI Manager namespace.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "ManagedNamespaceID": {
-          "type": "string",
-          "description": "The underlying managed namespace ID in the Kubernetes cluster.",
-          "readOnly": true
-        },
-        "labels": {
-          "type": "object",
-          "description": "The labels for the namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "annotations": {
-          "type": "object",
-          "description": "The annotations for the namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "resourceQuota": {
-          "$ref": "#/definitions/ResourceQuota",
-          "description": "The default resource quota for the namespace."
-        },
-        "defaultNetworkPolicy": {
-          "$ref": "#/definitions/NetworkPolicies",
-          "description": "The default network policy for the namespace."
-        },
-        "adoptionPolicy": {
-          "$ref": "#/definitions/AdoptionPolicy",
-          "description": "Action if Kubernetes namespace with same name already exists."
-        },
-        "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of the namespace."
-        }
-      }
     },
     "AIManagerNamespaceProvisioningState": {
       "type": "string",
@@ -1153,34 +1023,6 @@
         ]
       },
       "readOnly": true
-    },
-    "AIManagerProperties": {
-      "type": "object",
-      "description": "AI Manager properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/AIManagerProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "ClusterID": {
-          "type": "string",
-          "description": "The underlying cluster ID of the AI Manager.",
-          "readOnly": true
-        },
-        "SystemNodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "NodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "ApiserverSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        }
-      }
     },
     "AIManagerProvisioningState": {
       "type": "string",
@@ -1236,7 +1078,7 @@
       "description": "The AI Manager resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AIManagerProperties",
+          "$ref": "#/definitions/AiManagerProperties",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
@@ -1278,6 +1120,139 @@
             "description": "If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will succeed and take over the existing namespace to be managed by ARM, even if there are differences between the existing namespace and the new ARM resource. Some fields of the existing namespace might be overwritten."
           }
         ]
+      }
+    },
+    "AiManagerNamespace": {
+      "type": "object",
+      "description": "An AI Manager namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiManagerNamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AiManagerNamespaceListResult": {
+      "type": "object",
+      "description": "The response of a AiManagerNamespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiManagerNamespace items on this page",
+          "items": {
+            "$ref": "#/definitions/AiManagerNamespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiManagerNamespacePatch": {
+      "type": "object",
+      "description": "The properties of an AI Manager namespace that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AiManagerNamespaceProperties": {
+      "type": "object",
+      "description": "The properties of an AI Manager namespace.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "ManagedNamespaceID": {
+          "type": "string",
+          "description": "The underlying managed namespace ID in the Kubernetes cluster.",
+          "readOnly": true,
+          "x-ms-client-name": "managedNamespaceId"
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "The annotations for the namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resourceQuota": {
+          "$ref": "#/definitions/ResourceQuota",
+          "description": "The default resource quota for the namespace."
+        },
+        "defaultNetworkPolicy": {
+          "$ref": "#/definitions/NetworkPolicies",
+          "description": "The default network policy for the namespace."
+        },
+        "adoptionPolicy": {
+          "$ref": "#/definitions/AdoptionPolicy",
+          "description": "Action if Kubernetes namespace with same name already exists."
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of the namespace."
+        }
+      }
+    },
+    "AiManagerProperties": {
+      "type": "object",
+      "description": "AI Manager properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "ClusterID": {
+          "type": "string",
+          "description": "The underlying cluster ID of the AI Manager.",
+          "readOnly": true,
+          "x-ms-client-name": "clusterId"
+        },
+        "SystemNodeSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
+          "x-ms-client-name": "systemNodeSubnetId"
+        },
+        "NodeSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
+          "x-ms-client-name": "nodeSubnetId"
+        },
+        "ApiserverSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.",
+          "x-ms-client-name": "apiserverSubnetId"
+        }
       }
     },
     "CredentialResult": {

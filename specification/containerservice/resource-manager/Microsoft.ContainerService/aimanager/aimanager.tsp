@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 
 @doc("The AI Manager resource.")
 @resource("aiManagers")
-model AIManager is TrackedResource<AIManagerProperties> {
+model AIManager is TrackedResource<AiManagerProperties> {
   @doc("The name of the AI Manager resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -34,21 +34,25 @@ model AIManager is TrackedResource<AIManagerProperties> {
 }
 
 @doc("AI Manager properties.")
-model AIManagerProperties {
+model AiManagerProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: AIManagerProvisioningState;
   @visibility(Lifecycle.Read)
   @doc("The underlying cluster ID of the AI Manager.")
-  ClusterID?: string;
+  @encodedName("application/json", "ClusterID")
+  clusterId?: string;
   @doc("The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  SystemNodeSubnetID?: string;
+  @encodedName("application/json", "SystemNodeSubnetID")
+  systemNodeSubnetId?: string;
 
   @doc("The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  NodeSubnetID?: string;
+  @encodedName("application/json", "NodeSubnetID")
+  nodeSubnetId?: string;
 
   @doc("The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  ApiserverSubnetID?: string;
+  @encodedName("application/json", "ApiserverSubnetID")
+  apiserverSubnetId?: string;
 }
 
 @doc("The provisioning state of the AI Manager resource.")
@@ -79,7 +83,7 @@ union AIManagerProvisioningState {
 interface AIManagers {
   get is ArmResourceRead<AIManager>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AIManager>;
-  update is ArmResourcePatchAsync<AIManager, AIManagerProperties>;
+  update is ArmResourcePatchAsync<AIManager, AiManagerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<AIManager>;
   listByResourceGroup is ArmResourceListByParent<AIManager>;
   listBySubscription is ArmListBySubscription<AIManager>;

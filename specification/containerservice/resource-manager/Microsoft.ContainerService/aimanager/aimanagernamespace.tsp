@@ -13,7 +13,7 @@ namespace Microsoft.ContainerService;
 @doc("An AI Manager namespace.")
 @resource("namespaces")
 @parentResource(AIManager)
-model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
+model AiManagerNamespace is TrackedResource<AiManagerNamespaceProperties> {
   @doc("The name of the AI Manager namespace resource.")
   @key("namespaceName")
   @segment("namespaces")
@@ -28,14 +28,15 @@ model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
 }
 
 @doc("The properties of an AI Manager namespace.")
-model AIManagerNamespaceProperties {
+model AiManagerNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: AIManagerNamespaceProvisioningState;
 
   @visibility(Lifecycle.Read)
   @doc("The underlying managed namespace ID in the Kubernetes cluster.")
-  ManagedNamespaceID?: string;
+  @encodedName("application/json", "ManagedNamespaceID")
+  managedNamespaceId?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
@@ -150,41 +151,41 @@ union AIManagerNamespaceProvisioningState {
 }
 
 @armResourceOperations
-interface AIManagerNamespaces {
-  get is ArmResourceRead<AIManagerNamespace>;
+interface AiManagerNamespaces {
+  get is ArmResourceRead<AiManagerNamespace>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    AIManagerNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
-      IfMatchParameters<AIManagerNamespace> &
-      IfNoneMatchParameters<AIManagerNamespace>
+    AiManagerNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
+      IfMatchParameters<AiManagerNamespace> &
+      IfNoneMatchParameters<AiManagerNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    AIManagerNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
-      IfMatchParameters<AIManagerNamespace>
+    AiManagerNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
+      IfMatchParameters<AiManagerNamespace>
   >;
 
-  listByAIManager is ArmResourceListByParent<AIManagerNamespace>;
+  listByAiManager is ArmResourceListByParent<AiManagerNamespace>;
 
   update is ArmCustomPatchAsync<
-    AIManagerNamespace,
-    AIManagerNamespacePatch,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
-      IfMatchParameters<AIManagerNamespace>
+    AiManagerNamespace,
+    AiManagerNamespacePatch,
+    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
+      IfMatchParameters<AiManagerNamespace>
   >;
 
   @doc("Lists the credentials of an AI Manager namespace.")
   listCredential is ArmResourceActionSync<
-    AIManagerNamespace,
+    AiManagerNamespace,
     void,
     ArmResponse<CredentialResults>
   >;
 }
 
 @doc("The properties of an AI Manager namespace that can be patched.")
-model AIManagerNamespacePatch {
+model AiManagerNamespacePatch {
   /* The ARM tags of the AI Manager namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
