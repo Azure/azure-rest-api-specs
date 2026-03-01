@@ -26,4 +26,4 @@ Login using Azure CLI Login
 - Set env variable AZURE_CONFIG_DIR=/tmp/gh-aw/agent/.azure
 - Run `az login --service-principal --username $AZURE_CLIENT_ID --tenant $AZURE_TENANT_ID --federated-token $(cat /tmp/azure-oidc-token) --allow-no-subscriptions 2>&1`
 - If authentication fails, call the `noop` safe output with the captured response (labelled `authentication_failed`) and stop further processing.
-- If authentication fails with expired OIDC then request new OIDC and reathenticate using az login.
+- If authentication fails with expired OIDC then request new OIDC and reauthenticate using az login.

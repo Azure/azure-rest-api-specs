@@ -46,7 +46,7 @@ safe-outputs:
     max: 15
     hide-older-comments: true
   messages:
-    run-started: "[{workflow_name}]({run_url}) started for sdk generation."
+    run-started: "[{workflow_name}]({run_url}) started for Azure sdk generation."
   noop:
 ---
 
