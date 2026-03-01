@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"8bcf2d83042a6584b73629694981b728dcb22604da18868899b3a2855423e78f","compiler_version":"v0.51.0"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"537a43c66972948e2e690f4c35773d636c86963ca148ece14559e57f203368db","compiler_version":"v0.51.0"}
 
 name: "SDK Generation Agent"
 "on":
@@ -1009,7 +1009,7 @@ jobs:
           GH_AW_WORKFLOW_ID: "sdk-generation-agent"
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.activation.outputs.secret_verification_result }}
           GH_AW_CHECKOUT_PR_SUCCESS: ${{ needs.agent.outputs.checkout_pr_success }}
-          GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for Azure sdk generation."}'
+          GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for sdk generation."}'
           GH_AW_GROUP_REPORTS: "false"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -1083,7 +1083,7 @@ jobs:
     timeout-minutes: 15
     env:
       GH_AW_ENGINE_ID: "copilot"
-      GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for Azure sdk generation."}'
+      GH_AW_SAFE_OUTPUT_MESSAGES: '{"runStarted":"[{workflow_name}]({run_url}) started for sdk generation."}'
       GH_AW_WORKFLOW_ID: "sdk-generation-agent"
       GH_AW_WORKFLOW_NAME: "SDK Generation Agent"
     outputs:
