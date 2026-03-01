@@ -46,7 +46,7 @@ safe-outputs:
     max: 15
     hide-older-comments: true
   messages:
-    run-started: "[{workflow_name}]({run_url}) started for Azure sdk generation."
+    run-started: "[{workflow_name}]({run_url}) started for sdk generation."
   noop:
 ---
 
@@ -77,7 +77,6 @@ This workflow can be triggered in three ways:
 - Parse `issue_url` from `github.event.inputs.issue_url`.
 - Validate that `issue_url` points to an issue in this repository, extract the numeric issue ID, and hydrate issue context via the GitHub API.
 - Treat the resolved issue exactly the same as if the workflow were triggered directly from that issue.
-- Use default PR "https://github.com/Azure/azure-rest-api-specs/issues/40516" for testing manual dispatch
 
 If the triggering event does not meet its corresponding requirements, immediately call `noop` with guidance (for example: missing label, missing `Regenerate SDK`, or missing workflow_dispatch inputs).
 
@@ -128,7 +127,6 @@ If any SDK generation pipeline fails for one or more languages, add a comment on
 1. List each language whose SDK generation pipeline failed.
 2. For each failed language, include the full, non-redacted pipeline run URL so the user can inspect logs directly.
 3. For each failed language, run the pipeline analysis command **once per language** to identify the root cause:
-
    - Execute `azsdk azp analyze <build-id> -a false` where `<build-id>` is the pipeline build ID for that language.
    - Run this command only once per failed language — do not retry or re-run the analysis for the same build.
    - Review the analysis output and extract a concise summary of the core error (e.g. compilation error, missing dependency, TypeSpec validation failure).
