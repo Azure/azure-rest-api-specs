@@ -1,12 +1,18 @@
 {
-  "title": "Get an AI Manager namespace",
-  "operationId": "AIManagerNamespaces_Get",
+  "title": "Update an AI Manager namespace",
+  "operationId": "AiManagerNamespaces_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "aiManagerName": "aimanager1",
     "namespaceName": "namespace1",
-    "api-version": "2026-03-02-preview"
+    "api-version": "2026-03-02-preview",
+    "If-Match": "\"00000000-0000-0000-0000-000000000000\"",
+    "properties": {
+      "tags": {
+        "env": "staging"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -16,7 +22,7 @@
         "type": "Microsoft.ContainerService/aiManagers/namespaces",
         "location": "eastus",
         "tags": {
-          "env": "production"
+          "env": "staging"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -41,15 +47,21 @@
           "adoptionPolicy": "Never",
           "deletePolicy": "Delete"
         },
-        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "eTag": "\"00000000-0000-0000-0000-000000000001\"",
         "systemData": {
           "createdBy": "user@example.com",
           "createdByType": "User",
           "createdAt": "2025-01-01T00:00:00.0000000Z",
           "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-01T00:00:00.0000000Z"
+          "lastModifiedAt": "2025-01-02T00:00:00.0000000Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview"
       }
     }
   }

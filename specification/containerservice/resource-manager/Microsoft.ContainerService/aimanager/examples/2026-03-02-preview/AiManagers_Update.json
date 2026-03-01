@@ -1,11 +1,25 @@
 {
-  "title": "Get an AI Manager",
-  "operationId": "AIManagers_Get",
+  "title": "Update an AI Manager",
+  "operationId": "AiManagers_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "aiManagerName": "aimanager1",
-    "api-version": "2026-03-02-preview"
+    "api-version": "2026-03-02-preview",
+    "properties": {
+      "location": "eastus",
+      "tags": {
+        "env": "staging"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "SystemNodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/systemNodeSubnet",
+        "NodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/nodeSubnet",
+        "ApiserverSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/apiserverSubnet"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,7 +29,7 @@
         "type": "Microsoft.ContainerService/aiManagers",
         "location": "eastus",
         "tags": {
-          "env": "production"
+          "env": "staging"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -38,6 +52,12 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-01-01T00:00:00.0000000Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview"
       }
     }
   }

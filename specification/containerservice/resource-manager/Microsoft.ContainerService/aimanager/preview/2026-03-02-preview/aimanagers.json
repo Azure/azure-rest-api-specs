@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "AIManagers"
+      "name": "AiManagers"
     },
     {
       "name": "AiManagerNamespaces"
@@ -88,9 +88,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
-        "operationId": "AIManagers_ListBySubscription",
+        "operationId": "AiManagers_ListBySubscription",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "List AIManager resources by subscription ID",
         "parameters": [
@@ -117,7 +117,7 @@
         },
         "x-ms-examples": {
           "List AI Managers by subscription": {
-            "$ref": "./examples/AIManagers_ListBySubscription.json"
+            "$ref": "./examples/AiManagers_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -127,9 +127,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
-        "operationId": "AIManagers_ListByResourceGroup",
+        "operationId": "AiManagers_ListByResourceGroup",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "List AIManager resources by resource group",
         "parameters": [
@@ -159,7 +159,7 @@
         },
         "x-ms-examples": {
           "List AI Managers by resource group": {
-            "$ref": "./examples/AIManagers_ListByResourceGroup.json"
+            "$ref": "./examples/AiManagers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -169,9 +169,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}": {
       "get": {
-        "operationId": "AIManagers_Get",
+        "operationId": "AiManagers_Get",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "Get a AIManager",
         "parameters": [
@@ -211,14 +211,14 @@
         },
         "x-ms-examples": {
           "Get an AI Manager": {
-            "$ref": "./examples/AIManagers_Get.json"
+            "$ref": "./examples/AiManagers_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AIManagers_CreateOrUpdate",
+        "operationId": "AiManagers_CreateOrUpdate",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "Create a AIManager",
         "parameters": [
@@ -284,7 +284,7 @@
         },
         "x-ms-examples": {
           "Create or update an AI Manager": {
-            "$ref": "./examples/AIManagers_CreateOrUpdate.json"
+            "$ref": "./examples/AiManagers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -293,9 +293,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AIManagers_Update",
+        "operationId": "AiManagers_Update",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "Update a AIManager",
         "parameters": [
@@ -358,7 +358,7 @@
         },
         "x-ms-examples": {
           "Update an AI Manager": {
-            "$ref": "./examples/AIManagers_Update.json"
+            "$ref": "./examples/AiManagers_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -367,9 +367,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AIManagers_Delete",
+        "operationId": "AiManagers_Delete",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "Delete a AIManager",
         "parameters": [
@@ -420,7 +420,7 @@
         },
         "x-ms-examples": {
           "Delete an AI Manager": {
-            "$ref": "./examples/AIManagers_Delete.json"
+            "$ref": "./examples/AiManagers_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -431,9 +431,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listClusterUserCredential": {
       "post": {
-        "operationId": "AIManagers_ListClusterUserCredentials",
+        "operationId": "AiManagers_ListClusterUserCredentials",
         "tags": [
-          "AIManagers"
+          "AiManagers"
         ],
         "description": "Lists the user credentials of an AI Manager.",
         "parameters": [
@@ -508,7 +508,7 @@
         },
         "x-ms-examples": {
           "List cluster user credentials": {
-            "$ref": "./examples/AIManagers_ListClusterUserCredentials.json"
+            "$ref": "./examples/AiManagers_ListClusterUserCredentials.json"
           }
         }
       }
@@ -553,6 +553,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Manager namespaces": {
+            "$ref": "./examples/AiManagerNamespaces_ListByAiManager.json"
           }
         },
         "x-ms-pageable": {
@@ -610,6 +615,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Manager namespace": {
+            "$ref": "./examples/AiManagerNamespaces_Get.json"
           }
         }
       },
@@ -706,6 +716,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update an AI Manager namespace": {
+            "$ref": "./examples/AiManagerNamespaces_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -793,6 +808,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update an AI Manager namespace": {
+            "$ref": "./examples/AiManagerNamespaces_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -868,6 +888,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete an AI Manager namespace": {
+            "$ref": "./examples/AiManagerNamespaces_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -924,6 +949,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List namespace credentials": {
+            "$ref": "./examples/AiManagerNamespaces_ListCredential.json"
           }
         }
       }

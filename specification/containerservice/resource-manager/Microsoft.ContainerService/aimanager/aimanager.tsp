@@ -80,7 +80,7 @@ union AIManagerProvisioningState {
 }
 
 @armResourceOperations
-interface AIManagers {
+interface AiManagers {
   get is ArmResourceRead<AIManager>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AIManager>;
   update is ArmResourcePatchAsync<AIManager, AiManagerProperties>;
