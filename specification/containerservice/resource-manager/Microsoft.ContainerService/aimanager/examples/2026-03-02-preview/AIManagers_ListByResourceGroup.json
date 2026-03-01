@@ -1,0 +1,41 @@
+{
+  "title": "List AI Manager resources by resource group",
+  "operationId": "AIManagers_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-03-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1",
+            "name": "aimanager1",
+            "type": "Microsoft.ContainerService/aiManagers",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ClusterID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/aimanager1-cluster",
+              "SystemNodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/system-subnet",
+              "NodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/node-subnet",
+              "ApiserverSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/apiserver-subnet"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager2",
+            "name": "aimanager2",
+            "type": "Microsoft.ContainerService/aiManagers",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ClusterID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/aimanager2-cluster"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

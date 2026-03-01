@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerserviceaimanager"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
+options:
+  "@azure-tools/typespec-autorest":
+    emit-common-types-schema: "never"
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/aimanagers.json"
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/containerservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerserviceaimanager"
+    namespace: "azure.mgmt.containerserviceaimanager"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerServiceAIManager"
+    emitter-output-dir: "{output-dir}/sdk/aimanager/{namespace}"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerserviceaimanager"
+    namespace: "com.azure.resourcemanager.containerserviceaimanager"
+    service-name: "Container Service AI Manager"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerserviceaimanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerserviceaimanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerserviceaimanager"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerservice"
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerserviceaimanager"
+    package-details:
+      name: "@azure/arm-containerserviceaimanager"

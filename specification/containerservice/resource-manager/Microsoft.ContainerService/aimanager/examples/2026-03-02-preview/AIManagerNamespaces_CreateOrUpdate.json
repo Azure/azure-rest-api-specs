@@ -1,0 +1,109 @@
+{
+  "title": "Create or update an AI Manager namespace resource",
+  "operationId": "AIManagerNamespaces_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "aiManagerName": "aimanager1",
+    "namespaceName": "namespace1",
+    "api-version": "2026-03-02-preview",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "labels": {
+          "app": "ai-workload",
+          "team": "ml-ops"
+        },
+        "annotations": {
+          "description": "Namespace for AI workloads"
+        },
+        "resourceQuota": {
+          "cpuRequest": "10",
+          "cpuLimit": "20",
+          "memoryRequest": "20Gi",
+          "memoryLimit": "40Gi",
+          "gpuLimit": 4
+        },
+        "defaultNetworkPolicy": {
+          "ingress": "AllowSameNamespace",
+          "egress": "AllowAll"
+        },
+        "adoptionPolicy": "Never",
+        "deletePolicy": "Delete"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "labels": {
+            "app": "ai-workload",
+            "team": "ml-ops"
+          },
+          "annotations": {
+            "description": "Namespace for AI workloads"
+          },
+          "resourceQuota": {
+            "cpuRequest": "10",
+            "cpuLimit": "20",
+            "memoryRequest": "20Gi",
+            "memoryLimit": "40Gi",
+            "gpuLimit": 4
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          },
+          "adoptionPolicy": "Never",
+          "deletePolicy": "Delete"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "labels": {
+            "app": "ai-workload",
+            "team": "ml-ops"
+          },
+          "annotations": {
+            "description": "Namespace for AI workloads"
+          },
+          "resourceQuota": {
+            "cpuRequest": "10",
+            "cpuLimit": "20",
+            "memoryRequest": "20Gi",
+            "memoryLimit": "40Gi",
+            "gpuLimit": 4
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          },
+          "adoptionPolicy": "Never",
+          "deletePolicy": "Delete"
+        }
+      }
+    }
+  }
+}
