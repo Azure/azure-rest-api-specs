@@ -255,6 +255,10 @@ using Microsoft.DesktopVirtualization;
   "getProvisioningStatus",
   "csharp"
 );
+@@clientName(SessionHostManagementUpdateStatuses.get,
+  "getUpdateStatus",
+  "csharp"
+);
 @@clientName(HostPoolProvisioningControlParameter,
   "HostPoolProvisioningControlContent",
   "csharp"

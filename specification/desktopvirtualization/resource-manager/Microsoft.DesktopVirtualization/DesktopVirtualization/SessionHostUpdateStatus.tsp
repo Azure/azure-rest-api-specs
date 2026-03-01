@@ -15,8 +15,10 @@ namespace Microsoft.DesktopVirtualization;
  * Schema for SessionHostManagementUpdateStatus properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @parentResource(SessionHostManagement)
 @singleton("default")
+@Azure.ResourceManager.Legacy.customAzureResource
 model SessionHostManagementUpdateStatus {
   /** Fully qualified ID for the async operation. */
   id?: Azure.Core.armResourceIdentifier;
@@ -51,5 +53,9 @@ interface SessionHostManagementUpdateStatuses {
   @OpenAPI.operationId("SessionHostManagementsUpdateStatus_Get")
   @get
   @action("sessionHostUpdateStatuses/default")
-  get is ArmResourceRead<SessionHostManagementUpdateStatus>;
+  get is ArmResourceActionSync<
+    SessionHostManagement,
+    Request = void,
+    Response = SessionHostManagementUpdateStatus
+  >;
 }
