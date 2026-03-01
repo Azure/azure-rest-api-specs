@@ -6,12 +6,12 @@ import "./aimanagernamespace.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "ContainerServiceAIManagerClient" })
 @doc("Azure Kubernetes AI Manager api client.")
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.ContainerService;
 
 interface Operations extends Azure.ResourceManager.Operations {}

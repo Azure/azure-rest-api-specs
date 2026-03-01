@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerServiceAIManagerClient",
+    "version": "2026-03-02-preview",
     "description": "Azure Kubernetes AI Manager api client.",
-    "version": "2026-03-02-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,9 +30,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -47,153 +52,160 @@
   "paths": {
     "/providers/Microsoft.ContainerService/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "description": "Gets a list of operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List operations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
+        "operationId": "AIManagers_ListBySubscription",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_ListBySubscription",
-        "summary": "Gets a list of AI Managers in the specified subscription.",
+        "description": "List AIManager resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManagerListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List AI Managers by subscription": {
             "$ref": "./examples/AIManagers_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
+        "operationId": "AIManagers_ListByResourceGroup",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_ListByResourceGroup",
-        "summary": "Gets a list of AI Managers in the specified resource group.",
+        "description": "List AIManager resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManagerListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List AI Managers by resource group": {
             "$ref": "./examples/AIManagers_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}": {
       "get": {
+        "operationId": "AIManagers_Get",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_Get",
-        "summary": "Gets the specified AI Manager.",
+        "description": "Get a AIManager",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManager"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -204,29 +216,36 @@
         }
       },
       "put": {
+        "operationId": "AIManagers_CreateOrUpdate",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_CreateOrUpdate",
-        "summary": "Creates or updates an AI Manager.",
+        "description": "Create a AIManager",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
-            "description": "The AI Manager resource.",
             "schema": {
               "$ref": "#/definitions/AIManager"
             }
@@ -234,13 +253,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource update completed successfully.",
+            "description": "Resource 'AIManager' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/AIManager"
             }
           },
           "201": {
-            "description": "Resource create completed successfully.",
+            "description": "Resource 'AIManager' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AIManager"
             },
@@ -257,46 +276,53 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create or update an AI Manager": {
             "$ref": "./examples/AIManagers_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "AIManagers_Update",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_Update",
-        "summary": "Updates an existing AI Manager.",
+        "description": "Update a AIManager",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AIManagerUpdate"
             }
@@ -304,7 +330,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource update completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManager"
             }
@@ -312,10 +338,6 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -328,50 +350,53 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Update an AI Manager": {
             "$ref": "./examples/AIManagers_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "AIManagers_Delete",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_Delete",
-        "summary": "Deletes the specified AI Manager.",
+        "description": "Delete a AIManager",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -387,77 +412,97 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete an AI Manager": {
             "$ref": "./examples/AIManagers_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listClusterUserCredential": {
       "post": {
+        "operationId": "AIManagers_ListClusterUserCredentials",
         "tags": [
           "AIManagers"
         ],
-        "operationId": "AIManagers_ListClusterUserCredentials",
-        "summary": "Lists the user credentials of an AI Manager.",
+        "description": "Lists the user credentials of an AI Manager.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "server-fqdn",
             "in": "query",
+            "description": "Server FQDN type for credentials to be returned.",
             "required": false,
             "type": "string",
-            "description": "Server FQDN type for credentials to be returned."
+            "x-ms-client-name": "serverFqdn"
           },
           {
             "name": "format",
             "in": "query",
+            "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
             "required": false,
             "type": "string",
-            "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
             "enum": [
               "azure",
               "exec"
             ],
             "x-ms-enum": {
               "name": "Format",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "azure",
+                  "value": "azure",
+                  "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26."
+                },
+                {
+                  "name": "exec",
+                  "value": "exec",
+                  "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
+                }
+              ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CredentialResults"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -470,84 +515,105 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces": {
       "get": {
+        "operationId": "AIManagerNamespaces_ListByAIManager",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_ListByAIManager",
-        "summary": "Gets a list of AI Manager namespaces in the specified AI Manager.",
+        "description": "List AIManagerNamespace resources by AIManager",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespaceListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List AI Manager namespaces": {
             "$ref": "./examples/AIManagerNamespaces_ListByAIManager.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}": {
       "get": {
+        "operationId": "AIManagerNamespaces_Get",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_Get",
-        "summary": "Gets the specified AI Manager namespace.",
+        "description": "Get a AIManagerNamespace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNamespaceNameParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespace"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -558,46 +624,62 @@
         }
       },
       "put": {
+        "operationId": "AIManagerNamespaces_CreateOrUpdate",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_CreateOrUpdate",
-        "summary": "Creates or updates an AI Manager namespace.",
+        "description": "Create a AIManagerNamespace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AIManagerNamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "If-Match",
             "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
             "required": false,
             "type": "string",
-            "description": "The request should only proceed if an entity matches this string."
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
             "required": false,
             "type": "string",
-            "description": "The request should only proceed if no entity matches this string."
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
-            "description": "The AI Manager namespace resource.",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespace"
             }
@@ -605,13 +687,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource update completed successfully.",
+            "description": "Resource 'AIManagerNamespace' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespace"
             }
           },
           "201": {
-            "description": "Resource create completed successfully.",
+            "description": "Resource 'AIManagerNamespace' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespace"
             },
@@ -628,56 +710,71 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create or update an AI Manager namespace": {
             "$ref": "./examples/AIManagerNamespaces_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "AIManagerNamespaces_Update",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_Update",
-        "summary": "Updates an existing AI Manager namespace.",
+        "description": "Update a AIManagerNamespace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AIManagerNamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "If-Match",
             "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
             "required": false,
             "type": "string",
-            "description": "The request should only proceed if an entity matches this string."
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AIManagerNamespacePatch"
             }
@@ -685,7 +782,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource update completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AIManagerNamespace"
             }
@@ -693,10 +790,6 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -709,60 +802,71 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Update an AI Manager namespace": {
             "$ref": "./examples/AIManagerNamespaces_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "AIManagerNamespaces_Delete",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_Delete",
-        "summary": "Deletes the specified AI Manager namespace.",
+        "description": "Delete a AIManagerNamespace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AIManagerNamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "If-Match",
             "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
             "required": false,
             "type": "string",
-            "description": "The request should only proceed if an entity matches this string."
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -778,58 +882,72 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete an AI Manager namespace": {
             "$ref": "./examples/AIManagerNamespaces_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/listCredential": {
       "post": {
+        "operationId": "AIManagerNamespaces_ListCredential",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "operationId": "AIManagerNamespaces_ListCredential",
-        "summary": "Lists the credentials of an AI Manager namespace.",
+        "description": "Lists the credentials of an AI Manager namespace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AIManagerNamespaceNameParameter"
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CredentialResults"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -845,71 +963,26 @@
     "AIManager": {
       "type": "object",
       "description": "The AI Manager resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AIManagerProperties",
-          "description": "AI Manager properties.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed identity."
+          "description": "The resource-specific properties for this resource."
         },
         "eTag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention. Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity."
         }
-      }
-    },
-    "AIManagerProperties": {
-      "type": "object",
-      "description": "AI Manager properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/AIManagerProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "ClusterID": {
-          "type": "string",
-          "description": "The underlying cluster ID of the AI Manager.",
-          "readOnly": true
-        },
-        "SystemNodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "NodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "ApiserverSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      }
-    },
-    "AIManagerProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the AI Manager resource.",
-      "enum": [
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "AIManagerProvisioningState",
-        "modelAsString": true
-      }
+      ]
     },
     "AIManagerListResult": {
       "type": "object",
@@ -917,7 +990,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AIManager items on this page.",
+          "description": "The AIManager items on this page",
           "items": {
             "$ref": "#/definitions/AIManager"
           }
@@ -925,16 +998,57 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items."
+          "description": "The link to the next page of items"
         }
       },
       "required": [
         "value"
       ]
     },
-    "AIManagerUpdate": {
+    "AIManagerNamespace": {
       "type": "object",
-      "description": "The type used for update operations of the AIManager.",
+      "description": "An AI Manager namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AIManagerNamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AIManagerNamespaceListResult": {
+      "type": "object",
+      "description": "The response of a AIManagerNamespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AIManagerNamespace items on this page",
+          "items": {
+            "$ref": "#/definitions/AIManagerNamespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AIManagerNamespacePatch": {
+      "type": "object",
+      "description": "The properties of an AI Manager namespace that can be patched.",
       "properties": {
         "tags": {
           "type": "object",
@@ -942,53 +1056,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed identity."
-        },
-        "properties": {
-          "$ref": "#/definitions/AIManagerUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AIManagerUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AIManager.",
-      "properties": {
-        "SystemNodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "NodeSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "ApiserverSubnetID": {
-          "type": "string",
-          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        }
-      }
-    },
-    "AIManagerNamespace": {
-      "type": "object",
-      "description": "An AI Manager namespace.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AIManagerNamespaceProperties",
-          "description": "The properties of an AI Manager namespace.",
-          "x-ms-client-flatten": true
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention. Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       }
     },
@@ -1042,124 +1109,146 @@
       "type": "string",
       "description": "The provisioning state of the AI Manager namespace resource.",
       "enum": [
-        "Creating",
-        "Updating",
-        "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "AIManagerNamespaceProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "AIManagerNamespaceListResult": {
-      "type": "object",
-      "description": "The response of a AIManagerNamespace list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AIManagerNamespace items on this page.",
-          "items": {
-            "$ref": "#/definitions/AIManagerNamespace"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AIManagerNamespacePatch": {
-      "type": "object",
-      "description": "The properties of an AI Manager namespace that can be patched.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ResourceQuota": {
-      "type": "object",
-      "description": "The resource quota for the namespace.",
-      "properties": {
-        "cpuRequest": {
-          "type": "string",
-          "description": "The CPU request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
-        },
-        "cpuLimit": {
-          "type": "string",
-          "description": "The CPU limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
-        },
-        "memoryRequest": {
-          "type": "string",
-          "description": "The memory request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
-        },
-        "memoryLimit": {
-          "type": "string",
-          "description": "The memory limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
-        },
-        "gpuLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The GPU limit for the namespace."
-        }
-      }
-    },
-    "NetworkPolicies": {
-      "type": "object",
-      "description": "Default network policy of the namespace, specifying ingress and egress rules.",
-      "properties": {
-        "ingress": {
-          "$ref": "#/definitions/PolicyRule",
-          "description": "The default ingress network policy for the namespace.",
-          "default": "AllowSameNamespace"
-        },
-        "egress": {
-          "$ref": "#/definitions/PolicyRule",
-          "description": "The default egress network policy for the namespace.",
-          "default": "AllowAll"
-        }
-      }
-    },
-    "PolicyRule": {
-      "type": "string",
-      "description": "Enum representing different network policy rules.",
-      "enum": [
-        "DenyAll",
-        "AllowAll",
-        "AllowSameNamespace"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyRule",
         "modelAsString": true,
         "values": [
           {
-            "name": "DenyAll",
-            "value": "DenyAll",
-            "description": "Deny all network traffic."
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The namespace has been created."
           },
           {
-            "name": "AllowAll",
-            "value": "AllowAll",
-            "description": "Allow all network traffic."
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The namespace creation failed."
           },
           {
-            "name": "AllowSameNamespace",
-            "value": "AllowSameNamespace",
-            "description": "Allow traffic within the same namespace."
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The namespace creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a namespace being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a namespace being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a namespace being deleted."
           }
         ]
+      },
+      "readOnly": true
+    },
+    "AIManagerProperties": {
+      "type": "object",
+      "description": "AI Manager properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "ClusterID": {
+          "type": "string",
+          "description": "The underlying cluster ID of the AI Manager.",
+          "readOnly": true
+        },
+        "SystemNodeSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+        },
+        "NodeSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+        },
+        "ApiserverSubnetID": {
+          "type": "string",
+          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+        }
       }
+    },
+    "AIManagerProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AI Manager resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AIManagerProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AIManagerUpdate": {
+      "type": "object",
+      "description": "The AI Manager resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AIManagerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "AdoptionPolicy": {
       "type": "string",
@@ -1191,6 +1280,38 @@
         ]
       }
     },
+    "CredentialResult": {
+      "type": "object",
+      "description": "The credential result response.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the credential.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialResults": {
+      "type": "object",
+      "description": "The list credential result response.",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DeletePolicy": {
       "type": "string",
       "description": "Delete options of the namespace.",
@@ -1215,69 +1336,101 @@
         ]
       }
     },
-    "CredentialResults": {
+    "NetworkPolicies": {
       "type": "object",
-      "description": "The list credential result response.",
+      "description": "Default network policy of the namespace, specifying ingress and egress rules.",
       "properties": {
-        "kubeconfigs": {
-          "type": "array",
-          "description": "Base64-encoded Kubernetes configuration file.",
-          "items": {
-            "$ref": "#/definitions/CredentialResult"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+        "ingress": {
+          "type": "string",
+          "description": "The default ingress network policy for the namespace.",
+          "default": "AllowSameNamespace",
+          "enum": [
+            "DenyAll",
+            "AllowAll",
+            "AllowSameNamespace"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyRule",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DenyAll",
+                "value": "DenyAll",
+                "description": "Deny all network traffic."
+              },
+              {
+                "name": "AllowAll",
+                "value": "AllowAll",
+                "description": "Allow all network traffic."
+              },
+              {
+                "name": "AllowSameNamespace",
+                "value": "AllowSameNamespace",
+                "description": "Allow traffic within the same namespace."
+              }
+            ]
+          }
+        },
+        "egress": {
+          "type": "string",
+          "description": "The default egress network policy for the namespace.",
+          "default": "AllowAll",
+          "enum": [
+            "DenyAll",
+            "AllowAll",
+            "AllowSameNamespace"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyRule",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DenyAll",
+                "value": "DenyAll",
+                "description": "Deny all network traffic."
+              },
+              {
+                "name": "AllowAll",
+                "value": "AllowAll",
+                "description": "Allow all network traffic."
+              },
+              {
+                "name": "AllowSameNamespace",
+                "value": "AllowSameNamespace",
+                "description": "Allow traffic within the same namespace."
+              }
+            ]
+          }
         }
       }
     },
-    "CredentialResult": {
+    "ResourceQuota": {
       "type": "object",
-      "description": "The credential result response.",
+      "description": "The resource quota for the namespace.",
       "properties": {
-        "name": {
+        "cpuRequest": {
           "type": "string",
-          "description": "The name of the credential.",
-          "readOnly": true
+          "description": "The CPU request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
         },
-        "value": {
+        "cpuLimit": {
           "type": "string",
-          "format": "byte",
-          "description": "Base64-encoded Kubernetes configuration file.",
-          "readOnly": true
+          "description": "The CPU limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
+        },
+        "memoryRequest": {
+          "type": "string",
+          "description": "The memory request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
+        },
+        "memoryLimit": {
+          "type": "string",
+          "description": "The memory limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
+        },
+        "gpuLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The GPU limit for the namespace."
         }
       }
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation.",
-      "minLength": 1
-    },
-    "AIManagerNameParameter": {
-      "name": "aiManagerName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the AI Manager resource.",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
-      "x-ms-parameter-location": "method"
-    },
-    "AIManagerNamespaceNameParameter": {
-      "name": "namespaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the AI Manager namespace resource.",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
