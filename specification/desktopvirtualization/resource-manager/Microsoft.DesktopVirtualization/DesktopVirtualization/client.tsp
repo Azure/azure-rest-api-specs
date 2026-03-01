@@ -577,6 +577,9 @@ using Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(SessionHosts.listSingleSessionHostRegistrationTokens
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(HostPools.listRegistrationTokens
+);
 
 @@clientName(type, "DesktopVirtualizationImageType", "csharp");
 @@clientName(updateStatus,
