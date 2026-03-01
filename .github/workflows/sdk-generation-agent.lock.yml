@@ -28,7 +28,7 @@
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"3f9e2e18c9c2c9823a8af0601eb263b6c1c13267dccf4ea2429a8a04788e73d2","compiler_version":"v0.51.0"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"8390d578f4a2f89125172c4b2b77856a5e901c72a23f55beee6c301094ee3d96","compiler_version":"v0.51.0"}
 
 name: "SDK Generation Agent"
 "on":
@@ -53,6 +53,8 @@ run-name: "SDK Generation Agent"
 
 env:
   AZSDK_CLI_PATH: /tmp/bin
+  AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
+  AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
   GITHUB_ACTIONS: "true"
   GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
 
@@ -324,12 +326,14 @@ jobs:
       - name: Install azsdk mcp server
         run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory /tmp/bin
         shell: pwsh
-      - name: Azure Login with Workload Identity Federation
-        uses: azure/login@1384c340ab2dda50fed2bee3041d1d87018aa5e8 # v2
+      - id: oidc
+        name: Acquire OIDC token for Azure
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
-          allow-no-subscriptions: true
-          client-id: c277c2aa-5326-4d16-90de-98feeca69cbc
-          tenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
+          script: |-
+            const token = await core.getIDToken('api://AzureADTokenExchange');
+            const fs = require('fs');
+            fs.writeFileSync('/tmp/azure-oidc-token', token);
 
       - name: Configure Git credentials
         env:

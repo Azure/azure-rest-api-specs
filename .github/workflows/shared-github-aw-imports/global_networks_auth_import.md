@@ -8,10 +8,22 @@ network:
     - "azure.com"
     - "visualstudio.com"
 steps:
-  - name: Azure Login with Workload Identity Federation
-    uses: azure/login@v2
+  - name: Acquire OIDC token for Azure
+    id: oidc
+    uses: actions/github-script@v7
     with:
-      client-id: "c277c2aa-5326-4d16-90de-98feeca69cbc"
-      tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
-      allow-no-subscriptions: true
+      script: |
+        const token = await core.getIDToken('api://AzureADTokenExchange');
+        const fs = require('fs');
+        fs.writeFileSync('/tmp/azure-oidc-token', token);
 ---
+
+## Workflow Behavior
+
+Login using Azure CLI Login
+
+- Run `mkdir -p /tmp/gh-aw/agent/.azure`.
+- Set env variable AZURE_CONFIG_DIR=/tmp/gh-aw/agent/.azure
+- Run `az login --service-principal --username $AZURE_CLIENT_ID --tenant $AZURE_TENANT_ID --federated-token $(cat /tmp/azure-oidc-token) --allow-no-subscriptions 2>&1`
+- If authentication fails, call the `noop` safe output with the captured response (labelled `authentication_failed`) and stop further processing.
+- If authentication fails with expired OIDC then request new OIDC and reathenticate using az login.
