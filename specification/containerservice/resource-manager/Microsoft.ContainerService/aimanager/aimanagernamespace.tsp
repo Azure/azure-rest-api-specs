@@ -121,7 +121,7 @@ union DeletePolicy {
 
   @doc("Keep the Kubernetes namespace even if the ARM resource is deleted.")
   Keep: "Keep",
-  
+
   @doc("Delete both the ARM resource and the Kubernetes namespace together.")
   Delete: "Delete",
 }
