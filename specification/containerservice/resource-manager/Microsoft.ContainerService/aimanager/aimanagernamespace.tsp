@@ -34,6 +34,10 @@ model AIManagerNamespaceProperties {
   @doc("The status of the last operation.")
   provisioningState?: AIManagerNamespaceProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The underlying managed namespace ID in the Kubernetes cluster.")
+  ManagedNamespaceID?: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
   labels?: Record<string>;
