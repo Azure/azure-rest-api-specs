@@ -142,3 +142,9 @@ using Microsoft.DesktopVirtualization;
 @@doc(MSIXImages.expand::parameters.body,
   "Represents URI referring to MSIX Image"
 );
+@@Azure.ClientGenerator.Core.clientName(InitiateSessionHostUpdate.post::parameters.body,
+  "updateSessionHostsRequestBody"
+);
+@@doc(InitiateSessionHostUpdate.post::parameters.body,
+  "The resource properties to be updated"
+);

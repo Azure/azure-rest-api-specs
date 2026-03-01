@@ -556,3 +556,12 @@ using Microsoft.DesktopVirtualization;
   PrivateEndpointConnection,
   "csharp"
 );
+
+@@clientName(InitiateSessionHostUpdate.post,
+  "initiateSessionHostUpdate",
+  "csharp"
+);
+@@clientName(ControlSessionHostProvisioning.post,
+  "controlSessionHostProvisioning",
+  "csharp"
+);

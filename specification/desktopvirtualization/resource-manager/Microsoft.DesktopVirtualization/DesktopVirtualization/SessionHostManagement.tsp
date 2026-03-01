@@ -39,13 +39,15 @@ interface InitiateSessionHostUpdate {
   @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
-    },
-    Response = void
+    Request = UpdateSessionHostsRequestBody,
+    // {
+    //   /**
+    //    * The resource properties to be updated
+    //    */
+    //   @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
+    // },
+    Response = void,
+    OptionalRequestBody = true
   >;
 }
 
