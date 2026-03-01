@@ -26,12 +26,12 @@ These are the global settings for the AI Manager API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-03-preview
+tag: package-2026-03-02-preview
 ```
 
-### Tag: package-2026-03-preview
+### Tag: package-2026-03-02-preview
 
-These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-02-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-03-preview'
 input-file:

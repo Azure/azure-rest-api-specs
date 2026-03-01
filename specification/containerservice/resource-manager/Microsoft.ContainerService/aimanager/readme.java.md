@@ -18,15 +18,15 @@ description: "Azure Kubernetes AI Manager Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2026-03-preview
+  - tag: package-2026-03-02-preview
 ```
 
 ### Tag: package-2026-03-preview and java
 
-These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-02-preview` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2026-03-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2026-03-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerserviceaimanager.v2026_03_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2026_03_02_preview
