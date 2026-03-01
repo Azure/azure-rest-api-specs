@@ -175,6 +175,7 @@ interface AiManagerNamespaces {
   >;
 
   @doc("Lists the credentials of an AI Manager namespace.")
+  @post
   listCredential is ArmResourceActionSync<
     AiManagerNamespace,
     void,

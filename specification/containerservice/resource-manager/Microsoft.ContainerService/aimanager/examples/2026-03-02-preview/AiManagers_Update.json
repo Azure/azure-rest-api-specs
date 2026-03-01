@@ -1,63 +1,74 @@
 {
-  "title": "Update an AI Manager",
+  "title": "AiManagers_Update_MaximumSet",
   "operationId": "AiManagers_Update",
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "aiManagerName": "aimanager1",
     "api-version": "2026-03-02-preview",
+    "subscriptionId": "D76E8C7F-A192-405B-84A6-5E2A88453DB0",
+    "resourceGroupName": "rgaimanagers",
+    "aiManagerName": "Replace this value with a string matching RegExp ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
     "properties": {
-      "location": "eastus",
       "tags": {
-        "env": "staging"
+        "key6503": "tbf"
       },
       "identity": {
-        "type": "SystemAssigned"
+        "identity": {
+          "type": "None",
+          "userAssignedIdentities": {
+            "key1440": {}
+          }
+        }
       },
       "properties": {
-        "SystemNodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/systemNodeSubnet",
-        "NodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/nodeSubnet",
-        "ApiserverSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/apiserverSubnet"
+        "systemNodeSubnetId": "akagmewbcdlhtvygwtn",
+        "nodeSubnetId": "yhztnesvul",
+        "apiserverSubnetId": "lnlemeepz"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1",
-        "name": "aimanager1",
-        "type": "Microsoft.ContainerService/aiManagers",
-        "location": "eastus",
-        "tags": {
-          "env": "staging"
-        },
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "00000000-0000-0000-0000-000000000001",
-          "tenantId": "00000000-0000-0000-0000-000000000002"
-        },
         "properties": {
           "provisioningState": "Succeeded",
-          "ClusterID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1",
-          "SystemNodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/systemNodeSubnet",
-          "NodeSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/nodeSubnet",
-          "ApiserverSubnetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/apiserverSubnet"
+          "clusterId": "xxqiewrkqsricninxqqjxx",
+          "systemNodeSubnetId": "akagmewbcdlhtvygwtn",
+          "nodeSubnetId": "yhztnesvul",
+          "apiserverSubnetId": "lnlemeepz"
         },
-        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "eTag": "rqywvwaqkvsaxxtmgpwqxmlmzgfgj",
+        "identity": {
+          "identity": {
+            "principalId": "kfvrqwnvvrh",
+            "tenantId": "vjmfvwo",
+            "type": "None",
+            "userAssignedIdentities": {
+              "key1440": {
+                "principalId": "gritkxy",
+                "clientId": "nwmoujpkniokamg"
+              }
+            }
+          }
+        },
+        "tags": {
+          "key9962": "jhxeduplhjhrh"
+        },
+        "location": "xvdrssbqqtczd",
+        "id": "igefinixfwaodyhqazgnxwdifrjl",
+        "name": "bvtwddqcsvmfuuqfcehorzvf",
+        "type": "ivyosinh",
         "systemData": {
-          "createdBy": "user@example.com",
+          "createdBy": "qbkecbhya",
           "createdByType": "User",
-          "createdAt": "2025-01-01T00:00:00.0000000Z",
-          "lastModifiedBy": "user@example.com",
+          "createdAt": "2026-03-01T19:31:55.139Z",
+          "lastModifiedBy": "bqvxiqfzrvwtacvmwglzvkl",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-01T00:00:00.0000000Z"
+          "lastModifiedAt": "2026-03-01T19:31:55.139Z"
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview"
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }

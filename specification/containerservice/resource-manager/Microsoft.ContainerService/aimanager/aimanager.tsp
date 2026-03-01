@@ -43,7 +43,6 @@ model AiManagerProperties {
   clusterId?: string;
 
   @doc("The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-
   systemNodeSubnetId?: string;
 
   @doc("The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
@@ -77,15 +76,6 @@ union AIManagerProvisioningState {
   Canceled: "Canceled",
 }
 
-@doc("The request body for listing cluster user credentials.")
-model ListClusterUserCredentialRequest {
-  @doc("Server FQDN type for credentials to be returned.")
-  serverFqdn?: string;
-
-  @doc("Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.")
-  format?: Format;
-}
-
 @doc("The AI Manager resource patch model.")
 model AiManagerPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -107,11 +97,12 @@ interface AiManagers {
   listByResourceGroup is ArmResourceListByParent<AIManager>;
   listBySubscription is ArmListBySubscription<AIManager>;
 
-  @doc("Lists the user credentials of an AI Manager.")
-  @action("listClusterUserCredential")
-  listClusterUserCredentials is ArmResourceActionSync<
+  @doc("Lists the credentials of an AI Manager.")
+  @post
+  @action("ListCredential")
+  listCredential is ArmResourceActionSync<
     AIManager,
-    ListClusterUserCredentialRequest,
+    void,
     ArmResponse<CredentialResults>
   >;
 }

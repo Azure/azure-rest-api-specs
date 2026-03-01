@@ -77,7 +77,7 @@
           }
         },
         "x-ms-examples": {
-          "List operations": {
+          "Operations_List_MaximumSet": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -116,7 +116,7 @@
           }
         },
         "x-ms-examples": {
-          "List AI Managers by subscription": {
+          "AiManagers_ListBySubscription_MaximumSet": {
             "$ref": "./examples/AiManagers_ListBySubscription.json"
           }
         },
@@ -158,7 +158,7 @@
           }
         },
         "x-ms-examples": {
-          "List AI Managers by resource group": {
+          "AiManagers_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/AiManagers_ListByResourceGroup.json"
           }
         },
@@ -210,7 +210,7 @@
           }
         },
         "x-ms-examples": {
-          "Get an AI Manager": {
+          "AiManagers_Get_MaximumSet": {
             "$ref": "./examples/AiManagers_Get.json"
           }
         }
@@ -283,7 +283,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an AI Manager": {
+          "AiManagers_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/AiManagers_CreateOrUpdate.json"
           }
         },
@@ -357,7 +357,7 @@
           }
         },
         "x-ms-examples": {
-          "Update an AI Manager": {
+          "AiManagers_Update_MaximumSet": {
             "$ref": "./examples/AiManagers_Update.json"
           }
         },
@@ -419,7 +419,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an AI Manager": {
+          "AiManagers_Delete_MaximumSet": {
             "$ref": "./examples/AiManagers_Delete.json"
           }
         },
@@ -429,13 +429,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listClusterUserCredential": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listCredential": {
       "post": {
-        "operationId": "AiManagers_ListClusterUserCredentials",
+        "operationId": "AiManagers_ListCredential",
         "tags": [
           "AiManagers"
         ],
-        "description": "Lists the user credentials of an AI Manager.",
+        "description": "Lists the credentials of an AI Manager.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -455,15 +455,6 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListClusterUserCredentialRequest"
-            }
           }
         ],
         "responses": {
@@ -481,8 +472,8 @@
           }
         },
         "x-ms-examples": {
-          "List cluster user credentials": {
-            "$ref": "./examples/AiManagers_ListClusterUserCredentials.json"
+          "AiManagers_ListCredential_MaximumSet": {
+            "$ref": "./examples/AiManagers_ListCredential.json"
           }
         }
       }
@@ -530,7 +521,7 @@
           }
         },
         "x-ms-examples": {
-          "List AI Manager namespaces": {
+          "AiManagerNamespaces_ListByAiManager_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_ListByAiManager.json"
           }
         },
@@ -592,7 +583,7 @@
           }
         },
         "x-ms-examples": {
-          "Get an AI Manager namespace": {
+          "AiManagerNamespaces_Get_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_Get.json"
           }
         }
@@ -691,7 +682,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an AI Manager namespace": {
+          "AiManagerNamespaces_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_CreateOrUpdate.json"
           }
         },
@@ -783,7 +774,7 @@
           }
         },
         "x-ms-examples": {
-          "Update an AI Manager namespace": {
+          "AiManagerNamespaces_Update_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_Update.json"
           }
         },
@@ -863,7 +854,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an AI Manager namespace": {
+          "AiManagerNamespaces_Delete_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_Delete.json"
           }
         },
@@ -926,7 +917,7 @@
           }
         },
         "x-ms-examples": {
-          "List namespace credentials": {
+          "AiManagerNamespaces_ListCredential_MaximumSet": {
             "$ref": "./examples/AiManagerNamespaces_ListCredential.json"
           }
         }
@@ -1320,44 +1311,6 @@
             "description": "Delete both the ARM resource and the Kubernetes namespace together."
           }
         ]
-      }
-    },
-    "Format": {
-      "type": "string",
-      "description": "The format of the kubeconfig credential.",
-      "enum": [
-        "azure",
-        "exec"
-      ],
-      "x-ms-enum": {
-        "name": "Format",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "azure",
-            "value": "azure",
-            "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26."
-          },
-          {
-            "name": "exec",
-            "value": "exec",
-            "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
-          }
-        ]
-      }
-    },
-    "ListClusterUserCredentialRequest": {
-      "type": "object",
-      "description": "The request body for listing cluster user credentials.",
-      "properties": {
-        "serverFqdn": {
-          "type": "string",
-          "description": "Server FQDN type for credentials to be returned."
-        },
-        "format": {
-          "$ref": "#/definitions/Format",
-          "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path."
-        }
       }
     },
     "NetworkPolicies": {
