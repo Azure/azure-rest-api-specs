@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 import "./main.tsp";
 
+using Http;
 using Azure.ClientGenerator.Core;
 using Microsoft.DocumentDB;
 
@@ -92,4 +93,346 @@ model AccessRulePropertiesSubscriptionsItem {
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   global.AccessRulePropertiesSubscriptionsItem[],
   "go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoRoleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  createUpdateMongoRoleDefinitionParameters: MongoRoleDefinitionCreateUpdateParameters,
+): Azure.ResourceManager.ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
+@@override(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
+  mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoUserDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  createUpdateMongoUserDefinitionParameters: MongoUserDefinitionCreateUpdateParameters,
+): Azure.ResourceManager.ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
+@@override(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
+  mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoRoleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+
+@@override(MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
+  mongoDBResourcesDeleteMongoRoleDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoUserDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+
+@@override(MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
+  mongoDBResourcesDeleteMongoUserDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoDBResourcesGetMongoRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoRoleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmResponse<MongoRoleDefinitionGetResults>;
+
+@@override(MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
+  mongoDBResourcesGetMongoRoleDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op mongoDBResourcesGetMongoUserDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  mongoUserDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmResponse<MongoUserDefinitionGetResults>;
+
+@@override(MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
+  mongoDBResourcesGetMongoUserDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleAssignmentId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  createUpdateSqlRoleAssignmentParameters: SqlRoleAssignmentCreateUpdateParameters,
+): Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
+@@override(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
+  sqlResourcesCreateUpdateSqlRoleAssignmentCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  createUpdateSqlRoleDefinitionParameters: SqlRoleDefinitionCreateUpdateParameters,
+): Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
+@@override(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
+  sqlResourcesCreateUpdateSqlRoleDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesDeleteSqlRoleAssignmentCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleAssignmentId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+
+@@override(SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
+  sqlResourcesDeleteSqlRoleAssignmentCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesDeleteSqlRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+
+@@override(SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
+  sqlResourcesDeleteSqlRoleDefinitionCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesGetSqlRoleAssignmentCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleAssignmentId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmResponse<SqlRoleAssignmentGetResults>;
+
+@@override(SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
+  sqlResourcesGetSqlRoleAssignmentCustomized,
+  "go"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op sqlResourcesGetSqlRoleDefinitionCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  roleDefinitionId: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+  @minLength(3)
+  @maxLength(50)
+  accountName: string,
+): Azure.ResourceManager.ArmResponse<SqlRoleDefinitionGetResults>;
+
+@@override(SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
+  sqlResourcesGetSqlRoleDefinitionCustomized,
+  "go"
 );
