@@ -2253,11 +2253,11 @@ model ManagedServiceIdentity {
    * The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserassignedidentitiesAdditionalproperties>;
+  userAssignedIdentities?: Record<ManagedServiceIdentityUserAssignedIdentities>;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model UserassignedidentitiesAdditionalproperties {
+model ManagedServiceIdentityUserAssignedIdentities {
   /**
    * The principal id of user assigned identity.
    */

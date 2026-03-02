@@ -24,10 +24,6 @@ using Microsoft.DocumentDB;
   "hostname",
   "java"
 );
-@@clientName(Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
-  "ManagedServiceIdentityUserAssignedIdentities",
-  "java"
-);
 
 @@usage(DatabaseAccountGetResults,
   Azure.ClientGenerator.Core.Usage.input,
@@ -85,11 +81,6 @@ using Microsoft.DocumentDB;
 @@clientName(ServerVersion.Five0, "FIVE_ZERO", "java");
 @@clientName(ServerVersion.Six0, "SIX_ZERO", "java");
 @@clientName(ServerVersion.Seven0, "SEVEN_ZERO", "java");
-
-@@clientName(FleetspacePropertiesThroughputPoolConfigurationServiceTier,
-  "FleetspacePropertiesServiceTier",
-  "java"
-);
 
 /**
  *  The subscription resource ID for an access rule.
