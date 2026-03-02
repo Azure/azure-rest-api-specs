@@ -36,27 +36,29 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "KeyAuth": []
     },
     {
-      "OAuth2Auth": [
+      "AADToken": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    },
-    "OAuth2Auth": {
+    "AADToken": {
       "type": "oauth2",
+      "description": "Microsoft identity platform flows.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": ""
       }
+    },
+    "KeyAuth": {
+      "type": "apiKey",
+      "description": "Provide your Speech resource key here.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
     }
   },
   "tags": [],
@@ -201,15 +203,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -277,15 +271,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -533,15 +519,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -645,15 +623,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -712,15 +682,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -910,15 +872,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -1167,15 +1121,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -1243,15 +1189,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -1771,15 +1709,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
-            "required": false,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeader"
           },
           {
             "name": "id",
@@ -1839,6 +1769,34 @@
     }
   },
   "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "Microsoft identity platform flows.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1972,11 +1930,8 @@
       "description": "Consent object",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "displayName": {
@@ -2008,11 +1963,8 @@
           "description": "The locale of this consent. Locale code follows BCP-47. You can find the text\nto speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
         },
         "projectId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "properties": {
           "$ref": "#/definitions/ConsentProperties",
@@ -2184,18 +2136,12 @@
           "description": "Endpoint description"
         },
         "projectId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "modelId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "properties": {
           "$ref": "#/definitions/EndpointProperties",
@@ -2392,16 +2338,48 @@
         }
       }
     },
+    "KeyAuth": {
+      "type": "object",
+      "description": "Provide your Speech resource key here.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "Ocp-Apim-Subscription-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
+    },
     "Model": {
       "type": "object",
       "description": "Model object",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "voiceName": {
@@ -2422,25 +2400,16 @@
           "description": "The locale of this model. Locale code follows BCP-47. You can find the text to\nspeech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
         },
         "projectId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "consentId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "trainingSetId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "engineVersion": {
           "type": "string",
@@ -2595,11 +2564,8 @@
       "description": "Status of a long running operation.",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Unique operation ID.",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "status": {
@@ -2820,11 +2786,8 @@
       "description": "Personal voice object",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "speakerProfileId": {
@@ -2842,18 +2805,12 @@
           "description": "Personal voice description"
         },
         "projectId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "consentId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "audios": {
           "$ref": "#/definitions/AzureBlobContentSource",
@@ -2921,11 +2878,8 @@
       "description": "Project object. Consents, training sets, models, and endpoints are organized in\na project.",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "displayName": {
@@ -3101,11 +3055,8 @@
       "description": "Training set",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/resourceId",
           "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
         "displayName": {
@@ -3130,11 +3081,8 @@
           "description": "Training set properties"
         },
         "projectId": {
-          "type": "string",
-          "description": "Resource id",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "$ref": "#/definitions/resourceId",
+          "description": "Resource id"
         },
         "status": {
           "$ref": "#/definitions/Status",
@@ -3202,6 +3150,13 @@
           }
         ]
       }
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "Resource ID",
+      "minLength": 3,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
     }
   },
   "parameters": {
@@ -3242,6 +3197,18 @@
       "format": "int32",
       "default": 0,
       "x-ms-parameter-location": "method"
+    },
+    "OperationIdHeader": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+      "required": false,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
     }
   }
 }

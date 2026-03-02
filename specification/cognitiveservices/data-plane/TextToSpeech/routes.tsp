@@ -74,14 +74,9 @@ interface Projects {
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * Set this to true if you want to delete a project with model and endpoint.
@@ -100,14 +95,9 @@ interface Projects {
   @put
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * project definition
@@ -149,25 +139,11 @@ interface Consents {
   @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * consent definition
@@ -193,25 +169,11 @@ interface Consents {
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   post is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /** Consent form data */
       @multipartBody
@@ -252,14 +214,9 @@ interface TrainingSets {
   @put
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * training set definition
@@ -283,25 +240,11 @@ interface TrainingSets {
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   uploadData is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * Dataset to be uploaded
@@ -354,25 +297,11 @@ interface Models {
   @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * Model definition
@@ -416,16 +345,7 @@ interface Endpoints {
   @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
       /**
        * The resource ID, which should be UUID.
@@ -457,16 +377,7 @@ interface Endpoints {
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   resume is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
       /**
        * The resource ID, which should be UUID.
@@ -492,16 +403,7 @@ interface Endpoints {
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   suspend is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
       /**
        * The resource ID, which should be UUID.
@@ -552,25 +454,11 @@ interface PersonalVoices {
   @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /**
        * personal voice definition
@@ -596,25 +484,11 @@ interface PersonalVoices {
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   post is Azure.Core.Foundations.Operation<
     {
-      /**
-       * ID of the status monitor for the operation. If the Operation-Id header matches
-       * an existing operation and the request is not identical to the prior request, it
-       * will fail with a 400 Bad Request.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @header("Operation-Id")
-      operationId?: string;
+      ...OperationIdHeader;
 
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+      /** The ID of the resource. */
       @path
-      id: string;
+      id: resourceId;
 
       /** Personal voice form data */
       @multipartBody
