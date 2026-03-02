@@ -3043,7 +3043,7 @@ op regionalCheckNameAvailabilityCustomized(
   "listStaticSiteBuilds",
   "javascript"
 );
-@@clientName(StaticSiteBuildARMResources.getStaticSitesByResourceGroup,
+@@clientName(StaticSiteARMResources.getStaticSitesByResourceGroup,
   "listStaticSitesByResourceGroup",
   "javascript"
 );
@@ -3051,7 +3051,7 @@ op regionalCheckNameAvailabilityCustomized(
   "listUserProvidedFunctionAppsForStaticSiteBuild",
   "javascript"
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSite,
+@@clientName(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
   "listUserProvidedFunctionAppsForStaticSite",
   "javascript"
 );
@@ -3067,7 +3067,7 @@ op regionalCheckNameAvailabilityCustomized(
   "listPrivateEndpointConnectionList",
   "javascript"
 );
-@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionListSlot,
+@@clientName(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
   "listPrivateEndpointConnectionListSlot",
   "javascript"
 );
