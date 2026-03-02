@@ -10,6 +10,16 @@ options:
     output-file: "{version-status}/{version}/{feature}.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-splitting: "legacy-feature-files"
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetwork"
+    service-dir: "sdk/resourcemanager/network"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnetwork"
+    generate-fakes: true
+    inject-spans: true
+    single-client: false
+    flavor: azure
+    generate-samples: true
+    head-as-boolean: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
