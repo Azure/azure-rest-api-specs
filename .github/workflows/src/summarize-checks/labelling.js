@@ -812,7 +812,9 @@ const rulesPri0dataPlane = [
       `add the <code>PublishToCustomers</code> label to your PR in acknowledgement ` +
       `of the above. ` +
       `Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> ` +
-      `(see ${href("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}).`,
+      `(see ${href("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}). ` +
+      `❗If you don't have permissions to add the label, request <code>write access</code> per ` +
+      `${href("aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories", "https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories")}.`,
   },
   // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/6184
   // and https://github.com/Azure/azure-sdk-tools/issues/6612

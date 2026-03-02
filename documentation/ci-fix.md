@@ -34,6 +34,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`TypeSpec Validation`](#typespec-validation)
   - [`license/cla`](#licensecla)
 - [Suppression Process](#suppression-process)
+- [Getting write access to work on a PR](#getting-write-access-to-work-on-a-pr)
 - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
 - [Obsolete checks](#obsolete-checks)
 
@@ -264,6 +265,14 @@ This check is owned by One Engineering System. See [1ES GitHub inside Microsoft]
 In case there are validation errors reported against your service that you believe do not apply,
 we have a suppression process you can follow to permanently remove these reported errors for your specs.
 Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+
+# Getting write access to work on a PR
+
+If you need to add or remove labels on a PR but don't have the required permissions, you need write access
+to the repository.
+
+To request write access to the Azure REST API specs repositories, follow the instructions at
+[aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories](https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories).
 
 # Checks not covered by this guide
 
