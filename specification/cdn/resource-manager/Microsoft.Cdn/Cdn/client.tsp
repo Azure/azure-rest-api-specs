@@ -42,6 +42,14 @@ using Microsoft.Cdn;
 @@clientLocation(AFDDomains.listByProfile, "AfdCustomDomains", "java");
 @@clientLocation(AFDDomains.refreshValidationToken, "AfdCustomDomains", "java");
 
+// AfdProfiles client for Java
+@@clientLocation(Profiles.checkEndpointNameAvailability, "AfdProfiles", "java");
+@@clientLocation(Profiles.listResourceUsage, "AfdProfiles", "java");
+@@clientLocation(Profiles.checkHostNameAvailability, "AfdProfiles", "java");
+@@clientName(Profiles.checkHostNameAvailability, "checkHostnameAvailability", "java");
+@@clientLocation(Profiles.validateSecret, "AfdProfiles", "java");
+@@clientLocation(Profiles.upgrade, "AfdProfiles", "java");
+
 @@clientName(AFDDomain, "AfdDomain", "java");
 @@clientName(AFDDomainProperties, "AfdDomainProperties", "java");
 @@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,

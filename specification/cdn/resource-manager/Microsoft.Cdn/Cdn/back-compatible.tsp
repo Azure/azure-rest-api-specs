@@ -277,11 +277,14 @@ using Microsoft.Cdn;
 @@clientName(CidrIpAddress, "cidrIpAddress");
 @@clientName(PolicySettings, "policySettings");
 
-@@clientLocation(Profiles.checkEndpointNameAvailability, "AFDProfiles");
-@@clientLocation(Profiles.listResourceUsage, "AFDProfiles");
-@@clientLocation(Profiles.checkHostNameAvailability, "AFDProfiles");
-@@clientLocation(Profiles.validateSecret, "AFDProfiles");
-@@clientLocation(Profiles.upgrade, "AFDProfiles");
+@@clientLocation(Profiles.checkEndpointNameAvailability,
+  "AFDProfiles",
+  "!java"
+);
+@@clientLocation(Profiles.listResourceUsage, "AFDProfiles", "!java");
+@@clientLocation(Profiles.checkHostNameAvailability, "AFDProfiles", "!java");
+@@clientLocation(Profiles.validateSecret, "AFDProfiles", "!java");
+@@clientLocation(Profiles.upgrade, "AFDProfiles", "!java");
 @@clientLocation(Profiles.getLogAnalyticsMetrics, "LogAnalytics");
 @@clientLocation(Profiles.getLogAnalyticsRankings, "LogAnalytics");
 @@clientLocation(Profiles.getLogAnalyticsLocations, "LogAnalytics");
