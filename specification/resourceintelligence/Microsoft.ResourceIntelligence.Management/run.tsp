@@ -95,7 +95,7 @@ interface LatestRuns {
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ResourceGroupNameParameter,
+    ...ResourceGroupParameter,
     @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
   ): Run | ErrorResponse;
 
@@ -108,7 +108,7 @@ interface LatestRuns {
   createOrUpdate(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...ResourceGroupNameParameter,
+    ...ResourceGroupParameter,
     @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
     @body body: RunRequest,
   ): Run | { @statusCode statusCode: 201; @body body: Run } | ErrorResponse;
