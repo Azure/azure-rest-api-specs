@@ -17,9 +17,7 @@ namespace Microsoft.DesktopVirtualization;
  * Schema for SessionHostManagementUpdateStatus properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @parentResource(SessionHostManagement)
-@Azure.ResourceManager.Legacy.customAzureResource
 @singleton("default")
 @added(Versions.v2025_04_01_preview)
 model SessionHostManagementProvisioningStatus {
@@ -58,9 +56,5 @@ interface SessionHostManagementProvisioningStatuses {
   @OpenAPI.operationId("SessionHostProvisioningStatuses_Get")
   @get
   @action("sessionHostProvisioningStatuses/default")
-  get is ArmResourceActionSync<
-    SessionHostManagement,
-    Request = void,
-    Response = SessionHostManagementProvisioningStatus
-  >;
+  get is ArmResourceRead<SessionHostManagementProvisioningStatus>;
 }
