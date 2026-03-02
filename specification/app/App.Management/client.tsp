@@ -3,4 +3,5 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript");
+@@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
+@@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
