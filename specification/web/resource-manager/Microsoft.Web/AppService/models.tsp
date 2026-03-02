@@ -12737,6 +12737,7 @@ model NetworkFeaturesProperties {
 /**
  * Network Security Perimeter
  */
+@added(Versions.v2026_03_01_preview)
 model NetworkSecurityPerimeter {
   /**
    * ARM URI of the Network Security Perimeter resource.
@@ -12757,13 +12758,15 @@ model NetworkSecurityPerimeter {
 /**
  * Collection of Network Security Perimeter Configurations
  */
+@added(Versions.v2026_03_01_preview)
 model NetworkSecurityPerimeterConfigurationCollection
   is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
 
 /**
  * Detailed view of a Network Security Perimeter Configured for the site.
  */
- #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01_preview)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkSecurityPerimeterConfiguration extends ProxyOnlyResource {
   /**
    * Name of the Network Security Perimeter Profile Access Rule.
@@ -12774,6 +12777,7 @@ model NetworkSecurityPerimeterConfiguration extends ProxyOnlyResource {
 /**
  * Network Security Perimeter Configuration Properties
  */
+@added(Versions.v2026_03_01_preview)
 model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Reflects state of association persistence and configuration propagation to App Service Data Plane.
@@ -12826,6 +12830,7 @@ model NetworkTrace {
 /**
  * Network Security Perimeter Profile
  */
+@added(Versions.v2026_03_01_preview)
 model NspProfile {
   /**
    * Name of the Network Security Perimeter Profile.
@@ -12856,6 +12861,7 @@ model NspProfile {
 /**
  * Network Security Perimeter Profile Access Rule
  */
+@added(Versions.v2026_03_01_preview)
 model NspProfileAccessRule {
   /**
    * Name of the Network Security Perimeter Profile Access Rule.
@@ -12871,6 +12877,7 @@ model NspProfileAccessRule {
 /**
  * Network Security Perimeter Profile Access Rule Granular Feature
  */
+@added(Versions.v2026_03_01_preview)
 model NspProfileAccessRuleGranularFeature {
   /**
    * Resource Type of Granular Feature.
@@ -12886,6 +12893,7 @@ model NspProfileAccessRuleGranularFeature {
 /**
  * Network Security Perimeter Profile Access Rule Properties
  */
+@added(Versions.v2026_03_01_preview)
 model NspProfileAccessRuleProperties {
   /**
    * Direction of Access Rule (Inbound/Outbound).
@@ -12937,6 +12945,7 @@ model NspProfileAccessRuleProperties {
 /**
  * Network Security Perimeter Association Provisioning Issue
  */
+@added(Versions.v2026_03_01_preview)
 model NspProvisioningIssue {
   /**
    * Provisioning Issue Name
@@ -12952,6 +12961,7 @@ model NspProvisioningIssue {
 /**
  * Network Security Perimeter Association Provisioning Issue Properties
  */
+@added(Versions.v2026_03_01_preview)
 model NspProvisioningIssueProperties {
   /**
    * Provisioning Issue Type
@@ -12982,6 +12992,7 @@ model NspProvisioningIssueProperties {
 /**
  * Network Security Perimeter Resource Association
  */
+@added(Versions.v2026_03_01_preview)
 model NspResourceAssociation {
   /**
    * Network Security Perimeter Resource Association Name
