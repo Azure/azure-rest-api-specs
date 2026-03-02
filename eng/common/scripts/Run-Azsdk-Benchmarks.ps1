@@ -2,11 +2,15 @@
 # Builds the argument list for the Azure SDK Benchmarks CLI based on the provided parameters.
 # Called by the run-benchmarks composite action.
 
+[CmdletBinding()]
 param(
   [string]$Scenario,
   [string]$Tags,
   [string]$Model
 )
+
+Set-StrictMode -Version 4
+$ErrorActionPreference = 'Stop'
 
 [System.Collections.ArrayList]$runArgs = @("run")
 
