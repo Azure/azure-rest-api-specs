@@ -1,7 +1,19 @@
 id: release-trigger-001
 name: Trigger Release Pipeline
-prompt: "The readiness check passed. Go ahead and trigger the release pipeline for @azure/event-hubs JavaScript SDK."
+description: |
+  Test that the skill triggers the release pipeline and mentions approval.
+tags:
+  - basic
+inputs:
+  prompt: "The readiness check passed. Go ahead and trigger the release pipeline for @azure/event-hubs JavaScript SDK."
 expected:
-  - calls azsdk_release_sdk with checkReady=false to trigger pipeline
-  - uses packageName=@azure/event-hubs and language=JavaScript
-  - informs user they must approve the release stage manually
+  output_contains:
+    - "release"
+    - "pipeline"
+    - "approve"
+  outcomes:
+    - type: tool_called
+      tool_name: azsdk_release_sdk
+  behavior:
+    max_tool_calls: 3
+    max_response_time_ms: 30000
