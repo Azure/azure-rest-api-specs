@@ -30,17 +30,26 @@ using Azure.ClientGenerator.Core;
   "geoBackupKeyUri",
   "java"
 );
-@@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java");
+@@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java,go");
 
 @@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
   "HighAvailabilityMode",
-  "java"
+  "java,go"
 );
 @@clientName(Microsoft.DBforPostgreSQL.HighAvailabilityMode,
   "SupportedHighAvailabilityMode",
-  "java"
+  "java,go"
 );
 @@alternateType(Microsoft.DBforPostgreSQL.ServerSkuCapability.supportedHaMode,
   PostgreSqlFlexibleServerHighAvailabilityMode[],
-  "java"
+  "java,go"
 );
+
+@@clientName(PostgresMajorVersion.`11`, "Eleven", "go");
+@@clientName(PostgresMajorVersion.`12`, "Twelve", "go");
+@@clientName(PostgresMajorVersion.`13`, "Thirteen", "go");
+@@clientName(PostgresMajorVersion.`14`, "Fourteen", "go");
+@@clientName(PostgresMajorVersion.`15`, "Fifteen", "go");
+@@clientName(PostgresMajorVersion.`16`, "Sixteen", "go");
+@@clientName(PostgresMajorVersion.`17`, "Seventeen", "go");
+@@clientName(PostgresMajorVersion.`18`, "Eighteen", "go");

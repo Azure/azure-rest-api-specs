@@ -4,6 +4,7 @@ import "./main.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Search;
 
 @TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
@@ -368,6 +369,120 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
+// .NET specific customizations
+@@access(AnalyzeResult, Access.internal, "csharp");
+@@access(AzureActiveDirectoryApplicationCredentials, Access.internal, "csharp");
+@@alternateType(AzureMachineLearningSkill.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
+@@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
+@@access(DataSourceCredentials, Access.internal, "csharp");
+@@alternateType(Search.DocumentExtractionSkill.dataToExtract,
+  BlobIndexerDataToExtract,
+  "csharp"
+);
+@@alternateType(Search.DocumentExtractionSkill.parsingMode,
+  BlobIndexerParsingMode,
+  "csharp"
+);
+@@access(EdgeNGramTokenFilterV2, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilterV2,
+  "InternalEdgeNGramTokenFilterV2",
+  "csharp"
+);
+@@access(EdgeNGramTokenFilter, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilter, "InternalEdgeNGramTokenFilter", "csharp");
+@@clientName(EntityRecognitionSkillV3, "EntityRecognitionSkill", "csharp");
+@@clientName(IndexerCurrentState, "IndexerState", "csharp");
+@@clientName(IndexerCurrentState.resetDatasourceDocumentIds,
+  "ResetDataSourceDocumentIds",
+  "csharp"
+);
+@@clientName(IndexingMode.IndexingAllDocs, "AllDocuments", "csharp");
+@@clientName(IndexingMode.IndexingResetDocs, "ResetDocuments", "csharp");
+@@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
+@@alternateType(KnowledgeBase.eTag, eTag, "csharp");
+@@alternateType(KnowledgeSource.eTag, eTag, "csharp");
+@@access(LanguageDetectionSkill.modelVersion, Access.internal, "csharp");
+@@clientName(LengthTokenFilter.min, "MinLength", "csharp");
+@@clientName(LengthTokenFilter.max, "MaxLength", "csharp");
+@@access(ListDataSourcesResult, Access.internal, "csharp");
+@@access(ListIndexersResult, Access.internal, "csharp");
+@@access(ListIndexesResult, Access.internal, "csharp");
+@@access(ListIndexStatsSummary, Access.internal, "csharp");
+@@access(ListSkillsetsResult, Access.internal, "csharp");
+@@access(ListSynonymMapsResult, Access.internal, "csharp");
+@@access(LuceneStandardTokenizer, Access.internal, "csharp");
+@@clientName(LuceneStandardTokenizer,
+  "DeprecatedLuceneStandardTokenizer",
+  "csharp"
+);
+@@clientName(LuceneStandardTokenizerV2, "LuceneStandardTokenizer", "csharp");
+@@clientName(PIIDetectionSkill, "PiiDetectionSkill", "csharp");
+@@clientName(RegexFlags, "RegexFlag", "csharp");
+@@clientName(SkillNames, "ResetSkillsOptions", "csharp");
+@@alternateType(SearchIndexer.eTag, eTag, "csharp");
+@@alternateType(SearchIndexerSkillset.eTag, eTag, "csharp");
+@@clientName(SearchIndexerKnowledgeStore, "KnowledgeStore", "csharp");
+@@clientName(SearchIndexerKnowledgeStoreBlobProjectionSelector,
+  "KnowledgeStoreStorageProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjection,
+  "KnowledgeStoreProjection",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreFileProjectionSelector,
+  "KnowledgeStoreFileProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreObjectProjectionSelector,
+  "KnowledgeStoreObjectProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjectionSelector,
+  "KnowledgeStoreProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreTableProjectionSelector,
+  "KnowledgeStoreTableProjectionSelector",
+  "csharp"
+);
+@@clientName(ResourceCounter, "SearchResourceCounter", "csharp");
+@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+  "ContentFields",
+  "csharp"
+);
+@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+  "KeywordsFields",
+  "csharp"
+);
+@@alternateType(WebApiSkill.authResourceId, armResourceIdentifier, "csharp");
+@@alternateType(WebApiVectorizerParameters.authResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexBatch, Access.internal, "csharp");
+@@clientName(IndexBatch, "IndexBatch", "csharp");
+@@clientName(IndexingResult.statusCode, "Status", "csharp");
+@@clientName(DocumentKeysOrIds, "ResetDocumentOptions", "csharp");
+@@clientName(DocumentKeysOrIds.datasourceDocumentIds,
+  "DataSourceDocumentIds",
+  "csharp"
+);
+@@access(SearchDocumentsResult, Access.internal, "csharp");
+@@access(SearchResult, Access.internal, "csharp");
+@@access(SuggestDocumentsResult, Access.internal, "csharp");
+@@access(SuggestResult, Access.internal, "csharp");
+// end of .NET specific customizations
+
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);
 @@clientName(SearchClient.Documents.searchPost, "search", "java");
@@ -709,6 +824,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
+);
+@@clientName(Search.BlobIndexerPDFTextRotationAlgorithm,
+  "BlobIndexerPdfTextRotationAlgorithm",
+  "csharp"
 );
 @@clientNamespace(Search.IndexerExecutionEnvironment,
   "Azure.Search.Documents.Indexes"
