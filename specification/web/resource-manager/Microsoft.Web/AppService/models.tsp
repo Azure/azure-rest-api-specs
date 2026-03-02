@@ -11667,13 +11667,26 @@ model MSDeployStatusProperties {
 }
 
 /**
+ * MSDeploy ARM PUT information properties
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep MSDeployProperties as a subtype of MSDeployCore to match the existing ARM MSDeploy contract shape; follow aka.ms/tsp/conversion-fix for details."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve MSDeploy* identifier casing to align with the service's published API and existing clients; follow aka.ms/tsp/conversion-fix for details."
+model MSDeployProperties extends MSDeployCore {
+  /**
+   * List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.
+   */
+  @identifiers(#["packageUri"])
+  addOnPackages?: MSDeployCore[];
+}
+
+/**
  * MSDeploy ARM PUT information
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep MSDeploy to match the existing ARM MSDeploy contract shape; follow aka.ms/tsp/conversion-fix for details."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve MSDeploy identifier casing to align with the service's published API and existing clients; follow aka.ms/tsp/conversion-fix for details."
 model MSDeploy extends ProxyOnlyResource {
   /** Core resource properties */
-  properties?: MSDeployCore;
+  properties?: MSDeployProperties;
 }
 
 /**

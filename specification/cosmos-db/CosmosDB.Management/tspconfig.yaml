@@ -14,6 +14,7 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
+    service-dir: "sdk/cosmos"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cosmosdb"
     namespace: "azure.mgmt.cosmosdb"
     generate-test: true
@@ -35,10 +36,10 @@ options:
     client-side-validations: true
     enable-sync-stack: false
     use-object-for-unknown: true
+    float32-as-double: false
+    customization-class: customization/src/main/java/CosmosCustomization.java
     rename-model:
-      DataTransferServiceResourceCreateUpdateProperties: DataTransferServiceResourceCreateUpdateParameters
-      MaterializedViewsBuilderServiceResourceCreateUpdateProperties: MaterializedViewsBuilderServiceResourceCreateUpdateParameters
-      SqlDedicatedGatewayServiceResourceCreateUpdateProperties: SqlDedicatedGatewayServiceResourceCreateUpdateParameters
+      SkuTier: DatabaseAccountOfferType
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos"
     service-dir: "sdk/resourcemanager/cosmos"
