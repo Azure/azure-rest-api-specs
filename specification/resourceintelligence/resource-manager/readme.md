@@ -37,4 +37,11 @@ These settings apply only when `--tag=package-preview-2026-02` is specified on t
 ```yaml $(tag) == 'package-preview-2026-02'
 input-file:
   - Microsoft.ResourceIntelligence/preview/2026-02-01-preview/resourceintelligence.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: resourceintelligence.json
+    reason: "False positive. All provisioningState properties are marked as readOnly in their definitions."
+  - code: PathForNestedResource
+    from: resourceintelligence.json
+    reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
 ```
