@@ -862,6 +862,10 @@ union AccessTier {
   /** The Cold access tier. */
   Cold: "Cold",
 
+  /** The Smart access tier. */
+  @added(Versions.v2026_06_06)
+  Smart: "Smart",
+
   /** Extensible */
   string,
 }
@@ -874,8 +878,12 @@ union ArchiveStatus {
   /** The archive status is rehydrating pending to cool. */
   RehydratePendingToCool: "rehydrate-pending-to-cool",
 
-  /** The archive status is rehydrating pending to archive. */
+  /** The archive status is rehydrating pending to cold. */
   RehydratePendingToCold: "rehydrate-pending-to-cold",
+
+  /** The archive status is rehydrating pending to smart. */
+  @added(Versions.v2026_06_06)
+  RehydratePendingToSmart: "rehydrate-pending-to-smart",
 
   /** Extensible */
   string,
@@ -1018,6 +1026,11 @@ model BlobProperties {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
+
+  /** The smart access tier of the blob. */
+  @added(Versions.v2026_06_06)
+  @Xml.name("SmartAccessTier")
+  smartAccessTier?: AccessTier;
 
   /** Customer provided key sha256 */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;

@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "./models.tsp";
+import "@typespec/versioning";
 
 namespace Storage.Blob;
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 alias ApiVersionHeader = {
   /** Specifies the version of the operation to use for this request. */
@@ -868,6 +870,11 @@ interface Blob {
       @encode("rfc7231")
       @header("x-ms-access-tier-change-time")
       accessTierChangeTime?: utcDateTime;
+
+      /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+      @added(Versions.v2026_06_06)
+      @header("x-ms-smart-access-tier")
+      smartAccessTier?: string;
 
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
