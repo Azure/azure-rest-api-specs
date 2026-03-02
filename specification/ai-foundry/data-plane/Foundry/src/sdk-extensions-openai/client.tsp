@@ -381,7 +381,7 @@ namespace Azure.AI.Projects {
     }
   );
 
-  @@usage(OpenAI.OutputItem, Usage.json);
+  @@usage(OpenAI.OutputItem, Usage.input | Usage.output);
   @@access(OpenAI.OutputItem, Access.public);
   @@clientName(OpenAI.OutputItem, "AgentResponseItem");
 
