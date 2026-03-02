@@ -30053,37 +30053,6 @@
       "type": "object",
       "description": "Cosmos DB SQL database resource object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL database"
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -30116,8 +30085,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlDatabaseResource"
+        }
       ]
     },
     "RestorableSqlDatabasesListResult": {
