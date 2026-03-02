@@ -2,305 +2,205 @@
   "swagger": "2.0",
   "info": {
     "title": "Custom voice API",
+    "version": "2026-01-01",
     "description": "Custom voice API to create and deploy your voice.",
-    "contact": {
-      "name": "Azure AI - Speech Services",
-      "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
-    },
-    "version": "2026-01-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/customvoice",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
-    "/projects": {
+    "/basemodels": {
       "get": {
-        "tags": [
-          "Project"
-        ],
-        "description": "Gets a list of projects for the authenticated Speech service resource.",
-        "operationId": "Projects_List",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "BaseModels_List",
+        "description": "Gets a list of base models.",
         "parameters": [
           {
-            "$ref": "#/parameters/QuerySkip"
-          },
-          {
-            "$ref": "#/parameters/QueryMaxPageSize"
-          },
-          {
-            "$ref": "#/parameters/QueryFilter"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedProjects"
+              "$ref": "#/definitions/PaginatedBaseModels"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get base models": {
+            "$ref": "./examples/get_base_models.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get all projects": {
-            "$ref": "./examples/get_projects.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}": {
-      "get": {
-        "tags": [
-          "Project"
-        ],
-        "description": "Gets the project identified by the given ID.",
-        "operationId": "Projects_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a project": {
-            "$ref": "./examples/get_project.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Project"
-        ],
-        "description": "Deletes the project identified by the given ID. All data (like consent, training set) in this project will be deleted automatically.",
-        "operationId": "Projects_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "in": "query",
-            "name": "forceDelete",
-            "type": "boolean",
-            "description": "Set this to true if you want to delete a project with model and endpoint. Otherwise, the delete operation will fail.",
-            "default": false
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a project": {
-            "$ref": "./examples/delete_project.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Project"
-        ],
-        "description": "Creates a new project.",
-        "operationId": "Projects_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "project",
-            "description": "project definition",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a project": {
-            "$ref": "./examples/create_project.json"
-          }
         }
       }
     },
     "/consents": {
       "get": {
-        "tags": [
-          "Consent"
-        ],
-        "description": "Gets a list of consents for the authenticated Speech service resource.",
         "operationId": "Consents_List",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Gets a list of consents for the authenticated Speech service resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/QuerySkip"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryMaxPageSize"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
           },
           {
-            "$ref": "#/parameters/QueryFilter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedConsents"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
         },
         "x-ms-examples": {
           "Get all consents": {
             "$ref": "./examples/get_consents.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
     "/consents/{id}": {
       "get": {
-        "tags": [
-          "Consent"
-        ],
-        "description": "Gets the consent identified by the given ID.",
         "operationId": "Consents_Get",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Gets the consent identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Consent"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -311,71 +211,36 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Consent"
-        ],
-        "description": "Deletes the consent identified by the given ID.",
-        "operationId": "Consents_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a consent": {
-            "$ref": "./examples/delete_consent.json"
-          }
-        }
-      },
       "put": {
-        "tags": [
-          "Consent"
-        ],
-        "description": "Creates a new voice talent consent with the provided audio URL.",
         "operationId": "Consents_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Creates a new voice talent consent with the provided audio URL.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathId"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "in": "body",
             "name": "consent",
+            "in": "body",
             "description": "consent definition",
             "required": true,
             "schema": {
@@ -385,778 +250,304 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Consent"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a consent": {
             "$ref": "./examples/create_consent.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "post": {
-        "tags": [
-          "Consent"
-        ],
-        "description": "Creates a new voice talent consent with the provided audio file.",
         "operationId": "Consents_Post",
+        "description": "Creates a new voice talent consent with the provided audio file.",
         "consumes": [
           "multipart/form-data"
         ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathId"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "formData",
-            "name": "projectId",
-            "description": "The project ID.",
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
+            "name": "projectId",
             "in": "formData",
+            "description": "The project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "displayName",
+            "in": "formData",
             "description": "The display name of this consent.",
+            "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "name": "description",
+            "in": "formData",
             "description": "Optional description of this consent.",
+            "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "name": "voiceTalentName",
+            "in": "formData",
             "description": "The name of voice talent.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "name": "companyName",
+            "in": "formData",
             "description": "The name of company.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "name": "audiodata",
+            "in": "formData",
             "description": "An audio file containing the audio data.",
             "required": true,
             "type": "file"
           },
           {
-            "in": "formData",
             "name": "locale",
-            "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+            "in": "formData",
+            "description": "The locale of this consent. Locale code follows BCP-47. You can find the text\nto speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "name": "properties",
+            "in": "formData",
             "description": "properties.",
+            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Consent"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-examples": {
           "Create a consent": {
             "$ref": "./examples/create_consent_with_multipart_form.json"
           }
-        }
-      }
-    },
-    "/trainingsets": {
-      "get": {
-        "tags": [
-          "TrainingSet"
-        ],
-        "description": "Gets a list of training sets for the authenticated Speech service resource.",
-        "operationId": "TrainingSets_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/QuerySkip"
-          },
-          {
-            "$ref": "#/parameters/QueryMaxPageSize"
-          },
-          {
-            "$ref": "#/parameters/QueryFilter"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedTrainingSets"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get all training sets": {
-            "$ref": "./examples/get_trainingsets.json"
-          }
-        }
-      }
-    },
-    "/trainingsets/{id}": {
-      "get": {
-        "tags": [
-          "TrainingSet"
-        ],
-        "description": "Gets the training set identified by the given ID.",
-        "operationId": "TrainingSets_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/TrainingSet"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a training set": {
-            "$ref": "./examples/get_trainingset.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "TrainingSet"
-        ],
-        "description": "Deletes the training set identified by the given ID.",
-        "operationId": "TrainingSets_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a training set": {
-            "$ref": "./examples/delete_trainingset.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "TrainingSet"
-        ],
-        "description": "Creates a new training set.",
-        "operationId": "TrainingSets_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "trainingset",
-            "description": "training set definition",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrainingSet"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/TrainingSet"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a training set": {
-            "$ref": "./examples/create_trainingset.json"
-          }
-        }
-      }
-    },
-    "/trainingsets/{id}:upload": {
-      "post": {
-        "tags": [
-          "TrainingSet"
-        ],
-        "description": "Uploads data to the specified training set.",
-        "operationId": "TrainingSets_UploadData",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/HeaderOperationId"
-          },
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "dataset",
-            "description": "Dataset to be uploaded",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Dataset"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
-              },
-              "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "operation-location"
         },
-        "x-ms-examples": {
-          "Upload data to a training set": {
-            "$ref": "./examples/upload_trainingset.json"
-          }
-        }
-      }
-    },
-    "/modelrecipes": {
-      "get": {
-        "tags": [
-          "Model"
-        ],
-        "description": "Get a list of supported recipes for model building. Different recipes have different capabilities such as support for multi-style voice models.",
-        "operationId": "Models_ListRecipes",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedRecipes"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get all recipes": {
-            "$ref": "./examples/get_recipes.json"
-          }
-        }
-      }
-    },
-    "/models": {
-      "get": {
-        "tags": [
-          "Model"
-        ],
-        "description": "Gets the list of models for the authenticated Speech service resource.",
-        "operationId": "Models_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/QuerySkip"
-          },
-          {
-            "$ref": "#/parameters/QueryMaxPageSize"
-          },
-          {
-            "$ref": "#/parameters/QueryFilter"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedModels"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get all models": {
-            "$ref": "./examples/get_models.json"
-          }
-        }
-      }
-    },
-    "/models/{id}": {
-      "get": {
-        "tags": [
-          "Model"
-        ],
-        "description": "Gets the model identified by the given ID.",
-        "operationId": "Models_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Model"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a model": {
-            "$ref": "./examples/get_model.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "Model"
-        ],
-        "description": "Deletes the model identified by the given ID.",
-        "operationId": "Models_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Consents_Delete",
+        "description": "Deletes the consent identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "Delete a model": {
-            "$ref": "./examples/delete_model.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Model"
-        ],
-        "description": "Creates a new voice model.",
-        "operationId": "Models_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/HeaderOperationId"
-          },
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "model",
-            "description": "Model definition",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Model"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Model"
-            },
-            "headers": {
-              "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
-              },
-              "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create a model": {
-            "$ref": "./examples/create_model.json"
-          },
-          "Create a multi style model": {
-            "$ref": "./examples/create_multi_style_model.json"
+          "Delete a consent": {
+            "$ref": "./examples/delete_consent.json"
           }
         }
       }
     },
     "/endpoints": {
       "get": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Gets a list of endpoints for the authenticated Speech service resource.",
         "operationId": "Endpoints_List",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Gets a list of endpoints for the authenticated Speech service resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/QuerySkip"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryMaxPageSize"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
           },
           {
-            "$ref": "#/parameters/QueryFilter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedEndpoints"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
         },
         "x-ms-examples": {
           "Get all endpoints": {
             "$ref": "./examples/get_endpoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
     "/endpoints/{id}": {
       "get": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Gets the endpoint identified by the given ID.",
         "operationId": "Endpoints_Get",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Gets the endpoint identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID, which should be UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1167,71 +558,34 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Deletes the endpoint identified by the given ID.",
-        "operationId": "Endpoints_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathUuid"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an endpoint": {
-            "$ref": "./examples/delete_endpoint.json"
-          }
-        }
-      },
       "put": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Creates a new endpoint.",
         "operationId": "Endpoints_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Creates a new endpoint.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathUuid"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID, which should be UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           },
           {
-            "in": "body",
             "name": "endpoint",
+            "in": "body",
             "description": "Endpoint definition",
             "required": true,
             "schema": {
@@ -1241,565 +595,513 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create an endpoint": {
             "$ref": "./examples/create_endpoint.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "description": "Deletes the endpoint identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID, which should be UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an endpoint": {
+            "$ref": "./examples/delete_endpoint.json"
           }
         }
       }
     },
     "/endpoints/{id}:resume": {
       "post": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Resumes the endpoint identified by the given ID.",
         "operationId": "Endpoints_Resume",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Resumes the endpoint identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathUuid"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID, which should be UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-examples": {
           "Resume an endpoint": {
             "$ref": "./examples/resume_endpoint.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/endpoints/{id}:suspend": {
       "post": {
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Suspends the endpoint identified by the given ID.",
         "operationId": "Endpoints_Suspend",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Suspends the endpoint identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathUuid"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID, which should be UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-examples": {
           "Suspend an endpoint": {
             "$ref": "./examples/suspend_endpoint.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/basemodels": {
+    "/modelrecipes": {
       "get": {
-        "tags": [
-          "BaseModel"
-        ],
-        "description": "Gets a list of base models.",
-        "operationId": "BaseModels_List",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Models_ListRecipes",
+        "description": "Get a list of supported recipes for model building. Different recipes have\ndifferent capabilities such as support for multi-style voice models.",
         "parameters": [
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedBaseModels"
+              "$ref": "#/definitions/PaginatedRecipes"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all recipes": {
+            "$ref": "./examples/get_recipes.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get base models": {
-            "$ref": "./examples/get_base_models.json"
-          }
         }
       }
     },
-    "/personalvoices": {
+    "/models": {
       "get": {
-        "tags": [
-          "PersonalVoice"
-        ],
-        "description": "Gets a list of personal voices for the authenticated Speech service resource.",
-        "operationId": "PersonalVoices_List",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Models_List",
+        "description": "Gets the list of models for the authenticated Speech service resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/QuerySkip"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryMaxPageSize"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
           },
           {
-            "$ref": "#/parameters/QueryFilter"
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedPersonalVoices"
+              "$ref": "#/definitions/PaginatedModels"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all models": {
+            "$ref": "./examples/get_models.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get all personal voices": {
-            "$ref": "./examples/get_personalvoices.json"
-          }
         }
       }
     },
-    "/personalvoices/{id}": {
+    "/models/{id}": {
       "get": {
-        "tags": [
-          "PersonalVoice"
-        ],
-        "description": "Gets the personal voice identified by the given ID.",
-        "operationId": "PersonalVoices_Get",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Models_Get",
+        "description": "Gets the model identified by the given ID.",
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PersonalVoice"
+              "$ref": "#/definitions/Model"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "Get a personal voice": {
-            "$ref": "./examples/get_personalvoice.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PersonalVoice"
-        ],
-        "description": "Deletes the personal voice identified by the given ID.",
-        "operationId": "PersonalVoices_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a personal voice": {
-            "$ref": "./examples/delete_personalvoice.json"
+          "Get a model": {
+            "$ref": "./examples/get_model.json"
           }
         }
       },
       "put": {
-        "tags": [
-          "PersonalVoice"
-        ],
-        "description": "Creates a new personal voice with audio files in Azure Blob Storage.",
-        "operationId": "PersonalVoices_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "Models_Create",
+        "description": "Creates a new voice model.",
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PathId"
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "personalvoice",
-            "description": "personal voice definition",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonalVoice"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/PersonalVoice"
-            },
-            "headers": {
-              "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
-              },
-              "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create a personal voice": {
-            "$ref": "./examples/create_personalvoice.json"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "PersonalVoice"
-        ],
-        "description": "Creates a new personal voice with audio files in the client.",
-        "operationId": "PersonalVoices_Post",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/HeaderOperationId"
-          },
-          {
-            "$ref": "#/parameters/PathId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          },
-          {
-            "in": "formData",
-            "name": "displayName",
-            "description": "The display name of this model.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "description",
-            "description": "Optional description of this model.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "projectId",
-            "description": "The project ID.",
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "in": "formData",
-            "name": "audioData",
-            "description": "Audio files. Maximum file size is 30MB.",
-            "type": "file",
-            "x-ms-max-length": 31457280
-          },
-          {
-            "in": "formData",
-            "name": "properties",
-            "description": "properties.",
-            "type": "string"
+            "name": "model",
+            "in": "body",
+            "description": "Model definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/PersonalVoice"
+              "$ref": "#/definitions/Model"
             },
             "headers": {
               "Operation-Id": {
-                "type": "string",
-                "description": "ID of the operation."
+                "type": "string"
               },
               "Operation-Location": {
-                "description": "The location of the operation job. Use this URL to monitor operation status.",
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
+        "x-ms-examples": {
+          "Create a model": {
+            "$ref": "./examples/create_model.json"
+          },
+          "Create a multi style model": {
+            "$ref": "./examples/create_multi_style_model.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Models_Delete",
+        "description": "Deletes the model identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         },
         "x-ms-examples": {
-          "Create a personal voice": {
-            "$ref": "./examples/create_personalvoice_with_multipart_form.json"
+          "Delete a model": {
+            "$ref": "./examples/delete_model.json"
           }
         }
       }
     },
     "/operations/{id}": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Gets operation info.",
         "operationId": "Operations_Get",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Gets operation info.",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "The ID of the operation",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "minLength": 3,
-            "maxLength": 64
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/QueryApiVersion"
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the operation",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Operation"
             }
           },
           "default": {
-            "description": "An error occurred.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "Error code"
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1810,153 +1112,1042 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "AzureBlobContentSource": {
-      "description": "Azure Blob Storage content. With the examples below, it represents files https://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav",
-      "type": "object",
-      "required": [
-        "containerUrl",
-        "extensions"
-      ],
-      "properties": {
-        "containerUrl": {
-          "description": "Azure Blob Storage container URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). Need both read and list permissions.",
-          "type": "string",
-          "format": "url",
-          "example": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken"
+    },
+    "/personalvoices": {
+      "get": {
+        "operationId": "PersonalVoices_List",
+        "description": "Gets a list of personal voices for the authenticated Speech service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedPersonalVoices"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         },
-        "prefix": {
-          "description": "Blob name prefix.",
-          "type": "string",
-          "example": "jessica"
+        "x-ms-examples": {
+          "Get all personal voices": {
+            "$ref": "./examples/get_personalvoices.json"
+          }
         },
-        "extensions": {
-          "description": "File name extensions.",
-          "type": "array",
-          "items": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/personalvoices/{id}": {
+      "get": {
+        "operationId": "PersonalVoices_Get",
+        "description": "Gets the personal voice identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
             "type": "string",
-            "example": ".wav"
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a personal voice": {
+            "$ref": "./examples/get_personalvoice.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PersonalVoices_Create",
+        "description": "Creates a new personal voice with audio files in Azure Blob Storage.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "personalvoice",
+            "in": "body",
+            "description": "personal voice definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "post": {
+        "operationId": "PersonalVoices_Post",
+        "description": "Creates a new personal voice with audio files in the client.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "displayName",
+            "in": "formData",
+            "description": "The display name of this model.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "Optional description of this model.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "formData",
+            "description": "The project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "audioData",
+            "in": "formData",
+            "description": "Audio files. Maximum file size is 30MB.",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "properties",
+            "in": "formData",
+            "description": "properties.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice_with_multipart_form.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PersonalVoices_Delete",
+        "description": "Deletes the personal voice identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a personal voice": {
+            "$ref": "./examples/delete_personalvoice.json"
           }
         }
       }
     },
-    "BaseModel": {
-      "description": "Base model",
-      "required": [
-        "name",
-        "releaseDateTime"
-      ],
+    "/projects": {
+      "get": {
+        "operationId": "Projects_List",
+        "description": "Gets a list of projects for the authenticated Speech service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjects"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all projects": {
+            "$ref": "./examples/get_projects.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "operationId": "Projects_Get",
+        "description": "Gets the project identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a project": {
+            "$ref": "./examples/get_project.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Projects_Create",
+        "description": "Creates a new project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "project",
+            "in": "body",
+            "description": "project definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/create_project.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Projects_Delete",
+        "description": "Deletes the project identified by the given ID. All data (like consent,\ntraining set) in this project will be deleted automatically.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Set this to true if you want to delete a project with model and endpoint.\nOtherwise, the delete operation will fail.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a project": {
+            "$ref": "./examples/delete_project.json"
+          }
+        }
+      }
+    },
+    "/trainingsets": {
+      "get": {
+        "operationId": "TrainingSets_List",
+        "description": "Gets a list of training sets for the authenticated Speech service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of items to include in a single response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedTrainingSets"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all training sets": {
+            "$ref": "./examples/get_trainingsets.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/trainingsets/{id}": {
+      "get": {
+        "operationId": "TrainingSets_Get",
+        "description": "Gets the training set identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a training set": {
+            "$ref": "./examples/get_trainingset.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TrainingSets_Create",
+        "description": "Creates a new training set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "trainingset",
+            "in": "body",
+            "description": "training set definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TrainingSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a training set": {
+            "$ref": "./examples/create_trainingset.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TrainingSets_Delete",
+        "description": "Deletes the training set identified by the given ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a training set": {
+            "$ref": "./examples/delete_trainingset.json"
+          }
+        }
+      }
+    },
+    "/trainingsets/{id}:upload": {
+      "post": {
+        "operationId": "TrainingSets_UploadData",
+        "description": "Uploads data to the specified training set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches\nan existing operation and the request is not identical to the prior request, it\nwill fail with a 400 Bad Request.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "dataset",
+            "in": "body",
+            "description": "Dataset to be uploaded",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Id": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload data to a training set": {
+            "$ref": "./examples/upload_trainingset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "AzureBlobContentSource": {
+      "type": "object",
+      "description": "Azure Blob Storage content. With the examples below, it represents files\nhttps://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL with\n[SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview).\nNeed both read and list permissions."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Blob name prefix."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "File name extensions.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "containerUrl",
+        "extensions"
+      ]
+    },
+    "BaseModel": {
+      "type": "object",
+      "description": "Base model",
       "properties": {
         "name": {
-          "minLength": 1,
-          "type": "string"
+          "type": "string",
+          "description": "Base model name",
+          "minLength": 1
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Base model description"
         },
         "releaseDateTime": {
-          "description": "The stamp when the base model was released. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
           "format": "date-time",
-          "type": "string"
+          "description": "The stamp when the base model was released. The timestamp is encoded as ISO\n8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)."
         },
         "expirationDateTime": {
-          "description": "The timestamp when TTS service will stop serving this base model. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
           "format": "date-time",
-          "type": "string"
+          "description": "The timestamp when TTS service will stop serving this base model. The timestamp\nis encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)."
         },
         "capabilities": {
-          "description": "Capabilities of base model",
           "type": "array",
+          "description": "Capabilities of base model",
           "items": {
             "$ref": "#/definitions/ModelCapability"
           }
         }
-      }
+      },
+      "required": [
+        "name",
+        "releaseDateTime"
+      ]
     },
     "Consent": {
+      "type": "object",
       "description": "Consent object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name of consent.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of consent."
+        },
+        "voiceTalentName": {
+          "type": "string",
+          "description": "Voice talent name. Must match the voice talent name in the consent audio file.",
+          "minLength": 1
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company name. Must match the company name in the consent audio file.",
+          "minLength": 1
+        },
+        "audioUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The public accessible URL of the consent audio file. It's recommended to be an\nAzure blob URL with\n[SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview).\nThis property is only available in request."
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of this consent. Locale code follows BCP-47. You can find the text\nto speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConsentProperties",
+          "description": "Consent properties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of a resource."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as\nISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        }
+      },
       "required": [
         "voiceTalentName",
         "companyName",
         "locale",
         "projectId"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "displayName": {
-          "description": "Name of consent.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of consent.",
-          "type": "string"
-        },
-        "voiceTalentName": {
-          "description": "Voice talent name. Must match the voice talent name in the consent audio file.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "companyName": {
-          "description": "Company name. Must match the company name in the consent audio file.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "audioUrl": {
-          "description": "The public accessible URL of the consent audio file. It's recommended to be an Azure blob URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). This property is only available in request.",
-          "type": "string",
-          "format": "uri"
-        },
-        "locale": {
-          "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
-          "type": "string",
-          "example": "en-US"
-        },
-        "projectId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "properties": {
-          "$ref": "#/definitions/ConsentProperties"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
+      ]
     },
     "ConsentFailureReason": {
+      "type": "string",
       "description": "Consent creation failure reason",
       "enum": [
         "AudioAndScriptNotMatch",
         "Internal"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ConsentFailureReason",
         "modelAsString": true,
         "values": [
           {
+            "name": "AudioAndScriptNotMatch",
             "value": "AudioAndScriptNotMatch",
-            "description": "The consent audio mismatch with verbal statement. Please check [verbal-statement](https://github.com/Azure-Samples/Cognitive-Speech-TTS/blob/master/CustomVoice/script/verbal-statement-all-locales.txt)."
+            "description": "The consent audio mismatch with verbal statement. Please check\n[verbal-statement](https://github.com/Azure-Samples/Cognitive-Speech-TTS/blob/master/CustomVoice/script/verbal-statement-all-locales.txt)."
           },
           {
+            "name": "Internal",
             "value": "Internal",
             "description": "Custom Voice Service error."
           }
@@ -1964,180 +2155,230 @@
       }
     },
     "ConsentProperties": {
-      "description": "Consent properties",
       "type": "object",
+      "description": "Consent properties",
       "properties": {
         "failureReason": {
-          "$ref": "#/definitions/ConsentFailureReason"
+          "$ref": "#/definitions/ConsentFailureReason",
+          "description": "Consent creation failure reason"
         }
       }
     },
     "Dataset": {
+      "type": "object",
       "description": "Dataset object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of this dataset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of this dataset."
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind",
+          "description": "Dataset kind"
+        },
+        "processAs": {
+          "$ref": "#/definitions/DatasetProcessAs",
+          "description": "Dataset processing method. If not specified, the default processing method will\nbe used."
+        },
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage content. With the examples below, it represents files\nhttps://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav"
+        },
+        "scripts": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage content. With the examples below, it represents files\nhttps://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav"
+        }
+      },
       "required": [
         "kind",
         "audios"
-      ],
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "description": "The name of this dataset.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Optional description of this dataset.",
-          "type": "string"
-        },
-        "kind": {
-          "$ref": "#/definitions/DatasetKind"
-        },
-        "processAs": {
-          "$ref": "#/definitions/DatasetProcessAs"
-        },
-        "audios": {
-          "$ref": "#/definitions/AzureBlobContentSource"
-        },
-        "scripts": {
-          "$ref": "#/definitions/AzureBlobContentSource"
-        }
-      }
+      ]
     },
     "DatasetKind": {
+      "type": "string",
       "description": "Dataset kind",
       "enum": [
         "AudioAndScript",
         "LongAudio",
         "AudioOnly"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "DatasetKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AudioAndScript",
+            "value": "AudioAndScript",
+            "description": "AudioAndScript"
+          },
+          {
+            "name": "LongAudio",
+            "value": "LongAudio",
+            "description": "LongAudio"
+          },
+          {
+            "name": "AudioOnly",
+            "value": "AudioOnly",
+            "description": "AudioOnly"
+          }
+        ]
       }
     },
     "DatasetProcessAs": {
-      "description": "Dataset processing method. If not specified, the default processing method will be used.",
+      "type": "string",
+      "description": "Dataset processing method. If not specified, the default processing method will\nbe used.",
       "enum": [
         "Segmented",
         "Contextual"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "DatasetProcessAs",
         "modelAsString": true,
         "values": [
           {
+            "name": "Segmented",
             "value": "Segmented",
             "description": "The default processing mode that works with all supported languages."
           },
           {
+            "name": "Contextual",
             "value": "Contextual",
-            "description": "An enhanced mode that retains the audio as a whole to keep the contextual information for more natural intonations."
+            "description": "An enhanced mode that retains the audio as a whole to keep the contextual\ninformation for more natural intonations."
           }
         ]
       }
     },
     "Endpoint": {
-      "description": "Endpoint object",
-      "required": [
-        "projectId",
-        "modelId"
-      ],
       "type": "object",
+      "description": "Endpoint object",
       "properties": {
         "id": {
-          "description": "Endpoint Id",
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "description": "Endpoint Id"
         },
         "displayName": {
+          "type": "string",
           "description": "Endpoint name",
-          "minLength": 1,
-          "type": "string"
+          "minLength": 1
         },
         "description": {
-          "description": "Endpoint description",
-          "type": "string"
+          "type": "string",
+          "description": "Endpoint description"
         },
         "projectId": {
-          "$ref": "#/definitions/ResourceId"
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
         },
         "modelId": {
-          "$ref": "#/definitions/ResourceId"
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
         },
         "properties": {
-          "$ref": "#/definitions/EndpointProperties"
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "Endpoint properties"
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/Status",
+          "description": "Status of a resource."
         },
         "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
           "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
           "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as\nISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "projectId",
+        "modelId"
+      ]
     },
     "EndpointKind": {
+      "type": "string",
       "description": "Endpoint kind",
       "enum": [
         "HighPerformance",
         "FastResume"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "EndpointKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HighPerformance",
+            "value": "HighPerformance",
+            "description": "HighPerformance"
+          },
+          {
+            "name": "FastResume",
+            "value": "FastResume",
+            "description": "FastResume"
+          }
+        ]
       }
     },
     "EndpointProperties": {
-      "description": "Endpoint properties",
       "type": "object",
+      "description": "Endpoint properties",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/EndpointKind"
+          "$ref": "#/definitions/EndpointKind",
+          "description": "Endpoint kind"
         }
       }
     },
     "Error": {
-      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains an top-level error with error code, message, details, target and an inner error with more descriptive details.",
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
+      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains an top-level error with error code, message, details, target and\nan inner error with more descriptive details.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorCode"
+          "$ref": "#/definitions/ErrorCode",
+          "description": "Top-level error code"
         },
         "target": {
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
-          "type": "string"
+          "type": "string",
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case\nof invalid model."
         },
         "message": {
-          "description": "Top-level error message.",
-          "type": "string"
+          "type": "string",
+          "description": "Top-level error message."
         },
         "details": {
-          "description": "Additional supportive details regarding the error and/or expected policies.",
           "type": "array",
+          "description": "Additional supportive details regarding the error and/or expected policies.",
           "items": {
             "$ref": "#/definitions/Error"
           }
         },
         "innererror": {
-          "$ref": "#/definitions/InnerError"
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested)."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ErrorCode": {
+      "type": "string",
       "description": "Top-level error code",
       "enum": [
         "BadRequest",
@@ -2150,122 +2391,195 @@
         "InternalServerError",
         "ServiceUnavailable"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ErrorCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BadRequest",
+            "value": "BadRequest",
+            "description": "BadRequest"
+          },
+          {
+            "name": "BadArgument",
+            "value": "BadArgument",
+            "description": "BadArgument"
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "Unauthorized"
+          },
+          {
+            "name": "Forbidden",
+            "value": "Forbidden",
+            "description": "Forbidden"
+          },
+          {
+            "name": "NotFound",
+            "value": "NotFound",
+            "description": "NotFound"
+          },
+          {
+            "name": "UnsupportedMediaType",
+            "value": "UnsupportedMediaType",
+            "description": "UnsupportedMediaType"
+          },
+          {
+            "name": "TooManyRequests",
+            "value": "TooManyRequests",
+            "description": "TooManyRequests"
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError",
+            "description": "InternalServerError"
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable"
+          }
+        ]
       }
     },
     "ErrorResponse": {
-      "description": "Error response follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
-      "required": [
-        "error"
-      ],
       "type": "object",
+      "description": "Error response follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/Error",
+          "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains an top-level error with error code, message, details, target and\nan inner error with more descriptive details."
         }
-      }
-    },
-    "VoiceKind": {
-      "description": "Voice kind",
-      "enum": [
-        "Male",
-        "Female"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "VoiceKind",
-        "modelAsString": true
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "InnerError": {
-      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains required properties error code, message and optional properties target, inner error(this can be nested).",
       "type": "object",
+      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested).",
       "properties": {
         "code": {
-          "description": "Detailed error code to help diagnostic.",
-          "type": "string"
+          "type": "string",
+          "description": "Detailed error code to help diagnostic."
         },
         "target": {
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
-          "type": "string"
+          "type": "string",
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case\nof invalid model."
         },
         "message": {
-          "description": "Detailed error message.",
-          "type": "string"
+          "type": "string",
+          "description": "Detailed error message."
         },
         "innererror": {
-          "$ref": "#/definitions/InnerError"
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested)."
         }
       }
     },
     "Model": {
+      "type": "object",
       "description": "Model object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "voiceName": {
+          "type": "string",
+          "description": "Voice name",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Model description"
+        },
+        "recipe": {
+          "$ref": "#/definitions/Recipe",
+          "description": "Recipe for model building. Different recipes have different capability."
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of this model. Locale code follows BCP-47. You can find the text to\nspeech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "consentId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "trainingSetId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "Engine version. Update this version can get the latest pronunciation bug fixing.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelProperties",
+          "description": "Model properties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of a resource."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as\nISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        }
+      },
       "required": [
         "recipe",
         "projectId",
         "consentId",
         "trainingSetId"
+      ]
+    },
+    "ModelCapability": {
+      "type": "string",
+      "description": "Model capability",
+      "enum": [
+        "PersonalVoice"
       ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "voiceName": {
-          "description": "Voice name",
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "description": "Model description",
-          "type": "string"
-        },
-        "recipe": {
-          "$ref": "#/definitions/Recipe"
-        },
-        "locale": {
-          "description": "The locale of this model. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
-          "type": "string",
-          "example": "en-US"
-        },
-        "projectId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "consentId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "trainingSetId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "engineVersion": {
-          "description": "Engine version. Update this version can get the latest pronunciation bug fixing.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ModelProperties"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
+      "x-ms-enum": {
+        "name": "ModelCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PersonalVoice",
+            "value": "PersonalVoice",
+            "description": "PersonalVoice"
+          }
+        ]
       }
     },
     "ModelFailureReason": {
+      "type": "string",
       "description": "Model training failure reason",
       "enum": [
         "InaccessibleCustomerStorage",
@@ -2275,117 +2589,110 @@
         "DataNotReady",
         "DataNotEnough"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ModelFailureReason",
         "modelAsString": true,
         "values": [
           {
+            "name": "InaccessibleCustomerStorage",
             "value": "InaccessibleCustomerStorage",
-            "description": "The customer uses Bring Your Own Storage in Speech Account. But the storage is not accessible now. Please check [doc](https://learn.microsoft.com/azure/ai-services/speech-service/bring-your-own-storage-speech-resource?tabs=portal#configure-byos-associated-storage-account)."
+            "description": "The customer uses Bring Your Own Storage in Speech Account. But the storage is\nnot accessible now. Please check\n[doc](https://learn.microsoft.com/azure/ai-services/speech-service/bring-your-own-storage-speech-resource?tabs=portal#configure-byos-associated-storage-account)."
           },
           {
+            "name": "SpeakerVerificationFailed",
             "value": "SpeakerVerificationFailed",
             "description": "The consent and training audio are not from the same speaker."
           },
           {
+            "name": "TerminateByUser",
             "value": "TerminateByUser",
             "description": "The customer canceled model training."
           },
           {
+            "name": "Internal",
             "value": "Internal",
             "description": "Custom Voice Service error."
           },
           {
+            "name": "DataNotReady",
             "value": "DataNotReady",
             "description": "Training data is not ready for model training."
           },
           {
+            "name": "DataNotEnough",
             "value": "DataNotEnough",
             "description": "Training data is not enough for model training."
           }
         ]
       }
     },
-    "ModelCapability": {
-      "description": "Model capability",
-      "enum": [
-        "PersonalVoice"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ModelCapability",
-        "modelAsString": true
-      }
-    },
     "ModelProperties": {
-      "description": "Model properties",
       "type": "object",
+      "description": "Model properties",
       "properties": {
         "presetStyles": {
-          "description": "Preset styles of this model.",
           "type": "array",
+          "description": "Preset styles of this model.",
           "items": {
             "type": "string"
           }
         },
         "styleTrainingSetIds": {
-          "description": "Customized styles and associated training sets.",
           "type": "object",
+          "description": "Customized styles and associated training sets.",
           "additionalProperties": {
-            "$ref": "#/definitions/ResourceId"
+            "type": "string"
           }
         },
         "voiceStyles": {
-          "description": "All styles supported by this model.",
           "type": "array",
+          "description": "All styles supported by this model.",
           "items": {
             "type": "string"
           },
           "readOnly": true
         },
         "failureReason": {
-          "$ref": "#/definitions/ModelFailureReason"
+          "$ref": "#/definitions/ModelFailureReason",
+          "description": "Model training failure reason"
         },
         "failedTrainingsets": {
-          "description": "IDs of failed training sets.",
           "type": "array",
+          "description": "IDs of failed training sets.",
           "items": {
             "type": "string"
           },
           "readOnly": true
         },
         "secondaryLocales": {
-          "description": "Secondary locales that this model can speak. Locale code follows BCP-47.",
           "type": "array",
+          "description": "Secondary locales that this model can speak. Locale code follows BCP-47.",
           "items": {
-            "type": "string",
-            "example": "en-GB"
+            "type": "string"
           },
           "readOnly": true
         }
       }
     },
-    "OperationId": {
-      "description": "Unique operation ID.",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64
-    },
     "Operation": {
-      "description": "Status of a long running operation.",
       "type": "object",
+      "description": "Status of a long running operation.",
       "properties": {
         "id": {
-          "$ref": "#/definitions/OperationId"
+          "type": "string",
+          "description": "Unique operation ID.",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of an operation."
         }
       }
     },
     "OperationStatus": {
+      "type": "string",
       "description": "Status of an operation.",
       "enum": [
         "NotStarted",
@@ -2393,194 +2700,295 @@
         "Succeeded",
         "Failed"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "OperationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
       }
     },
     "PaginatedBaseModels": {
-      "description": "Paginated base model list",
-      "required": [
-        "value"
-      ],
       "type": "object",
+      "description": "Paginated base model list",
       "properties": {
         "value": {
-          "description": "Base model list",
           "type": "array",
+          "description": "The BaseModel items on this page",
           "items": {
             "$ref": "#/definitions/BaseModel"
           }
         },
         "nextLink": {
-          "description": "Link to next page.",
+          "type": "string",
           "format": "uri",
-          "type": "string"
+          "description": "The link to the next page of items"
         }
-      }
-    },
-    "PaginatedConsents": {
-      "description": "Paginated consent list",
+      },
       "required": [
         "value"
-      ],
+      ]
+    },
+    "PaginatedConsents": {
       "type": "object",
+      "description": "Paginated consent list",
       "properties": {
         "value": {
-          "description": "Consent list",
           "type": "array",
+          "description": "The Consent items on this page",
           "items": {
             "$ref": "#/definitions/Consent"
           }
         },
         "nextLink": {
-          "description": "Link to next page.",
+          "type": "string",
           "format": "uri",
-          "type": "string"
+          "description": "The link to the next page of items"
         }
-      }
-    },
-    "PaginatedEndpoints": {
-      "description": "Paginated endpoint list",
+      },
       "required": [
         "value"
-      ],
+      ]
+    },
+    "PaginatedEndpoints": {
       "type": "object",
+      "description": "Paginated endpoint list",
       "properties": {
         "value": {
-          "description": "Endpoint list",
           "type": "array",
+          "description": "The Endpoint items on this page",
           "items": {
             "$ref": "#/definitions/Endpoint"
           }
         },
         "nextLink": {
-          "description": "Link to next page.",
+          "type": "string",
           "format": "uri",
-          "type": "string"
+          "description": "The link to the next page of items"
         }
-      }
-    },
-    "PaginatedModels": {
-      "description": "Paginated model list",
+      },
       "required": [
         "value"
-      ],
+      ]
+    },
+    "PaginatedModels": {
       "type": "object",
+      "description": "Paginated model list",
       "properties": {
         "value": {
-          "description": "Model list",
           "type": "array",
+          "description": "The Model items on this page",
           "items": {
             "$ref": "#/definitions/Model"
           }
         },
         "nextLink": {
-          "description": "Link to next page.",
+          "type": "string",
           "format": "uri",
-          "type": "string"
+          "description": "The link to the next page of items"
         }
-      }
-    },
-    "PaginatedRecipes": {
-      "description": "Paginated recipe list",
+      },
       "required": [
         "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Recipe list",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Recipe"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page.",
-          "format": "uri",
-          "type": "string"
-        }
-      }
-    },
-    "PaginatedProjects": {
-      "description": "Paginated project list",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Project list",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Project"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page.",
-          "format": "uri",
-          "type": "string"
-        }
-      }
-    },
-    "PaginatedTrainingSets": {
-      "description": "Paginated training set list",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Training set list",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TrainingSet"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page.",
-          "format": "uri",
-          "type": "string"
-        }
-      }
+      ]
     },
     "PaginatedPersonalVoices": {
-      "description": "Paginated personal voice list",
-      "required": [
-        "value"
-      ],
       "type": "object",
+      "description": "Paginated personal voice list",
       "properties": {
         "value": {
-          "description": "Personal voice list",
           "type": "array",
+          "description": "The PersonalVoice items on this page",
           "items": {
             "$ref": "#/definitions/PersonalVoice"
           }
         },
         "nextLink": {
-          "description": "Link to next page.",
+          "type": "string",
           "format": "uri",
-          "type": "string"
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PaginatedProjects": {
+      "type": "object",
+      "description": "Paginated project list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PaginatedRecipes": {
+      "type": "object",
+      "description": "Paginated recipe list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Recipe items on this page",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PaginatedTrainingSets": {
+      "type": "object",
+      "description": "Paginated training set list",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TrainingSet items on this page",
+          "items": {
+            "$ref": "#/definitions/TrainingSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PersonalVoice": {
+      "type": "object",
+      "description": "Personal voice object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "speakerProfileId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Personal voice speaker profile id. Fill this property in SSML.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of personal voice",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Personal voice description"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "consentId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource",
+          "description": "Azure Blob Storage content. With the examples below, it represents files\nhttps://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav"
+        },
+        "properties": {
+          "$ref": "#/definitions/PersonalVoiceProperties",
+          "description": "Personal voice properties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of a resource."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as\nISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "projectId",
+        "consentId"
+      ]
+    },
+    "PersonalVoiceProperties": {
+      "type": "object",
+      "description": "Personal voice properties",
+      "properties": {
+        "failureReason": {
+          "$ref": "#/definitions/ModelFailureReason",
+          "description": "Model training failure reason"
         }
       }
     },
     "PresetStyleItem": {
-      "description": "Preset styles supported by the recipe. The voice model can support these styles without any style training set.",
       "type": "object",
+      "description": "Preset styles supported by the recipe. The voice model can support these styles\nwithout any style training set.",
       "properties": {
         "male": {
-          "description": "Preset styles supported on male voice model.",
           "type": "array",
+          "description": "Preset styles supported on male voice model.",
           "items": {
             "type": "string"
           }
         },
         "female": {
-          "description": "Preset styles supported on female voice model.",
           "type": "array",
+          "description": "Preset styles supported on female voice model.",
           "items": {
             "type": "string"
           }
@@ -2588,129 +2996,137 @@
       }
     },
     "Project": {
-      "description": "Project object. Consents, training sets, models, and endpoints are organized in a project.",
-      "required": [
-        "kind"
-      ],
       "type": "object",
+      "description": "Project object. Consents, training sets, models, and endpoints are organized in\na project.",
       "properties": {
         "id": {
-          "$ref": "#/definitions/ResourceId"
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
         },
         "displayName": {
+          "type": "string",
           "description": "Project name",
-          "minLength": 1,
-          "type": "string"
+          "minLength": 1
         },
         "description": {
-          "description": "Project description",
-          "type": "string"
+          "type": "string",
+          "description": "Project description"
         },
         "kind": {
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Project kind"
         },
         "locale": {
-          "description": "The locale of this project. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "string",
-          "example": "en-US"
+          "description": "The locale of this project. Locale code follows BCP-47. You can find the text\nto speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
         },
         "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
           "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "ProjectKind": {
+      "type": "string",
       "description": "Project kind",
       "enum": [
         "ProfessionalVoice",
         "PersonalVoice"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ProjectKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ProfessionalVoice",
+            "value": "ProfessionalVoice",
+            "description": "ProfessionalVoice"
+          },
+          {
+            "name": "PersonalVoice",
+            "value": "PersonalVoice",
+            "description": "PersonalVoice"
+          }
+        ]
       }
     },
     "Recipe": {
-      "description": "Recipe for model building. Different recipes have different capability.",
       "type": "object",
+      "description": "Recipe for model building. Different recipes have different capability.",
       "properties": {
         "kind": {
-          "description": "Recipe kind",
-          "type": "string"
+          "type": "string",
+          "description": "Recipe kind"
         },
         "version": {
-          "description": "Recipe version",
-          "type": "string"
+          "type": "string",
+          "description": "Recipe version"
         },
         "description": {
-          "description": "Recipe description",
           "type": "string",
+          "description": "Recipe description",
           "readOnly": true
         },
         "minUtteranceCount": {
-          "description": "Minimum utterance count required to train a voice model with this recipe.",
-          "format": "int32",
           "type": "integer",
+          "format": "int32",
+          "description": "Minimum utterance count required to train a voice model with this recipe.",
           "readOnly": true
         },
         "minStyleUtteranceCount": {
-          "description": "Minimum utterance count required to train each customized style.",
-          "format": "int32",
           "type": "integer",
+          "format": "int32",
+          "description": "Minimum utterance count required to train each customized style.",
           "readOnly": true
         },
         "maxCustomStyleNum": {
-          "description": "Maximum customized style number supported in one voice model.",
-          "format": "int32",
           "type": "integer",
+          "format": "int32",
+          "description": "Maximum customized style number supported in one voice model.",
           "readOnly": true
         },
         "datasetLocales": {
-          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find\nthe text to speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "items": {
-            "type": "string",
-            "example": "en-US"
+            "type": "string"
           },
           "readOnly": true
         },
         "modelLocales": {
-          "description": "The locale that a voice model can speak with this recipe. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
+          "description": "The locale that a voice model can speak with this recipe. Locale code follows\nBCP-47. You can find the text to speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "items": {
-            "type": "string",
-            "example": "en-US"
+            "type": "string"
           },
           "readOnly": true
         },
         "presetStyles": {
-          "description": "Preset styles supported by this recipe per locale. You can get these styles without any style training set.",
           "type": "object",
+          "description": "Preset styles supported by this recipe per locale. You can get these styles\nwithout any style training set.",
           "additionalProperties": {
             "$ref": "#/definitions/PresetStyleItem"
           },
           "readOnly": true
         },
         "minDurationInSeconds": {
-          "description": "Minimum audio duration in seconds required to train a voice model with this recipe.",
-          "format": "double",
           "type": "number",
+          "format": "double",
+          "description": "Minimum audio duration in seconds required to train a voice model with this\nrecipe.",
           "readOnly": true
         }
       }
     },
-    "ResourceId": {
-      "description": "Resource id",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64
-    },
     "Status": {
+      "type": "string",
       "description": "Status of a resource.",
       "enum": [
         "NotStarted",
@@ -2720,191 +3136,151 @@
         "Disabling",
         "Disabled"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "Status",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "Disabling"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
       }
     },
     "TrainingSet": {
+      "type": "object",
       "description": "Training set",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Training set name",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Training set description"
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find\nthe text to speech locale list here\nhttps://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VoiceKind",
+          "description": "Voice kind"
+        },
+        "properties": {
+          "$ref": "#/definitions/TrainingSetProperties",
+          "description": "Training set properties"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Resource id",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of a resource."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601\ndate and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as\nISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see\nhttps://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        }
+      },
       "required": [
         "locale",
         "projectId"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "displayName": {
-          "description": "Training set name",
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "description": "Training set description",
-          "type": "string"
-        },
-        "locale": {
-          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
-          "type": "string",
-          "example": "en-US"
-        },
-        "voiceKind": {
-          "$ref": "#/definitions/VoiceKind"
-        },
-        "properties": {
-          "$ref": "#/definitions/TrainingSetProperties"
-        },
-        "projectId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
+      ]
     },
     "TrainingSetProperties": {
-      "description": "Training set properties",
       "type": "object",
+      "description": "Training set properties",
       "properties": {
         "utteranceCount": {
-          "description": "Utterance count in this training set",
+          "type": "integer",
           "format": "int32",
-          "type": "integer"
+          "description": "Utterance count in this training set"
         },
         "durationInSeconds": {
-          "description": "Total duration of audio in seconds in this training set",
+          "type": "number",
           "format": "double",
-          "type": "number"
+          "description": "Total duration of audio in seconds in this training set"
         },
         "isContextual": {
-          "description": "Indicates whether the training set is composed of contextual data",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Indicates whether the training set is composed of contextual data"
         }
-      },
-      "readOnly": true
+      }
     },
-    "PersonalVoice": {
-      "description": "Personal voice object",
-      "required": [
-        "projectId",
-        "consentId"
+    "VoiceKind": {
+      "type": "string",
+      "description": "Voice kind",
+      "enum": [
+        "Male",
+        "Female"
       ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "speakerProfileId": {
-          "description": "Personal voice speaker profile id. Fill this property in SSML.",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Display name of personal voice",
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "description": "Personal voice description",
-          "type": "string"
-        },
-        "projectId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "consentId": {
-          "$ref": "#/definitions/ResourceId"
-        },
-        "audios": {
-          "$ref": "#/definitions/AzureBlobContentSource"
-        },
-        "properties": {
-          "$ref": "#/definitions/PersonalVoiceProperties"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "createdDateTime": {
-          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PersonalVoiceProperties": {
-      "description": "Personal voice properties",
-      "type": "object",
-      "properties": {
-        "failureReason": {
-          "$ref": "#/definitions/ModelFailureReason"
-        }
-      },
-      "readOnly": true
-    }
-  },
-  "securityDefinitions": {
-    "subscription_key": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header",
-      "description": "Provide your Speech resource key here."
-    },
-    "AADToken": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.",
-      "scopes": {
-        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      "x-ms-enum": {
+        "name": "VoiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Male",
+            "value": "Male",
+            "description": "Male"
+          },
+          {
+            "name": "Female",
+            "value": "Female",
+            "description": "Female"
+          }
+        ]
       }
     }
-  },
-  "security": [
-    {
-      "subscription_key": [],
-      "AADToken": []
-    }
-  ],
-  "schemes": [
-    "https"
-  ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/customvoice",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "endpoint",
-        "in": "path",
-        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
-        "required": true,
-        "type": "string"
-      }
-    ]
   },
   "parameters": {
-    "QueryApiVersion": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "The API version to use for this operation.",
@@ -2913,65 +3289,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "QuerySkip": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "QueryMaxPageSize": {
-      "name": "maxpagesize",
-      "in": "query",
-      "description": "The maximum number of items to include in a single response.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 100,
-      "x-ms-parameter-location": "method"
-    },
-    "QueryFilter": {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter condition.\r\n  - **Supported properties:** projectId, createdDateTime, locale, kind\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n    - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n    - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PathId": {
-      "name": "id",
-      "in": "path",
-      "description": "The ID of the resource.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
-    },
-    "PathUuid": {
-      "name": "id",
-      "in": "path",
-      "description": "The resource ID, which should be UUID.",
-      "required": true,
-      "type": "string",
-      "format": "uuid",
-      "x-ms-parameter-location": "method"
-    },
-    "HeaderOperationId": {
-      "name": "Operation-Id",
-      "in": "header",
-      "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-      "required": false,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -1,20 +1,16 @@
 {
   "parameters": {
+    "Content-Type": "application/json",
     "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
+    "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b",
     "api-version": "2026-01-01",
     "id": "JessicaMultiStyle",
-    "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b",
     "model": {
-      "voiceName": "JessicaMultiStyleNeural",
       "description": "Jessica multi style voice",
-      "recipe": {
-        "kind": "MultiStyle"
-      },
-      "projectId": "Jessica",
       "consentId": "Jessica",
-      "trainingSetId": "Jessica-300",
       "locale": "en-US",
+      "projectId": "Jessica",
       "properties": {
         "presetStyles": [
           "cheerful",
@@ -24,29 +20,25 @@
           "happy": "JessicaHappy-300",
           "myStyle2": "JessicaStyle2"
         }
-      }
-    },
-    "Content-Type": "application/json"
+      },
+      "recipe": {
+        "kind": "MultiStyle"
+      },
+      "trainingSetId": "Jessica-300",
+      "voiceName": "JessicaMultiStyleNeural"
+    }
   },
   "responses": {
     "201": {
-      "headers": {
-        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/a01a127a-c204-4e46-a8c1-fab01559b05b?api-version=2026-01-01",
-        "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b"
-      },
       "body": {
-        "id": "JessicaMultiStyle",
-        "voiceName": "JessicaMultiStyleNeural",
         "description": "Jessica multi style voice",
-        "recipe": {
-          "kind": "MultiStyle",
-          "version": "V3.2023.06"
-        },
-        "projectId": "Jessica",
         "consentId": "Jessica",
-        "trainingSetId": "Jessica-300",
-        "locale": "en-US",
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
         "engineVersion": "2023.07.04.0",
+        "id": "JessicaMultiStyle",
+        "lastActionDateTime": "2023-04-02T10:15:30.000Z",
+        "locale": "en-US",
+        "projectId": "Jessica",
         "properties": {
           "presetStyles": [
             "cheerful",
@@ -63,10 +55,20 @@
             "myStyle2"
           ]
         },
+        "recipe": {
+          "kind": "MultiStyle",
+          "version": "V3.2023.06"
+        },
         "status": "NotStarted",
-        "createdDateTime": "2023-04-01T05:30:00.000Z",
-        "lastActionDateTime": "2023-04-02T10:15:30.000Z"
+        "trainingSetId": "Jessica-300",
+        "voiceName": "JessicaMultiStyleNeural"
+      },
+      "headers": {
+        "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b",
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/a01a127a-c204-4e46-a8c1-fab01559b05b?api-version=2026-01-01"
       }
     }
-  }
+  },
+  "operationId": "Models_Create",
+  "title": "Create a multi style model"
 }
