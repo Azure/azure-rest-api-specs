@@ -691,14 +691,8 @@ using Microsoft.DesktopVirtualization;
   "IsDrainModeEnabled",
   "csharp"
 );
-@@clientName(BootDiagnosticsInfoProperties.enabled,
-  "IsEnabled",
-  "csharp"
-);
-@@clientName(BootDiagnosticsInfoPatchProperties.enabled,
-  "IsEnabled",
-  "csharp"
-);
+@@clientName(BootDiagnosticsInfoProperties.enabled, "IsEnabled", "csharp");
+@@clientName(BootDiagnosticsInfoPatchProperties.enabled, "IsEnabled", "csharp");
 @@clientName(SecurityInfoProperties.secureBootEnabled,
   "IsSecureBootEnabled",
   "csharp"
@@ -707,10 +701,7 @@ using Microsoft.DesktopVirtualization;
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(SecurityInfoProperties.vTpmEnabled,
-  "IsVtpmEnabled",
-  "csharp"
-);
+@@clientName(SecurityInfoProperties.vTpmEnabled, "IsVtpmEnabled", "csharp");
 @@clientName(SecurityInfoPatchProperties.vTpmEnabled,
   "IsVtpmEnabled",
   "csharp"
