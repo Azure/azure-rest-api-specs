@@ -14,13 +14,25 @@ using Microsoft.Cdn;
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
 @@access(Certificate, Access.public, "java");
-@@usage(Certificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@usage(Certificate,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
 @@access(CustomerCertificate, Access.public, "java");
-@@usage(CustomerCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@usage(CustomerCertificate,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
 @@access(ManagedCertificate, Access.public, "java");
-@@usage(ManagedCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@usage(ManagedCertificate,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
 @@access(AzureFirstPartyManagedCertificate, Access.public, "java");
-@@usage(AzureFirstPartyManagedCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@usage(AzureFirstPartyManagedCertificate,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
 
 // AfdCustomDomains client for Java
 @@clientLocation(AFDDomains.get, "AfdCustomDomains", "java");
@@ -37,6 +49,7 @@ using Microsoft.Cdn;
   "java"
 );
 @@clientName(AFDDomainHttpsParameters, "AfdDomainHttpsParameters", "java");
+@@clientName(AFDDomainMtlsParameters, "AfdDomainMtlsParameters", "java");
 @@clientName(AFDDomains, "AfdDomains", "java");
 @@clientName(AFDDomainUpdateParameters, "AfdDomainUpdateParameters", "java");
 @@clientName(AFDDomainUpdatePropertiesParameters,
@@ -59,6 +72,10 @@ using Microsoft.Cdn;
 @@clientName(AFDOrigin, "AfdOrigin", "java");
 @@clientName(AFDOriginProperties, "AfdOriginProperties", "java");
 @@clientName(AFDOrigins, "AfdOrigins", "java");
+@@clientName(AFDOriginUpdatePropertiesParameters,
+  "AfdOriginUpdatePropertiesParameters",
+  "java"
+);
 @@clientName(AFDOriginGroupUpdateParameters,
   "AfdOriginGroupUpdateParameters",
   "java"
@@ -98,6 +115,15 @@ using Microsoft.Cdn;
   "java"
 );
 @@clientName(AFDEndpointProtocols, "AfdEndpointProtocols", "java");
+@@clientName(AFDRouteGrpcState, "AfdRouteGrpcState", "java");
+@@clientName(DeploymentVersionAFDOriginChange,
+  "DeploymentVersionAfdOriginChange",
+  "java"
+);
+@@clientName(DeploymentVersionAFDOriginGroupChange,
+  "DeploymentVersionAfdOriginGroupChange",
+  "java"
+);
 @@clientName(CheckHostNameAvailabilityInput,
   "CheckHostnameAvailabilityInput",
   "java"
