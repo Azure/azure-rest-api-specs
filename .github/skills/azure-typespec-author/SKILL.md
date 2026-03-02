@@ -111,7 +111,7 @@ Return the following to the user:
 | **Files changed** | List of modified files |
 | **What changed** | Brief description of changes and rationale |
 | **Validation results** | Pass/fail + key output |
-| **References** | Titles/sections/links from retrieved context that justify decisions |
+| **References** | Titles/sections/links from the azure-sdk-mcp/azsdk_typespec_generate_authoring_plan tool response (do not omit this even for small or trivial changes) that justify decisions |
 
 ---
 
