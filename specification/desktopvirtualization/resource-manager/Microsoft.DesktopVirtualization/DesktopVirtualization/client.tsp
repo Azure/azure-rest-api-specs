@@ -701,11 +701,6 @@ using Microsoft.DesktopVirtualization;
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(SecurityInfoProperties.vTpmEnabled, "IsVtpmEnabled", "csharp");
-@@clientName(SecurityInfoPatchProperties.vTpmEnabled,
-  "IsVtpmEnabled",
-  "csharp"
-);
 @@clientName(HostPoolUpdateConfigurationProperties.deleteOriginalVm,
   "ShouldDeleteOriginalVm",
   "csharp"
