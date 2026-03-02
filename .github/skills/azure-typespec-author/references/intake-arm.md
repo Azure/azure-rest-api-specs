@@ -1,28 +1,22 @@
 # TypeSpec ARM Authoring - Intake and Clarification
 
-This document covers **Step 1: Intake and Clarification** for TypeSpec ARM authoring workflows. Complete all sub-steps below to collect the required information before proceeding to implementation.
-
-**Workflow overview:**
+Complete all sub-steps to collect required information before proceeding to implementation.
 
 | Sub-step | Goal | Mandatory? |
 |----------|------|------------|
 | [1.1 Analyze Project](#step-11-analyze-the-typespec-project) | Gather project inputs | Yes |
 | [1.2 Identify Case](#step-12-identify-supported-case) | Match request to a supported case | Yes |
 | [1.3 Display Results](#step-13-display-analysis-results) | Show analysis summary to user | Yes |
-| [1.4 Case-Specific Questions](#step-14-case-specific-intake-questions) | Collect additional inputs per case | Only if matched |
+| [1.4 Case-Specific Intake](#step-14-case-specific-intake) | Collect additional inputs per case | Only if matched |
 | [1.5 Confirm & Proceed](#step-15-summary-and-confirmation) | Confirm collected information | Yes |
 
 ---
 
 ## Step 1.1: Analyze the TypeSpec Project
 
-> **Prerequisite**: Before asking any case-specific questions, ALWAYS complete this step first.
+> **Prerequisite**: ALWAYS complete this step before asking case-specific questions.
 
-**Goal**: Understand the current TypeSpec project structure and gather all required inputs.
-
-### Required Inputs Checklist
-
-Ask if any of the following are missing:
+Collect the following inputs. Ask **up to 6 concise questions** for any that are missing:
 
 | # | Input | Example |
 |---|-------|---------|
@@ -36,417 +30,173 @@ Ask if any of the following are missing:
 | 8 | **Target resource/interface/operation** | Resource or operation name (if known) |
 | 9 | **Constraints** | Breaking-change limits, naming rules, emitter targets, etc. |
 
-If any input is missing, ask **up to 6 concise questions** and stop.
-
 ---
 
 ## Step 1.2: Identify Supported Case
 
-**Goal**: Determine which authoring case the user needs.
+Match the user's request to a supported case:
 
-Check whether the user's request falls into one of the supported cases:
+| Case | Name | Description |
+|------|------|-------------|
+| 1 | [Add New Preview Version](#case-1-add-new-preview-version) | Add a new preview API version to the `Versions` enum |
+| 2 | [Add New Stable Version](#case-2-add-new-stable-version) | Promote to a new stable API version or add the stable version from scratch |
+| 3 | [Add New Resource Type](#case-3-add-new-resource-type) | Define a new ARM resource with operations |
+| 4 | [Add Operations](#case-4-add-operations) | Add CRUD operations or custom actions on a resource |
+| 5 | [Add Long-Running Operation (LRO)](#case-5-add-long-running-operation-lro) | Add or configure an async/LRO operation |
+| 6 | [Add Patch Operation](#case-6-add-patch-operation) | Add a PATCH/update operation on a resource |
+| 7 | [Add Paging](#case-7-add-paging) | Add or configure pagination on list operations |
+| 8 | [Add Decorators](#case-8-add-decorators) | Add decorators on resources, properties, or operations |
 
-| Case | Name | Category | Description |
-|------|------|----------|-------------|
-| 1 | [Add New Preview Version](#case-1-add-new-preview-version) | Versioning | Add a new preview API version to the `Versions` enum |
-| 2 | [Add New Stable Version](#case-2-add-new-stable-version) | Versioning | Promote to a new stable API version |
-| 3 | [Add New Resource Type](#case-3-add-new-resource-type) | ARM Template | Define a new ARM resource with operations |
+> Cases 1-2 are **end-to-end user stories** -- the agent should proactively ask what features to add after the version is created.
 
-> **Note**: Cases 1–2 are **end-to-end user stories** — adding a new version typically triggers follow-up feature requests (adding resources, operations, models, etc.). The agent should proactively ask the user what features to add after the version is created.
-
-### Routing Logic
-
-- **Matched a supported case** → Proceed to the corresponding case section in [Step 1.4](#step-14-case-specific-intake-questions) to gather additional inputs.
-- **No match** → Skip case-specific questions. Proceed directly to **Step 2: Retrieve Solution** using information from Step 1.1 and the user's original request.
+- **Matched** -> Proceed to [Step 1.4](#step-14-case-specific-intake) for that case.
+- **No match** -> Skip to **Step 2: Retrieve Solution** using Step 1.1 inputs and the user's request.
 
 ---
 
 ## Step 1.3: Display Analysis Results
 
-> **MANDATORY**: You MUST always display this output before proceeding. Do NOT skip this step.
-
-**Goal**: Output the analysis results from Step 1.1 and the selected case from Step 1.2.
+> **MANDATORY**: You MUST display this output before proceeding. Do NOT skip.
 
 ```
-📊 TypeSpec Project Analysis
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TypeSpec Project Analysis
 
-Spec Root / Folder: /path/to/project
-Path to tspconfig.yaml: /path/to/project/tspconfig.yaml
+Spec Root: /path/to/project
+tspconfig.yaml: /path/to/project/tspconfig.yaml
 Service Type: management-plane
-
-Existing API Versions:
-  ✓ 2024-01-01 (stable)
-  ✓ 2024-06-01-preview (preview)
-
-Latest API Version: 2024-06-01-preview (preview)
-Current Working API Version: [To be determined based on user request]
-
+API Versions: 2024-01-01 (stable), 2024-06-01-preview (preview)
+Latest Version: 2024-06-01-preview (preview)
+Working Version: [TBD]
 Intent: [add/modify/fix]
-Target Resource/Interface/Operation: [if known]
-Constraints: [breaking-change limits, naming/versioning rules, emitter targets, etc.]
-
-Selected Case: [Case Name or "No matching supported case identified"]
+Target: [resource/operation if known]
+Constraints: [if any]
+Selected Case: [Case Name or "None"]
 ```
 
 ---
 
-## Step 1.4: Case-Specific Intake Questions
+## Step 1.4: Case-Specific Intake
 
-> Only ask these questions if the user's request matched a supported case in Step 1.3.
-
-Each case follows a consistent structure:
-
-1. **Context** — Pre-filled from analysis
-2. **Questions** — Additional inputs to collect
-3. **Validation** — Rules to check before proceeding
-4. **Collected Data** — JSON schema of all gathered information
-
----
+> Only collect if a supported case was matched in Step 1.2. Ask for any information not already known from Step 1.1.
 
 ### Case 1: Add New Preview Version
 
-> This is an **end-to-end user story** — after the version is created, the agent should ask what features to add to it.
+**Required information:**
 
-#### Example Prompts
+- New preview version string (`YYYY-MM-DD-preview`)
+- Whether latest existing version is preview or stable
 
-- `add a new preview API version 2025-10-01-preview for service widget resource management`
-- `add a new preview version 2025-03-01-preview`
-
-#### Context
-
-- Latest version: [version] ([preview/stable])
-- Existing resources: [list from analysis]
-
-#### Questions
-
-```
-1. What is the new preview version you want to add?
-   Format: YYYY-MM-DD-preview
-   Example: 2025-03-01-preview
-
-2. What is the latest version type in your project?
-   □ Preview (e.g., 2024-06-01-preview)
-   □ Stable (e.g., 2024-06-01)
-```
-
-#### Version Replacement Logic
-
-The behavior depends on the latest existing version type:
-
-| Latest version type | Action |
-|---------------------|--------|
-| **Preview** | **Replace** the latest preview version with the new one in the `Versions` enum (rename, don't add alongside). Update all references including the `examples/` folder name. |
-| **Stable** | **Add** the new preview version as a new entry in the `Versions` enum after the stable version. |
-
-The new preview version entry MUST be decorated with `@previewVersion`. Example:
-
-```typespec
-/** 2025-10-01-preview version */
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@previewVersion
-v2025_10_01_preview: "2025-10-01-preview",
-```
-
-#### Expected Agent Activity After Version Creation
-
-After the version enum is updated, the agent should:
-
-1. Update the `examples/` folder to match the new version
-2. Handle types from the previous preview:
-   - If a type from the latest preview is **not** in the new preview → simply remove it
-   - If other types are removed → mark with `@removed` decorator referencing the new version
-   - If types are added, renamed, or modified → mark with appropriate versioning decorators (`@added`, `@removed`, `@renamedFrom`, etc.)
-3. **Proactively ask** what features to add to this version:
-   ```
-   What would you like to add to this preview version? For example:
-   - Add new resources
-   - Add new operations to an existing resource
-   - Add/modify properties on an existing resource
-   - Add new models, unions, or enums
-   - Deprecate/remove resources, operations, or models
-   ```
-
-#### Validation
-
-- Version format: `YYYY-MM-DD-preview`
-- Date is not in the past
-- Version doesn't already exist in versions enum
-
-#### Collected Data
-
-```json
-{
-  "case": "add-new-preview-version",
-  "namespace": "[from analysis]",
-  "projectPath": "[from analysis]",
-  "currentLatestVersion": "[from analysis]",
-  "currentLatestVersionType": "preview|stable",
-  "newVersion": "[user input]",
-  "versionAction": "replace|add"
-}
-```
-
----
+**Key rule:** If latest is preview → replace it. If latest is stable → add new entry. New entry MUST use `@previewVersion`.
 
 ### Case 2: Add New Stable Version
 
-> This is an **end-to-end user story** — after the version is created, the agent should review preview features and ask what to carry forward.
+**Required information:**
 
-#### Example Prompts
+- New stable version string (`YYYY-MM-DD`)
+- Which preview features (if any) to exclude from promotion
 
-- `add a new stable API version 2025-10-01 for service widget resource management`
-- `promote to stable version 2025-06-01`
-
-#### Context
-
-- Latest version: [version] ([preview/stable])
-- Preview features to review: [list features introduced in preview versions]
-
-#### Questions
-
-```
-1. What is the new stable version you want to add?
-   Format: YYYY-MM-DD
-   Example: 2025-06-01
-
-2. Are there any preview features that should NOT be carried into stable?
-   □ No, promote all preview changes to stable
-   □ Yes (specify which features/properties to exclude)
-```
-
-#### Version Strategy
-
-Add the new stable version as a new entry in the `Versions` enum. Do NOT use `@previewVersion`. Example:
-
-```typespec
-/** 2025-10-01 version */
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-v2025_10_01: "2025-10-01",
-```
-
-#### Expected Agent Activity After Version Creation
-
-After the version enum is updated, the agent should:
-
-1. **Review all preview-only features** — list resources, operations, models, unions, and enums that were introduced in preview versions
-2. **Remove preview features not carried over** — resources, operations, models, unions, or enums that are not promoted to stable should be removed or marked with `@removed`
-3. Update the `examples/` folder to match the new stable version
-4. **Proactively ask** what features to add to this version:
-   ```
-   What would you like to add to this stable version? For example:
-   - Add new resources
-   - Add new operations to an existing resource
-   - Add/modify properties on an existing resource
-   - Add new models, unions, or enums
-   - Remove resources, operations, or models
-   ```
-
-#### Validation
-
-- Version format: `YYYY-MM-DD` (no `-preview` suffix)
-- Date is not in the past
-- Version doesn't already exist in versions enum
-- A preview version should exist before promoting to stable
-
-#### Collected Data
-
-```json
-{
-  "case": "add-new-stable-version",
-  "namespace": "[from analysis]",
-  "projectPath": "[from analysis]",
-  "currentLatestVersion": "[from analysis]",
-  "newVersion": "[user input]",
-  "excludeFromPromotion": [],
-  "previewFeatures": "[list of features from preview versions]"
-}
-```
-
----
+**Key rule:** Add new entry without `@previewVersion`. Alert user to breaking changes from previous stable version (these require breaking change review). Breaking changes from preview are expected and do not require review.
 
 ### Case 3: Add New Resource Type
 
-#### Example Prompts
+**Required information:**
 
-- `add a new ARM resource type named 'Asset' with CRUD operations`
-- `add a nested resource 'Certificate' under Employee`
+- Target API version(s)
+- Resource name (PascalCase)
+- Top-level or nested (if nested, parent resource)
+- Resource properties (name, type, required/optional, description)
 
-#### Context
+**Defaults (apply unless user says otherwise):**
+- Base type: top-level → TrackedResource, child of another resource → ProxyResource
+- All resources get: createOrReplace (PUT, async), get, update/patch, delete (async), list by parent
+- Resources with resourceGroup as parent also get list by subscription
+- Use `createOrReplace` templates (not `createOrUpdate`)
+- Use `ArmCustomPatch` with updatable properties from resource and its properties bag
 
-- Latest version: [version] ([preview/stable])
-- Existing resources: [list]
+**Key rule:** Top-level tracked resources MUST have `listByResourceGroup` and `listBySubscription`.
 
-#### Questions
+---
 
-```
-1. Which API version(s) should include this new resource?
-   □ Latest version only ([version])
-   □ Multiple versions (specify)
+### Case 4: Add Operations
 
-2. What is the resource type name?
-   Format: PascalCase (e.g., Widget, VirtualMachine)
+**Required information:**
 
-3. What is the resource base type?
-   □ TrackedResource — Azure resource with location and tags (most common for top-level)
-   □ ProxyResource — Azure resource without location and tags (common for nested/child)
+- Target resource
+- Operation type (CRUD or custom action)
+- Operation name (for custom actions)
+- Request/response models (for custom actions)
 
-4. Is this a top-level resource or nested under a parent?
-   □ Top-level (e.g., /subscriptions/.../resourceGroups/.../providers/Microsoft.Service/resources/{name})
-   □ Nested (e.g., /.../{parentName}/childResources/{name})
+**Defaults (apply unless user says otherwise):**
+- Never async: GET, LIST, HEAD
+- Default async (LRO): PUT, DELETE
+- Default sync: PATCH
+- Always ask user: POST/action
 
-   If nested, what is the parent resource? [show existing resources]
+**Key rule:** Use `createOrReplace` templates (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
 
-5. What properties should this resource have?
-   (Provide property name, type, required/optional, description)
+---
 
-6. Which CRUD operations should be included?
-   □ get (ArmResourceRead)
-   □ createOrUpdate (ArmResourceCreateOrReplaceAsync — LRO by default)
-   □ update/patch (ArmResourcePatchAsync)
-   □ delete (ArmResourceDeleteWithoutOkAsync — LRO by default)
-   □ listByResourceGroup (ArmResourceListByParent)
-   □ listBySubscription (ArmListBySubscription) — top-level only
+### Case 5: Add Long-Running Operation (LRO)
 
-7. Should any operations be long-running (LRO)?
-   □ createOrUpdate → sync or async?
-   □ delete → sync or async?
-   □ Any custom actions that are LRO?
-```
+**Required information:**
 
-#### ARM Template Pattern
+- Target resource and operation
+- LRO template to use (e.g., `ArmResourceCreateOrReplaceAsync`, `ArmResourceDeleteWithoutOkAsync`)
+- Final state via polling (if non-standard)
 
-The generated resource MUST follow ARM TypeSpec patterns:
+**Key rule:** PUT and DELETE default to async (LRO). GET, LIST, HEAD can never be async. Use `createOrReplace` (not `createOrUpdate`) templates.
 
-```typespec
-// Resource model
-model Asset is TrackedResource<AssetProperties> {
-  ...ResourceNameParameter<Asset>;
-}
+---
 
-// Operations interface with @armResourceOperations
-@armResourceOperations
-interface Assets {
-  get is ArmResourceRead<Asset>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Asset>;
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<Asset>;
-  listByResourceGroup is ArmResourceListByParent<Asset>;
-  listBySubscription is ArmListBySubscription<Asset>;
-}
-```
+### Case 6: Add Patch Operation
 
-For **child/nested resources**, use the `@parentResource` decorator:
+**Required information:**
 
-```typespec
-@parentResource(Employee)
-model Certificate is ProxyResource<CertificateProperties> {
-  ...ResourceNameParameter<Certificate>;
-}
-```
+- Target resource
+- Which properties are patchable
 
-#### Validation
+**Key rule:** Use `ArmCustomPatch` with a PATCH request template that takes updatable properties from the resource and its `properties` bag. PATCH defaults to sync.
 
-- Resource name is PascalCase
-- Confirm top-level vs child resource
-- If child resource, parent resource must be provided and must use `@parentResource`
-- Top-level tracked resources MUST have `listByResourceGroup` and `listBySubscription`
+---
 
-#### Collected Data
+### Case 7: Add Paging
 
-```json
-{
-  "case": "add-new-resource-type",
-  "namespace": "[from analysis]",
-  "targetVersions": ["[version]"],
-  "resourceName": "[user input]",
-  "resourceBaseType": "TrackedResource|ProxyResource",
-  "isNested": true/false,
-  "parentResource": "[if nested]",
-  "operations": {
-    "get": true,
-    "createOrUpdate": { "enabled": true, "isLRO": true },
-    "patch": { "enabled": true, "isLRO": true },
-    "delete": { "enabled": true, "isLRO": true },
-    "listBySubscription": true,
-    "listByResourceGroup": true
-  },
-  "properties": []
-}
-```
+**Required information:**
+
+- Target list operation(s)
+- Whether default ARM paging is sufficient or custom paging is needed
+
+**Key rule:** ARM list operations (e.g., `ArmResourceListByParent`, `ArmListBySubscription`) include paging by default.
+
+---
+
+### Case 8: Add Decorators
+
+**Required information:**
+
+- Target element (resource, property, operation, model, enum, union)
+- Decorator name or intent (e.g., visibility, versioning, encoding)
+- Decorator parameters/values
+
+**Key rule:** If using versioning decorators (`@added`, `@removed`, `@renamedFrom`, etc.), ensure `@typespec/versioning` is imported.
 
 ---
 
 ## Step 1.5: Summary and Confirmation
 
-After collecting all information, display a comprehensive summary and wait for user confirmation before proceeding.
+Display collected information and wait for user confirmation:
 
 ```
-✅ Information Collection Complete
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Information Collection Complete
 
 Case: [Case Name]
-
-Project Information:
-  Namespace: [namespace]
-  Project Path: [path]
-  Current Latest Version: [version] ([preview/stable])
-
-Requested Changes:
-  [Summary of user inputs]
-
+Namespace: [namespace]
+Project Path: [path]
+Latest Version: [version] ([preview/stable])
+Requested Changes: [summary]
 Target Version(s): [versions]
-
-Ready to Proceed: YES
 
 Is this information correct? (yes/no)
 ```
 
 Once confirmed, proceed to Step 2: Retrieve Solution.
-
-```
-✅ All required information collected.
-Ready to proceed to Step 2: Retrieve Solution
-
-Next actions:
-1. Call azsdk_typespec_retrieve_solution with collected information
-2. Apply recommended changes to TypeSpec files
-3. Validate compilation results
-```
-
----
-
-## Appendix: Common Validation Rules
-
-Quick reference for validation rules that apply across all cases.
-
-### General
-
-- Service namespace follows `Microsoft.ServiceName` pattern
-- TypeSpec project path exists and contains `tspconfig.yaml` and `main.tsp`
-- Target API version is valid format
-
-### Version Formats
-
-| Type | Format | Example |
-|------|--------|---------|
-| Preview | `YYYY-MM-DD-preview` | `2025-03-01-preview` |
-| Stable | `YYYY-MM-DD` | `2025-03-01` |
-
-- Date must not be in the past (current date is allowed)
-
-### Naming Conventions
-
-| Element | Casing | Example |
-|---------|--------|---------|
-| Resource types | PascalCase | `Widget`, `VirtualMachine` |
-| Operations / Actions | camelCase | `start`, `listByResourceGroup` |
-| Models / Enums / Unions | PascalCase | `WidgetProperties`, `ProvisioningState` |
-| Properties | camelCase | `displayName`, `provisioningState` |
-
-### Breaking Change Rules
-
-| Version type | Breaking changes |
-|--------------|-----------------|
-| Preview | Allowed |
-| Stable | Require careful consideration and clear justification |

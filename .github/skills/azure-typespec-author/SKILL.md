@@ -62,8 +62,6 @@ description: "Author or modify Azure TypeSpec API specifications in the azure-re
 
 Follow `references/intake-arm.md` to gather all required inputs.
 
-> **⚠️ CRITICAL**: Step 1 includes a **mandatory sub-step (Step 1.3)** that requires you to display the **📊 TypeSpec Project Analysis** summary in the chat. You **MUST** output this analysis before proceeding. Do **NOT** skip Step 1.3 or jump ahead to Step 2 without first displaying the analysis results to the user. This is a hard requirement — no exceptions.
-
 Do NOT proceed to Step 2 until all required inputs are collected **and** the analysis output has been displayed.
 
 ---
