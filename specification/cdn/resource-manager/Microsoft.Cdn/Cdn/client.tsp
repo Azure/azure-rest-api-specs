@@ -13,6 +13,16 @@ using Microsoft.Cdn;
 
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
+@@access(Certificate, Access.public, "java");
+@@usage(Certificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@access(CustomerCertificate, Access.public, "java");
+@@usage(CustomerCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@access(ManagedCertificate, Access.public, "java");
+@@usage(ManagedCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+@@access(AzureFirstPartyManagedCertificate, Access.public, "java");
+@@usage(AzureFirstPartyManagedCertificate, Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output, "java");
+
+// AfdCustomDomains client for Java
 @@clientLocation(AFDDomains.get, "AfdCustomDomains", "java");
 @@clientLocation(AFDDomains.create, "AfdCustomDomains", "java");
 @@clientLocation(AFDDomains.update, "AfdCustomDomains", "java");
@@ -112,6 +122,7 @@ using Microsoft.Cdn;
 @@clientName(AFDEndpointProperties.hostName, "hostname", "java");
 @@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(OriginProperties.hostName, "hostname", "java");
+
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",
