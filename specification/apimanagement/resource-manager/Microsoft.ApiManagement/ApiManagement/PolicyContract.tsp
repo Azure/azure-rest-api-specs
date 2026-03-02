@@ -11,6 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ApiManagement;
+
+alias PolicyGetParameters = {
+  /**
+   * Policy Export Format.
+   */
+  @query("format")
+  format?: PolicyExportFormat = PolicyExportFormat.xml;
+};
 /**
  * Policy Contract details.
  */
@@ -77,13 +85,7 @@ interface PolicyContracts {
    */
   get is PolicyContractOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -211,13 +213,7 @@ interface GraphQLApiResolverPolicy {
    */
   get is GraphQLApiResolverPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -335,13 +331,7 @@ interface ApiPolicy {
    */
   get is ApiPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -450,12 +440,7 @@ interface Policy {
    */
   get is PolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
+    Parameters = PolicyGetParameters,
     },
     Response = ArmResponse<PolicyContract> & {
       /**
@@ -573,13 +558,7 @@ interface ProductPolicy {
    */
   get is ProductPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -697,13 +676,7 @@ interface WorkspacePolicy {
    */
   get is WorkspacePolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -838,12 +811,7 @@ interface WorkspaceApiOperationPolicy {
    */
   get is WorkspaceApiOperationPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
+    Parameters = PolicyGetParameters,
     },
     Response = ArmResponse<PolicyContract> & {
       /**
@@ -971,13 +939,7 @@ interface WorkspaceApiPolicy {
    */
   get is WorkspaceApiPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -1103,13 +1065,7 @@ interface WorkspaceProductPolicy {
    */
   get is WorkspaceProductPolicyOps.Read<
     PolicyContract,
-    Parameters = {
-      /**
-       * Policy Export Format.
-       */
-      @query("format")
-      format?: PolicyExportFormat = PolicyExportFormat.xml;
-    },
+    Parameters = PolicyGetParameters,
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
