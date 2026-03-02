@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RemediationsClient",
-    "version": "2024-10-01"
+    "version": "2021-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -466,9 +466,6 @@
           },
           "Create remediation at subscription scope with all properties": {
             "$ref": "./examples/Remediations_CreateSubscriptionScope_AllProperties.json"
-          },
-          "Create remediation at subscription scope with resourceIds filter": {
-            "$ref": "./examples/Remediations_CreateSubscriptionScope_ResourceIdsFilter.json"
           }
         }
       },
@@ -1161,7 +1158,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "description": "The remediation definition.",
@@ -1193,7 +1190,7 @@
               },
               {
                 "value": "ReEvaluateCompliance",
-                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant. The resourceIds filter cannot be used in this mode."
+                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant."
               }
             ]
           },
@@ -1267,13 +1264,6 @@
             "type": "string"
           },
           "description": "The resource locations that will be remediated."
-        },
-        "resourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The IDs of the resources that will be remediated. Can specify at most 100 IDs. This filter cannot be used when ReEvaluateCompliance is set to ReEvaluateCompliance, and cannot be empty if provided."
         }
       },
       "description": "The filters that will be applied to determine which resources to remediate."

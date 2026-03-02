@@ -144,15 +144,15 @@ These settings apply only when `--tag=package-2024-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-10'
 input-file:
-  - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/remediations.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/policyEvents.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/policyStates.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/policyMetadata.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/checkPolicyRestrictions.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/componentPolicyStates.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/operations.json
-  - Microsoft.PolicyInsights/stable/2024-10-01/attestations.json
+  - preview/2018-07-01-preview/policyTrackedResources.json
+  - stable/2024-10-01/remediations.json
+  - stable/2024-10-01/policyEvents.json
+  - stable/2024-10-01/policyStates.json
+  - stable/2024-10-01/policyMetadata.json
+  - stable/2024-10-01/checkPolicyRestrictions.json
+  - stable/2024-10-01/componentPolicyStates.json
+  - stable/2024-10-01/operations.json
+  - stable/2024-10-01/attestations.json
 ```
 
 ### Tag: package-2023-03
@@ -161,15 +161,15 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-03'
 input-file:
-  - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-  - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-  - Microsoft.PolicyInsights/stable/2023-03-01/checkPolicyRestrictions.json
-  - Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
-  - Microsoft.PolicyInsights/stable/2022-04-01/operations.json
-  - Microsoft.PolicyInsights/stable/2022-09-01/attestations.json
+  - preview/2018-07-01-preview/policyTrackedResources.json
+  - stable/2021-10-01/remediations.json
+  - stable/2019-10-01/policyEvents.json
+  - stable/2019-10-01/policyStates.json
+  - stable/2019-10-01/policyMetadata.json
+  - stable/2023-03-01/checkPolicyRestrictions.json
+  - stable/2022-04-01/componentPolicyStates.json
+  - stable/2022-04-01/operations.json
+  - stable/2022-09-01/attestations.json
 ```
 ### Tag: package-2022-09
 
@@ -177,15 +177,15 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-  - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-  - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-  - Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
-  - Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
-  - Microsoft.PolicyInsights/stable/2022-04-01/operations.json
-  - Microsoft.PolicyInsights/stable/2022-09-01/attestations.json
+  - preview/2018-07-01-preview/policyTrackedResources.json
+  - stable/2021-10-01/remediations.json
+  - stable/2019-10-01/policyEvents.json
+  - stable/2019-10-01/policyStates.json
+  - stable/2019-10-01/policyMetadata.json
+  - stable/2022-03-01/checkPolicyRestrictions.json
+  - stable/2022-04-01/componentPolicyStates.json
+  - stable/2022-04-01/operations.json
+  - stable/2022-09-01/attestations.json
 ```
 
 ### Tag: package-2022-04
@@ -194,15 +194,15 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-04'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
-- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
-- Microsoft.PolicyInsights/stable/2022-04-01/componentPolicyStates.json
-- Microsoft.PolicyInsights/stable/2022-04-01/operations.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2021-10-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/policyMetadata.json
+- stable/2022-03-01/checkPolicyRestrictions.json
+- stable/2021-01-01/attestations.json
+- stable/2022-04-01/componentPolicyStates.json
+- stable/2022-04-01/operations.json
 ```
 
 ### Tag: package-2022-03
@@ -211,14 +211,14 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/stable/2022-03-01/checkPolicyRestrictions.json
-- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2021-10-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
+- stable/2022-03-01/checkPolicyRestrictions.json
+- stable/2021-01-01/attestations.json
 ```
 
 ### Tag: package-2021-10
@@ -227,14 +227,14 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
-- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2021-10-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
+- stable/2020-07-01/checkPolicyRestrictions.json
+- stable/2021-01-01/attestations.json
 ```
 
 ### Tag: package-2021-01
@@ -243,14 +243,14 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
-- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2019-07-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
+- stable/2020-07-01/checkPolicyRestrictions.json
+- stable/2021-01-01/attestations.json
 ```
 
 ### Tag: package-2020-07
@@ -259,13 +259,13 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2019-07-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
+- stable/2020-07-01/checkPolicyRestrictions.json
 ```
 
 ### Tag: package-2020-07-preview
@@ -274,13 +274,13 @@ These settings apply only when `--tag=package-2020-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-07-preview'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
-- Microsoft.PolicyInsights/preview/2020-07-01-preview/checkPolicyRestrictions.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2019-07-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
+- preview/2020-07-01-preview/checkPolicyRestrictions.json
 ```
 
 ### Tag: package-2019-10
@@ -289,12 +289,12 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
-- Microsoft.PolicyInsights/stable/2019-10-01/operations.json
-- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- stable/2019-07-01/remediations.json
+- stable/2019-10-01/policyEvents.json
+- stable/2019-10-01/policyStates.json
+- stable/2019-10-01/operations.json
+- stable/2019-10-01/policyMetadata.json
 ```
 
 ### Tag: package-2018-07
@@ -303,10 +303,10 @@ These settings apply only when `--tag=package-2018-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-07'
 input-file:
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
+- preview/2018-07-01-preview/policyTrackedResources.json
+- preview/2018-07-01-preview/remediations.json
+- preview/2018-07-01-preview/policyEvents.json
+- preview/2018-07-01-preview/policyStates.json
 ```
 
 ### Tag: package-2018-04
@@ -315,8 +315,8 @@ These settings apply only when `--tag=package-2018-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-04'
 input-file:
-- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
-- Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
+- stable/2018-04-04/policyEvents.json
+- stable/2018-04-04/policyStates.json
 ```
 
 ---
