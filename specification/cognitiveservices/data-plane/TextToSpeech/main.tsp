@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-namespace CustomvoiceAPI;
+namespace CustomVoiceApi;
 
 /** The available API versions. */
 enum Versions {

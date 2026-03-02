@@ -4,8 +4,9 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
-namespace CustomvoiceAPI;
+namespace CustomVoiceApi;
 
 /** Project kind */
 union ProjectKind {
@@ -192,19 +193,19 @@ union OperationStatus {
   Failed: "Failed",
 }
 
-/** Paginated project list */
-model PaginatedProjects is Azure.Core.Page<Project>;
-
 /**
  * Project object. Consents, training sets, models, and endpoints are organized in
  * a project.
  */
+@resource("projects")
 model Project {
   /** Resource id */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Project name */
   @minLength(1)
@@ -309,16 +310,16 @@ model InnerError {
   innererror?: InnerError;
 }
 
-/** Paginated consent list */
-model PaginatedConsents is Azure.Core.Page<Consent>;
-
 /** Consent object */
+@resource("consents")
 model Consent {
   /** Resource id */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Name of consent. */
   @minLength(1)
@@ -385,16 +386,16 @@ model ConsentProperties {
   failureReason?: ConsentFailureReason;
 }
 
-/** Paginated training set list */
-model PaginatedTrainingSets is Azure.Core.Page<TrainingSet>;
-
 /** Training set */
+@resource("trainingsets")
 model TrainingSet {
   /** Resource id */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Training set name */
   @minLength(1)
@@ -503,9 +504,6 @@ model AzureBlobContentSource {
   extensions: string[];
 }
 
-/** Paginated recipe list */
-model PaginatedRecipes is Azure.Core.Page<Recipe>;
-
 /** Recipe for model building. Different recipes have different capability. */
 model Recipe {
   /** Recipe kind */
@@ -573,16 +571,16 @@ model PresetStyleItem {
   female?: string[];
 }
 
-/** Paginated model list */
-model PaginatedModels is Azure.Core.Page<Model>;
-
 /** Model object */
+@resource("models")
 model Model {
   /** Resource id */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Voice name */
   @minLength(1)
@@ -670,14 +668,13 @@ model ModelProperties {
   secondaryLocales?: string[];
 }
 
-/** Paginated endpoint list */
-model PaginatedEndpoints is Azure.Core.Page<Endpoint>;
-
 /** Endpoint object */
+@resource("endpoints")
 model Endpoint {
   /** Endpoint Id */
-  @format("uuid")
-  id?: string;
+  @key
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   /** Endpoint name */
   @minLength(1)
@@ -727,12 +724,12 @@ model EndpointProperties {
   kind?: EndpointKind;
 }
 
-/** Paginated base model list */
-model PaginatedBaseModels is Azure.Core.Page<BaseModel>;
-
 /** Base model */
+@resource("basemodels")
 model BaseModel {
   /** Base model name */
+  @key
+  @visibility(Lifecycle.Read)
   @minLength(1)
   name: string;
 
@@ -757,21 +754,20 @@ model BaseModel {
   capabilities?: ModelCapability[];
 }
 
-/** Paginated personal voice list */
-model PaginatedPersonalVoices is Azure.Core.Page<PersonalVoice>;
-
 /** Personal voice object */
+@resource("personalvoices")
 model PersonalVoice {
   /** Resource id */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Personal voice speaker profile id. Fill this property in SSML. */
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  speakerProfileId?: string;
+  speakerProfileId?: uuid;
 
   /** Display name of personal voice */
   @minLength(1)
@@ -828,12 +824,15 @@ model PersonalVoiceProperties {
 }
 
 /** Status of a long running operation. */
+@resource("operations")
 model Operation {
   /** Unique operation ID. */
+  @key
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id?: string;
+  id: string;
 
   /** Status of an operation. */
   status?: OperationStatus;
