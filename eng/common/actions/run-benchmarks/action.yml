@@ -29,8 +29,9 @@ runs:
         INPUT_SCENARIO: ${{ inputs.scenario }}
         INPUT_TAGS: ${{ inputs.tags }}
         INPUT_MODEL: ${{ inputs.model }}
+        ACTION_PATH: ${{ github.action_path }}
       run: |
-        $scriptPath = Join-Path $env:GITHUB_ACTION_PATH ".." ".." "scripts" "Run-Azsdk-Benchmarks.ps1"
+        $scriptPath = Join-Path $env:ACTION_PATH ".." ".." "scripts" "Run-Azsdk-Benchmarks.ps1"
         & $scriptPath `
           -Scenario $env:INPUT_SCENARIO `
           -Tags $env:INPUT_TAGS `
