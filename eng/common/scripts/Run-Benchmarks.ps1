@@ -6,7 +6,6 @@ param(
   [string]$Scenario,
   [string]$Tags,
   [string]$Model,
-  [string]$Cleanup,
   [string]$ProjectDir
 )
 
@@ -25,11 +24,6 @@ if ($Scenario) {
 if ($Model) {
   $runArgs.Add('--model') | Out-Null
   $runArgs.Add($Model) | Out-Null
-}
-
-if ($Cleanup) {
-  $runArgs.Add('--cleanup') | Out-Null
-  $runArgs.Add($Cleanup) | Out-Null
 }
 
 Write-Host "Running: dotnet run --configuration Release -- $($runArgs -join ' ')"

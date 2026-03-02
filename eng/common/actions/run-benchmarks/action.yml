@@ -14,10 +14,6 @@ inputs:
     description: 'Model to use for agent execution'
     required: false
     default: 'claude-opus-4.5'
-  cleanup:
-    description: 'Cleanup policy for workspaces (OnSuccess, Always, Never)'
-    required: false
-    default: 'OnSuccess'
   project-dir:
     description: 'Path to the benchmarks project directory'
     required: false
@@ -41,7 +37,6 @@ runs:
         INPUT_SCENARIO: ${{ inputs.scenario }}
         INPUT_TAGS: ${{ inputs.tags }}
         INPUT_MODEL: ${{ inputs.model }}
-        INPUT_CLEANUP: ${{ inputs.cleanup }}
         INPUT_PROJECT_DIR: ${{ inputs.project-dir }}
       run: |
         $scriptPath = Join-Path $env:GITHUB_ACTION_PATH ".." ".." "scripts" "Run-Benchmarks.ps1"
@@ -49,14 +44,13 @@ runs:
           -Scenario $env:INPUT_SCENARIO `
           -Tags $env:INPUT_TAGS `
           -Model $env:INPUT_MODEL `
-          -Cleanup $env:INPUT_CLEANUP `
           -ProjectDir $env:INPUT_PROJECT_DIR
 
-    - name: Upload workspaces
+    - name: Upload benchmark logs
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: benchmark-workspaces
-        path: /tmp/azsdk-benchmarks/workspaces/
+        name: benchmark-logs
+        path: /tmp/azsdk-benchmarks/logs/
         if-no-files-found: ignore
         retention-days: 7
