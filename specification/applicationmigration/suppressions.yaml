@@ -10,3 +10,13 @@
     - ApplicationMigration.Management/ApplicationDiscovery.Management/tspconfig.yaml
     - ApplicationMigration.Management/WorkloadsDiscovery.Management/tspconfig.yaml
     - ApplicationMigration.Management/Network.Management/tspconfig.yaml
+
+- tool: Spectral
+  reason: >
+    ArmResourceActionNoResponseContentAsync emits only 202+default.
+    The 204 final response is handled at runtime by the LRO polling
+    endpoint (Location header). This is consistent with all sibling
+    agents (Storage, Mongo, Oracle, WorkloadsDiscovery).
+  rules: [PostResponseCodes]
+  paths:
+    - resource-manager/Microsoft.ApplicationMigration/Network/preview/2026-01-01-preview/NetworkDiscovery.json
