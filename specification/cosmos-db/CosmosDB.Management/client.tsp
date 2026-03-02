@@ -124,7 +124,7 @@ op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
 
 @@override(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
   mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
@@ -156,7 +156,7 @@ op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
 
 @@override(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
   mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -184,7 +184,7 @@ op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
 
 @@override(MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
   mongoDBResourcesDeleteMongoRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -212,7 +212,7 @@ op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
 
 @@override(MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
   mongoDBResourcesDeleteMongoUserDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -240,7 +240,7 @@ op mongoDBResourcesGetMongoRoleDefinitionCustomized(
 
 @@override(MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
   mongoDBResourcesGetMongoRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -268,7 +268,7 @@ op mongoDBResourcesGetMongoUserDefinitionCustomized(
 
 @@override(MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
   mongoDBResourcesGetMongoUserDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -301,7 +301,7 @@ op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
 
 @@override(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
   sqlResourcesCreateUpdateSqlRoleAssignmentCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -334,7 +334,7 @@ op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
 
 @@override(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
   sqlResourcesCreateUpdateSqlRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -362,7 +362,7 @@ op sqlResourcesDeleteSqlRoleAssignmentCustomized(
 
 @@override(SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
   sqlResourcesDeleteSqlRoleAssignmentCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -390,7 +390,7 @@ op sqlResourcesDeleteSqlRoleDefinitionCustomized(
 
 @@override(SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
   sqlResourcesDeleteSqlRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -418,7 +418,7 @@ op sqlResourcesGetSqlRoleAssignmentCustomized(
 
 @@override(SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
   sqlResourcesGetSqlRoleAssignmentCustomized,
-  "go"
+  "go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
@@ -446,5 +446,5 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 
 @@override(SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
   sqlResourcesGetSqlRoleDefinitionCustomized,
-  "go"
+  "go,java"
 );
