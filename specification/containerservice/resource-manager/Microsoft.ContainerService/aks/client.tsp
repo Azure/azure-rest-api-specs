@@ -792,6 +792,14 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(VmState, "ContainerServiceMachineVmState", "csharp");
 @@clientName(WorkloadRuntime.OCIContainer, "OciContainer", "csharp");
 @@clientName(UpgradeStrategy, "AgentPoolUpgradeStrategy", "csharp");
+@@clientName(ManagedClusterSecurityProfileImageIntegrity.enabled,
+  "IsImageIntegrityEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterSecurityProfileNodeRestriction.enabled,
+  "IsNodeRestrictionEnabled",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
