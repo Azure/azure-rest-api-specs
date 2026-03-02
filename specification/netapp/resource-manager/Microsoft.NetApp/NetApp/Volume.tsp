@@ -1519,18 +1519,21 @@ model Replication {
   /**
    * The status of the replication
    */
+  @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   mirrorState?: ReplicationMirrorState;
 
   /**
    * Replication creation time
    */
+  @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   replicationCreationTime?: utcDateTime;
 
   /**
    * Replication deletion time
    */
+  @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   replicationDeletionTime?: utcDateTime;
 }
@@ -1621,6 +1624,7 @@ model RelocateVolumeRequest {
 /**
  * Body for the list replications endpoint. If supplied, the body will be used as a filter for example to exclude deleted replications. If omitted, the endpoint returns all replications
  */
+@added(Versions.v2025_08_01)
 model ListReplicationsRequest {
   /**
    * Exclude Replications filter. 'None' returns all replications, 'Deleted' excludes deleted replications. Default is 'None'
@@ -2080,6 +2084,7 @@ union BreakthroughMode {
 /**
  * Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.
  */
+@added(Versions.v2025_12_01)
 model QuotaReportFilterRequest {
   /**
    * Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
@@ -2333,6 +2338,23 @@ interface Volumes {
   /**
    * Returns the list of group Ids for a specific LDAP User
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listGetGroupIdListForLdapUser")
+  @action("getGroupIdListForLdapUser")
+  listGetGroupIdListForLdapUser20250601 is ArmResourceActionAsync<
+    Volume,
+    /**
+     * Returns the list of group Ids for a specific LDAP User
+     */
+    GetGroupIdListForLdapUserRequest,
+    GetGroupIdListForLdapUserResponse
+  >;
+
+  /**
+   * Returns the list of group Ids for a specific LDAP User
+   */
+  @added(Versions.v2025_08_01)
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("getGroupIdListForLdapUser")
@@ -2381,6 +2403,21 @@ interface Volumes {
   /**
    * List all replications for a specified volume
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listReplications")
+  @list
+  oldlistReplications is ArmResourceActionSync<
+    Volume,
+    void,
+    ArmResponse<ListReplications>,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * List all replications for a specified volume
+   */
+  @added(Versions.v2025_08_01)
   @sharedRoute
   @list
   listReplications is ArmResourceActionSync<

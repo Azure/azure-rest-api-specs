@@ -60,6 +60,21 @@ namespace Microsoft.NetApp;
  */
 enum Versions {
   /**
+   * The 2025-06-01 API version.
+   */
+  v2025_06_01: "2025-06-01",
+
+  /**
+   * The 2025-08-01 API version.
+   */
+  v2025_08_01: "2025-08-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  v2025_09_01: "2025-09-01",
+
+  /**
    * The 2025-12-01 API version.
    */
   v2025_12_01: "2025-12-01",

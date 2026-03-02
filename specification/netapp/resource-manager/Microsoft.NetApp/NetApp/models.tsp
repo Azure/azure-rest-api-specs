@@ -39,11 +39,13 @@ union CheckNameResourceTypes {
   /**
    * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
    */
+  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
 
   /**
    * ANF Backup under a Backup Vault
    */
+  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
@@ -75,11 +77,13 @@ union CheckQuotaNameResourceTypes {
   /**
    * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
    */
+  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
 
   /**
    * ANF Backup under a Backup Vault
    */
+  @added(Versions.v2025_09_01)
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
@@ -279,6 +283,7 @@ union NetAppProvisioningState {
   /**
    * Resource is updating
    */
+  @added(Versions.v2025_09_01)
   Updating: "Updating",
 
   /**
