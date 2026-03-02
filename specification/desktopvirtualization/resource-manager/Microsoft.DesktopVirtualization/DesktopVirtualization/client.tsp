@@ -267,6 +267,16 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
+@@alternateType(NetworkInfoProperties.securityGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(NetworkInfoPatchProperties.securityGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@alternateType(ScalingSchedule.daysOfWeek,
   ScalingScheduleDaysOfWeekItemUsingStruct[],
   "csharp"
