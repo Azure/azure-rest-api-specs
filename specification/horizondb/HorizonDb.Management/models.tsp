@@ -191,7 +191,7 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
 @doc("HorizonDb replica for update operations")
 model HorizonDbReplicaForPatchUpdate {
   @doc("Properties of a HorizonDb replica for update operations")
-  properties: HorizonDbReplicaPropertiesForPatchUpdate;
+  properties?: HorizonDbReplicaPropertiesForPatchUpdate;
 }
 
 @doc("Properties of a HorizonDb firewall rule")
@@ -231,7 +231,7 @@ model HorizonDbFirewallRulePropertiesForPatchUpdate {
 @doc("HorizonDb firewall rule for update operations")
 model HorizonDbFirewallRuleForPatchUpdate {
   @doc("Properties of a HorizonDb firewall rule for update operations")
-  properties: HorizonDbFirewallRulePropertiesForPatchUpdate;
+  properties?: HorizonDbFirewallRulePropertiesForPatchUpdate;
 }
 
 @doc("The mode to create a new HorizonDb cluster")
