@@ -74,7 +74,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedBaseModels"
+              "$ref": "#/definitions/PagedBaseModel"
             }
           },
           "default": {
@@ -96,8 +96,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -110,36 +109,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedConsents"
+              "$ref": "#/definitions/PagedConsent"
             }
           },
           "default": {
@@ -161,8 +144,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -177,7 +159,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -226,7 +208,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -301,7 +284,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -418,7 +402,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -459,36 +443,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedEndpoints"
+              "$ref": "#/definitions/PagedEndpoint"
             }
           },
           "default": {
@@ -510,8 +478,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -526,7 +493,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The resource ID, which should be UUID.",
+            "description": "Endpoint Id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -573,7 +540,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -638,7 +606,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The resource ID, which should be UUID.",
+            "description": "Endpoint Id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -684,7 +652,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -750,7 +719,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -813,7 +783,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedRecipes"
+              "$ref": "#/definitions/PagedRecipe"
             }
           },
           "default": {
@@ -835,8 +805,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -849,36 +818,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedModels"
+              "$ref": "#/definitions/PagedModel"
             }
           },
           "default": {
@@ -900,8 +853,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -916,7 +868,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -965,7 +917,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -1035,7 +988,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1078,7 +1031,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the operation",
+            "description": "Unique operation ID.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1122,36 +1075,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedPersonalVoices"
+              "$ref": "#/definitions/PagedPersonalVoice"
             }
           },
           "default": {
@@ -1173,8 +1110,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1189,7 +1125,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1238,7 +1174,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -1313,7 +1250,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -1409,7 +1347,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1450,36 +1388,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedProjects"
+              "$ref": "#/definitions/PagedProject"
             }
           },
           "default": {
@@ -1501,8 +1423,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1517,7 +1438,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1662,36 +1583,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/CustomListQueryParameters.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of items to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/CustomListQueryParameters.maxpagesize"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/CustomListQueryParameters.filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PaginatedTrainingSets"
+              "$ref": "#/definitions/PagedTrainingSet"
             }
           },
           "default": {
@@ -1713,8 +1618,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1729,7 +1633,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1826,7 +1730,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1874,7 +1778,8 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "id",
@@ -1994,6 +1899,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureBlobContentSource": {
       "type": "object",
       "description": "Azure Blob Storage content. With the examples below, it represents files\nhttps://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav",
@@ -2027,7 +1937,8 @@
         "name": {
           "type": "string",
           "description": "Base model name",
-          "minLength": 1
+          "minLength": 1,
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -2065,7 +1976,8 @@
           "description": "Resource id",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -2124,6 +2036,7 @@
         }
       },
       "required": [
+        "id",
         "voiceTalentName",
         "companyName",
         "locale",
@@ -2257,9 +2170,9 @@
       "description": "Endpoint object",
       "properties": {
         "id": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Endpoint Id"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Endpoint Id",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -2306,6 +2219,7 @@
         }
       },
       "required": [
+        "id",
         "projectId",
         "modelId"
       ]
@@ -2487,7 +2401,8 @@
           "description": "Resource id",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "voiceName": {
           "type": "string",
@@ -2554,6 +2469,7 @@
         }
       },
       "required": [
+        "id",
         "recipe",
         "projectId",
         "consentId",
@@ -2683,13 +2599,17 @@
           "description": "Unique operation ID.",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/OperationStatus",
           "description": "Status of an operation."
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "OperationStatus": {
       "type": "string",
@@ -2727,9 +2647,9 @@
         ]
       }
     },
-    "PaginatedBaseModels": {
+    "PagedBaseModel": {
       "type": "object",
-      "description": "Paginated base model list",
+      "description": "Paged collection of BaseModel items",
       "properties": {
         "value": {
           "type": "array",
@@ -2748,9 +2668,9 @@
         "value"
       ]
     },
-    "PaginatedConsents": {
+    "PagedConsent": {
       "type": "object",
-      "description": "Paginated consent list",
+      "description": "Paged collection of Consent items",
       "properties": {
         "value": {
           "type": "array",
@@ -2769,9 +2689,9 @@
         "value"
       ]
     },
-    "PaginatedEndpoints": {
+    "PagedEndpoint": {
       "type": "object",
-      "description": "Paginated endpoint list",
+      "description": "Paged collection of Endpoint items",
       "properties": {
         "value": {
           "type": "array",
@@ -2790,9 +2710,9 @@
         "value"
       ]
     },
-    "PaginatedModels": {
+    "PagedModel": {
       "type": "object",
-      "description": "Paginated model list",
+      "description": "Paged collection of Model items",
       "properties": {
         "value": {
           "type": "array",
@@ -2811,9 +2731,9 @@
         "value"
       ]
     },
-    "PaginatedPersonalVoices": {
+    "PagedPersonalVoice": {
       "type": "object",
-      "description": "Paginated personal voice list",
+      "description": "Paged collection of PersonalVoice items",
       "properties": {
         "value": {
           "type": "array",
@@ -2832,9 +2752,9 @@
         "value"
       ]
     },
-    "PaginatedProjects": {
+    "PagedProject": {
       "type": "object",
-      "description": "Paginated project list",
+      "description": "Paged collection of Project items",
       "properties": {
         "value": {
           "type": "array",
@@ -2853,9 +2773,9 @@
         "value"
       ]
     },
-    "PaginatedRecipes": {
+    "PagedRecipe": {
       "type": "object",
-      "description": "Paginated recipe list",
+      "description": "Paged collection of Recipe items",
       "properties": {
         "value": {
           "type": "array",
@@ -2874,9 +2794,9 @@
         "value"
       ]
     },
-    "PaginatedTrainingSets": {
+    "PagedTrainingSet": {
       "type": "object",
-      "description": "Paginated training set list",
+      "description": "Paged collection of TrainingSet items",
       "properties": {
         "value": {
           "type": "array",
@@ -2904,11 +2824,11 @@
           "description": "Resource id",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "speakerProfileId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Personal voice speaker profile id. Fill this property in SSML.",
           "readOnly": true
         },
@@ -2961,6 +2881,7 @@
         }
       },
       "required": [
+        "id",
         "projectId",
         "consentId"
       ]
@@ -3004,7 +2925,8 @@
           "description": "Resource id",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -3031,6 +2953,7 @@
         }
       },
       "required": [
+        "id",
         "kind"
       ]
     },
@@ -3182,7 +3105,8 @@
           "description": "Resource id",
           "minLength": 3,
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -3230,6 +3154,7 @@
         }
       },
       "required": [
+        "id",
         "locale",
         "projectId"
       ]
@@ -3289,6 +3214,34 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "CustomListQueryParameters.filter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter condition.\n- **Supported properties:** projectId, createdDateTime, locale, kind\n- **Operators:**\n- eq, ne are supported for all properties.\n- gt, ge, lt, le are supported for createdDateTime.\n- **Example:**\n- ```filter=projectId eq 'Jessica'``` (filter by project ID)\n- ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\n- ```filter=locale eq 'en-US'``` (filter training set and model by locale)\n- ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource\ncreated time after 2023-11-01)",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomListQueryParameters.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of items to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "CustomListQueryParameters.skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
     }
   }
 }

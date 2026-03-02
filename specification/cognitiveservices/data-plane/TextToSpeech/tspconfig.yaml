@@ -8,6 +8,11 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-operations": "PUT create and POST action operations use Foundations.Operation to preserve exact response headers and status codes"
+    "@azure-tools/typespec-azure-core/use-standard-names": "Migrated from swagger; operation names match existing API conventions"
+    "@azure-tools/typespec-azure-core/byos": "Existing API uses multipart/form-data upload; BYOS not applicable"
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "Fixed via @@clientName in client.tsp; warning only appears in main compile"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}"

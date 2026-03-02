@@ -1,80 +1,75 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tsp";
 import "@typespec/openapi";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
-namespace CustomvoiceAPI;
+namespace CustomVoiceApi;
 
-interface ProjectsOperationGroup {
+/** Service traits - suppress standard Azure headers not used by this API. */
+alias CustomVoiceServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+/** Standard resource operations with Custom Voice service traits. */
+alias ops = Azure.Core.ResourceOperations<CustomVoiceServiceTraits>;
+
+/**
+ * Common list query parameters for resource list operations.
+ */
+model CustomListQueryParameters {
+  /**
+   * The number of result items to skip.
+   */
+  @query("skip")
+  skip?: int32 = 0;
+
+  /**
+   * The maximum number of items to include in a single response.
+   */
+  @query("maxpagesize")
+  maxpagesize?: int32 = 100;
+
+  /**
+   * Filter condition.
+   *   - **Supported properties:** projectId, createdDateTime, locale, kind
+   *   - **Operators:**
+   *     - eq, ne are supported for all properties.
+   *     - gt, ge, lt, le are supported for createdDateTime.
+   *   - **Example:**
+   *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
+   *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
+   *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
+   *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
+   * created time after 2023-11-01)
+   */
+  @query("filter")
+  filter?: string;
+}
+
+interface Projects {
   /**
    * Gets a list of projects for the authenticated Speech service resource.
    */
-  @operationId("Projects_List")
-  @route("/projects")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedProjects
+  list is ops.ResourceList<
+    Project,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the project identified by the given ID.
    */
-  @operationId("Projects_Get")
-  @route("/projects/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    Project
-  >;
+  get is ops.ResourceRead<Project>;
 
   /**
    * Deletes the project identified by the given ID. All data (like consent,
    * training set) in this project will be deleted automatically.
    */
-  @operationId("Projects_Delete")
   @route("/projects/{id}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -101,7 +96,6 @@ interface ProjectsOperationGroup {
   /**
    * Creates a new project.
    */
-  @operationId("Projects_Create")
   @route("/projects/{id}")
   @put
   create is Azure.Core.Foundations.Operation<
@@ -128,94 +122,31 @@ interface ProjectsOperationGroup {
   >;
 }
 
-interface ConsentsOperationGroup {
+interface Consents {
   /**
    * Gets a list of consents for the authenticated Speech service resource.
    */
-  @operationId("Consents_List")
-  @route("/consents")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedConsents
+  list is ops.ResourceList<
+    Consent,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the consent identified by the given ID.
    */
-  @operationId("Consents_Get")
-  @route("/consents/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    Consent
-  >;
+  get is ops.ResourceRead<Consent>;
 
   /**
    * Deletes the consent identified by the given ID.
    */
-  @operationId("Consents_Delete")
-  @route("/consents/{id}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    void
-  >;
+  delete is ops.ResourceDelete<Consent>;
 
   /**
    * Creates a new voice talent consent with the provided audio URL.
    */
-  @operationId("Consents_Create")
   @route("/consents/{id}")
   @put
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
       /**
@@ -227,7 +158,7 @@ interface ConsentsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -255,10 +186,10 @@ interface ConsentsOperationGroup {
   /**
    * Creates a new voice talent consent with the provided audio file.
    */
-  @operationId("Consents_Post")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/consents/{id}")
   @post
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   post is Azure.Core.Foundations.Operation<
     {
@@ -271,7 +202,7 @@ interface ConsentsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -295,91 +226,28 @@ interface ConsentsOperationGroup {
   >;
 }
 
-interface TrainingSetsOperationGroup {
+interface TrainingSets {
   /**
    * Gets a list of training sets for the authenticated Speech service resource.
    */
-  @operationId("TrainingSets_List")
-  @route("/trainingsets")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedTrainingSets
+  list is ops.ResourceList<
+    TrainingSet,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the training set identified by the given ID.
    */
-  @operationId("TrainingSets_Get")
-  @route("/trainingsets/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    TrainingSet
-  >;
+  get is ops.ResourceRead<TrainingSet>;
 
   /**
    * Deletes the training set identified by the given ID.
    */
-  @operationId("TrainingSets_Delete")
-  @route("/trainingsets/{id}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    void
-  >;
+  delete is ops.ResourceDelete<TrainingSet>;
 
   /**
    * Creates a new training set.
    */
-  @operationId("TrainingSets_Create")
   @route("/trainingsets/{id}")
   @put
   create is Azure.Core.Foundations.Operation<
@@ -408,10 +276,10 @@ interface TrainingSetsOperationGroup {
   /**
    * Uploads data to the specified training set.
    */
-  @operationId("TrainingSets_UploadData")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/trainingsets/{id}:upload")
   @post
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   uploadData is Azure.Core.Foundations.Operation<
     {
@@ -424,7 +292,7 @@ interface TrainingSetsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -449,104 +317,41 @@ interface TrainingSetsOperationGroup {
   >;
 }
 
-interface ModelsOperationGroup {
+interface Models {
   /**
    * Get a list of supported recipes for model building. Different recipes have
    * different capabilities such as support for multi-style voice models.
    */
-  @operationId("Models_ListRecipes")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable requires @extension for non-standard list operation"
   @route("/modelrecipes")
   @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  listRecipes is Azure.Core.Foundations.Operation<{}, PaginatedRecipes>;
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  listRecipes is Azure.Core.Foundations.Operation<{}, Azure.Core.Page<Recipe>>;
 
   /**
    * Gets the list of models for the authenticated Speech service resource.
    */
-  @operationId("Models_List")
-  @route("/models")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedModels
+  list is ops.ResourceList<
+    Model,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the model identified by the given ID.
    */
-  @operationId("Models_Get")
-  @route("/models/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    Model
-  >;
+  get is ops.ResourceRead<Model>;
 
   /**
    * Deletes the model identified by the given ID.
    */
-  @operationId("Models_Delete")
-  @route("/models/{id}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    void
-  >;
+  delete is ops.ResourceDelete<Model>;
 
   /**
    * Creates a new voice model.
    */
-  @operationId("Models_Create")
   @route("/models/{id}")
   @put
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
       /**
@@ -558,7 +363,7 @@ interface ModelsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -584,90 +389,31 @@ interface ModelsOperationGroup {
   >;
 }
 
-interface EndpointsOperationGroup {
+interface Endpoints {
   /**
    * Gets a list of endpoints for the authenticated Speech service resource.
    */
-  @operationId("Endpoints_List")
-  @route("/endpoints")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedEndpoints
+  list is ops.ResourceList<
+    Endpoint,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the endpoint identified by the given ID.
    */
-  @operationId("Endpoints_Get")
-  @route("/endpoints/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The resource ID, which should be UUID.
-       */
-      @format("uuid")
-      @path
-      id: string;
-    },
-    Endpoint
-  >;
+  get is ops.ResourceRead<Endpoint>;
 
   /**
    * Deletes the endpoint identified by the given ID.
    */
-  @operationId("Endpoints_Delete")
-  @route("/endpoints/{id}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The resource ID, which should be UUID.
-       */
-      @format("uuid")
-      @path
-      id: string;
-    },
-    void
-  >;
+  delete is ops.ResourceDelete<Endpoint>;
 
   /**
    * Creates a new endpoint.
    */
-  @operationId("Endpoints_Create")
   @route("/endpoints/{id}")
   @put
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
       /**
@@ -679,14 +425,13 @@ interface EndpointsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The resource ID, which should be UUID.
        */
-      @format("uuid")
       @path
-      id: string;
+      id: uuid;
 
       /**
        * Endpoint definition
@@ -705,10 +450,10 @@ interface EndpointsOperationGroup {
   /**
    * Resumes the endpoint identified by the given ID.
    */
-  @operationId("Endpoints_Resume")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/endpoints/{id}:resume")
   @post
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   resume is Azure.Core.Foundations.Operation<
     {
@@ -721,14 +466,13 @@ interface EndpointsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The resource ID, which should be UUID.
        */
-      @format("uuid")
       @path
-      id: string;
+      id: uuid;
     },
     {
       @statusCode statusCode: 202;
@@ -741,10 +485,10 @@ interface EndpointsOperationGroup {
   /**
    * Suspends the endpoint identified by the given ID.
    */
-  @operationId("Endpoints_Suspend")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/endpoints/{id}:suspend")
   @post
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   suspend is Azure.Core.Foundations.Operation<
     {
@@ -757,14 +501,13 @@ interface EndpointsOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The resource ID, which should be UUID.
        */
-      @format("uuid")
       @path
-      id: string;
+      id: uuid;
     },
     {
       @statusCode statusCode: 202;
@@ -775,105 +518,38 @@ interface EndpointsOperationGroup {
   >;
 }
 
-interface BaseModelsOperationGroup {
+interface BaseModels {
   /**
    * Gets a list of base models.
    */
-  @operationId("BaseModels_List")
-  @route("/basemodels")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<{}, PaginatedBaseModels>;
+  list is ops.ResourceList<BaseModel>;
 }
 
-interface PersonalVoicesOperationGroup {
+interface PersonalVoices {
   /**
    * Gets a list of personal voices for the authenticated Speech service resource.
    */
-  @operationId("PersonalVoices_List")
-  @route("/personalvoices")
-  @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink", itemName: "value" })
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The number of result items to skip.
-       */
-      @query("skip")
-      skip?: int32 = 0;
-
-      /**
-       * The maximum number of items to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32 = 100;
-
-      /**
-       * Filter condition.
-       *   - **Supported properties:** projectId, createdDateTime, locale, kind
-       *   - **Operators:**
-       *     - eq, ne are supported for all properties.
-       *     - gt, ge, lt, le are supported for createdDateTime.
-       *   - **Example:**
-       *     - ```filter=projectId eq 'Jessica'``` (filter by project ID)
-       *     - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)
-       *     - ```filter=locale eq 'en-US'``` (filter training set and model by locale)
-       *     - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource
-       * created time after 2023-11-01)
-       */
-      @query("filter")
-      filter?: string;
-    },
-    PaginatedPersonalVoices
+  list is ops.ResourceList<
+    PersonalVoice,
+    ListQueryParametersTrait<CustomListQueryParameters>
   >;
 
   /**
    * Gets the personal voice identified by the given ID.
    */
-  @operationId("PersonalVoices_Get")
-  @route("/personalvoices/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    PersonalVoice
-  >;
+  get is ops.ResourceRead<PersonalVoice>;
 
   /**
    * Deletes the personal voice identified by the given ID.
    */
-  @operationId("PersonalVoices_Delete")
-  @route("/personalvoices/{id}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the resource.
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    void
-  >;
+  delete is ops.ResourceDelete<PersonalVoice>;
 
   /**
    * Creates a new personal voice with audio files in Azure Blob Storage.
    */
-  @operationId("PersonalVoices_Create")
   @route("/personalvoices/{id}")
   @put
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   create is Azure.Core.Foundations.Operation<
     {
       /**
@@ -885,7 +561,7 @@ interface PersonalVoicesOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -913,10 +589,10 @@ interface PersonalVoicesOperationGroup {
   /**
    * Creates a new personal voice with audio files in the client.
    */
-  @operationId("PersonalVoices_Post")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/personalvoices/{id}")
   @post
-  @extension("x-ms-long-running-operation", true)
+  @pollingOperation(Operations.get)
   @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
   post is Azure.Core.Foundations.Operation<
     {
@@ -929,7 +605,7 @@ interface PersonalVoicesOperationGroup {
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
       @header("Operation-Id")
-      `Operation-Id`?: string;
+      operationId?: string;
 
       /**
        * The ID of the resource.
@@ -953,24 +629,9 @@ interface PersonalVoicesOperationGroup {
   >;
 }
 
-interface OperationsOperationGroup {
+interface Operations {
   /**
    * Gets operation info.
    */
-  @operationId("Operations_Get")
-  @route("/operations/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the operation
-       */
-      @maxLength(64)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-      @path
-      id: string;
-    },
-    Operation
-  >;
+  get is ops.ResourceRead<Operation>;
 }
