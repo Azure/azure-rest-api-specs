@@ -21276,10 +21276,6 @@
     "CassandraKeyspaceGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Cassandra keyspace"
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -21297,8 +21293,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraKeyspaceResource"
+        }
       ]
     },
     "CassandraKeyspaceGetResults": {
@@ -21699,24 +21697,6 @@
     "CassandraTableGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Cassandra table"
-        },
-        "defaultTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to live of the Cosmos DB Cassandra table"
-        },
-        "schema": {
-          "$ref": "#/definitions/CassandraSchema",
-          "description": "Schema of the Cosmos DB Cassandra table"
-        },
-        "analyticalStorageTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Analytical TTL."
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -21734,8 +21714,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraTableResource"
+        }
       ]
     },
     "CassandraTableGetResults": {
@@ -21877,14 +21859,6 @@
     "CassandraViewGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Cassandra view"
-        },
-        "viewDefinition": {
-          "type": "string",
-          "description": "View Definition of the Cosmos DB Cassandra view"
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -21902,9 +21876,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id",
-        "viewDefinition"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraViewResource"
+        }
       ]
     },
     "CassandraViewGetResults": {
@@ -22054,23 +22029,6 @@
     "ClientEncryptionKeyGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the ClientEncryptionKey"
-        },
-        "encryptionAlgorithm": {
-          "type": "string",
-          "description": "Encryption algorithm that will be used along with this client encryption key to encrypt/decrypt data."
-        },
-        "wrappedDataEncryptionKey": {
-          "type": "string",
-          "format": "byte",
-          "description": "Wrapped (encrypted) form of the key represented as a byte array."
-        },
-        "keyWrapMetadata": {
-          "$ref": "#/definitions/KeyWrapMetadata",
-          "description": "Metadata for the wrapping provider that can be used to unwrap the wrapped client encryption key."
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -22087,7 +22045,12 @@
           "description": "A system generated property representing the resource etag required for optimistic concurrency control.",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEncryptionKeyResource"
+        }
+      ]
     },
     "ClientEncryptionKeyGetResults": {
       "type": "object",
@@ -25728,37 +25691,6 @@
     "GremlinDatabaseGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Gremlin database"
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -25776,8 +25708,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinDatabaseResource"
+        }
       ]
     },
     "GremlinDatabaseGetResults": {
@@ -25949,63 +25883,6 @@
     "GremlinGraphGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Gremlin graph"
-        },
-        "indexingPolicy": {
-          "$ref": "#/definitions/IndexingPolicy",
-          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the graph"
-        },
-        "partitionKey": {
-          "$ref": "#/definitions/ContainerPartitionKey",
-          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
-        },
-        "defaultTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Default time to live"
-        },
-        "uniqueKeyPolicy": {
-          "$ref": "#/definitions/UniqueKeyPolicy",
-          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
-        },
-        "conflictResolutionPolicy": {
-          "$ref": "#/definitions/ConflictResolutionPolicy",
-          "description": "The conflict resolution policy for the graph."
-        },
-        "analyticalStorageTtl": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Analytical TTL."
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -26023,8 +25900,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinGraphResource"
+        }
       ]
     },
     "GremlinGraphGetResults": {
@@ -27273,57 +27152,6 @@
     "MongoDBCollectionGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB MongoDB collection"
-        },
-        "shardKey": {
-          "type": "object",
-          "description": "A key-value pair of shard keys to be applied for the request.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "indexes": {
-          "type": "array",
-          "description": "List of index keys",
-          "items": {
-            "$ref": "#/definitions/MongoIndex"
-          },
-          "x-ms-identifiers": []
-        },
-        "analyticalStorageTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Analytical TTL."
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -27341,8 +27169,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDBCollectionResource"
+        }
       ]
     },
     "MongoDBCollectionGetResults": {
@@ -27517,37 +27347,6 @@
     "MongoDBDatabaseGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB MongoDB database"
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -27565,8 +27364,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDBDatabaseResource"
+        }
       ]
     },
     "MongoDBDatabaseGetResults": {
@@ -29830,101 +29631,6 @@
       "type": "object",
       "description": "Cosmos DB SQL container resource object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL container"
-        },
-        "indexingPolicy": {
-          "$ref": "#/definitions/IndexingPolicy",
-          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the container"
-        },
-        "partitionKey": {
-          "$ref": "#/definitions/ContainerPartitionKey",
-          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
-        },
-        "defaultTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Default time to live"
-        },
-        "uniqueKeyPolicy": {
-          "$ref": "#/definitions/UniqueKeyPolicy",
-          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
-        },
-        "conflictResolutionPolicy": {
-          "$ref": "#/definitions/ConflictResolutionPolicy",
-          "description": "The conflict resolution policy for the container."
-        },
-        "clientEncryptionPolicy": {
-          "$ref": "#/definitions/ClientEncryptionPolicy",
-          "description": "The client encryption policy for the container."
-        },
-        "analyticalStorageTtl": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Analytical TTL."
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
-        "materializedViewDefinition": {
-          "$ref": "#/definitions/MaterializedViewDefinition",
-          "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
-        },
-        "materializedViews": {
-          "type": "array",
-          "description": "Materialized Views defined on the container.",
-          "items": {
-            "$ref": "#/definitions/MaterializedViewDetails"
-          }
-        },
-        "materializedViewsProperties": {
-          "$ref": "#/definitions/MaterializedViewsProperties",
-          "description": "Materialized Views Properties defined for source container."
-        },
-        "computedProperties": {
-          "type": "array",
-          "description": "List of computed properties",
-          "items": {
-            "$ref": "#/definitions/ComputedProperty"
-          }
-        },
-        "vectorEmbeddingPolicy": {
-          "$ref": "#/definitions/VectorEmbeddingPolicy",
-          "description": "The vector embedding policy for the container."
-        },
-        "fullTextPolicy": {
-          "$ref": "#/definitions/FullTextPolicy",
-          "description": "The FullText policy for the container."
-        },
-        "dataMaskingPolicy": {
-          "$ref": "#/definitions/DataMaskingPolicy",
-          "description": "The Data Masking policy for the container."
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -29947,8 +29653,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlContainerResource"
+        }
       ]
     },
     "RestorableSqlContainersListResult": {
@@ -30843,101 +30551,6 @@
     "SqlContainerGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL container"
-        },
-        "indexingPolicy": {
-          "$ref": "#/definitions/IndexingPolicy",
-          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the container"
-        },
-        "partitionKey": {
-          "$ref": "#/definitions/ContainerPartitionKey",
-          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
-        },
-        "defaultTtl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Default time to live"
-        },
-        "uniqueKeyPolicy": {
-          "$ref": "#/definitions/UniqueKeyPolicy",
-          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
-        },
-        "conflictResolutionPolicy": {
-          "$ref": "#/definitions/ConflictResolutionPolicy",
-          "description": "The conflict resolution policy for the container."
-        },
-        "clientEncryptionPolicy": {
-          "$ref": "#/definitions/ClientEncryptionPolicy",
-          "description": "The client encryption policy for the container."
-        },
-        "analyticalStorageTtl": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Analytical TTL."
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
-        "materializedViewDefinition": {
-          "$ref": "#/definitions/MaterializedViewDefinition",
-          "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
-        },
-        "materializedViews": {
-          "type": "array",
-          "description": "Materialized Views defined on the container.",
-          "items": {
-            "$ref": "#/definitions/MaterializedViewDetails"
-          }
-        },
-        "materializedViewsProperties": {
-          "$ref": "#/definitions/MaterializedViewsProperties",
-          "description": "Materialized Views Properties defined for source container."
-        },
-        "computedProperties": {
-          "type": "array",
-          "description": "List of computed properties",
-          "items": {
-            "$ref": "#/definitions/ComputedProperty"
-          }
-        },
-        "vectorEmbeddingPolicy": {
-          "$ref": "#/definitions/VectorEmbeddingPolicy",
-          "description": "The vector embedding policy for the container."
-        },
-        "fullTextPolicy": {
-          "$ref": "#/definitions/FullTextPolicy",
-          "description": "The FullText policy for the container."
-        },
-        "dataMaskingPolicy": {
-          "$ref": "#/definitions/DataMaskingPolicy",
-          "description": "The Data Masking policy for the container."
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -30955,8 +30568,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlContainerResource"
+        }
       ]
     },
     "SqlContainerGetResults": {
@@ -31175,37 +30790,6 @@
     "SqlDatabaseGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL database"
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -31231,8 +30815,10 @@
           "description": "A system generated property that specifies the addressable path of the users resource."
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlDatabaseResource"
+        }
       ]
     },
     "SqlDatabaseGetResults": {
@@ -31571,14 +31157,6 @@
     "SqlStoredProcedureGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL storedProcedure"
-        },
-        "body": {
-          "type": "string",
-          "description": "Body of the Stored Procedure"
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -31596,8 +31174,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlStoredProcedureResource"
+        }
       ]
     },
     "SqlStoredProcedureGetResults": {
@@ -31718,22 +31298,6 @@
     "SqlTriggerGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL trigger"
-        },
-        "body": {
-          "type": "string",
-          "description": "Body of the Trigger"
-        },
-        "triggerType": {
-          "$ref": "#/definitions/TriggerType",
-          "description": "Type of the Trigger"
-        },
-        "triggerOperation": {
-          "$ref": "#/definitions/TriggerOperation",
-          "description": "The operation the trigger is associated with"
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -31751,8 +31315,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlTriggerResource"
+        }
       ]
     },
     "SqlTriggerGetResults": {
@@ -31881,14 +31447,6 @@
     "SqlUserDefinedFunctionGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB SQL userDefinedFunction"
-        },
-        "body": {
-          "type": "string",
-          "description": "Body of the User Defined Function"
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -31906,8 +31464,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlUserDefinedFunctionResource"
+        }
       ]
     },
     "SqlUserDefinedFunctionGetResults": {
@@ -32113,37 +31673,6 @@
     "TableGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB table"
-        },
-        "restoreParameters": {
-          "$ref": "#/definitions/ResourceRestoreParameters",
-          "description": "Parameters to indicate the information about the restore"
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Enum to indicate the mode of account creation.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Restore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default"
-              },
-              {
-                "name": "Restore",
-                "value": "Restore"
-              }
-            ]
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -32161,8 +31690,10 @@
           "readOnly": true
         }
       },
-      "required": [
-        "id"
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableResource"
+        }
       ]
     },
     "TableGetResults": {
@@ -32589,42 +32120,6 @@
     "ThroughputSettingsGetPropertiesResource": {
       "type": "object",
       "properties": {
-        "throughput": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autoscaleSettings is required, but not both."
-        },
-        "autoscaleSettings": {
-          "$ref": "#/definitions/AutoscaleSettingsResource",
-          "description": "Cosmos DB resource for autoscale settings. Either throughput is required or autoscaleSettings is required, but not both."
-        },
-        "minimumThroughput": {
-          "type": "string",
-          "description": "The minimum throughput of the resource",
-          "readOnly": true
-        },
-        "offerReplacePending": {
-          "type": "string",
-          "description": "The throughput replace is pending",
-          "readOnly": true
-        },
-        "instantMaximumThroughput": {
-          "type": "string",
-          "description": "The offer throughput value to instantly scale up without triggering splits",
-          "readOnly": true
-        },
-        "softAllowedMaximumThroughput": {
-          "type": "string",
-          "description": "The maximum throughput value or the maximum maxThroughput value (for autoscale) that can be specified",
-          "readOnly": true
-        },
-        "throughputBuckets": {
-          "type": "array",
-          "description": "Array of throughput bucket limits to be applied to the Cosmos DB container",
-          "items": {
-            "$ref": "#/definitions/ThroughputBucketResource"
-          }
-        },
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
@@ -32641,7 +32136,12 @@
           "description": "A system generated property representing the resource etag required for optimistic concurrency control.",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThroughputSettingsResource"
+        }
+      ]
     },
     "ThroughputSettingsGetResults": {
       "type": "object",

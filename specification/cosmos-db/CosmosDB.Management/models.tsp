@@ -3438,9 +3438,9 @@ model SqlDatabaseGetProperties {
   options?: SqlDatabaseGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlDatabaseGetPropertiesResource {
-  ...SqlDatabaseResource;
+model SqlDatabaseGetPropertiesResource extends SqlDatabaseResource {
   ...ExtendedResourceProperties;
 
   /**
@@ -3544,9 +3544,10 @@ model ThroughputSettingsGetProperties {
   resource?: ThroughputSettingsGetPropertiesResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ThroughputSettingsGetPropertiesResource {
-  ...ThroughputSettingsResource;
+model ThroughputSettingsGetPropertiesResource
+  extends ThroughputSettingsResource {
   ...ExtendedResourceProperties;
 }
 
@@ -3706,9 +3707,10 @@ model ClientEncryptionKeyGetProperties {
   resource?: ClientEncryptionKeyGetPropertiesResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ClientEncryptionKeyGetPropertiesResource {
-  ...ClientEncryptionKeyResource;
+model ClientEncryptionKeyGetPropertiesResource
+  extends ClientEncryptionKeyResource {
   ...ExtendedResourceProperties;
 }
 
@@ -3809,9 +3811,9 @@ model SqlContainerGetProperties {
   options?: SqlContainerGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlContainerGetPropertiesResource {
-  ...SqlContainerResource;
+model SqlContainerGetPropertiesResource extends SqlContainerResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4530,9 +4532,10 @@ model SqlStoredProcedureGetProperties {
   resource?: SqlStoredProcedureGetPropertiesResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlStoredProcedureGetPropertiesResource {
-  ...SqlStoredProcedureResource;
+model SqlStoredProcedureGetPropertiesResource
+  extends SqlStoredProcedureResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4602,9 +4605,10 @@ model SqlUserDefinedFunctionGetProperties {
   resource?: SqlUserDefinedFunctionGetPropertiesResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlUserDefinedFunctionGetPropertiesResource {
-  ...SqlUserDefinedFunctionResource;
+model SqlUserDefinedFunctionGetPropertiesResource
+  extends SqlUserDefinedFunctionResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4675,9 +4679,9 @@ model SqlTriggerGetProperties {
   resource?: SqlTriggerGetPropertiesResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlTriggerGetPropertiesResource {
-  ...SqlTriggerResource;
+model SqlTriggerGetPropertiesResource extends SqlTriggerResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4760,10 +4764,11 @@ model MongoDBDatabaseGetProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: MongoDBDatabaseGetPropertiesOptions;
 }
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MongoDBDatabaseGetPropertiesResource {
-  ...MongoDBDatabaseResource;
+model MongoDBDatabaseGetPropertiesResource extends MongoDBDatabaseResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4851,10 +4856,11 @@ model MongoDBCollectionGetProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: MongoDBCollectionGetPropertiesOptions;
 }
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MongoDBCollectionGetPropertiesResource {
-  ...MongoDBCollectionResource;
+model MongoDBCollectionGetPropertiesResource extends MongoDBCollectionResource {
   ...ExtendedResourceProperties;
 }
 
@@ -4998,9 +5004,9 @@ model TableGetProperties {
   options?: TableGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TableGetPropertiesResource {
-  ...TableResource;
+model TableGetPropertiesResource extends TableResource {
   ...ExtendedResourceProperties;
 }
 
@@ -5082,9 +5088,9 @@ model CassandraKeyspaceGetProperties {
   options?: CassandraKeyspaceGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CassandraKeyspaceGetPropertiesResource {
-  ...CassandraKeyspaceResource;
+model CassandraKeyspaceGetPropertiesResource extends CassandraKeyspaceResource {
   ...ExtendedResourceProperties;
 }
 
@@ -5156,9 +5162,9 @@ model CassandraTableGetProperties {
   options?: CassandraTableGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CassandraTableGetPropertiesResource {
-  ...CassandraTableResource;
+model CassandraTableGetPropertiesResource extends CassandraTableResource {
   ...ExtendedResourceProperties;
 }
 
@@ -5305,9 +5311,9 @@ model GremlinDatabaseGetProperties {
   options?: GremlinDatabaseGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model GremlinDatabaseGetPropertiesResource {
-  ...GremlinDatabaseResource;
+model GremlinDatabaseGetPropertiesResource extends GremlinDatabaseResource {
   ...ExtendedResourceProperties;
 }
 
@@ -5389,9 +5395,9 @@ model GremlinGraphGetProperties {
   options?: GremlinGraphGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model GremlinGraphGetPropertiesResource {
-  ...GremlinGraphResource;
+model GremlinGraphGetPropertiesResource extends GremlinGraphResource {
   ...ExtendedResourceProperties;
 }
 
@@ -5561,9 +5567,9 @@ model CassandraViewGetProperties {
   options?: CassandraViewGetPropertiesOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CassandraViewGetPropertiesResource {
-  ...CassandraViewResource;
+model CassandraViewGetPropertiesResource extends CassandraViewResource {
   ...ExtendedResourceProperties;
 }
 
@@ -7329,8 +7335,9 @@ model RestorableSqlContainerPropertiesResource {
 /**
  * Cosmos DB SQL container resource object
  */
-model RestorableSqlContainerPropertiesResourceContainer {
-  ...SqlContainerResource;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RestorableSqlContainerPropertiesResourceContainer
+  extends SqlContainerResource {
   ...ExtendedResourceProperties;
 
   /**
