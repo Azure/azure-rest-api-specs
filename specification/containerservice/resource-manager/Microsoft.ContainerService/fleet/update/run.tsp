@@ -221,6 +221,11 @@ model UpdateRunStatus {
   status?: UpdateStatus;
 
   @visibility(Lifecycle.Read)
+  @doc("Total member upgrade failures across the entire UpdateRun.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
+
+  @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
@@ -259,6 +264,12 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.")
+  @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: string;
+
+  @visibility(Lifecycle.Read)
   @doc("The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value.")
   @added(Versions.v2026_02_01_preview)
   maxConcurrency?: int32;
@@ -294,6 +305,12 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.")
+  @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: string;
 
   @visibility(Lifecycle.Read)
   @doc("""
