@@ -56,6 +56,7 @@ interface SkusOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface OperationsResultsOperationGroup {
   /**
    * Returns operation results.
@@ -82,7 +83,7 @@ interface OperationsResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("OperationResults")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Kusto/locations/{location}/operationResults/{operationId}?operationResultResponseType=Location")
   @get
   @sharedRoute
   getLocation(
