@@ -441,7 +441,6 @@ interface Policy {
   get is PolicyOps.Read<
     PolicyContract,
     Parameters = PolicyGetParameters,
-    },
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -812,7 +811,6 @@ interface WorkspaceApiOperationPolicy {
   get is WorkspaceApiOperationPolicyOps.Read<
     PolicyContract,
     Parameters = PolicyGetParameters,
-    },
     Response = ArmResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
