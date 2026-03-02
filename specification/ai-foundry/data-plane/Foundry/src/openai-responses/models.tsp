@@ -40,6 +40,7 @@ namespace Azure.AI.Projects {
        * When provided, the request is routed to the same sandbox. When omitted, auto-derived from
        * conversation_id/prev_response_id or a new UUID is generated.
        */
+      @removed(Versions.v1)
       agent_session_id?: string,
     }
   );
@@ -62,6 +63,7 @@ namespace Azure.AI.Projects {
        * or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
        * affinity in follow-up calls.
        */
+      @removed(Versions.v1)
       agent_session_id?: string,
     }
   );
