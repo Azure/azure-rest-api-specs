@@ -5545,6 +5545,9 @@
           "Create a scale set with OS image scheduled events enabled.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithOSImageScheduledEventEnabled.json"
           },
+          "Create a scale set with OperationRecoverySettings enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithOperationRecoverySettings.json"
+          },
           "Create a scale set with ProxyAgent Settings of enabled and mode.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProxyAgentSettings.json"
           },
@@ -15888,6 +15891,24 @@
         "modelAsString": false
       }
     },
+    "OperationRecoverySettings": {
+      "type": "object",
+      "description": "The configuration parameters used for operation recovery settings on a virtual machine scale set.",
+      "properties": {
+        "restartRecoveryPolicy": {
+          "$ref": "#/definitions/RestartRecoveryPolicy",
+          "description": "The configuration parameters used for restart recovery policy."
+        },
+        "startRecoveryPolicy": {
+          "$ref": "#/definitions/StartRecoveryPolicy",
+          "description": "The configuration parameters used for start recovery policy."
+        },
+        "reimageRecoveryPolicy": {
+          "$ref": "#/definitions/ReimageRecoveryPolicy",
+          "description": "The configuration parameters used for reimage recovery policy."
+        }
+      }
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -16613,6 +16634,16 @@
         }
       }
     },
+    "ReimageRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing reimage recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether reimage recovery should be enabled. The default value is false."
+        }
+      }
+    },
     "RepairAction": {
       "type": "string",
       "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.",
@@ -16684,7 +16715,7 @@
     },
     "ResiliencyPolicy": {
       "type": "object",
-      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.",
+      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy, ResilientVMDeletionPolicy and OperationRecoverySettings (version > 2025-11-01).",
       "properties": {
         "resilientVMCreationPolicy": {
           "$ref": "#/definitions/ResilientVMCreationPolicy",
@@ -16701,6 +16732,10 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The configuration parameters used while performing zone allocation."
+        },
+        "operationRecoverySettings": {
+          "$ref": "#/definitions/OperationRecoverySettings",
+          "description": "The configuration parameters used for operation recovery settings."
         }
       }
     },
@@ -16847,6 +16882,16 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "RestartRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing restart recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether restart recovery should be enabled. The default value is false."
         }
       }
     },
@@ -18181,6 +18226,16 @@
       "required": [
         "value"
       ]
+    },
+    "StartRecoveryPolicy": {
+      "type": "object",
+      "description": "The configuration parameters used while performing start recovery.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether start recovery should be enabled. The default value is false."
+        }
+      }
     },
     "StatusLevelTypes": {
       "type": "string",
