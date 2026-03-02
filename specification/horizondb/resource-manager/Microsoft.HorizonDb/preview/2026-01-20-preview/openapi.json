@@ -331,7 +331,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate"
+              "$ref": "#/definitions/HorizonDbClusterForPatchUpdate"
             }
           }
         ],
@@ -828,7 +828,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbFirewallRulePropertiesForPatchUpdate"
+              "$ref": "#/definitions/HorizonDbFirewallRuleForPatchUpdate"
             }
           }
         ],
@@ -1234,7 +1234,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbReplicaPropertiesForPatchUpdate"
+              "$ref": "#/definitions/HorizonDbReplicaForPatchUpdate"
             }
           }
         ],
@@ -1443,6 +1443,23 @@
         }
       ]
     },
+    "HorizonDbClusterForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb cluster for update operations",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDb cluster."
+        }
+      }
+    },
     "HorizonDbClusterListResult": {
       "type": "object",
       "description": "The response of a HorizonDbCluster list operation.",
@@ -1588,13 +1605,6 @@
       "type": "object",
       "description": "Properties of a HorizonDb cluster for update operations",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
@@ -1631,6 +1641,19 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "HorizonDbFirewallRuleForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb firewall rule for update operations",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbFirewallRulePropertiesForPatchUpdate",
+          "description": "Properties of a HorizonDb firewall rule for update operations"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "HorizonDbFirewallRuleListResult": {
@@ -1834,6 +1857,19 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "HorizonDbReplicaForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb replica for update operations",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HorizonDbReplicaPropertiesForPatchUpdate",
+          "description": "Properties of a HorizonDb replica for update operations"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "HorizonDbReplicaListResult": {

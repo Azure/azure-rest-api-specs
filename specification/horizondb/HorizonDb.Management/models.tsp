@@ -86,8 +86,6 @@ model HorizonDbClusterProperties {
 
 @doc("Properties of a HorizonDb cluster for update operations")
 model HorizonDbClusterPropertiesForPatchUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   @secret
   @minLength(8)
   @maxLength(128)
@@ -100,6 +98,14 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @maxValue(96)
   @visibility(Lifecycle.Update)
   vCores?: int32;
+}
+
+@doc("HorizonDb cluster for update operations")
+model HorizonDbClusterForPatchUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The properties that can be updated for a HorizonDb cluster.")
+  properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
 
 @doc("Properties of a HorizonDb pool")
@@ -182,6 +188,12 @@ model HorizonDbReplicaPropertiesForPatchUpdate {
   role?: ReplicaRole;
 }
 
+@doc("HorizonDb replica for update operations")
+model HorizonDbReplicaForPatchUpdate {
+  @doc("Properties of a HorizonDb replica for update operations")
+  properties: HorizonDbReplicaPropertiesForPatchUpdate;
+}
+
 @doc("Properties of a HorizonDb firewall rule")
 model HorizonDbFirewallRuleProperties {
   @doc("The start IP address of the firewall rule")
@@ -214,6 +226,12 @@ model HorizonDbFirewallRulePropertiesForPatchUpdate {
   @visibility(Lifecycle.Update)
   @doc("The description of the firewall rule")
   description?: string;
+}
+
+@doc("HorizonDb firewall rule for update operations")
+model HorizonDbFirewallRuleForPatchUpdate {
+  @doc("Properties of a HorizonDb firewall rule for update operations")
+  properties: HorizonDbFirewallRulePropertiesForPatchUpdate;
 }
 
 @doc("The mode to create a new HorizonDb cluster")
