@@ -172,6 +172,35 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
+@@clientName(AllowRDPShortPathWithPrivateLink,
+  "AllowRdpShortPathWithPrivateLink",
+  "csharp"
+);
+
+@@clientName(HostPoolProperties.managedPrivateUDP,
+  "ManagedPrivateUdp",
+  "csharp"
+);
+@@clientName(HostPoolProperties.directUDP, "DirectUdp", "csharp");
+@@clientName(HostPoolProperties.publicUDP, "PublicUdp", "csharp");
+@@clientName(HostPoolProperties.relayUDP, "RelayUdp", "csharp");
+@@clientName(HostPoolProperties.allowRDPShortPathWithPrivateLink,
+  "AllowRdpShortPathWithPrivateLink",
+  "csharp"
+);
+
+@@clientName(HostPoolPatchProperties.managedPrivateUDP,
+  "ManagedPrivateUdp",
+  "csharp"
+);
+@@clientName(HostPoolPatchProperties.directUDP, "DirectUdp", "csharp");
+@@clientName(HostPoolPatchProperties.publicUDP, "PublicUdp", "csharp");
+@@clientName(HostPoolPatchProperties.relayUDP, "RelayUdp", "csharp");
+@@clientName(HostPoolPatchProperties.allowRDPShortPathWithPrivateLink,
+  "AllowRdpShortPathWithPrivateLink",
+  "csharp"
+);
+
 @@clientName(MSIXPackageList, "MsixPackageList", "csharp");
 @@clientName(MSIXPackageProperties.lastUpdated, "LastUpdatedOn", "csharp");
 
@@ -601,7 +630,7 @@ using Microsoft.DesktopVirtualization;
   "DesktopVirtualizationDiffDiskProperties",
   "csharp"
 );
-@@clientName(DirectUDP, "DesktopVirtualizationDirectUDP", "csharp");
+@@clientName(DirectUDP, "DesktopVirtualizationDirectUdp", "csharp");
 @@clientName(DiskInfoProperties,
   "DesktopVirtualizationDiskInfoProperties",
   "csharp"
@@ -628,7 +657,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 @@clientName(ManagedPrivateUDP,
-  "DesktopVirtualizationManagedPrivateUDP",
+  "DesktopVirtualizationManagedPrivateUdp",
   "csharp"
 );
 @@clientName(NetworkInfoPatchProperties,
@@ -640,7 +669,7 @@ using Microsoft.DesktopVirtualization;
   "DesktopVirtualizationNetworkInfoProperties",
   "csharp"
 );
-@@clientName(PublicUDP, "DesktopVirtualizationPublicUDP", "csharp");
+@@clientName(PublicUDP, "DesktopVirtualizationPublicUdp", "csharp");
 @@clientName(ProvisioningStateSHC,
   "ProvisioningStateSessionHostConfiguration",
   "csharp"
@@ -653,7 +682,7 @@ using Microsoft.DesktopVirtualization;
   "DesktopVirtualizationRegistrationTokenMinimal",
   "csharp"
 );
-@@clientName(RelayUDP, "DesktopVirtualizationRelayUDP", "csharp");
+@@clientName(RelayUDP, "DesktopVirtualizationRelayUdp", "csharp");
 @@clientName(ScalingMethodType,
   "DesktopVirtualizationScalingMethodType",
   "csharp"
