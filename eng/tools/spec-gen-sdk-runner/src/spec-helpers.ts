@@ -164,6 +164,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
     searchFileRegex: typespecProjectRegex,
     specRepoFolder: commandInput.localSpecRepoPath,
     stopAtFolder: "specification",
+    findAll: true,
   });
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {

@@ -26,6 +26,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v2_preview: "2025-01-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v3_preview: "2026-03-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -678,6 +682,15 @@ interface ProtectionGroups {
     @doc("The body type of the operation request.")
     request: RestoreProtectionItemRequest,
   ): ArmResponse<RestoreProtectionItemResponse> | ErrorResponse;
+
+  @doc("Resume Backup for a Protection Group.")
+  @armResourceAction(ProtectionGroup)
+  @action("resumeBackup")
+  @post
+  @added(Versions.v3_preview)
+  resumeBackup(
+    ...ResourceInstanceParameters<ProtectionGroup>,
+  ): ArmNoContentResponse<"Resource operation accepted."> | ErrorResponse;
 }
 
 @parentResource(ProtectionGroup)

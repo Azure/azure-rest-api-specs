@@ -11282,49 +11282,6 @@
         }
       }
     },
-    "DiskJobStatus": {
-      "type": "string",
-      "description": "Status of the job execution.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "DiskJobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Job has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Job is currently running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Job completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Job failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Job was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "DiskJobType": {
       "type": "string",
       "description": "Job Type supported for disk operations.",
@@ -12266,6 +12223,10 @@
             "create"
           ]
         },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Job provisioning state.",
@@ -12289,7 +12250,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/DiskJobStatus",
+          "$ref": "#/definitions/JobStatus",
           "description": "Status of disk job.",
           "readOnly": true
         },
@@ -12832,14 +12793,40 @@
           "$ref": "#/definitions/NetworkAdapterConfiguration",
           "description": "The desired network configuration to apply."
         },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the job.",
           "readOnly": true
         },
-        "status": {
+        "jobId": {
           "type": "string",
-          "description": "Status of the job.",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details if job failed.",
           "readOnly": true
         },
         "reportedProperties": {
