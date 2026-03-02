@@ -21,7 +21,7 @@ model NsxNsGroup
   ...ResourceNameParameter<
     Resource = NsxNsGroup,
     KeyName = "groupName",
-    SegmentName = "nsGroups",
+    SegmentName = "nsxNsGroups",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }

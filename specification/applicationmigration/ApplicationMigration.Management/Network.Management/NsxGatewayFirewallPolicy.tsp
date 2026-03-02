@@ -24,7 +24,7 @@ model NsxGatewayFirewallPolicy
   ...ResourceNameParameter<
     Resource = NsxGatewayFirewallPolicy,
     KeyName = "policyName",
-    SegmentName = "gatewayFirewallPolicies",
+    SegmentName = "nsxGatewayFirewallPolicies",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -59,7 +59,7 @@ model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
 }
 
 @armResourceOperations
-interface GatewayFirewallPolicies {
+interface NsxGatewayFirewallPolicies {
   /**
    * Gets the NsxGatewayFirewallPolicy resource.
    */

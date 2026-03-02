@@ -21,7 +21,7 @@ model NsxTier1Gateway
   ...ResourceNameParameter<
     Resource = NsxTier1Gateway,
     KeyName = "gatewayName",
-    SegmentName = "tier1Gateways",
+    SegmentName = "nsxTier1Gateways",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }

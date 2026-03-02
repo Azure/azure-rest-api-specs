@@ -21,7 +21,7 @@ model NsxSegment
   ...ResourceNameParameter<
     Resource = NsxSegment,
     KeyName = "segmentName",
-    SegmentName = "segments",
+    SegmentName = "nsxSegments",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }

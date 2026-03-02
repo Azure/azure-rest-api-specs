@@ -21,7 +21,7 @@ model NsxLoadBalancer
   ...ResourceNameParameter<
     Resource = NsxLoadBalancer,
     KeyName = "loadBalancerName",
-    SegmentName = "loadBalancers",
+    SegmentName = "nsxLoadBalancers",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }

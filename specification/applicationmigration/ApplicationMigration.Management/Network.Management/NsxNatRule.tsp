@@ -21,7 +21,7 @@ model NsxNatRule
   ...ResourceNameParameter<
     Resource = NsxNatRule,
     KeyName = "natRuleName",
-    SegmentName = "natRules",
+    SegmentName = "nsxNatRules",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
