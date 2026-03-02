@@ -6,7 +6,7 @@ import { simpleGit } from "simple-git";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { parse } from "../tsp-config.js";
-import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -15,6 +15,11 @@ export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
+    const suppression = (await getSuppressions(folder)).find((s) => s.rules?.includes(this.name));
+    if (suppression) {
+      return { success: true, stdOutput: `suppressed: ${suppression.reason}` };
+    }
+
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
