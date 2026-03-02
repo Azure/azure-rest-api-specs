@@ -822,8 +822,9 @@ interface Sites {
    * Description for Gets all Network Security Perimeter Association Configurations for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Gets all Network Security Perimeter Association Configurations for the site.")
+  @summary("Lists all Network Security Perimeter Association Configurations for the site.")
   @get
+  @list
   @action("networkSecurityPerimeterConfigurations")
   @added(Versions.v2026_03_01_preview)
   listNetworkSecurityPerimeterConfigurations is SiteOps.ActionSync<
@@ -841,7 +842,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}")
   @added(Versions.v2026_03_01_preview)
   getNetworkSecurityPerimeterConfiguration is ActionParameterSiteWebAppOps.ActionSync<
     Site,

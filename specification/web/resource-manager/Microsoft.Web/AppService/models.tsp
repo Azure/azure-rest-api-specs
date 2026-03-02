@@ -12741,12 +12741,12 @@ model NetworkSecurityPerimeter {
   /**
    * ARM URI of the Network Security Perimeter resource.
    */
-  id?: string;  
+  id?: string;
 
   /**
    * GUID of the Network Security Perimeter resource.
    */
-  perimeterGuid?: string;  
+  perimeterGuid?: string;
 
   /**
    * Location where the Network Security Perimeter resource.
@@ -12755,22 +12755,21 @@ model NetworkSecurityPerimeter {
 }
 
 /**
- * Detailed view of a Network Security Perimeter Configured for the site.
- */
-model NetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = NetworkSecurityPerimeterConfiguration,
-    KeyName = "view",
-    SegmentName = "networkSecurityPerimeterConfiguration",
-    NamePattern = ""
-  >;
-}
-
-/**
  * Collection of Network Security Perimeter Configurations
  */
-model NetworkSecurityPerimeterConfigurationCollection is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+model NetworkSecurityPerimeterConfigurationCollection
+  is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+
+/**
+ * Detailed view of a Network Security Perimeter Configured for the site.
+ */
+ #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model NetworkSecurityPerimeterConfiguration extends ProxyOnlyResource {
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  properties?: NetworkSecurityPerimeterConfigurationProperties;
+}
 
 /**
  * Network Security Perimeter Configuration Properties
@@ -12780,6 +12779,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
    * Reflects state of association persistence and configuration propagation to App Service Data Plane.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -12941,7 +12941,7 @@ model NspProvisioningIssue {
   /**
    * Provisioning Issue Name
    */
-   name?: string;
+  name?: string;
 
   /**
    * Provisioning Issue Properties
@@ -12956,27 +12956,27 @@ model NspProvisioningIssueProperties {
   /**
    * Provisioning Issue Type
    */
-   issueType?: string;
+  issueType?: string;
 
   /**
    * Provisioning Issue Severity
    */
-   severity?: string;
+  severity?: string;
 
   /**
    * Provisioning Issue Description
    */
-   description?: string;
+  description?: string;
 
   /**
    * Recommended ARM Ids to resolve the issue
    */
-   suggestedResourceIds?: string[];
+  suggestedResourceIds?: string[];
 
   /**
    * Recommended access rules to resolve the issue
    */
-   suggestedAccessRules?: string[];
+  suggestedAccessRules?: string[];
 }
 
 /**
@@ -12986,7 +12986,7 @@ model NspResourceAssociation {
   /**
    * Network Security Perimeter Resource Association Name
    */
-   name?: string;
+  name?: string;
 
   /**
    * Network Security Perimeter Association Access Mode (Learning/Enforced)
