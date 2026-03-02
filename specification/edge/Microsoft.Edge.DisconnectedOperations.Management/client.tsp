@@ -5,6 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
+using TypeSpec.Versioning;
 
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmtClient", "python");
 @@clientName(Microsoft.Edge,
