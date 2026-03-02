@@ -12765,8 +12765,8 @@ model NetworkSecurityPerimeterConfigurationCollection
 /**
  * Detailed view of a Network Security Perimeter Configured for the site.
  */
-@added(Versions.v2026_03_01_preview)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01_preview)
 model NetworkSecurityPerimeterConfiguration extends ProxyOnlyResource {
   /**
    * Name of the Network Security Perimeter Profile Access Rule.
@@ -12919,12 +12919,12 @@ model NspProfileAccessRuleProperties {
   /**
    * Subscriptions of Access Rule. Not supported by App Service.
    */
-  subscriptions?: string[];
+  subscriptions?: NspSubscription[];
 
   /**
    * NetworkSecurityPerimeter of Access Rule. Not supported by App Service.
    */
-  networkSecurityPerimeters?: string[];
+  networkSecurityPerimeters?: NetworkSecurityPerimeter[];
 
   /**
    * Fully Qualified Domain Names of Access Rule. Not supported by App Service.
@@ -13003,6 +13003,17 @@ model NspResourceAssociation {
    * Network Security Perimeter Association Access Mode (Learning/Enforced)
    */
   accessMode?: string;
+}
+
+/**
+ * Network Security Perimeter Subscription
+ */
+@added(Versions.v2026_03_01_preview)
+model NspSubscription {
+  /**
+   * Network Security Perimeter Subscription Id
+   */
+  id?: string;
 }
 
 /**

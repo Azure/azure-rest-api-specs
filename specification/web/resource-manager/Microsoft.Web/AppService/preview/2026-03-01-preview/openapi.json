@@ -48591,14 +48591,14 @@
           "type": "array",
           "description": "Subscriptions of Access Rule. Not supported by App Service.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NspSubscription"
           }
         },
         "networkSecurityPerimeters": {
           "type": "array",
           "description": "NetworkSecurityPerimeter of Access Rule. Not supported by App Service.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
           }
         },
         "fullyQualifiedDomainNames": {
@@ -48681,6 +48681,16 @@
         "accessMode": {
           "type": "string",
           "description": "Network Security Perimeter Association Access Mode (Learning/Enforced)"
+        }
+      }
+    },
+    "NspSubscription": {
+      "type": "object",
+      "description": "Network Security Perimeter Subscription",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Network Security Perimeter Subscription Id"
         }
       }
     },
