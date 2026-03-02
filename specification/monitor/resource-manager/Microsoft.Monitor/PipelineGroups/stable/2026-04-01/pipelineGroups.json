@@ -250,7 +250,7 @@
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           },
           "Create a PipelineGroup instance using a syslog receiver and backfill.": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithBackfill.json"
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithPersistence.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransformToCustomTable.json"
@@ -526,32 +526,14 @@
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
           "description": "API configurations for Azure Monitor workspace exporter."
         },
-        "backfill": {
-          "$ref": "#/definitions/BackfillConfiguration",
-          "description": "Backfill configurations."
+        "persistence": {
+          "$ref": "#/definitions/ExporterPersistenceConfiguration",
+          "description": "Persistence options for this exporter."
         }
       },
       "required": [
         "api"
       ]
-    },
-    "BackfillConfiguration": {
-      "type": "object",
-      "description": "Backfill configurations.",
-      "properties": {
-        "maxStorageUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage usage in gigabytes.",
-          "minimum": 1
-        },
-        "retentionPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period in minutes.",
-          "minimum": 1
-        }
-      }
     },
     "BatchProcessor": {
       "type": "object",
@@ -728,6 +710,24 @@
         "type",
         "name"
       ]
+    },
+    "ExporterPersistenceConfiguration": {
+      "type": "object",
+      "description": "Persistence options for this exporter.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in gigabytes.",
+          "minimum": 1
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes.",
+          "minimum": 1
+        }
+      }
     },
     "ExporterType": {
       "type": "string",
