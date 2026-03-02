@@ -797,7 +797,7 @@ model VmInfo {
   @doc("The vmTag of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
-  vmtag?: VmTag[];
+  vmtags?: VmTag[];
 }
 
 @doc("The properties of VmDestinationInfo")
