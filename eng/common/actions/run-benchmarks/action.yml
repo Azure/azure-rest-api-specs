@@ -14,10 +14,6 @@ inputs:
     description: 'Model to use for agent execution'
     required: false
     default: 'claude-opus-4.5'
-  project-dir:
-    description: 'Path to the benchmarks project directory'
-    required: false
-    default: 'tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks'
 
 runs:
   using: 'composite'
@@ -29,7 +25,7 @@ runs:
 
     - name: Build benchmarks
       shell: pwsh
-      run: dotnet build --configuration Release ${{ inputs.project-dir }}
+      run: dotnet build --configuration Release tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks
 
     - name: Run benchmarks
       shell: pwsh
@@ -37,14 +33,12 @@ runs:
         INPUT_SCENARIO: ${{ inputs.scenario }}
         INPUT_TAGS: ${{ inputs.tags }}
         INPUT_MODEL: ${{ inputs.model }}
-        INPUT_PROJECT_DIR: ${{ inputs.project-dir }}
       run: |
         $scriptPath = Join-Path $env:GITHUB_ACTION_PATH ".." ".." "scripts" "Run-Azsdk-Benchmarks.ps1"
         & $scriptPath `
           -Scenario $env:INPUT_SCENARIO `
           -Tags $env:INPUT_TAGS `
-          -Model $env:INPUT_MODEL `
-          -ProjectDir $env:INPUT_PROJECT_DIR
+          -Model $env:INPUT_MODEL
 
     - name: Upload benchmark logs
       if: always()

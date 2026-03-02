@@ -5,8 +5,7 @@
 param(
   [string]$Scenario,
   [string]$Tags,
-  [string]$Model,
-  [string]$ProjectDir
+  [string]$Model
 )
 
 [System.Collections.ArrayList]$runArgs = @("run")
@@ -27,4 +26,4 @@ if ($Model) {
 }
 
 Write-Host "Running: dotnet run --configuration Release -- $($runArgs -join ' ')"
-& dotnet run --configuration Release --project $ProjectDir -- @runArgs
+& dotnet run --configuration Release --project tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks -- @runArgs
