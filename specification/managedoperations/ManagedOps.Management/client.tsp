@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ManagedOps;
 
 @@clientName(Microsoft.ManagedOps, "ManagedOpsMgmtClient", "python");
+@@clientName(ManagedOp.name, "managedOpName", "python");
 @@clientName(ManagedOps, "ManagedOperations", "csharp");
 @@clientName(AzureMonitorInformation,
   "ManagedOpsAzureMonitorInformation",
