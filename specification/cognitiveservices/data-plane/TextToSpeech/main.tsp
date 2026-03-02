@@ -11,7 +11,15 @@ using TypeSpec.Versioning;
 /**
  * Custom voice API to create and deploy your voice.
  */
-@useAuth(KeyAuth | AADToken)
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
 @service(#{ title: "Custom voice API" })
 @versioned(Versions)
 @server(
@@ -26,20 +34,6 @@ using TypeSpec.Versioning;
   }
 )
 namespace CustomVoiceApi;
-
-/** Provide your Speech resource key here. */
-model KeyAuth is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
-
-/** Microsoft identity platform flows. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Suppress casing style for AAD"
-model AADToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>;
 
 /** The available API versions. */
 enum Versions {

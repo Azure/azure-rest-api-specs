@@ -6,7 +6,7 @@
     "Operation-Id": "1321a2c0-9be4-471d-83bb-bc3be4f96a6f",
     "api-version": "2026-01-01",
     "id": "Jessica-PersonalVoice",
-    "personalvoice": {
+    "resource": {
       "audios": {
         "containerUrl": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken",
         "prefix": "jessica/",
@@ -19,6 +19,20 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "consentId": "Jessica",
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "id": "Jessica-PersonalVoice",
+        "lastActionDateTime": "2023-04-02T10:15:30.000Z",
+        "projectId": "PersonalVoice",
+        "speakerProfileId": "3059912f-a3dc-49e3-bdd0-02e449df1fe3",
+        "status": "NotStarted"
+      },
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/1321a2c0-9be4-471d-83bb-bc3be4f96a6f?api-version=2026-01-01"
+      }
+    },
     "201": {
       "body": {
         "consentId": "Jessica",
@@ -30,7 +44,6 @@
         "status": "NotStarted"
       },
       "headers": {
-        "Operation-Id": "1321a2c0-9be4-471d-83bb-bc3be4f96a6f",
         "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/1321a2c0-9be4-471d-83bb-bc3be4f96a6f?api-version=2026-01-01"
       }
     }

@@ -36,29 +36,27 @@
   ],
   "security": [
     {
-      "KeyAuth": []
+      "ApiKeyAuth": []
     },
     {
-      "AADToken": [
+      "OAuth2Auth": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "Microsoft identity platform flows.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": ""
       }
-    },
-    "KeyAuth": {
-      "type": "apiKey",
-      "description": "Provide your Speech resource key here.",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
     }
   },
   "tags": [],
@@ -1829,34 +1827,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "Microsoft identity platform flows.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
-      ]
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2263,41 +2233,6 @@
           "description": "Endpoint kind"
         }
       }
-    },
-    "KeyAuth": {
-      "type": "object",
-      "description": "Provide your Speech resource key here.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "API key authentication",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "in": {
-          "type": "string",
-          "description": "location of the API key",
-          "enum": [
-            "header"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "name of the API key",
-          "enum": [
-            "Ocp-Apim-Subscription-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
     },
     "Model": {
       "type": "object",
