@@ -25,5 +25,5 @@ if ($Model) {
   $runArgs.Add($Model) | Out-Null
 }
 
-Write-Host "Running: dotnet run --configuration Release -- $($runArgs -join ' ')"
-& dotnet run --configuration Release --project tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks -- @runArgs
+Write-Host "Running: dotnet run -- $($runArgs -join ' ')"
+& dotnet run --project tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks -- @runArgs
