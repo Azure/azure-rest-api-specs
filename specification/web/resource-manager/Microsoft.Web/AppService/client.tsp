@@ -3035,3 +3035,47 @@ op regionalCheckNameAvailabilityCustomized(
   "listLinkedBackendsForBuild",
   "javascript"
 );
+@@clientName(StaticSites.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+@@clientName(StaticSiteBuildARMResources.getStaticSiteBuilds,
+  "listStaticSiteBuilds",
+  "javascript"
+);
+@@clientName(StaticSiteBuildARMResources.getStaticSitesByResourceGroup,
+  "listStaticSitesByResourceGroup",
+  "javascript"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
+  "listUserProvidedFunctionAppsForStaticSiteBuild",
+  "javascript"
+);
+@@clientName(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSite,
+  "listUserProvidedFunctionAppsForStaticSite",
+  "javascript"
+);
+@@clientName(AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
+  "listAppSettingsKeyVaultReferences",
+  "javascript"
+);
+@@clientName(AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
+  "listAppSettingsKeyVaultReferencesSlot",
+  "javascript"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
+  "listPrivateEndpointConnectionList",
+  "javascript"
+);
+@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionListSlot,
+  "listPrivateEndpointConnectionListSlot",
+  "javascript"
+);
+@@clientName(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
+  "listSiteConnectionStringKeyVaultReferences",
+  "javascript"
+);
+@@clientName(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
+  "listSiteConnectionStringKeyVaultReferencesSlot",
+  "javascript"
+);
