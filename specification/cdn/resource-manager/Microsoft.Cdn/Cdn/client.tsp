@@ -34,6 +34,11 @@ using Microsoft.Cdn;
   "java"
 );
 
+@@alternateType(RequestSchemeMatchConditionParameters.operator,
+  "Equal",
+  "java"
+);
+
 // AfdCustomDomains client for Java
 @@clientLocation(AFDDomains.get, "AfdCustomDomains", "java");
 @@clientLocation(AFDDomains.create, "AfdCustomDomains", "java");
@@ -46,7 +51,10 @@ using Microsoft.Cdn;
 @@clientLocation(Profiles.checkEndpointNameAvailability, "AfdProfiles", "java");
 @@clientLocation(Profiles.listResourceUsage, "AfdProfiles", "java");
 @@clientLocation(Profiles.checkHostNameAvailability, "AfdProfiles", "java");
-@@clientName(Profiles.checkHostNameAvailability, "checkHostnameAvailability", "java");
+@@clientName(Profiles.checkHostNameAvailability,
+  "checkHostnameAvailability",
+  "java"
+);
 @@clientLocation(Profiles.validateSecret, "AfdProfiles", "java");
 @@clientLocation(Profiles.upgrade, "AfdProfiles", "java");
 
