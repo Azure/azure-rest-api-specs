@@ -35,6 +35,12 @@ model Run is ProxyResource<RunProperties> {
  */
 model RunProperties {
   /**
+   * The provisioning state of the run.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+
+  /**
    * The lifecycle status of the run.
    */
   @visibility(Lifecycle.Read)

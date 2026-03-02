@@ -35,6 +35,12 @@ model Message is ProxyResource<MessageProperties> {
  */
 model MessageProperties {
   /**
+   * The provisioning state of the message.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+
+  /**
    * The type of message (system_message, tool_call, tool_return, assistant_message).
    */
   @visibility(Lifecycle.Read)
