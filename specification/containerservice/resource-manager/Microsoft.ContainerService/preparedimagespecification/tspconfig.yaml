@@ -1,0 +1,54 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerservicepreparedimagespecification"
+emit:
+  - "@azure-tools/typespec-autorest"
+output-dir: "{project-root}"
+options:
+  "@azure-tools/typespec-autorest":
+    emit-common-types-schema: "never"
+    emitter-output-dir: "{output-dir}"
+    output-file: "{version-status}/{version}/preparedimagespecification.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.ContainerServicePreparedImageSpecification"
+  "@azure-tools/typespec-java":
+    namespace: "com.azure.resourcemanager.containerservice.preparedimagespecification"
+    package-dir: "azure-resourcemanager-containerservice-preparedimagespecification"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice-preparedimagespecification"
+    service-name: "Container Service Prepared Image Specification"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerservicepreparedimagespecification"
+    package-dir: "armcontainerservicepreparedimagespecification"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservicepreparedimagespecification"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservicepreparedimagespecification"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicepreparedimagespecification"
+    flavor: "azure"
+    namespace: "azure.mgmt.containerservicepreparedimagespecification"
+    service-dir: "sdk/containerservice"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerservice"
+    package-dir: "arm-containerservicepreparedimagespecification"
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicepreparedimagespecification"
+    package-details:
+      name: "@azure/arm-containerservicepreparedimagespecification"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

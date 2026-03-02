@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ContainerServiceNodeCustomizationClient",
-    "version": "2025-09-02-preview",
-    "description": "Azure Kubernetes Node Customization api client.",
+    "title": "ContainerServicePreparedImageSpecificationClient",
+    "version": "2026-02-02-preview",
+    "description": "Azure Kubernetes Prepared Image Specification api client.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "NodeCustomizations"
+      "name": "PreparedImageSpecifications"
     }
   ],
   "paths": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/nodeCustomizations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/preparedImageSpecifications": {
       "get": {
-        "operationId": "NodeCustomizations_ListBySubscription",
+        "operationId": "PreparedImageSpecifications_ListBySubscription",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "List the node customizations in a subscription at the latest version.",
+        "description": "List the prepared image specifications in a subscription at the latest version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationListResult"
+              "$ref": "#/definitions/PreparedImageSpecificationListResult"
             }
           },
           "default": {
@@ -112,10 +112,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_ListBySubscription": {
-            "$ref": "./examples/NodeCustomizations_ListBySubscription.json"
+          "PreparedImageSpecifications_ListBySubscription": {
+            "$ref": "./examples/PreparedImageSpecifications_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -123,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications": {
       "get": {
-        "operationId": "NodeCustomizations_ListByResourceGroup",
+        "operationId": "PreparedImageSpecifications_ListByResourceGroup",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "List the node customizations in a resource group at the latest version.",
+        "description": "List the prepared image specifications in a resource group at the latest version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -145,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationListResult"
+              "$ref": "#/definitions/PreparedImageSpecificationListResult"
             }
           },
           "default": {
@@ -155,10 +154,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_ListByResourceGroup": {
-            "$ref": "./examples/NodeCustomizations_ListByResourceGroup.json"
+          "PreparedImageSpecifications_ListByResourceGroup": {
+            "$ref": "./examples/PreparedImageSpecifications_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -166,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}": {
       "get": {
-        "operationId": "NodeCustomizations_Get",
+        "operationId": "PreparedImageSpecifications_Get",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Get a node customization at the latest version.",
+        "description": "Get a prepared image specification at the latest version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -184,9 +182,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -198,7 +196,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomization"
+              "$ref": "#/definitions/PreparedImageSpecification"
             }
           },
           "default": {
@@ -208,19 +206,18 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_Get": {
-            "$ref": "./examples/NodeCustomizations_Get.json"
+          "PreparedImageSpecifications_Get": {
+            "$ref": "./examples/PreparedImageSpecifications_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "NodeCustomizations_CreateOrUpdate",
+        "operationId": "PreparedImageSpecifications_CreateOrUpdate",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Create or update a node customization resource. This will create a new version.",
+        "description": "Create or update a prepared image specification resource. This will create a new version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -248,9 +245,9 @@
             "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -263,21 +260,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NodeCustomization"
+              "$ref": "#/definitions/PreparedImageSpecification"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NodeCustomization' update operation succeeded",
+            "description": "Resource 'PreparedImageSpecification' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NodeCustomization"
+              "$ref": "#/definitions/PreparedImageSpecification"
             }
           },
           "201": {
-            "description": "Resource 'NodeCustomization' create operation succeeded",
+            "description": "Resource 'PreparedImageSpecification' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NodeCustomization"
+              "$ref": "#/definitions/PreparedImageSpecification"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -298,10 +295,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_CreateOrUpdate": {
-            "$ref": "./examples/NodeCustomizations_CreateOrUpdate.json"
+          "PreparedImageSpecifications_CreateOrUpdate": {
+            "$ref": "./examples/PreparedImageSpecifications_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -310,11 +306,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "NodeCustomizations_Update",
+        "operationId": "PreparedImageSpecifications_Update",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Update a NodeCustomization",
+        "description": "Update a PreparedImageSpecification",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -334,9 +330,9 @@
             "x-ms-client-name": "ifMatch"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -349,7 +345,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationUpdate"
+              "$ref": "#/definitions/PreparedImageSpecificationUpdate"
             }
           }
         ],
@@ -357,7 +353,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomization"
+              "$ref": "#/definitions/PreparedImageSpecification"
             }
           },
           "202": {
@@ -381,10 +377,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_Update": {
-            "$ref": "./examples/NodeCustomizations_Update.json"
+          "PreparedImageSpecifications_Update": {
+            "$ref": "./examples/PreparedImageSpecifications_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -393,11 +388,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "NodeCustomizations_Delete",
+        "operationId": "PreparedImageSpecifications_Delete",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Delete a node customization. This operation will be blocked if the resource is in use.",
+        "description": "Delete a prepared image specification. This operation will be blocked if the resource is in use.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -417,9 +412,9 @@
             "x-ms-client-name": "ifMatch"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -452,10 +447,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_Delete": {
-            "$ref": "./examples/NodeCustomizations_Delete.json"
+          "PreparedImageSpecifications_Delete": {
+            "$ref": "./examples/PreparedImageSpecifications_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -464,13 +458,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}/versions": {
       "get": {
-        "operationId": "NodeCustomizations_ListVersions",
+        "operationId": "PreparedImageSpecifications_ListVersions",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "List all versions of a node customization.",
+        "description": "List all versions of a prepared image specification.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -482,9 +476,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -496,7 +490,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationVersionListResult"
+              "$ref": "#/definitions/PreparedImageSpecificationVersionListResult"
             }
           },
           "default": {
@@ -506,10 +500,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_ListVersions": {
-            "$ref": "./examples/NodeCustomizations_ListVersions.json"
+          "PreparedImageSpecifications_ListVersions": {
+            "$ref": "./examples/PreparedImageSpecifications_ListVersions.json"
           }
         },
         "x-ms-pageable": {
@@ -517,13 +510,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}/versions/{version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/preparedImageSpecifications/{preparedImageSpecificationName}/versions/{version}": {
       "get": {
-        "operationId": "NodeCustomizations_GetVersion",
+        "operationId": "PreparedImageSpecifications_GetVersion",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Get a node customization at a particular version.",
+        "description": "Get a prepared image specification at a particular version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -535,9 +528,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -547,7 +540,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The version of the Node Customization.",
+            "description": "The version of the Prepared Image Specification.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -559,7 +552,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationVersion"
+              "$ref": "#/definitions/PreparedImageSpecificationVersion"
             }
           },
           "default": {
@@ -569,19 +562,18 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_GetVersion": {
-            "$ref": "./examples/NodeCustomizations_GetVersion.json"
+          "PreparedImageSpecifications_GetVersion": {
+            "$ref": "./examples/PreparedImageSpecifications_GetVersion.json"
           }
         }
       },
       "delete": {
-        "operationId": "NodeCustomizations_DeleteVersion",
+        "operationId": "PreparedImageSpecifications_DeleteVersion",
         "tags": [
-          "NodeCustomizations"
+          "PreparedImageSpecifications"
         ],
-        "description": "Delete a node customization version. This operation will be blocked if the node customization version is in use.",
+        "description": "Delete a prepared image specification version. This operation will be blocked if the prepared image specification version is in use.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -601,9 +593,9 @@
             "x-ms-client-name": "ifMatch"
           },
           {
-            "name": "nodeCustomizationName",
+            "name": "preparedImageSpecificationName",
             "in": "path",
-            "description": "The name of the Node Customization resource.",
+            "description": "The name of the Prepared Image Specification resource.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -613,7 +605,7 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The version of the Node Customization.",
+            "description": "The version of the Prepared Image Specification.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -646,10 +638,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
-          "NodeCustomizations_DeleteVersion": {
-            "$ref": "./examples/NodeCustomizations_DeleteVersion.json"
+          "PreparedImageSpecifications_DeleteVersion": {
+            "$ref": "./examples/PreparedImageSpecifications_DeleteVersion.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -684,12 +675,12 @@
         ]
       }
     },
-    "NodeCustomization": {
+    "PreparedImageSpecification": {
       "type": "object",
-      "description": "The Node Customization resource.",
+      "description": "The Prepared Image Specification resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NodeCustomizationProperties",
+          "$ref": "#/definitions/PreparedImageSpecificationProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -704,15 +695,15 @@
         }
       ]
     },
-    "NodeCustomizationListResult": {
+    "PreparedImageSpecificationListResult": {
       "type": "object",
-      "description": "The response of a NodeCustomization list operation.",
+      "description": "The response of a PreparedImageSpecification list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The NodeCustomization items on this page",
+          "description": "The PreparedImageSpecification items on this page",
           "items": {
-            "$ref": "#/definitions/NodeCustomization"
+            "$ref": "#/definitions/PreparedImageSpecification"
           }
         },
         "nextLink": {
@@ -725,9 +716,9 @@
         "value"
       ]
     },
-    "NodeCustomizationProperties": {
+    "PreparedImageSpecificationProperties": {
       "type": "object",
-      "description": "The properties of the Node Customization resource.",
+      "description": "The properties of the Prepared Image Specification resource.",
       "properties": {
         "containerImages": {
           "type": "array",
@@ -738,7 +729,7 @@
         },
         "identityProfile": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-          "description": "The identity used to execute node customization tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
         },
         "version": {
           "type": "string",
@@ -748,26 +739,26 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the node customization.",
+          "description": "The provisioning state of the prepared image specification.",
           "readOnly": true
         },
         "customizationScripts": {
           "type": "array",
           "description": "The scripts to customize the node before or after image capture.",
           "items": {
-            "$ref": "#/definitions/NodeCustomizationScript"
+            "$ref": "#/definitions/PreparedImageSpecificationScript"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "NodeCustomizationScript": {
+    "PreparedImageSpecificationScript": {
       "type": "object",
-      "description": "Node customization script",
+      "description": "Prepared image specification script",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name for the customization script. \nMust be unique within the node customization resource.\nCan only contain lowercase alphanumeric,'-' or '.' characters.",
+          "description": "The name for the customization script. \nMust be unique within the prepared image specification resource.\nCan only contain lowercase alphanumeric,'-' or '.' characters.",
           "maxLength": 263,
           "pattern": "^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$",
           "x-ms-mutability": [
@@ -798,9 +789,9 @@
         "scriptType"
       ]
     },
-    "NodeCustomizationUpdate": {
+    "PreparedImageSpecificationUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the NodeCustomization.",
+      "description": "The type used for update operations of the PreparedImageSpecification.",
       "properties": {
         "tags": {
           "type": "object",
@@ -810,14 +801,14 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/NodeCustomizationUpdateProperties",
+          "$ref": "#/definitions/PreparedImageSpecificationUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
       }
     },
-    "NodeCustomizationUpdateProperties": {
+    "PreparedImageSpecificationUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the NodeCustomization.",
+      "description": "The updatable properties of the PreparedImageSpecification.",
       "properties": {
         "containerImages": {
           "type": "array",
@@ -828,24 +819,24 @@
         },
         "identityProfile": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-          "description": "The identity used to execute node customization tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
+          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
         },
         "customizationScripts": {
           "type": "array",
           "description": "The scripts to customize the node before or after image capture.",
           "items": {
-            "$ref": "#/definitions/NodeCustomizationScript"
+            "$ref": "#/definitions/PreparedImageSpecificationScript"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "NodeCustomizationVersion": {
+    "PreparedImageSpecificationVersion": {
       "type": "object",
-      "description": "A version of the Node Customization resource.",
+      "description": "A version of the Prepared Image Specification resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NodeCustomizationProperties",
+          "$ref": "#/definitions/PreparedImageSpecificationProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -855,15 +846,15 @@
         }
       ]
     },
-    "NodeCustomizationVersionListResult": {
+    "PreparedImageSpecificationVersionListResult": {
       "type": "object",
-      "description": "The response of a NodeCustomizationVersion list operation.",
+      "description": "The response of a PreparedImageSpecificationVersion list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The NodeCustomizationVersion items on this page",
+          "description": "The PreparedImageSpecificationVersion items on this page",
           "items": {
-            "$ref": "#/definitions/NodeCustomizationVersion"
+            "$ref": "#/definitions/PreparedImageSpecificationVersion"
           }
         },
         "nextLink": {
