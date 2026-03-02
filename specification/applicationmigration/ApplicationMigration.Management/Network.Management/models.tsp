@@ -645,9 +645,6 @@ model Error {
   /** The summarized error message. */
   summaryMessage?: string;
 
-  /** The run-as account ID used during discovery. */
-  runAsAccountId?: string;
-
   /** The detailed error message. */
   message?: string;
 
