@@ -403,6 +403,11 @@
         "destinationPort": {
           "type": "integer",
           "description": "The VXLAN destination port that will receive the tapped traffic."
+        },
+        "mirrorSnaplen": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of bytes to capture per packet for mirrored traffic. A value of 0 means full packet capture (no truncation). If set to a non-zero value, the minimum is 64 and the maximum is 9000."
         }
       }
     },
