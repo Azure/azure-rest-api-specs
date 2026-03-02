@@ -86,6 +86,7 @@ interface Runs {
 // ============================================
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "LatestRuns uses a custom route for the singleton 'latest' endpoint"
+@tag("Runs")
 interface LatestRuns {
   /**
    * Gets the latest run.
