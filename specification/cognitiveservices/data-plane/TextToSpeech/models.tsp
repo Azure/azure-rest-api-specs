@@ -8,6 +8,12 @@ using Azure.Core;
 
 namespace CustomVoiceApi;
 
+/** Resource ID */
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+@minLength(3)
+@maxLength(64)
+scalar resourceId extends string;
+
 /** Project kind */
 union ProjectKind {
   string,
@@ -202,10 +208,7 @@ model Project {
   /** Resource id */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Project name */
   @minLength(1)
@@ -316,10 +319,7 @@ model Consent {
   /** Resource id */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Name of consent. */
   @minLength(1)
@@ -352,10 +352,7 @@ model Consent {
   locale: string;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  projectId: string;
+  projectId: resourceId;
 
   /** Consent properties */
   properties?: ConsentProperties;
@@ -392,10 +389,7 @@ model TrainingSet {
   /** Resource id */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Training set name */
   @minLength(1)
@@ -418,10 +412,7 @@ model TrainingSet {
   properties?: TrainingSetProperties;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  projectId: string;
+  projectId: resourceId;
 
   /** Status of a resource. */
   status?: Status;
@@ -577,10 +568,7 @@ model Model {
   /** Resource id */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Voice name */
   @minLength(1)
@@ -600,22 +588,13 @@ model Model {
   locale?: string;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  projectId: string;
+  projectId: resourceId;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  consentId: string;
+  consentId: resourceId;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  trainingSetId: string;
+  trainingSetId: resourceId;
 
   /** Engine version. Update this version can get the latest pronunciation bug fixing. */
   @visibility(Lifecycle.Read)
@@ -684,16 +663,10 @@ model Endpoint {
   description?: string;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  projectId: string;
+  projectId: resourceId;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  modelId: string;
+  modelId: resourceId;
 
   /** Endpoint properties */
   properties?: EndpointProperties;
@@ -760,10 +733,7 @@ model PersonalVoice {
   /** Resource id */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Personal voice speaker profile id. Fill this property in SSML. */
   @visibility(Lifecycle.Read)
@@ -777,16 +747,10 @@ model PersonalVoice {
   description?: string;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  projectId: string;
+  projectId: resourceId;
 
   /** Resource id */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  consentId: string;
+  consentId: resourceId;
 
   /**
    * Azure Blob Storage content. With the examples below, it represents files
@@ -829,13 +793,21 @@ model Operation {
   /** Unique operation ID. */
   @key
   @visibility(Lifecycle.Read)
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
-  id: string;
+  id: resourceId;
 
   /** Status of an operation. */
   status?: OperationStatus;
+}
+
+/** Operation-Id header for long-running operations. */
+model OperationIdHeader {
+  /**
+   * ID of the status monitor for the operation. If the Operation-Id header matches
+   * an existing operation and the request is not identical to the prior request, it
+   * will fail with a 400 Bad Request.
+   */
+  @header("Operation-Id")
+  operationId?: resourceId;
 }
 
 /** Form data for creating a consent with an audio file. */
