@@ -642,7 +642,7 @@ using Microsoft.DesktopVirtualization;
 );
 @@clientName(PublicUDP, "DesktopVirtualizationPublicUDP", "csharp");
 @@clientName(ProvisioningStateSHC,
-  "DesktopVirtualizationProvisioningStateSHC",
+  "ProvisioningStateSessionHostConfiguration",
   "csharp"
 );
 @@clientName(RegistrationTokenList,
@@ -667,7 +667,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 @@clientName(UpdateSessionHostsRequestBody,
-  "DesktopVirtualizationUpdateSessionHostsRequestBody",
+  "DesktopVirtualizationUpdateSessionHostsContent",
   "csharp"
 );
 @@clientName(VirtualMachineDiskType,
@@ -676,5 +676,63 @@ using Microsoft.DesktopVirtualization;
 );
 @@clientName(VirtualMachineSecurityType,
   "DesktopVirtualizationVirtualMachineSecurityType",
+  "csharp"
+);
+@@clientName(FailedSessionHostCleanupPolicySHC,
+  "FailedSessionHostCleanupPolicySessionHostConfiguration",
+  "csharp"
+);
+
+@@clientName(SessionHostProvisioningConfigurationProperties.setDrainMode,
+  "IsDrainModeEnabled",
+  "csharp"
+);
+@@clientName(SessionHostProvisioningConfigurationPatchProperties.setDrainMode,
+  "IsDrainModeEnabled",
+  "csharp"
+);
+@@clientName(BootDiagnosticsInfoProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(BootDiagnosticsInfoPatchProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(SecurityInfoProperties.secureBootEnabled,
+  "IsSecureBootEnabled",
+  "csharp"
+);
+@@clientName(SecurityInfoPatchProperties.secureBootEnabled,
+  "IsSecureBootEnabled",
+  "csharp"
+);
+@@clientName(SecurityInfoProperties.vTpmEnabled,
+  "IsVtpmEnabled",
+  "csharp"
+);
+@@clientName(SecurityInfoPatchProperties.vTpmEnabled,
+  "IsVtpmEnabled",
+  "csharp"
+);
+@@clientName(HostPoolUpdateConfigurationProperties.deleteOriginalVm,
+  "ShouldDeleteOriginalVm",
+  "csharp"
+);
+@@clientName(HostPoolUpdateConfigurationPatchProperties.deleteOriginalVm,
+  "ShouldDeleteOriginalVm",
+  "csharp"
+);
+
+@@alternateType(ActiveSessionHostConfigurationProperties.vmLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(SessionHostConfigurationProperties.vmLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(SessionHostConfigurationPatchProperties.vmLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
