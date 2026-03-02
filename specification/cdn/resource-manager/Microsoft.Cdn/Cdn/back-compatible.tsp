@@ -289,12 +289,15 @@ using Microsoft.Cdn;
 @@clientLocation(Profiles.getWafLogAnalyticsMetrics, "LogAnalytics");
 @@clientLocation(Profiles.getWafLogAnalyticsRankings, "LogAnalytics");
 @@clientName(Profiles.profilesListResourceUsage, "ListResourceUsage");
-@@clientLocation(AFDDomains.get, "AFDCustomDomains");
-@@clientLocation(AFDDomains.create, "AFDCustomDomains");
-@@clientLocation(AFDDomains.update, "AFDCustomDomains");
-@@clientLocation(AFDDomains.delete, "AFDCustomDomains");
-@@clientLocation(AFDDomains.listByProfile, "AFDCustomDomains");
-@@clientLocation(AFDDomains.refreshValidationToken, "AFDCustomDomains");
+@@clientLocation(AFDDomains.get, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.create, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.update, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.delete, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.listByProfile, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.refreshValidationToken,
+  "AFDCustomDomains",
+  "!java"
+);
 @@clientLocation(CdnWebApplicationFirewallPolicies.get, "Policies");
 @@clientLocation(CdnWebApplicationFirewallPolicies.createOrUpdate, "Policies");
 @@clientLocation(CdnWebApplicationFirewallPolicies.update, "Policies");

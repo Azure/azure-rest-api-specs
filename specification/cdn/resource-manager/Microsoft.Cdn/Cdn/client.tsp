@@ -13,6 +13,13 @@ using Microsoft.Cdn;
 
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
+@@clientLocation(AFDDomains.get, "AfdCustomDomains", "java");
+@@clientLocation(AFDDomains.create, "AfdCustomDomains", "java");
+@@clientLocation(AFDDomains.update, "AfdCustomDomains", "java");
+@@clientLocation(AFDDomains.delete, "AfdCustomDomains", "java");
+@@clientLocation(AFDDomains.listByProfile, "AfdCustomDomains", "java");
+@@clientLocation(AFDDomains.refreshValidationToken, "AfdCustomDomains", "java");
+
 @@clientName(AFDDomain, "AfdDomain", "java");
 @@clientName(AFDDomainProperties, "AfdDomainProperties", "java");
 @@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,
