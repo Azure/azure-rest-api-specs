@@ -68,7 +68,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(Snapshot, "AgentPoolSnapshot", "csharp");
-@@clientName(SnapshotProperties.enableFIPS, "EnableFips", "csharp");
+@@clientName(SnapshotProperties.enableFIPS, "IsFipsEnabled", "csharp");
 @@clientName(SnapshotProperties.osSku, "OSSku", "csharp");
 @@clientName(SnapshotProperties.osType, "OSType", "csharp");
 @@clientName(PrivateLinkResource,
@@ -87,7 +87,7 @@ using Microsoft.ContainerService;
 @@clientName(WindowsGmsaProfile.enabled, "IsEnabled", "csharp");
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
-@@clientName(KubeletConfig.failSwapOn, "FailStartWithSwapOn", "csharp");
+@@clientName(KubeletConfig.failSwapOn, "ShouldFailStartWithSwapOn", "csharp");
 @@clientName(ManagedClusterStorageProfile.diskCSIDriver,
   "DiskCsiDriver",
   "csharp"
@@ -430,7 +430,11 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.enableFIPS,
-  "EnableFips",
+  "IsFipsEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableAutoScaling,
+  "IsAutoScalingEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
@@ -443,6 +447,10 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
   "NodePublicIPPrefixId",
+  "csharp"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
+  "IsNodePublicIpEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.podSubnetID,
@@ -458,7 +466,11 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
-  "EnableUltraSsd",
+  "IsUltraSsdEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAgentPoolProfileProperties.enableEncryptionAtHost,
+  "IsEncryptionAtHostEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
@@ -480,7 +492,7 @@ using Microsoft.ContainerService;
 @@clientName(MachineOSProfile.osSKU, "OSSku", "csharp");
 @@clientName(MachineOSProfile.osDiskSizeGB, "OSDiskSizeInGB", "csharp");
 @@clientName(MachineOSProfile.osDiskType, "OSDiskType", "csharp");
-@@clientName(MachineOSProfile.enableFIPS, "EnableFips", "csharp");
+@@clientName(MachineOSProfile.enableFIPS, "IsFipsEnabled", "csharp");
 @@clientName(AgentPoolArtifactStreamingProfile.enabled,
   "IsArtifactStreamingEnabled",
   "csharp"
@@ -490,6 +502,10 @@ using Microsoft.ContainerService;
 @@clientName(MachineNetworkProperties.podSubnetID, "PodSubnetId", "csharp");
 @@clientName(MachineNetworkProperties.nodePublicIPPrefixID,
   "NodePublicIpPrefixId",
+  "csharp"
+);
+@@clientName(MachineNetworkProperties.enableNodePublicIP,
+  "IsNodePublicIpEnabled",
   "csharp"
 );
 @@clientName(GPUInstanceProfile, "GpuInstanceProfile", "csharp");
@@ -512,7 +528,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
-  "EnablePrivateClusterPublicFqdn",
+  "IsPrivateClusterPublicFqdnEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterAPIServerAccessProfile.privateDNSZone,
@@ -524,7 +540,11 @@ using Microsoft.ContainerService;
   "AzurePortalFqdn",
   "csharp"
 );
-@@clientName(ManagedClusterProperties.enableRBAC, "EnableRbac", "csharp");
+@@clientName(ManagedClusterProperties.enableRBAC, "IsRbacEnabled", "csharp");
+@@clientName(ManagedClusterProperties.disableLocalAccounts,
+  "IsLocalAccountsDisabled",
+  "csharp"
+);
 @@clientName(ManagedClusterHostedSystemProfile.enabled,
   "IsHostedSystemAddonsEnabled",
   "csharp"
@@ -792,7 +812,10 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "NetIPv4IPLocalPortRange ",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpTwReuse, "NetIPv4TcpTwReuse", "csharp");
+@@clientName(SysctlConfig.netIpv4TcpTwReuse,
+  "IsNetIpv4TcpTwReuseEnabled",
+  "csharp"
+);
 @@clientName(VmState, "ContainerServiceMachineVmState", "csharp");
 @@clientName(WorkloadRuntime.OCIContainer, "OciContainer", "csharp");
 @@clientName(UpgradeStrategy, "AgentPoolUpgradeStrategy", "csharp");
@@ -824,6 +847,14 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "IsContainerInsightsEnabled",
   "csharp"
 );
+@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
+  "IsCustomMetricsDisabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
+  "IsPrometheusMetricsScrapingDisabled",
+  "csharp"
+);
 @@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics.enabled,
   "IsAppMonitoringOpenTelemetryMetricsEnabled",
   "csharp"
@@ -838,6 +869,67 @@ namespace Azure.ResourceManager.ContainerService.Models {
 );
 @@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
   "IsAppMonitoringAutoInstrumentationEnabled",
+  "csharp"
+);
+@@clientName(LoadBalancerProperties.allowServicePlacement,
+  "IsServicePlacementAllowed",
+  "csharp"
+);
+@@clientName(MachineSecurityProfile.enableVTPM, "IsVtpmEnabled", "csharp");
+@@clientName(MachineSecurityProfile.enableSecureBoot,
+  "IsSecureBootEnabled",
+  "csharp"
+);
+@@clientName(MachineSecurityProfile.enableEncryptionAtHost,
+  "IsEncryptionAtHostEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateCluster,
+  "IsPrivateClusterEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.enableVnetIntegration,
+  "IsVnetIntegrationEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAPIServerAccessProfile.disableRunCommand,
+  "IsRunCommandDisabled",
+  "csharp"
+);
+@@clientName(ManagedClusterLoadBalancerProfile.enableMultipleStandardLoadBalancers,
+  "IsMultipleStandardLoadBalancersEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterPodIdentityProfile.allowNetworkPluginKubenet,
+  "IsKubenetNetworkPluginAllowed",
+  "csharp"
+);
+@@clientName(ManagedClusterProperties.enableNamespaceResources,
+  "IsNamespaceResourcesEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-empty-nodes`,
+  "IsDaemonsetEvictionForEmptyNodesEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-occupied-nodes`,
+  "IsDaemonsetEvictionForOccupiedNodesEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesAutoScalerProfile.`ignore-daemonsets-utilization`,
+  "IsDaemonsetsUtilizationIgnored",
+  "csharp"
+);
+@@clientName(ManagedClusterPropertiesForSnapshot.enableRbac,
+  "IsRbacEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterSecurityProfileDefenderSecurityGating.allowSecretAccess,
+  "IsSecretAccessAllowed",
+  "csharp"
+);
+@@clientName(UpgradeOverrideSettings.forceUpgrade,
+  "IsForceUpgradeEnabled",
   "csharp"
 );
 
