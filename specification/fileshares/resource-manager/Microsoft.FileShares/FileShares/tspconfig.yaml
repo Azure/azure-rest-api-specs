@@ -41,8 +41,9 @@ options:
     inject-spans: true
   "@azure-tools/typespec-powershell":
     service-dir: "src"
-    package-dir: "FileShare/FileShare.Autorest"
+    emitter-output-dir: "{output-dir}/{service-dir}/FileShare/FileShare.Autorest"
     clear-output-folder: true
+    debug: true
     azure: true
     module-version: 0.1.0
     prefix: "Az"
@@ -63,7 +64,11 @@ options:
           default:
             script: "(Get-AzContext).Subscription.Id"
       - where:
-          variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+          variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          subject: MapConnection
+          variant: ^(Get)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
         remove: true
       - where:
           variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
