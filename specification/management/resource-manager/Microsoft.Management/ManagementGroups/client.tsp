@@ -3,9 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Management;
-using Azure.ResourceManager;
-using Http;
-using Rest;
 
 namespace ClientCustomizations;
 
