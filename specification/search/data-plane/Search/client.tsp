@@ -1003,6 +1003,20 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.SplitSkillLanguage, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SplitSkillLanguage,
   "com.azure.search.documents.indexes",
