@@ -143,4 +143,4 @@ op setMetadataRequiredMetadata is StorageOperationNoBody<
   }
 >;
 
-@@override(Container.setMetadata, setMetadataRequiredMetadata, "rust,python");
+@@override(Container.setMetadata, setMetadataRequiredMetadata, "rust");
