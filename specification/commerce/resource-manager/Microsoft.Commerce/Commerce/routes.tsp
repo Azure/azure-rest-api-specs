@@ -53,13 +53,7 @@ interface UsageAggregatesOperationGroup {
       /**
        * `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
       @query("aggregationGranularity")
-      @Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-        "Daily",
-        "javascript"
-      )
       aggregationGranularity?: AggregationGranularity = AggregationGranularity.Daily;
 
       /**
