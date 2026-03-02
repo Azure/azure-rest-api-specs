@@ -1,20 +1,33 @@
 ---
 name: azure-typespec-author
-description: |
-  Author or modify Azure TypeSpec API specifications in the azure-rest-api-specs repository.
-  USE FOR: Any task that creates, modifies, or troubleshoots .tsp files or TypeSpec API specifications — including but not limited to API versioning, ARM or data-plane resource definitions (tracked, proxy, extension, child resources), resource operations (CRUD, PATCH, custom actions, async/LRO), models, enums, unions, properties, decorators, constraints, and swagger-to-TypeSpec conversion.
-  DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, single MCP tool calls that do not require multi-step workflows.
-  TOOLS/COMMANDS: azsdk_typespec_generate_authoring_plan, azsdk_run_typespec_validation
+description: "Author or modify Azure TypeSpec API specifications in the azure-rest-api-specs repository. USE FOR: Any task that creates, modifies, or troubleshoots .tsp files or TypeSpec API specifications — including but not limited to API versioning, ARM or data-plane resource definitions (tracked, proxy, extension, child resources), resource operations (CRUD, PATCH, custom actions, async/LRO), models, enums, unions, properties, decorators, constraints, and swagger-to-TypeSpec conversion. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, single MCP tool calls that do not require multi-step workflows. TOOLS/COMMANDS: azsdk_typespec_generate_authoring_plan, azsdk_run_typespec_validation"
 ---
 
 # Azure TypeSpec Author
 
+## Quick Reference
+
+| Property | Value |
+|----------|-------|
+| **Services** | Azure TypeSpec API Specifications (ARM & Data-plane) |
+| **MCP Tools** | `azsdk_typespec_generate_authoring_plan`, `azsdk_run_typespec_validation` |
+| **Best For** | Authoring, modifying, and troubleshooting `.tsp` files |
+
+## When to Use This Skill
+
+- Creating, modifying, or deleting content in `.tsp` files
+- API versioning (adding preview or stable versions)
+- ARM or data-plane resource definitions (tracked, proxy, extension, child resources)
+- Resource operations (CRUD, PATCH, custom actions, async/LRO)
+- Models, enums, unions, properties, decorators, and constraints
+- Swagger-to-TypeSpec conversion follow-up
+
 ## MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `azsdk_typespec_generate_authoring_plan` | Generate a grounded authoring plan for TypeSpec changes based on user request and existing code |
-| `azsdk_run_typespec_validation` | Run TypeSpec compilation and lint validation after edits |
+| Tool | Command | Use |
+|------|---------|-----|
+| `azsdk_typespec_generate_authoring_plan` | Generate authoring plan | Produces a grounded plan for TypeSpec changes based on user request and existing code |
+| `azsdk_run_typespec_validation` | Run validation | Runs TypeSpec compilation and lint validation after edits |
 
 ---
 
@@ -36,18 +49,18 @@ description: |
 
 | Step | Name | Tool / File | Gate |
 |------|------|-------------|------|
-| 1 | [Intake & Clarification](#step-1-intake--clarification) | `intake-arm.md` | All inputs collected + analysis displayed |
+| 1 | [Intake & Clarification](#step-1-intake--clarification) | `references/intake-arm.md` | All inputs collected + analysis displayed |
 | 2 | [Retrieve Solution](#step-2-retrieve-solution) | `azsdk_typespec_generate_authoring_plan` | Grounded plan returned |
 | 3 | [Apply Changes](#step-3-apply-changes) | Editor | User confirms uncertainties |
 | 4 | [Validate](#step-4-validate) | `azsdk_run_typespec_validation` | Compilation passes |
 | 5 | [Summarize](#step-5-summarize) | — | Summary displayed to user |
-| 6 | [Next Steps](#step-6-next-steps) | `next-steps-arm.md` | Follow-up actions presented |
+| 6 | [Next Steps](#step-6-next-steps) | `references/next-steps-arm.md` | Follow-up actions presented |
 
 ---
 
 ### Step 1: Intake & Clarification
 
-Follow `intake-arm.md` to gather all required inputs.
+Follow `references/intake-arm.md` to gather all required inputs.
 
 > **⚠️ CRITICAL**: Step 1 includes a **mandatory sub-step (Step 1.3)** that requires you to display the **📊 TypeSpec Project Analysis** summary in the chat. You **MUST** output this analysis before proceeding. Do **NOT** skip Step 1.3 or jump ahead to Step 2 without first displaying the analysis results to the user. This is a hard requirement — no exceptions.
 
@@ -104,9 +117,9 @@ Return the following to the user:
 
 ### Step 6: Next Steps
 
-Read the file `next-steps-arm.md` (using the read_file tool) and execute **ALL** of its instructions.
+Read the file `references/next-steps-arm.md` (using the read_file tool) and execute **ALL** of its instructions.
 
-> **Do NOT** summarize and end your turn without presenting the follow-up actions from `next-steps-arm.md` to the user. The user must be given the opportunity to request additional changes.
+> **Do NOT** summarize and end your turn without presenting the follow-up actions from `references/next-steps-arm.md` to the user. The user must be given the opportunity to request additional changes.
 
 ---
 
@@ -114,7 +127,7 @@ Read the file `next-steps-arm.md` (using the read_file tool) and execute **ALL**
 
 | Resource | Purpose |
 |----------|---------|
-| `intake-arm.md` | Step 1 — Intake and clarification steps for ARM authoring |
-| `next-steps-arm.md` | Step 6 — Post-authoring follow-up actions and case-specific guidance |
+| [`references/intake-arm.md`](references/intake-arm.md) | Step 1 — Intake and clarification steps for ARM authoring |
+| [`references/next-steps-arm.md`](references/next-steps-arm.md) | Step 6 — Post-authoring follow-up actions and case-specific guidance |
 | `sdk-generation` skill | SDK generation from TypeSpec |
 | `check-package-readiness` skill | Release readiness checks |
