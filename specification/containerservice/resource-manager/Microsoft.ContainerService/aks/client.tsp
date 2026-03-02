@@ -620,6 +620,10 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "ManagedClusterHttpProxyConfig",
   "csharp"
 );
+@@clientName(ManagedClusterHTTPProxyConfig.enabled,
+  "IsHttpProxyEnabled",
+  "csharp"
+);
 @@clientName(ManagedClusterHTTPProxyConfig.trustedCa, "TrustedCA", "csharp");
 @@clientName(LocalDNSMode, "LocalDnsMode", "csharp");
 @@clientName(LocalDNSState, "LocalDnsState", "csharp");
@@ -798,6 +802,42 @@ namespace Azure.ResourceManager.ContainerService.Models {
 );
 @@clientName(ManagedClusterSecurityProfileNodeRestriction.enabled,
   "IsNodeRestrictionEnabled",
+  "csharp"
+);
+@@clientName(ContainerServiceNetworkProfileKubeProxyConfig.enabled,
+  "IsKubeProxyEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterSecurityProfileDefenderSecurityGating.enabled,
+  "IsSecurityGatingEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterIngressDefaultDomainProfile.enabled,
+  "IsDefaultDomainEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterIngressProfileApplicationLoadBalancer.enabled,
+  "IsApplicationLoadBalancerEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.enabled,
+  "IsContainerInsightsEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics.enabled,
+  "IsAppMonitoringOpenTelemetryMetricsEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs.enabled,
+  "IsAppMonitoringOpenTelemetryLogsEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
+  "IsAppMonitoringAutoInstrumentationEnabled",
+  "csharp"
+);
+@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
+  "IsAppMonitoringAutoInstrumentationEnabled",
   "csharp"
 );
 
