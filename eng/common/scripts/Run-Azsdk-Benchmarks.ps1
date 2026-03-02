@@ -1,4 +1,4 @@
-# Run-Benchmarks.ps1
+# Run-Azsdk-Benchmarks.ps1
 # Builds the argument list for the Azure SDK Benchmarks CLI based on the provided parameters.
 # Called by the run-benchmarks composite action.
 
