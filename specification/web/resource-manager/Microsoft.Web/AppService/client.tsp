@@ -2887,3 +2887,5 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   "AppCertificatePatchResourceProperties",
   "go"
 );
+
+@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse");
