@@ -134,29 +134,13 @@ interface Consents {
   /**
    * Creates a new voice talent consent with the provided audio URL.
    */
-  @route("/consents/{id}")
-  @put
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
+  @operationId("Consents_Create")
   @pollingOperation(Operations.get)
-  create is Azure.Core.Foundations.Operation<
-    {
-      ...OperationIdHeader;
-
-      /** The ID of the resource. */
-      @path
-      id: resourceId;
-
-      /**
-       * consent definition
-       */
-      @bodyRoot
-      consent: Consent;
-    },
-    {
-      @statusCode statusCode: 201;
-      @header("Operation-Location") operationLocation: string;
-      @header("Operation-Id") operationIdHeader: string;
-      @bodyRoot body: Consent;
-    }
+  create is ops.LongRunningResourceCreateOrReplace<
+    Consent,
+    RequestHeadersTrait<OperationIdHeader>
   >;
 
   /**
@@ -292,29 +276,13 @@ interface Models {
   /**
    * Creates a new voice model.
    */
-  @route("/models/{id}")
-  @put
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
+  @operationId("Models_Create")
   @pollingOperation(Operations.get)
-  create is Azure.Core.Foundations.Operation<
-    {
-      ...OperationIdHeader;
-
-      /** The ID of the resource. */
-      @path
-      id: resourceId;
-
-      /**
-       * Model definition
-       */
-      @bodyRoot
-      `model`: Model;
-    },
-    {
-      @statusCode statusCode: 201;
-      @header("Operation-Location") operationLocation: string;
-      @header("Operation-Id") operationIdHeader: string;
-      @bodyRoot body: Model;
-    }
+  create is ops.LongRunningResourceCreateOrReplace<
+    Model,
+    RequestHeadersTrait<OperationIdHeader>
   >;
 }
 
@@ -340,31 +308,13 @@ interface Endpoints {
   /**
    * Creates a new endpoint.
    */
-  @route("/endpoints/{id}")
-  @put
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
+  @operationId("Endpoints_Create")
   @pollingOperation(Operations.get)
-  create is Azure.Core.Foundations.Operation<
-    {
-      ...OperationIdHeader;
-
-      /**
-       * The resource ID, which should be UUID.
-       */
-      @path
-      id: uuid;
-
-      /**
-       * Endpoint definition
-       */
-      @bodyRoot
-      endpoint: Endpoint;
-    },
-    {
-      @statusCode statusCode: 201;
-      @header("Operation-Location") operationLocation: string;
-      @header("Operation-Id") operationIdHeader: string;
-      @bodyRoot body: Endpoint;
-    }
+  create is ops.LongRunningResourceCreateOrReplace<
+    Endpoint,
+    RequestHeadersTrait<OperationIdHeader>
   >;
 
   /**
@@ -449,29 +399,13 @@ interface PersonalVoices {
   /**
    * Creates a new personal voice with audio files in Azure Blob Storage.
    */
-  @route("/personalvoices/{id}")
-  @put
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
+  @operationId("PersonalVoices_Create")
   @pollingOperation(Operations.get)
-  create is Azure.Core.Foundations.Operation<
-    {
-      ...OperationIdHeader;
-
-      /** The ID of the resource. */
-      @path
-      id: resourceId;
-
-      /**
-       * personal voice definition
-       */
-      @bodyRoot
-      personalvoice: PersonalVoice;
-    },
-    {
-      @statusCode statusCode: 201;
-      @header("Operation-Location") operationLocation: string;
-      @header("Operation-Id") operationIdHeader: string;
-      @bodyRoot body: PersonalVoice;
-    }
+  create is ops.LongRunningResourceCreateOrReplace<
+    PersonalVoice,
+    RequestHeadersTrait<OperationIdHeader>
   >;
 
   /**
