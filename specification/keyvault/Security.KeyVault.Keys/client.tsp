@@ -359,16 +359,18 @@ op getKeyAttestation is KeyVaultOperation<
   KeyBundle
 >;
 
-@@override(KeyVault.updateKey, updateKey);
-@@override(KeyVault.getKey, getKey);
+@@override(KeyVault.updateKey, updateKey, "!rust");
+@@override(KeyVault.getKey, getKey, "!rust");
+// Rust follows the service definition for optional versions but will consistently promote the version for crypto operation.
+// Not using (and storing) an explicit version for crypto operations is dangerous and can lock applications out of their data.
 @@override(KeyVault.encrypt, encrypt);
 @@override(KeyVault.decrypt, decrypt);
 @@override(KeyVault.sign, sign);
 @@override(KeyVault.verify, verify);
 @@override(KeyVault.wrapKey, wrapKey);
 @@override(KeyVault.unwrapKey, unwrapKey);
-@@override(KeyVault.release, release);
-@@override(KeyVault.getKeyAttestation, getKeyAttestation);
+@@override(KeyVault.release, release, "!rust");
+@@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
 
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");
