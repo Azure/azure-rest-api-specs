@@ -84,6 +84,15 @@ using Azure.AI.Projects;
 @@access(Agents.createAgentFromManifest, Access.internal);
 @@access(Agents.updateAgentFromManifest, Access.internal);
 
+// making methods private to add a public shim using the OpenAI types.
+@@access(MemoryStores.searchMemories, Access.internal);
+@@access(MemoryStores.updateMemories, Access.internal);
+@@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
+@@clientName(MemoryStores.searchMemories, "internalSearchMemories");
+
+@@access(MemoryStoreSearchResponse, Access.public);
+@@usage(MemoryStoreSearchResponse, Usage.output);
+
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
