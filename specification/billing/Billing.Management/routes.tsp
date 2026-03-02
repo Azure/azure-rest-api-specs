@@ -13,13 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AddressOperationGroup {
   /**
    * Validates an address. Use the operation to validate an address before using it as soldTo or a billTo address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Address_Validate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   @autoRoute
@@ -30,13 +29,13 @@ interface AddressOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface InvoicesOperationGroup {
   /**
    * Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_DownloadDocumentsByBillingSubscription")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @autoRoute
@@ -63,7 +62,12 @@ interface InvoicesOperationGroup {
     subscriptionId: string,
 
     ...ApiVersionParameter,
-    @body downloadUrls: DocumentDownloadRequest[],
+
+    /** A list of download details for individual documents. */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @body
+    @identifiers(#[])
+    downloadUrls: DocumentDownloadRequest[],
   ): ArmResponse<DocumentDownloadResult> | ArmAcceptedLroResponse<
     "Resource operation accepted.",
     LroHeaders = ArmLroLocationHeader<FinalResult = DocumentDownloadResult>

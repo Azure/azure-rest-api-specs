@@ -27,7 +27,8 @@ model Customer is Azure.ResourceManager.ProxyResource<CustomerProperties> {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -71,6 +72,7 @@ interface Customers {
   /**
    * Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   get is CustomerOps.Read<Customer>;
@@ -78,6 +80,7 @@ interface Customers {
   /**
    * Lists the customers that are billed to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   listByBillingProfile is CustomerOps.List<
@@ -130,8 +133,7 @@ interface Customers {
   /**
    * Lists the billing permissions the caller has for a customer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
@@ -146,8 +148,7 @@ interface Customers {
   /**
    * Provides a list of check access response objects for a customer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_CheckAccessByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")
@@ -160,8 +161,8 @@ interface Customers {
   /**
    * The list of billing requests submitted for the customer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRequests_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRequest")
   @list
@@ -213,8 +214,8 @@ interface Customers {
   /**
    * Adds a role assignment on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_CreateByCustomer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("createBillingRoleAssignment")
@@ -227,11 +228,10 @@ interface Customers {
   /**
    * Lists the role assignments for the caller on a customer while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ResolveByCustomer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
-  @list
   @action("resolveBillingRoleAssignments")
   resolveByCustomer is CustomerOps.ActionAsync<
     Customer,
@@ -255,8 +255,7 @@ interface Customers {
   /**
    * Lists the subscriptions for a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
@@ -265,7 +264,7 @@ interface Customers {
   billingSubscriptionsListByCustomer is CustomerOps.ActionSync<
     Customer,
     void,
-    ArmResponse<ResourceListResult<BillingSubscription>>,
+    ArmResponse<BillingSubscriptionListResult>,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
@@ -320,8 +319,8 @@ interface Customers {
   /**
    * Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Policies_CreateOrUpdateByCustomer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Policy")
   @put
@@ -329,14 +328,18 @@ interface Customers {
   createOrUpdateByCustomer is CustomerOps.ActionAsync<
     Customer,
     CustomerPolicy,
-    CustomerPolicy | ArmResourceCreatedResponse<CustomerPolicy>
+    CustomerPolicy,
+    Response = ArmResourceCreatedResponse<
+      CustomerPolicy,
+      ArmLroLocationHeader<FinalResult = CustomerPolicy> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmResponse<CustomerPolicy>
   >;
 
   /**
    * Lists the billed or unbilled transactions by customer id for given start date and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Transactions_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @list
@@ -436,8 +439,7 @@ interface CustomerOperationGroup {
   /**
    * Gets a customer by its ID at billing account level. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Customers_GetByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   getByBillingAccount is CustomerOperationGroupOps.Read<Customer>;
@@ -445,8 +447,7 @@ interface CustomerOperationGroup {
   /**
    * Lists the customers that are billed to a billing account. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Customers_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   listByBillingAccount is CustomerOperationGroupOps.List<
@@ -499,8 +500,7 @@ interface CustomerOperationGroup {
   /**
    * Lists the billing permissions the caller has for a customer at billing account level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_ListByCustomerAtBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
@@ -515,8 +515,7 @@ interface CustomerOperationGroup {
   /**
    * Lists the subscriptions for a customer at billing account level. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_ListByCustomerAtBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
@@ -525,7 +524,7 @@ interface CustomerOperationGroup {
   billingSubscriptionsListByCustomerAtBillingAccount is CustomerOperationGroupOps.ActionSync<
     Customer,
     void,
-    ArmResponse<ResourceListResult<BillingSubscription>>,
+    ArmResponse<BillingSubscriptionListResult>,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
@@ -580,8 +579,8 @@ interface CustomerOperationGroup {
   /**
    * Lists the products for a customer. These don't include products billed based on usage.The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Products_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Product")
   @list

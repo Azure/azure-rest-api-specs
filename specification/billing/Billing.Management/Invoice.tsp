@@ -14,6 +14,7 @@ namespace Microsoft.Billing;
 /**
  * An invoice.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
 @parentResource(BillingAccount)
 model Invoice is Azure.ResourceManager.ProxyResource<InvoiceProperties> {
@@ -27,7 +28,8 @@ model Invoice is Azure.ResourceManager.ProxyResource<InvoiceProperties> {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -64,6 +66,7 @@ interface Invoices {
   /**
    * Gets an invoice by billing account name and ID. The operation is supported for all billing account types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   getByBillingAccount is InvoiceOps.Read<Invoice>;
@@ -71,6 +74,7 @@ interface Invoices {
   /**
    * Lists the invoices for a billing account for a given start date and end date. The operation is supported for all billing account types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   listByBillingAccount is InvoiceOps.List<
@@ -129,13 +133,20 @@ interface Invoices {
   /**
    * Regenerate an invoice by billing account name and invoice name. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
-  amend is InvoiceOps.ActionAsync<Invoice, void, ArmAcceptedLroResponse>;
+  amend is InvoiceOps.ActionAsync<
+    Invoice,
+    void,
+    Invoice,
+    Response = ArmAcceptedLroResponse
+  >;
 
   /**
    * Gets a URL to download an invoice document. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("download")
@@ -155,6 +166,7 @@ interface Invoices {
   /**
    * Gets a URL to download the summary document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("downloadSummary")
@@ -167,8 +179,7 @@ interface Invoices {
   /**
    * Lists the transactions for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Transactions_ListByInvoice")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @list
@@ -220,8 +231,7 @@ interface Invoices {
   /**
    * Gets a URL to download the transactions document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Transactions_TransactionsDownloadByInvoice")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @action("transactionsDownload")
@@ -234,8 +244,7 @@ interface Invoices {
   /**
    * Gets the transaction summary for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Transactions_GetTransactionSummaryByInvoice")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @get
@@ -298,8 +307,7 @@ interface InvoiceByBillingSubscription {
   /**
    * Gets an invoice by subscription ID and invoice ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_GetByBillingSubscription")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   getByBillingSubscription is InvoiceByBillingSubscriptionOps.Read<Invoice>;
@@ -307,8 +315,7 @@ interface InvoiceByBillingSubscription {
   /**
    * Lists the invoices for a subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_ListByBillingSubscription")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   listByBillingSubscription is InvoiceByBillingSubscriptionOps.List<
@@ -367,8 +374,7 @@ interface InvoiceByBillingSubscription {
   /**
    * Gets a URL to download an invoice by billing subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_DownloadByBillingSubscription")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("download")
@@ -417,8 +423,7 @@ interface InvoiceById {
   /**
    * Gets an invoice by ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   get is InvoiceByIdOps.Read<Invoice>;

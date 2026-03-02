@@ -28,7 +28,8 @@ model BillingRoleAssignment
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -72,6 +73,7 @@ interface BillingRoleAssignments {
   /**
    * Gets a role assignment for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByBillingProfile is BillingRoleAssignmentOps.Read<BillingRoleAssignment>;
@@ -79,6 +81,7 @@ interface BillingRoleAssignments {
   /**
    * Deletes a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByBillingProfile is BillingRoleAssignmentOps.DeleteSync<BillingRoleAssignment>;
@@ -86,6 +89,7 @@ interface BillingRoleAssignments {
   /**
    * Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByBillingProfile is BillingRoleAssignmentOps.List<
@@ -158,8 +162,7 @@ interface BillingRoleAssignmentByCustomer {
   /**
    * Gets a role assignment for the caller on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_GetByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByCustomer is BillingRoleAssignmentByCustomerOps.Read<BillingRoleAssignment>;
@@ -167,8 +170,7 @@ interface BillingRoleAssignmentByCustomer {
   /**
    * Deletes a role assignment on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_DeleteByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByCustomer is BillingRoleAssignmentByCustomerOps.DeleteSync<BillingRoleAssignment>;
@@ -176,8 +178,7 @@ interface BillingRoleAssignmentByCustomer {
   /**
    * Lists the role assignments for the caller on customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByCustomer is BillingRoleAssignmentByCustomerOps.List<
@@ -250,8 +251,7 @@ interface BillingRoleAssignmentByInvoiceSection {
   /**
    * Gets a role assignment for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_GetByInvoiceSection")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.Read<BillingRoleAssignment>;
@@ -259,8 +259,7 @@ interface BillingRoleAssignmentByInvoiceSection {
   /**
    * Deletes a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_DeleteByInvoiceSection")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.DeleteSync<BillingRoleAssignment>;
@@ -268,8 +267,7 @@ interface BillingRoleAssignmentByInvoiceSection {
   /**
    * Lists the role assignments for the caller on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ListByInvoiceSection")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByInvoiceSection is BillingRoleAssignmentByInvoiceSectionOps.List<
@@ -328,8 +326,7 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_GetByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByBillingAccount is BillingRoleAssignmentByBillingAccountOps.Read<BillingRoleAssignment>;
@@ -337,8 +334,7 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_CreateOrUpdateByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByBillingAccount is BillingRoleAssignmentByBillingAccountOps.CreateOrUpdateAsync<
@@ -350,8 +346,7 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Deletes a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_DeleteByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByBillingAccount is BillingRoleAssignmentByBillingAccountOps.DeleteSync<BillingRoleAssignment>;
@@ -359,8 +354,7 @@ interface BillingRoleAssignmentByBillingAccount {
   /**
    * Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByBillingAccount is BillingRoleAssignmentByBillingAccountOps.List<
@@ -426,8 +420,7 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_GetByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByDepartment is BillingRoleAssignmentByDepartmentOps.Read<BillingRoleAssignment>;
@@ -435,8 +428,7 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_CreateOrUpdateByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByDepartment is BillingRoleAssignmentByDepartmentOps.CreateOrUpdateAsync<
@@ -448,8 +440,7 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Deletes a role assignment on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_DeleteByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByDepartment is BillingRoleAssignmentByDepartmentOps.DeleteSync<BillingRoleAssignment>;
@@ -457,8 +448,7 @@ interface BillingRoleAssignmentByDepartment {
   /**
    * Lists the role assignments for the caller on a department. The operation is supported for billing accounts of type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ListByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByDepartment is BillingRoleAssignmentByDepartmentOps.List<BillingRoleAssignment>;
@@ -503,8 +493,7 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_GetByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   getByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.Read<BillingRoleAssignment>;
@@ -512,8 +501,7 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_CreateOrUpdateByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   createOrUpdateByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.CreateOrUpdateAsync<
@@ -525,8 +513,7 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Deletes a role assignment on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_DeleteByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   deleteByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.DeleteSync<BillingRoleAssignment>;
@@ -534,8 +521,7 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   /**
    * Lists the role assignments for the caller on a enrollment account. The operation is supported for billing accounts of type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ListByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   listByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.List<BillingRoleAssignment>;

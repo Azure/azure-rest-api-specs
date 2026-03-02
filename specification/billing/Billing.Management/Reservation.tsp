@@ -14,6 +14,7 @@ namespace Microsoft.Billing;
 /**
  * The definition of the reservation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @tenantResource
 @parentResource(ReservationOrder)
 model Reservation
@@ -24,13 +25,14 @@ model Reservation
     SegmentName = "reservations",
     NamePattern = ""
   >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: int32;
 
   /**
    * The sku information associated to this reservation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ReservationSkuProperty;
 }
 
@@ -63,6 +65,7 @@ interface Reservations {
     PatchModel = Patch,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = Reservation> &
+      ArmLroLocationHeader<FinalResult = Reservation> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

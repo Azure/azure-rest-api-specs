@@ -28,7 +28,8 @@ model AssociatedTenant
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -37,6 +38,7 @@ interface AssociatedTenants {
   /**
    * Gets an associated tenant by ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AssociatedTenant")
   get is ArmResourceRead<
@@ -47,6 +49,7 @@ interface AssociatedTenants {
   /**
    * Create or update an associated tenant for the billing account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AssociatedTenant")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -59,6 +62,7 @@ interface AssociatedTenants {
   /**
    * Deletes an associated tenant for a billing account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AssociatedTenant")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -69,6 +73,7 @@ interface AssociatedTenants {
   /**
    * Lists the associated tenants that can collaborate with the billing account on commerce activities like viewing and downloading invoices, managing payments, making purchases, and managing or provisioning licenses.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AssociatedTenant")
   listByBillingAccount is ArmResourceListByParent<

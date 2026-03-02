@@ -27,7 +27,8 @@ model Department is Azure.ResourceManager.ProxyResource<DepartmentProperties> {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -36,6 +37,7 @@ interface Departments {
   /**
    * Gets a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Department")
   get is ArmResourceRead<
@@ -46,6 +48,7 @@ interface Departments {
   /**
    * Lists the departments that a user has access to. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Department")
   listByBillingAccount is ArmResourceListByParent<
@@ -87,8 +90,7 @@ interface Departments {
   /**
    * Lists the billing permissions the caller has for a department.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_ListByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
@@ -104,8 +106,7 @@ interface Departments {
   /**
    * Provides a list of check access response objects for a department.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_CheckAccessByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")

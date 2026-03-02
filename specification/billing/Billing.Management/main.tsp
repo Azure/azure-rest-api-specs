@@ -54,7 +54,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Billing Client
+ * Documentation for Microsoft.Billing.
  */
 @armProviderNamespace
 @service(#{ title: "BillingManagementClient" })
@@ -73,6 +73,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   list is Azure.ResourceManager.Operations.list;
 }

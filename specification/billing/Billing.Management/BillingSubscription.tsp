@@ -28,7 +28,8 @@ model BillingSubscription
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -69,6 +70,7 @@ interface BillingSubscriptions {
   /**
    * Gets a subscription by its billing profile and ID. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   getByBillingProfile is BillingSubscriptionOps.Read<
@@ -85,10 +87,12 @@ interface BillingSubscriptions {
   /**
    * Lists the subscriptions that are billed to a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   listByBillingProfile is BillingSubscriptionOps.List<
     BillingSubscription,
+    Response = ArmResponse<BillingSubscriptionListResult>,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
@@ -171,8 +175,7 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement,  Microsoft Partner Agreement, and Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   get is BillingSubscriptionOperationGroupOps.Read<
@@ -189,8 +192,8 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Updates the properties of a billing subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Update")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @patch(#{ implicitOptionality: false })
@@ -202,8 +205,7 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Cancels a billing subscription. This operation is supported only for billing accounts of type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   delete is BillingSubscriptionOperationGroupOps.DeleteWithoutOkAsync<BillingSubscription>;
@@ -211,12 +213,12 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Lists the subscriptions for a billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   listByBillingAccount is BillingSubscriptionOperationGroupOps.List<
     BillingSubscription,
+    Response = ArmResponse<BillingSubscriptionListResult>,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
@@ -283,21 +285,20 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Cancels a usage-based subscription. This operation is supported only for billing accounts of type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Cancel")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   cancel is BillingSubscriptionOperationGroupOps.ActionAsync<
     BillingSubscription,
     CancelSubscriptionRequest,
-    void
+    void,
+    Response = ArmAcceptedLroResponse
   >;
 
   /**
    * Merges the billing subscription provided in the request with a target billing subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Merge")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   merge is BillingSubscriptionOperationGroupOps.ActionAsync<
@@ -309,8 +310,7 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Moves charges for a subscription to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Move")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   move is BillingSubscriptionOperationGroupOps.ActionAsync<
@@ -322,8 +322,7 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Splits a subscription into a new subscription with quantity less than current subscription quantity and not equal to 0.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_Split")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   split is BillingSubscriptionOperationGroupOps.ActionAsync<
@@ -335,8 +334,7 @@ interface BillingSubscriptionOperationGroup {
   /**
    * Validates if charges for a subscription can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_ValidateMoveEligibility")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   validateMoveEligibility is BillingSubscriptionOperationGroupOps.ActionSync<

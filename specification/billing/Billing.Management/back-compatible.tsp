@@ -3,45 +3,45 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Billing;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExtendedStatusInfo.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PurchaseRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BillingSubscriptionProperties.enrollmentAccountSubscriptionDetails
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BillingSubscriptionPatch.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationProperty.utilization);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationPurchaseRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationPurchaseRequestProperties.reservedResourceProperties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Patch.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PatchProperties.renewProperties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(InitiateTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerInitiateTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AcceptTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ValidateTransferResponse.properties);
 
 @@clientName(AssociatedTenants.createOrUpdate::parameters.resource,
@@ -254,7 +254,7 @@ using Microsoft.Billing;
 @@clientLocation(SavingsPlanOrderModels.listByBillingAccount,
   "SavingsPlanOrders"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SavingsPlanOrderModel.properties);
 
 @@clientLocation(SavingsPlanModels.getByBillingAccount, "SavingsPlans");
@@ -266,7 +266,7 @@ using Microsoft.Billing;
 @@clientLocation(SavingsPlanModels.validateUpdateByBillingAccount,
   "SavingsPlans"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SavingsPlanModel.properties);
 
 @@clientLocation(BillingSubscriptionOperationGroup.get, BillingSubscriptions);
@@ -306,7 +306,7 @@ using Microsoft.Billing;
 @@clientName(BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BillingSubscription.properties);
 
 @@clientLocation(BillingSubscriptionAliases.get, "BillingSubscriptionsAliases");
@@ -319,7 +319,7 @@ using Microsoft.Billing;
 @@clientLocation(BillingSubscriptionAliases.listByBillingAccount,
   "BillingSubscriptionsAliases"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BillingSubscriptionAlias.properties);
 
 @@clientLocation(Customers.listByCustomer, "BillingPermissions");
@@ -433,13 +433,13 @@ using Microsoft.Billing;
 
 @@clientLocation(PaymentMethodLinks.getByBillingProfile, PaymentMethods);
 @@clientLocation(PaymentMethodLinks.listByBillingProfile, PaymentMethods);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PaymentMethodLink.properties);
 
 @@clientLocation(PaymentMethodOperationGroup.getByUser, PaymentMethods);
 @@clientLocation(PaymentMethodOperationGroup.deleteByUser, PaymentMethods);
 @@clientLocation(PaymentMethodOperationGroup.listByUser, PaymentMethods);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PaymentMethod.properties);
 
 @@clientLocation(CustomerPolicies.getByCustomer, Policies);
@@ -472,27 +472,30 @@ using Microsoft.Billing;
 @@clientName(Reservations.updateByBillingAccount::parameters.properties,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Reservation.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ReservationOrder.properties);
 
 @@clientName(Transfers.initiate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TransferDetails.properties);
 
 @@clientName(PartnerTransfers.initiate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PartnerTransferDetails.properties);
 
 @@clientName(RecipientTransfers.accept::parameters.body, "parameters");
 @@clientName(RecipientTransfers.validate::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RecipientTransferDetails.properties);
 
 @@clientLocation(AddressOperationGroup.validate, "Address");
 
 @@clientLocation(InvoicesOperationGroup.downloadDocumentsByBillingSubscription,
   Invoices
+);
+@@clientName(InvoicesOperationGroup.downloadDocumentsByBillingSubscription::parameters.downloadUrls,
+  "parameters"
 );

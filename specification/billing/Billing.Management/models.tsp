@@ -2253,7 +2253,7 @@ union PaymentMethodStatus {
   inactive: "inactive",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ServiceDefinedResourceName {
   string,
 
@@ -2791,7 +2791,7 @@ union ReservationBillingPlan {
   Monthly: "Monthly",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TransactionType {
   string,
 
@@ -3040,7 +3040,7 @@ union SupportedAccountType {
 /**
  * An agreement.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AgreementProperties {
   /**
    * The mode of acceptance for an agreement.
@@ -3164,13 +3164,13 @@ model Participant {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResourceWithTags
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3214,7 +3214,7 @@ model AssociatedTenantProperties {
 /**
  * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableBalanceProperties {
   /**
    * Credit amount for immediate payment.
@@ -3237,7 +3237,8 @@ model AvailableBalanceProperties {
 /**
  * Credit amount for immediate payment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableBalancePropertiesAmount extends Amount {}
 
 /**
@@ -3307,13 +3308,17 @@ model PaymentOnAccount {
 /**
  * Payment on Account amount.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentOnAccountAmount extends Amount {}
 
 /**
  * Total amount of payments on accounts.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableBalancePropertiesTotalPaymentsOnAccount extends Amount {}
 
 /**
@@ -3446,7 +3451,8 @@ model BillingAccountProperties {
 /**
  * The properties of an enrollment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPropertiesEnrollmentDetails extends EnrollmentDetails {}
 
 /**
@@ -3545,7 +3551,8 @@ model EnrollmentDetails {
 /**
  * The properties of an enrollment which are applicable only for indirect enrollments.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EnrollmentDetailsIndirectRelationshipInfo
   extends IndirectRelationshipInfo {}
 
@@ -3572,7 +3579,8 @@ model IndirectRelationshipInfo {
 /**
  * The address of the individual or organization that is responsible for the billing account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPropertiesSoldTo extends AddressDetails {}
 
 /**
@@ -3660,7 +3668,8 @@ model AddressDetails {
 /**
  * Describes the registration number of the organization linked with the billing account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPropertiesRegistrationNumber extends RegistrationNumber {}
 
 /**
@@ -3859,7 +3868,7 @@ model PaymentTermsEligibilityDetail {
 /**
  * A billing account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPatch extends ProxyResourceWithTags {
   /**
    * A billing account.
@@ -4085,7 +4094,8 @@ model BillingProfileProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4110,26 +4120,30 @@ model BillingProfileProperties {
 /**
  * Billing address.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePropertiesBillTo extends AddressDetails {}
 
 /**
  * Identifies the billing profile that is linked to another billing profile in indirect purchase motion.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePropertiesIndirectRelationshipInfo
   extends IndirectRelationshipInfo {}
 
 /**
  * The default address where the products are shipped, or the services are being used. If a ship to is not specified for a product or a subscription, then this address will be used.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePropertiesShipTo extends AddressDetails {}
 
 /**
  * The address of the individual or organization that is responsible for the billing account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePropertiesSoldTo extends AddressDetails {}
 
 /**
@@ -4172,13 +4186,14 @@ model SpendingLimitDetails {
 /**
  * The current payment term of the billing profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePropertiesCurrentPaymentTerm extends PaymentTerm {}
 
 /**
  * A billing property.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingPropertyProperties {
   /**
    * The type of agreement.
@@ -4435,14 +4450,16 @@ model BillingSubscriptionStatusDetails {
 /**
  * The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program. This property can be updated via patch.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingPropertyPropertiesSubscriptionServiceUsageAddress
   extends AddressDetails {}
 
 /**
  * The enrollment details for the subscription. Available for billing accounts with agreement type Enterprise Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingPropertyPropertiesEnrollmentDetails
   extends SubscriptionEnrollmentDetails {}
 
@@ -4489,7 +4506,7 @@ model BillingRequestProperties {
   /**
    * Additional information for the billing request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInformation?: Record<string>;
 
   /**
@@ -4654,6 +4671,7 @@ model BillingRequestProperties {
   /**
    * Type of billing request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: BillingRequestType;
 
   /**
@@ -4672,7 +4690,8 @@ model BillingRequestProperties {
 /**
  * The principal of the request reviewer. Will only be set if request is approved.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingRequestPropertiesReviewedBy extends Principal {}
 
 /**
@@ -4698,13 +4717,15 @@ model Principal {
 /**
  * The principal of the entity who created the request.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingRequestPropertiesCreatedBy extends Principal {}
 
 /**
  * The principal of the entity who last updated the request.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingRequestPropertiesLastUpdatedBy extends Principal {}
 
 /**
@@ -4891,7 +4912,7 @@ model BillingRoleAssignmentProperties {
 /**
  * The properties of a role definition.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingRoleDefinitionProperties {
   /**
    * The role description.
@@ -4935,7 +4956,7 @@ model SavingsPlanOrderModelProperties {
   /**
    * The provisioning state of the savings plan, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -4991,7 +5012,7 @@ model SavingsPlanOrderModelProperties {
    */
   planInformation?: BillingPlanInformation;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   savingsPlans?: string[];
 
   /**
@@ -5025,7 +5046,7 @@ model BillingPlanInformation {
    */
   nextPaymentDueDate?: plainDate;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   transactions?: PaymentDetail[];
 }
@@ -5039,7 +5060,7 @@ model Price {
    */
   currencyCode?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amount?: float64;
 }
 
@@ -5117,6 +5138,7 @@ model SavingsPlanOrderModelList is Azure.Core.Page<SavingsPlanOrderModel>;
 /**
  * List of savings plans
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanModelListResult extends SavingsPlanModelList {
   /**
    * The roll out count summary of the savings plans
@@ -5141,6 +5163,7 @@ model SavingsPlanModelProperties {
   /**
    * The provisioning state of the resource during a long-running operation.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -5342,7 +5365,7 @@ model PurchaseRequestProperties {
 /**
  * Commitment towards the benefit.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Commitment extends Price {
   /**
    * Commitment grain.
@@ -5443,7 +5466,7 @@ model SavingsPlanUpdateRequest {
   /**
    * Tags for this reservation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -5492,7 +5515,7 @@ model SavingsPlanUpdateValidateRequest {
  * Savings plan update validate response.
  */
 model SavingsPlanValidateResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   benefits?: SavingsPlanValidResponseProperty[];
 
@@ -5554,7 +5577,7 @@ model BillingSubscriptionProperties {
   /**
    * Dictionary of billing policies associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   billingPolicies?: Record<string>;
 
@@ -5910,8 +5933,8 @@ model SystemOverrides {
 /**
  * A billing subscription alias.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingSubscriptionAliasProperties extends BillingSubscriptionProperties {
   /**
    * The ID of the billing subscription with the subscription alias.
@@ -6034,7 +6057,7 @@ model MoveBillingSubscriptionErrorDetails {
 /**
  * The billing properties of a subscription.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingSubscriptionPatch extends ProxyResourceWithTags {
   /**
    * The properties of a(n) BillingSubscription
@@ -6045,7 +6068,7 @@ model BillingSubscriptionPatch extends ProxyResourceWithTags {
 /**
  * A partner's customer.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomerProperties {
   /**
    * The name of the billing profile.
@@ -6092,14 +6115,15 @@ model CustomerProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Optional grouping of enrollment accounts to segment costs into logical groupings and set budgets.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DepartmentProperties {
   /**
    * The cost center associated with the department.
@@ -6114,6 +6138,7 @@ model DepartmentProperties {
   /**
    * The ID that uniquely identifies the department.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -6127,7 +6152,7 @@ model DepartmentProperties {
 /**
  * It is an organizational hierarchy within a billing account to administer and manage azure costs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EnrollmentAccountProperties {
   /**
    * The cost center associated with the enrollment account.
@@ -6192,7 +6217,7 @@ model EnrollmentAccountProperties {
 /**
  * An invoice.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoiceProperties {
   /**
    * The amount due as of now.
@@ -6369,25 +6394,29 @@ model InvoiceProperties {
 /**
  * The amount due as of now.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesAmountDue extends Amount {}
 
 /**
  * The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesAzurePrepaymentApplied extends Amount {}
 
 /**
  * The total charges for the invoice billing period.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesBilledAmount extends Amount {}
 
 /**
  * The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesCreditAmount extends Amount {}
 
 /**
@@ -6452,7 +6481,8 @@ model FailedPayment {
 /**
  * The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesFreeAzureCreditApplied extends Amount {}
 
 /**
@@ -6499,13 +6529,15 @@ model Payment {
 /**
  * The paid amount.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentAmount extends Amount {}
 
 /**
  * Rebill details for an invoice.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesRebillDetails extends RebillDetails {}
 
 /**
@@ -6527,6 +6559,7 @@ model RebillDetails {
   /**
    * The rebill details of an invoice.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   rebillDetails?: RebillDetails;
 }
@@ -6534,25 +6567,29 @@ model RebillDetails {
 /**
  * The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesSubTotal extends Amount {}
 
 /**
  * The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesTaxAmount extends Amount {}
 
 /**
  * The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesTotalAmount extends Amount {}
 
 /**
  * The details of a refund request.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InvoicePropertiesRefundDetails extends RefundDetailsSummary {}
 
 /**
@@ -6624,13 +6661,15 @@ model RefundDetailsSummary {
 /**
  * The amount of refund requested.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefundDetailsSummaryAmountRequested extends Amount {}
 
 /**
  * The amount refunded.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefundDetailsSummaryAmountRefunded extends Amount {}
 
 /**
@@ -6735,7 +6774,8 @@ model InvoiceSectionProperties {
   /**
    * Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -6793,7 +6833,7 @@ model OperationDisplay {
 /**
  * The properties of a payment method link.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentMethodLinkProperties {
   /**
    * The account holder name for the payment method. This is only supported for payment methods with family CreditCard.
@@ -6875,11 +6915,12 @@ model PaymentMethodLogo {
 /**
  * The properties of a payment method.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentMethodProperties {
   /**
    * Id of payment method.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -7027,7 +7068,8 @@ model BillingProfilePolicyProperties {
 /**
  * The policies for Enterprise Agreement enrollments.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingProfilePolicyPropertiesEnterpriseAgreementPolicies
   extends EnterpriseAgreementPolicies {}
 
@@ -7091,7 +7133,8 @@ model BillingAccountPolicyProperties {
 /**
  * The policies for Enterprise Agreement enrollments.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPolicyPropertiesEnterpriseAgreementPolicies
   extends EnterpriseAgreementPolicies {}
 
@@ -7115,7 +7158,7 @@ model SubscriptionPolicyProperties {
 /**
  * A product.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductProperties {
   /**
    * Indicates whether auto renewal is turned on or off for a product.
@@ -7250,13 +7293,15 @@ model ProductProperties {
 /**
  * The last month charges.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductPropertiesLastCharge extends Amount {}
 
 /**
  * Reseller for this product. The fields is not available for Microsoft Partner Agreement products.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductPropertiesReseller extends Reseller {}
 
 /**
@@ -7288,7 +7333,8 @@ model MoveProductEligibilityResult {
 /**
  * Error details of the transfer eligibility validation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MoveProductEligibilityResultErrorDetails
   extends MoveProductErrorDetails {}
 
@@ -7318,7 +7364,7 @@ model MoveProductErrorDetails {
 /**
  * A product.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductPatch extends ProxyResourceWithTags {
   /**
    * A product.
@@ -7436,7 +7482,7 @@ model ReservationProperty {
   /**
    * The provisioning state of the reservation, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -7745,7 +7791,7 @@ model ReservationPurchaseRequest {
  * The name of sku
  */
 model SkuName {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 }
 
@@ -7907,7 +7953,7 @@ model Patch {
   /**
    * Tags for this reservation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -7940,7 +7986,7 @@ model PatchProperties {
    */
   renew?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewProperties?: PatchPropertiesRenewProperties;
 
   /**
@@ -7950,7 +7996,7 @@ model PatchProperties {
   reviewDateTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchPropertiesRenewProperties {
   /**
    * The request for reservation purchase
@@ -8035,7 +8081,7 @@ model ReservationOrderProperty {
   /**
    * The provisioning state of the reservation, e.g. Succeeded
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -8049,7 +8095,7 @@ model ReservationOrderProperty {
    */
   planInformation?: ReservationOrderBillingPlanInformation;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reservations?: Reservation[];
 
   /**
@@ -8088,7 +8134,7 @@ model ReservationOrderBillingPlanInformation {
    */
   nextPaymentDueDate?: plainDate;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   transactions?: ReservationPaymentDetail[];
 }
@@ -8136,7 +8182,7 @@ model ReservationPaymentDetail {
 /**
  * A transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Transaction extends ProxyResourceWithTags {
   /**
    * A transaction.
@@ -8166,6 +8212,7 @@ model TransactionProperties {
   /**
    * The name of the billing profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   billingProfileDisplayName?: unknown;
 
   /**
@@ -8350,49 +8397,57 @@ model TransactionProperties {
 /**
  * The amount of any Azure credits automatically applied to this transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesAzureCreditApplied extends Amount {}
 
 /**
  * The amount of Microsoft Azure Consumption Commitment(MACC) decrement through the transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesConsumptionCommitmentDecremented extends Amount {}
 
 /**
  * The price of the product after applying any discounts.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesEffectivePrice extends Amount {}
 
 /**
  * The retail price of the product.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesMarketPrice extends Amount {}
 
 /**
  * The pre-tax charged amount for the transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesSubTotal extends Amount {}
 
 /**
  * The tax amount applied to the transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesTax extends Amount {}
 
 /**
  * The charge associated with the transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesTransactionAmount extends Amount {}
 
 /**
  * The refund details of a transaction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransactionPropertiesRefundTransactionDetails
   extends RefundTransactionDetails {}
 
@@ -8419,13 +8474,15 @@ model RefundTransactionDetails {
 /**
  * The amount of refund requested.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefundTransactionDetailsAmountRequested extends Amount {}
 
 /**
  * The amount refunded.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RefundTransactionDetailsAmountRefunded extends Amount {}
 
 /**
@@ -8472,7 +8529,7 @@ model TransactionSummary {
 /**
  * Transfer details
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TransferProperties {
   /**
    * The time at which the transfer request expires.
@@ -8593,7 +8650,7 @@ model InitiateTransferProperties {
 /**
  * Transfer Details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PartnerTransferProperties {
   /**
    * The time at which the transfer request expires.
@@ -8716,7 +8773,7 @@ model ProductDetails {
 /**
  * Transfer Details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecipientTransferProperties {
   /**
    * The time at which the transfer request expires.
@@ -8964,6 +9021,22 @@ model PaymentMethodLinksListResult is Azure.Core.Page<PaymentMethodLink>;
 model PaymentMethodsListResult is Azure.Core.Page<PaymentMethod>;
 
 /**
- * The response of a Reservation list operation.
+ * The list of reservations and summary of roll out count of reservations in each state.
  */
-model ReservationsListResult is Azure.Core.Page<Reservation>;
+model ReservationsListResult is Azure.Core.Page<Reservation> {
+  /**
+   * The roll out count summary of the reservations
+   */
+  summary?: ReservationSummary;
+}
+
+/**
+ * The response of a BillingSubscription list operation.
+ */
+model BillingSubscriptionListResult is Azure.Core.Page<BillingSubscription> {
+  /**
+   * Total number of records.
+   */
+  @visibility(Lifecycle.Read)
+  totalCount?: float32;
+}

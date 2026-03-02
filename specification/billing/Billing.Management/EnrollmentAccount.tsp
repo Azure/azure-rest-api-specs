@@ -28,7 +28,8 @@ model EnrollmentAccount
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -72,6 +73,7 @@ interface EnrollmentAccounts {
   /**
    * Gets an enrollment account by department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("EnrollmentAccount")
   getByDepartment is EnrollmentAccountOps.Read<EnrollmentAccount>;
@@ -79,6 +81,7 @@ interface EnrollmentAccounts {
   /**
    * Lists the enrollment accounts for a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("EnrollmentAccount")
   listByDepartment is EnrollmentAccountOps.List<
@@ -155,8 +158,7 @@ interface EnrollmentAccountOperationGroup {
   /**
    * Gets an enrollment account by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnrollmentAccounts_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("EnrollmentAccount")
   get is EnrollmentAccountOperationGroupOps.Read<EnrollmentAccount>;
@@ -164,8 +166,7 @@ interface EnrollmentAccountOperationGroup {
   /**
    * Lists the enrollment accounts for a billing account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EnrollmentAccounts_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("EnrollmentAccount")
   listByBillingAccount is EnrollmentAccountOperationGroupOps.List<
@@ -212,8 +213,7 @@ interface EnrollmentAccountOperationGroup {
   /**
    * Lists the billing permissions the caller has for an enrollment account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_ListByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
@@ -228,8 +228,7 @@ interface EnrollmentAccountOperationGroup {
   /**
    * Provides a list of check access response objects for an enrollment account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_CheckAccessByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")
@@ -242,8 +241,7 @@ interface EnrollmentAccountOperationGroup {
   /**
    * Lists the subscriptions for an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingSubscriptions_ListByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
@@ -252,7 +250,7 @@ interface EnrollmentAccountOperationGroup {
   billingSubscriptionsListByEnrollmentAccount is EnrollmentAccountOperationGroupOps.ActionSync<
     EnrollmentAccount,
     void,
-    ArmResponse<ResourceListResult<BillingSubscription>>,
+    ArmResponse<BillingSubscriptionListResult>,
     Parameters = {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.

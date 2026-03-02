@@ -3,7 +3,7 @@
   "info": {
     "title": "BillingManagementClient",
     "version": "2024-04-01",
-    "description": "Billing Client",
+    "description": "Documentation for Microsoft.Billing.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -147,35 +147,40 @@
             "in": "query",
             "description": "When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeAllWithoutBillingProfiles",
             "in": "query",
             "description": "When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeDeleted",
             "in": "query",
             "description": "When true, results will include any billing accounts in a deleted state.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includePendingAgreement",
             "in": "query",
             "description": "Includes billing accounts with agreement pending signature that the user has access to.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeResellee",
             "in": "query",
             "description": "Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "legalOwnerTID",
@@ -3204,16 +3209,6 @@
               "$ref": "#/definitions/CustomerPolicy"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3239,7 +3234,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.Legacy.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-schema": "#/definitions/CustomerPolicy"
         },
         "x-ms-long-running-operation": true
       }
@@ -3334,10 +3329,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BillingRoleAssignmentListResult"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transactions": {
@@ -5105,10 +5097,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BillingRoleAssignmentListResult"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transactions": {
@@ -6237,10 +6226,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BillingRoleAssignmentListResult"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/transactions": {
@@ -7498,9 +7484,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10439,8 +10422,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -11748,6 +11730,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -11936,10 +11922,7 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BillingRoleAssignmentListResult"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders": {
@@ -12237,6 +12220,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -12497,8 +12484,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "downloadUrls",
+            "name": "parameters",
             "in": "body",
+            "description": "A list of download details for individual documents.",
             "required": true,
             "schema": {
               "type": "array",
@@ -14417,14 +14405,6 @@
         }
       ]
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.{ location: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
     "AzurePlan": {
       "type": "object",
       "description": "Details of the Azure plan.",
@@ -16280,6 +16260,12 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "float",
+          "description": "Total number of records.",
+          "readOnly": true
         }
       },
       "required": [
@@ -22001,6 +21987,66 @@
         ]
       }
     },
+    "ReservationSummary": {
+      "type": "object",
+      "description": "The roll up count summary of reservations in each state",
+      "properties": {
+        "cancelledCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Cancelled state",
+          "readOnly": true
+        },
+        "expiredCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Expired state",
+          "readOnly": true
+        },
+        "expiringCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Expiring state",
+          "readOnly": true
+        },
+        "failedCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Failed state",
+          "readOnly": true
+        },
+        "pendingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Pending state",
+          "readOnly": true
+        },
+        "succeededCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Succeeded state",
+          "readOnly": true
+        },
+        "noBenefitCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in 'No Benefit' state",
+          "readOnly": true
+        },
+        "warningCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Warning state",
+          "readOnly": true
+        },
+        "processingCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of reservation in Processing state",
+          "readOnly": true
+        }
+      }
+    },
     "ReservationSwapProperties": {
       "type": "object",
       "description": "Properties of reservation swap",
@@ -22045,7 +22091,7 @@
     },
     "ReservationsListResult": {
       "type": "object",
-      "description": "The response of a Reservation list operation.",
+      "description": "The list of reservations and summary of roll out count of reservations in each state.",
       "properties": {
         "value": {
           "type": "array",
@@ -22058,6 +22104,10 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "summary": {
+          "$ref": "#/definitions/ReservationSummary",
+          "description": "The roll out count summary of the reservations"
         }
       },
       "required": [
@@ -22143,7 +22193,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the resource during a long-running operation."
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "readOnly": true
         },
         "displayProvisioningState": {
           "type": "string",

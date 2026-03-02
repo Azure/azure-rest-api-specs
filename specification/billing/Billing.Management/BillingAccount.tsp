@@ -26,7 +26,8 @@ model BillingAccount
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -35,6 +36,7 @@ interface BillingAccounts {
   /**
    * Gets a billing account by its ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   get is ArmResourceRead<
@@ -45,6 +47,8 @@ interface BillingAccounts {
   /**
    * Updates the properties of a billing account. Currently, displayName and address can be updated for billing accounts with agreement type Microsoft Customer Agreement. Currently address and notification email address can be updated for billing accounts with agreement type Microsoft Online Services Agreement. Currently, purchase order number can be edited for billing accounts with agreement type Enterprise Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   @patch(#{ implicitOptionality: false })
@@ -57,6 +61,7 @@ interface BillingAccounts {
   /**
    * Lists the billing accounts that a user has access to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   list is ArmResourceListByParent<
@@ -67,41 +72,43 @@ interface BillingAccounts {
        * When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
        */
       @query("includeAll")
-      includeAll?: boolean;
+      includeAll?: boolean = false;
 
       /**
        * When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.
        */
       @query("includeAllWithoutBillingProfiles")
-      includeAllWithoutBillingProfiles?: boolean;
+      includeAllWithoutBillingProfiles?: boolean = false;
 
       /**
        * When true, results will include any billing accounts in a deleted state.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Includes billing accounts with agreement pending signature that the user has access to.
        */
       @query("includePendingAgreement")
-      includePendingAgreement?: boolean;
+      includePendingAgreement?: boolean = false;
 
       /**
        * Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.
        */
       @query("includeResellee")
-      includeResellee?: boolean;
+      includeResellee?: boolean = false;
 
       /**
        * Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("legalOwnerTID")
       legalOwnerTID?: string;
 
       /**
        * Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("legalOwnerOID")
       legalOwnerOID?: string;
 
@@ -140,6 +147,7 @@ interface BillingAccounts {
   /**
    * Adds payment terms to all the billing profiles under the billing account. Currently, payment terms can be added only on billing accounts that have Agreement Type as 'Microsoft Customer Agreement' and AccountType as 'Enterprise'. This action needs pre-authorization and only Field Sellers are authorized to add the payment terms and is not a self-serve action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   addPaymentTerms is ArmResourceActionAsync<
@@ -152,6 +160,7 @@ interface BillingAccounts {
   /**
    * Cancels all the payment terms on billing account that falls after the cancellation date in the request. Currently, cancel payment terms is only served by admin actions and is not a self-serve action.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   cancelPaymentTerms is ArmResourceActionAsync<
@@ -164,6 +173,7 @@ interface BillingAccounts {
   /**
    * Gets the transition details for a billing account that has transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   confirmTransition is ArmResourceActionSync<
@@ -176,6 +186,7 @@ interface BillingAccounts {
   /**
    * Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   @list
@@ -197,6 +208,7 @@ interface BillingAccounts {
   /**
    * Validates payment terms on a billing account with agreement type 'Microsoft Customer Agreement' and account type 'Enterprise'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingAccount")
   validatePaymentTerms is ArmResourceActionSync<
@@ -209,8 +221,7 @@ interface BillingAccounts {
   /**
    * Lists the billing permissions the caller has on a billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
@@ -226,8 +237,7 @@ interface BillingAccounts {
   /**
    * Provides a list of check access response objects for a billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingPermissions_CheckAccessByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")
@@ -241,8 +251,7 @@ interface BillingAccounts {
   /**
    * The list of billing requests submitted for the billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRequests_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRequest")
   @list
@@ -295,8 +304,7 @@ interface BillingAccounts {
   /**
    * Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_CreateByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("createBillingRoleAssignment")
@@ -310,11 +318,9 @@ interface BillingAccounts {
   /**
    * Lists the role assignments for the caller on a billing account while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleAssignments_ResolveByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
-  @list
   @action("resolveBillingRoleAssignments")
   resolveByBillingAccount is ArmResourceActionAsync<
     BillingAccount,
@@ -339,8 +345,6 @@ interface BillingAccounts {
   /**
    * List savings plans by billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SavingsPlans_ListByBillingAccount")
   @tag("Savings plan")
   @list
   @get
@@ -392,23 +396,24 @@ interface BillingAccounts {
   /**
    * Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Invoices_DownloadDocumentsByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("downloadDocuments")
-  downloadDocumentsByBillingAccount is ArmResourceActionAsync<
+  downloadDocumentsByBillingAccount is ArmResourceActionAsyncBase<
     BillingAccount,
     DocumentDownloadRequest[],
-    DocumentDownloadResult,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<DocumentDownloadResult> | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = DocumentDownloadResult> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
    * Lists the reservations in the billing account and the roll up counts of reservations group by provisioning states.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservations_ListByBillingAccount")
   @tag("Reservations")
   @list
   @get

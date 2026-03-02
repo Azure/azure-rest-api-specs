@@ -28,13 +28,14 @@ model SavingsPlanModel
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
    * Savings plan SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 }
 
@@ -43,8 +44,6 @@ interface SavingsPlanModels {
   /**
    * Get savings plan by billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SavingsPlans_GetByBillingAccount")
   @tag("Savings plan")
   getByBillingAccount is ArmResourceRead<
     SavingsPlanModel,
@@ -61,8 +60,6 @@ interface SavingsPlanModels {
   /**
    * Update savings plan by billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SavingsPlans_UpdateByBillingAccount")
   @tag("Savings plan")
   @patch(#{ implicitOptionality: false })
   updateByBillingAccount is ArmCustomPatchAsync<
@@ -70,14 +67,13 @@ interface SavingsPlanModels {
     PatchModel = SavingsPlanUpdateRequest,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = SavingsPlanModel> &
+      ArmLroLocationHeader<FinalResult = SavingsPlanModel> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * List savings plans in an order by billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SavingsPlans_ListBySavingsPlanOrder")
   @tag("Savings plan")
   listBySavingsPlanOrder is ArmResourceListByParent<
     SavingsPlanModel,
@@ -88,8 +84,6 @@ interface SavingsPlanModels {
   /**
    * Validate savings plan patch by billing account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SavingsPlans_ValidateUpdateByBillingAccount")
   @tag("Savings plan")
   @action("validate")
   validateUpdateByBillingAccount is ArmResourceActionSync<

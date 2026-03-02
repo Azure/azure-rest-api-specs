@@ -28,7 +28,8 @@ model BillingRoleDefinition
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -72,8 +73,7 @@ interface BillingRoleDefinitions {
   /**
    * Gets the definition for a role on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByBillingProfile")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByBillingProfile is BillingRoleDefinitionOps.Read<BillingRoleDefinition>;
@@ -81,8 +81,7 @@ interface BillingRoleDefinitions {
   /**
    * Lists the role definitions for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByBillingProfile")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByBillingProfile is BillingRoleDefinitionOps.List<BillingRoleDefinition>;
@@ -134,8 +133,7 @@ interface BillingRoleDefinitionByCustomer {
   /**
    * Gets the definition for a role on a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByCustomer is BillingRoleDefinitionByCustomerOps.Read<BillingRoleDefinition>;
@@ -143,8 +141,7 @@ interface BillingRoleDefinitionByCustomer {
   /**
    * Lists the role definitions for a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByCustomer")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByCustomer is BillingRoleDefinitionByCustomerOps.List<BillingRoleDefinition>;
@@ -196,8 +193,7 @@ interface BillingRoleDefinitionByInvoiceSection {
   /**
    * Gets the definition for a role on an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByInvoiceSection")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.Read<BillingRoleDefinition>;
@@ -205,8 +201,7 @@ interface BillingRoleDefinitionByInvoiceSection {
   /**
    * Lists the role definitions for an invoice section. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByInvoiceSection")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.List<BillingRoleDefinition>;
@@ -244,8 +239,7 @@ interface BillingRoleDefinitionByBillingAccount {
   /**
    * Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByBillingAccount is BillingRoleDefinitionByBillingAccountOps.Read<BillingRoleDefinition>;
@@ -253,8 +247,7 @@ interface BillingRoleDefinitionByBillingAccount {
   /**
    * Lists the role definitions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByBillingAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByBillingAccount is BillingRoleDefinitionByBillingAccountOps.List<BillingRoleDefinition>;
@@ -299,8 +292,7 @@ interface BillingRoleDefinitionByDepartment {
   /**
    * Gets the definition for a role on a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByDepartment is BillingRoleDefinitionByDepartmentOps.Read<BillingRoleDefinition>;
@@ -308,8 +300,7 @@ interface BillingRoleDefinitionByDepartment {
   /**
    * List the definition for a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByDepartment")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByDepartment is BillingRoleDefinitionByDepartmentOps.List<BillingRoleDefinition>;
@@ -354,8 +345,7 @@ interface BillingRoleDefinitionByEnrollmentAccount {
   /**
    * Gets the definition for a role on an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_GetByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.Read<BillingRoleDefinition>;
@@ -363,8 +353,7 @@ interface BillingRoleDefinitionByEnrollmentAccount {
   /**
    * List the definition for an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingRoleDefinition_ListByEnrollmentAccount")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.List<BillingRoleDefinition>;
