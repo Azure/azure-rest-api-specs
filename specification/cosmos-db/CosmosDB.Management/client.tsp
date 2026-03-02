@@ -101,12 +101,13 @@ model AccessRulePropertiesSubscriptionsItem {
 op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoRoleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -132,12 +133,13 @@ op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
 op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoUserDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -164,12 +166,13 @@ op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
 op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoRoleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -191,12 +194,13 @@ op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
 op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoUserDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -218,12 +222,13 @@ op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
 op mongoDBResourcesGetMongoRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoRoleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -245,12 +250,13 @@ op mongoDBResourcesGetMongoRoleDefinitionCustomized(
 op mongoDBResourcesGetMongoUserDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   mongoUserDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -272,12 +278,13 @@ op mongoDBResourcesGetMongoUserDefinitionCustomized(
 op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleAssignmentId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -304,12 +311,13 @@ op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
 op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -336,12 +344,13 @@ op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
 op sqlResourcesDeleteSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleAssignmentId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -363,12 +372,13 @@ op sqlResourcesDeleteSqlRoleAssignmentCustomized(
 op sqlResourcesDeleteSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -390,12 +400,13 @@ op sqlResourcesDeleteSqlRoleDefinitionCustomized(
 op sqlResourcesGetSqlRoleAssignmentCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleAssignmentId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -417,12 +428,13 @@ op sqlResourcesGetSqlRoleAssignmentCustomized(
 op sqlResourcesGetSqlRoleDefinitionCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   roleDefinitionId: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
