@@ -56,12 +56,6 @@ interface NetworkAgents {
     NetworkAgent,
     Response = ArmResponse<NetworkAgentList>
   >;
-
-  /**
-   * Trigger Refresh action
-   */
-  @action("refresh")
-  triggerRefresh is ArmResourceActionNoResponseContentAsync<NetworkAgent, void>;
 }
 
 @@maxLength(NetworkAgent.name, 63);
