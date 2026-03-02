@@ -45,3 +45,12 @@ suppressions:
     from: resourceintelligence.json
     reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
 ```
+
+### Tag: package-preview-2025-08
+
+These settings apply only when `--tag=package-preview-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08'
+input-file:
+  - Microsoft.ResourceIntelligence/preview/2025-08-01-preview/resourcecopilot.json
+```
