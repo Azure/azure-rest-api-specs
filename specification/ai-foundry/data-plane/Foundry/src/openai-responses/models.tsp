@@ -23,6 +23,36 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // Add default "auto" to InputImageContentParamAutoParam.detail — upstream has no default.
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Preserving upstream nullable pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Preserving upstream enum reference"
+  @@withoutOmittedProperties(OpenAI.InputImageContentParamAutoParam, "detail");
+  @@copyProperties(OpenAI.InputImageContentParamAutoParam,
+    {
+      /** The detail level of the image. One of `high`, `low`, or `auto`. Defaults to `auto`. */
+      detail?: OpenAI.DetailEnum | null = OpenAI.DetailEnum.auto,
+    }
+  );
+
+  // Add default value "message" to EasyInputMessage.type per OpenAI docs.
+  // Cannot make it optional since it's a discriminator, but the default ensures JSON schema
+  // includes "default": "message" so callers know they can omit it.
+  @@withoutOmittedProperties(OpenAI.EasyInputMessage, "type");
+  @@copyProperties(OpenAI.EasyInputMessage,
+    {
+      /** The type of the message input. Always `message`. */
+      type: "message" = "message",
+    }
+  );
+
+  // Add min/max constraints per OpenAI docs — upstream has none.
+  @@minValue(OpenAI.ModelResponseProperties.temperature, 0);
+  @@maxValue(OpenAI.ModelResponseProperties.temperature, 2);
+  @@minValue(OpenAI.ModelResponseProperties.top_p, 0);
+  @@maxValue(OpenAI.ModelResponseProperties.top_p, 1);
+  @@minValue(OpenAI.ModelResponseProperties.top_logprobs, 0);
+  @@maxValue(OpenAI.ModelResponseProperties.top_logprobs, 20);
+
   @@doc(OpenAI.CreateResponse.`model`,
     "The model deployment to use for the creation of this response."
   );
