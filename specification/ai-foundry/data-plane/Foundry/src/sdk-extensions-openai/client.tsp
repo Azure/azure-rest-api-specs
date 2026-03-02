@@ -3,12 +3,6 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
-// --------------------------------------------------------------------------------
-// Fix the xref.
-// --------------------------------------------------------------------------------
-@@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
-@@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
-
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Extensions.OpenAI")
 namespace Azure.AI.Projects {
@@ -53,6 +47,12 @@ namespace Azure.AI.Projects {
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
+
+  // --------------------------------------------------------------------------------
+  // Fix the xref.
+  // --------------------------------------------------------------------------------
+  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
@@ -321,12 +321,6 @@ namespace Azure.AI.Projects {
     "InternalOutputItemCustomToolCall"
   );
 
-  @@access(OpenAI.WebSearchPreviewTool, Access.internal);
-  @@clientName(OpenAI.WebSearchPreviewTool, "InternalWebSearchPreviewTool");
-
-  @@access(OpenAI.WebSearchTool, Access.internal);
-  @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
-
   @@access(OpenAI.WebSearchActionFind, Access.internal);
   @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
 
@@ -337,9 +331,6 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.WebSearchActionSearch, Access.internal);
   @@clientName(OpenAI.WebSearchActionSearch, "InternalWebSearchActionSearch");
-
-  @@access(OpenAI.CodeInterpreterTool, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterTool, "InternalCodeInterpreterTool");
 
   @@access(OpenAI.CodeInterpreterOutputImage, Access.internal);
   @@clientName(OpenAI.CodeInterpreterOutputImage,
