@@ -1,5 +1,5 @@
-name: 'Run Benchmarks'
-description: 'Build and run Azure SDK benchmark scenarios using the Copilot SDK'
+name: 'Run azsdk-cli Benchmarks'
+description: 'Build and run Azure SDK CLI benchmark scenarios using the Copilot SDK'
 
 inputs:
   scenario:
@@ -41,7 +41,7 @@ runs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: benchmark-logs
+        name: azsdk-cli-benchmark-logs
         path: /tmp/azsdk-benchmarks/logs/
         if-no-files-found: ignore
         retention-days: 7
