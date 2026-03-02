@@ -16770,6 +16770,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "Sites_ListNetworkSecurityPerimeterConfigurations",
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets all Network Security Perimeter Association Configurations for the site.",
+        "description": "Description for Gets all Network Security Perimeter Association Configurations for the site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/start": {
       "post": {
         "operationId": "WebApps_StartWebSiteNetworkTrace",
@@ -38927,6 +38969,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}": {
+      "get": {
+        "operationId": "Sites_GetNetworkSecurityPerimeterConfiguration",
+        "tags": [
+          "Sites"
+        ],
+        "summary": "Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.",
+        "description": "Description for Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterReference",
+            "in": "path",
+            "description": "AssociationName and PerimeterGuid of the Network Security Perimeter Association.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/{operationId}": {
       "get": {
         "operationId": "WebApps_GetNetworkTraces",
@@ -48268,6 +48359,89 @@
         }
       }
     },
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "description": "Network Security Perimeter",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM URI of the Network Security Perimeter resource."
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "GUID of the Network Security Perimeter resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where the Network Security Perimeter resource."
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "description": "Detailed view of a Network Security Perimeter Configured for the site.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationCollection": {
+      "type": "object",
+      "description": "Collection of Network Security Perimeter Configurations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Configuration Properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Reflects state of association persistence and configuration propagation to App Service Data Plane."
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "Reflects any misconfigurations and failures detected while provisioning the association or while processing configuration changes.",
+          "items": {
+            "$ref": "#/definitions/NspProvisioningIssue"
+          }
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "description": "Associated Network Security Perimeter resource."
+        },
+        "resourceAssociations": {
+          "$ref": "#/definitions/NspResourceAssociation",
+          "description": "Representation of Network Security Perimeter Association."
+        },
+        "profile": {
+          "$ref": "#/definitions/NspProfile",
+          "description": "Associated Network Security Perimeter Profile."
+        }
+      }
+    },
     "NetworkTrace": {
       "type": "object",
       "description": "Network trace",
@@ -48312,6 +48486,198 @@
       "x-ms-enum": {
         "name": "NotificationLevel",
         "modelAsString": false
+      }
+    },
+    "NspProfile": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Network Security Perimeter Profile."
+        },
+        "accessRulesVersion": {
+          "type": "string",
+          "description": "Access Rules Version for the Network Security Perimeter Profile."
+        },
+        "accessRules": {
+          "type": "array",
+          "description": "Access Rules for the Network Security Perimeter Profile.",
+          "items": {
+            "$ref": "#/definitions/NspProfileAccessRule"
+          }
+        },
+        "diagnosticSettingsVersion": {
+          "type": "string",
+          "description": "Diagnostic Settings Version for the Network Security Perimeter Profile."
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "description": "Enabled Log Categories for the Network Security Perimeter Profile.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProfileAccessRule": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Network Security Perimeter Profile Access Rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/NspProfileAccessRuleProperties",
+          "description": "Name of the Network Security Perimeter Profile Access Rule."
+        }
+      }
+    },
+    "NspProfileAccessRuleGranularFeature": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule Granular Feature",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type of Granular Feature."
+        },
+        "features": {
+          "type": "array",
+          "description": "Names of applied Granular Features.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProfileAccessRuleProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule Properties",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Direction of Access Rule (Inbound/Outbound)."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "IP Address Ranges of Access Rule",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceTags": {
+          "type": "array",
+          "description": "Service Tags of Access Rule",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Granular Features of Access Rule",
+          "items": {
+            "$ref": "#/definitions/NspProfileAccessRuleGranularFeature"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "Subscriptions of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "description": "NetworkSecurityPerimeter of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "description": "Fully Qualified Domain Names of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "Email Addresses of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "description": "Phone Numbers of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProvisioningIssue": {
+      "type": "object",
+      "description": "Network Security Perimeter Association Provisioning Issue",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Provisioning Issue Name"
+        },
+        "properties": {
+          "$ref": "#/definitions/NspProvisioningIssueProperties",
+          "description": "Provisioning Issue Properties"
+        }
+      }
+    },
+    "NspProvisioningIssueProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Association Provisioning Issue Properties",
+      "properties": {
+        "issueType": {
+          "type": "string",
+          "description": "Provisioning Issue Type"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Provisioning Issue Severity"
+        },
+        "description": {
+          "type": "string",
+          "description": "Provisioning Issue Description"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "description": "Recommended ARM Ids to resolve the issue",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "description": "Recommended access rules to resolve the issue",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspResourceAssociation": {
+      "type": "object",
+      "description": "Network Security Perimeter Resource Association",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network Security Perimeter Resource Association Name"
+        },
+        "accessMode": {
+          "type": "string",
+          "description": "Network Security Perimeter Association Access Mode (Learning/Enforced)"
+        }
       }
     },
     "OpenAuthenticationAccessPolicies": {

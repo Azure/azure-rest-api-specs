@@ -12735,6 +12735,75 @@ model NetworkFeaturesProperties {
 }
 
 /**
+ * Network Security Perimeter
+ */
+model NetworkSecurityPerimeter {
+  /**
+   * ARM URI of the Network Security Perimeter resource.
+   */
+  id?: string;  
+
+  /**
+   * GUID of the Network Security Perimeter resource.
+   */
+  perimeterGuid?: string;  
+
+  /**
+   * Location where the Network Security Perimeter resource.
+   */
+  location?: string;
+}
+
+/**
+ * Detailed view of a Network Security Perimeter Configured for the site.
+ */
+model NetworkSecurityPerimeterConfiguration
+  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
+  ...ResourceNameParameter<
+    Resource = NetworkSecurityPerimeterConfiguration,
+    KeyName = "view",
+    SegmentName = "networkSecurityPerimeterConfiguration",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * Collection of Network Security Perimeter Configurations
+ */
+model NetworkSecurityPerimeterConfigurationCollection is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+
+/**
+ * Network Security Perimeter Configuration Properties
+ */
+model NetworkSecurityPerimeterConfigurationProperties {
+  /**
+   * Reflects state of association persistence and configuration propagation to App Service Data Plane.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  provisioningState?: string;
+
+  /**
+   * Reflects any misconfigurations and failures detected while provisioning the association or while processing configuration changes.
+   */
+  provisioningIssues?: NspProvisioningIssue[];
+
+  /**
+   * Associated Network Security Perimeter resource.
+   */
+  networkSecurityPerimeter?: NetworkSecurityPerimeter;
+
+  /**
+   * Representation of Network Security Perimeter Association.
+   */
+  resourceAssociations?: NspResourceAssociation;
+
+  /**
+   * Associated Network Security Perimeter Profile.
+   */
+  profile?: NspProfile;
+}
+
+/**
  * Network trace
  */
 model NetworkTrace {
@@ -12752,6 +12821,177 @@ model NetworkTrace {
    * Detailed message of a network trace operation, e.g. error message in case of failure.
    */
   message?: string;
+}
+
+/**
+ * Network Security Perimeter Profile
+ */
+model NspProfile {
+  /**
+   * Name of the Network Security Perimeter Profile.
+   */
+  name?: string;
+
+  /**
+   * Access Rules Version for the Network Security Perimeter Profile.
+   */
+  accessRulesVersion?: string;
+
+  /**
+   * Access Rules for the Network Security Perimeter Profile.
+   */
+  accessRules?: NspProfileAccessRule[];
+
+  /**
+   * Diagnostic Settings Version for the Network Security Perimeter Profile.
+   */
+  diagnosticSettingsVersion?: string;
+
+  /**
+   * Enabled Log Categories for the Network Security Perimeter Profile.
+   */
+  enabledLogCategories?: string[];
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule
+ */
+model NspProfileAccessRule {
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  name?: string;
+
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  properties?: NspProfileAccessRuleProperties;
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule Granular Feature
+ */
+model NspProfileAccessRuleGranularFeature {
+  /**
+   * Resource Type of Granular Feature.
+   */
+  resourceType?: string;
+
+  /**
+   * Names of applied Granular Features.
+   */
+  features?: string[];
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule Properties
+ */
+model NspProfileAccessRuleProperties {
+  /**
+   * Direction of Access Rule (Inbound/Outbound).
+   */
+  direction?: string;
+
+  /**
+   * IP Address Ranges of Access Rule
+   */
+  addressPrefixes?: string[];
+
+  /**
+   * Service Tags of Access Rule
+   */
+  serviceTags?: string[];
+
+  /**
+   * Granular Features of Access Rule
+   */
+  @identifiers(#["resourceType"])
+  appliesTo?: NspProfileAccessRuleGranularFeature[];
+
+  /**
+   * Subscriptions of Access Rule. Not supported by App Service.
+   */
+  subscriptions?: string[];
+
+  /**
+   * NetworkSecurityPerimeter of Access Rule. Not supported by App Service.
+   */
+  networkSecurityPerimeters?: string[];
+
+  /**
+   * Fully Qualified Domain Names of Access Rule. Not supported by App Service.
+   */
+  fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Email Addresses of Access Rule. Not supported by App Service.
+   */
+  emailAddresses?: string[];
+
+  /**
+   * Phone Numbers of Access Rule. Not supported by App Service.
+   */
+  phoneNumbers?: string[];
+}
+
+/**
+ * Network Security Perimeter Association Provisioning Issue
+ */
+model NspProvisioningIssue {
+  /**
+   * Provisioning Issue Name
+   */
+   name?: string;
+
+  /**
+   * Provisioning Issue Properties
+   */
+  properties?: NspProvisioningIssueProperties;
+}
+
+/**
+ * Network Security Perimeter Association Provisioning Issue Properties
+ */
+model NspProvisioningIssueProperties {
+  /**
+   * Provisioning Issue Type
+   */
+   issueType?: string;
+
+  /**
+   * Provisioning Issue Severity
+   */
+   severity?: string;
+
+  /**
+   * Provisioning Issue Description
+   */
+   description?: string;
+
+  /**
+   * Recommended ARM Ids to resolve the issue
+   */
+   suggestedResourceIds?: string[];
+
+  /**
+   * Recommended access rules to resolve the issue
+   */
+   suggestedAccessRules?: string[];
+}
+
+/**
+ * Network Security Perimeter Resource Association
+ */
+model NspResourceAssociation {
+  /**
+   * Network Security Perimeter Resource Association Name
+   */
+   name?: string;
+
+  /**
+   * Network Security Perimeter Association Access Mode (Learning/Enforced)
+   */
+  accessMode?: string;
 }
 
 /**

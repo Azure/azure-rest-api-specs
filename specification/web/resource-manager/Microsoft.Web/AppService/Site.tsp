@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
 /**
@@ -815,6 +816,45 @@ interface Sites {
     ArmResponse<Operation> & ArmLroLocationHeader<FinalResult = Operation>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
     Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Gets all Network Security Perimeter Association Configurations for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets all Network Security Perimeter Association Configurations for the site.")
+  @get
+  @action("networkSecurityPerimeterConfigurations")
+  @added(Versions.v2026_03_01_preview)
+  listNetworkSecurityPerimeterConfigurations is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkSecurityPerimeterConfigurationCollection>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}")
+  @added(Versions.v2026_03_01_preview)
+  getNetworkSecurityPerimeterConfiguration is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * AssociationName and PerimeterGuid of the Network Security Perimeter Association.
+       */
+      @path
+      networkSecurityPerimeterReference: string;
+    },
+    Response = ArmResponse<NetworkSecurityPerimeterConfiguration>,
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
