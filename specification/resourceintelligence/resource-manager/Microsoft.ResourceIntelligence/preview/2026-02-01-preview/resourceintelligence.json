@@ -48,9 +48,6 @@
       "name": "Runs"
     },
     {
-      "name": "LatestRuns"
-    },
-    {
       "name": "Messages"
     }
   ],
@@ -278,6 +275,60 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Agents_Update",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Updates an agent's tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Agent tags": {
+            "$ref": "./examples/Agents_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Agents_Delete",
         "tags": [
@@ -326,7 +377,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/execute": {
       "post": {
-        "operationId": "Agents_Run",
+        "operationId": "Agents_Execute",
         "tags": [
           "Agents"
         ],
@@ -363,13 +414,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "201": {
-            "description": "Run create operation succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
+              "$ref": "#/definitions/RunResult"
             }
           },
           "default": {
@@ -427,7 +472,7 @@
           }
         },
         "x-ms-examples": {
-          "List Runs for an Agent": {
+          "List runs for an agent": {
             "$ref": "./examples/Runs_ListByParent.json"
           }
         },
@@ -668,9 +713,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/latest": {
       "get": {
         "operationId": "LatestRuns_Get",
-        "tags": [
-          "LatestRuns"
-        ],
         "description": "Gets the latest run.",
         "parameters": [
           {
@@ -693,7 +735,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Run"
             }
@@ -708,66 +750,6 @@
         "x-ms-examples": {
           "Get the latest run": {
             "$ref": "./examples/LatestRuns_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "LatestRuns_CreateOrUpdate",
-        "tags": [
-          "LatestRuns"
-        ],
-        "description": "Creates or updates a run via PUT for ARM/Bicep compatibility.\nThe \"latest\" name is a logical identifier — the actual run ID is generated server-side.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the run request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Run update operation succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "201": {
-            "description": "Run create operation succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a run via PUT (ARM/Bicep compatibility)": {
-            "$ref": "./examples/LatestRuns_CreateOrUpdate.json"
           }
         }
       }
@@ -826,6 +808,19 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of the agent.",
           "readOnly": true
+        }
+      }
+    },
+    "AgentTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Agent resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -923,7 +918,7 @@
       "type": "object",
       "description": "Properties of a Message resource.",
       "properties": {
-        "type": {
+        "messageType": {
           "$ref": "#/definitions/MessageType",
           "description": "The type of message (system_message, tool_call, tool_return, assistant_message).",
           "readOnly": true
@@ -1046,7 +1041,7 @@
           {
             "name": "None",
             "value": "none",
-            "description": "No specific policy — default behavior, starts the run"
+            "description": "No specific policy - default behavior, starts the run"
           },
           {
             "name": "Resume",
@@ -1142,13 +1137,6 @@
           "$ref": "#/definitions/ResumePolicy",
           "description": "The resume policy for the run. Defaults to none."
         },
-        "inputOverrides": {
-          "type": "object",
-          "description": "Optional input overrides as key-value pairs.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "message": {
           "type": "string",
           "description": "The input message from the user."
@@ -1159,6 +1147,24 @@
           "x-ms-client-name": "modelUrl"
         }
       }
+    },
+    "RunResult": {
+      "type": "object",
+      "description": "Result returned when an agent run is created.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The ID of the created run."
+        },
+        "status": {
+          "$ref": "#/definitions/RunStatus",
+          "description": "The current status of the run."
+        }
+      },
+      "required": [
+        "runId",
+        "status"
+      ]
     },
     "RunStatus": {
       "type": "string",

@@ -85,7 +85,7 @@ interface Runs {
 // LATEST RUN OPERATIONS
 // ============================================
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "LatestRuns uses a custom route for the singleton 'latest' endpoint"
 interface LatestRuns {
   /**
    * Gets the latest run.
@@ -96,20 +96,10 @@ interface LatestRuns {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
+
+    /**
+     * The name of the agent.
+     */
     @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
   ): Run | ErrorResponse;
-
-  /**
-   * Creates or updates a run via PUT for ARM/Bicep compatibility.
-   * The "latest" name is a logical identifier — the actual run ID is generated server-side.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/latest")
-  @put
-  createOrUpdate(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
-    @body body: RunRequest,
-  ): Run | { @statusCode statusCode: 201; @body body: Run } | ErrorResponse;
 }

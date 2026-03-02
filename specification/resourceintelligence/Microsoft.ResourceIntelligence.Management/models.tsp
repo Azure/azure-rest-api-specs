@@ -135,11 +135,6 @@ model RunRequest {
   resumePolicy?: ResumePolicy;
 
   /**
-   * Optional input overrides as key-value pairs.
-   */
-  inputOverrides?: Record<string>;
-
-  /**
    * The input message from the user.
    */
   message?: string;
@@ -151,4 +146,19 @@ model RunRequest {
   // "model" is a TypeSpec keyword - use @encodedName to keep the wire name as "model"
   @encodedName("application/json", "model")
   modelUrl?: string;
+}
+
+/**
+ * Result returned when an agent run is created.
+ */
+model RunResult {
+  /**
+   * The ID of the created run.
+   */
+  runId: string;
+
+  /**
+   * The current status of the run.
+   */
+  status: RunStatus;
 }

@@ -38,7 +38,7 @@ model MessageProperties {
    * The type of message (system_message, tool_call, tool_return, assistant_message).
    */
   @visibility(Lifecycle.Read)
-  type?: MessageType;
+  messageType?: MessageType;
 
   /**
    * The source of the message (system, user, actor, planner, critic).
