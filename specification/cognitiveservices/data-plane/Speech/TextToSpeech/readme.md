@@ -34,6 +34,8 @@ input-file:
 
 ## TextToSpeech 2026-01-01
 
+> **Note:** The 2026-01-01 version is generated from TypeSpec. The source of truth is in the TypeSpec files (`main.tsp`, `models.tsp`, `routes.tsp`) in this directory. Do not edit `stable/2026-01-01/texttospeech.json` directly — regenerate it by running `tsp compile .` from this directory.
+
 These settings apply only when `--tag=release_2026_01_01` is specified on the command line.
 
 ```yaml $(tag) == 'release_2026_01_01'

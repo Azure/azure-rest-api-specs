@@ -1,45 +1,47 @@
 {
   "parameters": {
+    "Content-Type": "application/json",
     "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
+    "Operation-Id": "1f4352df-f247-40c0-a7b1-a54d017933e1",
     "api-version": "2026-01-01",
     "id": "Jessica",
-    "Operation-Id": "1f4352df-f247-40c0-a7b1-a54d017933e1",
     "model": {
-      "voiceName": "JessicaNeural",
       "description": "Jessica voice",
+      "consentId": "Jessica",
+      "projectId": "Jessica",
       "recipe": {
         "kind": "Default"
       },
-      "projectId": "Jessica",
-      "consentId": "Jessica",
-      "trainingSetId": "Jessica-300"
-    },
-    "Content-Type": "application/json"
+      "trainingSetId": "Jessica-300",
+      "voiceName": "JessicaNeural"
+    }
   },
   "responses": {
     "201": {
-      "headers": {
-        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/1f4352df-f247-40c0-a7b1-a54d017933e1?api-version=2026-01-01",
-        "Operation-Id": "1f4352df-f247-40c0-a7b1-a54d017933e1"
-      },
       "body": {
-        "id": "Jessica",
-        "voiceName": "JessicaNeural",
         "description": "Jessica voice",
+        "consentId": "Jessica",
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "engineVersion": "2023.07.04.0",
+        "id": "Jessica",
+        "lastActionDateTime": "2023-04-02T10:15:30.000Z",
+        "locale": "en-US",
+        "projectId": "Jessica",
         "recipe": {
           "kind": "Default",
           "version": "V7.2023.03"
         },
-        "projectId": "Jessica",
-        "consentId": "Jessica",
-        "trainingSetId": "Jessica-300",
-        "locale": "en-US",
-        "engineVersion": "2023.07.04.0",
         "status": "NotStarted",
-        "createdDateTime": "2023-04-01T05:30:00.000Z",
-        "lastActionDateTime": "2023-04-02T10:15:30.000Z"
+        "trainingSetId": "Jessica-300",
+        "voiceName": "JessicaNeural"
+      },
+      "headers": {
+        "Operation-Id": "1f4352df-f247-40c0-a7b1-a54d017933e1",
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/1f4352df-f247-40c0-a7b1-a54d017933e1?api-version=2026-01-01"
       }
     }
-  }
+  },
+  "operationId": "Models_Create",
+  "title": "Create a model"
 }

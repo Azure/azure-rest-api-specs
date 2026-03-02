@@ -1,0 +1,34 @@
+parameters:
+  "service-dir":
+    default: "sdk/cognitiveservices"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/texttospeech.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cognitiveservices-speech-texttospeech"
+    namespace: "azure.cognitiveservices.speech.texttospeech"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.CognitiveServices.Speech.TextToSpeech"
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/{namespace}"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/cognitiveservices-speech-texttospeech"
+    package-details:
+      name: "@azure/cognitiveservices-speech-texttospeech"
+    experimental-extensible-enums: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cognitiveservices-speech-texttospeech"
+    namespace: com.azure.cognitiveservices.speech.texttospeech
+    flavor: azure
