@@ -280,7 +280,9 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -300,7 +302,7 @@ model ContainerAppAgentDefinition extends AgentDefinition {
   @example("")
   @example("---current")
   @example("--0000001")
-  ingress_subdomain_suffix: string;
+  ingress_subdomain_suffix: string = "";
 }
 
 @doc("A record mapping for a single protocol and its version.")
@@ -373,7 +375,9 @@ model ToolArgumentBinding {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

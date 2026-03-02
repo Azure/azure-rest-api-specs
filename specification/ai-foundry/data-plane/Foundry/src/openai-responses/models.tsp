@@ -13,6 +13,16 @@ namespace Azure.AI.Projects {
   // This is a temporary correction to the OpenAI source spec pending an upstream fix via overlay/origin.
   @@changePropertyType(OpenAI.MCPToolCall.error, Record<unknown>);
 
+  // Make InputImageContent.detail optional with default "auto" per OpenAI docs.
+  // Upstream has it as required; see https://platform.openai.com/docs/api-reference/responses/create
+  @@withoutOmittedProperties(OpenAI.InputImageContent, "detail");
+  @@copyProperties(OpenAI.InputImageContent,
+    {
+      /** The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`. */
+      detail?: OpenAI.ImageDetail = OpenAI.ImageDetail.auto,
+    }
+  );
+
   @@doc(OpenAI.CreateResponse.`model`,
     "The model deployment to use for the creation of this response."
   );
