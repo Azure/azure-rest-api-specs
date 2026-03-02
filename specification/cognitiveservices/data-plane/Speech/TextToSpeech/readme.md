@@ -4,10 +4,12 @@
 
 Configuration for generating TextToSpeech SDK.
 
-The current release for the TextToSpeech is `release_2026_01_01`.
+> **Note:** Starting from version 2026-01-01, the specification has moved to a [TypeSpec-based project](../../TextToSpeech/readme.md).
+
+The current release for the TextToSpeech is `release_2024_02_01_preview`.
 
 ``` yaml
-tag: release_2026_01_01
+tag: release_2024_02_01_preview
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -30,15 +32,4 @@ These settings apply only when `--tag=release_2024_02_01_preview` is specified o
 ```yaml $(tag) == 'release_2024_02_01_preview'
 input-file:
   - preview/2024-02-01-preview/texttospeech.json
-```
-
-## TextToSpeech 2026-01-01
-
-> **Note:** The 2026-01-01 version is generated from TypeSpec. The source of truth is in the TypeSpec files (`main.tsp`, `models.tsp`, `routes.tsp`) in this directory. Do not edit `stable/2026-01-01/texttospeech.json` directly — regenerate it by running `tsp compile .` from this directory.
-
-These settings apply only when `--tag=release_2026_01_01` is specified on the command line.
-
-```yaml $(tag) == 'release_2026_01_01'
-input-file:
-  - stable/2026-01-01/texttospeech.json
 ```
