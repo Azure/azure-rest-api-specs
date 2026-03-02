@@ -369,10 +369,14 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @Xml.name("SignedStart") signedStart: string;
+  @encode("rfc7231")
+  @Xml.name("SignedStart")
+  signedStart: utcDateTime;
 
   /** The date-time the key expires. */
-  @Xml.name("SignedExpiry") signedExpiry: string;
+  @encode("rfc7231")
+  @Xml.name("SignedExpiry")
+  signedExpiry: utcDateTime;
 
   /** Abbreviation of the Azure Storage service that accepts the key. */
   @Xml.name("SignedService") signedService: string;
@@ -1500,8 +1504,15 @@ alias ServerEncryptedResponseHeaderPrivate = {
 };
 
 /** The legal hold response header. */
+alias LegalHoldOptionalResponseHeader = {
+  /** Indicates whether the blob has a legal hold. */
+  @header("x-ms-legal-hold")
+  legalHold?: boolean;
+};
+
+/** The legal hold response header. */
 alias LegalHoldResponseHeader = {
-  /** Specifies the legal hold status to set on the blob. */
+  /** Indicates whether the blob has a legal hold. */
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };

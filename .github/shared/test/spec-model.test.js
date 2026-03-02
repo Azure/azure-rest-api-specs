@@ -127,6 +127,21 @@ describe("SpecModel", () => {
     ).toBeDefined();
   });
 
+  it("sorts readmes in toJSONAsync", async () => {
+    const folder = resolve(__dirname, "fixtures/getSpecModel/specification/multi-readme");
+
+    const specModel = new SpecModel(folder, options);
+    const json = /** @type {import('../src/spec-model.js').SpecModelJSON} */ (
+      await specModel.toJSONAsync()
+    );
+
+    expect(json.readmes.length).toBe(2);
+    const paths = json.readmes.map(
+      (r) => /** @type {import('../src/readme.js').ReadmeJSON} */ (r).path,
+    );
+    expect(paths[0].localeCompare(paths[1])).toBeLessThan(0);
+  });
+
   it("uses strings for tag names and doesn't parse Date object", async () => {
     const folder = resolve(__dirname, "fixtures/getSpecModel/specification/yaml-date-parsing");
 
