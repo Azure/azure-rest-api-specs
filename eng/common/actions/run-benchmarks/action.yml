@@ -1,0 +1,62 @@
+name: 'Run Benchmarks'
+description: 'Build and run Azure SDK benchmark scenarios using the Copilot SDK'
+
+inputs:
+  scenario:
+    description: 'Run a single scenario by name (leave empty to run all)'
+    required: false
+    default: ''
+  tags:
+    description: 'Filter scenarios by tags, comma-separated (ignored if scenario is specified)'
+    required: false
+    default: ''
+  model:
+    description: 'Model to use for agent execution'
+    required: false
+    default: 'claude-opus-4.5'
+  cleanup:
+    description: 'Cleanup policy for workspaces (OnSuccess, Always, Never)'
+    required: false
+    default: 'OnSuccess'
+  project-dir:
+    description: 'Path to the benchmarks project directory'
+    required: false
+    default: 'tools/azsdk-cli/Azure.Sdk.Tools.Cli.Benchmarks'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build benchmarks
+      shell: pwsh
+      run: dotnet build --configuration Release ${{ inputs.project-dir }}
+
+    - name: Run benchmarks
+      shell: pwsh
+      env:
+        INPUT_SCENARIO: ${{ inputs.scenario }}
+        INPUT_TAGS: ${{ inputs.tags }}
+        INPUT_MODEL: ${{ inputs.model }}
+        INPUT_CLEANUP: ${{ inputs.cleanup }}
+        INPUT_PROJECT_DIR: ${{ inputs.project-dir }}
+      run: |
+        $scriptPath = Join-Path $env:GITHUB_ACTION_PATH ".." ".." "scripts" "Run-Benchmarks.ps1"
+        & $scriptPath `
+          -Scenario $env:INPUT_SCENARIO `
+          -Tags $env:INPUT_TAGS `
+          -Model $env:INPUT_MODEL `
+          -Cleanup $env:INPUT_CLEANUP `
+          -ProjectDir $env:INPUT_PROJECT_DIR
+
+    - name: Upload workspaces
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-workspaces
+        path: /tmp/azsdk-benchmarks/workspaces/
+        if-no-files-found: ignore
+        retention-days: 7
