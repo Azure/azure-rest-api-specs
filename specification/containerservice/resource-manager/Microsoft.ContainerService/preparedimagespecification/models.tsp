@@ -35,7 +35,7 @@ model PreparedImageSpecificationProperties {
     If not specified the default agentpool identity will be used.
     This does not affect provisioned nodes.
     """)
-  identityProfile?: Foundations.UserAssignedIdentity;
+  identityProfile?: PreparedImageSpecificationManagedIdentityProfile;
 
   @visibility(Lifecycle.Read)
   @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
@@ -49,6 +49,24 @@ model PreparedImageSpecificationProperties {
   @doc("The scripts to customize the node before or after image capture.")
   @identifiers(#[])
   customizationScripts?: PreparedImageSpecificationScript[];
+}
+
+@doc("The managed identity profile used by the prepared image specification.")
+model PreparedImageSpecificationManagedIdentityProfile {
+  @doc("The resource ID of the user-assigned managed identity.")
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  @visibility(Lifecycle.Read)
+  @doc("The object ID of the managed identity.")
+  objectId?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The client ID of the managed identity.")
+  clientId?: string;
 }
 
 @doc("Prepared image specification script")

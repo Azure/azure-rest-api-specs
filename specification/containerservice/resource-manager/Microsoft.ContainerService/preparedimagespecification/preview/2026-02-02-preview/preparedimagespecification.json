@@ -716,6 +716,37 @@
         "value"
       ]
     },
+    "PreparedImageSpecificationManagedIdentityProfile": {
+      "type": "object",
+      "description": "The managed identity profile used by the prepared image specification.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of the managed identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the managed identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
     "PreparedImageSpecificationProperties": {
       "type": "object",
       "description": "The properties of the Prepared Image Specification resource.",
@@ -728,7 +759,7 @@
           }
         },
         "identityProfile": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfile",
           "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
         },
         "version": {
@@ -818,7 +849,7 @@
           }
         },
         "identityProfile": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfile",
           "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
         },
         "customizationScripts": {
