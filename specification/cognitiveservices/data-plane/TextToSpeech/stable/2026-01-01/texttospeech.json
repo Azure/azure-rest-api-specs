@@ -203,12 +203,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdHeader"
-          },
-          {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -216,9 +213,12 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "name": "consent",
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "consent definition",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Consent"
@@ -226,17 +226,29 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Consent"
             },
             "headers": {
-              "Operation-Id": {
-                "type": "string"
-              },
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -257,6 +269,9 @@
           "Create a consent": {
             "$ref": "./examples/create_consent.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -519,20 +534,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdHeader"
-          },
-          {
             "name": "id",
             "in": "path",
-            "description": "The resource ID, which should be UUID.",
+            "description": "Endpoint Id",
             "required": true,
             "type": "string",
             "format": "uuid"
           },
           {
-            "name": "endpoint",
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Endpoint definition",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Endpoint"
@@ -540,17 +555,29 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             },
             "headers": {
-              "Operation-Id": {
-                "type": "string"
-              },
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -571,6 +598,9 @@
           "Create an endpoint": {
             "$ref": "./examples/create_endpoint.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -872,12 +902,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdHeader"
-          },
-          {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -885,9 +912,12 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "name": "model",
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Model definition",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Model"
@@ -895,17 +925,29 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Model"
             },
             "headers": {
-              "Operation-Id": {
-                "type": "string"
-              },
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -929,6 +971,9 @@
           "Create a multi style model": {
             "$ref": "./examples/create_multi_style_model.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -1121,12 +1166,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/OperationIdHeader"
-          },
-          {
             "name": "id",
             "in": "path",
-            "description": "The ID of the resource.",
+            "description": "Resource id",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1134,9 +1176,12 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
           },
           {
-            "name": "personalvoice",
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "personal voice definition",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PersonalVoice"
@@ -1144,17 +1189,29 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PersonalVoice"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/PersonalVoice"
             },
             "headers": {
-              "Operation-Id": {
-                "type": "string"
-              },
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -1175,6 +1232,9 @@
           "Create a personal voice": {
             "$ref": "./examples/create_personalvoice.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -2201,140 +2261,6 @@
         "kind": {
           "$ref": "#/definitions/EndpointKind",
           "description": "Endpoint kind"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains an top-level error with error code, message, details, target and\nan inner error with more descriptive details.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCode",
-          "description": "Top-level error code"
-        },
-        "target": {
-          "type": "string",
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case\nof invalid model."
-        },
-        "message": {
-          "type": "string",
-          "description": "Top-level error message."
-        },
-        "details": {
-          "type": "array",
-          "description": "Additional supportive details regarding the error and/or expected policies.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested)."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Top-level error code",
-      "enum": [
-        "BadRequest",
-        "BadArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "UnsupportedMediaType",
-        "TooManyRequests",
-        "InternalServerError",
-        "ServiceUnavailable"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BadRequest",
-            "value": "BadRequest",
-            "description": "BadRequest"
-          },
-          {
-            "name": "BadArgument",
-            "value": "BadArgument",
-            "description": "BadArgument"
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized",
-            "description": "Unauthorized"
-          },
-          {
-            "name": "Forbidden",
-            "value": "Forbidden",
-            "description": "Forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "NotFound",
-            "description": "NotFound"
-          },
-          {
-            "name": "UnsupportedMediaType",
-            "value": "UnsupportedMediaType",
-            "description": "UnsupportedMediaType"
-          },
-          {
-            "name": "TooManyRequests",
-            "value": "TooManyRequests",
-            "description": "TooManyRequests"
-          },
-          {
-            "name": "InternalServerError",
-            "value": "InternalServerError",
-            "description": "InternalServerError"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable",
-            "description": "ServiceUnavailable"
-          }
-        ]
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available\nat\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains an top-level error with error code, message, details, target and\nan inner error with more descriptive details."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "InnerError": {
-      "type": "object",
-      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested).",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Detailed error code to help diagnostic."
-        },
-        "target": {
-          "type": "string",
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case\nof invalid model."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed error message."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.\nThis contains required properties error code, message and optional properties\ntarget, inner error(this can be nested)."
         }
       }
     },

@@ -25,38 +25,6 @@ union ProjectKind {
   PersonalVoice: "PersonalVoice",
 }
 
-/** Top-level error code */
-union ErrorCode {
-  string,
-
-  /** BadRequest */
-  BadRequest: "BadRequest",
-
-  /** BadArgument */
-  BadArgument: "BadArgument",
-
-  /** Unauthorized */
-  Unauthorized: "Unauthorized",
-
-  /** Forbidden */
-  Forbidden: "Forbidden",
-
-  /** NotFound */
-  NotFound: "NotFound",
-
-  /** UnsupportedMediaType */
-  UnsupportedMediaType: "UnsupportedMediaType",
-
-  /** TooManyRequests */
-  TooManyRequests: "TooManyRequests",
-
-  /** InternalServerError */
-  InternalServerError: "InternalServerError",
-
-  /** ServiceUnavailable */
-  ServiceUnavailable: "ServiceUnavailable",
-}
-
 /** Consent creation failure reason */
 union ConsentFailureReason {
   string,
@@ -234,83 +202,6 @@ model Project {
    */
   @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
-}
-
-/**
- * Error response follows Microsoft Azure REST API Guidelines which is available
- * at
- * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
- */
-@error
-model ErrorResponse {
-  /**
-   * Top-level error follows Microsoft Azure REST API Guidelines which is available
-   * at
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
-   * This contains an top-level error with error code, message, details, target and
-   * an inner error with more descriptive details.
-   */
-  error: Error;
-}
-
-/**
- * Top-level error follows Microsoft Azure REST API Guidelines which is available
- * at
- * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
- * This contains an top-level error with error code, message, details, target and
- * an inner error with more descriptive details.
- */
-model Error {
-  /** Top-level error code */
-  code: ErrorCode;
-
-  /**
-   * The source of the error. For example it would be "model" or "model id" in case
-   * of invalid model.
-   */
-  target?: string;
-
-  /** Top-level error message. */
-  message: string;
-
-  /** Additional supportive details regarding the error and/or expected policies. */
-  details?: Error[];
-
-  /**
-   * Inner error follows Microsoft Azure REST API Guidelines which is available at
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
-   * This contains required properties error code, message and optional properties
-   * target, inner error(this can be nested).
-   */
-  innererror?: InnerError;
-}
-
-/**
- * Inner error follows Microsoft Azure REST API Guidelines which is available at
- * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
- * This contains required properties error code, message and optional properties
- * target, inner error(this can be nested).
- */
-model InnerError {
-  /** Detailed error code to help diagnostic. */
-  code?: string;
-
-  /**
-   * The source of the error. For example it would be "model" or "model id" in case
-   * of invalid model.
-   */
-  target?: string;
-
-  /** Detailed error message. */
-  message?: string;
-
-  /**
-   * Inner error follows Microsoft Azure REST API Guidelines which is available at
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.
-   * This contains required properties error code, message and optional properties
-   * target, inner error(this can be nested).
-   */
-  innererror?: InnerError;
 }
 
 /** Consent object */
