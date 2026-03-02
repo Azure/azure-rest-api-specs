@@ -1,3 +1,4 @@
+import { getChangedFiles as getChangedFilesShared } from "@azure-tools/specs-shared/changed-files";
 import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -172,28 +173,18 @@ function isCommandAvailable(command: string): boolean {
   }
 }
 
-// Function to call Get-ChangedFiles from PowerShell script
-export function getChangedFiles(
+// Function to get changed files using simple-git via shared library
+export async function getChangedFiles(
   specRepoPath: string,
   baseCommitish: string = "HEAD^",
   targetCommitish: string = "HEAD",
-): string[] | undefined {
-  // set diff filter to include added, copied, modified, deleted, renamed, and type changed files
-  const diffFilter = "ACMDRT";
-  const scriptPath = path.resolve(specRepoPath, "eng/scripts/ChangedFiles-Functions.ps1");
-  const args = [
-    "-Command",
-    `& { . '${scriptPath}'; Get-ChangedFiles '${baseCommitish}' '${targetCommitish}' '${diffFilter}' }`,
-  ];
-
-  const output = runPowerShellScript(args);
-  if (output) {
-    return output
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0);
-  }
-  return undefined;
+): Promise<string[]> {
+  return getChangedFilesShared({
+    baseCommitish,
+    headCommitish: targetCommitish,
+    cwd: specRepoPath,
+    gitOptions: ["--diff-filter=ACMDRT"],
+  });
 }
 
 /**
