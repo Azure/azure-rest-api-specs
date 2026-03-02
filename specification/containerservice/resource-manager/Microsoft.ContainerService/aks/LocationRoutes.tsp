@@ -89,7 +89,7 @@ interface VmSkusOperationGroup {
        * To Include Extended Locations information or not in the response.
        */
       @query
-      includeExtendedLocations?: string;
+      includeExtendedLocations?: boolean;
     }
   >;
 }
