@@ -3484,7 +3484,7 @@ model SanAdapterProperties {
   /**
    * 802.1p priority value for cluster traffic.
    */
-  priorityValue8021ActionCluster?: int32;
+  priorityValue8021Action_Cluster?: int32;
 
   /**
    * 802.1p priority value for SMB traffic.
