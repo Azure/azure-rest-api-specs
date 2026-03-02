@@ -126,6 +126,33 @@ model AgentVersionObject {
   created_at: utcDateTime;
 
   definition: AgentDefinition;
+
+  @removed(Versions.v1)
+  @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
+  status: AgentVersionStatus = AgentVersionStatus.active;
+
+  @removed(Versions.v1)
+  @doc("Error details if the agent version provisioning failed.")
+  error?: ApiError;
+}
+
+@removed(Versions.v1)
+@doc("The provisioning status of an agent version.")
+union AgentVersionStatus {
+  @doc("The agent version is being provisioned.")
+  creating: "creating",
+
+  @doc("The agent version is active and ready to serve requests.")
+  active: "active",
+
+  @doc("The agent version provisioning failed.")
+  failed: "failed",
+
+  @doc("The agent version is being deleted.")
+  deleting: "deleting",
+
+  @doc("The agent version has been deleted.")
+  deleted: "deleted",
 }
 
 union AgentProtocol {
