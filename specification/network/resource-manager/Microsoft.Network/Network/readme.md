@@ -274,6 +274,9 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: network.json
     reason: False alarm.
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
