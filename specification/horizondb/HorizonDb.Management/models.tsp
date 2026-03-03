@@ -234,6 +234,75 @@ model HorizonDbFirewallRuleForPatchUpdate {
   properties?: HorizonDbFirewallRulePropertiesForPatchUpdate;
 }
 
+@doc("Properties of a private endpoint")
+model PrivateEndpoint {
+  @doc("The ARM resource ID of the private endpoint")
+  id?: string;
+}
+
+@doc("Connection state of a private endpoint connection")
+model PrivateLinkServiceConnectionState {
+  @doc("Status of the private endpoint connection")
+  status?: PrivateLinkServiceConnectionStatus;
+
+  @doc("Description for approving or rejecting the private endpoint connection")
+  description?: string;
+
+  @doc("Actions required on the consumer side")
+  @visibility(Lifecycle.Read)
+  actionsRequired?: string;
+}
+
+@doc("Properties of a HorizonDb private endpoint connection")
+model HorizonDbPrivateEndpointConnectionProperties {
+  @doc("Group IDs for the private endpoint connection")
+  @visibility(Lifecycle.Read)
+  groupIds?: string[];
+
+  @doc("The linked private endpoint")
+  @visibility(Lifecycle.Read)
+  privateEndpoint?: PrivateEndpoint;
+
+  @doc("Connection state of the private endpoint connection")
+  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+
+  @doc("Provisioning state of the private endpoint connection")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Properties for updating a HorizonDb private endpoint connection")
+model HorizonDbPrivateEndpointConnectionPropertiesForPatchUpdate {
+  @doc("Connection state of the private endpoint connection")
+  @visibility(Lifecycle.Update)
+  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+}
+
+@doc("HorizonDb private endpoint connection for update operations")
+model HorizonDbPrivateEndpointConnectionForPatchUpdate {
+  @doc("Properties of a private endpoint connection for update operations")
+  properties?: HorizonDbPrivateEndpointConnectionPropertiesForPatchUpdate;
+}
+
+@doc("Properties of a HorizonDb private link resource")
+model HorizonDbPrivateLinkResourceProperties {
+  @doc("Group ID of the private link resource")
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  @doc("Required members of the private link resource")
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  @doc("Required private DNS zone names")
+  @visibility(Lifecycle.Read)
+  requiredZoneNames?: string[];
+
+  @doc("Provisioning state of the private link resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
 @doc("The mode to create a new HorizonDb cluster")
 union CreateModeCluster {
   string,
@@ -334,4 +403,21 @@ union ProvisioningState {
 
   /** Provisioning is in progress */
   Provisioning: "Provisioning",
+}
+
+@doc("Status of the private endpoint connection")
+union PrivateLinkServiceConnectionStatus {
+  string,
+
+  /** Connection is approved */
+  Approved: "Approved",
+
+  /** Connection is pending approval */
+  Pending: "Pending",
+
+  /** Connection is rejected */
+  Rejected: "Rejected",
+
+  /** Connection has been disconnected */
+  Disconnected: "Disconnected",
 }

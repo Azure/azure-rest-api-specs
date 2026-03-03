@@ -1,0 +1,34 @@
+{
+  "operationId": "HorizonDbPrivateEndpointConnections_Get",
+  "title": "Get a private endpoint connection",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "privateEndpointConnectionName": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "properties": {
+          "groupIds": [
+            "default"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Auto-approved",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Ready"
+        }
+      }
+    }
+  }
+}

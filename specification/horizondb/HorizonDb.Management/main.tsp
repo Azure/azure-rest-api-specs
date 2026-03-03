@@ -82,6 +82,32 @@ model HorizonDbFirewallRule
   name: string;
 }
 
+@parentResource(HorizonDbCluster)
+model HorizonDbPrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<HorizonDbPrivateEndpointConnectionProperties> {
+  @doc("The name of the private endpoint connection")
+  @pattern("^.*$")
+  @minLength(1)
+  @maxLength(128)
+  @key("privateEndpointConnectionName")
+  @path
+  @segment("privateEndpointConnections")
+  name: string;
+}
+
+@parentResource(HorizonDbCluster)
+model HorizonDbPrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<HorizonDbPrivateLinkResourceProperties> {
+  @doc("The name of the private link resource group")
+  @pattern("^.*$")
+  @minLength(1)
+  @maxLength(128)
+  @key("groupName")
+  @path
+  @segment("privateLinkResources")
+  name: string;
+}
+
 @armResourceOperations
 interface HorizonDbClusters {
   @doc("Gets information about a HorizonDb cluster")
@@ -158,4 +184,31 @@ interface HorizonDbFirewallRules {
 
   @doc("Deletes a HorizonDb firewall rule")
   delete is ArmResourceDeleteWithoutOkAsync<HorizonDbFirewallRule>;
+}
+
+@armResourceOperations
+interface HorizonDbPrivateEndpointConnections {
+  @doc("Gets a private endpoint connection")
+  get is ArmResourceRead<HorizonDbPrivateEndpointConnection>;
+
+  @doc("Lists private endpoint connections in a HorizonDb cluster")
+  list is ArmResourceListByParent<HorizonDbPrivateEndpointConnection>;
+
+  @doc("Updates a private endpoint connection")
+  update is ArmCustomPatchAsync<
+    HorizonDbPrivateEndpointConnection,
+    HorizonDbPrivateEndpointConnectionForPatchUpdate
+  >;
+
+  @doc("Deletes a private endpoint connection")
+  delete is ArmResourceDeleteWithoutOkAsync<HorizonDbPrivateEndpointConnection>;
+}
+
+@armResourceOperations
+interface HorizonDbPrivateLinkResources {
+  @doc("Gets a private link resource")
+  get is ArmResourceRead<HorizonDbPrivateLinkResource>;
+
+  @doc("Lists private link resources in a HorizonDb cluster")
+  list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
 }
