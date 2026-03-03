@@ -29572,6 +29572,10 @@ model NetworkInterfaceLoadBalancerListResult is Azure.Core.Page<LoadBalancer>;
 model CloudServiceNetworkInterfaceListResult is Azure.Core.Page<NetworkInterface>;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+model CloudServicePublicIPAddressListResult is Azure.Core.Page<PublicIPAddress>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model AdminRuleListResult is Azure.Core.Page<BaseAdminRule>;
 

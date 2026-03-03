@@ -274,7 +274,7 @@ interface PublicIPAddressesOperationGroup {
   @get
   listCloudServicePublicIPAddresses is CloudServicesOps.List<
     PublicIPAddress,
-    Response = ResourceListResult<PublicIPAddress>,
+    Response = CloudServicePublicIPAddressListResult,
     OverrideErrorType = CloudError
   >;
 }

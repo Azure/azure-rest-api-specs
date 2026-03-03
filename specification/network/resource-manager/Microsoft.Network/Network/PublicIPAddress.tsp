@@ -141,6 +141,7 @@ interface PublicIPAddresses {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listCloudServiceRoleInstancePublicIPAddresses is PublicIPAddressOps.List<
     PublicIPAddress,
+    Response = ArmResponse<CloudServicePublicIPAddressListResult>,
     OverrideErrorType = CloudError
   >;
 }
