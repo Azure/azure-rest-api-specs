@@ -651,10 +651,9 @@ input-file:
 - preview/2022-01-01-preview/governanceRules.json
 - preview/2022-07-01-preview/applications.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-12-01-preview/automations.json
@@ -735,10 +734,9 @@ input-file:
 - preview/2022-07-01-preview/applications.json
 - preview/2022-12-01-preview/defenderForStorageSettings.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-10-01-preview/securityConnectors.json
