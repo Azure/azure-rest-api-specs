@@ -1345,6 +1345,13 @@ alias AllowTrailingDotParameter = {
   allowTrailingDot?: boolean;
 };
 
+/** Source allow trailing dot parameter. */
+alias SourceAllowTrailingDotParameter = {
+  /** If true, the trailing dot will not be trimmed from the source URI. */
+  @header("x-ms-source-allow-trailing-dot")
+  sourceAllowTrailingDot?: boolean;
+};
+
 /** Share snapshot parameter. */
 alias ShareSnapshotParameter = {
   /** The snapshot parameter is an opaque DateTime value that specifies a share snapshot. */
@@ -1380,24 +1387,17 @@ alias DateResponseHeader = {
   date: string;
 };
 
-/** Content length parameter. */
+/** Content length parameter (standard Content-Length). */
 alias ContentLengthParameter = {
   /** The number of bytes of data in the request body. */
   @header("Content-Length")
   contentLength: int64;
 };
 
-/** Content type header. */
-alias ContentTypeHeader = {
-  /** Specifies the content type of the data. */
-  @header("Content-Type")
-  contentType?: string;
-};
-
-/** Range header for partial content requests. */
+/** Range header (x-ms-range). */
 alias RangeHeader = {
-  /** The byte range to be written, specified as start-end (inclusive). */
-  @header("Range")
+  /** Return file data only from the specified byte range. */
+  @header("x-ms-range")
   range?: string;
 };
 
@@ -1408,13 +1408,225 @@ alias LeaseIdParameter = {
   leaseId?: string;
 };
 
+/** Share quota optional header. */
 alias ShareQuotaOptionalHeader = {
   /** Specifies the maximum size of the share, in gigabytes. */
   @header("x-ms-share-quota") shareQuota?: int32;
 };
 
+/** Recursive parameter (header). */
+alias RecursiveParameter = {
+  /** Specifies operation should apply to the directory specified in the URI, its files, its subdirectories and their files. */
+  @header("x-ms-recursive")
+  recursive?: boolean;
+};
+
 //
-// Common Response Headers
+// SMB/NFS File Property Headers (shared across many operations)
+//
+
+/** SMB file property request headers for setting file/directory attributes. */
+alias FileSmtPropertyRequestHeaders = {
+  /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
+  @header("x-ms-file-permission") filePermission?: string;
+
+  /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
+  @header("x-ms-file-permission-key") filePermissionKey?: string;
+
+  /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
+  @header("x-ms-file-attributes") fileAttributes?: string;
+
+  /** Creation time for the file/directory. Default value: Now. */
+  @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+  /** Last write time for the file/directory. Default value: Now. */
+  @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+  /** Change time for the file/directory. Default value: Now. */
+  @header("x-ms-file-change-time") fileChangeTime?: string;
+};
+
+/** File permission format parameter. */
+alias FilePermissionFormatParameter = {
+  /** Optional. Used to set permission format. */
+  @header("x-ms-file-permission-format")
+  filePermissionFormat?: FilePermissionFormat;
+};
+
+/** SMB file property response headers returned from file/directory operations. */
+alias FileSmtPropertyResponseHeaders = {
+  /** Key of the permission set for the directory/file. */
+  @header("x-ms-file-permission-key") filePermissionKey?: string;
+
+  /** Attributes set for the file/directory. */
+  @header("x-ms-file-attributes") fileAttributes?: string;
+
+  /** Creation time for the file/directory. */
+  @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+  /** Last write time for the file/directory. */
+  @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+  /** Change time for the file/directory. */
+  @header("x-ms-file-change-time") fileChangeTime?: string;
+
+  /** The fileId of the directory/file. */
+  @header("x-ms-file-id") fileId?: string;
+
+  /** The parent fileId of the directory/file. */
+  @header("x-ms-file-parent-id") fileParentId?: string;
+};
+
+/** NFS property request headers (owner, group, mode). */
+alias NfsRequestHeaders = {
+  /** Optional, NFS only. The owner of the file or directory. */
+  @header("x-ms-owner") owner?: string;
+
+  /** Optional, NFS only. The owning group of the file or directory. */
+  @header("x-ms-group") group?: string;
+
+  /** Optional, NFS only. The file mode of the file or directory. */
+  @header("x-ms-mode") mode?: string;
+};
+
+/** NFS property response headers. */
+alias NfsResponseHeaders = {
+  /** NFS only. The file mode. */
+  @header("x-ms-mode") mode?: string;
+
+  /** NFS only. The owner. */
+  @header("x-ms-owner") owner?: string;
+
+  /** NFS only. The owning group. */
+  @header("x-ms-group") group?: string;
+
+  /** NFS only. The file type. */
+  @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
+};
+
+//
+// File Content Headers (x-ms-content-* for setting file HTTP properties)
+//
+
+/** File content request headers for setting file HTTP properties. */
+alias FileContentRequestHeaders = {
+  /** Sets the MIME content type of the file. The default type is 'application/octet-stream'. */
+  @header("x-ms-content-type") fileContentType?: string;
+
+  /** Specifies which content encodings have been applied to the file. */
+  @header("x-ms-content-encoding") fileContentEncoding?: string;
+
+  /** Specifies the natural languages used by this resource. */
+  @header("x-ms-content-language") fileContentLanguage?: string;
+
+  /** Sets the file's cache control. The File service stores this value but does not use or modify it. */
+  @header("x-ms-cache-control") fileCacheControl?: string;
+
+  /** An MD5 hash of the file content. This hash is used to verify the integrity of the file during transport. */
+  @header("x-ms-content-md5") fileContentMd5?: string;
+
+  /** Sets the file's Content-Disposition header. */
+  @header("x-ms-content-disposition") fileContentDisposition?: string;
+};
+
+//
+// Share Paid Bursting Headers
+//
+
+/** Paid bursting request headers for share operations. */
+alias PaidBurstingRequestHeaders = {
+  /** Optional. Boolean. Default if not specified is false. This property enables paid bursting. */
+  @header("x-ms-share-paid-bursting-enabled") paidBurstingEnabled?: boolean;
+
+  /** Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS. */
+  @header("x-ms-share-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
+
+  /** Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340 MiB/sec. */
+  @header("x-ms-share-paid-bursting-max-bandwidth-mibps")
+  paidBurstingMaxBandwidthMibps?: int64;
+};
+
+/** Paid bursting response headers for share get properties. */
+alias PaidBurstingResponseHeaders = {
+  /** Whether paid bursting is enabled. */
+  @header("x-ms-share-paid-bursting-enabled") paidBurstingEnabled?: boolean;
+
+  /** The maximum IOPS for paid bursting. */
+  @header("x-ms-share-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
+
+  /** The maximum bandwidth for paid bursting. */
+  @header("x-ms-share-paid-bursting-max-bandwidth-mibps")
+  paidBurstingMaxBandwidthMibps?: int64;
+
+  /** The included burst IOPS. */
+  @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
+
+  /** The maximum burst credits for IOPS. */
+  @header("x-ms-share-max-burst-credits-for-iops") maxBurstCreditsForIops?: int64;
+};
+
+//
+// Copy Status Response Headers
+//
+
+/** Copy status response headers. */
+alias CopyStatusResponseHeaders = {
+  /** Conclusion time of the last attempted Copy File operation. */
+  @header("x-ms-copy-completion-time") copyCompletionTime?: string;
+
+  /** Only appears when x-ms-copy-status is failed or pending. */
+  @header("x-ms-copy-status-description") copyStatusDescription?: string;
+
+  /** String identifier for the last attempted Copy File operation. */
+  @header("x-ms-copy-id") copyId?: string;
+
+  /** Contains the number of bytes copied and the total bytes in the source. */
+  @header("x-ms-copy-progress") copyProgress?: string;
+
+  /** URL up to 2 KB in length that specifies the source blob or file. */
+  @header("x-ms-copy-source") copySource?: string;
+
+  /** State of the copy operation identified by x-ms-copy-id. */
+  @header("x-ms-copy-status") copyStatus?: string;
+};
+
+/** Lease response headers. */
+alias LeaseResponseHeaders = {
+  /** The lease duration. */
+  @header("x-ms-lease-duration") leaseDuration?: string;
+
+  /** The lease state. */
+  @header("x-ms-lease-state") leaseState?: string;
+
+  /** The lease status. */
+  @header("x-ms-lease-status") leaseStatus?: string;
+};
+
+/** Request server encrypted response header. */
+alias RequestServerEncryptedResponseHeader = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted. */
+  @header("x-ms-request-server-encrypted") requestServerEncrypted?: boolean;
+};
+
+/** Rename request headers (shared by File_Rename and Directory_Rename). */
+alias RenameRequestHeaders = {
+  /** Required. Specifies the URI-style path of the source file, up to 2 KB in length. */
+  @header("x-ms-file-rename-source") renameSource: string;
+
+  /** Boolean. Default value is false. Set to true to indicate that the destination should be overwritten. */
+  @header("x-ms-file-rename-replace-if-exists")
+  renameReplaceIfExists?: boolean;
+
+  /** Boolean. Default value is false. Set to true to overwrite the destination even if it has the read-only attribute set. */
+  @header("x-ms-file-rename-ignore-readonly")
+  renameIgnoreReadOnly?: boolean;
+
+  /** Required if the source file has an active lease. */
+  @header("x-ms-source-lease-id") sourceLeaseId?: string;
+};
+
+//
+// Common Response Header Compositions
 //
 
 /** Standard File Storage success response headers. */

@@ -172,7 +172,6 @@ interface Share {
       @path shareName: string;
       ...TimeoutParameter;
       ...MetadataHeaders;
-      ...FileRequestIntentParameter;
       ...ShareQuotaOptionalHeader;
 
       /** Specifies the access tier of the share. */
@@ -184,45 +183,19 @@ interface Share {
       /** Root squash to set on the share. Only valid for NFS shares. */
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
 
-      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission") filePermission?: string;
-
-      /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
-
-      /** Creation time for the file/directory. Default value: Now. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the file/directory. Default value: Now. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** Change time for the file/directory. Default value: Now. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** Optional. Used to set permission format for shares. */
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      /** Optional. Supported in version 2025-01-05 and later. Only allowed for provisioned v2 file shares. Specifies the provisioned number of input/output operations per second (IOPS) of the share. If this is not specified, the provisioned IOPS is set to value calculated based on recommendation formula. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
-
-      /** Optional. Supported in version 2025-01-05 and later. Only allowed for provisioned v2 file shares. Specifies the provisioned bandwidth of the share, in mebibytes per second (MiBps). If this is not specified, the provisioned bandwidth is set to value calculated based on recommendation formula. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
-
-      /** Optional. Boolean. Default if not specified is false. This property enables paid bursting. */
-      @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
-
-      /** Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS. */
-      @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
-
-      /** Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340 MiB/sec. */
-      @header("x-ms-paid-bursting-max-bandwidth-mibps")
-      paidBurstingMaxBandwidthMibps?: int64;
-
       /** Optional. Used to enable snapshot virtual directory access. */
       @header("x-ms-enable-snapshot-virtual-directory-access")
       enableSnapshotVirtualDirectoryAccess?: boolean;
+
+      ...PaidBurstingRequestHeaders;
+      ...FileRequestIntentParameter;
+
+      /** Optional. Specifies the provisioned IOPS of the share. */
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+
+      /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
 
       /** Optional. Used to enable SMB directory lease. */
       @header("x-ms-enable-smb-directory-lease")
@@ -230,6 +203,25 @@ interface Share {
     },
     {
       @statusCode statusCode: 201;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
+      /** The share quota. */
+      @header("x-ms-share-quota") shareQuota?: int32;
+
+      /** The provisioned IOPS. */
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+
+      /** The provisioned bandwidth. */
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
+
+      /** The included burst IOPS. */
+      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int64;
+
+      /** The maximum burst credits for IOPS. */
+      @header("x-ms-share-max-burst-credits-for-iops")
+      shareMaxBurstCreditsForIops?: int64;
     }
   >;
 
@@ -250,6 +242,8 @@ interface Share {
     },
     {
       ...MetadataHeaders;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** The maximum quota for the share. */
       @header("x-ms-share-quota") shareQuota: int32;
@@ -265,13 +259,15 @@ interface Share {
       @header("x-ms-share-provisioned-egress-mbps")
       shareProvisionedEgressMbps?: int32;
 
+      /** The next allowed quota downgrade time. */
+      @header("x-ms-share-next-allowed-quota-downgrade-time")
+      shareNextAllowedQuotaDowngradeTime?: string;
+
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       shareProvisionedBandwidthMibps?: int32;
 
-      /** The next allowed quota downgrade time. */
-      @header("x-ms-share-next-allowed-quota-downgrade-time")
-      shareNextAllowedQuotaDowngradeTime?: string;
+      ...LeaseResponseHeaders;
 
       /** The access tier of the share. */
       @header("x-ms-access-tier") accessTier?: string;
@@ -283,15 +279,6 @@ interface Share {
       @header("x-ms-access-tier-transition-state")
       accessTierTransitionState?: string;
 
-      /** The lease duration. */
-      @header("x-ms-lease-duration") leaseDuration?: string;
-
-      /** The lease state. */
-      @header("x-ms-lease-state") leaseState: string;
-
-      /** The lease status. */
-      @header("x-ms-lease-status") leaseStatus: string;
-
       /** The enabled protocols for the share. */
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
 
@@ -302,21 +289,7 @@ interface Share {
       @header("x-ms-enable-snapshot-virtual-directory-access")
       enableSnapshotVirtualDirectoryAccess?: boolean;
 
-      /** Whether paid bursting is enabled. */
-      @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
-
-      /** The maximum IOPS for paid bursting. */
-      @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
-
-      /** The maximum bandwidth for paid bursting. */
-      @header("x-ms-paid-bursting-max-bandwidth-mibps")
-      paidBurstingMaxBandwidthMibps?: int64;
-
-      /** The included burst IOPS. */
-      @header("x-ms-included-burst-iops") includedBurstIops?: int64;
-
-      /** The maximum burst credits for IOPS. */
-      @header("x-ms-max-burst-credits-for-iops") maxBurstCreditsForIops?: int64;
+      ...PaidBurstingResponseHeaders;
 
       /** The next allowed provisioned IOPS downgrade time. */
       @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
@@ -557,19 +530,55 @@ interface Share {
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
       ...LeaseIdParameter;
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
+
+      /** Optional. Used to enable snapshot virtual directory access. */
+      @header("x-ms-enable-snapshot-virtual-directory-access")
+      enableSnapshotVirtualDirectoryAccess?: boolean;
+
+      ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
 
       @header("x-ms-share-provisioned-bandwidth-mibps")
       shareProvisionedBandwidthMibps?: int32;
 
-      @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
-      @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
-
-      @header("x-ms-paid-bursting-max-bandwidth-mibps")
-      paidBurstingMaxBandwidthMibps?: int64;
+      /** Optional. Used to enable SMB directory lease. */
+      @header("x-ms-enable-smb-directory-lease")
+      enableSmbDirectoryLease?: boolean;
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
+      /** The current share quota. */
+      @header("x-ms-share-quota") shareQuota?: int32;
+
+      /** The share provisioned IOPS. */
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+
+      /** The share provisioned bandwidth in mebibytes per second. */
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
+
+      /** The share included burst IOPS. */
+      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+
+      /** The share max burst credits for IOPS. */
+      @header("x-ms-share-max-burst-credits-for-iops")
+      shareMaxBurstCreditsForIops?: int64;
+
+      /** Approximate time remaining in the share's existing downgrade request. */
+      @header("x-ms-share-next-allowed-quota-downgrade-time")
+      shareNextAllowedQuotaDowngradeTime?: string;
+
+      /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
+      @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
+      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+
+      /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
+      @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
+      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+    }
   >;
 
   /**
@@ -687,38 +696,21 @@ interface Directory {
 
       ...TimeoutParameter;
       ...MetadataHeaders;
-
-      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission") filePermission?: string;
-
-      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      ...ShareSnapshotParameter;
+      ...FileSmtPropertyRequestHeaders;
       ...FileRequestIntentParameter;
+      ...NfsRequestHeaders;
 
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      @header("x-ms-posix-permissions") posixPermissions?: string;
-      @header("x-ms-posix-umask") posixUmask?: string;
-      @header("x-ms-owner") owner?: string;
-      @header("x-ms-group") group?: string;
-      @header("x-ms-mode") mode?: string;
+      /** SMB only. Default value is New. */
+      @header("x-ms-file-property-semantics")
+      filePropertySemantics?: FilePropertySemantics;
     },
     {
       @statusCode statusCode: 201;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+      ...NfsResponseHeaders;
     }
   >;
 
@@ -741,13 +733,9 @@ interface Directory {
     },
     {
       ...MetadataHeaders;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
     }
   >;
 
@@ -786,36 +774,17 @@ interface Directory {
       @path directory: string;
 
       ...TimeoutParameter;
-
-      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission") filePermission?: string;
-
-      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
+      ...FileSmtPropertyRequestHeaders;
+      ...FilePermissionFormatParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      @header("x-ms-posix-permissions") posixPermissions?: string;
-      @header("x-ms-posix-umask") posixUmask?: string;
-      @header("x-ms-owner") owner?: string;
-      @header("x-ms-group") group?: string;
-      @header("x-ms-mode") mode?: string;
+      ...NfsRequestHeaders;
     },
     {
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
     }
   >;
 
@@ -849,13 +818,14 @@ interface Directory {
       @path shareName: string;
       @path directory: string;
       ...PrefixParameter;
+      ...ShareSnapshotParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
-      @query include?: string[]; // ListFilesIncludeType values
+      @query include?: string[];
       ...TimeoutParameter;
-      ...ShareSnapshotParameter;
-      ...FileRequestIntentParameter;
       @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
+      ...AllowTrailingDotParameter;
+      ...FileRequestIntentParameter;
     },
     {
       @body response: ListFilesAndDirectoriesSegmentResponse;
@@ -875,7 +845,8 @@ interface Directory {
       ...MaxResultsParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
-      @query recursive?: boolean;
+      ...RecursiveParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
@@ -896,7 +867,8 @@ interface Directory {
       ...TimeoutParameter;
       ...MarkerParameter;
       ...ShareSnapshotParameter;
-      @query recursive?: boolean;
+      ...RecursiveParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
@@ -914,24 +886,43 @@ interface Directory {
     {
       @path shareName: string;
       @path directory: string;
-      @header("x-ms-rename-source") renameSource: string;
       ...TimeoutParameter;
+      ...RenameRequestHeaders;
 
-      @header("x-ms-file-rename-replace-if-exists")
-      renameReplaceIfExists?: boolean;
+      /** Required if the destination has an active lease. */
+      @header("x-ms-destination-lease-id") destinationLeaseId?: string;
 
-      @header("x-ms-file-rename-ignore-read-only")
-      renameIgnoreReadOnly?: boolean;
+      /** If specified, the provided file attributes shall be set. */
+      @header("x-ms-file-attributes") fileAttributes?: string;
 
-      @header("x-ms-source-lease-id") sourceLeaseId?: string;
-      ...FileRequestIntentParameter;
+      /** Creation time for the directory. */
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
 
-      @header("x-ms-source-allow-trailing-dot")
-      sourceAllowTrailingDot?: boolean;
+      /** Last write time for the directory. */
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
 
+      /** Change time for the directory. */
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+
+      /** If specified the permission shall be set for the directory. */
+      @header("x-ms-file-permission") filePermission?: string;
+
+      ...FilePermissionFormatParameter;
+
+      /** Key of the permission to be set. */
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+
+      ...MetadataHeaders;
       ...AllowTrailingDotParameter;
+      ...SourceAllowTrailingDotParameter;
+      ...FileRequestIntentParameter;
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+    }
   >;
 }
 
@@ -964,78 +955,40 @@ interface File {
       /** Dummy constant parameter, file type can only be file. */
       @header("x-ms-type") fileType?: string;
 
+      ...FileContentRequestHeaders;
       ...MetadataHeaders;
-
-      /** If specified the permission (security descriptor) shall be set for the directory/file. This header can be used if Permission size is <= 8KB, else x-ms-file-permission-key header shall be used. Default value: Inherit. If SDDL is specified as input, it must have owner, group and dacl. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission") filePermission?: string;
-
-      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-
-      /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
-
-      /** Creation time for the file/directory. Default value: Now. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the file/directory. Default value: Now. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** Change time for the file/directory. Default value: Now. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** Sets the MIME content type of the file. The default type is 'application/octet-stream'. */
-      @header("Content-Type") contentType?: string;
-
-      /** Specifies which content encodings have been applied to the file. */
-      @header("Content-Encoding") contentEncoding?: string;
-
-      /** Specifies the natural languages used by this resource. */
-      @header("Content-Language") contentLanguage?: string;
-
-      /** Sets the file's cache control. The File service stores this value but does not use or modify it. */
-      @header("Cache-Control") cacheControl?: string;
-
-      /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. When the Content-MD5 header is specified, the File service compares the hash of the content that has arrived with the header value that was sent. If the two hashes do not match, the operation will fail with error code 400 (Bad Request). */
-      @header("Content-MD5") contentMd5?: string;
-
-      /** Sets the file's Content-Disposition header. */
-      @header("Content-Disposition") contentDisposition?: string;
-
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
-
+      ...FileSmtPropertyRequestHeaders;
+      ...FilePermissionFormatParameter;
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
-
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      /** Optional, NFS only. The owner of the file or directory. */
-      @header("x-ms-owner") owner?: string;
-
-      /** Optional, NFS only. The owning group of the file or directory. */
-      @header("x-ms-group") group?: string;
-
-      /** Optional, NFS only. The file mode of the file or directory */
-      @header("x-ms-mode") mode?: string;
+      ...NfsRequestHeaders;
 
       /** Optional, NFS only. Type of the file or directory. */
-      @header("x-ms-nfs-file-type") nfsFileType?: NfsFileType;
+      @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
 
-      /** If true, the trailing dot will not be trimmed from the target URI. */
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
+      @header("Content-MD5") contentMd5?: string;
+
+      /** SMB only. Default value is New. */
+      @header("x-ms-file-property-semantics")
+      filePropertySemantics?: FilePropertySemantics;
+
+      /** Optional. Specifies the content length of the file. */
+      @header("Content-Length") optionalContentLength?: int64;
     },
     {
       @statusCode statusCode: 201;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+      ...NfsResponseHeaders;
+
+      /** An MD5 hash returned for the content. */
+      @header("Content-MD5") contentMd5?: string;
+
+      /** Content length of the file. */
+      @header("Content-Length") contentLength?: int64;
     }
   >;
 
@@ -1044,7 +997,7 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}")
   @get
-  download is StorageOperationResponseBody<
+  download is StorageOperationNoBody<
     {
       /** The name of the target share. */
       @path shareName: string;
@@ -1056,29 +1009,24 @@ interface File {
       @path fileName: string;
 
       ...TimeoutParameter;
-
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
-
-      /** Return file data only from the specified byte range. */
-      @header("Range") range?: string;
+      ...RangeHeader;
 
       /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
       @header("x-ms-range-get-content-md5") getContentMd5?: boolean;
 
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
-
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
-      @header("x-ms-structured-body-get") structuredBodyGet?: string;
+
+      /** Optional. Used for structured get operations. */
+      @header("x-ms-structured-body") structuredBodyGet?: string;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying suppported status codes for download operation."
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
       @statusCode statusCode: 200 | 206;
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
+      @header("Content-Type") contentType?: string;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: string;
       @header("Content-MD5") contentMd5?: string;
@@ -1087,22 +1035,28 @@ interface File {
       @header("Content-Disposition") contentDisposition?: string;
       @header("Content-Language") contentLanguage?: string;
       @header("Accept-Ranges") acceptRanges?: string;
-      @header("x-ms-copy-completion-time") copyCompletionTime?: string;
-      @header("x-ms-copy-status-description") copyStatusDescription?: string;
-      @header("x-ms-copy-id") copyId?: string;
-      @header("x-ms-copy-progress") copyProgress?: string;
-      @header("x-ms-copy-source") copySource?: string;
-      @header("x-ms-copy-status") copyStatus?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
-      @header("x-ms-lease-duration") leaseDuration?: string;
-      @header("x-ms-lease-state") leaseState?: string;
-      @header("x-ms-lease-status") leaseStatus?: string;
+      ...CopyStatusResponseHeaders;
+
+      /** The MD5 hash of the full file content. */
+      @header("x-ms-content-md5") fileContentMd5?: string;
+
+      /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
+      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
+
+      ...FileSmtPropertyResponseHeaders;
+      ...LeaseResponseHeaders;
+
+      /** Structured body response header. */
+      @header("x-ms-structured-body") structuredBody?: string;
+
+      /** Structured content length. */
+      @header("x-ms-structured-content-length") structuredContentLength?: int64;
+
+      ...NfsResponseHeaders;
+
+      /** NFS only. The link count. */
+      @header("x-ms-link-count") linkCount?: int32;
+
       @body content?: bytes;
     }
   >;
@@ -1119,9 +1073,8 @@ interface File {
       @path fileName: string;
       @query sharesnapshot?: string;
       ...TimeoutParameter;
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
       @header("Last-Modified") lastModified: string;
@@ -1136,22 +1089,17 @@ interface File {
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
       @header("Content-Language") contentLanguage?: string;
-      @header("x-ms-copy-completion-time") copyCompletionTime?: string;
-      @header("x-ms-copy-status-description") copyStatusDescription?: string;
-      @header("x-ms-copy-id") copyId?: string;
-      @header("x-ms-copy-progress") copyProgress?: string;
-      @header("x-ms-copy-source") copySource?: string;
-      @header("x-ms-copy-status") copyStatus?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
-      @header("x-ms-lease-duration") leaseDuration?: string;
-      @header("x-ms-lease-state") leaseState?: string;
-      @header("x-ms-lease-status") leaseStatus?: string;
+      ...CopyStatusResponseHeaders;
+
+      /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
+      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
+
+      ...FileSmtPropertyResponseHeaders;
+      ...LeaseResponseHeaders;
+      ...NfsResponseHeaders;
+
+      /** NFS only. The link count. */
+      @header("x-ms-link-count") linkCount?: int32;
     }
   >;
 
@@ -1186,44 +1134,27 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
-      @header("x-ms-file-permission") filePermission?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
 
-      @header("x-ms-file-last-write-time-mode")
-      fileLastWriteTimeMode?: FileLastWrittenMode;
+      /** Specifies the number of bytes being transmitted. */
+      @header("x-ms-content-length") fileContentLength?: int64;
 
-      @header("Content-Length") contentLength?: int64;
-      @header("Content-Type") contentType?: string;
-      @header("Content-Encoding") contentEncoding?: string;
-      @header("Content-Language") contentLanguage?: string;
-      @header("Cache-Control") cacheControl?: string;
-      @header("Content-MD5") contentMd5?: string;
-      @header("Content-Disposition") contentDisposition?: string;
-      @header("x-ms-lease-id") leaseId?: string;
+      ...FileContentRequestHeaders;
+      ...FileSmtPropertyRequestHeaders;
+      ...FilePermissionFormatParameter;
+      ...LeaseIdParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
-
-      @header("x-ms-file-property-semantics")
-      filePropertySemantics?: FilePropertySemantics;
+      ...NfsRequestHeaders;
     },
     {
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+      ...NfsResponseHeaders;
+
+      /** NFS only. The link count. */
+      @header("x-ms-link-count") linkCount?: int32;
     }
   >;
 
@@ -1239,13 +1170,13 @@ interface File {
       @path fileName: string;
       ...TimeoutParameter;
       ...MetadataHeaders;
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
     },
     {
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
     }
   >;
 
@@ -1263,17 +1194,17 @@ interface File {
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration: int32;
 
-      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
+      /** Proposed lease ID, in a GUID string format. */
       @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
     },
     {
       @statusCode statusCode: 201;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
       @header("x-ms-lease-id") leaseId: string;
     }
   >;
@@ -1291,11 +1222,11 @@ interface File {
       @header("x-ms-lease-id") leaseId: string;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
     },
     {
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
     }
   >;
 
@@ -1313,17 +1244,17 @@ interface File {
       /** The lease ID of the active lease. */
       @header("x-ms-lease-id") leaseId: string;
 
-      /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
+      /** Proposed lease ID, in a GUID string format. */
       @header("x-ms-proposed-lease-id") proposedLeaseId: string;
 
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
     },
     {
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("x-ms-lease-id") leaseId: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      @header("x-ms-lease-id") returnedLeaseId: string;
     }
   >;
 
@@ -1339,16 +1270,16 @@ interface File {
       @path fileName: string;
       ...TimeoutParameter;
 
-      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
+      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. */
       @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
 
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
     },
     {
       @statusCode statusCode: 202;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** Approximate time remaining in the lease period, in seconds. */
       @header("x-ms-lease-time") leaseTime?: string;
@@ -1366,28 +1297,29 @@ interface File {
       @path directory: string;
       @path fileName: string;
 
-      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. For an update operation, the range can be up to 4 MB in size. For a clear operation, the range can be up to the value of the file's full size. */
+      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("x-ms-range") targetRange: string;
 
-      /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update. - Clear: Clears the specified range and releases the space used in storage for that range. */
+      /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write") fileRangeWrite: "update" | "clear";
 
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
 
-      /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. When the Content-MD5 header is specified, the File service compares the hash of the content that has arrived with the header value that was sent. */
+      /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. */
       @header("Content-MD5") contentMd5?: string;
 
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
 
+      /** If the file last write time should be preserved or overwritten. */
+      @header("x-ms-file-last-write-time")
+      fileLastWriteTimeMode?: FileLastWrittenMode;
+
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
 
-      /** If true, the trailing dot will not be trimmed from the target URI. */
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
-
       /** Optional. Used for structured put operations. */
-      @header("x-ms-structured-body-put") structuredBodyPut?: string;
+      @header("x-ms-structured-body") structuredBodyPut?: string;
 
       /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
@@ -1396,10 +1328,18 @@ interface File {
     },
     {
       @statusCode statusCode: 201;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
       @header("Content-MD5") contentMd5?: string;
-    }
+      ...RequestServerEncryptedResponseHeader;
+
+      /** The file last write time. */
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+      /** Structured body response header. */
+      @header("x-ms-structured-body") structuredBody?: string;
+    },
+    "application/octet-stream"
   >;
 
   /**
@@ -1422,6 +1362,9 @@ interface File {
       /** Bytes of source data in the specified range. */
       @header("x-ms-source-range") sourceRange: string;
 
+      /** Only update is supported. */
+      @header("x-ms-write") fileRangeWriteFromUrl: "update";
+
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
 
@@ -1435,30 +1378,32 @@ interface File {
       @header("x-ms-source-if-none-match-crc64")
       sourceIfNoneMatchCrc64?: string;
 
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
 
-      /** Specify the lease ID for the source if applicable. */
-      @header("x-ms-source-lease-id") sourceLeaseId?: string;
-
-      /** Only one of the x-ms-copy-source-authorization, x-ms-source-lease-id or x-ms-source-if-match-crc64 should be specified. */
+      /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
       @header("x-ms-copy-source-authorization")
       copySourceAuthorization?: string;
 
+      /** If the file last write time should be preserved or overwritten. */
+      @header("x-ms-file-last-write-time")
+      fileLastWriteTimeMode?: FileLastWrittenMode;
+
+      ...AllowTrailingDotParameter;
+      ...SourceAllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      /** If true, the trailing dot will not be trimmed from the source URI. */
-      @header("x-ms-source-allow-trailing-dot")
-      sourceAllowTrailingDot?: boolean;
-
-      /** If true, the trailing dot will not be trimmed from the target URI. */
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
       @statusCode statusCode: 201;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("Content-MD5") contentMd5?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
+      /** CRC64 hash of the range content. */
+      @header("x-ms-content-crc64") contentCrc64?: string;
+
+      ...RequestServerEncryptedResponseHeader;
+
+      /** The file last write time. */
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
     }
   >;
 
@@ -1473,23 +1418,25 @@ interface File {
       @path directory: string;
       @path fileName: string;
       @query sharesnapshot?: string;
+
+      /** The previous snapshot parameter is an opaque DateTime value that specifies a previous file snapshot to compare against. */
+      @query prevsharesnapshot?: string;
+
       ...TimeoutParameter;
-
-      /** Return file data only from the specified byte range. */
-      @header("Range") range?: string;
-
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
-
+      ...RangeHeader;
+      ...LeaseIdParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+
+      /** This header is allowed only when PrevShareSnapshot query parameter is set. Determines whether the changed ranges for a file that has been renamed or moved should be listed. */
+      @header("x-ms-file-support-rename") supportRename?: boolean;
     },
     {
-      @header("Last-Modified") lastModified: string;
-      @header("ETag") etag: string;
+      ...LastModifiedResponseHeader;
+      ...EtagResponseHeader;
 
       /** The length of the file. */
-      @header("x-ms-content-length") contentLength: int64;
+      @header("x-ms-content-length") fileContentLength: int64;
 
       @body rangeList: ShareFileRangeList;
     }
@@ -1511,7 +1458,13 @@ interface File {
 
       ...TimeoutParameter;
       ...MetadataHeaders;
+
+      /** If specified the permission shall be set for the file. */
       @header("x-ms-file-permission") filePermission?: string;
+
+      ...FilePermissionFormatParameter;
+
+      /** Key of the permission to be set. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
 
       /** Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key. */
@@ -1519,81 +1472,45 @@ interface File {
       filePermissionCopyMode?: PermissionCopyModeType;
 
       /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
-      @header("x-ms-file-copy-ignore-read-only")
+      @header("x-ms-file-copy-ignore-readonly")
       fileCopyIgnoreReadOnly?: boolean;
 
+      /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
 
-      /** Specifies either the option to copy file attributes from a source file(source) to a target file or a list of attributes to set on a target file. */
-      @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string;
-
+      /** Creation time for the file. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
 
-      /** Specifies either the option to copy file creation time from a source file(source) to a target file or a time value in ISO 8601 format to set as creation time on a target file. */
-      @header("x-ms-file-copy-file-creation-time")
-      fileCopyFileCreationTime?: string;
-
+      /** Last write time for the file. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
 
-      /** Specifies either the option to copy file last write time from a source file(source) to a target file or a time value in ISO 8601 format to set as last write time on a target file. */
-      @header("x-ms-file-copy-file-last-write-time")
-      fileCopyFileLastWriteTime?: string;
-
+      /** Change time for the file. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
-      /** Specifies either the option to copy file change time from a source file(source) to a target file or a time value in ISO 8601 format to set as change time on a target file. */
-      @header("x-ms-file-copy-file-change-time")
-      fileCopyFileChangeTime?: string;
-
-      /** Optional. Sets the archive attribute on the destination file. This attribute is only valid when specified in a copy operation from Blob Storage to File Storage. */
-      @header("x-ms-file-copy-set-archive-attribute")
+      /** Optional. Sets the archive attribute on the destination file. */
+      @header("x-ms-file-copy-set-archive")
       fileCopySetArchiveAttribute?: boolean;
 
-      /** If specified, the operation only succeeds if the resource's lease is active and matches this ID. */
-      @header("x-ms-lease-id") leaseId?: string;
-
-      /** Required if the source file has an active lease. The lease ID specified for this header must match the lease ID of the source file. */
-      @header("x-ms-source-lease-id") sourceLeaseId?: string;
-
-      /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
-      @header("x-ms-copy-source-authorization")
-      copySourceAuthorization?: string;
-
+      ...LeaseIdParameter;
+      ...AllowTrailingDotParameter;
+      ...SourceAllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      /** If true, the trailing dot will not be trimmed from the source URI. */
-      @header("x-ms-source-allow-trailing-dot")
-      sourceAllowTrailingDot?: boolean;
-
-      /** If true, the trailing dot will not be trimmed from the target URI. */
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
-
-      /** Optional, NFS only. The owner of the file or directory. */
-      @header("x-ms-owner") owner?: string;
-
-      /** Optional, NFS only. The owning group of the file or directory. */
-      @header("x-ms-group") group?: string;
-
-      /** Optional, NFS only. The file mode of the file or directory */
-      @header("x-ms-mode") mode?: string;
+      ...NfsRequestHeaders;
 
       /** Specifies mode copy option for the file. */
-      @header("x-ms-file-copy-mode-copy-mode")
+      @header("x-ms-file-mode-copy-mode")
       fileCopyModeCopyMode?: ModeCopyMode;
 
       /** Specifies owner copy option for the file. */
-      @header("x-ms-file-copy-owner-copy-mode")
+      @header("x-ms-file-owner-copy-mode")
       fileCopyOwnerCopyMode?: OwnerCopyMode;
     },
     {
       @statusCode statusCode: 202;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
-      /** String identifier for this copy operation. Use with Get File or Get File Properties to check the status of this copy operation, or pass to Abort Copy File to abort a pending copy. */
+      /** String identifier for this copy operation. */
       @header("x-ms-copy-id") copyId: string;
 
       /** State of the copy operation identified by x-ms-copy-id. */
@@ -1619,9 +1536,9 @@ interface File {
       @query copyid: string;
 
       ...TimeoutParameter;
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
       @statusCode statusCode: 204;
@@ -1645,8 +1562,8 @@ interface File {
       /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
 
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
       @body response: ListHandlesResponse;
@@ -1670,10 +1587,13 @@ interface File {
       ...TimeoutParameter;
       ...MarkerParameter;
       @query sharesnapshot?: string;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
+      /** A string describing next handle to be closed. */
+      @header("x-ms-marker") marker?: string;
+
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
       @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
     }
@@ -1689,36 +1609,46 @@ interface File {
       @path shareName: string;
       @path directory: string;
       @path fileName: string;
-
-      /** Required. Specifies the URI-style path of the source file, up to 2 KB in length. */
-      @header("x-ms-rename-source") renameSource: string;
-
       ...TimeoutParameter;
+      ...RenameRequestHeaders;
 
-      /** Boolean. Default value is false. Set to true to indicate that the destination file should be overwritten, even if it already exists and has the read-only attribute set. */
-      @header("x-ms-file-rename-replace-if-exists")
-      renameReplaceIfExists?: boolean;
-
-      /** Boolean. Default value is false. Set to true to overwrite the destination file even if it has the read-only attribute set. */
-      @header("x-ms-file-rename-ignore-read-only")
-      renameIgnoreReadOnly?: boolean;
-
-      /** Required if the source file has an active lease. The lease ID specified for this header must match the lease ID of the source file. */
-      @header("x-ms-source-lease-id") sourceLeaseId?: string;
-
-      /** Required if the destination file has an active lease. The lease ID specified must match the lease ID of the destination file. */
+      /** Required if the destination file has an active lease. */
       @header("x-ms-destination-lease-id") destinationLeaseId?: string;
 
+      /** If specified, the provided file attributes shall be set. */
+      @header("x-ms-file-attributes") fileAttributes?: string;
+
+      /** Creation time for the file. */
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+      /** Last write time for the file. */
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+      /** Change time for the file. */
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+
+      /** If specified the permission shall be set for the file. */
+      @header("x-ms-file-permission") filePermission?: string;
+
+      ...FilePermissionFormatParameter;
+
+      /** Key of the permission to be set. */
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+
+      ...MetadataHeaders;
+
+      /** Sets the MIME content type of the file. */
+      @header("x-ms-content-type") fileContentType?: string;
+
+      ...AllowTrailingDotParameter;
+      ...SourceAllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      @header("x-ms-source-allow-trailing-dot")
-      sourceAllowTrailingDot?: boolean;
-
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
     }
   >;
 
@@ -1734,18 +1664,14 @@ interface File {
       @path fileName: string;
       ...TimeoutParameter;
       ...MetadataHeaders;
-      @header("x-ms-file-permission") filePermission?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
+
+      /** Creation time for the file. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+      /** Last write time for the file. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      ...FileRequestIntentParameter;
 
-      @header("x-ms-file-permission-format")
-      filePermissionFormat?: FilePermissionFormat;
-
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
+      ...LeaseIdParameter;
 
       /** Optional, NFS only. The owner of the file or directory. */
       @header("x-ms-owner") owner?: string;
@@ -1753,23 +1679,32 @@ interface File {
       /** Optional, NFS only. The owning group of the file or directory. */
       @header("x-ms-group") group?: string;
 
-      /** Optional, NFS only. The file mode of the file or directory */
-      @header("x-ms-mode") mode?: string;
-
-      /** NFS only. Required. The path to the original file, the symbolic link is pointing to. The path is of type string which is not resolved and is stored as is. The path can be absolute path or the relative path depending on the content stored in the symbolic link file. */
+      /** NFS only. Required. The path to the original file, the symbolic link is pointing to. */
       @header("x-ms-link-text") linkText: string;
+
+      ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 201;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
+      /** The file creation time. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+      /** The file last write time. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+      /** The file change time. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
+
+      /** The fileId of the file. */
       @header("x-ms-file-id") fileId?: string;
+
+      /** The parent fileId of the file. */
       @header("x-ms-file-parent-id") fileParentId?: string;
+
+      ...NfsResponseHeaders;
     }
   >;
 
@@ -1784,20 +1719,12 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
+      @query sharesnapshot?: string;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
-      ...MetadataHeaders;
-      @header("ETag") etag: string;
-      @header("Last-Modified") lastModified: string;
-      @header("x-ms-file-attributes") fileAttributes?: string;
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-      @header("x-ms-file-id") fileId?: string;
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** The path to the original file, the symbolic link is pointing to. */
       @header("x-ms-link-text") linkText: string;
@@ -1815,29 +1742,21 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
-      ...MetadataHeaders;
+
+      /** Dummy type header, must be "file". */
+      @header("x-ms-type") fileType: "file";
+
+      ...LeaseIdParameter;
+
+      /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. */
+      @header("x-ms-file-target-file") targetFile: string;
+
       ...FileRequestIntentParameter;
-
-      /** If true, the trailing dot will not be trimmed from the target URI. */
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
-
-      /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. It should be full path of the target from the root.The target file must be in the same share and hence the same storage account. */
-      @header("x-ms-target-file") targetFile: string;
     },
     {
       @statusCode statusCode: 201;
-
-      /** The ETag of the file. */
-      @header("ETag") etag: string;
-
-      /** The last modified time of the file. */
-      @header("Last-Modified") lastModified: string;
-
-      /** The file permission key. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
-
-      /** The file attributes. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** The file creation time. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
@@ -1848,11 +1767,16 @@ interface File {
       /** The file change time. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
-      /** The fileId of the directory. */
+      /** The fileId of the file. */
       @header("x-ms-file-id") fileId?: string;
 
-      /** The parent fileId of the directory. */
+      /** The parent fileId of the file. */
       @header("x-ms-file-parent-id") fileParentId?: string;
+
+      /** Number of hard links to the file. */
+      @header("x-ms-link-count") linkCount?: int32;
+
+      ...NfsResponseHeaders;
     }
   >;
 }
