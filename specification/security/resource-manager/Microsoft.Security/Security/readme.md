@@ -704,6 +704,17 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+  - code: PathForResourceAction
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The initiateScan action path follows the existing controller route convention for this RP. Changing the path would be a breaking change.
+  - code: PathForNestedResource
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The scanOperationResults nested resource path follows the existing controller route convention. Changing the path would be a breaking change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    where:
+      - $.definitions.ScansV2
+    reason: ScansV2 is a list wrapper model containing ScanV2 items which inherit id/name/type from Resource. The wrapper itself is not a resource.
 
 # Needed when there is more than one input file
 override-info:
