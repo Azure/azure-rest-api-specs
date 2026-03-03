@@ -43,6 +43,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(HostEntityProperties.azureID, "azureId", "java");
 @@clientName(HostEntityProperties.hostName, "hostname", "java");
 @@clientName(IncidentEntitiesResponse.metaData, "metadata", "java");
+@@clientName(SourceType, "Source", "java");
 
 @@clientLocation(AlertRules.triggerRuleRun, "AlertRule", "python");
 @@clientLocation(triggeredAnalyticsRuleRun.get,
