@@ -22,8 +22,8 @@ alias ManagementGroupsListParameters = {
   /**
    * Page continuation token is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.
    */
-  @query("$skipToken")
-  $skipToken?: string;
+  @query("$skiptoken")
+  $skiptoken?: string;
 };
 
 alias EntitiesListParameters = {
