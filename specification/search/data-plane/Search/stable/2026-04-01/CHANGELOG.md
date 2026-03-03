@@ -1,0 +1,238 @@
+# Azure AI Search Data-Plane API 2026-04-01 — Changes from 2025-09-01
+
+This document summarizes the breaking and non-breaking changes introduced in the `2026-04-01` GA
+release of the Azure AI Search data-plane API compared with the previous GA release `2025-09-01`.
+
+> **Source**: TypeSpec-compiled `search.json` (PR [#40859](https://github.com/Azure/azure-rest-api-specs/pull/40859))
+
+---
+
+## Spec file consolidation
+
+| Previous (2025-09-01) | Current (2026-04-01) |
+|---|---|
+| `searchservice.json` + `searchindex.json` (two files, two clients) | `search.json` (single unified file, single client) |
+
+The two separate Swagger files are merged into one. The index-document operations (search, suggest,
+autocomplete, count, get, index) move from the base path of the index client
+(`{endpoint}/indexes/{indexName}`) into a single unified path hierarchy:
+
+| Previous path (searchindex.json) | New path (search.json) |
+|---|---|
+| `GET /docs` | `GET /indexes('{indexName}')/docs` |
+| `GET /docs('{key}')` | `GET /indexes('{indexName}')/docs('{key}')` |
+| `GET /docs/$count` | `GET /indexes('{indexName}')/docs/$count` |
+| `GET /docs/search.autocomplete` | `GET /indexes('{indexName}')/docs/search.autocomplete` |
+| `POST /docs/search.post.autocomplete` | `POST /indexes('{indexName}')/docs/search.post.autocomplete` |
+| `GET /docs/search.suggest` | `GET /indexes('{indexName}')/docs/search.suggest` |
+| `POST /docs/search.post.suggest` | `POST /indexes('{indexName}')/docs/search.post.suggest` |
+| `POST /docs/search.post.search` | `POST /indexes('{indexName}')/docs/search.post.search` |
+| `POST /docs/search.index` | `POST /indexes('{indexName}')/docs/search.index` |
+
+The REST wire paths themselves are equivalent; the index name previously appeared in the parameterised
+host (`{endpoint}/indexes/{indexName}`) while it is now a regular OData path parameter.
+
+---
+
+## Breaking Changes
+
+### 1. Legacy v1 cognitive skills removed
+
+The following **v1 skill types** are removed from the specification. They were deprecated in favour
+of the v3 variants introduced in earlier API versions and are no longer supported:
+
+| Removed type (discriminator `@odata.type`) | Replacement |
+|---|---|
+| `EntityRecognitionSkill` (`#Microsoft.Skills.Text.EntityRecognitionSkill`) | `EntityRecognitionSkillV3` (`#Microsoft.Skills.Text.V3.EntityRecognitionSkill`) |
+| `SentimentSkill` (`#Microsoft.Skills.Text.SentimentSkill`) | `SentimentSkillV3` (`#Microsoft.Skills.Text.V3.SentimentSkill`) |
+
+The corresponding language-code enums `EntityRecognitionSkillLanguage` and `SentimentSkillLanguage`
+are also removed.
+
+**Impact**: Skillsets that reference either legacy `@odata.type` value must be migrated to the V3
+equivalents before targeting this API version.
+
+### 2. `QueryResultDocumentVectorSubscores` definition removed
+
+The `QueryResultDocumentVectorSubscores` object model is removed. It was previously returned as an
+optional field nested under search-result vector debug data but is no longer surfaced in the public
+contract.
+
+### 3. `SearchIndexerLimits` numeric type narrowed to integer
+
+`maxDocumentExtractionSize` and `maxDocumentContentCharactersToExtract` both change their JSON
+schema type from `number` (double) to `integer` (int64). The wire format for in-range values is
+unchanged, but generated SDK clients typed against `number`/`double` must be updated.
+
+### 4. Definition renames (SDK-level breaking)
+
+Thirty-two model types have been renamed for clarity and consistency. The REST wire format (JSON
+property names and enum string values) is **identical** — the change only affects the generated
+client type names. Clients consuming the raw JSON API are not affected; clients using a generated
+SDK will see compile-time name changes.
+
+| Old name (2025-09-01) | New name (2026-04-01) |
+|---|---|
+| `AzureOpenAIParameters` | `AzureOpenAIVectorizerParameters` |
+| `BM25Similarity` | `BM25SimilarityAlgorithm` |
+| `BinaryQuantizationVectorSearchCompressionConfiguration` | `BinaryQuantizationCompression` |
+| `ClassicSimilarity` | `ClassicSimilarityAlgorithm` |
+| `DataToExtract` | `BlobIndexerDataToExtract` |
+| `ExecutionEnvironment` | `IndexerExecutionEnvironment` |
+| `ExhaustiveKnnVectorSearchAlgorithmConfiguration` | `ExhaustiveKnnAlgorithmConfiguration` |
+| `HnswVectorSearchAlgorithmConfiguration` | `HnswAlgorithmConfiguration` |
+| `ImageAction` | `BlobIndexerImageAction` |
+| `OcrSkillLineEnding` | `OcrLineEnding` |
+| `ParsingMode` | `BlobIndexerParsingMode` |
+| `PdfTextRotationAlgorithm` | `BlobIndexerPDFTextRotationAlgorithm` |
+| `PrioritizedFields` | `SemanticPrioritizedFields` |
+| `RawVectorQuery` | `VectorizedQuery` |
+| `ScalarQuantizationVectorSearchCompressionConfiguration` | `ScalarQuantizationCompression` |
+| `SearchIndexerIndexProjections` | `SearchIndexerIndexProjection` |
+| `SemanticErrorHandling` | `SemanticErrorMode` |
+| `SemanticPartialResponseReason` | `SemanticErrorReason` |
+| `SemanticPartialResponseType` | `SemanticSearchResultsType` |
+| `SemanticSettings` | `SemanticSearch` |
+| `ServiceCounters` | `SearchServiceCounters` |
+| `ServiceLimits` | `SearchServiceLimits` |
+| `ServiceStatistics` | `SearchServiceStatistics` |
+| `Similarity` | `SimilarityAlgorithm` |
+| `Suggester` | `SearchSuggester` |
+| `VectorSearchCompressionConfiguration` | `VectorSearchCompression` |
+| `VectorSearchCompressionTargetDataType` | `VectorSearchCompressionTarget` |
+| `WebApiParameters` | `WebApiVectorizerParameters` |
+| `AnswerResult` | `QueryAnswerResult` |
+| `CaptionResult` | `QueryCaptionResult` |
+| `Answers` | `QueryAnswerType` |
+| `Captions` | `QueryCaptionType` |
+
+### 5. `IndexAction.@search.action` — enum moved to standalone definition
+
+The `@search.action` property of `IndexAction` changes from an inline string enum to a `$ref` to
+the new `IndexActionType` definition. The four enum values (`upload`, `merge`, `mergeOrUpload`,
+`delete`) are unchanged on the wire; however, the `x-ms-client-name` changes from `ActionType`
+(old) to `actionType` (new, camelCase).
+
+### 6. `DocumentIntelligenceLayoutSkill` enum properties inlined
+
+The `outputMode`, `outputFormat`, and `markdownHeaderDepth` properties change from `$ref` to named
+enum definitions to inline string enums with the same allowed values. The standalone definitions
+`DocumentIntelligenceLayoutSkillOutputMode`, `DocumentIntelligenceLayoutSkillOutputFormat`, and
+`DocumentIntelligenceLayoutSkillMarkdownHeaderDepth` are removed. Wire values are unchanged.
+
+### 7. `IndexingParametersConfiguration` — enum properties inlined
+
+Similarly, `parsingMode`, `executionEnvironment`, `dataToExtract`, `imageAction`, and
+`pdfTextRotationAlgorithm` change from `$ref` to inline string enums (renamed as listed in §4
+above). Wire values are unchanged.
+
+### 8. `PatternAnalyzer` and `PatternTokenizer` — `flags` inlined
+
+The `flags` property changes from `$ref: #/definitions/RegexFlags` to an inline string. The allowed
+values are unchanged; the `RegexFlags` standalone definition is retained.
+
+### 9. `PhoneticTokenFilter.encoder` and `StopwordsTokenFilter.stopwordsList` inlined
+
+Same pattern: `$ref` to named enum replaced with inline string. Wire values are unchanged.
+
+---
+
+## Non-Breaking Changes
+
+### New operations — Aliases
+
+Full CRUD support for the `SearchAlias` resource, enabling an index to be accessed via multiple
+logical names:
+
+| Operation | Method + Path |
+|---|---|
+| `Aliases_Create` | `POST /aliases` |
+| `Aliases_CreateOrUpdate` | `PUT /aliases('{aliasName}')` |
+| `Aliases_Delete` | `DELETE /aliases('{aliasName}')` |
+| `Aliases_Get` | `GET /aliases('{aliasName}')` |
+| `Aliases_List` | `GET /aliases` |
+
+### New operations — KnowledgeBases
+
+New `KnowledgeBase` resource type and retrieval endpoint (AI-powered knowledge base with agentic
+retrieval):
+
+| Operation | Method + Path |
+|---|---|
+| `KnowledgeBases_Create` | `POST /knowledgebases` |
+| `KnowledgeBases_CreateOrUpdate` | `PUT /knowledgebases('{knowledgeBaseName}')` |
+| `KnowledgeBases_Delete` | `DELETE /knowledgebases('{knowledgeBaseName}')` |
+| `KnowledgeBases_Get` | `GET /knowledgebases('{knowledgeBaseName}')` |
+| `KnowledgeBases_List` | `GET /knowledgebases` |
+| `KnowledgeRetrieval_Retrieve` | `POST /knowledgebases('{knowledgeBaseName}')/retrieve` |
+
+### New operations — KnowledgeSources
+
+New `KnowledgeSource` resource type supporting Azure Blob, Azure One Lake, SharePoint, web, and
+search-index data sources:
+
+| Operation | Method + Path |
+|---|---|
+| `KnowledgeSources_Create` | `POST /knowledgesources` |
+| `KnowledgeSources_CreateOrUpdate` | `PUT /knowledgesources('{sourceName}')` |
+| `KnowledgeSources_Delete` | `DELETE /knowledgesources('{sourceName}')` |
+| `KnowledgeSources_Get` | `GET /knowledgesources('{sourceName}')` |
+| `KnowledgeSources_GetStatus` | `GET /knowledgesources('{sourceName}')/status` |
+| `KnowledgeSources_List` | `GET /knowledgesources` |
+
+### New skills
+
+| Skill type (`@odata.type`) | Description |
+|---|---|
+| `AzureMachineLearningSkill` (`#Microsoft.Skills.Custom.AmlSkill`) | Calls a custom Azure ML endpoint |
+| `ChatCompletionSkill` (`#Microsoft.Skills.Custom.ChatCompletionSkill`) | Calls a chat-completion model |
+| `ContentUnderstandingSkill` (`#Microsoft.Skills.Util.ContentUnderstandingSkill`) | Azure AI Content Understanding enrichment |
+| `VisionVectorizeSkill` (`#Microsoft.Skills.Vision.VectorizeSkill`) | Image vectorization via AI Vision |
+
+### New vectorizers
+
+| Vectorizer | Description |
+|---|---|
+| `AIServicesVisionVectorizer` | Vectorizes text/image using Azure AI Vision |
+
+### New optional fields on existing models
+
+| Model | New optional property | Notes |
+|---|---|---|
+| `AzureOpenAIEmbeddingSkill` | `resourceUri`, `deploymentId`, `apiKey`, `authIdentity`, `modelName` | Previously inherited from shared `AzureOpenAIParameters` mixin; now explicit properties |
+| `DocumentDebugInfo` | `innerHits` | Debug info for inner hit scoring |
+| `FacetResult` | `avg`, `cardinality`, `max`, `min`, `sum`, `@search.facets` | Aggregation statistics on facet buckets |
+| `IndexerExecutionResult` | `mode`, `statusDetail` | Fine-grained execution mode and detail code |
+| `IndexingParametersConfiguration` | `markdownHeaderDepth`, `markdownParsingSubmode` | Markdown parsing options |
+| `SearchDocumentsResult` | `@search.debug` | Debug information in search responses |
+| `SearchField` | `permissionFilter`, `sensitivityLabel` | Per-field ACL and data sensitivity metadata |
+| `SearchIndexerDataSource` | `identity` | Managed identity for data source authentication |
+| `SearchIndexerKnowledgeStore` | `identity` | Managed identity for knowledge store |
+| `SearchIndexerStatus` | `currentState` | Live indexer state detail |
+| `SearchResourceEncryptionKey` | `identity` | User-assigned managed identity for CMK |
+| `SplitSkill` | `unit`, `azureOpenAITokenizerParameters` | Token-aware splitting |
+| `VectorQuery` | `filterOverride`, `perDocumentVectorLimit`, `threshold` | Fine-grained vector query controls |
+
+### `SearchResourceEncryptionKey.keyVaultKeyVersion` made optional
+
+Previously required; now optional (supports auto-rotation of key vault keys).
+
+### `BlobIndexerParsingMode` — new `markdown` value
+
+The `markdown` parsing mode is added to `BlobIndexerParsingMode` (formerly `ParsingMode`), enabling
+direct Markdown ingestion without a separate skill.
+
+### Security definitions added
+
+`ApiKeyAuth` (API key in `api-key` header) and `OAuth2Auth` (OAuth2 implicit flow against
+`https://search.azure.com/.default`) are now formally declared in `securityDefinitions` and applied
+to all operations. This documents existing service authentication without changing client behaviour.
+
+### `SearchIndexerDataUserAssignedIdentity` — `federatedIdentityClientId` added
+
+New optional property to support workload identity federation scenarios.
+
+### New `indexes?_overload=listWithSelectedProperties` operation
+
+`Indexes_ListWithSelectedProperties` (`GET /indexes`) is exposed via `x-ms-paths` overload to
+return a lightweight index summary including only name, ETag, and selected statistics fields.
