@@ -567,7 +567,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 
@@ -609,7 +608,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 - stable/2018-06-01/pricings.json
@@ -636,7 +634,6 @@ input-file:
 - preview/2019-01-01-preview/regulatoryCompliance.json
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -719,7 +716,6 @@ input-file:
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2020-01-01-preview/securityContacts.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -1077,7 +1073,6 @@ These settings apply only when `--tag=package-2021-07-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2021-07-preview-only'
 input-file:
-  - preview/2021-07-01-preview/customAssessmentAutomation.json
   - preview/2021-07-01-preview/securityConnectors.json
 override-info:
   title: SecurityCenter
