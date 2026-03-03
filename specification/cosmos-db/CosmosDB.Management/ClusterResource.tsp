@@ -30,6 +30,15 @@ model ClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
+alias DeallocateParameters = {
+  /**
+   * Force to deallocate a cluster of Cluster Type Production. Force to deallocate a cluster of Cluster Type Production might cause data loss
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @header
+  `x-ms-force-deallocate`?: string;
+};
+
 @armResourceOperations(#{ omitTags: true })
 interface ClusterResources {
   /**
@@ -195,14 +204,7 @@ interface ClusterResources {
     void,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
-    Parameters = {
-      /**
-       * Force to deallocate a cluster of Cluster Type Production. Force to deallocate a cluster of Cluster Type Production might cause data loss
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-force-deallocate`?: string;
-    },
+    Parameters = DeallocateParameters,
     Error = CloudError
   >;
 

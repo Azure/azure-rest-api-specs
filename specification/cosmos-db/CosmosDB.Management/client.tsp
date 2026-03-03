@@ -14,6 +14,10 @@ using Microsoft.DocumentDB;
   "java,javascript,python"
 );
 
+@@clientName(DeallocateParameters.`x-ms-force-deallocate`,
+  "forceDeallocate",
+  "java"
+);
 @@clientName(CassandraClusterPublicStatus.eTag, "etag", "java");
 @@clientName(ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems.hostID,
   "hostId",
