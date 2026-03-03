@@ -38,6 +38,13 @@ These settings apply only when `--tag=package-2026-03-03-preview` is specified o
 ``` yaml $(tag) == 'package-2026-03-03-preview'
 input-file:
 - Microsoft.DataMigration/preview/2026-03-03-preview/postgressqlDatamigration.json
+suppressions:
+    - code: AddedReadOnlyPropertyInResponse
+      from: postgressqlDatamigration.json
+      reason: Adding preFlightValidations property in preview API version. This is a new feature being introduced.
+    - code: AddedOptionalProperty
+      from: postgressqlDatamigration.json
+      reason: Adding preFlightValidations property in preview API version. This is a new feature being introduced.
 ```
 
 ---
