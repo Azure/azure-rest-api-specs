@@ -71,7 +71,10 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
   @doc("Inline code text for the evaluator")
-  code_text: string;
+  code_text?: string;
+
+  @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
+  entry_point?: string;
 }
 
 @doc("Prompt-based evaluator")

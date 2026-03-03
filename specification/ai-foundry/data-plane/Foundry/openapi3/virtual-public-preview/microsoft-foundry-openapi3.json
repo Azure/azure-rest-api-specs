@@ -4469,6 +4469,167 @@
         }
       }
     },
+    "/evaluators/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Evaluators_getCredentials",
+        "description": "Get the SAS credential to access the storage account associated with an Evaluator version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      }
+    },
+    "/evaluators/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Evaluators_startPendingUpload",
+        "description": "Start a new or get an existing pending upload of an evaluator for a specific version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PendingUploadRequest"
+              }
+            }
+          },
+          "description": "The pending upload request parameters"
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_listLatest",
@@ -7993,6 +8154,10 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                      },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   },
@@ -8201,6 +8366,10 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                      },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   }
@@ -10155,7 +10324,8 @@
           "name",
           "version",
           "created_at",
-          "definition"
+          "definition",
+          "status"
         ],
         "properties": {
           "metadata": {
@@ -10199,8 +10369,36 @@
           },
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentVersionStatus"
+              }
+            ],
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.",
+            "default": "active"
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details if the agent version provisioning failed."
           }
         }
+      },
+      "AgentVersionStatus": {
+        "type": "string",
+        "enum": [
+          "creating",
+          "active",
+          "failed",
+          "deleting",
+          "deleted"
+        ],
+        "description": "The provisioning status of an agent version."
       },
       "AgenticIdentityPreviewCredentials": {
         "type": "object",
@@ -11822,8 +12020,7 @@
       "CodeBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
-          "type",
-          "code_text"
+          "type"
         ],
         "properties": {
           "type": {
@@ -11835,6 +12032,10 @@
           "code_text": {
             "type": "string",
             "description": "Inline code text for the evaluator"
+          },
+          "entry_point": {
+            "type": "string",
+            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')"
           }
         },
         "allOf": [
@@ -31758,6 +31959,10 @@
             ],
             "nullable": true,
             "description": "The agent used for this response"
+          },
+          "agent_session_id": {
+            "type": "string",
+            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
           }
         },
         "title": "The response object"

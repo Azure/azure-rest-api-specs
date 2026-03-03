@@ -154,6 +154,7 @@ using Azure.AI.Projects;
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
 // --------------------------------------------------------------------------------
 // Insights sub‐client
