@@ -28,16 +28,16 @@ These are the global settings for the DataMigration API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2025-01-10-privatepreview
+tag: package-2026-03-03-preview
 ```
 
-### Tag: package-2025-01-10-privatepreview
+### Tag: package-2026-03-03-preview
 
-These settings apply only when `--tag=package-2025-01-10-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2026-03-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-01-10-privatepreview'
+``` yaml $(tag) == 'package-2026-03-03-preview'
 input-file:
-- Microsoft.DataMigration/preview/2025-01-10-privatepreview/postgressqlDatamigration.json
+- Microsoft.DataMigration/preview/2026-03-03-preview/postgressqlDatamigration.json
 ```
 
 ---

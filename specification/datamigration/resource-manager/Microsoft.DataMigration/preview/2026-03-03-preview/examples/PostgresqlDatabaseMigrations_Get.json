@@ -1,0 +1,143 @@
+{
+  "title": "Get a database migration",
+  "operationId": "PostgresqlDatabaseMigrations_Get",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "my-rg",
+    "serviceName": "myMigrationService",
+    "databaseMigrationId": "mig-123e4567-e89b-12d3-a456-426614174000",
+    "api-version": "2026-03-03-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.DataMigration/postgresqlMigrationServices/myMigrationService/postgresqlDatabaseMigrations/mig-123e4567-e89b-12d3-a456-426614174000",
+        "name": "mig-123e4567-e89b-12d3-a456-426614174000",
+        "type": "Microsoft.DataMigration/postgresqlMigrationServices/postgresqlDatabaseMigrations",
+        "properties": {
+          "migrationName": "prod-oracle-to-azure-pg",
+          "description": "Production Oracle migration to Azure PostgreSQL Flexible Server",
+          "migrationMode": "offline",
+          "source": {
+            "engine": "oracle",
+            "serverResourceId": null,
+            "connectionEndPoints": [
+              {
+                "connectionName": "sourceConnection1",
+                "hostName": "source-db.company.com",
+                "port": 1521,
+                "serviceName": "PRODSCHEMA1",
+                "databaseName": null,
+                "credentials": {
+                  "authenticationMethod": "password",
+                  "userName": "migration_user"
+                },
+                "ssl": {
+                  "mode": "require"
+                }
+              }
+            ]
+          },
+          "target": {
+            "engine": "azure_postgres_flexible",
+            "serverResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.DBforPostgreSQL/flexibleServers/myServer",
+            "connectionEndPoints": [
+              {
+                "connectionName": "targetConnection1",
+                "hostName": "target-server1.postgres.database.azure.com",
+                "port": 5432,
+                "serviceName": null,
+                "databaseName": "target_db",
+                "credentials": {
+                  "authenticationMethod": "password",
+                  "userName": "migration_user"
+                },
+                "ssl": {
+                  "mode": "require"
+                }
+              }
+            ]
+          },
+          "mappingDefinitions": [
+            {
+              "mappingScope": "schema",
+              "sourceSchemaName": "HR",
+              "sourceDatabaseName": null,
+              "targetDatabaseName": "db1",
+              "targetSchemaName": "hr1",
+              "sourceConnectionName": "sourceConnection1",
+              "targetConnectionName": "targetConnection1"
+            }
+          ],
+          "computeProfile": {
+            "computeSubnetResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+          },
+          "migrationJobsettings": {
+            "validateOnly": false
+          },
+          "provisioningState": "Succeeded",
+          "migrationStatus": {
+            "state": "InProgress",
+            "errors": [],
+            "lastUpdatedAt": "2025-09-23T10:30:00Z"
+          },
+          "preFlightValidations": {
+            "migrationRequestId": "req-123e4567-e89b-12d3-a456-426614174000",
+            "state": "Completed",
+            "preFlightCheckSummaries": [
+              {
+                "checkName": "SourceConnectivity",
+                "state": "Completed",
+                "healthResult": {
+                  "status": "Success",
+                  "title": "Source Database Connectivity"
+                }
+              },
+              {
+                "checkName": "TargetConnectivity",
+                "state": "Completed",
+                "healthResult": {
+                  "status": "Success",
+                  "title": "Target Database Connectivity"
+                }
+              },
+              {
+                "checkName": "ExtensionCompatibility",
+                "state": "Completed",
+                "healthResult": {
+                  "status": "Warning",
+                  "errorMessage": "Some extensions may require manual configuration",
+                  "diagnosticHint": "Review extension compatibility before migration",
+                  "title": "Extension Compatibility Check"
+                }
+              }
+            ]
+          },
+          "databases": [
+            {
+              "databaseName": "HR",
+              "migrationStatus": "InProgress",
+              "validationStatus": "Succeeded",
+              "migrationProgress": {
+                "migrationPhase": "DataMigration",
+                "migrationStatistics": {
+                  "tablesTotal": 100,
+                  "tablesCompleted": 75,
+                  "tablesFailed": 0,
+                  "tablesInProgress": 5,
+                  "tablesPending": 20,
+                  "percentComplete": 75
+                }
+              },
+              "errors": [],
+              "createdAt": "2025-09-20T08:15:30Z",
+              "lastUpdatedAt": "2025-09-23T10:30:00Z"
+            }
+          ],
+          "startedAt": "2025-01-10T10:47:41.820717Z",
+          "endedAt": null
+        }
+      }
+    }
+  }
+}
