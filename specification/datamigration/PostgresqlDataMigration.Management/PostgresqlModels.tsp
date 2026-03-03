@@ -225,6 +225,51 @@ union ErrorSeverity {
   Info: "Info",
 }
 
+@doc("The readiness state of validation.")
+union ReadinessState {
+  string,
+
+  @doc("The validation has been accepted and is pending execution.")
+  Accepted: "Accepted",
+
+  @doc("The validation is currently in progress.")
+  InProgress: "InProgress",
+
+  @doc("The validation has completed successfully.")
+  Completed: "Completed",
+
+  @doc("The validation has failed.")
+  Failed: "Failed",
+}
+
+@doc("The readiness status of a check.")
+union ReadinessStatus {
+  string,
+
+  @doc("The check completed successfully without issues.")
+  Success: "Success",
+
+  @doc("The check failed with errors.")
+  Failure: "Failure",
+
+  @doc("The check completed with warnings.")
+  Warning: "Warning",
+}
+
+@doc("The split tables strategy.")
+union SplitTablesStrategy {
+  string,
+
+  @doc("No table splitting")
+  None: "none",
+
+  @doc("Split by CTID")
+  Ctid: "ctid",
+
+  @doc("Split by primary key")
+  PrimaryKey: "primary_key",
+}
+
 @doc("SSL configuration for database connection.")
 model SslConfiguration {
   @doc("SSL mode")
@@ -326,8 +371,82 @@ model ComputeProfile {
 
 @doc("Migration job settings.")
 model MigrationJobSettings {
-  @doc("Validate only flag")
-  validateOnly: boolean;
+  @doc("Number of parallel table migration jobs.")
+  @minValue(1)
+  @maxValue(32)
+  tableJobs?: int32 = 4;
+
+  @doc("Number of parallel index creation jobs.")
+  @minValue(1)
+  @maxValue(32)
+  indexJobs?: int32 = 4;
+
+  @doc("Number of parallel large object migration jobs.")
+  @minValue(1)
+  @maxValue(32)
+  largeObjectsJobs?: int32 = 4;
+
+  @doc("Logical decoding plugin name for CDC mode.")
+  @maxLength(64)
+  externalToFlexLdPlugin?: string = "test_decoding";
+
+  @doc("Delay in seconds for WAL switch check during CDC.")
+  @minValue(0)
+  @maxValue(3600)
+  switchWalCheckDelayInSeconds?: int32 = 120;
+
+  @doc("Skip collation validation between source and target.")
+  skipCollationValidation?: boolean = false;
+
+  @doc("Minimum parallel jobs per database.")
+  @minValue(1)
+  @maxValue(32)
+  minJobsPerDb?: int32 = 4;
+
+  @doc("Skip automatic job count calculation.")
+  skipJobsCalculation?: boolean = false;
+
+  @doc("Skip migration of roles and users.")
+  skipRoleUserMigration?: boolean = false;
+
+  @doc("Table splitting strategy.")
+  splitTablesStrategy?: SplitTablesStrategy;
+
+  @doc("Table split size in bytes for pgcopydb (default 20GB).")
+  @minValue(1073741824)
+  pgcopydbTableSplitSize?: int64 = 21474836480;
+
+  @doc("Maximum number of parts to split large tables.")
+  @minValue(1)
+  @maxValue(64)
+  splitMaxParts?: int32 = 8;
+
+  @doc("Skip pre-migration validation checks.")
+  skipValidation?: boolean = false;
+
+  @doc("Skip PostGIS extension validation.")
+  skipPostgisValidation?: boolean = true;
+
+  @doc("Skip tablespace migration.")
+  skipTableSpaces?: boolean = true;
+
+  @doc("Skip table splitting by CTID.")
+  skipSplitByCtid?: boolean = false;
+
+  @doc("Skip ANALYZE command after data migration.")
+  skipAnalyze?: boolean = false;
+
+  @doc("Use binary COPY format for data transfer.")
+  useBinaryCopy?: boolean = false;
+
+  @doc("Enable TimescaleDB extension support.")
+  enableTimescaleDb?: boolean = false;
+
+  @doc("Skip system ACL migration.")
+  skipSystemAcl?: boolean = true;
+
+  @doc("Skip procedural language compatibility check.")
+  skipLanguageCheck?: boolean = false;
 }
 
 @doc("Migration statistics.")
@@ -418,6 +537,49 @@ model MigrationStatus {
   lastUpdatedAt: utcDateTime;
 }
 
+@doc("Health result for a pre-flight check.")
+model HealthResult {
+  @doc("Status of the health check")
+  status: ReadinessStatus;
+
+  @doc("Error message if the check failed")
+  errorMessage?: string;
+
+  @doc("Diagnostic hint to help resolve issues")
+  diagnosticHint?: string;
+
+  @doc("Title or summary of the health check")
+  title?: string;
+}
+
+@doc("Summary of a pre-flight check.")
+model PreFlightCheckSummary {
+  @doc("Name of the pre-flight check")
+  checkName: string;
+
+  @doc("State of this specific pre-flight check")
+  state: ReadinessState;
+
+  @doc("Detailed health result for this check")
+  healthResult?: HealthResult;
+}
+
+@doc("Pre-flight validation status.")
+model PreFlightValidationStatus {
+  @doc("Unique identifier for the migration request")
+  migrationRequestId: string;
+
+  @doc("Overall state of the pre-flight validation")
+  state: ReadinessState;
+
+  @doc("Error message if validation failed")
+  errorMessage?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "checkName is the identifier"
+  @doc("List of pre-flight check summaries")
+  preFlightCheckSummaries?: PreFlightCheckSummary[];
+}
+
 @doc("Properties of the DatabaseMigration resource.")
 model DatabaseMigrationProperties {
   @doc("Migration name")
@@ -466,6 +628,10 @@ model DatabaseMigrationProperties {
   @doc("Migration status")
   @visibility(Lifecycle.Read)
   migrationStatus?: MigrationStatus;
+
+  @doc("Pre-flight validation status")
+  @visibility(Lifecycle.Read)
+  preFlightValidations?: PreFlightValidationStatus;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName is the identifier"
   @doc("List of database migration statuses")

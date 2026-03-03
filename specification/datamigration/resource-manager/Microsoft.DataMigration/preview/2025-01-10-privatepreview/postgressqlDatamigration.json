@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.DataMigration Management Service",
-    "version": "2025-01-10",
+    "version": "2025-01-10-privatepreview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1315,6 +1315,11 @@
           "description": "Migration status",
           "readOnly": true
         },
+        "preFlightValidations": {
+          "$ref": "#/definitions/PreFlightValidationStatus",
+          "description": "Pre-flight validation status",
+          "readOnly": true
+        },
         "databases": {
           "type": "array",
           "description": "List of database migration statuses",
@@ -1514,6 +1519,31 @@
         ]
       }
     },
+    "HealthResult": {
+      "type": "object",
+      "description": "Health result for a pre-flight check.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ReadinessStatus",
+          "description": "Status of the health check"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the check failed"
+        },
+        "diagnosticHint": {
+          "type": "string",
+          "description": "Diagnostic hint to help resolve issues"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or summary of the health check"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
     "MappingScope": {
       "type": "string",
       "description": "The scope of the mapping.",
@@ -1575,14 +1605,132 @@
       "type": "object",
       "description": "Migration job settings.",
       "properties": {
-        "validateOnly": {
+        "tableJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parallel table migration jobs.",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 32
+        },
+        "indexJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parallel index creation jobs.",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 32
+        },
+        "largeObjectsJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parallel large object migration jobs.",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 32
+        },
+        "externalToFlexLdPlugin": {
+          "type": "string",
+          "description": "Logical decoding plugin name for CDC mode.",
+          "default": "test_decoding",
+          "maxLength": 64
+        },
+        "switchWalCheckDelayInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Delay in seconds for WAL switch check during CDC.",
+          "default": 120,
+          "minimum": 0,
+          "maximum": 3600
+        },
+        "skipCollationValidation": {
           "type": "boolean",
-          "description": "Validate only flag"
+          "description": "Skip collation validation between source and target.",
+          "default": false
+        },
+        "minJobsPerDb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum parallel jobs per database.",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 32
+        },
+        "skipJobsCalculation": {
+          "type": "boolean",
+          "description": "Skip automatic job count calculation.",
+          "default": false
+        },
+        "skipRoleUserMigration": {
+          "type": "boolean",
+          "description": "Skip migration of roles and users.",
+          "default": false
+        },
+        "splitTablesStrategy": {
+          "$ref": "#/definitions/SplitTablesStrategy",
+          "description": "Table splitting strategy."
+        },
+        "pgcopydbTableSplitSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Table split size in bytes for pgcopydb (default 20GB).",
+          "default": 21474836480,
+          "minimum": 1073741824
+        },
+        "splitMaxParts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of parts to split large tables.",
+          "default": 8,
+          "minimum": 1,
+          "maximum": 64
+        },
+        "skipValidation": {
+          "type": "boolean",
+          "description": "Skip pre-migration validation checks.",
+          "default": false
+        },
+        "skipPostgisValidation": {
+          "type": "boolean",
+          "description": "Skip PostGIS extension validation.",
+          "default": true
+        },
+        "skipTableSpaces": {
+          "type": "boolean",
+          "description": "Skip tablespace migration.",
+          "default": true
+        },
+        "skipSplitByCtid": {
+          "type": "boolean",
+          "description": "Skip table splitting by CTID.",
+          "default": false
+        },
+        "skipAnalyze": {
+          "type": "boolean",
+          "description": "Skip ANALYZE command after data migration.",
+          "default": false
+        },
+        "useBinaryCopy": {
+          "type": "boolean",
+          "description": "Use binary COPY format for data transfer.",
+          "default": false
+        },
+        "enableTimescaleDb": {
+          "type": "boolean",
+          "description": "Enable TimescaleDB extension support.",
+          "default": false
+        },
+        "skipSystemAcl": {
+          "type": "boolean",
+          "description": "Skip system ACL migration.",
+          "default": true
+        },
+        "skipLanguageCheck": {
+          "type": "boolean",
+          "description": "Skip procedural language compatibility check.",
+          "default": false
         }
-      },
-      "required": [
-        "validateOnly"
-      ]
+      }
     },
     "MigrationMode": {
       "type": "string",
@@ -1911,6 +2059,57 @@
       },
       "readOnly": true
     },
+    "PreFlightCheckSummary": {
+      "type": "object",
+      "description": "Summary of a pre-flight check.",
+      "properties": {
+        "checkName": {
+          "type": "string",
+          "description": "Name of the pre-flight check"
+        },
+        "state": {
+          "$ref": "#/definitions/ReadinessState",
+          "description": "State of this specific pre-flight check"
+        },
+        "healthResult": {
+          "$ref": "#/definitions/HealthResult",
+          "description": "Detailed health result for this check"
+        }
+      },
+      "required": [
+        "checkName",
+        "state"
+      ]
+    },
+    "PreFlightValidationStatus": {
+      "type": "object",
+      "description": "Pre-flight validation status.",
+      "properties": {
+        "migrationRequestId": {
+          "type": "string",
+          "description": "Unique identifier for the migration request"
+        },
+        "state": {
+          "$ref": "#/definitions/ReadinessState",
+          "description": "Overall state of the pre-flight validation"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if validation failed"
+        },
+        "preFlightCheckSummaries": {
+          "type": "array",
+          "description": "List of pre-flight check summaries",
+          "items": {
+            "$ref": "#/definitions/PreFlightCheckSummary"
+          }
+        }
+      },
+      "required": [
+        "migrationRequestId",
+        "state"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the resource.",
@@ -1959,6 +2158,72 @@
         ]
       },
       "readOnly": true
+    },
+    "ReadinessState": {
+      "type": "string",
+      "description": "The readiness state of validation.",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ReadinessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The validation has been accepted and is pending execution."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The validation is currently in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The validation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The validation has failed."
+          }
+        ]
+      }
+    },
+    "ReadinessStatus": {
+      "type": "string",
+      "description": "The readiness status of a check.",
+      "enum": [
+        "Success",
+        "Failure",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ReadinessStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The check completed successfully without issues."
+          },
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The check failed with errors."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The check completed with warnings."
+          }
+        ]
+      }
     },
     "SchemaInfo": {
       "type": "object",
@@ -2024,6 +2289,36 @@
             "name": "AzurePostgresFlexible",
             "value": "azure_postgres_flexible",
             "description": "Azure PostgreSQL Flexible Server"
+          }
+        ]
+      }
+    },
+    "SplitTablesStrategy": {
+      "type": "string",
+      "description": "The split tables strategy.",
+      "enum": [
+        "none",
+        "ctid",
+        "primary_key"
+      ],
+      "x-ms-enum": {
+        "name": "SplitTablesStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "No table splitting"
+          },
+          {
+            "name": "Ctid",
+            "value": "ctid",
+            "description": "Split by CTID"
+          },
+          {
+            "name": "PrimaryKey",
+            "value": "primary_key",
+            "description": "Split by primary key"
           }
         ]
       }
