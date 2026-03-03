@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/billing"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,37 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/Billing/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-billing"
+    namespace: "azure.mgmt.billing"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-billing"
+    namespace: "com.azure.resourcemanager.billing"
+    service-name: "Billing"
+    premium: true
+    enable-sync-stack: true
+    client-side-validations: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-billing"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-billing"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/billing"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-billing"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/arm-billing"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
