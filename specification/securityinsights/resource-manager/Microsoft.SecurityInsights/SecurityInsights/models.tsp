@@ -3865,9 +3865,7 @@ model ClientInfo {
   /**
    * The object id of the client.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   /**
    * The user principal name of the client.
