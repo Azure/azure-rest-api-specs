@@ -54,11 +54,9 @@ using TypeSpec.Rest;
 );
 @@clientName(DisconnectedOperations, "Disconnected", "csharp");
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Edge {
-  @@scope(DisconnectedOperations.createOrUpdate, "!javascript");
-  @@scope(DisconnectedOperations.get, "!javascript");
-  @@scope(DisconnectedOperations.delete, "!javascript");
-  @@scope(DisconnectedOperations.listDeploymentManifest, "!javascript");
+  @doc("Disconnected operation resource for create or update.")
   model DisconnectedOperationCreateOrUpdate
     is TrackedResource<DisconnectedOperationPropertiesCreateOrUpdate> {
     @doc("Name of the resource")
@@ -68,7 +66,8 @@ namespace Microsoft.Edge {
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     name: string;
   }
-
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   model DisconnectedOperationPropertiesCreateOrUpdate {
     @renamedFrom(Microsoft.Edge.Versions.v2026_03_15, "connectionIntent")
     @removed(Microsoft.Edge.Versions.v2026_03_15)
@@ -102,20 +101,11 @@ namespace Microsoft.Edge {
     @doc("The current billing configuration")
     current: BillingPeriod;
   }
-
-  @armResourceOperations
-  interface DisconnectedOperationsJs
-    extends Azure.ResourceManager.TrackedResourceOperations<
-        DisconnectedOperation,
-        DisconnectedOperationProperties
-      > {
-    createOrUpdate is ArmResourceCreateOrUpdateAsync<DisconnectedOperationCreateOrUpdate>;
-  }
-
-  @@scope(DisconnectedOperationsJs.createOrUpdate, "javascript");
-
-  @@clientLocation(DisconnectedOperationsJs.createOrUpdate,
-    "DisconnectedOperations",
-    "javascript"
-  );
 }
+
+// JavaScript SDK: use CreateOrUpdate-specific resource model for write operations,
+// which omits server-side read-only fields (stampId, billingModel, etc.)
+@@alternateType(DisconnectedOperations.createOrUpdate::parameters.resource,
+  DisconnectedOperationCreateOrUpdate,
+  "javascript"
+);
