@@ -219,13 +219,13 @@ model DataMaskingPolicy {
    * List of JSON paths to include in the masking policy.
    */
   @identifiers(#[])
-  includedPaths?: DataMaskingPolicyIncludedPath[];
+  includedPaths?: DataMaskingPolicyIncludedPathsItem[];
 
   /**
    * List of JSON paths to exclude from masking.
    */
   @identifiers(#[])
-  excludedPaths?: DataMaskingPolicyExcludedPath[];
+  excludedPaths?: DataMaskingPolicyExcludedPathsItem[];
 
   /**
    * Flag indicating whether the data masking policy is enabled.
@@ -236,7 +236,7 @@ model DataMaskingPolicy {
 /**
  * JSON path to include in the masking policy.
  */
-model DataMaskingPolicyIncludedPath {
+model DataMaskingPolicyIncludedPathsItem {
   /**
    * The JSON path to apply masking (e.g. "/contact/phones").
    */
@@ -261,7 +261,7 @@ model DataMaskingPolicyIncludedPath {
 /**
  * JSON path to exclude from masking.
  */
-model DataMaskingPolicyExcludedPath {
+model DataMaskingPolicyExcludedPathsItem {
   /**
    * The JSON path to exclude from masking (e.g. "/id").
    */
