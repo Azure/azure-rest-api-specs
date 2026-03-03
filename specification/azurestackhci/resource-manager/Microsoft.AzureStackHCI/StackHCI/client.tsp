@@ -480,7 +480,10 @@ using Microsoft.AzureStackHCI;
   "EnableStorageAutoIP",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.PhysicalNodes.ipv4Address, "IPv4Address", "csharp");
+@@clientName(Microsoft.AzureStackHCI.PhysicalNodes.ipv4Address,
+  "IPv4Address",
+  "csharp"
+);
 @@clientName(Microsoft.AzureStackHCI.DeploymentSettingStorageAdapterIPInfo.ipv4Address,
   "IPv4Address",
   "csharp"
@@ -502,8 +505,14 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(Microsoft.AzureStackHCI.ClusterNode.osName, "OSName", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ClusterNode.osVersion, "OSVersion", "csharp");
-@@clientName(Microsoft.AzureStackHCI.InfrastructureNetwork.ipPools, "IPPools", "csharp");
+@@clientName(Microsoft.AzureStackHCI.ClusterNode.osVersion,
+  "OSVersion",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.InfrastructureNetwork.ipPools,
+  "IPPools",
+  "csharp"
+);
 @@clientName(Microsoft.AzureStackHCI.PrecheckResult.targetResourceID,
   "TargetResourceId",
   "csharp"
