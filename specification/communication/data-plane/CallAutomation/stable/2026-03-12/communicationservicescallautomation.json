@@ -2911,45 +2911,6 @@
       },
       "additionalProperties": false
     },
-    "IncomingCall": {
-      "description": "The incoming call event.",
-      "type": "object",
-      "properties": {
-        "to": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "from": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "callerDisplayName": {
-          "description": "Display name of caller.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serverCallId": {
-          "description": "The server call id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "customContext": {
-          "$ref": "#/definitions/CustomCallingContext"
-        },
-        "incomingCallContext": {
-          "description": "Incoming call context.",
-          "type": "string",
-          "readOnly": true
-        },
-        "onBehalfOfCallee": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
     "MediaStreamingAudioChannelType": {
       "description": "The audio channel type to stream, e.g., unmixed audio, mixed audio.",
       "enum": [
