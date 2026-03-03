@@ -135,3 +135,9 @@ using Microsoft.Help;
   "DiscoverSolutionsNlp",
   "csharp"
 );
+
+// Java SDK back-compat: restore old model name
+@@clientName(Microsoft.Help.DiagnosticProvisioningState,
+  "ProvisioningState",
+  "java"
+);
