@@ -49,7 +49,6 @@ union DatasetKind {
 }
 
 /** Dataset properties */
-/** Dataset properties */
 model DatasetProperties {
   /** Provisioning state of the dataset. */
   @visibility(Lifecycle.Read)
