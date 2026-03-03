@@ -43,6 +43,10 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @path
   @segment("fileShares")
   name: string;
+
+  @doc("The identity of the file share.")
+  @added(Versions.v2026_06_01)
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @doc("Media Tier enum.")
