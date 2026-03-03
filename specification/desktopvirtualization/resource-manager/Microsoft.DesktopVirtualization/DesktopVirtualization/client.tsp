@@ -590,6 +590,14 @@ using Microsoft.DesktopVirtualization;
   "getPrivateLinkResources",
   "csharp"
 );
+@@clientName(PrivateLinkResources.listByWorkspace,
+  "getPrivateLinkResources",
+  "csharp"
+);
+@@clientLocation(PrivateLinkResources.listByWorkspace,
+  "PrivateLinkResourcesByWorkspace",
+  "csharp"
+);
 
 @@Azure.ClientGenerator.Core.alternateType(CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
   PrivateEndpointConnection,
