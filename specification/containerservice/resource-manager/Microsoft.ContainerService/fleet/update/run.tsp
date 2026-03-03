@@ -229,6 +229,11 @@ model UpdateRunStatus {
   @doc("The node image upgrade specs for the update run. It is only set in update run when `NodeImageSelection.type` is `Consistent`.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelectionStatus;
+
+  @visibility(Lifecycle.Read)
+  @doc("Total member upgrade failures across the entire UpdateRun.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
 }
 
 @doc("The node image upgrade specs for the update run.")
@@ -257,6 +262,12 @@ model UpdateStageStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateStage.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.")
+  @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value.")
@@ -295,6 +306,12 @@ model UpdateGroupStatus {
   @doc("The name of the UpdateGroup.")
   name?: string;
 
+  @visibility(Lifecycle.Read)
+  @doc("The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.")
+  @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
+  @added(Versions.v2026_05_01_preview)
+  maxAllowedFailures?: string;
+  
   @visibility(Lifecycle.Read)
   @doc("""
       The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to "${GroupMaxConcurrencyDefault}".
