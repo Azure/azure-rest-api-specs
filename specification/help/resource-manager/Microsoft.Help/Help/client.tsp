@@ -136,8 +136,12 @@ using Microsoft.Help;
   "csharp"
 );
 
-// Java SDK back-compat: restore old model name
-@@clientName(Microsoft.Help.DiagnosticProvisioningState,
-  "ProvisioningState",
+// Java SDK: rename DiscoverySolutionNLPs to DiscoverySolutionNlps
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
+  "DiscoverySolutionNlp",
+  "java"
+);
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
+  "DiscoverySolutionNlp",
   "java"
 );
