@@ -30,6 +30,7 @@ runs:
         INPUT_TAGS: ${{ inputs.tags }}
         INPUT_MODEL: ${{ inputs.model }}
         ACTION_PATH: ${{ github.action_path }}
+        AZSDK_BENCHMARKS_LOG_DIR: ${{ github.workspace }}/azsdk-cli-benchmark-logs
       run: |
         $scriptPath = Join-Path $env:ACTION_PATH ".." ".." "scripts" "Run-Azsdk-Benchmarks.ps1"
         & $scriptPath `
@@ -42,6 +43,6 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: azsdk-cli-benchmark-logs
-        path: /tmp/azsdk-benchmarks/logs/
+        path: ${{ github.workspace }}/azsdk-cli-benchmark-logs/
         if-no-files-found: ignore
         retention-days: 7
