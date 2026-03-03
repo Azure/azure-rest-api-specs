@@ -62,7 +62,8 @@ interface PartnerTransfers {
   @tag("Transfers")
   list is ArmResourceListByParent<
     PartnerTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<PartnerTransferDetailsListResult>
   >;
 
   /**

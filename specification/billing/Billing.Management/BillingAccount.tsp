@@ -141,7 +141,8 @@ interface BillingAccounts {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<BillingAccountListResult>
   >;
 
   /**

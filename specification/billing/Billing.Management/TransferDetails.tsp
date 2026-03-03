@@ -58,7 +58,8 @@ interface Transfers {
    */
   list is ArmResourceListByParent<
     TransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<TransferDetailsListResult>
   >;
 
   /**

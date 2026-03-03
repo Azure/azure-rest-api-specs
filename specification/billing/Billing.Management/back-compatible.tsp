@@ -508,6 +508,7 @@ using Microsoft.Billing;
 
 @@Azure.ResourceManager.identifiers(AgreementListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(AssociatedTenantListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(BillingAccountListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(BillingProfileListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(BillingRequestListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(BillingRoleAssignmentListResult.value,
@@ -533,3 +534,32 @@ using Microsoft.Billing;
 @@Azure.ResourceManager.identifiers(PaymentMethodsListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(ProductListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(TransactionListResult.value, #["id"]);
+
+@@visibility(AgreementListResult.value, Lifecycle.Read);
+@@visibility(AssociatedTenantListResult.value, Lifecycle.Read);
+@@visibility(BillingProfileListResult.value, Lifecycle.Read);
+@@visibility(BillingRequestListResult.value, Lifecycle.Read);
+@@visibility(BillingRoleAssignmentListResult.value, Lifecycle.Read);
+@@visibility(BillingRoleDefinitionListResult.value, Lifecycle.Read);
+@@visibility(BillingSubscriptionAliasListResult.value, Lifecycle.Read);
+@@visibility(BillingSubscriptionListResult.value, Lifecycle.Read);
+@@visibility(CustomerListResult.value, Lifecycle.Read);
+@@visibility(DepartmentListResult.value, Lifecycle.Read);
+@@visibility(EnrollmentAccountListResult.value, Lifecycle.Read);
+@@visibility(InvoiceListResult.value, Lifecycle.Read);
+@@visibility(InvoiceSectionListResult.value, Lifecycle.Read);
+@@visibility(PaymentMethodLinksListResult.value, Lifecycle.Read);
+@@visibility(PaymentMethodsListResult.value, Lifecycle.Read);
+@@visibility(ProductListResult.value, Lifecycle.Read);
+@@visibility(TransactionListResult.value, Lifecycle.Read);
+@@visibility(BillingAccountListResult.value, Lifecycle.Read);
+@@visibility(BillingPermissionListResult.value, Lifecycle.Read);
+@@visibility(BillingSubscriptionListResult.nextLink, Lifecycle.Read);
+@@visibility(InvoiceSectionWithCreateSubPermissionListResult.value,
+  Lifecycle.Read
+);
+@@visibility(PartnerTransferDetailsListResult.value, Lifecycle.Read);
+@@visibility(RecipientTransferDetailsListResult.value, Lifecycle.Read);
+@@visibility(ReservationsListResult.value, Lifecycle.Read);
+@@visibility(ReservationsListResult.nextLink, Lifecycle.Read);
+@@visibility(TransferDetailsListResult.value, Lifecycle.Read);

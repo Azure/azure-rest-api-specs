@@ -48,7 +48,8 @@ interface RecipientTransfers {
   @summary("Lists the transfer requests received by the caller.")
   list is ArmResourceListByParent<
     RecipientTransferDetails,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<RecipientTransferDetailsListResult>
   >;
 
   /**

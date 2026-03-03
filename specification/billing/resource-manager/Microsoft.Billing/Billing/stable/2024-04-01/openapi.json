@@ -14067,6 +14067,7 @@
           "items": {
             "$ref": "#/definitions/Agreement"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -14294,6 +14295,7 @@
           "items": {
             "$ref": "#/definitions/AssociatedTenant"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -14483,14 +14485,18 @@
     },
     "BillingAccountListResult": {
       "type": "object",
-      "description": "The response of a BillingAccount list operation.",
+      "description": "Paged collection of BillingAccount items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingAccount items on this page",
           "items": {
             "$ref": "#/definitions/BillingAccount"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -14819,7 +14825,8 @@
           "description": "The BillingPermission items on this page",
           "items": {
             "$ref": "#/definitions/BillingPermission"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -14934,6 +14941,7 @@
           "items": {
             "$ref": "#/definitions/BillingProfile"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -15617,6 +15625,7 @@
           "items": {
             "$ref": "#/definitions/BillingRequest"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -15953,6 +15962,7 @@
           "items": {
             "$ref": "#/definitions/BillingRoleAssignment"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -16154,6 +16164,7 @@
           "items": {
             "$ref": "#/definitions/BillingRoleDefinition"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -16252,6 +16263,7 @@
           "items": {
             "$ref": "#/definitions/BillingSubscriptionAlias"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -16297,6 +16309,7 @@
           "items": {
             "$ref": "#/definitions/BillingSubscription"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -16304,7 +16317,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         },
         "totalCount": {
           "type": "number",
@@ -16987,6 +17001,7 @@
           "items": {
             "$ref": "#/definitions/Customer"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -17411,6 +17426,7 @@
           "items": {
             "$ref": "#/definitions/Department"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -17606,6 +17622,7 @@
           "items": {
             "$ref": "#/definitions/EnrollmentAccount"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -18246,6 +18263,7 @@
           "items": {
             "$ref": "#/definitions/Invoice"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -18569,6 +18587,7 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -18788,6 +18807,7 @@
           "items": {
             "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "invoiceSectionId"
           ]
@@ -19341,14 +19361,15 @@
     },
     "PartnerTransferDetailsListResult": {
       "type": "object",
-      "description": "The response of a PartnerTransferDetails list operation.",
+      "description": "Paged collection of PartnerTransferDetails items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The PartnerTransferDetails items on this page",
           "items": {
             "$ref": "#/definitions/PartnerTransferDetails"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -19734,6 +19755,7 @@
           "items": {
             "$ref": "#/definitions/PaymentMethodLink"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -19850,6 +19872,7 @@
           "items": {
             "$ref": "#/definitions/PaymentMethod"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -20305,6 +20328,7 @@
           "items": {
             "$ref": "#/definitions/Product"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -20866,14 +20890,15 @@
     },
     "RecipientTransferDetailsListResult": {
       "type": "object",
-      "description": "The response of a RecipientTransferDetails list operation.",
+      "description": "Paged collection of RecipientTransferDetails items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The RecipientTransferDetails items on this page",
           "items": {
             "$ref": "#/definitions/RecipientTransferDetails"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -22241,12 +22266,14 @@
           "description": "The Reservation items on this page",
           "items": {
             "$ref": "#/definitions/Reservation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         },
         "summary": {
           "$ref": "#/definitions/ReservationSummary",
@@ -23821,6 +23848,7 @@
           "items": {
             "$ref": "#/definitions/Transaction"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "id"
           ]
@@ -24141,14 +24169,15 @@
     },
     "TransferDetailsListResult": {
       "type": "object",
-      "description": "The response of a TransferDetails list operation.",
+      "description": "Paged collection of TransferDetails items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The TransferDetails items on this page",
           "items": {
             "$ref": "#/definitions/TransferDetails"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

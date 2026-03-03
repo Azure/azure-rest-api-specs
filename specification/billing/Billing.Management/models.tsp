@@ -9095,3 +9095,13 @@ model InvoiceSectionListResult is Azure.Core.Page<InvoiceSection>;
 model ProductListResult is Azure.Core.Page<Product>;
 
 model TransactionListResult is Azure.Core.Page<Transaction>;
+
+model BillingAccountListResult is Azure.Core.Page<BillingAccount>;
+
+model PartnerTransferDetailsListResult
+  is Azure.Core.Page<PartnerTransferDetails>;
+
+model RecipientTransferDetailsListResult
+  is Azure.Core.Page<RecipientTransferDetails>;
+
+model TransferDetailsListResult is Azure.Core.Page<TransferDetails>;
