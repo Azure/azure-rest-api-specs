@@ -15983,3 +15983,52 @@ model StorageMount {
    */
   credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
 }
+
+/**
+ * Result object for a static sites asynchronous operation.
+ */
+model StaticSitesOperationResults {
+  /**
+   * The fully qualified ID for the staticSite.  For example, /providers/Microsoft.Web/staticSites/test-swa
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.  For example, Microsoft.Web/staticSites
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the staticSite. For example, test-swa
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The start time of the asynchronous operation.
+   */
+  startTime?: string;
+
+  /**
+   * The end time of the asynchronous operation.
+   */
+  endTime?: string;
+
+  /**
+   * The generic properties of a staticSite.
+   */
+  properties?: StaticSite;
+
+  /**
+   * Error details for the asynchronous operation, if any.
+   */
+  error?: ErrorResponse;
+}

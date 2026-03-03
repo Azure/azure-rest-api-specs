@@ -561,3 +561,46 @@ interface StaticSitesOperationGroup {
     Error = DefaultErrorResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface StaticSitesAsyncOperationGroup {
+  /**
+   * Description for Gets the status of a static site async operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the status of a static site async operation.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperations/{operationId}")
+  @get
+  getStaticSiteOperation(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * Operation Id
+     */
+    @path
+    operationId: string,
+
+    ...SubscriptionIdParameter,
+  ): OkResponse | AcceptedResponse | NoContentResponse | DefaultErrorResponse;
+
+  /**
+   * Description for Gets the result of a static site async operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the result of a static site async operation.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}")
+  @get
+  getStaticSiteOperationResult(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * Operation Id
+     */
+    @path
+    operationId: string,
+
+    ...SubscriptionIdParameter,
+  ): StaticSitesOperationResults | DefaultErrorResponse;
+}
