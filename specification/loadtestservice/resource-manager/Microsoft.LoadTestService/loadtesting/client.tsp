@@ -18,10 +18,13 @@ namespace Customizations;
   "LoadTestResource"
 );
 
-@client({
-  name: "LoadTestMgmtClient",
-  service: Microsoft.LoadTestService,
-})
+@client(
+  {
+    name: "LoadTestMgmtClient",
+    service: Microsoft.LoadTestService,
+  },
+  "javascript"
+)
 @armResourceOperations
 interface LoadTests {
   listBySubscription is Microsoft.LoadTestService.LoadTests.listBySubscription;
