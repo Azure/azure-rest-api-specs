@@ -36,15 +36,3 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-01-01/*.json
   reason: Brownfield service not ready to migrate
-- tool: SwaggerAvocado
-  rules: [MISSING_APIS_IN_DEFAULT_TAG]
-  paths: [readme.md]
-  sub-paths:
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triagerecommendations"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triagerecommendations/{}"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triagerecommendations/{}/approve"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triagerecommendations/{}/reject"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triagerecommendations/{}/reset"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triageresources"
-    - "/subscriptions/{}/providers/microsoft.advisor/resiliencyreviews/{}/providers/microsoft.advisor/triageresources/{}"
-  reason: Triage APIs are deprecated and removed in 2026-03-01-preview version. These paths exist in older API versions but are intentionally excluded from the default tag.
