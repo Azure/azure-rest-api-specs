@@ -573,6 +573,12 @@ model RecommendationProperties {
   state?: NewState;
 
   /**
+   * The type of recommendation completion, which is either MarkedByUser or SystemVerified
+   */
+  @added(Versions.v2026_02_01_preview)
+  completionType?: string;
+
+  /**
    * The reason the Recommendation was dismissed.
    */
   @added(Versions.v2026_02_01_preview)
@@ -586,16 +592,24 @@ model RecommendationProperties {
   postponedUntilDateTime?: utcDateTime;
 
   /**
-   * The most recent time that Advisor checked the validity of the recommendation.
+   * The most recent time Advisor evaluated the recommendation for validity (re-ingested).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @added(Versions.v2026_02_01_preview)
   lastRefreshed?: utcDateTime;
 
   /**
-   * The most recent time that Advisor recommendation was updated.
+   * The most recent time the recommendation state changed (manual or automated).
    */
+  @added(Versions.v2026_02_01_preview)
   lastUpdated?: utcDateTime;
+
+  /**
+   * The most recent time that Advisor checked the validity of the recommendation.
+   */
+   @renamedFrom(Versions.v2026_02_01_preview, "lastUpdated")
+   @removed(Versions.v2026_02_01_preview)
+   oldlastUpdated?: utcDateTime;
 
   /**
    * The recommendation metadata.

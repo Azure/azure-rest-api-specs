@@ -1016,7 +1016,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'], '[State](#state)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' and State eq 'New'. Please note that State is available as a filter from API Version 2026-02-01-preview.",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[State](#state)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `State` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
             "required": false,
             "type": "string"
           },
@@ -2739,6 +2739,10 @@
           "$ref": "#/definitions/NewState",
           "description": "The state of the Recommendation"
         },
+        "completionType": {
+          "type": "string",
+          "description": "The type of recommendation completion, which is either MarkedByUser or SystemVerified"
+        },
         "recommendationDismissReason": {
           "$ref": "#/definitions/RecommendationDismissReason",
           "description": "The reason the Recommendation was dismissed."
@@ -2751,12 +2755,12 @@
         "lastRefreshed": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent time that Advisor checked the validity of the recommendation."
+          "description": "The most recent time Advisor evaluated the recommendation for validity (re-ingested)."
         },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent time that Advisor recommendation was updated."
+          "description": "The most recent time the recommendation state changed (manual or automated)."
         },
         "metadata": {
           "type": "object",
