@@ -12224,52 +12224,12 @@
     "ControlActivity": {
       "type": "object",
       "description": "Base class for all control activities like IfCondition, ForEach , Until.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Activity name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of activity."
-        },
-        "description": {
-          "type": "string",
-          "description": "Activity description."
-        },
-        "state": {
-          "$ref": "#/definitions/ActivityState",
-          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default."
-        },
-        "onInactiveMarkAs": {
-          "$ref": "#/definitions/ActivityOnInactiveMarkAs",
-          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default."
-        },
-        "dependsOn": {
-          "type": "array",
-          "description": "Activity depends on condition.",
-          "items": {
-            "$ref": "#/definitions/ActivityDependency"
-          },
-          "x-ms-identifiers": []
-        },
-        "userProperties": {
-          "type": "array",
-          "description": "Activity user properties.",
-          "items": {
-            "$ref": "#/definitions/UserProperty"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
         }
-      },
-      "discriminator": "type",
-      "required": [
-        "name",
-        "type"
       ],
-      "additionalProperties": {}
+      "x-ms-discriminator-value": "Container"
     },
     "CopyActivity": {
       "type": "object",
@@ -16835,7 +16795,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Activity"
+          "$ref": "#/definitions/ControlActivity"
         }
       ],
       "x-ms-discriminator-value": "ForEach"
@@ -23224,24 +23184,6 @@
       "type": "object",
       "description": "Base class for all triggers that support one to many model for trigger to pipeline.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Trigger type."
-        },
-        "description": {
-          "type": "string",
-          "description": "Trigger description."
-        },
-        "runtimeState": {
-          "$ref": "#/definitions/TriggerRuntimeState",
-          "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
-          "readOnly": true
-        },
-        "annotations": {
-          "type": "array",
-          "description": "List of tags that can be used for describing the trigger.",
-          "items": {}
-        },
         "pipelines": {
           "type": "array",
           "description": "Pipelines that need to be started.",
@@ -23253,11 +23195,12 @@
           ]
         }
       },
-      "discriminator": "type",
-      "required": [
-        "type"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
       ],
-      "additionalProperties": {}
+      "x-ms-discriminator-value": "MultiplePipelineTrigger"
     },
     "MySqlLinkedService": {
       "type": "object",
@@ -29103,16 +29046,6 @@
       "type": "object",
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
       "properties": {
-        "pipelines": {
-          "type": "array",
-          "description": "Pipelines that need to be started.",
-          "items": {
-            "$ref": "#/definitions/TriggerPipelineReference"
-          },
-          "x-ms-identifiers": [
-            "/pipelineReference/referenceName"
-          ]
-        },
         "typeProperties": {
           "$ref": "#/definitions/ScheduleTriggerTypeProperties",
           "description": "Schedule Trigger properties.",
@@ -29124,7 +29057,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Trigger"
+          "$ref": "#/definitions/MultiplePipelineTrigger"
         }
       ],
       "x-ms-discriminator-value": "ScheduleTrigger"
@@ -34824,7 +34757,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Activity"
+          "$ref": "#/definitions/ControlActivity"
         }
       ],
       "x-ms-discriminator-value": "WebHook"

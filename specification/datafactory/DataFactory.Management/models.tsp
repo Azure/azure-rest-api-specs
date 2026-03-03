@@ -19330,7 +19330,9 @@ model ServiceNowV2LinkedServiceTypeProperties {
 /**
  * Base class for all control activities like IfCondition, ForEach , Until.
  */
-model ControlActivity is Activity;
+model ControlActivity extends Activity {
+  type: "Container";
+}
 
 /**
  * Base class for all execution activities.
@@ -25770,7 +25772,9 @@ model SqlServerStoredProcedureActivityTypeProperties {
 /**
  * Execute pipeline activity.
  */
-model ExecutePipelineActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model ExecutePipelineActivity extends Activity {
   /**
    * Execute pipeline activity policy.
    */
@@ -26122,7 +26126,9 @@ model GetMetadataActivityTypeProperties {
 /**
  * This activity evaluates a boolean expression and executes either the activities under the ifTrueActivities property or the ifFalseActivities property depending on the result of the expression.
  */
-model IfConditionActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model IfConditionActivity extends Activity {
   /**
    * IfCondition activity properties.
    */
@@ -26159,7 +26165,9 @@ model IfConditionActivityTypeProperties {
 /**
  * This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.
  */
-model SwitchActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model SwitchActivity extends Activity {
   /**
    * Switch activity properties.
    */
@@ -26487,7 +26495,9 @@ model DataLakeAnalyticsUSQLActivityTypeProperties {
 /**
  * This activity suspends pipeline execution for the specified interval.
  */
-model WaitActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model WaitActivity extends Activity {
   /**
    * Wait activity properties.
    */
@@ -26512,7 +26522,9 @@ model WaitActivityTypeProperties {
 /**
  * This activity will fail within its own scope and output a custom error message and error code. The error message and code can provided either as a string literal or as an expression that can be evaluated to a string at runtime. The activity scope can be the whole pipeline or a control activity (e.g. foreach, switch, until), if the fail activity is contained in it.
  */
-model FailActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model FailActivity extends Activity {
   /**
    * Fail activity properties.
    */
@@ -26542,7 +26554,9 @@ model FailActivityTypeProperties {
 /**
  * This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.
  */
-model UntilActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model UntilActivity extends Activity {
   /**
    * Until activity properties.
    */
@@ -26578,7 +26592,9 @@ model UntilActivityTypeProperties {
 /**
  * This activity verifies that an external resource exists.
  */
-model ValidationActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model ValidationActivity extends Activity {
   /**
    * Validation activity properties.
    */
@@ -26623,7 +26639,9 @@ model ValidationActivityTypeProperties {
 /**
  * Filter and return results from input array based on the conditions.
  */
-model FilterActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model FilterActivity extends Activity {
   /**
    * Filter activity properties.
    */
@@ -26809,7 +26827,9 @@ model DatabricksJobActivityTypeProperties {
 /**
  * Set value for a Variable.
  */
-model SetVariableActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model SetVariableActivity extends Activity {
   /**
    * Set Variable activity properties.
    */
@@ -26864,7 +26884,9 @@ model SecureInputOutputPolicy {
 /**
  * Append value for a Variable of type Array.
  */
-model AppendVariableActivity extends ControlActivity {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ControlActivity)
+model AppendVariableActivity extends Activity {
   /**
    * Append Variable activity properties.
    */
@@ -27720,8 +27742,9 @@ model ExpressionV2 {
 /**
  * Base class for all triggers that support one to many model for trigger to pipeline.
  */
-model MultiplePipelineTrigger is Trigger {
+model MultiplePipelineTrigger extends Trigger {
   ...MultiplePipelineTriggerProperties;
+  type: "MultiplePipelineTrigger";
 }
 
 alias MultiplePipelineTriggerProperties = {
@@ -27854,7 +27877,11 @@ model RecurrenceScheduleOccurrence {
 /**
  * Trigger that runs every time the selected Blob container changes.
  */
-model BlobTrigger extends MultiplePipelineTrigger {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MultiplePipelineTrigger)
+model BlobTrigger extends Trigger {
+  ...MultiplePipelineTriggerProperties;
+
   /**
    * Blob Trigger properties.
    */
@@ -27889,7 +27916,11 @@ model BlobTriggerTypeProperties {
 /**
  * Trigger that runs every time a Blob event occurs.
  */
-model BlobEventsTrigger extends MultiplePipelineTrigger {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MultiplePipelineTrigger)
+model BlobEventsTrigger extends Trigger {
+  ...MultiplePipelineTriggerProperties;
+
   /**
    * Blob Events Trigger properties.
    */
@@ -27934,7 +27965,11 @@ model BlobEventsTriggerTypeProperties {
 /**
  * Trigger that runs every time a custom event is received.
  */
-model CustomEventsTrigger extends MultiplePipelineTrigger {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MultiplePipelineTrigger)
+model CustomEventsTrigger extends Trigger {
+  ...MultiplePipelineTriggerProperties;
+
   /**
    * Custom Events Trigger properties.
    */
