@@ -5376,24 +5376,19 @@
       "type": "string",
       "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
       "enum": [
-        "Uninitialized",
         "Initialized",
         "InProgress",
         "Completed",
         "Cancelled",
         "Paused",
         "Failed",
-        "Skipped"
+        "Skipped",
+        "Uninitialized"
       ],
       "x-ms-enum": {
         "name": "ChangeRecordStageProgressionState",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Uninitialized",
-            "value": "Uninitialized",
-            "description": "Change has not yet been initialized for the stage."
-          },
           {
             "name": "Initialized",
             "value": "Initialized",
@@ -5428,6 +5423,11 @@
             "name": "Skipped",
             "value": "Skipped",
             "description": "Change is not applied to the stage."
+          },
+          {
+            "name": "Uninitialized",
+            "value": "Uninitialized",
+            "description": "Change has not yet been initialized for the stage."
           }
         ]
       }

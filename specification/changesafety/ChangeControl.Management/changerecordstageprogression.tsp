@@ -80,9 +80,6 @@ model ChangeRecordStageProgressionProperties {
 union ChangeRecordStageProgressionState {
   string,
 
-  @doc("Change has not yet been initialized for the stage.")
-  Uninitialized: "Uninitialized",
-
   @doc("Change is initialized to be applied within the stage.")
   Initialized: "Initialized",
 
@@ -103,6 +100,9 @@ union ChangeRecordStageProgressionState {
 
   @doc("Change is not applied to the stage.")
   Skipped: "Skipped",
+
+  @doc("Change has not yet been initialized for the stage.")
+  Uninitialized: "Uninitialized",
 }
 
 @added(Versions.v2026_01_01_preview)
