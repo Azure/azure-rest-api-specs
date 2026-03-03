@@ -1562,7 +1562,8 @@ alias PaidBurstingResponseHeaders = {
   @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
 
   /** The maximum burst credits for IOPS. */
-  @header("x-ms-share-max-burst-credits-for-iops") maxBurstCreditsForIops?: int64;
+  @header("x-ms-share-max-burst-credits-for-iops")
+  maxBurstCreditsForIops?: int64;
 };
 
 //

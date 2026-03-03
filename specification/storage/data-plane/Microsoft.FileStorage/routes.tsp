@@ -146,7 +146,6 @@ interface Service {
   getUserDelegationKey is StorageOperation<
     {
       ...TimeoutParameter;
-      ...FileRequestIntentParameter;
 
       /** Key information */
       @body keyInfo: KeyInfo;
@@ -326,6 +325,12 @@ interface Share {
     },
     {
       @statusCode statusCode: 202;
+
+      /** The approximate size of the data stored on the share. */
+      @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
+
+      /** The approximate size of the data stored on the share snapshot. */
+      @header("x-ms-file-share-snapshot-usage-bytes") shareSnapshotUsageBytes?: int64;
     }
   >;
 
@@ -342,7 +347,7 @@ interface Share {
       ...TimeoutParameter;
 
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
-      @header("x-ms-lease-duration") leaseDuration: int32;
+      @header("x-ms-lease-duration") leaseDuration?: int32;
 
       /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
       @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
@@ -352,6 +357,8 @@ interface Share {
     },
     {
       @statusCode statusCode: 201;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
@@ -373,7 +380,10 @@ interface Share {
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+    }
   >;
 
   /**
@@ -389,13 +399,16 @@ interface Share {
       ...LeaseIdParameter;
 
       /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
-      @header("x-ms-proposed-lease-id") proposedLeaseId: string;
+      @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
       /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
     }
@@ -417,6 +430,9 @@ interface Share {
       ...FileRequestIntentParameter;
     },
     {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+
       /** Uniquely identifies a share's lease */
       @header("x-ms-lease-id") leaseId: string;
     }
@@ -437,14 +453,20 @@ interface Share {
       /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
       @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
 
+      ...LeaseIdParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 202;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** Approximate time remaining in the lease period, in seconds. */
       @header("x-ms-lease-time") leaseTime?: string;
+
+      /** Uniquely identifies a share's lease */
+      @header("x-ms-lease-id") leaseId?: string;
     }
   >;
 
@@ -464,6 +486,8 @@ interface Share {
     },
     {
       @statusCode statusCode: 201;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
 
       /** This header is a DateTime value that uniquely identifies the share snapshot. The value of this header may be used in subsequent requests to access the share snapshot. This value is opaque. */
       @header("x-ms-snapshot") snapshot: string;
@@ -596,7 +620,10 @@ interface Share {
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+    }
   >;
 
   /**
@@ -614,6 +641,8 @@ interface Share {
       ...FileRequestIntentParameter;
     },
     {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
       @body signedIdentifiers: SignedIdentifier[];
     }
   >;
@@ -633,7 +662,10 @@ interface Share {
       ...FileRequestIntentParameter;
       @body shareAcl?: SignedIdentifier[];
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+    }
   >;
 
   /**
@@ -651,6 +683,8 @@ interface Share {
       ...FileRequestIntentParameter;
     },
     {
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
       @body shareStats: ShareStats;
     }
   >;
@@ -672,6 +706,13 @@ interface Share {
     },
     {
       @statusCode statusCode: 201;
+      ...EtagResponseHeader;
+      ...LastModifiedResponseHeader;
+      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-bandwidth-mibps") shareProvisionedBandwidthMibps?: int32;
+      @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
+      @header("x-ms-share-max-burst-credits-for-iops") shareMaxBurstCreditsForIops?: int64;
     }
   >;
 }
@@ -697,6 +738,7 @@ interface Directory {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileSmtPropertyRequestHeaders;
+      ...FilePermissionFormatParameter;
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
 
@@ -736,6 +778,11 @@ interface Directory {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+
+      /** Whether server-encrypted. */
+      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
+
+      ...NfsResponseHeaders;
     }
   >;
 
@@ -785,6 +832,10 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+
+      @header("x-ms-mode") mode?: string;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
     }
   >;
 
@@ -803,9 +854,13 @@ interface Directory {
 
       ...TimeoutParameter;
       ...MetadataHeaders;
+      ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
-    {}
+    {
+      ...EtagResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
+    }
   >;
 
   /**
@@ -872,6 +927,9 @@ interface Directory {
       ...FileRequestIntentParameter;
     },
     {
+      /** A string describing next handle to be closed. */
+      @header("x-ms-marker") marker?: string;
+
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
       @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
     }
@@ -953,7 +1011,7 @@ interface File {
       ...TimeoutParameter;
 
       /** Dummy constant parameter, file type can only be file. */
-      @header("x-ms-type") fileType?: string;
+      @header("x-ms-type") fileType: string;
 
       ...FileContentRequestHeaders;
       ...MetadataHeaders;
@@ -1114,12 +1172,14 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
-      @header("x-ms-lease-id") leaseId?: string;
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
-      @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean;
     },
     {
       @statusCode statusCode: 202;
+
+      /** NFS only. The link count. */
+      @header("x-ms-link-count") linkCount?: int32;
     }
   >;
 
@@ -1151,7 +1211,10 @@ interface File {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-      ...NfsResponseHeaders;
+
+      @header("x-ms-mode") mode?: string;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
 
       /** NFS only. The link count. */
       @header("x-ms-link-count") linkCount?: int32;
@@ -1176,7 +1239,7 @@ interface File {
     },
     {
       ...EtagResponseHeader;
-      ...LastModifiedResponseHeader;
+      ...RequestServerEncryptedResponseHeader;
     }
   >;
 
@@ -1192,7 +1255,7 @@ interface File {
       @path fileName: string;
 
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
-      @header("x-ms-lease-duration") leaseDuration: int32;
+      @header("x-ms-lease-duration") leaseDuration?: int32;
 
       /** Proposed lease ID, in a GUID string format. */
       @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
@@ -1245,7 +1308,7 @@ interface File {
       @header("x-ms-lease-id") leaseId: string;
 
       /** Proposed lease ID, in a GUID string format. */
-      @header("x-ms-proposed-lease-id") proposedLeaseId: string;
+      @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -1269,10 +1332,7 @@ interface File {
       @path directory: string;
       @path fileName: string;
       ...TimeoutParameter;
-
-      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. */
-      @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
-
+      ...LeaseIdParameter;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
     },
@@ -1281,8 +1341,8 @@ interface File {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** Approximate time remaining in the lease period, in seconds. */
-      @header("x-ms-lease-time") leaseTime?: string;
+      /** Uniquely identifies a file's lease */
+      @header("x-ms-lease-id") leaseId?: string;
     }
   >;
 
@@ -1360,7 +1420,7 @@ interface File {
       @header("x-ms-copy-source") copySource: string;
 
       /** Bytes of source data in the specified range. */
-      @header("x-ms-source-range") sourceRange: string;
+      @header("x-ms-source-range") sourceRange?: string;
 
       /** Only update is supported. */
       @header("x-ms-write") fileRangeWriteFromUrl: "update";

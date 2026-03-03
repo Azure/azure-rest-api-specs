@@ -659,7 +659,7 @@
             "name": "x-ms-type",
             "in": "header",
             "description": "Dummy constant parameter, file type can only be file.",
-            "required": false,
+            "required": true,
             "type": "string",
             "x-ms-client-name": "fileType"
           },
@@ -1153,6 +1153,7 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
+            "description": "If specified, the lease ID must match the lease ID of the file.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
@@ -1178,13 +1179,6 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
-          },
-          {
-            "name": "x-ms-allow-trailing-dot",
-            "in": "header",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "allowTrailingDot"
           }
         ],
         "responses": {
@@ -1194,6 +1188,11 @@
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-link-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "NFS only. The link count."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -2304,6 +2303,16 @@
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
+              "x-ms-file-share-snapshot-usage-bytes": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The approximate size of the data stored on the share snapshot."
+              },
+              "x-ms-file-share-usage-bytes": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The approximate size of the data stored on the share."
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
@@ -2421,7 +2430,7 @@
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "leaseDuration"
@@ -2468,6 +2477,14 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -2631,6 +2648,14 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -2751,7 +2776,7 @@
             "name": "x-ms-proposed-lease-id",
             "in": "header",
             "description": "Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "proposedLeaseId"
           },
@@ -2798,6 +2823,14 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -2961,6 +2994,14 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -3092,6 +3133,14 @@
             "x-ms-client-name": "leaseBreakPeriod"
           },
           {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the lease ID must match the lease ID of the file.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
             "name": "sharesnapshot",
             "in": "query",
             "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
@@ -3125,9 +3174,21 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-lease-id": {
+                "type": "string",
+                "description": "Uniquely identifies a share's lease"
               },
               "x-ms-lease-time": {
                 "type": "string",
@@ -3281,6 +3342,14 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4115,6 +4184,14 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4270,6 +4347,14 @@
               }
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4433,6 +4518,14 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4585,6 +4678,14 @@
               "$ref": "#/definitions/ShareStats"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4743,6 +4844,14 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "Returns the date and time the resource was last modified."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -4750,6 +4859,26 @@
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-share-included-burst-iops": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-share-max-burst-credits-for-iops": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-share-provisioned-bandwidth-mibps": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-share-provisioned-iops": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-share-quota": {
+                "type": "integer",
+                "format": "int32"
               },
               "x-ms-version": {
                 "type": "string",
@@ -4922,6 +5051,34 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "fileChangeTime"
+          },
+          {
+            "name": "x-ms-file-permission-format",
+            "in": "header",
+            "description": "Optional. Used to set permission format.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Sddl",
+              "Binary"
+            ],
+            "x-ms-enum": {
+              "name": "FilePermissionFormat",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Sddl",
+                  "value": "Sddl",
+                  "description": "Sddl"
+                },
+                {
+                  "name": "Binary",
+                  "value": "Binary",
+                  "description": "Binary"
+                }
+              ]
+            },
+            "x-ms-client-name": "filePermissionFormat"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -5266,6 +5423,36 @@
                 "type": "string",
                 "description": "Creation time for the file/directory."
               },
+              "x-ms-file-file-type": {
+                "type": "string",
+                "description": "NFS only. The file type.",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "SymLink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Regular",
+                      "value": "Regular",
+                      "description": "Regular"
+                    },
+                    {
+                      "name": "Directory",
+                      "value": "Directory",
+                      "description": "Directory"
+                    },
+                    {
+                      "name": "SymLink",
+                      "value": "SymLink",
+                      "description": "SymLink"
+                    }
+                  ]
+                }
+              },
               "x-ms-file-id": {
                 "type": "string",
                 "description": "The fileId of the directory/file."
@@ -5282,13 +5469,29 @@
                 "type": "string",
                 "description": "Key of the permission set for the directory/file."
               },
+              "x-ms-group": {
+                "type": "string",
+                "description": "NFS only. The owning group."
+              },
               "x-ms-meta": {
                 "type": "string",
                 "description": "Optional. User-defined metadata for the resource."
               },
+              "x-ms-mode": {
+                "type": "string",
+                "description": "NFS only. The file mode."
+              },
+              "x-ms-owner": {
+                "type": "string",
+                "description": "NFS only. The owner."
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-server-encrypted": {
+                "type": "boolean",
+                "description": "Whether server-encrypted."
               },
               "x-ms-version": {
                 "type": "string",
@@ -5732,6 +5935,15 @@
                 "type": "string",
                 "description": "Key of the permission set for the directory/file."
               },
+              "x-ms-group": {
+                "type": "string"
+              },
+              "x-ms-mode": {
+                "type": "string"
+              },
+              "x-ms-owner": {
+                "type": "string"
+              },
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
@@ -5865,6 +6077,14 @@
             "x-ms-client-name": "metadata"
           },
           {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
+          },
+          {
             "name": "x-ms-file-request-intent",
             "in": "header",
             "description": "Valid values are 'backup'.",
@@ -5891,6 +6111,10 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -5898,6 +6122,10 @@
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-server-encrypted": {
+                "type": "boolean",
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted."
               },
               "x-ms-version": {
                 "type": "string",
@@ -6472,6 +6700,10 @@
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-marker": {
+                "type": "string",
+                "description": "A string describing next handle to be closed."
               },
               "x-ms-number-of-handles-closed": {
                 "type": "integer",
@@ -7158,36 +7390,6 @@
                 "type": "string",
                 "description": "Creation time for the file/directory."
               },
-              "x-ms-file-file-type": {
-                "type": "string",
-                "description": "NFS only. The file type.",
-                "enum": [
-                  "Regular",
-                  "Directory",
-                  "SymLink"
-                ],
-                "x-ms-enum": {
-                  "name": "NfsFileType",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "Regular",
-                      "value": "Regular",
-                      "description": "Regular"
-                    },
-                    {
-                      "name": "Directory",
-                      "value": "Directory",
-                      "description": "Directory"
-                    },
-                    {
-                      "name": "SymLink",
-                      "value": "SymLink",
-                      "description": "SymLink"
-                    }
-                  ]
-                }
-              },
               "x-ms-file-id": {
                 "type": "string",
                 "description": "The fileId of the directory/file."
@@ -7205,8 +7407,7 @@
                 "description": "Key of the permission set for the directory/file."
               },
               "x-ms-group": {
-                "type": "string",
-                "description": "NFS only. The owning group."
+                "type": "string"
               },
               "x-ms-link-count": {
                 "type": "integer",
@@ -7214,12 +7415,10 @@
                 "description": "NFS only. The link count."
               },
               "x-ms-mode": {
-                "type": "string",
-                "description": "NFS only. The file mode."
+                "type": "string"
               },
               "x-ms-owner": {
-                "type": "string",
-                "description": "NFS only. The owner."
+                "type": "string"
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -7404,10 +7603,6 @@
                 "type": "string",
                 "description": "The ETag contains a value that represents the version of the resource."
               },
-              "Last-Modified": {
-                "type": "string",
-                "description": "Returns the date and time the resource was last modified."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
@@ -7415,6 +7610,10 @@
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-request-server-encrypted": {
+                "type": "boolean",
+                "description": "The value of this header is set to true if the contents of the request are successfully encrypted."
               },
               "x-ms-version": {
                 "type": "string",
@@ -7531,7 +7730,7 @@
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "leaseDuration"
@@ -7908,7 +8107,7 @@
             "name": "x-ms-proposed-lease-id",
             "in": "header",
             "description": "Proposed lease ID, in a GUID string format.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "proposedLeaseId"
           },
@@ -8096,13 +8295,12 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-lease-break-period",
+            "name": "x-ms-lease-id",
             "in": "header",
-            "description": "For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60.",
+            "description": "If specified, the lease ID must match the lease ID of the file.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "leaseBreakPeriod"
+            "type": "string",
+            "x-ms-client-name": "leaseId"
           },
           {
             "name": "x-ms-file-request-intent",
@@ -8151,9 +8349,9 @@
                 "type": "string",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
-              "x-ms-lease-time": {
+              "x-ms-lease-id": {
                 "type": "string",
-                "description": "Approximate time remaining in the lease period, in seconds."
+                "description": "Uniquely identifies a file's lease"
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -8580,7 +8778,7 @@
             "name": "x-ms-source-range",
             "in": "header",
             "description": "Bytes of source data in the specified range.",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "sourceRange"
           },
@@ -11561,28 +11759,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-file-request-intent",
-            "in": "header",
-            "description": "Valid values are 'backup'.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "backup"
-            ],
-            "x-ms-enum": {
-              "name": "ShareTokenIntent",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "backup",
-                  "value": "backup",
-                  "description": "backup"
-                }
-              ]
-            },
-            "x-ms-client-name": "fileRequestIntent"
           },
           {
             "name": "keyInfo",
