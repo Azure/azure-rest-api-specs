@@ -51,9 +51,6 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
-
-  /** The SKU (Stock Keeping Unit) assigned to this resource. */
-  sku?: Azure.ResourceManager.CommonTypes.Sku;
 }
 
 model DeidPropertiesUpdate
