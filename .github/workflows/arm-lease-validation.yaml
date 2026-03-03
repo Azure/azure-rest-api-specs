@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 jobs:
-  validate-arm-leases:
+  arm-lease-validation:
     name: ARM Lease Validation
     runs-on: ubuntu-slim
 
@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Validate ARM leases
+      - name: ARM Lease Validation
         uses: actions/github-script@v8
         with:
           script: |

@@ -1,11 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 // Mock fs/promises before imports
-vi.mock("fs/promises", () => ({ access: vi.fn(), readFile: vi.fn() }));
+vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
 
 import * as fs from "fs/promises";
 
-const mockAccess = /** @type {import("vitest").Mock} */ (fs.access);
 const mockReadFile = /** @type {import("vitest").Mock} */ (fs.readFile);
 
 import {
@@ -190,7 +189,6 @@ describe("validate-arm-leases", () => {
 `;
 
     it("validates a complete valid lease file", async () => {
-      mockAccess.mockResolvedValue(undefined);
       mockReadFile.mockResolvedValue(validYaml);
 
       const result = await validateLeaseContent(
@@ -200,13 +198,11 @@ describe("validate-arm-leases", () => {
       );
 
       expect(result.errors).toHaveLength(0);
-      expect(mockAccess).toHaveBeenCalledOnce();
       expect(mockReadFile).toHaveBeenCalledOnce();
     });
 
     it("detects resource provider mismatch", async () => {
       const mismatchYaml = validYaml.replace("Microsoft.Test", "Microsoft.Other");
-      mockAccess.mockResolvedValue(undefined);
       mockReadFile.mockResolvedValue(mismatchYaml);
 
       const result = await validateLeaseContent(
@@ -220,7 +216,6 @@ describe("validate-arm-leases", () => {
 
     it("detects past startdate", async () => {
       const pastYaml = validYaml.replace("2027-06-01", "2025-01-01");
-      mockAccess.mockResolvedValue(undefined);
       mockReadFile.mockResolvedValue(pastYaml);
 
       const result = await validateLeaseContent(
@@ -233,7 +228,7 @@ describe("validate-arm-leases", () => {
     });
 
     it("returns error for non-existent file", async () => {
-      mockAccess.mockRejectedValue(new Error("ENOENT"));
+      mockReadFile.mockRejectedValue(new Error("ENOENT: no such file or directory"));
 
       const result = await validateLeaseContent(
         "/nonexistent/lease.yaml",
@@ -241,11 +236,10 @@ describe("validate-arm-leases", () => {
         ".github/arm-leases/svc/NS/lease.yaml",
       );
 
-      expect(result.errors.some((e) => e.includes("does not exist"))).toBe(true);
+      expect(result.errors.some((e) => e.includes("Error reading file"))).toBe(true);
     });
 
     it("detects invalid YAML content", async () => {
-      mockAccess.mockResolvedValue(undefined);
       mockReadFile.mockResolvedValue("invalid yaml content without structure");
 
       const result = await validateLeaseContent(
@@ -259,7 +253,6 @@ describe("validate-arm-leases", () => {
 
     it("accepts today as startdate", async () => {
       const todayYaml = validYaml.replace("2027-06-01", "2026-01-07");
-      mockAccess.mockResolvedValue(undefined);
       mockReadFile.mockResolvedValue(todayYaml);
 
       const result = await validateLeaseContent(

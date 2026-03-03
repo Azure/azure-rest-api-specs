@@ -1,5 +1,6 @@
-import { readFile, access } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import { resolve } from 'path';
+import { inspect } from 'util';
 import YAML from 'js-yaml';
 import * as z from 'zod';
 import { getChangedFiles } from '../../../shared/src/changed-files.js';
@@ -89,18 +90,11 @@ export async function validateLeaseContent(leaseFile, today, relativePath) {
   // or .github/arm-leases/<servicename>/<namespace>/<servicegroup>/lease.yaml
   const folderRP = pathForExtraction.split('/')[3]; // namespace is always at index 3
 
-  try {
-    await access(leaseFile);
-  } catch {
-    return { file: leaseFile, errors: ['File does not exist'] };
-  }
-
   let content;
   try {
     content = await readFile(leaseFile, 'utf-8');
   } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    return { file: leaseFile, errors: [`Error reading file: ${msg}`] };
+    return { file: leaseFile, errors: [`Error reading file: ${inspect(error)}`] };
   }
 
   // Use FAILSAFE_SCHEMA to keep all values as strings (prevents YAML Date auto-parsing)
@@ -108,8 +102,7 @@ export async function validateLeaseContent(leaseFile, today, relativePath) {
   try {
     raw = /** @type {any} */ (YAML.load(content, { schema: YAML.FAILSAFE_SCHEMA }));
   } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    return { file: leaseFile, errors: [`Invalid YAML: ${msg}`] };
+    return { file: leaseFile, errors: [`Invalid YAML: ${inspect(error)}`] };
   }
 
   // Parse with Zod schema — collects all field-level errors at once
