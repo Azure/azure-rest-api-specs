@@ -922,13 +922,6 @@
             "description": "The name of the virtual network gateway."
           },
           {
-            "name": "peer",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The IP address of the peer."
-          },
-          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
@@ -937,7 +930,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of learned BGP routes.",
+            "description": "List of effective routes.",
             "schema": {
               "$ref": "#/definitions/GatewayRouteListResult"
             }
@@ -955,6 +948,63 @@
         "x-ms-examples": {
           "GetVirtualNetworkGatewayAdvertisedRoutes": {
             "$ref": "./examples/VirtualNetworkGatewayGetAdvertisedRoutes.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getEffectiveRoutes": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetEffectiveRoutes",
+        "description": "This operation retrieves a list of routes configured on the the virtual network gateway instances as effective routes.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of effective routes.",
+            "schema": {
+              "$ref": "#/definitions/GatewayEffectiveRouteListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayEffectiveRoutes": {
+            "$ref": "./examples/VirtualNetworkGatewayGetEffectiveRoutes.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4120,6 +4170,42 @@
       },
       "description": "Gateway routing details."
     },
+    "GatewayEffectiveRoute": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The gateway's local address."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "List of route's network prefixes.",
+          "x-ms-identifiers": []
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop."
+        },
+        "nextHopType": {
+          "type": "string",
+          "description": "The nextHop type.",
+          "enum": [
+            "Tunnel",
+            "VirtualNetwork"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRouteNextHopType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Gateway effective routes"
+    },
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
@@ -4236,6 +4322,18 @@
             "$ref": "#/definitions/GatewayRoute"
           },
           "description": "List of gateway routes."
+        }
+      },
+      "description": "List of virtual network gateway routes."
+    },
+    "GatewayEffectiveRouteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayEffectiveRoute"
+          },
+          "description": "List of gateway effective routes."
         }
       },
       "description": "List of virtual network gateway routes."
