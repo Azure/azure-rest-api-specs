@@ -10,6 +10,10 @@ using Microsoft.Edge;
 
 @@clientName(Artifact, "DisconnectedOperationsArtifact", "csharp");
 @@clientName(Image, "DisconnectedOperationsImage", "csharp");
+@@clientName(HardwareSetting,
+  "DisconnectedOperationsHardwareSetting",
+  "csharp"
+);
 @@clientName(ArtifactDownloadResult,
   "DisconnectedOperationsArtifactDownloadResult",
   "csharp"
@@ -18,13 +22,29 @@ using Microsoft.Edge;
   "DisconnectedOperationsArtifactProperties",
   "csharp"
 );
+@@clientName(AutoRenew, "DisconnectedOperationsAutoRenew", "csharp");
+@@clientName(BenefitPlans, "DisconnectedOperationsBenefitPlans", "csharp");
+@@clientName(BenefitPlanStatus,
+  "DisconnectedOperationsBenefitPlanStatus",
+  "csharp"
+);
+@@clientName(BillingConfiguration,
+  "DisconnectedOperationsBillingConfiguration",
+  "csharp"
+);
 @@clientName(BillingModel, "DisconnectedOperationsBillingModel", "csharp");
+@@clientName(BillingPeriod, "DisconnectedOperationsBillingPeriod", "csharp");
+@@clientName(BillingStatus, "DisconnectedOperationsBillingStatus", "csharp");
 @@clientName(ConnectionIntent,
   "DisconnectedOperationsConnectionIntent",
   "csharp"
 );
 @@clientName(ConnectionStatus,
   "DisconnectedOperationsConnectionStatus",
+  "csharp"
+);
+@@clientName(HardwareSettingProperties,
+  "DisconnectedOperationsHardwareSettingProperties",
   "csharp"
 );
 @@clientName(ImageDownloadResult,
@@ -35,6 +55,11 @@ using Microsoft.Edge;
   "DisconnectedOperationsImageProperties",
   "csharp"
 );
+@@clientName(ImageUpdateProperties,
+  "DisconnectedOperationsImageUpdateProperties",
+  "csharp"
+);
+@@clientName(PricingModel, "DisconnectedOperationsPricingModel", "csharp");
 @@clientName(RegistrationStatus,
   "DisconnectedOperationsRegistrationStatus",
   "csharp"
@@ -44,4 +69,5 @@ using Microsoft.Edge;
   "DisconnectedOperationsResourceProvisioningState",
   "csharp"
 );
+@@clientName(SystemReboot, "DisconnectedOperationsSystemReboot", "csharp");
 @@clientName(DisconnectedOperations, "Disconnected", "csharp");
