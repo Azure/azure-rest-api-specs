@@ -439,5 +439,36 @@ describe("changedFiles", () => {
         "HEAD",
       ]);
     });
+
+    it("should log categories selectively with a logger", async () => {
+      // When only some categories are populated and a logger is provided, the per-category
+      // if-blocks whose category is empty should take their false branch.
+      const gitOutput = [
+        "A\tspecification/service1/readme.md",
+        "A\tspecification/service2/main.tsp",
+      ].join("\n");
+
+      mockDiff.mockResolvedValue(gitOutput);
+      const result = await getChangedFilesStatuses({ logger: debugLogger });
+      expect(result).toEqual({
+        additions: ["specification/service1/readme.md", "specification/service2/main.tsp"],
+        modifications: [],
+        deletions: [],
+        renames: [],
+        total: 2,
+      });
+
+      // Also test with no additions so the additions log block's false branch is covered
+      const gitOutputNoAdditions = "M\tspecification/service1/readme.md";
+      mockDiff.mockResolvedValue(gitOutputNoAdditions);
+      const result2 = await getChangedFilesStatuses({ logger: debugLogger });
+      expect(result2).toEqual({
+        additions: [],
+        modifications: ["specification/service1/readme.md"],
+        deletions: [],
+        renames: [],
+        total: 1,
+      });
+    });
   });
 });

@@ -243,6 +243,15 @@ describe("Swagger", () => {
     );
   });
 
+  it("returns cached examples on second call", async () => {
+    const swagger = new Swagger(resolve(__dirname, "fixtures/swagger/ignoreExamples/swagger.json"));
+    const examples1 = await swagger.getExamples();
+    const examples2 = await swagger.getExamples();
+
+    // Both calls should return the same (cached) Map instance
+    expect(examples2).toBe(examples1);
+  });
+
   it("computes versionKind from path", () => {
     let swagger = new Swagger(resolve("foo/preview/2025-01-01-preview/foo.json"));
     expect(swagger.versionKind).toEqual(API_VERSION_LIFECYCLE_STAGES.PREVIEW);
