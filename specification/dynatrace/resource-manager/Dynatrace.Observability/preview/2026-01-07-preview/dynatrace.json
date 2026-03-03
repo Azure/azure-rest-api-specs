@@ -122,20 +122,6 @@
               "$ref": "#/definitions/SaaSResourceDetailsResponse"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -150,12 +136,7 @@
           "SaaS_ActivateSaaS_MinimumSet_Gen": {
             "$ref": "./examples/SaaS_ActivateResource_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/SaaSResourceDetailsResponse"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getAllConnectedResourcesCount": {
@@ -2244,11 +2225,8 @@
         "firstName",
         "lastName",
         "emailAddress",
-        "phoneNumber",
         "company",
-        "country",
-        "state",
-        "jobTitle"
+        "country"
       ]
     },
     "AppServiceInfo": {
@@ -4005,9 +3983,21 @@
           "description": "Phone number of the user used by Dynatrace for contacting them if needed",
           "maxLength": 40
         },
+        "company": {
+          "type": "string",
+          "description": "Company name of the user"
+        },
         "country": {
           "type": "string",
           "description": "Country of the user"
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the user"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title of the user"
         }
       }
     },

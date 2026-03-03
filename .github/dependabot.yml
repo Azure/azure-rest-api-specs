@@ -26,16 +26,14 @@ updates:
     ignore:
       # Updated manually to align with minimum supported Node version
       - dependency-name: "@types/node"
+      # Updated manually by the team maintaining this package
+      - dependency-name: "@azure-tools/openai-typespec"
       # Updated manually by the Liftr team
       - dependency-name: "@azure-tools/typespec-liftr-base"
       # Only allow patch updates for spec-gen-sdk
       - dependency-name: "@azure-tools/spec-gen-sdk"
         update-types: ["version-update:semver-minor", "version-update:semver-major"]
     groups:
-      # Ships separately from other typespec packages
-      openapi-typespec:
-        patterns:
-          - "@azure-tools/openai-typespec"
       # Ships separately from other typespec packages
       typespec-client-generator-cli:
         patterns:
