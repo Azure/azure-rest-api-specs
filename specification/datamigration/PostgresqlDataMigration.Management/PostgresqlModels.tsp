@@ -451,7 +451,6 @@ model MigrationStatus {
   lastUpdatedAt: utcDateTime;
 }
 
-@added(Versions.v2025_01_10_preview)
 @doc("Health result for a pre-flight check.")
 model HealthResult {
   @doc("Status of the health check")
@@ -467,7 +466,6 @@ model HealthResult {
   title?: string;
 }
 
-@added(Versions.v2025_01_10_preview)
 @doc("Summary of a pre-flight check.")
 model PreFlightCheckSummary {
   @doc("Name of the pre-flight check")
@@ -480,7 +478,6 @@ model PreFlightCheckSummary {
   healthResult?: HealthResult;
 }
 
-@added(Versions.v2025_01_10_preview)
 @doc("Pre-flight validation status.")
 model PreFlightValidationStatus {
   @doc("Unique identifier for the migration request")

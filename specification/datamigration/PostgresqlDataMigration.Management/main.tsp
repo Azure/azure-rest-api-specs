@@ -18,7 +18,6 @@ using Azure.ResourceManager;
 namespace Microsoft.DataMigration;
 
 enum Versions {
-  @Azure.Core.previewVersion
   v2025_01_10_preview: "2025-01-10-preview",
 }
 
