@@ -143,6 +143,7 @@ using Microsoft.Batch;
 @@clientName(VMExtension, "BatchVmExtension", "csharp");
 @@clientName(VMExtension.type, "ExtensionType", "csharp");
 @@clientName(ContainerConfiguration, "BatchVmContainerConfiguration", "csharp");
+@@clientName(ContainerConfiguration.type, "containerType", "csharp");
 @@clientName(ContainerType, "BatchVmContainerType", "csharp");
 @@clientName(ContainerRegistry, "BatchVmContainerRegistry", "csharp");
 @@clientName(WindowsConfiguration.enableAutomaticUpdates,
@@ -325,6 +326,8 @@ using Microsoft.Batch;
   "BatchPublicIPAddressConfiguration",
   "csharp"
 );
+@@clientName(PublicIPAddressConfiguration.ipTags, "IPTags", "csharp");
+@@clientName(PublicIPAddressConfiguration.ipFamilies, "IPFamilies", "csharp");
 @@clientName(PublicIPAddressConfiguration.ipAddressIds,
   "IPAddressIds",
   "csharp"
@@ -419,8 +422,33 @@ using Microsoft.Batch;
   "BatchResourceAssociation",
   "csharp"
 );
+@@usage(Azure.ResourceManager.CommonTypes.ResourceAssociation,
+  Usage.input,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+  Usage.input,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  Usage.input,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  Usage.input,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  Usage.output,
+  "csharp"
+);
+@@usage(Azure.ResourceManager.CommonTypes.AccessRule, Usage.output, "csharp");
 @@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
   "VmGuestStateOnly",
+  "csharp"
+);
+@@clientName(SecurityEncryptionTypes.DiskWithVMGuestState,
+  "DiskWithVmGuestState ",
   "csharp"
 );
 @@clientName(SecurityEncryptionTypes, "BatchSecurityEncryptionType", "csharp");
@@ -432,6 +460,28 @@ using Microsoft.Batch;
   "BatchPrivateEndpointConnection",
   "csharp"
 );
+@@clientName(TaskSchedulingPolicy, "BatchTaskSchedulingPolicy", "csharp");
+@@clientName(DiskCustomerManagedKey, "BatchDiskCustomerManagedKey", "csharp");
+@@clientName(DiskEncryptionConfiguration,
+  "BatchDiskEncryptionConfiguration",
+  "csharp"
+);
+@@clientName(HostEndpointSettings, "BatchHostEndpointSettings", "csharp");
+@@clientName(HostEndpointSettings.inVMAccessControlProfileReferenceId,
+  "InVmAccessControlProfileReferenceId",
+  "csharp"
+);
+@@clientName(HostEndpointSettingsModeTypes,
+  "BatchHostEndpointSettingsModeType",
+  "csharp"
+);
+@@clientName(IPFamily, "BatchIPFamily", "csharp");
+@@clientName(IPTag, "BatchIPTag", "csharp");
+@@clientName(IPTag.ipTagType, "IPTagType", "csharp");
+@@clientName(JobDefaultOrder, "BatchJobDefaultOrder", "csharp");
+@@clientName(ProxyAgentSettings, "BatchProxyAgentSettings", "csharp");
+@@clientName(VMDiskSecurityProfile, "VmDiskSecurityProfile", "csharp");
+@@clientName(ResizeError, "BatchResizeError", "csharp");
 @@alternateType(PrivateEndpointConnection.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
@@ -473,6 +523,18 @@ using Microsoft.Batch;
 @@clientName(LocationOperationGroup.getQuotas, "GetBatchQuotas", "csharp");
 @@clientName(LocationOperationGroup.listSupportedVirtualMachineSkus,
   "GetBatchSupportedVirtualMachineSkus",
+  "csharp"
+);
+@@alternateType(QuotasLocationParameter.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(SKUsLocationParameter.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(CheckNameLocationParameter.locationName,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(BatchAccountUpdateParameters.identity,

@@ -24,12 +24,7 @@ interface LocationOperationGroup {
     Response = BatchLocationQuota,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The region for which to retrieve Batch service quotas.
-       */
-      @path
-      @segment("locations")
-      locationName: string;
+      ...QuotasLocationParameter;
     },
     Error = CloudError
   >;
@@ -44,12 +39,7 @@ interface LocationOperationGroup {
     Response = SupportedSkusResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The region for which to retrieve Batch service supported SKUs.
-       */
-      @path
-      @segment("locations")
-      locationName: string;
+      ...SKUsLocationParameter;
 
       /**
        * The maximum number of items to return in the response.
@@ -74,16 +64,38 @@ interface LocationOperationGroup {
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The desired region for the name check.
-       */
-      @path
-      @segment("locations")
-      locationName: string;
+      ...CheckNameLocationParameter;
     },
     Error = CloudError
   >;
 }
+
+alias QuotasLocationParameter = {
+  /**
+   * The region for which to retrieve Batch service quotas.
+   */
+  @path
+  @segment("locations")
+  locationName: string;
+};
+
+alias SKUsLocationParameter = {
+  /**
+   * The region for which to retrieve Batch service supported SKUs.
+   */
+  @path
+  @segment("locations")
+  locationName: string;
+};
+
+alias CheckNameLocationParameter = {
+  /**
+   * The desired region for the name check.
+   */
+  @path
+  @segment("locations")
+  locationName: string;
+};
 
 @@doc(LocationOperationGroup.checkNameAvailability::parameters.body,
   "Properties needed to check the availability of a name."
