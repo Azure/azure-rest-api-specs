@@ -1,0 +1,109 @@
+{
+  "operationId": "KnowledgeBases_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateKnowledgeBase",
+  "parameters": {
+    "endpoint": "https://exampleservice.search.windows.net",
+    "knowledgeBaseName": "base-example-index",
+    "api-version": "2026-04-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "knowledgeBase": {
+      "name": "base-example-index",
+      "knowledgeSources": [
+        {
+          "name": "ks-example-index"
+        }
+      ],
+      "models": [
+        {
+          "azureOpenAIParameters": {
+            "resourceUri": "https://test-sample.openai.azure.com/",
+            "deploymentId": "myDeployment",
+            "apiKey": "api-key",
+            "modelName": "gpt-4o-mini"
+          },
+          "kind": "azureOpenAI"
+        }
+      ],
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      },
+      "description": "Description of the knowledge base."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "base-example-index",
+        "description": "Description of the knowledge base.",
+        "knowledgeSources": [
+          {
+            "name": "ks-example-index"
+          }
+        ],
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "base-example-index",
+        "description": "Description of the knowledge base.",
+        "knowledgeSources": [
+          {
+            "name": "ks-example-index"
+          }
+        ],
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    }
+  }
+}
