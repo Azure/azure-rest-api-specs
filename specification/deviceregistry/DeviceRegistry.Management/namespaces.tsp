@@ -36,6 +36,14 @@ model Messaging {
   endpoints?: Record<MessagingEndpoint>;
 }
 
+@added(Versions.v2026_04_01)
+@doc("The namespace management endpoints model.")
+model Management {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Dictionary of management endpoints.")
+  endpoints?: Record<ManagementEndpoint>;
+}
+
 @added(Versions.v2025_07_01_preview)
 @doc("The namespace properties model.")
 model NamespaceProperties {
@@ -46,6 +54,11 @@ model NamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("Assigned and unassigned management endpoints.")
+  @added(Versions.v2026_04_01)
+  management?: Management;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -63,6 +76,22 @@ model MessagingEndpoint {
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
+}
+
+@added(Versions.v2026_04_01)
+@doc("Namespace management endpoint model used by service to connect to device.")
+model ManagementEndpoint {
+  @doc("Type of connection used for management endpoint.")
+  endpointType: string;
+
+  @doc("The endpoint address to connect to.")
+  address: string;
+
+  @doc("The scope ID for the management endpoint.")
+  scopeId: string;
+
+  @doc("The messaging endpoint Azure resource Id.")
+  resourceId: string;
 }
 
 @added(Versions.v2025_07_01_preview)
