@@ -25322,22 +25322,53 @@
         ]
       }
     },
-    "GarnetClusterEndpoint": {
+    "GarnetClusterResource": {
       "type": "object",
-      "description": "Endpoint for clients to connect to the cluster.",
+      "description": "Representation of a Garnet cache cluster.",
       "properties": {
-        "ipAddress": {
-          "type": "string",
-          "description": "Ipv4 address of the endpoint."
+        "properties": {
+          "$ref": "#/definitions/GarnetClusterResourceProperties",
+          "description": "The resource-specific properties for this resource."
         },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number."
+        "identity": {
+          "$ref": "#/definitions/ManagedCassandraManagedServiceIdentity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GarnetClusterResourcePatch": {
+      "type": "object",
+      "description": "Representation of a Garnet cache cluster for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GarnetClusterResourcePatchProperties",
+          "description": "Properties of a Garnet cache cluster for updates."
         }
       }
     },
-    "GarnetClusterProperties": {
+    "GarnetClusterResourcePatchProperties": {
+      "type": "object",
+      "description": "Properties of a Garnet cache cluster for updates.",
+      "properties": {
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Type of the cluster. If set to Production, some operations might not be permitted on cluster."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "Extensions to be added or updated on cluster.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GarnetClusterResourceProperties": {
       "type": "object",
       "description": "Properties of a Garnet cache cluster.",
       "properties": {
@@ -25366,7 +25397,7 @@
           "type": "array",
           "description": "Endpoints for clients to connect to the cluster.",
           "items": {
-            "$ref": "#/definitions/GarnetClusterEndpoint"
+            "$ref": "#/definitions/GarnetClusterResourcePropertiesEndPointsItem"
           },
           "readOnly": true
         },
@@ -25409,49 +25440,18 @@
         }
       }
     },
-    "GarnetClusterResource": {
+    "GarnetClusterResourcePropertiesEndPointsItem": {
       "type": "object",
-      "description": "Representation of a Garnet cache cluster.",
+      "description": "Endpoint for clients to connect to the cluster.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/GarnetClusterProperties",
-          "description": "The resource-specific properties for this resource."
+        "ipAddress": {
+          "type": "string",
+          "description": "Ipv4 address of the endpoint."
         },
-        "identity": {
-          "$ref": "#/definitions/ManagedCassandraManagedServiceIdentity",
-          "description": "Identity for the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "GarnetClusterResourcePatch": {
-      "type": "object",
-      "description": "Representation of a Garnet cache cluster for updates.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GarnetClusterResourcePatchProperties",
-          "description": "Properties of a Garnet cache cluster for updates."
-        }
-      }
-    },
-    "GarnetClusterResourcePatchProperties": {
-      "type": "object",
-      "description": "Properties of a Garnet cache cluster for updates.",
-      "properties": {
-        "clusterType": {
-          "$ref": "#/definitions/ClusterType",
-          "description": "Type of the cluster. If set to Production, some operations might not be permitted on cluster."
-        },
-        "extensions": {
-          "type": "array",
-          "description": "Extensions to be added or updated on cluster.",
-          "items": {
-            "type": "string"
-          }
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number."
         }
       }
     },

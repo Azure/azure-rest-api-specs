@@ -51,7 +51,7 @@ model CassandraRoleAssignmentListResult
   is ResourceListResult<CassandraRoleAssignmentResource>;
 
 /** Properties of a Garnet cache cluster. */
-model GarnetClusterProperties {
+model GarnetClusterResourceProperties {
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: GarnetCacheProvisioningState;
@@ -67,7 +67,7 @@ model GarnetClusterProperties {
   /** Endpoints for clients to connect to the cluster. */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  endPoints?: GarnetClusterEndpoint[];
+  endPoints?: GarnetClusterResourcePropertiesEndPointsItem[];
 
   /** Number of copies of data maintained by the cluster. */
   replicationFactor?: int32;
@@ -95,7 +95,7 @@ model GarnetClusterProperties {
 }
 
 /** Endpoint for clients to connect to the cluster. */
-model GarnetClusterEndpoint {
+model GarnetClusterResourcePropertiesEndPointsItem {
   /** Ipv4 address of the endpoint. */
   ipAddress?: string;
 
