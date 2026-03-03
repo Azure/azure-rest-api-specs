@@ -19,7 +19,7 @@ model AzureMonitorWorkspaceLogsExporter {
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
   cache?: CacheConfiguration;
 
-  @doc("Persistence options for this exporter.")
+  @doc("Persistence options for the exporter.")
   @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "cache")
   @added(Microsoft.Monitor.Versions.v2026_04_01)
   persistence?: ExporterPersistenceConfiguration;
