@@ -13,7 +13,7 @@ on:
       # Only trigger if PR includes at least one changed ARM lease file
       - ".github/arm-leases/**"
       # Also trigger on own sources
-      - ".github/workflows/arm-lease-validation-pms.yaml"
+      - ".github/workflows/arm-lease-validation.yaml"
       - ".github/workflows/src/arm-lease-validation/**"
 
 permissions:
@@ -21,8 +21,8 @@ permissions:
 
 jobs:
   validate-arm-leases:
-    name: Validate ARM Leases
-    runs-on: ubuntu-24.04
+    name: ARM Lease Validation
+    runs-on: ubuntu-slim
 
     steps:
       - name: Checkout repository
@@ -39,6 +39,6 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const { default: validateArmLeases } =
+            const { default: armLeaseValidation } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
-            return await validateArmLeases(core);
+            return await armLeaseValidation(core);
