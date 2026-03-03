@@ -5,7 +5,7 @@
     "subscriptionId": "12345678-1234-1234-1234-123456789012",
     "resourceGroupName": "my-rg",
     "serviceName": "myMigrationService",
-    "api-version": "2025-01-10"
+    "api-version": "2025-01-10-privatepreview"
   },
   "responses": {
     "200": {
@@ -76,14 +76,45 @@
               "migrationJobsettings": {
                 "tableJobs": 8,
                 "indexJobs": 4,
+                "largeObjectsJobs": 4,
+                "externalToFlexLdPlugin": "test_decoding",
+                "switchWalCheckDelayInSeconds": 120,
+                "skipCollationValidation": false,
+                "minJobsPerDb": 4,
+                "skipJobsCalculation": false,
+                "skipRoleUserMigration": false,
+                "splitTablesStrategy": "ctid",
+                "pgcopydbTableSplitSize": 21474836480,
+                "splitMaxParts": 8,
                 "skipValidation": false,
-                "splitTablesStrategy": "ctid"
+                "skipPostgisValidation": true,
+                "skipTableSpaces": true,
+                "skipSplitByCtid": false,
+                "skipAnalyze": false,
+                "useBinaryCopy": false,
+                "enableTimescaleDb": false,
+                "skipSystemAcl": true,
+                "skipLanguageCheck": false
               },
               "provisioningState": "Succeeded",
               "migrationStatus": {
                 "state": "InProgress",
                 "errors": [],
                 "lastUpdatedAt": "2025-09-23T10:30:00Z"
+              },
+              "preFlightValidations": {
+                "migrationRequestId": "req-123e4567-e89b-12d3-a456-426614174000",
+                "state": "Completed",
+                "preFlightCheckSummaries": [
+                  {
+                    "checkName": "SourceConnectivity",
+                    "state": "Completed",
+                    "healthResult": {
+                      "status": "Success",
+                      "title": "Source Database Connectivity"
+                    }
+                  }
+                ]
               },
               "databases": [
                 {
