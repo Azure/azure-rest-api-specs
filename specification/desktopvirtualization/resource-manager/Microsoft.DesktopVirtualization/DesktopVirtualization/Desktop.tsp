@@ -36,10 +36,7 @@ interface Desktops {
    * Update a desktop.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
-    Desktop,
-    DesktopPatch
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<Desktop, DesktopPatch>;
 
   /**
    * List desktops.
@@ -75,6 +72,4 @@ interface Desktops {
   "The name of the desktop within the specified desktop group"
 );
 @@doc(Desktop.properties, "Detailed properties for Desktop");
-@@clientName(Desktops.update::parameters.body,
-  "desktop"
-);
+@@clientName(Desktops.update::parameters.body, "desktop");

@@ -149,9 +149,7 @@ interface ApplicationGroups {
 @@doc(ApplicationGroups.createOrUpdate::parameters.resource,
   "Object containing ApplicationGroup definitions."
 );
-@@clientName(ApplicationGroups.update::parameters.body,
-  "applicationGroup"
-);
+@@clientName(ApplicationGroups.update::parameters.body, "applicationGroup");
 @@doc(ApplicationGroups.update::parameters.body,
   "The AppGroup properties to be updated"
 );

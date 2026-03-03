@@ -47,10 +47,7 @@ interface ScalingPlans {
    * Update a scaling plan.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
-    ScalingPlan,
-    ScalingPlanPatch
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<ScalingPlan, ScalingPlanPatch>;
 
   /**
    * Remove a scaling plan.
@@ -150,6 +147,4 @@ interface ScalingPlans {
 @@doc(ScalingPlans.create::parameters.resource,
   "Object containing scaling plan definitions."
 );
-@@clientName(ScalingPlans.update::parameters.body,
-  "scalingPlan"
-);
+@@clientName(ScalingPlans.update::parameters.body, "scalingPlan");

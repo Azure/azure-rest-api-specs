@@ -49,7 +49,7 @@ interface ScalingPlanPersonalSchedules {
     ScalingPlanPersonalSchedule,
     ScalingPlanPersonalSchedulePatch
   >;
-  
+
   /**
    * Remove a ScalingPlanPersonalSchedule.
    */

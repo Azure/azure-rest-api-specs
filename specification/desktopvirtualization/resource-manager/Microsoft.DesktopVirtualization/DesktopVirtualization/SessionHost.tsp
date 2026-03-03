@@ -132,6 +132,4 @@ interface SessionHosts {
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");
-@@clientName(SessionHosts.update::parameters.body,
-  "sessionHost"
-);
+@@clientName(SessionHosts.update::parameters.body, "sessionHost");

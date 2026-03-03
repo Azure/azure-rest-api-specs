@@ -42,10 +42,7 @@ interface Applications {
    * Update an application.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
-    Application,
-    ApplicationPatch
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<Application, ApplicationPatch>;
 
   /**
    * Remove an application.
@@ -89,6 +86,4 @@ interface Applications {
 @@doc(Applications.createOrUpdate::parameters.resource,
   "Object containing Application definitions."
 );
-@@clientName(Applications.update::parameters.body,
-  "application"
-);
+@@clientName(Applications.update::parameters.body, "application");

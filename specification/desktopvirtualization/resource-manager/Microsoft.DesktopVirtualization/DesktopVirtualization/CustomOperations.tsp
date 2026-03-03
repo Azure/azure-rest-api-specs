@@ -34,8 +34,9 @@ op ArmCustomPatchSyncWithOptionalBody<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
+
   /** The resource properties to be updated */
-  @bodyRoot body?: PatchModel
+  @bodyRoot body?: PatchModel,
 ): Response | Error;
 
 /**
@@ -71,6 +72,7 @@ op ArmCustomPatchAsyncWithOptionalBody<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
+
   /** The resource properties to be updated */
-  @bodyRoot body?: PatchModel
+  @bodyRoot body?: PatchModel,
 ): Response | Error;

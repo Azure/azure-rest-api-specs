@@ -45,10 +45,7 @@ interface Workspaces {
    * Update a workspace.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
-    Workspace,
-    WorkspacePatch
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<Workspace, WorkspacePatch>;
 
   /**
    * Remove a workspace.
@@ -98,6 +95,4 @@ interface Workspaces {
 @@doc(Workspaces.createOrUpdate::parameters.resource,
   "Object containing Workspace definitions."
 );
-@@clientName(Workspaces.update::parameters.body,
-  "workspace"
-);
+@@clientName(Workspaces.update::parameters.body, "workspace");

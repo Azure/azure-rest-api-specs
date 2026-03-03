@@ -142,10 +142,7 @@ interface HostPools {
    * Update a host pool.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSyncWithOptionalBody<
-    HostPool,
-    HostPoolPatch
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<HostPool, HostPoolPatch>;
 
   /**
    * Remove a host pool.
@@ -243,9 +240,5 @@ interface HostPools {
 @@doc(HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
-@@clientName(HostPools.update::parameters.body,
-  "hostPool"
-);
-@@doc(HostPools.update::parameters.body,
-  "The properties to be updated."
-);
+@@clientName(HostPools.update::parameters.body, "hostPool");
+@@doc(HostPools.update::parameters.body, "The properties to be updated.");
