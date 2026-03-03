@@ -1605,132 +1605,14 @@
       "type": "object",
       "description": "Migration job settings.",
       "properties": {
-        "tableJobs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of parallel table migration jobs.",
-          "default": 4,
-          "minimum": 1,
-          "maximum": 32
-        },
-        "indexJobs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of parallel index creation jobs.",
-          "default": 4,
-          "minimum": 1,
-          "maximum": 32
-        },
-        "largeObjectsJobs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of parallel large object migration jobs.",
-          "default": 4,
-          "minimum": 1,
-          "maximum": 32
-        },
-        "externalToFlexLdPlugin": {
-          "type": "string",
-          "description": "Logical decoding plugin name for CDC mode.",
-          "default": "test_decoding",
-          "maxLength": 64
-        },
-        "switchWalCheckDelayInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Delay in seconds for WAL switch check during CDC.",
-          "default": 120,
-          "minimum": 0,
-          "maximum": 3600
-        },
-        "skipCollationValidation": {
+        "validateOnly": {
           "type": "boolean",
-          "description": "Skip collation validation between source and target.",
-          "default": false
-        },
-        "minJobsPerDb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum parallel jobs per database.",
-          "default": 4,
-          "minimum": 1,
-          "maximum": 32
-        },
-        "skipJobsCalculation": {
-          "type": "boolean",
-          "description": "Skip automatic job count calculation.",
-          "default": false
-        },
-        "skipRoleUserMigration": {
-          "type": "boolean",
-          "description": "Skip migration of roles and users.",
-          "default": false
-        },
-        "splitTablesStrategy": {
-          "$ref": "#/definitions/SplitTablesStrategy",
-          "description": "Table splitting strategy."
-        },
-        "pgcopydbTableSplitSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Table split size in bytes for pgcopydb (default 20GB).",
-          "default": 21474836480,
-          "minimum": 1073741824
-        },
-        "splitMaxParts": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of parts to split large tables.",
-          "default": 8,
-          "minimum": 1,
-          "maximum": 64
-        },
-        "skipValidation": {
-          "type": "boolean",
-          "description": "Skip pre-migration validation checks.",
-          "default": false
-        },
-        "skipPostgisValidation": {
-          "type": "boolean",
-          "description": "Skip PostGIS extension validation.",
-          "default": true
-        },
-        "skipTableSpaces": {
-          "type": "boolean",
-          "description": "Skip tablespace migration.",
-          "default": true
-        },
-        "skipSplitByCtid": {
-          "type": "boolean",
-          "description": "Skip table splitting by CTID.",
-          "default": false
-        },
-        "skipAnalyze": {
-          "type": "boolean",
-          "description": "Skip ANALYZE command after data migration.",
-          "default": false
-        },
-        "useBinaryCopy": {
-          "type": "boolean",
-          "description": "Use binary COPY format for data transfer.",
-          "default": false
-        },
-        "enableTimescaleDb": {
-          "type": "boolean",
-          "description": "Enable TimescaleDB extension support.",
-          "default": false
-        },
-        "skipSystemAcl": {
-          "type": "boolean",
-          "description": "Skip system ACL migration.",
-          "default": true
-        },
-        "skipLanguageCheck": {
-          "type": "boolean",
-          "description": "Skip procedural language compatibility check.",
-          "default": false
+          "description": "Validate only flag"
         }
-      }
+      },
+      "required": [
+        "validateOnly"
+      ]
     },
     "MigrationMode": {
       "type": "string",
@@ -2289,36 +2171,6 @@
             "name": "AzurePostgresFlexible",
             "value": "azure_postgres_flexible",
             "description": "Azure PostgreSQL Flexible Server"
-          }
-        ]
-      }
-    },
-    "SplitTablesStrategy": {
-      "type": "string",
-      "description": "The split tables strategy.",
-      "enum": [
-        "none",
-        "ctid",
-        "primary_key"
-      ],
-      "x-ms-enum": {
-        "name": "SplitTablesStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "No table splitting"
-          },
-          {
-            "name": "Ctid",
-            "value": "ctid",
-            "description": "Split by CTID"
-          },
-          {
-            "name": "PrimaryKey",
-            "value": "primary_key",
-            "description": "Split by primary key"
           }
         ]
       }
