@@ -54,7 +54,7 @@ interface MSDeployStatusOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
@@ -131,7 +131,7 @@ interface MSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
@@ -206,7 +206,7 @@ interface MSDeployStatusSlotOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
@@ -285,7 +285,7 @@ interface InstanceMSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
