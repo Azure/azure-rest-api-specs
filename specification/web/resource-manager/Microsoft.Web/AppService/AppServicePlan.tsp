@@ -59,7 +59,7 @@ alias AppServicePlanActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperati
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms",
   }
 >;
 
@@ -81,7 +81,7 @@ interface AppServicePlans {
    * Description for Recycles a managed instance worker machine.
    */
   @summary("Recycles a managed instance worker machine.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance")
   recycleManagedInstanceWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,
@@ -302,7 +302,7 @@ interface AppServicePlans {
    */
   @summary("Reboot a worker machine in an App Service plan.")
   @action("reboot")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot")
   rebootWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,

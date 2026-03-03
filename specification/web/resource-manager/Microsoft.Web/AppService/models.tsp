@@ -10325,7 +10325,7 @@ model SiteAuthSettingsProperties {
   /**
    * The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.
    * This setting is optional. If not specified, "wl.basic" is used as the default scope.
-   * Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx
+   * Microsoft Account Scopes and permissions documentation: https://msdn.Microsoft.com/en-us/library/dn631845.aspx
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   microsoftAccountOAuthScopes?: string[];

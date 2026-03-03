@@ -655,7 +655,7 @@ interface Sites {
    * Description for Add or update a host level secret.
    */
   @summary("Add or update a host level secret.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @put
   createOrUpdateHostSecret is ActionParameterSiteWebAppOps.ActionSync<
     Site,
@@ -681,7 +681,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a host level secret.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @delete
   deleteHostSecret is ActionParameterSiteWebAppOps.ActionSync<
     Site,
@@ -824,7 +824,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}")
   getNetworkTraceOperation is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -930,7 +930,7 @@ interface Sites {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/{operationId}")
   getNetworkTraces is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -951,7 +951,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}")
   getNetworkTraceOperationV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -975,7 +975,7 @@ interface Sites {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/{operationId}")
   getNetworkTracesV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -1450,7 +1450,7 @@ alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperatio
     slot: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots",
   }
 >;
 
@@ -1468,7 +1468,7 @@ alias ActionParameterSiteWebAppOps = Azure.ResourceManager.Legacy.RoutedOperatio
   },
   {},
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites",
   }
 >;
 
@@ -1941,7 +1941,7 @@ interface WebApps {
    */
   @summary("Add or update a host level secret.")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
   createOrUpdateHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     KeyInfo,
@@ -1968,7 +1968,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a host level secret.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
   deleteHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     void,
@@ -2061,7 +2061,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}")
   getNetworkTraceOperationSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2167,7 +2167,7 @@ interface WebApps {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}")
   getNetworkTracesSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2187,7 +2187,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}")
   getNetworkTraceOperationSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2211,7 +2211,7 @@ interface WebApps {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}")
   getNetworkTracesSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,

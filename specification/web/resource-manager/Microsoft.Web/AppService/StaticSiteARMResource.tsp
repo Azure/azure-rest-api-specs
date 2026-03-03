@@ -55,7 +55,7 @@ alias StaticSiteUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites",
   }
 >;
 
@@ -140,7 +140,7 @@ interface StaticSiteARMResources {
   @summary("Gets the list of users of a static site.")
   @action("listUsers")
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers")
   listStaticSiteUsers is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     void,
@@ -159,7 +159,7 @@ interface StaticSiteARMResources {
    * Description for Deletes the user entry from the static site.
    */
   @summary("Deletes the user entry from the static site.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   @delete
   deleteStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
@@ -184,7 +184,7 @@ interface StaticSiteARMResources {
    */
   @summary("Updates a user entry with the listed roles")
   @patch(#{ implicitOptionality: true })
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   updateStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     StaticSiteUserARMResource,
