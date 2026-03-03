@@ -80,22 +80,22 @@ model DatasetColumn {
 /** ARM resource dataset schema. */
 model ArmResourceDatasetSchema {
   /** The full ARM resource ID. */
-  ResourceId: string;
+  resourceId: string;
 
   /** The type of the ARM resource. */
-  ResourceType: string;
+  resourceType: string;
 
   /** The name of the ARM resource. */
-  ResourceName: string;
+  resourceName: string;
 
   /** The tenant ID where the resource resides. */
-  TenantId: string;
+  tenantId: string;
 
   /** The subscription ID where the resource resides. */
-  SubscriptionId: string;
+  subscriptionId: string;
 
   /** The resource group where the resource resides. */
-  ResourceGroup: string;
+  resourceGroup: string;
 
   /** The kind of the ARM resource (optional). */
   kind?: string;
