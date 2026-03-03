@@ -9051,15 +9051,9 @@ model CosmosMongoDataTransferDataSourceSink extends DataTransferDataSourceSink {
 /**
  * A CosmosDB Mongo vCore API data source/sink
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  BaseCosmosDataTransferDataSourceSink
-)
 model CosmosMongoVCoreDataTransferDataSourceSink
   extends DataTransferDataSourceSink {
-  ...BaseCosmosDataTransferDataSourceSinkProperties;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
