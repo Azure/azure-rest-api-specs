@@ -208,7 +208,7 @@
       "name": "BulkRestore"
     },
     {
-      "name": "BulkRestoreOperationsStatus"
+      "name": "OperationStatus"
     },
     {
       "name": "ValidateBulkRestoreOperationsStatus"
@@ -925,6 +925,10 @@
           "202": {
             "description": "Accepted",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1017,11 +1021,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationsStatus/{operationId}": {
       "get": {
-        "operationId": "BulkRestoreOperationsStatus_Get",
+        "operationId": "FabricOperationStatus_Get",
         "tags": [
-          "BulkRestoreOperationsStatus"
+          "OperationStatus"
         ],
-        "description": "Fetches the status of a triggered bulk restore operation. The status can be in progress, completed\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation.\nIf the operation has completed, this method returns the OperationStatus with extended information\nspecific to the operation type (e.g., OperationStatusValidateBulkRestoreExtendedInfo for preCheckRestore).",
+        "description": "Fetches the status of an operation. The status can be in progress, completed\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation.\nIf the operation has completed, this method returns the OperationStatus with extended information\nspecific to the operation type.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

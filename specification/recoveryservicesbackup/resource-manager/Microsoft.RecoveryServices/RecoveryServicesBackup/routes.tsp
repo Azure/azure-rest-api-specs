@@ -834,7 +834,6 @@ interface BulkRestoreOperations {
    * This is an asynchronous operation that always returns 202 Accepted.
    * Returns a dictionary mapping each protected item ID to its latest recovery point.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Long running operation with location and Azure-AsyncOperation headers"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/getRecoveryPoints")
   @post
   @tag("BulkRestore")
@@ -870,6 +869,7 @@ interface BulkRestoreOperations {
       GetRecoveryPointsResponse,
       string
     > &
+      ArmAsyncOperationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>> &
       Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
@@ -956,16 +956,30 @@ interface BulkRestoreOperations {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-resource operations interface"
 @added(Versions.v2026_03_01)
-interface BulkRestoreOperationsStatus {
+interface FabricOperationStatus {
   /**
-   * Fetches the status of a triggered bulk restore operation. The status can be in progress, completed
+   * Fetches the status of an operation. The status can be in progress, completed
    * or failed. You can refer to the OperationStatus enum for all the possible states of the operation.
    * If the operation has completed, this method returns the OperationStatus with extended information
-   * specific to the operation type (e.g., OperationStatusValidateBulkRestoreExtendedInfo for preCheckRestore).
+   * specific to the operation type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to link multiple scenario-specific examples to a single generic operation"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationsStatus/{operationId}")
   @get
-  @tag("BulkRestoreOperationsStatus")
+  @tag("OperationStatus")
+  // This operation supports multiple scenarios (bulk restore, get recovery points, etc.) with different example files.
+  // Using @OpenAPI.extension to manually link scenario-specific examples since automatic discovery won't match non-standard example names.
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `Get Status of Bulk Restore Operation`: #{
+        $ref: "./examples/AzureIaasVm/BulkRestore_OperationsStatus.json",
+      },
+      `Get Status of Get Recovery Points Bulk Operation`: #{
+        $ref: "./examples/AzureIaasVm/GetRecoveryPoints_OperationsStatus.json",
+      },
+    }
+  )
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
