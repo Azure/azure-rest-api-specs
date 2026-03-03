@@ -7,6 +7,7 @@ import "./models.tsp";
 import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -79,15 +80,9 @@ interface ApplicationGroups {
    * Update an applicationGroup.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     ApplicationGroup,
-    ApplicationGroupPatch,
-    Request = {
-      /**
-       * The AppGroup properties to be updated
-       */
-      @bodyRoot applicationGroup?: ApplicationGroupPatch;
-    }
+    ApplicationGroupPatch
   >;
 
   /**
@@ -153,4 +148,10 @@ interface ApplicationGroups {
 @@doc(ApplicationGroup.properties, "Detailed properties for ApplicationGroup");
 @@doc(ApplicationGroups.createOrUpdate::parameters.resource,
   "Object containing ApplicationGroup definitions."
+);
+@@clientName(ApplicationGroups.update::parameters.body,
+  "applicationGroup"
+);
+@@doc(ApplicationGroups.update::parameters.body,
+  "The AppGroup properties to be updated"
 );

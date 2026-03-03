@@ -10,11 +10,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.DesktopVirtualization;
 
-alias OptionalBody<Body extends {}> = {
-  /** The resource properties to be updated */
-  @bodyRoot body?: Body;
-};
-
 /**
  * A resource update using a custom PATCH payload (synchronous)
  * @template Resource the resource being patched
@@ -29,27 +24,22 @@ alias OptionalBody<Body extends {}> = {
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
 @patch(#{ implicitOptionality: true })
-op ArmCustomPatchSync<
+op ArmCustomPatchSyncWithOptionalBody<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<Resource>,
-  Error extends {} = ErrorResponse,
-  Request extends {} = {
-    /** The resource properties to be updated */
-    @bodyRoot body: PatchModel;
-  },
-  EndParameters extends {} = {}
+  Error extends {} = ErrorResponse
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
-  ...Request,
-  ...EndParameters,
+  /** The resource properties to be updated */
+  @bodyRoot body?: PatchModel
 ): Response | Error;
 
 /**
- * A resource update using a custom PATCH payload (synchronous)
+ * A resource update using a custom PATCH payload (asynchronous)
  * @template Resource the resource being patched
  * @template PatchModel The input model for the PATCH request
  * @template BaseParameters Optional. Allows overriding the operation parameters
@@ -62,7 +52,7 @@ op ArmCustomPatchSync<
 @doc("Update a {name}", Resource)
 @armResourceUpdate(Resource)
 @patch(#{ implicitOptionality: true })
-op ArmCustomPatchAsync<
+op ArmCustomPatchAsyncWithOptionalBody<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.TagsUpdateModel<Resource>,
   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
@@ -77,15 +67,10 @@ op ArmCustomPatchAsync<
     "Resource update request accepted.",
     LroHeaders
   >,
-  Error extends {} = ErrorResponse,
-  Request extends {} = {
-    /** The resource properties to be updated */
-    @bodyRoot body: PatchModel;
-  },
-  EndParameters extends {} = {}
+  Error extends {} = ErrorResponse
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
-  ...Request,
-  ...EndParameters,
+  /** The resource properties to be updated */
+  @bodyRoot body?: PatchModel
 ): Response | Error;

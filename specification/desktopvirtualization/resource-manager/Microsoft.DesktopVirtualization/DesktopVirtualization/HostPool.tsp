@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace Microsoft.DesktopVirtualization;
@@ -140,15 +142,9 @@ interface HostPools {
    * Update a host pool.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     HostPool,
-    HostPoolPatch,
-    Request = {
-      /**
-       * The properties to be updated.
-       */
-      @bodyRoot hostPool?: HostPoolPatch;
-    }
+    HostPoolPatch
   >;
 
   /**
@@ -246,4 +242,10 @@ interface HostPools {
 @@doc(HostPool.properties, "Detailed properties for HostPool");
 @@doc(HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
+);
+@@clientName(HostPools.update::parameters.body,
+  "hostPool"
+);
+@@doc(HostPools.update::parameters.body,
+  "The properties to be updated."
 );
