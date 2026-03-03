@@ -1130,6 +1130,71 @@
         ]
       }
     },
+    "ArmResourceDatasetSchema": {
+      "type": "object",
+      "description": "ARM resource dataset schema.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the ARM resource."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group where the resource resides."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of the ARM resource (optional)."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the resource is located (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the ARM resource (optional).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties of the ARM resource (optional).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource information was captured (optional)."
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceType",
+        "resourceName",
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup"
+      ]
+    },
     "AutoDataQualityParameters": {
       "type": "object",
       "description": "Auto data quality parameters",
@@ -1639,71 +1704,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ArmResourceDatasetSchema": {
-      "type": "object",
-      "description": "ARM resource dataset schema.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The full ARM resource ID."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The type of the ARM resource."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "The name of the ARM resource."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID where the resource resides."
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription ID where the resource resides."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group where the resource resides."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of the ARM resource (optional)."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure region where the resource is located (optional)."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the ARM resource (optional).",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Additional properties of the ARM resource (optional).",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the resource information was captured (optional)."
-        }
-      },
-      "required": [
-        "resourceId",
-        "resourceType",
-        "resourceName",
-        "tenantId",
-        "subscriptionId",
-        "resourceGroup"
       ]
     },
     "DatasetColumn": {
