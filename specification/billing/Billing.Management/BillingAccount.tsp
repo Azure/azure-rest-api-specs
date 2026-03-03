@@ -260,7 +260,7 @@ interface BillingAccounts {
   billingRequestsListByBillingAccount is ArmResourceActionSync<
     BillingAccount,
     void,
-    ArmResponse<ResourceListResult<BillingRequest>>,
+    Response = ArmResponse<BillingRequestListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -325,14 +325,14 @@ interface BillingAccounts {
   resolveByBillingAccount is ArmResourceActionAsync<
     BillingAccount,
     void,
-    ResourceListResult<BillingRoleAssignment>,
+    BillingRoleAssignmentListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Resolves the scope display name for each of the role assignments.
        */
       @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean;
+      resolveScopeDisplayNames?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.

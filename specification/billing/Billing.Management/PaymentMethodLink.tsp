@@ -33,6 +33,32 @@ model PaymentMethodLink
   tags?: Record<string>;
 }
 
+alias PaymentMethodLinkOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    billingProfileName: string;
+  },
+  {
+    /** The ID that uniquely identifies a payment method. */
+    @path
+    @segment("paymentMethodLinks")
+    @key
+    paymentMethodName: string;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface PaymentMethodLinks {
   /**
@@ -41,10 +67,7 @@ interface PaymentMethodLinks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("PaymentMethods")
-  getByBillingProfile is ArmResourceRead<
-    PaymentMethodLink,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
-  >;
+  getByBillingProfile is PaymentMethodLinkOps.Read<PaymentMethodLink>;
 
   /**
    * Lists payment methods attached to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
@@ -52,9 +75,8 @@ interface PaymentMethodLinks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("PaymentMethods")
-  listByBillingProfile is ArmResourceListByParent<
+  listByBillingProfile is PaymentMethodLinkOps.List<
     PaymentMethodLink,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<PaymentMethodLinksListResult>
   >;
 }

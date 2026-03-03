@@ -84,7 +84,8 @@ interface Departments {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<DepartmentListResult>
   >;
 
   /**

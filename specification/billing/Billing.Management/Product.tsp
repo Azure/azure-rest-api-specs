@@ -104,7 +104,8 @@ interface Products {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<ProductListResult>
   >;
 
   /**

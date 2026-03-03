@@ -5209,7 +5209,7 @@ model SavingsPlanModelProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * SavingsPlan Id of the SavingsPlan from which this SavingsPlan is renewed.
@@ -5354,7 +5354,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Properties specific to applied scope type. Not required if not applicable.
@@ -5492,7 +5492,7 @@ model SavingsPlanUpdateRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Properties specific to renew.
@@ -5941,6 +5941,12 @@ model BillingSubscriptionAliasProperties extends BillingSubscriptionProperties {
    */
   @visibility(Lifecycle.Read)
   billingSubscriptionId?: string;
+
+  /**
+   * The provisioning state of the resource during a long-running operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -6777,6 +6783,26 @@ model InvoiceSectionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+}
+
+/**
+ * Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * List of billing operations supported by the Microsoft.Billing resource provider.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  @pageItems
+  value?: Operation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
 
 /**
@@ -7850,7 +7876,7 @@ model ReservationPurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Properties specific to each reserved resource type. Not required if not applicable.
@@ -9040,3 +9066,32 @@ model BillingSubscriptionListResult is Azure.Core.Page<BillingSubscription> {
   @visibility(Lifecycle.Read)
   totalCount?: float32;
 }
+
+model AgreementListResult is Azure.Core.Page<Agreement>;
+
+model AssociatedTenantListResult is Azure.Core.Page<AssociatedTenant>;
+
+model BillingProfileListResult is Azure.Core.Page<BillingProfile>;
+
+model BillingRequestListResult is Azure.Core.Page<BillingRequest>;
+
+model BillingRoleAssignmentListResult is Azure.Core.Page<BillingRoleAssignment>;
+
+model BillingRoleDefinitionListResult is Azure.Core.Page<BillingRoleDefinition>;
+
+model BillingSubscriptionAliasListResult
+  is Azure.Core.Page<BillingSubscriptionAlias>;
+
+model CustomerListResult is Azure.Core.Page<Customer>;
+
+model DepartmentListResult is Azure.Core.Page<Department>;
+
+model EnrollmentAccountListResult is Azure.Core.Page<EnrollmentAccount>;
+
+model InvoiceListResult is Azure.Core.Page<Invoice>;
+
+model InvoiceSectionListResult is Azure.Core.Page<InvoiceSection>;
+
+model ProductListResult is Azure.Core.Page<Product>;
+
+model TransactionListResult is Azure.Core.Page<Transaction>;

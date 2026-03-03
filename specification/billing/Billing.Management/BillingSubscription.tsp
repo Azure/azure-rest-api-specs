@@ -98,7 +98,7 @@ interface BillingSubscriptions {
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
@@ -224,19 +224,19 @@ interface BillingSubscriptionOperationGroup {
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.
        */
       @query("includeTenantSubscriptions")
-      includeTenantSubscriptions?: boolean;
+      includeTenantSubscriptions?: boolean = false;
 
       /**
        * Can be used to get failed billing subscriptions.
        */
       @query("includeFailed")
-      includeFailed?: boolean;
+      includeFailed?: boolean = false;
 
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`

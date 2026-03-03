@@ -67,6 +67,38 @@ alias CustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
+alias CustomerNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    billingProfileName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
+    customerName: string;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface Customers {
   /**
@@ -127,7 +159,8 @@ interface Customers {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<CustomerListResult>
   >;
 
   /**
@@ -171,7 +204,7 @@ interface Customers {
   billingRequestsListByCustomer is CustomerOps.ActionSync<
     Customer,
     void,
-    ArmResponse<ResourceListResult<BillingRequest>>,
+    ArmResponse<BillingRequestListResult>,
     Parameters = {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -236,13 +269,13 @@ interface Customers {
   resolveByCustomer is CustomerOps.ActionAsync<
     Customer,
     void,
-    ResourceListResult<BillingRoleAssignment>,
+    BillingRoleAssignmentListResult,
     Parameters = {
       /**
        * Resolves the scope display name for each of the role assignments.
        */
       @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean;
+      resolveScopeDisplayNames?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -261,7 +294,7 @@ interface Customers {
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByCustomer is CustomerOps.ActionSync<
+  billingSubscriptionsListByCustomer is CustomerNoPatternOps.ActionSync<
     Customer,
     void,
     ArmResponse<BillingSubscriptionListResult>,
@@ -270,7 +303,7 @@ interface Customers {
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
@@ -348,7 +381,7 @@ interface Customers {
   transactionsListByCustomer is CustomerOps.ActionSync<
     Customer,
     void,
-    ArmResponse<ResourceListResult<Transaction>>,
+    ArmResponse<TransactionListResult>,
     Parameters = {
       /**
        * The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.
@@ -406,6 +439,7 @@ interface Customers {
     }
   >;
 }
+
 alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -430,6 +464,32 @@ alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @segment("customers")
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    customerName: string;
+  }
+>;
+
+alias CustomerOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies a customer. */
+    @path
+    @segment("customers")
+    @key
     customerName: string;
   }
 >;
@@ -494,7 +554,8 @@ interface CustomerOperationGroup {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<CustomerListResult>
   >;
 
   /**
@@ -521,7 +582,7 @@ interface CustomerOperationGroup {
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByCustomerAtBillingAccount is CustomerOperationGroupOps.ActionSync<
+  billingSubscriptionsListByCustomerAtBillingAccount is CustomerOperationGroupNoPatternOps.ActionSync<
     Customer,
     void,
     ArmResponse<BillingSubscriptionListResult>,
@@ -530,7 +591,7 @@ interface CustomerOperationGroup {
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
@@ -589,7 +650,7 @@ interface CustomerOperationGroup {
   listByCustomer is CustomerOperationGroupOps.ActionSync<
     Customer,
     void,
-    ArmResponse<ResourceListResult<Product>>,
+    ArmResponse<ProductListResult>,
     Parameters = {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.

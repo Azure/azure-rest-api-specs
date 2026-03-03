@@ -112,7 +112,8 @@ interface BillingRoleAssignments {
        */
       @query("skip")
       skip?: int64;
-    }
+    },
+    Response = ArmResponse<BillingRoleAssignmentListResult>
   >;
 }
 alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -201,7 +202,8 @@ interface BillingRoleAssignmentByCustomer {
        */
       @query("skip")
       skip?: int64;
-    }
+    },
+    Response = ArmResponse<BillingRoleAssignmentListResult>
   >;
 }
 alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -290,7 +292,8 @@ interface BillingRoleAssignmentByInvoiceSection {
        */
       @query("skip")
       skip?: int64;
-    }
+    },
+    Response = ArmResponse<BillingRoleAssignmentListResult>
   >;
 }
 alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -377,7 +380,8 @@ interface BillingRoleAssignmentByBillingAccount {
        */
       @query("skip")
       skip?: int64;
-    }
+    },
+    Response = ArmResponse<BillingRoleAssignmentListResult>
   >;
 }
 alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -451,7 +455,10 @@ interface BillingRoleAssignmentByDepartment {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
-  listByDepartment is BillingRoleAssignmentByDepartmentOps.List<BillingRoleAssignment>;
+  listByDepartment is BillingRoleAssignmentByDepartmentOps.List<
+    BillingRoleAssignment,
+    Response = ArmResponse<BillingRoleAssignmentListResult>
+  >;
 }
 alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -524,7 +531,10 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
-  listByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.List<BillingRoleAssignment>;
+  listByEnrollmentAccount is BillingRoleAssignmentByEnrollmentAccountOps.List<
+    BillingRoleAssignment,
+    Response = ArmResponse<BillingRoleAssignmentListResult>
+  >;
 }
 
 @@doc(BillingRoleAssignment.name,

@@ -72,8 +72,24 @@ enum Versions {
   v2024_04_01: "2024-04-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {
+// interface Operations extends Azure.ResourceManager.Operations {
+//   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+//   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
+//   list is Azure.ResourceManager.Operations.list;
+// }
+
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
-  list is Azure.ResourceManager.Operations.list;
+  @tag("ArmOperations")
+  @autoRoute
+  @doc("List of operations supported by provider.")
+  @segment("operations")
+  @get
+  @list
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<OperationListResult> | Azure.ResourceManager.ErrorResponse;
 }

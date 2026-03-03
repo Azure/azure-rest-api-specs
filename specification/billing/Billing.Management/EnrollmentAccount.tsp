@@ -122,9 +122,11 @@ interface EnrollmentAccounts {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<EnrollmentAccountListResult>
   >;
 }
+
 alias EnrollmentAccountOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -140,6 +142,33 @@ alias EnrollmentAccountOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
     @segment("billingAccounts")
     @key
     @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    billingAccountName: string;
+  },
+  {},
+  {
+    /** The name of the enrollment account. */
+    @path
+    @segment("enrollmentAccounts")
+    @key
+    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    enrollmentAccountName: string;
+  }
+>;
+
+alias EnrollmentAccountOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
     billingAccountName: string;
   },
   {},
@@ -207,7 +236,8 @@ interface EnrollmentAccountOperationGroup {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<EnrollmentAccountListResult>
   >;
 
   /**
@@ -247,7 +277,7 @@ interface EnrollmentAccountOperationGroup {
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByEnrollmentAccount is EnrollmentAccountOperationGroupOps.ActionSync<
+  billingSubscriptionsListByEnrollmentAccount is EnrollmentAccountOperationGroupNoPatternOps.ActionSync<
     EnrollmentAccount,
     void,
     ArmResponse<BillingSubscriptionListResult>,

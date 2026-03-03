@@ -60,7 +60,8 @@ interface Agreements {
        */
       @query("expand")
       expand?: string;
-    }
+    },
+    Response = ArmResponse<AgreementListResult>
   >;
 }
 

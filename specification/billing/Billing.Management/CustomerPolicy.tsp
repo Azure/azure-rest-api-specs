@@ -71,7 +71,8 @@ alias CustomerPolicyOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("policies")
     @key
-    policyName: string;
+    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    policyName: ServiceDefinedResourceName;
   }
 >;
 

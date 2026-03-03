@@ -103,7 +103,8 @@ interface BillingRequests {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<BillingRequestListResult>
   >;
 }
 

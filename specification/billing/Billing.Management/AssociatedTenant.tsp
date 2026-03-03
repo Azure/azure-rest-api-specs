@@ -84,7 +84,7 @@ interface AssociatedTenants {
        * Can be used to get revoked associated tenants.
        */
       @query("includeRevoked")
-      includeRevoked?: boolean;
+      includeRevoked?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -121,7 +121,8 @@ interface AssociatedTenants {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<AssociatedTenantListResult>
   >;
 }
 

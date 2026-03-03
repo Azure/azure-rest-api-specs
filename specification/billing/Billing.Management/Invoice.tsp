@@ -127,7 +127,8 @@ interface Invoices {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<InvoiceListResult>
   >;
 
   /**
@@ -188,7 +189,7 @@ interface Invoices {
   listByInvoice is InvoiceOps.ActionSync<
     Invoice,
     void,
-    ArmResponse<ResourceListResult<Transaction>>,
+    ArmResponse<TransactionListResult>,
     Parameters = {
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -368,7 +369,8 @@ interface InvoiceByBillingSubscription {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<InvoiceListResult>
   >;
 
   /**

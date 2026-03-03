@@ -499,3 +499,37 @@ using Microsoft.Billing;
 @@clientName(InvoicesOperationGroup.downloadDocumentsByBillingSubscription::parameters.downloadUrls,
   "parameters"
 );
+
+@@clientName(AddressOperationGroup.validate::parameters.body, "parameters");
+
+@@Azure.ResourceManager.identifiers(InvoiceSectionWithCreateSubPermissionListResult.value,
+  #["invoiceSectionId"]
+);
+
+@@Azure.ResourceManager.identifiers(AgreementListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(AssociatedTenantListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(BillingProfileListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(BillingRequestListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(BillingRoleAssignmentListResult.value,
+  #["id"]
+);
+@@Azure.ResourceManager.identifiers(BillingRoleDefinitionListResult.value,
+  #["id"]
+);
+@@Azure.ResourceManager.identifiers(BillingSubscriptionAliasListResult.value,
+  #["id"]
+);
+@@Azure.ResourceManager.identifiers(BillingSubscriptionListResult.value,
+  #["id"]
+);
+@@Azure.ResourceManager.identifiers(CustomerListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(DepartmentListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(EnrollmentAccountListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(InvoiceListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(InvoiceSectionListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(PaymentMethodLinksListResult.value,
+  #["id"]
+);
+@@Azure.ResourceManager.identifiers(PaymentMethodsListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(ProductListResult.value, #["id"]);
+@@Azure.ResourceManager.identifiers(TransactionListResult.value, #["id"]);

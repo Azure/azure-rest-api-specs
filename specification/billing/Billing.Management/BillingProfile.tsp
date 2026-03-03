@@ -88,7 +88,7 @@ interface BillingProfiles {
        * Can be used to get deleted billing profiles.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -125,7 +125,8 @@ interface BillingProfiles {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<BillingProfileListResult>
   >;
 
   /**
@@ -183,7 +184,7 @@ interface BillingProfiles {
   billingRequestsListByBillingProfile is ArmResourceActionSync<
     BillingProfile,
     void,
-    ArmResponse<ResourceListResult<BillingRequest>>,
+    ArmResponse<BillingRequestListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -248,14 +249,14 @@ interface BillingProfiles {
   resolveByBillingProfile is ArmResourceActionAsync<
     BillingProfile,
     void,
-    ResourceListResult<BillingRoleAssignment>,
+    BillingRoleAssignmentListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Resolves the scope display name for each of the role assignments.
        */
       @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean;
+      resolveScopeDisplayNames?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -277,7 +278,7 @@ interface BillingProfiles {
   invoicesListByBillingProfile is ArmResourceActionSync<
     BillingProfile,
     void,
-    ArmResponse<ResourceListResult<Invoice>>,
+    InvoiceListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -342,7 +343,7 @@ interface BillingProfiles {
   productsListByBillingProfile is ArmResourceActionSync<
     BillingProfile,
     void,
-    ArmResponse<ResourceListResult<Product>>,
+    ArmResponse<ProductListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -446,7 +447,7 @@ interface BillingProfiles {
   transactionsListByBillingProfile is ArmResourceActionSync<
     BillingProfile,
     void,
-    ArmResponse<ResourceListResult<Transaction>>,
+    ArmResponse<TransactionListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**

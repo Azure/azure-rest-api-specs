@@ -84,7 +84,10 @@ interface BillingRoleDefinitions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByBillingProfile is BillingRoleDefinitionOps.List<BillingRoleDefinition>;
+  listByBillingProfile is BillingRoleDefinitionOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 alias BillingRoleDefinitionByCustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -144,7 +147,10 @@ interface BillingRoleDefinitionByCustomer {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByCustomer is BillingRoleDefinitionByCustomerOps.List<BillingRoleDefinition>;
+  listByCustomer is BillingRoleDefinitionByCustomerOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 alias BillingRoleDefinitionByInvoiceSectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -204,7 +210,10 @@ interface BillingRoleDefinitionByInvoiceSection {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.List<BillingRoleDefinition>;
+  listByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 alias BillingRoleDefinitionByBillingAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -250,7 +259,10 @@ interface BillingRoleDefinitionByBillingAccount {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByBillingAccount is BillingRoleDefinitionByBillingAccountOps.List<BillingRoleDefinition>;
+  listByBillingAccount is BillingRoleDefinitionByBillingAccountOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 alias BillingRoleDefinitionByDepartmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -303,7 +315,10 @@ interface BillingRoleDefinitionByDepartment {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByDepartment is BillingRoleDefinitionByDepartmentOps.List<BillingRoleDefinition>;
+  listByDepartment is BillingRoleDefinitionByDepartmentOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 alias BillingRoleDefinitionByEnrollmentAccountOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -356,7 +371,10 @@ interface BillingRoleDefinitionByEnrollmentAccount {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
-  listByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.List<BillingRoleDefinition>;
+  listByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.List<
+    BillingRoleDefinition,
+    Response = ArmResponse<BillingRoleDefinitionListResult>
+  >;
 }
 
 @@doc(BillingRoleDefinition.name,

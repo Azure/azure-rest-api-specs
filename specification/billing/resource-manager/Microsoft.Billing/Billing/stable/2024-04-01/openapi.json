@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "ArmOperations"
     },
     {
       "name": "Agreement"
@@ -604,7 +604,8 @@
             "in": "query",
             "description": "Can be used to get revoked associated tenants.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -991,7 +992,8 @@
             "in": "query",
             "description": "Can be used to get deleted billing profiles.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -1824,7 +1826,8 @@
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "expand",
@@ -2819,31 +2822,29 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "billingProfileName",
             "in": "path",
             "description": "The ID that uniquely identifies a billing profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "customerName",
             "in": "path",
             "description": "The ID that uniquely identifies a customer.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "includeDeleted",
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "expand",
@@ -3124,7 +3125,22 @@
             "in": "path",
             "description": "Service-defined resource names such as 'default' which are reserved resource names.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServiceDefinedResourceName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -3282,7 +3298,8 @@
             "in": "query",
             "description": "Resolves the scope display name for each of the role assignments.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -3791,7 +3808,8 @@
             "in": "query",
             "description": "Can be used to get deleted invoice sections.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -4638,31 +4656,29 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "billingProfileName",
             "in": "path",
             "description": "The ID that uniquely identifies a billing profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "invoiceSectionName",
             "in": "path",
             "description": "The ID that uniquely identifies an invoice section.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "includeDeleted",
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "expand",
@@ -5050,7 +5066,8 @@
             "in": "query",
             "description": "Resolves the scope display name for each of the role assignments.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -5721,16 +5738,14 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "billingProfileName",
             "in": "path",
             "description": "The ID that uniquely identifies a billing profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -5776,16 +5791,14 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "billingProfileName",
             "in": "path",
             "description": "The ID that uniquely identifies a billing profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "paymentMethodName",
@@ -6179,7 +6192,8 @@
             "in": "query",
             "description": "Resolves the scope display name for each of the role assignments.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -6894,15 +6908,15 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "includeDeleted",
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -6992,8 +7006,7 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "aliasName",
@@ -7041,8 +7054,7 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "aliasName",
@@ -7144,21 +7156,24 @@
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeTenantSubscriptions",
             "in": "query",
             "description": "Can be used to get tenant-owned billing subscriptions. This field is only applies to Microsoft Online Services Program billing accounts.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeFailed",
             "in": "query",
             "description": "Can be used to get failed billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "expand",
@@ -8274,23 +8289,22 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "customerName",
             "in": "path",
             "description": "The ID that uniquely identifies a customer.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "type": "string"
           },
           {
             "name": "includeDeleted",
             "in": "query",
             "description": "Can be used to get deleted billing subscriptions.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "expand",
@@ -10060,8 +10074,7 @@
             "in": "path",
             "description": "The ID that uniquely identifies a billing account.",
             "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "type": "string"
           },
           {
             "name": "enrollmentAccountName",
@@ -11875,7 +11888,8 @@
             "in": "query",
             "description": "Resolves the scope display name for each of the role assignments.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "filter",
@@ -13019,9 +13033,9 @@
       "get": {
         "operationId": "Operations_List",
         "tags": [
-          "Operations"
+          "ArmOperations"
         ],
-        "description": "List the operations for the provider",
+        "description": "List of operations supported by provider.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -13034,7 +13048,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -13415,7 +13429,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -13470,14 +13484,16 @@
             "in": "query",
             "description": "A flag that specifies whether or not to include billing country.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeTransitionStatus",
             "in": "query",
             "description": "A flag that specifies whether or not to include transition status for billing accounts with agreement type Microsoft Customer Agreement.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -14043,14 +14059,17 @@
     },
     "AgreementListResult": {
       "type": "object",
-      "description": "The response of a Agreement list operation.",
+      "description": "Paged collection of Agreement items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Agreement items on this page",
           "items": {
             "$ref": "#/definitions/Agreement"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -14267,14 +14286,17 @@
     },
     "AssociatedTenantListResult": {
       "type": "object",
-      "description": "The response of a AssociatedTenant list operation.",
+      "description": "Paged collection of AssociatedTenant items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The AssociatedTenant items on this page",
           "items": {
             "$ref": "#/definitions/AssociatedTenant"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -14904,14 +14926,17 @@
     },
     "BillingProfileListResult": {
       "type": "object",
-      "description": "The response of a BillingProfile list operation.",
+      "description": "Paged collection of BillingProfile items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingProfile items on this page",
           "items": {
             "$ref": "#/definitions/BillingProfile"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -15584,14 +15609,17 @@
     },
     "BillingRequestListResult": {
       "type": "object",
-      "description": "The response of a BillingRequest list operation.",
+      "description": "Paged collection of BillingRequest items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingRequest items on this page",
           "items": {
             "$ref": "#/definitions/BillingRequest"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -15917,14 +15945,17 @@
     },
     "BillingRoleAssignmentListResult": {
       "type": "object",
-      "description": "The response of a BillingRoleAssignment list operation.",
+      "description": "Paged collection of BillingRoleAssignment items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingRoleAssignment items on this page",
           "items": {
             "$ref": "#/definitions/BillingRoleAssignment"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -16115,14 +16146,17 @@
     },
     "BillingRoleDefinitionListResult": {
       "type": "object",
-      "description": "The response of a BillingRoleDefinition list operation.",
+      "description": "Paged collection of BillingRoleDefinition items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingRoleDefinition items on this page",
           "items": {
             "$ref": "#/definitions/BillingRoleDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -16210,14 +16244,17 @@
     },
     "BillingSubscriptionAliasListResult": {
       "type": "object",
-      "description": "The response of a BillingSubscriptionAlias list operation.",
+      "description": "Paged collection of BillingSubscriptionAlias items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The BillingSubscriptionAlias items on this page",
           "items": {
             "$ref": "#/definitions/BillingSubscriptionAlias"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -16237,6 +16274,11 @@
           "type": "string",
           "description": "The ID of the billing subscription with the subscription alias.",
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -16254,7 +16296,10 @@
           "description": "The BillingSubscription items on this page",
           "items": {
             "$ref": "#/definitions/BillingSubscription"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -16934,14 +16979,17 @@
     },
     "CustomerListResult": {
       "type": "object",
-      "description": "The response of a Customer list operation.",
+      "description": "Paged collection of Customer items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Customer items on this page",
           "items": {
             "$ref": "#/definitions/Customer"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -17355,14 +17403,17 @@
     },
     "DepartmentListResult": {
       "type": "object",
-      "description": "The response of a Department list operation.",
+      "description": "Paged collection of Department items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Department items on this page",
           "items": {
             "$ref": "#/definitions/Department"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -17547,14 +17598,17 @@
     },
     "EnrollmentAccountListResult": {
       "type": "object",
-      "description": "The response of a EnrollmentAccount list operation.",
+      "description": "Paged collection of EnrollmentAccount items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The EnrollmentAccount items on this page",
           "items": {
             "$ref": "#/definitions/EnrollmentAccount"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -18184,14 +18238,17 @@
     },
     "InvoiceListResult": {
       "type": "object",
-      "description": "The response of a Invoice list operation.",
+      "description": "Paged collection of Invoice items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Invoice items on this page",
           "items": {
             "$ref": "#/definitions/Invoice"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -18504,14 +18561,17 @@
     },
     "InvoiceSectionListResult": {
       "type": "object",
-      "description": "The response of a InvoiceSection list operation.",
+      "description": "Paged collection of InvoiceSection items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The InvoiceSection items on this page",
           "items": {
             "$ref": "#/definitions/InvoiceSection"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -18727,7 +18787,10 @@
           "description": "The InvoiceSectionWithCreateSubPermission items on this page",
           "items": {
             "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
-          }
+          },
+          "x-ms-identifiers": [
+            "invoiceSectionId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -19133,6 +19196,75 @@
         "billingFrequency": {
           "type": "string",
           "description": "Billing frequency of the product under the subscription.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\".",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Localized display information for this particular operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Localized display information for this particular operation.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of billing operations supported by the Microsoft.Billing resource provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results if there are any.",
           "readOnly": true
         }
       }
@@ -19601,7 +19733,10 @@
           "description": "The PaymentMethodLink items on this page",
           "items": {
             "$ref": "#/definitions/PaymentMethodLink"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -19714,7 +19849,10 @@
           "description": "The PaymentMethod items on this page",
           "items": {
             "$ref": "#/definitions/PaymentMethod"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -20159,14 +20297,17 @@
     },
     "ProductListResult": {
       "type": "object",
-      "description": "The response of a Product list operation.",
+      "description": "Paged collection of Product items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Product items on this page",
           "items": {
             "$ref": "#/definitions/Product"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -20670,7 +20811,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties",
@@ -21763,7 +21905,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "reservedResourceProperties": {
           "$ref": "#/definitions/ReservationPurchaseRequestPropertiesReservedResourceProperties",
@@ -22231,7 +22374,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "renewSource": {
           "type": "string",
@@ -22590,7 +22734,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "renewProperties": {
           "$ref": "#/definitions/RenewProperties",
@@ -23668,14 +23813,17 @@
     },
     "TransactionListResult": {
       "type": "object",
-      "description": "The response of a Transaction list operation.",
+      "description": "Paged collection of Transaction items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Transaction items on this page",
           "items": {
             "$ref": "#/definitions/Transaction"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",

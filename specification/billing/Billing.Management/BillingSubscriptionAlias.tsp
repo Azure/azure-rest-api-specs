@@ -33,6 +33,26 @@ model BillingSubscriptionAlias
   tags?: Record<string>;
 }
 
+alias BillingSubscriptionAliasOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+  },
+  {
+    /** The ID that uniquely identifies a subscription alias. */
+    @path
+    @segment("billingSubscriptionAliases")
+    @key
+    aliasName: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface BillingSubscriptionAliases {
@@ -42,10 +62,7 @@ interface BillingSubscriptionAliases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
-  get is ArmResourceRead<
-    BillingSubscriptionAlias,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
-  >;
+  get is BillingSubscriptionAliasOps.Read<BillingSubscriptionAlias>;
 
   /**
    * Creates or updates a billing subscription by its alias ID.  The operation is supported for seat based billing subscriptions.
@@ -54,9 +71,8 @@ interface BillingSubscriptionAliases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is BillingSubscriptionAliasOps.CreateOrUpdateAsync<
     BillingSubscriptionAlias,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResourceUpdatedResponse<BillingSubscriptionAlias> | ArmResourceCreatedResponse<
       BillingSubscriptionAlias,
       ArmLroLocationHeader<FinalResult = BillingSubscriptionAlias> &
@@ -70,15 +86,14 @@ interface BillingSubscriptionAliases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
-  listByBillingAccount is ArmResourceListByParent<
+  listByBillingAccount is BillingSubscriptionAliasOps.List<
     BillingSubscriptionAlias,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -115,7 +130,8 @@ interface BillingSubscriptionAliases {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<BillingSubscriptionAliasListResult>
   >;
 }
 

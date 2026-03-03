@@ -33,6 +33,32 @@ model InvoiceSection
   tags?: Record<string>;
 }
 
+alias InvoiceSectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    billingProfileName: string;
+  },
+  {
+    /** The ID that uniquely identifies an invoice section. */
+    @path
+    @segment("invoiceSections")
+    @key
+    invoiceSectionName: string;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface InvoiceSections {
   /**
@@ -88,7 +114,7 @@ interface InvoiceSections {
        * Can be used to get deleted invoice sections.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -125,7 +151,8 @@ interface InvoiceSections {
        */
       @query("search")
       search?: string;
-    }
+    },
+    Response = ArmResponse<InvoiceSectionListResult>
   >;
 
   /**
@@ -170,7 +197,7 @@ interface InvoiceSections {
   billingRequestsListByInvoiceSection is ArmResourceActionSync<
     InvoiceSection,
     void,
-    ArmResponse<ResourceListResult<BillingRequest>>,
+    Response = ArmResponse<BillingRequestListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -235,14 +262,14 @@ interface InvoiceSections {
   resolveByInvoiceSection is ArmResourceActionAsync<
     InvoiceSection,
     void,
-    ResourceListResult<BillingRoleAssignment>,
+    BillingRoleAssignmentListResult,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Resolves the scope display name for each of the role assignments.
        */
       @query("resolveScopeDisplayNames")
-      resolveScopeDisplayNames?: boolean;
+      resolveScopeDisplayNames?: boolean = false;
 
       /**
        * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
@@ -261,17 +288,16 @@ interface InvoiceSections {
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByInvoiceSection is ArmResourceActionSync<
+  billingSubscriptionsListByInvoiceSection is InvoiceSectionOps.ActionSync<
     InvoiceSection,
     void,
     ArmResponse<BillingSubscriptionListResult>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * Can be used to get deleted billing subscriptions.
        */
       @query("includeDeleted")
-      includeDeleted?: boolean;
+      includeDeleted?: boolean = false;
 
       /**
        * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
@@ -342,7 +368,7 @@ interface InvoiceSections {
   productsListByInvoiceSection is ArmResourceActionSync<
     InvoiceSection,
     void,
-    ArmResponse<ResourceListResult<Product>>,
+    ArmResponse<ProductListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
@@ -395,7 +421,7 @@ interface InvoiceSections {
   transactionsListByInvoiceSection is ArmResourceActionSync<
     InvoiceSection,
     void,
-    ArmResponse<ResourceListResult<Transaction>>,
+    ArmResponse<TransactionListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
