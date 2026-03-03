@@ -69,6 +69,11 @@ model NetworkInterfaceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkInterface indicating if the interface is reachable")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
 }
 
 @doc("The NetworkInterfacePatch resource definition.")

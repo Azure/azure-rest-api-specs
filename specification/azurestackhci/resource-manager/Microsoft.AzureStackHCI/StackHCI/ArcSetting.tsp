@@ -28,7 +28,7 @@ model ArcSetting is Azure.ResourceManager.ProxyResource<ArcSettingProperties> {
 }
 
 // here is the augment decorator for versioning
-@@removed(ArcSetting.identity, Versions.v2025_12_01_preview);
+@@added(ArcSetting.identity, Versions.v2026_03_15_preview);
 
 @armResourceOperations
 interface ArcSettings {

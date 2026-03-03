@@ -56,6 +56,14 @@ union ResourceOperationType {
   @doc("Hibernate operations on the resources")
   Hibernate: "Hibernate",
 
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  @doc("Create operations on the resources")
+  Create: "Create",
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  @doc("Delete operations on the resources")
+  Delete: "Delete",
+
   string,
 }
 
@@ -91,6 +99,63 @@ union OperationState {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The supported operating system types for flex VM creation")
+union OsType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The priority type for VM allocation")
+union PriorityType {
+  @doc("Regular priority VMs")
+  regular: "regular",
+
+  @doc("Spot priority VMs")
+  spot: "spot",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The allocation strategy for VM size selection")
+union AllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  CapacityOptimized: "CapacityOptimized",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The distribution strategy for zone allocation")
+union DistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  StrictBalanced: "StrictBalanced",
+
+  string,
+}
+
 // ------------------ Common Values ---------------
 alias Params = {
   ...ApiVersionParameter;
@@ -108,10 +173,21 @@ alias Params = {
 model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The deadline for the operation")
-  deadLine: offsetDateTime;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadLine?: offsetDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @added(Versions.`2026-03-01-preview`)
+  @doc("The deadline for the operation")
+  deadline?: offsetDateTime;
 
   @doc("The timezone for the operation")
-  timeZone: string;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  timeZone?: string;
+
+  @added(Versions.`2026-03-01-preview`)
+  @doc("The timezone for the operation")
+  timezone?: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
   deadlineType: DeadlineType = DeadlineType.Unknown;
@@ -120,7 +196,8 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  ids: Array<string>;
+  @typeChangedFrom(Versions.`2026-03-01-preview`, Array<string>)
+  ids: Array<armResourceIdentifier>;
 }
 
 @doc("The retry policy for the user request")
@@ -156,26 +233,37 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId: string;
+  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
+  @madeOptional(Versions.`2026-03-01-preview`)
+  resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  opType: ResourceOperationType = ResourceOperationType.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  subscriptionId: string;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  subscriptionId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
-  deadline: offsetDateTime;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadline?: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  deadlineType: DeadlineType = DeadlineType.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadlineType?: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  state: OperationState = OperationState.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  state?: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
   timeZone?: string;
+
+  @added(Versions.`2026-03-01-preview`)
+  @doc("Timezone for the operation")
+  timezone?: string;
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
@@ -191,7 +279,8 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId?: string;
+  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
+  resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;
@@ -339,6 +428,205 @@ model ExecuteStartRequest {
   correlationid: string;
 }
 
+// ----------- ExecuteCreate ---------
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("Resource creation data model")
+model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch")
+  baseProfile?: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
+  resourceOverrides?: Record<unknown>[];
+
+  @doc("The number of resources to create")
+  resourceCount: int32;
+
+  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  resourcePrefix?: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The ExecuteCreateRequest request for create operations")
+model ExecuteCreateRequest {
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("Correlationid item")
+  correlationid?: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The response from a create request")
+model CreateResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the create request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  @Azure.ResourceManager.identifiers(#["resourceId"])
+  @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+// ----------- ExecuteDelete ---------
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The ExecuteDeleteRequest for delete VM operation")
+model ExecuteDeleteRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("Correlationid item")
+  correlationid?: string;
+
+  @doc("Forced delete resource item")
+  forceDeletion?: boolean;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The response from a delete request")
+model DeleteResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the delete request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  @Azure.ResourceManager.identifiers(#["resourceId"])
+  @doc("The results from the delete request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+// ----------- ExecuteCreateFlex ---------
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("A VM size profile with a name and rank for flex VM creation")
+model VmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
+
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The priority profile for flex VM creation")
+model PriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("A zone preference with a zone identifier and rank")
+model ZonePreference {
+  @doc("The zone identifier")
+  zone: string;
+
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The zone allocation policy for distributing VMs across availability zones")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation")
+  distributionStrategy?: DistributionStrategy;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The flex properties for flexible VM creation")
+model FlexProperties {
+  @identifiers(#[])
+  @doc("The list of VM size profiles to use for flex creation")
+  @minItems(1)
+  @maxItems(5)
+  vmSizeProfiles: Array<VmSizeProfile>;
+
+  @doc("The operating system type for the VMs")
+  osType: OsType;
+
+  @doc("The priority profile for VM allocation")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy for distributing VMs across availability zones")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("Resource creation data model for flex VM provisioning")
+model ResourceProvisionFlexPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch")
+  baseProfile?: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
+  resourceOverrides?: Record<unknown>[];
+
+  @doc("Number of VMs to be created")
+  resourceCount: int32;
+
+  @doc("If resourceOverrides doesn't contain name, service will create name based on prefix and resourceCount")
+  resourcePrefix?: string;
+
+  @doc("The flex properties for flexible VM creation")
+  flexProperties: FlexProperties;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The ExecuteCreateFlexRequest request for executeCreateFlex operations")
+model ExecuteCreateFlexRequest {
+  @doc("Resource creation payload with flex properties")
+  resourceConfigParameters: ResourceProvisionFlexPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("Correlationid item")
+  correlationid?: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The response from a create flex request")
+model CreateFlexResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the create flex request eg virtual machines")
+  type: string;
+
+  @doc("The location of the create flex request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  @Azure.ResourceManager.identifiers(#["resourceId"])
+  @doc("The results from the create flex request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
 // ----------- GetOperationStatus ---------
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
@@ -371,6 +659,73 @@ model CancelOperationsResponse {
   @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
+}
+
+// ----------- GetOperationErrors ---------
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("This is the request to get errors per vm operations")
+model GetOperationErrorsRequest {
+  @doc("The list of operation ids to query errors of")
+  operationIds: Array<string>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("This is the response from a get operations errors request")
+model GetOperationErrorsResponse {
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("An array of errors based on the operationids")
+  results: Array<OperationErrorsResult>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("This is the first level of operation errors from the request when clients get errors per vm operation")
+model OperationErrorsResult {
+  @doc("The operationId identifying a vm operation")
+  operationId?: string;
+
+  @doc("The creation time of the error result")
+  creationTime?: offsetDateTime;
+
+  @doc("The activation time of a vm operation")
+  activationTime?: offsetDateTime;
+
+  @doc("The completion time of the operation if the operation was completed")
+  completedAt?: offsetDateTime;
+
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("A list of errors associated with the operationId")
+  operationErrors?: Array<OperationErrorDetails>;
+
+  @doc("Request level error code")
+  requestErrorCode?: string;
+
+  @doc("Request level error details")
+  requestErrorDetails?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("This describes errors per vm during an operation")
+model OperationErrorDetails {
+  @doc("The error code of the operation")
+  errorCode: string;
+
+  @doc("The error details of the operation")
+  errorDetails: string;
+
+  @doc("The timestamp of the error occurrence")
+  timestamp?: offsetDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @doc("The timestamp of the error occurrence")
+  timeStamp?: offsetDateTime;
+
+  @doc("The compute operationId of the Start/Deallocate/Hibernate request")
+  azureOperationName?: string;
+
+  @doc("The compute operationId of the Start/Deallocate/Hibernate request")
+  crpOperationId?: string;
 }
 
 @@identifiers(Azure.Core.Foundations.Error.details, #[]);

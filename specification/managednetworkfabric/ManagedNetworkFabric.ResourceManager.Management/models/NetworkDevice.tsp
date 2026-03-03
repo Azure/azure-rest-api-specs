@@ -66,6 +66,11 @@ model NetworkDeviceProperties {
   @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 
+  @doc("Operational state of networkDevice indicating if the device is reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
   @doc("Secret rotation status for the device's secrets.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_15)
@@ -137,26 +142,6 @@ model UpdateDeviceAdministrativeState {
 
   @doc("Administrative state.")
   state?: DeviceAdministrativeState;
-}
-
-@doc("NetworkDeviceRole is the device role: Example: CE | ToR.")
-union NetworkDeviceRole {
-  @doc("NetworkDeviceRole-CE(Customer Edge)")
-  CE: "CE",
-
-  @doc("NetworkDeviceRole-ToR(top of rack)")
-  ToR: "ToR",
-
-  @doc("NetworkDeviceRole-NPB(Network Packet Broker)")
-  NPB: "NPB",
-
-  @doc("NetworkDeviceRole-TS(Terminal Server)")
-  TS: "TS",
-
-  @doc("NetworkDeviceRole-Management")
-  Management: "Management",
-
-  string,
 }
 
 @doc("Type of reboot to be performed. Example: GracefulRebootWithZTP")
