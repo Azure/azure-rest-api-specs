@@ -7921,6 +7921,75 @@
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },
+      "AgentEndpoint": {
+        "type": "object",
+        "required": [
+          "protocols",
+          "authorization_schemes"
+        ],
+        "properties": {
+          "traffic_routing_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrafficRoutingPolicy"
+              }
+            ],
+            "description": "The traffic routing policy of the agent endpoint determines how traffic is routed to different versions of the agent."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
+          }
+        }
+      },
+      "AgentEndpointAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Discriminator property for AgentEndpointAuthorizationScheme."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraAuthorizationScheme",
+            "Header": "#/components/schemas/HeaderAuthorizationScheme",
+            "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
+            "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme"
+          }
+        }
+      },
+      "AgentIdentity": {
+        "type": "object",
+        "required": [
+          "principal_id",
+          "client_id"
+        ],
+        "properties": {
+          "principal_id": {
+            "type": "string",
+            "description": "The principal ID of the agent"
+          },
+          "client_id": {
+            "type": "string",
+            "description": "The client ID of the agent"
+          }
+        }
+      },
       "AgentKind": {
         "anyOf": [
           {
@@ -7972,6 +8041,27 @@
               "latest"
             ],
             "description": "The latest version of the agent."
+          },
+          "endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "blueprint_id": {
+            "type": "string",
+            "description": "The reference to a managed blueprint for the agent"
+          },
+          "identity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The identity of the agent",
+            "readOnly": true
           }
         }
       },
@@ -7984,7 +8074,8 @@
             "type": "string",
             "enum": [
               "activity_protocol",
-              "responses"
+              "responses",
+              "a2a"
             ]
           }
         ]
@@ -9450,6 +9541,44 @@
         },
         "description": "Blob reference details."
       },
+      "BotServiceAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BotService"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ]
+      },
+      "BotServiceRbacAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BotServiceRbac"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ]
+      },
       "BrowserAutomationPreviewTool": {
         "type": "object",
         "required": [
@@ -9989,6 +10118,18 @@
             "type": "string",
             "maxLength": 63,
             "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+          },
+          "endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "blueprint_id": {
+            "type": "string",
+            "description": "The reference to a managed blueprint for the agent"
           },
           "metadata": {
             "type": "object",
@@ -10687,6 +10828,25 @@
             "enum": [
               "ModelDeployment"
             ]
+          }
+        ]
+      },
+      "EntraAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
         ]
       },
@@ -12407,6 +12567,57 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FixedRatioTrafficRoutingPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "traffic_percentage"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FixedRatio"
+            ]
+          },
+          "traffic_percentage": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "The percentage of traffic to route to the version. Must be between 0 and 100."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrafficRoutingPolicy"
+          }
+        ]
+      },
+      "FlightTrafficRoutingPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "flight_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Flight"
+            ]
+          },
+          "flight_name": {
+            "type": "string",
+            "description": "The name of the flight to route traffic to."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrafficRoutingPolicy"
+          }
+        ]
+      },
       "FolderDatasetVersion": {
         "type": "object",
         "required": [
@@ -12466,6 +12677,29 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "HeaderAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type",
+          "isolation_key_source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          },
+          "isolation_key_source": {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ]
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -13003,6 +13237,23 @@
           }
         },
         "description": "Metadata about the insights."
+      },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "user_isolation_key",
+          "chat_isolation_key"
+        ],
+        "properties": {
+          "user_isolation_key": {
+            "type": "string",
+            "description": "The user isolation key header value"
+          },
+          "chat_isolation_key": {
+            "type": "string",
+            "description": "The chat isolation key header value"
+          }
+        }
       },
       "ItemGenerationParams": {
         "type": "object",
@@ -35425,6 +35676,30 @@
           }
         ],
         "description": "Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights."
+      },
+      "TrafficRoutingPolicy": {
+        "type": "object",
+        "required": [
+          "version",
+          "type"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "The version to rout traffic to"
+          },
+          "type": {
+            "type": "string",
+            "description": "Discriminator property for TrafficRoutingPolicy."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FixedRatio": "#/components/schemas/FixedRatioTrafficRoutingPolicy",
+            "Flight": "#/components/schemas/FlightTrafficRoutingPolicy"
+          }
+        }
       },
       "TreatmentEffectType": {
         "anyOf": [
