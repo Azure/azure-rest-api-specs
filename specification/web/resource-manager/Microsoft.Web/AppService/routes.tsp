@@ -582,7 +582,11 @@ interface StaticSitesAsyncOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): OkResponse | AcceptedResponse | NoContentResponse | DefaultErrorResponse;
+  ):
+    | ArmResponse<StaticSiteARMResource>
+    | ArmAcceptedLroResponse
+    | NoContentResponse
+    | DefaultErrorResponse;
 
   /**
    * Description for Gets the result of a static site async operation.
@@ -602,5 +606,5 @@ interface StaticSitesAsyncOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): StaticSitesOperationResults | DefaultErrorResponse;
+  ): ArmOperationStatus<StaticSite> | DefaultErrorResponse;
 }
