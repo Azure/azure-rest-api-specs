@@ -146,22 +146,14 @@ input-file:
   - preview/2025-09-01-preview/privateLinks.json
 ```
 
-### Tag: package-preview-2025-05-04-preview
+### Tag: package-2025-05-04
 
-These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-05-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-05-04-preview'
+```yaml $(tag) == 'package-2025-05-04'
 input-file:
-  - preview/2025-05-04-preview/operations.json
-  - preview/2025-05-04-preview/assessmentMetadata.json
-  - preview/2025-05-04-preview/assessments.json
-suppressions:
-  - code: GetResponseCodes
-    from: operationResults.json
-    where:
-          - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationResults/{operationId}"].get.responses["204"]
-    reason: According to the [Azure Resource Manager async API reference spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md), the 204 No Content response status code
-      is required for polling operations when the operation has completed successfully with no content to return.
+  - stable/2025-05-04/assessmentMetadata.json
+  - stable/2025-05-04/assessments.json
 ```
 
 ### Tag: package-2025-03
@@ -575,7 +567,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 
@@ -617,7 +608,6 @@ input-file:
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-08-01-preview/securityConnectors.json
 - stable/2018-06-01/pricings.json
@@ -644,7 +634,6 @@ input-file:
 - preview/2019-01-01-preview/regulatoryCompliance.json
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -658,8 +647,8 @@ input-file:
 - preview/2023-12-01-preview/automations.json
 - preview/2023-12-01-preview/securityContacts.json
 - preview/2024-08-01-preview/securityConnectors.json
-- preview/2025-05-04-preview/assessmentMetadata.json
-- preview/2025-05-04-preview/assessments.json
+- stable/2025-05-04/assessmentMetadata.json
+- stable/2025-05-04/assessments.json
 - preview/2025-09-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
 - preview/2025-10-01-preview/operations.json
@@ -727,7 +716,6 @@ input-file:
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2020-01-01-preview/securityContacts.json
 - preview/2021-05-01-preview/softwareInventories.json
-- preview/2021-07-01-preview/customAssessmentAutomation.json
 - preview/2021-10-01-preview/mdeOnboardings.json
 - preview/2022-01-01-preview/governanceAssignments.json
 - preview/2022-01-01-preview/governanceRules.json
@@ -754,8 +742,8 @@ input-file:
 - stable/2020-01-01/securitySolutionsReferenceData.json
 - stable/2020-01-01/serverVulnerabilityAssessments.json
 - stable/2020-01-01/topologies.json
-- stable/2021-06-01/assessmentMetadata.json
-- stable/2021-06-01/assessments.json
+- stable/2025-05-04/assessmentMetadata.json
+- stable/2025-05-04/assessments.json
 - stable/2022-01-01/alerts.json
 - stable/2022-05-01/settings.json
 - stable/2023-01-01/pricings.json
@@ -1085,7 +1073,6 @@ These settings apply only when `--tag=package-2021-07-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2021-07-preview-only'
 input-file:
-  - preview/2021-07-01-preview/customAssessmentAutomation.json
   - preview/2021-07-01-preview/securityConnectors.json
 override-info:
   title: SecurityCenter
