@@ -8,3 +8,5 @@ using Azure.ClientGenerator.Core;
   "BareMetalInfrastructureClient",
   "python"
 );
+
+@@clientName(OperationDisplay, "Display", "java");
