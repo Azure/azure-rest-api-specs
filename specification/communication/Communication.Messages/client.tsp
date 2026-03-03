@@ -57,6 +57,16 @@ interface ConversationThreadClient
   Access.internal
 );
 
+@@access(Azure.Communication.MessagesService.ActionGroupItem,
+  Access.internal,
+  "python"
+);
+
+@@clientName(Azure.Communication.MessagesService.MessageDataStream.id,
+  "mediaId",
+  "python"
+);
+
 @@clientName(Azure.Communication.MessagesService.MessageTemplate.values,
   "templateValues",
   "python"
