@@ -1353,6 +1353,297 @@
         }
       }
     },
+    "/jobs": {
+      "get": {
+        "operationId": "Jobs_List",
+        "description": "List Jobs in the workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCommandJob"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/jobs/{id}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "description": "Get a Job by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommandJob"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_CreateOrUpdate",
+        "description": "Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The command job to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommandJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommandJob"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CommandJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "description": "Delete a Job by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/jobs/{id}:cancel": {
+      "post": {
+        "operationId": "Jobs_Cancel",
+        "description": "Cancel a Job by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -1664,6 +1955,16 @@
         "maxRequestRate"
       ]
     },
+    "AllNodes": {
+      "type": "object",
+      "description": "All nodes means the service will be running on all of the nodes of the job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NodeCollection"
+        }
+      ],
+      "x-ms-discriminator-value": "All"
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1930,6 +2231,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -2022,6 +2365,160 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
+      ]
+    },
+    "CommandJob": {
+      "type": "object",
+      "description": "Command job definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The name and identifier for the Job. This is case-sensitive.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Specifies the type of job.",
+          "enum": [
+            "Command"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "command": {
+          "type": "string",
+          "description": "The command to execute on startup of the job."
+        },
+        "environmentId": {
+          "type": "string",
+          "description": "ACR path of environment"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of job."
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The asset property dictionary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "codeId": {
+          "type": "string",
+          "description": "Datasets Id"
+        },
+        "computeId": {
+          "type": "string",
+          "description": "Compute resource ID."
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Mapping of input data bindings used in the job.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobInput"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Mapping of output data bindings used in the job.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobOutput"
+          }
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables included in the job.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "$ref": "#/definitions/JobResourceConfiguration",
+          "description": "Compute Resource configuration for the job."
+        },
+        "distribution": {
+          "$ref": "#/definitions/DistributionConfiguration",
+          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
+        },
+        "limits": {
+          "$ref": "#/definitions/CommandJobLimits",
+          "description": "Command Job limit."
+        },
+        "services": {
+          "type": "object",
+          "description": "List of JobEndpoints. For local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobService"
+          }
+        },
+        "queueSettings": {
+          "$ref": "#/definitions/QueueSettings",
+          "description": "Queue settings for the job."
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Is the asset archived?"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the job.",
+          "readOnly": true
+        },
+        "creationContext": {
+          "$ref": "#/definitions/JobSystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "jobType",
+        "command",
+        "environmentId"
+      ]
+    },
+    "CommandJobLimits": {
+      "type": "object",
+      "description": "Command Job limit class.",
+      "properties": {
+        "jobLimitsType": {
+          "type": "string",
+          "description": "JobLimit type.",
+          "enum": [
+            "Command"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds."
+        }
+      },
+      "required": [
+        "jobLimitsType"
       ]
     },
     "Connection": {
@@ -2406,6 +2903,20 @@
       ],
       "x-ms-discriminator-value": "developer"
     },
+    "DistributionConfiguration": {
+      "type": "object",
+      "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+      "properties": {
+        "distributionType": {
+          "type": "string",
+          "description": "Specifies the type of distribution framework."
+        }
+      },
+      "discriminator": "distributionType",
+      "required": [
+        "distributionType"
+      ]
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -2748,6 +3259,220 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "JobInput": {
+      "type": "object",
+      "description": "Mapping of input data bindings used in the job.",
+      "properties": {
+        "jobInputType": {
+          "type": "string",
+          "description": "Specifies the type of job."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the input."
+        }
+      },
+      "discriminator": "jobInputType",
+      "required": [
+        "jobInputType"
+      ]
+    },
+    "JobOutput": {
+      "type": "object",
+      "description": "Mapping of output data bindings used in the job.",
+      "properties": {
+        "jobOutputType": {
+          "type": "string",
+          "description": "Specifies the type of job."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the output."
+        }
+      },
+      "discriminator": "jobOutputType",
+      "required": [
+        "jobOutputType"
+      ]
+    },
+    "JobResourceConfiguration": {
+      "type": "object",
+      "description": "Compute Resource configuration for the job.",
+      "properties": {
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional number of instances or nodes used by the compute target."
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "Optional type of VM used as supported by the compute target."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties bag.",
+          "additionalProperties": {}
+        },
+        "shmSize": {
+          "type": "string",
+          "description": "Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes)."
+        },
+        "dockerArgs": {
+          "type": "string",
+          "description": "Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types."
+        }
+      }
+    },
+    "JobService": {
+      "type": "object",
+      "description": "Job endpoint definition.",
+      "properties": {
+        "jobServiceType": {
+          "type": "string",
+          "description": "Endpoint type."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for endpoint."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Url for endpoint."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties to set on the endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "nodes": {
+          "$ref": "#/definitions/AllNodes",
+          "description": "Nodes that user would like to start the service on. If Nodes is not set or set to null, the service will only be started on leader node."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of endpoint.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Any error in the service.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobSystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "readOnly": true
+        }
+      }
+    },
+    "ListJobsQueryParameters": {
+      "type": "object",
+      "description": "Query parameters for filtering the job list.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records to skip for pagination."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "Filter jobs by type (e.g., 'Command')."
+        },
+        "tag": {
+          "type": "string",
+          "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch')."
+        },
+        "listViewType": {
+          "$ref": "#/definitions/ListViewType",
+          "description": "Specifies which view type to apply when listing jobs."
+        }
+      }
+    },
+    "ListViewType": {
+      "type": "string",
+      "description": "Specifies which jobs to include in a list result based on their lifecycle state.",
+      "enum": [
+        "ActiveOnly",
+        "ArchivedOnly",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ListViewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveOnly",
+            "value": "ActiveOnly",
+            "description": "Show only active (non-archived) jobs."
+          },
+          {
+            "name": "ArchivedOnly",
+            "value": "ArchivedOnly",
+            "description": "Show only archived jobs."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Show all jobs regardless of archived state."
+          }
+        ]
+      }
+    },
+    "LiteralJobInput": {
+      "type": "object",
+      "description": "Literal input type.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Literal value for the input."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "literal"
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -2845,6 +3570,23 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
+    "MpiDistribution": {
+      "type": "object",
+      "description": "MPI distribution configuration.",
+      "properties": {
+        "processCountPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of processes per MPI node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Mpi"
+    },
     "NoAuthenticationCredentials": {
       "type": "object",
       "description": "Credentials that do not require authentication",
@@ -2854,6 +3596,41 @@
         }
       ],
       "x-ms-discriminator-value": "None"
+    },
+    "NodeCollection": {
+      "type": "object",
+      "description": "Nodes that user would like to start the service on.",
+      "properties": {
+        "nodesValueType": {
+          "type": "string",
+          "description": "Type of the Nodes value."
+        }
+      },
+      "discriminator": "nodesValueType",
+      "required": [
+        "nodesValueType"
+      ]
+    },
+    "PagedCommandJob": {
+      "type": "object",
+      "description": "Paged collection of CommandJob items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommandJob items on this page",
+          "items": {
+            "$ref": "#/definitions/CommandJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedConnection": {
       "type": "object",
@@ -3083,6 +3860,33 @@
         ]
       }
     },
+    "PyTorchDistribution": {
+      "type": "object",
+      "description": "PyTorch distribution configuration.",
+      "properties": {
+        "processCountPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of processes per node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "PyTorch"
+    },
+    "QueueSettings": {
+      "type": "object",
+      "description": "Queue settings for the job.",
+      "properties": {
+        "jobTier": {
+          "type": "string",
+          "description": "Controls the compute job tier."
+        }
+      }
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
@@ -3300,6 +4104,122 @@
       "required": [
         "type"
       ]
+    },
+    "TensorFlowDistribution": {
+      "type": "object",
+      "description": "TensorFlow distribution configuration.",
+      "properties": {
+        "workerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of workers. If not specified, will default to the instance count."
+        },
+        "parameterServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parameter server tasks."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "TensorFlow"
+    },
+    "UriFileJobInput": {
+      "type": "object",
+      "description": "Uri file job input.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Input Asset URI."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Input Asset Delivery Mode."
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
+    "UriFileJobOutput": {
+      "type": "object",
+      "description": "Uri file job output.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Output Asset URI."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Output Asset Delivery Mode."
+        },
+        "assetName": {
+          "type": "string",
+          "description": "Name of the output data asset to register."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
+    "UriFolderJobInput": {
+      "type": "object",
+      "description": "Uri folder job input.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Input Asset URI."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Input Asset Delivery Mode."
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
+    },
+    "UriFolderJobOutput": {
+      "type": "object",
+      "description": "Uri folder job output.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Output Asset URI."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Output Asset Delivery Mode."
+        },
+        "assetName": {
+          "type": "string",
+          "description": "Name of the output data asset to register."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
     },
     "UserMessage": {
       "type": "object",

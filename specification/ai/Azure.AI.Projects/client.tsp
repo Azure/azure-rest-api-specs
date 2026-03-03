@@ -124,3 +124,13 @@ using Azure.ClientGenerator.Core;
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);
 @@access(Azure.AI.Projects.Connections.getWithCredentials, Access.internal);
+
+// Shorter method names for SDK Jobs operations
+@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Jobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Jobs.delete, "begin_delete", "python");
+@@clientName(Azure.AI.Projects.Jobs.cancel, "begin_cancel", "python");
