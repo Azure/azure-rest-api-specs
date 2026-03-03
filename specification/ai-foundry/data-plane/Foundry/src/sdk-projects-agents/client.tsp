@@ -22,6 +22,9 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
+  
+  @@usage(ApiError, Usage.output);
+  @@access(ApiError, Access.public);
 
   // --------------------------------------------------------------------------------
   // Fix the xref.
