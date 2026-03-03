@@ -1100,6 +1100,24 @@
     }
   },
   "definitions": {
+    "AdditionalProperties": {
+      "type": "object",
+      "description": "Additional Properties column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the column."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "AnomalyDetectionStrategy": {
       "type": "string",
       "description": "Anomaly detection strategy",
@@ -1167,17 +1185,17 @@
           "description": "The Azure region where the resource is located (optional)."
         },
         "resourceTags": {
-          "type": "object",
+          "type": "array",
           "description": "The tags associated with the ARM resource (optional).",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
           }
         },
         "resourceProperties": {
-          "type": "object",
+          "type": "array",
           "description": "The resource properties of the ARM resource (optional).",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
           }
         },
         "resourceTimestamp": {
