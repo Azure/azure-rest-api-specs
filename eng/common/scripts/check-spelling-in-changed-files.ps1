@@ -115,6 +115,7 @@ $spellingErrors = &"$PSScriptRoot/../spelling/Invoke-Cspell.ps1" `
   -CspellConfigPath $CspellConfigPath `
   -SpellCheckRoot $SpellCheckRoot `
   -FileList $changedFilePaths
+$cspellExitCode = $LASTEXITCODE
 
 if ($spellingErrors) {
     $errorLoggingFunction = Get-Item 'Function:LogWarning'
@@ -129,6 +130,14 @@ if ($spellingErrors) {
 
     if ($ExitWithError) {
         exit 1
+    }
+} elseif ($cspellExitCode -ne 0) {
+    $errorMessage = "Spell check process exited with code $cspellExitCode. Check the cspell configuration for errors (e.g. invalid 'import' paths in cspell.yaml)."
+    if ($ExitWithError) {
+        LogError $errorMessage
+        exit 1
+    } else {
+        LogWarning $errorMessage
     }
 } else {
   Write-Host "No spelling errors detected"
