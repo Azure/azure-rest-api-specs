@@ -1852,17 +1852,7 @@
         },
         "schema": {
           "description": "Dataset schema definition. When kind is 'Custom', this is an array of DatasetColumn objects. When kind is 'ArmResource', this is an ArmResourceDatasetSchema object.",
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DatasetColumn"
-              }
-            },
-            {
-              "$ref": "#/definitions/ArmResourceDatasetSchema"
-            }
-          ]
+          "x-ms-client-flatten": false
         },
         "locations": {
           "type": "array",
