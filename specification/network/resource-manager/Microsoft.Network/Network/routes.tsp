@@ -256,7 +256,7 @@ interface NetworkInterfacesOperationGroup {
   @get
   listCloudServiceNetworkInterfaces is RoutesNetworkInterfaceOps.List<
     NetworkInterface,
-    Response = ResourceListResult<NetworkInterface>,
+    Response = CloudServiceNetworkInterfaceListResult,
     OverrideErrorType = CloudError
   >;
 }

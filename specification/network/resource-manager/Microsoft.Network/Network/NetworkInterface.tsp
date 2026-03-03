@@ -96,6 +96,7 @@ interface NetworkInterfaces {
    */
   listCloudServiceRoleInstanceNetworkInterfaces is NetworkInterfaceOps.List<
     NetworkInterface,
+    Response = ArmResponse<CloudServiceNetworkInterfaceListResult>,
     OverrideErrorType = CloudError
   >;
 }
