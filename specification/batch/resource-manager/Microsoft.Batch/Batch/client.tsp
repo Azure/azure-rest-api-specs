@@ -438,11 +438,6 @@ using Microsoft.Batch;
   Usage.input,
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
-  Usage.output,
-  "csharp"
-);
-@@usage(Azure.ResourceManager.CommonTypes.AccessRule, Usage.output, "csharp");
 @@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
   "VmGuestStateOnly",
   "csharp"
@@ -535,6 +530,10 @@ using Microsoft.Batch;
 );
 @@alternateType(CheckNameLocationParameter.locationName,
   Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
 @@alternateType(BatchAccountUpdateParameters.identity,
@@ -632,5 +631,14 @@ namespace Microsoft.Batch {
   union BatchAccountCertificateProvisioningState {
     CertificateProvisioningState,
     string,
+  }
+}
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
   }
 }
