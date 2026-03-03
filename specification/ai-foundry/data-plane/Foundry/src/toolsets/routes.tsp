@@ -12,21 +12,21 @@ interface Toolsets {
   @doc("Create a toolset.")
   @operationId("createToolset")
   @post
-  @route("/toolset")
+  @route("/toolsets")
   createToolset is FoundryDataPlaneOperation<CreateToolsetRequest, ToolsetObject>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Update a toolset.")
   @operationId("updateToolset")
   @post
-  @route("/toolset/{tool_set_name}")
+  @route("/toolsets/{tool_set_name}")
   updateToolset is FoundryDataPlaneOperation<UpdateToolsetRequest, ToolsetObject>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Retrieve a toolset.")
   @operationId("getToolset")
   @get
-  @route("/toolset/{tool_set_name}")
+  @route("/toolsets/{tool_set_name}")
   getToolset is FoundryDataPlaneOperation<GetToolsetRequest, ToolsetObject>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -34,13 +34,13 @@ interface Toolsets {
   @operationId("listToolsets")
   @get
   @list
-  @route("/toolset")
+  @route("/toolsets")
   listToolsets is FoundryDataPlaneOperation<ListToolsetsRequest, AgentsPagedResult<ToolsetObject>>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Delete a toolset.")
   @operationId("deleteToolset")
   @delete
-  @route("/toolset/{tool_set_name}")
+  @route("/toolsets/{tool_set_name}")
   deleteToolset is FoundryDataPlaneOperation<DeleteToolsetRequest, DeleteToolsetResponse>;
 }
