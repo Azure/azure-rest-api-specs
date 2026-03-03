@@ -331,7 +331,7 @@ interface VectorTilesDataset {
   @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a list of available vector tilesets for the specified search.")
   @tag("Vector Tiles")
-  @route("/data/vector/{searchId}/tiles")
+  @route("/data/vector/searches/{searchId}/tiles")
   @get
   getSearchTileSetsList is Azure.Core.Foundations.Operation<
     {
@@ -357,7 +357,7 @@ interface VectorTilesDataset {
   @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the vector tileset metadata.")
   @tag("Vector Tiles")
-  @route("/data/vector/{searchId}/tiles/{tileMatrixSetId}")
+  @route("/data/vector/searches/{searchId}/tiles/{tileMatrixSetId}")
   @get
   getSearchTileSet is Azure.Core.Foundations.Operation<
     {
@@ -389,7 +389,7 @@ interface VectorTilesDataset {
   @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a vector tile from a search.")
   @tag("Vector Tiles")
-  @route("/data/vector/{searchId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}")
+  @route("/data/vector/searches/{searchId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}")
   @get
   getSearchTile is Azure.Core.Foundations.Operation<
     {
