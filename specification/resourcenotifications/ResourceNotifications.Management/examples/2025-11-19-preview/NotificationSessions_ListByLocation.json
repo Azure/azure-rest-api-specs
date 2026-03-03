@@ -1,0 +1,47 @@
+{
+  "operationId": "NotificationsSessions_ListByLocation",
+  "title": "List notification sessions in a location",
+  "parameters": {
+    "api-version": "2025-11-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "locationName": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/eastus/notificationSessions/session1",
+            "type": "Microsoft.ResourceNotifications/locations/notificationSessions",
+            "name": "session1",
+            "properties": {
+              "description": "Test notification session",
+              "maxDurationMinutes": 60,
+              "startTime": "2025-11-19T10:00:00Z",
+              "status": "Active",
+              "provisioningState": "Succeeded",
+              "createdAt": "2025-11-19T09:55:00Z",
+              "updatedAt": "2025-11-19T09:55:00Z",
+              "notificationSessionId": "session-id-001"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/eastus/notificationSessions/session2",
+            "type": "Microsoft.ResourceNotifications/locations/notificationSessions",
+            "name": "session2",
+            "properties": {
+              "description": "Another test session",
+              "maxDurationMinutes": 120,
+              "startTime": "2025-11-19T11:00:00Z",
+              "status": "Paused",
+              "provisioningState": "Succeeded",
+              "createdAt": "2025-11-19T10:55:00Z",
+              "updatedAt": "2025-11-19T10:58:00Z",
+              "notificationSessionId": "session-id-002"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

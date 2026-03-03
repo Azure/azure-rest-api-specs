@@ -129,6 +129,32 @@ union DataPreviewResultCode {
   string,
 }
 
+@doc("Model of SkippedReason")
+model SkippedReason {
+  @doc("Type of SkippedReason")
+  skippedReasonType: SkippedReasonType;
+
+  @doc("SkippedCount of Transform.")
+  skippedCount: int32;
+}
+
+@doc("Type of SkippedReason")
+union SkippedReasonType {
+  @doc("Exceeding the maximum number of records.")
+  MaxRecordCount: "MaxRecordCount",
+
+  @doc("Exceeding the maximum datasize of records.")
+  MaxDataSize: "MaxDataSize",
+
+  @doc("SourceDataFormat Transform.")
+  SourceDataFormat: "SourceDataFormat",
+
+  @doc("CloudEventsTransform Transform.")
+  CloudEventsTransform: "CloudEventsTransform",
+
+  string,
+}
+
 @doc("Properties of DataPreview results")
 model DataPreviewResults {
   @Azure.ResourceManager.identifiers(#[])
@@ -146,4 +172,8 @@ model DataPreviewResults {
 
   @doc("Result code of DataPreview.")
   resultCode: DataPreviewResultCode;
+
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("Reason of skipped messages.")
+  skippedReasons: SkippedReason[];
 }
