@@ -20962,6 +20962,21 @@
         }
       }
     },
+    "BaseCosmosDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A base CosmosDB data source/sink",
+      "properties": {
+        "remoteAccountName": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        }
+      ],
+      "x-ms-discriminator-value": "BaseCosmosDataTransferDataSourceSink"
+    },
     "BlobToCassandraRUCopyJobProperties": {
       "type": "object",
       "description": "Source Azure Blob Storage to Destination Cassandra copy job properties",
@@ -23162,9 +23177,6 @@
       "type": "object",
       "description": "A CosmosDB Cassandra API data source/sink",
       "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        },
         "keyspaceName": {
           "type": "string"
         },
@@ -23178,7 +23190,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "x-ms-discriminator-value": "CosmosDBCassandra"
@@ -23269,9 +23281,6 @@
       "type": "object",
       "description": "A CosmosDB Mongo API data source/sink",
       "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        },
         "databaseName": {
           "type": "string"
         },
@@ -23285,7 +23294,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "x-ms-discriminator-value": "CosmosDBMongo"
@@ -23294,9 +23303,6 @@
       "type": "object",
       "description": "A CosmosDB Mongo vCore API data source/sink",
       "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        },
         "databaseName": {
           "type": "string"
         },
@@ -23316,7 +23322,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "x-ms-discriminator-value": "CosmosDBMongoVCore"
@@ -23325,9 +23331,6 @@
       "type": "object",
       "description": "A CosmosDB No Sql API data source/sink",
       "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        },
         "databaseName": {
           "type": "string"
         },
@@ -23341,7 +23344,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
       "x-ms-discriminator-value": "CosmosDBSql"
