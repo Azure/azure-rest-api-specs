@@ -28,23 +28,16 @@ These are the global settings for the DataMigration API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2026-03-03-preview
+tag: package-2025-01-10-preview
 ```
 
-### Tag: package-2026-03-03-preview
+### Tag: package-2025-01-10-preview
 
-These settings apply only when `--tag=package-2026-03-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-01-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-03-03-preview'
+``` yaml $(tag) == 'package-2025-01-10-preview'
 input-file:
-- Microsoft.DataMigration/preview/2026-03-03-preview/postgressqlDatamigration.json
-suppressions:
-    - code: AddedReadOnlyPropertyInResponse
-      from: postgressqlDatamigration.json
-      reason: Adding preFlightValidations property in preview API version. This is a new feature being introduced.
-    - code: AddedOptionalProperty
-      from: postgressqlDatamigration.json
-      reason: Adding preFlightValidations property in preview API version. This is a new feature being introduced.
+- Microsoft.DataMigration/preview/2025-01-10-preview/postgressqlDatamigration.json
 ```
 
 ---

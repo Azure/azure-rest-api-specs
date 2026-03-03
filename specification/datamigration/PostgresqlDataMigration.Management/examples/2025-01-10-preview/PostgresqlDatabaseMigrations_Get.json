@@ -1,21 +1,12 @@
 {
-  "title": "Cutover a database migration",
-  "operationId": "PostgresqlDatabaseMigrations_Update",
+  "title": "Get a database migration",
+  "operationId": "PostgresqlDatabaseMigrations_Get",
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789012",
     "resourceGroupName": "my-rg",
     "serviceName": "myMigrationService",
     "databaseMigrationId": "mig-123e4567-e89b-12d3-a456-426614174000",
-    "api-version": "2026-03-03-preview",
-    "properties": {
-      "properties": {
-        "operationType": "cutover",
-        "databaseNames": [
-          "HR",
-          "Finance"
-        ]
-      }
-    }
+    "api-version": "2025-01-10-preview"
   },
   "responses": {
     "200": {
@@ -26,7 +17,7 @@
         "properties": {
           "migrationName": "prod-oracle-to-azure-pg",
           "description": "Production Oracle migration to Azure PostgreSQL Flexible Server",
-          "migrationMode": "online",
+          "migrationMode": "offline",
           "source": {
             "engine": "oracle",
             "serverResourceId": null,
@@ -86,9 +77,9 @@
           },
           "provisioningState": "Succeeded",
           "migrationStatus": {
-            "state": "CutoverInProgress",
+            "state": "InProgress",
             "errors": [],
-            "lastUpdatedAt": "2025-09-23T11:15:00Z"
+            "lastUpdatedAt": "2025-09-23T10:30:00Z"
           },
           "preFlightValidations": {
             "migrationRequestId": "req-123e4567-e89b-12d3-a456-426614174000",
@@ -109,28 +100,38 @@
                   "status": "Success",
                   "title": "Target Database Connectivity"
                 }
+              },
+              {
+                "checkName": "ExtensionCompatibility",
+                "state": "Completed",
+                "healthResult": {
+                  "status": "Warning",
+                  "errorMessage": "Some extensions may require manual configuration",
+                  "diagnosticHint": "Review extension compatibility before migration",
+                  "title": "Extension Compatibility Check"
+                }
               }
             ]
           },
           "databases": [
             {
               "databaseName": "HR",
-              "migrationStatus": "CutoverInProgress",
+              "migrationStatus": "InProgress",
               "validationStatus": "Succeeded",
               "migrationProgress": {
-                "migrationPhase": "Cutover",
+                "migrationPhase": "DataMigration",
                 "migrationStatistics": {
                   "tablesTotal": 100,
-                  "tablesCompleted": 100,
+                  "tablesCompleted": 75,
                   "tablesFailed": 0,
-                  "tablesInProgress": 0,
-                  "tablesPending": 0,
-                  "percentComplete": 100
+                  "tablesInProgress": 5,
+                  "tablesPending": 20,
+                  "percentComplete": 75
                 }
               },
               "errors": [],
               "createdAt": "2025-09-20T08:15:30Z",
-              "lastUpdatedAt": "2025-09-23T11:15:00Z"
+              "lastUpdatedAt": "2025-09-23T10:30:00Z"
             }
           ],
           "startedAt": "2025-01-10T10:47:41.820717Z",

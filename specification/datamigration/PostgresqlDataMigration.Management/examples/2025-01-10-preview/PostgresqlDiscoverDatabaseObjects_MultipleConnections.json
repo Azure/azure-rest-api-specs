@@ -1,24 +1,38 @@
 {
-  "title": "Discover database objects from Oracle source",
+  "title": "Discover database objects from multiple connections",
   "operationId": "MigrationServices_DiscoverDatabaseObjects",
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "myResourceGroup",
     "serviceName": "myMigrationService",
-    "api-version": "2026-03-03-preview",
+    "api-version": "2025-01-10-preview",
     "body": {
       "source": {
-        "engine": "oracle",
+        "engine": "postgres",
         "connectionEndPoints": [
           {
-            "connectionName": "oracleSource",
-            "hostName": "oracle-source.example.com",
-            "port": 1521,
-            "serviceName": "ORCL",
+            "connectionName": "postgresSource1",
+            "hostName": "postgres-source1.example.com",
+            "port": 5432,
+            "databaseName": "sourcedb1",
             "credentials": {
               "authenticationMethod": "password",
-              "userName": "sourceUser",
-              "password": "sourcePassword"
+              "userName": "sourceUser1",
+              "password": "sourcePassword1"
+            },
+            "ssl": {
+              "mode": "require"
+            }
+          },
+          {
+            "connectionName": "postgresSource2",
+            "hostName": "postgres-source2.example.com",
+            "port": 5432,
+            "databaseName": "sourcedb2",
+            "credentials": {
+              "authenticationMethod": "password",
+              "userName": "sourceUser2",
+              "password": "sourcePassword2"
             },
             "ssl": {
               "mode": "require"
@@ -27,10 +41,10 @@
         ]
       },
       "target": {
-        "engine": "azure_postgres_flexible",
+        "engine": "AzurepostgresFlexible",
         "connectionEndPoints": [
           {
-            "connectionName": "postgresTarget",
+            "connectionName": "azurepostgresTarget",
             "hostName": "postgres-target.postgres.database.azure.com",
             "port": 5432,
             "databaseName": "targetdb",
@@ -54,23 +68,37 @@
     "200": {
       "description": "Discovery operation completed successfully",
       "body": {
-        "requestId": "operation-12345",
+        "requestId": "operation-11223",
         "source": [
           {
-            "connectionName": "oracleSource",
-            "engine": "oracle",
+            "connectionName": "postgresSource1",
+            "engine": "postgres",
             "databases": [
               {
-                "serviceName": "ORCL",
+                "databaseName": "sourcedb1",
                 "schemas": [
                   {
-                    "schemaName": "HR"
+                    "schemaName": "app_schema"
                   },
                   {
-                    "schemaName": "SALES"
+                    "schemaName": "user_data"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "connectionName": "postgresSource2",
+            "engine": "postgres",
+            "databases": [
+              {
+                "databaseName": "sourcedb2",
+                "schemas": [
+                  {
+                    "schemaName": "analytics"
                   },
                   {
-                    "schemaName": "INVENTORY"
+                    "schemaName": "logs"
                   }
                 ]
               }
@@ -78,17 +106,9 @@
           }
         ],
         "target": {
-          "connectionName": "postgresTarget",
+          "connectionName": "azurepostgresTarget",
           "engine": "azure_postgres_flexible",
           "databases": [
-            {
-              "databaseName": "postgres",
-              "schemas": [
-                {
-                  "schemaName": "public"
-                }
-              ]
-            },
             {
               "databaseName": "targetdb",
               "schemas": [
@@ -96,6 +116,10 @@
                   "schemaName": "public"
                 }
               ]
+            },
+            {
+              "databaseName": "information_schema",
+              "schemas": []
             }
           ]
         }
@@ -104,7 +128,7 @@
     "202": {
       "description": "Discovery operation accepted",
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-12345",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DataMigration/locations/westus/operationTypes/discoverDatabaseObjects/operationResults/operation-11223",
         "Retry-After": "60"
       }
     }

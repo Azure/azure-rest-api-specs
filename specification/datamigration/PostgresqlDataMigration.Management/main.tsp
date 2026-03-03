@@ -18,7 +18,7 @@ using Azure.ResourceManager;
 namespace Microsoft.DataMigration;
 
 enum Versions {
-  v2026_03_03_preview: "2026-03-03-preview",
+  v2025_01_10_preview: "2025-01-10-preview",
 }
 
 @doc("Operations interface for Microsoft.DataMigration")
