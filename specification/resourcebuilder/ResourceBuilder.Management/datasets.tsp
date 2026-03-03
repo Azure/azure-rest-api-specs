@@ -112,13 +112,9 @@ model ArmResourceDatasetSchema {
   resourceLocation?: string;
 
   /** The tags associated with the ARM resource (optional). */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
   resourceTags?: AdditionalProperties[];
 
   /** The resource properties of the ARM resource (optional). */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
   resourceProperties?: AdditionalProperties[];
 
   /** The timestamp when the resource information was captured (optional). */
