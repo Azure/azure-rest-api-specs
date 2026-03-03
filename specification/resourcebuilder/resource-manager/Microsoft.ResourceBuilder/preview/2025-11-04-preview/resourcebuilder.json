@@ -1685,7 +1685,11 @@
           }
         },
         "properties": {
-          "description": "Additional properties of the ARM resource (optional)."
+          "type": "object",
+          "description": "Additional properties of the ARM resource (optional).",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "timestamp": {
           "type": "string",
@@ -1851,8 +1855,15 @@
           "readOnly": true
         },
         "schema": {
-          "description": "Dataset schema definition. When kind is 'Custom', this is an array of DatasetColumn objects. When kind is 'ArmResource', this is an ArmResourceDatasetSchema object.",
-          "x-ms-client-flatten": false
+          "type": "array",
+          "description": "Custom Dataset schema definition.",
+          "items": {
+            "$ref": "#/definitions/DatasetColumn"
+          }
+        },
+        "armResourceSchema": {
+          "$ref": "#/definitions/ArmResourceDatasetSchema",
+          "description": "ArmResource ArmResourceDatasetSchema object."
         },
         "locations": {
           "type": "array",

@@ -55,11 +55,11 @@ model DatasetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  /** Dataset schema definition.
-   * When kind is "Custom", this is an array of DatasetColumn objects.
-   * When kind is "ArmResource", this is an ArmResourceDatasetSchema object.
-   */
-  schema?: DatasetColumn[] | ArmResourceDatasetSchema;
+  /** Custom Dataset schema definition. */
+  schema?: DatasetColumn[];
+
+  /** ArmResource ArmResourceDatasetSchema object. */
+  armResourceSchema?: ArmResourceDatasetSchema;
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
@@ -108,7 +108,8 @@ model ArmResourceDatasetSchema {
   tags?: Record<string>;
 
   /** Additional properties of the ARM resource (optional). */
-  properties?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form additional properties for ARM resource"
+  properties?: Record<string>;
 
   /** The timestamp when the resource information was captured (optional). */
   timestamp?: utcDateTime;
