@@ -150,7 +150,10 @@ interface Consents {
   @route("/consents/{id}")
   @post
   @pollingOperation(Operations.get)
-  @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "operation-location" }
+  )
   post is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -221,7 +224,10 @@ interface TrainingSets {
   @route("/trainingsets/{id}:upload")
   @post
   @pollingOperation(Operations.get)
-  @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "operation-location" }
+  )
   uploadData is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -324,7 +330,10 @@ interface Endpoints {
   @route("/endpoints/{id}:resume")
   @post
   @pollingOperation(Operations.get)
-  @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "operation-location" }
+  )
   resume is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -350,7 +359,10 @@ interface Endpoints {
   @route("/endpoints/{id}:suspend")
   @post
   @pollingOperation(Operations.get)
-  @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "operation-location" }
+  )
   suspend is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -415,7 +427,10 @@ interface PersonalVoices {
   @route("/personalvoices/{id}")
   @post
   @pollingOperation(Operations.get)
-  @extension("x-ms-long-running-operation-options", #{ `final-state-via`: "operation-location" })
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "operation-location" }
+  )
   post is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
