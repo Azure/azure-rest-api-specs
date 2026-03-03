@@ -82,7 +82,7 @@ All lease files are automatically validated with the following requirements:
 
 ## Troubleshooting
 
-If your PR check **"ARM Lease Validation - PMs as reviewer"** is failing, review the error messages in the check output and fix the issues in your `lease.yaml` file. Common causes include:
+If your PR check **"ARM Lease Validation"** is failing, review the error messages in the check output and fix the issues in your `lease.yaml` file. Common causes include:
 
 - **Invalid folder structure**: Ensure the path follows `<servicename>/<namespace>/[<servicegroup>]/lease.yaml` with lowercase service name
 - **Resource provider mismatch**: The `resource-provider` value must match the namespace folder name exactly

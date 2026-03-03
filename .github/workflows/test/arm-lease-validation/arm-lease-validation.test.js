@@ -15,7 +15,7 @@ import {
   leaseSchema,
   LEASE_FILE_PATTERN,
   LEASE_FILE_WITH_GROUP_PATTERN,
-} from "../src/validate-arm-leases.js";
+} from "../../src/arm-lease-validation/arm-lease-validation.js";
 
 describe("validate-arm-leases", () => {
   afterEach(() => {

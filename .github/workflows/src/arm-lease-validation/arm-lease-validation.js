@@ -1,18 +1,18 @@
 import { readFile, access } from 'fs/promises';
-import { join } from 'path';
+import { resolve } from 'path';
 import YAML from 'js-yaml';
 import * as z from 'zod';
-import { getChangedFiles } from '../../shared/src/changed-files.js';
-import { CoreLogger } from './core-logger.js';
+import { getChangedFiles } from '../../../shared/src/changed-files.js';
+import { CoreLogger } from '../core-logger.js';
 
 // ============================================
 // Configuration
 // ============================================
 
-const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
-const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
+export const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
+export const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
 
-const ALLOWED_FILE_PATTERNS = [
+export const ALLOWED_FILE_PATTERNS = [
   LEASE_FILE_PATTERN,
   LEASE_FILE_WITH_GROUP_PATTERN,
   /^\.github\/arm-leases\/README\.md$/,
@@ -30,7 +30,7 @@ const ALLOWED_FILE_PATTERNS = [
  *   reviewer: alias
  * ```
  */
-const leaseSchema = z.object({
+export const leaseSchema = z.object({
   lease: z.object({
     'resource-provider': z.string().min(1, 'resource-provider is required').refine(
       (rp) => rp.split('.').every(part => /^[A-Z]/.test(part)),
@@ -62,7 +62,7 @@ const leaseSchema = z.object({
  * @param {string} file - File path to check
  * @returns {boolean} True if file is allowed
  */
-function isFileAllowed(file) {
+export function isFileAllowed(file) {
   return ALLOWED_FILE_PATTERNS.some(pattern => pattern.test(file));
 }
 
@@ -71,7 +71,7 @@ function isFileAllowed(file) {
  * @param {string[]} files - Array of file paths
  * @returns {string[]} Array of invalid files
  */
-function validateFolderStructure(files) {
+export function validateFolderStructure(files) {
   return files.filter(file => !LEASE_FILE_PATTERN.test(file) && !LEASE_FILE_WITH_GROUP_PATTERN.test(file));
 }
 
@@ -82,7 +82,7 @@ function validateFolderStructure(files) {
  * @param {string} relativePath - Relative path for folder name extraction
  * @returns {Promise<{file: string, errors: string[]}>} Validation result with errors array
  */
-async function validateLeaseContent(leaseFile, today, relativePath) {
+export async function validateLeaseContent(leaseFile, today, relativePath) {
   const errors = [];
   const pathForExtraction = relativePath || leaseFile;
   // Extract namespace from .github/arm-leases/<servicename>/<namespace>/lease.yaml
@@ -136,9 +136,6 @@ async function validateLeaseContent(leaseFile, today, relativePath) {
   return { file: leaseFile, errors };
 }
 
-export { isFileAllowed, validateFolderStructure, validateLeaseContent, leaseSchema,
-  ALLOWED_FILE_PATTERNS, LEASE_FILE_PATTERN, LEASE_FILE_WITH_GROUP_PATTERN };
-
 // ============================================
 // Main Validation Logic
 // ============================================
@@ -169,7 +166,7 @@ export default async function validateArmLeases(core) {
       disallowedFiles.push(file);
     }
   }
-  
+
   if (disallowedFiles.length > 0) {
     core.info(`Found ${disallowedFiles.length} disallowed file(s). Only lease.yaml and README.md files within .github/arm-leases/ are allowed:\n`);
     core.info('Disallowed files:');
@@ -182,10 +179,10 @@ export default async function validateArmLeases(core) {
   }
 
   // Step 3: Check for non-lease.yaml and non-README files
-  const nonLeaseFiles = allChangedFiles.filter(file => 
+  const nonLeaseFiles = allChangedFiles.filter(file =>
     !file.endsWith('/lease.yaml') && !file.endsWith('/README.md')
   );
-  
+
   if (nonLeaseFiles.length > 0) {
     core.info(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
     nonLeaseFiles.forEach(file => core.info(`Remove or rename - ${file}`));
@@ -194,7 +191,7 @@ export default async function validateArmLeases(core) {
   }
 
   // Step 4: Get ARM lease files (only lease.yaml files)
-  const armLeaseFiles = allChangedFiles.filter(file => 
+  const armLeaseFiles = allChangedFiles.filter(file =>
     file.startsWith('.github/arm-leases/') && !file.endsWith('.md')
   );
 
@@ -209,7 +206,7 @@ export default async function validateArmLeases(core) {
 
   // Step 5: Validate folder structure
   const invalidStructure = validateFolderStructure(armLeaseFiles);
-  
+
   if (invalidStructure.length > 0) {
     core.info(`${invalidStructure.length} file(s) with invalid folder structure:`);
     invalidStructure.forEach(file => core.info(`  ${file}`));
@@ -227,10 +224,10 @@ export default async function validateArmLeases(core) {
   }
 
   // Step 6: Validate lease file contents
-  const validLeaseFiles = armLeaseFiles.filter(file => 
+  const validLeaseFiles = armLeaseFiles.filter(file =>
     LEASE_FILE_PATTERN.test(file) || LEASE_FILE_WITH_GROUP_PATTERN.test(file)
   );
-  
+
   if (validLeaseFiles.length === 0) {
     if (hasErrors) {
       core.setFailed('ARM Lease Validation failed - fix errors above');
@@ -241,9 +238,9 @@ export default async function validateArmLeases(core) {
   }
 
   const contentErrors = [];
-  
+
   for (const leaseFile of validLeaseFiles) {
-    const fullPath = join(cwd, leaseFile);
+    const fullPath = resolve(cwd, leaseFile);
     const result = await validateLeaseContent(fullPath, today, leaseFile);
     if (result.errors.length > 0) {
       contentErrors.push({ file: leaseFile, errors: result.errors });

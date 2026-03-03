@@ -1,4 +1,4 @@
-name: ARM Lease Validation - PMs as reviewer
+name: ARM Lease Validation
 
 on:
   pull_request:
@@ -13,8 +13,8 @@ on:
       # Only trigger if PR includes at least one changed ARM lease file
       - ".github/arm-leases/**"
       # Also trigger on own sources
-      - ".github/workflows/validate-arm-leases.yaml"
-      - ".github/workflows/src/validate-arm-leases.js"
+      - ".github/workflows/arm-lease-validation-pms.yaml"
+      - ".github/workflows/src/arm-lease-validation/**"
 
 permissions:
   contents: read
@@ -40,5 +40,5 @@ jobs:
         with:
           script: |
             const { default: validateArmLeases } =
-              await import('${{ github.workspace }}/.github/workflows/src/validate-arm-leases.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
             return await validateArmLeases(core);
