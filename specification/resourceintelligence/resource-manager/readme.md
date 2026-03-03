@@ -44,14 +44,7 @@ suppressions:
   - code: PathForNestedResource
     from: resourceintelligence.json
     reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
-```
-
-### Suppressions
-
-```yaml
-directive:
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    from: resourcecopilot.json
+  - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: "The generatequery API from the 2025-08-01-preview version is superseded by the new 2026-02-01-preview API."
 ```
 
