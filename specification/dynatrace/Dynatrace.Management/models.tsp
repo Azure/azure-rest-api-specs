@@ -918,6 +918,7 @@ model UserInfo {
   /**
    * Company name of the user
    */
+  @added(Versions.v2026_01_07_preview)
   company?: string;
 
   /**
@@ -928,11 +929,13 @@ model UserInfo {
   /**
    * State of the user
    */
+  @added(Versions.v2026_01_07_preview)
   state?: string;
 
   /**
    * Job title of the user
    */
+  @added(Versions.v2026_01_07_preview)
   jobTitle?: string;
 }
 
