@@ -55,7 +55,7 @@ interface ActionResponses {
       ActionResponse
     >,
     ActionRequest,
-    ArmResourceUpdatedResponse<ActionResponse> | ArmResourceCreatedResponse<ActionResponse>,
+    ArmResourceUpdatedResponse<ActionResponse> | ArmResourceCreatedSyncResponse<ActionResponse>,
     ErrorResponse = CloudError
   >;
 
