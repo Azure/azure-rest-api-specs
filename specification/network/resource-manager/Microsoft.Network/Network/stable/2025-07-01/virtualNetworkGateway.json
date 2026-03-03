@@ -922,6 +922,13 @@
             "description": "The name of the virtual network gateway."
           },
           {
+            "name": "peer",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The IP address of the peer."
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
@@ -930,7 +937,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of effective routes.",
+            "description": "List of advertised BGP routes.",
             "schema": {
               "$ref": "#/definitions/GatewayRouteListResult"
             }
