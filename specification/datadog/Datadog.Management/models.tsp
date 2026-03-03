@@ -513,6 +513,22 @@ model ResourceSku {
 }
 
 /**
+ * Details about the marketplace offer associated with the monitor resource.
+ */
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model MarketplaceOfferDetails {
+  /**
+   * The publisher ID (e.g., "datadog1591740804488").
+   */
+  publisherId?: string;
+
+  /**
+   * The offer ID (e.g., "dd_liftr_v3_decoupled").
+   */
+  offerId?: string;
+}
+
+/**
  * Properties specific to the monitor resource.
  */
 model MonitorProperties {
@@ -552,12 +568,27 @@ model MonitorProperties {
   liftrResourcePreference?: int32;
 
   /**
+   * SaaS details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  saaSData?: SaaSData;
+
+  /**
    * SRE Agent configuration to connect to MCP server of Datadog for given organization.
    */
   @identifiers(#["mcpConnectorResourceId"])
   @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
   @visibility(Lifecycle.Update)
   sreAgentConfiguration?: SreAgentConfiguration[];
+
+  /**
+   * Details about the marketplace offer associated with the resource.
+   * Required for API version 2025-11 and later.
+   * For earlier API versions, defaults to the legacy offer.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  marketplaceOfferDetails?: MarketplaceOfferDetails;
 }
 
 /**
@@ -804,6 +835,12 @@ model MarketplaceSaaSInfo {
   billedAzureSubscriptionId?: string;
 
   /**
+   * Offer Id of the Marketplace offer
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  offerId?: string;
+
+  /**
    * Flag specifying if the Marketplace status is subscribed or not.
    */
   subscribed?: boolean;
@@ -1036,4 +1073,74 @@ model ResubscribeProperties {
    * Newly selected Azure resource group in which the new Marketplace subscription will be created for Resubscribe
    */
   resourceGroup?: string;
+}
+
+/**
+ * SaaS guid for Activate and Validate SaaS Resource
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model ActivateSaaSParameterRequest {
+  /**
+   * SaaS guid of marketplace saas subscription to be activated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid: string;
+
+  /**
+   * User information of the person activating the SaaS resource.
+   */
+  userInfo?: UserInfo;
+
+  /**
+   * Datadog organization properties to link the Saas resource to.
+   */
+  datadogOrganizationProperties?: DatadogOrganizationProperties;
+}
+
+/**
+ * Response of get latest linked SaaS resource operation
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model LatestLinkedSaaSResponse {
+  /**
+   * Flag indicating if the SaaS resource is hidden
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  isHiddenSaaS?: boolean;
+
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * SaaS details
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model SaaSData {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * Marketplace SaaS resource details.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
+  /**
+   * Id of the Marketplace SaaS Resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSId?: string;
 }
