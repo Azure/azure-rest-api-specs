@@ -8,3 +8,4 @@ using Microsoft.ServiceFabric;
   "ServiceFabricManagementClient",
   "javascript"
 );
+@@clientName(ProxyResource, "CustomProxyResource", "javascript");
