@@ -202,7 +202,7 @@ namespace PurviewDataQuality {
     #{ Rules_Get_V2: #{ $ref: "./examples/Rules_Get_V2.json" } }
   )
   @doc("Retrieves all rules associated with data assets. Data product is specified as optional query parameter.")
-  op getRulesV2 is RpcOperation<
+  op getRulesForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -240,7 +240,7 @@ namespace PurviewDataQuality {
     #{ Rule_Get_V2: #{ $ref: "./examples/Rule_Get_V2.json" } }
   )
   @doc("Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.")
-  op getRuleV2 is RpcOperation<
+  op getRuleForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -282,7 +282,7 @@ namespace PurviewDataQuality {
     #{ Rules_Delete_V2: #{ $ref: "./examples/Rules_Delete_V2.json" } }
   )
   @doc("Deletes a specific rule associated with a data asset. Data product is specified as optional query parameter.")
-  op deleteRuleV2 is RpcOperation<
+  op deleteRuleForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -323,7 +323,7 @@ namespace PurviewDataQuality {
     #{ Rules_Update_V2: #{ $ref: "./examples/Rules_Update_V2.json" } }
   )
   @doc("Updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
-  op updateRuleV2 is RpcOperation<
+  op updateRuleForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -369,7 +369,7 @@ namespace PurviewDataQuality {
     #{ Rules_UpdatePatch_V2: #{ $ref: "./examples/Rules_UpdatePatch_V2.json" } }
   )
   @doc("Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
-  op updateRulePatchV2 is RpcOperation<
+  op updateRulePatchForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -820,7 +820,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs")
   @get
-  op getRunsForAssetV2 is RpcOperation<
+  op getRunsForAssetForAssetDQ is RpcOperation<
     {
       @doc("The unique identifier for the business domain.")
       @path
@@ -909,7 +909,7 @@ namespace PurviewDataQuality {
   )
   @doc("Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.")
   @post
-  op observationsV2 is RpcOperation<
+  op ObservationsForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -977,7 +977,7 @@ namespace PurviewDataQuality {
     }
   )
   @doc("Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.")
-  op deleteObservationV2 is RpcOperation<
+  op deleteObservationForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1387,7 +1387,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @get
-  op getScopedAssetMetaDataV2 is RpcOperation<
+  op getScopedAssetMetaDataForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -1425,7 +1425,7 @@ namespace PurviewDataQuality {
   @doc("Create or update the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @patch(#{ implicitOptionality: true })
-  op updateScopedAssetMetaDataV2 is RpcOperation<
+  op updateScopedAssetMetaDataForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -1467,7 +1467,7 @@ namespace PurviewDataQuality {
   @doc("Deletes the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @delete
-  op deleteScopedAssetMetaDataV2 is RpcOperation<
+  op deleteScopedAssetMetaDataForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -1549,7 +1549,7 @@ namespace PurviewDataQuality {
   )
   @doc("Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @post
-  op profileV2 is RpcOperation<
+  op profileForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -1608,7 +1608,7 @@ namespace PurviewDataQuality {
     #{ Profile_Delete_V2: #{ $ref: "./examples/Profile_Delete_V2.json" } }
   )
   @doc("Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.")
-  op deleteProfileRunV2 is RpcOperation<
+  op deleteProfileRunForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1649,7 +1649,7 @@ namespace PurviewDataQuality {
     #{ DQAsset_Create_V2: #{ $ref: "./examples/DQAsset_Create_V2.json" } }
   )
   @doc("Creates a DQ asset within a business domain. Data product is specified as optional query parameter.")
-  op createDQAssetV2 is RpcOperation<
+  op createDQAssetForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1690,7 +1690,7 @@ namespace PurviewDataQuality {
     #{ DQAsset_Get_V2: #{ $ref: "./examples/DQAsset_Get_V2.json" } }
   )
   @doc("Retrieves a DQ asset by identifier within a business domain. Data product is specified as optional query parameter.")
-  op getDQAssetV2 is RpcOperation<
+  op getDQAssetForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1728,7 +1728,7 @@ namespace PurviewDataQuality {
     #{ DQAsset_Delete_V2: #{ $ref: "./examples/DQAsset_Delete_V2.json" } }
   )
   @doc("Deletes a DQ asset within a business domain. Data product is specified as optional query parameter.")
-  op deleteDQAssetV2 is RpcOperation<
+  op deleteDQAssetForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1765,7 +1765,7 @@ namespace PurviewDataQuality {
     #{ DQAssets_List_V2: #{ $ref: "./examples/DQAssets_List_V2.json" } }
   )
   @doc("Retrieves DQ assets for a business domain with pagination. Data product is specified as optional query parameter.")
-  op getDQAssetsPaginationV2 is RpcOperation<
+  op getDQAssetsPaginationForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1803,7 +1803,7 @@ namespace PurviewDataQuality {
     #{ AssetScores_Get_V2: #{ $ref: "./examples/AssetScores_Get_V2.json" } }
   )
   @doc("Retrieves asset scores for specified assets. Data product is specified as optional query parameter.")
-  op getAssetScoresV2 is RpcOperation<
+  op getAssetScoresForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1841,7 +1841,7 @@ namespace PurviewDataQuality {
     #{ DQAsset_Clone_V2: #{ $ref: "./examples/DQAsset_Clone_V2.json" } }
   )
   @doc("Submits a clone job for a DQ asset. Data product is specified as optional query parameter.")
-  op cloneDQAssetV2 is RpcOperation<
+  op cloneDQAssetForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
@@ -1953,7 +1953,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{assetId}/snapshots")
   @get
-  op getLatestSnapshotV2 is RpcOperation<
+  op getLatestSnapshotForAssetDQ is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
