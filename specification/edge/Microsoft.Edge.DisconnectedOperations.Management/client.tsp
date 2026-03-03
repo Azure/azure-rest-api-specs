@@ -85,7 +85,7 @@ namespace Microsoft.Edge {
 
     @doc("The billing configuration")
     @added(Microsoft.Edge.Versions.v2026_03_15)
-    billingConfiguration?: BillingConfigurationCreateCreateOrUpdate;
+    billingConfiguration?: BillingConfigurationCreateOrUpdate;
 
     @doc("The benefit plans")
     @added(Microsoft.Edge.Versions.v2026_03_15)
@@ -94,7 +94,7 @@ namespace Microsoft.Edge {
 
   @doc("The billing configuration")
   @added(Microsoft.Edge.Versions.v2026_03_15)
-  model BillingConfigurationCreateCreateOrUpdate {
+  model BillingConfigurationCreateOrUpdate {
     @doc("The auto renew setting")
     autoRenew: AutoRenew;
 
