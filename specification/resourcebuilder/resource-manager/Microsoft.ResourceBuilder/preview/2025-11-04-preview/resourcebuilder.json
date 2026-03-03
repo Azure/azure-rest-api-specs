@@ -1641,6 +1641,67 @@
         }
       ]
     },
+    "ArmResourceDatasetSchema": {
+      "type": "object",
+      "description": "ARM resource dataset schema.",
+      "properties": {
+        "ResourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "ResourceType": {
+          "type": "string",
+          "description": "The type of the ARM resource."
+        },
+        "ResourceName": {
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "TenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "ResourceGroup": {
+          "type": "string",
+          "description": "The resource group where the resource resides."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of the ARM resource (optional)."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the resource is located (optional)."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the ARM resource (optional).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "Additional properties of the ARM resource (optional)."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource information was captured (optional)."
+        }
+      },
+      "required": [
+        "ResourceId",
+        "ResourceType",
+        "ResourceName",
+        "TenantId",
+        "SubscriptionId",
+        "ResourceGroup"
+      ]
+    },
     "DatasetColumn": {
       "type": "object",
       "description": "Dataset column",
@@ -1790,11 +1851,18 @@
           "readOnly": true
         },
         "schema": {
-          "type": "array",
-          "description": "Dataset schema definition.",
-          "items": {
-            "$ref": "#/definitions/DatasetColumn"
-          }
+          "description": "Dataset schema definition. When kind is 'Custom', this is an array of DatasetColumn objects. When kind is 'ArmResource', this is an ArmResourceDatasetSchema object.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DatasetColumn"
+              }
+            },
+            {
+              "$ref": "#/definitions/ArmResourceDatasetSchema"
+            }
+          ]
         },
         "locations": {
           "type": "array",

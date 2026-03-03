@@ -49,13 +49,17 @@ union DatasetKind {
 }
 
 /** Dataset properties */
+/** Dataset properties */
 model DatasetProperties {
   /** Provisioning state of the dataset. */
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  /** Dataset schema definition. */
-  schema?: DatasetColumn[];
+  /** Dataset schema definition.
+   * When kind is "Custom", this is an array of DatasetColumn objects.
+   * When kind is "ArmResource", this is an ArmResourceDatasetSchema object.
+   */
+  schema?: DatasetColumn[] | ArmResourceDatasetSchema;
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
@@ -71,6 +75,43 @@ model DatasetColumn {
 
   /** Description of the column. */
   description?: string;
+}
+
+/** ARM resource dataset schema. */
+model ArmResourceDatasetSchema {
+  /** The full ARM resource ID. */
+  ResourceId: string;
+
+  /** The type of the ARM resource. */
+  ResourceType: string;
+
+  /** The name of the ARM resource. */
+  ResourceName: string;
+
+  /** The tenant ID where the resource resides. */
+  TenantId: string;
+
+  /** The subscription ID where the resource resides. */
+  SubscriptionId: string;
+
+  /** The resource group where the resource resides. */
+  ResourceGroup: string;
+
+  /** The kind of the ARM resource (optional). */
+  kind?: string;
+
+  /** The Azure region where the resource is located (optional). */
+  location?: string;
+
+  /** Tags associated with the ARM resource (optional). */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
+  tags?: Record<string>;
+
+  /** Additional properties of the ARM resource (optional). */
+  properties?: unknown;
+
+  /** The timestamp when the resource information was captured (optional). */
+  timestamp?: utcDateTime;
 }
 
 /** Dataset column type */
