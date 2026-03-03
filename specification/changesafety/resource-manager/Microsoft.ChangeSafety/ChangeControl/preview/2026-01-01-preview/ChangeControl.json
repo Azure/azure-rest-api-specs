@@ -4387,7 +4387,7 @@
           "description": "Time the activity occurred in ISO-8601 format."
         },
         "initiatedByType": {
-          "type": "string",
+          "$ref": "#/definitions/InitiatedByType",
           "description": "Identity type that initiated the event."
         },
         "initiatedBy": {
@@ -6016,6 +6016,36 @@
             "name": "ManualTouch",
             "value": "ManualTouch",
             "description": "Manual touch change."
+          }
+        ]
+      }
+    },
+    "InitiatedByType": {
+      "type": "string",
+      "description": "Identity type that initiated the event.",
+      "enum": [
+        "Application",
+        "User",
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "InitiatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "An application initiated the event."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user initialized the event."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "A Managed identity initialized the event."
           }
         ]
       }

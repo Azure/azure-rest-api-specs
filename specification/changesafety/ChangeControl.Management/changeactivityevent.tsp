@@ -53,7 +53,7 @@ model ChangeActivityEventProperties {
   timestamp: utcDateTime;
 
   @doc("Identity type that initiated the event.")
-  initiatedByType?: string;
+  initiatedByType?: InitiatedByType;
 
   @doc("Initiator or end user identity.")
   initiatedBy?: string;
@@ -106,6 +106,21 @@ union ActivityType {
 
   @doc("ARM Control Plane activity")
   ArmControlPlane: "ArmControlPlane",
+}
+
+@doc("Identity type that initiated the event.")
+@added(Versions.v2026_01_01_preview)
+union InitiatedByType {
+  string,
+
+  @doc("An application initiated the event.")
+  Application: "Application",
+
+  @doc("A user initialized the event.")
+  User: "User",
+
+  @doc("A Managed identity initialized the event.")
+  ManagedIdentity: "ManagedIdentity",
 }
 
 @doc("Azure resource Id of a ChangeActivityEvent.")
