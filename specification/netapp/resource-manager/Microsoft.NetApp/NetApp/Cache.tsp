@@ -581,7 +581,6 @@ interface Caches {
   /**
    * Patch the specified Cache
    */
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cache,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

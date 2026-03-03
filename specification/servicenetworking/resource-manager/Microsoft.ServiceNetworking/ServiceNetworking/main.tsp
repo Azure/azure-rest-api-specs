@@ -318,7 +318,6 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;

@@ -268,7 +268,7 @@ interface QuestionAnsweringProjects {
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @sharedRoute
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
-  @patch(#{ implicitOptionality: false })
+  @patch
   updateSources is Foundations.LongRunningOperation<
     {
       /**
@@ -301,7 +301,7 @@ interface QuestionAnsweringProjects {
   @sharedRoute
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
-  @patch(#{ implicitOptionality: false })
+  @patch
   updateSourcesFromFiles is Foundations.LongRunningOperation<
     {
       @doc("This request has a multi-part body.")

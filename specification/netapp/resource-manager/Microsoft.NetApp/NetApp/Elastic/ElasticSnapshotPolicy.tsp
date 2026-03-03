@@ -225,7 +225,6 @@ interface ElasticSnapshotPolicies {
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ElasticSnapshotPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
