@@ -3893,9 +3893,7 @@ model EntityManualTriggerRequestBody {
   /**
    * The tenant id of the playbook resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * The resource id of the playbook resource.
@@ -3912,11 +3910,8 @@ model EntityManualTriggerRequestBody {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManualTriggerRequestBody {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId?: string;
-
+  tenantId?: Azure.Core.uuid;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   logicAppsResourceId: Azure.Core.armResourceIdentifier<[
     {
@@ -4049,10 +4044,8 @@ model UserInfo {
   /**
    * The object id of the user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  objectId?: string | null;
+  objectId?: Azure.Core.uuid | null;
 }
 
 /**
@@ -4158,9 +4151,7 @@ model BookmarkExpandParameters {
   /**
    * The Id of the expansion to perform.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  expansionId?: string;
+  expansionId?: Azure.Core.uuid;
 
   /**
    * The start date filter, so the only expansion results returned are after this date.
@@ -5133,9 +5124,7 @@ model EntityExpandParameters {
   /**
    * The Id of the expansion to perform.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  expansionId?: string;
+  expansionId?: Azure.Core.uuid;
 
   /**
    * The start date filter, so the only expansion results returned are after this date.
@@ -5729,10 +5718,8 @@ model HuntOwner {
   /**
    * The object id of the user the hunt is assigned to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  objectId?: string | null;
+  objectId?: Azure.Core.uuid | null;
 
   /**
    * The user principal name of the user the hunt is assigned to.
@@ -5946,9 +5933,7 @@ model IncidentOwnerInfo {
   /**
    * The object id of the user the incident is assigned to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   /**
    * The user principal name of the user the incident is assigned to.
@@ -8028,10 +8013,8 @@ model TIObjectCommonProperties {
   /**
    * The ID of the rules version that was active when this TI object was last ingested.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  ingestionRulesVersion?: string;
+  ingestionRulesVersion?: Azure.Core.uuid;
 
   /**
    * The name of the method/application that initiated the last write to this TI object.
@@ -10024,9 +10007,7 @@ model PlaybookActionProperties {
   /**
    * The tenant id of the playbook resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 /**
@@ -14167,9 +14148,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The anomaly settings definition Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  settingsDefinitionId?: string;
+  settingsDefinitionId?: Azure.Core.uuid;
 }
 
 /**
@@ -14426,10 +14405,8 @@ model AccountEntityProperties extends EntityCommonProperties {
   /**
    * The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  objectGuid?: string;
+  objectGuid?: Azure.Core.uuid;
 
   /**
    * The Azure Active Directory Passport User ID.
@@ -14770,10 +14747,8 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * The ID of the security agent running on the device
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  iotSecurityAgentId?: string;
+  iotSecurityAgentId?: Azure.Core.uuid;
 
   /**
    * The type of the device
@@ -15089,10 +15064,8 @@ model MailboxEntityProperties extends EntityCommonProperties {
   /**
    * The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  externalDirectoryObjectId?: string;
+  externalDirectoryObjectId?: Azure.Core.uuid;
 }
 
 /**
@@ -15309,10 +15282,8 @@ model MailMessageEntityProperties extends EntityCommonProperties {
   /**
    * The network message id of this mail message
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  networkMessageId?: string;
+  networkMessageId?: Azure.Core.uuid;
 
   /**
    * The internet message id of this mail message
@@ -15607,10 +15578,8 @@ model SecurityGroupEntityProperties extends EntityCommonProperties {
   /**
    * A single-value attribute that is the unique identifier for the object, assigned by active directory.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  objectGuid?: string;
+  objectGuid?: Azure.Core.uuid;
 
   /**
    * The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group
@@ -15642,18 +15611,14 @@ model SubmissionMailEntityProperties extends EntityCommonProperties {
   /**
    * The network message id of email to which submission belongs
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  networkMessageId?: string;
+  networkMessageId?: Azure.Core.uuid;
 
   /**
    * The submission id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  submissionId?: string;
+  submissionId?: Azure.Core.uuid;
 
   /**
    * The submitter
