@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Edge",
-    "version": "2024-10-01-preview",
+    "version": "2026-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -149,7 +149,10 @@
       "enum": [
         "Connected",
         "NeedsAttention",
-        "NotRecentlyConnected"
+        "NotRecentlyConnected",
+        "Disconnected",
+        "InProgress",
+        "FinishSetup"
       ],
       "x-ms-enum": {
         "name": "ConnectivityStatusEnum",
@@ -169,6 +172,21 @@
             "name": "NotRecentlyConnected",
             "value": "NotRecentlyConnected",
             "description": "The device was not recently connected (deprecated; use Disconnected)"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The device is in Disconnected state and replaces NotRecentlyConnected"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The device is in transition; NoDataAvailable should be represented as InProgress"
+          },
+          {
+            "name": "FinishSetup",
+            "value": "FinishSetup",
+            "description": "The device is pending initial setup completion"
           }
         ]
       }
