@@ -5,6 +5,58 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureStackHCI;
 
+// === C# backward-compat renames for property type changes ===
+// Rename new typed properties to free up original names for backward-compat custom code
+
+// ArcSettingProperties.connectivityProperties: BinaryData -> ArcConnectivityProperties
+@@clientName(Microsoft.AzureStackHCI.ArcSettingProperties.connectivityProperties,
+  "ArcConnectivityPropertiesConfig",
+  "csharp"
+);
+
+// ArcSettingsPatchProperties.connectivityProperties: BinaryData -> ArcConnectivityProperties
+@@clientName(Microsoft.AzureStackHCI.ArcSettingsPatchProperties.connectivityProperties,
+  "ArcConnectivityPropertiesConfig",
+  "csharp"
+);
+
+// RemoteSupportNodeSettings.arcResourceId: ResourceIdentifier -> string
+@@clientName(Microsoft.AzureStackHCI.RemoteSupportNodeSettings.arcResourceId,
+  "ArcResourceIdString",
+  "csharp"
+);
+
+// DeploymentSettingsProperties.arcNodeResourceIds: IList<ResourceIdentifier> -> IList<string>
+@@clientName(Microsoft.AzureStackHCI.DeploymentSettingsProperties.arcNodeResourceIds,
+  "ArcNodeResourceIdStrings",
+  "csharp"
+);
+
+// DeploymentSettingsProperties.deploymentMode: property was settable, now read-only or moved
+@@clientName(Microsoft.AzureStackHCI.DeploymentSettingsProperties.deploymentMode,
+  "EceDeploymentMode",
+  "csharp"
+);
+
+// ExtensionInstanceView.status: ExtensionInstanceViewStatus -> ArcExtensionInstanceViewStatus
+@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView.status,
+  "ArcExtensionStatus",
+  "csharp"
+);
+
+// UpdateProperties.prerequisites: IList<UpdatePrerequisite> -> IList<HciClusterUpdatePrerequisite>
+@@clientName(Microsoft.AzureStackHCI.UpdateProperties.prerequisites,
+  "HciClusterPrerequisites",
+  "csharp"
+);
+
+// UpdateSummariesProperties.state: UpdateSummariesPropertiesState -> HciClusterUpdateState
+@@clientName(Microsoft.AzureStackHCI.UpdateSummariesProperties.state,
+  "HciClusterUpdateState",
+  "csharp"
+);
+
+// === Java renames ===
 @@clientName(Microsoft.AzureStackHCI.Update, "HciUpdate", "java");
 @@clientName(Microsoft.AzureStackHCI.RemoteSupportProperties.expirationTimeStamp,
   "expirationTimestamp",
