@@ -9,7 +9,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.Edge;
-
 @doc("Disconnected operation resource.")
 model DisconnectedOperation
   is TrackedResource<DisconnectedOperationProperties> {
