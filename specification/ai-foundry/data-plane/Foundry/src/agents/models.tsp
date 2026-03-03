@@ -69,10 +69,20 @@ model CreateAgentRequest {
   @maxLength(63)
   name: string;
 
+  @doc("The endpoint configuration for the agent")
+  endpoint?: AgentEndpoint;
+
+  @doc("The reference to a managed blueprint for the agent")
+  blueprint_id?: string;
+
   ...CreateAgentVersionRequest;
 }
 
 model UpdateAgentRequest {
+  @removed(Versions.v1)
+  @doc("The endpoint configuration for the agent")
+  endpoint?: AgentEndpoint;
+
   ...CreateAgentVersionRequest;
 }
 
@@ -82,6 +92,136 @@ union AgentObjectType {
   agentDeleted: "agent.deleted",
   agentVersionDeleted: "agent.version.deleted",
   agentContainer: "agent.container",
+}
+
+union TrafficRoutingPolicyType {
+  string,
+  FixedRatio: "FixedRatio",
+  Flight: "Flight",
+}
+
+@discriminator("type")
+model TrafficRoutingPolicy {
+  @doc("The version to rout traffic to")
+  version: string;
+}
+
+model FixedRatioTrafficRoutingPolicy extends TrafficRoutingPolicy {
+  type: TrafficRoutingPolicyType.FixedRatio;
+
+  @doc("The percentage of traffic to route to the version. Must be between 0 and 100.")
+  @minValue(0)
+  @maxValue(100)
+  traffic_percentage: int32;
+}
+
+model FlightTrafficRoutingPolicy extends TrafficRoutingPolicy {
+  type: TrafficRoutingPolicyType.Flight;
+
+  @doc("The name of the flight to route traffic to.")
+  flight_name: string;
+}
+
+@discriminator("type")
+model AgentEndpointAuthorizationScheme {}
+
+model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.Entra;
+}
+
+model HeaderAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.Header;
+  isolation_key_source: IsolationKeySource;
+}
+
+model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.BotService;
+}
+
+model BotServiceRbacAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
+}
+
+model IsolationKeySource {
+  @doc("The user isolation key header value")
+  user_isolation_key: string;
+
+  @doc("The chat isolation key header value")
+  chat_isolation_key: string;
+}
+
+union AgentEndpointAuthorizationSchemeType {
+  string,
+  Entra: "Entra",
+  Header: "Header",
+  BotService: "BotService",
+  BotServiceRbac: "BotServiceRbac",
+}
+
+model AgentEndpoint {
+  @doc("The traffic routing policy of the agent endpoint determines how traffic is routed to different versions of the agent.")
+  traffic_routing_policy?: TrafficRoutingPolicy;
+
+  @doc("The protocols that the agent supports")
+  protocols: AgentProtocol[];
+
+  @doc("The authorization schemes supported by the agent endpoint")
+  authorization_schemes: AgentEndpointAuthorizationScheme[];
+}
+
+model AgentIdentity {
+  @doc("The principal ID of the agent")
+  principal_id: string;
+
+  @doc("The client ID of the agent")
+  client_id: string;
+}
+
+/** A skill example string with a maximum length of 1024 characters. */
+@maxLength(1024)
+scalar SkillExample extends string;
+
+@maxLength(32)
+scalar SkillTag extends string;
+
+model AgentSkill {
+  @doc("a unique identifier for the skill")
+  @maxLength(64)
+  @minLength(1)
+  id: string;
+
+  @doc("The name of the skill")
+  @maxLength(128)
+  @minLength(1)
+  name: string;
+
+  @doc("A description of the skill")
+  @maxLength(2048)
+  description?: string;
+
+  @doc("set of tagwords describing classes of capabilities for the skill")
+  @maxItems(5)
+  tags?: SkillTag[];
+
+  @doc("A list of example scenarios that the skill can perform.")
+  @maxItems(5)
+  examples?: SkillExample[];
+}
+
+model AgentCard {
+  @doc("The version of the agent card.")
+  @maxLength(32)
+  @minLength(1)
+  version: string;
+
+  @doc("The description of the agent card.")
+  @maxLength(2048)
+  description?: string;
+
+  @doc("The set of skills that an agent can perform.")
+  @maxItems(16)
+  skills: AgentSkill[];
 }
 
 model AgentObject {
@@ -99,6 +239,17 @@ model AgentObject {
   versions: {
     latest: AgentVersionObject;
   };
+
+  @doc("The endpoint configuration for the agent")
+  endpoint?: AgentEndpoint;
+
+  @doc("The reference to a managed blueprint for the agent")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  blueprint_id?: string;
+
+  @doc("The identity of the agent")
+  @visibility(Lifecycle.Read)
+  identity?: AgentIdentity;
 }
 
 model AgentVersionObject {
@@ -132,6 +283,7 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
+  a2a: "a2a",
 
   @removed(Versions.v1)
   invocations: "invocations",
@@ -280,7 +432,9 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -373,7 +527,9 @@ model ToolArgumentBinding {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union ContainerLogKind {
   /** Console logs from the container. */
