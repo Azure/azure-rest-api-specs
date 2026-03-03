@@ -11019,12 +11019,6 @@
       "type": "object",
       "description": "A copy activity Azure Table source.",
       "properties": {
-        "queryTimeout": {
-          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        },
-        "additionalColumns": {
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
-        },
         "azureTableSourceQuery": {
           "description": "Azure Table source query. Type: string (or Expression with resultType string)."
         },
@@ -11034,7 +11028,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "x-ms-discriminator-value": "AzureTableSource"
@@ -32932,22 +32926,6 @@
       "type": "object",
       "description": "Copy activity sources of tabular type.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Copy source type."
-        },
-        "sourceRetryCount": {
-          "description": "Source retry count. Type: integer (or Expression with resultType integer)."
-        },
-        "sourceRetryWait": {
-          "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        },
-        "maxConcurrentConnections": {
-          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
-        },
-        "disableMetricsCollection": {
-          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
-        },
         "queryTimeout": {
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
@@ -32955,11 +32933,12 @@
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       },
-      "discriminator": "type",
-      "required": [
-        "type"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
       ],
-      "additionalProperties": {}
+      "x-ms-discriminator-value": "TabularSource"
     },
     "TabularTranslator": {
       "type": "object",
@@ -33418,20 +33397,20 @@
       "type": "object",
       "description": "Trigger referenced dependency.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of dependency reference."
-        },
         "referenceTrigger": {
           "$ref": "#/definitions/TriggerReference",
           "description": "Referenced trigger."
         }
       },
-      "discriminator": "type",
       "required": [
-        "type",
         "referenceTrigger"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyReference"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerDependencyReference"
     },
     "TriggerFilterParameters": {
       "type": "object",
@@ -33788,10 +33767,6 @@
       "type": "object",
       "description": "Referenced tumbling window trigger dependency.",
       "properties": {
-        "referenceTrigger": {
-          "$ref": "#/definitions/TriggerReference",
-          "description": "Referenced trigger."
-        },
         "offset": {
           "type": "string",
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
@@ -33807,12 +33782,9 @@
           "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))"
         }
       },
-      "required": [
-        "referenceTrigger"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/DependencyReference"
+          "$ref": "#/definitions/TriggerDependencyReference"
         }
       ],
       "x-ms-discriminator-value": "TumblingWindowTriggerDependencyReference"

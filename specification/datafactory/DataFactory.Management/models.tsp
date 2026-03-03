@@ -21271,8 +21271,9 @@ model BinarySource extends CopySource {
 /**
  * Copy activity sources of tabular type.
  */
-model TabularSource is CopySource {
+model TabularSource extends CopySource {
   ...TabularSourceProperties;
+  type: "TabularSource";
 }
 
 alias TabularSourceProperties = {
@@ -21492,7 +21493,11 @@ model RelationalSource extends CopySource {
 /**
  * A copy activity source for Informix.
  */
-model InformixSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model InformixSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21528,7 +21533,11 @@ model MicrosoftAccessSource extends CopySource {
 /**
  * A copy activity source for Db2 databases.
  */
-model Db2Source extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model Db2Source extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21543,7 +21552,11 @@ model Db2Source extends TabularSource {
 /**
  * A copy activity source for ODBC databases.
  */
-model OdbcSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model OdbcSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21558,7 +21571,11 @@ model OdbcSource extends TabularSource {
 /**
  * A copy activity source for MySQL databases.
  */
-model MySqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model MySqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21573,7 +21590,11 @@ model MySqlSource extends TabularSource {
 /**
  * A copy activity source for PostgreSQL databases.
  */
-model PostgreSqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model PostgreSqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21588,7 +21609,11 @@ model PostgreSqlSource extends TabularSource {
 /**
  * A copy activity source for PostgreSQL databases.
  */
-model PostgreSqlV2Source extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model PostgreSqlV2Source extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21603,7 +21628,11 @@ model PostgreSqlV2Source extends TabularSource {
 /**
  * A copy activity source for Sybase databases.
  */
-model SybaseSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SybaseSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21618,7 +21647,11 @@ model SybaseSource extends TabularSource {
 /**
  * A copy activity source for SapBW server via MDX.
  */
-model SapBwSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapBwSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * MDX query. Type: string (or Expression with resultType string).
    */
@@ -21660,7 +21693,11 @@ model ODataSource extends CopySource {
 /**
  * A copy activity Salesforce source.
  */
-model SalesforceSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SalesforceSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -21706,7 +21743,11 @@ model SalesforceServiceCloudSource extends CopySource {
 /**
  * A copy activity source for SAP Cloud for Customer source.
  */
-model SapCloudForCustomerSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapCloudForCustomerSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SAP Cloud for Customer OData query. For example, "$top=1". Type: string (or Expression with resultType string).
    */
@@ -21726,7 +21767,11 @@ model SapCloudForCustomerSource extends TabularSource {
 /**
  * A copy activity source for SAP ECC source.
  */
-model SapEccSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapEccSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).
    */
@@ -21746,7 +21791,11 @@ model SapEccSource extends TabularSource {
 /**
  * A copy activity source for SAP HANA source.
  */
-model SapHanaSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapHanaSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SAP HANA Sql query. Type: string (or Expression with resultType string).
    */
@@ -21786,7 +21835,11 @@ model SapHanaPartitionSettings {
 /**
  * A copy activity source for SAP Business Warehouse Open Hub Destination source.
  */
-model SapOpenHubSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapOpenHubSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean).
    */
@@ -21816,7 +21869,11 @@ model SapOpenHubSource extends TabularSource {
 /**
  * A copy activity source for SAP ODP source.
  */
-model SapOdpSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapOdpSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * The extraction mode. Allowed value include: Full, Delta and Recovery. The default value is Full. Type: string (or Expression with resultType string).
    */
@@ -21848,7 +21905,11 @@ model SapOdpSource extends TabularSource {
 /**
  * A copy activity source for SAP Table source.
  */
-model SapTableSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SapTableSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * The number of rows to be retrieved. Type: integer(or Expression with resultType integer).
    */
@@ -22011,7 +22072,11 @@ model RestSource extends CopySource {
 /**
  * A copy activity SQL source.
  */
-model SqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -22072,7 +22137,11 @@ model SqlPartitionSettings {
 /**
  * A copy activity SQL server source.
  */
-model SqlServerSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SqlServerSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -22119,7 +22188,11 @@ model SqlServerSource extends TabularSource {
 /**
  * A copy activity Amazon RDS for SQL Server source.
  */
-model AmazonRdsForSqlServerSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AmazonRdsForSqlServerSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -22167,7 +22240,11 @@ model AmazonRdsForSqlServerSource extends TabularSource {
 /**
  * A copy activity Azure SQL source.
  */
-model AzureSqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AzureSqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -22214,8 +22291,12 @@ model AzureSqlSource extends TabularSource {
 /**
  * A copy activity Azure SQL Managed Instance source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlMISource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SqlMISource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL reader query. Type: string (or Expression with resultType string).
    */
@@ -22262,8 +22343,12 @@ model SqlMISource extends TabularSource {
 /**
  * A copy activity SQL Data Warehouse source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SqlDWSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SqlDWSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * SQL Data Warehouse reader query. Type: string (or Expression with resultType string).
    */
@@ -22345,7 +22430,11 @@ model HdfsSource extends CopySource {
 /**
  * A copy activity Azure MySQL source.
  */
-model AzureMySqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AzureMySqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -22536,7 +22625,11 @@ model AmazonRdsForOraclePartitionSettings {
 /**
  * A copy activity Teradata source.
  */
-model TeradataSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model TeradataSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Teradata query. Type: string (or Expression with resultType string).
    */
@@ -22641,7 +22734,11 @@ model WebSource extends CopySource {
 /**
  * A copy activity source for a Cassandra database.
  */
-model CassandraSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model CassandraSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Should be a SQL-92 query expression or Cassandra Query Language (CQL) command. Type: string (or Expression with resultType string).
    */
@@ -22923,8 +23020,12 @@ model HttpSource extends CopySource {
 /**
  * A copy activity Amazon Marketplace Web Service source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AmazonMWSSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AmazonMWSSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -22939,7 +23040,11 @@ model AmazonMWSSource extends TabularSource {
 /**
  * A copy activity Azure Database for PostgreSQL source.
  */
-model AzurePostgreSqlSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AzurePostgreSqlSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23004,7 +23109,11 @@ model AzureMySqlSink extends CopySink {
 /**
  * A copy activity Concur Service source.
  */
-model ConcurSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ConcurSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23019,7 +23128,11 @@ model ConcurSource extends TabularSource {
 /**
  * A copy activity Couchbase server source.
  */
-model CouchbaseSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model CouchbaseSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23034,7 +23147,11 @@ model CouchbaseSource extends TabularSource {
 /**
  * A copy activity Drill server source.
  */
-model DrillSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model DrillSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23049,7 +23166,11 @@ model DrillSource extends TabularSource {
 /**
  * A copy activity Eloqua server source.
  */
-model EloquaSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model EloquaSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23064,7 +23185,11 @@ model EloquaSource extends TabularSource {
 /**
  * A copy activity Google BigQuery service source.
  */
-model GoogleBigQuerySource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model GoogleBigQuerySource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23079,7 +23204,11 @@ model GoogleBigQuerySource extends TabularSource {
 /**
  * A copy activity Google BigQuery service source.
  */
-model GoogleBigQueryV2Source extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model GoogleBigQueryV2Source extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23094,7 +23223,11 @@ model GoogleBigQueryV2Source extends TabularSource {
 /**
  * A copy activity Greenplum Database source.
  */
-model GreenplumSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model GreenplumSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23109,8 +23242,12 @@ model GreenplumSource extends TabularSource {
 /**
  * A copy activity HBase server source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model HBaseSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model HBaseSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23125,7 +23262,11 @@ model HBaseSource extends TabularSource {
 /**
  * A copy activity Hive Server source.
  */
-model HiveSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model HiveSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23140,7 +23281,11 @@ model HiveSource extends TabularSource {
 /**
  * A copy activity Hubspot Service source.
  */
-model HubspotSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model HubspotSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23155,7 +23300,11 @@ model HubspotSource extends TabularSource {
 /**
  * A copy activity Impala server source.
  */
-model ImpalaSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ImpalaSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23170,7 +23319,11 @@ model ImpalaSource extends TabularSource {
 /**
  * A copy activity Jira Service source.
  */
-model JiraSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model JiraSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23185,7 +23338,11 @@ model JiraSource extends TabularSource {
 /**
  * A copy activity Magento server source.
  */
-model MagentoSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model MagentoSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23200,8 +23357,12 @@ model MagentoSource extends TabularSource {
 /**
  * A copy activity MariaDB server source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MariaDBSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model MariaDBSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23216,8 +23377,12 @@ model MariaDBSource extends TabularSource {
 /**
  * A copy activity Azure MariaDB source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureMariaDBSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AzureMariaDBSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23232,7 +23397,11 @@ model AzureMariaDBSource extends TabularSource {
 /**
  * A copy activity Marketo server source.
  */
-model MarketoSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model MarketoSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23247,7 +23416,11 @@ model MarketoSource extends TabularSource {
 /**
  * A copy activity Paypal Service source.
  */
-model PaypalSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model PaypalSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23262,7 +23435,11 @@ model PaypalSource extends TabularSource {
 /**
  * A copy activity Phoenix server source.
  */
-model PhoenixSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model PhoenixSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23277,7 +23454,11 @@ model PhoenixSource extends TabularSource {
 /**
  * A copy activity Presto server source.
  */
-model PrestoSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model PrestoSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23292,7 +23473,11 @@ model PrestoSource extends TabularSource {
 /**
  * A copy activity QuickBooks server source.
  */
-model QuickBooksSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model QuickBooksSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23307,7 +23492,11 @@ model QuickBooksSource extends TabularSource {
 /**
  * A copy activity ServiceNow server source.
  */
-model ServiceNowSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ServiceNowSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23322,7 +23511,11 @@ model ServiceNowSource extends TabularSource {
 /**
  * A copy activity Shopify Service source.
  */
-model ShopifySource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ShopifySource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23337,7 +23530,11 @@ model ShopifySource extends TabularSource {
 /**
  * A copy activity Spark Server source.
  */
-model SparkSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SparkSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23352,7 +23549,11 @@ model SparkSource extends TabularSource {
 /**
  * A copy activity Square Service source.
  */
-model SquareSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SquareSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23367,7 +23568,11 @@ model SquareSource extends TabularSource {
 /**
  * A copy activity Xero Service source.
  */
-model XeroSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model XeroSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23382,7 +23587,11 @@ model XeroSource extends TabularSource {
 /**
  * A copy activity Zoho server source.
  */
-model ZohoSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ZohoSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23397,7 +23606,11 @@ model ZohoSource extends TabularSource {
 /**
  * A copy activity Netezza source.
  */
-model NetezzaSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model NetezzaSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23442,7 +23655,11 @@ model NetezzaPartitionSettings {
 /**
  * A copy activity Vertica source.
  */
-model VerticaSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model VerticaSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23457,7 +23674,11 @@ model VerticaSource extends TabularSource {
 /**
  * A copy activity Salesforce Marketing Cloud source.
  */
-model SalesforceMarketingCloudSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SalesforceMarketingCloudSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23472,7 +23693,11 @@ model SalesforceMarketingCloudSource extends TabularSource {
 /**
  * A copy activity Responsys source.
  */
-model ResponsysSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ResponsysSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23487,8 +23712,12 @@ model ResponsysSource extends TabularSource {
 /**
  * A copy activity Dynamics AX source.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DynamicsAXSource extends TabularSource {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model DynamicsAXSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23508,7 +23737,11 @@ model DynamicsAXSource extends TabularSource {
 /**
  * A copy activity Oracle Service Cloud source.
  */
-model OracleServiceCloudSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model OracleServiceCloudSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23523,7 +23756,11 @@ model OracleServiceCloudSource extends TabularSource {
 /**
  * A copy activity Google AdWords service source.
  */
-model GoogleAdWordsSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model GoogleAdWordsSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * A query to retrieve data from source. Type: string (or Expression with resultType string).
    */
@@ -23538,7 +23775,11 @@ model GoogleAdWordsSource extends TabularSource {
 /**
  * A copy activity source for Amazon Redshift Source.
  */
-model AmazonRedshiftSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model AmazonRedshiftSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Database query. Type: string (or Expression with resultType string).
    */
@@ -23762,7 +24003,11 @@ model AzureDatabricksDeltaLakeImportCommand extends ImportSettings {
 /**
  * A copy activity Microsoft Fabric Warehouse source.
  */
-model WarehouseSource extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model WarehouseSource extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Microsoft Fabric Warehouse reader query. Type: string (or Expression with resultType string).
    */
@@ -27578,7 +27823,11 @@ model SynapseSparkJobReference {
 /**
  * A copy activity Salesforce V2 source.
  */
-model SalesforceV2Source extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model SalesforceV2Source extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string).
    */
@@ -27696,7 +27945,11 @@ model SalesforceServiceCloudV2Sink extends CopySink {
 /**
  * A copy activity ServiceNowV2 server source.
  */
-model ServiceNowV2Source extends TabularSource {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TabularSource)
+model ServiceNowV2Source extends CopySource {
+  ...TabularSourceProperties;
+
   /**
    * Expression to filter data from source.
    */
@@ -28123,8 +28376,9 @@ model TriggerReference {
 /**
  * Trigger referenced dependency.
  */
-model TriggerDependencyReference is DependencyReference {
+model TriggerDependencyReference extends DependencyReference {
   ...TriggerDependencyReferenceProperties;
+  type: "TriggerDependencyReference";
 }
 
 alias TriggerDependencyReferenceProperties = {
