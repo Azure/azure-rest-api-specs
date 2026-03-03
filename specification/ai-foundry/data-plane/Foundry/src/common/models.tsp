@@ -57,6 +57,9 @@ union AgentDefinitionOptInKeys {
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+  @removed(Versions.v1)
+  agent_endpoints_v1_preview: "AgentEndpoints=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {

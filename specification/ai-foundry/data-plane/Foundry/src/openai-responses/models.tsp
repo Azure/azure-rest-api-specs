@@ -65,7 +65,9 @@ namespace Azure.AI.Projects {
   );
 
   // See GitHub issue https://github.com/microsoft/openai-openapi-pr/issues/644
-  @@summary(OpenAI.AutoCodeInterpreterToolParam, "Automatic Code Interpreter Tool Parameters");
+  @@summary(OpenAI.AutoCodeInterpreterToolParam,
+    "Automatic Code Interpreter Tool Parameters"
+  );
 
   alias AgentNameQueryParam = {
     @query

@@ -23,7 +23,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   startAgentContainer is FoundryDataPlanePreviewOperation<
@@ -55,7 +57,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   updateAgentContainer is FoundryDataPlanePreviewOperation<
@@ -87,7 +91,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   stopAgentContainer is FoundryDataPlanePreviewOperation<
@@ -113,7 +119,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   deleteAgentContainer is FoundryDataPlanePreviewOperation<
@@ -136,7 +144,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   getAgentContainer is FoundryDataPlanePreviewOperation<
@@ -178,7 +188,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   streamAgentContainerLogs is FoundryDataPlanePreviewOperation<
@@ -220,7 +232,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   getAgentContainerOperation is FoundryDataPlanePreviewOperation<
@@ -244,7 +258,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   listAgentContainerOperations is FoundryDataPlanePreviewOperation<
@@ -267,7 +283,9 @@ interface AgentContainers {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.container_agents_v1_preview
+      ],
     }
   )
   listAgentVersionContainerOperations is FoundryDataPlanePreviewOperation<

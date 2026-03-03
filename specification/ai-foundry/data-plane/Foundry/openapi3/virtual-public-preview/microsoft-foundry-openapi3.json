@@ -125,7 +125,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -771,7 +772,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -9769,7 +9771,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -9783,7 +9786,8 @@
             "enum": [
               "HostedAgents=V1Preview",
               "WorkflowAgents=V1Preview",
-              "ContainerAgents=V1Preview"
+              "ContainerAgents=V1Preview",
+              "AgentEndpoints=V1Preview"
             ]
           }
         ],
@@ -9818,6 +9822,11 @@
             },
             "description": "The authorization schemes supported by the agent endpoint"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "AgentEndpointAuthorizationScheme": {
@@ -9839,6 +9848,11 @@
             "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
             "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "AgentEvaluation": {
@@ -10048,6 +10062,11 @@
             "type": "string",
             "description": "The client ID of the agent"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "AgentKind": {
@@ -10109,11 +10128,21 @@
                 "$ref": "#/components/schemas/AgentEndpoint"
               }
             ],
-            "description": "The endpoint configuration for the agent"
+            "description": "The endpoint configuration for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           },
           "blueprint_id": {
             "type": "string",
-            "description": "The reference to a managed blueprint for the agent"
+            "description": "The reference to a managed blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           },
           "identity": {
             "allOf": [
@@ -10122,6 +10151,11 @@
               }
             ],
             "description": "The identity of the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
             "readOnly": true
           }
         }
@@ -11646,7 +11680,12 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "BotServiceRbacAuthorizationScheme": {
         "type": "object",
@@ -11665,7 +11704,12 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "BrowserAutomationPreviewTool": {
         "type": "object",
@@ -12354,11 +12398,21 @@
                 "$ref": "#/components/schemas/AgentEndpoint"
               }
             ],
-            "description": "The endpoint configuration for the agent"
+            "description": "The endpoint configuration for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           },
           "blueprint_id": {
             "type": "string",
-            "description": "The reference to a managed blueprint for the agent"
+            "description": "The reference to a managed blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           },
           "metadata": {
             "type": "object",
@@ -12384,7 +12438,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "AgentEndpoints=V1Preview"
               ]
             }
           }
@@ -12393,7 +12448,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -12458,7 +12514,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "AgentEndpoints=V1Preview"
               ]
             }
           }
@@ -12467,7 +12524,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -13120,7 +13178,12 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "EntraIDCredentials": {
         "type": "object",
@@ -14994,7 +15057,12 @@
           {
             "$ref": "#/components/schemas/TrafficRoutingPolicy"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "FlightTrafficRoutingPolicy": {
         "type": "object",
@@ -15018,7 +15086,12 @@
           {
             "$ref": "#/components/schemas/TrafficRoutingPolicy"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "FolderDatasetVersion": {
         "type": "object",
@@ -15101,7 +15174,12 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -15728,6 +15806,11 @@
             "type": "string",
             "description": "The chat isolation key header value"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "ItemGenerationParams": {
@@ -38322,6 +38405,11 @@
             "FixedRatio": "#/components/schemas/FixedRatioTrafficRoutingPolicy",
             "Flight": "#/components/schemas/FlightTrafficRoutingPolicy"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "TreatmentEffectType": {
@@ -38426,7 +38514,12 @@
                 "$ref": "#/components/schemas/AgentEndpoint"
               }
             ],
-            "description": "The endpoint configuration for the agent"
+            "description": "The endpoint configuration for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           },
           "metadata": {
             "type": "object",
@@ -38452,10 +38545,19 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "AgentEndpoints=V1Preview"
               ]
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview",
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "UpdateEvalParametersBody": {
