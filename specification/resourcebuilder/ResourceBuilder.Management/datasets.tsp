@@ -97,23 +97,23 @@ model ArmResourceDatasetSchema {
   resourceGroup: string;
 
   /** The kind of the ARM resource (optional). */
-  kind?: string;
+  resourceKind?: string;
 
   /** The Azure region where the resource is located (optional). */
-  location?: string;
+  resourceLocation?: string;
 
   /** Tags associated with the ARM resource (optional). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
-  tags?: Record<string>;
+  resourceTags?: Record<string>;
 
   /** Additional properties of the ARM resource (optional). */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
-  properties?: Record<string>;
+  resourceProperties?: Record<string>;
 
   /** The timestamp when the resource information was captured (optional). */
-  timestamp?: utcDateTime;
+  resourceTimestamp?: utcDateTime;
 }
 
 /** Dataset column type */
