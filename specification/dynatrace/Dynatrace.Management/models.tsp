@@ -916,9 +916,27 @@ model UserInfo {
   phoneNumber?: string;
 
   /**
+   * Company name of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  company?: string;
+
+  /**
    * Country of the user
    */
   country?: string;
+
+  /**
+   * State of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  state?: string;
+
+  /**
+   * Job title of the user
+   */
+  @added(Versions.v2026_01_07_preview)
+  jobTitle?: string;
 }
 
 /**
@@ -1383,7 +1401,7 @@ model AdminUserDetails {
    * Phone number of the user used by Dynatrace for contacting them if needed
    */
   @maxLength(40)
-  phoneNumber: string;
+  phoneNumber?: string;
 
   /**
    * Company name of the admin user
@@ -1398,12 +1416,12 @@ model AdminUserDetails {
   /**
    * State of the admin user
    */
-  state: string;
+  state?: string;
 
   /**
    * Job title of the admin user
    */
-  jobTitle: string;
+  jobTitle?: string;
 }
 
 /**
