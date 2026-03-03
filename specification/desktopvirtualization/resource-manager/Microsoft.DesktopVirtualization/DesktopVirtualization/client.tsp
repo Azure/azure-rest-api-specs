@@ -586,6 +586,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 @@clientName(MSIXImages.expand, "expandMsixImages", "csharp");
+@@clientName(StartMenuItems.list, "getStartMenuItems", "csharp");
 @@clientName(PrivateLinkResources.listByHostPool,
   "getPrivateLinkResources",
   "csharp"
