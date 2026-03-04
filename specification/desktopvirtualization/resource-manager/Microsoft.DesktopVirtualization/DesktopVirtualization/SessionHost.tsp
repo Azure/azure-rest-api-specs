@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -7,6 +8,7 @@ import "./models.tsp";
 import "./HostPool.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -38,15 +40,10 @@ interface SessionHosts {
    * Update a session host.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     SessionHost,
     SessionHostPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot sessionHost?: SessionHostPatch;
-
+    Parameters = {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
@@ -135,3 +132,4 @@ interface SessionHosts {
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");
+@@clientName(SessionHosts.update::parameters.body, "sessionHost");
