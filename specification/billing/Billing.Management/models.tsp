@@ -8010,7 +8010,7 @@ model PatchProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewProperties?: PatchPropertiesRenewProperties;
@@ -9049,22 +9049,41 @@ model PaymentMethodsListResult is Azure.Core.Page<PaymentMethod>;
 /**
  * The list of reservations and summary of roll out count of reservations in each state.
  */
-model ReservationsListResult is Azure.Core.Page<Reservation> {
-  /**
-   * The roll out count summary of the reservations
-   */
+model ReservationsListResult {
+  /** The link (url) to the next page of results. */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
+
+  /** The roll out count summary of the reservations */
   summary?: ReservationSummary;
+
+  /** The list of reservations. */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Reservation[];
 }
 
 /**
- * The response of a BillingSubscription list operation.
+ * A container for a list of resources
  */
-model BillingSubscriptionListResult is Azure.Core.Page<BillingSubscription> {
+model BillingSubscriptionListResult {
+  /** The link (url) to the next page of results. */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: url;
+
   /**
    * Total number of records.
    */
   @visibility(Lifecycle.Read)
-  totalCount?: float32;
+  totalCount?: int32;
+
+  /** The list of resources. */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  @identifiers(#["id"])
+  value?: BillingSubscription[];
 }
 
 model AgreementListResult is Azure.Core.Page<Agreement>;

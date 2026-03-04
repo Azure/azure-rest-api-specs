@@ -7086,10 +7086,6 @@
               "$ref": "#/definitions/BillingSubscriptionAlias"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -16301,11 +16297,23 @@
     },
     "BillingSubscriptionListResult": {
       "type": "object",
-      "description": "The response of a BillingSubscription list operation.",
+      "description": "A container for a list of resources",
       "properties": {
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of records.",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
-          "description": "The BillingSubscription items on this page",
+          "description": "The list of resources.",
           "items": {
             "$ref": "#/definitions/BillingSubscription"
           },
@@ -16313,23 +16321,8 @@
           "x-ms-identifiers": [
             "id"
           ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        },
-        "totalCount": {
-          "type": "number",
-          "format": "float",
-          "description": "Total number of records.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "BillingSubscriptionMergeRequest": {
       "type": "object",
@@ -19481,7 +19474,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "renewProperties": {
           "$ref": "#/definitions/PatchPropertiesRenewProperties",
@@ -22261,28 +22255,25 @@
       "type": "object",
       "description": "The list of reservations and summary of roll out count of reservations in each state.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Reservation items on this page",
-          "items": {
-            "$ref": "#/definitions/Reservation"
-          },
-          "readOnly": true
-        },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
+          "description": "The link (url) to the next page of results.",
           "readOnly": true
         },
         "summary": {
           "$ref": "#/definitions/ReservationSummary",
           "description": "The roll out count summary of the reservations"
+        },
+        "value": {
+          "type": "array",
+          "description": "The list of reservations.",
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          },
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SavingsPlanModel": {
       "type": "object",

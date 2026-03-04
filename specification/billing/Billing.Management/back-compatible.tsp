@@ -520,9 +520,6 @@ using Microsoft.Billing;
 @@Azure.ResourceManager.identifiers(BillingSubscriptionAliasListResult.value,
   #["id"]
 );
-@@Azure.ResourceManager.identifiers(BillingSubscriptionListResult.value,
-  #["id"]
-);
 @@Azure.ResourceManager.identifiers(CustomerListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(DepartmentListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(EnrollmentAccountListResult.value, #["id"]);
@@ -542,7 +539,6 @@ using Microsoft.Billing;
 @@visibility(BillingRoleAssignmentListResult.value, Lifecycle.Read);
 @@visibility(BillingRoleDefinitionListResult.value, Lifecycle.Read);
 @@visibility(BillingSubscriptionAliasListResult.value, Lifecycle.Read);
-@@visibility(BillingSubscriptionListResult.value, Lifecycle.Read);
 @@visibility(CustomerListResult.value, Lifecycle.Read);
 @@visibility(DepartmentListResult.value, Lifecycle.Read);
 @@visibility(EnrollmentAccountListResult.value, Lifecycle.Read);
@@ -554,12 +550,9 @@ using Microsoft.Billing;
 @@visibility(TransactionListResult.value, Lifecycle.Read);
 @@visibility(BillingAccountListResult.value, Lifecycle.Read);
 @@visibility(BillingPermissionListResult.value, Lifecycle.Read);
-@@visibility(BillingSubscriptionListResult.nextLink, Lifecycle.Read);
 @@visibility(InvoiceSectionWithCreateSubPermissionListResult.value,
   Lifecycle.Read
 );
 @@visibility(PartnerTransferDetailsListResult.value, Lifecycle.Read);
 @@visibility(RecipientTransferDetailsListResult.value, Lifecycle.Read);
-@@visibility(ReservationsListResult.value, Lifecycle.Read);
-@@visibility(ReservationsListResult.nextLink, Lifecycle.Read);
 @@visibility(TransferDetailsListResult.value, Lifecycle.Read);
