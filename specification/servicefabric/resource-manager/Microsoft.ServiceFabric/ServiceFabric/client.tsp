@@ -6,5 +6,5 @@ using Microsoft.ServiceFabric;
 
 @@clientName(Microsoft.ServiceFabric,
   "ServiceFabricManagementClient",
-  "javascript"
+  "javascript,python"
 );
