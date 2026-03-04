@@ -54,8 +54,6 @@ interface ReservationResponses {
   /**
    * Get specific `Reservation` details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Get")
   @summary("Get `Reservation` details.")
   @tag("Reservation")
   get is ArmResourceRead<
@@ -74,8 +72,6 @@ interface ReservationResponses {
   /**
    * Updates the applied scopes of the `Reservation`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Update")
   @summary("Updates a `Reservation`.")
   @tag("Reservation")
   @tag("ApplyScope")
@@ -93,8 +89,6 @@ interface ReservationResponses {
   /**
    * List `Reservation`s within a single `ReservationOrder`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_List")
   @summary("Get `Reservation`s in a given reservation Order")
   @tag("Reservation")
   list is ArmResourceListByParent<
@@ -109,8 +103,6 @@ interface ReservationResponses {
    *
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_AvailableScopes")
   @summary("Get Available Scopes for `Reservation`.")
   @tag("Reservation, AvailableScopes")
   availableScopes is ArmResourceActionAsyncBase<
@@ -127,8 +119,6 @@ interface ReservationResponses {
   /**
    * Archiving a `Reservation` moves it to `Archived` state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Archive")
   @summary("Archive a `Reservation`.")
   @tag("Reservation, Archive")
   archive is ArmResourceActionSync<
@@ -143,8 +133,6 @@ interface ReservationResponses {
    * Restores a `Reservation` to the state it was before archiving.
    *
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Unarchive")
   @summary("Unarchive a `Reservation`.")
   @tag("Reservation, Unarchive")
   unarchive is ArmResourceActionSync<
@@ -158,8 +146,6 @@ interface ReservationResponses {
   /**
    * List of all the revisions for the `Reservation`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_ListRevisions")
   @summary("Get `Reservation` revisions.")
   @tag("Reservation")
   @list

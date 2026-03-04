@@ -18,8 +18,6 @@ interface ReservationOperationGroup {
   /**
    * List the reservations and the roll up counts of reservations group by provisioning states that the user has access to in the current tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_ListAll")
   @autoRoute
   @get
   @list
@@ -132,9 +130,7 @@ interface ReservationOrderOperationGroup {
   /**
    * Calculate price for placing a `ReservationOrder`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Calculate price for a `ReservationOrder`.")
-  @operationId("ReservationOrder_Calculate")
   @autoRoute
   @action("calculatePrice")
   @tag("Reservation, Calculate")
@@ -152,9 +148,7 @@ interface CalculateExchangeOperationGroup {
    *
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Calculates the refund amounts and price of the new purchases.")
-  @operationId("CalculateExchange_Post")
   @autoRoute
   @action("calculateExchange")
   @tag("Exchange")
@@ -175,9 +169,7 @@ interface ExchangeOperationGroup {
    *
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Exchange Reservation(s)")
-  @operationId("Exchange_Post")
   @autoRoute
   @action("exchange")
   @tag("Exchange")

@@ -33,8 +33,6 @@ interface ReservationOrderResponses {
   /**
    * Get the details of the `ReservationOrder`.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ReservationOrder_Get")
   @summary("Get a specific `ReservationOrder`.")
   @tag("Reservation")
   get is ArmResourceRead<
@@ -53,10 +51,8 @@ interface ReservationOrderResponses {
   /**
    * Purchase `ReservationOrder` and create resource under the specified URI.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("ReservationOrder_Purchase")
   @tag("Reservation, Purchase")
   @summary("Purchase `ReservationOrder`")
   purchase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -72,8 +68,6 @@ interface ReservationOrderResponses {
   /**
    * List of all the `ReservationOrder`s that the user has access to in the current tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ReservationOrder_List")
   @summary("Get all `ReservationOrder`s.")
   @tag("Reservation")
   list is ArmResourceListByParent<
@@ -86,8 +80,6 @@ interface ReservationOrderResponses {
   /**
    * Split a `Reservation` into two `Reservation`s with specified quantity distribution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Split")
   @summary("Split the `Reservation`.")
   @tag("Reservation, Split")
   split is ArmResourceActionAsyncBase<
@@ -102,8 +94,6 @@ interface ReservationOrderResponses {
   /**
    * Merge the specified `Reservation`s into a new `Reservation`. The two `Reservation`s being merged must have same properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Reservation_Merge")
   @summary("Merges two `Reservation`s.")
   @tag("Reservation, Merge")
   merge is ArmResourceActionAsyncBase<
@@ -118,8 +108,6 @@ interface ReservationOrderResponses {
   /**
    * Change directory (tenant) of `ReservationOrder` and all `Reservation` under it to specified tenant id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ReservationOrder_ChangeDirectory")
   @summary("Change directory of `ReservationOrder`.")
   @tag("ReservationOrder, ChangeDirectory")
   changeDirectory is ArmResourceActionSync<
@@ -134,8 +122,6 @@ interface ReservationOrderResponses {
    * Calculate price for returning `Reservations` if there are no policy errors.
    *
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CalculateRefund_Post")
   @summary("Calculate the refund amount of a reservation order.")
   @tag("CalculateRefund")
   @action("calculateRefund")
@@ -152,8 +138,6 @@ interface ReservationOrderResponses {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Return_Post")
   @summary("Return a reservation.")
   @tag("Return")
   @action("return")
