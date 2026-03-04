@@ -33,10 +33,10 @@ model AzCopyResourceProperties {
   destinationSas?: string;
 
   @doc("Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob).")
-  fromTo: FromToType;
+  fromTo?: FromToType;
 
   @doc("Only for Blob-Blob transfers. Specifies the blob type to use when uploading blobs. Acceptable values: BlockBlob, PageBlob, AppendBlob.")
-  blobType: BlobType;
+  blobType?: BlobType;
 
   @doc("Specifies whether the root of the source is considered a part of the transfer.")
   asSubdir?: boolean;
