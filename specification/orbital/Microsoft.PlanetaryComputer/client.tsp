@@ -93,19 +93,6 @@ interface Ingestion {
   getSource is IngestionSources.get;
   listSources is IngestionSources.list;
   listManagedIdentities is IngestionSources.listManagedIdentities;
-
-  // INMA STAC-Proxied Collection operations (stable only)
-  @added(Versions.v2026_04_15)
-  listCollections is InmaCollections.list;
-  @added(Versions.v2026_04_15)
-  getCollection is InmaCollections.get;
-
-  // INMA STAC-Proxied Item operations (stable only)
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  @added(Versions.v2026_04_15)
-  listItems is InmaItems.list;
-  @added(Versions.v2026_04_15)
-  getItem is InmaItems.get;
 }
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
