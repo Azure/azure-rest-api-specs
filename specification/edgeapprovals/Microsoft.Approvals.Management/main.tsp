@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./ApprovalWorkflowDefinition.tsp";
-import "./ApprovalWorkflowAssignment.tsp";
 import "./ApprovalWorkflowInstance.tsp";
 import "./ApprovalSetting.tsp";
 import "./InvokeAndFetchApprovalRequest.tsp";
@@ -22,7 +21,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Approvals;
 
 enum Versions {
-  `2025-05-01-preview`,
+  `2026-04-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
