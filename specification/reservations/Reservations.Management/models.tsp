@@ -1129,6 +1129,7 @@ model Error {
   /**
    * Extended error information including error code and error message
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
   error?: ExtendedErrorInfo;
 }
 
@@ -1440,7 +1441,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Properties specific to each reserved resource type. Not required if not applicable.
@@ -1696,6 +1697,7 @@ model ReservationOrderProperties {
   /**
    * Current state of the reservation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: ProvisioningState;
 
   /**
@@ -1782,13 +1784,14 @@ model ReservationsProperties {
   capabilities?: string;
 
   /**
-   * Quantity of the skus that are part of the reservation.
+   * Quantity of the skus that are part of the reservation. Must be greater than zero.
    */
   quantity?: int32;
 
   /**
    * Current state of the reservation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: ProvisioningState;
 
   /**
@@ -1893,7 +1896,7 @@ model ReservationsProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Reservation Id of the reservation from which this reservation is renewed. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}.
@@ -2163,7 +2166,7 @@ model PatchProperties {
   /**
    * Setting this to true will automatically purchase a new reservation on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   renewProperties?: PatchPropertiesRenewProperties;
@@ -2181,6 +2184,16 @@ model PatchPropertiesRenewProperties {
    * The request for reservation purchase
    */
   purchaseProperties?: PurchaseRequest;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model OperationList {
+  @pageItems
+  value?: OperationResponse[];
+
+  /** Url to get the next page of items. */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -2210,6 +2223,7 @@ model OperationResponse {
   /**
    * Properties of the operation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   properties?: unknown;
 }
 

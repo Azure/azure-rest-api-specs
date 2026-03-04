@@ -62,7 +62,8 @@ interface ReservationOperationGroup {
        */
       @query("take")
       take?: float32;
-    }
+    },
+    Error = Microsoft.Capacity.ErrorResponse
   >;
 }
 
@@ -126,7 +127,6 @@ op getAppliedReservationList is ArmProviderActionSync<
   Error = Error
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @armResourceOperations(#{ omitTags: true })
 interface ReservationOrderOperationGroup {
   /**
@@ -145,7 +145,6 @@ interface ReservationOrderOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @armResourceOperations(#{ omitTags: true })
 interface CalculateExchangeOperationGroup {
   /**
@@ -169,7 +168,6 @@ interface CalculateExchangeOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @armResourceOperations(#{ omitTags: true })
 interface ExchangeOperationGroup {
   /**
@@ -183,10 +181,12 @@ interface ExchangeOperationGroup {
   @autoRoute
   @action("exchange")
   @tag("Exchange")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   post is ArmProviderActionAsync<
     Request = ExchangeRequest,
     Response = ExchangeOperationResultResponse,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExchangeOperationResultResponse> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ExchangeOperationResultResponse> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = Error
   >;
 }

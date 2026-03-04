@@ -22,10 +22,12 @@ model ReservationOrderResponse
     SegmentName = "reservationOrders",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations(#{ omitTags: true })
 interface ReservationOrderResponses {
   /**
@@ -88,10 +90,11 @@ interface ReservationOrderResponses {
   @operationId("Reservation_Split")
   @summary("Split the `Reservation`.")
   @tag("Reservation, Split")
-  split is ArmResourceActionAsync<
+  split is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     SplitRequest,
-    ReservationResponse[],
+    ArmResponse<ReservationResponse[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -103,10 +106,11 @@ interface ReservationOrderResponses {
   @operationId("Reservation_Merge")
   @summary("Merges two `Reservation`s.")
   @tag("Reservation, Merge")
-  merge is ArmResourceActionAsync<
+  merge is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     MergeRequest,
-    ReservationResponse[],
+    ArmResponse<ReservationResponse[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -146,6 +150,8 @@ interface ReservationOrderResponses {
   /**
    * Return a reservation and get refund information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Return_Post")
   @summary("Return a reservation.")

@@ -46,7 +46,7 @@
       "name": "AppliedReservation"
     },
     {
-      "name": "Operations"
+      "name": "Operation"
     },
     {
       "name": "Reservation"
@@ -99,7 +99,7 @@
         "description": "Calculates price for exchanging `Reservations` if there are no policy errors.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -166,7 +166,7 @@
         "description": "Calculate price for placing a `ReservationOrder`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -209,7 +209,7 @@
         "description": "Returns one or more `Reservations` in exchange for one or more `Reservation` purchases.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -233,7 +233,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -245,7 +250,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -263,28 +268,34 @@
     },
     "/providers/Microsoft.Capacity/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Operation_List",
         "tags": [
-          "Operations"
+          "Operation"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Get operations.",
+        "description": "List all the operations.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -302,7 +313,7 @@
         "description": "List of all the `ReservationOrder`s that the user has access to in the current tenant.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -339,7 +350,7 @@
         "description": "Get the details of the `ReservationOrder`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -388,7 +399,7 @@
         "description": "Purchase `ReservationOrder` and create resource under the specified URI.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -460,7 +471,7 @@
         "description": "Calculate price for returning `Reservations` if there are no policy errors.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -510,7 +521,7 @@
         "description": "Change directory (tenant) of `ReservationOrder` and all `Reservation` under it to specified tenant id",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -560,7 +571,7 @@
         "description": "Merge the specified `Reservation`s into a new `Reservation`. The two `Reservation`s being merged must have same properties.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -616,8 +627,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ReservationResponseArray"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -632,7 +642,7 @@
         "description": "List `Reservation`s within a single `ReservationOrder`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -676,7 +686,7 @@
         "description": "Get specific `Reservation` details.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -730,7 +740,7 @@
         "description": "Updates the applied scopes of the `Reservation`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -811,7 +821,7 @@
         "description": "Archiving a `Reservation` moves it to `Archived` state.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -856,7 +866,7 @@
         "description": "Check whether the scopes from request is valid for `Reservation`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -929,7 +939,7 @@
         "description": "List of all the revisions for the `Reservation`.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -980,7 +990,7 @@
         "description": "Restores a `Reservation` to the state it was before archiving.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -1025,7 +1035,7 @@
         "description": "Return a reservation and get refund information.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -1097,7 +1107,7 @@
         "description": "Split a `Reservation` into two `Reservation`s with specified quantity distribution.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "reservationOrderId",
@@ -1153,8 +1163,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ReservationResponseArray"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1165,7 +1174,7 @@
         "description": "List the reservations and the roll up counts of reservations group by provisioning states that the user has access to in the current tenant.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -1222,7 +1231,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1246,10 +1255,10 @@
         "description": "Get applicable `Reservation`s that are applied to this subscription or a resource group under this subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1283,10 +1292,10 @@
         "description": "Get the regions and skus that are available for RI purchase for the specified Azure subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "reservedResourceType",
@@ -2062,6 +2071,37 @@
         }
       }
     },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "The details of the error."
+        }
+      }
+    },
     "ErrorResponseCode": {
       "type": "string",
       "description": "Error code describing the reason that service is not able to process the incoming request",
@@ -2665,6 +2705,65 @@
         }
       }
     },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Information about an operation",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "description": "The response containing operation information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "description": "Properties of the operation"
+        }
+      }
+    },
     "OperationResultError": {
       "type": "object",
       "description": "Required if status == failed or status == canceled.",
@@ -2755,7 +2854,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time.",
+          "default": false
         },
         "renewProperties": {
           "$ref": "#/definitions/PatchPropertiesRenewProperties"
@@ -3021,7 +3121,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time.",
+          "default": false
         },
         "reservedResourceProperties": {
           "$ref": "#/definitions/PurchaseRequestPropertiesReservedResourceProperties",
@@ -3437,7 +3538,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3478,15 +3579,9 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "ReservationResponseArray": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ReservationResponse"
-      }
     },
     "ReservationSplitProperties": {
       "type": "object",
@@ -3875,7 +3970,7 @@
         "quantity": {
           "type": "integer",
           "format": "int32",
-          "description": "Quantity of the skus that are part of the reservation."
+          "description": "Quantity of the skus that are part of the reservation. Must be greater than zero."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3966,7 +4061,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new reservation on the expiration date time.",
+          "default": false
         },
         "renewSource": {
           "type": "string",

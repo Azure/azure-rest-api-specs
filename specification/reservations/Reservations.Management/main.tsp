@@ -26,11 +26,12 @@ using TypeSpec.Versioning;
 /**
  * This API describe Azure Reservation
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
 @armProviderNamespace
 @service(#{ title: "Azure Reservation API" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Capacity;
 
 /**
@@ -43,4 +44,20 @@ enum Versions {
   v2022_11_01: "2022-11-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+interface Operation {
+  /**
+   * List all the operations.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operation")
+  @autoRoute
+  @segment("operations")
+  @summary("Get operations.")
+  @get
+  @list
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<OperationList> | Error;
+}
