@@ -120,9 +120,7 @@ interface HorizonDbClusters {
   @doc("Updates an existing HorizonDb cluster (e.g., tags, vCores, replica count)")
   update is ArmCustomPatchAsync<
     HorizonDbCluster,
-    HorizonDbClusterForPatchUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>
+    HorizonDbClusterForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb cluster")
@@ -163,9 +161,7 @@ interface HorizonDbReplicas {
   @doc("Updates an existing HorizonDb replica (e.g., role)")
   update is ArmCustomPatchAsync<
     HorizonDbReplica,
-    HorizonDbReplicaForPatchUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>
+    HorizonDbReplicaForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb replica")
@@ -191,9 +187,7 @@ interface HorizonDbFirewallRules {
   @doc("Updates an existing HorizonDb firewall rule (e.g., IP ranges)")
   update is ArmCustomPatchAsync<
     HorizonDbFirewallRule,
-    HorizonDbFirewallRuleForPatchUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>
+    HorizonDbFirewallRuleForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb firewall rule")
@@ -215,9 +209,7 @@ interface HorizonDbPrivateEndpointConnections {
   @doc("Updates a private endpoint connection")
   update is ArmCustomPatchAsync<
     HorizonDbPrivateEndpointConnection,
-    HorizonDbPrivateEndpointConnectionForPatchUpdate,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>
+    HorizonDbPrivateEndpointConnectionForPatchUpdate
   >;
 
   @doc("Deletes a private endpoint connection")
