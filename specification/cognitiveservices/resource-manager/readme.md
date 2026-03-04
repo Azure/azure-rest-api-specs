@@ -129,6 +129,11 @@ suppressions:
   - code: ResourceNameRestriction
     reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
     from: cognitiveservices.json
+  - code: ParametersSchemaAsTypeObject
+    reason: Backend requires array type for bulk operations since 2024-04-01 API. Changing to object would be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
 ```
 
 ### Tag: package-2025-09-01
