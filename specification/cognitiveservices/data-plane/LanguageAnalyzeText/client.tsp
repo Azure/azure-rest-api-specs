@@ -562,3 +562,13 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "python");
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
+
+@@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
+@@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
+@@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");
+@@clientName(HealthcareLROTask, "HealthcareOperationAction", "csharp");
+@@clientName(KeyPhraseLROTask, "KeyPhraseOperationAction", "csharp");
+@@clientName(PiiLROTask, "PiiOperationAction", "csharp");
+@@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
+@@clientName(HealthcareLROResult, "HealthcareOperationResult", "csharp");
+@@clientName(SentimentLROResult, "SentimentOperationResult", "csharp");
