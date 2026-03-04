@@ -47,11 +47,6 @@ using Microsoft.Batch;
 );
 @@clientName(Microsoft.Batch.CifsMountConfiguration.userName, "Username", "go");
 
-@@clientName(Azure.ResourceManager.CommonTypes.TrackedResource,
-  "AzureResource",
-  "python"
-);
-
 @@clientName(CachingType, "BatchDiskCachingType", "csharp");
 @@clientName(Application, "BatchApplication", "csharp");
 @@alternateType(Application.etag, Azure.Core.EtagProperty.etag, "csharp");
