@@ -99,12 +99,18 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
+@@clientName(Index, "AIProjectIndex", "java");
+
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
 
 @@clientName(BlobReference.blobUri, "blobUrl");
 @@clientName(SasCredential.sasUri, "sasUrl");
 
-@@clientName(OpenAI.Error, "OpenAIError"); // prevents codegen conflict
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -141,10 +147,7 @@ namespace Azure.AI.Projects;
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
-// @@alternateType(DayOfWeek, { identity: "java.time.DayOfWeek" }, "java")
-
-// @@access(DayOfWeek, Access.internal);
-// @@usage(DayOfWeek, Usage.input);
+@@alternateType(DayOfWeek, { identity: "java.time.DayOfWeek" }, "java");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
