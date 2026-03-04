@@ -54,13 +54,9 @@ namespace Azure.AI.Projects {
   @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
-  @@clientName(BingGroundingSearchToolParameters,
-    "BingGroundingSearchToolOptions"
-  );
   @@clientName(CreatedBy, "AgentResponseItemSource");
   @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
 
-  @@clientName(MemorySearchOptions, "MemorySearchToolOptions");
   @@clientName(MemorySearchToolCallItemResource,
     "MemorySearchToolCallResponseItem"
   );
@@ -68,33 +64,10 @@ namespace Azure.AI.Projects {
     "OAuthConsentRequestResponseItem"
   );
   @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
-  @@clientName(OpenApiTool, "OpenAPITool");
-  @@clientName(OpenApiAnonymousAuthDetails,
-    "OpenAPIAnonymousAuthenticationDetails"
-  );
-  @@clientName(OpenApiAuthDetails, "OpenAPIAuthenticationDetails");
-  @@clientName(OpenApiFunctionDefinition, "OpenAPIFunctionDefinition");
-  @@clientName(OpenApiManagedAuthDetails,
-    "OpenAPIManagedAuthenticationDetails"
-  );
-  @@clientName(OpenApiProjectConnectionAuthDetails,
-    "OpenAPIProjectConnectionAuthenticationDetails"
-  );
-  @@clientName(OpenApiProjectConnectionSecurityScheme,
-    "OpenAPIProjectConnectionSecurityScheme"
-  );
-  @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
-  @@clientName(SharepointGroundingToolParameters,
-    "SharePointGroundingToolOptions"
-  );
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
   // --------------------------------------------------------------------------------
-
-  @@access(OpenAI.LocalShellToolParam, Access.internal);
-  @@clientName(OpenAI.LocalShellToolParam, "InternalLocalShellTool");
-
   @@access(OpenAI.ItemLocalShellToolCall, Access.internal);
   @@clientName(OpenAI.ItemLocalShellToolCall, "InternalLocalShellToolCallItem");
   @@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
@@ -286,23 +259,6 @@ namespace Azure.AI.Projects {
     "InternalOutputItemCustomToolCallOutput"
   );
 
-  @@access(OpenAI.CustomToolParam, Access.internal);
-  @@clientName(OpenAI.CustomToolParam, "InternalCustomToolParam");
-
-  @@access(OpenAI.FunctionShellToolParam, Access.internal);
-  @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam");
-
-  @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
-  @@clientName(OpenAI.AutoCodeInterpreterToolParam,
-    "InternalAutoCodeInterpreterToolParam"
-  );
-
-  @@access(OpenAI.MCPToolFilter, Access.internal);
-  @@clientName(OpenAI.MCPToolFilter, "InternalMCPToolFilter");
-
-  @@access(OpenAI.MCPToolRequireApproval, Access.internal);
-  @@clientName(OpenAI.MCPToolRequireApproval, "InternalMCPToolRequireApproval");
-
   @@access(OpenAI.OutputItemReasoningItem, Access.internal);
   @@clientName(OpenAI.OutputItemReasoningItem,
     "InternalOutputItemReasoningItem"
@@ -352,15 +308,6 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ComputerUsePreviewTool, "InternalComputerUsePreviewTool");
   @@access(OpenAI.FileSearchTool, Access.internal);
   @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool");
-
-  @@access(OpenAI.FunctionTool, Access.internal);
-  @@clientName(OpenAI.FunctionTool, "InternalFunctionTool");
-
-  @@access(OpenAI.ImageGenTool, Access.internal);
-  @@clientName(OpenAI.ImageGenTool, "InternalImageGenTool");
-
-  @@access(OpenAI.MCPTool, Access.internal);
-  @@clientName(OpenAI.MCPTool, "InternalMCPTool");
 
   @@access(OpenAI.ToolChoiceParam, Access.internal);
   @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam");
