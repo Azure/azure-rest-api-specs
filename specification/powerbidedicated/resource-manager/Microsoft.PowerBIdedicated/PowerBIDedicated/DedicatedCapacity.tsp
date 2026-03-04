@@ -97,8 +97,8 @@ interface Capacities {
     DedicatedCapacity,
     void,
     {
-    @body body: void;
-  },
+      @body body: void;
+    },
     Error = ErrorResponse
   >;
 
@@ -109,8 +109,8 @@ interface Capacities {
     DedicatedCapacity,
     void,
     {
-    @body body: void;
-  },
+      @body body: void;
+    },
     Error = ErrorResponse
   >;
 
