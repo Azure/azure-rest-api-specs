@@ -32,7 +32,23 @@ host (`{endpoint}/indexes/{indexName}`) while it is now a regular OData path par
 
 ## Breaking Changes
 
+> **Legend for this section**
+>
+> Each breaking change is tagged as one of:
+>
+> - 🔴 **Service change** — the REST wire format or service behavior changed between 2025-09-01
+>   and 2026-04-01. Clients that call the live service are affected regardless of which SDK they use.
+> - 🟡 **TypeSpec migration artifact** — the REST wire format is **identical** between the two
+>   releases. The apparent "break" exists only in the generated SDK because TypeSpec applies stricter
+>   or cleaner naming and typing conventions than the previous hand-authored Swagger. Clients that
+>   speak the raw JSON/HTTP API directly are **not** affected; clients using a generated SDK will see
+>   compile-time name or type changes that require a code update, but **no service re-deployment or
+>   data migration is needed**.
+
 ### 1. Legacy v1 cognitive skills removed
+
+> 🔴 **Service change** — these `@odata.type` discriminator values are rejected by the live service
+> as of this API version.
 
 The following **v1 skill types** are removed from the specification. They were deprecated in favour
 of the v3 variants introduced in earlier API versions and are no longer supported:
@@ -50,17 +66,30 @@ equivalents before targeting this API version.
 
 ### 2. `QueryResultDocumentVectorSubscores` definition removed
 
+> 🔴 **Service change** — this model is no longer returned by the live service.
+
 The `QueryResultDocumentVectorSubscores` object model is removed. It was previously returned as an
 optional field nested under search-result vector debug data but is no longer surfaced in the public
 contract.
 
 ### 3. `SearchIndexerLimits` numeric type narrowed to integer
 
+> 🟡 **TypeSpec migration artifact** — the live service always returned integer values for these
+> fields; the Swagger incorrectly typed them as `number` (double). TypeSpec enforces explicit
+> integer types, correcting the spec to match actual service behavior. The JSON wire values are
+> compatible for any in-range integer. Only generated SDK clients typed against `double`/`number`
+> need a code update.
+
 `maxDocumentExtractionSize` and `maxDocumentContentCharactersToExtract` both change their JSON
 schema type from `number` (double) to `integer` (int64). The wire format for in-range values is
 unchanged, but generated SDK clients typed against `number`/`double` must be updated.
 
 ### 4. Definition renames (SDK-level breaking)
+
+> 🟡 **TypeSpec migration artifact** — the REST wire format (JSON property names and enum string
+> values) is **identical**. The new names reflect TypeSpec's stricter disambiguation conventions.
+> Clients consuming the raw JSON API are **not** affected. Clients using a generated SDK will see
+> compile-time name changes.
 
 Thirty-two model types have been renamed for clarity and consistency. The REST wire format (JSON
 property names and enum string values) is **identical** — the change only affects the generated
@@ -104,12 +133,20 @@ SDK will see compile-time name changes.
 
 ### 5. `IndexAction.@search.action` — enum moved to standalone definition
 
+> 🟡 **TypeSpec migration artifact** — the four wire enum values are unchanged. TypeSpec requires
+> named enum definitions; the previously inline enum became the `IndexActionType` definition. The
+> only SDK-visible change is the `x-ms-client-name` casing (`ActionType` → `actionType`).
+
 The `@search.action` property of `IndexAction` changes from an inline string enum to a `$ref` to
 the new `IndexActionType` definition. The four enum values (`upload`, `merge`, `mergeOrUpload`,
 `delete`) are unchanged on the wire; however, the `x-ms-client-name` changes from `ActionType`
 (old) to `actionType` (new, camelCase).
 
 ### 6. `DocumentIntelligenceLayoutSkill` enum properties inlined
+
+> 🟡 **TypeSpec migration artifact** — wire values are unchanged. TypeSpec emits enum references
+> differently from hand-authored Swagger; the standalone wrapper definitions were an artefact of
+> the old authoring style and are not needed when TypeSpec generates the OpenAPI.
 
 The `outputMode`, `outputFormat`, and `markdownHeaderDepth` properties change from `$ref` to named
 enum definitions to inline string enums with the same allowed values. The standalone definitions
@@ -118,16 +155,23 @@ enum definitions to inline string enums with the same allowed values. The standa
 
 ### 7. `IndexingParametersConfiguration` — enum properties inlined
 
+> 🟡 **TypeSpec migration artifact** — same pattern as §6 above. Wire values are unchanged.
+
 Similarly, `parsingMode`, `executionEnvironment`, `dataToExtract`, `imageAction`, and
 `pdfTextRotationAlgorithm` change from `$ref` to inline string enums (renamed as listed in §4
 above). Wire values are unchanged.
 
 ### 8. `PatternAnalyzer` and `PatternTokenizer` — `flags` inlined
 
+> 🟡 **TypeSpec migration artifact** — the allowed flag values are unchanged. TypeSpec inlines the
+> string type directly; the `RegexFlags` standalone definition remains present (used elsewhere).
+
 The `flags` property changes from `$ref: #/definitions/RegexFlags` to an inline string. The allowed
 values are unchanged; the `RegexFlags` standalone definition is retained.
 
 ### 9. `PhoneticTokenFilter.encoder` and `StopwordsTokenFilter.stopwordsList` inlined
+
+> 🟡 **TypeSpec migration artifact** — same pattern as §8 above. Wire values are unchanged.
 
 Same pattern: `$ref` to named enum replaced with inline string. Wire values are unchanged.
 
