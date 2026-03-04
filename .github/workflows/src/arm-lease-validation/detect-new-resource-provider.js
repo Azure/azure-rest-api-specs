@@ -141,8 +141,21 @@ export default async function detectNewResourceProvider({ context, core }) {
 
   core.info("Detecting New Resource Providers");
 
+  // Determine merge base between HEAD and the base branch (usually main)
+  // This ensures we detect all changes introduced in the PR, not just the last commit.
+  let mergeBase = "HEAD^";
+  try {
+    const baseRef = context.payload.pull_request?.base?.sha || "main";
+    mergeBase = await git.raw(["merge-base", baseRef, "HEAD"]);
+    mergeBase = mergeBase.trim();
+    core.info(`Using merge-base: ${mergeBase} (against ${baseRef})`);
+  } catch (e) {
+    core.info(`Could not determine merge-base, falling back to HEAD^. Error: ${e.message}`);
+  }
+
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
+    baseCommitish: "HEAD^",
     paths: ["specification"],
     logger: new CoreLogger(core),
   };
@@ -224,7 +237,7 @@ export default async function detectNewResourceProvider({ context, core }) {
   if (newResourceProviders.length === 0) {
     core.info("No new resource providers detected.");
     core.info("Checking for new resource types in existing RPs...");
-    return await checkNewResourceTypes(repoRoot, rmFiles, core);
+    return await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
   }
 
   core.info(`Detected ${newResourceProviders.length} new resource provider(s)`);
@@ -262,7 +275,7 @@ export default async function detectNewResourceProvider({ context, core }) {
   }
 
   core.info("Checking for new resource types in existing RPs...");
-  const newRtResult = await checkNewResourceTypes(repoRoot, rmFiles, core);
+  const newRtResult = await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
 
   // Combine outcomes: if either check failed/requires review, we should return that status
   const finalStatus =
@@ -290,14 +303,15 @@ export default async function detectNewResourceProvider({ context, core }) {
  * Check for new resource types in existing RPs and validate their leases.
  *
  * @param {string} repoRoot - Repository root directory
+ * @param {string} mergeBase - Git merge base SHA
  * @param {string[]} rmFiles - Resource-manager file paths changed in the PR
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<{ status: string, labelActions: ManagedLabelActions }>}
  */
-async function checkNewResourceTypes(repoRoot, rmFiles, core) {
+async function checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core) {
   const newRtResults = await detectNewResourceTypes({
     repoRoot,
-    mergeBase: "HEAD^",
+    mergeBase,
     rmFiles,
     core,
   });
