@@ -163,6 +163,14 @@ model QuotaBucketRequestReplacement
   "csharp"
 );
 
+// Remove 'Resource' from model names
+@@clientName(LoadTestMappingResource, "LoadTestMapping", "csharp");
+@@clientName(LoadTestProfileMappingResource, "LoadTestProfileMapping", "csharp");
+@@clientName(MaxMonthlyVirtualUserHoursResourceProperties,
+  "MaxMonthlyVirtualUserHoursProperties",
+  "csharp"
+);
+
 // Fix property types: resource IDs should use ResourceIdentifier
 @@alternateType(LoadTestMappingProperties.sourceResourceId,
   Azure.Core.armResourceIdentifier,
