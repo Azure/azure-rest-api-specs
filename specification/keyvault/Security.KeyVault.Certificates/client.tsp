@@ -93,7 +93,10 @@ op getCertificate is KeyVaultOperation<
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
-@@clientName(SubjectAlternativeNames.uris, "uniformResourceIdentifiers", "java");
+@@clientName(SubjectAlternativeNames.uris,
+  "uniformResourceIdentifiers",
+  "java"
+);
 @@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
 // Go configuration
