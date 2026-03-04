@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-10'
 input-file:
-  - Microsoft.Network/stable/2025-10-01/openapi.json
+  - stable/2025-10-01/openapi.json
 ```
 
 ### Tag: package-2025-03
@@ -46,10 +46,10 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-  - Microsoft.Network/stable/2025-03-01/network.json
-  - Microsoft.Network/stable/2025-03-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - stable/2025-03-01/network.json
+  - stable/2025-03-01/webapplicationfirewall.json
+  - stable/2021-06-01/frontdoor.json
+  - stable/2019-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2024-02
@@ -58,10 +58,10 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.Network/stable/2024-02-01/network.json
-  - Microsoft.Network/stable/2024-02-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - stable/2024-02-01/network.json
+  - stable/2024-02-01/webapplicationfirewall.json
+  - stable/2021-06-01/frontdoor.json
+  - stable/2019-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2022-05
@@ -70,10 +70,10 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
-  - Microsoft.Network/stable/2022-05-01/network.json
-  - Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - stable/2022-05-01/network.json
+  - stable/2022-05-01/webapplicationfirewall.json
+  - stable/2021-06-01/frontdoor.json
+  - stable/2019-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2021-06
@@ -82,10 +82,10 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2021-06-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-06-01/network.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - stable/2021-06-01/frontdoor.json
+  - stable/2021-06-01/webapplicationfirewall.json
+  - stable/2021-06-01/network.json
+  - stable/2019-11-01/networkexperiment.json
 directive:
   - where:
       - $.paths
@@ -99,10 +99,10 @@ These settings apply only when `--tag=package-2020-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-11'
 input-file:
-  - Microsoft.Network/stable/2020-11-01/network.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
-  - Microsoft.Network/stable/2020-05-01/frontdoor.json
-  - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
+  - stable/2020-11-01/network.json
+  - stable/2019-11-01/networkexperiment.json
+  - stable/2020-05-01/frontdoor.json
+  - stable/2020-11-01/webapplicationfirewall.json
 ```
 
 ### Tag: package-2020-05
@@ -111,10 +111,10 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
-- Microsoft.Network/stable/2020-05-01/network.json
-- Microsoft.Network/stable/2019-11-01/networkexperiment.json
-- Microsoft.Network/stable/2020-05-01/frontdoor.json
-- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+- stable/2020-05-01/network.json
+- stable/2019-11-01/networkexperiment.json
+- stable/2020-05-01/frontdoor.json
+- stable/2020-04-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -128,10 +128,10 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-04'
 input-file:
-- Microsoft.Network/stable/2020-04-01/network.json
-- Microsoft.Network/stable/2019-11-01/networkexperiment.json
-- Microsoft.Network/stable/2020-04-01/frontdoor.json
-- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+- stable/2020-04-01/network.json
+- stable/2019-11-01/networkexperiment.json
+- stable/2020-04-01/frontdoor.json
+- stable/2020-04-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -145,10 +145,10 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.Network/stable/2020-01-01/network.json
-- Microsoft.Network/stable/2019-11-01/networkexperiment.json
-- Microsoft.Network/stable/2020-01-01/frontdoor.json
-- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+- stable/2020-01-01/network.json
+- stable/2019-11-01/networkexperiment.json
+- stable/2020-01-01/frontdoor.json
+- stable/2019-10-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -162,10 +162,10 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
-- Microsoft.Network/stable/2019-11-01/network.json
-- Microsoft.Network/stable/2019-11-01/networkexperiment.json
-- Microsoft.Network/stable/2019-05-01/frontdoor.json
-- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+- stable/2019-11-01/network.json
+- stable/2019-11-01/networkexperiment.json
+- stable/2019-05-01/frontdoor.json
+- stable/2019-10-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -179,9 +179,9 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
-- Microsoft.Network/stable/2019-05-01/frontdoor.json
-- Microsoft.Network/stable/2019-05-01/network.json
-- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+- stable/2019-05-01/frontdoor.json
+- stable/2019-05-01/network.json
+- stable/2019-10-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -195,9 +195,9 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-05'
 input-file:
-- Microsoft.Network/stable/2019-05-01/frontdoor.json
-- Microsoft.Network/stable/2019-05-01/network.json
-- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+- stable/2019-05-01/frontdoor.json
+- stable/2019-05-01/network.json
+- stable/2019-03-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -211,9 +211,9 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
-- Microsoft.Network/stable/2019-04-01/frontdoor.json
-- Microsoft.Network/stable/2019-04-01/network.json
-- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+- stable/2019-04-01/frontdoor.json
+- stable/2019-04-01/network.json
+- stable/2019-03-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -227,9 +227,9 @@ These settings apply only when `--tag=package-2019-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-03-preview'
 input-file:
-- Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
-- Microsoft.Network/preview/2018-08-01-preview/network.json
-- Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+- preview/2018-08-01-preview/frontdoor.json
+- preview/2018-08-01-preview/network.json
+- preview/2019-03-01-preview/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -243,9 +243,9 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
-- Microsoft.Network/preview/2018-08-01-preview/network.json
-- Microsoft.Network/preview/2018-08-01-preview/webapplicationfirewall.json
+- preview/2018-08-01-preview/frontdoor.json
+- preview/2018-08-01-preview/network.json
+- preview/2018-08-01-preview/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
