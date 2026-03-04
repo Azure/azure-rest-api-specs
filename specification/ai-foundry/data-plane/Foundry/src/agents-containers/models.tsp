@@ -31,6 +31,7 @@ union AgentContainerOperationStatus {
   #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
 )
 union AgentContainerStatus {
+   string,
   @doc("The container is starting.")
   Starting: "Starting",
 
