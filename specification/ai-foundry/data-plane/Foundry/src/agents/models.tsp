@@ -212,7 +212,7 @@ model PromptAgentDefinition extends AgentDefinition {
     where the model considers the results of the tokens with top_p probability
     mass. So 0.1 means only the tokens comprising the top 10% probability mass
     are considered.
-
+    
     We generally recommend altering this or `temperature` but not both.
     """)
   @minValue(0)
@@ -312,7 +312,7 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The kind of telemetry export endpoint.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 union TelemetryEndpointKind {
   string,
@@ -324,7 +324,7 @@ union TelemetryEndpointKind {
 @doc("The type of telemetry data to export.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 union TelemetryDataKind {
   string,
@@ -342,7 +342,7 @@ union TelemetryDataKind {
 @doc("The transport protocol for telemetry export.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 union TelemetryTransportProtocol {
   string,
@@ -359,7 +359,7 @@ union TelemetryTransportProtocol {
 @doc("The type of authentication for a telemetry endpoint.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 union TelemetryEndpointAuthType {
   string,
@@ -372,7 +372,7 @@ union TelemetryEndpointAuthType {
 @discriminator("type")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model TelemetryEndpointAuth {
   @doc("The authentication type.")
@@ -382,7 +382,7 @@ model TelemetryEndpointAuth {
 @doc("Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   @doc("The authentication type, always 'header' for header-based secret authentication.")
@@ -409,7 +409,7 @@ model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
 @doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model TelemetryConfig {
   @doc("Customer-supplied telemetry export endpoint configurations.")
@@ -422,7 +422,7 @@ model TelemetryConfig {
 @discriminator("kind")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model TelemetryEndpoint {
   @doc("The telemetry export endpoint kind.")
@@ -439,7 +439,7 @@ model TelemetryEndpoint {
 @doc("An OTLP (OpenTelemetry Protocol) telemetry export endpoint.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
@@ -457,7 +457,9 @@ model OtlpTelemetryEndpoint extends TelemetryEndpoint {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -550,7 +552,9 @@ model ToolArgumentBinding {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

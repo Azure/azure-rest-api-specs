@@ -7993,6 +7993,10 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                      },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   },
@@ -8201,6 +8205,10 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                      },
+                      "agent_session_id": {
+                        "type": "string",
+                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
                       }
                     }
                   }
@@ -10155,7 +10163,8 @@
           "name",
           "version",
           "created_at",
-          "definition"
+          "definition",
+          "status"
         ],
         "properties": {
           "metadata": {
@@ -10199,8 +10208,36 @@
           },
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentVersionStatus"
+              }
+            ],
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.",
+            "default": "active"
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details if the agent version provisioning failed."
           }
         }
+      },
+      "AgentVersionStatus": {
+        "type": "string",
+        "enum": [
+          "creating",
+          "active",
+          "failed",
+          "deleting",
+          "deleted"
+        ],
+        "description": "The provisioning status of an agent version."
       },
       "AgenticIdentityPreviewCredentials": {
         "type": "object",
@@ -14869,6 +14906,50 @@
         },
         "description": "Details of a function tool call."
       },
+      "HeaderTelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type",
+          "headerName",
+          "secretId",
+          "secretKey"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "header"
+            ],
+            "description": "The authentication type, always 'header' for header-based secret authentication."
+          },
+          "headerName": {
+            "type": "string",
+            "description": "The name of the HTTP header to inject the secret value into.",
+            "example": "X-Otlp-Api-Key"
+          },
+          "secretId": {
+            "type": "string",
+            "description": "The identifier of the secret store or connection.",
+            "example": "my-secret-store"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "The key within the secret to retrieve the authentication value.",
+            "example": "OTLP_KEY"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointAuth"
+          }
+        ],
+        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "HostedAgentDefinition": {
         "type": "object",
         "required": [
@@ -14933,6 +15014,14 @@
             "type": "string",
             "description": "The image ID for the agent, applicable to image-based hosted agents.",
             "example": "my-registry.azurecr.io/my-hosted-agent:latest"
+          },
+          "telemetry_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryConfig"
+              }
+            ],
+            "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           }
         },
         "allOf": [
@@ -31758,6 +31847,10 @@
             ],
             "nullable": true,
             "description": "The agent used for this response"
+          },
+          "agent_session_id": {
+            "type": "string",
+            "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
           }
         },
         "title": "The response object"
@@ -36265,6 +36358,48 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OtlpTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "endpoint",
+          "protocol"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ],
+            "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The OTLP collector endpoint URL.",
+            "example": "https://my-collector.example.com/otlp"
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryTransportProtocol"
+              }
+            ],
+            "description": "The transport protocol for the OTLP endpoint.",
+            "example": "Http"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpoint"
+          }
+        ],
+        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -37936,6 +38071,185 @@
           }
         },
         "description": "Taxonomy sub-category definition."
+      },
+      "TelemetryConfig": {
+        "type": "object",
+        "required": [
+          "endpoints"
+        ],
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryEndpoint"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Customer-supplied telemetry export endpoint configurations."
+          }
+        },
+        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryDataKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          }
+        ],
+        "description": "The type of telemetry data to export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointKind"
+              }
+            ],
+            "description": "The telemetry export endpoint kind."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryDataKind"
+            },
+            "description": "Data types to export to this endpoint. Use an empty array to export no data.",
+            "example": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuth"
+              }
+            ],
+            "description": "Optional authentication configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
+          }
+        },
+        "description": "A telemetry export endpoint configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuthType"
+              }
+            ],
+            "description": "The authentication type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
+          }
+        },
+        "description": "Authentication configuration for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuthType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "header"
+            ]
+          }
+        ],
+        "description": "The type of authentication for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ]
+          }
+        ],
+        "description": "The kind of telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryTransportProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Http",
+              "Grpc"
+            ]
+          }
+        ],
+        "description": "The transport protocol for telemetry export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "ToolCallOutputContent": {
         "anyOf": [
