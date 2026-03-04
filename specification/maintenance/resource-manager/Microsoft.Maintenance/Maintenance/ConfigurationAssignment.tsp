@@ -83,7 +83,7 @@ interface ConfigurationAssignmentOps
 @armResourceOperations
 interface ConfigurationAssignments {
   /**
-   * Get configuration assignment for resource..
+   * Get configuration assignment for resource.
    */
   getParent is ConfigurationAssignmentOps.Read<
     ConfigurationAssignment,
@@ -161,7 +161,7 @@ interface ConfigurationAssignmentOperationGroupOps
 @armResourceOperations
 interface ConfigurationAssignmentOperationGroup {
   /**
-   * Get configuration assignment for resource..
+   * Get configuration assignment for resource.
    */
   get is ConfigurationAssignmentOperationGroupOps.Read<
     ConfigurationAssignment,
@@ -280,7 +280,7 @@ interface ConfigurationAssignmentsForResourceGroupOps
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroup {
   /**
-   * Get configuration assignment for resource..
+   * Get configuration assignment for resource.
    */
   get is ConfigurationAssignmentsForResourceGroupOps.Read<
     ConfigurationAssignment,

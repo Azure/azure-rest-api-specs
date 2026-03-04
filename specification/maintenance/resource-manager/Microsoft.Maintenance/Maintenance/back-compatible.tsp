@@ -101,6 +101,9 @@ using Microsoft.Maintenance;
 @@clientLocation(ConfigurationAssignmentsForSubscriptions.list,
   "ConfigurationAssignmentsWithinSubscription"
 );
+@@clientLocation(ApplyUpdatesOperationGroup.createOrUpdateGrandParent,
+  ApplyUpdates
+);
 @@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvents");
 @@clientLocation(ScheduledEventOperationGroup.acknowledgeList,
   "ScheduledEvents"

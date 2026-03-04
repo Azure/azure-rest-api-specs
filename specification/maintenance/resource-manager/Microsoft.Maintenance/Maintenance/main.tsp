@@ -14,16 +14,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./MaintenanceConfiguration.tsp";
 import "./ApplyUpdate.tsp";
+import "./MaintenancePlans.tsp";
 import "./ConfigurationAssignment.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
 /**
  * Azure Maintenance Management Client
  */
@@ -39,7 +37,6 @@ namespace Microsoft.Maintenance;
 enum Versions {
   /**
    * The 2026-02-01-preview API version.
-   * This API version includes new API to use MaintenancePlan
    */
   v2026_02_01_preview: "2026-02-01-preview",
 }
