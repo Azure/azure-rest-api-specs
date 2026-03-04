@@ -239,6 +239,11 @@ using Azure.ClientGenerator.Core;
   Azure.Core.uuid,
   "csharp"
 );
+@@alternateType(MarketplaceProperties.meterId, Azure.Core.uuid, "csharp");
+@@alternateType(MarketplaceProperties.subscriptionGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(Reseller.resellerId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -268,6 +273,7 @@ using Azure.ClientGenerator.Core;
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
+@@alternateType(Marketplace.etag, Azure.Core.EtagProperty.etag, "csharp");
 
 @@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
 // Rename the operation to match the contract's expected method name (GetPriceSheet)
@@ -275,6 +281,9 @@ using Azure.ClientGenerator.Core;
 
 @@alternateType(UsageDetail, ConsumptionUsageDetail, "csharp");
 @@alternateType(ChargeSummary, ConsumptionChargeSummary, "csharp");
+
+@@usage(Tag, Usage.input, "csharp");
+@@usage(TagsResult, Usage.input, "csharp");
 
 /**
  * An usage detail resource.
