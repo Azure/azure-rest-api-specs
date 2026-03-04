@@ -51,7 +51,6 @@ op FoundryDataPlaneOperation<
 
 /** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
 union AgentDefinitionOptInKeys {
-  string,
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
 
@@ -60,7 +59,6 @@ union AgentDefinitionOptInKeys {
 }
 
 union FoundryFeaturesOptInKeys {
-  string,
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
