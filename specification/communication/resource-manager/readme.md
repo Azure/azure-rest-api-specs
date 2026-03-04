@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2026-03-18` is specified on the co
 ```yaml $(tag) == 'package-2026-03-18'
 input-file:
   - Microsoft.Communication/stable/2026-03-18/openapi.json
-
+```
 
 ### Tag: package-2025-09-01
 
