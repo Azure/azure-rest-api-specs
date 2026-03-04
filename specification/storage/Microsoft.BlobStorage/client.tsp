@@ -408,3 +408,31 @@ enum ImmutabilityPolicySetting {
 @@alternateType(Storage.Blob.UserDelegationKey.signedExpiry, string, "python");
 @@alternateType(Storage.Blob.UserDelegationKey.value, string, "python");
 @@alternateType(Storage.Blob.Block.name, string, "python");
+
+/** Defining an override for backward compatibility for existing sdks since the expiry
+ * parameter was originally defined as optional in the swagger
+ **/
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?comp=immutabilityPolicies")
+op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...ImmutabilityPolicyExpiryParameter;
+    ...ImmutabilityPolicyModeParameter;
+    ...SnapshotParameter;
+    ...VersionIdParameter;
+  },
+  {
+    ...ImmutabilityPolicyExpiresOnResponseHeaderPrivate;
+    ...ImmutabilityPolicyModeResponseHeaderPrivate;
+  }
+>;
+
+@@override(Storage.Blob.Blob.setImmutabilityPolicy,
+  setImmutabilityPolicyOptionalExpiry,
+  "python,csharp,javascript,go"
+);
