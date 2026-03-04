@@ -9728,16 +9728,23 @@
         }
       },
       "AgentContainerStatus": {
-        "type": "string",
-        "enum": [
-          "Starting",
-          "Running",
-          "Stopping",
-          "Stopped",
-          "Failed",
-          "Deleting",
-          "Deleted",
-          "Updating"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Starting",
+              "Running",
+              "Stopping",
+              "Stopped",
+              "Failed",
+              "Deleting",
+              "Deleted",
+              "Updating"
+            ]
+          }
         ],
         "description": "Status of the container of a specific version of an agent.",
         "x-ms-foundry-meta": {
