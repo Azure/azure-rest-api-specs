@@ -120,11 +120,17 @@ interface HorizonDbClusters {
   @doc("Updates an existing HorizonDb cluster (e.g., tags, vCores, replica count)")
   update is ArmCustomPatchAsync<
     HorizonDbCluster,
-    HorizonDbClusterForPatchUpdate
+    HorizonDbClusterForPatchUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a HorizonDb cluster")
-  delete is ArmResourceDeleteWithoutOkAsync<HorizonDbCluster>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbCluster,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   @doc("Lists all HorizonDb clusters in a resource group")
   listByResourceGroup is ArmResourceListByParent<HorizonDbCluster>;
@@ -157,11 +163,17 @@ interface HorizonDbReplicas {
   @doc("Updates an existing HorizonDb replica (e.g., role)")
   update is ArmCustomPatchAsync<
     HorizonDbReplica,
-    HorizonDbReplicaForPatchUpdate
+    HorizonDbReplicaForPatchUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a HorizonDb replica")
-  delete is ArmResourceDeleteWithoutOkAsync<HorizonDbReplica>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbReplica,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 }
 
 @armResourceOperations
@@ -179,11 +191,17 @@ interface HorizonDbFirewallRules {
   @doc("Updates an existing HorizonDb firewall rule (e.g., IP ranges)")
   update is ArmCustomPatchAsync<
     HorizonDbFirewallRule,
-    HorizonDbFirewallRuleForPatchUpdate
+    HorizonDbFirewallRuleForPatchUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a HorizonDb firewall rule")
-  delete is ArmResourceDeleteWithoutOkAsync<HorizonDbFirewallRule>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbFirewallRule,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 }
 
 @armResourceOperations
@@ -197,11 +215,17 @@ interface HorizonDbPrivateEndpointConnections {
   @doc("Updates a private endpoint connection")
   update is ArmCustomPatchAsync<
     HorizonDbPrivateEndpointConnection,
-    HorizonDbPrivateEndpointConnectionForPatchUpdate
+    HorizonDbPrivateEndpointConnectionForPatchUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @doc("Deletes a private endpoint connection")
-  delete is ArmResourceDeleteWithoutOkAsync<HorizonDbPrivateEndpointConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbPrivateEndpointConnection,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 }
 
 @armResourceOperations
