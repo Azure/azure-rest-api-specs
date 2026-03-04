@@ -158,7 +158,8 @@ function validateStartDate(date) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
         throw new Error(`Invalid date format : ${date}. Expected YYYY-MM-DD`);
     }
-    const dateObj = new Date(date);
+    // Using T00:00:00 forces interpretation as local time instead of UTC to avoid "past date" issues
+    const dateObj = new Date(date + 'T00:00:00');
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
