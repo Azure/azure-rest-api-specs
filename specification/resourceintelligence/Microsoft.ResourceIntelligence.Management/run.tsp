@@ -79,7 +79,14 @@ interface Runs {
   /**
    * Creates or updates a run.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Run>;
+  @armResourceCreateOrUpdate(Run)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<Run>,
+
+    /** The run request parameters. */
+    @body resource: RunRequest,
+  ): ArmResponse<Run> | ArmCreatedResponse<Run> | ErrorResponse;
 
   /**
    * Deletes a run.

@@ -621,24 +621,31 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The run request parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Run"
+              "$ref": "#/definitions/RunRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Run' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Run"
             }
           },
           "201": {
-            "description": "Resource 'Run' create operation succeeded",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Run"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {

@@ -49,6 +49,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: resourceintelligence.json
     reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
+  - code: PutRequestResponseSchemeArm
+    from: resourceintelligence.json
+    reason: "The Runs_CreateOrUpdate PUT operation intentionally uses RunRequest as the request body per API design review, while returning the Run resource in the response."
 ```
 
 ### Tag: package-preview-2025-08
