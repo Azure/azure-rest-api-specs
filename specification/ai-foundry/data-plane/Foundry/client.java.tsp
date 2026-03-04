@@ -112,32 +112,10 @@ namespace Azure.AI.Projects;
 @@clientName(OpenAI.Error, "ApiError");
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
-@@clientName(OpenAI.AutoCodeInterpreterToolParam, "AutoCodeInterpreterToolParameter", "java");
-@@clientName(OpenAI.ClickParam, "ClickParameter", "java");
-@@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
-@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam, "ContainerNetworkPolicyAllowlistParameter", "java");
-@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam, "ContainerNetworkPolicyDisabledParameter", "java");
-@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam, "ContainerNetworkPolicyDomainSecretParameter", "java");
-@@clientName(OpenAI.ContainerNetworkPolicyParam, "ContainerNetworkPolicyParameter", "java");
-@@clientName(OpenAI.CoordParam, "CoordParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
-@@clientName(OpenAI.DragParam, "DragParameter", "java");
 @@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParameter", "java");
-@@clientName(OpenAI.FunctionToolCall, "FunctionToolCallItemParameter", "java");
-@@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
-@@clientName(OpenAI.InlineSkillSourceParam, "InlineSkillSourceParameter", "java");
-@@clientName(OpenAI.InputItemApplyPatchToolCallItemParam, "InputItemApplyPatchToolCallItemParameter", "java");
-@@clientName(OpenAI.InputItemComputerCallOutputItemParam, "InputItemComputerCallOutputItemParameter", "java");
-@@clientName(OpenAI.InputItemFunctionCallOutputItemParam, "InputItemFunctionCallOutputItemParameter", "java");
-@@clientName(OpenAI.InputItemFunctionShellCallItemParam, "InputItemFunctionShellCallItemParameter", "java");
-@@clientName(OpenAI.ItemReferenceParam, "ItemReferenceParameter", "java");
-@@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
-@@clientName(OpenAI.MoveParam, "MoveParameter", "java");
-@@clientName(OpenAI.ScreenshotParam, "ScreenshotParameter", "java");
-@@clientName(OpenAI.ScrollParam, "ScrollParameter", "java");
-@@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
-@@clientName(OpenAI.TypeParam, "TypeParameter", "java");
-@@clientName(OpenAI.WaitParam, "WaitParameter", "java");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
