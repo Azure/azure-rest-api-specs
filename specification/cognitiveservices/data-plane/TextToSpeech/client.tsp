@@ -22,3 +22,5 @@ using CustomVoiceApi;
 
 // AZC0034: Operation conflicts with Azure.Operation from Azure.Core
 @@clientName(Operation, "CustomVoiceOperation", "csharp");
+
+@@clientName(ConsentPostFormData.audiodata, "audioData", "java");

@@ -162,6 +162,9 @@ interface Consents {
       @path
       id: resourceId;
 
+      /** content-type header */
+      @header contentType: "multipart/form-data";
+
       /** Consent form data */
       @multipartBody
       body: ConsentPostFormData;
@@ -438,6 +441,9 @@ interface PersonalVoices {
       /** The ID of the resource. */
       @path
       id: resourceId;
+
+      /** content-type header */
+      @header contentType: "multipart/form-data";
 
       /** Personal voice form data */
       @multipartBody
