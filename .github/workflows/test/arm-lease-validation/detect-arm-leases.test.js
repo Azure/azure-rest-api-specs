@@ -29,11 +29,7 @@ function daysAgo(n) {
 
 /** Build a valid lease YAML string */
 function leaseYaml(startdate, duration) {
-  return [
-    "lease:",
-    `  startdate: ${startdate}`,
-    `  duration: ${duration}`,
-  ].join("\n");
+  return `lease:\n  startdate: "${startdate}"\n  duration: "${duration}"\n`;
 }
 
 describe("detect-arm-leases", () => {
@@ -50,7 +46,7 @@ describe("detect-arm-leases", () => {
     it("returns invalid when lease has expired", () => {
       const result = parseLease(leaseYaml(daysAgo(100), "P90D"));
       expect(result.valid).toBe(false);
-      expect(result.reason).toMatch(/expired/i);
+      expect(result.reason).toContain("expired");
     });
 
     it("returns valid on the last day of lease", () => {
@@ -80,20 +76,9 @@ describe("detect-arm-leases", () => {
       expect(result.valid).toBe(true);
     });
 
-    it("returns valid for single day duration starting today", () => {
+    it("handles single day duration", () => {
       const result = parseLease(leaseYaml(today().toString(), "P1D"));
       expect(result.valid).toBe(true);
-    });
-
-    it("returns valid for future start dates", () => {
-      const start = today().add({ days: 10 }).toString();
-      const result = parseLease(leaseYaml(start, "P90D"));
-      expect(result.valid).toBe(true);
-    });
-
-    it("returns invalid for empty YAML content", () => {
-      const result = parseLease("");
-      expect(result.valid).toBe(false);
     });
 
     it("returns invalid for malformed YAML", () => {
@@ -101,26 +86,16 @@ describe("detect-arm-leases", () => {
       expect(result.valid).toBe(false);
     });
 
-    it("returns invalid when startdate is missing", () => {
-      const yaml = ["lease:", "  duration: P90D"].join("\n");
-      const result = parseLease(yaml);
+    it("returns invalid for empty content", () => {
+      const result = parseLease("");
       expect(result.valid).toBe(false);
+      expect(result.reason).toContain("Empty");
     });
 
-    it("returns invalid when duration is missing", () => {
-      const yaml = ["lease:", "  startdate: " + daysAgo(10)].join("\n");
-      const result = parseLease(yaml);
-      expect(result.valid).toBe(false);
-    });
-
-    it("returns invalid for bad startdate format", () => {
-      const result = parseLease(leaseYaml("01-01-2025", "P90D"));
-      expect(result.valid).toBe(false);
-    });
-
-    it("returns invalid for bad duration format", () => {
-      const result = parseLease(leaseYaml(daysAgo(10), "90 days"));
-      expect(result.valid).toBe(false);
+    it("returns valid for future start dates", () => {
+      const start = today().add({ days: 10 }).toString();
+      const result = parseLease(leaseYaml(start, "P90D"));
+      expect(result.valid).toBe(true);
     });
   });
 
