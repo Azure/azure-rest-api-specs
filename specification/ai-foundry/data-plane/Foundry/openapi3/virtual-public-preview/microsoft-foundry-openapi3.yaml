@@ -10188,24 +10188,24 @@ components:
       type: object
       required:
         - type
-        - headerName
-        - secretId
-        - secretKey
+        - header_name
+        - secret_id
+        - secret_key
       properties:
         type:
           type: string
           enum:
             - header
           description: The authentication type, always 'header' for header-based secret authentication.
-        headerName:
+        header_name:
           type: string
           description: The name of the HTTP header to inject the secret value into.
           example: X-Otlp-Api-Key
-        secretId:
+        secret_id:
           type: string
           description: The identifier of the secret store or connection.
           example: my-secret-store
-        secretKey:
+        secret_key:
           type: string
           description: The key within the secret to retrieve the authentication value.
           example: OTLP_KEY
