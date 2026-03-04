@@ -135,6 +135,12 @@ model RunRequest {
   resumePolicy?: ResumePolicy;
 
   /**
+   * Optional input overrides for the run.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Input overrides require a flexible key-value structure matching the previous API version"
+  inputOverrides?: Record<string>;
+
+  /**
    * The input message from the user.
    */
   message?: string;

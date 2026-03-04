@@ -275,60 +275,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "Agents_Update",
-        "tags": [
-          "Agents"
-        ],
-        "description": "Updates an agent's tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the agent.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgentTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Agent tags": {
-            "$ref": "./examples/Agents_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Agents_Delete",
         "tags": [
@@ -823,6 +769,60 @@
             "$ref": "./examples/LatestRuns_Get.json"
           }
         }
+      },
+      "put": {
+        "operationId": "LatestRuns_CreateOrUpdate",
+        "tags": [
+          "Runs"
+        ],
+        "description": "Creates or updates the latest run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The run request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the latest Run": {
+            "$ref": "./examples/LatestRuns_CreateOrUpdate.json"
+          }
+        }
       }
     }
   },
@@ -879,19 +879,6 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of the agent.",
           "readOnly": true
-        }
-      }
-    },
-    "AgentTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in Agent resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1217,6 +1204,13 @@
         "resumePolicy": {
           "$ref": "#/definitions/ResumePolicy",
           "description": "The resume policy for the run. Defaults to none."
+        },
+        "inputOverrides": {
+          "type": "object",
+          "description": "Optional input overrides for the run.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "message": {
           "type": "string",

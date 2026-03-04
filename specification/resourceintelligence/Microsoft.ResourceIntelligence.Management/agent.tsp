@@ -66,11 +66,6 @@ interface Agents {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
-   * Updates an agent's tags.
-   */
-  update is ArmTagsPatchSync<Agent>;
-
-  /**
    * Deletes an agent.
    */
   delete is ArmResourceDeleteSync<Agent>;
