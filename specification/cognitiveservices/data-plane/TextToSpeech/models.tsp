@@ -719,7 +719,7 @@ model ConsentPostFormData {
   companyName: HttpPart<string>;
 
   /** An audio file containing the audio data. */
-  audiodata: HttpPart<bytes>;
+  audioData: HttpPart<bytes>;
 
   /**
    * The locale of this consent. Locale code follows BCP-47. You can find the text
