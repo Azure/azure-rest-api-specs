@@ -8084,6 +8084,11 @@
         "version"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureBatchLinkedService": {
       "type": "object",
       "description": "Azure Batch linked service.",
@@ -16224,8 +16229,7 @@
           "description": "The identity type."
         },
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The principal id of the identity.",
           "readOnly": true
         },
