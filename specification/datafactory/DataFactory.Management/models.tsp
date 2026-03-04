@@ -3547,10 +3547,8 @@ model FactoryIdentity {
   /**
    * The client tenant id of the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * List of user assigned identities for the factory.
