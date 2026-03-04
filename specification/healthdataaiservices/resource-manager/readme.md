@@ -30,6 +30,15 @@ openapi-subtype: rpaas
 tag: package-2024-09-20
 ```
 
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - Microsoft.HealthDataAIServices/preview/2025-03-01-preview/openapi.json
+```
+
 ### Tag: package-2024-09-20
 
 These settings apply only when `--tag=package-2024-09-20` is specified on the command line.
