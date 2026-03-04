@@ -75,6 +75,9 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
+
+  @doc("The container image tag to use for evaluator code execution")
+  image_tag?: string;
 }
 
 @doc("Prompt-based evaluator")
