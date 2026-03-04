@@ -304,16 +304,6 @@ model SkuDetailsForExistingResource {
 }
 
 /**
- * Additional properties to expose performance metrics to shoebox.
- */
-model OperationProperties {
-  /**
-   * Service specification for exposing performance metrics to shoebox.
-   */
-  serviceSpecification?: ServiceSpecification;
-}
-
-/**
  * Service specification for exposing performance metrics to shoebox.
  */
 model ServiceSpecification {
