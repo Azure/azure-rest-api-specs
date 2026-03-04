@@ -6,6 +6,8 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.skills_v1_preview>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Skills")
 interface Skills {
@@ -14,9 +16,11 @@ interface Skills {
    */
   @post
   @route("/skills")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkill is FoundryDataPlaneOperation<
     {
       ...CreateSkillRequest;
+      ...SkillsPreviewHeader;
     },
     SkillObject
   >;
@@ -26,9 +30,11 @@ interface Skills {
    */
   @post
   @route("/skills:import")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillFromPackage is FoundryDataPlaneOperation<
     {
       ...CreateSkillFromPackageRequest;
+      ...SkillsPreviewHeader;
     },
     SkillObject
   >;
@@ -38,10 +44,13 @@ interface Skills {
    */
   @get
   @route("/skills/{skill_name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkill is FoundryDataPlaneOperation<
     {
       /** The unique name of the skill. */
       @path skill_name: string;
+
+      ...SkillsPreviewHeader;
     },
     SkillObject
   >;
@@ -51,10 +60,13 @@ interface Skills {
    */
   @get
   @route("/skills/{skill_name}:download")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   downloadSkill is FoundryDataPlaneOperation<
     {
       /** The unique name of the skill. */
       @path skill_name: string;
+
+      ...SkillsPreviewHeader;
     },
     DownloadSkillResponse
   >;
@@ -64,9 +76,11 @@ interface Skills {
    */
   @route("/skills")
   @list
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
     {
       ...CommonPageQueryParameters;
+      ...SkillsPreviewHeader;
     },
     AgentsPagedResult<SkillObject>
   >;
@@ -76,12 +90,14 @@ interface Skills {
    */
   @post
   @route("/skills/{skill_name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   updateSkill is FoundryDataPlaneOperation<
     {
       /** The unique name of the skill. */
       @path skill_name: string;
 
       ...UpdateSkillRequest;
+      ...SkillsPreviewHeader;
     },
     SkillObject
   >;
@@ -92,10 +108,13 @@ interface Skills {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/skills/{skill_name}")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkill is FoundryDataPlaneOperation<
     {
       /** The unique name of the skill. */
       @path skill_name: string;
+
+      ...SkillsPreviewHeader;
     },
     DeleteSkillResponse
   >;

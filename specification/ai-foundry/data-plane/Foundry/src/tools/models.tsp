@@ -26,7 +26,6 @@ namespace Azure.AI.Projects {
     bing_grounding: "bing_grounding",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
-    skill: "skill",
 
     @removed(Versions.v1)
     memory_search: "memory_search",
@@ -249,21 +248,6 @@ namespace Azure.AI.Projects {
      * The openapi function definition.
      */
     openapi: OpenApiFunctionDefinition;
-  }
-
-  /**
-   * The input definition information for a skill tool as used to configure an agent.
-   */
-  model SkillTool extends OpenAI.Tool {
-    /**
-     * The object type, which is always 'skill'.
-     */
-    type: "skill";
-
-    /**
-     * The name of the skill to invoke.
-     */
-    name: string;
   }
 
   /**

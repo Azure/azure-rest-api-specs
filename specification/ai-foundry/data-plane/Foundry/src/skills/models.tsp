@@ -2,6 +2,10 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
+const SkillsRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
+};
+
 @doc("The object type of a skill resource.")
 union SkillObjectType {
   @doc("A skill object.")
