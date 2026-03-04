@@ -77,7 +77,7 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -92,7 +92,7 @@
         "tags": [
           "AiManagers"
         ],
-        "description": "List AIManager resources by subscription ID",
+        "description": "List AiManager resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManagerListResult"
+              "$ref": "#/definitions/AiManagerListResult"
             }
           },
           "default": {
@@ -116,7 +116,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_ListBySubscription_MaximumSet": {
+          "AiManagers_ListBySubscription": {
             "$ref": "./examples/AiManagers_ListBySubscription.json"
           }
         },
@@ -131,7 +131,7 @@
         "tags": [
           "AiManagers"
         ],
-        "description": "List AIManager resources by resource group",
+        "description": "List AiManager resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -147,7 +147,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManagerListResult"
+              "$ref": "#/definitions/AiManagerListResult"
             }
           },
           "default": {
@@ -158,7 +158,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_ListByResourceGroup_MaximumSet": {
+          "AiManagers_ListByResourceGroup": {
             "$ref": "./examples/AiManagers_ListByResourceGroup.json"
           }
         },
@@ -173,7 +173,7 @@
         "tags": [
           "AiManagers"
         ],
-        "description": "Get a AIManager",
+        "description": "Get a AiManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -199,7 +199,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManager"
+              "$ref": "#/definitions/AiManager"
             }
           },
           "default": {
@@ -210,7 +210,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_Get_MaximumSet": {
+          "AiManagers_Get": {
             "$ref": "./examples/AiManagers_Get.json"
           }
         }
@@ -220,7 +220,7 @@
         "tags": [
           "AiManagers"
         ],
-        "description": "Create a AIManager",
+        "description": "Create a AiManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -247,21 +247,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AIManager"
+              "$ref": "#/definitions/AiManager"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AIManager' update operation succeeded",
+            "description": "Resource 'AiManager' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AIManager"
+              "$ref": "#/definitions/AiManager"
             }
           },
           "201": {
-            "description": "Resource 'AIManager' create operation succeeded",
+            "description": "Resource 'AiManager' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AIManager"
+              "$ref": "#/definitions/AiManager"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -283,7 +283,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_CreateOrUpdate_MaximumSet": {
+          "AiManagers_CreateOrUpdate": {
             "$ref": "./examples/AiManagers_CreateOrUpdate.json"
           }
         },
@@ -297,7 +297,7 @@
         "tags": [
           "AiManagers"
         ],
-        "description": "Update a AIManager",
+        "description": "Update a AiManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -332,21 +332,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AIManager"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+              "$ref": "#/definitions/AiManager"
             }
           },
           "default": {
@@ -357,21 +343,17 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_Update_MaximumSet": {
+          "AiManagers_Update": {
             "$ref": "./examples/AiManagers_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "AiManagers_Delete",
         "tags": [
           "AiManagers"
         ],
-        "description": "Delete a AIManager",
+        "description": "Delete a AiManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -419,7 +401,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_Delete_MaximumSet": {
+          "AiManagers_Delete": {
             "$ref": "./examples/AiManagers_Delete.json"
           }
         },
@@ -472,7 +454,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagers_ListCredential_MaximumSet": {
+          "AiManagers_ListCredential": {
             "$ref": "./examples/AiManagers_ListCredential.json"
           }
         }
@@ -484,7 +466,7 @@
         "tags": [
           "AiManagerNamespaces"
         ],
-        "description": "List AiManagerNamespace resources by AIManager",
+        "description": "List AiManagerNamespace resources by AiManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -521,7 +503,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_ListByAiManager_MaximumSet": {
+          "AiManagerNamespaces_ListByAiManager": {
             "$ref": "./examples/AiManagerNamespaces_ListByAiManager.json"
           }
         },
@@ -583,7 +565,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_Get_MaximumSet": {
+          "AiManagerNamespaces_Get": {
             "$ref": "./examples/AiManagerNamespaces_Get.json"
           }
         }
@@ -682,7 +664,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_CreateOrUpdate_MaximumSet": {
+          "AiManagerNamespaces_CreateOrUpdate": {
             "$ref": "./examples/AiManagerNamespaces_CreateOrUpdate.json"
           }
         },
@@ -752,20 +734,6 @@
               "$ref": "#/definitions/AiManagerNamespace"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -774,14 +742,10 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_Update_MaximumSet": {
+          "AiManagerNamespaces_Update": {
             "$ref": "./examples/AiManagerNamespaces_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "AiManagerNamespaces_Delete",
@@ -854,7 +818,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_Delete_MaximumSet": {
+          "AiManagerNamespaces_Delete": {
             "$ref": "./examples/AiManagerNamespaces_Delete.json"
           }
         },
@@ -917,7 +881,7 @@
           }
         },
         "x-ms-examples": {
-          "AiManagerNamespaces_ListCredential_MaximumSet": {
+          "AiManagerNamespaces_ListCredential": {
             "$ref": "./examples/AiManagerNamespaces_ListCredential.json"
           }
         }
@@ -925,7 +889,7 @@
     }
   },
   "definitions": {
-    "AIManager": {
+    "AiManager": {
       "type": "object",
       "description": "The AI Manager resource.",
       "properties": {
@@ -949,15 +913,15 @@
         }
       ]
     },
-    "AIManagerListResult": {
+    "AiManagerListResult": {
       "type": "object",
-      "description": "The response of a AIManager list operation.",
+      "description": "The response of a AiManager list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AIManager items on this page",
+          "description": "The AiManager items on this page",
           "items": {
-            "$ref": "#/definitions/AIManager"
+            "$ref": "#/definitions/AiManager"
           }
         },
         "nextLink": {
@@ -970,137 +934,9 @@
         "value"
       ]
     },
-    "AIManagerNamespaceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the AI Manager namespace resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "AIManagerNamespaceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The namespace has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The namespace creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The namespace creation was canceled."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The provisioning state of a namespace being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The provisioning state of a namespace being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The provisioning state of a namespace being deleted."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "AIManagerProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the AI Manager resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "AIManagerProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Resource is being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is updating."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is deleting."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "AdoptionPolicy": {
-      "type": "string",
-      "description": "Action if Kubernetes namespace with same name already exists.",
-      "enum": [
-        "Never",
-        "IfIdentical",
-        "Always"
-      ],
-      "x-ms-enum": {
-        "name": "AdoptionPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Never",
-            "value": "Never",
-            "description": "If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will fail."
-          },
-          {
-            "name": "IfIdentical",
-            "value": "IfIdentical",
-            "description": "If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will succeed only if there is no difference between the existing namespace and the new ARM resource. If there is any difference, the creation will fail."
-          },
-          {
-            "name": "Always",
-            "value": "Always",
-            "description": "If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will succeed and take over the existing namespace to be managed by ARM, even if there are differences between the existing namespace and the new ARM resource. Some fields of the existing namespace might be overwritten."
-          }
-        ]
-      }
-    },
     "AiManagerNamespace": {
       "type": "object",
-      "description": "An AI Manager namespace.",
+      "description": "The AI Manager namespace.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AiManagerNamespaceProperties",
@@ -1156,16 +992,6 @@
       "type": "object",
       "description": "The properties of an AI Manager namespace.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "managedNamespaceId": {
-          "type": "string",
-          "description": "The underlying managed namespace ID in the Kubernetes cluster.",
-          "readOnly": true
-        },
         "labels": {
           "type": "object",
           "description": "The labels for the namespace.",
@@ -1180,21 +1006,85 @@
             "type": "string"
           }
         },
-        "resourceQuota": {
-          "$ref": "#/definitions/ResourceQuota",
-          "description": "The default resource quota for the namespace."
+        "provisioningState": {
+          "$ref": "#/definitions/AiManagerNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         },
-        "defaultNetworkPolicy": {
-          "$ref": "#/definitions/NetworkPolicies",
-          "description": "The default network policy for the namespace."
+        "managedNamespaceId": {
+          "type": "string",
+          "description": "The underlying managed namespace ID in the Kubernetes cluster.",
+          "readOnly": true
         },
-        "adoptionPolicy": {
-          "$ref": "#/definitions/AdoptionPolicy",
-          "description": "Action if Kubernetes namespace with same name already exists."
+        "status": {
+          "$ref": "#/definitions/AiManagerNamespaceStatus",
+          "description": "Status information for the AiManager.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiManagerNamespaceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AI Manager namespace resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AiManagerNamespaceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The namespace has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The namespace creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The namespace creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a namespace being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a namespace being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a namespace being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AiManagerNamespaceStatus": {
+      "type": "object",
+      "description": "Status information for the AiManagerNamespace.",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the AiManagerNamespace.",
+          "readOnly": true
         },
-        "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of the namespace."
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error for the AiManagerNamespace.",
+          "readOnly": true
         }
       }
     },
@@ -1212,10 +1102,6 @@
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
           "description": "Managed identity."
-        },
-        "properties": {
-          "$ref": "#/definitions/AiManagerProperties",
-          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1223,27 +1109,92 @@
       "type": "object",
       "description": "AI Manager properties.",
       "properties": {
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of the AI Manager."
+        },
         "provisioningState": {
-          "$ref": "#/definitions/AIManagerProvisioningState",
+          "$ref": "#/definitions/AiManagerProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "clusterId": {
-          "type": "string",
-          "description": "The underlying cluster ID of the AI Manager.",
+        "clusterIds": {
+          "type": "array",
+          "description": "The underlying cluster IDs of the AI Manager.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
-        "systemNodeSubnetId": {
+        "status": {
+          "$ref": "#/definitions/AiManagerStatus",
+          "description": "Status information for the AIManager.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiManagerProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AI Manager resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AiManagerProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AiManagerStatus": {
+      "type": "object",
+      "description": "Status information for the AiManager.",
+      "properties": {
+        "lastOperationId": {
           "type": "string",
-          "description": "The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+          "description": "The last operation ID for the AiManager.",
+          "readOnly": true
         },
-        "nodeSubnetId": {
-          "type": "string",
-          "description": "The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
-        },
-        "apiserverSubnetId": {
-          "type": "string",
-          "description": "The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR."
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error for the AiManager.",
+          "readOnly": true
         }
       }
     },
@@ -1291,7 +1242,7 @@
     },
     "DeletePolicy": {
       "type": "string",
-      "description": "Delete options of the namespace.",
+      "description": "Delete options of the AI Manager.",
       "enum": [
         "Keep",
         "Delete"
@@ -1303,109 +1254,14 @@
           {
             "name": "Keep",
             "value": "Keep",
-            "description": "Keep the Kubernetes namespace even if the ARM resource is deleted."
+            "description": "Keep the underlying cluster resources even if the AIManager resource is deleted."
           },
           {
             "name": "Delete",
             "value": "Delete",
-            "description": "Delete both the ARM resource and the Kubernetes namespace together."
+            "description": "Delete both the underlying cluster resources and the AIManager resource together."
           }
         ]
-      }
-    },
-    "NetworkPolicies": {
-      "type": "object",
-      "description": "Default network policy of the namespace, specifying ingress and egress rules.",
-      "properties": {
-        "ingress": {
-          "type": "string",
-          "description": "The default ingress network policy for the namespace.",
-          "default": "AllowSameNamespace",
-          "enum": [
-            "DenyAll",
-            "AllowAll",
-            "AllowSameNamespace"
-          ],
-          "x-ms-enum": {
-            "name": "PolicyRule",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "DenyAll",
-                "value": "DenyAll",
-                "description": "Deny all network traffic."
-              },
-              {
-                "name": "AllowAll",
-                "value": "AllowAll",
-                "description": "Allow all network traffic."
-              },
-              {
-                "name": "AllowSameNamespace",
-                "value": "AllowSameNamespace",
-                "description": "Allow traffic within the same namespace."
-              }
-            ]
-          }
-        },
-        "egress": {
-          "type": "string",
-          "description": "The default egress network policy for the namespace.",
-          "default": "AllowAll",
-          "enum": [
-            "DenyAll",
-            "AllowAll",
-            "AllowSameNamespace"
-          ],
-          "x-ms-enum": {
-            "name": "PolicyRule",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "DenyAll",
-                "value": "DenyAll",
-                "description": "Deny all network traffic."
-              },
-              {
-                "name": "AllowAll",
-                "value": "AllowAll",
-                "description": "Allow all network traffic."
-              },
-              {
-                "name": "AllowSameNamespace",
-                "value": "AllowSameNamespace",
-                "description": "Allow traffic within the same namespace."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "ResourceQuota": {
-      "type": "object",
-      "description": "The resource quota for the namespace.",
-      "properties": {
-        "cpuRequest": {
-          "type": "string",
-          "description": "The CPU request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
-        },
-        "cpuLimit": {
-          "type": "string",
-          "description": "The CPU limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
-        },
-        "memoryRequest": {
-          "type": "string",
-          "description": "The memory request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
-        },
-        "memoryLimit": {
-          "type": "string",
-          "description": "The memory limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
-        },
-        "gpuLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The GPU limit for the namespace."
-        }
       }
     }
   },

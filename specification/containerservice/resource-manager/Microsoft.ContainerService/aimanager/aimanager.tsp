@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 
 @doc("The AI Manager resource.")
 @resource("aiManagers")
-model AIManager is TrackedResource<AiManagerProperties> {
+model AiManager is TrackedResource<AiManagerProperties> {
   @doc("The name of the AI Manager resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -34,26 +34,46 @@ model AIManager is TrackedResource<AiManagerProperties> {
 
 @doc("AI Manager properties.")
 model AiManagerProperties {
+  @doc("Delete options of the AI Manager.")
+  deletePolicy?: DeletePolicy;
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
-  provisioningState?: AIManagerProvisioningState;
+  provisioningState?: AiManagerProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The underlying cluster ID of the AI Manager.")
-  clusterId?: string;
+  @doc("The underlying cluster IDs of the AI Manager.")
+  clusterIds?: string[];
 
-  @doc("The ID of the subnet that will be joined by system nodes managed and hosted by AKS for running critical system addons. This ID must be provided together with `nodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don’t specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  systemNodeSubnetId?: string;
+  @visibility(Lifecycle.Read)
+  @doc("Status information for the AIManager.")
+  status?: AiManagerStatus;
+}
 
-  @doc("The ID of the subnet that will be joined by nodes managed and hosted by AKS. This ID must be provided together with `systemNodeSubnetID` and `apiserverSubnetId`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  nodeSubnetId?: string;
+@doc("Status information for the AiManager.")
+model AiManagerStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The last operation ID for the AiManager.")
+  lastOperationId?: string;
 
-  @doc("The ID of the subnet for the API server. This ID must be provided together with `systemNodeSubnetID` and `nodeSubnetID`, and all three subnet IDs must belong to the same VNet. If you don't specify it, AKS will create a subnet in the managed resource group using a default /24 CIDR.")
-  apiserverSubnetId?: string;
+  @visibility(Lifecycle.Read)
+  @doc("The last operation error for the AiManager.")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@doc("Delete options of the AI Manager.")
+union DeletePolicy {
+  string,
+
+  @doc("Keep the underlying cluster resources even if the AIManager resource is deleted.")
+  Keep: "Keep",
+
+  @doc("Delete both the underlying cluster resources and the AIManager resource together.")
+  Delete: "Delete",
 }
 
 @doc("The provisioning state of the AI Manager resource.")
-union AIManagerProvisioningState {
+union AiManagerProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -83,25 +103,22 @@ model AiManagerPatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @doc("Managed identity.")
   identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: AiManagerProperties;
 }
 
 @armResourceOperations
 interface AiManagers {
-  get is ArmResourceRead<AIManager>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AIManager>;
-  update is ArmCustomPatchAsync<AIManager, AiManagerPatch>;
-  delete is ArmResourceDeleteWithoutOkAsync<AIManager>;
-  listByResourceGroup is ArmResourceListByParent<AIManager>;
-  listBySubscription is ArmListBySubscription<AIManager>;
+  get is ArmResourceRead<AiManager>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AiManager>;
+  update is ArmCustomPatchSync<AiManager, AiManagerPatch>;
+  delete is ArmResourceDeleteWithoutOkAsync<AiManager>;
+  listByResourceGroup is ArmResourceListByParent<AiManager>;
+  listBySubscription is ArmListBySubscription<AiManager>;
 
   @doc("Lists the credentials of an AI Manager.")
   @post
   @action("ListCredential")
   listCredential is ArmResourceActionSync<
-    AIManager,
+    AiManager,
     void,
     ArmResponse<CredentialResults>
   >;

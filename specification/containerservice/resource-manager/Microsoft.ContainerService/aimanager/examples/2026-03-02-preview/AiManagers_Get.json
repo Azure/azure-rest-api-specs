@@ -1,50 +1,47 @@
 {
-  "title": "AiManagers_Get_MaximumSet",
   "operationId": "AiManagers_Get",
+  "title": "Gets an AI Manager resource.",
   "parameters": {
     "api-version": "2026-03-02-preview",
-    "subscriptionId": "D76E8C7F-A192-405B-84A6-5E2A88453DB0",
-    "resourceGroupName": "rgaimanagers",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
     "aiManagerName": "aimanager1"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "clusterId": "xxqiewrkqsricninxqqjxx",
-          "systemNodeSubnetId": "akagmewbcdlhtvygwtn",
-          "nodeSubnetId": "yhztnesvul",
-          "apiserverSubnetId": "lnlemeepz"
-        },
-        "eTag": "rqywvwaqkvsaxxtmgpwqxmlmzgfgj",
-        "identity": {
-          "identity": {
-            "principalId": "00000000-0000-0000-0000-000000000001",
-            "tenantId": "00000000-0000-0000-0000-000000000000",
-            "type": "None",
-            "userAssignedIdentities": {
-              "key1440": {
-                "principalId": "00000000-0000-0000-0000-000000000002",
-                "clientId": "00000000-0000-0000-0000-000000000003"
-              }
-            }
-          }
-        },
-        "tags": {
-          "key9962": "jhxeduplhjhrh"
-        },
-        "location": "xvdrssbqqtczd",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1",
         "name": "aimanager1",
-        "type": "ivyosinh",
+        "type": "Microsoft.ContainerService/aiManagers",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
         "systemData": {
-          "createdBy": "qbkecbhya",
+          "createdBy": "user@example.com",
           "createdByType": "User",
-          "createdAt": "2026-03-01T19:31:55.139Z",
-          "lastModifiedBy": "bqvxiqfzrvwtacvmwglzvkl",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-03-01T19:31:55.139Z"
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "identity": {
+          "identity": {
+            "type": "SystemAssigned",
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "tenantId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "properties": {
+          "deletePolicy": "Keep",
+          "provisioningState": "Succeeded",
+          "clusterIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          ],
+          "status": {
+            "lastOperationId": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     }

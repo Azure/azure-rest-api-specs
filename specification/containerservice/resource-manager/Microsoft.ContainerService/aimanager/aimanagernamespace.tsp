@@ -10,9 +10,9 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ContainerService;
 
-@doc("An AI Manager namespace.")
+@doc("The AI Manager namespace.")
 @resource("namespaces")
-@parentResource(AIManager)
+@parentResource(AiManager)
 model AiManagerNamespace is TrackedResource<AiManagerNamespaceProperties> {
   @doc("The name of the AI Manager namespace resource.")
   @key("namespaceName")
@@ -29,14 +29,6 @@ model AiManagerNamespace is TrackedResource<AiManagerNamespaceProperties> {
 
 @doc("The properties of an AI Manager namespace.")
 model AiManagerNamespaceProperties {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: AIManagerNamespaceProvisioningState;
-
-  @visibility(Lifecycle.Read)
-  @doc("The underlying managed namespace ID in the Kubernetes cluster.")
-  managedNamespaceId?: string;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
   labels?: Record<string>;
@@ -45,87 +37,32 @@ model AiManagerNamespaceProperties {
   @doc("The annotations for the namespace.")
   annotations?: Record<string>;
 
-  @doc("The default resource quota for the namespace.")
-  resourceQuota?: ResourceQuota;
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState?: AiManagerNamespaceProvisioningState;
 
-  @doc("The default network policy for the namespace.")
-  defaultNetworkPolicy?: NetworkPolicies;
+  @visibility(Lifecycle.Read)
+  @doc("The underlying managed namespace ID in the Kubernetes cluster.")
+  managedNamespaceId?: string;
 
-  @doc("Action if Kubernetes namespace with same name already exists.")
-  adoptionPolicy?: AdoptionPolicy;
-
-  @doc("Delete options of the namespace.")
-  deletePolicy?: DeletePolicy;
+  @visibility(Lifecycle.Read)
+  @doc("Status information for the AiManager.")
+  status?: AiManagerNamespaceStatus;
 }
 
-@doc("The resource quota for the namespace.")
-model ResourceQuota {
-  @doc("The CPU request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu")
-  cpuRequest?: string;
+@doc("Status information for the AiManagerNamespace.")
+model AiManagerNamespaceStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The last operation ID for the AiManagerNamespace.")
+  lastOperationId?: string;
 
-  @doc("The CPU limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu")
-  cpuLimit?: string;
-
-  @doc("The memory request for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory")
-  memoryRequest?: string;
-
-  @doc("The memory limit for the namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory")
-  memoryLimit?: string;
-
-  @doc("The GPU limit for the namespace.")
-  gpuLimit?: int32;
-}
-
-@doc("Enum representing different network policy rules")
-union PolicyRule {
-  string,
-
-  @doc("Deny all network traffic.")
-  DenyAll: "DenyAll",
-
-  @doc("Allow all network traffic.")
-  AllowAll: "AllowAll",
-
-  @doc("Allow traffic within the same namespace.")
-  AllowSameNamespace: "AllowSameNamespace",
-}
-
-@doc("Default network policy of the namespace, specifying ingress and egress rules.")
-model NetworkPolicies {
-  @doc("The default ingress network policy for the namespace.")
-  ingress?: PolicyRule = PolicyRule.AllowSameNamespace;
-
-  @doc("The default egress network policy for the namespace.")
-  egress?: PolicyRule = PolicyRule.AllowAll;
-}
-
-@doc("Action if Kubernetes namespace with same name already exists.")
-union AdoptionPolicy {
-  string,
-
-  @doc("If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will fail.")
-  Never: "Never",
-
-  @doc("If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will succeed only if there is no difference between the existing namespace and the new ARM resource. If there is any difference, the creation will fail.")
-  IfIdentical: "IfIdentical",
-
-  @doc("If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will succeed and take over the existing namespace to be managed by ARM, even if there are differences between the existing namespace and the new ARM resource. Some fields of the existing namespace might be overwritten.")
-  Always: "Always",
-}
-
-@doc("Delete options of the namespace.")
-union DeletePolicy {
-  string,
-
-  @doc("Keep the Kubernetes namespace even if the ARM resource is deleted.")
-  Keep: "Keep",
-
-  @doc("Delete both the ARM resource and the Kubernetes namespace together.")
-  Delete: "Delete",
+  @visibility(Lifecycle.Read)
+  @doc("The last operation error for the AiManagerNamespace.")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("The provisioning state of the AI Manager namespace resource.")
-union AIManagerNamespaceProvisioningState {
+union AiManagerNamespaceProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -167,7 +104,7 @@ interface AiManagerNamespaces {
 
   listByAiManager is ArmResourceListByParent<AiManagerNamespace>;
 
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiManagerNamespace,
     AiManagerNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &

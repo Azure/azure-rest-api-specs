@@ -1,129 +1,97 @@
 {
-  "title": "AiManagerNamespaces_CreateOrUpdate_MaximumSet",
   "operationId": "AiManagerNamespaces_CreateOrUpdate",
+  "title": "Creates or updates an AI Manager namespace resource.",
   "parameters": {
     "api-version": "2026-03-02-preview",
-    "subscriptionId": "D76E8C7F-A192-405B-84A6-5E2A88453DB0",
-    "resourceGroupName": "rgaimanagers",
-    "If-Match": "magy",
-    "If-None-Match": "ayljmyogpbfvcldnlkt",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
     "aiManagerName": "aimanager1",
     "namespaceName": "namespace1",
+    "If-Match": null,
+    "If-None-Match": null,
     "resource": {
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
+      },
       "properties": {
         "labels": {
-          "key4834": "sxoktxwlincpkrcjnvgltvuwlzzx"
+          "app": "myapp"
         },
         "annotations": {
-          "key5059": "mfuzynpuuuflbrxpfowxtueixzx"
-        },
-        "resourceQuota": {
-          "cpuRequest": "ufcdlfniaprrzxmkshchupsxf",
-          "cpuLimit": "igsjdz",
-          "memoryRequest": "jibrdbstui",
-          "memoryLimit": "pbjrolerlfb",
-          "gpuLimit": 1
-        },
-        "defaultNetworkPolicy": {
-          "ingress": "DenyAll",
-          "egress": "DenyAll"
-        },
-        "adoptionPolicy": "Never",
-        "deletePolicy": "Keep"
-      },
-      "tags": {
-        "key8337": "bgyywjlphsxzmarkwsdnrm"
-      },
-      "location": "tbwfeesjivrebnl"
+          "note": "example"
+        }
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "managedNamespaceId": "yeuuikfjhokeigo",
-          "labels": {
-            "key4834": "sxoktxwlincpkrcjnvgltvuwlzzx"
-          },
-          "annotations": {
-            "key5059": "mfuzynpuuuflbrxpfowxtueixzx"
-          },
-          "resourceQuota": {
-            "cpuRequest": "ufcdlfniaprrzxmkshchupsxf",
-            "cpuLimit": "igsjdz",
-            "memoryRequest": "jibrdbstui",
-            "memoryLimit": "pbjrolerlfb",
-            "gpuLimit": 1
-          },
-          "defaultNetworkPolicy": {
-            "ingress": "DenyAll",
-            "egress": "DenyAll"
-          },
-          "adoptionPolicy": "Never",
-          "deletePolicy": "Keep"
-        },
-        "eTag": "qpyjsbiwyssfhbxmvpuowvjn",
-        "tags": {
-          "key8337": "bgyywjlphsxzmarkwsdnrm"
-        },
-        "location": "tbwfeesjivrebnl",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
         "name": "namespace1",
-        "type": "hrccpbslauvfroefzcz",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
         "systemData": {
-          "createdBy": "qbkecbhya",
+          "createdBy": "user@example.com",
           "createdByType": "User",
-          "createdAt": "2026-03-01T19:31:55.139Z",
-          "lastModifiedBy": "bqvxiqfzrvwtacvmwglzvkl",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-03-01T19:31:55.139Z"
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "labels": {
+            "app": "myapp"
+          },
+          "annotations": {
+            "note": "example"
+          },
+          "provisioningState": "Succeeded",
+          "managedNamespaceId": "managed-namespace-id",
+          "status": {
+            "lastOperationId": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-02-preview",
+        "Retry-After": 10
       },
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "managedNamespaceId": "yeuuikfjhokeigo",
-          "labels": {
-            "key4834": "sxoktxwlincpkrcjnvgltvuwlzzx"
-          },
-          "annotations": {
-            "key5059": "mfuzynpuuuflbrxpfowxtueixzx"
-          },
-          "resourceQuota": {
-            "cpuRequest": "ufcdlfniaprrzxmkshchupsxf",
-            "cpuLimit": "igsjdz",
-            "memoryRequest": "jibrdbstui",
-            "memoryLimit": "pbjrolerlfb",
-            "gpuLimit": 1
-          },
-          "defaultNetworkPolicy": {
-            "ingress": "DenyAll",
-            "egress": "DenyAll"
-          },
-          "adoptionPolicy": "Never",
-          "deletePolicy": "Keep"
-        },
-        "eTag": "qpyjsbiwyssfhbxmvpuowvjn",
-        "tags": {
-          "key8337": "bgyywjlphsxzmarkwsdnrm"
-        },
-        "location": "tbwfeesjivrebnl",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
         "name": "namespace1",
-        "type": "hrccpbslauvfroefzcz",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
         "systemData": {
-          "createdBy": "qbkecbhya",
+          "createdBy": "user@example.com",
           "createdByType": "User",
-          "createdAt": "2026-03-01T19:31:55.139Z",
-          "lastModifiedBy": "bqvxiqfzrvwtacvmwglzvkl",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-03-01T19:31:55.139Z"
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "labels": {
+            "app": "myapp"
+          },
+          "annotations": {
+            "note": "example"
+          },
+          "provisioningState": "Creating",
+          "managedNamespaceId": "managed-namespace-id",
+          "status": {
+            "lastOperationId": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     }
