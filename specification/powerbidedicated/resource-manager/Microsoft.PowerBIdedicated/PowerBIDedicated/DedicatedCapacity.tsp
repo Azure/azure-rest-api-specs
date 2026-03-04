@@ -98,10 +98,7 @@ interface Capacities {
     void,
     {
       @body body: void;
-    } & ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      void
-    >,
+    } & ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
@@ -113,10 +110,7 @@ interface Capacities {
     void,
     {
       @body body: void;
-    } & ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      void
-    >,
+    } & ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
