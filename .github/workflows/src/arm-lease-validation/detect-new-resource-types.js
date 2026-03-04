@@ -14,6 +14,9 @@ import { SwaggerInventory } from "@microsoft.azure/openapi-validator-core";
 const VERSION_PATTERN =
   /^specification\/([^/]+)\/resource-manager\/([^/]+)\/(stable|preview)\/([^/]+)\//;
 
+// Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
+const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
+
 const RESOURCE_TYPE_REGEX = /\/providers\/([^/]+\/[^/\{]+)/;
 
 /** Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines) */
