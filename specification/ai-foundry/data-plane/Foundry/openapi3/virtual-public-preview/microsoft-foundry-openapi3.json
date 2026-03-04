@@ -4541,7 +4541,18 @@
         },
         "tags": [
           "Evaluators"
-        ]
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
+              }
+            }
+          },
+          "description": "The credential request parameters"
+        }
       }
     },
     "/evaluators/{name}/versions/{version}/startPendingUpload": {
@@ -14559,6 +14570,20 @@
           }
         },
         "description": "Evaluator Configuration"
+      },
+      "EvaluatorCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
+          }
+        },
+        "description": "Request body for getting evaluator credentials"
       },
       "EvaluatorDefinition": {
         "type": "object",

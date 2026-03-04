@@ -156,6 +156,10 @@ interface Evaluators {
     {
       ...EvaluatorsPreviewHeader;
 
+      @doc("The credential request parameters")
+      @Http.bodyRoot
+      credentialRequest: EvaluatorCredentialRequest;
+
       @doc("The specific version id of the EvaluatorVersion to operate on.")
       @Rest.segment("versions")
       @Http.path
