@@ -170,6 +170,17 @@ model QuotaBucketRequestReplacement
   "MaxMonthlyVirtualUserHoursProperties",
   "csharp"
 );
+@@clientName(MaxMonthlyVirtualUserHoursResource, "MaxMonthlyVirtualUserHours", "csharp");
+
+// Remove 'Resource' from update properties model names
+@@clientName(LoadTestMappingResourceUpdateProperties,
+  "LoadTestMappingUpdateProperties",
+  "csharp"
+);
+@@clientName(LoadTestProfileMappingResourceUpdateProperties,
+  "LoadTestProfileMappingUpdateProperties",
+  "csharp"
+);
 
 // Fix property types: resource IDs should use ResourceIdentifier
 @@alternateType(LoadTestMappingProperties.sourceResourceId,
