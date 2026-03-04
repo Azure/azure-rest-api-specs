@@ -111,11 +111,6 @@ namespace Azure.AI.Projects;
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
 
-@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
-@@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
-@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParameter", "java");
-@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
-
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------

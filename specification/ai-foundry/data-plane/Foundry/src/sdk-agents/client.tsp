@@ -79,6 +79,13 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.Error, "ApiError");
 @@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters");
 
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
+@@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParameter", "java");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
+@@clientName(OpenAI.CustomGrammarFormatParam, "CustomGrammarFormatParameter", "java");
+
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
