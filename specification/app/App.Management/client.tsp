@@ -6,3 +6,6 @@ using Microsoft.App;
 
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
+
+@@clientLocation(getCustomDomainVerificationId,"ContainerAppsAPIClient", "go");
+@@clientLocation(Jobs.jobExecution,"ContainerAppsAPIClient", "go");
