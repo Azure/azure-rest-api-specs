@@ -85,7 +85,7 @@ jobs:
       # Used by other workflows like set-status
       - if: ${{ always() && steps.generate-job-summary.outputs.summary }}
         name: Set job-summary artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: job-summary
           path: ${{ steps.generate-job-summary.outputs.summary }}
