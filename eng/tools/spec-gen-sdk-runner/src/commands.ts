@@ -91,7 +91,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths from the changed files
-  const changedSpecs = detectChangedSpecConfigFiles(commandInput);
+  const changedSpecs = await detectChangedSpecConfigFiles(commandInput);
 
   let statusCode = 0;
   let pushedSpecConfigCount: number;
