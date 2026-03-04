@@ -31,6 +31,15 @@ openapi-type: arm
 tag: package-2025-10
 ```
 
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11'
+input-file:
+  - Microsoft.Network/stable/2025-11-01/openapi.json
+```
+
 ### Tag: package-2025-10
 
 These settings apply only when `--tag=package-2025-10` is specified on the command line.
