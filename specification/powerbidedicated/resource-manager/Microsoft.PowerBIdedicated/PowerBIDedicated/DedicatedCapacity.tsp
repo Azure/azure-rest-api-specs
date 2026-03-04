@@ -98,7 +98,9 @@ interface Capacities {
     void,
     {
       @body body: void;
-    } & ArmLroLocationHeader<FinalResult = void>,
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
@@ -110,7 +112,9 @@ interface Capacities {
     void,
     {
       @body body: void;
-    } & ArmLroLocationHeader<FinalResult = void>,
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
