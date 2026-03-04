@@ -9,7 +9,6 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(Microsoft.BareMetalInfrastructure.OperationDisplay,
-  "Display",
-  "java"
-);
+@@clientName(OperationDisplay, "Display", "java");
+
+@@clientName(NetworkInterface, "IpAddress", "java");
