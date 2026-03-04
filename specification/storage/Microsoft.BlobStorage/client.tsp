@@ -121,7 +121,9 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
+@@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
+// @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
