@@ -142,3 +142,8 @@ op replacePurge(
   "Client",
   "go"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(PolicyGetParameters.format,
+  "xml",
+  "javascript"
+);
