@@ -55,6 +55,9 @@
       "name": "Tiles for STAC Collections Mosaics"
     },
     {
+      "name": "Tiles for STAC Collections"
+    },
+    {
       "name": "Tile Matrix Sets"
     },
     {
@@ -9743,6 +9746,3983 @@
         "x-ms-examples": {
           "MosaicsAssetsForTiles_GetZxyAssets": {
             "$ref": "./examples/MosaicsAssetsForTiles_GetZxyAssets.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/{tileMatrixSetId}/WMTSCapabilities.xml": {
+      "get": {
+        "operationId": "CollectionMosaicsWmtsTileMatrixSets_GetCapabilitiesXml",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Wmts Tilematrixsetid As Path",
+        "description": "OGC WMTS endpoint for a STAC collection with TileMatrixSetId as path.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tile_format",
+            "in": "query",
+            "description": "Output image type. Default is png.",
+            "required": false,
+            "type": "string",
+            "default": "png",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            },
+            "x-ms-client-name": "tileFormat"
+          },
+          {
+            "name": "tile_scale",
+            "in": "query",
+            "description": "Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "x-ms-client-name": "tileScale"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.minZoom"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/TileMatrixSetQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/TileMatrixSetQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/TileMatrixSetQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsWmtsTileMatrixSets_GetCapabilitiesXml": {
+            "$ref": "./examples/CollectionMosaicsWmtsTileMatrixSets_GetCapabilitiesXml.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/{longitude},{latitude}/assets": {
+      "get": {
+        "operationId": "CollectionMosaicsAssetsForPoints_GetPointAssets",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Assets For Point",
+        "description": "Return a list of assets for a given point in a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StacItemPointAsset"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsAssetsForPoints_GetPointAssets": {
+            "$ref": "./examples/CollectionMosaicsAssetsForPoints_GetPointAssets.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/{tileMatrixSetId}/tilejson.json": {
+      "get": {
+        "operationId": "CollectionMosaicsTileMatrixSetsTileJson_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection TileJson Tilematrixsetid As Path",
+        "description": "Return TileJSON document for a STAC collection with TileMatrixSetId as path.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tile_format",
+            "in": "query",
+            "description": "Default will be automatically defined if the output image needs a mask (png) or\nnot (jpeg).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            },
+            "x-ms-client-name": "tileFormat"
+          },
+          {
+            "name": "tile_scale",
+            "in": "query",
+            "description": "Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "x-ms-client-name": "tileScale"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.minZoom"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileJsonMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileMatrixSetsTileJson_Get": {
+            "$ref": "./examples/CollectionMosaicsTileMatrixSetsTileJson_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/WMTSCapabilities.xml": {
+      "get": {
+        "operationId": "CollectionMosaicsWmts_GetCapabilitiesXml",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Wmts",
+        "description": "OGC WMTS endpoint for a STAC collection.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "name": "tile_format",
+            "in": "query",
+            "description": "Output image type. Default is png.",
+            "required": false,
+            "type": "string",
+            "default": "png",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            },
+            "x-ms-client-name": "tileFormat"
+          },
+          {
+            "name": "tile_scale",
+            "in": "query",
+            "description": "Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "x-ms-client-name": "tileScale"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.minZoom"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsWmts_GetCapabilitiesXml": {
+            "$ref": "./examples/CollectionMosaicsWmts_GetCapabilitiesXml.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/bbox/{minx},{miny},{maxx},{maxy}.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsBbox_GetCroppedToBoundingBox",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Bbox",
+        "description": "Create an image from part of a STAC collection dataset (bounding box crop).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.minx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.miny"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsBbox_GetCroppedToBoundingBox": {
+            "$ref": "./examples/CollectionMosaicsBbox_GetCroppedToBoundingBox.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/bbox/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Bbox With Dimensions",
+        "description": "Create an image from part of a STAC collection dataset (bounding box crop with dimensions).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.minx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.miny"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Force output image width",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Force output image height",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight": {
+            "$ref": "./examples/CollectionMosaicsBboxWithDimensions_GetCroppedToBoundingBoxWidthByHeight.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/bbox/{minx},{miny},{maxx},{maxy}/assets": {
+      "get": {
+        "operationId": "CollectionMosaicsAssetsForBbox_GetBboxAssets",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Assets For Bbox",
+        "description": "Return a list of assets which overlap a given bounding box for a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.minx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.miny"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxx"
+          },
+          {
+            "$ref": "#/parameters/BoundingBoxPathParameters.maxy"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return list of assets",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsAssetsForBbox_GetBboxAssets": {
+            "$ref": "./examples/CollectionMosaicsAssetsForBbox_GetBboxAssets.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/feature/{width}x{height}.{format}": {
+      "post": {
+        "operationId": "CollectionMosaicsFeatureWithDimensions_CropWidthByHeightFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Feature With Dimensions",
+        "description": "Create an image from a GeoJSON feature with explicit dimensions for a STAC collection.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "width",
+            "in": "path",
+            "description": "Force output image width",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "path",
+            "description": "Force output image height",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsFeatureWithDimensions_CropWidthByHeightFormat": {
+            "$ref": "./examples/CollectionMosaicsFeatureWithDimensions_CropWidthByHeightFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/feature.{format}": {
+      "post": {
+        "operationId": "CollectionMosaicsFeature_CropFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Feature",
+        "description": "Create an image from a GeoJSON feature for a STAC collection.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "name": "max_size",
+            "in": "query",
+            "description": "Image output size limit if width and height limits are not set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1024,
+            "x-ms-client-name": "maxSize"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsFeature_CropFormat": {
+            "$ref": "./examples/CollectionMosaicsFeature_CropFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/info": {
+      "get": {
+        "operationId": "CollectionMosaicsInfo_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Info",
+        "description": "Return search query info from a STAC collection identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TilerStacSearchRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsInfo_Get": {
+            "$ref": "./examples/CollectionMosaicsInfo_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/point/{longitude},{latitude}": {
+      "get": {
+        "operationId": "CollectionMosaicsPoint_GetPoint",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Point",
+        "description": "Return pixel values from assets intersecting with a given point in a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Longitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Latitude",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TilerCoreModelsResponsesPoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsPoint_GetPoint": {
+            "$ref": "./examples/CollectionMosaicsPoint_GetPoint.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/statistics": {
+      "post": {
+        "operationId": "CollectionMosaicsStatistics_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Statistics",
+        "description": "Return statistics from a GeoJSON feature for a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "coord-crs",
+            "in": "query",
+            "description": "Coordinate Reference System of the input coords. Default to `epsg:4326`.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "coordinateReferenceSystem"
+          },
+          {
+            "name": "dst-crs",
+            "in": "query",
+            "description": "Output Coordinate Reference System.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "destinationCrs"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.maxSize"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.categorical"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.categoriesPixels"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.percentiles"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.histogramBins"
+          },
+          {
+            "$ref": "#/parameters/StatisticsQueryParameters.histogramRange"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.height"
+          },
+          {
+            "$ref": "#/parameters/DimensionsQueryParameters.width"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request GeoJson body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StacItemStatisticsGeoJson"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsStatistics_Get": {
+            "$ref": "./examples/CollectionMosaicsStatistics_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tilejson.json": {
+      "get": {
+        "operationId": "CollectionMosaicsTileJson_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection TileJson",
+        "description": "Return TileJSON document for a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "name": "tile_format",
+            "in": "query",
+            "description": "Default will be automatically defined if the output image needs a mask (png) or\nnot (jpeg).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "png",
+              "npy",
+              "tif",
+              "jpeg",
+              "jpg",
+              "jp2",
+              "webp",
+              "pngraw"
+            ],
+            "x-ms-enum": {
+              "name": "TilerImageFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "png",
+                  "value": "png",
+                  "description": "Portable Network Graphics format - supports transparency"
+                },
+                {
+                  "name": "npy",
+                  "value": "npy",
+                  "description": "NumPy array format for raw data access"
+                },
+                {
+                  "name": "tif",
+                  "value": "tif",
+                  "description": "GeoTIFF format for georeferenced raster data"
+                },
+                {
+                  "name": "jpeg",
+                  "value": "jpeg",
+                  "description": "JPEG format - smaller file size but lossy compression"
+                },
+                {
+                  "name": "jpg",
+                  "value": "jpg",
+                  "description": "Alternate extension for JPEG format"
+                },
+                {
+                  "name": "jp2",
+                  "value": "jp2",
+                  "description": "JPEG 2000 format - supports both lossy and lossless compression"
+                },
+                {
+                  "name": "webp",
+                  "value": "webp",
+                  "description": "WebP format - modern image format with good compression"
+                },
+                {
+                  "name": "pngraw",
+                  "value": "pngraw",
+                  "description": "Raw PNG format for access to unprocessed data"
+                }
+              ]
+            },
+            "x-ms-client-name": "tileFormat"
+          },
+          {
+            "name": "tile_scale",
+            "in": "query",
+            "description": "Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "x-ms-client-name": "tileScale"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.minZoom"
+          },
+          {
+            "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileJsonMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileJson_Get": {
+            "$ref": "./examples/CollectionMosaicsTileJson_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles": {
+      "get": {
+        "operationId": "CollectionMosaicsTileSetList_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tileset List",
+        "description": "Return a list of available tilesets for a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSetList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileSetList_Get": {
+            "$ref": "./examples/CollectionMosaicsTileSetList_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}": {
+      "get": {
+        "operationId": "CollectionMosaicsTileSetMetadata_Get",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tileset Metadata",
+        "description": "Return metadata for a specific tileset of a STAC collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileSetMetadata_Get": {
+            "$ref": "./examples/CollectionMosaicsTileSetMetadata_Get.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{z}/{x}/{y}@{scale}x.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsTiles_GetZxyScaleByFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile",
+        "description": "Create map tile for a STAC collection (without TileMatrixSetId, with scale and format).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "name": "scale",
+            "in": "path",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles (default: \"1\")",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp) (default: \"png\").",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTiles_GetZxyScaleByFormat": {
+            "$ref": "./examples/CollectionMosaicsTiles_GetZxyScaleByFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{z}/{x}/{y}": {
+      "get": {
+        "operationId": "CollectionMosaicsTilesPlain_GetZxy",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Plain",
+        "description": "Create map tile for a STAC collection (without TileMatrixSetId, scale, or format).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTilesPlain_GetZxy": {
+            "$ref": "./examples/CollectionMosaicsTilesPlain_GetZxy.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{z}/{x}/{y}.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsTilesFormat_GetZxyByFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Format",
+        "description": "Create map tile for a STAC collection (with format, without TileMatrixSetId or scale).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTilesFormat_GetZxyByFormat": {
+            "$ref": "./examples/CollectionMosaicsTilesFormat_GetZxyByFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{z}/{x}/{y}@{scale}x": {
+      "get": {
+        "operationId": "CollectionMosaicsTilesScale_GetZxyByScale",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Scale",
+        "description": "Create map tile for a STAC collection (with scale, without TileMatrixSetId or format).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "scale",
+            "in": "path",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTilesScale_GetZxyByScale": {
+            "$ref": "./examples/CollectionMosaicsTilesScale_GetZxyByScale.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsTileMatrixSets_GetZxyScaleByFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Tilematrixsetid",
+        "description": "Create map tile for a STAC collection (with TileMatrixSetId, scale, and format in path).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "scale",
+            "in": "path",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileMatrixSets_GetZxyScaleByFormat": {
+            "$ref": "./examples/CollectionMosaicsTileMatrixSets_GetZxyScaleByFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}": {
+      "get": {
+        "operationId": "CollectionMosaicsTileMatrixSetsPlain_GetZxy",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Tilematrixsetid Plain",
+        "description": "Create map tile for a STAC collection (with TileMatrixSetId, without scale or format).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileMatrixSetsPlain_GetZxy": {
+            "$ref": "./examples/CollectionMosaicsTileMatrixSetsPlain_GetZxy.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}.{format}": {
+      "get": {
+        "operationId": "CollectionMosaicsTileMatrixSetsFormat_GetZxyByFormat",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Tilematrixsetid Format",
+        "description": "Create map tile for a STAC collection (with TileMatrixSetId and format, without scale).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileMatrixSetsFormat_GetZxyByFormat": {
+            "$ref": "./examples/CollectionMosaicsTileMatrixSetsFormat_GetZxyByFormat.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x": {
+      "get": {
+        "operationId": "CollectionMosaicsTileMatrixSetsScale_GetZxyByScale",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Tile Tilematrixsetid Scale",
+        "description": "Create map tile for a STAC collection (with TileMatrixSetId and scale, without format).",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/webp",
+          "image/jp2",
+          "image/tiff; application=geotiff",
+          "application/x-binary",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithm"
+          },
+          {
+            "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "scale",
+            "in": "path",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.buffer"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.colorFormula"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.collection"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.resampling"
+          },
+          {
+            "$ref": "#/parameters/MosaicTileQueryParameters.pixelSelection"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.rescale"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMapName"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.colorMap"
+          },
+          {
+            "$ref": "#/parameters/MiscTileQueryParameters.returnMask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return an image.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsTileMatrixSetsScale_GetZxyByScale": {
+            "$ref": "./examples/CollectionMosaicsTileMatrixSetsScale_GetZxyByScale.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets": {
+      "get": {
+        "operationId": "CollectionMosaicsAssetsForTileMatrixSets_GetZxyAssets",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Assets For Tile Tilematrixsetid As Path",
+        "description": "Return a list of assets which overlap a given tile for a STAC collection (with TileMatrixSetId).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier selecting one of the TileMatrixSetId supported",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TilerAssetGeoJson"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsAssetsForTileMatrixSets_GetZxyAssets": {
+            "$ref": "./examples/CollectionMosaicsAssetsForTileMatrixSets_GetZxyAssets.json"
+          }
+        }
+      }
+    },
+    "/data/mosaic/collections/{collectionId}/tiles/{z}/{x}/{y}/assets": {
+      "get": {
+        "operationId": "CollectionMosaicsAssetsForTiles_GetZxyAssets",
+        "tags": [
+          "Tiles for STAC Collections"
+        ],
+        "summary": "Collection Assets For Tile",
+        "description": "Return a list of assets which overlap a given tile for a STAC collection (without TileMatrixSetId).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.itemsLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
+          },
+          {
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.z"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.x"
+          },
+          {
+            "$ref": "#/parameters/ZxyPathParameters.y"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "query",
+            "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')",
+            "required": false,
+            "type": "string",
+            "default": "WebMercatorQuad",
+            "enum": [
+              "CanadianNAD83_LCC",
+              "EuropeanETRS89_LAEAQuad",
+              "LINZAntarticaMapTilegrid",
+              "NZTM2000Quad",
+              "UPSAntarcticWGS84Quad",
+              "UPSArcticWGS84Quad",
+              "UTM31WGS84Quad",
+              "WGS1984Quad",
+              "WebMercatorQuad",
+              "WorldCRS84Quad",
+              "WorldMercatorWGS84Quad"
+            ],
+            "x-ms-enum": {
+              "name": "TileMatrixSetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CanadianNAD83_LCC",
+                  "value": "CanadianNAD83_LCC",
+                  "description": "Canadian NAD83 Lambert Conformal Conic projection tile matrix set"
+                },
+                {
+                  "name": "EuropeanETRS89_LAEAQuad",
+                  "value": "EuropeanETRS89_LAEAQuad",
+                  "description": "European ETRS89 Lambert Azimuthal Equal Area Quad tile matrix set"
+                },
+                {
+                  "name": "LINZAntarticaMapTilegrid",
+                  "value": "LINZAntarticaMapTilegrid",
+                  "description": "Land Information New Zealand (LINZ) Antarctica Map tile grid matrix set"
+                },
+                {
+                  "name": "NZTM2000Quad",
+                  "value": "NZTM2000Quad",
+                  "description": "New Zealand Transverse Mercator 2000 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSAntarcticWGS84Quad",
+                  "value": "UPSAntarcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Antarctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UPSArcticWGS84Quad",
+                  "value": "UPSArcticWGS84Quad",
+                  "description": "Universal Polar Stereographic Arctic WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "UTM31WGS84Quad",
+                  "value": "UTM31WGS84Quad",
+                  "description": "Universal Transverse Mercator Zone 31 WGS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WGS1984Quad",
+                  "value": "WGS1984Quad",
+                  "description": "WGS 1984 Quad tile matrix set"
+                },
+                {
+                  "name": "WebMercatorQuad",
+                  "value": "WebMercatorQuad",
+                  "description": "Web Mercator Quad tile matrix set"
+                },
+                {
+                  "name": "WorldCRS84Quad",
+                  "value": "WorldCRS84Quad",
+                  "description": "World CRS84 Quad tile matrix set"
+                },
+                {
+                  "name": "WorldMercatorWGS84Quad",
+                  "value": "WorldMercatorWGS84Quad",
+                  "description": "World Mercator WGS84 Quad tile matrix set"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return list of assets",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionMosaicsAssetsForTiles_GetZxyAssets": {
+            "$ref": "./examples/CollectionMosaicsAssetsForTiles_GetZxyAssets.json"
           }
         }
       }

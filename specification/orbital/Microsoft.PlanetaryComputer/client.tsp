@@ -319,6 +319,81 @@ interface Data {
   getMosaicsTileNoTmsByFormat is MosaicsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
   getMosaicsTileNoTmsByScale is MosaicsTilesScale.getZxyByScale;
+
+  // === Collection-level mosaic endpoints (stable 2026-04-15) ===
+
+  // Collection Tileset List and Metadata
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  @added(Versions.v2026_04_15)
+  listCollectionTilesets is CollectionMosaicsTileSetList.get;
+  @added(Versions.v2026_04_15)
+  getCollectionTilesetMetadata is CollectionMosaicsTileSetMetadata.get;
+
+  // Collection Tiles (TileMatrixSetId as path)
+  @added(Versions.v2026_04_15)
+  getCollectionTile is CollectionMosaicsTileMatrixSets.getZxyScaleByFormat;
+  @added(Versions.v2026_04_15)
+  getCollectionTilePlain is CollectionMosaicsTileMatrixSetsPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getCollectionTileByFormat is CollectionMosaicsTileMatrixSetsFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getCollectionTileByScale is CollectionMosaicsTileMatrixSetsScale.getZxyByScale;
+
+  // Collection Tiles (without TileMatrixSetId in path)
+  @added(Versions.v2026_04_15)
+  getCollectionTileNoTms is CollectionMosaicsTiles.getZxyScaleByFormat;
+  @added(Versions.v2026_04_15)
+  getCollectionTileNoTmsPlain is CollectionMosaicsTilesPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getCollectionTileNoTmsByFormat is CollectionMosaicsTilesFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getCollectionTileNoTmsByScale is CollectionMosaicsTilesScale.getZxyByScale;
+
+  // Collection TileJSON
+  @added(Versions.v2026_04_15)
+  getCollectionTileJson is CollectionMosaicsTileJson.get;
+  @added(Versions.v2026_04_15)
+  getCollectionTileJsonTms is CollectionMosaicsTileMatrixSetsTileJson.get;
+
+  // Collection WMTS
+  @added(Versions.v2026_04_15)
+  getCollectionWmtsCapabilities is CollectionMosaicsWmts.getCapabilitiesXml;
+  @added(Versions.v2026_04_15)
+  getCollectionWmtsCapabilitiesTms is CollectionMosaicsWmtsTileMatrixSets.getCapabilitiesXml;
+
+  // Collection Assets
+  @added(Versions.v2026_04_15)
+  getCollectionAssetsForTile is CollectionMosaicsAssetsForTileMatrixSets.getZxyAssets;
+  @added(Versions.v2026_04_15)
+  getCollectionAssetsForTileNoTms is CollectionMosaicsAssetsForTiles.getZxyAssets;
+  @added(Versions.v2026_04_15)
+  getCollectionAssetsForPoint is CollectionMosaicsAssetsForPoints.getPointAssets;
+  @added(Versions.v2026_04_15)
+  getCollectionAssetsForBbox is CollectionMosaicsAssetsForBbox.getBboxAssets;
+
+  // Collection Point
+  @added(Versions.v2026_04_15)
+  getCollectionPoint is CollectionMosaicsPoint.getPoint;
+
+  // Collection Info
+  @added(Versions.v2026_04_15)
+  getCollectionInfo is CollectionMosaicsInfo.get;
+
+  // Collection Statistics
+  @added(Versions.v2026_04_15)
+  getCollectionStatistics is CollectionMosaicsStatistics.get;
+
+  // Collection Bbox Crop
+  @added(Versions.v2026_04_15)
+  getCollectionBboxCrop is CollectionMosaicsBbox.getCroppedToBoundingBox;
+  @added(Versions.v2026_04_15)
+  getCollectionBboxCropWithDimensions is CollectionMosaicsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+
+  // Collection Feature Crop
+  @added(Versions.v2026_04_15)
+  cropCollectionFeature is CollectionMosaicsFeature.cropFormat;
+  @added(Versions.v2026_04_15)
+  cropCollectionFeatureWithDimensions is CollectionMosaicsFeatureWithDimensions.cropWidthByHeightFormat;
 }
 
 // === Shared Access Signature (SAS) ===

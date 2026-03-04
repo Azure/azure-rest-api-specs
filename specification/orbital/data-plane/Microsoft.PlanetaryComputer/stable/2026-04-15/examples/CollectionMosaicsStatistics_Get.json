@@ -1,0 +1,108 @@
+{
+  "title": "CollectionMosaicsStatistics_Get",
+  "operationId": "CollectionMosaicsStatistics_Get",
+  "parameters": {
+    "api-version": "2026-04-15",
+    "collectionId": "naip-atl",
+    "assets": [
+      "image"
+    ],
+    "body": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.5,
+              37.7
+            ],
+            [
+              -122.3,
+              37.7
+            ],
+            [
+              -122.3,
+              37.8
+            ],
+            [
+              -122.5,
+              37.8
+            ],
+            [
+              -122.5,
+              37.7
+            ]
+          ]
+        ]
+      },
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -122.5,
+                37.7
+              ],
+              [
+                -122.3,
+                37.7
+              ],
+              [
+                -122.3,
+                37.8
+              ],
+              [
+                -122.5,
+                37.8
+              ],
+              [
+                -122.5,
+                37.7
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "statistics": {
+            "image_b1": {
+              "min": 0.0,
+              "max": 255.0,
+              "mean": 128.5,
+              "count": 65536.0,
+              "sum": 8421376.0,
+              "std": 73.9,
+              "median": 128.0,
+              "majority": 128.0,
+              "minority": 0.0,
+              "unique": 256.0,
+              "histogram": [
+                [
+                  6500.0,
+                  6500.0
+                ],
+                [
+                  0.0,
+                  128.0,
+                  255.0
+                ]
+              ],
+              "valid_percent": 100.0,
+              "masked_pixels": 0.0,
+              "valid_pixels": 65536.0,
+              "percentile_2": 5.0,
+              "percentile_98": 250.0
+            }
+          }
+        }
+      }
+    }
+  }
+}
