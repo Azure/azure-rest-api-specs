@@ -10,21 +10,22 @@ import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpAzEmitterOutputDirSubRule,
-  TspConfigCsharpAzNamespaceSubRule,
+  TspConfigCsharpDpEmitterOutputDirSubRule,
+  TspConfigCsharpDpNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
-  TspConfigGoContainingModuleMatchPatternSubRule,
+  TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
+  TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtContainingModuleMatchPatternSubRule,
   TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoMgmtInjectSpansTrueSubRule,
+  TspConfigGoMgmtModuleMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoModuleMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -75,11 +76,6 @@ export function createEmitterOptionExample(
   }
   const content = stringify(obj);
   return content;
-}
-
-// TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
-function shouldBeTrueOnFailSubRuleValidation(emitterName: string) {
-  return emitterName === "@azure-tools/typespec-csharp" ? true : false;
 }
 
 function createParameterTestCases(
@@ -155,7 +151,7 @@ function createEmitterOptionTestCases(
       },
       ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
     ),
-    success: shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: false,
     subRules,
   });
 
@@ -166,7 +162,7 @@ function createEmitterOptionTestCases(
       emitterName,
       ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
     ),
-    success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: allowUndefined ? true : false,
     subRules,
   });
 
@@ -182,7 +178,7 @@ function createEmitterOptionTestCases(
         },
         ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
       ),
-      success: shouldBeTrueOnFailSubRuleValidation(emitterName),
+      success: false,
       subRules,
     });
   }
@@ -302,7 +298,7 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   "module",
   "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
   "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
-  [new TspConfigGoModuleMatchPatternSubRule()],
+  [new TspConfigGoMgmtModuleMatchPatternSubRule()],
   false,
 );
 
@@ -312,7 +308,7 @@ const goManagementContainingModuleTestCases = createEmitterOptionTestCases(
   "containing-module",
   "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
   "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
-  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  [new TspConfigGoMgmtContainingModuleMatchPatternSubRule()],
   false,
 );
 
@@ -358,8 +354,7 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoModuleMatchPatternSubRule()],
-  false,
+  [new TspConfigGoDpModuleMatchPatternSubRule()],
 );
 
 const goDpContainingModuleTestCases = createEmitterOptionTestCases(
@@ -368,7 +363,7 @@ const goDpContainingModuleTestCases = createEmitterOptionTestCases(
   "containing-module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  [new TspConfigGoDpContainingModuleMatchPatternSubRule()],
   false,
 );
 
@@ -581,49 +576,40 @@ const pythonDpEmitterOutputTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
 );
 
-const csharpAzEmitterOutputTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "emitter-output-dir",
-  "{output-dir}/{service-dir}/Azure.AAA",
-  "{output-dir}/{service-dir}/AAA",
-  [new TspConfigCsharpAzEmitterOutputDirSubRule()],
-);
-
-const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
+const csharpDpNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
   "",
   "namespace",
-  "Azure.AAA",
-  "AAA",
-  [new TspConfigCsharpAzNamespaceSubRule()],
+  "Azure.AI.Vision.Face",
+  "AI.Vision.Face",
+  [new TspConfigCsharpDpNamespaceSubRule()],
 );
 
-const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
+const csharpDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
   "",
-  "clear-output-folder",
-  true,
-  false,
-  [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
-);
-
-const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  managementTspconfigFolder,
   "emitter-output-dir",
-  "{output-dir}/{service-dir}/Azure.ResourceManager.AAA",
-  "{output-dir}/{service-dir}/Azure.Management.AAA",
-  [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  "{output-dir}/{service-dir}/Azure.AI.Vision.Face",
+  "{output-dir}/{service-dir}/AI.Vision.Face",
+  [new TspConfigCsharpDpEmitterOutputDirSubRule()],
 );
 
 const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
+  "@azure-typespec/http-client-csharp-mgmt",
   managementTspconfigFolder,
   "namespace",
-  "Azure.ResourceManager.AAA",
-  "Azure.Management.AAA",
+  "Azure.ResourceManager.compute",
+  "Azure.compute", // Invalid: missing "resourcemanager"
   [new TspConfigCsharpMgmtNamespaceSubRule()],
+);
+
+const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp-mgmt",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/Azure.ResourceManager.compute",
+  "{output-dir}/{service-dir}/ResourceManager.compute", // Invalid: missing "Azure."
+  [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
 // Test cases for emitter-output-dir with namespace variable resolution
@@ -664,17 +650,149 @@ options:
     subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
   },
   {
-    description: "Validate Ts mgmt recursive variable resolution (namespace -> package-name)",
+    description: "Validate http-client-csharp namespace with {package-name} variable",
+    folder: "",
+    tspconfigContent: `
+  options:
+    "@azure-typespec/http-client-csharp":
+      package-name: "Azure.MyService"
+      namespace: "{package-name}"
+  `,
+    success: true,
+    subRules: [new TspConfigCsharpDpNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp namespace with invalid {package-name} variable value",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp":
+    package-name: "MyService"
+    namespace: "{package-name}"
+`,
+    success: false,
+    subRules: [new TspConfigCsharpDpNamespaceSubRule()],
+  },
+  {
+    description: "Validate http-client-csharp-mgmt emitter-output-dir with {package-name} variable",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+  options:
+    "@azure-typespec/http-client-csharp-mgmt":
+      package-name: "Azure.ResourceManager.MyService"
+      emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+  `,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt recursive variable resolution (namespace -> package-name)",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 options:
-  "@azure-tools/typespec-ts":
-    package-name: "arm-aaa-bbb"
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.Compute.Recommender"
     namespace: "{package-name}"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 `,
     success: true,
-    subRules: [new TspConfigTsMgmtModularEmitterOutputDirSubRule()],
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir with custom service-dir and recursive variable resolution",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+  options:
+    "@azure-typespec/http-client-csharp-mgmt":
+      package-name: "Azure.ResourceManager.Compute.Recommender"
+      namespace: "{package-name}"
+      emitter-output-dir: "{output-dir}/sdk/dellstorage/{namespace}"
+  `,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+  {
+    description:
+      "Validate http-client-csharp-mgmt emitter-output-dir fails when last segment is invalid",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Dell.Storage"
+    emitter-output-dir: "{output-dir}/sdk/dellstorage/Dell.Storage"
+`,
+    success: false,
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+  },
+];
+
+const optionalRulesWithoutEmitterConfigTestCases: Case[] = [
+  {
+    description: "Optional rule: should be skipped when emitter is not configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+parameters:
+  service-dir: "sdk/test"
+`,
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description: "Optional rule: multiple rules should be skipped when emitter is not configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+parameters:
+  service-dir: "sdk/test"
+`,
+    success: true,
+    subRules: [
+      new TspConfigJavaMgmtNamespaceFormatSubRule(),
+      new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
+      new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
+      new TspConfigGoDpContainingModuleMatchPatternSubRule(),
+    ],
+  },
+];
+
+const optionalRulesWithEmitterConfigTestCases: Case[] = [
+  {
+    description:
+      "Validate Go DP emitter-output-dir should fail when not defined (emitter configured with model)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  },
+  {
+    description:
+      "Validate Go Mgmt Module should fail when not defined (emitter configured with model)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoMgmtModuleMatchPatternSubRule()],
+  },
+  {
+    description:
+      "Validate Go Mgmt Containing Module should fail when not defined (emitter configured with model)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoMgmtContainingModuleMatchPatternSubRule()],
   },
 ];
 
@@ -719,7 +837,7 @@ options:
     folder: managementTspconfigFolder,
     subRules: [
       new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule(),
-      new TspConfigGoModuleMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
     ],
     tspconfigContent: `
 options:
@@ -746,7 +864,7 @@ describe("tspconfig", function () {
     readTspConfigSpy.mockReset();
   });
 
-  it.each([
+  const requiredTestCases = [
     // common
     ...commonAzureServiceDirTestCases,
     ...commonAzureServiceDirWithOutputDirTestCases,
@@ -766,10 +884,6 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpModuleTestCases,
-    ...goDpContainingModuleTestCases,
-    ...goDpEmitterOutputDirTestCases,
-    ...goDpServiceDirTestCases,
     // java
     ...javaAzEmitterOutputDirTestCases,
     ...javaMgmtEmitterOutputDirTestCases,
@@ -782,15 +896,27 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpEmitterOutputTestCases,
-    // csharp
-    ...csharpAzEmitterOutputTestCases,
-    ...csharpAzNamespaceTestCases,
-    ...csharpAzClearOutputFolderTestCases,
-    ...csharpMgmtEmitterOutputDirTestCases,
-    ...csharpMgmtNamespaceTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
-  ])(`$description`, async (c: Case) => {
+  ];
+
+  const optionalTestCases = [
+    // Test cases for optional rules when emitter is not configured
+    ...optionalRulesWithoutEmitterConfigTestCases,
+    ...optionalRulesWithEmitterConfigTestCases,
+    // csharp
+    ...csharpDpNamespaceTestCases,
+    ...csharpMgmtNamespaceTestCases,
+    ...csharpDpEmitterOutputDirTestCases,
+    ...csharpMgmtEmitterOutputDirTestCases,
+    // go data plane
+    ...goDpEmitterOutputDirTestCases,
+    ...goDpServiceDirTestCases,
+    ...goDpModuleTestCases,
+    ...goDpContainingModuleTestCases,
+  ];
+
+  it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
       {
@@ -806,9 +932,13 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     });
 
-    const rule = new SdkTspConfigValidationRule(c.subRules);
+    // Determine if the subRules are in optional test cases
+    const isOptional = optionalTestCases.some((tc) => tc === c);
+    const rule = isOptional
+      ? new SdkTspConfigValidationRule([], c.subRules as any)
+      : new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, c.success); // Non-management should always pass
+    strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
@@ -831,7 +961,7 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     });
 
-    const rule = new SdkTspConfigValidationRule(c.subRules);
+    const rule = new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     const returnSuccess = c.folder.includes(".Management") ? c.success : true;
     strictEqual(result.success, returnSuccess);
@@ -856,7 +986,7 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     });
 
-    const rule = new SdkTspConfigValidationRule(c.subRules);
+    const rule = new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
     strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
@@ -905,9 +1035,10 @@ parameters:
       });
 
       // Create validation rule and execute
-      const rule = new SdkTspConfigValidationRule([
-        new TspConfigCommonAzServiceDirMatchPatternSubRule(),
-      ]);
+      const rule = new SdkTspConfigValidationRule(
+        [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+        [],
+      );
       const result = await rule.execute(awsServiceFolder);
 
       // Validate that validation passes for each service

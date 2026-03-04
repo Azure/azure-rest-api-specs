@@ -94,3 +94,7 @@ enum OldMarketplaceSubscriptionStatus {
   Suspended,
   Unsubscribed,
 }
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
