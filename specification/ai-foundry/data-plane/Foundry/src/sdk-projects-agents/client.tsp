@@ -6,7 +6,6 @@ using Azure.Core.Experimental;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Projects.Agents")
 namespace Azure.AI.Projects {
-
   @@usage(CreateAgentRequest, Usage.input);
   @@access(CreateAgentRequest, Access.internal);
 
@@ -22,7 +21,7 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.Metadata, Access.internal);
   @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
-  
+
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
 
@@ -34,10 +33,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
-  @@clientName(Agents,
-    "AgentsClient",
-    "csharp"
-  );
+  @@clientName(Agents, "AgentsClient", "csharp");
   @@clientName(AgentObject, "AgentRecord");
   @@clientName(AgentProtocol, "AgentCommunicationMethod");
 
@@ -47,7 +43,7 @@ namespace Azure.AI.Projects {
   @@clientName(ContainerAppAgentDefinition,
     "ContainerApplicationAgentDefinition"
   );
-//  @@clientName(CreatedBy, "AgentResponseItemSource");
+  //  @@clientName(CreatedBy, "AgentResponseItemSource");
   @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
 
   @@clientName(MemorySearchOptions, "MemorySearchToolOptions");
@@ -132,17 +128,17 @@ namespace Azure.AI.Projects {
 
   @@access(OpenAI.ToolChoiceParam, Access.internal);
   @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam");
-  
+
   @@access(OpenAI.WebSearchPreviewTool, Access.internal);
   @@clientName(OpenAI.WebSearchPreviewTool, "InternalWebSearchPreviewTool");
-  
+
   @@access(OpenAI.WebSearchTool, Access.internal);
   @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
-  
+
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
-  
+
   @@usage(AgentDefinition, Usage.input | Usage.output);
   @@access(AgentDefinition, Access.public);
 

@@ -103,9 +103,16 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items, "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.", DocumentationMode.replace, "javascript");
-@@clientDoc(MemoryStoreSearchRequest.items, "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.", DocumentationMode.replace, "javascript");
-
+@@clientDoc(MemoryStoreUpdateRequest.items,
+  "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+@@clientDoc(MemoryStoreSearchRequest.items,
+  "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
 
 // The Python SDK will have custom code to handle LRO memory updates, and
 // new input "items" specified via OpenAI classes.
