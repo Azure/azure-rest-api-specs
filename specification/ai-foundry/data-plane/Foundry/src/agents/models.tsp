@@ -307,6 +307,105 @@ model HostedAgentDefinition extends AgentDefinition {
   telemetry_config?: TelemetryConfig;
 }
 
+// ── Telemetry Unions ────────────────────────────────────
+
+@doc("The kind of telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointKind {
+  string,
+
+  @doc("OpenTelemetry Protocol (OTLP) endpoint.")
+  OTLP: "OTLP",
+}
+
+@doc("The type of telemetry data to export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+union TelemetryDataKind {
+  string,
+
+  @doc("Container stdout and stderr logs.")
+  ContainerStdoutStderr: "ContainerStdoutStderr",
+
+  @doc("Container OpenTelemetry signals.")
+  ContainerOtel: "ContainerOtel",
+
+  @doc("Container metrics.")
+  Metrics: "Metrics",
+}
+
+@doc("The transport protocol for telemetry export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+union TelemetryTransportProtocol {
+  string,
+
+  @doc("HTTP transport protocol.")
+  Http: "Http",
+
+  @doc("gRPC transport protocol.")
+  Grpc: "Grpc",
+}
+
+// ── Telemetry Auth (discriminated by "type") ────────────
+
+@doc("The type of authentication for a telemetry endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointAuthType {
+  string,
+
+  @doc("Header-based secret authentication.")
+  header: "header",
+}
+
+@doc("Authentication configuration for a telemetry endpoint.")
+@discriminator("type")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpointAuth {
+  @doc("The authentication type.")
+  type: TelemetryEndpointAuthType;
+}
+
+@doc("Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
+  @doc("The authentication type, always 'header' for header-based secret authentication.")
+  type: TelemetryEndpointAuthType.header;
+
+  @doc("The name of the HTTP header to inject the secret value into.")
+  @encodedName("application/json", "headerName")
+  @example("X-Otlp-Api-Key")
+  header_name: string;
+
+  @doc("The identifier of the secret store or connection.")
+  @encodedName("application/json", "secretId")
+  @example("my-secret-store")
+  secret_id: string;
+
+  @doc("The key within the secret to retrieve the authentication value.")
+  @encodedName("application/json", "secretKey")
+  @example("OTLP_KEY")
+  secret_key: string;
+}
+
+// ── Telemetry Config & Endpoint (discriminated by "kind") ─
+
 @doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
 @extension(
   "x-ms-foundry-meta",
@@ -314,29 +413,45 @@ model HostedAgentDefinition extends AgentDefinition {
 )
 model TelemetryConfig {
   @doc("Customer-supplied telemetry export endpoint configurations.")
-  endpoints?: TelemetryEndpoint[];
+  @minItems(1)
+  @maxItems(3)
+  endpoints: TelemetryEndpoint[];
 }
 
-@doc("A single telemetry export endpoint.")
+@doc("A telemetry export endpoint configuration.")
+@discriminator("kind")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
 )
 model TelemetryEndpoint {
-  @doc("The telemetry export protocol kind")
-  kind: string;
+  @doc("The telemetry export endpoint kind.")
+  kind: TelemetryEndpointKind;
 
-  @doc("Data types to export to this endpoint.")
-  data?: string[];
-
-  @doc("The OTLP collector endpoint URL.")
-  endpoint?: string;
-
-  @doc("The transport protocol: 'Http' or 'Grpc'.")
-  protocol?: string;
+  @doc("Data types to export to this endpoint. Use an empty array to export no data.")
+  @example(#["ContainerStdoutStderr", "ContainerOtel", "Metrics"])
+  data: TelemetryDataKind[];
 
   @doc("Optional authentication configuration.")
-  auth?: Record<string>;
+  auth?: TelemetryEndpointAuth;
+}
+
+@doc("An OTLP (OpenTelemetry Protocol) telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionFeatureKeys.hosted_agents_v1_preview] }
+)
+model OtlpTelemetryEndpoint extends TelemetryEndpoint {
+  @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
+  kind: TelemetryEndpointKind.OTLP;
+
+  @doc("The OTLP collector endpoint URL.")
+  @example("https://my-collector.example.com/otlp")
+  endpoint: string;
+
+  @doc("The transport protocol for the OTLP endpoint.")
+  @example("Http")
+  protocol: TelemetryTransportProtocol;
 }
 
 @doc("The container app agent definition.")
