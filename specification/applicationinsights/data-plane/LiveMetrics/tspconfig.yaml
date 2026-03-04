@@ -20,12 +20,11 @@ options:
     namespace: "livemetrics"
     flavor: azure
     generate-packaging-files: false
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.Monitor.OpenTelemetry.LiveMetrics"
+    namespace: "{package-name}"
+    model-namespace: true
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "LiveMetrics"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/livemetrics-rest"
     generate-metadata: true
