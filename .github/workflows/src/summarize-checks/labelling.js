@@ -653,7 +653,8 @@ function processARMReviewWorkflowLabels(
 
   // Block if ARMModelingReviewRequired is present (new RP namespace detected)
   const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
-  const blockedOnArmModeling = armModelingReviewLabel.present;
+  // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
+  const blockedOnArmModeling = armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
 
   const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
