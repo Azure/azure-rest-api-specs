@@ -64,6 +64,12 @@
         "x-ms-examples": {
           "KustoClustersCreateOrUpdate": {
             "$ref": "./examples/KustoClustersCreateOrUpdate.json"
+          },
+          "KustoClusterCreateWithCMKUserAssignedIdentity": {
+            "$ref": "./examples/KustoClusterCreateWithCMKUserAssignedIdentity.json"
+          },
+          "KustoClusterCreateWithCMKFederatedIdentity": {
+            "$ref": "./examples/KustoClusterCreateWithCMKFederatedIdentity.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -136,6 +142,18 @@
         "x-ms-examples": {
           "KustoClustersUpdate": {
             "$ref": "./examples/KustoClustersUpdate.json"
+          },
+          "KustoClusterUpdateWithCMKFederatedIdentity": {
+            "$ref": "./examples/KustoClusterUpdateWithCMKFederatedIdentity.json"
+          },
+          "KustoClusterUpdateEnableCMK": {
+            "$ref": "./examples/KustoClusterUpdateEnableCMK.json"
+          },
+          "KustoClusterUpdateCMKKeyRotation": {
+            "$ref": "./examples/KustoClusterUpdateCMKKeyRotation.json"
+          },
+          "KustoClusterUpdateDisableCMK": {
+            "$ref": "./examples/KustoClusterUpdateDisableCMK.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2123,6 +2141,9 @@
         "x-ms-examples": {
           "KustoScriptsGet": {
             "$ref": "./examples/KustoScriptsGet.json"
+          },
+          "KustoScriptsGetWithManagedIdentity": {
+            "$ref": "./examples/KustoScriptsGetWithManagedIdentity.json"
           }
         },
         "description": "Gets a Kusto cluster database script.",
@@ -2169,6 +2190,9 @@
         "x-ms-examples": {
           "KustoScriptsCreateOrUpdate": {
             "$ref": "./examples/KustoScriptsCreateOrUpdate.json"
+          },
+          "KustoScriptsCreateOrUpdateWithManagedIdentity": {
+            "$ref": "./examples/KustoScriptsCreateOrUpdateWithManagedIdentity.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3663,8 +3687,14 @@
           "KustoDataConnectionValidation": {
             "$ref": "./examples/KustoDataConnectionValidationAsync.json"
           },
+          "KustoDataConnectionEventHubWithManagedIdentityValidationAsync": {
+            "$ref": "./examples/KustoDataConnectionEventHubWithManagedIdentityValidationAsync.json"
+          },
           "KustoDataConnectionEventGridValidation": {
             "$ref": "./examples/KustoDataConnectionEventGridValidationAsync.json"
+          },
+          "KustoDataConnectionEventGridWithManagedIdentityValidationAsync": {
+            "$ref": "./examples/KustoDataConnectionEventGridWithManagedIdentityValidationAsync.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3843,8 +3873,14 @@
           "KustoDataConnectionsGet": {
             "$ref": "./examples/KustoDataConnectionsGet.json"
           },
+          "KustoDataConnectionsEventHubWithManagedIdentityGet": {
+            "$ref": "./examples/KustoDataConnectionsEventHubWithManagedIdentityGet.json"
+          },
           "KustoDataConnectionsEventGridGet": {
             "$ref": "./examples/KustoDataConnectionsEventGridGet.json"
+          },
+          "KustoDataConnectionsEventGridWithManagedIdentityGet": {
+            "$ref": "./examples/KustoDataConnectionsEventGridWithManagedIdentityGet.json"
           },
           "KustoDataConnectionsCosmosDbGet": {
             "$ref": "./examples/KustoDataConnectionsCosmosDbGet.json"
@@ -3895,8 +3931,14 @@
           "KustoDataConnectionsCreateOrUpdate": {
             "$ref": "./examples/KustoDataConnectionsCreateOrUpdate.json"
           },
+          "KustoDataConnectionsEventHubWithManagedIdentityCreateOrUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventHubWithManagedIdentityCreateOrUpdate.json"
+          },
           "KustoDataConnectionsEventGridCreateOrUpdate": {
             "$ref": "./examples/KustoDataConnectionsEventGridCreateOrUpdate.json"
+          },
+          "KustoDataConnectionsEventGridWithManagedIdentityCreateOrUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventGridWithManagedIdentityCreateOrUpdate.json"
           },
           "KustoDataConnectionsCosmosDbCreateOrUpdate": {
             "$ref": "./examples/KustoDataConnectionsCosmosDbCreateOrUpdate.json"
@@ -3975,8 +4017,14 @@
           "KustoDataConnectionsUpdate": {
             "$ref": "./examples/KustoDataConnectionsUpdate.json"
           },
+          "KustoDataConnectionsEventHubWithManagedIdentityUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventHubWithManagedIdentityUpdate.json"
+          },
           "KustoDataConnectionsEventGridUpdate": {
             "$ref": "./examples/KustoDataConnectionsEventGridUpdate.json"
+          },
+          "KustoDataConnectionsEventGridWithManagedIdentityUpdate": {
+            "$ref": "./examples/KustoDataConnectionsEventGridWithManagedIdentityUpdate.json"
           },
           "KustoDataConnectionsCosmosDbUpdate": {
             "$ref": "./examples/KustoDataConnectionsCosmosDbUpdate.json"
@@ -4678,10 +4726,11 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Public network access to the cluster is enabled by default. When disabled, only private endpoint connection to the cluster is allowed",
+          "description": "Public network access to the cluster is enabled by default. When disabled, only private endpoint connections to the cluster are allowed. When 'SecuredByPerimeter', inbound and outbound traffic is controlled by the NSP profile's access rules.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -5493,6 +5542,80 @@
       ],
       "description": "Class representing the Kusto event hub connection properties."
     },
+    "EventHubConnectionWithManagedIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "eventHubResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the event hub to be used to create a data connection."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventHubDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "eventSystemProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "System properties of the event hub"
+        },
+        "compression": {
+          "$ref": "#/definitions/Compression",
+          "description": "The event hub messages compression type"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object ID of the managedIdentityResourceId"
+        },
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true
+          },
+          "default": "Single"
+        },
+        "retrievalStartDate": {
+          "description": "When defined, the data connection retrieves existing Event hub events created since the Retrieval start date. It can only retrieve events retained by the Event hub, based on its retention period.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "eventHubResourceIdForManagedIdentity",
+        "consumerGroup",
+        "managedIdentityResourceId"
+      ],
+      "description": "Class representing the Kusto event hub connection with required managed identity properties."
+    },
     "IotHubConnectionProperties": {
       "type": "object",
       "properties": {
@@ -5577,7 +5700,8 @@
         "PARQUET",
         "ORC",
         "APACHEAVRO",
-        "W3CLOGFILE"
+        "W3CLOGFILE",
+        "AZMONSTREAM"
       ],
       "x-ms-enum": {
         "name": "eventHubDataFormat",
@@ -5603,7 +5727,8 @@
         "PARQUET",
         "ORC",
         "APACHEAVRO",
-        "W3CLOGFILE"
+        "W3CLOGFILE",
+        "AZMONSTREAM"
       ],
       "x-ms-enum": {
         "name": "iotHubDataFormat",
@@ -5629,7 +5754,8 @@
         "PARQUET",
         "ORC",
         "APACHEAVRO",
-        "W3CLOGFILE"
+        "W3CLOGFILE",
+        "AZMONSTREAM"
       ],
       "x-ms-enum": {
         "name": "eventGridDataFormat",
@@ -5734,6 +5860,81 @@
         "consumerGroup"
       ],
       "description": "Class representing the Kusto event grid connection properties."
+    },
+    "EventGridConnectionWithManagedIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "storageAccountResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the storage account where the data resides."
+        },
+        "eventHubResourceIdForManagedIdentity": {
+          "type": "string",
+          "description": "The resource ID of the event hub that is subscribed to the storage account events."
+        },
+        "eventGridResourceId": {
+          "type": "string",
+          "description": "The resource ID where the event grid is configured to send events."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventGridDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "ignoreFirstRecord": {
+          "type": "boolean",
+          "description": "A Boolean value that, if set to true, indicates that ingestion should ignore the first record of every file"
+        },
+        "blobStorageEventType": {
+          "$ref": "#/definitions/BlobStorageEventType",
+          "description": "The name of blob storage event type to process."
+        },
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub and storage account."
+        },
+        "managedIdentityObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object ID of managedIdentityResourceId"
+        },
+        "databaseRouting": {
+          "type": "string",
+          "description": "Indication for database routing information from the data connection, by default only database routing information is allowed",
+          "enum": [
+            "Single",
+            "Multi"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseRouting",
+            "modelAsString": true
+          },
+          "default": "Single"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "required": [
+        "storageAccountResourceIdForManagedIdentity",
+        "eventHubResourceIdForManagedIdentity",
+        "consumerGroup",
+        "managedIdentityResourceId"
+      ],
+      "description": "Class representing the Kusto event grid connection with mandatory managed identity properties."
     },
     "CosmosDbDataConnectionProperties": {
       "type": "object",
@@ -6223,6 +6424,10 @@
             "name": "PrincipalPermissionsAction",
             "modelAsString": true
           }
+        },
+        "managedIdentityResourceId": {
+          "description": "The resource identifier of the managed identity to be used. When provided, the managed identity will be used to read the script content from the scriptUrl.",
+          "type": "string"
         }
       },
       "description": "A class representing database script property."
@@ -6577,6 +6782,279 @@
         }
       }
     },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "The Network Security Perimeter configuration resource.",
+      "type": "object",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the Network Security Perimeter Configuration",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Result of the List Network Security Perimeter configuration operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of Network Security Perimeter configurations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Properties of the Network Security Perimeter Configuration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of Network Security Perimeter configuration propagation",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues if any",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "readOnly": true
+        },
+        "resourceAssociation": {
+          "description": "Information about resource association",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource association",
+              "type": "string"
+            },
+            "accessMode": {
+              "description": "Access Mode of the resource association",
+              "enum": [
+                "Enforced",
+                "Learning",
+                "Audit"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceAssociationAccessMode",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "profile": {
+          "description": "Network Security Perimeter profile",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource",
+              "type": "string"
+            },
+            "accessRulesVersion": {
+              "description": "Current access rules version",
+              "type": "number"
+            },
+            "accessRules": {
+              "description": "List of Access Rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "diagnosticSettingsVersion": {
+              "description": "Diagnostic settings version",
+              "type": "number"
+            },
+            "enabledLogCategories": {
+              "description": "Enabled logging categories",
+              "type": "array",
+              "items": {
+                "description": "Logging category",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "description": "Describes provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the issue",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of provisioning issue",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "issueType": {
+              "description": "Type of issue",
+              "enum": [
+                "Unknown",
+                "ConfigurationPropagationFailure"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IssueType",
+                "modelAsString": true
+              }
+            },
+            "severity": {
+              "description": "Severity of the issue.",
+              "enum": [
+                "Warning",
+                "Error"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Severity",
+                "modelAsString": true
+              }
+            },
+            "description": {
+              "description": "Description of the issue",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NspAccessRule": {
+      "description": "Information of Access Rule in Network Security Perimeter profile",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Access Rule",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "direction": {
+              "description": "Direction of Access Rule",
+              "enum": [
+                "Inbound",
+                "Outbound"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NspAccessRuleDirection",
+                "modelAsString": true
+              }
+            },
+            "addressPrefixes": {
+              "description": "Address prefixes in the CIDR format for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "IP Address",
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "description": "Subscriptions for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "Subscription for inbound rule",
+                "type": "object",
+                "readOnly": true,
+                "properties": {
+                  "id": {
+                    "description": "The ARM identifier of subscription",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "networkSecurityPerimeters": {
+              "description": "NetworkSecurityPerimeters for inbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/NetworkSecurityPerimeter"
+              }
+            },
+            "fullyQualifiedDomainNames": {
+              "description": "FQDN for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "description": "Fully qualified domain name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "The ARM identifier of the resource",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Guid of the resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
     "OutboundNetworkDependenciesEndpointListResult": {
       "description": "Collection of Outbound Environment Endpoints",
       "required": [
@@ -6788,7 +7266,9 @@
             "EventHub",
             "EventGrid",
             "IotHub",
-            "CosmosDb"
+            "CosmosDb",
+            "EventHubWithManagedIdentity",
+            "EventGridWithManagedIdentity"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6946,6 +7426,23 @@
       "description": "Class representing an event hub data connection.",
       "x-ms-discriminator-value": "EventHub"
     },
+    "EventHubDataConnectionWithManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The Event Hub data connection properties to validate.",
+          "$ref": "#/definitions/EventHubConnectionWithManagedIdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an event hub data connection with required managed identity.",
+      "x-ms-discriminator-value": "EventHubWithManagedIdentity"
+    },
     "IotHubDataConnection": {
       "type": "object",
       "properties": {
@@ -6979,6 +7476,23 @@
       ],
       "description": "Class representing an Event Grid data connection.",
       "x-ms-discriminator-value": "EventGrid"
+    },
+    "EventGridDataConnectionWithManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the Event Grid data connection with mandatory managed identity.",
+          "$ref": "#/definitions/EventGridConnectionWithManagedIdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an Event Grid data connection with mandatory managed identity.",
+      "x-ms-discriminator-value": "EventGridWithManagedIdentity"
     },
     "CosmosDbDataConnection": {
       "type": "object",
@@ -7465,8 +7979,13 @@
         },
         "userIdentity": {
           "type": "string",
-          "description": "The user assigned identity (ARM resource id) that has access to the key.",
+          "description": "The user assigned identity (ARM resource id) that has access to the key. The identity must have 'Get', 'Wrap Key', and 'Unwrap Key' permissions on the Key Vault key, or be assigned the 'Key Vault Crypto Service Encryption User' role.",
           "x-ms-client-name": "UserIdentity"
+        },
+        "federatedIdentityClientId": {
+          "type": "string",
+          "description": "The application (client) ID of the multi-tenant Microsoft Entra application. Used for cross-tenant customer-managed key scenarios where the encryption key is stored in a different tenant than the cluster. The application must be configured with the user-assigned managed identity as a federated identity credential.",
+          "x-ms-client-name": "FederatedIdentityClientId"
         }
       }
     },
@@ -7866,6 +8385,15 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "pattern": "^.*$"
+    },
+    "networkSecurityPerimeterConfigurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
+      "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
       "name": "privateEndpointConnectionName",
