@@ -2563,7 +2563,7 @@ alias LeaseDurationHeaderParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust,javascript,python")
+  @alternateType(Record<string>, "rust,javascript,python,csharp")
   @header("x-ms-meta")
   metadata?: string;
 };

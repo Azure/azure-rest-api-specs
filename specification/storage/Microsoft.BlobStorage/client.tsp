@@ -113,12 +113,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
-@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "!csharp");
+@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "!csharp");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
@@ -142,7 +142,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 @@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
   "expiry",
-  "!python"
+  "!python, !csharp"
 );
 
 @@alternateType(AccessPolicy.start, string, "javascript");
@@ -436,3 +436,48 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
   setImmutabilityPolicyOptionalExpiry,
   "python,csharp,javascript,go"
 );
+
+// C# customizations
+@@alternateType(AccessPolicy.start, utcDateTime, "csharp");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
+@@alternateType(LeaseBreakPeriodParameter.breakPeriod, int64, "csharp");
+@@alternateType(LeaseDurationHeaderParameter.duration, int64, "csharp");
+@@alternateType(BlobItem.metadata, Record<string>, "csharp");
+@@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "csharp");
+@@alternateType(KeyInfo.delegatedUserTid, string, "csharp");
+
+@@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
+@@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
+@@clientName(Blob, "BlobRestClient", "csharp");
+@@clientName(BlobItem, "BlobItemInternal", "csharp");
+@@clientName(Container, "ContainerRestClient", "csharp");
+@@clientName(Container.listBlobs, "ListBlobFlatSegment", "csharp");
+@@clientName(Service, "ServiceRestClient", "csharp");
+@@clientName(BlockBlob, "BlockBlobRestClient", "csharp");
+@@clientName(PageBlob, "PageBlobRestClient", "csharp");
+@@clientName(AppendBlob, "AppendBlobRestClient", "csharp");
+@@clientName(BlobProperties, "BlobPropertiesInternal", "csharp");
+@@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "csharp");
+@@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "csharp");
+@@clientName(LeaseDuration, "LeaseDurationType", "csharp");
+@@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "csharp");
+@@clientName(ContainerItem.delete, "deleted", "csharp");
+@@clientName(Blob.setProperties, "SetHttpHeaders", "csharp");
+@@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "csharp");
+@@clientName(Container.findBlobsByTags, "FilterBlobs", "csharp");
+@@clientName(Service.findBlobsByTags, "FilterBlobs", "csharp");
+@@clientName(Service.listContainers, "ListContainersSegment", "csharp");
+@@clientName(QueryType, "QueryFormatType", "csharp");
+@@clientName(QueryType.JSON, "Json", "csharp");
+
+@@access(BlobProperties, Access.internal, "csharp");
+@@access(BlobItem, Access.internal, "csharp");
+
+@@clientOption(MetadataHeaders.`metadata`, "collectionHeaderPrefix", "x-ms-meta-", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers, "csharp");
