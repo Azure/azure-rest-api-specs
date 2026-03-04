@@ -651,7 +651,11 @@ function processARMReviewWorkflowLabels(
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
+  // Block if ARMModelingReviewRequired is present (new RP namespace detected)
+  const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
+  const blockedOnArmModeling = armModelingReviewLabel.present;
+
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -707,7 +711,8 @@ function processARMReviewWorkflowLabels(
   console.log(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
-      `blockedOnRpaas: ${blockedOnRpaas}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}, ` +
+      `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
 }
@@ -884,6 +889,18 @@ const rulesPri0NotReadyForArmReview = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", "ARMModelingReviewRequired"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMModelingReviewRequired</code> label. " +
+        "This means it is introducing a new Resource Provider namespace. " +
+        "New RPs require a discussion with the ARM Modelling Review team before merging.<br/>" +
+        "Please schedule a meeting at " +
+        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.`,
+    ),
   },
 ];
 
