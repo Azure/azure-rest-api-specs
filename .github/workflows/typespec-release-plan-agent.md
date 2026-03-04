@@ -1,10 +1,12 @@
 ---
-description: Update or create release plans when TypeSpec API specs are pushed to a PR branch.
+description: Update or create release plans when TypeSpec API specs are pushed to a PR branch or when a comment requests it.
 on:
   workflow_dispatch:
   push:
     branches:
       - update_release_plan
+  issue_comment:
+    types: [created]
 permissions:
   contents: read
   actions: read
@@ -43,10 +45,20 @@ You are an AI agent that automatically updates or creates release plans when Typ
 
 ## Step 1: Find Associated Pull Request
 
-Determine the pull request associated with this push event.
+Determine the pull request associated with this event.
+
+### Push trigger
 
 - Identify the pull request that caused the workflow trigger.
 - Use test PR `https://github.com/Azure/azure-rest-api-specs/pull/40692` as API spec PR.
+
+### Issue comment trigger
+
+- This trigger fires on `issue_comment` → `created` events.
+- First, verify the comment is on a **pull request** (not an issue). If `github.event.issue.pull_request` is absent, call `noop` with guidance ("Comment is on an issue, not a pull request — skipping") and stop.
+- Verify the pull request has the `TypeSpec` label by checking `github.event.issue.labels`. If the `TypeSpec` label is **not** present, call `noop` with guidance ("PR does not have the TypeSpec label — skipping") and stop.
+- Check if the comment body contains `Create release plan` or `Update release plan` (case-insensitive match). If neither phrase is found, call `noop` with guidance ("Comment does not contain a release plan command — skipping") and stop.
+- Use the pull request number from `github.event.issue.number` and build the PR URL: `https://github.com/${{ github.repository }}/pull/<PR_NUMBER>`.
 
 ## Step 2: Check TypeSpec Label
 

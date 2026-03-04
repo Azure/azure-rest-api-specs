@@ -21,17 +21,20 @@
 #
 # For more information: https://github.github.com/gh-aw/introduction/overview/
 #
-# Update or create release plans when TypeSpec API specs are pushed to a PR branch.
+# Update or create release plans when TypeSpec API specs are pushed to a PR branch or when a comment requests it.
 #
 # Resolved workflow manifest:
 #   Imports:
 #     - shared-github-aw-imports/global_networks_auth_import.md
 #     - shared-github-aw-imports/install_azsdk_cli_import.md
 #
-# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"06b37fb8add6eafb6fd47b6816ffac76b310a9529fb81fdc8a1988317b9d7dca","compiler_version":"v0.52.1"}
+# gh-aw-metadata: {"schema_version":"v1","frontmatter_hash":"05a8f34186a72fa3d3166ad5d4f1abac8431c2e917ef594b2f4171e7f831952a","compiler_version":"v0.52.1"}
 
 name: "TypeSpec Release Plan Update Agent"
 "on":
+  issue_comment:
+    types:
+    - created
   push:
     branches:
     - update_release_plan
@@ -40,7 +43,7 @@ name: "TypeSpec Release Plan Update Agent"
 permissions: {}
 
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ github.ref || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ github.event.issue.number || github.run_id }}"
 
 run-name: "TypeSpec Release Plan Update Agent"
 
@@ -59,10 +62,13 @@ jobs:
     permissions:
       contents: read
     outputs:
+      body: ${{ steps.sanitized.outputs.body }}
       comment_id: ""
       comment_repo: ""
       model: ${{ steps.generate_aw_info.outputs.model }}
       secret_verification_result: ${{ steps.validate-secret.outputs.verification_result }}
+      text: ${{ steps.sanitized.outputs.text }}
+      title: ${{ steps.sanitized.outputs.title }}
     steps:
       - name: Setup Scripts
         uses: github/gh-aw/actions/setup@a86e657586e4ac5f549a790628971ec02f6a4a8f # v0.52.1
@@ -114,6 +120,15 @@ jobs:
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
             setupGlobals(core, github, context, exec, io);
             const { main } = require('/opt/gh-aw/actions/check_workflow_timestamp_api.cjs');
+            await main();
+      - name: Compute current body text
+        id: sanitized
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+            setupGlobals(core, github, context, exec, io);
+            const { main } = require('/opt/gh-aw/actions/compute_text.cjs');
             await main();
       - name: Create prompt with built-in context
         env:
@@ -826,7 +841,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           WORKFLOW_NAME: "TypeSpec Release Plan Update Agent"
-          WORKFLOW_DESCRIPTION: "Update or create release plans when TypeSpec API specs are pushed to a PR branch."
+          WORKFLOW_DESCRIPTION: "Update or create release plans when TypeSpec API specs are pushed to a PR branch or when a comment requests it."
           HAS_PATCH: ${{ steps.collect_output.outputs.has_patch }}
         with:
           script: |
