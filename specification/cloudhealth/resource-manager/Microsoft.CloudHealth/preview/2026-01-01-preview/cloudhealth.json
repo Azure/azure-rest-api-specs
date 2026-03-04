@@ -2508,12 +2508,6 @@
           "$ref": "#/definitions/DiscoveryRuleSpecification",
           "description": "Specification of the discovery rule defining how entities are discovered."
         },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the discovery rule was (soft-)deleted.",
-          "readOnly": true
-        },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
           "description": "Error details if the last discovery operation failed.",
@@ -2782,12 +2776,6 @@
           "description": "Discovered by which discovery rule. If set, the entity cannot be deleted manually.",
           "readOnly": true
         },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the entity was (soft-)deleted",
-          "readOnly": true
-        },
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "Health state of this entity",
@@ -2996,7 +2984,7 @@
           "$ref": "#/definitions/HealthReportEvaluationRule",
           "description": "Evaluation rules that were used to determine the reported health state"
         },
-        "expiresIn": {
+        "expiresInMinutes": {
           "type": "integer",
           "format": "int32",
           "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
@@ -3531,12 +3519,6 @@
           "$ref": "#/definitions/discoveryRuleName",
           "description": "Discovered by which discovery rule. If set, the relationship cannot be deleted manually.",
           "readOnly": true
-        },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the relationship was (soft-)deleted",
-          "readOnly": true
         }
       },
       "required": [
@@ -3737,12 +3719,6 @@
         "evaluationRules": {
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
-        },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the signal definition was (soft-)deleted",
-          "readOnly": true
         }
       },
       "discriminator": "signalKind",

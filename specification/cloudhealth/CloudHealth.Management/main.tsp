@@ -160,6 +160,7 @@ model SignalDefinitionProperties {
   @doc("Evaluation rules for the signal definition")
   evaluationRules: EvaluationRule;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the signal definition was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -515,6 +516,7 @@ model EntityProperties {
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the entity was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -781,7 +783,7 @@ model AzureResourceSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     ResourceMetricSignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -793,7 +795,7 @@ model LogAnalyticsSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     LogAnalyticsQuerySignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -805,7 +807,7 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     PrometheusMetricsSignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -987,6 +989,7 @@ model RelationshipProperties {
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -1036,6 +1039,7 @@ model DiscoveryRuleProperties {
   @doc("Specification of the discovery rule defining how entities are discovered.")
   specification: DiscoveryRuleSpecification;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the discovery rule was (soft-)deleted.")
   deletionDate?: utcDateTime;
@@ -1239,7 +1243,7 @@ model HealthReportRequest {
   @doc("Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.")
   @minValue(1)
   @maxValue(10080) // = 1 week
-  expiresIn?: int32 = 60;
+  expiresInMinutes?: int32 = 60;
 
   @doc("Optional additional context or description for the health report")
   additionalContext?: string4096;
