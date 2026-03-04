@@ -1,10 +1,12 @@
 parameters:
   "service-dir":
-    default: "sdk/applicationinsights"
+    default: "sdk/monitor"
   "dependencies":
     default: ""
+
 emit:
   - "@azure-tools/typespec-autorest"
+
 options:
   "@azure-tools/typespec-autorest":
     emit-lro-options: "none"
@@ -13,17 +15,17 @@ options:
     omit-unreachable-types: true
     output-file: "{version-status}/{version}/livemetrics.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-applicationinsights-livemetrics"
-    namespace: "azure.applicationinsights.livemetrics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-opentelemetry-exporter/azure/monitor/opentelemetry/exporter/_quickpulse/_generated"
+    package-name: "azure-monitor-opentelemetry-exporter"
+    namespace: "livemetrics"
     flavor: azure
-    generate-test: true
-    generate-sample: true
-  "@azure-tools/typespec-csharp":
+    generate-packaging-files: false
+    tracing: false
+  "@azure-typespec/http-client-csharp":
+    package-name: "Azure.Monitor.OpenTelemetry.LiveMetrics"
+    namespace: "{package-name}"
+    model-namespace: true
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "LiveMetrics"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/livemetrics-rest"
     generate-metadata: true
