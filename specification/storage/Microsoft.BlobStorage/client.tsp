@@ -169,3 +169,43 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
+
+op containerSetMetadataOverride(
+  ...ApiVersionHeader,
+  ...ClientRequestIdHeader,
+  ...TimeoutParameter,
+  ...LeaseIdOptionalParameter,
+
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string,
+
+  ...IfModifiedSinceParameter,
+): void;
+
+@@override(Storage.Blob.Container.setMetadata, containerSetMetadataOverride);
+
+op blobSetMetadataOverride(
+  ...ApiVersionHeader,
+  ...ClientRequestIdHeader,
+  ...TimeoutParameter,
+
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string,
+
+  ...LeaseIdOptionalParameter,
+  ...EncryptionKeyParameter,
+  ...EncryptionKeySha256Parameter,
+  ...EncryptionAlgorithmParameter,
+  ...EncryptionScopeParameter,
+  ...IfModifiedSinceParameter,
+  ...IfUnmodifiedSinceParameter,
+  ...IfNoneMatchParameter,
+  ...IfMatchParameter,
+  ...IfTagsParameter,
+): void;
+
+@@override(Storage.Blob.Blob.setMetadata, blobSetMetadataOverride);
