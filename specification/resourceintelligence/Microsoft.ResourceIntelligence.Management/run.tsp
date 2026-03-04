@@ -114,25 +114,4 @@ interface LatestRuns {
      */
     @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
   ): Run | ErrorResponse;
-
-  /**
-   * Creates or updates the latest run.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceIntelligence/agents/{agentName}/runs/latest")
-  @put
-  createOrUpdate(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the agent.
-     */
-    @path @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$") agentName: string,
-
-    /**
-     * The run request parameters.
-     */
-    @body body: RunRequest,
-  ): Run | ErrorResponse;
 }

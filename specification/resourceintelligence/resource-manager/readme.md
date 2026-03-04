@@ -46,6 +46,9 @@ suppressions:
     reason: "The /runs/latest endpoint is a custom singleton-like route for retrieving the latest run for an agent."
   - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: "The generatequery API from the 2025-08-01-preview version is superseded by the new 2026-02-01-preview API."
+  - code: AvoidAdditionalProperties
+    from: resourceintelligence.json
+    reason: "The inputOverrides property requires a flexible key-value dictionary structure for passing runtime overrides, matching the previous API version."
 ```
 
 ### Tag: package-preview-2025-08
