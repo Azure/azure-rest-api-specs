@@ -236,3 +236,14 @@ using Microsoft.SqlVirtualMachine;
 @@alternateType(AutoBackupSettings.storageAccountUrl, url, "csharp");
 @@alternateType(KeyVaultCredentialSettings.azureKeyVaultUrl, url, "csharp");
 @@alternateType(WsfcDomainProfile.storageAccountUrl, url, "csharp");
+
+// Java-specific client names to mitigate migration breaks
+@@clientName(SQLStorageSettings, "SqlStorageSettings", "java");
+@@clientName(SQLTempDbSettings, "SqlTempDbSettings", "java");
+@@clientName(AADAuthenticationSettings, "AadAuthenticationSettings", "java");
+@@clientName(SQLInstanceSettings, "SqlInstanceSettings", "java");
+@@clientName(PrivateIPAddress, "PrivateIpAddress", "java");
+@@clientName(SqlConnectivityUpdateSettings.sqlAuthUpdateUserName,
+  "sqlAuthUpdateUsername",
+  "java"
+);
