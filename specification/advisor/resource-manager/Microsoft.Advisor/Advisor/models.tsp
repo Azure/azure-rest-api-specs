@@ -607,9 +607,9 @@ model RecommendationProperties {
   /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
-   @renamedFrom(Versions.v2026_02_01_preview, "lastUpdated")
-   @removed(Versions.v2026_02_01_preview)
-   oldlastUpdated?: utcDateTime;
+  @renamedFrom(Versions.v2026_02_01_preview, "lastUpdated")
+  @removed(Versions.v2026_02_01_preview)
+  oldlastUpdated?: utcDateTime;
 
   /**
    * The recommendation metadata.
