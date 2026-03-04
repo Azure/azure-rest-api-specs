@@ -6,3 +6,5 @@ using Microsoft.App;
 
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
+
+@@clientName(Microsoft.App, "ContainerAppsApiManager", "java");
