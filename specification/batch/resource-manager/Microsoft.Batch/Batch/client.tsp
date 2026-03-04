@@ -438,6 +438,7 @@ using Microsoft.Batch;
   Usage.input,
   "csharp"
 );
+@@usage(NetworkSecurityPerimeterConfiguration, Usage.input, "csharp");
 @@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
   "VmGuestStateOnly",
   "csharp"
