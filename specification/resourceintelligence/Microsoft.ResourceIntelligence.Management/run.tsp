@@ -77,6 +77,11 @@ interface Runs {
   get is ArmResourceRead<Run>;
 
   /**
+   * Creates or updates a run.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Run>;
+
+  /**
    * Deletes a run.
    */
   delete is ArmResourceDeleteSync<Run>;
