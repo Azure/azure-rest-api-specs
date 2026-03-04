@@ -165,20 +165,16 @@ model QuotaBucketRequestReplacement
 
 // Remove 'Resource' from model names
 @@clientName(LoadTestMappingResource, "LoadTestMapping", "csharp");
-@@clientName(LoadTestProfileMappingResource, "LoadTestProfileMapping", "csharp");
+@@clientName(LoadTestProfileMappingResource,
+  "LoadTestProfileMapping",
+  "csharp"
+);
 @@clientName(MaxMonthlyVirtualUserHoursResourceProperties,
   "MaxMonthlyVirtualUserHoursProperties",
   "csharp"
 );
-@@clientName(MaxMonthlyVirtualUserHoursResource, "MaxMonthlyVirtualUserHours", "csharp");
-
-// Remove 'Resource' from update properties model names
-@@clientName(LoadTestMappingResourceUpdateProperties,
-  "LoadTestMappingUpdateProperties",
-  "csharp"
-);
-@@clientName(LoadTestProfileMappingResourceUpdateProperties,
-  "LoadTestProfileMappingUpdateProperties",
+@@clientName(MaxMonthlyVirtualUserHoursResource,
+  "MaxMonthlyVirtualUserHours",
   "csharp"
 );
 
