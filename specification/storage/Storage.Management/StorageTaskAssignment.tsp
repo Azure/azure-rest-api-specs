@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./StorageAccount.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
@@ -125,6 +127,13 @@ interface StorageTaskAssignments {
     },
     Error = ErrorResponse
   >;
+
+  /**
+   * Stops any active running storage action for the storage task assignment
+   */
+  @added(Versions.v2025_08_01)
+  @action("stopAssignment")
+  stopAssignment is ArmResourceActionAsync<StorageTaskAssignment, void, void>;
 }
 
 @@maxLength(StorageTaskAssignment.name, 24);
