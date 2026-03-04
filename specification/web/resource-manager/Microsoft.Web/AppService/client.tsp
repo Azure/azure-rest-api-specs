@@ -2896,6 +2896,8 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   "go"
 );
 
+@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse");
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op checkNameAvailabilityCustomized(
