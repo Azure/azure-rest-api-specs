@@ -261,9 +261,28 @@ export default async function detectNewResourceProvider({ context, core }) {
     core.info("New resource provider(s) detected with valid ARM lease — no action required.");
   }
 
+  core.info("Checking for new resource types in existing RPs...");
+  const newRtResult = await checkNewResourceTypes(repoRoot, rmFiles, core);
+
+  // Combine outcomes: if either check failed/requires review, we should return that status
+  const finalStatus =
+    !allLeasesValid || newRtResult.status.includes("invalid") || newRtResult.status.includes("review")
+      ? "validation-failed"
+      : "validation-passed";
+
+  // Merge label actions: 'add' wins over 'remove' wins over 'none'
+  /** @type {ManagedLabelActions} */
+  const combinedLabelActions = { ...getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required") };
+  for (const [label, action] of Object.entries(newRtResult.labelActions)) {
+    const currentAction = combinedLabelActions[label];
+    if (action === LabelAction.Add || (action === LabelAction.Remove && currentAction === LabelAction.None)) {
+      combinedLabelActions[label] = action;
+    }
+  }
+
   return {
-    status: allLeasesValid ? "new-rp-all-leases-valid" : "new-rp-invalid-lease",
-    labelActions: getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required"),
+    status: finalStatus,
+    labelActions: combinedLabelActions,
   };
 }
 
