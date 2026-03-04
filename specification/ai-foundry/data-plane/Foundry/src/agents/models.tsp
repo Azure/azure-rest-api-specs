@@ -389,17 +389,14 @@ model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   type: TelemetryEndpointAuthType.header;
 
   @doc("The name of the HTTP header to inject the secret value into.")
-  @encodedName("application/json", "headerName")
   @example("X-Otlp-Api-Key")
   header_name: string;
 
   @doc("The identifier of the secret store or connection.")
-  @encodedName("application/json", "secretId")
   @example("my-secret-store")
   secret_id: string;
 
   @doc("The key within the secret to retrieve the authentication value.")
-  @encodedName("application/json", "secretKey")
   @example("OTLP_KEY")
   secret_key: string;
 }
