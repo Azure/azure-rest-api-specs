@@ -7,7 +7,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 using Azure.ResourceManager;
 
-@useDependency(Microsoft.LoadTestService.APIVersions.v2022_12_01)
 namespace Customizations;
 
 @@clientName(LoadTests.updateLoadtest::parameters.properties,
