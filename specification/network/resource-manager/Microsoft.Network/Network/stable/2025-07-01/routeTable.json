@@ -620,15 +620,15 @@
         },
         "nextHopType": {
           "$ref": "#/definitions/RouteNextHopType",
-          "description": "The type of Azure hop the packet should be sent to."
+          "description": "The type of Azure hop the packet should be sent to. When set to 'VirtualAppliance', the 'nextHopIpAddress' property is required and 'nextHop' must not be set. When set to 'VirtualApplianceEcmp', the 'nextHop' property is required and 'nextHopIpAddress' must not be set."
         },
         "nextHopIpAddress": {
           "type": "string",
-          "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+          "description": "The IP address packets should be forwarded to. Required when nextHopType is 'VirtualAppliance'. Must not be set when nextHopType is 'VirtualApplianceEcmp'; use the 'nextHop' property instead for ECMP routes."
         },
         "nextHop": {
           "$ref": "#/definitions/RouteNextHopEcmp",
-          "description": "The next hop for an ECMP route. Only used when the next hop type is VirtualApplianceEcmp."
+          "description": "The next hop for an ECMP route. Required when nextHopType is 'VirtualApplianceEcmp'. Must not be set for other nextHopType values."
         },
         "provisioningState": {
           "readOnly": true,
