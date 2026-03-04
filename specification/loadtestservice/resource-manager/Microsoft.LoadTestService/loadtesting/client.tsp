@@ -23,7 +23,7 @@ namespace Customizations;
     name: "LoadTestMgmtClient",
     service: Microsoft.LoadTestService,
   },
-  "javascript"
+  "!csharp"
 )
 @armResourceOperations
 interface LoadTests {
