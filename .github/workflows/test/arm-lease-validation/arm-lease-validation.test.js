@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-// Mock fs/promises before imports
-vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
+/** @type {import("vitest").MockedFunction<typeof import("fs/promises").readFile>} */
+const mockReadFile = vi.hoisted(() => vi.fn());
 
-import * as fs from "fs/promises";
-
-const mockReadFile = /** @type {import("vitest").Mock} */ (fs.readFile);
+vi.mock("fs/promises", () => ({
+  readFile: mockReadFile,
+}));
 
 import {
   isFileAllowed,
@@ -96,7 +96,7 @@ describe("validate-arm-leases", () => {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "P90D",
+          duration: "P90D",
           reviewer: "John Doe",
         },
       };
@@ -108,7 +108,7 @@ describe("validate-arm-leases", () => {
         lease: {
           "resource-provider": "microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "P90D",
+          duration: "P90D",
           reviewer: "John Doe",
         },
       };
@@ -120,47 +120,47 @@ describe("validate-arm-leases", () => {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "01-15-2026",
-          "duration-days": "P90D",
+          duration: "P90D",
           reviewer: "John Doe",
         },
       };
       expect(leaseSchema.safeParse(invalid).success).toBe(false);
     });
 
-    it("rejects invalid duration-days format", () => {
+    it("rejects invalid duration format", () => {
       const invalid = {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "90 days",
+          duration: "90 days",
           reviewer: "John Doe",
         },
       };
       expect(leaseSchema.safeParse(invalid).success).toBe(false);
     });
 
-    it("rejects duration exceeding 180 days", () => {
-      const invalid = {
+    it("accepts month-based durations like P6M", () => {
+      const valid = {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "P200D",
+          duration: "P6M",
           reviewer: "John Doe",
         },
       };
-      expect(leaseSchema.safeParse(invalid).success).toBe(false);
+      expect(leaseSchema.safeParse(valid).success).toBe(true);
     });
 
-    it("rejects zero duration", () => {
-      const invalid = {
+    it("accepts combined durations like P1Y2M3D", () => {
+      const valid = {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "P0D",
+          duration: "P1Y2M3D",
           reviewer: "John Doe",
         },
       };
-      expect(leaseSchema.safeParse(invalid).success).toBe(false);
+      expect(leaseSchema.safeParse(valid).success).toBe(true);
     });
 
     it("rejects empty reviewer", () => {
@@ -168,7 +168,7 @@ describe("validate-arm-leases", () => {
         lease: {
           "resource-provider": "Microsoft.Test",
           startdate: "2026-06-01",
-          "duration-days": "P90D",
+          duration: "P90D",
           reviewer: "",
         },
       };
@@ -184,7 +184,7 @@ describe("validate-arm-leases", () => {
     const validYaml = `lease:
   resource-provider: Microsoft.Test
   startdate: "2027-06-01"
-  duration-days: P90D
+  duration: P90D
   reviewer: John Doe
 `;
 

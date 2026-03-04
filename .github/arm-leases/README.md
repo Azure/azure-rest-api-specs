@@ -20,13 +20,13 @@ This directory is intended to be governed via CODEOWNERS to ensure proper govern
 
 Each lease must be placed in the following directory structure:
 ```
-.github/arm-leases/<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml
+.github/arm-leases/<orgName>/<rpNamespace>/[<serviceName> (optional)]/lease.yaml
 ```
 
 ### Path Requirements:
-- `<servicename>`: lowercase alphanumeric only (e.g., testservice, widgetservice)
-- `<namespace>`: alphanumeric with dots, case-sensitive (e.g., Microsoft.TestRP, Azure.Widget)
-- `<servicegroup>`: (optional) logical grouping within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"
+- `<orgName>`: lowercase alphanumeric only (e.g., testservice, widgetservice)
+- `<rpNamespace>`: alphanumeric with dots, case-sensitive (e.g., Microsoft.TestRP, Azure.Widget)
+- `<serviceName>`: (optional) customer-facing service name within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"
 
 ### Lease File Format
 
@@ -34,21 +34,21 @@ The `lease.yaml` file must follow this format:
 
 ```yaml
 lease:
-  resource-provider: Microsoft.TestRP    # Must match the namespace folder name
+  resource-provider: Microsoft.TestRP    # Must match the rpNamespace folder name
   startdate: 2026-01-07                  # ISO 8601 format (YYYY-MM-DD)
-  duration-days: P180D                   # ISO 8601 duration (maximum P180D)
+  duration: P180D                        # ISO 8601 duration (e.g., P180D, P6M, P1Y2M3D)
   reviewer: Evan Hissey                  # Name of the approving reviewer
 ```
 
 ### Copy-Paste Template
 
-Create a file at `.github/arm-leases/<servicename>/<namespace>/<servicegroup>(optional)/lease.yaml` with the following content (replace the placeholder values):
+Create a file at `.github/arm-leases/<orgName>/<rpNamespace>/<serviceName>(optional)/lease.yaml` with the following content (replace the placeholder values):
 
 ```yaml
 lease:
-  resource-provider: <Namespace>
+  resource-provider: <rpNamespace>
   startdate: <YYYY-MM-DD>
-  duration-days: P180D
+  duration: P180D
   reviewer: <Your Name>
 
 ```
@@ -59,10 +59,10 @@ All lease files are automatically validated with the following requirements:
 
 ### 1. File Location
 - Only `lease.yaml` files are allowed in the `.github/arm-leases/` directory
-- Must follow the folder structure: `<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml`
+- Must follow the folder structure: `<orgName>/<rpNamespace>/[<serviceName> (optional)]/lease.yaml`
 
 ### 2. Resource Provider Name
-- Must match the namespace folder name exactly
+- Must match the `<rpNamespace>` folder name exactly
 - Example: If folder is `Microsoft.TestRP`, then `resource-provider` must be `Microsoft.TestRP`
 
 ### 3. Start Date
@@ -71,9 +71,8 @@ All lease files are automatically validated with the following requirements:
 
 ### 4. Duration
 - Required field that cannot be empty
-- Must be in ISO 8601 duration format: `P{n}D` (e.g., `P90D`, `P180D`)
-- **Cannot exceed P180D** (maximum lease period of 180 days)
-- Must be greater than 0 days
+- Must be a valid ISO 8601 duration (e.g., `P180D`, `P6M`, `P1Y2M3D`)
+- Supports day-based (`P90D`), month-based (`P6M`), and combined formats (`P1Y2M3D`)
 
 ### 5. Reviewer
 - Required field that cannot be empty
@@ -84,10 +83,10 @@ All lease files are automatically validated with the following requirements:
 
 If your PR check **"ARM Lease Validation"** is failing, review the error messages in the check output and fix the issues in your `lease.yaml` file. Common causes include:
 
-- **Invalid folder structure**: Ensure the path follows `<servicename>/<namespace>/[<servicegroup>]/lease.yaml` with lowercase service name
-- **Resource provider mismatch**: The `resource-provider` value must match the namespace folder name exactly
+- **Invalid folder structure**: Ensure the path follows `<orgName>/<rpNamespace>/[<serviceName>]/lease.yaml` with lowercase org name
+- **Resource provider mismatch**: The `resource-provider` value must match the `<rpNamespace>` folder name exactly
 - **Past start date**: The `startdate` must be today or a future date in `YYYY-MM-DD` format
-- **Invalid duration**: Use ISO 8601 format `P{n}D` (e.g., `P180D`), maximum `P180D`
-- **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration-days`, `reviewer`) are required
+- **Invalid duration**: Use a valid ISO 8601 duration (e.g., `P180D`, `P6M`, `P1Y2M3D`)
+- **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration`, `reviewer`) are required
 - **Disallowed files**: Only `lease.yaml` and `README.md` files are permitted in `.github/arm-leases/`
 
