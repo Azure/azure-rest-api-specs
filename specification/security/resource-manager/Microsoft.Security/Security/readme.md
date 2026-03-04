@@ -79,21 +79,27 @@ suppressions:
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.parameters.PricingName
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PutRequestResponseSchemeArm
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].put
     reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.definitions.PricingList
     reason: The collection is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: PathForResourceAction
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/batch"].post
     reason: The pricings API uses a {scopeId} parameter instead of the standard /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/... path pattern. This is by design as the endpoint supports multiple scope types (subscription and resource-level scopes). The batch action is a POST on the pricings collection.
   - code: ParameterNotDefinedInGlobalParameters
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.paths["/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}"].get.parameters[0]
     reason: api-version parameter is referenced from common types v1, which is the recommended pattern.
   - code: EnumInsteadOfBoolean
     from: Microsoft.Security\preview\2025-10-01-preview\pricings.json
+    where: $.definitions.BatchPricingResult.properties.success
     reason: The success property is a simple success/failure indicator for batch results that will not need additional states.
   - code: ResourceNameRestriction
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
