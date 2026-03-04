@@ -77,6 +77,7 @@ using Azure.AI.Projects;
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
