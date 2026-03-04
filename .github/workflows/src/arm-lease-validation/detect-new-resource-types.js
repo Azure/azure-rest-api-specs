@@ -140,11 +140,13 @@ export async function detectNewResourceTypes({
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
-    const match = file.match(VERSION_PATTERN);
+    // Attempt to match pattern at any position to handle paths more robustly
+    const match = file.match(VERSION_PATTERN) || file.match(RESOURCE_MANAGER_PATTERN);
     if (!match) continue;
 
-    const orgName = match[1];
-    const namespace = match[2];
+    // organization name is always the second component in 'specification/<org>/...'
+    const orgName = file.split("/")[1];
+    const namespace = match[1]; // match[1] is RP namespace for RESOURCE_MANAGER_PATTERN
     const namespacePath = `specification/${orgName}/resource-manager/${namespace}`;
 
     if (!namespaceMap.has(namespace)) {
