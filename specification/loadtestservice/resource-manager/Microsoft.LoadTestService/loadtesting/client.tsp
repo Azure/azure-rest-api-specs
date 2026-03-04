@@ -147,6 +147,40 @@ model QuotaBucketRequestReplacement
 );
 @@clientName(EncryptionPropertiesIdentity.type, "IdentityType", "csharp");
 
+// Fix breaking changes: preserve method names from 1.1.2 GA
+@@clientName(Microsoft.LoadTestService.Quotas.checkAvailability,
+  "CheckLoadTestingQuotaAvailability",
+  "csharp"
+);
+@@clientName(Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints,
+  "GetOutboundNetworkDependenciesEndpoints",
+  "csharp"
+);
+
+// Fix naming: model ends with 'Request', should use 'Content' suffix (AZC0030)
+@@clientName(MaxMonthlyVirtualUserHoursLimitRequest,
+  "MaxMonthlyVirtualUserHoursLimitContent",
+  "csharp"
+);
+
+// Fix property types: resource IDs should use ResourceIdentifier
+@@alternateType(LoadTestMappingProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestMappingProperties.azureLoadTestingResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestProfileMappingProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestProfileMappingProperties.azureLoadTestingResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResourceUpdate.properties,
   "csharp"
