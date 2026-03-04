@@ -773,6 +773,54 @@
         "endpoint"
       ]
     },
+    "ParsingTypeKey": {
+      "type": "string",
+      "description": "Supported keys for allowed syslog/CEF parsing types.",
+      "enum": [
+        "all",
+        "rfc3164",
+        "rfc5424",
+        "cefRfc3164",
+        "cefRfc5424",
+        "rawCef"
+      ],
+      "x-ms-enum": {
+        "name": "ParsingTypeKey",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "all",
+            "value": "all",
+            "description": "Allow all supported syslog and CEF message formats."
+          },
+          {
+            "name": "rfc3164",
+            "value": "rfc3164",
+            "description": "Allow rfc3164 messages."
+          },
+          {
+            "name": "rfc5424",
+            "value": "rfc5424",
+            "description": "Allow rfc5424 messages."
+          },
+          {
+            "name": "cefRfc3164",
+            "value": "cefRfc3164",
+            "description": "Allow CEF messages embedded in rfc3164 messages."
+          },
+          {
+            "name": "cefRfc5424",
+            "value": "cefRfc5424",
+            "description": "Allow CEF messages embedded in rfc5424 messages."
+          },
+          {
+            "name": "rawCef",
+            "value": "rawCef",
+            "description": "Allow raw CEF messages without syslog encapsulation."
+          }
+        ]
+      }
+    },
     "PersistenceConfigurations": {
       "type": "object",
       "description": "Persistence options to all pipelines in the instance.",
@@ -1391,6 +1439,16 @@
           "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
+        "allowedParsingTypes": {
+          "type": "array",
+          "description": "List of allowed message parsing types. Use this to restrict ingestion to specific RFC formats (for example, rfc5424 only) or allow a controlled migration (for example, rfc3164 + rfc5424). Default all.",
+          "default": [
+            "all"
+          ],
+          "items": {
+            "$ref": "#/definitions/ParsingTypeKey"
+          }
+        },
         "transportProtocol": {
           "type": "string",
           "description": "Transport protocol. Default tcp.",
@@ -1415,6 +1473,11 @@
               }
             ]
           }
+        },
+        "allow3164WithoutPriHeader": {
+          "type": "boolean",
+          "description": "Control whether rfc3164-based messages without the PRI header are accepted. Set to false to enforce stricter ingestion and reject malformed or legacy messages without PRI. Only applicable when allowed parsing types include rfc3164-based formats. Default true.",
+          "default": true
         }
       },
       "required": [

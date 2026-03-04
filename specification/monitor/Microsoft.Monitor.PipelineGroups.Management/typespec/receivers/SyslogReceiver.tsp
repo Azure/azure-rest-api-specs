@@ -15,7 +15,11 @@ model SyslogReceiver {
 
   @doc("Protocol to parse syslog messages. Default rfc3164")
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
-  protocol?: SyslogProtocol = SyslogProtocol.rfc3164;
+  protocol?: SyslogProtocol = "rfc3164";
+
+  @doc("List of allowed message parsing types. Use this to restrict ingestion to specific RFC formats (for example, rfc5424 only) or allow a controlled migration (for example, rfc3164 + rfc5424). Default all.")
+  @added(Microsoft.Monitor.Versions.v2026_04_01)
+  allowedParsingTypes?: ParsingTypeKey[] = #["all"];
 
   @doc("Transport protocol. Default tcp.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
@@ -25,6 +29,10 @@ model SyslogReceiver {
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
   allowSkipPriHeader?: boolean = false;
+
+  @doc("Control whether rfc3164-based messages without the PRI header are accepted. Set to false to enforce stricter ingestion and reject malformed or legacy messages without PRI. Only applicable when allowed parsing types include rfc3164-based formats. Default true.")
+  @added(Microsoft.Monitor.Versions.v2026_04_01)
+  allow3164WithoutPriHeader?: boolean = true;
 }
 
 @doc("The syslog protocol to parse messages.")
@@ -37,6 +45,29 @@ union SyslogProtocol {
 
   @doc("rfc5424 protocol.")
   rfc5424: "rfc5424",
+}
+
+@doc("Supported keys for allowed syslog/CEF parsing types.")
+union ParsingTypeKey {
+  string,
+
+  @doc("Allow all supported syslog and CEF message formats.")
+  all: "all",
+
+  @doc("Allow rfc3164 messages.")
+  rfc3164: "rfc3164",
+
+  @doc("Allow rfc5424 messages.")
+  rfc5424: "rfc5424",
+
+  @doc("Allow CEF messages embedded in rfc3164 messages.")
+  cefRfc3164: "cefRfc3164",
+
+  @doc("Allow CEF messages embedded in rfc5424 messages.")
+  cefRfc5424: "cefRfc5424",
+
+  @doc("Allow raw CEF messages without syslog encapsulation.")
+  rawCef: "rawCef",
 }
 
 @doc("The syslog receiver’s underlying transport protocol.")
