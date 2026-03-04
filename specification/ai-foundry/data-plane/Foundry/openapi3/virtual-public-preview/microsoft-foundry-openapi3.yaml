@@ -32,7 +32,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefintionOptInKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: api-version
           in: query
           required: true
@@ -202,7 +202,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefintionOptInKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -473,7 +473,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefintionOptInKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -5253,6 +5253,12 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
                 - type: object
                   properties:
                     metadata:
@@ -5391,6 +5397,12 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
     get:
       operationId: listResponses
       description: Returns the list of all responses.
@@ -6433,7 +6445,7 @@ components:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-    AgentDefintionOptInKeys:
+    AgentDefinitionOptInKeys:
       anyOf:
         - type: string
         - type: string
@@ -6441,7 +6453,7 @@ components:
             - HostedAgents=V1Preview
             - WorkflowAgents=V1Preview
             - ContainerAgents=V1Preview
-      description: Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents.
+      description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentEvaluation:
       type: object
       required:
@@ -6696,6 +6708,7 @@ components:
         - version
         - created_at
         - definition
+        - status
       properties:
         metadata:
           type: object
@@ -6735,6 +6748,24 @@ components:
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AgentVersionStatus'
+          description: The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.
+          default: active
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details if the agent version provisioning failed.
+    AgentVersionStatus:
+      type: string
+      enum:
+        - creating
+        - active
+        - failed
+        - deleting
+        - deleted
+      description: The provisioning status of an agent version.
     AgenticIdentityPreviewCredentials:
       type: object
       required:
@@ -11602,7 +11633,7 @@ components:
         network_policy:
           $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
       description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
-      title: CodeInterpreterToolAuto
+      title: Automatic Code Interpreter Tool Parameters
     OpenAI.ChatCompletionTool:
       type: object
       required:
@@ -22316,6 +22347,13 @@ components:
             - $ref: '#/components/schemas/AgentReference'
           nullable: true
           description: The agent used for this response
+        agent_session_id:
+          type: string
+          description: |-
+            The session identifier for this response. Currently only relevant for hosted agents.
+            Always returned for hosted agents — either the caller-provided value, the auto-derived value,
+            or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
+            affinity in follow-up calls.
       title: The response object
     OpenAI.ResponseAudioDeltaEvent:
       type: object
