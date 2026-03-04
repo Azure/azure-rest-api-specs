@@ -1,0 +1,44 @@
+name: ARM Lease Validation
+
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
+    paths:
+      # Only trigger if PR includes at least one changed ARM lease file
+      - ".github/arm-leases/**"
+      # Also trigger on own sources
+      - ".github/workflows/arm-lease-validation.yaml"
+      - ".github/workflows/src/arm-lease-validation/**"
+
+permissions:
+  contents: read
+
+jobs:
+  arm-lease-validation:
+    name: ARM Lease Validation
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          sparse-checkout: |
+            .github
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: ARM Lease Validation
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: armLeaseValidation } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
+            return await armLeaseValidation(core);
