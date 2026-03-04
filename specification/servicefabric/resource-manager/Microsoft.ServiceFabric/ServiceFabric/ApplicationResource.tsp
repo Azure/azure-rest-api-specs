@@ -393,6 +393,8 @@ model ApplicationUserAssignedIdentity {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationResourceUpdate extends ProxyResource {
   /**
    * The application resource properties for patch operations.
