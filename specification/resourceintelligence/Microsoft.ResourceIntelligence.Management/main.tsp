@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./agent.tsp";
 import "./run.tsp";
 import "./message.tsp";
+import "./query.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
