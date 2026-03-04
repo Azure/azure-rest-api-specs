@@ -58,10 +58,6 @@ model DeidUpdate {
   /** Updatable managed service identity */
   identity?: ManagedServiceIdentityUpdate;
 
-  /** The resource-specific properties for this resource. */
-  @added(Versions.v2026_03_01_preview)
-  sku?: Azure.ResourceManager.CommonTypes.Sku;
-
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
 }
