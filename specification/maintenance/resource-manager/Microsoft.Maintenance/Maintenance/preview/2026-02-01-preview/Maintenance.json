@@ -3164,27 +3164,13 @@
       "type": "string",
       "description": "Maintenance Plan State.",
       "enum": [
-        "Pending",
-        "InProgress",
         "Succeeded",
-        "Failed",
-        "Cancelled",
-        "Deleted"
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "MaintenancePlansState",
         "modelAsString": false,
         "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "MaintenancePlan call was accepted, creation has not started."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "MaintenancePlan call was accepted, creation has started."
-          },
           {
             "name": "Succeeded",
             "value": "Succeeded",
@@ -3194,16 +3180,6 @@
             "name": "Failed",
             "value": "Failed",
             "description": "MaintenancePlan call was accepted, creation has failed."
-          },
-          {
-            "name": "Cancelled",
-            "value": "Cancelled",
-            "description": "MaintenancePlan call was accepted, creation has been cancelled by user."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "MaintenancePlan is soft-deleted."
           }
         ]
       },
