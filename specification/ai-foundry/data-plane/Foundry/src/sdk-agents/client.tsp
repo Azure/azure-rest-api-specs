@@ -55,8 +55,6 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
-@@clientName(ApiError, "OpenAIError");
-
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
@@ -74,6 +72,11 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
   "cachedTokensCount"
 );
+
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -112,9 +115,6 @@ using Azure.AI.Projects;
 
 @@usage(AgentReference, Usage.input);
 @@access(AgentReference, Access.public);
-
-@@usage(ApiError, Usage.output);
-@@access(ApiError, Access.public);
 
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
