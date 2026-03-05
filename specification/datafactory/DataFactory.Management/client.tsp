@@ -200,15 +200,6 @@ using Microsoft.DataFactory;
   "java"
 );
 
-@@usage(CopyTranslator, Usage.input | Usage.output, "java");
-@@access(CopyTranslator, Access.public, "java");
-@@usage(TabularTranslator, Usage.input | Usage.output, "java");
-@@access(TabularTranslator, Access.public, "java");
-@@usage(TypeConversionSettings, Usage.input | Usage.output, "java");
-@@access(TypeConversionSettings, Access.public, "java");
-@@usage(DatasetSchemaDataElement, Usage.input | Usage.output, "java");
-@@access(DatasetSchemaDataElement, Access.public, "java");
-
 @@clientLocation(PrivateEndpointConnectionResources.listByFactory,
   "PrivateEndPointConnections",
   "python"
