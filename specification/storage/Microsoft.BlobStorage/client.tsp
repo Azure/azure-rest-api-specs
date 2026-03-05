@@ -118,6 +118,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
+/** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
+alias MetadataHeadersRequired = {
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string;
+};
+
 /** operation sets one or more user-defined name-value pairs for the specified container. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -125,16 +133,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @put
 @sharedRoute
 @route("?restype=container&comp=metadata")
-op setMetadataRequiredMetadata is StorageOperationNoBody<
+op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
   {
     ...TimeoutParameter;
     ...LeaseIdOptionalParameter;
-
-    /** The metadata headers. */
-    @alternateType(Record<string>, "rust")
-    @header("x-ms-meta")
-    metadata: string;
-
+    ...MetadataHeadersRequired;
     ...IfModifiedSinceParameter;
   },
   {
@@ -143,4 +146,37 @@ op setMetadataRequiredMetadata is StorageOperationNoBody<
   }
 >;
 
-@@override(Container.setMetadata, setMetadataRequiredMetadata, "rust");
+@@override(Container.setMetadata, setMetadataRequiredMetadataContainer, "rust");
+
+/** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?comp=metadata")
+op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...MetadataHeadersRequired;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    ...EtagResponseHeaderPrivate;
+    ...LastModifiedResponseHeaderPrivate;
+    ...VersionIdResponseHeaderPrivate;
+    ...RequestServerEncryptedResponseHeaderPrivate;
+    ...EncryptionKeySha256ResponseHeaderPrivate;
+    ...EncryptionScopeResponseHeaderPrivate;
+  }
+>;
+
+@@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
