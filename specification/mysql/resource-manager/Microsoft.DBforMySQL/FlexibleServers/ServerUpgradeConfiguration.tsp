@@ -44,6 +44,6 @@ interface ServerUpgradeConfigurations {
   update is ArmResourceActionSync<
     Server,
     ServerUpgradeConfig,
-    ArmResponse<string>
+    ArmResponse<ServerUpgradeConfig>
   >;
 }
