@@ -216,7 +216,7 @@ export default async function detectNewResourceProvider({ context, core }) {
     if (!hasAtLeastOneBrandNewRP) {
       core.info("No brand new resource providers detected, spec directories exist in base branch.");
       core.info("Checking for new resource types in existing RPs...");
-      return await checkNewResourceTypes(repoRoot, rmFiles, core);
+      return await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
     }
   }
 
