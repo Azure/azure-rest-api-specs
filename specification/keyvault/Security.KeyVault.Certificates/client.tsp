@@ -22,7 +22,7 @@ using KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op updateCertificate is KeyVaultOperation<
   {
     /**
@@ -76,8 +76,8 @@ op getCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
-@@override(KeyVault.updateCertificate, updateCertificate);
-@@override(KeyVault.getCertificate, getCertificate);
+@@override(KeyVault.updateCertificate, updateCertificate, "!rust");
+@@override(KeyVault.getCertificate, getCertificate, "!rust");
 
 // Java configuration
 @@usage(CertificateIssuerItem, Usage.input, "java");
@@ -93,6 +93,11 @@ op getCertificate is KeyVaultOperation<
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
+@@clientName(SubjectAlternativeNames.uris,
+  "uniformResourceIdentifiers",
+  "java"
+);
+@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
 // Go configuration
 

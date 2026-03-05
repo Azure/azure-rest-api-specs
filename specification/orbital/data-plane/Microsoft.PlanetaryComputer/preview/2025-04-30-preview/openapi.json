@@ -12399,7 +12399,6 @@
         "properties": {
           "type": "object",
           "description": "Feature properties",
-          "default": {},
           "additionalProperties": {}
         }
       },
@@ -13735,9 +13734,12 @@
           }
         },
         "bbox": {
-          "type": "number",
-          "format": "float",
+          "type": "array",
           "description": "Geographic bounding box to filter items [west, south, east, north]",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
           "x-ms-client-name": "boundingBox"
         },
         "intersects": {
@@ -16741,9 +16743,12 @@
           "description": "Unique identifier for the feature"
         },
         "bbox": {
-          "type": "number",
-          "format": "float",
+          "type": "array",
           "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
           "x-ms-client-name": "boundingBox"
         }
       },
