@@ -128,7 +128,6 @@ alias ServiceGroupRoute = "/providers/Microsoft.Management/serviceGroups";
 @doc("ServiceGroup as parameter")
 model ServiceGroupBaseParameters {
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @doc("The name of the service group.")
   serviceGroupName: string;
 }
