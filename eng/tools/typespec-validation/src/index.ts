@@ -9,6 +9,7 @@ import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
+import { TspLintSuppressionsCheckRule } from "./rules/tsp-lint-suppressions.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -65,6 +66,7 @@ export async function main() {
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),
+    new TspLintSuppressionsCheckRule(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {
