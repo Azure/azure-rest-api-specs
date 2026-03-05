@@ -17,7 +17,7 @@ const VERSION_PATTERN =
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
 
-const RESOURCE_TYPE_REGEX = /\/providers\/([^?]+)/;
+const RESOURCE_TYPE_REGEX = /\/providers\/([^/?#]+)(\/[^?#]*)?/;
 
 /** Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines/extensions) */
 function getResourceType(apiPath) {
@@ -25,10 +25,17 @@ function getResourceType(apiPath) {
   if (!match) return null;
 
   // Split and filter out parameter segments like {vmName} to get the static resource type
-  return match[1]
-    .split("/")
-    .filter((segment) => !segment.startsWith("{"))
-    .join("/");
+  const provider = match[1];
+  const typeHierarchy = match[2];
+  if (!typeHierarchy) return provider;
+
+  return (
+    provider +
+    typeHierarchy
+      .split("/")
+      .filter((segment) => segment && !segment.startsWith("{"))
+      .join("/")
+  );
 }
 
 /**
@@ -93,20 +100,33 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, repoRoot) {
 
   const swaggerFiles = output
     .split("\n")
-    .filter((f) => f.endsWith(".json") && !f.includes("/examples/"));
+    .filter((f) => f.trim() && f.endsWith(".json") && !f.includes("/examples/"))
+    .filter((f, index, self) => self.indexOf(f) === index); // deduplicate
 
-  for (const file of swaggerFiles) {
-    /** @type {string} */
+  const total = swaggerFiles.length;
+  if (total > 0) {
+    console.log(`Analyzing ${total} swagger files in base branch for comparison...`);
+  }
+
+  // Iterate over files, but only log summary if it's too much
+  for (let i = 0; i < swaggerFiles.length; i++) {
+    const file = swaggerFiles[i];
+    if (total > 10 && i % 20 === 0 && i > 0) {
+      console.log(`Progress: ${i}/${total} files processed...`);
+    }
+
     let content;
     try {
-      content = await git.show([`${commitish}:${file}`]);
+      content = await git.show([`${commitish}:${file.trim()}`]);
     } catch (e) {
-      console.warn(`Failed to read ${file} at ${commitish}, skipping: ${e.message}`);
+      // Intentionally quiet to avoid log spam during comparison
       continue;
     }
 
     try {
       const swaggerDoc = JSON.parse(content);
+      // Skip files that aren't ARM resource-manager specs (minimal check)
+      if (!swaggerDoc.paths) continue;
       const types = getResourceTypesFromSwagger(
         swaggerDoc,
         resolve(repoRoot, file),
