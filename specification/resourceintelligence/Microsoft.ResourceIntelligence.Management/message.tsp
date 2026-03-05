@@ -33,13 +33,8 @@ model Message is ProxyResource<MessageProperties> {
 /**
  * Properties of a Message resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Messages are read-only projections with no create/update/delete lifecycle, so provisioningState is not applicable."
 model MessageProperties {
-  /**
-   * The provisioning state of the message.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
-
   /**
    * The type of message (system_message, tool_call, tool_return, assistant_message).
    */
@@ -50,7 +45,7 @@ model MessageProperties {
    * The source of the message (system, user, actor, planner, critic).
    */
   @visibility(Lifecycle.Read)
-  source?: MessageSource;
+  source?: string;
 
   /**
    * The content of the message. For tool_call/tool_return messages, this may contain JSON.

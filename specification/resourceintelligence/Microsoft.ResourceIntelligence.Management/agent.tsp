@@ -26,6 +26,8 @@ model Agent is TrackedResource<AgentProperties> {
   @pattern("^[a-zA-Z][a-zA-Z0-9-]{0,62}[a-zA-Z0-9]$")
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
@@ -88,5 +90,5 @@ interface Agents {
   /**
    * Creates a new run for the agent.
    */
-  execute is ArmResourceActionSync<Agent, RunRequest, RunResult>;
+  execute is ArmResourceActionSync<Agent, RunRequest, Run>;
 }

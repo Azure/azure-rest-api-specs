@@ -8,6 +8,7 @@
     "agentName": "myAgent",
     "body": {
       "message": "Show me all virtual machines in this subscription",
+      "model": "https://myopenai.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01",
       "allowToolUse": "enabled",
       "resumePolicy": "none"
     }
@@ -15,8 +16,19 @@
   "responses": {
     "200": {
       "body": {
-        "runId": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
-        "status": "running"
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/6fa459ea-ee8a-3ca4-894e-db77e160355e",
+        "name": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
+        "type": "Microsoft.ResourceIntelligence/agents/runs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "running",
+          "startTime": "2026-02-01T12:00:00Z"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-01T12:00:00Z"
+        }
       }
     }
   }

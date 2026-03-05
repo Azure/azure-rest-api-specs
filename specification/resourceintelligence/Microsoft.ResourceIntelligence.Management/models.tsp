@@ -17,9 +17,6 @@ namespace Microsoft.ResourceIntelligence;
 union RunStatus {
   string,
 
-  /** The run is idle and not currently executing */
-  Idle: "idle",
-
   /** The run is actively executing */
   Running: "running",
 
@@ -62,27 +59,6 @@ union MessageType {
   user_message: "user_message",
 }
 
-/**
- * The source of a message.
- */
-union MessageSource {
-  string,
-
-  /** Message from the system */
-  system: "system",
-
-  /** Message from the user */
-  user: "user",
-
-  /** Message from the actor agent */
-  actor: "actor",
-
-  /** Message from the planner agent */
-  planner: "planner",
-
-  /** Message from the critic agent */
-  critic: "critic",
-}
 
 // ============================================
 // RUN REQUEST / RESPONSE
@@ -143,28 +119,12 @@ model RunRequest {
   /**
    * The input message from the user.
    */
-  message?: string;
+  message: string;
 
   /**
-   * Optional model URL override. When specified, this URL is used for all agents
-   * instead of the model URL from the agent definitions.
+   * The model endpoint URL to use for this run.
    */
-  // "model" is a TypeSpec keyword - use @encodedName to keep the wire name as "model"
   @encodedName("application/json", "model")
-  modelUrl?: string;
+  modelUrl: string;
 }
 
-/**
- * Result returned when an agent run is created.
- */
-model RunResult {
-  /**
-   * The ID of the created run.
-   */
-  runId: string;
-
-  /**
-   * The current status of the run.
-   */
-  status: RunStatus;
-}

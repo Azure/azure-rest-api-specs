@@ -25,7 +25,7 @@ model Run is ProxyResource<RunProperties> {
    */
   @key("runId")
   @segment("runs")
-  @pattern("^[a-zA-Z0-9-]{1,64}$")
+  @pattern("^(?!latest$)[a-zA-Z0-9-]{1,64}$")
   @path
   name: string;
 }
@@ -62,7 +62,22 @@ model RunProperties {
    * Error details if the run failed.
    */
   @visibility(Lifecycle.Read)
-  error?: string;
+  error?: RunError;
+}
+
+/**
+ * Error details for a failed run.
+ */
+model RunError {
+  /**
+   * The error code.
+   */
+  code: string;
+
+  /**
+   * The error message.
+   */
+  message: string;
 }
 
 // ============================================
@@ -77,7 +92,7 @@ interface Runs {
   get is ArmResourceRead<Run>;
 
   /**
-   * Creates or updates a run.
+   * Creates or updates a run. Returns 200 for terminal states, 201 with LRO for running states.
    */
   @armResourceCreateOrUpdate(Run)
   @put
@@ -86,7 +101,11 @@ interface Runs {
 
     /** The run request parameters. */
     @body resource: RunRequest,
-  ): ArmResponse<Run> | ArmCreatedResponse<Run> | ErrorResponse;
+  ): ArmResponse<Run> | ArmResourceCreatedResponse<
+    Run,
+    ArmAsyncOperationHeader<ArmOperationStatus, string, Run> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 
   /**
    * Deletes a run.

@@ -323,6 +323,9 @@
         "x-ms-examples": {
           "Create or update an Agent": {
             "$ref": "./examples/Agents_CreateOrUpdate.json"
+          },
+          "Create or update an Agent with user-assigned identity": {
+            "$ref": "./examples/Agents_CreateOrUpdate_UserAssigned.json"
           }
         }
       },
@@ -465,7 +468,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RunResult"
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -563,7 +566,7 @@
             "description": "The unique identifier of the run.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+            "pattern": "^(?!latest$)[a-zA-Z0-9-]{1,64}$"
           }
         ],
         "responses": {
@@ -591,7 +594,7 @@
         "tags": [
           "Runs"
         ],
-        "description": "Creates or updates a run.",
+        "description": "Creates or updates a run. Returns 200 for terminal states, 201 with LRO for running states.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -616,7 +619,7 @@
             "description": "The unique identifier of the run.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+            "pattern": "^(?!latest$)[a-zA-Z0-9-]{1,64}$"
           },
           {
             "name": "resource",
@@ -636,11 +639,15 @@
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'Run' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Run"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -659,7 +666,12 @@
           "Create or update a Run": {
             "$ref": "./examples/Runs_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Run"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Runs_Delete",
@@ -691,7 +703,7 @@
             "description": "The unique identifier of the run.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+            "pattern": "^(?!latest$)[a-zA-Z0-9-]{1,64}$"
           }
         ],
         "responses": {
@@ -746,7 +758,7 @@
             "description": "The unique identifier of the run.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+            "pattern": "^(?!latest$)[a-zA-Z0-9-]{1,64}$"
           }
         ],
         "responses": {
@@ -804,7 +816,7 @@
             "description": "The unique identifier of the run.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,64}$"
+            "pattern": "^(?!latest$)[a-zA-Z0-9-]{1,64}$"
           },
           {
             "name": "messageId",
@@ -892,6 +904,10 @@
         "properties": {
           "$ref": "#/definitions/AgentProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1065,18 +1081,13 @@
       "type": "object",
       "description": "Properties of a Message resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The provisioning state of the message.",
-          "readOnly": true
-        },
         "messageType": {
           "$ref": "#/definitions/MessageType",
           "description": "The type of message (system_message, tool_call, tool_return, assistant_message).",
           "readOnly": true
         },
         "source": {
-          "$ref": "#/definitions/MessageSource",
+          "type": "string",
           "description": "The source of the message (system, user, actor, planner, critic).",
           "readOnly": true
         },
@@ -1091,48 +1102,6 @@
           "description": "The timestamp when the message was created.",
           "readOnly": true
         }
-      }
-    },
-    "MessageSource": {
-      "type": "string",
-      "description": "The source of a message.",
-      "enum": [
-        "system",
-        "user",
-        "actor",
-        "planner",
-        "critic"
-      ],
-      "x-ms-enum": {
-        "name": "MessageSource",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "system",
-            "value": "system",
-            "description": "Message from the system"
-          },
-          {
-            "name": "user",
-            "value": "user",
-            "description": "Message from the user"
-          },
-          {
-            "name": "actor",
-            "value": "actor",
-            "description": "Message from the actor agent"
-          },
-          {
-            "name": "planner",
-            "value": "planner",
-            "description": "Message from the planner agent"
-          },
-          {
-            "name": "critic",
-            "value": "critic",
-            "description": "Message from the critic agent"
-          }
-        ]
       }
     },
     "MessageType": {
@@ -1297,6 +1266,24 @@
         }
       ]
     },
+    "RunError": {
+      "type": "object",
+      "description": "Error details for a failed run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "RunListResult": {
       "type": "object",
       "description": "The response of a Run list operation.",
@@ -1345,7 +1332,7 @@
           "readOnly": true
         },
         "error": {
-          "type": "string",
+          "$ref": "#/definitions/RunError",
           "description": "Error details if the run failed.",
           "readOnly": true
         }
@@ -1376,34 +1363,19 @@
         },
         "model": {
           "type": "string",
-          "description": "Optional model URL override. When specified, this URL is used for all agents\ninstead of the model URL from the agent definitions.",
+          "description": "The model endpoint URL to use for this run.",
           "x-ms-client-name": "modelUrl"
-        }
-      }
-    },
-    "RunResult": {
-      "type": "object",
-      "description": "Result returned when an agent run is created.",
-      "properties": {
-        "runId": {
-          "type": "string",
-          "description": "The ID of the created run."
-        },
-        "status": {
-          "$ref": "#/definitions/RunStatus",
-          "description": "The current status of the run."
         }
       },
       "required": [
-        "runId",
-        "status"
+        "message",
+        "model"
       ]
     },
     "RunStatus": {
       "type": "string",
       "description": "The lifecycle status of a run.",
       "enum": [
-        "idle",
         "running",
         "paused",
         "awaitingInput",
@@ -1414,11 +1386,6 @@
         "name": "RunStatus",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Idle",
-            "value": "idle",
-            "description": "The run is idle and not currently executing"
-          },
           {
             "name": "Running",
             "value": "running",
