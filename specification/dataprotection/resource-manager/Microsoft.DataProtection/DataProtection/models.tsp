@@ -609,7 +609,8 @@ model BackupVault {
    * Storage Settings
    */
   @identifiers(#[])
-  storageSettings: StorageSetting[];
+  @madeOptional(Versions.v2026_03_01)
+  storageSettings?: StorageSetting[];
 
   /**
    * Is vault protected by resource guard
