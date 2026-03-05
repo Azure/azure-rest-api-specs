@@ -9,7 +9,9 @@ namespace Azure.AI.Projects;
 @doc("Status of the container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union AgentContainerOperationStatus {
   @doc("The container operation is not started.")
@@ -28,10 +30,13 @@ union AgentContainerOperationStatus {
 @doc("Status of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union AgentContainerStatus {
-   string,
+  string,
+
   @doc("The container is starting.")
   Starting: "Starting",
 
@@ -60,7 +65,9 @@ union AgentContainerStatus {
 @doc("The error details of the container operation, if any.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerOperationError {
   @doc("The error code of the container operation, if any.")
@@ -76,7 +83,9 @@ model AgentContainerOperationError {
 @doc("The container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerOperationObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
@@ -101,7 +110,9 @@ model AgentContainerOperationObject {
 @doc("The details of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerObject {
   @doc("The object type, which is always 'agent.container'.")
@@ -144,7 +155,9 @@ model AgentContainerObject {
 @doc("Information about a container replica.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model ContainerReplica {
   @doc("The name of the replica.")
@@ -160,7 +173,9 @@ model ContainerReplica {
 @doc("Detailed information about the container.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model ContainerDetails {
   @doc("The provisioning state of the container.")
@@ -184,7 +199,9 @@ model ContainerDetails {
 
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 model AcceptedAgentContainerOperation {
   @statusCode
