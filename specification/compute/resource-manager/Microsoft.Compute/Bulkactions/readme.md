@@ -42,12 +42,12 @@ suppressions:
     reason: Tags are mimicing the existing object structure from compute, bulkactions is a
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
-    where: $.definitions.VirtualMachineExtensionProperties.properties.settings
+    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
   - code:  AvoidAdditionalProperties
     reason: Tags are mimicing the existing object structure from compute, bulkactions is a
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
-    where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings  
+    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings   
 ```
 
 ### Tag: package-2026-04-01
