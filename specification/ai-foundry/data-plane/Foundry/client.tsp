@@ -158,6 +158,10 @@ using Azure.AI.Projects;
 @@clientName(Evaluators.listLatestVersions, "list");
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+
 // --------------------------------------------------------------------------------
 // Insights sub‐client
 // --------------------------------------------------------------------------------
@@ -194,6 +198,14 @@ using Azure.AI.Projects;
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
 @@clientName(Schedule.id, "schedule_id");
+
+// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
+@@alternateType(CronTrigger.startTime, utcDateTime, "python");
+@@alternateType(CronTrigger.endTime, utcDateTime, "python");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
