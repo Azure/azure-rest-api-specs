@@ -739,6 +739,19 @@ model UpdateProperties {
 }
 
 /**
+ * Represents an operation returned by the GetOperations request
+ */
+@doc("Represents an operation returned by the GetOperations request")
+model MaintenanceOperation {
+  ...Azure.ResourceManager.CommonTypes.Operation;
+
+  /**
+   * Properties of the operation
+   */
+  properties?: {};
+}
+
+/**
  * Result of the List Operations operation
  */
 model OperationsListResult {
@@ -753,5 +766,5 @@ model OperationsListResult {
    */
   @pageItems
   @identifiers(#["name"])
-  value?: Operation[];
+  value?: MaintenanceOperation[];
 }

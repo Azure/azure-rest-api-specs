@@ -11,6 +11,11 @@ using Microsoft.Maintenance;
 //@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceOperation.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "configuration"
 );
