@@ -213,8 +213,8 @@ export async function detectNewResourceTypes({
 }) {
   const git = simpleGit(repoRoot);
 
-  // Group changed RM swagger files by namespace
-  /** @type {Map<string, {orgName: string, namespacePath: string}>} */
+  // Group changed RM swagger files by service subdirectory (namespace + service group)
+  /** @type {Map<string, {orgName: string, namespacePath: string, namespace: string}>} */
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
@@ -226,17 +226,20 @@ export async function detectNewResourceTypes({
     const parts = file.split("/");
     const orgName = parts[1];
     const namespace = parts[3];
-    const namespacePath = `specification/${orgName}/resource-manager/${namespace}`;
+    // Scope to the service subdirectory (e.g. DiskRP) to avoid scanning the entire namespace
+    const serviceGroup = parts[4];
+    const namespacePath = `specification/${orgName}/resource-manager/${namespace}/${serviceGroup}`;
+    const serviceKey = `${namespace}/${serviceGroup}`;
 
-    if (!namespaceMap.has(namespace)) {
-      namespaceMap.set(namespace, { orgName, namespacePath });
+    if (!namespaceMap.has(serviceKey)) {
+      namespaceMap.set(serviceKey, { orgName, namespacePath, namespace });
     }
   }
 
   const results = [];
 
-  for (const [namespace, { orgName, namespacePath }] of namespaceMap) {
-    core.info(`Checking for new resource types in ${namespace}...`);
+  for (const [serviceKey, { orgName, namespacePath, namespace }] of namespaceMap) {
+    core.info(`Checking for new resource types in ${serviceKey}...`);
 
     const baseTypes = await getResourceTypesAtRef(
       git,
