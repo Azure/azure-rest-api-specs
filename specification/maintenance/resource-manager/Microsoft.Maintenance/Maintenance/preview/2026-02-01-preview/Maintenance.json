@@ -3307,55 +3307,6 @@
         }
       }
     },
-    "Operation": {
-      "type": "object",
-      "description": "Represents an operation returned by the GetOperations request",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationInfo",
-          "description": "Display name of the operation"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation"
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "x-ms-client-flatten": true
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation is a data action"
-        }
-      }
-    },
-    "OperationInfo": {
-      "type": "object",
-      "description": "Information about an operation",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Name of the provider"
-        },
-        "resource": {
-          "type": "string",
-          "description": "Name of the resource type"
-        },
-        "operation": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the operation"
-        }
-      }
-    },
     "OperationsListResult": {
       "type": "object",
       "description": "Result of the List Operations operation",
@@ -3368,7 +3319,7 @@
           "type": "array",
           "description": "A collection of operations",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
