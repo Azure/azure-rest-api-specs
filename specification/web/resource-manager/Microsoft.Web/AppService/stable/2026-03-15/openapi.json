@@ -1971,12 +1971,12 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSiteOperationStatuses/{operationId}": {
       "get": {
-        "operationId": "StaticSiteOperationStatusesInterface_GetStaticSiteOperationResult",
+        "operationId": "StaticSiteOperationStatusesInterface_GetStaticSiteOperationStatus",
         "tags": [
           "StaticSiteOperationStatusesInterface"
         ],
-        "summary": "Gets the result of a static site async operation.",
-        "description": "Description for Gets the result of a static site async operation.",
+        "summary": "Gets the status of a static site async operation.",
+        "description": "Description for Gets the status of a static site async operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2007,11 +2007,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the result of a static site async operation": {
-            "$ref": "./examples/GetStaticSiteOperationStatus.json"
           }
         }
       }
@@ -54342,7 +54337,9 @@
         },
         "repositoryToken": {
           "type": "string",
-          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets."
+          "format": "password",
+          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.",
+          "x-ms-secret": true
         },
         "buildProperties": {
           "$ref": "#/definitions/StaticSiteBuildProperties",

@@ -89,7 +89,7 @@ interface StaticSitesOperationResultsInterface {
   getStaticSiteOperationResult is ArmResourceRead<
     StaticSitesOperationResultResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = NoContentResponse | ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse | NoContentResponse,
     Error = DefaultErrorResponse
   >;
 }
@@ -98,10 +98,10 @@ interface StaticSitesOperationResultsInterface {
 @armResourceOperations
 interface StaticSiteOperationStatusesInterface {
   /**
-   * Description for Gets the result of a static site async operation.
+   * Description for Gets the status of a static site async operation.
    */
-  @summary("Gets the result of a static site async operation.")
-  getStaticSiteOperationResult is ArmResourceRead<
+  @summary("Gets the status of a static site async operation.")
+  getStaticSiteOperationStatus is ArmResourceRead<
     StaticSiteOperationStatusResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Error = DefaultErrorResponse

@@ -53856,7 +53856,9 @@
         },
         "repositoryToken": {
           "type": "string",
-          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets."
+          "format": "password",
+          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.",
+          "x-ms-secret": true
         },
         "buildProperties": {
           "$ref": "#/definitions/StaticSiteBuildProperties",

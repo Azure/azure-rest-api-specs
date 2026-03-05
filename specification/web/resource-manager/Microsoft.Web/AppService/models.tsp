@@ -8460,7 +8460,7 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   repositoryToken?: string;
 
   /**
