@@ -65,3 +65,12 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 input-file:
   - Microsoft.Validate/preview/2025-10-01-preview/validate.json
 ```
+
+### Tag: default
+
+These settings apply when no tag is specified on the command line.
+
+```yaml $(tag) == 'default' || $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - Microsoft.Validate/preview/2026-03-01-preview/validate.json
+```
