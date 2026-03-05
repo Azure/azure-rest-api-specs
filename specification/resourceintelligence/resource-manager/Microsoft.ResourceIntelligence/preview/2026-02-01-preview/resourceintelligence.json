@@ -57,7 +57,7 @@
   "paths": {
     "/providers/Microsoft.ResourceIntelligence/generateQuery": {
       "post": {
-        "operationId": "QueryOperationGroup_Generate",
+        "operationId": "QueryOperationGroup_GenerateQuery",
         "tags": [
           "QueryOperationGroup"
         ],
@@ -334,7 +334,7 @@
         "tags": [
           "Agents"
         ],
-        "description": "Updates an agent's tags.",
+        "description": "Updates an agent.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -359,7 +359,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentTagsUpdate"
+              "$ref": "#/definitions/AgentUpdate"
             }
           }
         ],
@@ -378,7 +378,7 @@
           }
         },
         "x-ms-examples": {
-          "Update Agent tags": {
+          "Update an Agent": {
             "$ref": "./examples/Agents_Update.json"
           }
         }
@@ -956,16 +956,38 @@
         }
       }
     },
-    "AgentTagsUpdate": {
+    "AgentUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in Agent resources.",
+      "description": "The type used for update operations of the Agent.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "AgentUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Agent.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly display name for the agent."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the agent's purpose."
         }
       }
     },

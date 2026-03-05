@@ -68,9 +68,15 @@ interface Agents {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
-   * Updates an agent's tags.
+   * Updates an agent.
    */
-  update is ArmTagsPatchSync<Agent>;
+  update is ArmCustomPatchSync<
+    Agent,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Agent,
+      AgentProperties
+    >
+  >;
 
   /**
    * Deletes an agent.

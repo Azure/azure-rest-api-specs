@@ -114,7 +114,7 @@ interface QueryOperationGroup {
    */
   @route("/providers/Microsoft.ResourceIntelligence/generateQuery")
   @post
-  generate(
+  generateQuery(
     ...ApiVersionParameter,
 
     /**
