@@ -54,7 +54,10 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 @@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");
-@@alternateType(MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed.lookbackPeriod, string, "go");
+@@alternateType(MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed.lookbackPeriod,
+  string,
+  "go"
+);
 @@clientName(MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
   "go"
