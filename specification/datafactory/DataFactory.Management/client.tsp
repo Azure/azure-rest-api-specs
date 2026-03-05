@@ -199,6 +199,8 @@ using Microsoft.DataFactory;
   "SsisLogLocationTypeProperties",
   "java"
 );
+@@clientName(FactoryVSTSConfiguration, "FactoryVstsConfiguration", "java");
+@@clientName(SalesforceV2Source.SOQLQuery, "soqlQuery", "java");
 
 @@usage(CopyTranslator, Usage.input | Usage.output, "java");
 @@access(CopyTranslator, Access.public, "java");
