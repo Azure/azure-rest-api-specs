@@ -102,6 +102,16 @@ directive:
     reason: MSDeploy is the intentional name matching the existing service API.
 ```
 
+### Tag: package-2026-03-15
+
+These settings apply only when `--tag=package-2026-03-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-15'
+input-file:
+    - preview/2026-03-15/openapi.json
+```
+
+
 ### Tag: package-2026-03-01-preview
 
 These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
