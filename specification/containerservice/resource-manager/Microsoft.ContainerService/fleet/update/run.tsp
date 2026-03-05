@@ -264,6 +264,11 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
+  @doc("The total member upgrade failures within the stage.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
+
+  @visibility(Lifecycle.Read)
   @doc("The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.")
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
   @added(Versions.v2026_05_01_preview)
@@ -305,6 +310,11 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The total member upgrade failures within the group.")
+  @added(Versions.v2026_05_01_preview)
+  failureCount?: int32;
 
   @visibility(Lifecycle.Read)
   @doc("The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.")
