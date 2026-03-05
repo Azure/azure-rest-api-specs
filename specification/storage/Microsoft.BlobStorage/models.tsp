@@ -77,6 +77,10 @@ union StorageErrorCode {
   /** Empty metadata key. */
   EmptyMetadataKey: "EmptyMetadataKey",
 
+  /** Incremental copy of an earlier snapshot is not allowed. */
+  @added(Versions.v2026_04_06)
+  IncrementalCopyOfEarlierSnapshotNotAllowed: "IncrementalCopyOfEarlierSnapshotNotAllowed",
+
   /** Insufficient account permissions. */
   InsufficientAccountPermissions: "InsufficientAccountPermissions",
 
@@ -110,6 +114,9 @@ union StorageErrorCode {
   /** Invalid request URL. */
   InvalidRequestUrl: "InvalidRequestUrl",
 
+  /** Invalid resource name. */
+  InvalidResourceName: "InvalidResourceName",
+
   /** Invalid URI. */
   InvalidUri: "InvalidUri",
 
@@ -139,6 +146,9 @@ union StorageErrorCode {
 
   /** Multiple condition headers not supported. */
   MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
+
+  /** No authentication information. */
+  NoAuthenticationInformation: "NoAuthenticationInformation",
 
   /** Operation timed out. */
   OperationTimedOut: "OperationTimedOut",
