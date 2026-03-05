@@ -57,7 +57,10 @@ interface NetworkInterfaces {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
 
   @doc("List all the Network Interface resources in a given resource group.")
-  listByNetworkDevice is ArmResourceListByParent<NetworkInterface>;
+  listByNetworkDevice is ArmResourceListByParent<
+    NetworkInterface,
+    Response = NetworkInterfacesList
+  >;
 
   @doc("Update the admin state of the Network Interface.")
   @action("updateAdministrativeState")

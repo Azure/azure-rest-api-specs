@@ -49,10 +49,16 @@ interface InternetGateways {
   delete is ArmResourceDeleteWithoutOkAsync<InternetGateway>;
 
   @doc("Displays Internet Gateways list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<InternetGateway>;
+  listByResourceGroup is ArmResourceListByParent<
+    InternetGateway,
+    Response = InternetGatewaysListResult
+  >;
 
   @doc("Displays Internet Gateways list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<InternetGateway>;
+  listBySubscription is ArmListBySubscription<
+    InternetGateway,
+    Response = InternetGatewaysListResult
+  >;
 }
 
 @@doc(InternetGateways.create::parameters.resource, "Request payload.");

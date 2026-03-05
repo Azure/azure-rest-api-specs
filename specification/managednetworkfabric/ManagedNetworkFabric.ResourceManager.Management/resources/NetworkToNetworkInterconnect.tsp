@@ -58,7 +58,10 @@ interface NetworkToNetworkInterconnects {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkToNetworkInterconnect>;
 
   @doc("Implements Network To Network Interconnects list by Network Fabric GET method.")
-  listByNetworkFabric is ArmResourceListByParent<NetworkToNetworkInterconnect>;
+  listByNetworkFabric is ArmResourceListByParent<
+    NetworkToNetworkInterconnect,
+    Response = NetworkToNetworkInterconnectsList
+  >;
 
   @doc("Updates the NPB Static Route BFD Administrative State.")
   @removed(Versions.v2024_06_15_preview)

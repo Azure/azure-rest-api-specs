@@ -618,11 +618,14 @@ model ProviderLevelTestActionResponse {
 interface ProviderLevelTestActions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @doc("Test Provider Level Action.")
-  @route("/providers/Microsoft.LiftrPilot/providerLevelTestAction")
+  @armResourceAction(OrganizationResource)
+  @action("providerLevelTestAction")
   @post
   @OpenAPI.extension("x-ms-long-running-operation", true)
   invoke(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ProviderNamespace<OrganizationResource>,
 
     @bodyRoot
     @doc("The details for ProviderLevelTestAction request.")
