@@ -279,16 +279,16 @@
           "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to rawCef": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithRawCef.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164": {
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and allowSkipPriHeader set to false": {
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164 and allowSkipPriHeader set to false": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164AndAllowSkipPri.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and syslogrfc5424 for migration": {
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164 and syslogRfc5424 for migration": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithAllowedFormats.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc5424": {
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc5424": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc5424.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
@@ -449,11 +449,11 @@
   "definitions": {
     "AllowedFormats": {
       "type": "string",
-      "description": "Supported keys for allowed syslog and CEF parsing types.",
+      "description": "Supported literals for allowed syslog and CEF parsing formats.",
       "enum": [
         "all",
-        "syslogrfc3164",
-        "syslogrfc5424",
+        "syslogRfc3164",
+        "syslogRfc5424",
         "cefRfc3164",
         "cefRfc5424",
         "rawCef"
@@ -465,32 +465,32 @@
           {
             "name": "all",
             "value": "all",
-            "description": "Allow all supported syslog and CEF message formats."
+            "description": "Allow all supported syslog and CEF formats."
           },
           {
-            "name": "syslogrfc3164",
-            "value": "syslogrfc3164",
-            "description": "Allow rfc3164 messages."
+            "name": "syslogRfc3164",
+            "value": "syslogRfc3164",
+            "description": "Allow RFC3164 syslog messages."
           },
           {
-            "name": "syslogrfc5424",
-            "value": "syslogrfc5424",
-            "description": "Allow rfc5424 messages."
+            "name": "syslogRfc5424",
+            "value": "syslogRfc5424",
+            "description": "Allow RFC5424 syslog messages."
           },
           {
             "name": "cefRfc3164",
             "value": "cefRfc3164",
-            "description": "Allow CEF messages embedded in rfc3164 messages."
+            "description": "Allow CEF payloads embedded in RFC3164 syslog messages."
           },
           {
             "name": "cefRfc5424",
             "value": "cefRfc5424",
-            "description": "Allow CEF messages embedded in rfc5424 messages."
+            "description": "Allow CEF payloads embedded in RFC5424 syslog messages."
           },
           {
             "name": "rawCef",
             "value": "rawCef",
-            "description": "Allow raw CEF messages without syslog encapsulation."
+            "description": "Allow raw CEF payloads without syslog encapsulation."
           }
         ]
       }
@@ -1450,7 +1450,7 @@
         },
         "allowedFormats": {
           "type": "array",
-          "description": "List of allowed message formats. Use this to restrict ingestion to specific syslog and CEF formats (for example, syslogrfc5424 only). Default all.",
+          "description": "List of allowed message formats for syslog/CEF ingestion. Default 'all'.",
           "default": [
             "all"
           ],

@@ -17,7 +17,7 @@ model SyslogReceiver {
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
   protocol?: SyslogProtocol = "rfc3164";
 
-  @doc("List of allowed message formats. Use this to restrict ingestion to specific syslog and CEF formats (for example, syslogrfc5424 only). Default all.")
+  @doc("List of allowed message formats for syslog/CEF ingestion. Default 'all'.")
   @added(Microsoft.Monitor.Versions.v2026_04_01)
   allowedFormats?: AllowedFormats[] = #["all"];
 
@@ -42,26 +42,26 @@ union SyslogProtocol {
   rfc5424: "rfc5424",
 }
 
-@doc("Supported keys for allowed syslog and CEF parsing types.")
+@doc("Supported literals for allowed syslog and CEF parsing formats.")
 union AllowedFormats {
   string,
 
-  @doc("Allow all supported syslog and CEF message formats.")
+  @doc("Allow all supported syslog and CEF formats.")
   all: "all",
 
-  @doc("Allow rfc3164 messages.")
-  syslogrfc3164: "syslogrfc3164",
+  @doc("Allow RFC3164 syslog messages.")
+  syslogRfc3164: "syslogRfc3164",
 
-  @doc("Allow rfc5424 messages.")
-  syslogrfc5424: "syslogrfc5424",
+  @doc("Allow RFC5424 syslog messages.")
+  syslogRfc5424: "syslogRfc5424",
 
-  @doc("Allow CEF messages embedded in rfc3164 messages.")
+  @doc("Allow CEF payloads embedded in RFC3164 syslog messages.")
   cefRfc3164: "cefRfc3164",
 
-  @doc("Allow CEF messages embedded in rfc5424 messages.")
+  @doc("Allow CEF payloads embedded in RFC5424 syslog messages.")
   cefRfc5424: "cefRfc5424",
 
-  @doc("Allow raw CEF messages without syslog encapsulation.")
+  @doc("Allow raw CEF payloads without syslog encapsulation.")
   rawCef: "rawCef",
 }
 
