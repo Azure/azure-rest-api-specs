@@ -22,7 +22,7 @@ using KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op updateSecret is KeyVaultOperation<
   {
     /**
