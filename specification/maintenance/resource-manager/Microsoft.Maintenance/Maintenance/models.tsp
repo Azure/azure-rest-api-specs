@@ -739,6 +739,36 @@ model UpdateProperties {
 }
 
 /**
+ * Represents an operation returned by the GetOperations request
+ */
+model Operation {
+  /**
+   * Name of the operation
+   */
+  name?: string;
+
+  /**
+   * Display name of the operation
+   */
+  display?: OperationInfo;
+
+  /**
+   * Origin of the operation
+   */
+  origin?: string;
+
+  /**
+   * Properties of the operation
+   */
+  properties?: {};
+
+  /**
+   * Indicates whether the operation is a data action
+   */
+  isDataAction?: boolean;
+}
+
+/**
  * Result of the List Operations operation
  */
 model OperationsListResult {
