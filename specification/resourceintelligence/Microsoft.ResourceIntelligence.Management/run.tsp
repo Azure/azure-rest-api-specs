@@ -33,13 +33,8 @@ model Run is ProxyResource<RunProperties> {
 /**
  * Properties of a Run resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Runs use a custom status field for lifecycle tracking; provisioningState is not applicable."
 model RunProperties {
-  /**
-   * The provisioning state of the run.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
-
   /**
    * The lifecycle status of the run.
    */
