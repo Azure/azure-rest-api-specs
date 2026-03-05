@@ -106,11 +106,11 @@ model MetricsProfile {
 
 @armResourceOperations
 interface AppLinkMembers {
-  @doc("Get an AppLinkMember")
+  @doc("Get an AppLinkMember.")
   get is ArmResourceRead<AppLinkMember>;
-  @doc("Create an AppLinkMember")
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
-  @doc("Update an AppLinkMember")
+  @doc("Create an AppLinkMember.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
+  @doc("Update an AppLinkMember.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmResourcePatchAsync<
     AppLinkMember,
@@ -119,7 +119,8 @@ interface AppLinkMembers {
       ArmLroLocationHeader<FinalResult = AppLinkMember> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-  @doc("Delete an AppLinkMember")
+  @doc("Delete an AppLinkMember.")
   delete is ArmResourceDeleteWithoutOkAsync<AppLinkMember>;
+  @doc("List AppLinkMember resources by AppLink.")
   listByAppLink is ArmResourceListByParent<AppLinkMember>;
 }

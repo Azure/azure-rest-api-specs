@@ -66,6 +66,7 @@ model VersionInfo {
 
 @armResourceOperations
 interface AvailableVersions {
+  @doc("List AvailableVersion resources by location.")
   listByLocation is ArmResourceListByParent<
     Resource = AvailableVersion,
     Parameters = {
