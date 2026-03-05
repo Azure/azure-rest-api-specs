@@ -48,10 +48,16 @@ interface RoutePolicies {
   delete is ArmResourceDeleteWithoutOkAsync<RoutePolicy>;
 
   @doc("Implements RoutePolicies list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<RoutePolicy>;
+  listByResourceGroup is ArmResourceListByParent<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Implements RoutePolicies list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<RoutePolicy>;
+  listBySubscription is ArmListBySubscription<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Updated the admin state for this Route Policy.")
   @action("updateAdministrativeState")

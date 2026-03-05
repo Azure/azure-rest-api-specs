@@ -18,10 +18,49 @@ describe("folder-structure", function () {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     normalizePathSpy = vi.spyOn(utils, "normalizePath");
     readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
   });
 
   afterEach(() => {
     vi.clearAllMocks();
+  });
+
+  it("should succeed with first suppression reason when rule is suppressed", async function () {
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "test suppression reason",
+        rules: ["FolderStructure"],
+      },
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "foo",
+        rules: ["FolderStructure"],
+      },
+    ]);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(result.success);
+    assert(result.stdOutput?.includes("suppressed"));
+    assert(result.stdOutput?.includes("test suppression reason"));
+    assert(!result.stdOutput?.includes("foo"));
+  });
+
+  it("should not suppress when suppression targets a different rule", async function () {
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        reason: "test other reason",
+        rules: ["OtherRule"],
+      },
+    ]);
+    fileExistsSpy.mockResolvedValue(false);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(!result.success);
   });
 
   it("should fail if folder doesn't exist", async function () {

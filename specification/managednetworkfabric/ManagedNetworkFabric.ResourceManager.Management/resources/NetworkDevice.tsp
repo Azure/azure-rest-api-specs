@@ -56,10 +56,16 @@ interface NetworkDevices {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkDevice>;
 
   @doc("List all the Network Device resources in a given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkDevice>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkDevice,
+    Response = NetworkDevicesListResult
+  >;
 
   @doc("List all the Network Device resources in a given subscription.")
-  listBySubscription is ArmListBySubscription<NetworkDevice>;
+  listBySubscription is ArmListBySubscription<
+    NetworkDevice,
+    Response = NetworkDevicesListResult
+  >;
 
   @doc("Reboot the Network Device.")
   @action("reboot")

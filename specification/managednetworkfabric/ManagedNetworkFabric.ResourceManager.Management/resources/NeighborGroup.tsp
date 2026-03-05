@@ -53,10 +53,16 @@ interface NeighborGroups {
   delete is ArmResourceDeleteWithoutOkAsync<NeighborGroup>;
 
   @doc("Displays NeighborGroups list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NeighborGroup>;
+  listByResourceGroup is ArmResourceListByParent<
+    NeighborGroup,
+    Response = NeighborGroupsListResult
+  >;
 
   @doc("Displays NeighborGroups list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NeighborGroup>;
+  listBySubscription is ArmListBySubscription<
+    NeighborGroup,
+    Response = NeighborGroupsListResult
+  >;
 
   @doc("Resync the Neighbor Group after a configuration change.")
   @added(Versions.v2025_07_15)

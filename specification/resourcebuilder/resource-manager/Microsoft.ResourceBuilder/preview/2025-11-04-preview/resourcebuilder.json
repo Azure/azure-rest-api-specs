@@ -1100,6 +1100,24 @@
     }
   },
   "definitions": {
+    "AdditionalProperties": {
+      "type": "object",
+      "description": "Additional Properties column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the column."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "AnomalyDetectionStrategy": {
       "type": "string",
       "description": "Anomaly detection strategy",
@@ -1129,6 +1147,71 @@
           }
         ]
       }
+    },
+    "ArmResourceDatasetSchema": {
+      "type": "object",
+      "description": "ARM resource dataset schema.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the ARM resource."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group where the resource resides."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the ARM resource (optional)."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The Azure region where the resource is located (optional)."
+        },
+        "resourceTags": {
+          "type": "array",
+          "description": "The tags associated with the ARM resource (optional).",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
+          }
+        },
+        "resourceProperties": {
+          "type": "array",
+          "description": "The resource properties of the ARM resource (optional).",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
+          }
+        },
+        "resourceTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource information was captured (optional)."
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceType",
+        "resourceName",
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup"
+      ]
     },
     "AutoDataQualityParameters": {
       "type": "object",
@@ -1791,10 +1874,14 @@
         },
         "schema": {
           "type": "array",
-          "description": "Dataset schema definition.",
+          "description": "Custom Dataset schema definition.",
           "items": {
             "$ref": "#/definitions/DatasetColumn"
           }
+        },
+        "armResourceSchema": {
+          "$ref": "#/definitions/ArmResourceDatasetSchema",
+          "description": "ArmResource ArmResourceDatasetSchema object."
         },
         "locations": {
           "type": "array",

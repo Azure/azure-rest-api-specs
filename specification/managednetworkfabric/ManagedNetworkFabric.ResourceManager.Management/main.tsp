@@ -55,6 +55,7 @@ import "./resources/RoutePolicy.tsp";
 import "./resources/NetworkMonitor.tsp";
 import "./resources/NetworkBootstrapDevice.tsp";
 import "./resources/NetworkBootstrapInterface.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

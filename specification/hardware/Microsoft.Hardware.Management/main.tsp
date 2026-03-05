@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./returns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -14,21 +15,27 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{ title: "Hardware Resource Provider" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Hardware;
 
 enum Versions {
   /**
    * The 2023-07-12-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
   v2023_07_12_preview: "2023-07-12-preview",
 
   /**
    * The 2025-12-04-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
   v2025_12_04_preview: "2025-12-04-preview",
-}
 
+  /**
+   * The 2026-02-26-preview API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_02_26_preview: "2026-02-26-preview",
+}
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A Hardware Resource Provider Order resource")
@@ -142,23 +149,22 @@ model OrderLineQuantity {
   @doc("Order line pending quantity")
   pending: int64;
 
-  @doc("Order lineId in-progress quantity")
+  @doc("Order line in-progress quantity")
   @visibility(Lifecycle.Read)
   inProgress?: int64;
 
-  @doc("Order lineId fulfilled quantity")
+  @doc("Order line fulfilled quantity")
   @visibility(Lifecycle.Read)
   fulfilled?: int64;
 
-  @doc("Order lineId quantity pending cancellation")
-  @visibility(Lifecycle.Read)
+  @doc("Order line quantity pending cancellation")
   pendingCancel?: int64;
 
-  @doc("Order lineId cancelled quantity")
+  @doc("Order line cancelled quantity")
   @visibility(Lifecycle.Read)
   cancelled?: int64;
 
-  @doc("Order lineId returned quantity")
+  @doc("Order line returned quantity")
   @visibility(Lifecycle.Read)
   returned?: int64;
 }
@@ -398,6 +404,10 @@ union BillingState {
 
   @doc("The payment has been refunded.")
   Refunded: "Refunded",
+
+  @added(Versions.v2026_02_26_preview)
+  @doc("The payment refund failed.")
+  RefundFailed: "RefundFailed",
 
   string,
 }

@@ -1,0 +1,71 @@
+{
+  "title": "ChangeActivityEvents_ListByParent_2026_01_01_preview",
+  "operationId": "ChangeActivityEvents_ListByParent",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceUri": "subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/providers/Microsoft.ChangeSafety/changeActivityEvents/dfb8aa2b-0d71-4537-864e-b1ada8a6730f",
+            "name": "dfb8aa2b-0d71-4537-864e-b1ada8a6730f",
+            "type": "Microsoft.ChangeSafety/changeActivityEvents",
+            "properties": {
+              "activityId": "dfb8aa2b-0d71-4537-864e-b1ada8a6730f",
+              "kind": "AcquirePolicyToken",
+              "category": "Information",
+              "activityType": "PolicyGovernance",
+              "targetResourceId": "/subscriptions/15d4b41e-8f09-4719-bc3c-7bff2f1ee744/resourceGroups/rg-changesafety/providers/Microsoft.Network/trafficManagerProfiles/tm-prod-frontend",
+              "externalReferenceId": "6e1fbb35-1cfd-4f7e-b359-6ab9dbf00d77",
+              "timestamp": "2026-01-12T21:42:58Z",
+              "initiatedByType": "Application",
+              "initiatedBy": "ada13db0-78d5-4d4d-8796-642151882fd0",
+              "eventVersion": "2026-01-01",
+              "eventData": {
+                "tokenId": "tok_a1b2c3d4e5f6",
+                "validationResult": "Passed",
+                "policyEvaluationCount": 5
+              },
+              "links": [
+                {
+                  "name": "workTrackingItem",
+                  "uri": "https://dev.azure.com/contoso/Project/_workitems/edit/12345",
+                  "description": "Related work item for this policy token acquisition"
+                },
+                {
+                  "name": "approvalRequest",
+                  "uri": "https://approval.contoso.com/requests/67890",
+                  "description": "Approval request for policy token"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/providers/Microsoft.ChangeSafety/changeActivityEvents/3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+            "name": "3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+            "type": "Microsoft.ChangeSafety/changeActivityEvents",
+            "properties": {
+              "activityId": "3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+              "kind": "PolicyEvaluation",
+              "category": "Information",
+              "activityType": "PolicyGovernance",
+              "targetResourceId": "/subscriptions/15d4b41e-8f09-4719-bc3c-7bff2f1ee744/resourceGroups/rg-changesafety/providers/Microsoft.Network/trafficManagerProfiles/tm-prod-frontend",
+              "timestamp": "2026-01-12T21:45:32Z",
+              "initiatedByType": "Application",
+              "initiatedBy": "ada13db0-78d5-4d4d-8796-642151882fd0",
+              "eventVersion": "2026-01-01",
+              "eventData": {
+                "policyName": "RequireChangeRecord",
+                "evaluationResult": "Compliant",
+                "evaluationDurationMs": 145
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
