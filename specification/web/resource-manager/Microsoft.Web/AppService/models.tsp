@@ -1,11 +1,13 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -8460,7 +8462,9 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  @extension("x-ms-secret", true)
   repositoryToken?: string;
 
   /**
