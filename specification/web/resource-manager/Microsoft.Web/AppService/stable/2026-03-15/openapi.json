@@ -451,12 +451,6 @@
     },
     {
       "name": "WorkflowVersions"
-    },
-    {
-      "name": "StaticSitesOperationResultsInterface"
-    },
-    {
-      "name": "StaticSiteOperationStatusesInterface"
     }
   ],
   "paths": {
@@ -1971,10 +1965,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSiteOperationStatuses/{operationId}": {
       "get": {
-        "operationId": "StaticSiteOperationStatusesInterface_GetStaticSiteOperationStatus",
-        "tags": [
-          "StaticSiteOperationStatusesInterface"
-        ],
+        "operationId": "GlobalOperationGroup_GetStaticSiteOperationStatus",
         "summary": "Gets the status of a static site async operation.",
         "description": "Description for Gets the status of a static site async operation.",
         "parameters": [
@@ -1982,24 +1973,24 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "operationId",
             "in": "path",
-            "description": "The name of the StaticSiteOperationStatusResource",
+            "description": "Operation Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StaticSiteOperationStatusResource"
+              "$ref": "#/definitions/StaticSitesOperationStatus"
             }
           },
           "default": {
@@ -2013,10 +2004,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}": {
       "get": {
-        "operationId": "StaticSitesOperationResultsInterface_GetStaticSiteOperationResult",
-        "tags": [
-          "StaticSitesOperationResultsInterface"
-        ],
+        "operationId": "GlobalOperationGroup_GetStaticSiteOperationResult",
         "summary": "Gets the result of a static site async operation.",
         "description": "Description for Gets the result of a static site async operation.",
         "parameters": [
@@ -2024,17 +2012,17 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "operationId",
             "in": "path",
-            "description": "The name of the StaticSitesOperationResultResource",
+            "description": "Operation Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2060,11 +2048,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the result of a static site async operation": {
-            "$ref": "./examples/GetStaticSiteOperationResult.json"
           }
         }
       }
@@ -54953,21 +54936,6 @@
         "value"
       ]
     },
-    "StaticSiteOperationStatusResource": {
-      "type": "object",
-      "description": "Proxy resource representing a static site async operation status.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StaticSitesAsyncOperationProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "StaticSitePatchResource": {
       "type": "object",
       "description": "ARM resource for a static site when patching",
@@ -55317,13 +55285,28 @@
         }
       ]
     },
-    "StaticSitesAsyncOperationProperties": {
+    "StaticSitesOperationStatus": {
       "type": "object",
-      "description": "Properties for a static site async operation status.",
+      "description": "Status object for a static sites asynchronous operation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the staticSite.  For example, /providers/Microsoft.Web/staticSites/test-swa",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Web/staticSites",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the staticSite. For example, test-swa",
+          "readOnly": true
+        },
         "status": {
           "type": "string",
-          "description": "The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed",
+          "description": "The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed",
           "readOnly": true
         },
         "startTime": {
