@@ -128,6 +128,8 @@ directive:
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
       - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
+      - $.definitions.ChangeRecordRetrieveAllStagesResponseItemProperties.properties.stageVariables
+      - $.definitions.ChangeRecordRetrieveAllStagesResponseItemProperties.properties.parameters
 ```
 
 ---
