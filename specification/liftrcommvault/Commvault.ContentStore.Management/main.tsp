@@ -30,6 +30,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v3_preview: "2026-03-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v4_preview: "2026-05-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -761,7 +765,7 @@ interface ProtectionGroups {
   @armResourceAction(ProtectionGroup)
   @action("backup")
   @post
-  @added(Versions.v3_preview)
+  @added(Versions.v4_preview)
   backup(
     ...ResourceInstanceParameters<ProtectionGroup>,
 
