@@ -99,6 +99,20 @@ op getCertificate is KeyVaultOperation<
 );
 @@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "java");
 
+// Python configuration
+@@clientName(SubjectAlternativeNames.uris,
+  "uniform_resource_identifiers",
+  "python"
+);
+@@clientName(SubjectAlternativeNames.ipAddresses, "ip_addresses", "python");
+
+// JavaScript configuration
+@@clientName(SubjectAlternativeNames.uris,
+  "uniformResourceIdentifiers",
+  "javascript"
+);
+@@clientName(SubjectAlternativeNames.ipAddresses, "ipAddresses", "javascript");
+
 // Go configuration
 
 /**
