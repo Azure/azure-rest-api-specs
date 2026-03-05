@@ -400,6 +400,11 @@ enum ImmutabilityPolicySetting {
 
 @@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
 @@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
+@@clientOption(MetadataHeaders.metadata,
+  "headerCollectionPrefix",
+  "x-ms-meta",
+  "javascript"
+);
 
 @@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
