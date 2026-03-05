@@ -82,6 +82,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
+@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------

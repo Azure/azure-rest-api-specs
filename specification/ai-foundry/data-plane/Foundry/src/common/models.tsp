@@ -51,7 +51,6 @@ op FoundryDataPlaneOperation<
 
 /** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
 union AgentDefinitionOptInKeys {
-  string,
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
 
@@ -60,7 +59,6 @@ union AgentDefinitionOptInKeys {
 }
 
 union FoundryFeaturesOptInKeys {
-  string,
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
@@ -212,7 +210,7 @@ alias CommonPageQueryParameters = {
   ...PageBeforeQueryParameter;
 };
 
-model MetadataPropertyForRequest {
+alias MetadataPropertyForRequest = {
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be
    * useful for storing additional information about the object in a structured
@@ -223,8 +221,8 @@ model MetadataPropertyForRequest {
    */
   @extension("x-oaiTypeLabel", "map")
   metadata?: Record<string>;
-}
-model MetadataPropertyForResponse {
+};
+alias MetadataPropertyForResponse = {
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be
    * useful for storing additional information about the object in a structured
@@ -235,7 +233,7 @@ model MetadataPropertyForResponse {
    */
   @extension("x-oaiTypeLabel", "map")
   metadata: Record<string> | null;
-}
+};
 
 alias SseResponseOf<T> = {
   @header("Content-Type") contentType: "text/event-stream";
