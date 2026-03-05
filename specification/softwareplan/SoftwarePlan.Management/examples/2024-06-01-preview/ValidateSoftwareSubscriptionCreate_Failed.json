@@ -1,0 +1,39 @@
+{
+  "title": "ValidateSoftwareSubscriptionCreate_Failed",
+  "operationId": "ValidateSoftwareSubscriptionCreate",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "testResourceGroup",
+    "body": {
+      "location": "global",
+      "properties": {
+        "productCode": "INVALID_CODE",
+        "quantity": 0,
+        "autoRenew": "Disabled",
+        "displayName": "Invalid software subscription",
+        "startAt": "2024-01-01T00:00:00Z",
+        "endDate": "2024-12-31T23:59:59Z",
+        "cotermBillingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2024-06-01/billingSubscriptions/12345678-1234-1234-1234-123456789012",
+        "parentSoftwareSubscriptionId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/testResourceGroup/providers/Microsoft.SoftwarePlan/softwareSubscriptions/invalid-subscription"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validationResult": "Failed",
+        "validationFailures": [
+          {
+            "reasonCode": "InvalidQuantity",
+            "reason": "Quantity cannot be zero or negative."
+          },
+          {
+            "reasonCode": "InvalidProductCode",
+            "reason": "The specified product code 'INVALID_CODE' is not valid or not available for the resource group."
+          }
+        ]
+      }
+    }
+  }
+}

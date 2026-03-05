@@ -53,10 +53,16 @@ interface NetworkPacketBrokers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkPacketBroker>;
 
   @doc("Displays NetworkPacketBrokers list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NetworkPacketBroker>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 
   @doc("Displays Network Packet Brokers list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NetworkPacketBroker>;
+  listBySubscription is ArmListBySubscription<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 }
 
 @@doc(NetworkPacketBrokers.create::parameters.resource, "Request payload.");
