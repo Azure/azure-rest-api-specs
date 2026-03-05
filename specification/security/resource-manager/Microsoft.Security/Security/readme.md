@@ -721,6 +721,9 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: PutRequestResponseSchemeArm
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
 
 # Needed when there is more than one input file
 override-info:
@@ -803,6 +806,9 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: PutRequestResponseSchemeArm
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
 
 # Needed when there is more than one input file
 override-info:
