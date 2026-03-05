@@ -38,7 +38,7 @@ description: "Author or modify Azure TypeSpec API specifications in the azure-re
 1. **This skill is MANDATORY for ALL `.tsp` file edits.** Any request that modifies, creates, or deletes content in a `.tsp` file MUST follow the full workflow — regardless of how simple the change appears. There are no "trivial" TypeSpec edits. Even changing a single `?` (optional → required) can be a breaking change requiring versioning decorators.
 2. **Do not edit any files until you have required inputs and have retrieved a solution.** Use the `azsdk_typespec_generate_authoring_plan` MCP tool.
 3. **Make minimal, scoped edits** to satisfy the request. Avoid refactors unless explicitly asked.
-4. **After edits, validate** (compile / lint / emitter checks if available) and report results.
+4. **After edits, validate** using the `azsdk_run_typespec_validation` MCP tool and report results.
 5. **Always provide references** (titles / sections / links) from retrieved context that justify the recommended approach.
 
 ---
