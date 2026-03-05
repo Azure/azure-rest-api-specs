@@ -51,32 +51,43 @@ function getResourceType(apiPath) {
  * @returns {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: Array<{method: string, apiPath: string}>}>}
  */
 function getResourceTypesFromSwagger(swaggerDoc, specPath) {
-  const armHelper = new ArmHelper(
-    swaggerDoc,
-    resolve(specPath),
-    new SwaggerInventory(),
-  );
   const resourceTypes = new Map();
 
-  for (const resource of armHelper.getAllResources()) {
-    const firstOp = resource.operations[0];
-    const resourceType = getResourceType(firstOp.apiPath);
+  // ArmHelper requires a populated SwaggerInventory to resolve cross-file $refs.
+  // When used with a fresh empty inventory (as here), it throws "Node does not exist"
+  // during getAllResources(). Wrap in try/catch so we always fall through to the
+  // path-based fallback when ArmHelper cannot run.
+  try {
+    const armHelper = new ArmHelper(
+      swaggerDoc,
+      resolve(specPath),
+      new SwaggerInventory(),
+    );
 
-    if (resourceType && !resourceTypes.has(resourceType)) {
-      resourceTypes.set(resourceType, {
-        resourceType,
-        provider: resourceType.split("/")[0],
-        modelName: resource.modelName,
-        operations: resource.operations.map((op) => ({
-          method: op.httpMethod,
-          apiPath: op.apiPath,
-        })),
-      });
+    for (const resource of armHelper.getAllResources()) {
+      const firstOp = resource.operations[0];
+      const resourceType = getResourceType(firstOp.apiPath);
+
+      if (resourceType && !resourceTypes.has(resourceType)) {
+        resourceTypes.set(resourceType, {
+          resourceType,
+          provider: resourceType.split("/")[0],
+          modelName: resource.modelName,
+          operations: resource.operations.map((op) => ({
+            method: op.httpMethod,
+            apiPath: op.apiPath,
+          })),
+        });
+      }
     }
+  } catch {
+    // ArmHelper failed (e.g. empty SwaggerInventory throws "Node does not exist").
+    // Fall through to the path-based fallback below.
   }
 
   // Fallback: when ArmHelper finds no resources (e.g. spec uses inline response schemas
-  // instead of $ref to named definitions), scan paths directly for ARM resource patterns.
+  // instead of $ref to named definitions, or ArmHelper threw), scan paths directly for
+  // ARM resource patterns.
   if (resourceTypes.size === 0 && swaggerDoc.paths) {
     /** @type {Record<string, Record<string, unknown>>} */
     const paths = /** @type {any} */ (swaggerDoc.paths);
