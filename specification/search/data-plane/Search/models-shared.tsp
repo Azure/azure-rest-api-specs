@@ -36,7 +36,7 @@ alias acceptHeaderMinimal = {
 alias acceptHeaderNone = {
   /** The Accept header. */
   @header("Accept")
-  accept: "application/json;odata.metadata=none";
+  accept?: "application/json;odata.metadata=none";
 };
 
 alias selectQuery = {
