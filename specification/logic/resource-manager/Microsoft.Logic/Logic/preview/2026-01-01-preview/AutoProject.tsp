@@ -63,49 +63,6 @@ interface AutoProjects {
    * Gets a list of auto projects by subscription.
    */
   listBySubscription is ArmListBySubscription<AutoProject>;
-
-  /**
-   * Validates the auto project configuration and all auto app references.
-   * Checks that referenced ContainerApps exist, are of kind 'workflowapp',
-   * and have managedBy set to this auto project.
-   */
-  validate is ArmResourceActionSync<AutoProject, void, AutoProjectValidationResult>;
-}
-
-/**
- * The result of validating an auto project.
- */
-model AutoProjectValidationResult {
-  /**
-   * Whether the auto project configuration is valid.
-   */
-  isValid: boolean;
-
-  /**
-   * Validation errors, if any.
-   */
-  @identifiers(#[])
-  errors?: AutoProjectValidationError[];
-}
-
-/**
- * A validation error for the auto project.
- */
-model AutoProjectValidationError {
-  /**
-   * The error code.
-   */
-  code: string;
-
-  /**
-   * The error message.
-   */
-  message: string;
-
-  /**
-   * The target property or resource that caused the error.
-   */
-  target?: string;
 }
 
 @@doc(AutoProject.name, "The auto project name.");

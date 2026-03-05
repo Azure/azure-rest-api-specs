@@ -31,19 +31,6 @@ union AutoProjectProvisioningState {
 }
 
 /**
- * The state of the auto project.
- */
-union AutoProjectState {
-  string,
-
-  /** The auto project is active and all auto apps are running. */
-  Active: "Active",
-
-  /** The auto project is disabled and all auto apps are stopped. */
-  Disabled: "Disabled",
-}
-
-/**
  * The properties of the auto project resource.
  */
 model AutoProjectProperties {
@@ -66,11 +53,6 @@ model AutoProjectProperties {
   changedTime?: utcDateTime;
 
   /**
-   * The state of the auto project.
-   */
-  state?: AutoProjectState;
-
-  /**
    * A description of the auto project.
    */
   description?: string;
@@ -81,7 +63,7 @@ model AutoProjectProperties {
    * Each ContainerApp must have kind set to 'workflowapp'.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#["containerAppResourceId"])
+  @identifiers(#["resourceId"])
   autoApps?: AutoAppReference[];
 }
 
@@ -93,7 +75,7 @@ model AutoAppReference {
    * The ARM resource ID of the ContainerApp (Microsoft.App/containerApps).
    * The ContainerApp must have kind set to 'workflowapp' and managedBy set to this auto project's resource ID.
    */
-  containerAppResourceId: string;
+  resourceId: string;
 
   /**
    * A friendly display name for this auto app within the auto project.
