@@ -73,7 +73,7 @@ Invoke `azsdk_typespec_generate_authoring_plan` MCP tool:
 | Parameter | Value |
 |-----------|-------|
 | `request` | User request (verbatim) |
-| `additionalInformation` | Relevant `.tsp` code read from the project |
+| `additionalInformation` | All content gathered from Step 1 (intake analysis, user answers, relevant `.tsp` code read from the project) |
 | `typeSpecProjectRootPath` | TypeSpec project root path |
 
 Do NOT proceed to Step 3 without a grounded plan from this tool.

@@ -39,7 +39,7 @@ Match the user's request to a supported case:
 | Case | Name | Description |
 |------|------|-------------|
 | 1 | [Add New Preview Version](#case-1-add-new-preview-version) | Add a new preview API version to the `Versions` enum |
-| 2 | [Add New Stable Version](#case-2-add-new-stable-version) | Promote to a new stable API version or add the stable version from scratch |
+| 2 | [Add New Stable Version](#case-2-add-new-stable-version) | Promote existing preview API version to a new stable API version or add the stable version from scratch |
 | 3 | [Add New Resource Type](#case-3-add-new-resource-type) | Define a new ARM resource with operations |
 | 4 | [Add Operations](#case-4-add-operations) | Add CRUD operations or custom actions on a resource |
 | 5 | [Add Long-Running Operation (LRO)](#case-5-add-long-running-operation-lro) | Add or configure an async/LRO operation |
