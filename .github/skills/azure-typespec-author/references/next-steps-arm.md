@@ -2,10 +2,10 @@
 
 After authoring is complete, execute the follow-up steps below.
 
-| Sub-step | Applies To | Goal |
-|----------|-----------|------|
-| [6.1 Verify Examples](#step-61-verify-examples) | All cases | Ensure example files are up-to-date |
-| [6.2 Case-Specific Follow-up](#step-62-case-specific-follow-up) | Cases 1 & 2 only | Present targeted next steps |
+| Sub-step                                                        | Applies To       | Goal                                |
+| --------------------------------------------------------------- | ---------------- | ----------------------------------- |
+| [6.1 Verify Examples](#step-61-verify-examples)                 | All cases        | Ensure example files are up-to-date |
+| [6.2 Case-Specific Follow-up](#step-62-case-specific-follow-up) | Cases 1 & 2 only | Present targeted next steps         |
 
 ---
 

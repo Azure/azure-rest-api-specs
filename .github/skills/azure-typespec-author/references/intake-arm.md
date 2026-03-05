@@ -2,13 +2,13 @@
 
 Complete all sub-steps to collect required information before proceeding to implementation.
 
-| Sub-step | Goal | Mandatory? |
-|----------|------|------------|
-| [1.1 Analyze Project](#step-11-analyze-the-typespec-project) | Gather project inputs | Yes |
-| [1.2 Identify Case](#step-12-identify-supported-case) | Match request to a supported case | Yes |
-| [1.3 Display Results](#step-13-display-analysis-results) | Show analysis summary to user | Yes |
-| [1.4 Case-Specific Intake](#step-14-case-specific-intake) | Collect additional inputs per case | Only if matched |
-| [1.5 Confirm & Proceed](#step-15-summary-and-confirmation) | Confirm collected information | Yes |
+| Sub-step                                                     | Goal                               | Mandatory?      |
+| ------------------------------------------------------------ | ---------------------------------- | --------------- |
+| [1.1 Analyze Project](#step-11-analyze-the-typespec-project) | Gather project inputs              | Yes             |
+| [1.2 Identify Case](#step-12-identify-supported-case)        | Match request to a supported case  | Yes             |
+| [1.3 Display Results](#step-13-display-analysis-results)     | Show analysis summary to user      | Yes             |
+| [1.4 Case-Specific Intake](#step-14-case-specific-intake)    | Collect additional inputs per case | Only if matched |
+| [1.5 Confirm & Proceed](#step-15-summary-and-confirmation)   | Confirm collected information      | Yes             |
 
 ---
 
@@ -18,17 +18,17 @@ Complete all sub-steps to collect required information before proceeding to impl
 
 Collect the following inputs. Ask **up to 6 concise questions** for any that are missing:
 
-| # | Input | Example |
-|---|-------|---------|
-| 1 | **Spec root / folder** | `/specification/widget/resource-manager/Microsoft.Widget/Widget` |
-| 2 | **Path to tspconfig.yaml** | `<spec-root>/tspconfig.yaml` |
-| 3 | **Service type** | management-plane / data-plane |
-| 4 | **Existing API versions** | `2024-01-01 (stable)`, `2024-06-01-preview (preview)` |
-| 5 | **Latest API version** | Most recent entry in the `Versions` enum |
-| 6 | **Current working API version** | The version being added or modified this session |
-| 7 | **Intent** | add / modify / fix |
-| 8 | **Target resource/interface/operation** | Resource or operation name (if known) |
-| 9 | **Constraints** | Breaking-change limits, naming rules, emitter targets, etc. |
+| #   | Input                                   | Example                                                          |
+| --- | --------------------------------------- | ---------------------------------------------------------------- |
+| 1   | **Spec root / folder**                  | `/specification/widget/resource-manager/Microsoft.Widget/Widget` |
+| 2   | **Path to tspconfig.yaml**              | `<spec-root>/tspconfig.yaml`                                     |
+| 3   | **Service type**                        | management-plane / data-plane                                    |
+| 4   | **Existing API versions**               | `2024-01-01 (stable)`, `2024-06-01-preview (preview)`            |
+| 5   | **Latest API version**                  | Most recent entry in the `Versions` enum                         |
+| 6   | **Current working API version**         | The version being added or modified this session                 |
+| 7   | **Intent**                              | add / modify / fix                                               |
+| 8   | **Target resource/interface/operation** | Resource or operation name (if known)                            |
+| 9   | **Constraints**                         | Breaking-change limits, naming rules, emitter targets, etc.      |
 
 ---
 
@@ -36,16 +36,16 @@ Collect the following inputs. Ask **up to 6 concise questions** for any that are
 
 Match the user's request to a supported case:
 
-| Case | Name | Description |
-|------|------|-------------|
-| 1 | [Add New Preview Version](#case-1-add-new-preview-version) | Add a new preview API version to the `Versions` enum |
-| 2 | [Add New Stable Version](#case-2-add-new-stable-version) | Promote existing preview API version to a new stable API version or add the stable version from scratch |
-| 3 | [Add New Resource Type](#case-3-add-new-resource-type) | Define a new ARM resource with operations |
-| 4 | [Add Operations](#case-4-add-operations) | Add CRUD operations or custom actions on a resource |
-| 5 | [Add Long-Running Operation (LRO)](#case-5-add-long-running-operation-lro) | Add or configure an async/LRO operation |
-| 6 | [Add Patch Operation](#case-6-add-patch-operation) | Add a PATCH/update operation on a resource |
-| 7 | [Add Paging](#case-7-add-paging) | Add or configure pagination on list operations |
-| 8 | [Add Decorators](#case-8-add-decorators) | Add decorators on resources, properties, or operations |
+| Case | Name                                                                       | Description                                                                                             |
+| ---- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 1    | [Add New Preview Version](#case-1-add-new-preview-version)                 | Add a new preview API version to the `Versions` enum                                                    |
+| 2    | [Add New Stable Version](#case-2-add-new-stable-version)                   | Promote existing preview API version to a new stable API version or add the stable version from scratch |
+| 3    | [Add New Resource Type](#case-3-add-new-resource-type)                     | Define a new ARM resource with operations                                                               |
+| 4    | [Add Operations](#case-4-add-operations)                                   | Add CRUD operations or custom actions on a resource                                                     |
+| 5    | [Add Long-Running Operation (LRO)](#case-5-add-long-running-operation-lro) | Add or configure an async/LRO operation                                                                 |
+| 6    | [Add Patch Operation](#case-6-add-patch-operation)                         | Add a PATCH/update operation on a resource                                                              |
+| 7    | [Add Paging](#case-7-add-paging)                                           | Add or configure pagination on list operations                                                          |
+| 8    | [Add Decorators](#case-8-add-decorators)                                   | Add decorators on resources, properties, or operations                                                  |
 
 > Cases 1-2 are **end-to-end user stories** -- the agent should proactively ask what features to add after the version is created.
 
@@ -107,6 +107,7 @@ Selected Case: [Case Name or "None"]
 - Resource properties (name, type, required/optional, description)
 
 **Defaults (apply unless user says otherwise):**
+
 - Base type: top-level → TrackedResource, child of another resource → ProxyResource
 - All resources get: createOrReplace (PUT, async), get, update/patch, delete (async), list by parent
 - Resources with resourceGroup as parent also get list by subscription
@@ -127,6 +128,7 @@ Selected Case: [Case Name or "None"]
 - Request/response models (for custom actions)
 
 **Defaults (apply unless user says otherwise):**
+
 - Never async: GET, LIST, HEAD
 - Default async (LRO): PUT, DELETE
 - Default sync: PATCH
