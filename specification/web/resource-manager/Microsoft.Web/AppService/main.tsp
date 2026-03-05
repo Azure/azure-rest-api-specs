@@ -83,7 +83,6 @@ import "./RequestHistory.tsp";
 import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
-import "./StaticSitesOperationResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

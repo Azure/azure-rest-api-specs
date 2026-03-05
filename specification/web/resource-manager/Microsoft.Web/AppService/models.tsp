@@ -15989,9 +15989,9 @@ model StorageMount {
 }
 
 /**
- * Result object for a static sites asynchronous operation.
+ * Status object for a static sites asynchronous operation.
  */
-model StaticSitesOperationResults {
+model StaticSitesOperationStatus {
   /**
    * The fully qualified ID for the staticSite.  For example, /providers/Microsoft.Web/staticSites/test-swa
    */
