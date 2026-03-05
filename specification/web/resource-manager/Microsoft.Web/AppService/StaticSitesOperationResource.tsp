@@ -48,17 +48,17 @@ model StaticSitesAsyncOperationProperties {
 }
 
 /**
- * Proxy resource representing a static site async operation status.
+ * Proxy resource representing a static site async operation result.
  */
 @added(Versions.v2026_03_15)
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-model StaticSitesOperationResource
+model StaticSitesOperationResultResource
   is Azure.ResourceManager.ProxyResource<StaticSitesAsyncOperationProperties> {
   ...ResourceNameParameter<
-    Resource = StaticSitesOperationResource,
+    Resource = StaticSitesOperationResultResource,
     KeyName = "operationId",
-    SegmentName = "staticSitesOperations",
+    SegmentName = "staticSitesOperationResults",
     NamePattern = ""
   >;
 }
@@ -81,15 +81,15 @@ model StaticSiteOperationStatusResource
 
 @added(Versions.v2026_03_15)
 @armResourceOperations
-interface StaticSitesOperationsInterface {
+interface StaticSitesOperationResultsInterface {
   /**
-   * Description for Gets the status of a static site async operation.
+   * Description for Gets the result of a static site async operation.
    */
-  @summary("Gets the status of a static site async operation.")
-  getStaticSiteOperation is ArmResourceRead<
-    StaticSitesOperationResource,
+  @summary("Gets the result of a static site async operation.")
+  getStaticSiteOperationResult is ArmResourceRead<
+    StaticSitesOperationResultResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = NoContentResponse,
+    Response = NoContentResponse | ArmAcceptedLroResponse,
     Error = DefaultErrorResponse
   >;
 }

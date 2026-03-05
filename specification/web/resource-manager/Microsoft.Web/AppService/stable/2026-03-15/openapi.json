@@ -453,7 +453,7 @@
       "name": "WorkflowVersions"
     },
     {
-      "name": "StaticSitesOperationsInterface"
+      "name": "StaticSitesOperationResultsInterface"
     },
     {
       "name": "StaticSiteOperationStatusesInterface"
@@ -2016,14 +2016,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperations/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}": {
       "get": {
-        "operationId": "StaticSitesOperationsInterface_GetStaticSiteOperation",
+        "operationId": "StaticSitesOperationResultsInterface_GetStaticSiteOperationResult",
         "tags": [
-          "StaticSitesOperationsInterface"
+          "StaticSitesOperationResultsInterface"
         ],
-        "summary": "Gets the status of a static site async operation.",
-        "description": "Description for Gets the status of a static site async operation.",
+        "summary": "Gets the result of a static site async operation.",
+        "description": "Description for Gets the result of a static site async operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2037,12 +2037,26 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "The name of the StaticSitesOperationResource",
+            "description": "The name of the StaticSitesOperationResultResource",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -2054,8 +2068,8 @@
           }
         },
         "x-ms-examples": {
-          "Gets the status of a static site async operation": {
-            "$ref": "./examples/GetStaticSiteOperation.json"
+          "Gets the result of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationResult.json"
           }
         }
       }
