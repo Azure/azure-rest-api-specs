@@ -181,11 +181,6 @@ stages:
             Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
           displayName: "Validate and update SDK repository commitish"
 
-        - task: npmAuthenticate@0
-          displayName: 'Authenticate .npmrc'
-          inputs:
-            workingFile: $(Build.SourcesDirectory)/.npmrc
-
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           Paths:
@@ -210,6 +205,12 @@ stages:
         inputs:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
+
+      - task: npmAuthenticate@0
+        displayName: 'Authenticate .npmrc'
+        condition: and(succeeded(), contains(variables['SdkRepoName'], '-js'))
+        inputs:
+          workingFile: $(SdkRepoDirectory)/.npmrc
 
       - task: UsePythonVersion@0
         inputs:
