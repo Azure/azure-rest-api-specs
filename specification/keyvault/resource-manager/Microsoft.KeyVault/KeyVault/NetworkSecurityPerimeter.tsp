@@ -1,11 +1,14 @@
-import "@typespec/rest";
-import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
 import "./models.tsp";
+import "./Vault.tsp";
 
+using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 
@@ -98,12 +101,23 @@ union Severity {
   Error: "Error",
 }
 
-model NetworkSecurityPerimeterConfiguration
-  extends Azure.ResourceManager.ProxyResource<
-    NetworkSecurityPerimeterConfigurationProperties,
-    true
-  > {}
+// @parentResource(Vault)
+// model NetworkSecurityPerimeterConfiguration
+//   extends Azure.ResourceManager.ProxyResource<
+//     NetworkSecurityPerimeterConfigurationProperties,
+//     true
+//   > {}
 
+@parentResource(Vault)
+model NetworkSecurityPerimeterConfiguration
+  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
+  ...ResourceNameParameter<
+    Resource = NetworkSecurityPerimeterConfiguration,
+    KeyName = "networkSecurityPerimeterConfigurations",
+    SegmentName = "associationProxyName",
+    NamePattern = ""
+  >;
+}
 /**
  * Network security configuration properties.
  */
@@ -148,7 +162,6 @@ model NetworkSecurityPerimeterConfigurationListResult {
   /**
    * The link used to get the next page of results.
    */
-  @format("uri")
   nextLink?: string;
 }
 
@@ -159,13 +172,11 @@ model NetworkSecurityPerimeter {
   /**
    * Fully qualified Azure resource ID of the NSP resource
    */
-  @format("arm-id")
   id?: string;
 
   /**
    * Universal unique ID (UUID) of the network security perimeter
    */
-  @format("uuid")
   perimeterGuid?: string;
 
   /**
@@ -351,7 +362,6 @@ interface NetworkSecurityPerimeterConfigurations {
    */
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
-    Parameters = {},
     Error = CloudError
   >;
 }
