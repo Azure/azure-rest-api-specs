@@ -33,10 +33,21 @@ description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
 tag: package-2026-04-01
 
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: The operations API is defined in a separate file.
+suppressions:  
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: SSD is the abbreviation for solid state drive used in the property name.
     from: Bulkactions.json
+    where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a
+      passthrough API and will deliver the object as is to compute.
+    from: Bulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.settings
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a
+      passthrough API and will deliver the object as is to compute.
+    from: Bulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings  
 ```
 
 ### Tag: package-2026-04-01
