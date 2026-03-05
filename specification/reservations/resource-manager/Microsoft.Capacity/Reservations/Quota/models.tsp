@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Capacity;
+namespace Quota;
 
 /**
  * Proxy resource for resource provider path segment.

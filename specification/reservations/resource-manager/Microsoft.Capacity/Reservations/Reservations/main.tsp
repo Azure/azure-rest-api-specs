@@ -27,12 +27,12 @@ using TypeSpec.Versioning;
  * This API describe Azure Reservation
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Capacity")
 @service(#{ title: "Azure Reservation API" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
-namespace Microsoft.Capacity;
+namespace Reservations;
 
 /**
  * The available API versions.

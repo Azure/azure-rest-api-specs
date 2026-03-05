@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Capacity;
+namespace Reservations;
 /**
  * The definition of the reservation.
  */

@@ -26,12 +26,12 @@ using TypeSpec.Versioning;
  * Microsoft Azure Quota Resource Provider
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Capacity")
 @service(#{ title: "Azure Reservation API" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Capacity;
+namespace Quota;
 
 /**
  * The available API versions.

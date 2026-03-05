@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Capacity;
+namespace Reservations;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ReservationOperationGroup {
@@ -61,7 +61,7 @@ interface ReservationOperationGroup {
       @query("take")
       take?: float32;
     },
-    Error = Microsoft.Capacity.ErrorResponse
+    Error = ErrorResponse
   >;
 }
 

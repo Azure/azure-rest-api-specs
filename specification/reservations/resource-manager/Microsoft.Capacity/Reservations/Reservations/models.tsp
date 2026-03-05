@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Capacity;
+namespace Reservations;
 
 /**
  * Error code describing the reason that service is not able to process the incoming request
