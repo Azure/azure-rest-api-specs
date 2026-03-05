@@ -421,3 +421,93 @@ union PrivateLinkServiceConnectionStatus {
   /** Connection has been disconnected */
   Disconnected: "Disconnected",
 }
+
+@doc("Restart mode for parameter group")
+union RestartMode {
+  string,
+
+  /** Restart immediately */
+  Immediate: "Immediate",
+
+  /** Restart during maintenance window */
+  Maintenance: "Maintenance",
+}
+
+@doc("Properties of a HorizonDb parameter group")
+model HorizonDbParameterGroupProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Parameters in the parameter group")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  parameters?: Record<ParameterProperties>;
+
+  @doc("Description of the parameter group")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  description?: string;
+
+  @doc("Target version for the parameter group")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  targetVersion?: int32;
+
+  @doc("Current version of the parameter group")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  version?: int32;
+
+  @doc("Restart mode for applying parameters")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  restartMode?: RestartMode;
+
+  @doc("The provisioning state of the parameter group")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Properties of a HorizonDb parameters")
+model ParameterProperties {
+  @doc("The value of the configuration")
+  value?: string;
+
+  @doc("The source of the configuration value")
+  source?: string;
+}
+
+@doc("Properties of a HorizonDb parameter group for update operations")
+model HorizonDbParameterGroupPropertiesForPatchUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Parameters in the parameter group")
+  @visibility(Lifecycle.Update)
+  parameters?: Record<ParameterProperties>;
+
+  @doc("Description of the parameter group")
+  @visibility(Lifecycle.Update)
+  description?: string;
+
+  @doc("Current version of the parameter group")
+  @visibility(Lifecycle.Update)
+  version?: int32;
+
+  @doc("Restart mode for applying parameters")
+  @visibility(Lifecycle.Update)
+  restartMode?: RestartMode;
+}
+
+@doc("Properties for parameter group connections")
+model HorizonDbParameterGroupConnectionsProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Connected clusters and pools")
+  @visibility(Lifecycle.Read)
+  connections?: Record<ConnectionInfo>;
+}
+
+@doc("Connection information for a cluster or pool")
+model ConnectionInfo {
+  @doc("ARM resource ID of the connected resource")
+  armId?: string;
+
+  @doc("Whether the latest version is reflected")
+  isLatestVersionReflected?: string;
+
+  @doc("Version number")
+  version?: int32;
+}

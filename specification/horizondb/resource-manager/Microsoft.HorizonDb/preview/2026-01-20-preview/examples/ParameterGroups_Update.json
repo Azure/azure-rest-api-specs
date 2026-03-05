@@ -1,0 +1,38 @@
+{
+  "operationId": "HorizonDbParameterGroups_Update",
+  "title": "Update a HorizonDb parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroup",
+    "parameterGroupName": "pg1",
+    "api-version": "2026-01-20-preview",
+    "properties": {
+      "tags": {
+        "team": "updated-data-platform"
+      },
+      "properties": {
+        "parameters": {
+          "max_connections": {
+            "value": "300",
+            "source": "abc"
+          },
+          "log_min_error_statement": {
+            "value": "warning",
+            "source": "abc"
+          }
+        },
+        "description": "Updated parameter group for high-throughput workloads",
+        "version": 23,
+        "restartMode": "Maintenance"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2026-01-20-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationResults/ffffffff-ffff-ffff-ffff-ffffffffffff"
+      }
+    }
+  }
+}

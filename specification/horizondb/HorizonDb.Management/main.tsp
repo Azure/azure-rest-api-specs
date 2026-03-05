@@ -108,6 +108,18 @@ model HorizonDbPrivateLinkResource
   name: string;
 }
 
+model HorizonDbParameterGroup
+  is Azure.ResourceManager.TrackedResource<HorizonDbParameterGroupProperties> {
+  @doc("The name of the HorizonDb parameter group")
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
+  @minLength(1)
+  @maxLength(63)
+  @key("parameterGroupName")
+  @path
+  @segment("parameterGroups")
+  name: string;
+}
+
 @armResourceOperations
 interface HorizonDbClusters {
   @doc("Gets information about a HorizonDb cluster")
@@ -227,4 +239,51 @@ interface HorizonDbPrivateLinkResources {
 
   @doc("Lists private link resources in a HorizonDb cluster")
   list is ArmResourceListByParent<HorizonDbPrivateLinkResource>;
+}
+
+@armResourceOperations
+interface HorizonDbParameterGroups {
+  @doc("Gets information about a HorizonDb parameter group")
+  get is ArmResourceRead<HorizonDbParameterGroup>;
+
+  @doc("Creates a new HorizonDb parameter group or updates an existing parameter group")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbParameterGroup>;
+
+  @doc("Updates an existing HorizonDb parameter group")
+  update is ArmCustomPatchAsync<
+    HorizonDbParameterGroup,
+    HorizonDbParameterGroupPropertiesForPatchUpdate
+  >;
+
+  @doc("Deletes a HorizonDb parameter group")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HorizonDbParameterGroup,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  @doc("Lists all HorizonDb parameter groups in a resource group")
+  listByResourceGroup is ArmResourceListByParent<HorizonDbParameterGroup>;
+
+  @doc("Lists all HorizonDb parameter groups in a subscription")
+  listBySubscription is ArmListBySubscription<HorizonDbParameterGroup>;
+
+  @doc("Gets all clusters and pools connected to a parameter group")
+  @action("connections")
+  listConnections is ArmResourceActionSync<
+    HorizonDbParameterGroup,
+    void,
+    ArmResponse<Azure.ResourceManager.ProxyResource<HorizonDbParameterGroupConnectionsProperties>>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<HorizonDbParameterGroup>
+  >;
+
+  @doc("Gets the history of a parameter group")
+  @action("history")
+  listHistory is ArmResourceActionSync<
+    HorizonDbParameterGroup,
+    void,
+    ArmResponse<Azure.ResourceManager.ResourceListResult<HorizonDbParameterGroup>>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<HorizonDbParameterGroup>
+  >;
 }

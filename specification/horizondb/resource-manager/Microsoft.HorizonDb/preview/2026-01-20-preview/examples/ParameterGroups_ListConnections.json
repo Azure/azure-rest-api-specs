@@ -1,0 +1,38 @@
+{
+  "operationId": "HorizonDbParameterGroups_ListConnections",
+  "title": "List connections for a HorizonDb parameter group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "myResourceGroup",
+    "parameterGroupName": "pg1",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/parameterGroups/pg1",
+        "name": "pg1",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "properties": {
+          "connections": {
+            "cluster1": {
+              "armId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster1",
+              "isLatestVersionReflected": "true",
+              "version": 22
+            },
+            "cluster2": {
+              "armId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster2",
+              "isLatestVersionReflected": "false",
+              "version": 21
+            },
+            "cluster3": {
+              "armId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/clusters/cluster3",
+              "isLatestVersionReflected": "true",
+              "version": 22
+            }
+          }
+        }
+      }
+    }
+  }
+}

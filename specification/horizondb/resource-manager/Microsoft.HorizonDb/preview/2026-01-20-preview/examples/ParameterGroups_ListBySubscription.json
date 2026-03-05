@@ -1,0 +1,61 @@
+{
+  "operationId": "HorizonDbParameterGroups_ListBySubscription",
+  "title": "List HorizonDb parameter groups in a subscription",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/parameterGroups/pg1",
+            "name": "pg1",
+            "type": "Microsoft.HorizonDb/parameterGroups",
+            "location": "eastus2",
+            "tags": {
+              "env": "dev",
+              "team": "data-platform"
+            },
+            "properties": {
+              "parameters": {
+                "max_connections": {
+                  "value": "200",
+                  "source": "abc"
+                }
+              },
+              "description": "Parameter group for high-throughput workloads",
+              "targetVersion": 12,
+              "version": 22,
+              "restartMode": "Immediate",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/anotherResourceGroup/providers/Microsoft.HorizonDb/parameterGroups/pg3",
+            "name": "pg3",
+            "type": "Microsoft.HorizonDb/parameterGroups",
+            "location": "centralus",
+            "tags": {
+              "env": "test"
+            },
+            "properties": {
+              "parameters": {
+                "shared_buffers": {
+                  "value": "1000",
+                  "source": "abc"
+                }
+              },
+              "description": "Parameter group for testing",
+              "targetVersion": 11,
+              "version": 20,
+              "restartMode": "Immediate",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
