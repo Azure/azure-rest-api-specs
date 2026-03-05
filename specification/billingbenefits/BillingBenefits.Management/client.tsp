@@ -35,6 +35,7 @@ using Microsoft.BillingBenefits;
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "ServiceManagedIdentityType",
   "python"
+);
 
 // csharp
 @@clientName(ReservationOrderAliasResponse,
