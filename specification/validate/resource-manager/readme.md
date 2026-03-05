@@ -70,7 +70,7 @@ input-file:
 
 These settings apply when no tag is specified on the command line.
 
-```yaml $(tag) == 'default' || $(tag) == 'package-2026-03-01-preview'
+```yaml $(tag) == 'default'
 input-file:
   - Microsoft.Validate/preview/2026-03-01-preview/validate.json
 ```
