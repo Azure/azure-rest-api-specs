@@ -16,4 +16,14 @@ describe("Tag", () => {
 
     await expect(swagger.getRefs()).rejects.toThrowError(/Failed to read file for swagger/i);
   });
+
+  it("sorts input files in toJSONAsync", async () => {
+    const tag = new Tag("test-tag", ["b.json", "a.json"]);
+    const json = /** @type {import('../src/tag.js').TagJSON} */ (await tag.toJSONAsync());
+    const files = json.inputFiles.map(
+      (f) => /** @type {import('../src/swagger.js').SwaggerJSON} */ (f).path,
+    );
+    expect(files.length).toBe(2);
+    expect(files[0].localeCompare(files[1])).toBeLessThan(0);
+  });
 });

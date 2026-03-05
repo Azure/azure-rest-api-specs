@@ -178,7 +178,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
     // Log the markdown content to the pipeline log file
     if (comparedSpecsTableContent) {
-      appendMarkdownToLog(context.oadMessageProcessorContext, comparedSpecsTableContent);
+      await appendMarkdownToLog(context.oadMessageProcessorContext, comparedSpecsTableContent);
     }
 
     // output breaking change label variables only when the PR targets a production branch
@@ -232,7 +232,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       statusCode = 1;
     }
 
-    logFullOadMessagesList(msgs);
+    await logFullOadMessagesList(msgs);
     await generateBreakingChangeResultSummary(
       context,
       msgs,

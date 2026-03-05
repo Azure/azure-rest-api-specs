@@ -41,6 +41,7 @@ alias selectQuery = {
   /** Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @query
+  @alternateType(string, "javascript")
   $select?: string[];
 };
 

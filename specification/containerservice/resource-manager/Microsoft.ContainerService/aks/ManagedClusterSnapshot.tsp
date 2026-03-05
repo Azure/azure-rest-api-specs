@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./models.tsp";
+import "./CommonModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -9,6 +9,11 @@ using TypeSpec.Http;
 using Versioning;
 
 namespace Microsoft.ContainerService;
+
+// =============================================================================
+// ManagedClusterSnapshot resource and operations
+// =============================================================================
+
 /**
  * A managed cluster snapshot resource.
  */
@@ -22,6 +27,19 @@ model ManagedClusterSnapshot
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
 }
+
+@@maxLength(ManagedClusterSnapshot.name, 63);
+@@minLength(ManagedClusterSnapshot.name, 1);
+@@doc(ManagedClusterSnapshot.name, "The name of the managed cluster resource.");
+@@doc(ManagedClusterSnapshot.properties,
+  "Properties of a managed cluster snapshot."
+);
+@@doc(ManagedClusterSnapshots.createOrUpdate::parameters.resource,
+  "The managed cluster snapshot to create or update."
+);
+@@doc(ManagedClusterSnapshots.updateTags::parameters.properties,
+  "Parameters supplied to the Update managed cluster snapshot Tags operation."
+);
 
 @armResourceOperations
 @added(Versions.v2025_10_02_preview)
@@ -61,15 +79,87 @@ interface ManagedClusterSnapshots {
   list is ArmListBySubscription<ManagedClusterSnapshot>;
 }
 
-@@maxLength(ManagedClusterSnapshot.name, 63);
-@@minLength(ManagedClusterSnapshot.name, 1);
-@@doc(ManagedClusterSnapshot.name, "The name of the managed cluster resource.");
-@@doc(ManagedClusterSnapshot.properties,
-  "Properties of a managed cluster snapshot."
-);
-@@doc(ManagedClusterSnapshots.createOrUpdate::parameters.resource,
-  "The managed cluster snapshot to create or update."
-);
-@@doc(ManagedClusterSnapshots.updateTags::parameters.properties,
-  "Parameters supplied to the Update managed cluster snapshot Tags operation."
-);
+// =============================================================================
+// ManagedClusterSnapshot models
+// =============================================================================
+
+/**
+ * Properties for a managed cluster snapshot.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
+@added(Versions.v2025_10_02_preview)
+model ManagedClusterSnapshotProperties {
+  /**
+   * CreationData to be used to specify the source resource ID to create this snapshot.
+   */
+  creationData?: CreationData;
+
+  /**
+   * The type of a snapshot. The default is NodePool.
+   */
+  snapshotType?: SnapshotType = SnapshotType.NodePool;
+
+  /**
+   * What the properties will be showed when getting managed cluster snapshot. Those properties are read-only.
+   */
+  @visibility(Lifecycle.Read)
+  managedClusterPropertiesReadOnly?: ManagedClusterPropertiesForSnapshot;
+}
+
+/**
+ * managed cluster properties for snapshot, these properties are read only.
+ */
+@added(Versions.v2025_10_02_preview)
+model ManagedClusterPropertiesForSnapshot {
+  /**
+   * The current kubernetes version.
+   */
+  kubernetesVersion?: string;
+
+  /**
+   * The current managed cluster sku.
+   */
+  sku?: ManagedClusterSKU;
+
+  /**
+   * Whether the cluster has enabled Kubernetes Role-Based Access Control or not.
+   */
+  enableRbac?: boolean;
+
+  /**
+   * The current network profile.
+   */
+  @visibility(Lifecycle.Read)
+  networkProfile?: NetworkProfileForSnapshot;
+}
+
+/**
+ * network profile for managed cluster snapshot, these properties are read only.
+ */
+@added(Versions.v2025_10_02_preview)
+model NetworkProfileForSnapshot {
+  /**
+   * networkPlugin for managed cluster snapshot.
+   */
+  networkPlugin?: NetworkPlugin;
+
+  /**
+   * NetworkPluginMode for managed cluster snapshot.
+   */
+  networkPluginMode?: NetworkPluginMode;
+
+  /**
+   * networkPolicy for managed cluster snapshot.
+   */
+  networkPolicy?: NetworkPolicy;
+
+  /**
+   * networkMode for managed cluster snapshot.
+   */
+  networkMode?: NetworkMode;
+
+  /**
+   * loadBalancerSku for managed cluster snapshot.
+   */
+  loadBalancerSku?: LoadBalancerSku;
+}
