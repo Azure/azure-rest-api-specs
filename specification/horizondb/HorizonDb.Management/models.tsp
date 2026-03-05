@@ -472,8 +472,6 @@ model ParameterProperties {
 
 @doc("Properties of a HorizonDb parameter group for update operations")
 model HorizonDbParameterGroupPropertiesForPatchUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Parameters in the parameter group")
   @visibility(Lifecycle.Update)
@@ -490,6 +488,14 @@ model HorizonDbParameterGroupPropertiesForPatchUpdate {
   @doc("Restart mode for applying parameters")
   @visibility(Lifecycle.Update)
   restartMode?: RestartMode;
+}
+
+@doc("HorizonDb parameter group for update operations")
+model HorizonDbParameterGroupForPatchUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The properties that can be updated for a HorizonDb parameter group.")
+  properties?: HorizonDbParameterGroupPropertiesForPatchUpdate;
 }
 
 @doc("Properties for parameter group connections")

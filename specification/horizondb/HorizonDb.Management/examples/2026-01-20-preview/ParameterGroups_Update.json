@@ -6,7 +6,7 @@
     "resourceGroupName": "myResourceGroup",
     "parameterGroupName": "pg1",
     "api-version": "2026-01-20-preview",
-    "properties": {
+    "resource": {
       "tags": {
         "team": "updated-data-platform"
       },
@@ -28,6 +28,33 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroup/providers/Microsoft.HorizonDb/parameterGroups/pg1",
+        "name": "pg1",
+        "type": "Microsoft.HorizonDb/parameterGroups",
+        "location": "eastus2",
+        "tags": {
+          "team": "updated-data-platform"
+        },
+        "properties": {
+          "parameters": {
+            "max_connections": {
+              "value": "300",
+              "source": "abc"
+            },
+            "log_min_error_statement": {
+              "value": "warning",
+              "source": "abc"
+            }
+          },
+          "description": "Updated parameter group for high-throughput workloads",
+          "version": 23,
+          "restartMode": "Maintenance",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2026-01-20-preview",

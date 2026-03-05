@@ -253,7 +253,7 @@ interface HorizonDbParameterGroups {
   @doc("Updates an existing HorizonDb parameter group")
   update is ArmCustomPatchAsync<
     HorizonDbParameterGroup,
-    HorizonDbParameterGroupPropertiesForPatchUpdate
+    HorizonDbParameterGroupForPatchUpdate
   >;
 
   @doc("Deletes a HorizonDb parameter group")

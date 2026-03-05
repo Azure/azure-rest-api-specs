@@ -2007,7 +2007,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HorizonDbParameterGroupPropertiesForPatchUpdate"
+              "$ref": "#/definitions/HorizonDbParameterGroupForPatchUpdate"
             }
           }
         ],
@@ -2659,6 +2659,23 @@
         }
       }
     },
+    "HorizonDbParameterGroupForPatchUpdate": {
+      "type": "object",
+      "description": "HorizonDb parameter group for update operations",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/HorizonDbParameterGroupPropertiesForPatchUpdate",
+          "description": "The properties that can be updated for a HorizonDb parameter group."
+        }
+      }
+    },
     "HorizonDbParameterGroupListResult": {
       "type": "object",
       "description": "The response of a HorizonDbParameterGroup list operation.",
@@ -2744,13 +2761,6 @@
       "type": "object",
       "description": "Properties of a HorizonDb parameter group for update operations",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "parameters": {
           "type": "object",
           "description": "Parameters in the parameter group",
