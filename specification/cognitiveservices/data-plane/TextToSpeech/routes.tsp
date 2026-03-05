@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "@typespec/openapi";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
-using TypeSpec.OpenAPI;
 
 namespace CustomVoiceApi;
 
@@ -27,12 +25,14 @@ model CustomListQueryParameters {
    * The number of result items to skip.
    */
   @query("skip")
+  @offset
   skip?: int32 = 0;
 
   /**
    * The maximum number of items to include in a single response.
    */
   @query("maxpagesize")
+  @pageSize
   maxpagesize?: int32 = 100;
 
   /**
@@ -134,9 +134,6 @@ interface Consents {
   /**
    * Creates a new voice talent consent with the provided audio URL.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
-  @operationId("Consents_Create")
   @pollingOperation(Operations.get)
   create is ops.LongRunningResourceCreateOrReplace<
     Consent,
@@ -146,15 +143,11 @@ interface Consents {
   /**
    * Creates a new voice talent consent with the provided audio file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/consents/{id}")
   @post
   @pollingOperation(Operations.get)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "operation-location" }
-  )
-  post is Azure.Core.Foundations.Operation<
+  @useFinalStateVia("operation-location")
+  createFromAudioFile is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
 
@@ -223,14 +216,10 @@ interface TrainingSets {
   /**
    * Uploads data to the specified training set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/trainingsets/{id}:upload")
   @post
   @pollingOperation(Operations.get)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "operation-location" }
-  )
+  @useFinalStateVia("operation-location")
   uploadData is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -258,10 +247,9 @@ interface Models {
    * Get a list of supported recipes for model building. Different recipes have
    * different capabilities such as support for multi-style voice models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable requires @extension for non-standard list operation"
   @route("/modelrecipes")
   @get
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  @list
   listRecipes is Azure.Core.Foundations.Operation<{}, Azure.Core.Page<Recipe>>;
 
   /**
@@ -285,9 +273,6 @@ interface Models {
   /**
    * Creates a new voice model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
-  @operationId("Models_Create")
   @pollingOperation(Operations.get)
   create is ops.LongRunningResourceCreateOrReplace<
     Model,
@@ -317,9 +302,6 @@ interface Endpoints {
   /**
    * Creates a new endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
-  @operationId("Endpoints_Create")
   @pollingOperation(Operations.get)
   create is ops.LongRunningResourceCreateOrReplace<
     Endpoint,
@@ -329,14 +311,10 @@ interface Endpoints {
   /**
    * Resumes the endpoint identified by the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/endpoints/{id}:resume")
   @post
   @pollingOperation(Operations.get)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "operation-location" }
-  )
+  @useFinalStateVia("operation-location")
   resume is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -358,14 +336,10 @@ interface Endpoints {
   /**
    * Suspends the endpoint identified by the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/endpoints/{id}:suspend")
   @post
   @pollingOperation(Operations.get)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "operation-location" }
-  )
+  @useFinalStateVia("operation-location")
   suspend is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
@@ -414,9 +388,6 @@ interface PersonalVoices {
   /**
    * Creates a new personal voice with audio files in Azure Blob Storage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Specify operationId to remove OrReplace from generated name"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Specify operationId to remove OrReplace from generated name"
-  @operationId("PersonalVoices_Create")
   @pollingOperation(Operations.get)
   create is ops.LongRunningResourceCreateOrReplace<
     PersonalVoice,
@@ -426,15 +397,11 @@ interface PersonalVoices {
   /**
    * Creates a new personal voice with audio files in the client.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-long-running-operation-options requires @extension"
   @route("/personalvoices/{id}")
   @post
   @pollingOperation(Operations.get)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "operation-location" }
-  )
-  post is Azure.Core.Foundations.Operation<
+  @useFinalStateVia("operation-location")
+  createFromAudioFile is Azure.Core.Foundations.Operation<
     {
       ...OperationIdHeader;
 
