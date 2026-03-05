@@ -32,34 +32,6 @@ union AlertConfigurationMode {
 }
 
 /**
- * The status of an alert.
- */
-@added(Versions.v2025_10_02_preview)
-union AlertStatus {
-  string,
-
-  /**
-   * The alert is installed and active.
-   */
-  Installed: "Installed",
-
-  /**
-   * The alert is pending installation.
-   */
-  Pending: "Pending",
-
-  /**
-   * The alert is uninstalled.
-   */
-  Uninstalled: "Uninstalled",
-
-  /**
-   * The alert installation failed.
-   */
-  Failed: "Failed",
-}
-
-/**
  * The current provisioning state of the alert configuration.
  */
 @added(Versions.v2025_10_02_preview)
