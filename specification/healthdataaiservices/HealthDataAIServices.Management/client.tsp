@@ -28,6 +28,14 @@ namespace Microsoft.HealthDataAIServices {
     "HealthDataAIServicesPrivateLinkResourceData",
     "csharp"
   );
+  @@clientName(DeidServiceSkuTier,
+    "HealthDataAIServicesSkuTier",
+    "csharp"
+  );
+  @@clientName(DeidServiceSku,
+    "HealthDataAIServicesSku",
+    "csharp"
+  );
   @@clientName(PrivateLinks.listByDeidService, "GetPrivateLinks", "csharp");
 
   @@clientName(Versions.v2024_09_20,

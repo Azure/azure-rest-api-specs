@@ -740,6 +740,10 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/DeidServiceSku",
+          "description": "The SKU of the deid service."
         }
       },
       "allOf": [
@@ -797,6 +801,53 @@
         }
       }
     },
+    "DeidServiceSku": {
+      "type": "object",
+      "description": "The SKU of the DeidService resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU, e.g. \"Free\", \"Basic\", \"Standard\"."
+        },
+        "tier": {
+          "$ref": "#/definitions/DeidServiceSkuTier",
+          "description": "The tier of the SKU."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DeidServiceSkuTier": {
+      "type": "string",
+      "description": "The SKU tier for the DeidService resource.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "DeidServiceSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free tier"
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier"
+          }
+        ]
+      }
+    },
     "DeidUpdate": {
       "type": "object",
       "description": "Patch request body for DeidService",
@@ -815,6 +866,10 @@
         "properties": {
           "$ref": "#/definitions/DeidPropertiesUpdate",
           "description": "RP-specific properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/DeidServiceSku",
+          "description": "The SKU of the deid service."
         }
       }
     },

@@ -40,6 +40,10 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding SKU support"
+  /** The SKU of the deid service. */
+  sku?: DeidServiceSku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +55,9 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU of the deid service. */
+  sku?: DeidServiceSku;
 }
 
 model DeidPropertiesUpdate
@@ -89,6 +96,29 @@ enum PublicNetworkAccess {
 
   @doc("The public network access is disabled")
   Disabled,
+}
+
+/** The SKU tier for the DeidService resource. */
+union DeidServiceSkuTier {
+  string,
+
+  /** Free tier */
+  Free: "Free",
+
+  /** Basic tier */
+  Basic: "Basic",
+
+  /** Standard tier */
+  Standard: "Standard",
+}
+
+/** The SKU of the DeidService resource. */
+model DeidServiceSku {
+  /** The name of the SKU, e.g. "Free", "Basic", "Standard". */
+  name: string;
+
+  /** The tier of the SKU. */
+  tier?: DeidServiceSkuTier;
 }
 
 @doc("Details of the HealthDataAIServices DeidService.")
