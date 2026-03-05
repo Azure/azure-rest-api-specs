@@ -16,12 +16,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
       "get": {
         "tags": [
-          "Disks"
+          "SuperDisks"
         ],
-        "operationId": "Disks_Get_v2",
+        "operationId": "SuperDisks_Get",
         "parameters": [
           {
             "name": "subscriptionId",
@@ -63,12 +63,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/childResources/{childName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}": {
       "get": {
         "tags": [
-          "ChildResources"
+          "SuperDiskMetrics"
         ],
-        "operationId": "ChildResources_Get",
+        "operationId": "SuperDiskMetrics_Get",
         "parameters": [
           {
             "name": "subscriptionId",
@@ -89,7 +89,7 @@
             "type": "string"
           },
           {
-            "name": "childName",
+            "name": "metricName",
             "in": "path",
             "required": true,
             "type": "string"
