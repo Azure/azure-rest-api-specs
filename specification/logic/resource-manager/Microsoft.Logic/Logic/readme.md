@@ -39,6 +39,19 @@ directive:
 
 ```
 
+### Tag: package-2026-01-preview
+
+These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01-preview'
+input-file:
+- preview/2026-01-01-preview/logic.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: logic.json
+    reason: "provisioningState is already marked readOnly via @visibility(Lifecycle.Read) in TypeSpec. This is a known false positive in the linter."
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
