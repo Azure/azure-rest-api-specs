@@ -17,11 +17,18 @@ const VERSION_PATTERN =
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
 
-const RESOURCE_TYPE_REGEX = /\/providers\/([^/]+\/[^/\{]+)/;
+const RESOURCE_TYPE_REGEX = /\/providers\/([^?]+)/;
 
-/** Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines) */
+/** Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines/extensions) */
 function getResourceType(apiPath) {
-  return apiPath.match(RESOURCE_TYPE_REGEX)?.[1] || null;
+  const match = apiPath.match(RESOURCE_TYPE_REGEX);
+  if (!match) return null;
+
+  // Split and filter out parameter segments like {vmName} to get the static resource type
+  return match[1]
+    .split("/")
+    .filter((segment) => !segment.startsWith("{"))
+    .join("/");
 }
 
 /**
@@ -93,7 +100,8 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, repoRoot) {
     let content;
     try {
       content = await git.show([`${commitish}:${file}`]);
-    } catch {
+    } catch (e) {
+      console.warn(`Failed to read ${file} at ${commitish}, skipping: ${e.message}`);
       continue;
     }
 
@@ -143,13 +151,13 @@ export async function detectNewResourceTypes({
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
-    // Attempt to match pattern at any position to handle paths more robustly
-    const match = file.match(VERSION_PATTERN) || file.match(RESOURCE_MANAGER_PATTERN);
-    if (!match) continue;
+    // Determine orgName and namespace from the file path
+    // Format: specification/<orgName>/resource-manager/<namespace>/...
+    const parts = file.split("/");
+    if (parts[0] !== "specification" || parts[2] !== "resource-manager") continue;
 
-    // organization name is always the second component in 'specification/<org>/...'
-    const orgName = file.split("/")[1];
-    const namespace = match[1]; // match[1] is RP namespace for RESOURCE_MANAGER_PATTERN
+    const orgName = parts[1];
+    const namespace = parts[3];
     const namespacePath = `specification/${orgName}/resource-manager/${namespace}`;
 
     if (!namespaceMap.has(namespace)) {
