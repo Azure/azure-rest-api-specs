@@ -447,6 +447,10 @@ union PublicNetworkAccess {
   Enabled: "Enabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
+
+  /**
+   * Property used by NetworkSecurityPerimeters for locking down the vault to only perimeter rules.
+   */
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
