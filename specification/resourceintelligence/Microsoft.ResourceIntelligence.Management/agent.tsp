@@ -51,6 +51,15 @@ model AgentProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+/**
+ * The type used for update operations of the Agent.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Only tags are updatable via PATCH for Agent"
+model AgentUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}
+
 // ============================================
 // AGENT OPERATIONS
 // ============================================
@@ -70,13 +79,7 @@ interface Agents {
   /**
    * Updates an agent.
    */
-  update is ArmCustomPatchSync<
-    Agent,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Agent,
-      AgentProperties
-    >
-  >;
+  update is ArmCustomPatchSync<Agent, AgentUpdate>;
 
   /**
    * Deletes an agent.
