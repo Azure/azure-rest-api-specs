@@ -53,7 +53,10 @@ interface InternalNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<InternalNetwork>;
 
   @doc("Displays InternalNetworks list by resource group GET method.")
-  listByL3IsolationDomain is ArmResourceListByParent<InternalNetwork>;
+  listByL3IsolationDomain is ArmResourceListByParent<
+    InternalNetwork,
+    Response = InternalNetworksList
+  >;
 
   @doc("Update Administrative state of  InternalNetworks on resources referred by their resource ids.")
   @action("updateAdministrativeState")
