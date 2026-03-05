@@ -50,11 +50,6 @@ union ValidationExecutionPlanProvisioningState {
   ResourceProvisioningState,
 
   @doc("The resource is being provisioned.")
-  @removed(Versions.v2026_03_01_preview)
-  Provisioning: "Provisioning",
-
-  @doc("The resource is being provisioned.")
-  @added(Versions.v2026_03_01_preview)
   Creating: "Creating",
 
   @doc("The resource is updating.")
