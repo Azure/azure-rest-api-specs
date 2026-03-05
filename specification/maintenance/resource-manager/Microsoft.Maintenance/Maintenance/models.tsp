@@ -774,6 +774,24 @@ model Operation {
  */
 model OperationsListResult {
   /**
+   * Fully qualified identifier of the resource
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the resource
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
    * The link used to get the next page of operations.
    */
   @nextLink
