@@ -1,8 +1,8 @@
 // Map Legends interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tiler.map-legends.tsp";
 import "./models.common.images.tsp";
+import "./models.tiler.map-legends.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -13,17 +13,35 @@ interface MapsIntervalLegends {
   /**
    * Generate values and color swatches mapping for a given interval classmap.
    *
-   * Args:
-   *     trim_start (int, optional): Number of items to trim from
-   *         the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
+   * Returns a color map for intervals, where each interval is defined by:
+   * - A numeric range `[min, max]` representing the interval boundaries.
+   * - An RGBA color `[red, green, blue, alpha]` associated with the interval.
+   *
+   * The response is a 2D array of interval definitions, where each element is a pair:
+   * - The first element is an array of two numbers `[min, max]` defining the interval.
+   * - The second element is an array of four numbers `[red, green, blue, alpha]` defining the RGBA color.
+   *
+   * Example:
+   * ```json
+   * [
+   *   [
+   *     [-2, 0], [0, 0, 0, 0]
+   *   ],
+   *   [
+   *     [1, 32], [255, 255, 178, 255]
+   *   ]
+   * ]
+   * ```
+   * This example defines two intervals:
+   * - The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).
+   * - The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Interval Legend")
   @tag("Map Legends")
   @route("/data/legend/interval/{classmapName}")
   @get
-  getByClassmapName is Azure.Core.Foundations.Operation<
+  getByClassMapName is Azure.Core.Foundations.Operation<
     {
       /**
        * classmap name
@@ -45,21 +63,16 @@ interface MapsIntervalLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    IntervalLegendsResponse | NoContentResponse
+    IntervalLegendsResponse
   >;
 }
 
-interface MapsClassmapLegends {
+interface MapsClassMapLegends {
   /**
    * Generate values and color swatches mapping for a given classmap.
-   *
-   * Args:
-   *     trim_start (int, optional): Number of items to trim
-   *         from the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Classmap Legend")
+  @summary("Get ClassMap Legend")
   @tag("Map Legends")
   @route("/data/legend/classmap/{classmapName}")
   @get
@@ -85,7 +98,7 @@ interface MapsClassmapLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ClassmapLegendResponse | NoContentResponse
+    ClassMapLegendResponse
   >;
 }
 
@@ -96,23 +109,11 @@ interface MapsLegends {
    * If the colormap has non-contiguous values at the beginning or end,
    * which aren't desired in the output image, they can be trimmed by specifying
    * the number of values to trim.
-   *
-   * Args:
-   *     cmap_name (string): The name of the registered colormap to generate
-   *         a legend for
-   *     height (float, optional): The output height of the legend image
-   *     width (float, optional): The output width of the legend image
-   *     trim_start (int, optional): Number of items to trim from
-   *         the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
-   *
-   * Returns:
-   *     HTTP response with jpeg encoded image data
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Legend")
   @tag("Map Legends")
-  @route("/data/legend/colormap/{cmapName}")
+  @route("/data/legend/colormap/{colorMapName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
@@ -122,19 +123,19 @@ interface MapsLegends {
       @path
       @maxLength(500)
       @pattern(".*")
-      cmapName: string;
+      colorMapName: string;
 
       /**
        * The output height of the legend image
        */
       @query("height")
-      height?: float64 = 0.15;
+      height?: float32 = 0.15;
 
       /**
        * The output width of the legend image
        */
       @query("width")
-      width?: float64 = 5;
+      width?: float32 = 5;
 
       /**
        * Number of items to trim from the start of the cmap
@@ -148,6 +149,6 @@ interface MapsLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ImagePngResponse | NoContentResponse
+    ImagePngResponse
   >;
 }

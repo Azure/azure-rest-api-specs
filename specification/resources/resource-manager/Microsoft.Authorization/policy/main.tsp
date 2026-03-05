@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./DataPolicyManifests.tsp";
 import "./PolicyAssignment.tsp";
 import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";

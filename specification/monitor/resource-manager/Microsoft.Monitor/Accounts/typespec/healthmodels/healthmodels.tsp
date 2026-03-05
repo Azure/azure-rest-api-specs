@@ -100,6 +100,7 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
 }
 
 @armResourceOperations(HealthModel)
+@removed(Versions.v2025_10_03)
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
@@ -112,6 +113,7 @@ interface HealthModels {
 }
 
 @armResourceOperations(SignalDefinition)
+@removed(Versions.v2025_10_03)
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
@@ -125,6 +127,7 @@ interface SignalDefinitions {
 }
 
 @armResourceOperations(AuthenticationSetting)
+@removed(Versions.v2025_10_03)
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
@@ -134,6 +137,7 @@ interface AuthenticationSettings {
 }
 
 @armResourceOperations(Entity)
+@removed(Versions.v2025_10_03)
 interface Entities {
   get is ArmResourceRead<Entity>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
@@ -147,6 +151,7 @@ interface Entities {
 }
 
 @armResourceOperations(Relationship)
+@removed(Versions.v2025_10_03)
 interface Relationships {
   get is ArmResourceRead<Relationship>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
@@ -160,6 +165,7 @@ interface Relationships {
 }
 
 @armResourceOperations(DiscoveryRule)
+@removed(Versions.v2025_10_03)
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
