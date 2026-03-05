@@ -125,8 +125,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -248,6 +247,73 @@
         "tags": [
           "Agents"
         ]
+      }
+    },
+    "/agents/initialize": {
+      "post": {
+        "operationId": "Agents_initializeAgentObject",
+        "description": "Initializes an agent object",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "$ref": "#/components/schemas/FoundryFeaturesOptInKeys"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitializeAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}": {
@@ -419,6 +485,82 @@
         "tags": [
           "Agents"
         ]
+      }
+    },
+    "/agents/{agent_name}/endpoint": {
+      "post": {
+        "operationId": "Agents_updateAgentObject",
+        "description": "Updates an agent endpoint.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "$ref": "#/components/schemas/FoundryFeaturesOptInKeys"
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAgentEndpointRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/import": {
@@ -772,8 +914,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -9771,8 +9912,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -9786,8 +9926,7 @@
             "enum": [
               "HostedAgents=V1Preview",
               "WorkflowAgents=V1Preview",
-              "ContainerAgents=V1Preview",
-              "AgentEndpoints=V1Preview"
+              "ContainerAgents=V1Preview"
             ]
           }
         ],
@@ -9800,13 +9939,13 @@
           "authorization_schemes"
         ],
         "properties": {
-          "traffic_routing_policy": {
+          "version_selector": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TrafficRoutingPolicy"
+                "$ref": "#/components/schemas/VersionSelector"
               }
             ],
-            "description": "The traffic routing policy of the agent endpoint determines how traffic is routed to different versions of the agent."
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
           },
           "protocols": {
             "type": "array",
@@ -9825,7 +9964,7 @@
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -9836,22 +9975,40 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
-            "description": "Discriminator property for AgentEndpointAuthorizationScheme."
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationSchemeType"
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "Entra": "#/components/schemas/EntraAuthorizationScheme",
-            "Header": "#/components/schemas/HeaderAuthorizationScheme",
             "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
             "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme"
           }
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
+          ]
+        }
+      },
+      "AgentEndpointAuthorizationSchemeType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "BotService",
+              "BotServiceRbac"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -10065,7 +10222,7 @@
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -10131,7 +10288,7 @@
             "description": "The endpoint configuration for the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
-                "AgentEndpoints=V1Preview"
+                "AgentEndpoint=V1Preview"
               ]
             }
           },
@@ -10140,7 +10297,7 @@
             "description": "The reference to a managed blueprint for the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
-                "AgentEndpoints=V1Preview"
+                "AgentEndpoint=V1Preview"
               ]
             }
           },
@@ -10153,7 +10310,7 @@
             "description": "The identity of the agent",
             "x-ms-foundry-meta": {
               "required_previews": [
-                "AgentEndpoints=V1Preview"
+                "AgentEndpoint=V1Preview"
               ]
             },
             "readOnly": true
@@ -11683,7 +11840,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -11707,7 +11864,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -12392,28 +12549,6 @@
             "maxLength": 63,
             "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
           },
-          "endpoint": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentEndpoint"
-              }
-            ],
-            "description": "The endpoint configuration for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
-          "blueprint_id": {
-            "type": "string",
-            "description": "The reference to a managed blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           "metadata": {
             "type": "object",
             "additionalProperties": {
@@ -12438,8 +12573,7 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview",
-                "AgentEndpoints=V1Preview"
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
@@ -12448,8 +12582,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -12514,8 +12647,7 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview",
-                "AgentEndpoints=V1Preview"
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
@@ -12524,8 +12656,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -13164,7 +13295,8 @@
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "isolation_key_source"
         ],
         "properties": {
           "type": {
@@ -13172,6 +13304,9 @@
             "enum": [
               "Entra"
             ]
+          },
+          "isolation_key_source": {
+            "$ref": "#/components/schemas/IsolationKeySource"
           }
         },
         "allOf": [
@@ -13181,7 +13316,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -13206,6 +13341,30 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
       },
       "Eval": {
         "type": "object",
@@ -15032,7 +15191,7 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
-      "FixedRatioTrafficRoutingPolicy": {
+      "FixedRatioVersionSelectionRule": {
         "type": "object",
         "required": [
           "type",
@@ -15055,41 +15214,12 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TrafficRoutingPolicy"
+            "$ref": "#/components/schemas/VersionSelectionRule"
           }
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "FlightTrafficRoutingPolicy": {
-        "type": "object",
-        "required": [
-          "type",
-          "flight_name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "Flight"
-            ]
-          },
-          "flight_name": {
-            "type": "string",
-            "description": "The name of the flight to route traffic to."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TrafficRoutingPolicy"
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -15135,6 +15265,24 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryFeaturesOptInKeys": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Evaluations=V1Preview",
+              "Schedules=V1Preview",
+              "RedTeams=V1Preview",
+              "Insights=V1Preview",
+              "MemoryStores=V1Preview",
+              "AgentEndpoint=V1Preview"
+            ]
+          }
+        ]
+      },
       "FunctionToolCall": {
         "type": "object",
         "required": [
@@ -15153,31 +15301,37 @@
         },
         "description": "Details of a function tool call."
       },
-      "HeaderAuthorizationScheme": {
+      "HeaderIsolationKeySource": {
         "type": "object",
         "required": [
-          "type",
-          "isolation_key_source"
+          "kind",
+          "user_isolation_key",
+          "chat_isolation_key"
         ],
         "properties": {
-          "type": {
+          "kind": {
             "type": "string",
             "enum": [
               "Header"
             ]
           },
-          "isolation_key_source": {
-            "$ref": "#/components/schemas/IsolationKeySource"
+          "user_isolation_key": {
+            "type": "string",
+            "description": "The user isolation key header value"
+          },
+          "chat_isolation_key": {
+            "type": "string",
+            "description": "The chat isolation key header value"
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            "$ref": "#/components/schemas/IsolationKeySource"
           }
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -15429,6 +15583,36 @@
           }
         },
         "description": "Index resource Definition"
+      },
+      "InitializeAgentRequest": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+          },
+          "endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "blueprint_id": {
+            "type": "string",
+            "description": "The reference to a managed blueprint for the agent"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
       },
       "InputData": {
         "type": "object",
@@ -15794,22 +15978,42 @@
       "IsolationKeySource": {
         "type": "object",
         "required": [
-          "user_isolation_key",
-          "chat_isolation_key"
+          "kind"
         ],
         "properties": {
-          "user_isolation_key": {
-            "type": "string",
-            "description": "The user isolation key header value"
-          },
-          "chat_isolation_key": {
-            "type": "string",
-            "description": "The chat isolation key header value"
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
           }
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "AgentEndpoints=V1Preview"
+            "AgentEndpoint=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
           ]
         }
       },
@@ -38383,35 +38587,6 @@
         ],
         "description": "Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights."
       },
-      "TrafficRoutingPolicy": {
-        "type": "object",
-        "required": [
-          "version",
-          "type"
-        ],
-        "properties": {
-          "version": {
-            "type": "string",
-            "description": "The version to rout traffic to"
-          },
-          "type": {
-            "type": "string",
-            "description": "Discriminator property for TrafficRoutingPolicy."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "FixedRatio": "#/components/schemas/FixedRatioTrafficRoutingPolicy",
-            "Flight": "#/components/schemas/FlightTrafficRoutingPolicy"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "TreatmentEffectType": {
         "anyOf": [
           {
@@ -38471,6 +38646,24 @@
         ],
         "description": "Type of the trigger."
       },
+      "UpdateAgentEndpointRequest": {
+        "type": "object",
+        "properties": {
+          "endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
+      },
       "UpdateAgentFromManifestRequest": {
         "type": "object",
         "required": [
@@ -38508,19 +38701,6 @@
           "definition"
         ],
         "properties": {
-          "endpoint": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentEndpoint"
-              }
-            ],
-            "description": "The endpoint configuration for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           "metadata": {
             "type": "object",
             "additionalProperties": {
@@ -38545,8 +38725,7 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview",
-                "AgentEndpoints=V1Preview"
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
@@ -38555,8 +38734,7 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview",
-            "AgentEndpoints=V1Preview"
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -38633,6 +38811,70 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "VersionSelectionRule": {
+        "type": "object",
+        "required": [
+          "type",
+          "agentVersion"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VersionSelectorType"
+          },
+          "agentVersion": {
+            "type": "string",
+            "description": "The version to rout traffic to"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
+      },
+      "VersionSelector": {
+        "type": "object",
+        "required": [
+          "version_selection_rules"
+        ],
+        "properties": {
+          "version_selection_rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionSelectionRule"
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
+          ]
+        }
+      },
+      "VersionSelectorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "FixedRatio"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoint=V1Preview"
           ]
         }
       },

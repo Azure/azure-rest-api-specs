@@ -1,8 +1,10 @@
+import "@typespec/versioning";
 import "../common/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -202,5 +204,48 @@ interface Agents {
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
+  >;
+
+  /**
+   * Initializes an agent object
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @post
+  @route("/agents/initialize")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @removed(Versions.v1)
+  initializeAgentObject is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys,
+    InitializeAgentRequest,
+    AgentObject
+  >;
+
+  /**
+   * Updates an agent endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @post
+  @route("/agents/{agent_name}/endpoint")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @removed(Versions.v1)
+  updateAgentObject is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys,
+    {
+      /** The name of the agent to retrieve. */
+      @path agent_name: string;
+
+      ...UpdateAgentEndpointRequest;
+    },
+    AgentObject
   >;
 }
