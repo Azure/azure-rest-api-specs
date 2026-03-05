@@ -133,7 +133,7 @@ model GeoCatalogProperties {
 
   @added(Versions.`2025-07-01-preview`)
   @doc("Whether or not public network access is allowed for the GeoCatalog.")
-  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Disabled;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   @added(Versions.`2025-07-01-preview`)
   @doc("The resource IDs of the managed storage accounts for the GeoCatalog.")
@@ -169,6 +169,17 @@ model GeoCatalogUpdate {
 
   @doc("The managed service identity properties to update.")
   identity?: ManagedServiceIdentityUpdate;
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("The updatable properties of the GeoCatalog.")
+  properties?: GeoCatalogUpdateProperties;
+}
+
+@added(Versions.`2025-07-01-preview`)
+@doc("The updatable properties of a GeoCatalog.")
+model GeoCatalogUpdateProperties {
+  @doc("Whether or not public network access is allowed for the GeoCatalog.")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @armResourceOperations(GeoCatalog)

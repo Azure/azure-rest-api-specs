@@ -882,7 +882,7 @@
         "publicNetworkAccess": {
           "type": "string",
           "description": "Whether or not public network access is allowed for the GeoCatalog.",
-          "default": "Disabled",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -937,6 +937,20 @@
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentityUpdate",
           "description": "The managed service identity properties to update."
+        },
+        "properties": {
+          "$ref": "#/definitions/GeoCatalogUpdateProperties",
+          "description": "The updatable properties of the GeoCatalog."
+        }
+      }
+    },
+    "GeoCatalogUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of a GeoCatalog.",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for the GeoCatalog."
         }
       }
     },
