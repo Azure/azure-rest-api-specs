@@ -656,7 +656,6 @@ model StopBackupProtectionGroupRequest {
 }
 
 @doc("The properties of BackupProtectionGroupRequest")
-@added(Versions.v3_preview)
 model BackupProtectionGroupRequest {
   @doc("The vm list details.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -664,7 +663,6 @@ model BackupProtectionGroupRequest {
 }
 
 @doc("Backup job response for a Protection Group")
-@added(Versions.v3_preview)
 model BackupProtectionGroupResponse {
   @doc("The Commvault response for taskId")
   @visibility(Lifecycle.Read)
@@ -676,7 +674,6 @@ model BackupProtectionGroupResponse {
 }
 
 @doc("The VM list for backup")
-@added(Versions.v3_preview)
 model VmList {
   @doc("The list of VM GUIDs to backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -689,7 +686,6 @@ model VmList {
 }
 
 @doc("The VM GUID for backup")
-@added(Versions.v3_preview)
 model VmGuid {
   @doc("The id of the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -697,7 +693,6 @@ model VmGuid {
 }
 
 @doc("The backup options for the VM backup")
-@added(Versions.v3_preview)
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
