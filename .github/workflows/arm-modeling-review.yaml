@@ -29,9 +29,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0 # Fetch all history for merge-base calculation and diffing
           sparse-checkout: |
             .github
+            specification
+            eng
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -43,25 +45,33 @@ jobs:
           script: |
             const { default: armModelingReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/detect-new-resource-provider.js');
-            return await armModelingReview({ context, core });
+            const result = await armModelingReview({ context, core });
+            core.info(`Final detection result: ${JSON.stringify(result, null, 2)}`);
+            return result;
 
-      - if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
-        name: Upload artifact for ARMModelingReviewRequired label
+      - name: Upload artifact for ARMModelingReviewRequired label
+        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingReviewRequired"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] == 'add' }}"
 
-      - if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
-        name: Upload artifact for ARMModelingSignedOff label
+      - name: Upload artifact for ARMModelingSignedOff label
+        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] == 'add' }}"
 
-      - if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
-        name: Upload artifact for ARMModelingAutoSignedOff label
+      - name: Upload artifact for ARMModelingAutoSignedOff label
+        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingAutoSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] == 'add' }}"
+
+      - name: Upload artifact for issue_number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: "${{ github.event.pull_request.number }}"
