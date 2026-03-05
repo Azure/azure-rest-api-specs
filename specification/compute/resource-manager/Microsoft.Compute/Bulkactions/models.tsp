@@ -3,6 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./virtualMachineProfile.tsp";
+import "./virtualMachineExtension.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -94,15 +97,65 @@ model Resources {
   ]>>;
 }
 
+/**
+ * The virtual machine specification for bulk create.
+ */
+model BulkactionVMSpec {
+  /**
+   * The marketplace image plan used for the virtual machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  plan?: Plan;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  /**
+   * The identity of the virtual machine, if configured.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: VirtualMachineIdentity;
+
+  /**
+   * The extended location of the Virtual Machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
+
+  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
+  placement?: Placement;
+
+  /**
+   * Resource tags to apply to the virtual machines created by this bulk action.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  @doc("Describes the properties of a Virtual Machine.")
+  vmProperties?: BulkactionVMProfile;
+}
+
+/**
+ * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
+ */
+model BulkVMConfiguration {
+  @doc("Bulk Actions Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
+  vmProperties?: BulkactionVMSpec;
+
+  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
+  extensions?: BulkactionVMExtension[];
+
+  @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
+  computeApiVersion?: string;
+}
+
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
-  baseProfile?: Record<unknown>;
+  @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
+  baseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
-  resourceOverrides?: Record<unknown>[];
+  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch")
+  @identifiers(#[])
+  resourceOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;

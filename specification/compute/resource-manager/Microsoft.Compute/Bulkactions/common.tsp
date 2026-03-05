@@ -1,0 +1,143 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using Azure.ResourceManager;
+
+namespace Microsoft.Compute;
+
+@doc("ApiError for Fleet")
+model ApiError is ApiErrorBase {
+  @identifiers(#["message", "target"])
+  @doc("The API error details")
+  details?: Array<ApiErrorBase>;
+
+  @doc("The API inner error")
+  innererror?: InnerError;
+}
+
+@doc("API error base.")
+model ApiErrorBase {
+  @doc("The error code.")
+  code?: string;
+
+  @doc("The target of the particular error.")
+  target?: string;
+
+  @doc("The error message.")
+  message?: string;
+}
+
+@doc("Inner error details.")
+model InnerError {
+  @doc("The exception type.")
+  exceptionType?: string;
+
+  @doc("The internal error message or exception dump.")
+  errorDetail?: string;
+}
+
+@doc("Describes a reference to a sub-resource.")
+model SubResource {
+  @doc("The ID of the sub-resource.")
+  id?: string;
+}
+
+@doc("Describes a reference to Key Vault Secret")
+model KeyVaultSecretReference {
+  @doc("The URL referencing a secret in a Key Vault.")
+  secretUrl: string;
+
+  @doc("The relative URL of the Key Vault containing the secret.")
+  sourceVault: SubResource;
+}
+
+/**
+ * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ResourceIdentityType {
+  SystemAssigned,
+  UserAssigned,
+  `SystemAssigned, UserAssigned`,
+  None,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model UserAssignedIdentitiesValue {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+}
+
+/**
+ * Identity for the virtual machine.
+ */
+model VirtualMachineIdentity {
+  /**
+   * The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.
+   */
+  type?: ResourceIdentityType;
+
+  /**
+   * The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+ */
+union ZonePlacementPolicyType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Any: "Any",
+
+  /**
+   * The platform automatically selects an availability zone based on the request.
+   */
+  Auto: "Auto",
+}
+
+/**
+ * Describes the user-defined constraints for resource hardware placement.
+ */
+model Placement {
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+   */
+  zonePlacementPolicy?: ZonePlacementPolicyType;
+
+  /**
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
+   */
+  includeZones?: string[];
+
+  /**
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
+   */
+  excludeZones?: string[];
+}
