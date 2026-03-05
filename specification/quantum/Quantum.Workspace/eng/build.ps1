@@ -128,7 +128,7 @@ Copying examples from $source to $newVersionExamples
         npx tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
         
-    # copy to swagger folder to easy upload to https://apiview.dev/
+    # copy to swagger folder to easy upload to https://apiview.org/
     New-Item -ItemType Directory -Force -Path (Join-Path $outputDirectory "./swagger/") *> $null
     Copy-Item $newSwaggerFile (Join-Path $outputDirectory "./swagger/quantum.swagger") -Force *> $null
 
