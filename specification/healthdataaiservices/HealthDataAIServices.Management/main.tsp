@@ -40,6 +40,10 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding SKU property"
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: Sku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +55,9 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: Sku;
 }
 
 model DeidPropertiesUpdate
@@ -89,6 +96,55 @@ enum PublicNetworkAccess {
 
   @doc("The public network access is disabled")
   Disabled,
+}
+
+/** The SKU tier based on the SKU name. */
+union SkuTier {
+  string,
+
+  /** The Free tier. */
+  Free: "Free",
+
+  /** The Basic tier. */
+  Basic: "Basic",
+
+  /** The Standard tier. */
+  Standard: "Standard",
+
+  /** The Premium tier. */
+  Premium: "Premium",
+}
+
+/** The name of the SKU. */
+union SkuName {
+  string,
+
+  /** The Free SKU. */
+  Free: "Free",
+
+  /** The Basic SKU. */
+  Basic: "Basic",
+
+  /** The Standard SKU. */
+  Standard: "Standard",
+}
+
+/** The resource model definition representing SKU. */
+model Sku {
+  /** The name of the SKU. Ex - Free, Basic, Standard. */
+  name: SkuName;
+
+  /** This field is required to be implemented by the resource provider if the service has more than one tier, but is not required on a PUT. */
+  tier?: SkuTier;
+
+  /** The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. */
+  size?: string;
+
+  /** If the service has different generations of hardware, for the same SKU, then that can be captured here. */
+  family?: string;
+
+  /** If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. */
+  capacity?: int32;
 }
 
 @doc("Details of the HealthDataAIServices DeidService.")
