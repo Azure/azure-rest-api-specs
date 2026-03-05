@@ -103,6 +103,11 @@ interface Runs {
   > | ErrorResponse;
 
   /**
+   * Executes a run asynchronously.
+   */
+  execute is ArmResourceActionAsync<Run, RunRequest, Run>;
+
+  /**
    * Deletes a run.
    */
   delete is ArmResourceDeleteSync<Run>;

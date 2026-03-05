@@ -96,5 +96,5 @@ interface Agents {
   /**
    * Creates a new run for the agent.
    */
-  execute is ArmResourceActionSync<Agent, RunRequest, Run>;
+  execute is ArmResourceActionAsync<Agent, RunRequest, Run>;
 }

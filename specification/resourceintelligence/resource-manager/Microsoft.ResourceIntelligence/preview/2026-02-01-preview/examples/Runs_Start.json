@@ -1,11 +1,12 @@
 {
-  "operationId": "Agents_Execute",
-  "title": "Create a new run for an agent",
+  "operationId": "Runs_Start",
+  "title": "Start a run asynchronously",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "agentName": "myAgent",
+    "runId": "run-001",
     "body": {
       "message": "Show me all virtual machines in this subscription",
       "modelUrl": "https://myopenai.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01",
@@ -16,8 +17,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/6fa459ea-ee8a-3ca4-894e-db77e160355e",
-        "name": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/run-001",
+        "name": "run-001",
         "type": "Microsoft.ResourceIntelligence/agents/runs",
         "properties": {
           "status": "completed",
@@ -33,7 +34,7 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceIntelligence/locations/eastus/operationStatuses/op-001?api-version=2026-02-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceIntelligence/locations/eastus/operationStatuses/op-002?api-version=2026-02-01-preview",
         "Retry-After": "10"
       }
     }
