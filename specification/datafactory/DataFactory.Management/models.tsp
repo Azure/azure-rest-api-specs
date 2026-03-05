@@ -6628,24 +6628,9 @@ model MappingDataFlowTypeProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSource extends Transformation {
   /**
-   * Dataset reference.
-   */
-  dataset?: DatasetReference;
-
-  /**
-   * Linked service reference.
-   */
-  linkedService?: LinkedServiceReference;
-
-  /**
    * Schema linked service reference.
    */
   schemaLinkedService?: LinkedServiceReference;
-
-  /**
-   * Flowlet Reference
-   */
-  flowlet?: DataFlowReference;
 }
 
 /**
@@ -6684,29 +6669,9 @@ model Transformation {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSink extends Transformation {
   /**
-   * Dataset reference.
-   */
-  dataset?: DatasetReference;
-
-  /**
-   * Linked service reference.
-   */
-  linkedService?: LinkedServiceReference;
-
-  /**
    * Schema linked service reference.
    */
   schemaLinkedService?: LinkedServiceReference;
-
-  /**
-   * Rejected data linked service reference.
-   */
-  rejectedDataLinkedService?: LinkedServiceReference;
-
-  /**
-   * Flowlet Reference
-   */
-  flowlet?: DataFlowReference;
 }
 
 /**
