@@ -760,7 +760,8 @@ model Operation {
   /**
    * Properties of the operation
    */
-  properties?: {};
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Operation properties is a free-form object"
+  properties?: Record<unknown>;
 
   /**
    * Indicates whether the operation is a data action
