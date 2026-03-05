@@ -63,10 +63,9 @@ model IpCommunityRule {
   communityMembers: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The IP Community patch resource definition.")
-model IpCommunityPatch {
-  ...TagsUpdate;
-
+model IpCommunityPatch extends TagsUpdate {
   @doc("IP Community patchable properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
