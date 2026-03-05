@@ -177,12 +177,6 @@ export async function detectNewResourceTypes({
       repoRoot,
     );
 
-    // If the namespace didn't exist in base, skip — that's a new RP, handled elsewhere
-    if (baseTypes.size === 0) {
-      core.info(` ${namespace}: no resources in base (new RP, skipping)`);
-      continue;
-    }
-
     const headTypes = await getResourceTypesAtRef(
       git,
       "HEAD",
