@@ -173,6 +173,6 @@ using Microsoft.Confluent;
 );
 @@alternateType(OrganizationResourceProperties.ssoUrl, url, "csharp");
 @@clientName(SCClusterRecords.createAPIKey,
-  "$DO_NOT_NORMALIZE$createAPIKey",
+  "createAPIKey",
   "javascript"
 );
