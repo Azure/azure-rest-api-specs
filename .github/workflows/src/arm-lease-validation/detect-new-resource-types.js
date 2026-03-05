@@ -9,6 +9,10 @@ import { resolve } from "path";
 import { simpleGit } from "simple-git";
 import { ArmHelper } from "@microsoft.azure/openapi-validator-rulesets/dist/native/utilities/arm-helper.js";
 import { SwaggerInventory } from "@microsoft.azure/openapi-validator-core";
+import debug from "debug";
+
+// Disable simple-git debug logging to remove verbose [GitExecutor] logs from the output
+debug.disable();
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
