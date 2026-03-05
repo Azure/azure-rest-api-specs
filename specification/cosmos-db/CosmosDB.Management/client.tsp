@@ -452,8 +452,3 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   sqlResourcesGetSqlRoleDefinitionCustomized,
   "go,java"
 );
-
-@@alternateType(BaseCosmosDataTransferDataSourceSink.component,
-  DataTransferComponent,
-  "go"
-);
