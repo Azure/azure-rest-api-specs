@@ -37,7 +37,10 @@ interface WorkloadComponents {
    * Updates a workload component corresponding to the Virtual Instance resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<WorkloadComponent, WorkloadComponentUpdate>;
+  update is ArmCustomPatchAsync<
+    WorkloadComponent,
+    UpdateWorkloadComponentRequest
+  >;
 
   /**
    * Deletes the workload component corresponding to the Virtual Instance resource.

@@ -17,10 +17,29 @@ model SapApiDiscoveryConfiguration extends DiscoveryConfiguration {
 
   /**
    * The Azure resource ID of the virtual machine to use for SAP API discovery.
-   * Required on create, optional on update.
    * Only application server or central server Vm Resource Id supported as input.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  vmResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+}
+
+/**
+ * Defines the update configuration for SAP API discovery.
+ */
+@added(Versions.v2026_02_01_preview)
+model UpdateSapApiDiscoveryConfiguration extends UpdateDiscoveryConfiguration {
+  /**
+   * The discovery type.
+   */
+  discoveryType: DiscoveryConfigurationType.SAPAPI;
+
+  /**
+   * The Azure resource ID of the virtual machine to use for SAP API discovery.
+   * Only application server or central server Vm Resource Id supported as input.
+   */
   vmResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines";
