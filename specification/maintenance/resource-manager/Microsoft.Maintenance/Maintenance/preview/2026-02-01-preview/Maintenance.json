@@ -2717,54 +2717,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.ActionType": {
-      "type": "string",
-      "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Internal",
-            "value": "Internal",
-            "description": "Actions are for internal-only APIs."
-          }
-        ]
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.Origin": {
-      "type": "string",
-      "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
-      "enum": [
-        "user",
-        "system",
-        "user,system"
-      ],
-      "x-ms-enum": {
-        "name": "Origin",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user",
-            "description": "Indicates the operation is initiated by a user."
-          },
-          {
-            "name": "system",
-            "value": "system",
-            "description": "Indicates the operation is initiated by a system."
-          },
-          {
-            "name": "user,system",
-            "value": "user,system",
-            "description": "Indicates the operation is initiated by a user or system."
-          }
-        ]
-      }
-    },
     "ConfigurationAssignment": {
       "type": "object",
       "description": "Configuration Assignment",
@@ -3153,41 +3105,6 @@
         }
       }
     },
-    "MaintenanceOperation": {
-      "type": "object",
-      "description": "Represents an operation returned by the GetOperations request",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
-          "readOnly": true
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations.",
-          "readOnly": true
-        },
-        "display": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationDisplay",
-          "description": "Localized display information for this particular operation."
-        },
-        "origin": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.Origin",
-          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
-          "readOnly": true
-        },
-        "actionType": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ActionType",
-          "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
-          "readOnly": true
-        },
-        "properties": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "MaintenancePlan": {
       "type": "object",
       "description": "Maintenance plan extension/proxy resource",
@@ -3402,7 +3319,7 @@
           "type": "array",
           "description": "A collection of operations",
           "items": {
-            "$ref": "#/definitions/MaintenanceOperation"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Operation"
           },
           "x-ms-identifiers": [
             "name"
