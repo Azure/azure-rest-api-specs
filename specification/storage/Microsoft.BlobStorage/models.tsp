@@ -604,7 +604,7 @@ model ContainerItem {
   @Xml.name("Name") name: string;
 
   /** Whether the container is deleted. */
-  @Xml.name("Deleted") delete?: boolean;
+  @Xml.name("Deleted") deleted?: boolean;
 
   /** The version of the container. */
   @Xml.name("Version") version?: string;
