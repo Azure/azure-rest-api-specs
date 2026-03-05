@@ -176,23 +176,6 @@ union ConnectionStatus {
   Failed: "Failed",
 }
 
-@doc("The validation status.")
-union ValidationStatus {
-  string,
-
-  @doc("Validation succeeded")
-  Succeeded: "Succeeded",
-
-  @doc("Validation failed")
-  Failed: "Failed",
-
-  @doc("Validation in progress")
-  InProgress: "InProgress",
-
-  @doc("Validation pending")
-  Pending: "Pending",
-}
-
 @doc("The migration phase.")
 union MigrationPhase {
   string,
@@ -426,9 +409,6 @@ model DatabaseMigrationStatus {
 
   @doc("Migration status")
   migrationStatus: MigrationState;
-
-  @doc("Validation status")
-  validationStatus: ValidationStatus;
 
   @doc("Migration progress")
   migrationProgress: MigrationProgress;

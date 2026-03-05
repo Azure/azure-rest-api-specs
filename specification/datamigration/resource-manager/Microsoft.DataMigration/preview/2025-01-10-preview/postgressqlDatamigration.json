@@ -1381,10 +1381,6 @@
           "$ref": "#/definitions/MigrationState",
           "description": "Migration status"
         },
-        "validationStatus": {
-          "$ref": "#/definitions/ValidationStatus",
-          "description": "Validation status"
-        },
         "migrationProgress": {
           "$ref": "#/definitions/MigrationProgress",
           "description": "Migration progress"
@@ -1412,7 +1408,6 @@
       "required": [
         "databaseName",
         "migrationStatus",
-        "validationStatus",
         "migrationProgress",
         "errors",
         "createdAt",
@@ -2344,43 +2339,6 @@
       "required": [
         "status"
       ]
-    },
-    "ValidationStatus": {
-      "type": "string",
-      "description": "The validation status.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "InProgress",
-        "Pending"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Validation succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Validation failed"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Validation in progress"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Validation pending"
-          }
-        ]
-      },
-      "readOnly": true
     }
   },
   "parameters": {}
