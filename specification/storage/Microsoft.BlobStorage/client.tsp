@@ -135,7 +135,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(BlobProperties.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );
-
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
