@@ -357,6 +357,53 @@ describe("detectNewResourceTypes", () => {
     expect(metricsType).toBeDefined();
   });
 
+  it("detects new resource types via path-based fallback when ArmHelper throws (e.g. empty SwaggerInventory)", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
+          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    // ArmHelper throws (simulating the real "Node does not exist" error from an
+    // empty SwaggerInventory — the actual failure mode in production)
+    mockGetAllResources.mockImplementation(() => {
+      throw new Error("Node does not exist: file:///path/to/spec.json");
+    });
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].namespace).toBe("Microsoft.Compute");
+    const superDisksType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks",
+    );
+    expect(superDisksType).toBeDefined();
+    expect(superDisksType.operations).toContain("GET");
+  });
+
   it("path-based fallback excludes operations-only paths", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const existingPreviewFile = `${ns}/DiskRP/stable/2024-01-01/compute.json`;
