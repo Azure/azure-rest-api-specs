@@ -145,10 +145,11 @@ describe("detectNewResourceTypes", () => {
   it("returns empty when HEAD has same resource types as base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file]]]),
-      headFiles: new Map([[ns, [file]]]),
+      baseFiles: new Map([[servicePath, [file]]]),
+      headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -171,10 +172,11 @@ describe("detectNewResourceTypes", () => {
   it("detects new resource types present in HEAD but absent from base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file]]]),
-      headFiles: new Map([[ns, [file]]]),
+      baseFiles: new Map([[servicePath, [file]]]),
+      headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -210,15 +212,17 @@ describe("detectNewResourceTypes", () => {
     const networkNs = "specification/network/resource-manager/Microsoft.Network";
     const computeFile = `${computeNs}/stable/2024-01-01/compute.json`;
     const networkFile = `${networkNs}/stable/2024-01-01/network.json`;
+    const computeServicePath = `${computeNs}/stable`;
+    const networkServicePath = `${networkNs}/stable`;
 
     setupGit({
       baseFiles: new Map([
-        [computeNs, [computeFile]],
-        [networkNs, [networkFile]],
+        [computeServicePath, [computeFile]],
+        [networkServicePath, [networkFile]],
       ]),
       headFiles: new Map([
-        [computeNs, [computeFile]],
-        [networkNs, [networkFile]],
+        [computeServicePath, [computeFile]],
+        [networkServicePath, [networkFile]],
       ]),
       fileContents: new Map([
         [`base123:${computeFile}`, swaggerContent],
@@ -246,10 +250,11 @@ describe("detectNewResourceTypes", () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
     const exampleFile = `${ns}/stable/2024-01-01/examples/create.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file, exampleFile]]]),
-      headFiles: new Map([[ns, [file, exampleFile]]]),
+      baseFiles: new Map([[servicePath, [file, exampleFile]]]),
+      headFiles: new Map([[servicePath, [file, exampleFile]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -273,11 +278,12 @@ describe("detectNewResourceTypes", () => {
   it("skips non-JSON files from ls-tree output", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
-    const readme = `${ns}/readme.md`;
+    const readme = `${ns}/stable/readme.md`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file, readme]]]),
-      headFiles: new Map([[ns, [file, readme]]]),
+      baseFiles: new Map([[servicePath, [file, readme]]]),
+      headFiles: new Map([[servicePath, [file, readme]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -317,8 +323,8 @@ describe("detectNewResourceTypes", () => {
     });
 
     setupGit({
-      baseFiles: new Map([[ns, [existingFile]]]),
-      headFiles: new Map([[ns, [existingFile, newFile]]]),
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
       fileContents: new Map([
         [`base123:${existingFile}`, existingSwagger],
         [`HEAD:${existingFile}`, existingSwagger],
@@ -353,8 +359,8 @@ describe("detectNewResourceTypes", () => {
 
   it("path-based fallback excludes operations-only paths", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
-    const existingFile = `${ns}/stable/2024-01-01/compute.json`;
-    const newFile = `${ns}/preview/2026-01-01-preview/compute.json`;
+    const existingPreviewFile = `${ns}/DiskRP/stable/2024-01-01/compute.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/compute.json`;
 
     const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
     const operationsOnlySwagger = JSON.stringify({
@@ -367,11 +373,11 @@ describe("detectNewResourceTypes", () => {
     });
 
     setupGit({
-      baseFiles: new Map([[ns, [existingFile]]]),
-      headFiles: new Map([[ns, [existingFile, newFile]]]),
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile, newFile]]]),
       fileContents: new Map([
-        [`base123:${existingFile}`, existingSwagger],
-        [`HEAD:${existingFile}`, existingSwagger],
+        [`base123:${existingPreviewFile}`, existingSwagger],
+        [`HEAD:${existingPreviewFile}`, existingSwagger],
         [`HEAD:${newFile}`, operationsOnlySwagger],
       ]),
     });
