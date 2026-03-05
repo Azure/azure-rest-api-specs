@@ -1,5 +1,20 @@
 - tool: TypeSpecValidation
   reason: >
+    Compute sub-projects are nested three levels under resource-manager (e.g.
+    resource-manager/Microsoft.Compute/Compute/ComputeDisk) as part of the unified
+    folder structure refactor, which is one level deeper than the standard two-level
+    requirement. Cross-folder imports from ../common/ are also required by this layout.
+    Suppressed pending tsp-validation support for the new structure.
+    Responsibility: Service team.
+  rules: [FolderStructure]
+  paths:
+    - resource-manager/Microsoft.Compute/Compute/Compute
+    - resource-manager/Microsoft.Compute/Compute/ComputeDisk
+    - resource-manager/Microsoft.Compute/Compute/ComputeGallery
+    - resource-manager/Microsoft.Compute/Compute/ComputeSku
+
+- tool: TypeSpecValidation
+  reason: >
     Not ready to generate SDKs from TypeSpec.
     Responsibility: Service team with SDK team collaboration.
     More info: https://aka.ms/azsdk/spec-gen-sdk-config.
