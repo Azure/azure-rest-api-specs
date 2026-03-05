@@ -67,6 +67,7 @@ using TypeSpec.Rest;
   "DisconnectedOperationsImageUpdateProperties",
   "csharp"
 );
+@@clientName(LinkExpiry, "LinkExpiresOn", "csharp");
 @@clientName(PricingModel, "DisconnectedOperationsPricingModel", "csharp");
 @@clientName(RegistrationStatus,
   "DisconnectedOperationsRegistrationStatus",
@@ -79,6 +80,15 @@ using TypeSpec.Rest;
 );
 @@clientName(SystemReboot, "DisconnectedOperationsSystemReboot", "csharp");
 @@clientName(DisconnectedOperations, "Disconnected", "csharp");
+
+@@alternateType(DisconnectedOperationDeploymentManifest.Location,
+  AzureLocation,
+  "csharp"
+);
+@@alternateType(DisconnectedOperationsHardwareSettingProperties.DeviceId,
+  GUID,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.Edge {
