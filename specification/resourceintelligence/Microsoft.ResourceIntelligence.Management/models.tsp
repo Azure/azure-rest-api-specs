@@ -59,7 +59,6 @@ union MessageType {
   user_message: "user_message",
 }
 
-
 // ============================================
 // RUN REQUEST / RESPONSE
 // ============================================
@@ -127,4 +126,3 @@ model RunRequest {
   @encodedName("application/json", "model")
   modelUrl: string;
 }
-
