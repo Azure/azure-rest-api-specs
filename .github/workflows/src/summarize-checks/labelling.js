@@ -651,9 +651,10 @@ function processARMReviewWorkflowLabels(
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  // Block if ARMModelingReviewRequired is present (new RP namespace detected)
+  // Block if ARMModelingReviewRequired is present (new RP namespace or new resource type detected)
   const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
-  const blockedOnArmModeling = armModelingReviewLabel.present;
+  // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
+  const blockedOnArmModeling = armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
 
   const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
@@ -896,8 +897,8 @@ const rulesPri0NotReadyForArmReview = [
     anyRequiredLabels: [],
     troubleshootingGuide: wrapInArmReviewMessage(
       "This PR has <code>ARMModelingReviewRequired</code> label. " +
-        "This means it is introducing a new Resource Provider namespace. " +
-        "New RPs require a discussion with the ARM Modelling Review team before merging.<br/>" +
+        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
+        "New RPs and new resource types require a discussion with the ARM Modelling Review team before merging.<br/>" +
         "Please schedule a meeting at " +
         `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.`,
     ),

@@ -145,10 +145,11 @@ describe("detectNewResourceTypes", () => {
   it("returns empty when HEAD has same resource types as base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file]]]),
-      headFiles: new Map([[ns, [file]]]),
+      baseFiles: new Map([[servicePath, [file]]]),
+      headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -171,10 +172,11 @@ describe("detectNewResourceTypes", () => {
   it("detects new resource types present in HEAD but absent from base", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file]]]),
-      headFiles: new Map([[ns, [file]]]),
+      baseFiles: new Map([[servicePath, [file]]]),
+      headFiles: new Map([[servicePath, [file]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -210,15 +212,17 @@ describe("detectNewResourceTypes", () => {
     const networkNs = "specification/network/resource-manager/Microsoft.Network";
     const computeFile = `${computeNs}/stable/2024-01-01/compute.json`;
     const networkFile = `${networkNs}/stable/2024-01-01/network.json`;
+    const computeServicePath = `${computeNs}/stable`;
+    const networkServicePath = `${networkNs}/stable`;
 
     setupGit({
       baseFiles: new Map([
-        [computeNs, [computeFile]],
-        [networkNs, [networkFile]],
+        [computeServicePath, [computeFile]],
+        [networkServicePath, [networkFile]],
       ]),
       headFiles: new Map([
-        [computeNs, [computeFile]],
-        [networkNs, [networkFile]],
+        [computeServicePath, [computeFile]],
+        [networkServicePath, [networkFile]],
       ]),
       fileContents: new Map([
         [`base123:${computeFile}`, swaggerContent],
@@ -246,10 +250,11 @@ describe("detectNewResourceTypes", () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
     const exampleFile = `${ns}/stable/2024-01-01/examples/create.json`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file, exampleFile]]]),
-      headFiles: new Map([[ns, [file, exampleFile]]]),
+      baseFiles: new Map([[servicePath, [file, exampleFile]]]),
+      headFiles: new Map([[servicePath, [file, exampleFile]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -273,11 +278,12 @@ describe("detectNewResourceTypes", () => {
   it("skips non-JSON files from ls-tree output", async () => {
     const ns = "specification/compute/resource-manager/Microsoft.Compute";
     const file = `${ns}/stable/2024-01-01/compute.json`;
-    const readme = `${ns}/readme.md`;
+    const readme = `${ns}/stable/readme.md`;
+    const servicePath = `${ns}/stable`;
 
     setupGit({
-      baseFiles: new Map([[ns, [file, readme]]]),
-      headFiles: new Map([[ns, [file, readme]]]),
+      baseFiles: new Map([[servicePath, [file, readme]]]),
+      headFiles: new Map([[servicePath, [file, readme]]]),
       fileContents: new Map([
         [`base123:${file}`, swaggerContent],
         [`HEAD:${file}`, swaggerContent],
@@ -296,6 +302,143 @@ describe("detectNewResourceTypes", () => {
     expect(mockShow).not.toHaveBeenCalledWith(
       expect.arrayContaining([expect.stringContaining("readme.md")]),
     );
+  });
+
+  it("detects new resource types via path-based fallback when ArmHelper finds nothing (inline schemas)", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
+          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}": {
+          get: { operationId: "SuperDiskMetrics_Get", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    // ArmHelper returns nothing (inline schemas, no definitions)
+    mockGetAllResources.mockReturnValue([]);
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].namespace).toBe("Microsoft.Compute");
+    // superDisks should be detected via path fallback
+    const superDisksType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks",
+    );
+    expect(superDisksType).toBeDefined();
+    expect(superDisksType.operations).toContain("GET");
+    // superDisks/metrics is also new but child of superDisks
+    const metricsType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks/metrics",
+    );
+    expect(metricsType).toBeDefined();
+  });
+
+  it("detects new resource types via path-based fallback when ArmHelper throws (e.g. empty SwaggerInventory)", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
+          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    // ArmHelper throws (simulating the real "Node does not exist" error from an
+    // empty SwaggerInventory — the actual failure mode in production)
+    mockGetAllResources.mockImplementation(() => {
+      throw new Error("Node does not exist: file:///path/to/spec.json");
+    });
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].namespace).toBe("Microsoft.Compute");
+    const superDisksType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks",
+    );
+    expect(superDisksType).toBeDefined();
+    expect(superDisksType.operations).toContain("GET");
+  });
+
+  it("path-based fallback excludes operations-only paths", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingPreviewFile = `${ns}/DiskRP/stable/2024-01-01/compute.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-01-01-preview/compute.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const operationsOnlySwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/providers/Microsoft.Compute/operations": {
+          get: { operationId: "Operations_List", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile]]]),
+      headFiles: new Map([[`${ns}/DiskRP`, [existingPreviewFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingPreviewFile}`, existingSwagger],
+        [`HEAD:${existingPreviewFile}`, existingSwagger],
+        [`HEAD:${newFile}`, operationsOnlySwagger],
+      ]),
+    });
+
+    mockGetAllResources.mockReturnValue([]);
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toEqual([]);
   });
 
 });

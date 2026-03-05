@@ -9,47 +9,126 @@ import { resolve } from "path";
 import { simpleGit } from "simple-git";
 import { ArmHelper } from "@microsoft.azure/openapi-validator-rulesets/dist/native/utilities/arm-helper.js";
 import { SwaggerInventory } from "@microsoft.azure/openapi-validator-core";
+import debug from "debug";
 
-// Match: specification/<orgName>/resource-manager/<Namespace>/(stable|preview)/<version>/
-const VERSION_PATTERN =
-  /^specification\/([^/]+)\/resource-manager\/([^/]+)\/(stable|preview)\/([^/]+)\//;
+// Disable simple-git debug logging to remove verbose [GitExecutor] logs from the output
+debug.disable();
 
-const RESOURCE_TYPE_REGEX = /\/providers\/([^/]+\/[^/\{]+)/;
+// Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
+const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
 
-/** Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines) */
+const RESOURCE_TYPE_REGEX = /\/providers\/([^/?#]+)(\/[^?#]*)?/;
+
+/**
+ * Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines/extensions)
+ * @param {string} apiPath
+ * @returns {string | null}
+ */
 function getResourceType(apiPath) {
-  return apiPath.match(RESOURCE_TYPE_REGEX)?.[1] || null;
+  const match = apiPath.match(RESOURCE_TYPE_REGEX);
+  if (!match) return null;
+
+  // Split and filter out parameter segments like {vmName} to get the static resource type
+  const provider = /** @type {string} */ (match[1]);
+  const typeHierarchy = /** @type {string | undefined} */ (match[2]);
+  if (!typeHierarchy) return provider;
+
+  // typeHierarchy starts with "/" (e.g. "/superDisks/{diskName}").
+  // Filter out empty segments and path parameters, then re-join with "/" preserving the leading slash.
+  const staticSegments = typeHierarchy
+    .split("/")
+    .filter((segment) => segment && !segment.startsWith("{"));
+
+  if (staticSegments.length === 0) return provider;
+
+  return provider + "/" + staticSegments.join("/");
 }
 
 /**
  * Get all ARM resource types from a swagger document using openapi-validator's ArmHelper.
  *
+ * Primary: ArmHelper detects resources based on definitions with x-ms-azure-resource or
+ * ARM base types. Fallback: path-based detection for specs using inline schemas.
+ *
  * @param {Object} swaggerDoc - Parsed swagger JSON document
  * @param {string} specPath - Absolute path to the swagger file
- * @returns {Map<string, {resourceType: string, provider: string, modelName: string, operations: Array<{method: string, apiPath: string}>}>}
+ * @returns {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: Array<{method: string, apiPath: string}>}>}
  */
 function getResourceTypesFromSwagger(swaggerDoc, specPath) {
-  const armHelper = new ArmHelper(
-    swaggerDoc,
-    resolve(specPath),
-    new SwaggerInventory(),
-  );
   const resourceTypes = new Map();
 
-  for (const resource of armHelper.getAllResources()) {
-    const firstOp = resource.operations[0];
-    const resourceType = getResourceType(firstOp.apiPath);
+  // ArmHelper requires a populated SwaggerInventory to resolve cross-file $refs.
+  // When used with a fresh empty inventory (as here), it throws "Node does not exist"
+  // during getAllResources(). Wrap in try/catch so we always fall through to the
+  // path-based fallback when ArmHelper cannot run.
+  try {
+    const armHelper = new ArmHelper(
+      swaggerDoc,
+      resolve(specPath),
+      new SwaggerInventory(),
+    );
 
-    if (resourceType && !resourceTypes.has(resourceType)) {
-      resourceTypes.set(resourceType, {
-        resourceType,
-        provider: resourceType.split("/")[0],
-        modelName: resource.modelName,
-        operations: resource.operations.map((op) => ({
-          method: op.httpMethod,
-          apiPath: op.apiPath,
-        })),
-      });
+    for (const resource of armHelper.getAllResources()) {
+      const firstOp = resource.operations[0];
+      const resourceType = getResourceType(firstOp.apiPath);
+
+      if (resourceType && !resourceTypes.has(resourceType)) {
+        resourceTypes.set(resourceType, {
+          resourceType,
+          provider: resourceType.split("/")[0],
+          modelName: resource.modelName,
+          operations: resource.operations.map((op) => ({
+            method: op.httpMethod,
+            apiPath: op.apiPath,
+          })),
+        });
+      }
+    }
+  } catch {
+    // ArmHelper failed (e.g. empty SwaggerInventory throws "Node does not exist").
+    // Fall through to the path-based fallback below.
+  }
+
+  // Fallback: when ArmHelper finds no resources (e.g. spec uses inline response schemas
+  // instead of $ref to named definitions, or ArmHelper threw), scan paths directly for
+  // ARM resource patterns.
+  if (resourceTypes.size === 0 && swaggerDoc.paths) {
+    /** @type {Record<string, Record<string, unknown>>} */
+    const paths = /** @type {any} */ (swaggerDoc.paths);
+    for (const [apiPath, pathItem] of Object.entries(paths)) {
+      const resourceType = getResourceType(apiPath);
+      if (!resourceType || !resourceType.includes("/")) continue;
+
+      const parts = resourceType.split("/");
+      // Skip operations-only paths (e.g. Microsoft.Compute/operations)
+      if (parts[parts.length - 1].toLowerCase() === "operations") continue;
+
+      /** @type {Array<{method: string, apiPath: string}>} */
+      const ops = Object.entries(/** @type {Record<string, unknown>} */ (pathItem))
+        .filter(([method]) =>
+          ["get", "put", "post", "patch", "delete"].includes(method.toLowerCase()),
+        )
+        .map(([method]) => ({ method: method.toUpperCase(), apiPath }));
+
+      if (ops.length === 0) continue;
+
+      if (!resourceTypes.has(resourceType)) {
+        resourceTypes.set(resourceType, {
+          resourceType,
+          provider: parts[0],
+          modelName: null,
+          operations: ops,
+        });
+      } else {
+        const existing = /** @type {{operations: Array<{method: string, apiPath: string}>}} */ (
+          resourceTypes.get(resourceType)
+        );
+        for (const op of ops) {
+          if (!existing.operations.some((e) => e.method === op.method && e.apiPath === op.apiPath)) {
+            existing.operations.push(op);
+          }
+        }
+      }
     }
   }
 
@@ -63,7 +142,7 @@ function getResourceTypesFromSwagger(swaggerDoc, specPath) {
  * @param {string} commitish - Git ref
  * @param {string} namespacePath - e.g. `specification/compute/resource-manager/Microsoft.Compute`
  * @param {string} repoRoot - Repository root directory
- * @returns {Promise<Map<string, Object>>} Map of resource type to info
+ * @returns {Promise<Map<string, Object> | null>} Map of resource type to info, or null if path doesn't exist at this ref
  */
 async function getResourceTypesAtRef(git, commitish, namespacePath, repoRoot) {
   const allTypes = new Map();
@@ -78,24 +157,38 @@ async function getResourceTypesAtRef(git, commitish, namespacePath, repoRoot) {
       namespacePath,
     ]);
   } catch {
-    return allTypes; // path doesn't exist at this ref
+    return null; // path doesn't exist at this ref
   }
 
   const swaggerFiles = output
     .split("\n")
-    .filter((f) => f.endsWith(".json") && !f.includes("/examples/"));
+    .filter((f) => f.trim() && f.endsWith(".json") && !f.includes("/examples/"))
+    .filter((f, index, self) => self.indexOf(f) === index); // deduplicate
 
-  for (const file of swaggerFiles) {
-    /** @type {string} */
+  const total = swaggerFiles.length;
+  if (total > 0) {
+    console.log(`Analyzing ${total} swagger files in base branch for comparison...`);
+  }
+
+  // Iterate over files, but only log summary if it's too much
+  for (let i = 0; i < swaggerFiles.length; i++) {
+    const file = swaggerFiles[i];
+    if (total > 10 && i % 20 === 0 && i > 0) {
+      console.log(`Progress: ${i}/${total} files processed...`);
+    }
+
     let content;
     try {
-      content = await git.show([`${commitish}:${file}`]);
-    } catch {
+      content = await git.show([`${commitish}:${file.trim()}`]);
+    } catch (e) {
+      // Intentionally quiet to avoid log spam during comparison
       continue;
     }
 
     try {
       const swaggerDoc = JSON.parse(content);
+      // Skip files that aren't ARM resource-manager specs (minimal check)
+      if (!swaggerDoc.paths) continue;
       const types = getResourceTypesFromSwagger(
         swaggerDoc,
         resolve(repoRoot, file),
@@ -135,27 +228,33 @@ export async function detectNewResourceTypes({
 }) {
   const git = simpleGit(repoRoot);
 
-  // Group changed RM swagger files by namespace
-  /** @type {Map<string, {orgName: string, namespacePath: string}>} */
+  // Group changed RM swagger files by service subdirectory (namespace + service group)
+  /** @type {Map<string, {orgName: string, namespacePath: string, namespace: string}>} */
   const namespaceMap = new Map();
 
   for (const file of rmFiles) {
-    const match = file.match(VERSION_PATTERN);
-    if (!match) continue;
+    // Use RESOURCE_MANAGER_PATTERN to ensure the file is inside a namespace directory
+    // (the trailing "/" in the pattern requires at least one path component after the namespace)
+    const rmMatch = file.match(RESOURCE_MANAGER_PATTERN);
+    if (!rmMatch) continue;
 
-    const orgName = match[1];
-    const namespace = match[2];
-    const namespacePath = `specification/${orgName}/resource-manager/${namespace}`;
+    const parts = file.split("/");
+    const orgName = parts[1];
+    const namespace = parts[3];
+    // Scope to the service subdirectory (e.g. DiskRP) to avoid scanning the entire namespace
+    const serviceGroup = parts[4];
+    const namespacePath = `specification/${orgName}/resource-manager/${namespace}/${serviceGroup}`;
+    const serviceKey = `${namespace}/${serviceGroup}`;
 
-    if (!namespaceMap.has(namespace)) {
-      namespaceMap.set(namespace, { orgName, namespacePath });
+    if (!namespaceMap.has(serviceKey)) {
+      namespaceMap.set(serviceKey, { orgName, namespacePath, namespace });
     }
   }
 
   const results = [];
 
-  for (const [namespace, { orgName, namespacePath }] of namespaceMap) {
-    core.info(`Checking for new resource types in ${namespace}...`);
+  for (const [serviceKey, { orgName, namespacePath, namespace }] of namespaceMap) {
+    core.info(`Checking for new resource types in ${serviceKey}...`);
 
     const baseTypes = await getResourceTypesAtRef(
       git,
@@ -164,9 +263,9 @@ export async function detectNewResourceTypes({
       repoRoot,
     );
 
-    // If the namespace didn't exist in base, skip — that's a new RP, handled elsewhere
-    if (baseTypes.size === 0) {
-      core.info(` ${namespace}: no resources in base (new RP, skipping)`);
+    // Skip namespace if it doesn't exist in base (brand new RP — handled by RP-level detection)
+    if (baseTypes === null) {
+      core.info(` ${namespace}: no resources in base (new namespace), skipping RT detection`);
       continue;
     }
 
@@ -178,7 +277,7 @@ export async function detectNewResourceTypes({
     );
 
     const newTypes = [];
-    for (const [type, info] of headTypes) {
+    for (const [type, info] of (headTypes ?? new Map())) {
       if (!baseTypes.has(type)) {
         newTypes.push({
           resourceType: type,
