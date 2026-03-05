@@ -68,7 +68,7 @@ alias LocationParameter = {
   "The request body"
 );
 
-@armResourceOperations(#{ omitTags: npm, i: true })
+@armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
   /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
