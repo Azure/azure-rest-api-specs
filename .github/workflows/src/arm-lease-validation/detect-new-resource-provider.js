@@ -277,12 +277,6 @@ export default async function detectNewResourceProvider({ context, core }) {
   core.info("Checking for new resource types in existing RPs...");
   const newRtResult = await checkNewResourceTypes(repoRoot, mergeBase, rmFiles, core);
 
-  // Combine outcomes: if either check failed/requires review, we should return that status
-  const finalStatus =
-    !allLeasesValid || newRtResult.status.includes("invalid") || newRtResult.status.includes("review")
-      ? "validation-failed"
-      : "validation-passed";
-
   // Merge label actions: 'add' wins over 'remove' wins over 'none'
   /** @type {ManagedLabelActions} */
   const combinedLabelActions = { ...getLabelActions(allLeasesValid ? "auto-signed-off" : "review-required") };
@@ -294,7 +288,7 @@ export default async function detectNewResourceProvider({ context, core }) {
   }
 
   return {
-    status: finalStatus,
+    status: allLeasesValid ? "new-rp-all-leases-valid" : "new-rp-invalid-lease",
     labelActions: combinedLabelActions,
   };
 }

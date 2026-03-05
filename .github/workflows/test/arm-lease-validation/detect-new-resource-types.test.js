@@ -298,4 +298,94 @@ describe("detectNewResourceTypes", () => {
     );
   });
 
+  it("detects new resource types via path-based fallback when ArmHelper finds nothing (inline schemas)", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/DiskRP/stable/2024-01-01/disk.json`;
+    const newFile = `${ns}/DiskRP/preview/2026-05-01-preview/disk.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const newSwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}": {
+          get: { operationId: "SuperDisks_Get", responses: { "200": { description: "OK" } } },
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/superDisks/{diskName}/metrics/{metricName}": {
+          get: { operationId: "SuperDiskMetrics_Get", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[ns, [existingFile]]]),
+      headFiles: new Map([[ns, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, newSwagger],
+      ]),
+    });
+
+    // ArmHelper returns nothing (inline schemas, no definitions)
+    mockGetAllResources.mockReturnValue([]);
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].namespace).toBe("Microsoft.Compute");
+    // superDisks should be detected via path fallback
+    const superDisksType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks",
+    );
+    expect(superDisksType).toBeDefined();
+    expect(superDisksType.operations).toContain("GET");
+    // superDisks/metrics is also new but child of superDisks
+    const metricsType = result[0].newResourceTypes.find((t) =>
+      t.resourceType === "Microsoft.Compute/superDisks/metrics",
+    );
+    expect(metricsType).toBeDefined();
+  });
+
+  it("path-based fallback excludes operations-only paths", async () => {
+    const ns = "specification/compute/resource-manager/Microsoft.Compute";
+    const existingFile = `${ns}/stable/2024-01-01/compute.json`;
+    const newFile = `${ns}/preview/2026-01-01-preview/compute.json`;
+
+    const existingSwagger = JSON.stringify({ swagger: "2.0", paths: {} });
+    const operationsOnlySwagger = JSON.stringify({
+      swagger: "2.0",
+      paths: {
+        "/providers/Microsoft.Compute/operations": {
+          get: { operationId: "Operations_List", responses: { "200": { description: "OK" } } },
+        },
+      },
+    });
+
+    setupGit({
+      baseFiles: new Map([[ns, [existingFile]]]),
+      headFiles: new Map([[ns, [existingFile, newFile]]]),
+      fileContents: new Map([
+        [`base123:${existingFile}`, existingSwagger],
+        [`HEAD:${existingFile}`, existingSwagger],
+        [`HEAD:${newFile}`, operationsOnlySwagger],
+      ]),
+    });
+
+    mockGetAllResources.mockReturnValue([]);
+
+    const result = await detectNewResourceTypes({
+      repoRoot: "/fake/repo",
+      mergeBase: "base123",
+      rmFiles: [newFile],
+      core,
+    });
+
+    expect(result).toEqual([]);
+  });
+
 });
