@@ -9,36 +9,13 @@ import { resolve } from "path";
 import { simpleGit } from "simple-git";
 import { ArmHelper } from "@microsoft.azure/openapi-validator-rulesets/dist/native/utilities/arm-helper.js";
 import { SwaggerInventory } from "@microsoft.azure/openapi-validator-core";
+import {
+  getResourceType,
+  isOperationsPath,
+} from "../../../shared/src/arm-resource-types.js";
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\//;
-
-const RESOURCE_TYPE_REGEX = /\/providers\/([^/?#]+)(\/[^?#]*)?/;
-
-/**
- * Extract resource type from API path (e.g. Microsoft.Compute/virtualMachines/extensions)
- * @param {string} apiPath
- * @returns {string | null}
- */
-function getResourceType(apiPath) {
-  const match = apiPath.match(RESOURCE_TYPE_REGEX);
-  if (!match) return null;
-
-  // Split and filter out parameter segments like {vmName} to get the static resource type
-  const provider = /** @type {string} */ (match[1]);
-  const typeHierarchy = /** @type {string | undefined} */ (match[2]);
-  if (!typeHierarchy) return provider;
-
-  // typeHierarchy starts with "/" (e.g. "/superDisks/{diskName}").
-  // Filter out empty segments and path parameters, then re-join with "/" preserving the leading slash.
-  const staticSegments = typeHierarchy
-    .split("/")
-    .filter((segment) => segment && !segment.startsWith("{"));
-
-  if (staticSegments.length === 0) return provider;
-
-  return provider + "/" + staticSegments.join("/");
-}
 
 /**
  * Get all ARM resource types from a swagger document using openapi-validator's ArmHelper.
@@ -84,9 +61,8 @@ function getResourceTypesFromSwagger(swaggerDoc, specPath) {
       const resourceType = getResourceType(apiPath);
       if (!resourceType || !resourceType.includes("/")) continue;
 
-      const parts = resourceType.split("/");
       // Skip operations-only paths (e.g. Microsoft.Compute/operations)
-      if (parts[parts.length - 1].toLowerCase() === "operations") continue;
+      if (isOperationsPath(resourceType)) continue;
 
       /** @type {Array<{method: string, apiPath: string}>} */
       const ops = Object.entries(/** @type {Record<string, unknown>} */ (pathItem))
@@ -97,6 +73,7 @@ function getResourceTypesFromSwagger(swaggerDoc, specPath) {
 
       if (ops.length === 0) continue;
 
+      const parts = resourceType.split("/");
       if (!resourceTypes.has(resourceType)) {
         resourceTypes.set(resourceType, {
           resourceType,
