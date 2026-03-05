@@ -30,7 +30,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: api-version
           in: query
           required: true
@@ -200,7 +200,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -318,7 +318,7 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionFeatureKeys'
+            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
         - name: agent_name
           in: path
           required: true
@@ -5162,14 +5162,14 @@ components:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-    AgentDefinitionFeatureKeys:
+    AgentDefinitionOptInKeys:
       anyOf:
         - type: string
         - type: string
           enum:
             - HostedAgents=V1Preview
             - WorkflowAgents=V1Preview
-      description: Feature opt-in keys for agent definition operations supporting container, hosted, and workflow agents.
+      description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentKind:
       anyOf:
         - type: string
@@ -5518,6 +5518,55 @@ components:
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
       description: Represents a target specifying an Azure AI agent.
+    AzureAIBenchmarkDataSourceConfig:
+      type: object
+      required:
+        - scenario
+        - benchmark_name
+      properties:
+        scenario:
+          type: string
+          enum:
+            - benchmark_preview
+          description: Data schema scenario, always `benchmark` for benchmark evaluations.
+        benchmark_name:
+          type: string
+          description: The name of the benchmark specification.
+        benchmark_version:
+          type: string
+          description: The version of the benchmark specification (e.g., '0.1'). Latest version if not specified.
+        grader_model:
+          type: string
+          description: Optional grader model for benchmarks that use model graders, Required when the benchmark's testing_criteria uses a model grader type.
+      allOf:
+        - $ref: '#/components/schemas/AzureAIDataSourceConfig'
+      description: Data source configuration for benchmark evaluations.
+    AzureAIBenchmarkPreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - target
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_benchmark_preview
+          description: The type of data source, always `azure_ai_benchmark_preview`.
+        input_messages:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: Input messages configuration.
+        target:
+          anyOf:
+            - $ref: '#/components/schemas/AzureAIModelTarget'
+            - $ref: '#/components/schemas/AzureAIAgentTarget'
+          description: |-
+            The target model or agent to evaluate against the benchmark.
+            When using `azure_ai_model` target, `sampling_params` must not be provided;
+            inference parameters are auto-filled from the benchmark specification stored in eval group properties.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Represents a data source for benchmark evaluation runs.
     AzureAIDataSourceConfig:
       type: object
       required:
@@ -5536,7 +5585,12 @@ components:
             - responses
             - traces_preview
             - synthetic_data_gen_preview
+            - benchmark_preview
           description: Data schema scenario.
+      discriminator:
+        propertyName: scenario
+        mapping:
+          benchmark_preview: '#/components/schemas/AzureAIBenchmarkDataSourceConfig'
       allOf:
         - $ref: '#/components/schemas/DataSourceConfig'
     AzureAIModelTarget:
@@ -6635,6 +6689,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.CreateEvalLogsDataSourceConfig'
             - $ref: '#/components/schemas/OpenAI.CreateEvalStoredCompletionsDataSourceConfig'
             - $ref: '#/components/schemas/AzureAIDataSourceConfig'
+            - $ref: '#/components/schemas/AzureAIBenchmarkDataSourceConfig'
           description: The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation.
         testing_criteria:
           type: array
@@ -7047,6 +7102,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.CreateEvalLogsDataSourceConfig'
             - $ref: '#/components/schemas/OpenAI.CreateEvalStoredCompletionsDataSourceConfig'
             - $ref: '#/components/schemas/AzureAIDataSourceConfig'
+            - $ref: '#/components/schemas/AzureAIBenchmarkDataSourceConfig'
           description: Configuration of data sources used in runs of the evaluation.
         testing_criteria:
           type: array
@@ -7501,6 +7557,7 @@ components:
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
+          azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
       type: object
@@ -8456,6 +8513,37 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
+    HeaderTelemetryEndpointAuth:
+      type: object
+      required:
+        - type
+        - header_name
+        - secret_id
+        - secret_key
+      properties:
+        type:
+          type: string
+          enum:
+            - header
+          description: The authentication type, always 'header' for header-based secret authentication.
+        header_name:
+          type: string
+          description: The name of the HTTP header to inject the secret value into.
+          example: X-Otlp-Api-Key
+        secret_id:
+          type: string
+          description: The identifier of the secret store or connection.
+          example: my-secret-store
+        secret_key:
+          type: string
+          description: The key within the secret to retrieve the authentication value.
+          example: OTLP_KEY
+      allOf:
+        - $ref: '#/components/schemas/TelemetryEndpointAuth'
+      description: Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
     HostedAgentDefinition:
       type: object
       required:
@@ -8505,6 +8593,10 @@ components:
           type: string
           description: The image ID for the agent, applicable to image-based hosted agents.
           example: my-registry.azurecr.io/my-hosted-agent:latest
+        telemetry_config:
+          allOf:
+            - $ref: '#/components/schemas/TelemetryConfig'
+          description: Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -9803,7 +9895,7 @@ components:
         network_policy:
           $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
       description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
-      title: CodeInterpreterToolAuto
+      title: Automatic Code Interpreter Tool Parameters
     OpenAI.ChatCompletionTool:
       type: object
       required:
@@ -24200,6 +24292,33 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an OpenAPI tool call.
+    OtlpTelemetryEndpoint:
+      type: object
+      required:
+        - kind
+        - endpoint
+        - protocol
+      properties:
+        kind:
+          type: string
+          enum:
+            - OTLP
+          description: The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.
+        endpoint:
+          type: string
+          description: The OTLP collector endpoint URL.
+          example: https://my-collector.example.com/otlp
+        protocol:
+          allOf:
+            - $ref: '#/components/schemas/TelemetryTransportProtocol'
+          description: The transport protocol for the OTLP endpoint.
+          example: Http
+      allOf:
+        - $ref: '#/components/schemas/TelemetryEndpoint'
+      description: An OTLP (OpenTelemetry Protocol) telemetry export endpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
     PageOrder:
       type: string
       enum:
@@ -25308,6 +25427,113 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+    TelemetryConfig:
+      type: object
+      required:
+        - endpoints
+      properties:
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetryEndpoint'
+          minItems: 1
+          maxItems: 3
+          description: Customer-supplied telemetry export endpoint configurations.
+      description: Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryDataKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - ContainerStdoutStderr
+            - ContainerOtel
+            - Metrics
+      description: The type of telemetry data to export.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryEndpoint:
+      type: object
+      required:
+        - kind
+        - data
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/TelemetryEndpointKind'
+          description: The telemetry export endpoint kind.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetryDataKind'
+          description: Data types to export to this endpoint. Use an empty array to export no data.
+          example:
+            - ContainerStdoutStderr
+            - ContainerOtel
+            - Metrics
+        auth:
+          allOf:
+            - $ref: '#/components/schemas/TelemetryEndpointAuth'
+          description: Optional authentication configuration.
+      discriminator:
+        propertyName: kind
+        mapping:
+          OTLP: '#/components/schemas/OtlpTelemetryEndpoint'
+      description: A telemetry export endpoint configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryEndpointAuth:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/TelemetryEndpointAuthType'
+          description: The authentication type.
+      discriminator:
+        propertyName: type
+        mapping:
+          header: '#/components/schemas/HeaderTelemetryEndpointAuth'
+      description: Authentication configuration for a telemetry endpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryEndpointAuthType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - header
+      description: The type of authentication for a telemetry endpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryEndpointKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - OTLP
+      description: The kind of telemetry export endpoint.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    TelemetryTransportProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Http
+            - Grpc
+      description: The transport protocol for telemetry export.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
     ToolCallOutputContent:
       anyOf:
         - type: object

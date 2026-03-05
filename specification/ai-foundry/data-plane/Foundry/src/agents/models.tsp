@@ -8,9 +8,9 @@ namespace Azure.AI.Projects;
 
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
-    AgentDefintionOptInKeys.hosted_agents_v1_preview,
-    AgentDefintionOptInKeys.container_agents_v1_preview,
-    AgentDefintionOptInKeys.workflow_agents_v1_preview
+    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.workflow_agents_v1_preview
   ],
 };
 
@@ -126,12 +126,42 @@ model AgentVersionObject {
   created_at: utcDateTime;
 
   definition: AgentDefinition;
+
+  @removed(Versions.v1)
+  @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
+  status: AgentVersionStatus = AgentVersionStatus.active;
+
+  @removed(Versions.v1)
+  @doc("Error details if the agent version provisioning failed.")
+  error?: ApiError;
+}
+
+@removed(Versions.v1)
+@doc("The provisioning status of an agent version.")
+union AgentVersionStatus {
+  @doc("The agent version is being provisioned.")
+  creating: "creating",
+
+  @doc("The agent version is active and ready to serve requests.")
+  active: "active",
+
+  @doc("The agent version provisioning failed.")
+  failed: "failed",
+
+  @doc("The agent version is being deleted.")
+  deleting: "deleting",
+
+  @doc("The agent version has been deleted.")
+  deleted: "deleted",
 }
 
 union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
+
+  @removed(Versions.v1)
+  invocations: "invocations",
 }
 
 union AgentKind {
@@ -223,7 +253,7 @@ model PromptAgentDefinitionTextOptions {
 @doc("The workflow agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefintionOptInKeys.workflow_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
@@ -235,7 +265,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefintionOptInKeys.hosted_agents_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
 )
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
@@ -272,12 +302,161 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
+
+  @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+  telemetry_config?: TelemetryConfig;
+}
+
+// ── Telemetry Unions ────────────────────────────────────
+
+@doc("The kind of telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointKind {
+  string,
+
+  @doc("OpenTelemetry Protocol (OTLP) endpoint.")
+  OTLP: "OTLP",
+}
+
+@doc("The type of telemetry data to export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryDataKind {
+  string,
+
+  @doc("Container stdout and stderr logs.")
+  ContainerStdoutStderr: "ContainerStdoutStderr",
+
+  @doc("Container OpenTelemetry signals.")
+  ContainerOtel: "ContainerOtel",
+
+  @doc("Container metrics.")
+  Metrics: "Metrics",
+}
+
+@doc("The transport protocol for telemetry export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryTransportProtocol {
+  string,
+
+  @doc("HTTP transport protocol.")
+  Http: "Http",
+
+  @doc("gRPC transport protocol.")
+  Grpc: "Grpc",
+}
+
+// ── Telemetry Auth (discriminated by "type") ────────────
+
+@doc("The type of authentication for a telemetry endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointAuthType {
+  string,
+
+  @doc("Header-based secret authentication.")
+  header: "header",
+}
+
+@doc("Authentication configuration for a telemetry endpoint.")
+@discriminator("type")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpointAuth {
+  @doc("The authentication type.")
+  type: TelemetryEndpointAuthType;
+}
+
+@doc("Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
+  @doc("The authentication type, always 'header' for header-based secret authentication.")
+  type: TelemetryEndpointAuthType.header;
+
+  @doc("The name of the HTTP header to inject the secret value into.")
+  @example("X-Otlp-Api-Key")
+  header_name: string;
+
+  @doc("The identifier of the secret store or connection.")
+  @example("my-secret-store")
+  secret_id: string;
+
+  @doc("The key within the secret to retrieve the authentication value.")
+  @example("OTLP_KEY")
+  secret_key: string;
+}
+
+// ── Telemetry Config & Endpoint (discriminated by "kind") ─
+
+@doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryConfig {
+  @doc("Customer-supplied telemetry export endpoint configurations.")
+  @minItems(1)
+  @maxItems(3)
+  endpoints: TelemetryEndpoint[];
+}
+
+@doc("A telemetry export endpoint configuration.")
+@discriminator("kind")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpoint {
+  @doc("The telemetry export endpoint kind.")
+  kind: TelemetryEndpointKind;
+
+  @doc("Data types to export to this endpoint. Use an empty array to export no data.")
+  @example(#["ContainerStdoutStderr", "ContainerOtel", "Metrics"])
+  data: TelemetryDataKind[];
+
+  @doc("Optional authentication configuration.")
+  auth?: TelemetryEndpointAuth;
+}
+
+@doc("An OTLP (OpenTelemetry Protocol) telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model OtlpTelemetryEndpoint extends TelemetryEndpoint {
+  @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
+  kind: TelemetryEndpointKind.OTLP;
+
+  @doc("The OTLP collector endpoint URL.")
+  @example("https://my-collector.example.com/otlp")
+  endpoint: string;
+
+  @doc("The transport protocol for the OTLP endpoint.")
+  @example("Http")
+  protocol: TelemetryTransportProtocol;
 }
 
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefintionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
@@ -370,7 +549,9 @@ model ToolArgumentBinding {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefintionOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.container_agents_v1_preview],
+  }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

@@ -55,8 +55,6 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
-@@clientName(ApiError, "OpenAIError");
-
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
@@ -75,6 +73,24 @@ using Azure.AI.Projects;
   "cachedTokensCount"
 );
 
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters");
+
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
+@@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParameter",
+  "java"
+);
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
+@@clientName(OpenAI.CustomGrammarFormatParam,
+  "CustomGrammarFormatParameter",
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -84,13 +100,22 @@ using Azure.AI.Projects;
 @@access(Agents.createAgentFromManifest, Access.internal);
 @@access(Agents.updateAgentFromManifest, Access.internal);
 
+// making methods private to add a public shim using the OpenAI types.
+@@access(MemoryStores.searchMemories, Access.internal);
+@@access(MemoryStores.updateMemories, Access.internal);
+@@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
+@@clientName(MemoryStores.searchMemories, "internalSearchMemories");
+
+@@access(MemoryStoreSearchResponse, Access.public);
+@@usage(MemoryStoreSearchResponse, Usage.output);
+
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 @@access(FoundryFeaturesOptInKeys, Access.public);
-@@access(AgentDefintionOptInKeys, Access.public);
+@@access(AgentDefinitionOptInKeys, Access.public);
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
@@ -103,9 +128,6 @@ using Azure.AI.Projects;
 
 @@usage(AgentReference, Usage.input);
 @@access(AgentReference, Access.public);
-
-@@usage(ApiError, Usage.output);
-@@access(ApiError, Access.public);
 
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);

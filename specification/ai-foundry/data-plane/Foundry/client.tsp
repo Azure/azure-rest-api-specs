@@ -82,6 +82,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
+@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
@@ -141,6 +143,25 @@ using Azure.AI.Projects;
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
+
+// --------------------------------------------------------------------------------
+// Evaluators sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Evaluators.listLatestVersions, "list");
+
+// --------------------------------------------------------------------------------
+// Insights sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
 // --------------------------------------------------------------------------------
@@ -171,6 +192,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
+@@clientName(Schedule.id, "schedule_id");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -187,6 +209,36 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+// --------------------------------------------------------------------------------
+// To support custom client-side handling of "opt-in" to preview features.
+// --------------------------------------------------------------------------------
+
+// Remove preview opt-in union types from the public PythonSDK surface.
+//
+// TODO: These do not work. Follow up with the Python emitter team.
+// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
+// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
+// in alias WithConditionalFoundryPreviewHeader.
+//
+//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+
+// Add optional boolean "allow_preview" client initialization parameter
+// See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
+model AIProjectClientOptions {
+  @doc("Whether to enable preview features. Must be specified and set to True to enable preview features.")
+  allow_preview?: boolean;
+}
+
+@@clientInitialization(Azure.AI.Projects,
+  {
+    parameters: AIProjectClientOptions,
+  },
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Other
