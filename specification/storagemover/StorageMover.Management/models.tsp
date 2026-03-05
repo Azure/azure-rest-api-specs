@@ -248,6 +248,7 @@ union CredentialType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureKeyVaultSmb: "AzureKeyVaultSmb",
+
   @added(Versions.v2025_12_01)
   AzureKeyVaultS3WithHMAC: "AzureKeyVaultS3WithHMAC",
 }
