@@ -15,6 +15,7 @@ using Microsoft.Support;
   "SupportNameAvailabilityContent",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
 @@clientName(CheckNameAvailabilityOutput,
   "SupportNameAvailabilityResult",
   "csharp"
@@ -29,10 +30,6 @@ using Microsoft.Support;
 @@clientName(UpdateContactProfile, "SupportContactProfileContent", "csharp");
 @@clientName(Type, "SupportResourceType", "csharp");
 @@clientName(Service, "SupportAzureService", "csharp");
-@@alternateType(TechnicalTicketDetails.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 @@clientName(Consent, "AdvancedDiagnosticConsent", "csharp");
 @@clientName(MessageProperties, "ChatTranscriptMessageProperties", "csharp");
 @@clientName(UploadFile, "UploadFileContent", "csharp");
@@ -40,4 +37,93 @@ using Microsoft.Support;
   "SecondaryConsentEnabledInfo",
   "csharp"
 );
+@@clientName(SecondaryConsent.type, "SecondaryConsentType", "csharp");
+@@clientName(SecondaryConsentEnabled.type,
+  "SecondaryConsentEnabledType",
+  "csharp"
+);
 @@clientName(ServiceProperties.resourceTypes, "ArmResourceTypes", "csharp");
+@@clientName(SeverityLevel, "SupportSeverityLevel", "csharp");
+@@clientName(ContactProfile, "SupportContactProfile", "csharp");
+@@clientName(ServiceLevelAgreement, "SupportServiceLevelAgreement", "csharp");
+@@clientName(LookUpResourceIdRequest,
+  "SupportLookUpResourceIdContent",
+  "csharp"
+);
+@@clientName(LookUpResourceIdResponse,
+  "SupportLookUpResourceIdResult",
+  "csharp"
+);
+@@clientName(ServiceClassificationRequest,
+  "SupportServiceClassificationContent",
+  "csharp"
+);
+@@clientName(ChatTranscriptDetails, "ChatTranscriptDetail", "csharp");
+@@clientName(FileWorkspaceDetails, "FileWorkspaceDetail", "csharp");
+@@clientName(FileDetails, "SupportFileDetail", "csharp");
+@@clientName(FileWorkspaces, "SubscriptionFileWorkspace", "csharp");
+@@clientName(SupportTickets, "SubscriptionSupportTicket", "csharp");
+@@clientName(SupportTickets.checkNameAvailability,
+  "CheckCommunicationNameAvailability",
+  "csharp"
+);
+@@clientName(ChatTranscripts, "SupportTicketChatTranscript", "csharp");
+@@clientName(Communications, "SupportTicketCommunication", "csharp");
+@@clientName(Files, "SupportTicketFile", "csharp");
+@@clientName(ChatTranscriptsNoSubscription,
+  "SupportTicketNoSubChatTranscript",
+  "csharp"
+);
+@@clientName(CommunicationsNoSubscription,
+  "SupportTicketNoSubCommunication",
+  "csharp"
+);
+@@clientName(FilesNoSubscription, "SupportTicketNoSubFile", "csharp");
+@@clientName(ClassificationService, "SupportClassificationService", "csharp");
+@@clientName(DirectConnectEscalation,
+  "SupportDirectConnectEscalation",
+  "csharp"
+);
+@@clientName(EscalationStatus, "SupportEscalationStatus", "csharp");
+@@clientName(ServiceClassificationAnswer,
+  "SupportServiceClassificationAnswer",
+  "csharp"
+);
+@@clientName(ServiceClassificationOutput,
+  "SupportServiceClassificationOutput",
+  "csharp"
+);
+@@clientName(FileWorkspacesNoSubscription, "TenantFileWorkspace", "csharp");
+@@clientName(SupportTicketsNoSubscription, "TenantSupportTicket", "csharp");
+@@clientName(SupportTicketsNoSubscription.checkNameAvailability,
+  "CheckNameAvailabilityCommunicationsNoSubscription",
+  "csharp"
+);
+@@clientName(SupportTicketsOperationGroup.checkNameAvailability,
+  "CheckSupportTicketNameAvailability",
+  "csharp"
+);
+@@clientName(SupportTicketsNoSubscriptionOperationGroup.checkNameAvailability,
+  "CheckNameAvailabilitySupportTicketsNoSubscription",
+  "csharp"
+);
+@@alternateType(LookUpResourceIdRequest.identifier,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LookUpResourceIdResponse.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(TechnicalTicketDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ClassificationService.resourceTypes,
+  Azure.Core.armResourceType[],
+  "csharp"
+);
+@@usage(ProblemClassification, Usage.input, "csharp");
+@@usage(Service, Usage.input, "csharp");
+@@usage(MessageProperties, Usage.input, "csharp");
+@@usage(SecondaryConsentEnabled, Usage.input, "csharp");
