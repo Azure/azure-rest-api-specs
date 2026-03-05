@@ -270,17 +270,26 @@
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table": {
             "$ref": "./examples/PipelineGroupCreateStandardSyslog.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedParsingTypes set to rfc3164": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithRfc3164.json"
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to cefRfc3164": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCefRfc3164.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedParsingTypes set to rfc3164 and allow3164WithoutPriHeader set to false": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithRfc3164AndAllowSkipPri.json"
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to cefRfc5424": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCefRfc5424.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedParsingTypes set to rfc3164 and rfc5424 for migration": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithAllowedParsingTypes.json"
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to rawCef": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithRawCef.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver with allowedParsingTypes set to rfc5424": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithRfc5424.json"
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and allowSkipPriHeader set to false": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164AndAllowSkipPri.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and syslogrfc5424 for migration": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithAllowedFormats.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc5424": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc5424.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithUdp.json"
@@ -438,6 +447,54 @@
     }
   },
   "definitions": {
+    "AllowedFormats": {
+      "type": "string",
+      "description": "Supported keys for allowed syslog and CEF parsing types.",
+      "enum": [
+        "all",
+        "syslogrfc3164",
+        "syslogrfc5424",
+        "cefRfc3164",
+        "cefRfc5424",
+        "rawCef"
+      ],
+      "x-ms-enum": {
+        "name": "AllowedFormats",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "all",
+            "value": "all",
+            "description": "Allow all supported syslog and CEF message formats."
+          },
+          {
+            "name": "syslogrfc3164",
+            "value": "syslogrfc3164",
+            "description": "Allow rfc3164 messages."
+          },
+          {
+            "name": "syslogrfc5424",
+            "value": "syslogrfc5424",
+            "description": "Allow rfc5424 messages."
+          },
+          {
+            "name": "cefRfc3164",
+            "value": "cefRfc3164",
+            "description": "Allow CEF messages embedded in rfc3164 messages."
+          },
+          {
+            "name": "cefRfc5424",
+            "value": "cefRfc5424",
+            "description": "Allow CEF messages embedded in rfc5424 messages."
+          },
+          {
+            "name": "rawCef",
+            "value": "rawCef",
+            "description": "Allow raw CEF messages without syslog encapsulation."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",
@@ -772,54 +829,6 @@
       "required": [
         "endpoint"
       ]
-    },
-    "ParsingTypeKey": {
-      "type": "string",
-      "description": "Supported keys for allowed syslog/CEF parsing types.",
-      "enum": [
-        "all",
-        "rfc3164",
-        "rfc5424",
-        "cefRfc3164",
-        "cefRfc5424",
-        "rawCef"
-      ],
-      "x-ms-enum": {
-        "name": "ParsingTypeKey",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "all",
-            "value": "all",
-            "description": "Allow all supported syslog and CEF message formats."
-          },
-          {
-            "name": "rfc3164",
-            "value": "rfc3164",
-            "description": "Allow rfc3164 messages."
-          },
-          {
-            "name": "rfc5424",
-            "value": "rfc5424",
-            "description": "Allow rfc5424 messages."
-          },
-          {
-            "name": "cefRfc3164",
-            "value": "cefRfc3164",
-            "description": "Allow CEF messages embedded in rfc3164 messages."
-          },
-          {
-            "name": "cefRfc5424",
-            "value": "cefRfc5424",
-            "description": "Allow CEF messages embedded in rfc5424 messages."
-          },
-          {
-            "name": "rawCef",
-            "value": "rawCef",
-            "description": "Allow raw CEF messages without syslog encapsulation."
-          }
-        ]
-      }
     },
     "PersistenceConfigurations": {
       "type": "object",
@@ -1439,14 +1448,14 @@
           "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
-        "allowedParsingTypes": {
+        "allowedFormats": {
           "type": "array",
-          "description": "List of allowed message parsing types. Use this to restrict ingestion to specific RFC formats (for example, rfc5424 only) or allow a controlled migration (for example, rfc3164 + rfc5424). Default all.",
+          "description": "List of allowed message formats. Use this to restrict ingestion to specific syslog and CEF formats (for example, syslogrfc5424 only). Default all.",
           "default": [
             "all"
           ],
           "items": {
-            "$ref": "#/definitions/ParsingTypeKey"
+            "$ref": "#/definitions/AllowedFormats"
           }
         },
         "transportProtocol": {
@@ -1474,10 +1483,10 @@
             ]
           }
         },
-        "allow3164WithoutPriHeader": {
+        "allowSkipPriHeader": {
           "type": "boolean",
-          "description": "Control whether rfc3164-based messages without the PRI header are accepted. Set to false to enforce stricter ingestion and reject malformed or legacy messages without PRI. Only applicable when allowed parsing types include rfc3164-based formats. Default true.",
-          "default": true
+          "description": "Configure the receiver to allow parsing of messages without the PRI header. Default false.",
+          "default": false
         }
       },
       "required": [

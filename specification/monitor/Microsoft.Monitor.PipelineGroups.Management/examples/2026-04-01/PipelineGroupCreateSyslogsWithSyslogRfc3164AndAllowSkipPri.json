@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver with allowedParsingTypes set to rfc3164 and rfc5424 for migration",
+  "title": "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and allowSkipPriHeader set to false",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -23,11 +23,10 @@
             "name": "syslog-receiver1",
             "syslog": {
               "endpoint": "0.0.0.0:514",
-              "allowedParsingTypes": [
-                "rfc3164",
-                "rfc5424"
+              "allowedFormats": [
+                "syslogrfc3164"
               ],
-              "allow3164WithoutPriHeader": false
+              "allowSkipPriHeader": false
             }
           }
         ],
@@ -109,11 +108,10 @@
               "name": "syslog-receiver1",
               "syslog": {
                 "endpoint": "0.0.0.0:514",
-                "allowedParsingTypes": [
-                  "rfc3164",
-                  "rfc5424"
+                "allowedFormats": [
+                  "syslogrfc3164"
                 ],
-                "allow3164WithoutPriHeader": false
+                "allowSkipPriHeader": false
               }
             }
           ],
@@ -202,11 +200,10 @@
               "name": "syslog-receiver1",
               "syslog": {
                 "endpoint": "0.0.0.0:514",
-                "allowedParsingTypes": [
-                  "rfc3164",
-                  "rfc5424"
+                "allowedFormats": [
+                  "syslogrfc3164"
                 ],
-                "allow3164WithoutPriHeader": false
+                "allowSkipPriHeader": false
               }
             }
           ],

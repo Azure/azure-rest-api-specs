@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc5424",
+  "title": "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogrfc3164 and syslogrfc5424 for migration",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -24,8 +24,10 @@
             "syslog": {
               "endpoint": "0.0.0.0:514",
               "allowedFormats": [
+                "syslogrfc3164",
                 "syslogrfc5424"
-              ]
+              ],
+              "allowSkipPriHeader": false
             }
           }
         ],
@@ -108,8 +110,10 @@
               "syslog": {
                 "endpoint": "0.0.0.0:514",
                 "allowedFormats": [
+                  "syslogrfc3164",
                   "syslogrfc5424"
-                ]
+                ],
+                "allowSkipPriHeader": false
               }
             }
           ],
@@ -199,8 +203,10 @@
               "syslog": {
                 "endpoint": "0.0.0.0:514",
                 "allowedFormats": [
+                  "syslogrfc3164",
                   "syslogrfc5424"
-                ]
+                ],
+                "allowSkipPriHeader": false
               }
             }
           ],
