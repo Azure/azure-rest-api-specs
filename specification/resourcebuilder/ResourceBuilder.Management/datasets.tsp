@@ -22,11 +22,30 @@ model Dataset is ProxyResource<DatasetProperties> {
   name: string;
 
   /**
+   * Dataset kind discriminator. Determines which properties are valid for this dataset.
+   * - Custom: Custom user-defined dataset.
+   * - ArmResource: ARM (Azure Resource Manager) managed resource dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Dataset resource"
+  kind?: DatasetKind;
+
+  /**
    * Gets or sets tags of the resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
   tags?: Record<string>;
+}
+
+/** Dataset kind discriminator */
+union DatasetKind {
+  /** Custom user-defined dataset. */
+  Custom: "Custom",
+
+  /** ARM (Azure Resource Manager) managed resource dataset. */
+  ArmResource: "ArmResource",
+
+  string,
 }
 
 /** Dataset properties */
@@ -35,8 +54,11 @@ model DatasetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  /** Dataset schema definition. */
+  /** Custom Dataset schema definition. */
   schema?: DatasetColumn[];
+
+  /** ArmResource ArmResourceDatasetSchema object. */
+  armResourceSchema?: ArmResourceDatasetSchema;
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
@@ -52,6 +74,51 @@ model DatasetColumn {
 
   /** Description of the column. */
   description?: string;
+}
+
+/** Additional Properties column */
+model AdditionalProperties {
+  /** Name of the column. */
+  name: string;
+
+  /** Value of the column. */
+  value: string;
+}
+
+/** ARM resource dataset schema. */
+model ArmResourceDatasetSchema {
+  /** The full ARM resource ID. */
+  resourceId: string;
+
+  /** The type of the ARM resource. */
+  resourceType: string;
+
+  /** The name of the ARM resource. */
+  resourceName: string;
+
+  /** The tenant ID where the resource resides. */
+  tenantId: string;
+
+  /** The subscription ID where the resource resides. */
+  subscriptionId: string;
+
+  /** The resource group where the resource resides. */
+  resourceGroup: string;
+
+  /** The kind of the ARM resource (optional). */
+  resourceKind?: string;
+
+  /** The Azure region where the resource is located (optional). */
+  resourceLocation?: string;
+
+  /** The tags associated with the ARM resource (optional). */
+  resourceTags?: AdditionalProperties[];
+
+  /** The resource properties of the ARM resource (optional). */
+  resourceProperties?: AdditionalProperties[];
+
+  /** The timestamp when the resource information was captured (optional). */
+  resourceTimestamp?: utcDateTime;
 }
 
 /** Dataset column type */

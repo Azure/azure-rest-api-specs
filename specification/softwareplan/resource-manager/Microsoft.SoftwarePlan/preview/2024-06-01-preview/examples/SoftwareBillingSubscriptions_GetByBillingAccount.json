@@ -1,0 +1,36 @@
+{
+  "title": "SoftwareBillingSubscriptions_GetByBillingAccount",
+  "operationId": "SoftwareBillingSubscriptions_GetByBillingAccount",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01",
+    "softwareBillingSubscriptionName": "11111111-2222-3333-4444-555555555555",
+    "$expand": "associatedSoftwareBillingSubscriptionIds"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "SQL Server Enterprise Core True UP Yr. 1 SKU",
+          "productCode": "12345678-ABCD-1234-5678-123456789012",
+          "quantity": 1,
+          "status": "Active",
+          "startDate": "2025-07-04T12:00:00Z",
+          "endDate": "2025-07-04T12:00:00Z",
+          "autoRenew": "Disabled",
+          "parentSoftwareBillingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/99999999-aaaa-bbbb-cccc-dddddddddddd",
+          "associatedSoftwareBillingSubscriptionIds": [
+            "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/22222222-3333-4444-5555-666677777777",
+            "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/33333333-4444-5555-6666-777788888888"
+          ],
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/billingProfiles/88888888-9999-aaaa-bbbb-cccccccccccc",
+          "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PR_MSProposalRG/providers/Microsoft.SoftwarePlan/softwareSubscriptions/software-sub-001",
+          "softwareSubscriptionType": "LicenseSoftwareAssurance"
+        },
+        "id": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/11111111-2222-3333-4444-555566666666",
+        "name": "11111111-2222-3333-4444-555566666666",
+        "type": "Microsoft.SoftwarePlan/SoftwareBillingSubscriptions"
+      }
+    }
+  }
+}
