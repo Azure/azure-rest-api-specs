@@ -6401,7 +6401,8 @@ model IntegrationRuntimeStatusListResponse
 /**
  * Factory's VSTS repo information.
  */
-model FactoryVstsConfiguration extends FactoryRepoConfiguration {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model FactoryVSTSConfiguration extends FactoryRepoConfiguration {
   /**
    * VSTS project name.
    */
@@ -6627,9 +6628,24 @@ model MappingDataFlowTypeProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSource extends Transformation {
   /**
+   * Dataset reference.
+   */
+  dataset?: DatasetReference;
+
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
+
+  /**
    * Schema linked service reference.
    */
   schemaLinkedService?: LinkedServiceReference;
+
+  /**
+   * Flowlet Reference
+   */
+  flowlet?: DataFlowReference;
 }
 
 /**
@@ -6668,6 +6684,16 @@ model Transformation {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataFlowSink extends Transformation {
   /**
+   * Dataset reference.
+   */
+  dataset?: DatasetReference;
+
+  /**
+   * Linked service reference.
+   */
+  linkedService?: LinkedServiceReference;
+
+  /**
    * Schema linked service reference.
    */
   schemaLinkedService?: LinkedServiceReference;
@@ -6676,6 +6702,11 @@ model DataFlowSink extends Transformation {
    * Rejected data linked service reference.
    */
   rejectedDataLinkedService?: LinkedServiceReference;
+
+  /**
+   * Flowlet Reference
+   */
+  flowlet?: DataFlowReference;
 }
 
 /**
@@ -10332,6 +10363,7 @@ model IntegrationRuntimeDataFlowProperties {
   /**
    * Time to live (in minutes) setting of the cluster which will execute data flow job.
    */
+  @minValue(0)
   timeToLive?: int32;
 
   /**

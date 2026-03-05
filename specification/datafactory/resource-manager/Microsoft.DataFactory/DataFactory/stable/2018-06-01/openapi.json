@@ -13622,6 +13622,14 @@
       "type": "object",
       "description": "Transformation for data flow sink.",
       "properties": {
+        "dataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "Dataset reference."
+        },
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference."
+        },
         "schemaLinkedService": {
           "$ref": "#/definitions/LinkedServiceReference",
           "description": "Schema linked service reference."
@@ -13629,6 +13637,10 @@
         "rejectedDataLinkedService": {
           "$ref": "#/definitions/LinkedServiceReference",
           "description": "Rejected data linked service reference."
+        },
+        "flowlet": {
+          "$ref": "#/definitions/DataFlowReference",
+          "description": "Flowlet Reference"
         }
       },
       "allOf": [
@@ -13641,9 +13653,21 @@
       "type": "object",
       "description": "Transformation for data flow source.",
       "properties": {
+        "dataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "Dataset reference."
+        },
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference",
+          "description": "Linked service reference."
+        },
         "schemaLinkedService": {
           "$ref": "#/definitions/LinkedServiceReference",
           "description": "Schema linked service reference."
+        },
+        "flowlet": {
+          "$ref": "#/definitions/DataFlowReference",
+          "description": "Flowlet Reference"
         }
       },
       "allOf": [
@@ -16432,7 +16456,7 @@
         }
       }
     },
-    "FactoryVstsConfiguration": {
+    "FactoryVSTSConfiguration": {
       "type": "object",
       "description": "Factory's VSTS repo information.",
       "properties": {
@@ -19979,7 +20003,8 @@
         "timeToLive": {
           "type": "integer",
           "format": "int32",
-          "description": "Time to live (in minutes) setting of the cluster which will execute data flow job."
+          "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
+          "minimum": 0
         },
         "cleanup": {
           "type": "boolean",
@@ -28068,8 +28093,7 @@
       "description": "A copy activity Salesforce V2 source.",
       "properties": {
         "SOQLQuery": {
-          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string).",
-          "x-ms-client-name": "soqlQuery"
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
         },
         "query": {
           "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
