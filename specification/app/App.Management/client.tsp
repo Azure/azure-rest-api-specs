@@ -9,3 +9,18 @@ using Microsoft.App;
 
 @@clientLocation(getCustomDomainVerificationId,"ContainerAppsAPIClient", "go");
 @@clientLocation(Jobs.jobExecution,"ContainerAppsAPIClient", "go");
+
+@@clientName(VnetConfiguration.platformReservedDnsIP,
+  "platformReservedDnsIp",
+  "java"
+);
+@@clientName(RegistryInfo.registryUserName, "registryUsername", "java");
+@@clientName(CustomHostnameAnalysisResult.hostName, "hostname", "java");
+@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
+  "disableWwwAuthenticate",
+  "java"
+);
+@@clientName(ContainerApps.listCustomHostNameAnalysis,
+  "listCustomHostnameAnalysis",
+  "java"
+);
