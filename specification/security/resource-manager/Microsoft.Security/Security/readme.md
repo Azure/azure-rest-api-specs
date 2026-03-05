@@ -718,6 +718,9 @@ suppressions:
   - code: LroErrorContent
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: This RP uses its own CloudError type which is compatible with ARM error format but predates common-types v2.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
 
 # Needed when there is more than one input file
 override-info:
@@ -797,6 +800,9 @@ suppressions:
   - code: LroErrorContent
     from: sqlVulnerabilityAssessmentsScanOperations.json
     reason: This RP uses its own CloudError type which is compatible with ARM error format but predates common-types v2.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
 
 # Needed when there is more than one input file
 override-info:
