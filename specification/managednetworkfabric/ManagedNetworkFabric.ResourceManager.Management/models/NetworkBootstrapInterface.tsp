@@ -4,10 +4,9 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Network Bootstrap Interface Properties defines the properties of the resource.")
-model NetworkBootstrapInterfaceProperties {
-  ...AnnotationResource;
-
+model NetworkBootstrapInterfaceProperties extends AnnotationResource {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -66,10 +65,9 @@ model NetworkBootstrapInterfacePatch {
   properties?: NetworkBootstrapInterfacePatchProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Network Bootstrap Interface Patch properties.")
-model NetworkBootstrapInterfacePatchProperties {
-  ...AnnotationResource;
-
+model NetworkBootstrapInterfacePatchProperties extends AnnotationResource {
   @doc("Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   @removed(Versions.v2026_01_15_preview)
