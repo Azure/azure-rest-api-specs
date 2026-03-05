@@ -1315,9 +1315,9 @@
           "description": "Migration status",
           "readOnly": true
         },
-        "preFlightValidations": {
-          "$ref": "#/definitions/PreFlightValidationStatus",
-          "description": "Pre-flight validation status",
+        "preMigrationValidations": {
+          "$ref": "#/definitions/PreMigrationValidationStatus",
+          "description": "Pre-migration validation status",
           "readOnly": true
         },
         "databases": {
@@ -1434,6 +1434,30 @@
         }
       ]
     },
+    "DiagnosticSeverity": {
+      "type": "string",
+      "description": "Diagnostic severity level.",
+      "enum": [
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level diagnostic"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error level diagnostic"
+          }
+        ]
+      }
+    },
     "DiscoverDatabaseObjectsRequest": {
       "type": "object",
       "description": "Request body for discovering database objects.",
@@ -1518,31 +1542,6 @@
           }
         ]
       }
-    },
-    "HealthResult": {
-      "type": "object",
-      "description": "Health result for a pre-flight check.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/ReadinessStatus",
-          "description": "Status of the health check"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message if the check failed"
-        },
-        "diagnosticHint": {
-          "type": "string",
-          "description": "Diagnostic hint to help resolve issues"
-        },
-        "title": {
-          "type": "string",
-          "description": "Title or summary of the health check"
-        }
-      },
-      "required": [
-        "status"
-      ]
     },
     "MappingScope": {
       "type": "string",
@@ -1941,54 +1940,45 @@
       },
       "readOnly": true
     },
-    "PreFlightCheckSummary": {
+    "PreMigrationValidationStatus": {
       "type": "object",
-      "description": "Summary of a pre-flight check.",
+      "description": "Pre-migration validation status.",
       "properties": {
-        "checkName": {
-          "type": "string",
-          "description": "Name of the pre-flight check"
-        },
         "state": {
           "$ref": "#/definitions/ReadinessState",
-          "description": "State of this specific pre-flight check"
+          "description": "Overall state of the pre-migration validation"
         },
-        "healthResult": {
-          "$ref": "#/definitions/HealthResult",
-          "description": "Detailed health result for this check"
-        }
-      },
-      "required": [
-        "checkName",
-        "state"
-      ]
-    },
-    "PreFlightValidationStatus": {
-      "type": "object",
-      "description": "Pre-flight validation status.",
-      "properties": {
-        "migrationRequestId": {
-          "type": "string",
-          "description": "Unique identifier for the migration request"
-        },
-        "state": {
-          "$ref": "#/definitions/ReadinessState",
-          "description": "Overall state of the pre-flight validation"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message if validation failed"
-        },
-        "preFlightCheckSummaries": {
+        "preMigrationValidationSummaries": {
           "type": "array",
-          "description": "List of pre-flight check summaries",
+          "description": "List of pre-migration validation summaries",
           "items": {
-            "$ref": "#/definitions/PreFlightCheckSummary"
+            "$ref": "#/definitions/PreMigrationValidationSummary"
           }
         }
       },
       "required": [
-        "migrationRequestId",
+        "state"
+      ]
+    },
+    "PreMigrationValidationSummary": {
+      "type": "object",
+      "description": "Summary of a pre-migration validation.",
+      "properties": {
+        "validationName": {
+          "type": "string",
+          "description": "Name of the validation"
+        },
+        "state": {
+          "$ref": "#/definitions/ReadinessState",
+          "description": "State of this specific validation"
+        },
+        "validationResult": {
+          "$ref": "#/definitions/ValidationResult",
+          "description": "Detailed validation result for this check"
+        }
+      },
+      "required": [
+        "validationName",
         "state"
       ]
     },
@@ -2045,9 +2035,8 @@
       "type": "string",
       "description": "The readiness state of validation.",
       "enum": [
-        "Accepted",
         "InProgress",
-        "Completed",
+        "Succeeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -2055,18 +2044,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The validation has been accepted and is pending execution."
-          },
-          {
             "name": "InProgress",
             "value": "InProgress",
             "description": "The validation is currently in progress."
           },
           {
-            "name": "Completed",
-            "value": "Completed",
+            "name": "Succeeded",
+            "value": "Succeeded",
             "description": "The validation has completed successfully."
           },
           {
@@ -2075,14 +2059,15 @@
             "description": "The validation has failed."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ReadinessStatus": {
       "type": "string",
       "description": "The readiness status of a check.",
       "enum": [
-        "Success",
-        "Failure",
+        "Succeeded",
+        "Failed",
         "Warning"
       ],
       "x-ms-enum": {
@@ -2090,13 +2075,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Success",
-            "value": "Success",
+            "name": "Succeeded",
+            "value": "Succeeded",
             "description": "The check completed successfully without issues."
           },
           {
-            "name": "Failure",
-            "value": "Failure",
+            "name": "Failed",
+            "value": "Failed",
             "description": "The check failed with errors."
           },
           {
@@ -2105,7 +2090,8 @@
             "description": "The check completed with warnings."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SchemaInfo": {
       "type": "object",
@@ -2312,6 +2298,51 @@
         "source",
         "target",
         "computeProfile"
+      ]
+    },
+    "ValidationDiagnostics": {
+      "type": "object",
+      "description": "Diagnostic information for validation result.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Diagnostic code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message"
+        },
+        "severity": {
+          "$ref": "#/definitions/DiagnosticSeverity",
+          "description": "Severity of the diagnostic"
+        },
+        "diagnosticHint": {
+          "type": "string",
+          "description": "Diagnostic hint to help resolve issues"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "severity",
+        "diagnosticHint"
+      ]
+    },
+    "ValidationResult": {
+      "type": "object",
+      "description": "Validation result for a pre-migration check.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ReadinessStatus",
+          "description": "Status of the validation check"
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/ValidationDiagnostics",
+          "description": "Diagnostics information"
+        }
+      },
+      "required": [
+        "status"
       ]
     },
     "ValidationStatus": {

@@ -231,14 +231,11 @@ union ErrorSeverity {
 union ReadinessState {
   string,
 
-  @doc("The validation has been accepted and is pending execution.")
-  Accepted: "Accepted",
-
   @doc("The validation is currently in progress.")
   InProgress: "InProgress",
 
   @doc("The validation has completed successfully.")
-  Completed: "Completed",
+  Succeeded: "Succeeded",
 
   @doc("The validation has failed.")
   Failed: "Failed",
@@ -249,13 +246,24 @@ union ReadinessStatus {
   string,
 
   @doc("The check completed successfully without issues.")
-  Success: "Success",
+  Succeeded: "Succeeded",
 
   @doc("The check failed with errors.")
-  Failure: "Failure",
+  Failed: "Failed",
 
   @doc("The check completed with warnings.")
   Warning: "Warning",
+}
+
+@doc("Diagnostic severity level.")
+union DiagnosticSeverity {
+  string,
+
+  @doc("Warning level diagnostic")
+  Warning: "Warning",
+
+  @doc("Error level diagnostic")
+  Error: "Error",
 }
 
 @doc("SSL configuration for database connection.")
@@ -451,47 +459,50 @@ model MigrationStatus {
   lastUpdatedAt: utcDateTime;
 }
 
-@doc("Health result for a pre-flight check.")
-model HealthResult {
-  @doc("Status of the health check")
-  status: ReadinessStatus;
+@doc("Diagnostic information for validation result.")
+model ValidationDiagnostics {
+  @doc("Diagnostic code")
+  code: string;
 
-  @doc("Error message if the check failed")
-  errorMessage?: string;
+  @doc("Diagnostic message")
+  message: string;
+
+  @doc("Severity of the diagnostic")
+  severity: DiagnosticSeverity;
 
   @doc("Diagnostic hint to help resolve issues")
-  diagnosticHint?: string;
-
-  @doc("Title or summary of the health check")
-  title?: string;
+  diagnosticHint: string;
 }
 
-@doc("Summary of a pre-flight check.")
-model PreFlightCheckSummary {
-  @doc("Name of the pre-flight check")
-  checkName: string;
+@doc("Validation result for a pre-migration check.")
+model ValidationResult {
+  @doc("Status of the validation check")
+  status: ReadinessStatus;
 
-  @doc("State of this specific pre-flight check")
-  state: ReadinessState;
-
-  @doc("Detailed health result for this check")
-  healthResult?: HealthResult;
+  @doc("Diagnostics information")
+  diagnostics?: ValidationDiagnostics;
 }
 
-@doc("Pre-flight validation status.")
-model PreFlightValidationStatus {
-  @doc("Unique identifier for the migration request")
-  migrationRequestId: string;
+@doc("Summary of a pre-migration validation.")
+model PreMigrationValidationSummary {
+  @doc("Name of the validation")
+  validationName: string;
 
-  @doc("Overall state of the pre-flight validation")
+  @doc("State of this specific validation")
   state: ReadinessState;
 
-  @doc("Error message if validation failed")
-  errorMessage?: string;
+  @doc("Detailed validation result for this check")
+  validationResult?: ValidationResult;
+}
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "checkName is the identifier"
-  @doc("List of pre-flight check summaries")
-  preFlightCheckSummaries?: PreFlightCheckSummary[];
+@doc("Pre-migration validation status.")
+model PreMigrationValidationStatus {
+  @doc("Overall state of the pre-migration validation")
+  state: ReadinessState;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "validationName is the identifier"
+  @doc("List of pre-migration validation summaries")
+  preMigrationValidationSummaries?: PreMigrationValidationSummary[];
 }
 
 @doc("Properties of the DatabaseMigration resource.")
@@ -543,9 +554,9 @@ model DatabaseMigrationProperties {
   @visibility(Lifecycle.Read)
   migrationStatus?: MigrationStatus;
 
-  @doc("Pre-flight validation status")
+  @doc("Pre-migration validation status")
   @visibility(Lifecycle.Read)
-  preFlightValidations?: PreFlightValidationStatus;
+  preMigrationValidations?: PreMigrationValidationStatus;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName is the identifier"
   @doc("List of database migration statuses")

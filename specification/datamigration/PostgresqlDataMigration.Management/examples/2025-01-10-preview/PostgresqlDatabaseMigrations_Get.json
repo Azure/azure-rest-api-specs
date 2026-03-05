@@ -81,34 +81,34 @@
             "errors": [],
             "lastUpdatedAt": "2025-09-23T10:30:00Z"
           },
-          "preFlightValidations": {
-            "migrationRequestId": "req-123e4567-e89b-12d3-a456-426614174000",
-            "state": "Completed",
-            "preFlightCheckSummaries": [
+          "preMigrationValidations": {
+            "state": "Succeeded",
+            "preMigrationValidationSummaries": [
               {
-                "checkName": "SourceConnectivity",
-                "state": "Completed",
-                "healthResult": {
-                  "status": "Success",
-                  "title": "Source Database Connectivity"
+                "validationName": "SourceConnectivity",
+                "state": "Succeeded",
+                "validationResult": {
+                  "status": "Succeeded"
                 }
               },
               {
-                "checkName": "TargetConnectivity",
-                "state": "Completed",
-                "healthResult": {
-                  "status": "Success",
-                  "title": "Target Database Connectivity"
+                "validationName": "TargetConnectivity",
+                "state": "Succeeded",
+                "validationResult": {
+                  "status": "Succeeded"
                 }
               },
               {
-                "checkName": "ExtensionCompatibility",
-                "state": "Completed",
-                "healthResult": {
+                "validationName": "ExtensionCompatibility",
+                "state": "Succeeded",
+                "validationResult": {
                   "status": "Warning",
-                  "errorMessage": "Some extensions may require manual configuration",
-                  "diagnosticHint": "Review extension compatibility before migration",
-                  "title": "Extension Compatibility Check"
+                  "diagnostics": {
+                    "code": "EXT001",
+                    "message": "Some extensions may require manual configuration",
+                    "severity": "Warning",
+                    "diagnosticHint": "Review extension compatibility before migration"
+                  }
                 }
               }
             ]
