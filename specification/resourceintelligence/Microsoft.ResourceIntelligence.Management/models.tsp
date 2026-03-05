@@ -123,6 +123,5 @@ model RunRequest {
   /**
    * The model endpoint URL to use for this run.
    */
-  @encodedName("application/json", "model")
   modelUrl: string;
 }
