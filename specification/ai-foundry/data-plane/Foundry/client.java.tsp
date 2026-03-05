@@ -147,7 +147,12 @@ namespace Azure.AI.Projects;
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
-@@alternateType(DayOfWeek, { identity: "java.time.DayOfWeek" }, "java");
+@@alternateType(DayOfWeek,
+  {
+    identity: "java.time.DayOfWeek",
+  },
+  "java"
+);
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");

@@ -9,7 +9,6 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
-import "./src/agents/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -24,19 +23,6 @@ namespace Azure.AI.Projects;
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
-
-@@usage(CreateAgentRequest, Usage.input);
-@@access(CreateAgentRequest, Access.internal);
-
-@@usage(CreateAgentVersionFromManifestRequest, Usage.input);
-@@access(CreateAgentVersionFromManifestRequest, Access.public);
-
-@@usage(UpdateAgentRequest, Usage.input);
-@@access(UpdateAgentRequest, Access.internal);
-
-@@usage(CreateAgentVersionRequest, Usage.input);
-@@access(CreateAgentVersionRequest, Access.public);
-@@clientName(CreateAgentVersionRequest, "AgentVersionCreationOptions");
 
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);
@@ -96,7 +82,6 @@ namespace Azure.AI.Projects;
 @@clientName(Datasets, "AIProjectDatasetsOperations", "csharp");
 @@clientName(Deployments, "AIProjectDeploymentsOperations", "csharp");
 @@clientName(Indexes, "AIProjectIndexesOperations", "csharp");
-@@clientName(Agents, "AIProjectAgentsOperations", "csharp");
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Connections.get, "getConnection", "csharp");
