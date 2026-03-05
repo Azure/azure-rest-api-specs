@@ -46,25 +46,24 @@ jobs:
             const { default: armModelingReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/detect-new-resource-provider.js');
             const result = await armModelingReview({ context, core });
-            core.info(`Final detection result: ${JSON.stringify(result, null, 2)}`);
             return result;
 
       - name: Upload artifact for ARMModelingReviewRequired label
-        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
+        if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingReviewRequired"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingSignedOff label
-        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
+        if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingAutoSignedOff label
-        if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
+        if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingAutoSignedOff"
