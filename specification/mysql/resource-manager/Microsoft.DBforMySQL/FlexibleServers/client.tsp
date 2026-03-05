@@ -240,10 +240,7 @@ using Microsoft.DBforMySQL;
   "MySqlFlexibleServerDetachVnetContent",
   "csharp"
 );
-@@clientName(ServerUpgradeConfig,
-  "MySqlFlexibleServerUpgradeConfig",
-  "csharp"
-);
+@@clientName(ServerUpgradeConfig, "MySqlFlexibleServerUpgradeConfig", "csharp");
 @@clientName(CheckNameAvailability.execute,
   "CheckMySqlFlexibleServerNameAvailability",
   "csharp"

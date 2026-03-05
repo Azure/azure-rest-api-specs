@@ -25,19 +25,15 @@ model ServerUpgradeConfig {
 @added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface ServerUpgradeConfigurations {
-  @doc("Gets the configurations used by upgrade operations on a high availability server.")
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Gets the configurations used by upgrade operations on a high availability server.")
   @operationId("Servers_GetUpgradeConfigurations")
   @action("upgradeConfigurations")
   @get
-  get is ArmResourceActionSync<
-    Server,
-    void,
-    ArmResponse<ServerUpgradeConfig>
-  >;
+  get is ArmResourceActionSync<Server, void, ArmResponse<ServerUpgradeConfig>>;
 
-  @doc("Updates the configurations used by upgrade operations on a high availability server.")
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Updates the configurations used by upgrade operations on a high availability server.")
   @operationId("Servers_SetUpgradeConfigurations")
   @action("upgradeConfigurations")
   @patch(#{ implicitOptionality: false })
