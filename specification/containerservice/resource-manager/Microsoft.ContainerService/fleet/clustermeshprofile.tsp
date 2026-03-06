@@ -80,8 +80,8 @@ model ClusterMeshProfileStatus {
   @visibility(Lifecycle.Read)
   state: ClusterMeshState;
 
-   @doc("The last applied MemberSelector for the cluster mesh profile.")
   @visibility(Lifecycle.Read)
+  @doc("The last applied MemberSelector for the cluster mesh profile.")
   lastAppliedMemberSelector?: MemberSelector;
 
   @visibility(Lifecycle.Read)
