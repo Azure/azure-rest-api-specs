@@ -48,6 +48,51 @@ directive:
     reason: Existing service; would be a breaking change
 ```
 
+### Tag: package-dataset-dataplane-1.5.0
+
+These settings apply only when `--tag=package-dataset-dataplane-1.5.0` is specified on the command line.
+
+```yaml $(tag) == 'package-dataset-dataplane-1.5.0'
+input-file:
+  - Microsoft.MachineLearningServices.DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+```
+
+### Tag: package-model-dataplane-1.0.0
+
+These settings apply only when `--tag=package-model-dataplane-1.0.0` is specified on the command line.
+
+```yaml $(tag) == 'package-model-dataplane-1.0.0'
+input-file:
+  - Microsoft.MachineLearningServices.ModelDataplane/stable/1.0.0/model-dataplane.json
+```
+
+### Tag: package-registry-discovery-v1.0
+
+These settings apply only when `--tag=package-registry-discovery-v1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-registry-discovery-v1.0'
+input-file:
+  - Microsoft.MachineLearningServices.RegistryDiscovery/stable/v1.0/registry-discovery.json
+```
+
+### Tag: package-runhistory-v1.0
+
+These settings apply only when `--tag=package-runhistory-v1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-runhistory-v1.0'
+input-file:
+  - Microsoft.MachineLearningServices.RunHistory/stable/v1.0/run-history.json
+```
+
+### Tag: package-workspace-dataplane-2023-06-01-preview
+
+These settings apply only when `--tag=package-workspace-dataplane-2023-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-workspace-dataplane-2023-06-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices.WorkspaceDataplane/preview/2023-06-01-preview/workspace-dataplane.json
+```
+
 ### Tag: package-2024-05-01-preview
 
 These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
@@ -147,6 +192,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices.DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+  - $(this-folder)/Microsoft.MachineLearningServices.ModelDataplane/stable/1.0.0/model-dataplane.json
+  - $(this-folder)/Microsoft.MachineLearningServices.RegistryDiscovery/stable/v1.0/registry-discovery.json
+  - $(this-folder)/Microsoft.MachineLearningServices.RunHistory/stable/v1.0/run-history.json
+  - $(this-folder)/Microsoft.MachineLearningServices.WorkspaceDataplane/preview/2023-06-01-preview/workspace-dataplane.json
   - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
   - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
   - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
