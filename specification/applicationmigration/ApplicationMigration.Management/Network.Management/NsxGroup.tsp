@@ -39,7 +39,7 @@ model NsxNsGroupProperties is AzureResourceProperties {
 
   /** Effective virtual machine references resolved by the group. */
   @identifiers(#[])
-  effectiveVirtualMachineRefs?: EffectiveVmRef[];
+  effectiveVirtualMachineArmIds?: EffectiveVmArmId[];
 
   /** Effective IP address members resolved by the group. */
   effectiveIpMembers?: string[];

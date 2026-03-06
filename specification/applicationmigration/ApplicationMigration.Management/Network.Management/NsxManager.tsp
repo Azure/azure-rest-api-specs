@@ -43,10 +43,10 @@ model NsxManagerProperties is AzureResourceProperties {
   isGlobalManager?: boolean;
 
   /** ARM resource IDs of local NSX Manager references. */
-  localNsxManagerRefs?: Azure.Core.armResourceIdentifier[];
+  localNsxManagerArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of managed vCenter servers. */
-  vcenterRefs?: Azure.Core.armResourceIdentifier<[
+  vcenterArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/vcenters";
     }

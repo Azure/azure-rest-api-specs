@@ -479,9 +479,9 @@ model Subnet {
 /**
  * A reference to an effective virtual machine.
  */
-model EffectiveVmRef {
+model EffectiveVmArmId {
   /** ARM resource ID of the virtual machine. */
-  vmRef?: Azure.Core.armResourceIdentifier;
+  vmArmId?: Azure.Core.armResourceIdentifier;
 
   /** Display name of the virtual machine. */
   displayName?: string;
@@ -504,7 +504,7 @@ model BackendPoolMember {
   weight?: int32;
 
   /** ARM resource ID of the virtual machine. */
-  vmRef?: Azure.Core.armResourceIdentifier<[
+  vmArmId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/machines";
     }
@@ -700,10 +700,10 @@ model NsxManagerPatchFields {
   isGlobalManager?: boolean;
 
   /** ARM resource IDs of local NSX Manager references. */
-  localNsxManagerRefs?: Azure.Core.armResourceIdentifier[];
+  localNsxManagerArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of managed vCenter servers. */
-  vcenterRefs?: Azure.Core.armResourceIdentifier<[
+  vcenterArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/vcenters";
     }
@@ -739,16 +739,16 @@ model NsxTier0GatewayPatchFields {
   firewallEnabled?: boolean;
 
   /** ARM resource IDs of associated Tier-1 gateways. */
-  associatedTier1Gateways?: Azure.Core.armResourceIdentifier[];
+  associatedTier1GatewayArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated segments. */
-  associatedSegments?: Azure.Core.armResourceIdentifier[];
+  associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
-  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+  associatedNatRuleArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated gateway firewall policies. */
-  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
+  associatedGfwPolicyArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxTier1Gateway patch envelope. */
@@ -783,16 +783,16 @@ model NsxTier1GatewayPatchFields {
   parentTier0Gateway?: Azure.Core.armResourceIdentifier;
 
   /** ARM resource IDs of associated segments. */
-  associatedSegments?: Azure.Core.armResourceIdentifier[];
+  associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
-  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+  associatedNatRuleArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated gateway firewall policies. */
-  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
+  associatedGfwPolicyArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated load balancers. */
-  associatedLoadBalancers?: Azure.Core.armResourceIdentifier[];
+  associatedLoadBalancerArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxSegment patch envelope. */
@@ -837,7 +837,7 @@ model NsxSegmentPatchFields {
   adminState?: AdminState;
 
   /** ARM resource IDs of virtual machines connected to this segment. */
-  associatedVirtualMachines?: Azure.Core.armResourceIdentifier<[
+  associatedVirtualMachineArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/machines";
     }
@@ -872,7 +872,7 @@ model NsxNsGroupPatchFields {
 
   /** Effective virtual machine references resolved by the group. */
   @identifiers(#[])
-  effectiveVirtualMachineRefs?: EffectiveVmRef[];
+  effectiveVirtualMachineArmIds?: EffectiveVmArmId[];
 
   /** Effective IP address members resolved by the group. */
   effectiveIpMembers?: string[];

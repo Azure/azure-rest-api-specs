@@ -53,7 +53,7 @@ model NsxSegmentProperties is AzureResourceProperties {
   adminState?: AdminState;
 
   /** ARM resource IDs of virtual machines connected to this segment. */
-  associatedVirtualMachines?: Azure.Core.armResourceIdentifier<[
+  associatedVirtualMachineArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/vmwareSites/machines";
     }

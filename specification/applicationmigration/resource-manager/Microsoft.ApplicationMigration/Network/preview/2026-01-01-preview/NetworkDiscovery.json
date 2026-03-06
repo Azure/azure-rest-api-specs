@@ -3843,7 +3843,7 @@
           "format": "int32",
           "description": "The weight of the member."
         },
-        "vmRef": {
+        "vmArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the virtual machine.",
@@ -3881,11 +3881,11 @@
         ]
       }
     },
-    "EffectiveVmRef": {
+    "EffectiveVmArmId": {
       "type": "object",
       "description": "A reference to an effective virtual machine.",
       "properties": {
-        "vmRef": {
+        "vmArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the virtual machine."
@@ -5461,7 +5461,7 @@
           "type": "boolean",
           "description": "Whether this is a global manager."
         },
-        "localNsxManagerRefs": {
+        "localNsxManagerArmIds": {
           "type": "array",
           "description": "ARM resource IDs of local NSX Manager references.",
           "items": {
@@ -5470,7 +5470,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "vcenterRefs": {
+        "vcenterArmIds": {
           "type": "array",
           "description": "ARM resource IDs of managed vCenter servers.",
           "items": {
@@ -5557,7 +5557,7 @@
           "type": "boolean",
           "description": "Whether this is a global manager."
         },
-        "localNsxManagerRefs": {
+        "localNsxManagerArmIds": {
           "type": "array",
           "description": "ARM resource IDs of local NSX Manager references.",
           "items": {
@@ -5566,7 +5566,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "vcenterRefs": {
+        "vcenterArmIds": {
           "type": "array",
           "description": "ARM resource IDs of managed vCenter servers.",
           "items": {
@@ -5835,11 +5835,11 @@
           },
           "x-ms-identifiers": []
         },
-        "effectiveVirtualMachineRefs": {
+        "effectiveVirtualMachineArmIds": {
           "type": "array",
           "description": "Effective virtual machine references resolved by the group.",
           "items": {
-            "$ref": "#/definitions/EffectiveVmRef"
+            "$ref": "#/definitions/EffectiveVmArmId"
           },
           "x-ms-identifiers": []
         },
@@ -5918,11 +5918,11 @@
           },
           "x-ms-identifiers": []
         },
-        "effectiveVirtualMachineRefs": {
+        "effectiveVirtualMachineArmIds": {
           "type": "array",
           "description": "Effective virtual machine references resolved by the group.",
           "items": {
-            "$ref": "#/definitions/EffectiveVmRef"
+            "$ref": "#/definitions/EffectiveVmArmId"
           },
           "x-ms-identifiers": []
         },
@@ -6035,7 +6035,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state of the segment."
         },
-        "associatedVirtualMachines": {
+        "associatedVirtualMachineArmIds": {
           "type": "array",
           "description": "ARM resource IDs of virtual machines connected to this segment.",
           "items": {
@@ -6143,7 +6143,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state of the segment."
         },
-        "associatedVirtualMachines": {
+        "associatedVirtualMachineArmIds": {
           "type": "array",
           "description": "ARM resource IDs of virtual machines connected to this segment.",
           "items": {
@@ -6251,7 +6251,7 @@
           "type": "boolean",
           "description": "Whether the firewall is enabled."
         },
-        "associatedTier1Gateways": {
+        "associatedTier1GatewayArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated Tier-1 gateways.",
           "items": {
@@ -6260,7 +6260,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedSegments": {
+        "associatedSegmentArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
           "items": {
@@ -6269,7 +6269,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedNatRules": {
+        "associatedNatRuleArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated NAT rules.",
           "items": {
@@ -6278,7 +6278,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedGfwPolicies": {
+        "associatedGfwPolicyArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated gateway firewall policies.",
           "items": {
@@ -6359,7 +6359,7 @@
           "type": "boolean",
           "description": "Whether this is a VRF gateway."
         },
-        "associatedTier1Gateways": {
+        "associatedTier1GatewayArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated Tier-1 gateways.",
           "items": {
@@ -6368,7 +6368,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedSegments": {
+        "associatedSegmentArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
           "items": {
@@ -6377,7 +6377,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedNatRules": {
+        "associatedNatRuleArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated NAT rules.",
           "items": {
@@ -6386,7 +6386,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedGfwPolicies": {
+        "associatedGfwPolicyArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated gateway firewall policies.",
           "items": {
@@ -6478,7 +6478,7 @@
           "format": "arm-id",
           "description": "ARM resource ID of the parent Tier-0 gateway."
         },
-        "associatedSegments": {
+        "associatedSegmentArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
           "items": {
@@ -6487,7 +6487,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedNatRules": {
+        "associatedNatRuleArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated NAT rules.",
           "items": {
@@ -6496,7 +6496,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedGfwPolicies": {
+        "associatedGfwPolicyArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated gateway firewall policies.",
           "items": {
@@ -6505,7 +6505,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedLoadBalancers": {
+        "associatedLoadBalancerArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated load balancers.",
           "items": {
@@ -6587,7 +6587,7 @@
           "format": "arm-id",
           "description": "ARM resource ID of the parent Tier-0 gateway."
         },
-        "associatedSegments": {
+        "associatedSegmentArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
           "items": {
@@ -6596,7 +6596,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedNatRules": {
+        "associatedNatRuleArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated NAT rules.",
           "items": {
@@ -6605,7 +6605,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedGfwPolicies": {
+        "associatedGfwPolicyArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated gateway firewall policies.",
           "items": {
@@ -6614,7 +6614,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedLoadBalancers": {
+        "associatedLoadBalancerArmIds": {
           "type": "array",
           "description": "ARM resource IDs of associated load balancers.",
           "items": {

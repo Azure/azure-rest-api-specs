@@ -43,16 +43,16 @@ model NsxTier0GatewayProperties is AzureResourceProperties {
   isVrf?: boolean;
 
   /** ARM resource IDs of associated Tier-1 gateways. */
-  associatedTier1Gateways?: Azure.Core.armResourceIdentifier[];
+  associatedTier1GatewayArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated segments. */
-  associatedSegments?: Azure.Core.armResourceIdentifier[];
+  associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
-  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+  associatedNatRuleArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated gateway firewall policies. */
-  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
+  associatedGfwPolicyArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @armResourceOperations

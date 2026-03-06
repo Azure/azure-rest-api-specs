@@ -43,16 +43,16 @@ model NsxTier1GatewayProperties is AzureResourceProperties {
   parentTier0Gateway?: Azure.Core.armResourceIdentifier;
 
   /** ARM resource IDs of associated segments. */
-  associatedSegments?: Azure.Core.armResourceIdentifier[];
+  associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
-  associatedNatRules?: Azure.Core.armResourceIdentifier[];
+  associatedNatRuleArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated gateway firewall policies. */
-  associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
+  associatedGfwPolicyArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated load balancers. */
-  associatedLoadBalancers?: Azure.Core.armResourceIdentifier[];
+  associatedLoadBalancerArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @armResourceOperations
