@@ -59,11 +59,9 @@ interface StaticSitesAsyncOperations {
   ): ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully."> | DefaultErrorResponse;
 }
 
-@@segment(
-  StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
+@@segment(StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
   "staticSiteOperationStatuses"
 );
-@@segment(
-  StaticSitesAsyncOperations.getOperationResult::parameters.operationId,
+@@segment(StaticSitesAsyncOperations.getOperationResult::parameters.operationId,
   "staticSitesOperationResults"
 );
