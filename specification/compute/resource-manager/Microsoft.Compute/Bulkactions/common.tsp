@@ -8,37 +8,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 
-@doc("ApiError for Fleet")
-model ApiError is ApiErrorBase {
-  @identifiers(#["message", "target"])
-  @doc("The API error details")
-  details?: Array<ApiErrorBase>;
-
-  @doc("The API inner error")
-  innererror?: InnerError;
-}
-
-@doc("API error base.")
-model ApiErrorBase {
-  @doc("The error code.")
-  code?: string;
-
-  @doc("The target of the particular error.")
-  target?: string;
-
-  @doc("The error message.")
-  message?: string;
-}
-
-@doc("Inner error details.")
-model InnerError {
-  @doc("The exception type.")
-  exceptionType?: string;
-
-  @doc("The internal error message or exception dump.")
-  errorDetail?: string;
-}
-
 @doc("Describes a reference to a sub-resource.")
 model SubResource {
   @doc("The ID of the sub-resource.")
