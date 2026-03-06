@@ -1940,7 +1940,7 @@
       "description": "Pre-migration validation status.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/ReadinessState",
+          "$ref": "#/definitions/ValidationState",
           "description": "Overall state of the pre-migration validation"
         },
         "preMigrationValidationSummaries": {
@@ -1964,7 +1964,7 @@
           "description": "Name of the validation"
         },
         "state": {
-          "$ref": "#/definitions/ReadinessState",
+          "$ref": "#/definitions/ValidationState",
           "description": "State of this specific validation"
         },
         "validationResult": {
@@ -2021,68 +2021,6 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Resource is being deleted"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "ReadinessState": {
-      "type": "string",
-      "description": "The readiness state of validation.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ReadinessState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The validation is currently in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The validation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The validation has failed."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "ReadinessStatus": {
-      "type": "string",
-      "description": "The readiness status of a check.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ReadinessStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The check completed successfully without issues."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The check failed with errors."
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "The check completed with warnings."
           }
         ]
       },
@@ -2328,7 +2266,7 @@
       "description": "Validation result for a pre-migration check.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/ReadinessStatus",
+          "$ref": "#/definitions/ValidationStatus",
           "description": "Status of the validation check"
         },
         "diagnostics": {
@@ -2339,6 +2277,68 @@
       "required": [
         "status"
       ]
+    },
+    "ValidationState": {
+      "type": "string",
+      "description": "The readiness state of validation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The validation is currently in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The validation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The validation has failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "The readiness status of a check.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The check completed successfully without issues."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The check failed with errors."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The check completed with warnings."
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {}

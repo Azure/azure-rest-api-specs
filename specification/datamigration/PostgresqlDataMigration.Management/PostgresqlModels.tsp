@@ -4,9 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Versioning;
-
 namespace Microsoft.DataMigration;
 
 @doc("The mode of the database migration.")
@@ -211,7 +208,7 @@ union ErrorSeverity {
 }
 
 @doc("The readiness state of validation.")
-union ReadinessState {
+union ValidationState {
   string,
 
   @doc("The validation is currently in progress.")
@@ -225,7 +222,7 @@ union ReadinessState {
 }
 
 @doc("The readiness status of a check.")
-union ReadinessStatus {
+union ValidationStatus {
   string,
 
   @doc("The check completed successfully without issues.")
@@ -457,7 +454,7 @@ model ValidationDiagnostics {
 @doc("Validation result for a pre-migration check.")
 model ValidationResult {
   @doc("Status of the validation check")
-  status: ReadinessStatus;
+  status: ValidationStatus;
 
   @doc("Diagnostics information")
   diagnostics?: ValidationDiagnostics;
@@ -469,7 +466,7 @@ model PreMigrationValidationSummary {
   validationName: string;
 
   @doc("State of this specific validation")
-  state: ReadinessState;
+  state: ValidationState;
 
   @doc("Detailed validation result for this check")
   validationResult?: ValidationResult;
@@ -478,7 +475,7 @@ model PreMigrationValidationSummary {
 @doc("Pre-migration validation status.")
 model PreMigrationValidationStatus {
   @doc("Overall state of the pre-migration validation")
-  state: ReadinessState;
+  state: ValidationState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "validationName is the identifier"
   @doc("List of pre-migration validation summaries")
