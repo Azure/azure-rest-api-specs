@@ -35,5 +35,5 @@ interface BlocklistClient {
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
 
 // Python-specific: Change severity type from int32 to float32 for forward compatibility
-@@alternateType(ContentSafety.TextCategoriesAnalysis.severity, float32, "python")
-@@alternateType(ContentSafety.ImageCategoriesAnalysis.severity, float32, "python")
+@@alternateType(ContentSafety.TextCategoriesAnalysis.severity, float32, "python");
+@@alternateType(ContentSafety.ImageCategoriesAnalysis.severity, float32, "python");
