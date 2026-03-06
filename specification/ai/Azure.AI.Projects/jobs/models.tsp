@@ -18,6 +18,7 @@ namespace Azure.AI.Projects;
 @doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
 @discriminator("distributionType")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
   distributionType: string;
@@ -25,6 +26,7 @@ model DistributionConfiguration {
 
 @doc("PyTorch distribution configuration.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model PyTorchDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
   distributionType: "PyTorch";
@@ -35,6 +37,7 @@ model PyTorchDistribution extends DistributionConfiguration {
 
 @doc("MPI distribution configuration.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model MpiDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
   distributionType: "Mpi";
@@ -45,6 +48,7 @@ model MpiDistribution extends DistributionConfiguration {
 
 @doc("TensorFlow distribution configuration.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model TensorFlowDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
   distributionType: "TensorFlow";
@@ -60,6 +64,7 @@ model TensorFlowDistribution extends DistributionConfiguration {
 @doc("Mapping of input data bindings used in the job.")
 @discriminator("jobInputType")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model JobInput {
   @doc("Specifies the type of job.")
   jobInputType: string;
@@ -70,6 +75,7 @@ model JobInput {
 
 @doc("Uri file job input.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model UriFileJobInput extends JobInput {
   @doc("Specifies the type of job.")
   jobInputType: "uri_file";
@@ -83,6 +89,7 @@ model UriFileJobInput extends JobInput {
 
 @doc("Uri folder job input.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model UriFolderJobInput extends JobInput {
   @doc("Specifies the type of job.")
   jobInputType: "uri_folder";
@@ -96,6 +103,7 @@ model UriFolderJobInput extends JobInput {
 
 @doc("Literal input type.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model LiteralJobInput extends JobInput {
   @doc("Specifies the type of job.")
   jobInputType: "literal";
@@ -108,6 +116,7 @@ model LiteralJobInput extends JobInput {
 @doc("Mapping of output data bindings used in the job.")
 @discriminator("jobOutputType")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model JobOutput {
   @doc("Specifies the type of job.")
   jobOutputType: string;
@@ -118,6 +127,7 @@ model JobOutput {
 
 @doc("Uri file job output.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model UriFileJobOutput extends JobOutput {
   @doc("Specifies the type of job.")
   jobOutputType: "uri_file";
@@ -134,6 +144,7 @@ model UriFileJobOutput extends JobOutput {
 
 @doc("Uri folder job output.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model UriFolderJobOutput extends JobOutput {
   @doc("Specifies the type of job.")
   jobOutputType: "uri_folder";
@@ -152,6 +163,7 @@ model UriFolderJobOutput extends JobOutput {
 @doc("Nodes that user would like to start the service on.")
 @discriminator("nodesValueType")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model NodeCollection {
   @doc("Type of the Nodes value.")
   nodesValueType: string;
@@ -159,6 +171,7 @@ model NodeCollection {
 
 @doc("All nodes means the service will be running on all of the nodes of the job.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model AllNodes extends NodeCollection {
   @doc("Type of the Nodes value.")
   nodesValueType: "All";
@@ -166,6 +179,7 @@ model AllNodes extends NodeCollection {
 
 @doc("Job endpoint definition.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model JobService {
   @doc("Endpoint type.")
   jobServiceType?: string;
@@ -193,6 +207,7 @@ model JobService {
 
 @doc("Compute Resource configuration for the job.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model JobResourceConfiguration {
   @doc("Optional number of instances or nodes used by the compute target.")
   instanceCount?: int32;
@@ -212,6 +227,7 @@ model JobResourceConfiguration {
 
 @doc("Command Job limit class.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model CommandJobLimits {
   @doc("JobLimit type.")
   @visibility(Lifecycle.Read)
@@ -223,6 +239,7 @@ model CommandJobLimits {
 
 @doc("Queue settings for the job.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model QueueSettings {
   @doc("Controls the compute job tier.")
   jobTier?: string;
@@ -230,6 +247,7 @@ model QueueSettings {
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model JobSystemData {
   @doc("The identity that created the resource.")
   @visibility(Lifecycle.Read)
@@ -259,6 +277,7 @@ model JobSystemData {
 @doc("Command job definition.")
 @resource("jobs")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model CommandJob {
   @doc("The name and identifier for the Job. This is case-sensitive.")
   @visibility(Lifecycle.Read)
@@ -339,6 +358,7 @@ model CommandJob {
 
 @doc("Query parameters for filtering the job list.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model ListJobsQueryParameters {
   @doc("Number of records to skip for pagination.")
   @query
@@ -359,6 +379,7 @@ model ListJobsQueryParameters {
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 union ListViewType {
   string,
 

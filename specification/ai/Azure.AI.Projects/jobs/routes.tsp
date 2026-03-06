@@ -21,6 +21,7 @@ alias JobServiceTraits = SupportsClientRequestId &
 alias JobOperations = Azure.Core.ResourceOperations<JobServiceTraits>;
 
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 interface Jobs {
   @doc("List Jobs in the workspace.")
   list is JobOperations.ResourceList<CommandJob, ListJobsQueryParameters>;
