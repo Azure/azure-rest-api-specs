@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace ConfidentialLedger;
 
@@ -252,6 +253,7 @@ model PagedCollections {
 /**
  * Paginated tags returned in response to a query.
  */
+@added(Versions.v2026_02_23)
 model PagedTags {
   /**
    * Array of tags.

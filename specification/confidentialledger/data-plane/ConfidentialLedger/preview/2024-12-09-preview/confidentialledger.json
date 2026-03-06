@@ -71,48 +71,6 @@
         }
       }
     },
-    "/app/collections/tags": {
-      "get": {
-        "operationId": "ListTags",
-        "summary": "Gets a list of tags for a collection.",
-        "description": "Retrieves the tags associated with a collection.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "collectionId",
-            "in": "query",
-            "description": "The collection id.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTags"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Tags": {
-            "$ref": "./examples/ListTags.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "tags"
-        }
-      }
-    },
     "/app/enclaveQuotes": {
       "get": {
         "operationId": "GetEnclaveQuotes",
@@ -2067,26 +2025,6 @@
           "description": "Path from which to retrieve the next page of results."
         }
       }
-    },
-    "PagedTags": {
-      "type": "object",
-      "description": "Paginated tags returned in response to a query.",
-      "properties": {
-        "tags": {
-          "type": "array",
-          "description": "Array of tags.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Path from which to retrieve the next page of results."
-        }
-      },
-      "required": [
-        "tags"
-      ]
     },
     "PagedUserDefinedFunctions": {
       "type": "object",
