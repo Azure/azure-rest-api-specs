@@ -91,6 +91,39 @@ suppressions:
     where:
       - $.definitions.SessionHostConfiguration
       - $.definitions.SessionHostManagement
+  - code: ArmResourcePropertiesBag
+    from: desktopvirtualization.json
+    reason: Existing service contract does not model all resource shapes with a free-form properties bag.
+  - code: AvoidAdditionalProperties
+    from: desktopvirtualization.json
+    reason: Existing request/response payloads include constrained additional properties for backward compatibility.
+  - code: ListInOperationName
+    from: desktopvirtualization.json
+    reason: Existing operation naming is preserved to avoid client breaking changes.
+  - code: OperationIdNounConflictingModelNames
+    from: desktopvirtualization.json
+    reason: Existing operationId naming is preserved for backward compatibility.
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: desktopvirtualization.json
+    reason: Existing operations schema shape is shared with prior API versions.
+  - code: PatchBodyParametersSchema
+    from: desktopvirtualization.json
+    reason: Existing PATCH body schema is maintained for compatibility with deployed clients.
+  - code: PatchIdentityProperty
+    from: desktopvirtualization.json
+    reason: Existing PATCH behavior intentionally follows current service-side identity handling.
+  - code: PatchSkuProperty
+    from: desktopvirtualization.json
+    reason: Existing PATCH contract does not expose SKU in all resource shapes.
+  - code: PostOperationIdContainsUrlVerb
+    from: desktopvirtualization.json
+    reason: Existing operationId naming includes URL verbs and is kept for compatibility.
+  - code: PostResponseCodes
+    from: desktopvirtualization.json
+    reason: Existing POST behaviors and response codes are preserved across API versions.
+  - code: PutInOperationName
+    from: desktopvirtualization.json
+    reason: Existing PUT operation naming is preserved for backward compatibility.
 ```
 
 ### Tag: package-preview-2026-01-01-preview
