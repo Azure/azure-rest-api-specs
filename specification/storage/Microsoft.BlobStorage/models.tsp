@@ -1544,11 +1544,19 @@ alias DenyEncryptionScopeOverride = {
 };
 
 /** Specifies whether data in the container may be accessed publicly and the level of access */
-alias BlobPublicAccess = {
+alias BlobPublicAccessParameter = {
   /** The public access setting for the container. */
   @header("x-ms-blob-public-access")
   access?: PublicAccessType;
 };
+
+/** Specifies whether data in the container may be accessed publicly and the level of access */
+alias BlobPublicAccessResponseHeader = {
+  /** The public access setting for the container. */
+  @header("x-ms-blob-public-access")
+  blobPublicAccess?: PublicAccessType;
+};
+
 
 /** Optional: Indicates the priority with which to rehydrate an archived blob. */
 alias RehydratePriorityHeader = {
