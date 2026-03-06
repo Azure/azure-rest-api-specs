@@ -206,11 +206,7 @@ stages:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
 
-      - task: npmAuthenticate@0
-        displayName: 'Authenticate .npmrc'
-        condition: and(succeeded(), contains(variables['SdkRepoName'], '-js'))
-        inputs:
-          workingFile: $(SdkRepoDirectory)/.npmrc
+      - template: /eng/common/pipelines/templates/steps/authenticate-temp-npmrc.yml
 
       - task: UsePythonVersion@0
         inputs:
