@@ -2,7 +2,6 @@
 
 - [2025-09-01 vs 2026-04-01](#2025-09-01-vs-2026-04-01)
   - [Spec file consolidation](#spec-file-consolidation)
-  - [Breaking changes](#breaking-changes)
   - [Non-breaking changes](#non-breaking-changes)
   - [TypeSpec migration artifacts](#typespec-migration-artifacts)
 - [2025-11-01-preview vs 2026-04-01](#2025-11-01-preview-vs-2026-04-01)
@@ -25,30 +24,6 @@
 ---
 
 ## Changes
-
-### Breaking Changes
-
-#### 1. Legacy v1 cognitive skills removed
-
-The following **v1 skill types** are removed from the specification. They were deprecated in favour
-of the v3 variants introduced in earlier API versions and are no longer supported:
-
-| Removed type (discriminator `@odata.type`) | Replacement |
-|---|---|
-| `EntityRecognitionSkill` (`#Microsoft.Skills.Text.EntityRecognitionSkill`) | `EntityRecognitionSkillV3` (`#Microsoft.Skills.Text.V3.EntityRecognitionSkill`) |
-| `SentimentSkill` (`#Microsoft.Skills.Text.SentimentSkill`) | `SentimentSkillV3` (`#Microsoft.Skills.Text.V3.SentimentSkill`) |
-
-The corresponding language-code enums `EntityRecognitionSkillLanguage` and `SentimentSkillLanguage`
-are also removed.
-
-**Impact**: Skillsets that reference either legacy `@odata.type` value must be migrated to the V3
-equivalents before targeting this API version.
-
-#### 2. `QueryResultDocumentVectorSubscores` definition removed
-
-The `QueryResultDocumentVectorSubscores` object model is removed. It was previously returned as an
-optional field nested under search-result vector debug data but is no longer surfaced in the public
-contract.
 
 ### Non-Breaking Changes
 
@@ -230,6 +205,28 @@ no effect on the HTTP wire format.
 Every operation gains an explicit `Accept: application/json;odata.metadata=minimal` required header
 parameter. The 2025-09-01 Swagger had no explicit `Accept` parameter; the service already required
 and returned this content type. This is a **documentation-level change** — no wire behaviour change.
+
+### 12. Legacy v1 cognitive skill types removed from discriminator
+
+`SentimentSkill` (`#Microsoft.Skills.Text.SentimentSkill`) and `EntityRecognitionSkill`
+(`#Microsoft.Skills.Text.EntityRecognitionSkill`) are removed from the `SearchIndexerSkill`
+polymorphic discriminator union. Both V1 types were deprecated in a prior API version and were not
+carried forward into the TypeSpec-authored spec. The V3 replacements remain fully supported:
+
+- `SentimentSkillV3` (`#Microsoft.Skills.Text.V3.SentimentSkill`)
+- `EntityRecognitionSkillV3` (`#Microsoft.Skills.Text.V3.EntityRecognitionSkill`)
+
+The corresponding enums `SentimentSkillLanguage` and `EntityRecognitionSkillLanguage` are also
+removed. The service has long rejected V1-typed skill submissions; callers still using V1
+`@odata.type` values must migrate to the V3 equivalents.
+
+### 13. `QueryResultDocumentVectorSubscores` removed — inline schema equivalent
+
+The named definition `QueryResultDocumentVectorSubscores`
+(`object{additionalProperties: SingleVectorFieldResult}`) is removed. The
+`QueryResultDocumentSubscores.vectors` array items are now typed with the semantically equivalent
+inline schema (`object{additionalProperties: SingleVectorFieldResult}`). The REST wire response
+format is **unchanged**; this is a named-type-to-inline conversion with identical JSON structure.
 
 ---
 
