@@ -794,6 +794,14 @@ model VmInfo {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   targetVmGuid?: string;
 
+  @added(Versions.v1_preview)
+  @removed(Versions.v3_preview)
+  @doc("The vmTag of the VM.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
+  vmtag?: VmTag[];
+
+  @added(Versions.v3_preview)
   @doc("The vmTag of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
