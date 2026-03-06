@@ -63,9 +63,9 @@ op listCollections is ConfidentialLedgerCommon.LedgerOperation<
 /**
  * Retrieves the tags associated with a collection.
  */
-@added(Versions.v2026_02_23)
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+@added(Versions.v2026_02_23)
 @summary("Gets a list of tags for a collection.")
 @route("/app/collections/tags")
 @list
