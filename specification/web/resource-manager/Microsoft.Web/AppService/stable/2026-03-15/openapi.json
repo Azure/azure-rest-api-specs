@@ -2001,6 +2001,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the status of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationStatus.json"
+          }
         }
       }
     },
@@ -2027,6 +2032,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2041,14 +2052,16 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the result of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationResult.json"
           }
         }
       }
@@ -55292,22 +55305,32 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The fully qualified ID for the staticSite.  For example, /providers/Microsoft.Web/staticSites/test-swa",
+          "description": "The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "The type of the resource.  For example, Microsoft.Web/staticSites",
+          "description": "The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the staticSite. For example, test-swa",
+          "description": "The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134",
           "readOnly": true
         },
+        "properties": {
+          "$ref": "#/definitions/StaticSitesOperationStatusProperties",
+          "description": "Properties of the async operation status."
+        }
+      }
+    },
+    "StaticSitesOperationStatusProperties": {
+      "type": "object",
+      "description": "Properties of a static sites asynchronous operation status.",
+      "properties": {
         "status": {
           "type": "string",
-          "description": "The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed",
+          "description": "The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed",
           "readOnly": true
         },
         "startTime": {
@@ -55318,7 +55341,7 @@
           "type": "string",
           "description": "The end time of the asynchronous operation."
         },
-        "properties": {
+        "staticSiteProperties": {
           "$ref": "#/definitions/StaticSite",
           "description": "The generic properties of a staticSite."
         },

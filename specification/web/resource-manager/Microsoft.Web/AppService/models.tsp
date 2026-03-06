@@ -15989,29 +15989,11 @@ model StorageMount {
 }
 
 /**
- * Status object for a static sites asynchronous operation.
+ * Properties of a static sites asynchronous operation status.
  */
-model StaticSitesOperationStatus {
+model StaticSitesOperationStatusProperties {
   /**
-   * The fully qualified ID for the staticSite.  For example, /providers/Microsoft.Web/staticSites/test-swa
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The type of the resource.  For example, Microsoft.Web/staticSites
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The name of the staticSite. For example, test-swa
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed
+   * The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed
    */
   @visibility(Lifecycle.Read)
   status?: string;
@@ -16029,10 +16011,38 @@ model StaticSitesOperationStatus {
   /**
    * The generic properties of a staticSite.
    */
-  properties?: StaticSite;
+  staticSiteProperties?: StaticSite;
 
   /**
    * Error details for the asynchronous operation, if any.
    */
   error?: ErrorResponse;
+}
+
+/**
+ * Status object for a static sites asynchronous operation.
+ */
+model StaticSitesOperationStatus {
+  /**
+   * The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Properties of the async operation status.
+   */
+  properties?: StaticSitesOperationStatusProperties;
 }

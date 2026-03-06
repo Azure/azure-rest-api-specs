@@ -56,7 +56,7 @@ interface StaticSitesAsyncOperations {
 
     ...LocationResourceParameter,
     ...Foundations.OperationIdParameter,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully."> | DefaultErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.Resource> | ArmAcceptedLroResponse | DefaultErrorResponse;
 }
 
 @@segment(StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
