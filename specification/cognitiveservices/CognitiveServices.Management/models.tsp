@@ -1578,10 +1578,10 @@ model AccountProperties {
   allowProjectManagement?: boolean;
 
   /**
-    * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
+   * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
    */
   @added(Versions.v2026_01_15_preview)
-    foundryAutoUpgrade?: FoundryAutoUpgrade;
+  foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
    * Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter.

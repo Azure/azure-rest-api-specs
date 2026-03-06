@@ -154,7 +154,9 @@ interface AgenticApplications {
 @@doc(AgenticApplications.createOrUpdate::parameters.resource,
   "Agentic Application definition object."
 );
-@@summary(AgenticApplications.list, "Lists Agentic Applications in the project.");
+@@summary(AgenticApplications.list,
+  "Lists Agentic Applications in the project."
+);
 @@summary(AgenticApplications.get, "Gets an Agentic Application by name.");
 @@summary(AgenticApplications.createOrUpdate,
   "Creates or updates an Agentic Application (asynchronous)."
