@@ -2,7 +2,7 @@
   "title": "FleetManagedNamespaces_CreateOrUpdate",
   "operationId": "FleetManagedNamespaces_CreateOrUpdate",
   "parameters": {
-    "api-version": "2026-03-02-preview",
+    "api-version": "2026-04-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
@@ -26,6 +26,9 @@
             "ingress": "AllowSameNamespace",
             "egress": "AllowAll"
           }
+        },
+        "rolloutStrategy": {
+          "type": "RollingUpdate"
         },
         "adoptionPolicy": "Never",
         "deletePolicy": "Keep",
@@ -82,9 +85,6 @@
               }
             }
           }
-        },
-        "status": {
-          "lastOperationError": {}
         }
       },
       "location": "eastus"
@@ -112,6 +112,9 @@
               "egress": "AllowAll"
             }
           },
+          "rolloutStrategy": {
+            "type": "RollingUpdate"
+          },
           "adoptionPolicy": "Never",
           "deletePolicy": "Keep",
           "propagationPolicy": {
@@ -167,9 +170,6 @@
                 }
               }
             }
-          },
-          "status": {
-            "lastOperationError": {}
           }
         },
         "eTag": "\"EtagValue\"",
@@ -180,16 +180,16 @@
         "systemData": {
           "createdBy": "someUser",
           "createdByType": "User",
-          "createdAt": "2025-08-23T05:40:40.657Z",
+          "createdAt": "2026-04-02T05:40:40.657Z",
           "lastModifiedBy": "someOtherUser",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-08-23T05:40:40.657Z"
+          "lastModifiedAt": "2026-04-02T05:40:40.657Z"
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-08-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-04-02-preview"
       },
       "body": {
         "properties": {
@@ -212,6 +212,9 @@
               "egress": "AllowAll"
             }
           },
+          "rolloutStrategy": {
+            "type": "RollingUpdate"
+          },
           "adoptionPolicy": "Never",
           "deletePolicy": "Keep",
           "propagationPolicy": {
@@ -267,9 +270,6 @@
                 }
               }
             }
-          },
-          "status": {
-            "lastOperationError": {}
           }
         },
         "eTag": "\"EtagValue\"",
@@ -283,10 +283,10 @@
         "systemData": {
           "createdBy": "someUser",
           "createdByType": "User",
-          "createdAt": "2025-08-23T05:40:40.657Z",
+          "createdAt": "2026-04-02T05:40:40.657Z",
           "lastModifiedBy": "someOtherUser",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-08-23T05:40:40.657Z"
+          "lastModifiedAt": "2026-04-02T05:40:40.657Z"
         }
       }
     }
