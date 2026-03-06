@@ -72,7 +72,6 @@ interface VpnServerConfigurationPolicyGroups {
    * Lists all the configurationPolicyGroups in a resource group for a vpnServerConfiguration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("configurationPolicyGroups_ListByVpnServerConfiguration")
   listByVpnServerConfiguration is ArmResourceListByParent<
     VpnServerConfigurationPolicyGroup,
     Response = ArmResponse<ListVpnServerConfigurationPolicyGroupsResult>,
