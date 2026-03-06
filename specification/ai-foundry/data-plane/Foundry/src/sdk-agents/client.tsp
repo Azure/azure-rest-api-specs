@@ -143,3 +143,4 @@ using Azure.AI.Projects;
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
