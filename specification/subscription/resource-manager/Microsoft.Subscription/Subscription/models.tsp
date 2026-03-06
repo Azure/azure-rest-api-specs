@@ -68,7 +68,7 @@ union Workload {
 /**
  * The provisioning state of the resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
 
@@ -140,7 +140,7 @@ union CreatedByType {
 /**
  * The provisioning state of the resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Provisioning {
   string,
 
@@ -335,7 +335,7 @@ model PutAliasRequestAdditionalProperties {
   /**
    * Tags for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -408,7 +408,7 @@ model SubscriptionAliasResponseProperties {
   /**
    * Tags for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -439,7 +439,7 @@ model AcceptOwnershipRequestProperties {
   /**
    * Tags for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -484,7 +484,7 @@ model AcceptOwnershipStatusResponse {
   /**
    * Tags for the subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -511,7 +511,7 @@ model PutTenantPolicyRequestProperties {
 /**
  * Tenant policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TenantPolicy {
   /**
    * Policy Id.
@@ -543,7 +543,7 @@ model GetTenantPolicyListResponse is Azure.Core.Page<GetTenantPolicyResponse>;
 /**
  * Put billing account policies response properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingAccountPoliciesResponseProperties {
   /**
    * Service tenant for the billing account.
@@ -600,7 +600,7 @@ model TargetDirectoryRequestProperties {
 /**
  * Properties of subscription Response for Changed Target Directory.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TargetDirectoryResultProperties {
   /**
    * Destination Tenant Id where Subscription will be accepted.

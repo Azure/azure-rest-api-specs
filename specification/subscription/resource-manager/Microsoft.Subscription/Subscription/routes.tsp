@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Subscription;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SubscriptionOperationGroup {
   /**
    * The operation to cancel a subscription
@@ -64,7 +64,7 @@ interface SubscriptionOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SubscriptionOperationOperationGroup {
   /**
    * Get the status of the pending Microsoft.Subscription API operations.
@@ -83,7 +83,7 @@ interface SubscriptionOperationOperationGroup {
     ArmLroLocationHeader) | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SubscriptionsOperationGroup {
   /**
    * The operation to accept Subscription Changed Request

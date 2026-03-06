@@ -39,7 +39,7 @@ interface GetTenantPolicyResponses {
   /**
    * Create or Update Subscription tenant policy for user's tenant.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   addUpdatePolicyForTenant is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GetTenantPolicyResponse,
     Request = PutTenantPolicyRequestProperties,
