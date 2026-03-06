@@ -2192,6 +2192,488 @@
     }
   },
   "x-ms-paths": {
+    "/?_overload=copyFromUrl": {
+      "put": {
+        "operationId": "Blob_CopyFromUrl",
+        "description": "The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "x-ms-meta",
+            "in": "header",
+            "description": "The metadata headers.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "metadata"
+          },
+          {
+            "name": "x-ms-access-tier",
+            "in": "header",
+            "description": "The tier to be set on the blob.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P4",
+              "P6",
+              "P10",
+              "P15",
+              "P20",
+              "P30",
+              "P40",
+              "P50",
+              "P60",
+              "P70",
+              "P80",
+              "Hot",
+              "Cool",
+              "Archive",
+              "Premium",
+              "Cold"
+            ],
+            "x-ms-enum": {
+              "name": "AccessTier",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "P4",
+                  "value": "P4",
+                  "description": "The hot P4 tier."
+                },
+                {
+                  "name": "P6",
+                  "value": "P6",
+                  "description": "The hot P6 tier."
+                },
+                {
+                  "name": "P10",
+                  "value": "P10",
+                  "description": "The hot P10 tier."
+                },
+                {
+                  "name": "P15",
+                  "value": "P15",
+                  "description": "The hot P15 tier."
+                },
+                {
+                  "name": "P20",
+                  "value": "P20",
+                  "description": "The hot P20 tier."
+                },
+                {
+                  "name": "P30",
+                  "value": "P30",
+                  "description": "The hot P30 tier."
+                },
+                {
+                  "name": "P40",
+                  "value": "P40",
+                  "description": "The hot P40 tier."
+                },
+                {
+                  "name": "P50",
+                  "value": "P50",
+                  "description": "The hot P50 tier."
+                },
+                {
+                  "name": "P60",
+                  "value": "P60",
+                  "description": "The hot P60 tier."
+                },
+                {
+                  "name": "P70",
+                  "value": "P70",
+                  "description": "The hot P70 tier."
+                },
+                {
+                  "name": "P80",
+                  "value": "P80",
+                  "description": "The hot P80 tier."
+                },
+                {
+                  "name": "Hot",
+                  "value": "Hot",
+                  "description": "The hot access tier."
+                },
+                {
+                  "name": "Cool",
+                  "value": "Cool",
+                  "description": "The cool access tier."
+                },
+                {
+                  "name": "Archive",
+                  "value": "Archive",
+                  "description": "The archive access tier."
+                },
+                {
+                  "name": "Premium",
+                  "value": "Premium",
+                  "description": "The Premium access tier."
+                },
+                {
+                  "name": "Cold",
+                  "value": "Cold",
+                  "description": "The Cold access tier."
+                }
+              ]
+            },
+            "x-ms-client-name": "tier"
+          },
+          {
+            "name": "x-ms-source-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "sourceIfModifiedSince"
+          },
+          {
+            "name": "x-ms-source-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "sourceIfUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-source-if-match",
+            "in": "header",
+            "description": "Specify an ETag value to operate only on blobs with a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceIfMatch"
+          },
+          {
+            "name": "x-ms-source-if-none-match",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceIfNoneMatch"
+          },
+          {
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "x-ms-if-tags",
+            "in": "header",
+            "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-copy-source",
+            "in": "header",
+            "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "copySource"
+          },
+          {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-source-content-md5",
+            "in": "header",
+            "description": "Specify the md5 calculated for the range of bytes that must be read from the copy source.",
+            "required": false,
+            "type": "string",
+            "format": "byte",
+            "x-ms-client-name": "sourceContentMd5"
+          },
+          {
+            "name": "x-ms-tags",
+            "in": "header",
+            "description": "Optional.  Used to set blob tags in various blob operations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "BlobTagsString"
+          },
+          {
+            "name": "x-ms-immutability-policy-until-date",
+            "in": "header",
+            "description": "Specifies the date time when the blobs immutability policy is set to expire.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "immutabilityPolicyExpiry"
+          },
+          {
+            "name": "x-ms-immutability-policy-mode",
+            "in": "header",
+            "description": "Specifies the immutability policy mode to set on the blob.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "mutable",
+              "locked",
+              "unlocked"
+            ],
+            "x-ms-enum": {
+              "name": "ImmutabilityPolicyMode",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Mutable",
+                  "value": "mutable",
+                  "description": "The immutability policy is mutable. Should never be set, only returned."
+                },
+                {
+                  "name": "Locked",
+                  "value": "locked",
+                  "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
+                }
+              ]
+            },
+            "x-ms-client-name": "immutabilityPolicyMode"
+          },
+          {
+            "name": "x-ms-legal-hold",
+            "in": "header",
+            "description": "Specified if a legal hold should be set on the blob.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "legalHold"
+          },
+          {
+            "name": "x-ms-copy-source-authorization",
+            "in": "header",
+            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "copySourceAuthorization"
+          },
+          {
+            "name": "x-ms-encryption-scope",
+            "in": "header",
+            "description": "Optional.  Version 2019-07-07 and later.  Specifies the encryption scope to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "encryptionScope"
+          },
+          {
+            "name": "x-ms-copy-source-tag-option",
+            "in": "header",
+            "description": "Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "COPY"
+            ],
+            "x-ms-enum": {
+              "name": "BlobCopySourceTags",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Replace",
+                  "value": "REPLACE",
+                  "description": "The replace blob source tags option."
+                },
+                {
+                  "name": "Copy",
+                  "value": "COPY",
+                  "description": "The copy blob source tags option."
+                }
+              ]
+            },
+            "x-ms-client-name": "copySourceTags"
+          },
+          {
+            "name": "x-ms-file-request-intent",
+            "in": "header",
+            "description": "Valid value is backup",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "backup"
+            ],
+            "x-ms-enum": {
+              "name": "FileShareTokenIntent",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Backup",
+                  "value": "backup",
+                  "description": "The file share token intent is backup."
+                }
+              ]
+            },
+            "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-requires-sync",
+            "in": "header",
+            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "requiresSync"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that you can use to perform operations conditionally."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The date/time that the container was last modified."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-content-crc64": {
+                "type": "string",
+                "format": "byte",
+                "description": "This response header is returned so that the client can check for the integrity of the copied content."
+              },
+              "x-ms-copy-id": {
+                "type": "string",
+                "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
+              },
+              "x-ms-copy-status": {
+                "type": "string",
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "success"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              },
+              "x-ms-encryption-scope": {
+                "type": "string",
+                "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              },
+              "x-ms-version-id": {
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
     "/?_overload=create": {
       "put": {
         "operationId": "AppendBlob_Create",
@@ -4371,8 +4853,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "type": "string"
             },
@@ -5717,488 +6199,6 @@
       }
     },
     "/?comp=copy": {
-      "put": {
-        "operationId": "Blob_CopyFromUrl",
-        "description": "The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "x-ms-meta",
-            "in": "header",
-            "description": "The metadata headers.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "metadata"
-          },
-          {
-            "name": "x-ms-access-tier",
-            "in": "header",
-            "description": "The tier to be set on the blob.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P4",
-              "P6",
-              "P10",
-              "P15",
-              "P20",
-              "P30",
-              "P40",
-              "P50",
-              "P60",
-              "P70",
-              "P80",
-              "Hot",
-              "Cool",
-              "Archive",
-              "Premium",
-              "Cold"
-            ],
-            "x-ms-enum": {
-              "name": "AccessTier",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "P4",
-                  "value": "P4",
-                  "description": "The hot P4 tier."
-                },
-                {
-                  "name": "P6",
-                  "value": "P6",
-                  "description": "The hot P6 tier."
-                },
-                {
-                  "name": "P10",
-                  "value": "P10",
-                  "description": "The hot P10 tier."
-                },
-                {
-                  "name": "P15",
-                  "value": "P15",
-                  "description": "The hot P15 tier."
-                },
-                {
-                  "name": "P20",
-                  "value": "P20",
-                  "description": "The hot P20 tier."
-                },
-                {
-                  "name": "P30",
-                  "value": "P30",
-                  "description": "The hot P30 tier."
-                },
-                {
-                  "name": "P40",
-                  "value": "P40",
-                  "description": "The hot P40 tier."
-                },
-                {
-                  "name": "P50",
-                  "value": "P50",
-                  "description": "The hot P50 tier."
-                },
-                {
-                  "name": "P60",
-                  "value": "P60",
-                  "description": "The hot P60 tier."
-                },
-                {
-                  "name": "P70",
-                  "value": "P70",
-                  "description": "The hot P70 tier."
-                },
-                {
-                  "name": "P80",
-                  "value": "P80",
-                  "description": "The hot P80 tier."
-                },
-                {
-                  "name": "Hot",
-                  "value": "Hot",
-                  "description": "The hot access tier."
-                },
-                {
-                  "name": "Cool",
-                  "value": "Cool",
-                  "description": "The cool access tier."
-                },
-                {
-                  "name": "Archive",
-                  "value": "Archive",
-                  "description": "The archive access tier."
-                },
-                {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
-                },
-                {
-                  "name": "Cold",
-                  "value": "Cold",
-                  "description": "The Cold access tier."
-                }
-              ]
-            },
-            "x-ms-client-name": "tier"
-          },
-          {
-            "name": "x-ms-source-if-modified-since",
-            "in": "header",
-            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "sourceIfModifiedSince"
-          },
-          {
-            "name": "x-ms-source-if-unmodified-since",
-            "in": "header",
-            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "sourceIfUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-source-if-match",
-            "in": "header",
-            "description": "Specify an ETag value to operate only on blobs with a matching value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "sourceIfMatch"
-          },
-          {
-            "name": "x-ms-source-if-none-match",
-            "in": "header",
-            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "sourceIfNoneMatch"
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ifModifiedSince"
-          },
-          {
-            "name": "If-Unmodified-Since",
-            "in": "header",
-            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "A condition that must be met in order for the request to be processed.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "x-ms-if-tags",
-            "in": "header",
-            "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-copy-source",
-            "in": "header",
-            "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "copySource"
-          },
-          {
-            "name": "x-ms-lease-id",
-            "in": "header",
-            "description": "If specified, the operation only succeeds if the resource's lease is active and matches this ID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-source-content-md5",
-            "in": "header",
-            "description": "Specify the md5 calculated for the range of bytes that must be read from the copy source.",
-            "required": false,
-            "type": "string",
-            "format": "byte",
-            "x-ms-client-name": "sourceContentMd5"
-          },
-          {
-            "name": "x-ms-tags",
-            "in": "header",
-            "description": "Optional.  Used to set blob tags in various blob operations.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "BlobTagsString"
-          },
-          {
-            "name": "x-ms-immutability-policy-until-date",
-            "in": "header",
-            "description": "Specifies the date time when the blobs immutability policy is set to expire.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "immutabilityPolicyExpiry"
-          },
-          {
-            "name": "x-ms-immutability-policy-mode",
-            "in": "header",
-            "description": "Specifies the immutability policy mode to set on the blob.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "mutable",
-              "locked",
-              "unlocked"
-            ],
-            "x-ms-enum": {
-              "name": "ImmutabilityPolicyMode",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Mutable",
-                  "value": "mutable",
-                  "description": "The immutability policy is mutable. Should never be set, only returned."
-                },
-                {
-                  "name": "Locked",
-                  "value": "locked",
-                  "description": "The immutability policy is locked."
-                },
-                {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                }
-              ]
-            },
-            "x-ms-client-name": "immutabilityPolicyMode"
-          },
-          {
-            "name": "x-ms-legal-hold",
-            "in": "header",
-            "description": "Specified if a legal hold should be set on the blob.",
-            "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-copy-source-authorization",
-            "in": "header",
-            "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "copySourceAuthorization"
-          },
-          {
-            "name": "x-ms-encryption-scope",
-            "in": "header",
-            "description": "Optional.  Version 2019-07-07 and later.  Specifies the encryption scope to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "encryptionScope"
-          },
-          {
-            "name": "x-ms-copy-source-tag-option",
-            "in": "header",
-            "description": "Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "REPLACE",
-              "COPY"
-            ],
-            "x-ms-enum": {
-              "name": "BlobCopySourceTags",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Replace",
-                  "value": "REPLACE",
-                  "description": "The replace blob source tags option."
-                },
-                {
-                  "name": "Copy",
-                  "value": "COPY",
-                  "description": "The copy blob source tags option."
-                }
-              ]
-            },
-            "x-ms-client-name": "copySourceTags"
-          },
-          {
-            "name": "x-ms-file-request-intent",
-            "in": "header",
-            "description": "Valid value is backup",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "backup"
-            ],
-            "x-ms-enum": {
-              "name": "FileShareTokenIntent",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Backup",
-                  "value": "backup",
-                  "description": "The file share token intent is backup."
-                }
-              ]
-            },
-            "x-ms-client-name": "fileRequestIntent"
-          },
-          {
-            "name": "x-ms-requires-sync",
-            "in": "header",
-            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "true"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "requiresSync"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Content-MD5": {
-                "type": "string",
-                "format": "byte",
-                "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The ETag contains a value that you can use to perform operations conditionally."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-content-crc64": {
-                "type": "string",
-                "format": "byte",
-                "description": "This response header is returned so that the client can check for the integrity of the copied content."
-              },
-              "x-ms-copy-id": {
-                "type": "string",
-                "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
-              },
-              "x-ms-copy-status": {
-                "type": "string",
-                "description": "State of the copy operation identified by x-ms-copy-id.",
-                "enum": [
-                  "success"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
-              "x-ms-encryption-scope": {
-                "type": "string",
-                "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              },
-              "x-ms-version-id": {
-                "type": "string",
-                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?comp=copy&_overload=abortCopyFromUrl": {
       "put": {
         "operationId": "Blob_AbortCopyFromUrl",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
@@ -14993,13 +14993,13 @@
       "properties": {
         "Start": {
           "type": "string",
-          "format": "date-time",
+          "format": "rfc3339-fixed-width",
           "description": "The date-time the policy is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
-          "format": "date-time",
+          "format": "rfc3339-fixed-width",
           "description": "The date-time the policy expires.",
           "x-ms-client-name": "expiry"
         },
