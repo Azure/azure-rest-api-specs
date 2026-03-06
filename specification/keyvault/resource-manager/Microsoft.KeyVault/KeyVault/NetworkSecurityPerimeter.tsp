@@ -364,4 +364,9 @@ interface NetworkSecurityPerimeterConfigurations {
     NetworkSecurityPerimeterConfiguration,
     Error = CloudError
   >;
+
+  @post
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{associationProxyName}/reconcile")
+  reconcile is ArmProviderActionSync<void, ArmNoContentResponse>;
+  // reconcile is ArmResourceActionNoContentSync<void, ArmNoContentResponse>;
 }
