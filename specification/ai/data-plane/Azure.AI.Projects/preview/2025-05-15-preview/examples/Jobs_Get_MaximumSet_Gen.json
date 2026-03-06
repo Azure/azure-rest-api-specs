@@ -1,0 +1,35 @@
+{
+  "title": "Jobs_Get_MaximumSet",
+  "operationId": "Jobs_Get",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "id": "my_training_job_01",
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "my_training_job_01",
+        "name": "my_training_job_01",
+        "jobType": "Command",
+        "command": "python train.py --epochs 10",
+        "environmentId": "azureml://registries/azureml/environments/acpt-pytorch-2.2-cuda12.1/versions/10",
+        "displayName": "My Training Job",
+        "description": "A sample command job for training",
+        "tags": {
+          "framework": "pytorch"
+        },
+        "properties": {
+          "experimentName": "my-experiment"
+        },
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+        "resources": {
+          "instanceCount": 1,
+          "instanceType": "Standard_NC6"
+        },
+        "status": "Running",
+        "isArchived": false
+      }
+    }
+  }
+}
