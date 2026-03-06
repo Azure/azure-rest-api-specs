@@ -259,7 +259,7 @@ model BaseEvent {
   name?: string;
 
   /** The event data. */
-  data?: unknown;
+  data?: string;
 }
 
 /** Request to batch add or modify runs. */
@@ -296,6 +296,7 @@ model BatchEventCommandResult {
 }
 
 /** A batch of metric values to post. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model BatchIMetricV2 {
   /** The metric values. */
   values?: IMetricV2[];
@@ -412,7 +413,7 @@ model CreateRun {
   properties?: Record<string>;
 
   /** The parameters dictionary for the run. Parameters are immutable. */
-  parameters?: Record<unknown>;
+  parameters?: Record<string>;
 
   /** The action URIs for the run. */
   actionUris?: Record<string>;
@@ -442,10 +443,10 @@ model CreateRun {
   outputDatasets?: OutputDatasetLineage[];
 
   /** The run definition specification. */
-  runDefinition?: unknown;
+  runDefinition?: string;
 
   /** The job specification. */
-  jobSpecification?: unknown;
+  jobSpecification?: string;
 
   /** The primary metric name. */
   primaryMetricName?: string;
@@ -541,6 +542,7 @@ model DatasetOutputDetails {
 /** Configuration for delete operations. */
 model DeleteConfiguration {
   /** The workspace ID. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   workspaceId?: string;
 
@@ -629,7 +631,7 @@ model ErrorAdditionalInfo {
   type?: string;
 
   /** The additional info. */
-  info?: unknown;
+  info?: string;
 }
 
 /** The error response. */
@@ -663,7 +665,7 @@ model Event {
   timestamp?: utcDateTime;
 
   /** Gets the collection of attributes associated with the event. */
-  attributes?: Record<unknown>;
+  attributes?: Record<string>;
 }
 
 /** An experiment. */
@@ -732,10 +734,10 @@ model GetRunDataResult {
   runMetadata?: Run;
 
   /** The run definition. */
-  runDefinition?: unknown;
+  runDefinition?: string;
 
   /** The job specification. */
-  jobSpecification?: unknown;
+  jobSpecification?: string;
 }
 
 /** A request to get runs by IDs. */
@@ -754,6 +756,7 @@ model GetSampledMetricRequest {
 }
 
 /** Sequence of one or many values sharing a common DataContainerId, Name, and Schema. Used only for Post Metrics. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model IMetricV2 {
   /** Data container to which this Metric belongs. */
   dataContainerId?: string;
@@ -768,6 +771,7 @@ model IMetricV2 {
   `namespace`?: string;
 
   /** The standard schema ID. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   standardSchemaId?: string;
 
@@ -809,12 +813,13 @@ model KeyValuePairBaseEventErrorResponse {
 }
 
 /** A key-value pair of string and JToken. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model KeyValuePairStringJToken {
   /** The key. */
   key?: string;
 
   /** The value. */
-  value?: unknown;
+  value?: string;
 }
 
 /** A key-value pair of two strings. */
@@ -832,7 +837,7 @@ model Link {
   context?: SpanContext;
 
   /** Gets the collection of attributes associated with the link. */
-  attributes?: Record<unknown>;
+  attributes?: Record<string>;
 }
 
 /** A request to list generic resource metrics. */
@@ -910,6 +915,7 @@ model MetricSample {
   `namespace`?: string;
 
   /** The standard schema ID. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   standardSchemaId?: string;
 
@@ -962,6 +968,7 @@ model MetricV2 {
   `namespace`?: string;
 
   /** The standard schema ID. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   standardSchemaId?: string;
 
@@ -987,7 +994,7 @@ model MetricV2Value {
   step?: int64;
 
   /** Dictionary mapping column names (specified as the keys in MetricV2Dto.Columns) to their values. */
-  data?: Record<unknown>;
+  data?: Record<string>;
 }
 
 /** A request to modify an experiment. */
@@ -1224,14 +1231,17 @@ model Run {
   statusRevision?: int64;
 
   /** A system generated Id for the run. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   runUuid?: string;
 
   /** A system generated Id for the run's parent. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   parentRunUuid?: string;
 
   /** A system generated Id for the root of the run's hierarchy. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   rootRunUuid?: string;
 
@@ -1311,7 +1321,7 @@ model Run {
   properties?: Record<string>;
 
   /** The parameters dictionary for the run. Parameters are immutable. */
-  parameters?: Record<unknown>;
+  parameters?: Record<string>;
 
   /** The action URIs for the run. */
   actionUris?: Record<string>;
@@ -1341,10 +1351,10 @@ model Run {
   outputDatasets?: OutputDatasetLineage[];
 
   /** The run definition specification. */
-  runDefinition?: unknown;
+  runDefinition?: string;
 
   /** The job specification. */
-  jobSpecification?: unknown;
+  jobSpecification?: string;
 
   /** The primary metric name. */
   primaryMetricName?: string;
@@ -1389,14 +1399,17 @@ model RunDetails {
   runId?: string;
 
   /** A system generated Id for the run. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   runUuid?: string;
 
   /** A system generated Id for the run's parent. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   parentRunUuid?: string;
 
   /** A system generated Id for the root of the run's hierarchy. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   rootRunUuid?: string;
 
@@ -1431,7 +1444,7 @@ model RunDetails {
   properties?: Record<string>;
 
   /** The parameters dictionary for the run. Parameters are immutable. */
-  parameters?: Record<unknown>;
+  parameters?: Record<string>;
 
   /** The interactive run services for a run. Services are mutable. */
   services?: Record<EndpointSetting>;
@@ -1443,7 +1456,7 @@ model RunDetails {
   outputDatasets?: OutputDatasetLineage[];
 
   /** The run definition specification. */
-  runDefinition?: unknown;
+  runDefinition?: string;
 
   /** The log files. */
   logFiles?: Record<string>;
@@ -1527,6 +1540,7 @@ model RunMetric {
   runId?: string;
 
   /** The metric ID. */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Existing API format"
   @format("uuid")
   metricId?: string;
 
@@ -1555,7 +1569,7 @@ model RunMetric {
   dataLocation?: string;
 
   /** The metric cells. */
-  cells?: unknown[];
+  cells?: string[];
 
   /** The metric schema. */
   schema?: MetricSchema;

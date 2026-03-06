@@ -38,6 +38,7 @@ interface Assets {
 
   /** List assets in a workspace. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -79,6 +80,7 @@ interface Assets {
 
   /** Get an asset by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -93,8 +95,9 @@ interface Assets {
 
   /** Patch an asset. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}")
-  @patch
+  @patch(#{implicitOptionality: true})
   patch is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;
@@ -129,6 +132,7 @@ interface Assets {
 interface ExtensiveModels {
   /** Get an extensive model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/extensiveModels/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -185,6 +189,7 @@ interface Models {
 
   /** List models in a workspace. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -286,6 +291,7 @@ interface Models {
 
   /** Get a model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -317,8 +323,9 @@ interface Models {
 
   /** Patch a model. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}")
-  @patch
+  @patch(#{implicitOptionality: true})
   patch is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;

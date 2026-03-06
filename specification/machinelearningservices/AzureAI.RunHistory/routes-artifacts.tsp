@@ -20,6 +20,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listInContainerByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -120,6 +121,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts/path")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listInPathByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -143,6 +145,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listSasByPrefixByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -170,6 +173,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listInContainerByExperimentName is Operation<
     {
       ...WorkspacePathParams;
@@ -270,6 +274,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/path")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listInPathByExperimentName is Operation<
     {
       ...WorkspacePathParams;
@@ -293,6 +298,7 @@ interface RunArtifacts {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/prefix/contentinfo")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listSasByPrefixByExperimentName is Operation<
     {
       ...WorkspacePathParams;

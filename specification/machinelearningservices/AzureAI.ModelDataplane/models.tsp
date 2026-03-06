@@ -282,11 +282,12 @@ model BlobReference {
 }
 
 /** A data reference credential. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model DataReferenceCredentialDto {
   /** The credential type. */
   credentialType?: string;
 
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** A blob reference for consumption with credentials. */
@@ -337,7 +338,7 @@ model DataReferencesForConsumptionDto {
 /** A data item. */
 model DataItem {
   /** The data value. */
-  data?: unknown;
+  data?: string;
 }
 
 /** A dependent asset reference. */
@@ -406,9 +407,11 @@ model ContainerResourceRequirements {
   cpuLimit?: float64;
 
   /** Memory in GB requested. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   memoryInGB?: float64;
 
   /** Memory in GB limit. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   memoryInGBLimit?: float64;
 
   /** Whether GPU is enabled. */
@@ -464,6 +467,7 @@ model CreateUnregisteredOutputModelDto {
 }
 
 /** Context information about resource creation. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model CreationContext {
   /** The time the resource was created. */
   createdTime?: utcDateTime;
@@ -474,7 +478,7 @@ model CreationContext {
   /** The creation source. */
   creationSource?: string;
 
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** A dataset reference. */
@@ -546,7 +550,7 @@ model ErrorResponse {
 
 /** An extensible object that allows additional properties. */
 model ExtensibleObject {
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** A user identity. */
@@ -594,12 +598,15 @@ model ModelDeploymentSettings {
   modelFormat: ModelFormatEnum;
 
   /** The model name. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   ModelName?: string;
 
   /** The model version. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   ModelVersion?: string;
 
   /** The model type. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   ModelType?: string;
 }
 
@@ -771,16 +778,20 @@ model ServiceResponseBase {
 /** An extensive model with associated services and assets. */
 model ExtensiveModel {
   /** The model. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   Model?: Model;
 
   /** The list of services associated with the model. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   ServiceList?: ServiceResponseBase[];
 
   /** The list of assets associated with the model. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   AssetList?: Asset[];
 }
 
 /** Index annotations for an entity. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model IndexAnnotations {
   /** Whether the entity is archived. */
   archived?: boolean;
@@ -788,18 +799,20 @@ model IndexAnnotations {
   /** Tags for the entity. */
   tags?: Record<string>;
 
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** Index properties for an entity. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model IndexProperties {
   /** The creation context. */
   creationContext?: CreationContext;
 
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** A relationship between entities. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
 model Relationship {
   /** The relation type. */
   relationType?: string;
@@ -821,7 +834,7 @@ model Relationship {
   @visibility(Lifecycle.Read)
   entityContainerId?: string;
 
-  ...Record<unknown>;
+  ...Record<string>;
 }
 
 /** An index entity. */
@@ -882,7 +895,7 @@ model FeedIndexEntityDto {
   schemaId?: string;
 
   /** The entity schema. */
-  entitySchema?: unknown;
+  entitySchema?: string;
 }
 
 /** A feed index entity request DTO. */
@@ -1017,7 +1030,7 @@ model ModelSettingsIdentifiers {
 /** A JSON Patch operation. */
 model PatchOperation {
   /** The value to apply. */
-  value?: unknown;
+  value?: string;
 
   /** The path to the property to modify. */
   path?: string;

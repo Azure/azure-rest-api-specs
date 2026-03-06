@@ -259,6 +259,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataContainerMutable"
@@ -594,6 +595,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataVersionMutable"
@@ -3721,6 +3723,7 @@
           "description": "The field type."
         },
         "value": {
+          "type": "string",
           "description": "The field value."
         }
       }
@@ -4013,7 +4016,9 @@
         "properties": {
           "type": "object",
           "description": "Additional properties.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "savedDatasetId": {
           "type": "string",
@@ -4091,7 +4096,9 @@
         "additionalProperties": {
           "type": "object",
           "description": "Additional properties.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "partitionFormat": {
           "type": "string",
@@ -4191,7 +4198,9 @@
         "legacyProperties": {
           "type": "object",
           "description": "Legacy properties.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "dataExpiryTime": {
           "type": "string",
@@ -4201,7 +4210,9 @@
         "legacy": {
           "type": "object",
           "description": "Legacy data.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4242,6 +4253,7 @@
           "description": "The additional info type."
         },
         "info": {
+          "type": "string",
           "description": "The additional info."
         }
       }
@@ -4439,7 +4451,9 @@
         "options": {
           "type": "object",
           "description": "The request options.",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
@@ -4563,247 +4577,308 @@
         "values": [
           {
             "name": "Continue",
-            "value": "Continue"
+            "value": "Continue",
+            "description": "Continue status code."
           },
           {
             "name": "SwitchingProtocols",
-            "value": "SwitchingProtocols"
+            "value": "SwitchingProtocols",
+            "description": "SwitchingProtocols status code."
           },
           {
             "name": "Processing",
-            "value": "Processing"
+            "value": "Processing",
+            "description": "Processing status code."
           },
           {
             "name": "EarlyHints",
-            "value": "EarlyHints"
+            "value": "EarlyHints",
+            "description": "EarlyHints status code."
           },
           {
             "name": "OK",
-            "value": "OK"
+            "value": "OK",
+            "description": "OK status code."
           },
           {
             "name": "Created",
-            "value": "Created"
+            "value": "Created",
+            "description": "Created status code."
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "Accepted status code."
           },
           {
             "name": "NonAuthoritativeInformation",
-            "value": "NonAuthoritativeInformation"
+            "value": "NonAuthoritativeInformation",
+            "description": "NonAuthoritativeInformation status code."
           },
           {
             "name": "NoContent",
-            "value": "NoContent"
+            "value": "NoContent",
+            "description": "NoContent status code."
           },
           {
             "name": "ResetContent",
-            "value": "ResetContent"
+            "value": "ResetContent",
+            "description": "ResetContent status code."
           },
           {
             "name": "PartialContent",
-            "value": "PartialContent"
+            "value": "PartialContent",
+            "description": "PartialContent status code."
           },
           {
             "name": "MultiStatus",
-            "value": "MultiStatus"
+            "value": "MultiStatus",
+            "description": "MultiStatus status code."
           },
           {
             "name": "AlreadyReported",
-            "value": "AlreadyReported"
+            "value": "AlreadyReported",
+            "description": "AlreadyReported status code."
           },
           {
             "name": "IMUsed",
-            "value": "IMUsed"
+            "value": "IMUsed",
+            "description": "IMUsed status code."
           },
           {
             "name": "Ambiguous",
-            "value": "Ambiguous"
+            "value": "Ambiguous",
+            "description": "Ambiguous status code."
           },
           {
             "name": "Moved",
-            "value": "Moved"
+            "value": "Moved",
+            "description": "Moved status code."
           },
           {
             "name": "Redirect",
-            "value": "Redirect"
+            "value": "Redirect",
+            "description": "Redirect status code."
           },
           {
             "name": "RedirectMethod",
-            "value": "RedirectMethod"
+            "value": "RedirectMethod",
+            "description": "RedirectMethod status code."
           },
           {
             "name": "NotModified",
-            "value": "NotModified"
+            "value": "NotModified",
+            "description": "NotModified status code."
           },
           {
             "name": "UseProxy",
-            "value": "UseProxy"
+            "value": "UseProxy",
+            "description": "UseProxy status code."
           },
           {
             "name": "Unused",
-            "value": "Unused"
+            "value": "Unused",
+            "description": "Unused status code."
           },
           {
             "name": "TemporaryRedirect",
-            "value": "TemporaryRedirect"
+            "value": "TemporaryRedirect",
+            "description": "TemporaryRedirect status code."
           },
           {
             "name": "PermanentRedirect",
-            "value": "PermanentRedirect"
+            "value": "PermanentRedirect",
+            "description": "PermanentRedirect status code."
           },
           {
             "name": "BadRequest",
-            "value": "BadRequest"
+            "value": "BadRequest",
+            "description": "BadRequest status code."
           },
           {
             "name": "Unauthorized",
-            "value": "Unauthorized"
+            "value": "Unauthorized",
+            "description": "Unauthorized status code."
           },
           {
             "name": "PaymentRequired",
-            "value": "PaymentRequired"
+            "value": "PaymentRequired",
+            "description": "PaymentRequired status code."
           },
           {
             "name": "Forbidden",
-            "value": "Forbidden"
+            "value": "Forbidden",
+            "description": "Forbidden status code."
           },
           {
             "name": "NotFound",
-            "value": "NotFound"
+            "value": "NotFound",
+            "description": "NotFound status code."
           },
           {
             "name": "MethodNotAllowed",
-            "value": "MethodNotAllowed"
+            "value": "MethodNotAllowed",
+            "description": "MethodNotAllowed status code."
           },
           {
             "name": "NotAcceptable",
-            "value": "NotAcceptable"
+            "value": "NotAcceptable",
+            "description": "NotAcceptable status code."
           },
           {
             "name": "ProxyAuthenticationRequired",
-            "value": "ProxyAuthenticationRequired"
+            "value": "ProxyAuthenticationRequired",
+            "description": "ProxyAuthenticationRequired status code."
           },
           {
             "name": "RequestTimeout",
-            "value": "RequestTimeout"
+            "value": "RequestTimeout",
+            "description": "RequestTimeout status code."
           },
           {
             "name": "Conflict",
-            "value": "Conflict"
+            "value": "Conflict",
+            "description": "Conflict status code."
           },
           {
             "name": "Gone",
-            "value": "Gone"
+            "value": "Gone",
+            "description": "Gone status code."
           },
           {
             "name": "LengthRequired",
-            "value": "LengthRequired"
+            "value": "LengthRequired",
+            "description": "LengthRequired status code."
           },
           {
             "name": "PreconditionFailed",
-            "value": "PreconditionFailed"
+            "value": "PreconditionFailed",
+            "description": "PreconditionFailed status code."
           },
           {
             "name": "RequestEntityTooLarge",
-            "value": "RequestEntityTooLarge"
+            "value": "RequestEntityTooLarge",
+            "description": "RequestEntityTooLarge status code."
           },
           {
             "name": "RequestUriTooLong",
-            "value": "RequestUriTooLong"
+            "value": "RequestUriTooLong",
+            "description": "RequestUriTooLong status code."
           },
           {
             "name": "UnsupportedMediaType",
-            "value": "UnsupportedMediaType"
+            "value": "UnsupportedMediaType",
+            "description": "UnsupportedMediaType status code."
           },
           {
             "name": "RequestedRangeNotSatisfiable",
-            "value": "RequestedRangeNotSatisfiable"
+            "value": "RequestedRangeNotSatisfiable",
+            "description": "RequestedRangeNotSatisfiable status code."
           },
           {
             "name": "ExpectationFailed",
-            "value": "ExpectationFailed"
+            "value": "ExpectationFailed",
+            "description": "ExpectationFailed status code."
           },
           {
             "name": "MisdirectedRequest",
-            "value": "MisdirectedRequest"
+            "value": "MisdirectedRequest",
+            "description": "MisdirectedRequest status code."
           },
           {
             "name": "UnprocessableEntity",
-            "value": "UnprocessableEntity"
+            "value": "UnprocessableEntity",
+            "description": "UnprocessableEntity status code."
           },
           {
             "name": "Locked",
-            "value": "Locked"
+            "value": "Locked",
+            "description": "Locked status code."
           },
           {
             "name": "FailedDependency",
-            "value": "FailedDependency"
+            "value": "FailedDependency",
+            "description": "FailedDependency status code."
           },
           {
             "name": "UpgradeRequired",
-            "value": "UpgradeRequired"
+            "value": "UpgradeRequired",
+            "description": "UpgradeRequired status code."
           },
           {
             "name": "PreconditionRequired",
-            "value": "PreconditionRequired"
+            "value": "PreconditionRequired",
+            "description": "PreconditionRequired status code."
           },
           {
             "name": "TooManyRequests",
-            "value": "TooManyRequests"
+            "value": "TooManyRequests",
+            "description": "TooManyRequests status code."
           },
           {
             "name": "RequestHeaderFieldsTooLarge",
-            "value": "RequestHeaderFieldsTooLarge"
+            "value": "RequestHeaderFieldsTooLarge",
+            "description": "RequestHeaderFieldsTooLarge status code."
           },
           {
             "name": "UnavailableForLegalReasons",
-            "value": "UnavailableForLegalReasons"
+            "value": "UnavailableForLegalReasons",
+            "description": "UnavailableForLegalReasons status code."
           },
           {
             "name": "InternalServerError",
-            "value": "InternalServerError"
+            "value": "InternalServerError",
+            "description": "InternalServerError status code."
           },
           {
             "name": "NotImplemented",
-            "value": "NotImplemented"
+            "value": "NotImplemented",
+            "description": "NotImplemented status code."
           },
           {
             "name": "BadGateway",
-            "value": "BadGateway"
+            "value": "BadGateway",
+            "description": "BadGateway status code."
           },
           {
             "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable status code."
           },
           {
             "name": "GatewayTimeout",
-            "value": "GatewayTimeout"
+            "value": "GatewayTimeout",
+            "description": "GatewayTimeout status code."
           },
           {
             "name": "HttpVersionNotSupported",
-            "value": "HttpVersionNotSupported"
+            "value": "HttpVersionNotSupported",
+            "description": "HttpVersionNotSupported status code."
           },
           {
             "name": "VariantAlsoNegotiates",
-            "value": "VariantAlsoNegotiates"
+            "value": "VariantAlsoNegotiates",
+            "description": "VariantAlsoNegotiates status code."
           },
           {
             "name": "InsufficientStorage",
-            "value": "InsufficientStorage"
+            "value": "InsufficientStorage",
+            "description": "InsufficientStorage status code."
           },
           {
             "name": "LoopDetected",
-            "value": "LoopDetected"
+            "value": "LoopDetected",
+            "description": "LoopDetected status code."
           },
           {
             "name": "NotExtended",
-            "value": "NotExtended"
+            "value": "NotExtended",
+            "description": "NotExtended status code."
           },
           {
             "name": "NetworkAuthenticationRequired",
-            "value": "NetworkAuthenticationRequired"
+            "value": "NetworkAuthenticationRequired",
+            "description": "NetworkAuthenticationRequired status code."
           }
         ]
       }
@@ -4874,6 +4949,7 @@
       "description": "A long-running operation response.",
       "properties": {
         "completionResult": {
+          "type": "string",
           "description": "The completion result."
         },
         "location": {

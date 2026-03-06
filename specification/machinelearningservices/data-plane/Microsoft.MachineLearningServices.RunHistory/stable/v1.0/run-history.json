@@ -4621,6 +4621,7 @@
           "description": "The event name."
         },
         "data": {
+          "type": "string",
           "description": "The event data."
         }
       }
@@ -4660,7 +4661,7 @@
           "type": "object",
           "description": "Errors occurred while fetching the requested Artifact Ids.",
           "additionalProperties": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/RunHistoryErrorResponse"
           }
         }
       }
@@ -4743,7 +4744,7 @@
           "type": "object",
           "description": "The failed results keyed by identifier.",
           "additionalProperties": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/RunHistoryErrorResponse"
           }
         }
       }
@@ -4763,7 +4764,7 @@
           "type": "object",
           "description": "The errors keyed by run ID.",
           "additionalProperties": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/RunHistoryErrorResponse"
           }
         }
       }
@@ -4896,7 +4897,9 @@
         "parameters": {
           "type": "object",
           "description": "The parameters dictionary for the run. Parameters are immutable.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "actionUris": {
           "type": "object",
@@ -4956,9 +4959,11 @@
           }
         },
         "runDefinition": {
+          "type": "string",
           "description": "The run definition specification."
         },
         "jobSpecification": {
+          "type": "string",
           "description": "The job specification."
         },
         "primaryMetricName": {
@@ -5247,7 +5252,7 @@
           "type": "object",
           "description": "Errors keyed by tag name.",
           "additionalProperties": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/RunHistoryErrorResponse"
           }
         }
       }
@@ -5381,41 +5386,8 @@
           "description": "The additional info type."
         },
         "info": {
+          "type": "string",
           "description": "The additional info."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "The error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/RootError",
-          "description": "The root error."
-        },
-        "correlation": {
-          "type": "object",
-          "description": "Dictionary containing correlation details for the error.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "environment": {
-          "type": "string",
-          "description": "The hosting environment."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure region."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time in UTC."
-        },
-        "componentName": {
-          "type": "string",
-          "description": "Component name where error originated/encountered."
         }
       }
     },
@@ -5435,7 +5407,9 @@
         "attributes": {
           "type": "object",
           "description": "Gets the collection of attributes associated with the event.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5576,9 +5550,11 @@
           "description": "The run metadata."
         },
         "runDefinition": {
+          "type": "string",
           "description": "The run definition."
         },
         "jobSpecification": {
+          "type": "string",
           "description": "The job specification."
         }
       }
@@ -5696,7 +5672,7 @@
           "description": "The event key."
         },
         "value": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response value."
         }
       }
@@ -5710,6 +5686,7 @@
           "description": "The key."
         },
         "value": {
+          "type": "string",
           "description": "The value."
         }
       }
@@ -5739,7 +5716,9 @@
         "attributes": {
           "type": "object",
           "description": "Gets the collection of attributes associated with the link.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5995,7 +5974,9 @@
         "data": {
           "type": "object",
           "description": "Dictionary mapping column names (specified as the keys in MetricV2Dto.Columns) to their values.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6181,7 +6162,7 @@
           "description": "The metric that caused the error."
         },
         "errorResponse": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response."
         }
       }
@@ -6366,7 +6347,7 @@
           "description": "The Token expiration time in UTC."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response."
         },
         "warnings": {
@@ -6512,7 +6493,9 @@
         "parameters": {
           "type": "object",
           "description": "The parameters dictionary for the run. Parameters are immutable.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "actionUris": {
           "type": "object",
@@ -6572,9 +6555,11 @@
           }
         },
         "runDefinition": {
+          "type": "string",
           "description": "The run definition specification."
         },
         "jobSpecification": {
+          "type": "string",
           "description": "The job specification."
         },
         "primaryMetricName": {
@@ -6684,7 +6669,7 @@
           "description": "The end time of the run in UTC."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response."
         },
         "warnings": {
@@ -6711,7 +6696,9 @@
         "parameters": {
           "type": "object",
           "description": "The parameters dictionary for the run. Parameters are immutable.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "services": {
           "type": "object",
@@ -6735,6 +6722,7 @@
           }
         },
         "runDefinition": {
+          "type": "string",
           "description": "The run definition specification."
         },
         "logFiles": {
@@ -6859,6 +6847,40 @@
         }
       }
     },
+    "RunHistoryErrorResponse": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError",
+          "description": "The root error."
+        },
+        "correlation": {
+          "type": "object",
+          "description": "Dictionary containing correlation details for the error.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "string",
+          "description": "The hosting environment."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time in UTC."
+        },
+        "componentName": {
+          "type": "string",
+          "description": "Component name where error originated/encountered."
+        }
+      }
+    },
     "RunMetric": {
       "type": "object",
       "description": "A run metric.",
@@ -6909,7 +6931,9 @@
         "cells": {
           "type": "array",
           "description": "The metric cells.",
-          "items": {}
+          "items": {
+            "type": "string"
+          }
         },
         "schema": {
           "$ref": "#/definitions/MetricSchema",
@@ -7000,7 +7024,7 @@
           "description": "The status."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response."
         },
         "properties": {
@@ -7030,7 +7054,7 @@
           "description": "The status."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/RunHistoryErrorResponse",
           "description": "The error response."
         },
         "endpoint": {

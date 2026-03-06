@@ -61,66 +61,188 @@ union FieldType {
 /** The HTTP status code. */
 union HttpStatusCode {
   string,
+
+  /** Continue status code. */
   Continue: "Continue",
+
+  /** SwitchingProtocols status code. */
   SwitchingProtocols: "SwitchingProtocols",
+
+  /** Processing status code. */
   Processing: "Processing",
+
+  /** EarlyHints status code. */
   EarlyHints: "EarlyHints",
+
+  /** OK status code. */
   OK: "OK",
+
+  /** Created status code. */
   Created: "Created",
+
+  /** Accepted status code. */
   Accepted: "Accepted",
+
+  /** NonAuthoritativeInformation status code. */
   NonAuthoritativeInformation: "NonAuthoritativeInformation",
+
+  /** NoContent status code. */
   NoContent: "NoContent",
+
+  /** ResetContent status code. */
   ResetContent: "ResetContent",
+
+  /** PartialContent status code. */
   PartialContent: "PartialContent",
+
+  /** MultiStatus status code. */
   MultiStatus: "MultiStatus",
+
+  /** AlreadyReported status code. */
   AlreadyReported: "AlreadyReported",
+
+  /** IMUsed status code. */
   IMUsed: "IMUsed",
+
+  /** Ambiguous status code. */
   Ambiguous: "Ambiguous",
+
+  /** Moved status code. */
   Moved: "Moved",
+
+  /** Redirect status code. */
   Redirect: "Redirect",
+
+  /** RedirectMethod status code. */
   RedirectMethod: "RedirectMethod",
+
+  /** NotModified status code. */
   NotModified: "NotModified",
+
+  /** UseProxy status code. */
   UseProxy: "UseProxy",
+
+  /** Unused status code. */
   Unused: "Unused",
+
+  /** TemporaryRedirect status code. */
   TemporaryRedirect: "TemporaryRedirect",
+
+  /** PermanentRedirect status code. */
   PermanentRedirect: "PermanentRedirect",
+
+  /** BadRequest status code. */
   BadRequest: "BadRequest",
+
+  /** Unauthorized status code. */
   Unauthorized: "Unauthorized",
+
+  /** PaymentRequired status code. */
   PaymentRequired: "PaymentRequired",
+
+  /** Forbidden status code. */
   Forbidden: "Forbidden",
+
+  /** NotFound status code. */
   NotFound: "NotFound",
+
+  /** MethodNotAllowed status code. */
   MethodNotAllowed: "MethodNotAllowed",
+
+  /** NotAcceptable status code. */
   NotAcceptable: "NotAcceptable",
+
+  /** ProxyAuthenticationRequired status code. */
   ProxyAuthenticationRequired: "ProxyAuthenticationRequired",
+
+  /** RequestTimeout status code. */
   RequestTimeout: "RequestTimeout",
+
+  /** Conflict status code. */
   Conflict: "Conflict",
+
+  /** Gone status code. */
   Gone: "Gone",
+
+  /** LengthRequired status code. */
   LengthRequired: "LengthRequired",
+
+  /** PreconditionFailed status code. */
   PreconditionFailed: "PreconditionFailed",
+
+  /** RequestEntityTooLarge status code. */
   RequestEntityTooLarge: "RequestEntityTooLarge",
+
+  /** RequestUriTooLong status code. */
   RequestUriTooLong: "RequestUriTooLong",
+
+  /** UnsupportedMediaType status code. */
   UnsupportedMediaType: "UnsupportedMediaType",
+
+  /** RequestedRangeNotSatisfiable status code. */
   RequestedRangeNotSatisfiable: "RequestedRangeNotSatisfiable",
+
+  /** ExpectationFailed status code. */
   ExpectationFailed: "ExpectationFailed",
+
+  /** MisdirectedRequest status code. */
   MisdirectedRequest: "MisdirectedRequest",
+
+  /** UnprocessableEntity status code. */
   UnprocessableEntity: "UnprocessableEntity",
+
+  /** Locked status code. */
   Locked: "Locked",
+
+  /** FailedDependency status code. */
   FailedDependency: "FailedDependency",
+
+  /** UpgradeRequired status code. */
   UpgradeRequired: "UpgradeRequired",
+
+  /** PreconditionRequired status code. */
   PreconditionRequired: "PreconditionRequired",
+
+  /** TooManyRequests status code. */
   TooManyRequests: "TooManyRequests",
+
+  /** RequestHeaderFieldsTooLarge status code. */
   RequestHeaderFieldsTooLarge: "RequestHeaderFieldsTooLarge",
+
+  /** UnavailableForLegalReasons status code. */
   UnavailableForLegalReasons: "UnavailableForLegalReasons",
+
+  /** InternalServerError status code. */
   InternalServerError: "InternalServerError",
+
+  /** NotImplemented status code. */
   NotImplemented: "NotImplemented",
+
+  /** BadGateway status code. */
   BadGateway: "BadGateway",
+
+  /** ServiceUnavailable status code. */
   ServiceUnavailable: "ServiceUnavailable",
+
+  /** GatewayTimeout status code. */
   GatewayTimeout: "GatewayTimeout",
+
+  /** HttpVersionNotSupported status code. */
   HttpVersionNotSupported: "HttpVersionNotSupported",
+
+  /** VariantAlsoNegotiates status code. */
   VariantAlsoNegotiates: "VariantAlsoNegotiates",
+
+  /** InsufficientStorage status code. */
   InsufficientStorage: "InsufficientStorage",
+
+  /** LoopDetected status code. */
   LoopDetected: "LoopDetected",
+
+  /** NotExtended status code. */
   NotExtended: "NotExtended",
+
+  /** NetworkAuthenticationRequired status code. */
   NetworkAuthenticationRequired: "NetworkAuthenticationRequired",
 }
 
@@ -162,6 +284,7 @@ union StoredProcedureParameterType {
 }
 
 /** The semantic type for profiling. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 union SType {
   string,
 
@@ -223,6 +346,7 @@ model BatchDataUriResponse {
 }
 
 /** Request to batch-resolve data URIs. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model BatchGetResolvedURIs {
   /** The list of URIs to resolve. */
   values: string[];
@@ -336,7 +460,7 @@ model DataField {
   type?: FieldType;
 
   /** The field value. */
-  value?: unknown;
+  value?: string;
 }
 
 /** A resolved data URI response. */
@@ -501,7 +625,7 @@ model DatasetDefinition {
   fileType?: string;
 
   /** Additional properties. */
-  properties?: Record<unknown>;
+  properties?: Record<string>;
 
   /** The saved dataset ID. */
   savedDatasetId?: string;
@@ -549,7 +673,7 @@ model DatasetPath {
   httpUrl?: string;
 
   /** Additional properties. */
-  additionalProperties?: Record<unknown>;
+  additionalProperties?: Record<string>;
 
   /** The partition format. */
   partitionFormat?: string;
@@ -612,13 +736,13 @@ model DatasetV2 {
   tags?: Record<string>;
 
   /** Legacy properties. */
-  legacyProperties?: Record<unknown>;
+  legacyProperties?: Record<string>;
 
   /** The data expiry time. */
   dataExpiryTime?: utcDateTime;
 
   /** Legacy data. */
-  legacy?: Record<unknown>;
+  legacy?: Record<string>;
 }
 
 /** Entity metadata. */
@@ -645,7 +769,7 @@ model ErrorAdditionalInfo {
   type?: string;
 
   /** The additional info. */
-  info?: unknown;
+  info?: string;
 }
 
 /** The error response. */
@@ -718,7 +842,7 @@ model HttpRequestMessage {
 
   /** The request options. */
   @visibility(Lifecycle.Read)
-  options?: Record<unknown>;
+  options?: Record<string>;
 }
 
 /** An HTTP response message. */
@@ -761,6 +885,7 @@ model InnerErrorResponse {
 }
 
 /** A key-value pair where the value is a list of strings. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model KeyValuePairStringIEnumerable {
   /** The key. */
   key?: string;
@@ -772,7 +897,7 @@ model KeyValuePairStringIEnumerable {
 /** A long-running operation response. */
 model LongRunningOperationResponse {
   /** The completion result. */
-  completionResult?: unknown;
+  completionResult?: string;
 
   /** The location URI. */
   location?: url;
@@ -1070,6 +1195,7 @@ model StringLengthCount {
 }
 
 /** A semantic type count for profile results. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 model STypeCount {
   /** The semantic type. */
   sType?: SType;

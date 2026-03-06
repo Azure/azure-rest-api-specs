@@ -16,6 +16,7 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing API path structure."
   @route("/rp/workspaces/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/join/{projectWorkspaceName}")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   hubJoin is Azure.Core.Foundations.Operation<
     {
       /** The ID of the target subscription. */
@@ -39,6 +40,7 @@ interface Workspaces {
 
 /** Accepted response with location header for polling. */
 model AcceptedResponse {
+  /** HTTP status code. */
   @statusCode statusCode: 202;
 
   /** URI to poll for asynchronous operation result. */

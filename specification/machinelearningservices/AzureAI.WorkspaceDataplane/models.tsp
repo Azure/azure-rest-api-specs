@@ -349,7 +349,7 @@ model WorkspaceProperties {
   keyVaults?: string[];
 
   /** Managed network configuration. */
-  managedNetwork?: unknown;
+  managedNetwork?: Record<string>;
 
   /** The URI associated with this workspace that machine learning flow must point at to set up tracking. */
   @visibility(Lifecycle.Read)

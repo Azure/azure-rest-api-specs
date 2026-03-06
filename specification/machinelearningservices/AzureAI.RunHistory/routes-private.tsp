@@ -13,11 +13,12 @@ namespace Microsoft.MachineLearningServices.RunHistory;
 /** Common path prefix for private history workspace operations. */
 
 /** Private delete configuration operations. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
 interface DeleteConfiguration_Operations {
   /** Patch delete configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/deleteConfiguration")
-  @patch
+  @patch(#{implicitOptionality: true})
   patchConfiguration is Operation<
     {
       ...WorkspacePathParams;
@@ -63,6 +64,7 @@ interface Spans {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/spans")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   list is Operation<
     {
       ...WorkspacePathParams;

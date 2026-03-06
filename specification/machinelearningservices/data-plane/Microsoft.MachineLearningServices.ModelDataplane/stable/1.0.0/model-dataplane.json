@@ -1658,13 +1658,16 @@
           "description": "The creation source."
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "DataItem": {
       "type": "object",
       "description": "A data item.",
       "properties": {
         "data": {
+          "type": "string",
           "description": "The data value."
         }
       }
@@ -1678,7 +1681,9 @@
           "description": "The credential type."
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "DataReferences": {
       "type": "object",
@@ -1854,47 +1859,12 @@
         ]
       }
     },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "type": "array",
-          "description": "The list of inner error details.",
-          "items": {
-            "$ref": "#/definitions/InnerErrorDetails"
-          }
-        },
-        "correlation": {
-          "type": "object",
-          "description": "Correlation information for the error.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ExtensibleObject": {
       "type": "object",
       "description": "An extensible object that allows additional properties.",
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "ExtensiveModel": {
       "type": "object",
@@ -1933,6 +1903,7 @@
           "description": "The schema identifier."
         },
         "entitySchema": {
+          "type": "string",
           "description": "The entity schema."
         }
       }
@@ -1994,7 +1965,9 @@
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "IndexEntity": {
       "type": "object",
@@ -2075,7 +2048,9 @@
           "description": "The creation context."
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "InnerErrorDetails": {
       "type": "object",
@@ -2490,6 +2465,43 @@
         "modelFormat"
       ]
     },
+    "ModelErrorResponse": {
+      "type": "object",
+      "description": "Error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of inner error details.",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDetails"
+          }
+        },
+        "correlation": {
+          "type": "object",
+          "description": "Correlation information for the error.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ModelFormatEnum": {
       "type": "string",
       "description": "Model format enumeration.",
@@ -2780,6 +2792,7 @@
       "description": "A JSON Patch operation.",
       "properties": {
         "value": {
+          "type": "string",
           "description": "The value to apply."
         },
         "path": {
@@ -2850,7 +2863,9 @@
           "readOnly": true
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "ServiceResponseBase": {
       "type": "object",
@@ -2908,7 +2923,7 @@
           "description": "The time the service was last updated."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/ModelErrorResponse",
           "description": "Error information if the service encountered an error."
         },
         "computeType": {

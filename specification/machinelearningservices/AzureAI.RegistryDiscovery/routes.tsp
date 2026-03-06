@@ -29,7 +29,7 @@ interface RegistryManagementNonWorkspace {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/registrymanagement/v1.0/registries/{registryName}/discovery")
   @get
-  registryManagementNonWorkspace is Azure.Core.Foundations.Operation<
+  getRegistryManagementNonWorkspace is Azure.Core.Foundations.Operation<
     {
       /** The registry name. */
       @path registryName: string;
