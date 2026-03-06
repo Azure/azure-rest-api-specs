@@ -1352,6 +1352,10 @@
         "properties": {
           "$ref": "#/definitions/FileShareProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the file share."
         }
       },
       "allOf": [
@@ -1908,6 +1912,10 @@
       "type": "object",
       "description": "The type used for update operations of the FileShare.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the file share."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
