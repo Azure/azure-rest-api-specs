@@ -281,6 +281,16 @@ model AgentEndpoint {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentIdentity {
+  @doc("The details of the identity")
+  details: IdentityDetails;
+}
+
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+)
+model IdentityDetails {
   @doc("The principal ID of the agent")
   principal_id: string;
 
