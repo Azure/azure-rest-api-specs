@@ -784,6 +784,12 @@ model JobDefinitionProperties {
    */
   @added(Versions.v2025_08_01)
   dataIntegrityValidation?: DataIntegrityValidation = DataIntegrityValidation.None;
+
+  /**
+   * Boolean to preserve permissions or not.
+   */
+  @added(Versions.v2025_12_01)
+  preservePermissions?: boolean = true;
 }
 
 /**
