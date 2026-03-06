@@ -31,8 +31,6 @@ interface GetTenantPolicyResponses {
   /**
    * Get the subscription tenant policy for the user's tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubscriptionPolicy_GetPolicyForTenant")
   getPolicyForTenant is ArmResourceRead<
     GetTenantPolicyResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -41,9 +39,7 @@ interface GetTenantPolicyResponses {
   /**
    * Create or Update Subscription tenant policy for user's tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("SubscriptionPolicy_AddUpdatePolicyForTenant")
   addUpdatePolicyForTenant is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GetTenantPolicyResponse,
     Request = PutTenantPolicyRequestProperties,
@@ -54,8 +50,6 @@ interface GetTenantPolicyResponses {
   /**
    * Get the subscription tenant policy for the user's tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubscriptionPolicy_ListPolicyForTenant")
   listPolicyForTenant is ArmResourceListByParent<
     GetTenantPolicyResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

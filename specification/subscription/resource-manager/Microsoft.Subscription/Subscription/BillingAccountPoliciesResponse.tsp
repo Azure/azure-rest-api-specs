@@ -36,8 +36,6 @@ interface BillingAccountPoliciesResponses {
   /**
    * Get Billing Account Policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingAccount_GetPolicy")
   getPolicy is Extension.Read<
     billingAccountExternalResource,
     BillingAccountPoliciesResponse

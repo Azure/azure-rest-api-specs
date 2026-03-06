@@ -30,8 +30,6 @@ interface TargetDirectoryResults {
   /**
    * The operation to view Initiator Subscription Changed Request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscriptions_GetTargetDirectory")
   getTargetDirectory is ArmResourceRead<
     TargetDirectoryResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -40,9 +38,7 @@ interface TargetDirectoryResults {
   /**
    * The operation to initiate Subscription Changed Request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Subscriptions_PutTargetDirectory")
   putTargetDirectory is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TargetDirectoryResult,
     Request = TargetDirectoryRequest,
@@ -53,9 +49,7 @@ interface TargetDirectoryResults {
   /**
    * The operation to delete Initiator Subscription Changed Request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Subscriptions_DeleteTargetDirectory")
   deleteTargetDirectory is ArmResourceDeleteSync<
     TargetDirectoryResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -65,8 +59,6 @@ interface TargetDirectoryResults {
   /**
    * The operation to list Initiator Subscription Changed Request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscriptions_ListTargetDirectory")
   listTargetDirectory is ArmResourceListByParent<
     TargetDirectoryResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

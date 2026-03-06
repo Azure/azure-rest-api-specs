@@ -18,8 +18,6 @@ interface SubscriptionOperationGroup {
   /**
    * The operation to cancel a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Cancel")
   @autoRoute
   cancel is ArmProviderActionSync<
     Response = CanceledSubscriptionId,
@@ -28,8 +26,6 @@ interface SubscriptionOperationGroup {
   /**
    * The operation to rename a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Rename")
   @autoRoute
   rename is ArmProviderActionSync<
     Request = SubscriptionName,
@@ -39,8 +35,6 @@ interface SubscriptionOperationGroup {
   /**
    * The operation to enable a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Enable")
   @autoRoute
   enable is ArmProviderActionSync<
     Response = EnabledSubscriptionId,
@@ -49,8 +43,6 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_AcceptOwnership")
   @autoRoute
   acceptOwnership is ArmProviderActionAsync<
     Request = AcceptOwnershipRequest,
@@ -62,8 +54,6 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_AcceptOwnershipStatus")
   @autoRoute
   @get
   acceptOwnershipStatus is ArmProviderActionSync<
@@ -79,8 +69,6 @@ interface SubscriptionOperationOperationGroup {
   /**
    * Get the status of the pending Microsoft.Subscription API operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SubscriptionOperation_Get")
   @route("/providers/Microsoft.Subscription/subscriptionOperations/{operationId}")
   @get
   get(
@@ -100,8 +88,6 @@ interface SubscriptionsOperationGroup {
   /**
    * The operation to accept Subscription Changed Request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscriptions_AcceptTargetDirectory")
   @autoRoute
   @action("acceptChangeTenant")
   acceptTargetDirectory is ArmProviderActionSync<Parameters = {
@@ -110,8 +96,6 @@ interface SubscriptionsOperationGroup {
   /**
    * The operation for Acceptor to view the accepted request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscriptions_TargetDirectoryStatus")
   @autoRoute
   @action("changeTenantStatus")
   targetDirectoryStatus is ArmProviderActionSync<
