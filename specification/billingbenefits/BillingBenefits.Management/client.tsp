@@ -36,3 +36,13 @@ using Microsoft.BillingBenefits;
   "ServiceManagedIdentityType",
   "python"
 );
+
+// csharp
+@@clientName(DiscountsOperationGroup.scopeList,
+  "GetApplicableDiscounts",
+  "csharp"
+);
+@@clientName(ConditionalCreditsOperationGroup.scopeList,
+  "GetApplicableConditionalCredits",
+  "csharp"
+);
