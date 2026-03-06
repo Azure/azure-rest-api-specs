@@ -13,37 +13,20 @@ namespace Microsoft.ServiceFabric;
 /**
  * The application type name resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(Cluster)
-model ApplicationTypeResource
-  is Azure.ResourceManager.ProxyResource<ApplicationTypeResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = ApplicationTypeResource,
-    KeyName = "applicationTypeName",
-    SegmentName = "applicationTypes",
-    NamePattern = ""
-  >;
+model ApplicationTypeResource extends ProxyResource {
+  properties?: ApplicationTypeResourceProperties;
 
-  /**
-   * It will be deprecated in New API, resource location depends on the parent resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Azure resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  tags?: Record<string>;
-
-  /**
-   * Azure resource etag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
   @visibility(Lifecycle.Read)
-  etag?: string;
+  @path
+  @key("applicationTypeName")
+  @segment("applicationTypes")
+  name: string;
 }
 
 @armResourceOperations(#{ omitTags: true })
