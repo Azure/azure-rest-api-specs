@@ -42,15 +42,15 @@ interface Jobs {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<CommandJob>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO delete pattern required by the Job API"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is handled server-side; clients poll Operation-Location header"
   @doc("Delete a Job by id.")
-  delete is JobOperations.LongRunningResourceDelete<CommandJob>;
+  delete is JobOperations.ResourceDelete<CommandJob>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO cancel action required by the Job API"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is handled server-side; clients poll Operation-Location header"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
   @doc("Cancel a Job by id.")
   @post
-  @Rest.action("cancel")
-  cancel is JobOperations.LongRunningResourceAction<CommandJob, {}, {}>;
+  cancel is JobOperations.ResourceAction<
+    CommandJob,
+    {},
+    Http.NoContentResponse
+  >;
 }
