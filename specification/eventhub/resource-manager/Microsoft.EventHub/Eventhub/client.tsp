@@ -4,12 +4,24 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
+// Mark list operations as pageable for C# backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Clusters.listNamespaces,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ClustersOperationGroup.listAvailableClusterRegion,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EHNamespaces.privateLinkResourcesGet,
+  "csharp"
+);
+
 @@clientName(Microsoft.EventHub,
   "EventHubManagementClient",
   "python,javascript"
 );
-
-// Fix TLS version naming changes for Go SDK backward compatibility
 @@clientName(TlsVersion.`1.0`, "One0", "go");
 @@clientName(TlsVersion.`1.1`, "One1", "go");
 @@clientName(TlsVersion.`1.2`, "One2", "go");
@@ -21,14 +33,60 @@ using Microsoft.EventHub;
   "go"
 );
 
-// C# SDK rename mappings
+// csharp configuration
+@@clientName(Microsoft.EventHub.EventHubs,
+  "EventHubAuthorizationRule",
+  "csharp"
+);
+@@clientName(AuthorizationRules,
+  "EventHubsNamespaceAuthorizationRule",
+  "csharp"
+);
+@@clientName(DisasterRecoveryConfigs,
+  "EventHubsDisasterRecoveryAuthorizationRule",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "EventHubsPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(Clusters.configurationGet, "GetConfiguration", "csharp");
+@@clientName(EHNamespaces.privateLinkResourcesGet,
+  "GetPrivateLinkResources",
+  "csharp"
+);
+@@clientName(NetworkRuleSets.getNetworkRuleSet, "GetNetworkRuleSet", "csharp");
+@@clientName(NetworkRuleSets.listNetworkRuleSet,
+  "ListNetworkRuleSets",
+  "csharp"
+);
+@@clientName(EHNamespaces.failover, "FailOver", "csharp");
+@@clientName(EHNamespaces.checkNameAvailability,
+  "CheckEventHubsDisasterRecoveryNameAvailability",
+  "csharp"
+);
+@@clientName(NamespacesOperationGroup.checkNameAvailability,
+  "CheckEventHubsNamespaceNameAvailability",
+  "csharp"
+);
+@@clientName(ClustersOperationGroup.listAvailableClusterRegion,
+  "GetAvailableClusterRegionClusters",
+  "csharp"
+);
+@@clientName(Clusters.patch, "PatchConfiguration", "csharp");
+@@clientName(CaptureIdentity.type, "IdentityType", "csharp");
+@@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(Encryption.keySource, "KeySource", "csharp");
 @@clientName(SchemaType, "EventHubsSchemaType", "csharp");
 @@clientName(SchemaCompatibility, "EventHubsSchemaCompatibility", "csharp");
 @@clientName(ClusterProperties.createdAt, "CreatedOn", "csharp");
 @@alternateType(ClusterProperties.createdAt, utcDateTime, "csharp");
 @@clientName(ClusterProperties.updatedAt, "UpdatedOn", "csharp");
 @@alternateType(ClusterProperties.updatedAt, utcDateTime, "csharp");
-@@clientName(EHNamespace, "EventHubsNamespace", "csharp");
 @@alternateType(EHNamespaceProperties.clusterArmId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -67,10 +125,6 @@ using Microsoft.EventHub;
   "EventHubsApplicationGroupPolicy",
   "csharp"
 );
-// @@clientName(ApplicationGroupListResult,
-//   "EventHubsApplicationGroupListResult",
-//   "csharp"
-// );
 @@clientName(RegenerateAccessKeyParameters,
   "EventHubsRegenerateAccessKeyContent",
   "csharp"
@@ -88,7 +142,6 @@ using Microsoft.EventHub;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(EntityStatus, "EventHubEntityStatus", "csharp");
 @@clientName(CheckNameAvailabilityParameter,
   "EventHubsNameAvailabilityContent",
   "csharp"
@@ -114,3 +167,217 @@ using Microsoft.EventHub;
   "EventHubsNamespaceReplicaLocation",
   "csharp"
 );
+@@clientName(ErrorDetail, "EventHubsErrorDetail", "csharp");
+@@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "csharp");
+@@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
+@@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
+@@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
+@@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
+@@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
+@@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
+@@clientName(PublicNetworkAccess, "EventHubsPublicNetworkAccess", "csharp");
+@@clientName(ProvisioningIssueProperties,
+  "EventHubsProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(ProvisioningIssue, "EventHubsProvisioningIssue", "csharp");
+@@usage(ProvisioningIssue, Usage.input, "csharp");
+@@clientName(MetricId, "EventHubsMetricId", "csharp");
+@@clientName(NetworkSecurityPerimeter,
+  "EventHubsNetworkSecurityPerimeter",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfiguration,
+  "EventHubsNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfigurationPropertiesProfile,
+  "EventHubsNetworkSecurityPerimeterConfigurationPropertiesProfile",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation,
+  "EventHubsNetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfigurationProvisioningState,
+  "EventHubsNetworkSecurityPerimeterConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(NspAccessRule, "EventHubsNspAccessRule", "csharp");
+@@clientName(NspAccessRuleDirection,
+  "EventHubsNspAccessRuleDirection",
+  "csharp"
+);
+@@clientName(NspAccessRuleProperties,
+  "EventHubsNspAccessRuleProperties",
+  "csharp"
+);
+@@clientName(ResourceAssociationAccessMode,
+  "EventHubsResourceAssociationAccessMode",
+  "csharp"
+);
+@@clientName(ClusterSku, "EventHubsClusterSku", "csharp");
+@@clientName(ClusterSkuName, "EventHubsClusterSkuName", "csharp");
+@@clientName(NetworkRuleSet, "EventHubsNetworkRuleSet", "csharp");
+@@clientName(Encryption, "EventHubsEncryption", "csharp");
+@@clientName(KeyVaultProperties, "EventHubsKeyVaultProperties", "csharp");
+@@clientName(CaptureIdentity, "EventHubsCaptureIdentity", "csharp");
+@@clientName(CaptureIdentityType, "EventHubsCaptureIdentityType", "csharp");
+@@clientName(ThrottlingPolicy, "EventHubsThrottlingPolicy", "csharp");
+@@clientName(ApplicationGroup, "EventHubsApplicationGroup", "csharp");
+@@clientName(AuthorizationRule, "EventHubsAuthorizationRule", "csharp");
+@@clientName(AccessKeys, "EventHubsAccessKeys", "csharp");
+@@clientName(AccessRights, "EventHubsAccessRight", "csharp");
+@@clientName(ConsumerGroup, "EventHubsConsumerGroup", "csharp");
+@@clientName(SchemaGroup, "EventHubsSchemaGroup", "csharp");
+@@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
+@@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
+@@usage(FailOver, Usage.input | Usage.output, "csharp");
+@@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(Eventhub.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ConsumerGroup.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ApplicationGroup.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(SchemaGroup.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(NetworkRuleSet.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(PrivateEndpointConnection.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(NetworkSecurityPerimeterConfiguration.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(AvailableCluster.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(NamespaceReplicaLocation.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ArmDisasterRecovery.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(EHNamespace.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
+@@alternateType(DestinationProperties.dataLakeSubscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(SchemaGroupProperties.eTag, Azure.Core.eTag, "csharp");
+@@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
+@@clientName(NamespaceReplicaLocation.locationName,
+  "PrimaryLocation",
+  "csharp"
+);
+@@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
+@@clientName(NspAccessRulePropertiesSubscriptionsItem,
+  "EventHubsNspAccessRulePropertiesSubscriptionsItem",
+  "csharp"
+);
+@@clientName(NspAccessRulePropertiesSubscriptionsItem.id,
+  "SubscriptionId",
+  "csharp"
+);
+@@alternateType(NspAccessRulePropertiesSubscriptionsItem.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Subnet.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Cluster, EventHubsCluster, "csharp");
+@@alternateType(EHNamespace, EventHubsNamespace, "csharp");
+@@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
+
+// added to solve the problem that the c# resource class can inherit the `trackedResource data` class
+namespace Microsoft.EventHub {
+  /**
+   * Single Event Hubs Cluster resource in List or Get operations.
+   */
+  model EventHubsCluster
+    is Azure.ResourceManager.TrackedResource<ClusterProperties> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = Cluster,
+      KeyName = "clusterName",
+      SegmentName = "clusters",
+      NamePattern = ""
+    >;
+    ...OmitProperties<
+      Cluster,
+      "id" | "name" | "type" | "properties" | "sku" | "location"
+    >;
+  }
+
+  /**
+   * Single Namespace item in List or Get Operation
+   */
+  model EventHubsNamespace
+    is Azure.ResourceManager.TrackedResource<EHNamespaceProperties> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = EHNamespace,
+      KeyName = "namespaceName",
+      SegmentName = "namespaces",
+      NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
+    >;
+    ...OmitProperties<
+      Cluster,
+      "id" | "name" | "type" | "properties" | "sku" | "location" | "identity"
+    >;
+  }
+
+  /**
+   * Enumerates the possible values for the status of the Event Hub.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  enum EventHubEntityStatus {
+    /**
+     * Unknown
+     */
+    Unknown,
+
+    /**
+     * Active
+     */
+    Active,
+
+    /**
+     * Disabled
+     */
+    Disabled,
+
+    /**
+     * Restoring
+     */
+    Restoring,
+
+    /**
+     * SendDisabled
+     */
+    SendDisabled,
+
+    /**
+     * ReceiveDisabled
+     */
+    ReceiveDisabled,
+
+    /**
+     * Creating
+     */
+    Creating,
+
+    /**
+     * Deleting
+     */
+    Deleting,
+
+    /**
+     * Renaming
+     */
+    Renaming,
+  }
+}
