@@ -485,7 +485,7 @@ using Http;
 
 @@clientName(Microsoft.RecoveryServices,
   "RecoveryServicesBackupClient",
-  "javascript"
+  "javascript,python"
 );
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
