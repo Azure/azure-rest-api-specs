@@ -60,6 +60,25 @@ op listCollections is ConfidentialLedgerCommon.LedgerOperation<
 >;
 
 /**
+ * Retrieves the tags associated with a collection.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+@summary("Gets a list of tags for a collection.")
+@route("/app/collections/tags")
+@list
+op listTags is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /**
+     * The collection id.
+     */
+    @query("collectionId")
+    collectionId?: string;
+  },
+  PagedTags
+>;
+
+/**
  * A collection id may optionally be specified. Only entries in the specified (or
  * default) collection will be returned.
  */

@@ -250,6 +250,23 @@ model PagedCollections {
 }
 
 /**
+ * Paginated tags returned in response to a query.
+ */
+model PagedTags {
+  /**
+   * Array of tags.
+   */
+  @pageItems
+  tags: string[];
+
+  /**
+   * Path from which to retrieve the next page of results.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * Identifier for collections.
  */
 model Collection {
