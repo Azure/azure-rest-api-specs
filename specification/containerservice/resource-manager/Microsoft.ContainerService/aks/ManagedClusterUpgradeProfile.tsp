@@ -54,7 +54,7 @@ interface ManagedClusterUpgradeProfiles {
 /**
  * Control plane and agent pool upgrade profiles.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
 model ManagedClusterUpgradeProfileProperties {
   /**
    * The list of available upgrade versions for the control plane.

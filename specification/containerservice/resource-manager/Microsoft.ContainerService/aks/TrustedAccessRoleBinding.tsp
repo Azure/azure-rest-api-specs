@@ -55,17 +55,17 @@ interface TrustedAccessRoleBindings {
    * Create or update a trusted access role binding
    */
   @tag("TrustedAccess")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    TrustedAccessRoleBinding,
-    LroHeaders = ArmLroLocationHeader<FinalResult = TrustedAccessRoleBinding> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TrustedAccessRoleBinding>;
 
   /**
    * Delete a trusted access role binding.
    */
   @tag("TrustedAccess")
-  delete is ArmResourceDeleteWithoutOkAsync<TrustedAccessRoleBinding>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    TrustedAccessRoleBinding,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * List trusted access role bindings.
@@ -181,7 +181,7 @@ model TrustedAccessRoleRule {
   /**
    * List of allowed nonResourceURLs
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   nonResourceURLs?: string[];
 }

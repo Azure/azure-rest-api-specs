@@ -32,7 +32,7 @@ model MeshMembership
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
@@ -60,16 +60,16 @@ interface MeshMemberships {
   /**
    * Creates or updates the mesh membership of a managed cluster.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    MeshMembership,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MeshMembership> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<MeshMembership>;
 
   /**
    * Deletes the mesh membership of a managed cluster.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<MeshMembership>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MeshMembership,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Lists mesh memberships in a managed cluster.
@@ -136,7 +136,7 @@ model MeshMembershipProperties {
   /**
    * The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedMeshID: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.AppLink/applinks";

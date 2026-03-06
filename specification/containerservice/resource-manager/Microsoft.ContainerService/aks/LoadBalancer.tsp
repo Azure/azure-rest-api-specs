@@ -56,7 +56,7 @@ interface LoadBalancers {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     LoadBalancer,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -129,7 +129,7 @@ model LoadBalancerProperties {
   /**
    * The current provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -159,7 +159,7 @@ model LabelSelectorRequirement {
   /**
    * key is the label key that the selector applies to.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The 'key' property refers to a Kubernetes label selector key, not a secret or credential."
   key?: string;
 
   /**

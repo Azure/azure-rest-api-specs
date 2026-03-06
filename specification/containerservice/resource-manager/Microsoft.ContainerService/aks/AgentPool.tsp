@@ -48,9 +48,7 @@ interface AgentPools {
        */
       @header
       ifNoneMatch?: string;
-    },
-    LroHeaders = ArmLroLocationHeader<FinalResult = AgentPool> &
-      Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**
@@ -58,11 +56,13 @@ interface AgentPools {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AgentPool,
+    LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /**
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
 
@@ -82,7 +82,7 @@ interface AgentPools {
   /**
    * Aborts the currently running operation on the agent pool. The Agent Pool will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancellation can take place, a 409 error code is returned.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @action("abort")
   @summary("Aborts last operation running on agent pool.")
   abortLatestOperation is ArmResourceActionAsync<
@@ -112,21 +112,21 @@ interface AgentPools {
   deleteMachines is ArmResourceActionAsyncBase<
     AgentPool,
     AgentPoolDeleteMachinesParameter,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeaderWithLocation &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AgentPool>
   >;
 
   /**
    * Upgrading the node image version of an agent pool applies the newest OS and runtime updates to the nodes. AKS provides one new image per week with the latest updates. For more details on node image versions, see: https://docs.microsoft.com/azure/aks/node-image-upgrade
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Upgrades the node image version of an agent pool to the latest.")
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
     {
       ...AcceptedResponse;
-      ...ArmAsyncOperationHeader<FinalResult = void>;
+      ...ArmCombinedLroHeaders<FinalResult = void>;
       ...Azure.Core.Foundations.RetryAfterHeader;
 
       @body

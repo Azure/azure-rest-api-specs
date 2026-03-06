@@ -128,7 +128,7 @@ union Type {
 /**
  * Properties used to configure planned maintenance for a Managed Cluster.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
 model MaintenanceConfigurationProperties {
   /**
    * Time slots during the week when planned maintenance is allowed to proceed. If two array entries specify the same day of the week, the applied configuration is the union of times in both entries.
@@ -177,13 +177,11 @@ model TimeSpan {
   /**
    * The start of a time span
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   start?: utcDateTime;
 
   /**
    * The end of a time span
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   end?: utcDateTime;
 }
 

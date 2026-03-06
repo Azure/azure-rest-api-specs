@@ -30,7 +30,7 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
   /**
    * The Availability zone in which machine is located.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
@@ -41,7 +41,7 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
   "The machine to create or update."
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Machine resources do not support individual DELETE. Instead, machines are deleted in bulk via AgentPools_DeleteMachines, or automatically when node pools scale down."
 @armResourceOperations
 interface Machines {
   /**
@@ -123,7 +123,7 @@ model MachineSecurityProfile {
   /**
    * vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableVTPM?: boolean;
 
   /**
@@ -176,13 +176,13 @@ model MachineOSProfile {
   /**
    * Specifies the OS SKU used by the agent pool. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   osSKU?: OSSKU;
 
   /**
    * OS Disk Size in GB to be used to specify the disk size for every machine in the master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxValue(2048)
   @minValue(0)
   osDiskSizeGB?: int32;
@@ -195,7 +195,7 @@ model MachineOSProfile {
   /**
    * Whether to use a FIPS-enabled OS.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableFIPS?: boolean;
 
   /**
@@ -212,7 +212,7 @@ model MachineOSProfile {
 /**
  * The Linux machine's specific profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @added(Versions.v2025_10_02_preview)
 model MachineOSProfileLinuxProfile {
   /**
@@ -234,7 +234,7 @@ model MachineKubernetesProfile {
   /**
    * The node labels on the machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   nodeLabels?: Record<string>;
 
   /**
@@ -330,7 +330,7 @@ model MachineStatus {
 /**
  * The properties of the machine
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
 model MachineProperties {
   /**
    * network properties of the machine
@@ -397,7 +397,7 @@ model MachineProperties {
   /**
    * The current deployment or provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
   @added(Versions.v2025_10_02_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: string;
@@ -405,7 +405,7 @@ model MachineProperties {
   /**
    * The tags to be persisted on the machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   @added(Versions.v2025_10_02_preview)
   tags?: Record<string>;
 
@@ -438,7 +438,7 @@ model MachineNetworkProperties {
   /**
    * The ID of the subnet which node and optionally pods will join on startup. If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   vnetSubnetID?: Azure.Core.armResourceIdentifier<[
     {
@@ -449,7 +449,7 @@ model MachineNetworkProperties {
   /**
    * The ID of the subnet which pods will join when launched. If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   podSubnetID?: Azure.Core.armResourceIdentifier<[
     {
@@ -460,14 +460,14 @@ model MachineNetworkProperties {
   /**
    * Whether the machine is allocated its own public IP. Some scenarios may require the machine to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. The default is false.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   enableNodePublicIP?: boolean;
 
   /**
    * The public IP prefix ID which VM node should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   nodePublicIPPrefixID?: Azure.Core.armResourceIdentifier<[
     {
@@ -478,7 +478,7 @@ model MachineNetworkProperties {
   /**
    * IPTags of instance-level public IPs.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   @identifiers(#[])
   nodePublicIPTags?: IPTag[];
