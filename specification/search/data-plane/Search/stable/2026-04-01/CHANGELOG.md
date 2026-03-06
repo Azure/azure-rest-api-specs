@@ -1,3 +1,16 @@
+## Table of Contents
+
+- [2025-09-01 vs 2026-04-01](#2025-09-01-vs-2026-04-01)
+  - [Spec file consolidation](#spec-file-consolidation)
+  - [Breaking changes](#breaking-changes)
+  - [Non-breaking changes](#non-breaking-changes)
+  - [TypeSpec migration artifacts](#typespec-migration-artifacts)
+- [2025-11-01-preview vs 2026-04-01](#2025-11-01-preview-vs-2026-04-01)
+  - [Breaking changes](#breaking-changes-1)
+  - [Non-breaking changes](#non-breaking-changes-1)
+
+---
+
 # 2025-09-01 vs 2026-04-01
 
 > The 2025-09-01 release consisted of two separate Swagger files (`searchservice.json` and
@@ -8,25 +21,6 @@
 | Previous (2025-09-01) | Current (2026-04-01) |
 |---|---|
 | `searchservice.json` + `searchindex.json` (two files, two clients) | `search.json` (single unified file, single client) |
-
-The two separate Swagger files are merged into one. The index-document operations (search, suggest,
-autocomplete, count, get, index) move from the base path of the index client
-(`{endpoint}/indexes/{indexName}`) into a single unified path hierarchy:
-
-| Previous path (searchindex.json) | New path (search.json) |
-|---|---|
-| `GET /docs` | `GET /indexes('{indexName}')/docs` |
-| `GET /docs('{key}')` | `GET /indexes('{indexName}')/docs('{key}')` |
-| `GET /docs/$count` | `GET /indexes('{indexName}')/docs/$count` |
-| `GET /docs/search.autocomplete` | `GET /indexes('{indexName}')/docs/search.autocomplete` |
-| `POST /docs/search.post.autocomplete` | `POST /indexes('{indexName}')/docs/search.post.autocomplete` |
-| `GET /docs/search.suggest` | `GET /indexes('{indexName}')/docs/search.suggest` |
-| `POST /docs/search.post.suggest` | `POST /indexes('{indexName}')/docs/search.post.suggest` |
-| `POST /docs/search.post.search` | `POST /indexes('{indexName}')/docs/search.post.search` |
-| `POST /docs/search.index` | `POST /indexes('{indexName}')/docs/search.index` |
-
-The REST wire paths themselves are equivalent; the index name previously appeared in the parameterised
-host (`{endpoint}/indexes/{indexName}`) while it is now a regular OData path parameter.
 
 ---
 
@@ -58,10 +52,9 @@ contract.
 
 ### Non-Breaking Changes
 
-#### New operations — Aliases
+#### New operations
 
-Full CRUD support for the `SearchAlias` resource, enabling an index to be accessed via multiple
-logical names:
+Full CRUD support is added for three new resource types (Aliases, KnowledgeBases, KnowledgeSources). `Indexes_GetStatistics` is also new (on the existing Indexes resource).
 
 | Operation | Method + Path |
 |---|---|
@@ -70,49 +63,31 @@ logical names:
 | `Aliases_Delete` | `DELETE /aliases('{aliasName}')` |
 | `Aliases_Get` | `GET /aliases('{aliasName}')` |
 | `Aliases_List` | `GET /aliases` |
-
-#### New operations — KnowledgeBases
-
-New `KnowledgeBase` resource type and retrieval endpoint (AI-powered knowledge base with agentic
-retrieval):
-
-| Operation | Method + Path |
-|---|---|
 | `KnowledgeBases_Create` | `POST /knowledgebases` |
 | `KnowledgeBases_CreateOrUpdate` | `PUT /knowledgebases('{knowledgeBaseName}')` |
 | `KnowledgeBases_Delete` | `DELETE /knowledgebases('{knowledgeBaseName}')` |
 | `KnowledgeBases_Get` | `GET /knowledgebases('{knowledgeBaseName}')` |
 | `KnowledgeBases_List` | `GET /knowledgebases` |
 | `KnowledgeRetrieval_Retrieve` | `POST /knowledgebases('{knowledgeBaseName}')/retrieve` |
-
-#### New operations — KnowledgeSources
-
-New `KnowledgeSource` resource type supporting Azure Blob, Azure One Lake, SharePoint, web, and
-search-index data sources:
-
-| Operation | Method + Path |
-|---|---|
 | `KnowledgeSources_Create` | `POST /knowledgesources` |
 | `KnowledgeSources_CreateOrUpdate` | `PUT /knowledgesources('{sourceName}')` |
 | `KnowledgeSources_Delete` | `DELETE /knowledgesources('{sourceName}')` |
 | `KnowledgeSources_Get` | `GET /knowledgesources('{sourceName}')` |
 | `KnowledgeSources_GetStatus` | `GET /knowledgesources('{sourceName}')/status` |
 | `KnowledgeSources_List` | `GET /knowledgesources` |
+| `Indexes_GetStatistics` | `GET /indexes('{indexName}')/search.stats` |
 
-#### New skills
+Aliases enable an index to be accessed via multiple logical names. KnowledgeBases and KnowledgeSources support AI-powered knowledge retrieval backed by search-index, Azure Blob, Azure One Lake, and web data sources.
 
-| Skill type (`@odata.type`) | Description |
-|---|---|
-| `AzureMachineLearningSkill` (`#Microsoft.Skills.Custom.AmlSkill`) | Calls a custom Azure ML endpoint |
-| `ChatCompletionSkill` (`#Microsoft.Skills.Custom.ChatCompletionSkill`) | Calls a chat-completion model |
-| `ContentUnderstandingSkill` (`#Microsoft.Skills.Util.ContentUnderstandingSkill`) | Azure AI Content Understanding enrichment |
-| `VisionVectorizeSkill` (`#Microsoft.Skills.Vision.VectorizeSkill`) | Image vectorization via AI Vision |
+#### New skills and vectorizers
 
-#### New vectorizers
-
-| Vectorizer | Description |
-|---|---|
-| `AIServicesVisionVectorizer` | Vectorizes text/image using Azure AI Vision |
+| Type | `@odata.type` / name | Description |
+|---|---|---|
+| Skill | `AzureMachineLearningSkill` (`#Microsoft.Skills.Custom.AmlSkill`) | Calls a custom Azure ML endpoint |
+| Skill | `ChatCompletionSkill` (`#Microsoft.Skills.Custom.ChatCompletionSkill`) | Calls a chat-completion model |
+| Skill | `ContentUnderstandingSkill` (`#Microsoft.Skills.Util.ContentUnderstandingSkill`) | Azure AI Content Understanding enrichment |
+| Skill | `VisionVectorizeSkill` (`#Microsoft.Skills.Vision.VectorizeSkill`) | Image vectorization via AI Vision |
+| Vectorizer | `AIServicesVisionVectorizer` | Vectorizes text/image using Azure AI Vision |
 
 #### New optional fields on existing models
 
@@ -132,29 +107,13 @@ search-index data sources:
 | `SplitSkill` | `unit`, `azureOpenAITokenizerParameters` | Token-aware splitting |
 | `VectorQuery` | `filterOverride`, `perDocumentVectorLimit`, `threshold` | Fine-grained vector query controls |
 
-#### `SearchResourceEncryptionKey.keyVaultKeyVersion` made optional
+#### Other additions
 
-Previously required; now optional (supports auto-rotation of key vault keys).
-
-#### `BlobIndexerParsingMode` — new `markdown` value
-
-The `markdown` parsing mode is added to `BlobIndexerParsingMode` (formerly `ParsingMode`), enabling
-direct Markdown ingestion without a separate skill.
-
-#### Security definitions added
-
-`ApiKeyAuth` (API key in `api-key` header) and `OAuth2Auth` (OAuth2 implicit flow against
-`https://search.azure.com/.default`) are now formally declared in `securityDefinitions` and applied
-to all operations. This documents existing service authentication without changing client behaviour.
-
-#### `SearchIndexerDataUserAssignedIdentity` — `federatedIdentityClientId` added
-
-New optional property to support workload identity federation scenarios.
-
-#### New `indexes?_overload=listWithSelectedProperties` operation
-
-`Indexes_ListWithSelectedProperties` (`GET /indexes`) is exposed via `x-ms-paths` overload to
-return a lightweight index summary including only name, ETag, and selected statistics fields.
+- **`SearchResourceEncryptionKey.keyVaultKeyVersion` made optional** — supports auto-rotation of key vault keys.
+- **`BlobIndexerParsingMode` — new `markdown` value** — enables direct Markdown ingestion without a separate skill.
+- **Security definitions added** — `ApiKeyAuth` (API key in `api-key` header) and `OAuth2Auth` (OAuth2 implicit flow against `https://search.azure.com/.default`) are formally declared in `securityDefinitions`; documents existing authentication without changing client behaviour.
+- **`SearchIndexerDataUserAssignedIdentity.federatedIdentityClientId` added** — new optional property for workload identity federation.
+- **`Indexes_ListWithSelectedProperties` operation** — `GET /indexes` via `x-ms-paths` overload returns a lightweight index summary (name, ETag, selected statistics fields only).
 
 ---
 
@@ -245,6 +204,32 @@ values are unchanged; the `RegexFlags` standalone definition is retained.
 ### 7. `PhoneticTokenFilter.encoder` and `StopwordsTokenFilter.stopwordsList` inlined
 
 Same pattern: `$ref` to named enum replaced with inline string. Wire values are unchanged.
+
+### 8. URL path consolidation (equivalent routing)
+
+Index-document operations and the knowledge-base retrieval endpoint moved from parameterized host
+templates to explicit path prefixes. The REST wire paths are **wire-identical** — no caller changes
+are required. This is a Swagger structural change only, driven by TypeSpec's single-host model.
+
+### 9. `$select` query parameter type changed (`string` → `array[string]`)
+
+For list operations on `/datasources`, `/indexers`, `/skillsets`, and `/synonymmaps`, the `$select`
+query parameter type changes from `string` to `array` (items: `string`, `collectionFormat: csv`).
+The wire format — a comma-separated list — is **unchanged**; only the SDK-generated parameter type
+changes from `string` to `string[]`.
+
+### 10. `POST /datasources` body parameter name changed
+
+The request-body parameter for `POST /datasources` is renamed from `dataSource` to
+`dataSourceConnection`. The underlying JSON schema (`SearchIndexerDataSource`) is **identical** — only
+the Swagger parameter `name` field differs. This may affect generated SDK method signatures but has
+no effect on the HTTP wire format.
+
+### 11. `Accept` header added as required parameter
+
+Every operation gains an explicit `Accept: application/json;odata.metadata=minimal` required header
+parameter. The 2025-09-01 Swagger had no explicit `Accept` parameter; the service already required
+and returned this content type. This is a **documentation-level change** — no wire behaviour change.
 
 ---
 
