@@ -76,3 +76,13 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+@@clientName(Azure.Communication.MessagesService.CommunicationMessageKind,
+  "MessageKind",
+  "python"
+);
+
+@@clientName(Azure.Communication.MessagesService.MessageDataStream.id,
+  "mediaId",
+  "python"
+);
