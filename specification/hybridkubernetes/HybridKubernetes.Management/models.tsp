@@ -252,14 +252,6 @@ model ConnectedClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
-   * Timestamp representing the last inbound connectivity health check.
-   */
-  @added(Versions.v2026_02_01_preview)
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastInboundConnectivityTime?: utcDateTime;
-
-  /**
    * Represents the health status inbound connectivity (relay connection and Kubernetes API).
    */
   @added(Versions.v2026_02_01_preview)
