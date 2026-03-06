@@ -64,31 +64,7 @@ namespace Microsoft.Compute;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
-@@clientName(ExecuteDeleteRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
-@@clientName(ExecuteCreateRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
-@@clientName(ExecuteDeallocateRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
-@@clientName(ExecuteHibernateRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
-@@clientName(ExecuteStartRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
-@@clientName(GetOperationStatusRequest.correlationid,
-  "correlationId",
-  "csharp,javascript,java,python"
-);
 @@clientName(OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript,java,python"

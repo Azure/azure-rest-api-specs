@@ -374,9 +374,6 @@ model ExecuteDeallocateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -386,9 +383,6 @@ model ExecuteHibernateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -398,9 +392,6 @@ model ExecuteStartRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -410,9 +401,6 @@ model ExecuteCreateRequest {
 
   @doc("The execution parameters for the request")
   executionParameters: ExecutionParameters;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
 }
 
 @doc("The response from a create request")
@@ -457,9 +445,6 @@ model ExecuteDeleteRequest {
   @doc("The resources for the request")
   resources: Resources;
 
-  @doc("CorrelationId item")
-  correlationid?: string;
-
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
 }
@@ -469,9 +454,6 @@ model ExecuteDeleteRequest {
 model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("This is the response from a get operations status request")
@@ -486,9 +468,6 @@ model GetOperationStatusResponse {
 model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
   operationIds: Array<string>;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("This is the response from a cancel operations request")
