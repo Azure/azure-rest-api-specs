@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2025-12-01-preview` is specified o
 input-file:
   - stable/2015-07-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
