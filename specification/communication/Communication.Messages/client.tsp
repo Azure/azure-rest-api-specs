@@ -76,3 +76,25 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+// Python-specific customizations
+
+// Rename 'id' parameter to 'media_id' (camelCase: 'mediaId') in download_media / getMedia operations
+// Addresses APIView feedback: rename built-in 'id' to a more descriptive name
+@@clientName(Azure.Communication.MessagesService.MessageDataStream.id,
+  "mediaId",
+  "python"
+);
+
+// Rename CommunicationMessageKind to MessageKind for improved clarity
+@@clientName(Azure.Communication.MessagesService.CommunicationMessageKind,
+  "MessageKind",
+  "python"
+);
+
+// Make ActionGroupContent internal since it is an implementation detail not intended
+// for direct public use
+@@access(Azure.Communication.MessagesService.ActionGroupContent,
+  Access.internal,
+  "python"
+);
