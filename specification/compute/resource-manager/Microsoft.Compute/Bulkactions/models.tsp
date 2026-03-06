@@ -92,7 +92,7 @@ model Resources {
   @doc("The resource ids used for the request")
   ids: Array<armResourceIdentifier<[
     {
-      type: "Microsoft.Compute/vm";
+      type: "Microsoft.Compute/virtualMachines";
     }
   ]>>;
 }
@@ -211,7 +211,7 @@ model ResourceOperationDetails {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   resourceId?: Array<armResourceIdentifier<[
     {
-      type: "Microsoft.Compute/vm";
+      type: "Microsoft.Compute/virtualMachines";
     }
   ]>>;
 
@@ -253,7 +253,7 @@ model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   resourceId?: Array<armResourceIdentifier<[
     {
-      type: "Microsoft.Compute/vm";
+      type: "Microsoft.Compute/virtualMachines";
     }
   ]>>;
 
