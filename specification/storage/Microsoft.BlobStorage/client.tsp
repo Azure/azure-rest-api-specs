@@ -201,7 +201,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "maxPageSize",
   "javascript"
 );
-@@clientName(BlobPublicAccess.access, "blobPublicAccess", "javascript");
 @@clientName(LeaseDurationResponseHeader.duration,
   "leaseDuration",
   "javascript"
