@@ -86,10 +86,7 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
-@@clientName(OpenAI.CustomGrammarFormatParam,
-  "CustomGrammarFormatParameter",
-  "java"
-);
+@@clientName(OpenAI.CustomGrammarFormatParam, "CustomGrammarFormatParameter", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
