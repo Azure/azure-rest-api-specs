@@ -3311,9 +3311,20 @@
       "type": "object",
       "description": "Represents an operation returned by the GetOperations request",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified identifier of the resource",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
-          "description": "Name of the operation"
+          "description": "Name of the operation",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource",
+          "readOnly": true
         },
         "display": {
           "$ref": "#/definitions/OperationInfo",

@@ -743,9 +743,22 @@ model UpdateProperties {
  */
 model Operation {
   /**
+   * Fully qualified identifier of the resource
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
    * Name of the operation
    */
+  @visibility(Lifecycle.Read)
   name?: string;
+
+  /**
+   * Type of the resource
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /**
    * Display name of the operation
