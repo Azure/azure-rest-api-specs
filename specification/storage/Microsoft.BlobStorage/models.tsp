@@ -2563,7 +2563,7 @@ alias LeaseDurationHeaderParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust,javascript,python,csharp")
+  @alternateType(Record<string>, "rust,javascript,python,csharp,go")
   @header("x-ms-meta")
   metadata?: string;
 };
@@ -2571,7 +2571,7 @@ alias MetadataHeaders = {
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
   /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
-  @alternateType(Record<string>, "rust,javascript,python")
+  @alternateType(Record<string>, "rust,javascript,python,go")
   @header("x-ms-or")
   objectReplicationRules?: string;
 };

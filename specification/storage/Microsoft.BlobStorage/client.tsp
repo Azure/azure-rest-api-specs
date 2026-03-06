@@ -297,6 +297,7 @@ enum ImmutabilityPolicySetting {
 @@alternateType(BlobItem.metadata, Record<string>, "go");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "go");
 @@alternateType(BlobPrefix.name, string, "go");
+@@alternateType(Block.name, string, "go");
 @@alternateType(BlockIdParameter.blockid, string, "go");
 @@alternateType(BlockLookupList.latest, string[], "go");
 @@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm,
@@ -325,12 +326,17 @@ enum ImmutabilityPolicySetting {
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "go");
 @@clientName(BlobServiceProperties.cors, "CORS", "go");
+@@clientName(ContainerItem.delete, "deleted", "go");
+@@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyUntilDate, "ImmutabilityPolicyExpiry", "go");
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyUntilDate, "ImmutabilityPolicyExpiry", "go");
 @@clientName(ListBlobsIncludeItemGo, "ListBlobsIncludeItem", "go");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "go");
+@@clientName(Metrics.includeApis, "IncludeAPIs", "go");
 @@clientName(QueryType, "QueryFormatType", "go");
 @@clientName(Storage.Blob.Blob.setProperties, "SetHTTPHeaders", "go");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "FilterBlobs", "go");
@@ -434,7 +440,7 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 
 @@override(Storage.Blob.Blob.setImmutabilityPolicy,
   setImmutabilityPolicyOptionalExpiry,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript"
 );
 
 // C# customizations
