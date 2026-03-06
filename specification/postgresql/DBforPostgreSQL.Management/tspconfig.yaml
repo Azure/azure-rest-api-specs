@@ -77,9 +77,9 @@ options:
           verb: Set
         remove: true
   "@azure-typespec/http-client-csharp-mgmt":
-    # use-legacy-resource-detection: false
-    namespace: "Azure.ResourceManager.PostgreSql"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.PostgreSql"
+    namespace: "{package-name}.FlexibleServers"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

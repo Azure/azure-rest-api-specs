@@ -317,6 +317,65 @@ using Azure.ClientGenerator.Core;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// IPAddress type mappings
+@@alternateType(FirewallRuleProperties.startIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(FirewallRuleProperties.endIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+
+// Guid type mappings
+@@alternateType(AuthConfig.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(AdministratorMicrosoftEntraProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(UserAssignedIdentity.principalId, Azure.Core.uuid, "csharp");
+@@alternateType(UserAssignedIdentity.tenantId, Azure.Core.uuid, "csharp");
+
+// Uri type mappings
+@@alternateType(DataEncryption.primaryKeyURI, TypeSpec.url, "csharp");
+@@alternateType(DataEncryption.geoBackupKeyURI, TypeSpec.url, "csharp");
+
+// ResourceIdentifier type mappings
+@@alternateType(VirtualNetworkSubnetUsageParameter.virtualNetworkArmResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MigrationProperties.sourceDbServerResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MigrationProperties.targetDbServerResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MigrationPropertiesForPatch.sourceDbServerResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// AzureLocation type mappings
+@@alternateType(VirtualNetworkSubnetUsageModel.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(DbServerMetadata.location, Azure.Core.azureLocation, "csharp");
+
+// ResourceType type mappings
+@@alternateType(MigrationNameAvailability.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(NameAvailabilityModel.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
 @@clientName(AdvancedThreatProtectionSettingsModel,
   "ServerThreatProtectionSettingsModel",
   "csharp"
@@ -372,3 +431,67 @@ using Azure.ClientGenerator.Core;
   "PostgreSqlFlexibleServerTuningOptionType",
   "csharp"
 );
+
+// Fix duplicate GetAll methods - CapabilitiesByLocation and QuotaUsages both generate GetAll(locationName)
+@@clientName(CapabilitiesByLocationOperationGroup.list,
+  "GetLocationCapabilities",
+  "csharp"
+);
+@@clientName(QuotaUsagesOperationGroup.list,
+  "GetLocationQuotaUsages",
+  "csharp"
+);
+
+// Fix duplicate GetByServer methods - CapturedLogs and Replicas both generate GetByServer()
+@@clientName(Servers.listByServer, "GetCapturedLogsByServer", "csharp");
+@@clientName(Servers.replicasListByServer, "GetReplicasByServer", "csharp");
+
+// Preserve backward-compatible type names from FlexibleServers sub-namespace
+@@clientName(Replica, "PostgreSqlFlexibleServersReplica", "csharp");
+@@clientName(ReplicationState, "PostgreSqlFlexibleServersReplicationState", "csharp");
+@@clientName(ServerSku, "PostgreSqlFlexibleServersServerSku", "csharp");
+@@clientName(SourceType, "PostgreSqlFlexibleServersSourceType", "csharp");
+@@clientName(SslMode, "PostgreSqlFlexibleServersSslMode", "csharp");
+@@clientName(StorageType, "PostgreSqlFlexibleServersStorageType", "csharp");
+@@clientName(ValidationDetails, "PostgreSqlFlexibleServersValidationDetails", "csharp");
+@@clientName(ValidationMessage, "PostgreSqlFlexibleServersValidationMessage", "csharp");
+@@clientName(ValidationState, "PostgreSqlFlexibleServersValidationState", "csharp");
+
+// Restore public constructors and property setters for models treated as output-only
+@@usage(ObjectRecommendation, Usage.input, "csharp");
+@@usage(ObjectRecommendationPropertiesAnalyzedWorkload, Usage.input, "csharp");
+@@usage(ObjectRecommendationPropertiesImplementationDetails, Usage.input, "csharp");
+@@usage(CapturedLog, Usage.input, "csharp");
+@@usage(BackupAutomaticAndOnDemand, Usage.input, "csharp");
+@@usage(Configuration, Usage.input, "csharp");
+@@usage(AdministratorMicrosoftEntra, Usage.input, "csharp");
+@@usage(BackupsLongTermRetentionOperation, Usage.input, "csharp");
+@@usage(TuningOptions, Usage.input, "csharp");
+@@usage(PrivateLinkResource, Usage.input, "csharp");
+
+// Preserve backward-compatible property names
+@@clientName(DataEncryption.type, "KeyType", "csharp");
+@@clientName(DataEncryption.primaryKeyURI, "PrimaryKeyUri", "csharp");
+@@clientName(DataEncryption.geoBackupKeyURI, "GeoBackupKeyUri", "csharp");
+@@clientName(FirewallRuleProperties.startIpAddress, "StartIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "EndIPAddress", "csharp");
+@@clientName(Storage.type, "StorageType", "csharp");
+@@clientName(UserAssignedIdentity.type, "IdentityType", "csharp");
+@@clientName(MigrationNameAvailability.type, "ResourceType", "csharp");
+@@clientName(NameAvailabilityModel.type, "ResourceType", "csharp");
+@@clientName(CapturedLogProperties.type, "LogFileType", "csharp");
+@@clientName(ValidationSummaryItem.type, "ValidationSummaryItemType", "csharp");
+
+// Rename resource types to have proper service prefix
+@@clientName(PrivateEndpointConnection,
+  "PostgreSqlFlexibleServersPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateLinkResource,
+  "PostgreSqlFlexibleServersPrivateLinkResource",
+  "csharp"
+);
+
+// Make BackupStoreDetails public (was internal in new generator)
+@@access(BackupStoreDetails, Access.public, "csharp");
+@@usage(BackupStoreDetails, Usage.input, "csharp");
