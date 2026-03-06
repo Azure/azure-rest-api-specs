@@ -453,3 +453,161 @@ namespace CombineClient;
 );
 @@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "java");
 @@clientName(Microsoft.Network.Resource, "NetworkResource", "java");
+@@clientName(Microsoft.Network.Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties,
+  "ManagedServiceIdentityUserAssignedIdentities",
+  "java"
+);
+
+// Casing renames: IP, DNS, SQL
+@@clientName(Microsoft.Network.AzureFirewallIPConfiguration,
+  "AzureFirewallIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfiguration,
+  "ApplicationGatewayFrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfiguration,
+  "VirtualNetworkGatewayIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSkuTier,
+  "PublicIpAddressSkuTier",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressDnsSettings,
+  "PublicIpAddressDnsSettings",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
+@@clientName(Microsoft.Network.PublicIPAddressMigrationPhase,
+  "PublicIpAddressMigrationPhase",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPAddressSkuName,
+  "PublicIpAddressSkuName",
+  "java"
+);
+@@clientName(Microsoft.Network.VerificationIPFlowParameters,
+  "VerificationIpFlowParameters",
+  "java"
+);
+@@clientName(Microsoft.Network.IPRule, "IpRule", "java");
+@@clientName(Microsoft.Network.IPTraffic, "IpTraffic", "java");
+@@clientName(Microsoft.Network.BastionHostIPConfiguration,
+  "BastionHostIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSkuName,
+  "PublicIpPrefixSkuName",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress,
+  "IpConfigurationBgpPeeringAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.AzureFirewallPublicIPAddress,
+  "AzureFirewallPublicIpAddress",
+  "java"
+);
+@@clientName(Microsoft.Network.HubPublicIPAddresses,
+  "HubPublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateEndpointIPVersionType,
+  "PrivateEndpointIpVersionType",
+  "java"
+);
+@@clientName(Microsoft.Network.PreferredIPVersion,
+  "PreferredIpVersion",
+  "java"
+);
+@@clientName(Microsoft.Network.HubIPAddresses, "HubIpAddresses", "java");
+@@clientName(Microsoft.Network.PublicIPAddressSku,
+  "PublicIpAddressSku",
+  "java"
+);
+@@clientName(Microsoft.Network.ApplicationGatewayIPConfiguration,
+  "ApplicationGatewayIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.PrivateEndpointIPConfiguration,
+  "PrivateEndpointIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPVersion, "IpVersion", "java");
+@@clientName(Microsoft.Network.IPAllocationMethod,
+  "IpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.PublicIPPrefixSkuTier,
+  "PublicIpPrefixSkuTier",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualApplianceIPConfigurationProperties,
+  "VirtualApplianceIpConfigurationProperties",
+  "java"
+);
+@@clientName(Microsoft.Network.VirtualApplianceIPConfiguration,
+  "VirtualApplianceIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+  "NetworkInterfaceIpConfigurationPrivateLinkConnectionProperties",
+  "java"
+);
+@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfiguration,
+  "LoadBalancerVipSwapRequestFrontendIpConfiguration",
+  "java"
+);
+
+// IDPS casing renames
+@@clientName(Microsoft.Network.FirewallPolicyIdpsQuerySortOrder,
+  "FirewallPolicyIdpsQuerySortOrder",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureDirection,
+  "FirewallPolicyIdpsSignatureDirection",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureMode,
+  "FirewallPolicyIdpsSignatureMode",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicyIdpsSignatureSeverity,
+  "FirewallPolicyIdpsSignatureSeverity",
+  "java"
+);
+@@clientName(Microsoft.Network.IdpsQueryObject, "IdpsQueryObject", "java");
+
+// BGP, JWT, SNAT, LOA casing renames
+@@clientName(Microsoft.Network.BGPCommunity, "BgpCommunity", "java");
+@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
+  "ApplicationGatewayEntraJwtValidationConfig",
+  "java"
+);
+@@clientName(Microsoft.Network.FirewallPolicySnat,
+  "FirewallPolicySnat",
+  "java"
+);
+@@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
+  "GenerateExpressRoutePortsLoaRequest",
+  "java"
+);
+
+// HTTP casing renames
+@@clientName(Microsoft.Network.HttpConfigurationMethod,
+  "HttpConfigurationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.HttpConfiguration, "HttpConfiguration", "java");
+@@clientName(Microsoft.Network.HttpHeader, "HttpHeader", "java");
+@@clientName(Microsoft.Network.HttpMethod, "HttpMethod", "java");
+
+// Interface renames
+@@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
+@@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
+
+// Model rename (from separate .tsp file)
+@@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
