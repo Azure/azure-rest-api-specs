@@ -14,6 +14,11 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue");
 
+@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "CustomerManagedKeyEncryptionKeyIdentity",
+  "java"
+);
+
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
   "java"
