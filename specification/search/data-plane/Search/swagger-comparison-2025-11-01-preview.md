@@ -6,7 +6,7 @@ This document compares:
 1. **Old (hand-authored)**: `searchservice.json` + `searchindex.json` + `knowledgebase.json` — the hand-authored swagger **before** [PR #38841](https://github.com/Azure/azure-rest-api-specs/pull/38841) was merged
 2. **New (TSP-compiled)**: `search.json` — the TypeSpec-compiled swagger in the current `main` branch
 
-> **Refreshed**: This comparison was updated against the latest TSP-compiled `search.json` in the `main` branch.
+> **Refreshed**: This comparison was updated against the latest TSP-compiled `search.json` in the `main` branch. The `Accept` header breaking-change entry (previously item 4) has been removed because PRs [#41045](https://github.com/Azure/azure-rest-api-specs/pull/41045) and [#41062](https://github.com/Azure/azure-rest-api-specs/pull/41062) make the header optional — see §15 in the non-breaking section.
 
 ---
 
@@ -84,27 +84,7 @@ The names of request-body parameters changed in several operations. The underlyi
 
 ### Low Impact
 
-#### 4. `Accept` Header Added as Required Parameter
-
-The TSP-compiled spec adds `Accept: application/json;odata.metadata=minimal` as a **required header parameter** to every operation.
-
-**Old spec**: No explicit `Accept` header parameter defined  
-**New spec**: Every operation includes:
-```json
-{
-  "name": "Accept",
-  "in": "header",
-  "required": true,
-  "type": "string",
-  "enum": ["application/json;odata.metadata=minimal"]
-}
-```
-
-**Impact**: Makes the implicit HTTP contract explicit. The service was already returning `application/json;odata.metadata=minimal` and will continue to respond to requests that omit the header. This is a **documentation-level change** with no API behavior impact.
-
----
-
-#### 5. `ChatCompletionExtraParametersBehavior` Enum Value Bug Fix
+#### 4. `ChatCompletionExtraParametersBehavior` Enum Value Bug Fix
 
 This change fixes a pre-existing inconsistency in the old hand-authored spec:
 
@@ -314,6 +294,16 @@ The following operations were added in the updated `search.json`:
 | `Indexes_GetStatistics` | `GET /indexes('{indexName}')/search.stats` | Retrieves statistics for a specific index |
 | `GetIndexStatsSummary` | `GET /indexstats` | Retrieves a summary of statistics for all indexes in the service |
 
+### 15. `Accept` Header — Made Optional (Fixed, Non-Breaking)
+
+The TSP-compiled spec initially added an `Accept: application/json;odata.metadata=minimal` header as a **required** parameter to every operation, which was flagged as a low-impact breaking change.
+
+This has since been resolved in two follow-up PRs:
+- [PR #41045](https://github.com/Azure/azure-rest-api-specs/pull/41045) (merged) — made `acceptHeaderNone` optional
+- [PR #41062](https://github.com/Azure/azure-rest-api-specs/pull/41062) (in-flight) — made `acceptHeaderMinimal` optional, covering all remaining operations
+
+After these fixes the new spec declares `Accept` as an **optional** header (`"required": false`). Since the old spec had no explicit Accept header (the constraint was implicit), an optional header in the new spec is not a breaking change.
+
 ---
 
 ## Summary
@@ -322,8 +312,8 @@ The following operations were added in the updated `search.json`:
 |----------|-------|-------|
 | **High Impact Breaking Changes** | **1** | V1 skill types removed from discriminator |
 | **Medium Impact Breaking Changes** | **2** | `$select` type change; body param name changes |
-| **Low Impact Breaking Changes** | **2** | `Accept` header added; `ChatCompletion` enum bug fix |
-| **Non-Breaking Changes** | **Many** | See sections 1–14 above |
+| **Low Impact Breaking Changes** | **1** | `ChatCompletion` enum bug fix |
+| **Non-Breaking Changes** | **Many** | See sections 1–15 above |
 
 ### High Impact Breaking Changes (1)
 1. **V1 skill types removed from discriminator union** — both `SentimentSkill` (`@odata.type: #Microsoft.Skills.Text.SentimentSkill`) and `EntityRecognitionSkill` (`@odata.type: #Microsoft.Skills.Text.EntityRecognitionSkill`) were removed in the same change (V1 skill deprecation).
@@ -332,9 +322,8 @@ The following operations were added in the updated `search.json`:
 1. **`$select` type: `string` → `array[string]` (csv)** — Wire format unchanged; generated SDK client types change
 2. **Body parameter names** — Swagger metadata only; underlying JSON schema unchanged
 
-### Low Impact Breaking Changes (2)
-1. **`Accept` header added as required** — Makes implicit HTTP contract explicit; no actual behavior change
-2. **`ChatCompletionExtraParametersBehavior` enum value** — Fixes inconsistency (`"pass-through"` → `"passThrough"`); corrects swagger to match API reality
+### Low Impact Breaking Changes (1)
+1. **`ChatCompletionExtraParametersBehavior` enum value** — Fixes inconsistency (`"pass-through"` → `"passThrough"`); corrects swagger to match API reality
 
 ### Non-Breaking Changes
 - File consolidation: 3 hand-authored files → 1 TSP-compiled file
@@ -343,3 +332,4 @@ The following operations were added in the updated `search.json`:
 - Inline ↔ `$ref` conversions (all with equivalent schemas)
 - Type format clarifications (`number` → `number(double)`, `number(int64)` → `integer(int64)`)
 - New definitions, operations, and features added (see sections 11–14)
+- `Accept` header made optional (not breaking; fixed via PRs #41045 and #41062 — see §15)
