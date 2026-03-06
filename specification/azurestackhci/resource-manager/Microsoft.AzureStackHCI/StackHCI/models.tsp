@@ -8769,6 +8769,9 @@ model EdgeMachineDiskJobProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: DiskJobType;
 
+  /** Deployment mode to trigger job. */
+  deploymentMode?: DeploymentMode;
+
   /** Job provisioning state. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -8787,7 +8790,7 @@ model EdgeMachineDiskJobProperties {
 
   /** Status of disk job. */
   @visibility(Lifecycle.Read)
-  status?: DiskJobStatus;
+  status?: JobStatus;
 
   /** Error details if job failed. */
   @visibility(Lifecycle.Read)
@@ -8813,29 +8816,6 @@ union DiskJobType {
 
   /** Job to resolve configuration drift between desired and reported state. */
   SyncConfiguration: "SyncConfiguration",
-}
-
-/**
- * Status of the job execution.
- */
-@added(Versions.v2026_03_15_preview)
-union DiskJobStatus {
-  string,
-
-  /** Job has not started. */
-  NotStarted: "NotStarted",
-
-  /** Job is currently running. */
-  Running: "Running",
-
-  /** Job completed successfully. */
-  Succeeded: "Succeeded",
-
-  /** Job failed. */
-  Failed: "Failed",
-
-  /** Job was canceled. */
-  Canceled: "Canceled",
 }
 
 /**
@@ -9180,13 +9160,32 @@ model EdgeMachineNetworkAdapterJobProperties {
   /** The desired network configuration to apply. */
   targetConfiguration: NetworkAdapterConfiguration;
 
+  /** Deployment mode to trigger job. */
+  deploymentMode?: DeploymentMode;
+
   /** Provisioning state of the job. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** Status of the job. */
+  /** Unique, immutable job id. */
   @visibility(Lifecycle.Read)
-  status?: string;
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of Edge device job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Error details if job failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   /** Reported properties for Network Adapter Job. */
   @visibility(Lifecycle.Read)

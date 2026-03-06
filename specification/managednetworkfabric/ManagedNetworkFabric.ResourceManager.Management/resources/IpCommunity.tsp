@@ -47,10 +47,16 @@ interface IpCommunities {
   delete is ArmResourceDeleteWithoutOkAsync<IpCommunity>;
 
   @doc("Implements IP Communities list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<IpCommunity>;
+  listByResourceGroup is ArmResourceListByParent<
+    IpCommunity,
+    Response = IpCommunitiesListResult
+  >;
 
   @doc("Implements IP Communities list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<IpCommunity>;
+  listBySubscription is ArmListBySubscription<
+    IpCommunity,
+    Response = IpCommunitiesListResult
+  >;
 }
 
 @@doc(IpCommunities.create::parameters.resource, "Request payload.");

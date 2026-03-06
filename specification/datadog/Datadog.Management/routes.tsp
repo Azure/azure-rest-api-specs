@@ -95,7 +95,7 @@ interface SaaSOperationGroup {
   @autoRoute
   @post
   @action("activateSaaS")
-  activateResource is ArmProviderActionAsync<
+  activateResource is ArmProviderActionSync<
     Request = ActivateSaaSParameterRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,

@@ -31,7 +31,6 @@ model NetworkTapRuleProperties {
 
   @doc("The ARM resource Id of the NetworkTap.")
   @visibility(Lifecycle.Read)
-  @removed(Versions.v2025_07_15)
   networkTapId?: string;
 
   @doc("The ARM resource Id of the NetworkTap Rules.")
@@ -133,10 +132,9 @@ model NetworkTapRuleMatchConfigurationPatch {
   actions?: NetworkTapRuleActionPatch[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Defines the match condition that is supported to filter the traffic.")
-model NetworkTapRuleMatchCondition {
-  ...CommonMatchConditions;
-
+model NetworkTapRuleMatchCondition extends CommonMatchConditions {
   @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType = EncapsulationType.None;
 
@@ -144,10 +142,9 @@ model NetworkTapRuleMatchCondition {
   portCondition?: PortCondition;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Defines the match condition that is supported to filter the traffic.")
-model NetworkTapRuleMatchConditionPatch {
-  ...CommonMatchConditionsPatch;
-
+model NetworkTapRuleMatchConditionPatch extends CommonMatchConditionsPatch {
   @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType;
 
@@ -194,10 +191,9 @@ model NetworkTapRuleAction {
 @doc("Action that need to performed.")
 model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The NetworkTapRule resource definition.")
-model NetworkTapRulePatch {
-  ...TagsUpdate;
-
+model NetworkTapRulePatch extends TagsUpdate {
   @doc("Network Tap Rule Patch properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
@@ -213,24 +209,13 @@ model NetworkTapRulePatch {
   @doc("The managed service identities assigned to this resource.")
   identity?: ManagedServiceIdentityPatch;
 }
-
-@doc("Network Tap Rule Patch properties.")
-model NetworkTapRulePatchProperties {
-  ...AnnotationResource;
-
+@doc("Network Tap Rule updatable properties.")
+model NetworkTapRulePatchableProperties {
   @doc("Input method to configure Network Tap Rule.")
   configurationType?: ConfigurationType;
 
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
-
-  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
-  @added(Versions.v2025_07_15)
-  identitySelector?: IdentitySelectorPatch;
-
-  @doc("Global network tap rule actions")
-  @added(Versions.v2024_06_15_preview)
-  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 
   @doc("List of match configurations.")
   @Azure.ResourceManager.identifiers(#[])
@@ -248,6 +233,20 @@ model NetworkTapRulePatchProperties {
   @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2025_07_15)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
+}
+
+@doc("Network Tap Rule Patch properties.")
+model NetworkTapRulePatchProperties {
+  ...AnnotationResource;
+  ...NetworkTapRulePatchableProperties;
+
+  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
+  @added(Versions.v2025_07_15)
+  identitySelector?: IdentitySelectorPatch;
+
+  @doc("Global network tap rule actions")
+  @added(Versions.v2024_06_15_preview)
+  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 }
 
 @doc("Polling interval in seconds.")

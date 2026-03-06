@@ -19,10 +19,10 @@ model AzureMonitorWorkspaceLogsExporter {
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
   cache?: CacheConfiguration;
 
-  @doc("Backfill configurations.")
+  @doc("Persistence options for the exporter.")
   @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "cache")
   @added(Microsoft.Monitor.Versions.v2026_04_01)
-  backfill?: BackfillConfiguration;
+  persistence?: ExporterPersistenceConfiguration;
 }
 
 @doc("Azure Monitor Workspace Logs Api configurations.")
@@ -105,9 +105,9 @@ model CacheConfiguration {
   retentionPeriod?: int32;
 }
 
-@doc("Backfill configurations.")
+@doc("Persistence options for this exporter.")
 @added(Microsoft.Monitor.Versions.v2026_04_01)
-model BackfillConfiguration {
+model ExporterPersistenceConfiguration {
   @doc("Max storage usage in gigabytes.")
   @minValue(1)
   maxStorageUsage?: int32;

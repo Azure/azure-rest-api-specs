@@ -1,0 +1,4380 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.SoftwarePlan management service",
+    "version": "2024-06-01-preview",
+    "description": "Microsoft.SoftwarePlan Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SoftwareSubscriptions"
+    },
+    {
+      "name": "SoftwareLicenses"
+    },
+    {
+      "name": "SoftwareLicenseProductKeys"
+    },
+    {
+      "name": "SoftwareLicenseProductDownloadOptions"
+    },
+    {
+      "name": "SoftwareBillingSubscriptions"
+    },
+    {
+      "name": "Amendments"
+    },
+    {
+      "name": "ProductKeys"
+    },
+    {
+      "name": "ProductDownloadOptions"
+    },
+    {
+      "name": "LicenseSummary"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/amendments": {
+      "get": {
+        "operationId": "Amendments_ListByBillingAccount",
+        "tags": [
+          "Amendments"
+        ],
+        "description": "List Amendment resources by billing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmendmentFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AmendmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Amendments_ListByBillingAccount": {
+            "$ref": "./examples/Amendments_ListByBillingAccount.json"
+          },
+          "Amendments_ListByBillingAccount_All": {
+            "$ref": "./examples/Amendments_ListByBillingAccount_All.json"
+          },
+          "Amendments_ListByBillingAccount_Empty": {
+            "$ref": "./examples/Amendments_ListByBillingAccount_Empty.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Amendments_Create",
+        "tags": [
+          "Amendments"
+        ],
+        "description": "Create an Amendment. Only the authorized internal system may invoke this operation; other callers receive 403 Forbidden.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AmendmentRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Amendment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Amendments_Create": {
+            "$ref": "./examples/Amendments_Create.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/amendments/{amendmentId}": {
+      "get": {
+        "operationId": "Amendments_Get",
+        "tags": [
+          "Amendments"
+        ],
+        "description": "Get an Amendment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "amendmentId",
+            "in": "path",
+            "description": "The amendment ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Amendment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Amendments_Get": {
+            "$ref": "./examples/Amendments_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/licenseSummary/default": {
+      "get": {
+        "operationId": "LicenseSummary_ListByBillingAccount",
+        "tags": [
+          "LicenseSummary"
+        ],
+        "description": "List LicenseSummary resources by BillingAccount ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LicenseSummaryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseSummary_ListByBillingAccount": {
+            "$ref": "./examples/LicenseSummary_ListByBillingAccount.json"
+          }
+        },
+        "x-ms-odata": "#/definitions/LicenseSummaryResource",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/refreshLicenseSummary": {
+      "post": {
+        "operationId": "LicenseSummary_RefreshByBillingAccount",
+        "tags": [
+          "LicenseSummary"
+        ],
+        "description": "Refresh license summary for a billing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseSummary_RefreshByBillingAccount": {
+            "$ref": "./examples/LicenseSummary_RefreshByBillingAccount.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions": {
+      "get": {
+        "operationId": "SoftwareBillingSubscriptions_ListByBillingAccount",
+        "tags": [
+          "SoftwareBillingSubscriptions"
+        ],
+        "description": "List SoftwareBillingSubscription resources by BillingAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameters.top"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameters.skipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareBillingSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareBillingSubscriptions_ListByBillingAccount": {
+            "$ref": "./examples/SoftwareBillingSubscriptions_ListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/{softwareBillingSubscriptionName}": {
+      "get": {
+        "operationId": "SoftwareBillingSubscriptions_GetByBillingAccount",
+        "tags": [
+          "SoftwareBillingSubscriptions"
+        ],
+        "description": "Get a SoftwareBillingSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "softwareBillingSubscriptionName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a software billing subscription.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandSoftwareBillingSubscriptionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareBillingSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareBillingSubscriptions_GetByBillingAccount": {
+            "$ref": "./examples/SoftwareBillingSubscriptions_GetByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/{softwareBillingSubscriptionName}/validateSoftwareSubscriptionUpdate": {
+      "post": {
+        "operationId": "SoftwareBillingSubscriptions_ValidateSoftwareSubscriptionUpdate",
+        "tags": [
+          "SoftwareSubscriptions",
+          "SoftwareBillingSubscriptions"
+        ],
+        "description": "Validate if the given changes for the software subscription corresponding to this software billing subscription are valid.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "softwareBillingSubscriptionName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a software billing subscription.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The validation request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscriptionUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareBillingSubscriptions_ValidateSoftwareSubscriptionUpdate_Failed": {
+            "$ref": "./examples/SoftwareBillingSubscriptions_ValidateSoftwareSubscriptionUpdate_Failed.json"
+          },
+          "SoftwareBillingSubscriptions_ValidateSoftwareSubscriptionUpdate_Success": {
+            "$ref": "./examples/SoftwareBillingSubscriptions_ValidateSoftwareSubscriptionUpdate_Success.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/tenantLevelValidateSoftwareSubscriptionCreate": {
+      "post": {
+        "operationId": "TenantLevelValidateSoftwareSubscriptionCreate",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Validate if the given Software Subscription to be created is valid under this billing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The validation request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TenantLevelValidateSoftwareSubscriptionCreate_Failed": {
+            "$ref": "./examples/TenantLevelValidateSoftwareSubscriptionCreate_Failed.json"
+          },
+          "TenantLevelValidateSoftwareSubscriptionCreate_Success": {
+            "$ref": "./examples/TenantLevelValidateSoftwareSubscriptionCreate_Success.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SoftwarePlan/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SoftwarePlan/softwareLicenses": {
+      "get": {
+        "operationId": "SoftwareLicenses_ListBySubscription",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "List SoftwareLicense resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_ListBySubscription": {
+            "$ref": "./examples/SoftwareLicenses_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SoftwarePlan/softwareSubscriptions": {
+      "get": {
+        "operationId": "SoftwareSubscriptions_ListBySubscription",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "List SoftwareSubscription resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_ListBySubscription": {
+            "$ref": "./examples/SoftwareSubscriptions_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses": {
+      "get": {
+        "operationId": "SoftwareLicenses_ListByResourceGroup",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "List SoftwareLicense resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_ListByResourceGroup": {
+            "$ref": "./examples/SoftwareLicenses_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}": {
+      "get": {
+        "operationId": "SoftwareLicenses_Get",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "Get a SoftwareLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_Get": {
+            "$ref": "./examples/SoftwareLicenses_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SoftwareLicenses_CreateOrUpdate",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "Create a SoftwareLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SoftwareLicense' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            }
+          },
+          "201": {
+            "description": "Resource 'SoftwareLicense' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_CreateOrUpdate": {
+            "$ref": "./examples/SoftwareLicenses_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SoftwareLicenses_Update",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "Update a SoftwareLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SoftwareLicenses_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SoftwareLicenses_Delete",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "Delete a SoftwareLicense",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenses_Delete": {
+            "$ref": "./examples/SoftwareLicenses_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productDownloadOptions": {
+      "get": {
+        "operationId": "SoftwareLicenseProductDownloadOptions_List",
+        "tags": [
+          "SoftwareLicenseProductDownloadOptions"
+        ],
+        "description": "List product download options for a software license",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseProductDownloadOptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductDownloadOptions_List": {
+            "$ref": "./examples/SoftwareLicenses_ProductDownloadOptions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productDownloadOptions/{productDownloadOptionName}": {
+      "get": {
+        "operationId": "SoftwareLicenseProductDownloadOptions_Get",
+        "tags": [
+          "SoftwareLicenseProductDownloadOptions"
+        ],
+        "description": "Get product download option by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productDownloadOptionName",
+            "in": "path",
+            "description": "Name of the download options",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseProductDownloadOption"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductDownloadOptions_Get": {
+            "$ref": "./examples/SoftwareLicenses_ProductDownloadOptions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productDownloadOptions/{productDownloadOptionName}/generateDownloadLinks": {
+      "post": {
+        "operationId": "SoftwareLicenseProductDownloadOptions_GenerateDownloadLinks",
+        "tags": [
+          "SoftwareLicenseProductDownloadOptions"
+        ],
+        "description": "Generate download links for a product download option (POST action)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productDownloadOptionName",
+            "in": "path",
+            "description": "Name of the download options",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseGenerateDownloadLinksInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseGenerateDownloadLinksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductDownloadOptions_GenerateDownloadLinks": {
+            "$ref": "./examples/SoftwareLicenses_ProductDownloadOptions_GenerateDownloadLinks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productKeys": {
+      "get": {
+        "operationId": "SoftwareLicenseProductKeys_List",
+        "tags": [
+          "SoftwareLicenseProductKeys"
+        ],
+        "description": "List product keys for a software license",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseProductKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductKeys_List": {
+            "$ref": "./examples/SoftwareLicenses_ProductKeys_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productKeys/{productKeyName}": {
+      "get": {
+        "operationId": "SoftwareLicenseProductKeys_Get",
+        "tags": [
+          "SoftwareLicenseProductKeys"
+        ],
+        "description": "Get product key by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicenseProductKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductKeys_Get": {
+            "$ref": "./examples/SoftwareLicenses_ProductKeys_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareLicenses/{softwareLicenseName}/productKeys/{productKeyName}/showFullKey": {
+      "post": {
+        "operationId": "SoftwareLicenseProductKeys_ShowFullKey",
+        "tags": [
+          "SoftwareLicenseProductKeys"
+        ],
+        "description": "Show Full product key",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareLicenseName",
+            "in": "path",
+            "description": "Name of softwareLicense",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ShowFullSoftwareLicenseKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareLicenseProductKeys_ShowFullKey": {
+            "$ref": "./examples/SoftwareLicenses_ProductKeys_ShowFullKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions": {
+      "get": {
+        "operationId": "SoftwareSubscriptions_ListByResourceGroup",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "List SoftwareSubscription resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_ListByResourceGroup": {
+            "$ref": "./examples/SoftwareSubscriptions_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}": {
+      "get": {
+        "operationId": "SoftwareSubscriptions_Get",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Get a SoftwareSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandSoftwareSubscriptionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_Get": {
+            "$ref": "./examples/SoftwareSubscriptions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SoftwareSubscriptions_CreateOrUpdate",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Create a SoftwareSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SoftwareSubscription' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          },
+          "201": {
+            "description": "Resource 'SoftwareSubscription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/SoftwareSubscriptions_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "SoftwareSubscriptions_Create_AddLicense_Or_TrueUp": {
+            "$ref": "./examples/SoftwareSubscriptions_Create_AddLicense_Or_TrueUp.json"
+          },
+          "SoftwareSubscriptions_Create_With_Coterm": {
+            "$ref": "./examples/SoftwareSubscriptions_Create_With_Coterm.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SoftwareSubscriptions_Update",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Update a SoftwareSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscriptionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_Update_Coterm": {
+            "$ref": "./examples/SoftwareSubscriptions_Update_Coterm.json"
+          },
+          "SoftwareSubscriptions_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SoftwareSubscriptions_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SoftwareSubscriptions_Delete",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Delete a SoftwareSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_Delete": {
+            "$ref": "./examples/SoftwareSubscriptions_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/cancel": {
+      "post": {
+        "operationId": "SoftwareSubscriptions_Cancel",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_Cancel": {
+            "$ref": "./examples/SoftwareSubscriptions_Cancel_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/listKeys": {
+      "post": {
+        "operationId": "SoftwareSubscriptions_ListKeys",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "List software keys provisioned for this subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/SoftwareSubscriptionsListKeysParameters.languageCode"
+          },
+          {
+            "$ref": "#/parameters/SoftwareSubscriptionsListKeysParameters.cpuFileType"
+          },
+          {
+            "$ref": "#/parameters/SoftwareSubscriptionsListKeysParameters.showKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SoftwareKey"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_ListKeys": {
+            "$ref": "./examples/SoftwareSubscriptions_ListKeys_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productDownloadOptions": {
+      "get": {
+        "operationId": "ProductDownloadOptions_List",
+        "tags": [
+          "ProductDownloadOptions"
+        ],
+        "description": "List product download options for a software subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductDownloadOptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductDownloadOptions_List": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductDownloadOptions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productDownloadOptions/{productDownloadOptionName}": {
+      "get": {
+        "operationId": "ProductDownloadOptions_Get",
+        "tags": [
+          "ProductDownloadOptions"
+        ],
+        "description": "Get product download option by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productDownloadOptionName",
+            "in": "path",
+            "description": "Name of the download options",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductDownloadOption"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductDownloadOptions_Get": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductDownloadOptions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productDownloadOptions/{productDownloadOptionName}/generateDownloadLinks": {
+      "post": {
+        "operationId": "ProductDownloadOptions_GenerateDownloadLinks",
+        "tags": [
+          "ProductDownloadOptions"
+        ],
+        "description": "Generate download links for a product download option (POST action)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productDownloadOptionName",
+            "in": "path",
+            "description": "Name of the download options",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateDownloadLinksInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDownloadLinksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductDownloadOptions_GenerateDownloadLinks": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductDownloadOptions_GenerateDownloadLinks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productKeys": {
+      "get": {
+        "operationId": "ProductKeys_List",
+        "tags": [
+          "ProductKeys"
+        ],
+        "description": "List product keys for a software subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/ListProductKeysParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductKeys_List": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductKeys_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productKeys/{productKeyName}": {
+      "get": {
+        "operationId": "ProductKeys_Get",
+        "tags": [
+          "ProductKeys"
+        ],
+        "description": "Get product key by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductKeys_Get": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductKeys_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productKeys/{productKeyName}/processActivationUnitsOffset": {
+      "post": {
+        "operationId": "ProductKeys_ProcessActivationUnitsOffset",
+        "tags": [
+          "ProductKeys"
+        ],
+        "description": "Process activation units offset for a product key",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProcessActivationUnitsOffsetInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductKeys_ProcessActivationUnitsOffset": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductKeys_ProcessActivationUnitsOffset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productKeys/{productKeyName}/replaceKey": {
+      "post": {
+        "operationId": "ProductKeys_ReplaceKey",
+        "tags": [
+          "ProductKeys"
+        ],
+        "description": "Replace a product key",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplaceKeyInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductKeys_ReplaceKey": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductKeys_ReplaceKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/productKeys/{productKeyName}/showFullKey": {
+      "post": {
+        "operationId": "ProductKeys_ShowFullKey",
+        "tags": [
+          "ProductKeys"
+        ],
+        "description": "Show Full product key",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "productKeyName",
+            "in": "path",
+            "description": "Name of the product key",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-:]{3,36}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ShowFullKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductKeys_ShowFullKey": {
+            "$ref": "./examples/SoftwareSubscriptions_ProductKeys_ShowFullKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/refreshFulfillment": {
+      "post": {
+        "operationId": "SoftwareSubscriptions_RefreshFulfillment",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Initiates asynchronous auto-fulfillment of keys for all eligible product versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_RefreshFulfillment_200": {
+            "$ref": "./examples/SoftwareSubscriptions_RefreshFulfillment_200.json"
+          },
+          "SoftwareSubscriptions_RefreshFulfillment_202": {
+            "$ref": "./examples/SoftwareSubscriptions_RefreshFulfillment_202.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}/validateUpdate": {
+      "post": {
+        "operationId": "SoftwareSubscriptions_ValidateUpdate",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Validate if the given Software Subscription changes are valid under this resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareSubscriptionName",
+            "in": "path",
+            "description": "Name of softwareSubscription",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Software subscription update details to validate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscriptionUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareSubscriptions_ValidateUpdate_Failed": {
+            "$ref": "./examples/SoftwareSubscriptions_ValidateUpdate_Failed.json"
+          },
+          "SoftwareSubscriptions_ValidateUpdate_Success": {
+            "$ref": "./examples/SoftwareSubscriptions_ValidateUpdate_Success.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/validateSoftwareLicenseCreate": {
+      "post": {
+        "operationId": "ValidateSoftwareLicenseCreate",
+        "tags": [
+          "SoftwareLicenses"
+        ],
+        "description": "Validate if the given Software License to be created is valid under this resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Software license details to validate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareLicense"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateSoftwareLicenseCreate_Failed": {
+            "$ref": "./examples/ValidateSoftwareLicenseCreate_Failed.json"
+          },
+          "ValidateSoftwareLicenseCreate_Success": {
+            "$ref": "./examples/ValidateSoftwareLicenseCreate_Success.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/validateSoftwareSubscriptionCreate": {
+      "post": {
+        "operationId": "ValidateSoftwareSubscriptionCreate",
+        "tags": [
+          "SoftwareSubscriptions"
+        ],
+        "description": "Validate if the given Software Subscription to be created is valid under this resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Software subscription details to validate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateSoftwareSubscriptionCreate_Failed": {
+            "$ref": "./examples/ValidateSoftwareSubscriptionCreate_Failed.json"
+          },
+          "ValidateSoftwareSubscriptionCreate_Success": {
+            "$ref": "./examples/ValidateSoftwareSubscriptionCreate_Success.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Amendment": {
+      "type": "object",
+      "description": "Amendment resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AmendmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AmendmentFilter": {
+      "type": "object",
+      "description": "Fields supported for OData filtering of Amendments.",
+      "properties": {
+        "amendmentType": {
+          "$ref": "#/definitions/AmendmentType",
+          "description": "Type of amendment"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the amendment is active"
+        }
+      }
+    },
+    "AmendmentListResult": {
+      "type": "object",
+      "description": "The response of an Amendment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Amendment items on this page",
+          "items": {
+            "$ref": "#/definitions/Amendment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AmendmentProperties": {
+      "type": "object",
+      "description": "Amendment properties",
+      "properties": {
+        "amendmentType": {
+          "$ref": "#/definitions/AmendmentType",
+          "description": "Type of amendment",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "amendmentDescription": {
+          "type": "string",
+          "description": "Description of the amendment",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "Quote identifier used for this amendment",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "upn": {
+          "type": "string",
+          "description": "User Principal Name (UPN) for this amendment",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the amendment",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the amendment",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the amendment is active",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "amendmentType",
+        "amendmentDescription",
+        "quoteId",
+        "upn",
+        "startDate",
+        "endDate"
+      ]
+    },
+    "AmendmentRequestModel": {
+      "type": "object",
+      "description": "Amendment resource for create request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AmendmentProperties",
+          "description": "The resource-specific properties for create request."
+        }
+      }
+    },
+    "AmendmentType": {
+      "type": "string",
+      "description": "Type of amendment",
+      "enum": [
+        "trueUp"
+      ],
+      "x-ms-enum": {
+        "name": "AmendmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TrueUp",
+            "value": "trueUp",
+            "description": "True-up amendment"
+          }
+        ]
+      }
+    },
+    "AutoRenewSetting": {
+      "type": "string",
+      "description": "Indicates whether the subscription is configured for automatic renewal upon expiration.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AutoRenewSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AutoRenew is disabled. Subscription will not renew automatically upon expiration."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AutoRenew is enabled. Subscription will renew automatically upon expiration."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DownloadLinkItem": {
+      "type": "object",
+      "description": "GenerateDownloadLinks Response Item",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Name of the download file"
+        },
+        "link": {
+          "type": "string",
+          "format": "password",
+          "description": "URL to download software",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "fileName",
+        "link"
+      ]
+    },
+    "DownloadOptionProperties": {
+      "type": "object",
+      "description": "Download option details for a product",
+      "properties": {
+        "cpuAndFileType": {
+          "type": "string",
+          "description": "Specifies the CPU architecture and file type (e.g., \"64 Bit, ISO\")"
+        },
+        "displayRank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional rank for display purposes"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the download file"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the download file"
+        },
+        "iso2LanguageCode": {
+          "type": "string",
+          "description": "Language code for the download option (e.g., \"en\")"
+        },
+        "optionTitle": {
+          "type": "string",
+          "description": "Title or description of the download option"
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Optional field for L+SA products to specify the version (e.g., \"2019\", \"2022\")"
+        }
+      },
+      "required": [
+        "cpuAndFileType",
+        "displayRank",
+        "fileSize",
+        "fileName",
+        "iso2LanguageCode"
+      ]
+    },
+    "GenerateDownloadLinksInput": {
+      "type": "object",
+      "description": "Download option details for generateDownloadLinks POST action",
+      "properties": {
+        "cpuAndFileType": {
+          "type": "string",
+          "description": "Specifies the CPU architecture and file type (e.g., \"64 Bit, ISO\")"
+        },
+        "iso2LanguageCode": {
+          "type": "string",
+          "description": "Language code for the download option (e.g., \"en\")"
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Optional field for L+SA products to specify the version (e.g., \"2019\", \"2022\")"
+        }
+      },
+      "required": [
+        "cpuAndFileType",
+        "iso2LanguageCode"
+      ]
+    },
+    "GenerateDownloadLinksResponse": {
+      "type": "object",
+      "description": "GenerateDownloadLinks Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of download link items",
+          "items": {
+            "$ref": "#/definitions/DownloadLinkItem"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KeyStatus": {
+      "type": "string",
+      "description": "Supported values for keyStatus",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Blocked",
+        "Revoked",
+        "Replaced",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "KeyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Key is active and available for activation."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Key is not valid for activation (e.g., expired, not provisioned, or disabled)."
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "Key is blocked due to policy, compliance, or security issues (e.g., fraud or piracy)."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Key is permanently revoked (e.g., due to refund or cancellation)."
+          },
+          {
+            "name": "Replaced",
+            "value": "Replaced",
+            "description": "Key has been replaced or all activations consumed. No longer usable."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No 5x5 key is assigned"
+          }
+        ]
+      }
+    },
+    "KeyType": {
+      "type": "string",
+      "description": "Supported values for keyType",
+      "enum": [
+        "KMS",
+        "MAK",
+        "Setup",
+        "Retail",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KMS",
+            "value": "KMS",
+            "description": "Key Management Service (KMS) Key. Used for activating systems within an organization's network via a KMS host. Commonly used in volume activation scenarios."
+          },
+          {
+            "name": "MAK",
+            "value": "MAK",
+            "description": "Multiple Activation Key (MAK). Activates a specific number of systems. Each activation reduces the remaining activation count."
+          },
+          {
+            "name": "Setup",
+            "value": "Setup",
+            "description": "Setup Key. A non-unique 5x5 key, with no activation count associated."
+          },
+          {
+            "name": "Retail",
+            "value": "Retail",
+            "description": "Retail Key. A unique 5x5 key issued to each customer for every order. Activation behavior may vary depending on the product. Refer to the specific product documentation for details on key usage and activation count."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None. No activation key is provided."
+          }
+        ]
+      }
+    },
+    "LicenseSummaryProperties": {
+      "type": "object",
+      "description": "LicenseSummary properties",
+      "properties": {
+        "billingAccountName": {
+          "type": "string",
+          "description": "Billing account identifier",
+          "pattern": "^([0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "type": "string",
+          "description": "Billing profile identifier",
+          "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+          "readOnly": true
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product",
+          "readOnly": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "Catalog product Id",
+          "pattern": "\\b[BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz\\d]{12}\\b",
+          "readOnly": true
+        },
+        "productVersion": {
+          "type": "string",
+          "description": "Version of the product",
+          "readOnly": true
+        },
+        "licenseQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of licenses",
+          "readOnly": true
+        },
+        "softwareAssuranceQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of active software assurance",
+          "readOnly": true
+        },
+        "lastRefreshedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the license summary was last refreshed",
+          "readOnly": true
+        }
+      }
+    },
+    "LicenseSummaryResource": {
+      "type": "object",
+      "description": "LicenseSummary resource - provides license summary information for a billing account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LicenseSummaryResult": {
+      "type": "object",
+      "description": "The response of a LicenseSummary by Billing Account operation",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LicenseSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/LicenseSummaryResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListProductDownloadOptionsResponse": {
+      "type": "object",
+      "description": "List ProductDownloadOptions Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of product download options",
+          "items": {
+            "$ref": "#/definitions/ProductDownloadOption"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListProductKeysResponse": {
+      "type": "object",
+      "description": "List Product Keys Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of product keys",
+          "items": {
+            "$ref": "#/definitions/ProductKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListSoftwareLicenseProductDownloadOptionsResponse": {
+      "type": "object",
+      "description": "List SoftwareLicenseProductDownloadOptions Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of product download options",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseProductDownloadOption"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListSoftwareLicenseProductKeysResponse": {
+      "type": "object",
+      "description": "List SoftwareLicense Product Keys Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of product keys",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseProductKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "Represents the result of a long-running operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the operation result."
+        },
+        "status": {
+          "$ref": "#/definitions/OperationResultStatus",
+          "description": "Status of the operation result."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties associated with the operation result.",
+          "properties": {
+            "resourceId": {
+              "type": "string",
+              "description": "Resource ID related to the operation result."
+            }
+          },
+          "required": [
+            "resourceId"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the operation result."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status",
+        "properties",
+        "type"
+      ]
+    },
+    "OperationResultStatus": {
+      "type": "string",
+      "description": "Status of a long-running operation result.",
+      "enum": [
+        "Pending",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Operation is pending."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProcessActivationUnitsOffsetInput": {
+      "type": "object",
+      "description": "Input model for processActivationUnitsOffset operation",
+      "properties": {
+        "activationUnitsOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Activation Units to be offset to existing activations count as requested by Support."
+        }
+      },
+      "required": [
+        "activationUnitsOffset"
+      ]
+    },
+    "ProductDownloadOption": {
+      "type": "object",
+      "description": "ProductDownloadOption Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductDownloadOptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductDownloadOptionListResult": {
+      "type": "object",
+      "description": "The response of a ProductDownloadOption list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductDownloadOption items on this page",
+          "items": {
+            "$ref": "#/definitions/ProductDownloadOption"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProductDownloadOptionProperties": {
+      "type": "object",
+      "description": "Properties for ProductDownloadOption resource",
+      "properties": {
+        "downloadOptions": {
+          "type": "array",
+          "description": "Array of available download options",
+          "items": {
+            "$ref": "#/definitions/DownloadOptionProperties"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ]
+        }
+      },
+      "required": [
+        "downloadOptions"
+      ]
+    },
+    "ProductKey": {
+      "type": "object",
+      "description": "Product Key Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductKeyListResult": {
+      "type": "object",
+      "description": "The response of a ProductKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductKey items on this page",
+          "items": {
+            "$ref": "#/definitions/ProductKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProductKeyProperties": {
+      "type": "object",
+      "description": "Product Key Properties (masked or full)",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "Type of key provisioned"
+        },
+        "keyStatus": {
+          "$ref": "#/definitions/KeyStatus",
+          "description": "Status of key provisioned"
+        },
+        "maskedKey": {
+          "type": "string",
+          "description": "5x5 software activation key value - masked. Null in ShowFullKey response."
+        },
+        "fullKey": {
+          "type": "string",
+          "format": "password",
+          "description": "5x5 software activation key value. This is actual key which is a secret. Null in List and Get ProductKeys response.",
+          "x-ms-secret": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID associated with the key."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "SKU ID associated with the key."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Software version for L+SA products (optional)."
+        },
+        "purchasedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of keys purchased."
+        },
+        "activationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Number of activations for the key."
+        },
+        "activationUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Change in Activations in Units Requested by Support."
+        },
+        "activationCountUsed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of activations done by the User."
+        }
+      },
+      "required": [
+        "keyType",
+        "keyStatus",
+        "productId",
+        "skuId",
+        "purchasedCount",
+        "activationCount"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Canceling"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource has been canceled."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Resource is being provisioned."
+          },
+          {
+            "name": "Canceling",
+            "value": "Canceling",
+            "description": "Resource is being canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReplaceKeyInput": {
+      "type": "object",
+      "description": "Input model for ReplaceKey POST operation",
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/ReplaceKeyReason",
+          "description": "Reason for replacing the key"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "ReplaceKeyReason": {
+      "type": "string",
+      "description": "Supported reasons for ReplaceKey operation",
+      "enum": [
+        "Chargeback",
+        "CustomerCancellation",
+        "DunningAbandoned",
+        "Expiration",
+        "Fraud",
+        "SettlementReversal"
+      ],
+      "x-ms-enum": {
+        "name": "ReplaceKeyReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Chargeback",
+            "value": "Chargeback",
+            "description": "Replacement due to Chargeback"
+          },
+          {
+            "name": "CustomerCancellation",
+            "value": "CustomerCancellation",
+            "description": "Replacement due to Customer Cancellation"
+          },
+          {
+            "name": "DunningAbandoned",
+            "value": "DunningAbandoned",
+            "description": "Replacement due to Dunning Abandonment"
+          },
+          {
+            "name": "Expiration",
+            "value": "Expiration",
+            "description": "Replacement due to Expiration"
+          },
+          {
+            "name": "Fraud",
+            "value": "Fraud",
+            "description": "Replacement due to Fraud"
+          },
+          {
+            "name": "SettlementReversal",
+            "value": "SettlementReversal",
+            "description": "Replacement due to Settlement Reversal"
+          }
+        ]
+      }
+    },
+    "ShowFullKeyResult": {
+      "type": "object",
+      "description": "Show Full Key Response (same as ProductKey, but keyValue is full)",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ShowFullSoftwareLicenseKeyResult": {
+      "type": "object",
+      "description": "Show Full Key Result for SoftwareLicense (same as SoftwareLicenseProductKey, but keyValue is full)",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareLicenseProductKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SoftwareBillingSubscription": {
+      "type": "object",
+      "description": "SoftwareBillingSubscription resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareBillingSubscriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SoftwareBillingSubscriptionListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareBillingSubscription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareBillingSubscription items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareBillingSubscription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareBillingSubscriptionProperties": {
+      "type": "object",
+      "description": "SoftwareBillingSubscription properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for the subscription",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Unique identifier for the product purchased",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the product being billed under this subscription.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SoftwareBillingSubscriptionStatus",
+          "description": "The status of the software billing subscription.",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Date when the subscription benefit should start. Format : 2023-02-01T01:01:01.1075056Z",
+          "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date when the subscription benefit should end. Format : 2026-02-01T01:01:01.1075056Z",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenewSetting",
+          "description": "Indicates whether the subscription is configured for automatic renewal upon expiration.",
+          "readOnly": true
+        },
+        "renewal": {
+          "$ref": "#/definitions/SoftwareSubscriptionRenewalProperties",
+          "description": "Contains information about renewal of this subscription",
+          "readOnly": true
+        },
+        "parentSoftwareBillingSubscriptionId": {
+          "type": "string",
+          "description": "The ID of the software billing subscription corresponding to the base/initial software subscription purchased. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/{softwareBillingSubscriptionName}",
+          "readOnly": true
+        },
+        "associatedSoftwareBillingSubscriptionIds": {
+          "type": "array",
+          "description": "The IDs of the software billing subscriptions corresponding to the True up or Licenses that are added on top of the base/initial software subscription purchase (parent). Returned only if requested in the $expand query parameter. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.SoftwarePlan/softwareBillingSubscriptions/{softwareBillingSubscriptionName}",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "type": "string",
+          "description": "The ID of the billing profile to which this subscription is billed. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+          "readOnly": true
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "The uri of the software subscription resource corresponding to this software billing subscription. Format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}",
+          "readOnly": true
+        },
+        "softwareSubscriptionType": {
+          "$ref": "#/definitions/SoftwareSubscriptionType",
+          "description": "The type of the software subscription resource corresponding to this software billing subscription.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "productCode",
+        "quantity",
+        "status",
+        "startDate",
+        "endDate",
+        "autoRenew",
+        "billingProfileId",
+        "resourceUri",
+        "softwareSubscriptionType"
+      ]
+    },
+    "SoftwareBillingSubscriptionStatus": {
+      "type": "string",
+      "description": "The status of the software billing subscription.",
+      "enum": [
+        "Pending",
+        "Active",
+        "Failed",
+        "Canceled",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareBillingSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The software billing subscription is in a pending state. This represents the initial phase after creation, before activation and the commencement of billing."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Software billing subscription is active."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Software billing subscription creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Software billing subscription has been canceled."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Software billing subscription has expired."
+          }
+        ]
+      }
+    },
+    "SoftwareKey": {
+      "type": "object",
+      "description": "Provisioned software key info",
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "Type of key provisioned"
+        },
+        "keyStatus": {
+          "type": "string",
+          "description": "Status of key provisioned"
+        },
+        "keyValue": {
+          "type": "string",
+          "format": "password",
+          "description": "5x5 software activation key",
+          "x-ms-secret": true
+        },
+        "downloadLink": {
+          "type": "string",
+          "format": "password",
+          "description": "URL to download software",
+          "x-ms-secret": true
+        },
+        "purchasedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of purchased keys"
+        },
+        "activationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of activated keys"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Catalog product Id for this software"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "Catalog sku Id for this software"
+        }
+      },
+      "required": [
+        "keyType"
+      ]
+    },
+    "SoftwareLicense": {
+      "type": "object",
+      "description": "SoftwareLicense resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareLicenseProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SoftwareLicenseDownloadLinkItem": {
+      "type": "object",
+      "description": "Generate Download Links Response Item",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Name of the download file"
+        },
+        "link": {
+          "type": "string",
+          "format": "password",
+          "description": "URL to download software",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "fileName",
+        "link"
+      ]
+    },
+    "SoftwareLicenseDownloadOptionProperties": {
+      "type": "object",
+      "description": "Download option details for a product",
+      "properties": {
+        "cpuAndFileType": {
+          "type": "string",
+          "description": "Specifies the CPU architecture and file type configured by Product Teams (e.g., \"64 Bit, ISO\")"
+        },
+        "displayRank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional rank for display purposes. MinValue = 0 , MaxValue = 100"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the download file"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the download file"
+        },
+        "iso2LanguageCode": {
+          "type": "string",
+          "description": "Language code for the download option (e.g., \"en\")"
+        },
+        "optionTitle": {
+          "type": "string",
+          "description": "Title or description of the download option"
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Optional field for L+SA products to specify the version (e.g., \"2019\", \"2022\")"
+        }
+      },
+      "required": [
+        "cpuAndFileType",
+        "displayRank",
+        "fileSize",
+        "fileName",
+        "iso2LanguageCode"
+      ]
+    },
+    "SoftwareLicenseGenerateDownloadLinksInput": {
+      "type": "object",
+      "description": "Download option details for generateDownloadLinks POST action",
+      "properties": {
+        "cpuAndFileType": {
+          "type": "string",
+          "description": "Specifies the CPU architecture and file type (e.g., \"64 Bit, ISO\") configured by Product Teams."
+        },
+        "iso2LanguageCode": {
+          "type": "string",
+          "description": "Language code for the download option (e.g., \"en\")"
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Optional field for L+SA products to specify the version (e.g., \"2019\", \"2022\")"
+        }
+      },
+      "required": [
+        "cpuAndFileType",
+        "iso2LanguageCode"
+      ]
+    },
+    "SoftwareLicenseGenerateDownloadLinksResponse": {
+      "type": "object",
+      "description": "Generate Download Links Response for SoftwareLicense",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of download link items",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseDownloadLinkItem"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareLicenseListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareLicense list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareLicense items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicense"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareLicenseProductDownloadOption": {
+      "type": "object",
+      "description": "SoftwareLicenseProductDownloadOption Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareLicenseProductDownloadOptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SoftwareLicenseProductDownloadOptionListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareLicenseProductDownloadOption list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareLicenseProductDownloadOption items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseProductDownloadOption"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareLicenseProductDownloadOptionProperties": {
+      "type": "object",
+      "description": "Properties for SoftwareLicenseProductDownloadOption resource",
+      "properties": {
+        "downloadOptions": {
+          "type": "array",
+          "description": "Array of available download options",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseDownloadOptionProperties"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ]
+        }
+      },
+      "required": [
+        "downloadOptions"
+      ]
+    },
+    "SoftwareLicenseProductKey": {
+      "type": "object",
+      "description": "SoftwareLicense Product Key Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareLicenseProductKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SoftwareLicenseProductKeyListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareLicenseProductKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareLicenseProductKey items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareLicenseProductKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareLicenseProductKeyProperties": {
+      "type": "object",
+      "description": "Product Key Properties for SoftwareLicense (masked or full)",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "Type of key provisioned"
+        },
+        "keyStatus": {
+          "$ref": "#/definitions/KeyStatus",
+          "description": "Status of key provisioned"
+        },
+        "maskedKey": {
+          "type": "string",
+          "description": "5x5 software activation key value - masked. Null in ShowFullKey response."
+        },
+        "fullKey": {
+          "type": "string",
+          "format": "password",
+          "description": "5x5 software activation key value. This is actual key which is a secret. Null in List and Get ProductKeys response.",
+          "x-ms-secret": true
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID that uniquely identifies a software product configured by business. Format: ^[A-Z0-9]{12}$"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "SKU ID that uniquely identifies a software product SKU configured by business. Format: ^[A-Z0-9]{4}$"
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "Software version for L+SA products (optional)."
+        },
+        "purchasedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of keys purchased."
+        },
+        "activationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Number of activations for the key."
+        }
+      },
+      "required": [
+        "keyType",
+        "keyStatus",
+        "productId",
+        "skuId",
+        "purchasedCount",
+        "activationCount"
+      ]
+    },
+    "SoftwareLicenseProperties": {
+      "type": "object",
+      "description": "SoftwareLicense properties",
+      "properties": {
+        "upn": {
+          "type": "string",
+          "description": "Unique identifier for the product purchased",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the product purchased",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Date when the license benefit should start. Format : 2023-02-01T01:01:01.1075056Z",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date when the license benefit should end. Format : 2023-02-01T01:01:01.1075056Z",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "upn",
+        "quantity"
+      ]
+    },
+    "SoftwareLicensePropertiesUpdate": {
+      "type": "object",
+      "description": "SoftwareLicense properties"
+    },
+    "SoftwareLicenseUpdate": {
+      "type": "object",
+      "description": "SoftwareLicense resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareLicensePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "SoftwareSubscription": {
+      "type": "object",
+      "description": "SoftwareSubscription resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareSubscriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SoftwareSubscriptionLicenseSummary": {
+      "type": "object",
+      "description": "Summary of License & Software Assurance for the software subscription",
+      "properties": {
+        "productName": {
+          "type": "string",
+          "description": "Name of the product"
+        },
+        "productVersion": {
+          "type": "string",
+          "description": "Version of the product"
+        },
+        "licenseQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of licenses"
+        },
+        "softwareAssuranceQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of active software assurances"
+        }
+      },
+      "required": [
+        "productName",
+        "productVersion",
+        "licenseQuantity",
+        "softwareAssuranceQuantity"
+      ]
+    },
+    "SoftwareSubscriptionListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareSubscription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareSubscription items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareSubscription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareSubscriptionProperties": {
+      "type": "object",
+      "description": "SoftwareSubscription properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for the subscription",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "softwareSubscriptionType": {
+          "$ref": "#/definitions/SoftwareSubscriptionType",
+          "description": "The type of the software subscription.",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Unique identifier for the product purchased",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If softwareSubscriptionType is SoftwareSubscription, the count of Software Subscriptions purchased. If softwareSubscriptionType is LicenseSoftwareAssurance, the count of Software Assurances purchased.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "licenseQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of Licenses purchased for this product. Applicable for LicenseSoftwareAssurance.",
+          "readOnly": true
+        },
+        "licenseSummary": {
+          "type": "array",
+          "description": "Summary of the license information for this software subscription. Applicable for LicenseSoftwareAssurance. Returned only if requested in the $expand query parameter.",
+          "items": {
+            "$ref": "#/definitions/SoftwareSubscriptionLicenseSummary"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SoftwareSubscriptionStatus",
+          "description": "The status of the software subscription.",
+          "readOnly": true
+        },
+        "startAt": {
+          "type": "string",
+          "description": "Date when the subscription benefit should start. Format : 2023-02-01T01:01:01.1075056Z",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date when the subscription benefit should end. Format : 2026-02-01T01:01:01.1075056Z",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "cotermBillingSubscriptionId": {
+          "type": "string",
+          "description": "The billing subscription id of the asset that this subscription is cotermed with. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenewSetting",
+          "description": "Indicates whether the subscription is configured for automatic renewal upon expiration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "renewal": {
+          "$ref": "#/definitions/SoftwareSubscriptionRenewalProperties",
+          "description": "Contains information about renewal of this product",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "billingSubscriptionId": {
+          "type": "string",
+          "description": "The ID of the billing subscription corresponding to this software subscription. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}",
+          "readOnly": true
+        },
+        "parentSoftwareSubscriptionId": {
+          "type": "string",
+          "description": "ID of the base/initial software subscription purchased. Format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "associatedSoftwareSubscriptionIds": {
+          "type": "array",
+          "description": "ID of the True up or Licenses that are added on top of the base/initial software subscription purchase (parent). Returned only if requested in the $expand query parameter. Format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SoftwarePlan/softwareSubscriptions/{softwareSubscriptionName}",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "softwareSubscriptionType",
+        "productCode",
+        "quantity",
+        "status",
+        "billingSubscriptionId"
+      ]
+    },
+    "SoftwareSubscriptionPropertiesUpdate": {
+      "type": "object",
+      "description": "SoftwareSubscription properties",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenewSetting",
+          "description": "Indicates whether the subscription is configured for automatic renewal upon expiration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "renewal": {
+          "$ref": "#/definitions/SoftwareSubscriptionRenewalPropertiesUpdate",
+          "description": "Contains information about renewal of this product",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "SoftwareSubscriptionRenewalProperties": {
+      "type": "object",
+      "description": "productCode to be used during renewal",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "productCode to be used during renewal"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date when the subscription benefit ends after renewal. Format : 2026-02-01T01:01:01.1075056Z"
+        },
+        "cotermBillingSubscriptionId": {
+          "type": "string",
+          "description": "The billing subscription id of the asset that this subscription is cotermed with. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"
+        }
+      },
+      "required": [
+        "productCode"
+      ]
+    },
+    "SoftwareSubscriptionRenewalPropertiesUpdate": {
+      "type": "object",
+      "description": "productCode to be used during renewal",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "productCode to be used during renewal"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date when the subscription benefit ends after renewal. Format : 2026-02-01T01:01:01.1075056Z"
+        },
+        "cotermBillingSubscriptionId": {
+          "type": "string",
+          "description": "The billing subscription id of the asset that this subscription is cotermed with. Format : /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}"
+        }
+      }
+    },
+    "SoftwareSubscriptionStatus": {
+      "type": "string",
+      "description": "The status of the software subscription.",
+      "enum": [
+        "Pending",
+        "Active",
+        "Failed",
+        "Canceled",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Software subscription is pending."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Software subscription is active."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Software subscription failed creation."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Software subscription has been canceled."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Software subscription has expired."
+          }
+        ]
+      }
+    },
+    "SoftwareSubscriptionType": {
+      "type": "string",
+      "description": "The type of the software subscription resource.",
+      "enum": [
+        "SoftwareSubscription",
+        "LicenseSoftwareAssurance"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareSubscriptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SoftwareSubscription",
+            "value": "SoftwareSubscription",
+            "description": "SoftwareSubscription resource type"
+          },
+          {
+            "name": "LicenseSoftwareAssurance",
+            "value": "LicenseSoftwareAssurance",
+            "description": "LicenseSoftwareAssurance resource type"
+          }
+        ]
+      }
+    },
+    "SoftwareSubscriptionUpdate": {
+      "type": "object",
+      "description": "SoftwareSubscription resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareSubscriptionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "SoftwareSubscriptionUpdateProperties": {
+      "type": "object",
+      "description": "SoftwareSubscription properties that can be updated",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenewSetting",
+          "description": "Indicates whether the subscription is configured for automatic renewal upon expiration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "renewal": {
+          "$ref": "#/definitions/SoftwareSubscriptionRenewalProperties",
+          "description": "Contains information about renewal of this product",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "SoftwareSubscriptionUpdateRequest": {
+      "type": "object",
+      "description": "SoftwareSubscription update request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareSubscriptionUpdateProperties",
+          "description": "SoftwareSubscription properties to be updated"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ValidationFailure": {
+      "type": "object",
+      "description": "Validation failure",
+      "properties": {
+        "reasonCode": {
+          "type": "string",
+          "description": "Reason code for the validation failure"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Detailed reason for the validation failure"
+        }
+      },
+      "required": [
+        "reasonCode",
+        "reason"
+      ]
+    },
+    "ValidationResponse": {
+      "type": "object",
+      "description": "Validation result",
+      "properties": {
+        "validationResult": {
+          "$ref": "#/definitions/ValidationResult",
+          "description": "Validation result"
+        },
+        "validationFailures": {
+          "type": "array",
+          "description": "List of validation failures",
+          "items": {
+            "$ref": "#/definitions/ValidationFailure"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "validationResult"
+      ]
+    },
+    "ValidationResult": {
+      "type": "string",
+      "description": "Validation result",
+      "enum": [
+        "Passed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "Validation passed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "AmendmentFilterParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "OData filter expression to filter amendments. Supported fields (eq only): properties/amendmentType (string, e.g. 'trueUp'), properties/isActive (boolean). Examples: filter=properties/amendmentType eq 'trueUp'; filter=properties/isActive eq true; filter=properties/amendmentType eq 'trueUp' and properties/isActive eq true.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-odata": "#/definitions/AmendmentFilter"
+    },
+    "BillingAccountNameParameter": {
+      "name": "billingAccountName",
+      "in": "path",
+      "description": "The ID that uniquely identifies a billing account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^([0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
+      "x-ms-parameter-location": "method"
+    },
+    "ExpandSoftwareBillingSubscriptionQueryParameter": {
+      "name": "$expand",
+      "in": "query",
+      "description": "The $expand OData query parameter. This is a comma-separated list of additional properties to include in the response. Possible values include: 'associatedSoftwareBillingSubscriptionIds'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "expand"
+    },
+    "ExpandSoftwareSubscriptionQueryParameter": {
+      "name": "$expand",
+      "in": "query",
+      "description": "The $expand OData query parameter. This is a comma-separated list of additional properties to include in the response. Possible values include: 'licenseSummary', 'associatedSoftwareSubscriptionIds'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "expand"
+    },
+    "ListProductKeysParameters": {
+      "name": "keyStatus",
+      "in": "query",
+      "description": "Filter by keyStatus",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Blocked",
+        "Revoked",
+        "Replaced",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "KeyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Key is active and available for activation."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Key is not valid for activation (e.g., expired, not provisioned, or disabled)."
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "Key is blocked due to policy, compliance, or security issues (e.g., fraud or piracy)."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Key is permanently revoked (e.g., due to refund or cancellation)."
+          },
+          {
+            "name": "Replaced",
+            "value": "Replaced",
+            "description": "Key has been replaced or all activations consumed. No longer usable."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No 5x5 key is assigned"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PaginationParameters.skipToken": {
+      "name": "skipToken",
+      "in": "query",
+      "description": "Continuation token for retrieving the next page of results. Returned in the response nextLink uri when more items are available.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PaginationParameters.top": {
+      "name": "top",
+      "in": "query",
+      "description": "Maximum number of items to return per page",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "SoftwareSubscriptionsListKeysParameters.cpuFileType": {
+      "name": "cpuFileType",
+      "in": "query",
+      "description": "The CPU and file type of software to be downloaded.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SoftwareSubscriptionsListKeysParameters.languageCode": {
+      "name": "languageCode",
+      "in": "query",
+      "description": "The language code of software to be downloaded.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SoftwareSubscriptionsListKeysParameters.showKey": {
+      "name": "showKey",
+      "in": "query",
+      "description": "Whether to return unmasked key in the response.",
+      "required": true,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -47,10 +47,16 @@ interface NetworkRacks {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkRack>;
 
   @doc("List all Network Rack resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkRack>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkRack,
+    Response = NetworkRacksListResult
+  >;
 
   @doc("List all Network Rack resources in the given subscription")
-  listBySubscription is ArmListBySubscription<NetworkRack>;
+  listBySubscription is ArmListBySubscription<
+    NetworkRack,
+    Response = NetworkRacksListResult
+  >;
 }
 
 @@doc(NetworkRacks.create::parameters.resource, "Request payload.");

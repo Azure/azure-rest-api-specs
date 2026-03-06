@@ -93,10 +93,20 @@ model NetworkDeviceProperties {
   ]>;
 }
 
-@doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
-model NetworkDevicePatchParameters {
-  ...TagsUpdate;
+@doc("Network Device updatable properties.")
+model NetworkDevicePatchableProperties {
+  @doc("The host name of the device.")
+  @minLength(1)
+  hostName?: string;
 
+  @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
+  @minLength(1)
+  serialNumber?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
+model NetworkDevicePatchParameters extends TagsUpdate {
   @doc("Network Device Patch properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
@@ -116,14 +126,7 @@ model NetworkDevicePatchParameters {
 @doc("Network Device Patch properties.")
 model NetworkDevicePatchParametersProperties {
   ...AnnotationResource;
-
-  @doc("The host name of the device.")
-  @minLength(1)
-  hostName?: string;
-
-  @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
-  @minLength(1)
-  serialNumber?: string;
+  ...NetworkDevicePatchableProperties;
 
   @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
   @added(Versions.v2025_07_15)
@@ -136,10 +139,9 @@ model RebootProperties {
   rebootType?: RebootType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Update the administrative state on list of resources.")
-model UpdateDeviceAdministrativeState {
-  ...EnableDisableOnResources;
-
+model UpdateDeviceAdministrativeState extends EnableDisableOnResources {
   @doc("Administrative state.")
   state?: DeviceAdministrativeState;
 }

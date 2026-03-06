@@ -52,7 +52,10 @@ interface ExternalNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<ExternalNetwork>;
 
   @doc("Implements External Networks list by resource group GET method.")
-  listByL3IsolationDomain is ArmResourceListByParent<ExternalNetwork>;
+  listByL3IsolationDomain is ArmResourceListByParent<
+    ExternalNetwork,
+    Response = ExternalNetworksList
+  >;
 
   @doc("Executes update operation to enable or disable administrative State for externalNetwork.")
   @action("updateAdministrativeState")

@@ -547,10 +547,9 @@ model Resource {
   systemData?: SystemData;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Update administrative state on list of resources.")
-model UpdateAdministrativeState {
-  ...EnableDisableOnResources;
-
+model UpdateAdministrativeState extends EnableDisableOnResources {
   @doc("Administrative state.")
   state?: EnableDisableState;
 }
@@ -561,20 +560,17 @@ model EnableDisableOnResources {
   resourceIds?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Common response for the state updates.")
-model CommonPostActionResponseForStateUpdate {
-  ...ErrorResponse;
-
+model CommonPostActionResponseForStateUpdate extends CommonErrorResponse {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The response of the action validate configuration.")
-@removed(Versions.v2026_01_15_preview)
-model ValidateConfigurationResponse {
-  ...ErrorResponse;
-
+model ValidateConfigurationResponse extends CommonErrorResponse {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
@@ -603,10 +599,9 @@ model ValidateConfigurationResponseProperties {
   url?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Common response for device updates.")
-model CommonPostActionResponseForDeviceUpdate {
-  ...ErrorResponse;
-
+model CommonPostActionResponseForDeviceUpdate extends CommonErrorResponse {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
@@ -632,10 +627,10 @@ model DeviceRoCommand {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The current status of an async operation.")
-model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
-  ...ErrorResponse;
-
+model CommonPostActionResponseForDeviceROCommandsOperationStatusResult
+  extends CommonErrorResponse {
   @doc("The end time of the operation.")
   @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
@@ -668,15 +663,15 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Common response for device Ro Commands.")
 @removed(Versions.v2024_06_15_preview)
 @renamedFrom(
   Versions.v2024_06_15_preview,
   "CommonPostActionResponseForDeviceROCommands"
 )
-model CommonPostActionResponseForDeviceROCommandsDeprecated {
-  ...ErrorResponse;
-
+model CommonPostActionResponseForDeviceROCommandsDeprecated
+  extends CommonErrorResponse {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
@@ -711,10 +706,9 @@ model DeviceRwCommand {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Common response for device Rw Commands.")
-model CommonPostActionResponseForDeviceRWCommands {
-  ...ErrorResponse;
-
+model CommonPostActionResponseForDeviceRWCommands extends CommonErrorResponse {
   @doc("Gets the configuration state.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
@@ -1436,4 +1430,16 @@ union GenerateBaseConfiguration {
   Enabled: "Enabled",
 
   string,
+}
+
+/**
+ * The error message.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.CommonTypes.Private.armCommonDefinition(
+  "ErrorResponse",
+  Azure.ResourceManager.CommonTypes.Versions.v5
+)
+model CommonErrorResponse {
+  ...Azure.ResourceManager.ErrorResponse;
 }
