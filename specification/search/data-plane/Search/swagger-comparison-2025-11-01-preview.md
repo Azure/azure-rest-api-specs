@@ -20,17 +20,7 @@ This document compares:
 
 ## Breaking Changes
 
-Breaking changes are classified by impact level:
-
-| Impact | Definition |
-|--------|-----------|
-| **High** | Affects API wire behavior or removes documented contract features; requires caller changes |
-| **Medium** | Affects SDK-generated client code only; no change to the HTTP wire format |
-| **Low** | Cosmetic or documentation-level; no practical behavioral change, or fixes a pre-existing bug |
-
----
-
-### High Impact
+### Skillset Operations
 
 #### 1. Legacy V1 Skill Types Removed from Discriminator Union
 
@@ -49,7 +39,7 @@ The V3 variants remain:
 
 ---
 
-### Medium Impact
+### Service List Operations
 
 #### 2. `$select` Query Parameter Type Changed (`string` → `array`)
 
@@ -65,6 +55,8 @@ For list operations on `/datasources`, `/indexers`, `/skillsets`, and `/synonymm
 **Impact**: No change to the HTTP wire format. SDK clients generated from the old spec may have typed this parameter as a plain `string`; clients generated from the new spec will use `string[]`. This is a **code-generation breaking change** for SDK consumers, not for direct HTTP callers.
 
 ---
+
+### Datasource & Knowledge Base Operations
 
 #### 3. Body Parameter Names Changed (Swagger Metadata Only)
 
@@ -82,7 +74,7 @@ The names of request-body parameters changed in several operations. The underlyi
 
 ---
 
-### Low Impact
+### ChatCompletion Operations
 
 #### 4. `ChatCompletionExtraParametersBehavior` Enum Value Bug Fix
 
@@ -100,7 +92,9 @@ The old spec was internally inconsistent: the `enum` array listed `"pass-through
 
 ## Non-Breaking Changes
 
-### 1. Schema File Consolidation
+### Schema & Infrastructure
+
+#### 1. Schema File Consolidation
 
 Three separate swagger files merged into one:
 
@@ -110,7 +104,7 @@ Three separate swagger files merged into one:
 | `searchindex.json` (137 KB, document operations) | *(merged)* |
 | `knowledgebase.json` (35 KB, knowledge operations) | *(merged)* |
 
-### 2. URL Path Consolidation (Equivalent Routing)
+#### 2. URL Path Consolidation (Equivalent Routing)
 
 Document operations and knowledge retrieval moved from parameterized host templates to explicit path prefixes. The resolved URLs are **identical**:
 
@@ -119,7 +113,9 @@ Document operations and knowledge retrieval moved from parameterized host templa
 | host: `{endpoint}/indexes('{indexName}')` + path `/docs/...` | host: `{endpoint}` + path `/indexes('{indexName}')/docs/...` |
 | host: `{endpoint}/knowledgebases('{knowledgeBaseName}')` + path `/retrieve` | host: `{endpoint}` + path `/knowledgebases('{knowledgeBaseName}')/retrieve` |
 
-### 3. Definition Renames (37 Equivalent Renames)
+### Model & Definition Changes
+
+#### 3. Definition Renames (37 Equivalent Renames)
 
 All of the following definitions were renamed with **identical content** (verified by schema unfolding):
 
@@ -165,7 +161,7 @@ All of the following definitions were renamed with **identical content** (verifi
 
 > Note: `WebApiParameters.httpHeaders` was typed as `$ref: WebApiHttpHeaders` (which expanded to `object{additionalProperties: {type: string}}`). The new `WebApiVectorizerParameters.httpHeaders` is the equivalent inline schema. Not breaking per the stated rules.
 
-### 4. Inline ↔ `$ref` Conversions (Same Content)
+#### 4. Inline ↔ `$ref` Conversions (Same Content)
 
 All of the following property type changes convert between inline schema and `$ref` with **equivalent unfolded schemas** — not breaking per the comparison rules:
 
@@ -189,7 +185,7 @@ All of the following property type changes convert between inline schema and `$r
 | `StopwordsTokenFilter` | `stopwordsList` | `$ref: StopwordsList` (modelAsString: false) → inline enum (same values) |
 | `VectorizableTextQuery` | `queryRewrites` | `QueryRewrites` → `QueryRewritesType` (equivalent rename) |
 
-### 5. Number Format Clarifications (Not Breaking)
+#### 5. Number Format Clarifications (Not Breaking)
 
 Three properties in `ChatCompletionCommonModelParameters` had `format: double` added. Since these were already typed as `number` and format is a constraint hint, this is a clarification only:
 
@@ -199,7 +195,7 @@ Three properties in `ChatCompletionCommonModelParameters` had `format: double` a
 | `presencePenalty` | `type: number` | `type: number, format: double` |
 | `frequencyPenalty` | `type: number` | `type: number, format: double` |
 
-### 6. `FacetResult.cardinality` Type Clarification (Not Breaking)
+#### 6. `FacetResult.cardinality` Type Clarification (Not Breaking)
 
 | | Old | New |
 |-|-----|-----|
@@ -208,23 +204,27 @@ Three properties in `ChatCompletionCommonModelParameters` had `format: double` a
 
 Both have `format: int64`. The old `type: number` with `format: int64` was imprecise; the new `type: integer, format: int64` is more accurate and equivalent in practice.
 
-### 7. `AzureOpenAIVectorizer.azureOpenAIParameters` Type Rename (Not Breaking)
+#### 7. `AzureOpenAIVectorizer.azureOpenAIParameters` Type Rename (Not Breaking)
 
 Changed from `AzureOpenAIParameters` to `AzureOpenAIVectorizerParameters`. Both have identical properties: `resourceUri`, `deploymentId`, `apiKey`, `authIdentity`, `modelName`.
 
-### 8. `KnowledgeBaseAzureOpenAIModel.azureOpenAIParameters` Type Rename (Not Breaking)
+#### 8. `KnowledgeBaseAzureOpenAIModel.azureOpenAIParameters` Type Rename (Not Breaking)
 
 Changed from `AzureOpenAIParameters` to `AzureOpenAIVectorizerParameters` — same rename as above, same content.
 
-### 9. `AzureOpenAITokenizerParameters.encoderModelName` Type Rename (Not Breaking)
+#### 9. `AzureOpenAITokenizerParameters.encoderModelName` Type Rename (Not Breaking)
 
 Changed from `EncoderModelName` to `SplitSkillEncoderModelName` — equivalent rename with same enum values.
 
-### 10. `GET /indexes` — `$select` Parameter Removed (Non-Breaking)
+### Index Operations
+
+#### 10. `GET /indexes` — `$select` Parameter Removed (Non-Breaking)
 
 The optional `$select` query parameter was removed from `GET /indexes`. Since it was optional (`required: false`), its removal is non-breaking. `ListIndexesSelectedResult` was added as a new response type to support a filtered-fields response variant.
 
-### 11. New Definitions Added (Non-Breaking Additions)
+### New Features & Additions
+
+#### 11. New Definitions Added (Non-Breaking Additions)
 
 The following new definitions were added (new features or schema extractions):
 
@@ -253,7 +253,7 @@ The following new definitions were added (new features or schema extractions):
 | `ChatCompletionSchemaProperties` | Extracted from inline in old spec |
 | `ChatCompletionResponseFormatType` | Extracted enum for response format type |
 
-### 12. `KnowledgeBaseActivityRecord.type` — Added Enum Constraint (Not Breaking)
+#### 12. `KnowledgeBaseActivityRecord.type` — Added Enum Constraint (Not Breaking)
 
 | | Old | New |
 |-|-----|-----|
@@ -262,7 +262,7 @@ The following new definitions were added (new features or schema extractions):
 
 The old spec had this as an unconstrained `string`. The new spec adds the specific valid values. This is a documentation improvement for a property that already had fixed service-side values.
 
-### 13. New Definitions Added in Refreshed TSP-Compiled Swagger
+#### 13. New Definitions Added in Refreshed TSP-Compiled Swagger
 
 The following definitions were added in the updated TSP-compiled `search.json` and were not present in the initial migration comparison. They represent new features now fully captured in the TypeSpec:
 
@@ -285,7 +285,7 @@ The following definitions were added in the updated TSP-compiled `search.json` a
 | `SearchServiceStatistics` | `indexersRuntime` | `$ref: ServiceIndexersRuntime` | Service-level indexer runtime counters |
 | `SearchServiceLimits` | `maxCumulativeIndexerRuntimeSeconds` | `integer (int64, nullable)` | Maximum cumulative indexer runtime allowed |
 
-### 14. New Operations Added in Refreshed TSP-Compiled Swagger
+#### 14. New Operations Added in Refreshed TSP-Compiled Swagger
 
 The following operations were added in the updated `search.json`:
 
@@ -294,7 +294,9 @@ The following operations were added in the updated `search.json`:
 | `Indexes_GetStatistics` | `GET /indexes('{indexName}')/search.stats` | Retrieves statistics for a specific index |
 | `GetIndexStatsSummary` | `GET /indexstats` | Retrieves a summary of statistics for all indexes in the service |
 
-### 15. `Accept` Header — Made Optional (Fixed, Non-Breaking)
+### All Operations
+
+#### 15. `Accept` Header — Made Optional (Fixed, Non-Breaking)
 
 The TSP-compiled spec initially added an `Accept: application/json;odata.metadata=minimal` header as a **required** parameter to every operation, which was flagged as a low-impact breaking change.
 
@@ -308,22 +310,19 @@ After these fixes the new spec declares `Accept` as an **optional** header (`"re
 
 ## Summary
 
-| Category | Count | Notes |
-|----------|-------|-------|
-| **High Impact Breaking Changes** | **1** | V1 skill types removed from discriminator |
-| **Medium Impact Breaking Changes** | **2** | `$select` type change; body param name changes |
-| **Low Impact Breaking Changes** | **1** | `ChatCompletion` enum bug fix |
-| **Non-Breaking Changes** | **Many** | See sections 1–15 above |
+### Breaking Changes (4)
 
-### High Impact Breaking Changes (1)
+**Skillset Operations**
 1. **V1 skill types removed from discriminator union** — both `SentimentSkill` (`@odata.type: #Microsoft.Skills.Text.SentimentSkill`) and `EntityRecognitionSkill` (`@odata.type: #Microsoft.Skills.Text.EntityRecognitionSkill`) were removed in the same change (V1 skill deprecation).
 
-### Medium Impact Breaking Changes (2)
-1. **`$select` type: `string` → `array[string]` (csv)** — Wire format unchanged; generated SDK client types change
-2. **Body parameter names** — Swagger metadata only; underlying JSON schema unchanged
+**Service List Operations**
+2. **`$select` type: `string` → `array[string]` (csv)** — Wire format unchanged; generated SDK client types change
 
-### Low Impact Breaking Changes (1)
-1. **`ChatCompletionExtraParametersBehavior` enum value** — Fixes inconsistency (`"pass-through"` → `"passThrough"`); corrects swagger to match API reality
+**Datasource & Knowledge Base Operations**
+3. **Body parameter names** — Swagger metadata only; underlying JSON schema unchanged
+
+**ChatCompletion Operations**
+4. **`ChatCompletionExtraParametersBehavior` enum value** — Fixes inconsistency (`"pass-through"` → `"passThrough"`); corrects swagger to match API reality
 
 ### Non-Breaking Changes
 - File consolidation: 3 hand-authored files → 1 TSP-compiled file
