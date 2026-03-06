@@ -75,6 +75,7 @@ Determine how many TypeSpec projects are modified in this PR.
 - Idenitify the TypeSpec projects for the modified files in the PR. A TypeSpec project root directory contains a tspconfig.yaml(tspconfig.yaml may not be in modified list)
 - Record the list and count of modified TypeSpec projects.
 - If zero TypeSpec projects are modified, call `noop` with guidance ("No TypeSpec projects modified in this PR") and stop.
+- If multiple TypeSpec projects are modified in the PR, call `noop` with guidance (" Multiple TypeSpec projects are modified in the PR. Release plan cannot be auto created/updated by GitHub agent workflow. You can create/update a release plan using azsdk agent. Refer aka.ms/azsdk/agent for more details") and stop.
 
 ## Step 4: Check Existing Release Plan
 
@@ -83,7 +84,7 @@ Before enforcing the single-project gate, check whether a release plan already e
 ### 4a — Lookup by spec PR URL
 
 - Build the full spec PR URL: `https://github.com/${{ github.repository }}/pull/<PR_NUMBER>`.
-- Execute `azsdk release-plan get-by-spec-pr --spec-pr-url <PR_URL>` to search for an existing release plan linked to this PR.
+- Execute `azsdk release-plan get -p <PR_URL>` to search for an existing release plan linked to this PR.
 - If a release plan is found, record the work item ID, release plan ID, and existing metadata. Proceed to **Step 6** regardless of how many TypeSpec projects were modified.
 
 ### 4b — Fallback: lookup by TypeSpec project path
@@ -91,7 +92,7 @@ Before enforcing the single-project gate, check whether a release plan already e
 If no release plan was found in 4a:
 
 - Extract the TypeSpec project path from the modified projects list (Step 3). If exactly one project is modified, use that path directly. If multiple are modified, try each path.
-- For each candidate path, execute `azsdk release-plan get-by-spec-pr --typespec-project <PROJECT_PATH>` to search for a release plan associated with that TypeSpec project.
+- For each TypeSpec path, execute `azsdk release-plan get --typespec-path <PROJECT_PATH>` to search for a release plan associated with that TypeSpec project.
 - If a release plan is found for any path, record the work item ID, release plan ID, and existing metadata. Also record the matching TypeSpec project path. Proceed to **Step 6**.
 - If no release plan is found by either method, continue to **Step 5**.
 
@@ -127,7 +128,7 @@ Read the API version from the TypeSpec project's `main.tsp` file.
 Update the existing release plan with the latest information.
 
 - Update the spec PR URL in the release plan:
-  `azsdk release-plan update-spec-pr --work-item-id <WORK_ITEM_ID> --spec-pr-url <PR_URL>`
+  `azsdk release-plan update --work-item-id <WORK_ITEM_ID>  --typespec-path <TypeSpec project>  --api-version <API version> --pull-request <PR_URL>`
 - Update the TypeSpec project path and API version as needed.
 - Add a comment on the PR: "Updated release plan (work item `<WORK_ITEM_ID>`) with TypeSpec project `<PROJECT_PATH>`, API version `<API_VERSION>`, and spec PR link."
 
@@ -140,7 +141,7 @@ First determine whether the PR adds or modifies an API version.
 - If the diff **does** show a new or changed API version, proceed to create a release plan:
   1. **Release month**: Look for release month information in the PR description or title. If not found, default to **current month + 2** in `Month YYYY` format (e.g. if the current month is March 2026, the default release month is `May 2026`).
   2. **Release type**: Derive from the API version string — if it contains `-preview`, use `beta`; otherwise use `stable`.
-  3. **Create**: Execute `azsdk release-plan create --typespec-project <PROJECT_PATH> --api-version <API_VERSION> --spec-pr-url <PR_URL> --release-month "<RELEASE_MONTH>" --release-type <RELEASE_TYPE>`.
+  3. **Create**: Execute `azsdk release-plan create --typespec-project <PROJECT_PATH> --api-version <API_VERSION> --pull-request <PR_URL> --release-month "<RELEASE_MONTH>" --release-type <RELEASE_TYPE>`.
   3a. If successfulAdd a comment on the PR: "Created release plan for TypeSpec project `<PROJECT_PATH>` with API version `<API_VERSION>` and target release month `<RELEASE_MONTH>`."
   3b. If failed to create a release plan due to missing service and product ID, then add a comment to create a release plan using azsdk agent. Comment should inlcude link `aka.ms/azsdk/agent` for more details.
 
