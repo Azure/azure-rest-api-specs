@@ -1676,78 +1676,78 @@ union EntityCategory {
 }
 
 /** The language codes supported for input text by EntityRecognitionSkill. */
-union EntityRecognitionSkillLanguage {
-  string,
+// union EntityRecognitionSkillLanguage {
+//   string,
 
-  /** Arabic */
-  ar: "ar",
+//   /** Arabic */
+//   ar: "ar",
 
-  /** Czech */
-  cs: "cs",
+//   /** Czech */
+//   cs: "cs",
 
-  /** Chinese-Simplified */
-  `zh-Hans`: "zh-Hans",
+//   /** Chinese-Simplified */
+//   `zh-Hans`: "zh-Hans",
 
-  /** Chinese-Traditional */
-  `zh-Hant`: "zh-Hant",
+//   /** Chinese-Traditional */
+//   `zh-Hant`: "zh-Hant",
 
-  /** Danish */
-  da: "da",
+//   /** Danish */
+//   da: "da",
 
-  /** Dutch */
-  nl: "nl",
+//   /** Dutch */
+//   nl: "nl",
 
-  /** English */
-  en: "en",
+//   /** English */
+//   en: "en",
 
-  /** Finnish */
-  fi: "fi",
+//   /** Finnish */
+//   fi: "fi",
 
-  /** French */
-  fr: "fr",
+//   /** French */
+//   fr: "fr",
 
-  /** German */
-  de: "de",
+//   /** German */
+//   de: "de",
 
-  /** Greek */
-  el: "el",
+//   /** Greek */
+//   el: "el",
 
-  /** Hungarian */
-  hu: "hu",
+//   /** Hungarian */
+//   hu: "hu",
 
-  /** Italian */
-  it: "it",
+//   /** Italian */
+//   it: "it",
 
-  /** Japanese */
-  ja: "ja",
+//   /** Japanese */
+//   ja: "ja",
 
-  /** Korean */
-  ko: "ko",
+//   /** Korean */
+//   ko: "ko",
 
-  /** Norwegian (Bokmaal) */
-  no: "no",
+//   /** Norwegian (Bokmaal) */
+//   no: "no",
 
-  /** Polish */
-  pl: "pl",
+//   /** Polish */
+//   pl: "pl",
 
-  /** Portuguese (Portugal) */
-  `pt-PT`: "pt-PT",
+//   /** Portuguese (Portugal) */
+//   `pt-PT`: "pt-PT",
 
-  /** Portuguese (Brazil) */
-  `pt-BR`: "pt-BR",
+//   /** Portuguese (Brazil) */
+//   `pt-BR`: "pt-BR",
 
-  /** Russian */
-  ru: "ru",
+//   /** Russian */
+//   ru: "ru",
 
-  /** Spanish */
-  es: "es",
+//   /** Spanish */
+//   es: "es",
 
-  /** Swedish */
-  sv: "sv",
+//   /** Swedish */
+//   sv: "sv",
 
-  /** Turkish */
-  tr: "tr",
-}
+//   /** Turkish */
+//   tr: "tr",
+// }
 
 /** A string indicating what maskingMode to use to mask the personal information detected in the input text. */
 union PIIDetectionSkillMaskingMode {
@@ -1761,54 +1761,54 @@ union PIIDetectionSkillMaskingMode {
 }
 
 /** The language codes supported for input text by SentimentSkill. */
-union SentimentSkillLanguage {
-  string,
+// union SentimentSkillLanguage {
+//   string,
 
-  /** Danish */
-  da: "da",
+//   /** Danish */
+//   da: "da",
 
-  /** Dutch */
-  nl: "nl",
+//   /** Dutch */
+//   nl: "nl",
 
-  /** English */
-  en: "en",
+//   /** English */
+//   en: "en",
 
-  /** Finnish */
-  fi: "fi",
+//   /** Finnish */
+//   fi: "fi",
 
-  /** French */
-  fr: "fr",
+//   /** French */
+//   fr: "fr",
 
-  /** German */
-  de: "de",
+//   /** German */
+//   de: "de",
 
-  /** Greek */
-  el: "el",
+//   /** Greek */
+//   el: "el",
 
-  /** Italian */
-  it: "it",
+//   /** Italian */
+//   it: "it",
 
-  /** Norwegian (Bokmaal) */
-  no: "no",
+//   /** Norwegian (Bokmaal) */
+//   no: "no",
 
-  /** Polish */
-  pl: "pl",
+//   /** Polish */
+//   pl: "pl",
 
-  /** Portuguese (Portugal) */
-  `pt-PT`: "pt-PT",
+//   /** Portuguese (Portugal) */
+//   `pt-PT`: "pt-PT",
 
-  /** Russian */
-  ru: "ru",
+//   /** Russian */
+//   ru: "ru",
 
-  /** Spanish */
-  es: "es",
+//   /** Spanish */
+//   es: "es",
 
-  /** Swedish */
-  sv: "sv",
+//   /** Swedish */
+//   sv: "sv",
 
-  /** Turkish */
-  tr: "tr",
-}
+//   /** Turkish */
+//   tr: "tr",
+// }
 
 /** The language codes supported for input text by SplitSkill. */
 union SplitSkillLanguage {
@@ -6091,7 +6091,7 @@ model MergeSkill extends SearchIndexerSkill {
 model SentimentSkillV3 extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  defaultLanguageCode?: SentimentSkillLanguage | null;
+  defaultLanguageCode?: string | null;
 
   /** If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false. */
   includeOpinionMining?: boolean = false;
@@ -6128,11 +6128,11 @@ model EntityLinkingSkill extends SearchIndexerSkill {
 /** Using the Text Analytics API, extracts entities of different types from text. */
 model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   /** A list of entity categories that should be extracted. */
-  categories?: EntityCategory[];
+  categories?: string[];
 
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  defaultLanguageCode?: EntityRecognitionSkillLanguage | null;
+  defaultLanguageCode?: string | null;
 
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
   @minValue(0)
