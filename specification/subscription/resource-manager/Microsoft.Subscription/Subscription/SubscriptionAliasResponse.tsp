@@ -66,7 +66,8 @@ interface SubscriptionAliasResponses {
   @operationId("Alias_List")
   list is ArmResourceListByParent<
     SubscriptionAliasResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<SubscriptionAliasListResult>
   >;
 }
 

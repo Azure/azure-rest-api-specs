@@ -56,7 +56,8 @@ interface SubscriptionOperationGroup {
     Request = AcceptOwnershipRequest,
     Parameters = {
       ...SubscriptionIdParameter;
-    }
+    },
+    Response = ArmAcceptedResponse & ArmLroLocationHeader
   >;
   /**
    * Accept subscription ownership status.
@@ -90,7 +91,8 @@ interface SubscriptionOperationOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<SubscriptionCreationResult> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<SubscriptionCreationResult> | (ArmAcceptedResponse &
+    ArmLroLocationHeader) | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

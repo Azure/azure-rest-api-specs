@@ -27,7 +27,8 @@ model BillingAccountPoliciesResponse
 alias billingAccountExternalResource = Extension.ExternalResource<
   "Microsoft.Billing",
   "billingAccounts",
-  "{billingAccountId}"
+  "billingAccountId",
+  ParentType = "Tenant"
 >;
 
 @armResourceOperations
@@ -37,7 +38,10 @@ interface BillingAccountPoliciesResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BillingAccount_GetPolicy")
-  getPolicy is ArmResourceRead<BillingAccountPoliciesResponse>;
+  getPolicy is Extension.Read<
+    billingAccountExternalResource,
+    BillingAccountPoliciesResponse
+  >;
 }
 
 @@doc(BillingAccountPoliciesResponse.name, "");

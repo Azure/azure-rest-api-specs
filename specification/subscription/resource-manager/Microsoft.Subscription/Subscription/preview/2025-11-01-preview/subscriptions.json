@@ -56,6 +56,46 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Subscription/policies/default": {
+      "get": {
+        "operationId": "BillingAccount_GetPolicy",
+        "tags": [
+          "BillingAccountPoliciesResponses"
+        ],
+        "description": "Get Billing Account Policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPoliciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBillingAccountPolicy": {
+            "$ref": "./examples/getBillingAccountPolicy.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
         "operationId": "Alias_List",
@@ -72,7 +112,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionAliasResponseListResult"
+              "$ref": "#/definitions/SubscriptionAliasListResult"
             }
           },
           "default": {
@@ -245,7 +285,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -408,8 +448,12 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -496,9 +540,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -636,7 +677,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TargetDirectoryResultListResult"
+              "$ref": "#/definitions/TargetDirectoryListResult"
             }
           },
           "default": {
@@ -840,45 +881,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscription/policies/default": {
-      "get": {
-        "operationId": "BillingAccount_GetPolicy",
-        "tags": [
-          "BillingAccountPoliciesResponses"
-        ],
-        "description": "Get Billing Account Policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BillingAccountPoliciesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetBillingAccountPolicy": {
-            "$ref": "./examples/getBillingAccountPolicy.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -986,6 +988,11 @@
           }
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BillingAccountPoliciesResponse": {
       "type": "object",
@@ -1248,7 +1255,7 @@
           "type": "array",
           "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         }
       }
@@ -1278,22 +1285,7 @@
         }
       }
     },
-    "SubscriptionAliasResponse": {
-      "type": "object",
-      "description": "Subscription Information with the alias.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SubscriptionAliasResponseProperties",
-          "description": "Subscription Alias response properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SubscriptionAliasResponseListResult": {
+    "SubscriptionAliasListResult": {
       "type": "object",
       "description": "The response of a SubscriptionAliasResponse list operation.",
       "properties": {
@@ -1312,6 +1304,21 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SubscriptionAliasResponse": {
+      "type": "object",
+      "description": "Subscription Information with the alias.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionAliasResponseProperties",
+          "description": "Subscription Alias response properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "SubscriptionAliasResponseProperties": {
@@ -1395,6 +1402,27 @@
         }
       }
     },
+    "TargetDirectoryListResult": {
+      "type": "object",
+      "description": "The response of a TargetDirectoryResult list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TargetDirectoryResult items on this page",
+          "items": {
+            "$ref": "#/definitions/TargetDirectoryResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "TargetDirectoryRequest": {
       "type": "object",
       "description": "Subscription Request for Changed Target Directory.",
@@ -1434,27 +1462,6 @@
         }
       ]
     },
-    "TargetDirectoryResultListResult": {
-      "type": "object",
-      "description": "The response of a TargetDirectoryResult list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TargetDirectoryResult items on this page",
-          "items": {
-            "$ref": "#/definitions/TargetDirectoryResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TargetDirectoryResultProperties": {
       "type": "object",
       "description": "Properties of subscription Response for Changed Target Directory.",
@@ -1487,6 +1494,7 @@
           "type": "string",
           "format": "date-time",
           "description": "The UTC date and time when the transfer request was accepted",
+          "x-nullable": true,
           "readOnly": true
         },
         "sourceOwnerEmail": {
@@ -1540,7 +1548,7 @@
           "type": "array",
           "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         }
       }

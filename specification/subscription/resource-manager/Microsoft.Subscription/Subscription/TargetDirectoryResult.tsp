@@ -69,7 +69,8 @@ interface TargetDirectoryResults {
   @operationId("Subscriptions_ListTargetDirectory")
   listTargetDirectory is ArmResourceListByParent<
     TargetDirectoryResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<TargetDirectoryListResult>
   >;
 }
 
