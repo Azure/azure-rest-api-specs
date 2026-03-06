@@ -45,13 +45,13 @@ model ServiceEndpointPolicyDefinition extends SubResourceModel {
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @armResourceOperations(#{ omitTags: true })
 interface ServiceEndpointPolicyDefinitions {
-  @tag("ServiceEndpointPolicyDefinitions")
+  @tag("serviceEndpointPolicyDefinitions")
   get is ArmResourceRead<ServiceEndpointPolicyDefinition, Error = CloudError>;
 
   /**
    * Creates or updates a service endpoint policy definition in the specified service endpoint policy.
    */
-  @tag("ServiceEndpointPolicyDefinitions")
+  @tag("serviceEndpointPolicyDefinitions")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceEndpointPolicyDefinition,
     Error = CloudError

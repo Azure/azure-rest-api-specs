@@ -60,11 +60,12 @@ alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface RouteFilters {
   /**
    * Gets the specified route filter.
    */
+  @tag("RouteFilters")
   @autoRoute
   get is ArmResourceRead<
     RouteFilter,
@@ -81,6 +82,7 @@ interface RouteFilters {
   /**
    * Creates or updates a route filter in a specified resource group.
    */
+  @tag("RouteFilters")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RouteFilter,
@@ -90,6 +92,7 @@ interface RouteFilters {
   /**
    * Updates tags of a route filter.
    */
+  @tag("RouteFilters")
   @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -104,6 +107,7 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @tag("RouteFilters")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteFilter,
@@ -115,6 +119,7 @@ interface RouteFilters {
   /**
    * Gets all route filters in a resource group.
    */
+  @tag("RouteFilters")
   @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     RouteFilter,
@@ -124,6 +129,7 @@ interface RouteFilters {
   /**
    * Gets all route filters in a subscription.
    */
+  @tag("RouteFilters")
   @autoRoute
   list is ArmListBySubscription<RouteFilter, Error = CloudError>;
 
