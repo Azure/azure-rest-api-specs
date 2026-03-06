@@ -34,7 +34,7 @@ alias AgenticApplicationsListParameters = {
   /**
    * Names of agentic applications to retrieve.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Multi-value query parameter for filtering by application names, matching existing swagger behavior"
   @query(#{ name: "names", explode: true })
   names?: string[];
 
@@ -100,7 +100,7 @@ interface AgenticApplications {
         /**
          * Timeout for the client to use when polling the asynchronous operation.
          */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        #suppress "@azure-tools/typespec-azure-core/no-format" "ISO 8601 duration format for async operation timeout header"
         @header("x-ms-async-operation-timeout")
         @format("duration")
         asyncOperationTimeout: string;

@@ -10520,6 +10520,11 @@
         "tenantId"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BillingMeterInfo": {
       "type": "object",
       "properties": {
@@ -12100,8 +12105,7 @@
           "description": "Required by Concur connection category"
         },
         "clientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Client id in the format of UUID"
         },
         "clientSecret": {
