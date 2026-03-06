@@ -968,7 +968,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientName(Search.OcrSkillLanguage.`is`, "IsEnum", "python");
-@@clientName(Search.ScoringStatistics.Global, "GlobalEnum", "python");
+
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.OcrLineEnding,
   "com.azure.search.documents.indexes",
@@ -2685,7 +2685,17 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerClient.Indexers.resync, "resync");
 @@clientName(SearchIndexerClient.Indexers.getStatus, "getIndexerStatus");
 @@clientName(SearchIndexerClient.DataSources.create,
-  "createDataSourceConnection"
+  "createDataSourceConnection",
+  "!python"
+);
+@@clientName(SearchIndexerClient.DataSources.create,
+  "createDataSourceConn",
+  "python"
+);
+@@clientName(
+  SearchIndexerClient.DataSources.create::parameters.dataSource,
+  "dataSourceConn",
+  "python"
 );
 @@clientName(SearchIndexerClient.DataSources.createOrUpdate,
   "createOrUpdateDataSourceConnection"
