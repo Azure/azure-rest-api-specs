@@ -43,15 +43,6 @@ We evaluated three approaches and selected **Option C**:
     └── description?: string
 ```
 
-### AutoAppReference (returned by listAutoApps action)
-
-```
-├── resourceId: string (ARM resource ID of Microsoft.App/containerApps)
-├── displayName?: string
-├── provisioningState (read-only): AutoAppProvisioningState
-└── runningState (read-only): AutoAppRunningState
-```
-
 ### Relationship to ContainerApp
 
 Each managed ContainerApp (under `Microsoft.App/containerApps`):
@@ -61,7 +52,7 @@ Each managed ContainerApp (under `Microsoft.App/containerApps`):
 
 > **Design note — `environmentId` removed:** An earlier design included `environmentId` on the AutoProject to specify the managed environment. This was removed because an AutoProject may manage ContainerApps across multiple managed environments. Each ContainerApp already knows its environment via its own resource definition, so duplicating it on the AutoProject would be redundant and artificially restrictive.
 
-> **Design note — `autoApps` moved to dedicated action:** Rather than embedding the auto apps array as a read-only property on `AutoProjectProperties`, the managed apps are discovered via a dedicated `listAutoApps` POST action. This keeps the resource representation lightweight (auto apps are not returned on every GET/LIST) and separates the concerns of lifecycle management from discovery. The `managedBy` relationship is implemented by the `Microsoft.App` resource provider — our action queries which ContainerApps have `managedBy` set to this AutoProject's resource ID.
+> **Design note — `autoApps` removed from AutoProject spec:** The AutoProject does not track which ContainerApps it manages. The `managedBy` property lives on the ContainerApp side and is implemented by the `Microsoft.App` resource provider. To discover which apps are managed by an AutoProject, callers use existing ARM mechanisms (e.g., Azure Resource Graph query: `resources | where type == 'microsoft.app/containerapps' and properties.managedBy == '<autoProjectResourceId>'`). This keeps the AutoProject spec focused on lifecycle orchestration without duplicating ownership information that belongs to Microsoft.App.
 
 ```
 Microsoft.Logic/autoProjects/myAutoProject
@@ -84,12 +75,6 @@ Microsoft.Logic/autoProjects/myAutoProject
 | ListByResourceGroup | GET | No | Lists auto projects in a resource group |
 | ListBySubscription | GET | No | Lists auto projects in a subscription |
 
-### Custom Actions
-
-| Action | Method | Path | Async? | Description |
-|--------|--------|------|--------|-------------|
-| ListAutoApps | POST | `.../autoProjects/{name}/listAutoApps` | No | Lists the ContainerApps (kind `workflowapp`) managed by this auto project. Returns `AutoAppListResult` with pagination. |
-
 > **Design note — `configuration` removed:** An earlier design included `AutoProjectConfiguration` with shared secrets, access control rules, and a workload profile name at the AutoProject level, along with a `deployConfiguration` action to push them to all apps. This was removed because each ContainerApp (`Microsoft.App/containerApps`) already has its own secrets, ingress/IP restrictions, and workload profile settings. Duplicating these at the AutoProject level creates ambiguity about which configuration takes precedence and adds unnecessary sync complexity. The AutoProject is a **lifecycle orchestrator**, not a configuration manager — each app manages its own configuration independently.
 
 ## Enums / Unions
@@ -97,8 +82,6 @@ Microsoft.Logic/autoProjects/myAutoProject
 | Name | Values |
 |------|--------|
 | AutoProjectProvisioningState | InProgress, Succeeded, Failed, Canceled, Deleting |
-| AutoAppProvisioningState | InProgress, Succeeded, Failed, Canceled, Deleting |
-| AutoAppRunningState | Running, Stopped, Unknown |
 
 ## API Version
 
