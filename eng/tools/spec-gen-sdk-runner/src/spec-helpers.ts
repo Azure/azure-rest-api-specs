@@ -133,8 +133,10 @@ export function processTypeSpecProjectsV2FolderStructure(
   return changedSpecs;
 }
 
-export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): ChangedSpecs[] {
-  const prChangedFiles: string[] = getChangedFiles(commandInput.localSpecRepoPath) ?? [];
+export async function detectChangedSpecConfigFiles(
+  commandInput: SpecGenSdkCmdInput,
+): Promise<ChangedSpecs[]> {
+  const prChangedFiles: string[] = await getChangedFiles(commandInput.localSpecRepoPath);
   if (prChangedFiles.length === 0) {
     logMessage("No files changed in the PR");
   }

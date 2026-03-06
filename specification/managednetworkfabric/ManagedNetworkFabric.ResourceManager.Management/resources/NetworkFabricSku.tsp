@@ -38,5 +38,8 @@ interface NetworkFabricSkus {
   get is ArmResourceRead<NetworkFabricSku>;
 
   @doc("Implements Network Fabric SKUs list by subscription GET method.")
-  listBySubscription is ArmResourceListByParent<NetworkFabricSku>;
+  listBySubscription is ArmResourceListByParent<
+    NetworkFabricSku,
+    Response = NetworkFabricSkusListResult
+  >;
 }

@@ -211,7 +211,7 @@ describe("generateSdkForSpecPr", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
@@ -270,7 +270,7 @@ describe("generateSdkForSpecPr", () => {
     };
 
     // Return empty array for changedSpecs
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue([]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue([]);
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
 
@@ -313,7 +313,7 @@ describe("generateSdkForSpecPr", () => {
     const mockChangedSpecs = [{ specs: [] }];
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
@@ -365,7 +365,7 @@ describe("generateSdkForSpecPr", () => {
     };
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
@@ -413,7 +413,7 @@ describe("generateSdkForSpecPr", () => {
     });
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(log, "logMessage").mockImplementation(() => {

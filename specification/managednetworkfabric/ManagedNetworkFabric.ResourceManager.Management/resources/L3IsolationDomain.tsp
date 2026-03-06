@@ -58,10 +58,16 @@ interface L3IsolationDomains {
   delete is ArmResourceDeleteWithoutOkAsync<L3IsolationDomain>;
 
   @doc("Displays L3IsolationDomains list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<L3IsolationDomain>;
+  listByResourceGroup is ArmResourceListByParent<
+    L3IsolationDomain,
+    Response = L3IsolationDomainsListResult
+  >;
 
   @doc("Displays L3IsolationDomains list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<L3IsolationDomain>;
+  listBySubscription is ArmListBySubscription<
+    L3IsolationDomain,
+    Response = L3IsolationDomainsListResult
+  >;
 
   @doc("Enables racks for this Isolation Domain.")
   @action("updateAdministrativeState")
