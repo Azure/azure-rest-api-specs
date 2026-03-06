@@ -76,3 +76,23 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+// Python-specific customizations for APIView feedback
+
+// Rename 'id' parameter to 'media_id' in download_media for Python (Lines 65, 166)
+@@clientName(Azure.Communication.MessagesService.MessageDataStream.id,
+  "mediaId",
+  "python"
+);
+
+// Rename CommunicationMessageKind to MessageKind for Python (Line 355)
+@@clientName(Azure.Communication.MessagesService.CommunicationMessageKind,
+  "MessageKind",
+  "python"
+);
+
+// Make MessageTemplateItem.language internal for Python (Line 751)
+@@access(Azure.Communication.MessagesService.MessageTemplateItem.language,
+  Access.internal,
+  "python"
+);
