@@ -204,7 +204,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?comp=metadata")
-  getMetadata is StorageOperationNoBody<
+  getProperties is StorageOperationNoBody<
     {
       ...TimeoutParameter;
     },
