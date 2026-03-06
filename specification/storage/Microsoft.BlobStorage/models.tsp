@@ -636,7 +636,7 @@ model ContainerProperties {
   lastModified: utcDateTime;
 
   /** The ETag of the container. */
-  @Xml.name("Etag") eTag: string;
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The lease status of the container. */
   @Xml.name("LeaseStatus") leaseStatus?: LeaseStatus;
@@ -962,7 +962,7 @@ model BlobProperties {
   lastModified: utcDateTime;
 
   /** The blob ETag. */
-  @Xml.name("Etag") eTag: string;
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The content length of the blob. */
   @Xml.name("Content-Length") contentLength?: int64;
