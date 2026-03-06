@@ -354,7 +354,11 @@ interface GlobalOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): NoContentResponse | DefaultErrorResponse;
+  ):
+    | ArmResponse<Resource>
+    | ArmLroLocationHeader
+    | NoContentResponse
+    | DefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
