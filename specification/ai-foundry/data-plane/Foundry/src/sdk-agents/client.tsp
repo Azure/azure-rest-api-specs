@@ -85,6 +85,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
 @@clientName(OpenAI.CustomGrammarFormatParam, "CustomGrammarFormatParameter", "java");
 
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -130,4 +131,4 @@ using Azure.AI.Projects;
 // Type replacements
 // --------------------------------------------------------------------------------
 
-@@alternateType(OpenAI.LocalShellExecAction.timeout_ms, { identity: "java.time.Duration" }, "java");
+@@alternateType(OpenAI.LocalShellExecAction.timeout_ms, { identity: "java.time.Duration", package: "java.time" }, "java");
