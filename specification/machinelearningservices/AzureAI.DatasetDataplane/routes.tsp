@@ -15,9 +15,9 @@ namespace Microsoft.MachineLearningServices.DatasetDataplane;
 interface DataCall {
   /** Get a preview for an MLTable. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   @route("/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/preview")
   @post
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   getPreviewForMLTable is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -37,9 +37,9 @@ interface DataCall {
 
   /** Get a quick profile for an MLTable. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   @route("/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/quickprofile")
   @post
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   getQuickProfileForMLTable is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -59,9 +59,9 @@ interface DataCall {
 
   /** Get the schema for an MLTable. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   @route("/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/schema")
   @post
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API name"
   getSchemaForMLTable is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -106,9 +106,9 @@ interface DataContainerOps {
 
   /** List data containers. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainer")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listDataContainer is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -147,7 +147,7 @@ interface DataContainerOps {
   /** Modify a data container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainer/{name}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   modifyDataContainer is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -327,9 +327,9 @@ interface DataVersionOps {
 
   /** List data versions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   list is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -380,7 +380,7 @@ interface DataVersionOps {
   /** Modify a data version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions/{version}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   modify is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -433,9 +433,9 @@ interface DataVersionOps {
 
   /** Check if a data version exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions/{version}/exists")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   exists is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -462,9 +462,9 @@ interface DataVersionOps {
 interface DatasetsV1 {
   /** List datasets. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   list is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -592,9 +592,9 @@ interface DatasetsV1 {
 
   /** Update a dataset. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   updateDataset is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -734,9 +734,9 @@ interface DatasetsV1 {
 
   /** Unregister a dataset by name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}")
   @delete
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   unregisterDataset is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -760,9 +760,9 @@ interface DatasetsV1 {
 interface DatasetControllerV2 {
   /** List datasets (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   list is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -890,9 +890,9 @@ interface DatasetControllerV2 {
 
   /** Update a dataset (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   updateDataset is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -1032,9 +1032,9 @@ interface DatasetControllerV2 {
 
   /** Unregister a dataset by name (v1.2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}")
   @delete
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   unregisterDataset is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -1100,9 +1100,9 @@ interface DatasetV2Operations {
 
   /** List datasets (v2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   list is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -1176,9 +1176,9 @@ interface DatasetV2Operations {
 
   /** Update a dataset (v2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   updateDataset is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */
@@ -1225,9 +1225,9 @@ interface DatasetV2Operations {
 
   /** Update a dataset by name and version (v2). */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}/versions/{versionId}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   updateDatasetByNameAndVersion is Azure.Core.Foundations.Operation<
     {
       /** The Azure Subscription ID. */

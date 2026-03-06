@@ -14,9 +14,9 @@ interface Workspaces {
   /** Create project workspace under workspaceHub's default resource group. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing API path structure."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/rp/workspaces/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/join/{projectWorkspaceName}")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   hubJoin is Azure.Core.Foundations.Operation<
     {
       /** The ID of the target subscription. */

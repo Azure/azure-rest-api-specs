@@ -57,7 +57,7 @@ interface Experiments {
   /** Update an experiment. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   update is Operation<
     {
       ...WorkspacePathParams;

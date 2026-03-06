@@ -97,7 +97,7 @@ interface Assets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   patch is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;
@@ -325,7 +325,7 @@ interface Models {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   patch is Azure.Core.Foundations.Operation<
     {
       ...WorkspacePathParameters;

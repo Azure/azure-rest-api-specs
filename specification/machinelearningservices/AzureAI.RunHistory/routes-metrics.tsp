@@ -11,7 +11,6 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices.RunHistory;
 
 /** Common path prefix for metric workspace operations. */
-
 /** Metric operations. */
 interface Metrics {
   /** Get full fidelity metric. */

@@ -11,7 +11,6 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices.RunHistory;
 
 /** Common path prefix for history workspace operations. */
-
 /** Run operations. */
 interface Runs {
   /** Get a run by run ID. */
@@ -48,7 +47,7 @@ interface Runs {
   /** Add or modify a run. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   addOrModifyExperiment is Operation<
     {
       ...WorkspacePathParams;
@@ -142,7 +141,7 @@ interface Runs {
   /** Add or modify run service instances. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/serviceinstances/{nodeId}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   addOrModifyRunServiceInstances is Operation<
     {
       ...WorkspacePathParams;
@@ -206,9 +205,9 @@ interface Runs {
 
   /** List runs by compute. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/runs")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
   listByCompute is Operation<
     {
       ...WorkspacePathParams;
@@ -261,7 +260,7 @@ interface Runs {
   /** Add or modify a run by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   addOrModifyByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -371,7 +370,7 @@ interface Runs {
   /** Modify or delete run tags by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/tags")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   modifyOrDeleteTagsByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -445,7 +444,7 @@ interface Runs {
   /** Batch add or modify runs by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/batch/runs")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   batchAddOrModifyByExperimentId is Operation<
     {
       ...WorkspacePathParams;
@@ -483,7 +482,7 @@ interface Runs {
   /** Add or modify a run by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   addOrModifyByExperimentName is Operation<
     {
       ...WorkspacePathParams;
@@ -593,7 +592,7 @@ interface Runs {
   /** Modify or delete run tags by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/tags")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   modifyOrDeleteTagsByExperimentName is Operation<
     {
       ...WorkspacePathParams;
@@ -667,7 +666,7 @@ interface Runs {
   /** Batch add or modify runs by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/batch/runs")
-  @patch(#{implicitOptionality: true})
+  @patch(#{ implicitOptionality: true })
   batchAddOrModifyByExperimentName is Operation<
     {
       ...WorkspacePathParams;
