@@ -1,0 +1,138 @@
+{
+  "title": "FleetManagedNamespaces_CreateOrUpdate_ExternalRollout",
+  "operationId": "FleetManagedNamespaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgfleets",
+    "fleetName": "fleet1",
+    "managedNamespaceName": "namespace2",
+    "resource": {
+      "properties": {
+        "managedNamespaceProperties": {
+          "labels": {
+            "environment": "production",
+            "team": "platform"
+          },
+          "annotations": {
+            "external-manager": "argocd"
+          }
+        },
+        "rolloutStrategy": {
+          "type": "External"
+        },
+        "adoptionPolicy": "IfIdentical",
+        "deletePolicy": "Keep",
+        "propagationPolicy": {
+          "type": "Placement",
+          "placementProfile": {
+            "defaultClusterResourcePlacement": {
+              "policy": {
+                "placementType": "PickFixed",
+                "numberOfClusters": 3
+              }
+            }
+          }
+        }
+      },
+      "location": "westus2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "managedNamespaceProperties": {
+            "labels": {
+              "environment": "production",
+              "team": "platform"
+            },
+            "annotations": {
+              "external-manager": "argocd"
+            }
+          },
+          "rolloutStrategy": {
+            "type": "External"
+          },
+          "adoptionPolicy": "IfIdentical",
+          "deletePolicy": "Keep",
+          "propagationPolicy": {
+            "type": "Placement",
+            "placementProfile": {
+              "defaultClusterResourcePlacement": {
+                "policy": {
+                  "placementType": "PickFixed",
+                  "numberOfClusters": 3
+                }
+              }
+            }
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "location": "westus2",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/managedNamespaces/namespace2",
+        "name": "namespace2",
+        "type": "Microsoft.ContainerService/fleets/managedNamespaces",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2026-04-02T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-02T05:40:40.657Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/westus2/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-04-02-preview"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedNamespaceProperties": {
+            "labels": {
+              "environment": "production",
+              "team": "platform"
+            },
+            "annotations": {
+              "external-manager": "argocd"
+            }
+          },
+          "rolloutStrategy": {
+            "type": "External"
+          },
+          "adoptionPolicy": "IfIdentical",
+          "deletePolicy": "Keep",
+          "propagationPolicy": {
+            "type": "Placement",
+            "placementProfile": {
+              "defaultClusterResourcePlacement": {
+                "policy": {
+                  "placementType": "PickFixed",
+                  "numberOfClusters": 3
+                }
+              }
+            }
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "tags": {
+          "external": "true"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/managedNamespaces/namespace2",
+        "name": "namespace2",
+        "type": "Microsoft.ContainerService/fleets/managedNamespaces",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2026-04-02T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-02T05:40:40.657Z"
+        }
+      }
+    }
+  }
+}
