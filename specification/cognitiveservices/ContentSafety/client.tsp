@@ -36,7 +36,6 @@ interface BlocklistClient {
 
 // Python-specific customizations
 @@access(ContentSafety.TextBlocklists.deleteTextBlocklist, Access.internal, "python");
-@@clientName(BlocklistClient.deleteTextBlocklist, "deleteTextBlocklistInternal", "python");
 @@clientName(BlocklistClient.removeBlocklistItems, "removeItems", "python");
 @@clientName(ContentSafety.AnalyzeImageOutputType.FourSeverityLevels, "FourSeverity", "python");
 @@alternateType(ContentSafety.TextCategoriesAnalysis.severity, float32, "python");
