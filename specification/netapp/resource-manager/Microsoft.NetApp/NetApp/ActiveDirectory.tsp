@@ -15,8 +15,6 @@ namespace Microsoft.NetApp;
 /**
  * Active Directory Configuration resource
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ActiveDirectoryConfig
   is TrackedResource<ActiveDirectoryConfigProperties> {
@@ -34,8 +32,6 @@ model ActiveDirectoryConfig
 /**
  * Active Directory Configuration properties
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ActiveDirectoryConfigProperties {
   ...ActiveDirectoryConfigCommonProperties;
@@ -55,8 +51,6 @@ model ActiveDirectoryConfigProperties {
 }
 
 /** Active Directory Configuration common properties */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ActiveDirectoryConfigCommonProperties {
   /** A domain user account with permission to create machine accounts */
@@ -93,8 +87,6 @@ model ActiveDirectoryConfigCommonProperties {
 }
 
 /** Access password from Azure KeyVault Secrets to connect Active Directory */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SecretPassword {
   /** Properties provided by KeyVault. */
@@ -105,8 +97,6 @@ model SecretPassword {
 }
 
 /** Properties of key vault to get the secrets for password. */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SecretPasswordKeyVaultProperties {
   /** The Uri of KeyVault. */
@@ -119,8 +109,6 @@ model SecretPasswordKeyVaultProperties {
 }
 
 /** Identity used to authenticate with key vault. */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SecretPasswordIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
@@ -132,8 +120,6 @@ model SecretPasswordIdentity {
 }
 
 /** Active Directory Configuration patch properties */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ActiveDirectoryConfigPatchProperties {
   ...ActiveDirectoryConfigCommonProperties;
@@ -143,8 +129,6 @@ model ActiveDirectoryConfigPatchProperties {
 }
 
 /** Access Password from Azure KeyVault Secret to connect Active Directory on patch */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SecretPasswordPatch {
   /** Patch Properties provided by KeyVault. */
@@ -155,8 +139,6 @@ model SecretPasswordPatch {
 }
 
 /** Patch Properties of key vault to get the secrets for password. */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model SecretPasswordKeyVaultPatchProperties {
   /** The Uri of KeyVault. */
@@ -171,20 +153,14 @@ model SecretPasswordKeyVaultPatchProperties {
 @armResourceOperations
 interface ActiveDirectoryConfigs {
   /** Get the details of the specified active directory configuration */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   get is ArmResourceRead<ActiveDirectoryConfig>;
 
   /** Create or update the specified active directory configuration */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ActiveDirectoryConfig>;
 
   /** Patch the specified active directory configuration */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -198,20 +174,14 @@ interface ActiveDirectoryConfigs {
   >;
 
   /** Delete the specified Active Directory configuration */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the resource group. */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listByResourceGroup is ArmResourceListByParent<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the subscription */
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
   @added(Versions.v2025_12_15_preview)
   listBySubscription is ArmListBySubscription<ActiveDirectoryConfig>;
 }
