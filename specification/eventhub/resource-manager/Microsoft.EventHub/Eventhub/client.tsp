@@ -284,6 +284,10 @@ using Microsoft.EventHub;
   "SubscriptionId",
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(NspAccessRulePropertiesSubscriptionsItem.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -293,6 +297,15 @@ using Microsoft.EventHub;
 @@alternateType(Cluster, EventHubsCluster, "csharp");
 @@alternateType(EHNamespace, EventHubsNamespace, "csharp");
 @@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsCluster.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsNamespace.properties,
+  "csharp"
+);
 
 // added to solve the problem that the c# resource class can inherit the `trackedResource data` class
 namespace Microsoft.EventHub {
@@ -309,7 +322,7 @@ namespace Microsoft.EventHub {
     >;
     ...OmitProperties<
       Cluster,
-      "id" | "name" | "type" | "properties" | "sku" | "location"
+      "id" | "name" | "type" | "properties" | "location"
     >;
   }
 
@@ -326,8 +339,14 @@ namespace Microsoft.EventHub {
     >;
     ...OmitProperties<
       Cluster,
-      "id" | "name" | "type" | "properties" | "sku" | "location" | "identity"
+      "id" | "name" | "type" | "properties" | "location" | "identity"
     >;
+
+    /**
+     * Properties of BYOK Identity description
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
   }
 
   /**
