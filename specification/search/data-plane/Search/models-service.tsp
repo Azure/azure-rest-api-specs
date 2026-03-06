@@ -6091,7 +6091,7 @@ model MergeSkill extends SearchIndexerSkill {
 model SentimentSkillV3 extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  defaultLanguageCode?: string | null;
+  defaultLanguageCode?: SentimentSkillLanguage | null;
 
   /** If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false. */
   includeOpinionMining?: boolean = false;
