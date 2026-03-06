@@ -142,8 +142,8 @@ interface Incidents {
     Incident,
     Request = ManualTriggerRequestBody,
     Response = NoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body body: {};
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: unknown;
     },
     ErrorType = CloudError,
     OptionalRequestBody = true
