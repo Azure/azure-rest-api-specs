@@ -28,7 +28,7 @@ tools:
     toolsets: [default, actions]
 safe-outputs:
   add-comment:
-    max: 10
+    max: 11
     hide-older-comments: true
   noop:
 ---
