@@ -7,8 +7,8 @@ using Microsoft.App;
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
 
-@@clientLocation(getCustomDomainVerificationId,"ContainerAppsAPIClient", "go");
-@@clientLocation(Jobs.jobExecution,"ContainerAppsAPIClient", "go");
+@@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
+@@clientLocation(Jobs.jobExecution, "ContainerAppsAPIClient", "go");
 
 @@clientName(VnetConfiguration.platformReservedDnsIP,
   "platformReservedDnsIp",
@@ -24,3 +24,5 @@ using Microsoft.App;
   "listCustomHostnameAnalysis",
   "java"
 );
+
+@@clientLocation(Jobs.jobExecution, Microsoft.App, "java");
