@@ -81,10 +81,15 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
-@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParameter",
+  "java"
+);
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
-@@clientName(OpenAI.CustomGrammarFormatParam, "CustomGrammarFormatParameter", "java");
-
+@@clientName(OpenAI.CustomGrammarFormatParam,
+  "CustomGrammarFormatParameter",
+  "java"
+);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -126,3 +131,8 @@ using Azure.AI.Projects;
 
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
+
+@@alternateType(OpenAI.LocalShellExecAction.timeout_ms,
+  "java.time.Duration",
+  "java"
+);
