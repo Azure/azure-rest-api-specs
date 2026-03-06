@@ -46,3 +46,37 @@ using Microsoft.BillingBenefits;
   "GetApplicableConditionalCredits",
   "csharp"
 );
+
+// csharp: Rename Request/Response models to comply with AZC0030 naming rules
+@@clientName(BenefitValidateRequest,
+  "BillingBenefitsBenefitValidateContent",
+  "csharp"
+);
+@@clientName(BenefitValidateResponse,
+  "BillingBenefitsBenefitValidateResult",
+  "csharp"
+);
+@@clientName(ChargeShortfallRequest,
+  "BillingBenefitsChargeShortfallContent",
+  "csharp"
+);
+@@clientName(PurchaseRequest,
+  "BillingBenefitsPurchaseContent",
+  "csharp"
+);
+@@clientName(ReservationOrderAliasRequest,
+  "BillingBenefitsReservationOrderAliasContent",
+  "csharp"
+);
+@@clientName(SavingsPlanUpdateValidateRequest,
+  "BillingBenefitsSavingsPlanUpdateValidateContent",
+  "csharp"
+);
+@@clientName(SavingsPlanValidateResponse,
+  "BillingBenefitsSavingsPlanValidateResult",
+  "csharp"
+);
+@@clientName(SellerResourceListRequest,
+  "BillingBenefitsSellerResourceListContent",
+  "csharp"
+);
