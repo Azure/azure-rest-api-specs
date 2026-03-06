@@ -643,45 +643,7 @@
     },
     "AutoProjectUpdate": {
       "type": "object",
-      "description": "The auto project resource. An auto project is a logical grouping that owns and manages\nmultiple ContainerApps of kind 'workflowapp' via the managedBy relationship.\nThe auto project is the single entry point for lifecycle management of its auto apps.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutoProjectProperties",
-          "description": "The auto project properties."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "description": "The auto project patch model for update operations.",
       "properties": {
         "tags": {
           "type": "object",
@@ -689,13 +651,26 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/AutoProjectUpdateProperties",
+          "description": "The updatable properties of the auto project."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+      }
+    },
+    "AutoProjectUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the auto project resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the auto project."
         }
-      ]
+      }
     }
   },
   "parameters": {}

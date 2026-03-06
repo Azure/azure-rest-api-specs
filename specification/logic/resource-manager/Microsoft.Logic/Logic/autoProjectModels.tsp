@@ -68,6 +68,32 @@ model AutoProjectProperties {
 }
 
 /**
+ * The updatable properties of the auto project resource.
+ */
+model AutoProjectUpdateProperties {
+  /**
+   * A description of the auto project.
+   */
+  description?: string;
+}
+
+/**
+ * The auto project patch model for update operations.
+ */
+model AutoProjectUpdate
+  is Azure.ResourceManager.Foundations.TagsUpdateModel<AutoProject> {
+  /**
+   * The updatable properties of the auto project.
+   */
+  properties?: AutoProjectUpdateProperties;
+
+  /**
+   * Managed service identity for the auto project.
+   */
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+/**
  * A reference to a ContainerApp of kind workflowapp managed by this auto project.
  */
 model AutoAppReference {

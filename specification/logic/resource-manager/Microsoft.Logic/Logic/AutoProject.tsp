@@ -45,7 +45,7 @@ interface AutoProjects {
   /**
    * Updates an auto project using JSON Merge Patch.
    */
-  update is ArmResourcePatchAsync<AutoProject, AutoProjectProperties>;
+  update is ArmCustomPatchAsync<AutoProject, AutoProjectUpdate>;
 
   /**
    * Deletes an auto project and all of its managed auto apps.
