@@ -303,6 +303,7 @@ enum ImmutabilityPolicySetting {
   EncryptionAlgorithmTypeGo,
   "go"
 );
+@@alternateType(ExpiryTimeParameter.expiryTime, string, "go");
 @@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
   ImmutabilityPolicySetting,
   "go"
