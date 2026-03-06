@@ -13359,7 +13359,7 @@
             "name": "containerAcl",
             "in": "body",
             "description": "The access control list for the container.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SignedIdentifiers"
             }
@@ -14705,13 +14705,13 @@
       "properties": {
         "Start": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
-          "format": "rfc3339-fixed-width",
+          "format": "date-time",
           "description": "The date-time the policy expires.",
           "x-ms-client-name": "expiry"
         },
