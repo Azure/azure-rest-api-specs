@@ -455,9 +455,99 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/supportPlans/{supportPlanName}/cancel": {
+      "post": {
+        "operationId": "SupportPlansResource_Cancel",
+        "tags": [
+          "SupportPlansResource"
+        ],
+        "description": "Cancel a Support Plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supportPlanName",
+            "in": "path",
+            "description": "The name of the Support Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Cancel request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelSupportPlanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource cancelled successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a Support Plan": {
+            "$ref": "./examples/SupportPlansResource_Cancel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
+    "CancelSupportPlanRequest": {
+      "type": "object",
+      "description": "The request to cancel a Support Plan",
+      "properties": {
+        "serviceEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the support plan service should end"
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "The reason code for the cancellation"
+        }
+      },
+      "required": [
+        "serviceEndDate",
+        "reasonCode"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -594,13 +684,17 @@
           "type": "boolean",
           "description": "Flag indicating if the support plan should auto-renew"
         },
-        "supportCommitReferenceId": {
+        "multiEntityReferenceType": {
           "type": "string",
-          "description": "Reference ID for support commit tracking"
+          "description": "Describes the type of the multi-entity reference identifier"
         },
-        "isParticipationAllowed": {
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
+        },
+        "isMultiEntityParticipationAllowed": {
           "type": "boolean",
-          "description": "Flag indicating if participation is allowed"
+          "description": "Flag indicating if multi-entity participation is allowed"
         }
       },
       "required": [
@@ -657,13 +751,17 @@
           "type": "boolean",
           "description": "Flag indicating if the support plan should auto-renew"
         },
-        "supportCommitReferenceId": {
+        "multiEntityReferenceType": {
           "type": "string",
-          "description": "Reference ID for support commit tracking"
+          "description": "Describes the type of the multi-entity reference identifier"
         },
-        "isParticipationAllowed": {
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
+        },
+        "isMultiEntityParticipationAllowed": {
           "type": "boolean",
-          "description": "Flag indicating if participation is allowed"
+          "description": "Flag indicating if multi-entity participation is allowed"
         }
       }
     },
@@ -684,6 +782,10 @@
       "type": "object",
       "description": "The request for an eligibility check.",
       "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Indicates the purpose of the validation request"
+        },
         "lineItems": {
           "type": "array",
           "description": "The array of line items to be validated",
@@ -735,9 +837,13 @@
           "type": "string",
           "description": "Tenant identifier for the purchase"
         },
-        "supportCommitReferenceId": {
+        "multiEntityReferenceType": {
           "type": "string",
-          "description": "Reference ID for support commit tracking"
+          "description": "Describes the type of the multi-entity reference identifier"
+        },
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
         }
       },
       "required": [
