@@ -6157,6 +6157,21 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
             }
           }
         }
@@ -16849,7 +16864,7 @@
           "description": "The Apache Arrow configuration.",
           "x-ms-client-name": "arrowConfiguration"
         },
-        "ParquetConfiguration": {
+        "ParquetTextConfiguration": {
           "$ref": "#/definitions/ParquetConfiguration",
           "description": "The Parquet configuration.",
           "x-ms-client-name": "parquetTextConfiguration"
