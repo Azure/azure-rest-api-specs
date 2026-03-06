@@ -33,3 +33,9 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+// Python-specific customizations
+@@access(ContentSafety.TextBlocklists.deleteTextBlocklist, Access.internal, "python");
+@@clientName(BlocklistClient.removeBlocklistItems, "removeItems", "python");
+@@access(ContentSafety.TextBlocklists.removeBlocklistItems, Access.internal, "python");
+@@clientName(ContentSafety.ImageCategory.SelfHarm, "SELFHARM", "python");
