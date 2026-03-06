@@ -333,7 +333,7 @@ interface GlobalOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): StaticSitesOperationStatus | DefaultErrorResponse;
+  ): ArmResponse<StaticSitesOperationStatus> | DefaultErrorResponse;
 
   /**
    * Description for Gets the result of a static site async operation.
@@ -354,7 +354,7 @@ interface GlobalOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmAcceptedLroResponse | NoContentResponse | DefaultErrorResponse;
+  ): NoContentResponse | DefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
