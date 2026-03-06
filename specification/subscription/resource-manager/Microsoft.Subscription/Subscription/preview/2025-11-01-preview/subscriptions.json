@@ -41,27 +41,12 @@
   "tags": [
     {
       "name": "Operations"
-    },
-    {
-      "name": "SubscriptionAliasResponses"
-    },
-    {
-      "name": "GetTenantPolicyResponses"
-    },
-    {
-      "name": "BillingAccountPoliciesResponses"
-    },
-    {
-      "name": "TargetDirectoryResults"
     }
   ],
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Subscription/policies/default": {
       "get": {
         "operationId": "BillingAccount_GetPolicy",
-        "tags": [
-          "BillingAccountPoliciesResponses"
-        ],
         "description": "Get Billing Account Policy.",
         "parameters": [
           {
@@ -99,9 +84,6 @@
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
         "operationId": "Alias_List",
-        "tags": [
-          "SubscriptionAliasResponses"
-        ],
         "description": "List Alias Subscription.",
         "parameters": [
           {
@@ -135,9 +117,6 @@
     "/providers/Microsoft.Subscription/aliases/{aliasName}": {
       "get": {
         "operationId": "Alias_Get",
-        "tags": [
-          "SubscriptionAliasResponses"
-        ],
         "description": "Get Alias Subscription.",
         "parameters": [
           {
@@ -173,9 +152,6 @@
       },
       "put": {
         "operationId": "Alias_Create",
-        "tags": [
-          "SubscriptionAliasResponses"
-        ],
         "description": "Create Alias Subscription.",
         "parameters": [
           {
@@ -242,9 +218,6 @@
       },
       "delete": {
         "operationId": "Alias_Delete",
-        "tags": [
-          "SubscriptionAliasResponses"
-        ],
         "description": "Delete Alias.",
         "parameters": [
           {
@@ -318,9 +291,6 @@
     "/providers/Microsoft.Subscription/policies": {
       "get": {
         "operationId": "SubscriptionPolicy_ListPolicyForTenant",
-        "tags": [
-          "GetTenantPolicyResponses"
-        ],
         "description": "Get the subscription tenant policy for the user's tenant.",
         "parameters": [
           {
@@ -354,9 +324,6 @@
     "/providers/Microsoft.Subscription/policies/default": {
       "get": {
         "operationId": "SubscriptionPolicy_GetPolicyForTenant",
-        "tags": [
-          "GetTenantPolicyResponses"
-        ],
         "description": "Get the subscription tenant policy for the user's tenant.",
         "parameters": [
           {
@@ -385,9 +352,6 @@
       },
       "put": {
         "operationId": "SubscriptionPolicy_AddUpdatePolicyForTenant",
-        "tags": [
-          "GetTenantPolicyResponses"
-        ],
         "description": "Create or Update Subscription tenant policy for user's tenant.",
         "parameters": [
           {
@@ -661,9 +625,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest": {
       "get": {
         "operationId": "Subscriptions_ListTargetDirectory",
-        "tags": [
-          "TargetDirectoryResults"
-        ],
         "description": "The operation to list Initiator Subscription Changed Request",
         "parameters": [
           {
@@ -700,9 +661,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default": {
       "get": {
         "operationId": "Subscriptions_GetTargetDirectory",
-        "tags": [
-          "TargetDirectoryResults"
-        ],
         "description": "The operation to view Initiator Subscription Changed Request",
         "parameters": [
           {
@@ -734,9 +692,6 @@
       },
       "put": {
         "operationId": "Subscriptions_PutTargetDirectory",
-        "tags": [
-          "TargetDirectoryResults"
-        ],
         "description": "The operation to initiate Subscription Changed Request",
         "parameters": [
           {
@@ -777,9 +732,6 @@
       },
       "delete": {
         "operationId": "Subscriptions_DeleteTargetDirectory",
-        "tags": [
-          "TargetDirectoryResults"
-        ],
         "description": "The operation to delete Initiator Subscription Changed Request",
         "parameters": [
           {

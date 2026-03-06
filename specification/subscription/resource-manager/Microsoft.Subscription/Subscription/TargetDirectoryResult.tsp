@@ -25,7 +25,7 @@ model TargetDirectoryResult
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TargetDirectoryResults {
   /**
    * The operation to view Initiator Subscription Changed Request

@@ -24,7 +24,7 @@ model SubscriptionAliasResponse
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SubscriptionAliasResponses {
   /**
    * Get Alias Subscription.

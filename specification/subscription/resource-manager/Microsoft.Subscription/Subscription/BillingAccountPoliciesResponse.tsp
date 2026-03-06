@@ -31,7 +31,7 @@ alias billingAccountExternalResource = Extension.ExternalResource<
   ParentType = "Tenant"
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface BillingAccountPoliciesResponses {
   /**
    * Get Billing Account Policy.
