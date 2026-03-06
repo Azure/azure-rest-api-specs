@@ -43,6 +43,7 @@ import "./StaticSiteUserProvidedFunctionAppARMResource.tsp";
 import "./StaticSiteBasicAuthPropertiesARMResource.tsp";
 import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
+import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
 import "./AIGateway.tsp";
 import "./BackupItem.tsp";

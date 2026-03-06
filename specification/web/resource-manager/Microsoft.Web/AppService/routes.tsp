@@ -314,51 +314,7 @@ interface GlobalOperationGroup {
     ...SubscriptionIdParameter,
   ): NoContentResponse | DefaultErrorResponse;
 
-  /**
-   * Description for Gets the status of a static site async operation.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_03_15)
-  @summary("Gets the status of a static site async operation.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSiteOperationStatuses/{operationId}")
-  @get
-  getStaticSiteOperationStatus(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
 
-    /**
-     * Operation Id
-     */
-    @path
-    operationId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<StaticSitesOperationStatus> | DefaultErrorResponse;
-
-  /**
-   * Description for Gets the result of a static site async operation.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_03_15)
-  @summary("Gets the result of a static site async operation.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}")
-  @get
-  getStaticSiteOperationResult(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * Operation Id
-     */
-    @path
-    operationId: string,
-
-    ...SubscriptionIdParameter,
-  ):
-    | ArmResponse<Resource>
-    | ArmLroLocationHeader
-    | NoContentResponse
-    | DefaultErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
