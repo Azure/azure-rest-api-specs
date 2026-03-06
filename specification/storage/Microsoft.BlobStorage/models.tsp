@@ -1402,7 +1402,7 @@ model QueryFormat {
 
   /** The Parquet configuration. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
-  @Xml.name("ParquetConfiguration")
+  @Xml.name("ParquetTextConfiguration")
   parquetTextConfiguration?: ParquetConfiguration;
 }
 
