@@ -4,20 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
-// Mark list operations as pageable for C# backward compatibility
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Clusters.listNamespaces,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ClustersOperationGroup.listAvailableClusterRegion,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EHNamespaces.privateLinkResourcesGet,
-  "csharp"
-);
-
 @@clientName(Microsoft.EventHub,
   "EventHubManagementClient",
   "python,javascript"
@@ -233,6 +219,48 @@ using Microsoft.EventHub;
 @@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
 @@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
 @@usage(FailOver, Usage.input | Usage.output, "csharp");
+@@usage(NspAccessRulePropertiesSubscriptionsItem,
+  Usage.input | Usage.output,
+  "csharp"
+);
+// Mark list operations as pageable for C# backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Clusters.listNamespaces,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ClustersOperationGroup.listAvailableClusterRegion,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EHNamespaces.privateLinkResourcesGet,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(NetworkSecurityPerimeterConfigurations.list,
+  "csharp"
+);
+@@clientLocation(AuthorizationRules.getAuthorizationRule,
+  AuthorizationRules,
+  "csharp"
+);
+@@clientLocation(AuthorizationRules.createOrUpdateAuthorizationRule,
+  AuthorizationRules,
+  "csharp"
+);
+@@clientLocation(AuthorizationRules.deleteAuthorizationRule,
+  AuthorizationRules,
+  "csharp"
+);
+@@clientLocation(AuthorizationRules.listAuthorizationRules,
+  AuthorizationRules,
+  "csharp"
+);
+@@clientLocation(AuthorizationRules.listKeys, AuthorizationRules, "csharp");
+@@clientLocation(AuthorizationRules.regenerateKeys,
+  AuthorizationRules,
+  "csharp"
+);
 @@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(Eventhub.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(ConsumerGroup.location, Azure.Core.azureLocation, "csharp");
@@ -288,12 +316,12 @@ using Microsoft.EventHub;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(NspAccessRulePropertiesSubscriptionsItem.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Subnet.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(NspAccessRuleProperties.subscriptions,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 @@alternateType(Cluster, EventHubsCluster, "csharp");
 @@alternateType(EHNamespace, EventHubsNamespace, "csharp");
 @@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
@@ -339,8 +367,14 @@ namespace Microsoft.EventHub {
     >;
     ...OmitProperties<
       Cluster,
-      "id" | "name" | "type" | "properties" | "location" | "identity"
+      "id" | "name" | "type" | "properties" | "location" | "identity" | "sku"
     >;
+
+    /**
+     * Properties of sku resource
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    sku?: Sku;
 
     /**
      * Properties of BYOK Identity description
@@ -398,5 +432,14 @@ namespace Microsoft.EventHub {
      * Renaming
      */
     Renaming,
+  }
+}
+
+// We add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model SubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
   }
 }
