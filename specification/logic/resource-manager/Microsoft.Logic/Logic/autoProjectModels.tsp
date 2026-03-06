@@ -56,15 +56,6 @@ model AutoProjectProperties {
    * A description of the auto project.
    */
   description?: string;
-
-  /**
-   * The auto apps managed by this auto project (read-only).
-   * Populated by the server based on ContainerApps that have `managedBy` set to this auto project's resource ID.
-   * Each ContainerApp must have kind set to 'workflowapp'.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["resourceId"])
-  autoApps?: AutoAppReference[];
 }
 
 /**
@@ -95,11 +86,13 @@ model AutoProjectUpdate
 
 /**
  * A reference to a ContainerApp of kind workflowapp managed by this auto project.
+ * The managedBy relationship is implemented by the Microsoft.App resource provider.
  */
 model AutoAppReference {
   /**
    * The ARM resource ID of the ContainerApp (Microsoft.App/containerApps).
-   * The ContainerApp must have kind set to 'workflowapp' and managedBy set to this auto project's resource ID.
+   * The ContainerApp must have kind set to 'workflowapp' and its managedBy property
+   * set to this auto project's resource ID by the Microsoft.App resource provider.
    */
   resourceId: string;
 
@@ -119,6 +112,22 @@ model AutoAppReference {
    */
   @visibility(Lifecycle.Read)
   runningState?: AutoAppRunningState;
+}
+
+/**
+ * The response for the listAutoApps action.
+ */
+model AutoAppListResult {
+  /**
+   * The list of auto apps managed by this auto project.
+   */
+  @identifiers(#["resourceId"])
+  value: AutoAppReference[];
+
+  /**
+   * The link to the next page of items.
+   */
+  nextLink?: url;
 }
 
 /**

@@ -1,0 +1,30 @@
+{
+  "operationId": "AutoProjects_ListAutoApps",
+  "title": "List Auto Apps for Auto Project",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "autoProjectName": "myAutoProject",
+    "api-version": "2026-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/workflow-orders",
+            "displayName": "Order Processing",
+            "provisioningState": "Succeeded",
+            "runningState": "Running"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/workflow-notifications",
+            "displayName": "Notification Service",
+            "provisioningState": "Succeeded",
+            "runningState": "Running"
+          }
+        ]
+      }
+    }
+  }
+}

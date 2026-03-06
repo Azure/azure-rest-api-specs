@@ -63,6 +63,12 @@ interface AutoProjects {
    * Gets a list of auto projects by subscription.
    */
   listBySubscription is ArmListBySubscription<AutoProject>;
+
+  /**
+   * Lists the auto apps (ContainerApps of kind 'workflowapp') managed by this auto project.
+   * The managedBy relationship is implemented by the Microsoft.App resource provider.
+   */
+  listAutoApps is ArmResourceActionSync<AutoProject, void, AutoAppListResult>;
 }
 
 @@doc(AutoProject.name, "The auto project name.");

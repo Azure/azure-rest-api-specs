@@ -40,13 +40,16 @@ We evaluated three approaches and selected **Option C**:
     ├── provisioningState (read-only): AutoProjectProvisioningState
     ├── createdTime (read-only): utcDateTime
     ├── changedTime (read-only): utcDateTime
-    ├── state?: AutoProjectState (Active | Disabled)
-    ├── description?: string
-    ├── autoApps (read-only): AutoAppReference[]
-    │   ├── containerAppResourceId: string (ARM resource ID of Microsoft.App/containerApps)
-    │   ├── displayName?: string
-    │   ├── provisioningState (read-only): AutoAppProvisioningState
-    │   └── runningState (read-only): AutoAppRunningState
+    └── description?: string
+```
+
+### AutoAppReference (returned by listAutoApps action)
+
+```
+├── resourceId: string (ARM resource ID of Microsoft.App/containerApps)
+├── displayName?: string
+├── provisioningState (read-only): AutoAppProvisioningState
+└── runningState (read-only): AutoAppRunningState
 ```
 
 ### Relationship to ContainerApp
@@ -58,7 +61,7 @@ Each managed ContainerApp (under `Microsoft.App/containerApps`):
 
 > **Design note — `environmentId` removed:** An earlier design included `environmentId` on the AutoProject to specify the managed environment. This was removed because an AutoProject may manage ContainerApps across multiple managed environments. Each ContainerApp already knows its environment via its own resource definition, so duplicating it on the AutoProject would be redundant and artificially restrictive.
 
-> **Design note — `autoApps` is read-only:** The `autoApps` array is populated by the server based on which ContainerApps have `managedBy` set to this AutoProject's resource ID. Users do not send it in PUT/PATCH requests. This avoids dangling references — the server always reflects the true state of managed resources.
+> **Design note — `autoApps` moved to dedicated action:** Rather than embedding the auto apps array as a read-only property on `AutoProjectProperties`, the managed apps are discovered via a dedicated `listAutoApps` POST action. This keeps the resource representation lightweight (auto apps are not returned on every GET/LIST) and separates the concerns of lifecycle management from discovery. The `managedBy` relationship is implemented by the `Microsoft.App` resource provider — our action queries which ContainerApps have `managedBy` set to this AutoProject's resource ID.
 
 ```
 Microsoft.Logic/autoProjects/myAutoProject
@@ -83,9 +86,9 @@ Microsoft.Logic/autoProjects/myAutoProject
 
 ### Custom Actions
 
-| Action | Method | Async? | Description |
-|--------|--------|--------|-------------|
-| Validate | POST | No | Validates auto project and checks that all managed ContainerApps exist, are kind `workflowapp`, and have `managedBy` set correctly |
+| Action | Method | Path | Async? | Description |
+|--------|--------|------|--------|-------------|
+| ListAutoApps | POST | `.../autoProjects/{name}/listAutoApps` | No | Lists the ContainerApps (kind `workflowapp`) managed by this auto project. Returns `AutoAppListResult` with pagination. |
 
 > **Design note — `configuration` removed:** An earlier design included `AutoProjectConfiguration` with shared secrets, access control rules, and a workload profile name at the AutoProject level, along with a `deployConfiguration` action to push them to all apps. This was removed because each ContainerApp (`Microsoft.App/containerApps`) already has its own secrets, ingress/IP restrictions, and workload profile settings. Duplicating these at the AutoProject level creates ambiguity about which configuration takes precedence and adds unnecessary sync complexity. The AutoProject is a **lifecycle orchestrator**, not a configuration manager — each app manages its own configuration independently.
 
@@ -94,7 +97,6 @@ Microsoft.Logic/autoProjects/myAutoProject
 | Name | Values |
 |------|--------|
 | AutoProjectProvisioningState | InProgress, Succeeded, Failed, Canceled, Deleting |
-| AutoProjectState | Active, Disabled |
 | AutoAppProvisioningState | InProgress, Succeeded, Failed, Canceled, Deleting |
 | AutoAppRunningState | Running, Stopped, Unknown |
 
@@ -108,19 +110,17 @@ This TypeSpec project is a standalone service directory for the AutoProject reso
 
 ```
 specification/logic/resource-manager/Microsoft.Logic/
-├── Logic/                               ← Existing swagger specs (untouched)
-│   ├── stable/2019-05-01/logic.json
-│   ├── stable/2016-06-01/logic.json
-│   ├── preview/*/logic.json
-│   └── readme.md
-└── AutoProject/                         ← NEW TypeSpec project (this directory)
-    ├── tspconfig.yaml
-    ├── main.tsp
-    ├── AutoProject.tsp
-    ├── autoProjectModels.tsp
-    ├── examples/2026-01-01-preview/
-    └── preview/2026-01-01-preview/      ← Generated OpenAPI output
-        └── autoProject.json
+├── Logic/                               ← TypeSpec project + generated swagger
+│   ├── main.tsp                         ← Entry point (namespace, version)
+│   ├── AutoProject.tsp                  ← Resource definition and operations
+│   ├── autoProjectModels.tsp            ← Models, unions, types
+│   ├── tspconfig.yaml                   ← Compiler and emitter config
+│   ├── readme.md                        ← AutoRest readme with tags
+│   ├── AUTOPROJECT-DESIGN.md            ← This design document
+│   ├── examples/2026-01-01-preview/     ← Source example files
+│   └── preview/2026-01-01-preview/      ← Generated OpenAPI output
+│       ├── logic.json
+│       └── examples/
 ```
 
 ## Files
@@ -136,7 +136,9 @@ specification/logic/resource-manager/Microsoft.Logic/
 | Dependency | Description |
 |------------|-------------|
 | `Microsoft.App` | The AutoProject RP must call `Microsoft.App/containerApps` APIs to create, update, start, stop, and delete managed ContainerApps. |
-| `managedBy` contract | The `Microsoft.App` RP must honor the `managedBy` property to prevent direct deletion of managed ContainerApps in complete mode deployments. |
+| `managedBy` contract | The `Microsoft.App` RP must implement `managedBy` support on `Microsoft.App/containerApps`. This means Microsoft.App sets and honors the `managedBy` property to prevent direct deletion of managed ContainerApps in complete mode deployments. |
+
+> **Note:** The `managedBy` property on ContainerApps is **implemented by the Microsoft.App resource provider**, not by Microsoft.Logic. Our AutoProject spec defines the `listAutoApps` action to query which ContainerApps are managed, but the actual `managedBy` field enforcement is Microsoft.App's responsibility.
 
 ## `managedBy` Contract — Enforcement Details
 
