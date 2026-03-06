@@ -76,3 +76,29 @@ interface ConversationThreadClient
   "mediaUrl",
   "java"
 );
+
+// Python-specific customizations
+
+// Rename MessageDataStream.id to mediaId for Python (avoids shadowing built-in 'id')
+@@clientName(Azure.Communication.MessagesService.MessageDataStream.id,
+  "mediaId",
+  "python"
+);
+
+// Rename CommunicationMessageKind to MessageKind for Python
+@@clientName(Azure.Communication.MessagesService.CommunicationMessageKind,
+  "MessageKind",
+  "python"
+);
+
+// Make ActionGroupContent publicly accessible for Python
+@@access(Azure.Communication.MessagesService.ActionGroupContent,
+  Access.public,
+  "python"
+);
+
+// Mark WhatsAppListActionBindings.kind as internal for Python since it's a fixed discriminator value
+@@access(Azure.Communication.MessagesService.WhatsAppListActionBindings.kind,
+  Access.internal,
+  "python"
+);
