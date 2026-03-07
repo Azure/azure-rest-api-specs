@@ -126,6 +126,7 @@ interface Evaluators {
   // POST /evaluators/{evaluatorName}/versions/{version}/startPendingUpload
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
+  @Versioning.removed(Versions.v1)
   @Rest.action("startPendingUpload")
   startPendingUpload is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
@@ -151,6 +152,7 @@ interface Evaluators {
   @Http.post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
+  @Versioning.removed(Versions.v1)
   getCredentials is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
