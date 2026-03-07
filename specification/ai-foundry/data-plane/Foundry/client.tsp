@@ -156,6 +156,11 @@ using Azure.AI.Projects;
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
+
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
 // Insights sub‐client
@@ -194,6 +199,14 @@ using Azure.AI.Projects;
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
 @@clientName(Schedule.id, "schedule_id");
 
+// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
+@@alternateType(CronTrigger.startTime, utcDateTime, "python");
+@@alternateType(CronTrigger.endTime, utcDateTime, "python");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
+
 // --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
@@ -211,13 +224,13 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
-// To support custom client-side handling of "opt-in" to preview features. 
+// To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
 // Remove preview opt-in union types from the public PythonSDK surface.
 //
 // TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the 
+// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
 // proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
 // in alias WithConditionalFoundryPreviewHeader.
 //
@@ -233,7 +246,12 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects, {parameters: AIProjectClientOptions}, "python");
+@@clientInitialization(Azure.AI.Projects,
+  {
+    parameters: AIProjectClientOptions,
+  },
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Other
