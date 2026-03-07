@@ -277,7 +277,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyImportParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -415,7 +416,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyUpdateParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -518,7 +520,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -574,7 +577,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -630,7 +634,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyReleaseParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -686,7 +691,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/SecureKeyUnWrapOperationParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -742,7 +748,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/SecureKeyWrapOperationParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -798,7 +805,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeySignParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -854,7 +862,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -910,7 +919,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyVerifyParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -966,7 +976,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyOperationsParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -1054,7 +1065,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyCreateParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -1271,7 +1283,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/KeyRestoreParameters"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -1311,7 +1324,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/GetRandomBytesRequest"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -2329,7 +2343,8 @@
         },
         "enc": {
           "$ref": "#/definitions/KeyEncryptionAlgorithm",
-          "description": "The encryption algorithm to use to protected the exported key material"
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "minLength": 1
         }
       }
     },
@@ -2497,6 +2512,7 @@
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
           "description": "The type of key pair to be used for the certificate.",
+          "minLength": 1,
           "x-ms-client-name": "keyType"
         },
         "key_size": {
