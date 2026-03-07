@@ -136,7 +136,10 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(Services, "StorageAccountSasSignedService", "csharp");
-@@clientName(SignedResourceTypes, "StorageAccountSasSignedResourceType", "csharp");
+@@clientName(SignedResourceTypes,
+  "StorageAccountSasSignedResourceType",
+  "csharp"
+);
 @@clientName(Permissions, "StorageAccountSasPermission", "csharp");
 @@clientName(HttpProtocol, "StorageAccountHttpProtocol", "csharp");
 
@@ -168,10 +171,7 @@ using Microsoft.Storage;
 @@clientName(IntervalUnit, "ExecutionIntervalUnit", "csharp");
 @@clientName(AccountLimits, "FileServiceAccountLimits", "csharp");
 @@clientName(AccountUsage, "FileServiceAccountUsage", "csharp");
-@@clientName(AccountUsageElements,
-  "FileServiceAccountUsageElements",
-  "csharp"
-);
+@@clientName(AccountUsageElements, "FileServiceAccountUsageElements", "csharp");
 @@clientName(Name, "LastAccessTimeTrackingPolicyName", "csharp");
 @@clientName(LeaseContainerRequestAction, "LeaseContainerAction", "csharp");
 @@clientName(RuleType, "ManagementPolicyRuleType", "csharp");
@@ -193,20 +193,11 @@ using Microsoft.Storage;
 );
 @@clientName(RestorePolicyProperties, "RestorePolicy", "csharp");
 @@clientName(SignedResource, "ServiceSasSignedResourceType", "csharp");
-@@clientName(EncryptionIdentity,
-  "StorageAccountEncryptionIdentity",
-  "csharp"
-);
-@@clientName(EncryptionServices,
-  "StorageAccountEncryptionServices",
-  "csharp"
-);
+@@clientName(EncryptionIdentity, "StorageAccountEncryptionIdentity", "csharp");
+@@clientName(EncryptionServices, "StorageAccountEncryptionServices", "csharp");
 @@clientName(KeyPermission, "StorageAccountKeyPermission", "csharp");
 @@clientName(KeySource, "StorageAccountKeySource", "csharp");
-@@clientName(KeyVaultProperties,
-  "StorageAccountKeyVaultProperties",
-  "csharp"
-);
+@@clientName(KeyVaultProperties, "StorageAccountKeyVaultProperties", "csharp");
 @@clientName(MigrationName, "StorageAccountMigrationName", "csharp");
 @@clientName(CheckNameAvailabilityResult,
   "StorageAccountNameAvailabilityResult",
@@ -218,16 +209,10 @@ using Microsoft.Storage;
 @@clientName(EncryptionService, "StorageEncryptionService", "csharp");
 @@clientName(Bypass, "StorageNetworkBypass", "csharp");
 @@clientName(DefaultAction, "StorageNetworkDefaultAction", "csharp");
-@@clientName(PrivateLinkResource,
-  "StoragePrivateLinkResourceData",
-  "csharp"
-);
+@@clientName(PrivateLinkResource, "StoragePrivateLinkResourceData", "csharp");
 @@clientName(RoutingChoice, "StorageRoutingChoice", "csharp");
 @@clientName(AccessPolicy, "StorageServiceAccessPolicy", "csharp");
-@@clientName(TableSignedIdentifier,
-  "StorageTableSignedIdentifier",
-  "csharp"
-);
+@@clientName(TableSignedIdentifier, "StorageTableSignedIdentifier", "csharp");
 @@clientName(StorageTaskAssignmentUpdateProperties,
   "StorageTaskAssignmentPatchProperties",
   "csharp"
@@ -337,7 +322,10 @@ op getDeletedAccountCustomized(
 // it to ARM's SubResource type (which has an internal DeserializeSubResource method).
 // Define a SubResource model in Azure.ResourceManager.Models namespace with armResourceIdentifier
 // to match the generator's system type mapping, then use alternateType to replace the property.
-@@clientName(NspAccessRulePropertiesSubscriptionsItem, "NspAccessRuleSubscription", "csharp");
+@@clientName(NspAccessRulePropertiesSubscriptionsItem,
+  "NspAccessRuleSubscription",
+  "csharp"
+);
 
 namespace Azure.ResourceManager.Models {
   /** Represents a reference to an existing resource by its ARM resource id */
@@ -347,4 +335,453 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(NspAccessRuleProperties.subscriptions, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(NspAccessRuleProperties.subscriptions,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+
+// C# @@usage decorators for backward-compatible setters on models
+// Resource types
+@@usage(StorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(BlobContainer,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(BlobInventoryPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(BlobServiceProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(FileShare,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ObjectReplicationPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(LocalUser,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ManagementPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageAccountMigration,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(PrivateEndpointConnection,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+// Non-resource models
+@@usage(BlobInventoryPolicyRule,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(BlobInventoryPolicySchema,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ChangeFeed,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(DeleteRetentionPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(EncryptionScopeKeyVaultProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ImmutableStorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ImmutableStorageWithVersioning,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(LastAccessTimeTrackingPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ManagementPolicyRule,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ProtocolSettings,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(RestorePolicyProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(SmbSetting,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageAccountCreateParameters,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageAccountSkuConversionStatus,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageAccountUpdateParameters,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageTaskAssignmentProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageTaskReportInstance,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(StorageTaskAssignmentUpdateProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(TagFilter,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(IPRule,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(KeyVaultProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ResourceAccessRule,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(VirtualNetworkRule,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(ActiveDirectoryProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(CustomDomain,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(EncryptionService,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(RoutingPreference,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(AccessPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(TableAccessPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+// C# property renames for backward compatibility (Is-prefix for boolean properties)
+@@clientName(ChangeFeed.enabled, "IsEnabled", "csharp");
+@@clientName(DeleteRetentionPolicy.enabled, "IsEnabled", "csharp");
+@@clientName(ImmutableStorageAccount.enabled, "IsEnabled", "csharp");
+@@clientName(ImmutableStorageWithVersioning.enabled, "IsEnabled", "csharp");
+@@clientName(LastAccessTimeTrackingPolicy.enable, "IsEnabled", "csharp");
+@@clientName(ManagementPolicyRule.enabled, "IsEnabled", "csharp");
+@@clientName(RestorePolicyProperties.enabled, "IsEnabled", "csharp");
+@@clientName(EncryptionService.enabled, "IsEnabled", "csharp");
+@@clientName(BlobInventoryPolicyRule.enabled, "IsEnabled", "csharp");
+@@clientName(BlobInventoryPolicySchema.enabled, "IsEnabled", "csharp");
+@@clientName(StorageTaskAssignmentProperties.enabled, "IsEnabled", "csharp");
+@@clientName(StorageTaskAssignmentUpdateProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(CustomDomain.useSubDomainName,
+  "IsUseSubDomainNameEnabled",
+  "csharp"
+);
+@@clientName(RoutingPreference.publishInternetEndpoints,
+  "IsInternetEndpointsPublished",
+  "csharp"
+);
+@@clientName(RoutingPreference.publishMicrosoftEndpoints,
+  "IsMicrosoftEndpointsPublished",
+  "csharp"
+);
+@@clientName(ContainerProperties.denyEncryptionScopeOverride,
+  "PreventEncryptionScopeOverride",
+  "csharp"
+);
+@@clientName(BlobServicePropertiesProperties.automaticSnapshotPolicyEnabled,
+  "IsAutomaticSnapshotPolicyEnabled",
+  "csharp"
+);
+@@clientName(FileShareProperties.enabledProtocols, "EnabledProtocol", "csharp");
+@@clientName(TagFilter.`op`, "Operator", "csharp");
+@@clientName(AccessPolicy.expiryTime, "ExpireOn", "csharp");
+@@clientName(TableAccessPolicy.expiryTime, "ExpireOn", "csharp");
+@@clientName(ManagementPolicyRule.type, "RuleType", "csharp");
+@@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
+
+// Additional property renames for StorageAccount properties
+@@clientName(StorageAccountPropertiesCreateParameters.defaultToOAuthAuthentication,
+  "IsDefaultToOAuthAuthentication",
+  "csharp"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
+  "IsNfsV3Enabled",
+  "csharp"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.enableExtendedGroups,
+  "IsExtendedGroupEnabled",
+  "csharp"
+);
+@@clientName(StorageAccountProperties.defaultToOAuthAuthentication,
+  "IsDefaultToOAuthAuthentication",
+  "csharp"
+);
+@@clientName(StorageAccountProperties.isNfsV3Enabled,
+  "IsNfsV3Enabled",
+  "csharp"
+);
+@@clientName(StorageAccountProperties.enableExtendedGroups,
+  "IsExtendedGroupEnabled",
+  "csharp"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.defaultToOAuthAuthentication,
+  "IsDefaultToOAuthAuthentication",
+  "csharp"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.enableExtendedGroups,
+  "IsExtendedGroupEnabled",
+  "csharp"
+);
+@@clientName(DualStackEndpointPreference.publishIpv6Endpoint,
+  "IsIPv6EndpointToBePublished",
+  "csharp"
+);
+@@clientName(BlobServicePropertiesProperties.automaticSnapshotPolicyEnabled,
+  "IsAutomaticSnapshotPolicyEnabled",
+  "csharp"
+);
+
+// ObjectReplicationPolicy flattened boolean renames
+@@clientName(ObjectReplicationPolicyPropertiesMetrics.enabled,
+  "IsMetricsEnabled",
+  "csharp"
+);
+@@clientName(ObjectReplicationPolicyPropertiesPriorityReplication.enabled,
+  "IsPriorityReplicationEnabled",
+  "csharp"
+);
+
+// LocalUser property renames
+@@clientName(LocalUserProperties.allowAclAuthorization,
+  "IsAclAuthorizationAllowed",
+  "csharp"
+);
+@@clientName(LocalUserProperties.isNFSv3Enabled, "IsNfsV3Enabled", "csharp");
+
+// SmbSetting/NfsSetting flattened property renames
+@@clientName(Multichannel.enabled, "IsMultiChannelEnabled", "csharp");
+@@clientName(EncryptionInTransit.required, "IsRequired", "csharp");
+
+// BlobInventoryPolicy property rename
+@@clientName(BlobInventoryPolicyProperties.policy, "PolicySchema", "csharp");
+
+// PrivateEndpointConnection property rename
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+
+// ManagementPolicy flattened property access
+@@clientName(ManagementPolicySchema.rules, "Rules", "csharp");
+
+// @@alternateType decorators for C# backward compat types
+@@alternateType(ResourceAccessRule.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
+@@alternateType(ResourceAccessRule.tenantId, uuid, "csharp");
+@@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
+@@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
+@@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
+
+// Rename DomainGuid → ActiveDirectoryDomainGuid for backward compat
+@@clientName(ActiveDirectoryProperties.domainGuid,
+  "ActiveDirectoryDomainGuid",
+  "csharp"
+);
+
+// Rename automaticSnapshotPolicyEnabled on BlobServiceProperties
+@@clientName(BlobServicePropertiesProperties.automaticSnapshotPolicyEnabled,
+  "IsAutomaticSnapshotPolicyEnabled",
+  "csharp"
+);
+
+// @@alternateType for Endpoint URL properties (string -> url = System.Uri in C#)
+@@alternateType(Endpoints.blob, url, "csharp");
+@@alternateType(Endpoints.queue, url, "csharp");
+@@alternateType(Endpoints.table, url, "csharp");
+@@alternateType(Endpoints.file, url, "csharp");
+@@alternateType(Endpoints.web, url, "csharp");
+@@alternateType(Endpoints.dfs, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.blob, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.queue, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.table, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.file, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.web, url, "csharp");
+@@alternateType(StorageAccountMicrosoftEndpoints.dfs, url, "csharp");
+@@alternateType(StorageAccountInternetEndpoints.blob, url, "csharp");
+@@alternateType(StorageAccountInternetEndpoints.file, url, "csharp");
+@@alternateType(StorageAccountInternetEndpoints.web, url, "csharp");
+@@alternateType(StorageAccountInternetEndpoints.dfs, url, "csharp");
+
+// @@alternateType for ResourceIdentifier properties
+@@alternateType(DeletedAccountProperties.storageAccountResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(NetworkSecurityPerimeter.id, armResourceIdentifier, "csharp");
+
+// @@alternateType for Guid properties
+@@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
+@@alternateType(TagProperty.tenantId, uuid, "csharp");
+
+// @@clientName for Endpoint property renames
+@@clientName(Endpoints.blob, "BlobUri", "csharp");
+@@clientName(Endpoints.queue, "QueueUri", "csharp");
+@@clientName(Endpoints.table, "TableUri", "csharp");
+@@clientName(Endpoints.file, "FileUri", "csharp");
+@@clientName(Endpoints.web, "WebUri", "csharp");
+@@clientName(Endpoints.dfs, "DfsUri", "csharp");
+@@clientName(Endpoints.ipv6Endpoints, "IPv6Endpoints", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.blob, "BlobUri", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.queue, "QueueUri", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.table, "TableUri", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.file, "FileUri", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.web, "WebUri", "csharp");
+@@clientName(StorageAccountMicrosoftEndpoints.dfs, "DfsUri", "csharp");
+@@clientName(StorageAccountInternetEndpoints.blob, "BlobUri", "csharp");
+@@clientName(StorageAccountInternetEndpoints.file, "FileUri", "csharp");
+@@clientName(StorageAccountInternetEndpoints.web, "WebUri", "csharp");
+@@clientName(StorageAccountInternetEndpoints.dfs, "DfsUri", "csharp");
+
+// Other property renames
+@@clientName(DeletedAccountProperties.storageAccountResourceId,
+  "StorageAccountResourceId",
+  "csharp"
+);
+@@clientName(Restriction.type, "RestrictionType", "csharp");
+@@clientName(BlobInventoryPolicyFilter.prefixMatch, "IncludePrefix", "csharp");
+
+// Property renames for boolean Is-prefix
+@@clientName(ContainerProperties.deleted, "IsDeleted", "csharp");
+@@clientName(FileShareProperties.deleted, "IsDeleted", "csharp");
+@@clientName(CheckNameAvailabilityResult.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(StorageAccountProperties.accountMigrationInProgress,
+  "IsAccountMigrationInProgress",
+  "csharp"
+);
+@@clientName(StorageAccountProperties.failoverInProgress,
+  "IsFailoverInProgress",
+  "csharp"
+);
+
+// Property renames for DateTimeOffset On-suffix
+@@clientName(AccountSasParameters.signedExpiry,
+  "SharedAccessExpireOn",
+  "csharp"
+);
+@@clientName(StorageTaskReportProperties.startTime, "StartedOn", "csharp");
+@@clientName(StorageTaskReportProperties.finishTime, "FinishedOn", "csharp");
+@@clientName(DeletedAccountProperties.creationTime, "CreatedOn", "csharp");
+@@clientName(DeletedAccountProperties.deletionTime, "DeletedOn", "csharp");
+
+// Property renames for Iops casing
+@@clientName(BurstingConstants.burstFloorIOPS, "BurstFloorIops", "csharp");
+@@clientName(FileShareRecommendations.baseIOPS, "BaseIops", "csharp");
+
+// Rename network rule set properties for IPRules/IPv6Rules
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(NetworkRuleSet.ipv6Rules, "IPv6Rules", "csharp");
+
+// AllowedCopyScope member rename
+@@clientName(AllowedCopyScope.AAD, "Aad", "csharp");
+
+// DeletedAccountProperties location needs AzureLocation type
+@@alternateType(DeletedAccountProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(StorageAccountProperties.primaryLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(StorageAccountProperties.secondaryLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+// Fix IOPS casing: IOPS → Iops for backward compat
+@@clientName(AccountLimits.maxProvisionedIOPS, "MaxProvisionedIops", "csharp");
+@@clientName(FileShareLimits.maxProvisionedIOPS, "MaxProvisionedIops", "csharp");
+@@clientName(FileShareLimits.minProvisionedIOPS, "MinProvisionedIops", "csharp");
+@@clientName(AccountUsageElements.provisionedIOPS, "ProvisionedIops", "csharp");
+
+// Fix UpdateHistoryProperty.update → UpdateType for backward compat
+@@clientName(UpdateHistoryProperty.update, "UpdateType", "csharp");
+
+// Fix Location type on create parameters
+@@alternateType(
+  StorageAccountCreateParameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+// Fix CheckNameAvailabilityParameters.type → ResourceType with proper type
+@@clientName(
+  StorageAccountCheckNameAvailabilityParameters.type,
+  "ResourceType",
+  "csharp"
+);
+@@access(StorageAccountCheckNameAvailabilityParameters.type, Access.public, "csharp");
+
+// Fix location types to AzureLocation
+@@alternateType(
+  SkuInformationLocationInfoItem.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DeletedAccountProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
