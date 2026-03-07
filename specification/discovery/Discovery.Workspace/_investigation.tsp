@@ -142,21 +142,23 @@ model WorkingMemoryEntry {
   ...WithCreatedAt;
 }
 
-@doc("Get discovery engine working memory parameters.")
-@added(Versions.`2026-02-01-preview`)
-model GetDiscoveryEngineMemoryParameters {
+/** Get discovery engine working memory parameters. */
+alias GetDiscoveryEngineMemoryParameters = {
   @doc("Skip results.")
+  @added(Versions.`2026-02-01-preview`)
   @query
   skip?: int32;
 
   @doc("Query the top results.")
+  @added(Versions.`2026-02-01-preview`)
   @query
   top?: int32;
 
   @doc("Bound the number of results that come back in one response.")
+  @added(Versions.`2026-02-01-preview`)
   @query
   maxPageSize?: int32;
-}
+};
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Discovery Engine Update Request. This will create the discovery engine if it does not already exist.")
@@ -442,6 +444,7 @@ interface Investigations {
   @doc("Update the discovery engine for an investigation. This will create the discovery engine if it does not already exist.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine")
   @patch
+  @added(Versions.`2025-12-01-preview`)
   updateDiscoveryEngine is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")

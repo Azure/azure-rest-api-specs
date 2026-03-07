@@ -117,9 +117,6 @@ model ToolReference {
 model KnowledgeBaseReference {
   @doc("The resource ID of the knowledge base.")
   knowledgeBaseId: string;
-
-  @doc("The name of the knowledge base.")
-  name: string;
 }
 
 // ============================================================================

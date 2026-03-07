@@ -30,7 +30,7 @@ model KnowledgeBaseVersion {
 }
 
 @doc("Resources for indexing operation")
-model WithNodePool {
+model IndexingRequest {
   @doc("Node pool ID")
   nodePoolId: string;
 
@@ -43,7 +43,7 @@ model WithNodePool {
 }
 
 @doc("Supercomputer run ID")
-model WithRunId {
+model IndexingResponse {
   @doc("Run ID")
   runId: string;
 }
@@ -113,7 +113,7 @@ interface KnowledgeBaseVersions {
 
   //   @route("/indexingOperations/{operationId}")
   //   getIndexingOperationStatus is Operations.GetResourceOperationStatus<KnowledgeBaseVersion,
-  //     WithRunId
+  //     IndexingResponse
   //   >;
 
   //   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
@@ -157,16 +157,16 @@ interface KnowledgeBaseVersions {
   @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
   startIndexing is Operations.LongRunningResourceAction<
     KnowledgeBaseVersion,
-    WithNodePool,
-    WithRunId
+    IndexingRequest,
+    IndexingResponse
   >;
 
   @doc("Cancel indexing.")
   @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
   cancelIndexing is Operations.LongRunningResourceAction<
     KnowledgeBaseVersion,
-    WithNodePool,
-    WithRunId
+    IndexingRequest,
+    IndexingResponse
   >;
 
   @doc("Delete a KnowledgeBaseVersion.")

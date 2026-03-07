@@ -241,7 +241,19 @@ model RunRequest {
 
   @doc("Override the infrastructure requirements in the tool definitions.")
   infraOverrides?: InfraOverrides;
+
+  @added(Versions.`2026-02-01-preview`)
+  @doc("Optional environment variables to set in the tool container. This must not contain any secrets.")
+  environmentVariables?: EnvironmentVariable[];
 }
+
+alias EnvironmentVariable = {
+  @doc("Name of the environment variable. This must not contain any secrets.")
+  name: string;
+
+  @doc("Value of the environment variable. This must not contain any secrets.")
+  value: string;
+};
 
 @doc("A file to be included in the input data for a tool run and the path where it will be mounted, relative to the working directory.")
 model InlineFile {
@@ -326,21 +338,21 @@ model RunResult {
 }
 
 /** Project name path parameter for URL routing */
-model WithProjectNamePath {
+alias WithProjectNamePath = {
   /** Name of the associated Project. */
   @path
   @maxLength(24)
   @pattern(resourceNamePattern)
   projectName: string;
-}
+};
 
 /** Operation ID path parameter */
-model WithOperationId {
+alias WithOperationId = {
   /** ID of the operation to cancel. */
   @path
   @maxLength(38)
   operationId: string;
-}
+};
 
 /** Summary information for an operation. */
 model Operation {
@@ -409,7 +421,7 @@ model NodepoolUsage {
 }
 
 /** Get operations parameters. */
-model GetOperationsParameters {
+alias GetOperationsParameters = {
   /** Skip results (pagination control). */
   @query
   skip?: int32;
@@ -421,14 +433,24 @@ model GetOperationsParameters {
   /** Bound the number of results that come back in one response (pagination control). */
   @query
   maxPageSize?: int32;
-}
+};
+
+/** Query parameter to control the number of log lines returned. */
+alias WithLogCount = {
+  /** Number of log lines to return (0-2500). */
+  @added(Versions.`2026-02-01-preview`)
+  @query
+  @minValue(0)
+  @maxValue(2500)
+  logCount?: int32;
+};
 
 interface Tools {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Used for to poll status of a Tool run.")
   @route("/tools/projects/{projectName}/operations")
   getRunStatus is Foundations.GetOperationStatus<
-    WithProjectNamePath,
+    WithProjectNamePath & WithLogCount,
     RunResult
   >;
 

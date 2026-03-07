@@ -368,7 +368,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WithNodePool"
+              "$ref": "#/definitions/IndexingRequest"
             }
           }
         ],
@@ -392,7 +392,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/WithRunId",
+                  "$ref": "#/definitions/IndexingResponse",
                   "description": "The result of the operation."
                 }
               },
@@ -499,7 +499,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WithNodePool"
+              "$ref": "#/definitions/IndexingRequest"
             }
           }
         ],
@@ -523,7 +523,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/WithRunId",
+                  "$ref": "#/definitions/IndexingResponse",
                   "description": "The result of the operation."
                 }
               },
@@ -841,6 +841,36 @@
           }
         ]
       }
+    },
+    "IndexingRequest": {
+      "type": "object",
+      "description": "Resources for indexing operation",
+      "properties": {
+        "nodePoolId": {
+          "type": "string",
+          "description": "Node pool ID"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID"
+        }
+      },
+      "required": [
+        "nodePoolId"
+      ]
+    },
+    "IndexingResponse": {
+      "type": "object",
+      "description": "Supercomputer run ID",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "Run ID"
+        }
+      },
+      "required": [
+        "runId"
+      ]
     },
     "IndexingStatus": {
       "type": "string",
@@ -1377,36 +1407,6 @@
       },
       "required": [
         "id"
-      ]
-    },
-    "WithNodePool": {
-      "type": "object",
-      "description": "Resources for indexing operation",
-      "properties": {
-        "nodePoolId": {
-          "type": "string",
-          "description": "Node pool ID"
-        },
-        "projectId": {
-          "type": "string",
-          "description": "Project ID"
-        }
-      },
-      "required": [
-        "nodePoolId"
-      ]
-    },
-    "WithRunId": {
-      "type": "object",
-      "description": "Supercomputer run ID",
-      "properties": {
-        "runId": {
-          "type": "string",
-          "description": "Run ID"
-        }
-      },
-      "required": [
-        "runId"
       ]
     }
   },

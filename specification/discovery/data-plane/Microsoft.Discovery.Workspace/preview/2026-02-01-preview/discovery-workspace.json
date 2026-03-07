@@ -76,6 +76,13 @@
             "type": "string"
           },
           {
+            "name": "projectName",
+            "in": "query",
+            "description": "The name of the associated Project",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "createdSince",
             "in": "query",
             "description": "The oldest creation timestamp to keep",
@@ -258,6 +265,46 @@
         "x-ms-examples": {
           "Conversations_Update_MaximumSet": {
             "$ref": "./examples/Conversations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Conversations_Delete",
+        "description": "Deletes a Conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationName",
+            "in": "path",
+            "description": "The conversation name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Conversations_Delete_MaximumSet": {
+            "$ref": "./examples/Conversations_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -776,13 +823,28 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/GetDiscoveryEngineMemoryParameters.skip"
+            "name": "skip",
+            "in": "query",
+            "description": "Skip results.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/GetDiscoveryEngineMemoryParameters.top"
+            "name": "top",
+            "in": "query",
+            "description": "Query the top results.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/GetDiscoveryEngineMemoryParameters.maxPageSize"
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "Bound the number of results that come back in one response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1606,7 +1668,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithProjectNamePath"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the associated Project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -1684,7 +1752,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithProjectNamePath"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the associated Project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1723,16 +1797,37 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithProjectNamePath"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the associated Project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/GetOperationsParameters.skip"
+            "name": "skip",
+            "in": "query",
+            "description": "Skip results (pagination control).",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/GetOperationsParameters.top"
+            "name": "top",
+            "in": "query",
+            "description": "Query the top results (pagination control).",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/GetOperationsParameters.maxPageSize"
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "Bound the number of results that come back in one response (pagination control).",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1771,7 +1866,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithProjectNamePath"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the associated Project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "logCount",
+            "in": "query",
+            "description": "Number of log lines to return (0-2500).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2500
           },
           {
             "name": "operationId",
@@ -1840,10 +1951,21 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/WithProjectNamePath"
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the associated Project.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/WithOperationId"
+            "name": "operationId",
+            "in": "path",
+            "description": "ID of the operation to cancel.",
+            "required": true,
+            "type": "string",
+            "maxLength": 38
           }
         ],
         "responses": {
@@ -2892,6 +3014,27 @@
         "infraOverrides": {
           "$ref": "#/definitions/InfraOverrides",
           "description": "Override the infrastructure requirements in the tool definitions."
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "Optional environment variables to set in the tool container. This must not contain any secrets.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the environment variable. This must not contain any secrets."
+              },
+              "value": {
+                "type": "string",
+                "description": "Value of the environment variable. This must not contain any secrets."
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          }
         }
       },
       "required": [
@@ -3683,79 +3826,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "GetDiscoveryEngineMemoryParameters.maxPageSize": {
-      "name": "maxPageSize",
-      "in": "query",
-      "description": "Bound the number of results that come back in one response.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "GetDiscoveryEngineMemoryParameters.skip": {
-      "name": "skip",
-      "in": "query",
-      "description": "Skip results.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "GetDiscoveryEngineMemoryParameters.top": {
-      "name": "top",
-      "in": "query",
-      "description": "Query the top results.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "GetOperationsParameters.maxPageSize": {
-      "name": "maxPageSize",
-      "in": "query",
-      "description": "Bound the number of results that come back in one response (pagination control).",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "GetOperationsParameters.skip": {
-      "name": "skip",
-      "in": "query",
-      "description": "Skip results (pagination control).",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "GetOperationsParameters.top": {
-      "name": "top",
-      "in": "query",
-      "description": "Query the top results (pagination control).",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "WithOperationId": {
-      "name": "operationId",
-      "in": "path",
-      "description": "ID of the operation to cancel.",
-      "required": true,
-      "type": "string",
-      "maxLength": 38,
-      "x-ms-parameter-location": "method"
-    },
-    "WithProjectNamePath": {
-      "name": "projectName",
-      "in": "path",
-      "description": "Name of the associated Project.",
-      "required": true,
-      "type": "string",
-      "maxLength": 24,
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "x-ms-parameter-location": "method"
     }
   }
 }

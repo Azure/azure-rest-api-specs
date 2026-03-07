@@ -52,3 +52,10 @@ alias WithQueryInvestigationName = {
   @TypeSpec.Http.query
   investigationName?: string;
 };
+
+/** For searching by Project. */
+alias WithQueryProjectName = {
+  @doc("The name of the associated Project")
+  @TypeSpec.Http.query
+  projectName?: string;
+};

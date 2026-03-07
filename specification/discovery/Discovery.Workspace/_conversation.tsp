@@ -55,9 +55,14 @@ interface Conversations {
   @doc("Updates a Conversation.")
   update is StandardResourceOperations.ResourceCreateOrUpdate<Conversation>;
 
+  @doc("Deletes a Conversation.")
+  delete is ResourceDelete<Conversation>;
+
   @doc("List Conversation resources")
   list is ResourceList<
     Conversation,
-    QueryParametersTrait<WithQueryInvestigationName & WithQueryCreatedSince>
+    QueryParametersTrait<WithQueryInvestigationName &
+      WithQueryProjectName &
+      WithQueryCreatedSince>
   >;
 }
