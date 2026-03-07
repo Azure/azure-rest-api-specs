@@ -38,6 +38,14 @@ using Microsoft.BillingBenefits;
 );
 
 // csharp
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+  "BillingBenefitsManagedServiceIdentity",
+  "csharp"
+);
+@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+  "BillingBenefitsManagedServiceIdentityType",
+  "csharp"
+);
 @@clientName(ReservationOrderAliasResponse,
   "BillingBenefitsReservationOrderAlias",
   "csharp"
@@ -243,3 +251,6 @@ using Microsoft.BillingBenefits;
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");
 @@clientName(Term.P5Y, "P5_Y", "python");
+
+@@clientName(DiscountsOperationGroup.scopeList, "listDiscountByScope", "csharp");
+@@clientName(ConditionalCreditsOperationGroup.scopeList, "listConditionalCreditByScope", "csharp");
