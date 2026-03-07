@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 
@@ -260,6 +262,12 @@ union MatchVariable {
    * SocketAddr
    */
   SocketAddr: "SocketAddr",
+
+ @added(Versions.v2025_11_01)
+  /**
+   * JA4
+   */
+  JA4: "JA4",
 }
 
 /**
@@ -332,6 +340,18 @@ union Operator {
    * ServiceTagMatch
    */
   ServiceTagMatch: "ServiceTagMatch",
+  
+  @added(Versions.v2025_11_01)
+  /**
+   * AsnMatch
+   */
+  AsnMatch: "AsnMatch",
+  
+  @added(Versions.v2025_11_01)
+  /**
+   * ClientFingerprint
+   */
+  ClientFingerprint: "ClientFingerprint",
 }
 
 /**
@@ -1768,6 +1788,192 @@ model ManagedRuleSetList {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedRuleSets?: ManagedRuleSet[];
+
+  /**
+   * List of exceptions applied on the managed rule sets.
+   */
+   @added(Versions.v2025_11_01)
+   exceptionsList?: ManagedRuleSetExceptionList;
+}
+
+/**
+ * Defines the list of exceptions for the managed rule sets.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetExceptionList {
+  /**
+   * List of exceptions.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  managedRuleSetExceptions?: ManagedRuleSetException[];
+}
+
+/**
+ * Excludes whole requests from managed rule evaluation according to match conditions.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetException {
+  /**
+   * The variable to be evaluated for excluding the request.
+   */
+  matchVariable: ExceptionMatchVariable;
+
+  /**
+   * Comparison operator to apply to the selector when specifying which elements
+   * in the collection this exception applies to.
+   */
+  selectorMatchOperator?: ExceptionSelectorMatchOperator;
+
+  /**
+   * When matchVariable is a collection, operator used to specify which elements
+   * in the collection this exception applies to.
+   * Currently supported only for RequestHeaderNames.
+   */
+  selector?: string;
+
+  /**
+   * Comparison operator to apply to the value to be matched.
+   */
+  valueMatchOperator: ExceptionValueMatchOperator;
+
+  /**
+   * List of values to be matched with.
+   */
+  matchValues: string[];
+
+  /**
+   * Scope(s) of the exception.
+   */
+  @identifiers(#["ruleSetType", "ruleSetVersion"])
+  scopes: ManagedRuleSetScope[];
+}
+
+
+/**
+ * Defines the scope of the managed rules.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetScope {
+  /**
+   * Defines the rule set type.
+   * Examples: DefaultRuleSet, Microsoft_DefaultRuleSet,
+   * Microsoft_BotManagerRuleSet, Microsoft_HTTPDDoSRuleSet, BotProtection
+   */
+  ruleSetType: string;
+
+  /**
+   * Defines the version of the rule set.
+   */
+  ruleSetVersion: string;
+
+  /**
+   * List of rule group scopes.
+   */
+  @identifiers(#["ruleGroupName"])
+  ruleGroupScopes?: RuleGroupScope[];
+}
+
+
+/**
+ * Defines the scope of the rule group.
+ */
+@added(Versions.v2025_11_01)
+model RuleGroupScope {
+  /**
+   * Defines the rule group name.
+   */
+  ruleGroupName: string;
+
+  /**
+   * List of rule scopes.
+   */
+  @identifiers(#["ruleId"])
+  ruleScopes?: RuleScope[];
+}
+
+/**
+ * Defines the scope of the rule.
+ */
+@added(Versions.v2025_11_01)
+model RuleScope {
+  /**
+   * Defines the rule id.
+   */
+  ruleId: string;
+}
+
+/**
+ * The variable to be evaluated for excluding the request.
+ */
+@added(Versions.v2025_11_01)
+union ExceptionMatchVariable {
+  string,
+
+  /**
+   * RequestUri
+   */
+  RequestUri: "RequestUri",
+
+  /**
+   * SocketAddr
+   */
+  SocketAddr: "SocketAddr",
+
+  /**
+   * RequestHeaderNames
+   */
+  RequestHeaderNames: "RequestHeaderNames",
+}
+
+/**
+ * Comparison operator to apply to the selector when specifying which elements in the collection this exception applies to..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionSelectorMatchOperator {
+  string,
+
+  /**
+   * Equals
+   */
+  Equals: "Equals",
+}
+
+/**
+ * Comparison operator to apply to the value to be matched..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionValueMatchOperator {
+  string,
+
+  /**
+   * Equals
+   */
+  Equals: "Equals",
+
+  /**
+	* Contains
+	*/
+  Contains: "Contains",
+
+  /**
+   * StartsWith
+   */
+  StartsWith: "StartsWith",
+
+  /**
+   * EndsWith
+   */
+  EndsWith: "EndsWith",
+
+  /**
+   * EqualsAny
+   */
+  EqualsAny: "EqualsAny",
+
+  /**
+   * IPMatch
+   */
+  IPMatch: "IPMatch",
 }
 
 /**
