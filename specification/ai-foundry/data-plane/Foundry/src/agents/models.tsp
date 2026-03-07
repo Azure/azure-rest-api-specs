@@ -303,6 +303,7 @@ model HostedAgentDefinition extends AgentDefinition {
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
 
+  @removed(Versions.v1)
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
 }

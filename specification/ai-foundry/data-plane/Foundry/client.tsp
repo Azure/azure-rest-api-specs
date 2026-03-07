@@ -224,13 +224,13 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
-// To support custom client-side handling of "opt-in" to preview features. 
+// To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
 // Remove preview opt-in union types from the public PythonSDK surface.
 //
 // TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the 
+// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
 // proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
 // in alias WithConditionalFoundryPreviewHeader.
 //
@@ -246,7 +246,12 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects, {parameters: AIProjectClientOptions}, "python");
+@@clientInitialization(Azure.AI.Projects,
+  {
+    parameters: AIProjectClientOptions,
+  },
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Other

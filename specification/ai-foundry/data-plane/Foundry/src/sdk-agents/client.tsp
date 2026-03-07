@@ -81,10 +81,15 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
-@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParameter",
+  "java"
+);
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
-@@clientName(OpenAI.CustomGrammarFormatParam, "CustomGrammarFormatParameter", "java");
-
+@@clientName(OpenAI.CustomGrammarFormatParam,
+  "CustomGrammarFormatParameter",
+  "java"
+);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -103,11 +108,6 @@ using Azure.AI.Projects;
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
-
-// The original type is string | OpenAI.ToolChoiceParam . Making this just string
-// Prevents the emission of the full ToolChoiceParam class tree in Java, which
-// is already exposed by the Stainless library. Currently there aren't any azure-isms.
-@@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 @@access(FoundryFeaturesOptInKeys, Access.public);
 @@access(AgentDefinitionOptInKeys, Access.public);
@@ -128,7 +128,20 @@ using Azure.AI.Projects;
 @@access(MemoryStoreUpdateResponse, Access.public);
 
 // --------------------------------------------------------------------------------
-// Type replacements
+// Type overrides
 // --------------------------------------------------------------------------------
 
+// The original type is string | OpenAI.ToolChoiceParam . Making this just string
+// Prevents the emission of the full ToolChoiceParam class tree in Java, which
+// is already exposed by the Stainless library. Currently there aren't any azure-isms.
+@@changePropertyType(PromptAgentDefinition.tool_choice, string);
+
+// TimeZone property override via model indirection
+@alternateType({
+  identity: "java.util.TimeZone"
+}, "java")
+model TimeZoneType {}
+
+@@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.LocalShellExecAction.timeout_ms, duration, "java");
