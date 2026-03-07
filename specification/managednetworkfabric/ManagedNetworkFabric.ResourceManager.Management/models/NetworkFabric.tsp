@@ -169,7 +169,6 @@ model NetworkFabricProperties extends AnnotationResource {
   @doc("NetworkFabric QoS Configuration")
   @added(Versions.v2025_07_15)
   qosConfiguration?: QosProperties;
-
 }
 
 @doc("Network and credentials configuration currently applied to terminal server.")
@@ -355,7 +354,6 @@ model NetworkFabricPatchProperties {
   @doc("Authorized transciever configuration for NetworkFabric.")
   @added(Versions.v2025_07_15)
   authorizedTransceiver?: AuthorizedTransceiverPatchProperties;
-
 }
 
 @doc("Network Fabric updatable properties.")

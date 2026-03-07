@@ -199,7 +199,6 @@ interface NetworkFabrics {
     ValidateConfigurationResponse
   >;
 
-
   @doc("Gets Topology of the underlying resources in the given Network Fabric instance.")
   @action("getTopology")
   @removed(Versions.v2025_07_15)
