@@ -39,6 +39,13 @@ model IpPrefixProperties {
   administrativeState?: AdministrativeState;
 }
 
+@doc("IP Prefix patchable properties.")
+model IpPrefixPatchableProperties {
+  @doc("The list of IP Prefix Rules.")
+  @Azure.ResourceManager.identifiers(#[])
+  ipPrefixRules?: IpPrefixRule[];
+}
+
 @doc("IP Prefix Rule properties.")
 model IpPrefixRule {
   @doc("Action to be taken on the configuration. Example: Permit | Deny.")
@@ -59,21 +66,25 @@ model IpPrefixRule {
   subnetMaskLength?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The IP Prefix patch resource definition.")
-model IpPrefixPatch {
-  ...TagsUpdate;
-
+model IpPrefixPatch extends TagsUpdate {
   @doc("IP Prefix patchable properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: IpPrefixPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("IP Prefix patchable properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: IpPrefixPatchProperties;
 }
 
 @doc("IP Prefix patchable properties.")
 model IpPrefixPatchProperties {
   ...AnnotationResource;
-
-  @doc("The list of IP Prefix Rules.")
-  @Azure.ResourceManager.identifiers(#[])
-  ipPrefixRules?: IpPrefixRule[];
+  ...IpPrefixPatchableProperties;
 }
 
 @doc("Specify prefix-list bounds.")

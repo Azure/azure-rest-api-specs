@@ -7,6 +7,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("IP Extended Community Properties defines the resource properties.")
 model IpExtendedCommunityProperties {
   ...AnnotationResource;
+  ...IpExtendedCommunityPatchableProperties;
 
   @added(Versions.v2024_06_15_preview)
   @doc("ARM Resource ID of the Network Fabric.")
@@ -16,10 +17,6 @@ model IpExtendedCommunityProperties {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
     }
   ]>;
-
-  @doc("List of IP Extended Community Rules.")
-  @Azure.ResourceManager.identifiers(#[])
-  ipExtendedCommunityRules: IpExtendedCommunityRule[];
 
   @doc("Details of the last operation performed on the resource")
   @visibility(Lifecycle.Read)
@@ -39,6 +36,13 @@ model IpExtendedCommunityProperties {
   administrativeState?: AdministrativeState;
 }
 
+@doc("IP Extended Community patchable properties.")
+model IpExtendedCommunityPatchableProperties {
+  @doc("List of IP Extended Community Rules.")
+  @Azure.ResourceManager.identifiers(#[])
+  ipExtendedCommunityRules: IpExtendedCommunityRule[];
+}
+
 @doc("List of IP Extended Community Rules.")
 model IpExtendedCommunityRule {
   @doc("Action to be taken on the configuration. Example: Permit | Deny.")
@@ -54,11 +58,18 @@ model IpExtendedCommunityRule {
   routeTargets: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The IP Extended Communities patch resource definition.")
-model IpExtendedCommunityPatch {
-  ...TagsUpdate;
-
+model IpExtendedCommunityPatch extends TagsUpdate {
   @doc("IP Extended Community patchable properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: IpExtendedCommunityPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("IP Extended Community patchable properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: IpExtendedCommunityPatchProperties;
 }
 

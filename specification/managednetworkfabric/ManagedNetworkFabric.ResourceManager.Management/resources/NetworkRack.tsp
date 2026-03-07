@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -20,6 +20,14 @@ model NetworkRack extends Azure.ResourceManager.Foundations.TrackedResource {
   name: string;
 
   /** The NetworkRack properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: NetworkRackProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Rack Properties")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkRackProperties;
 }
 
@@ -39,10 +47,16 @@ interface NetworkRacks {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkRack>;
 
   @doc("List all Network Rack resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkRack>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkRack,
+    Response = NetworkRacksListResult
+  >;
 
   @doc("List all Network Rack resources in the given subscription")
-  listBySubscription is ArmListBySubscription<NetworkRack>;
+  listBySubscription is ArmListBySubscription<
+    NetworkRack,
+    Response = NetworkRacksListResult
+  >;
 }
 
 @@doc(NetworkRacks.create::parameters.resource, "Request payload.");

@@ -5,10 +5,9 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("L2Isolation Domain Properties defines the properties of the resource.")
-model L2IsolationDomainProperties {
-  ...AnnotationResource;
-
+model L2IsolationDomainProperties extends AnnotationResource {
   @doc("ARM Resource ID of the Network Fabric.")
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
@@ -56,19 +55,29 @@ model L2IsolationDomainProperties {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The L2 Isolation Domain patch resource definition.")
-model L2IsolationDomainPatch {
-  ...TagsUpdate;
-
+model L2IsolationDomainPatch extends TagsUpdate {
   @doc("Resource properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: L2IsolationDomainPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("L2 Isolation Domain resource patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: L2IsolationDomainPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")
 @withoutDefaultValues
-model L2IsolationDomainPatchProperties {
-  ...AnnotationResource;
-
+model L2IsolationDomainPatchProperties extends AnnotationResource {
   @doc("Maximum transmission unit. Default value is 1500.")
   @maxValue(9200)
   @minValue(64)
