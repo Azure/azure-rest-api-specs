@@ -1,0 +1,71 @@
+{
+  "title": "PublicMaintenanceConfigurations_Get_MaximumSet",
+  "operationId": "PublicMaintenanceConfigurations_Get",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "B0D46BBE-44A0-442D-ADD6-68389EC84593",
+    "resourceName": "configuration1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "namespace": "Microsoft.Maintenance",
+          "extensionProperties": {
+            "key5592": "key5592Value"
+          },
+          "maintenanceScope": "Host",
+          "maintenanceWindow": {
+            "startDateTime": "2020-04-30 08:00",
+            "expirationDateTime": "9999-12-31 00:00",
+            "duration": "05:00",
+            "timeZone": "Pacific Standard Time",
+            "recurEvery": "2Weeks"
+          },
+          "visibility": "Public",
+          "installPatches": {
+            "rebootSetting": "IfRequired",
+            "windowsParameters": {
+              "kbNumbersToExclude": [
+                "KB5003638"
+              ],
+              "kbNumbersToInclude": [
+                "KB5005565"
+              ],
+              "classificationsToInclude": [
+                "critical"
+              ],
+              "excludeKbsRequiringReboot": true
+            },
+            "linuxParameters": {
+              "packageNameMasksToExclude": [
+                "httpd"
+              ],
+              "packageNameMasksToInclude": [
+                "nginx"
+              ],
+              "classificationsToInclude": [
+                "critical"
+              ]
+            }
+          }
+        },
+        "location": "westus2",
+        "tags": {
+          "key9660": "key9960Value"
+        },
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/configuration1",
+        "name": "configuration1",
+        "type": "Microsoft.Maintenance/publicMaintenanceConfigurations",
+        "systemData": {
+          "createdBy": "jdoe",
+          "createdByType": "User",
+          "createdAt": "2026-02-24T15:47:50.865Z",
+          "lastModifiedBy": "janedoe",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-24T15:47:50.865Z"
+        }
+      }
+    }
+  }
+}
