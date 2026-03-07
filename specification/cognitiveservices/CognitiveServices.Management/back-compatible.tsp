@@ -173,6 +173,9 @@ using Microsoft.CognitiveServices;
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.patch,
   "ManagedNetworkSettings"
 );
+@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.delete,
+  "ManagedNetworkSettings"
+);
 @@clientName(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "body"
 );
