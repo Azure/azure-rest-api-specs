@@ -173,6 +173,7 @@ using Microsoft.DataProtection;
   "DataProtectionBackupRecoveryPoint",
   "csharp"
 );
+@@usage(AzureBackupRecoveryPointResource, Usage.input | Usage.output, "csharp");
 @@clientName(AzureBackupRecoveryTimeBasedRestoreRequest,
   "BackupRecoveryTimeBasedRestoreContent",
   "csharp"
@@ -369,7 +370,10 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
-@@clientName(IdentityDetails.userAssignedIdentityArmUrl, "UserAssignedIdentityId", "csharp");
+@@clientName(IdentityDetails.userAssignedIdentityArmUrl,
+  "UserAssignedIdentityId",
+  "csharp"
+);
 @@alternateType(IdentityDetails.userAssignedIdentityArmUrl,
   armResourceIdentifier,
   "csharp"
@@ -692,10 +696,7 @@ using Microsoft.DataProtection;
   "ValidateAdhocBackup",
   "csharp"
 );
-@@clientName(BackupVaultResources.trigger,
-  "TriggerExportJob",
-  "csharp"
-);
+@@clientName(BackupVaultResources.trigger, "TriggerExportJob", "csharp");
 
 // Fix ResourceGuard operation names to match old API surface
 @@clientName(ResourceGuardResources.patch, "Update", "csharp");
