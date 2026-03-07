@@ -7,7 +7,7 @@ const SkillsRequiredPreviews = #{
 };
 
 @doc("The object type of a skill resource.")
-union SkillObjectType {
+enum SkillObjectType {
   @doc("A skill object.")
   skill: "skill",
 
@@ -15,8 +15,7 @@ union SkillObjectType {
   skillDeleted: "skill.deleted",
 }
 
-@doc("The request payload for creating a skill.")
-model CreateSkillRequest {
+alias CreateSkillRequest = {
   @doc("The unique name of the skill.")
   @maxLength(63)
   name: string;
@@ -31,10 +30,9 @@ model CreateSkillRequest {
 
   @doc("Set of key-value pairs associated with the skill.")
   metadata?: Record<string>;
-}
+};
 
-@doc("The request payload for creating a skill from a GZip package.")
-model CreateSkillFromPackageRequest {
+alias CreateSkillFromPackageRequest = {
   @doc("The content type of the incoming skill package payload.")
   @header("Content-Type")
   content_type: "application/gzip";
@@ -42,10 +40,13 @@ model CreateSkillFromPackageRequest {
   @doc("The GZip package used to create the skill.")
   @body
   body: bytes;
-}
+};
 
-@doc("The request payload for updating a skill.")
-model UpdateSkillRequest {
+alias UpdateSkillRequest = {
+  @doc("The unique name of the skill.")
+  @path
+  skill_name: string;
+
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
   description?: string;
@@ -56,12 +57,34 @@ model UpdateSkillRequest {
 
   @doc("Set of key-value pairs associated with the skill.")
   metadata?: Record<string>;
-}
+};
+
+alias GetSkillRequest = {
+  @doc("The unique name of the skill.")
+  @path
+  skill_name: string;
+};
+
+alias DownloadSkillRequest = {
+  @doc("The unique name of the skill.")
+  @path
+  skill_name: string;
+};
+
+alias ListSkillsRequest = {
+  ...CommonPageQueryParameters;
+};
+
+alias DeleteSkillRequest = {
+  @doc("The unique name of the skill.")
+  @path
+  skill_name: string;
+};
 
 @doc("A skill object.")
 model SkillObject {
   @doc("The object type, which is always 'skill'.")
-  object: SkillObjectType.skill;
+  object: SkillObjectType = SkillObjectType.skill;
 
   @doc("The unique identifier of the skill.")
   skill_id: string;
@@ -84,7 +107,7 @@ model SkillObject {
 @doc("A deleted skill Object")
 model DeleteSkillResponse {
   @doc("The object type. Always 'skill.deleted'.")
-  object: SkillObjectType.skillDeleted;
+  object: SkillObjectType = SkillObjectType.skillDeleted;
 
   @doc("The unique name of the skill.")
   name: string;

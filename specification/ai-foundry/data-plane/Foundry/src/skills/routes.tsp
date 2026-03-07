@@ -18,10 +18,7 @@ interface Skills {
   @route("/skills")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkill is FoundryDataPlaneOperation<
-    {
-      ...CreateSkillRequest;
-      ...SkillsPreviewHeader;
-    },
+    CreateSkillRequest & SkillsPreviewHeader,
     SkillObject
   >;
 
@@ -32,10 +29,7 @@ interface Skills {
   @route("/skills:import")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillFromPackage is FoundryDataPlaneOperation<
-    {
-      ...CreateSkillFromPackageRequest;
-      ...SkillsPreviewHeader;
-    },
+    CreateSkillFromPackageRequest & SkillsPreviewHeader,
     SkillObject
   >;
 
@@ -46,12 +40,7 @@ interface Skills {
   @route("/skills/{skill_name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkill is FoundryDataPlaneOperation<
-    {
-      /** The unique name of the skill. */
-      @path skill_name: string;
-
-      ...SkillsPreviewHeader;
-    },
+    GetSkillRequest & SkillsPreviewHeader,
     SkillObject
   >;
 
@@ -62,12 +51,7 @@ interface Skills {
   @route("/skills/{skill_name}:download")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   downloadSkill is FoundryDataPlaneOperation<
-    {
-      /** The unique name of the skill. */
-      @path skill_name: string;
-
-      ...SkillsPreviewHeader;
-    },
+    DownloadSkillRequest & SkillsPreviewHeader,
     DownloadSkillResponse
   >;
 
@@ -78,10 +62,7 @@ interface Skills {
   @list
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
-    {
-      ...CommonPageQueryParameters;
-      ...SkillsPreviewHeader;
-    },
+    ListSkillsRequest & SkillsPreviewHeader,
     AgentsPagedResult<SkillObject>
   >;
 
@@ -92,13 +73,7 @@ interface Skills {
   @route("/skills/{skill_name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   updateSkill is FoundryDataPlaneOperation<
-    {
-      /** The unique name of the skill. */
-      @path skill_name: string;
-
-      ...UpdateSkillRequest;
-      ...SkillsPreviewHeader;
-    },
+    UpdateSkillRequest & SkillsPreviewHeader,
     SkillObject
   >;
 
@@ -110,12 +85,7 @@ interface Skills {
   @route("/skills/{skill_name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkill is FoundryDataPlaneOperation<
-    {
-      /** The unique name of the skill. */
-      @path skill_name: string;
-
-      ...SkillsPreviewHeader;
-    },
+    DeleteSkillRequest & SkillsPreviewHeader,
     DeleteSkillResponse
   >;
 }
