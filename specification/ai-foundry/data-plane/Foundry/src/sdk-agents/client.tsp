@@ -131,4 +131,4 @@ using Azure.AI.Projects;
 // Type replacements
 // --------------------------------------------------------------------------------
 
-@@alternateType(OpenAI.LocalShellExecAction.timeout_ms, { identity: "java.time.Duration", package: "java.time" }, "java");
+@@alternateType(OpenAI.LocalShellExecAction.timeout_ms, duration, "java");
