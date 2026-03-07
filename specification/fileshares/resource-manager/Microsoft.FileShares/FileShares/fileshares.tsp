@@ -245,6 +245,35 @@ union EncryptionInTransitRequired {
   Disabled: "Disabled",
 }
 
+@doc("File share patch properties - contains only patchable properties")
+model FileSharePatchProperties {
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.")
+  provisionedStorageGiB?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned IO / sec of the share.")
+  provisionedIOPerSec?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned throughput / sec of the share.")
+  provisionedThroughputMiBPerSec?: int32;
+
+  @visibility(Lifecycle.Update)
+  @doc("Protocol settings specific NFS.")
+  nfsProtocolProperties?: NfsProtocolProperties;
+
+  @visibility(Lifecycle.Update)
+  @doc("The set of properties for control public access.")
+  publicAccessProperties?: PublicAccessProperties;
+
+  @visibility(Lifecycle.Update)
+  @doc("Gets or sets allow or disallow public network access to azure managed file share")
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
 @lroStatus
 @doc("The status of file share's ProvisioningState.")
 union FileShareProvisioningState {
@@ -294,7 +323,7 @@ interface FileShares {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     FileShare,
-    ResourceUpdateModel<FileShare, FileShareProperties>,
+    ResourceUpdateModel<FileShare, FileSharePatchProperties>,
     BaseParameters<FileShare>
   >;
 
@@ -339,7 +368,7 @@ interface FileShareSnapshots {
   @doc("Update a FileShareSnapshot.")
   updateFileShareSnapshot is ArmCustomPatchAsync<
     FileShareSnapshot,
-    ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotProperties>,
+    ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotPatchProperties>,
     BaseParameters<FileShareSnapshot>,
     Response = ArmResponse<FileShareSnapshot> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
@@ -409,6 +438,14 @@ model FileShareSnapshotProperties {
   @doc("The initiator of the FileShareSnapshot. This is a user-defined value.")
   initiatorId?: string;
 
+  @doc("The metadata")
+  metadata?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing use case"
+@doc("FileShareSnapshot patch properties - contains only patchable properties")
+model FileShareSnapshotPatchProperties {
+  @visibility(Lifecycle.Update)
   @doc("The metadata")
   metadata?: Record<string>;
 }
