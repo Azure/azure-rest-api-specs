@@ -431,6 +431,30 @@ model ConnectionState {
  * Description of a namespace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RelayUpdateParametersReplacement extends CommonTypes.Resource {
+  /**
+   * SKU of the namespace.
+   */
+  sku?: Sku;
+
+  /**
+   * Description of Relay namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: RelayNamespaceProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+}
+
+/**
+ * Description of a namespace resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RelayUpdateParameters extends ResourceNamespacePatch {
   /**
    * SKU of the namespace.
@@ -470,11 +494,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource required member names.
    */
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
    * The private link resource Private link DNS zone name.
    */
+  @visibility(Lifecycle.Read)
   requiredZoneNames?: string[];
 }
 

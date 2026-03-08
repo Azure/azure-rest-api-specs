@@ -38,10 +38,12 @@ interface PrivateLinkResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
-    PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResourcesListResult>
-  >;
+  list is ArmResourceListByParent<PrivateLinkResource>;
+
+  // list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
+  //   PrivateLinkResource,
+  //   Response = ArmResponse<PrivateLinkResourcesListResult>
+  // >;
 }
 
 @@doc(PrivateLinkResource.name, "The name of the private link resource.");
