@@ -116,6 +116,34 @@ input-file:
   - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
   - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+
+suppressions:
+  - code: PathForResourceAction
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The initiateScan action path follows the existing controller route convention for this RP. Changing the path would be a breaking change.
+  - code: PathForNestedResource
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: The scanOperationResults nested resource path follows the existing controller route convention. Changing the path would be a breaking change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    where:
+      - $.definitions.ScansV2
+    reason: ScansV2 is a list wrapper model containing ScanV2 items which inherit id/name/type from Resource. The wrapper itself is not a resource.
+  - code: LroErrorContent
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: This RP uses its own CloudError type which is compatible with ARM error format but predates common-types v2.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: ScansV2 is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: ScanResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: PutRequestResponseSchemeArm
+    from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+    reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
 ```
 
 ### Tag: package-2026-01
@@ -721,6 +749,12 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: ScansV2 is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: ScanResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
   - code: PutRequestResponseSchemeArm
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
@@ -806,6 +840,12 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: RulesResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanOperations.json
+    reason: ScansV2 is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: sqlVulnerabilityAssessmentsScanResultsOperations.json
+    reason: ScanResults is a small collection that does not require pagination. nextLinkName is set to null in x-ms-pageable.
   - code: PutRequestResponseSchemeArm
     from: sqlVulnerabilityAssessmentsBaselineRuleOperations.json
     reason: The PUT body uses RuleResultsInput (latestScan flag + results array) which is intentionally different from the RuleResults ARM resource response. The controller accepts this simplified input format.
