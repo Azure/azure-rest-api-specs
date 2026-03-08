@@ -1550,48 +1550,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes": {
-      "get": {
-        "operationId": "VirtualMachineSizes_List",
-        "description": "This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineSizeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineSizes_List_MaximumSet_Gen": {
-            "$ref": "./examples/computeRPCommonExamples/VirtualMachineSizes_List_MaximumSet_Gen.json"
-          },
-          "VirtualMachineSizes_List_MinimumSet_Gen": {
-            "$ref": "./examples/computeRPCommonExamples/VirtualMachineSizes_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups": {
       "get": {
         "operationId": "ProximityPlacementGroups_ListBySubscription",
