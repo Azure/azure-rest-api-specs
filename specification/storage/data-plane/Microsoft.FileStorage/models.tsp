@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/xml";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
@@ -683,18 +684,18 @@ model AccessPolicy {
    * The date-time the policy is active.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  Start?: utcDateTime;
+  @Xml.name("Start") start?: utcDateTime;
 
   /**
    * The date-time the policy expires.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  Expiry?: utcDateTime;
+  @Xml.name("Expiry") expiry?: utcDateTime;
 
   /**
    * The permissions for the ACL policy.
    */
-  Permission?: string;
+  @Xml.name("Permission") permission?: string;
 }
 
 /**
@@ -712,59 +713,79 @@ model CorsRule {
    * origin that the user age sends to the service. You can also use the wildcard
    * character '*' to allow all origin domains to make requests via CORS.
    */
-  AllowedOrigins: string;
+  @Xml.name("AllowedOrigins") allowedOrigins: string;
 
   /**
    * The methods (HTTP request verbs) that the origin domain may use for a CORS
    * request. (comma separated)
    */
-  AllowedMethods: string;
+  @Xml.name("AllowedMethods") allowedMethods: string;
 
   /**
    * The request headers that the origin domain may specify on the CORS request.
    */
-  AllowedHeaders: string;
+  @Xml.name("AllowedHeaders") allowedHeaders: string;
 
   /**
    * The response headers that may be sent in the response to the CORS request and
    * exposed by the browser to the request issuer.
    */
-  ExposedHeaders: string;
+  @Xml.name("ExposedHeaders") exposedHeaders: string;
 
   /**
    * The maximum amount time that a browser should cache the preflight OPTIONS
    * request.
    */
-  MaxAgeInSeconds: int32;
+  @Xml.name("MaxAgeInSeconds") maxAgeInSeconds: int32;
 }
 
 /**
  * Abstract for entries that can be listed from Directory.
  */
+@Xml.name("Entries")
 model FilesAndDirectoriesListSegment {
-  DirectoryItems: DirectoryItem[];
-  FileItems: FileItem[];
+  /** The directory items. */
+  @Xml.unwrapped
+  @Xml.name("DirectoryItems")
+  directoryItems: DirectoryItem[];
+
+  /** The file items. */
+  @Xml.unwrapped
+  @Xml.name("FileItems")
+  fileItems: FileItem[];
 }
 
 /**
  * A listed directory item.
  */
+@Xml.name("Directory")
 model DirectoryItem {
-  Name: StringEncoded;
-  FileId?: string;
+  /** The directory name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
 
   /**
    * File properties.
    */
-  Properties?: FileProperty;
+  @Xml.name("Properties") properties?: FileProperty;
 
-  Attributes?: string;
-  PermissionKey?: string;
+  /** The file attributes. */
+  @Xml.name("Attributes") attributes?: string;
+
+  /** The permission key. */
+  @Xml.name("PermissionKey") permissionKey?: string;
 }
 
 model StringEncoded {
-  Encoded?: boolean;
-  content?: string;
+  /** Whether the value is encoded. */
+  @Xml.attribute
+  @Xml.name("Encoded")
+  encoded?: boolean;
+
+  /** The string content. */
+  @Xml.unwrapped content?: string;
 }
 
 /**
@@ -777,220 +798,328 @@ model FileProperty {
    * reflect that fact until the handle is closed or the op-lock is broken. To
    * retrieve current property values, call Get File Properties.
    */
-  `Content-Length`: int64;
+  @Xml.name("Content-Length") contentLength: int64;
 
+  /** The creation time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  CreationTime?: utcDateTime;
+  @Xml.name("CreationTime") creationTime?: utcDateTime;
 
+  /** The last access time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  LastAccessTime?: utcDateTime;
+  @Xml.name("LastAccessTime") lastAccessTime?: utcDateTime;
 
+  /** The last write time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  LastWriteTime?: utcDateTime;
+  @Xml.name("LastWriteTime") lastWriteTime?: utcDateTime;
 
+  /** The change time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  ChangeTime?: utcDateTime;
+  @Xml.name("ChangeTime") changeTime?: utcDateTime;
 
+  /** The last modified time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  `Last-Modified`?: utcDateTime;
+  @Xml.name("Last-Modified") lastModified?: utcDateTime;
 
-  Etag?: string;
+  /** The ETag of the file. */
+  @Xml.name("Etag") eTag?: string;
 }
 
 /**
  * A listed file item.
  */
+@Xml.name("File")
 model FileItem {
-  Name: StringEncoded;
-  FileId?: string;
+  /** The file name. */
+  @Xml.name("Name") name: StringEncoded;
+
+  /** The file ID. */
+  @Xml.name("FileId") fileId?: string;
 
   /**
    * File properties.
    */
-  Properties: FileProperty;
+  @Xml.name("Properties") properties: FileProperty;
 
-  Attributes?: string;
-  PermissionKey?: string;
+  /** The file attributes. */
+  @Xml.name("Attributes") attributes?: string;
+
+  /** The permission key. */
+  @Xml.name("PermissionKey") permissionKey?: string;
 }
 
 /**
  * A listed Azure Storage handle item.
  */
+@Xml.name("Handle")
 model HandleItem {
   /**
    * XSMB service handle ID
    */
-  HandleId: string;
+  @Xml.name("HandleId") handleId: string;
 
-  Path: StringEncoded;
+  /** The path. */
+  @Xml.name("Path") path: StringEncoded;
 
   /**
    * FileId uniquely identifies the file or directory.
    */
-  FileId: string;
+  @Xml.name("FileId") fileId: string;
 
   /**
    * ParentId uniquely identifies the parent directory of the object.
    */
-  ParentId?: string;
+  @Xml.name("ParentId") parentId?: string;
 
   /**
    * SMB session ID in context of which the file handle was opened
    */
-  SessionId: string;
+  @Xml.name("SessionId") sessionId: string;
 
   /**
    * Client IP that opened the handle
    */
-  ClientIp: string;
+  @Xml.name("ClientIp") clientIp: string;
 
   /**
    * Name of the client machine where the share is being mounted
    */
-  ClientName: string;
+  @Xml.name("ClientName") clientName: string;
 
   /**
    * Time when the session that previously opened the handle has last been
    * reconnected. (UTC)
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  OpenTime: utcDateTime;
+  @Xml.name("OpenTime") openTime: utcDateTime;
 
   /**
    * Time handle was last connected to (UTC)
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  LastReconnectTime?: utcDateTime;
+  @Xml.name("LastReconnectTime") lastReconnectTime?: utcDateTime;
 
-  AccessRightList?: AccessRight[];
+  /** The access rights. */
+  @Xml.name("AccessRightList") accessRightList?: AccessRight[];
 }
 
 /**
  * An enumeration of directories and files.
  */
+@Xml.name("EnumerationResults")
 model ListFilesAndDirectoriesSegmentResponse {
-  ServiceEndpoint: string;
-  ShareName: string;
-  ShareSnapshot?: string;
-  Encoded?: boolean;
-  DirectoryPath: string;
-  Prefix: StringEncoded;
-  Marker?: string;
-  MaxResults?: int32;
+  /** The service endpoint. */
+  @Xml.attribute
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
+
+  /** The share name. */
+  @Xml.attribute
+  @Xml.name("ShareName")
+  shareName: string;
+
+  /** The share snapshot. */
+  @Xml.attribute
+  @Xml.name("ShareSnapshot")
+  shareSnapshot?: string;
+
+  /** Whether the listing is encoded. */
+  @Xml.attribute
+  @Xml.name("Encoded")
+  encoded?: boolean;
+
+  /** The directory path. */
+  @Xml.attribute
+  @Xml.name("DirectoryPath")
+  directoryPath: string;
+
+  /** The prefix. */
+  @Xml.name("Prefix") prefix: StringEncoded;
+
+  /** The marker. */
+  @Xml.name("Marker") marker?: string;
+
+  /** The max results. */
+  @Xml.name("MaxResults") maxResults?: int32;
 
   /**
    * Abstract for entries that can be listed from Directory.
    */
-  Segment: FilesAndDirectoriesListSegment;
+  @Xml.name("Segment") segment: FilesAndDirectoriesListSegment;
 
-  NextMarker: string;
-  DirectoryId?: string;
+  /** The next marker. */
+  @Xml.name("NextMarker") nextMarker: string;
+
+  /** The directory ID. */
+  @Xml.name("DirectoryId") directoryId?: string;
 }
 
 /**
  * An enumeration of handles.
  */
+@Xml.name("EnumerationResults")
 model ListHandlesResponse {
-  HandleList?: HandleItem[];
-  NextMarker: string;
+  /** The handle list. */
+  @Xml.name("Entries") handleList?: HandleItem[];
+
+  /** The next marker. */
+  @Xml.name("NextMarker") nextMarker: string;
 }
 
 /**
  * An enumeration of shares.
  */
+@Xml.name("EnumerationResults")
 model ListSharesResponse {
-  ServiceEndpoint: string;
-  Prefix?: string;
-  Marker?: string;
-  MaxResults?: int32;
+  /** The service endpoint. */
+  @Xml.attribute
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
 
+  /** The prefix. */
+  @Xml.name("Prefix") prefix?: string;
+
+  /** The marker. */
+  @Xml.name("Marker") marker?: string;
+
+  /** The max results. */
+  @Xml.name("MaxResults") maxResults?: int32;
+
+  /** The share items. */
   @pageItems
-  ShareItems?: ShareItemInternal[];
+  @Xml.name("Shares")
+  shareItems?: ShareItemInternal[];
 
+  /** The next marker. */
   @continuationToken
-  NextMarker: string;
+  @Xml.name("NextMarker")
+  nextMarker: string;
 }
 
 /**
  * A listed Azure Storage share item.
  */
+@Xml.name("Share")
 model ShareItemInternal {
-  Name: string;
-  Snapshot?: string;
-  Deleted?: boolean;
-  Version?: string;
+  /** The share name. */
+  @Xml.name("Name") name: string;
+
+  /** The share snapshot. */
+  @Xml.name("Snapshot") snapshot?: string;
+
+  /** Whether the share is deleted. */
+  @Xml.name("Deleted") deleted?: boolean;
+
+  /** The share version. */
+  @Xml.name("Version") version?: string;
 
   /**
    * Properties of a share.
    */
-  Properties: SharePropertiesInternal;
+  @Xml.name("Properties") properties: SharePropertiesInternal;
 
   /**
    * Dictionary of <string>
    */
-  Metadata?: Record<string>;
+  @Xml.name("Metadata") metadata?: Record<string>;
 }
 
 /**
  * Properties of a share.
  */
 model SharePropertiesInternal {
+  /** The last modified time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  `Last-Modified`: utcDateTime;
+  @Xml.name("Last-Modified") lastModified: utcDateTime;
 
-  Etag: string;
-  Quota: int32;
-  ProvisionedIops?: int32;
-  ProvisionedIngressMBps?: int32;
-  ProvisionedEgressMBps?: int32;
-  ProvisionedBandwidthMiBps?: int32;
+  /** The ETag of the share. */
+  @Xml.name("Etag") eTag: string;
 
+  /** The share quota. */
+  @Xml.name("Quota") quota: int32;
+
+  /** The provisioned IOPS. */
+  @Xml.name("ProvisionedIops") provisionedIops?: int32;
+
+  /** The provisioned ingress in MBps. */
+  @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int32;
+
+  /** The provisioned egress in MBps. */
+  @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int32;
+
+  /** The provisioned bandwidth in MiBps. */
+  @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int32;
+
+  /** The next allowed quota downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  NextAllowedQuotaDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedQuotaDowngradeTime") nextAllowedQuotaDowngradeTime?: utcDateTime;
 
+  /** The deleted time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  DeletedTime?: utcDateTime;
+  @Xml.name("DeletedTime") deletedTime?: utcDateTime;
 
-  RemainingRetentionDays?: int32;
-  AccessTier?: string;
+  /** The remaining retention days. */
+  @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
+  /** The access tier. */
+  @Xml.name("AccessTier") accessTier?: string;
+
+  /** The access tier change time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  AccessTierChangeTime?: utcDateTime;
+  @Xml.name("AccessTierChangeTime") accessTierChangeTime?: utcDateTime;
 
-  AccessTierTransitionState?: string;
+  /** The access tier transition state. */
+  @Xml.name("AccessTierTransitionState") accessTierTransitionState?: string;
 
   /**
    * The current lease status of the share.
    */
-  LeaseStatus?: LeaseStatusType;
+  @Xml.name("LeaseStatus") leaseStatus?: LeaseStatusType;
 
   /**
    * Lease state of the share.
    */
-  LeaseState?: LeaseStateType;
+  @Xml.name("LeaseState") leaseState?: LeaseStateType;
 
   /**
    * When a share is leased, specifies whether the lease is of infinite or fixed
    * duration.
    */
-  LeaseDuration?: LeaseDurationType;
+  @Xml.name("LeaseDuration") leaseDuration?: LeaseDurationType;
 
-  EnabledProtocols?: string;
-  RootSquash?: ShareRootSquash;
-  EnableSnapshotVirtualDirectoryAccess?: boolean;
-  PaidBurstingEnabled?: boolean;
-  PaidBurstingMaxIops?: int64;
-  PaidBurstingMaxBandwidthMibps?: int64;
-  IncludedBurstIops?: int64;
-  MaxBurstCreditsForIops?: int64;
+  /** The enabled protocols. */
+  @Xml.name("EnabledProtocols") enabledProtocols?: string;
 
+  /** The root squash setting. */
+  @Xml.name("RootSquash") rootSquash?: ShareRootSquash;
+
+  /** Whether snapshot virtual directory access is enabled. */
+  @Xml.name("EnableSnapshotVirtualDirectoryAccess") enableSnapshotVirtualDirectoryAccess?: boolean;
+
+  /** Whether paid bursting is enabled. */
+  @Xml.name("PaidBurstingEnabled") paidBurstingEnabled?: boolean;
+
+  /** The maximum IOPS for paid bursting. */
+  @Xml.name("PaidBurstingMaxIops") paidBurstingMaxIops?: int64;
+
+  /** The maximum bandwidth for paid bursting in MiBps. */
+  @Xml.name("PaidBurstingMaxBandwidthMibps") paidBurstingMaxBandwidthMibps?: int64;
+
+  /** The included burst IOPS. */
+  @Xml.name("IncludedBurstIops") includedBurstIops?: int64;
+
+  /** The maximum burst credits for IOPS. */
+  @Xml.name("MaxBurstCreditsForIops") maxBurstCreditsForIops?: int64;
+
+  /** The next allowed provisioned IOPS downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  NextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedProvisionedIopsDowngradeTime") nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
+  /** The next allowed provisioned bandwidth downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  NextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedProvisionedBandwidthDowngradeTime") nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
-  EnableSmbDirectoryLease?: boolean;
+  /** Whether SMB directory lease is enabled. */
+  @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
 }
 
 /**
@@ -1000,23 +1129,23 @@ model Metrics {
   /**
    * The version of Storage Analytics to configure.
    */
-  Version: string;
+  @Xml.name("Version") version: string;
 
   /**
    * Indicates whether metrics are enabled for the File service.
    */
-  Enabled: boolean;
+  @Xml.name("Enabled") enabled: boolean;
 
   /**
    * Indicates whether metrics should generate summary statistics for called API
    * operations.
    */
-  IncludeAPIs?: boolean;
+  @Xml.name("IncludeAPIs") includeApis?: boolean;
 
   /**
    * The retention policy.
    */
-  RetentionPolicy?: RetentionPolicy;
+  @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
 }
 
 /**
@@ -1027,76 +1156,86 @@ model RetentionPolicy {
    * Indicates whether a retention policy is enabled for the File service. If false,
    * metrics data is retained, and the user is responsible for deleting it.
    */
-  Enabled: boolean;
+  @Xml.name("Enabled") enabled: boolean;
 
   /**
    * Indicates the number of days that metrics data should be retained. All data
    * older than this value will be deleted. Metrics data is deleted on a best-effort
    * basis after the retention period expires.
    */
+  @Xml.name("Days")
   @maxValue(365)
   @minValue(1)
-  Days?: int32;
+  days?: int32;
 }
 
 /**
  * Settings for SMB multichannel
  */
+@Xml.name("Multichannel")
 model SmbMultichannel {
   /**
    * If SMB multichannel is enabled.
    */
-  Enabled?: boolean;
+  @Xml.name("Enabled") enabled?: boolean;
 }
 
 /**
  * An Azure Storage file range.
  */
+@Xml.name("Range")
 model FileRange {
   /**
    * Start of the range.
    */
-  Start: int64;
+  @Xml.name("Start") start: int64;
 
   /**
    * End of the range.
    */
-  End: int64;
+  @Xml.name("End") end: int64;
 }
 
+/** A clear range. */
+@Xml.name("ClearRange")
 model ClearRange {
-  Start: int64;
-  End: int64;
+  /** Start of the range. */
+  @Xml.name("Start") start: int64;
+
+  /** End of the range. */
+  @Xml.name("End") end: int64;
 }
 
 /**
  * Protocol settings
  */
+@Xml.name("ProtocolSettings")
 model ShareProtocolSettings {
   /**
    * Settings for SMB protocol.
    */
-  Smb?: ShareSmbSettings;
+  @Xml.name("Smb") smb?: ShareSmbSettings;
 
   /**
    * Settings for NFS protocol.
    */
-  Nfs?: ShareNfsSettings;
+  @Xml.name("Nfs") nfs?: ShareNfsSettings;
 }
 
 /**
  * Settings for SMB protocol.
  */
+@Xml.name("SMB")
 model ShareSmbSettings {
   /**
    * Settings for SMB Multichannel.
    */
-  Multichannel?: SmbMultichannel;
+  @Xml.name("Multichannel") multichannel?: SmbMultichannel;
 
   /**
    * Enable or disable encryption in transit.
    */
-  EncryptionInTransit?: ShareSmbSettingsEncryptionInTransit;
+  @Xml.name("EncryptionInTransit") encryptionInTransit?: ShareSmbSettingsEncryptionInTransit;
 }
 
 /**
@@ -1106,17 +1245,18 @@ model ShareSmbSettingsEncryptionInTransit {
   /**
    * If encryption in transit is required
    */
-  Required?: boolean;
+  @Xml.name("Required") required?: boolean;
 }
 
 /**
  * Settings for SMB protocol.
  */
+@Xml.name("NFS")
 model ShareNfsSettings {
   /**
    * Enable or disable encryption in transit.
    */
-  EncryptionInTransit?: ShareNfsSettingsEncryptionInTransit;
+  @Xml.name("EncryptionInTransit") encryptionInTransit?: ShareNfsSettingsEncryptionInTransit;
 }
 
 /**
@@ -1126,26 +1266,44 @@ model ShareNfsSettingsEncryptionInTransit {
   /**
    * If encryption in transit is required
    */
-  Required?: boolean;
+  @Xml.name("Required") required?: boolean;
 }
 
 /**
  * The list of file ranges
  */
 model ShareFileRangeList {
-  Ranges?: FileRange[];
-  ClearRanges?: ClearRange[];
+  /** The file ranges. */
+  @Xml.unwrapped
+  @Xml.name("Ranges")
+  ranges?: FileRange[];
+
+  /** The clear ranges. */
+  @Xml.unwrapped
+  @Xml.name("ClearRanges")
+  clearRanges?: ClearRange[];
 }
 
 @error
+@mediaTypeHint("application/xml")
 model StorageError {
   @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
   @header("x-ms-error-code") errorCode?: string;
-  Message?: string;
-  CopySourceStatusCode?: int64;
-  CopySourceErrorCode?: string;
-  CopySourceErrorMessage?: string;
-  AuthenticationErrorDetail?: string;
+
+  /** The error message. */
+  @Xml.name("Message") message?: string;
+
+  /** The copy source status code. */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int64;
+
+  /** The copy source error code. */
+  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
+
+  /** The copy source error message. */
+  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
+
+  /** The authentication error detail. */
+  @Xml.name("AuthenticationErrorDetail") authenticationErrorDetail?: string;
 }
 
 /**
@@ -1156,7 +1314,7 @@ model ShareStats {
    * The approximate size of the data stored in bytes. Note that this value may not
    * include all recently created or recently resized files.
    */
-  ShareUsageBytes: int32;
+  @Xml.name("ShareUsageBytes") shareUsageBytes: int32;
 }
 
 /**
@@ -1166,12 +1324,12 @@ model SignedIdentifier {
   /**
    * A unique id.
    */
-  Id: string;
+  @Xml.name("Id") id: string;
 
   /**
    * The access policy.
    */
-  AccessPolicy?: AccessPolicy;
+  @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
 /**
@@ -1181,22 +1339,22 @@ model StorageServiceProperties {
   /**
    * A summary of request statistics grouped by API in hourly aggregates for files.
    */
-  HourMetrics?: Metrics;
+  @Xml.name("HourMetrics") hourMetrics?: Metrics;
 
   /**
    * A summary of request statistics grouped by API in minute aggregates for files.
    */
-  MinuteMetrics?: Metrics;
+  @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
 
   /**
    * The set of CORS rules.
    */
-  Cors?: CorsRule[];
+  @Xml.name("Cors") cors?: CorsRule[];
 
   /**
    * Protocol settings
    */
-  Protocol?: ShareProtocolSettings;
+  @Xml.name("Protocol") protocol?: ShareProtocolSettings;
 }
 
 /**
@@ -1208,6 +1366,7 @@ model SharePermission {
    */
   permission: string;
 
+  /** The permission format. */
   format?: FilePermissionFormat;
 }
 
@@ -1218,17 +1377,17 @@ model KeyInfo {
   /**
    * The date-time the key is active in ISO 8601 UTC time
    */
-  Start?: string;
+  @Xml.name("Start") start?: string;
 
   /**
    * The date-time the key expires in ISO 8601 UTC time
    */
-  Expiry: string;
+  @Xml.name("Expiry") expiry: string;
 
   /**
    * The delegated user tenant id in Azure AD
    */
-  DelegatedUserTid?: string;
+  @Xml.name("DelegatedUserTid") delegatedUserTid?: string;
 }
 
 /**
@@ -1238,45 +1397,45 @@ model UserDelegationKey {
   /**
    * The Azure Active Directory object ID in GUID format.
    */
-  SignedOid: string;
+  @Xml.name("SignedOid") signedOid: string;
 
   /**
    * The Azure Active Directory tenant ID in GUID format
    */
-  SignedTid: string;
+  @Xml.name("SignedTid") signedTid: string;
 
   /**
    * The date-time the key is active
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  SignedStart: utcDateTime;
+  @Xml.name("SignedStart") signedStart: utcDateTime;
 
   /**
    * The date-time the key expires
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  SignedExpiry: utcDateTime;
+  @Xml.name("SignedExpiry") signedExpiry: utcDateTime;
 
   /**
    * Abbreviation of the Azure Storage service that accepts the key
    */
-  SignedService: string;
+  @Xml.name("SignedService") signedService: string;
 
   /**
    * The service version that created the key
    */
-  SignedVersion: string;
+  @Xml.name("SignedVersion") signedVersion: string;
 
   /**
    * The delegated user tenant id in Azure AD. Return if DelegatedUserTid is
    * specified.
    */
-  SignedDelegatedUserTid?: string;
+  @Xml.name("SignedDelegatedUserTid") signedDelegatedUserTid?: string;
 
   /**
    * The key as a base64 string
    */
-  Value: string;
+  @Xml.name("Value") value: string;
 }
 
 //
