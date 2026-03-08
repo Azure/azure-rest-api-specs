@@ -401,6 +401,7 @@ union StorageErrorCode {
   TotalSharesCountExceedsAccountLimit: "TotalSharesCountExceedsAccountLimit",
 }
 
+/** The access tier of the share. */
 union ShareAccessTier {
   string,
 
@@ -425,6 +426,7 @@ union ShareAccessTier {
   Premium: "Premium",
 }
 
+/** The share token intent. */
 union ShareTokenIntent {
   string,
 
@@ -434,6 +436,7 @@ union ShareTokenIntent {
   backup: "backup",
 }
 
+/** The NFS file type. */
 union NfsFileType {
   string,
 
@@ -453,6 +456,7 @@ union NfsFileType {
   SymLink: "SymLink",
 }
 
+/** The file property semantics. */
 union FilePropertySemantics {
   string,
 
@@ -470,6 +474,7 @@ union FilePropertySemantics {
 /**
  * Access rights of the access policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum AccessRight {
   /**
    * Read
@@ -490,6 +495,7 @@ enum AccessRight {
 /**
  * The current lease status of the share.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStatusType {
   /**
    * locked
@@ -505,6 +511,7 @@ enum LeaseStatusType {
 /**
  * Lease state of the share.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStateType {
   /**
    * available
@@ -536,6 +543,7 @@ enum LeaseStateType {
  * When a share is leased, specifies whether the lease is of infinite or fixed
  * duration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseDurationType {
   /**
    * infinite
@@ -548,6 +556,8 @@ enum LeaseDurationType {
   fixed,
 }
 
+/** The root squash setting for the share. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ShareRootSquash {
   /**
    * NoRootSquash
@@ -565,6 +575,8 @@ enum ShareRootSquash {
   AllSquash,
 }
 
+/** The file permission format. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FilePermissionFormat {
   /**
    * Sddl
@@ -577,6 +589,8 @@ enum FilePermissionFormat {
   Binary,
 }
 
+/** The type of file information to include in the listing. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListFilesIncludeType {
   /**
    * Timestamps
@@ -599,6 +613,8 @@ enum ListFilesIncludeType {
   PermissionKey,
 }
 
+/** The type of share information to include in the listing. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListSharesIncludeType {
   /**
    * snapshots
@@ -616,6 +632,8 @@ enum ListSharesIncludeType {
   deleted,
 }
 
+/** The permission copy mode type. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum PermissionCopyModeType {
   /**
    * source
@@ -628,6 +646,8 @@ enum PermissionCopyModeType {
   override,
 }
 
+/** The mode copy mode. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ModeCopyMode {
   /**
    * source
@@ -640,6 +660,8 @@ enum ModeCopyMode {
   override,
 }
 
+/** The owner copy mode. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum OwnerCopyMode {
   /**
    * source
@@ -652,6 +674,8 @@ enum OwnerCopyMode {
   override,
 }
 
+/** The delete snapshots option type. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum DeleteSnapshotsOptionType {
   /**
    * include
@@ -664,6 +688,8 @@ enum DeleteSnapshotsOptionType {
   `include-leased`,
 }
 
+/** The file last written mode. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FileLastWrittenMode {
   /**
    * Now
@@ -778,6 +804,7 @@ model DirectoryItem {
   @Xml.name("PermissionKey") permissionKey?: string;
 }
 
+/** An encoded string value. */
 model StringEncoded {
   /** Whether the value is encoded. */
   @Xml.attribute
@@ -1041,9 +1068,11 @@ model SharePropertiesInternal {
   @Xml.name("ProvisionedIops") provisionedIops?: int32;
 
   /** The provisioned ingress in MBps. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int32;
 
   /** The provisioned egress in MBps. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int32;
 
   /** The provisioned bandwidth in MiBps. */
@@ -1051,7 +1080,8 @@ model SharePropertiesInternal {
 
   /** The next allowed quota downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("NextAllowedQuotaDowngradeTime") nextAllowedQuotaDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedQuotaDowngradeTime")
+  nextAllowedQuotaDowngradeTime?: utcDateTime;
 
   /** The deleted time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -1093,7 +1123,8 @@ model SharePropertiesInternal {
   @Xml.name("RootSquash") rootSquash?: ShareRootSquash;
 
   /** Whether snapshot virtual directory access is enabled. */
-  @Xml.name("EnableSnapshotVirtualDirectoryAccess") enableSnapshotVirtualDirectoryAccess?: boolean;
+  @Xml.name("EnableSnapshotVirtualDirectoryAccess")
+  enableSnapshotVirtualDirectoryAccess?: boolean;
 
   /** Whether paid bursting is enabled. */
   @Xml.name("PaidBurstingEnabled") paidBurstingEnabled?: boolean;
@@ -1102,7 +1133,8 @@ model SharePropertiesInternal {
   @Xml.name("PaidBurstingMaxIops") paidBurstingMaxIops?: int64;
 
   /** The maximum bandwidth for paid bursting in MiBps. */
-  @Xml.name("PaidBurstingMaxBandwidthMibps") paidBurstingMaxBandwidthMibps?: int64;
+  @Xml.name("PaidBurstingMaxBandwidthMibps")
+  paidBurstingMaxBandwidthMibps?: int64;
 
   /** The included burst IOPS. */
   @Xml.name("IncludedBurstIops") includedBurstIops?: int64;
@@ -1112,11 +1144,13 @@ model SharePropertiesInternal {
 
   /** The next allowed provisioned IOPS downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("NextAllowedProvisionedIopsDowngradeTime") nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedProvisionedIopsDowngradeTime")
+  nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
 
   /** The next allowed provisioned bandwidth downgrade time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @Xml.name("NextAllowedProvisionedBandwidthDowngradeTime") nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
+  @Xml.name("NextAllowedProvisionedBandwidthDowngradeTime")
+  nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
 
   /** Whether SMB directory lease is enabled. */
   @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
@@ -1235,7 +1269,8 @@ model ShareSmbSettings {
   /**
    * Enable or disable encryption in transit.
    */
-  @Xml.name("EncryptionInTransit") encryptionInTransit?: ShareSmbSettingsEncryptionInTransit;
+  @Xml.name("EncryptionInTransit")
+  encryptionInTransit?: ShareSmbSettingsEncryptionInTransit;
 }
 
 /**
@@ -1256,7 +1291,8 @@ model ShareNfsSettings {
   /**
    * Enable or disable encryption in transit.
    */
-  @Xml.name("EncryptionInTransit") encryptionInTransit?: ShareNfsSettingsEncryptionInTransit;
+  @Xml.name("EncryptionInTransit")
+  encryptionInTransit?: ShareNfsSettingsEncryptionInTransit;
 }
 
 /**
@@ -1284,10 +1320,15 @@ model ShareFileRangeList {
   clearRanges?: ClearRange[];
 }
 
+/** The storage error response. */
 @error
 @mediaTypeHint("application/xml")
 model StorageError {
+  /** The status code of the error. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API"
   @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
+
+  /** The error code. */
   @header("x-ms-error-code") errorCode?: string;
 
   /** The error message. */
