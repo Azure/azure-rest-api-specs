@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureFileStorage;
+namespace Storage.File;
 
 /** Azure Storage File basic operation template */
 op StorageOperation<
@@ -120,6 +120,7 @@ interface Service {
   /**
    * The List Shares Segment operation returns a list of the shares and share snapshots under the specified account.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/?comp=list")
   @get
   listSharesSegment is StorageOperationResponseBody<
@@ -330,7 +331,8 @@ interface Share {
       @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
 
       /** The approximate size of the data stored on the share snapshot. */
-      @header("x-ms-file-share-snapshot-usage-bytes") shareSnapshotUsageBytes?: int64;
+      @header("x-ms-file-share-snapshot-usage-bytes")
+      shareSnapshotUsageBytes?: int64;
     }
   >;
 
@@ -710,9 +712,14 @@ interface Share {
       ...LastModifiedResponseHeader;
       @header("x-ms-share-quota") shareQuota?: int32;
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
-      @header("x-ms-share-provisioned-bandwidth-mibps") shareProvisionedBandwidthMibps?: int32;
+
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
+
       @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int32;
-      @header("x-ms-share-max-burst-credits-for-iops") shareMaxBurstCreditsForIops?: int64;
+
+      @header("x-ms-share-max-burst-credits-for-iops")
+      shareMaxBurstCreditsForIops?: int64;
     }
   >;
 }
@@ -832,7 +839,6 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-
       @header("x-ms-mode") mode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
@@ -1211,7 +1217,6 @@ interface File {
       ...LastModifiedResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-
       @header("x-ms-mode") mode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;

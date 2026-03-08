@@ -2,7 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using AzureFileStorage;
+using Storage.File;
 
 @@clientName(AccessPolicy.Start, "start");
 @@clientName(AccessPolicy.Expiry, "expiry");

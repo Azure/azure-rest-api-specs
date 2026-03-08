@@ -6,7 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
-namespace AzureFileStorage;
+namespace Storage.File;
 
 /**
  * Error codes returned by the service
@@ -903,7 +903,11 @@ model ListSharesResponse {
   Prefix?: string;
   Marker?: string;
   MaxResults?: int32;
+
+  @pageItems
   ShareItems?: ShareItemInternal[];
+
+  @continuationToken
   NextMarker: string;
 }
 
@@ -1299,6 +1303,7 @@ alias TimeoutParameter = {
 alias MarkerParameter = {
   /** A string value that identifies the portion of the list to be returned with the next listing operation. */
   @query
+  @continuationToken
   marker?: string;
 };
 

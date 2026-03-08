@@ -41,7 +41,7 @@ using TypeSpec.Versioning;
     url: url,
   }
 )
-namespace AzureFileStorage;
+namespace Storage.File;
 
 /**
  * The available API versions
