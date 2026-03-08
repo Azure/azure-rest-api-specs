@@ -3484,6 +3484,12 @@ model ManagedClusterAzureMonitorProfileMetrics {
    * Kube State Metrics profile for the Azure Managed Prometheus addon. These optional settings are for the kube-state-metrics pod that is deployed with the addon. See aka.ms/AzureManagedPrometheus-optional-parameters for details.
    */
   kubeStateMetrics?: ManagedClusterAzureMonitorProfileKubeStateMetrics;
+
+  /**
+   * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
+   */
+  @added(Versions.v2026_02_02_preview)
+  controlPlane?: ManagedClusterAzureMonitorProfileMetricsControlPlane;
 }
 
 /**
@@ -3499,6 +3505,17 @@ model ManagedClusterAzureMonitorProfileKubeStateMetrics {
    * Comma-separated list of Kubernetes annotation keys that will be used in the resource's labels metric (Example: 'namespaces=[kubernetes.io/team,...],pods=[kubernetes.io/team],...'). By default the metric contains only resource name and namespace labels.
    */
   metricAnnotationsAllowList?: string;
+}
+
+/**
+ * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
+ */
+@added(Versions.v2026_02_02_preview)
+model ManagedClusterAzureMonitorProfileMetricsControlPlane {
+  /**
+   * Whether to enable or disable collection of control plane metrics by the Azure Managed Prometheus addon. Defaults to disabled. See aka.ms/aks/controlplane-metrics for details.
+   */
+  enabled?: boolean;
 }
 
 /**
