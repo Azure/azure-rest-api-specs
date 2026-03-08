@@ -926,6 +926,16 @@
             "$ref": "#/definitions/ManagedRuleGroupDefinition"
           },
           "description": "Rule groups of the managed rule set."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Display name of the managed rule set."
+        },
+        "isDeprecated": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the managed rule set version is deprecated."
         }
       }
     },
@@ -974,6 +984,12 @@
           "description": "Describes the functionality of the managed rule.",
           "readOnly": true,
           "type": "string"
+        },
+        "defaultParanoiaLevel": {
+          "description": "Describes the default paranoia level of the managed rule. Only applicable to DRS rules.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
