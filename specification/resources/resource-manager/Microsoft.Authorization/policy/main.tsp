@@ -7,25 +7,28 @@
  * Version: 0.11.12
  * Date: 2025-10-27T02:40:16.533Z
  */
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "@typespec/rest";
+import "@typespec/versioning";
 import "./back-compatible.tsp";
 import "./DataPolicyManifests.tsp";
+import "./models.tsp";
 import "./PolicyAssignment.tsp";
 import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";
+import "./PolicyExemption.tsp";
 import "./PolicySetDefinition.tsp";
 import "./PolicySetDefinitionVersion.tsp";
 import "./routes.tsp";
+import "./Variable.tsp";
+import "./VariableValue.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /**
@@ -40,6 +43,12 @@ namespace Microsoft.Authorization;
 
 /**
  * The available API versions.
+ *
+ * The preview version (v2025_12_01_preview) includes everything from the latest
+ * stable version plus new preview-only resource types:
+ * - PolicyExemption, Variable, VariableValue (marked with @added(Versions.v2025_12_01_preview))
+ *
+ * See https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/
  */
 enum Versions {
   /**
@@ -51,4 +60,10 @@ enum Versions {
    * The 2025-11-01 API version.
    */
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  @previewVersion
+  v2025_12_01_preview: "2025-12-01-preview",
 }
