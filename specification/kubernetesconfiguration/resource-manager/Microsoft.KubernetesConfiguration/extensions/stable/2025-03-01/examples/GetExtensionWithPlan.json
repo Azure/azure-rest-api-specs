@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionName": "azureVote",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "name": "azureVote",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
+        "plan": {
+          "name": "azure-vote-standard",
+          "product": "azure-vote-standard-offer-id",
+          "publisher": "Microsoft"
+        },
+        "properties": {
+          "autoUpgradeMinorVersion": false,
+          "configurationSettings": {
+            "omsagent.env.clusterName": "clusterName1",
+            "omsagent.secret.wsid": "fakeTokenPlaceholder"
+          },
+          "currentVersion": "0.1.4",
+          "extensionType": "azure-vote",
+          "isSystemExtension": false,
+          "provisioningState": "Succeeded",
+          "releaseTrain": "Preview",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "statuses": [],
+          "version": "0.1.4"
+        },
+        "systemData": {
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Extensions_Get",
+  "title": "Get Extension with Plan"
+}

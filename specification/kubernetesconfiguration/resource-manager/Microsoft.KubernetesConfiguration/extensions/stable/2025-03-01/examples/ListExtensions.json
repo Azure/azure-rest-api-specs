@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "ClusterMonitor",
+            "type": "Microsoft.KubernetesConfiguration/extensions",
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+            "properties": {
+              "autoUpgradeMinorVersion": false,
+              "configurationSettings": {
+                "omsagent.env.clusterName": "clusterName1",
+                "omsagent.secret.wsid": "fakeTokenPlaceholder"
+              },
+              "currentVersion": "0.1.4",
+              "extensionType": "azuremonitor-containers",
+              "isSystemExtension": false,
+              "provisioningState": "Succeeded",
+              "releaseTrain": "Preview",
+              "scope": {
+                "cluster": {
+                  "releaseNamespace": "kube-system"
+                }
+              },
+              "statuses": [],
+              "version": "0.1.4"
+            },
+            "systemData": {
+              "createdAt": "2021-09-08T05:10:57.027Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-09-08T05:10:57.027Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "name": "App1Monitor",
+            "type": "Microsoft.KubernetesConfiguration/extensions",
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/BackupVault01",
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "configurationSettings": {},
+              "currentVersion": "1.0.1",
+              "extensionType": "Microsoft.RecoveryServices/recoveryVault",
+              "isSystemExtension": false,
+              "provisioningState": "Succeeded",
+              "releaseTrain": "Stable",
+              "scope": {
+                "cluster": {
+                  "releaseNamespace": "myKVNamespace"
+                }
+              },
+              "statuses": [],
+              "version": null
+            },
+            "systemData": {
+              "createdAt": "2021-09-08T04:09:23.011Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-09-08T04:09:23.011Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "name": "azureVote",
+            "type": "Microsoft.KubernetesConfiguration/extensions",
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
+            "plan": {
+              "name": "azure-vote-standard",
+              "product": "azure-vote-standard-offer-id",
+              "publisher": "Microsoft"
+            },
+            "properties": {
+              "autoUpgradeMinorVersion": false,
+              "configurationSettings": {
+                "omsagent.env.clusterName": "clusterName1",
+                "omsagent.secret.wsid": "fakeTokenPlaceholder"
+              },
+              "currentVersion": "0.1.4",
+              "extensionType": "azure-vote",
+              "isSystemExtension": false,
+              "provisioningState": "Succeeded",
+              "releaseTrain": "Preview",
+              "scope": {
+                "cluster": {
+                  "releaseNamespace": "kube-system"
+                }
+              },
+              "statuses": [],
+              "version": "0.1.4"
+            },
+            "systemData": {
+              "createdAt": "2021-09-08T05:10:57.027Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-09-08T05:10:57.027Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Extensions_List",
+  "title": "List Extensions"
+}
