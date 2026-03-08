@@ -11,18 +11,43 @@ options:
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/generated_file.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file/azure/storage/file/_generated"
+    package-name: "azure-storage-file"
+    package-mode: dataplane
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Storage.Files"
+    model-namespace: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/storage-file-rest"
+    generate-metadata: false
+    generate-test: false
+    include-headers-in-response: true
+    package-details:
+      name: "@azure-rest/storage-file"
+      description: "Azure.Storage.File Service"
+    flavor: azure
+  # "@azure-tools/typespec-java":
+  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file"
+  #   namespace: com.azure.storage.file
+  #   flavor: azure
+  "@azure-tools/typespec-rust":
+    package-dir: "azure_storage_file"
+    crate-name: "azure_storage_file"
+    crate-version: "0.1.0"
+    flavor: azure
+    temp-omit-doc-links: true
+  # TODO: Replace this with client.tsp solution once it lands (issue: https://github.com/Azure/typespec-rust/issues/806)
+    # omit-constructors: true
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azfile"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azfile/internal/generated"
+    generate-fakes: false
+    omit-constructors: true
+    go-generate: build.go
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
