@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Storage.File;
@@ -336,9 +335,9 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=lease&acquire")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   acquireLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -366,9 +365,9 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=lease&release")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   releaseLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -386,9 +385,9 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=lease&change")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   changeLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -413,9 +412,9 @@ interface Share {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=lease&renew")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   renewLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -535,9 +534,9 @@ interface Share {
   /**
    * Sets properties for the specified share.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=properties")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setProperties is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -608,9 +607,9 @@ interface Share {
   /**
    * Sets one or more user-defined name-value pairs for the specified share.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=metadata")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -647,9 +646,9 @@ interface Share {
   /**
    * Sets stored access policies for the share that may be used with Shared Access Signatures.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=acl")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setAccessPolicy is StorageOperationRequestBody<
     {
       ...ShareNamePathParameter;
@@ -689,9 +688,9 @@ interface Share {
   /**
    * Restores a previously deleted share.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}?restype=share&comp=undelete")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   restore is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -702,6 +701,7 @@ interface Share {
 
       /** Specifies the version of the previously-deleted share. */
       @header("x-ms-deleted-share-version") deletedShareVersion?: string;
+
       ...FileRequestIntentParameter;
     },
     {
@@ -803,9 +803,9 @@ interface Directory {
   /**
    * Sets properties for the specified directory.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?restype=directory&comp=properties")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setProperties is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -831,9 +831,9 @@ interface Directory {
   /**
    * Sets one or more user-defined name-value pairs for the specified directory.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?restype=directory&comp=metadata")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -852,9 +852,9 @@ interface Directory {
   /**
    * Returns a list of files and directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?restype=directory&comp=list")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listFilesAndDirectoriesSegment is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
@@ -871,6 +871,7 @@ interface Directory {
 
       /** Include extended information. */
       @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
+
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
@@ -882,9 +883,9 @@ interface Directory {
   /**
    * Lists handles for directory.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?comp=listhandles")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listHandles is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
@@ -905,9 +906,9 @@ interface Directory {
   /**
    * Closes all handles open for given directory.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?comp=forceclosehandles")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   forceCloseHandles is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -915,6 +916,7 @@ interface Directory {
 
       /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
       @header("x-ms-handle-id") handleId: string;
+
       ...TimeoutParameter;
       ...MarkerParameter;
       ...ShareSnapshotParameter;
@@ -934,9 +936,9 @@ interface Directory {
   /**
    * Renames a directory. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?restype=directory&comp=rename")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   rename is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1045,9 +1047,9 @@ interface File {
   /**
    * Reads or downloads a file from the system, including its metadata and properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   download is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1119,6 +1121,7 @@ interface File {
 
       /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
+
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -1175,9 +1178,9 @@ interface File {
   /**
    * Sets HTTP headers on a file.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=properties")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setHttpHeaders is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1213,9 +1216,9 @@ interface File {
   /**
    * Sets one or more user-defined name-value pairs for the specified file.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=metadata")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1236,9 +1239,9 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=lease&acquire")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   acquireLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1266,9 +1269,9 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=lease&release")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   releaseLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1277,6 +1280,7 @@ interface File {
 
       /** The lease ID of the active lease. */
       @header("x-ms-lease-id") leaseId: string;
+
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
       ...AllowTrailingDotParameter;
@@ -1290,9 +1294,9 @@ interface File {
   /**
    * The Lease File operation establishes and manages a lock on a file for write and delete operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=lease&change")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   changeLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1344,10 +1348,10 @@ interface File {
   /**
    * Upload a range of bytes to a file.
    */
-  @route("/{shareName}/{directory}/{fileName}?comp=range")
-  @put
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
+  @route("/{shareName}/{directory}/{fileName}?comp=range")
+  @put
   uploadRange is StorageOperationRequestBody<
     {
       ...ShareNamePathParameter;
@@ -1362,6 +1366,7 @@ interface File {
 
       /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
+
       ...TimeoutParameter;
 
       /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. */
@@ -1404,9 +1409,9 @@ interface File {
   /**
    * Upload a range of bytes to a file where the contents are read from a URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=range&fromURL")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   uploadRangeFromUrl is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1427,6 +1432,7 @@ interface File {
 
       /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
+
       ...TimeoutParameter;
 
       /** Specify the CRC64 hash of the source content. */
@@ -1611,9 +1617,9 @@ interface File {
   /**
    * Lists handles for file.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=listhandles")
   @get
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listHandles is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
@@ -1637,9 +1643,9 @@ interface File {
   /**
    * Closes all handles open for given file.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=forceclosehandles")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   forceCloseHandles is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1654,6 +1660,7 @@ interface File {
 
       /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
+
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
@@ -1669,9 +1676,9 @@ interface File {
   /**
    * Renames a file. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=rename")
   @put
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   rename is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
@@ -1790,6 +1797,7 @@ interface File {
 
       /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
+
       ...FileRequestIntentParameter;
     },
     {
