@@ -52,4 +52,58 @@ directive:
   - suppress: OAV107
 ```
 
+```yaml
+suppressions:
+  - code: LroExtension
+    from: generated_file.json
+    reason: Legacy operations not defined as lro
+```
+
+```yaml
+directive:
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: generated_file.json
+    reason: Service uses XML, not JSON, so cannot validate.
+  - suppress: ValidFormats
+    from: generated_file.json
+    reason: Properly specifying parameter format.
+  - suppress: EnumInsteadOfBoolean
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: ErrorResponse
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: MsPaths
+    from: generated_file.json
+    reason: Auto-generated swagger based on typespec
+  - suppress: SuccessResponseBody
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: LroHeaders
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: VersionPolicy
+    from: generated_file.json
+    reason: Existing API with api version header
+  - suppress: PutInOperationName
+    from: generated_file.json
+    reason: Existing API with sdk usage
+  - suppress: OperationId
+    from: generated_file.json
+  - suppress: GetInOperationName
+    from: generated_file.json
+  - suppress: XmsEnumValidation
+    from: generated_file.json
+    reason: Existing API contract and auto-generated enum definitions
+  - suppress: SecurityDefinitionDescription
+    from: generated_file.json
+    reason: Auto-generated swagger from typespec
+  - suppress: PathParameterSchema
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: PutRequestResponseScheme
+    from: generated_file.json
+    reason: Existing API contract
+```
+
 ---
