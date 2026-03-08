@@ -1480,8 +1480,37 @@ model UserDelegationKey {
 }
 
 //
+/** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
+union FileRangeWriteType {
+  string,
+
+  /** Writes the bytes specified by the request body into the specified range. */
+  update: "update",
+
+  /** Clears the specified range and releases the space used in storage for that range. */
+  clear: "clear",
+}
+
 // Common Parameter Aliases
 //
+
+/** Share name path parameter. */
+alias ShareNamePathParameter = {
+  /** The name of the target share. */
+  @path shareName: string;
+};
+
+/** Directory path parameter. */
+alias DirectoryPathParameter = {
+  /** The path of the target directory. */
+  @path directory: string;
+};
+
+/** File name path parameter. */
+alias FileNamePathParameter = {
+  /** The path of the target file. */
+  @path fileName: string;
+};
 
 /** API version header alias */
 alias ApiVersionHeader = {

@@ -1129,18 +1129,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -1297,24 +1300,28 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
           {
             "name": "sharesnapshot",
             "in": "query",
+            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
             "required": false,
             "type": "string"
           },
@@ -1617,6 +1624,7 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
@@ -2251,7 +2259,7 @@
           {
             "name": "x-ms-delete-snapshots",
             "in": "header",
-            "description": "The delete snapshots option type.",
+            "description": "Specifies the option include to delete the base share and all of its snapshots.",
             "required": false,
             "type": "string",
             "enum": [
@@ -3522,6 +3530,7 @@
           {
             "name": "permission",
             "in": "body",
+            "description": "A permission (a security descriptor) at the share level.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharePermission"
@@ -3666,7 +3675,7 @@
           {
             "name": "x-ms-file-permission-format",
             "in": "header",
-            "description": "The file permission format.",
+            "description": "Optional. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary.",
             "required": false,
             "type": "string",
             "enum": [
@@ -3827,6 +3836,7 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
@@ -3851,7 +3861,7 @@
           {
             "name": "x-ms-access-tier",
             "in": "header",
-            "description": "The access tier of the share.",
+            "description": "Specifies the access tier of the share.",
             "required": false,
             "type": "string",
             "enum": [
@@ -3899,7 +3909,7 @@
           {
             "name": "x-ms-root-squash",
             "in": "header",
-            "description": "The root squash setting for the share.",
+            "description": "Root squash to set on the share. Only valid for NFS shares.",
             "required": false,
             "type": "string",
             "enum": [
@@ -3989,6 +3999,7 @@
           {
             "name": "x-ms-share-provisioned-iops",
             "in": "header",
+            "description": "Optional. Specifies the provisioned number of input/output operations per second (IOPS) of the share.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -3997,6 +4008,7 @@
           {
             "name": "x-ms-share-provisioned-bandwidth-mibps",
             "in": "header",
+            "description": "Optional. Specifies the provisioned bandwidth of the share, in MiBps.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -4550,6 +4562,7 @@
           {
             "name": "shareAcl",
             "in": "body",
+            "description": "The ACL for the share.",
             "required": false,
             "schema": {
               "type": "array",
@@ -4858,6 +4871,7 @@
           {
             "name": "x-ms-deleted-share-name",
             "in": "header",
+            "description": "Specifies the name of the previously-deleted share.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "deletedShareName"
@@ -4865,6 +4879,7 @@
           {
             "name": "x-ms-deleted-share-version",
             "in": "header",
+            "description": "Specifies the version of the previously-deleted share.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "deletedShareVersion"
@@ -6287,12 +6302,14 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
@@ -6329,6 +6346,7 @@
           {
             "name": "include",
             "in": "query",
+            "description": "Include this parameter to specify one or more datasets to include in the response.",
             "required": false,
             "type": "array",
             "items": {
@@ -6348,6 +6366,7 @@
           {
             "name": "x-ms-file-extended-info",
             "in": "header",
+            "description": "Include extended information.",
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "fileExtendedInfo"
@@ -6496,12 +6515,14 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
@@ -6689,18 +6710,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "x-ms-handle-id",
             "in": "header",
+            "description": "Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "handleId"
@@ -6889,12 +6913,14 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
@@ -7198,7 +7224,7 @@
     },
     "/{shareName}/{directory}/{fileName}?comp=properties": {
       "put": {
-        "operationId": "File_SetHTTPHeaders",
+        "operationId": "File_SetHttpHeaders",
         "description": "Sets HTTP headers on a file.",
         "parameters": [
           {
@@ -7220,18 +7246,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -7604,18 +7633,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -7793,18 +7825,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -7986,24 +8021,28 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
           {
             "name": "x-ms-lease-id",
             "in": "header",
+            "description": "The lease ID of the active lease.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
@@ -8166,18 +8205,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -8358,18 +8400,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -8546,18 +8591,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -8580,13 +8628,27 @@
               "clear"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "FileRangeWriteType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "Writes the bytes specified by the request body into the specified range."
+                },
+                {
+                  "name": "clear",
+                  "value": "clear",
+                  "description": "Clears the specified range and releases the space used in storage for that range."
+                }
+              ]
             },
             "x-ms-client-name": "fileRangeWrite"
           },
           {
             "name": "Content-Length",
             "in": "header",
+            "description": "The number of bytes being transmitted in the request body.",
             "required": true,
             "type": "integer",
             "format": "int64",
@@ -8695,6 +8757,7 @@
           {
             "name": "content",
             "in": "body",
+            "description": "The file content to upload.",
             "required": false,
             "schema": {
               "type": "string",
@@ -8813,7 +8876,7 @@
     },
     "/{shareName}/{directory}/{fileName}?comp=range&fromURL": {
       "put": {
-        "operationId": "File_UploadRangeFromURL",
+        "operationId": "File_UploadRangeFromUrl",
         "description": "Upload a range of bytes to a file where the contents are read from a URL.",
         "parameters": [
           {
@@ -8835,18 +8898,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -8891,6 +8957,7 @@
           {
             "name": "Content-Length",
             "in": "header",
+            "description": "The number of bytes being transmitted in the request body.",
             "required": true,
             "type": "integer",
             "format": "int64",
@@ -9142,24 +9209,28 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
           {
             "name": "sharesnapshot",
             "in": "query",
+            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
             "required": false,
             "type": "string"
           },
@@ -9360,18 +9431,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -9773,18 +9847,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -9967,18 +10044,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -10158,18 +10238,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -10200,6 +10283,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
+            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
             "required": false,
             "type": "string"
           },
@@ -10356,18 +10440,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -10701,18 +10788,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -10984,18 +11074,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -11011,6 +11104,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
+            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
             "required": false,
             "type": "string"
           },
@@ -11159,18 +11253,21 @@
           {
             "name": "shareName",
             "in": "path",
+            "description": "The name of the target share.",
             "required": true,
             "type": "string"
           },
           {
             "name": "directory",
             "in": "path",
+            "description": "The path of the target directory.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fileName",
             "in": "path",
+            "description": "The path of the target file.",
             "required": true,
             "type": "string"
           },
@@ -12352,6 +12449,30 @@
       ],
       "xml": {
         "name": "Range"
+      }
+    },
+    "FileRangeWriteType": {
+      "type": "string",
+      "description": "Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range.",
+      "enum": [
+        "update",
+        "clear"
+      ],
+      "x-ms-enum": {
+        "name": "FileRangeWriteType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "update",
+            "value": "update",
+            "description": "Writes the bytes specified by the request body into the specified range."
+          },
+          {
+            "name": "clear",
+            "value": "clear",
+            "description": "Clears the specified range and releases the space used in storage for that range."
+          }
+        ]
       }
     },
     "FilesAndDirectoriesListSegment": {

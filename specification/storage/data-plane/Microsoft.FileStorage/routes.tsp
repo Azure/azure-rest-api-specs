@@ -169,7 +169,7 @@ interface Share {
   @put
   create is StorageOperationNoBody<
     {
-      @path shareName: string;
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...ShareQuotaOptionalHeader;
@@ -232,9 +232,7 @@ interface Share {
   @get
   getProperties is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -312,12 +310,11 @@ interface Share {
   @delete
   delete is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
 
+      /** Specifies the option include to delete the base share and all of its snapshots. */
       @header("x-ms-delete-snapshots")
       deleteSnapshots?: DeleteSnapshotsOptionType;
 
@@ -341,11 +338,10 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&acquire")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   acquireLease is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
 
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
@@ -372,11 +368,10 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&release")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   releaseLease is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...LeaseIdParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
@@ -393,11 +388,10 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&change")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   changeLease is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...LeaseIdParameter;
 
       /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
@@ -421,11 +415,10 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=lease&renew")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   renewLease is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...LeaseIdParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
@@ -447,9 +440,7 @@ interface Share {
   @put
   breakLease is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
 
       /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
@@ -479,9 +470,7 @@ interface Share {
   @put
   createSnapshot is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
@@ -503,11 +492,11 @@ interface Share {
   @put
   createPermission is StorageOperationRequestBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+
+      /** A permission (a security descriptor) at the share level. */
       @body permission: SharePermission;
     },
     {
@@ -525,14 +514,14 @@ interface Share {
   @get
   getPermission is StorageOperationResponseBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
+      ...ShareNamePathParameter;
 
       /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
       @header("x-ms-file-permission-key") filePermissionKey: string;
 
       ...TimeoutParameter;
 
+      /** Optional. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary. */
       @header("x-ms-file-permission-format")
       filePermissionFormat?: FilePermissionFormat;
 
@@ -548,13 +537,19 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=properties")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setProperties is StorageOperationNoBody<
     {
-      @path shareName: string;
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...ShareQuotaOptionalHeader;
+
+      /** Specifies the access tier of the share. */
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
+
       ...LeaseIdParameter;
+
+      /** Root squash to set on the share. Only valid for NFS shares. */
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
 
       /** Optional. Used to enable snapshot virtual directory access. */
@@ -563,8 +558,11 @@ interface Share {
 
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
+
+      /** Optional. Specifies the provisioned number of input/output operations per second (IOPS) of the share. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
 
+      /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       shareProvisionedBandwidthMibps?: int32;
 
@@ -612,11 +610,10 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=metadata")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...LeaseIdParameter;
@@ -635,9 +632,7 @@ interface Share {
   @get
   getAccessPolicy is StorageOperationResponseBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -654,14 +649,16 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=acl")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setAccessPolicy is StorageOperationRequestBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
+
+      /** The ACL for the share. */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing storage API."
       @body shareAcl?: SignedIdentifier[];
     },
     {
@@ -677,9 +674,7 @@ interface Share {
   @get
   getStatistics is StorageOperationResponseBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -696,13 +691,16 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=undelete")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   restore is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
+      ...ShareNamePathParameter;
       ...TimeoutParameter;
+
+      /** Specifies the name of the previously-deleted share. */
       @header("x-ms-deleted-share-name") deletedShareName?: string;
+
+      /** Specifies the version of the previously-deleted share. */
       @header("x-ms-deleted-share-version") deletedShareVersion?: string;
       ...FileRequestIntentParameter;
     },
@@ -736,12 +734,8 @@ interface Directory {
   @put
   create is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileSmtPropertyRequestHeaders;
@@ -770,12 +764,8 @@ interface Directory {
   @get
   getProperties is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -800,12 +790,8 @@ interface Directory {
   @delete
   delete is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
     },
@@ -819,14 +805,11 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=properties")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setProperties is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...FileSmtPropertyRequestHeaders;
       ...FilePermissionFormatParameter;
@@ -850,14 +833,11 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=metadata")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...AllowTrailingDotParameter;
@@ -874,16 +854,22 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=list")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listFilesAndDirectoriesSegment is StorageOperationResponseBody<
     {
-      @path shareName: string;
-      @path directory: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...PrefixParameter;
       ...ShareSnapshotParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
+
+      /** Include this parameter to specify one or more datasets to include in the response. */
       @query include?: string[];
+
       ...TimeoutParameter;
+
+      /** Include extended information. */
       @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -898,10 +884,11 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?comp=listhandles")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listHandles is StorageOperationResponseBody<
     {
-      @path shareName: string;
-      @path directory: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
       ...TimeoutParameter;
@@ -920,10 +907,13 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?comp=forceclosehandles")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   forceCloseHandles is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+
+      /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
       @header("x-ms-handle-id") handleId: string;
       ...TimeoutParameter;
       ...MarkerParameter;
@@ -946,10 +936,11 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory&comp=rename")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   rename is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...RenameRequestHeaders;
 
@@ -1002,14 +993,9 @@ interface File {
   @put
   create is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
-      /** The path of the target file. */
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero. */
       @header("x-ms-content-length") contentLength: int64;
@@ -1061,17 +1047,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   download is StorageOperationNoBody<
     {
-      /** The name of the target share. */
-      @path shareName: string;
-
-      /** The path of the target directory. */
-      @path directory: string;
-
-      /** The path of the target file. */
-      @path fileName: string;
-
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...RangeHeader;
 
@@ -1132,9 +1113,11 @@ interface File {
   @head
   getProperties is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
+
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
       ...TimeoutParameter;
       ...LeaseIdParameter;
@@ -1174,9 +1157,9 @@ interface File {
   @delete
   delete is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -1194,11 +1177,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=properties")
   @put
-  setHTTPHeaders is StorageOperationNoBody<
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  setHttpHeaders is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
 
       /** Specifies the number of bytes being transmitted. */
@@ -1231,11 +1215,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=metadata")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   setMetadata is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...LeaseIdParameter;
@@ -1253,11 +1238,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&acquire")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   acquireLease is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
       @header("x-ms-lease-duration") leaseDuration?: int32;
@@ -1282,11 +1268,14 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&release")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   releaseLease is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
+
+      /** The lease ID of the active lease. */
       @header("x-ms-lease-id") leaseId: string;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -1303,11 +1292,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=lease&change")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   changeLease is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** The lease ID of the active lease. */
       @header("x-ms-lease-id") leaseId: string;
@@ -1333,9 +1323,9 @@ interface File {
   @put
   breakLease is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...LeaseIdParameter;
       ...FileRequestIntentParameter;
@@ -1356,18 +1346,21 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=range")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   uploadRange is StorageOperationRequestBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("x-ms-range") targetRange: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
-      @header("x-ms-write") fileRangeWrite: "update" | "clear";
+      @header("x-ms-write") fileRangeWrite: FileRangeWriteType;
 
+      /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
 
@@ -1389,6 +1382,7 @@ interface File {
       /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
 
+      /** The file content to upload. */
       @body content?: bytes;
     },
     {
@@ -1412,11 +1406,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=range&fromURL")
   @put
-  uploadRangeFromURL is StorageOperationNoBody<
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
+  uploadRangeFromUrl is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("x-ms-range") targetRange: string;
@@ -1430,6 +1425,7 @@ interface File {
       /** Only update is supported. */
       @header("x-ms-write") fileRangeWriteFromUrl: "update";
 
+      /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
       ...TimeoutParameter;
 
@@ -1479,9 +1475,11 @@ interface File {
   @get
   getRangeList is StorageOperationResponseBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
+
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
 
       /** The previous snapshot parameter is an opaque DateTime value that specifies a previous file snapshot to compare against. */
@@ -1514,9 +1512,9 @@ interface File {
   @put
   startCopy is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies the URL of the source file or blob, up to 2 KB in length. */
       @header("x-ms-copy-source") copySource: string;
@@ -1590,9 +1588,9 @@ interface File {
   @put
   abortCopy is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Must be the literal "abort" to abort the pending copy operation. */
       @header("x-ms-copy-action") copyActionAbort: "abort";
@@ -1615,11 +1613,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=listhandles")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   listHandles is StorageOperationResponseBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
       ...TimeoutParameter;
@@ -1640,17 +1639,20 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=forceclosehandles")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   forceCloseHandles is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
 
       /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
       @header("x-ms-handle-id") handleId: string;
 
       ...TimeoutParameter;
       ...MarkerParameter;
+
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -1669,11 +1671,12 @@ interface File {
    */
   @route("/{shareName}/{directory}/{fileName}?comp=rename")
   @put
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   rename is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...RenameRequestHeaders;
 
@@ -1724,9 +1727,9 @@ interface File {
   @put
   createSymbolicLink is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
       ...MetadataHeaders;
 
@@ -1780,10 +1783,12 @@ interface File {
   @get
   getSymbolicLink is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
+
+      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
       @query sharesnapshot?: string;
       ...FileRequestIntentParameter;
     },
@@ -1803,9 +1808,9 @@ interface File {
   @put
   createHardLink is StorageOperationNoBody<
     {
-      @path shareName: string;
-      @path directory: string;
-      @path fileName: string;
+      ...ShareNamePathParameter;
+      ...DirectoryPathParameter;
+      ...FileNamePathParameter;
       ...TimeoutParameter;
 
       /** Dummy type header, must be "file". */
