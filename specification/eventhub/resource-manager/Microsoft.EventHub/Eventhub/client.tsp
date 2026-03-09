@@ -102,7 +102,6 @@ using Microsoft.EventHub;
   "EventHubsPrivateLinkConnectionStatus",
   "csharp"
 );
-@@clientName(PrivateLinkResource, "EventHubsPrivateLinkResourceData", "csharp");
 @@clientName(ProvisioningState, "EventHubsClusterProvisioningState", "csharp");
 @@clientName(CleanupPolicyRetentionDescription.Compact, "Compaction", "csharp");
 @@alternateType(NetworkSecurityPerimeterConfigurationProperties.sourceResourceId,
@@ -111,6 +110,10 @@ using Microsoft.EventHub;
 );
 @@clientName(ApplicationGroupPolicy,
   "EventHubsApplicationGroupPolicy",
+  "csharp"
+);
+@@clientName(ApplicationGroupPolicy.type,
+  "ApplicationGroupPolicyType",
   "csharp"
 );
 @@clientName(RegenerateAccessKeyParameters,
@@ -191,7 +194,6 @@ using Microsoft.EventHub;
   "EventHubsNetworkSecurityPerimeterConfigurationProvisioningState",
   "csharp"
 );
-@@clientName(NspAccessRule, "EventHubsNspAccessRule", "csharp");
 @@clientName(NspAccessRuleDirection,
   "EventHubsNspAccessRuleDirection",
   "csharp"
@@ -282,10 +284,6 @@ using Microsoft.EventHub;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(NamespaceReplicaLocation.locationName,
-  Azure.Core.azureLocation,
-  "csharp"
-);
 @@alternateType(ArmDisasterRecovery.location,
   Azure.Core.azureLocation,
   "csharp"
@@ -300,11 +298,15 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@alternateType(SchemaGroupProperties.eTag, Azure.Core.eTag, "csharp");
-@@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
-@@clientName(NamespaceReplicaLocation.locationName,
-  "PrimaryLocation",
+@@alternateType(FailOverProperties.primaryLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(EHNamespaceIdListResult.value,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
 @@clientName(NspAccessRulePropertiesSubscriptionsItem,
   "EventHubsNspAccessRulePropertiesSubscriptionsItem",
@@ -327,6 +329,11 @@ using Microsoft.EventHub;
 @@alternateType(Cluster, EventHubsCluster, "csharp");
 @@alternateType(EHNamespace, EventHubsNamespace, "csharp");
 @@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
+@@alternateType(NspAccessRule, EventHubsNspAccessRule, "csharp");
+@@alternateType(PrivateLinkResource,
+  EventHubsPrivateLinkResourceData,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsCluster.properties,
@@ -383,6 +390,24 @@ namespace Microsoft.EventHub {
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  }
+
+  /**
+   * Information of Access Rule in Network Profile
+   */
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  model EventHubsNspAccessRule
+    extends Azure.ResourceManager.CommonTypes.Resource {
+    ...OmitProperties<NspAccessRule, "id" | "name" | "type">;
+  }
+
+  /**
+   * Information of the private link resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  model EventHubsPrivateLinkResourceData
+    extends Azure.ResourceManager.CommonTypes.Resource {
+    ...OmitProperties<PrivateLinkResource, "id" | "name" | "type">;
   }
 
   /**
