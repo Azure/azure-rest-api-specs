@@ -297,103 +297,120 @@ interface Data {
   @added(Versions.v2026_04_15)
   cropGeoJsonBare is TilerGeoJsonsCrop.crop;
 
-  // Mosaic Tileset List and Metadata
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  @added(Versions.v2026_04_15)
-  listMosaicsTilesets is MosaicsTileSetList.get;
-  @added(Versions.v2026_04_15)
-  getMosaicsTilesetMetadata is MosaicsTileSetMetadata.get;
-
-  // Mosaic Tile Variants (TileMatrixSetId as path)
-  @added(Versions.v2026_04_15)
-  getMosaicsTilePlain is MosaicsTileMatrixSetsPlain.getZxy;
-  @added(Versions.v2026_04_15)
-  getMosaicsTileByFormat is MosaicsTileMatrixSetsFormat.getZxyByFormat;
-  @added(Versions.v2026_04_15)
-  getMosaicsTileByScale is MosaicsTileMatrixSetsScale.getZxyByScale;
-
-  // Mosaic Tile Variants (without TileMatrixSetId in path)
-  @added(Versions.v2026_04_15)
-  getMosaicsTileNoTmsPlain is MosaicsTilesPlain.getZxy;
-  @added(Versions.v2026_04_15)
-  getMosaicsTileNoTmsByFormat is MosaicsTilesFormat.getZxyByFormat;
-  @added(Versions.v2026_04_15)
-  getMosaicsTileNoTmsByScale is MosaicsTilesScale.getZxyByScale;
-
   // === Collection-level mosaic endpoints (stable 2026-04-15) ===
 
   // Collection Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listCollectionTilesets is CollectionMosaicsTileSetList.get;
+  listCollectionTilesets is MosaicCollectionsTileSetList.get;
   @added(Versions.v2026_04_15)
-  getCollectionTilesetMetadata is CollectionMosaicsTileSetMetadata.get;
+  getCollectionTilesetMetadata is MosaicCollectionsTileSetMetadata.get;
 
   // Collection Tiles (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getCollectionTile is CollectionMosaicsTileMatrixSets.getZxyScaleByFormat;
+  getCollectionTile is MosaicCollectionsTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTilePlain is CollectionMosaicsTileMatrixSetsPlain.getZxy;
+  getCollectionTilePlain is MosaicCollectionsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getCollectionTileByFormat is CollectionMosaicsTileMatrixSetsFormat.getZxyByFormat;
+  getCollectionTileByFormat is MosaicCollectionsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileByScale is CollectionMosaicsTileMatrixSetsScale.getZxyByScale;
+  getCollectionTileByScale is MosaicCollectionsTileMatrixSetsScale.getZxyByScale;
 
   // Collection Tiles (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTms is CollectionMosaicsTiles.getZxyScaleByFormat;
+  getCollectionTileNoTms is MosaicCollectionsTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTmsPlain is CollectionMosaicsTilesPlain.getZxy;
+  getCollectionTileNoTmsPlain is MosaicCollectionsTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTmsByFormat is CollectionMosaicsTilesFormat.getZxyByFormat;
+  getCollectionTileNoTmsByFormat is MosaicCollectionsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTmsByScale is CollectionMosaicsTilesScale.getZxyByScale;
+  getCollectionTileNoTmsByScale is MosaicCollectionsTilesScale.getZxyByScale;
 
   // Collection TileJSON
   @added(Versions.v2026_04_15)
-  getCollectionTileJson is CollectionMosaicsTileJson.get;
+  getCollectionTileJson is MosaicCollectionsTileJson.get;
   @added(Versions.v2026_04_15)
-  getCollectionTileJsonTms is CollectionMosaicsTileMatrixSetsTileJson.get;
+  getCollectionTileJsonTms is MosaicCollectionsTileMatrixSetsTileJson.get;
 
   // Collection WMTS
   @added(Versions.v2026_04_15)
-  getCollectionWmtsCapabilities is CollectionMosaicsWmts.getCapabilitiesXml;
+  getCollectionWmtsCapabilities is MosaicCollectionsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getCollectionWmtsCapabilitiesTms is CollectionMosaicsWmtsTileMatrixSets.getCapabilitiesXml;
+  getCollectionWmtsCapabilitiesTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Collection Assets
   @added(Versions.v2026_04_15)
-  getCollectionAssetsForTile is CollectionMosaicsAssetsForTileMatrixSets.getZxyAssets;
+  getCollectionAssetsForTile is MosaicCollectionsAssetsForTileMatrixSets.getZxyAssets;
   @added(Versions.v2026_04_15)
-  getCollectionAssetsForTileNoTms is CollectionMosaicsAssetsForTiles.getZxyAssets;
+  getCollectionAssetsForTileNoTms is MosaicCollectionsAssetsForTiles.getZxyAssets;
   @added(Versions.v2026_04_15)
-  getCollectionAssetsForPoint is CollectionMosaicsAssetsForPoints.getPointAssets;
-  @added(Versions.v2026_04_15)
-  getCollectionAssetsForBbox is CollectionMosaicsAssetsForBbox.getBboxAssets;
-
-  // Collection Point
-  @added(Versions.v2026_04_15)
-  getCollectionPoint is CollectionMosaicsPoint.getPoint;
+  getCollectionAssetsForBbox is MosaicCollectionsAssetsForBbox.getBboxAssets;
 
   // Collection Info
   @added(Versions.v2026_04_15)
-  getCollectionInfo is CollectionMosaicsInfo.get;
-
-  // Collection Statistics
-  @added(Versions.v2026_04_15)
-  getCollectionStatistics is CollectionMosaicsStatistics.get;
+  getCollectionInfo is MosaicCollectionsInfo.get;
 
   // Collection Bbox Crop
   @added(Versions.v2026_04_15)
-  getCollectionBboxCrop is CollectionMosaicsBbox.getCroppedToBoundingBox;
+  getCollectionBboxCrop is MosaicCollectionsBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
-  getCollectionBboxCropWithDimensions is CollectionMosaicsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  getCollectionBboxCropWithDimensions is MosaicCollectionsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
 
-  // Collection Feature Crop
+  // === Search-based mosaic endpoints (stable 2026-04-15) ===
+
+  // #1 - Searches Tileset List
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  cropCollectionFeature is CollectionMosaicsFeature.cropFormat;
+  listSearchesTilesets is MosaicSearchesTileSetList.get;
+  // #2 - Searches Tileset Metadata
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureWithDimensions is CollectionMosaicsFeatureWithDimensions.cropWidthByHeightFormat;
+  getSearchesTilesetMetadata is MosaicSearchesTileSetMetadata.get;
+  // #3 - Searches Tiles with TileMatrixSetId (4 variants)
+  @added(Versions.v2026_04_15)
+  getSearchesTile is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
+  @added(Versions.v2026_04_15)
+  getSearchesTilePlain is MosaicSearchesTileMatrixSetsPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getSearchesTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getSearchesTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
+  // #7 - Searches Assets for Tile (with TileMatrixSetId)
+  @added(Versions.v2026_04_15)
+  getSearchesAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
+  // #5 - Searches TileJSON with TileMatrixSetId
+  @added(Versions.v2026_04_15)
+  getSearchesTileJsonTms is MosaicSearchesTileMatrixSetsTileJson.get;
+  // #6 - Searches WMTS with TileMatrixSetId
+  @added(Versions.v2026_04_15)
+  getSearchesWmtsCapabilitiesTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
+  // #13 - Searches Info
+  @added(Versions.v2026_04_15)
+  getSearchesInfo is MosaicSearchesInfoSearch.get;
+  // #14 - Searches Register
+  @added(Versions.v2026_04_15)
+  searchesRegister is MosaicSearchesRegisterSearch.register;
+  // #10 - Searches Bbox Crop (NEW)
+  @added(Versions.v2026_04_15)
+  getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
+  @added(Versions.v2026_04_15)
+  getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  // Remaining /searches/ equivalents for consistency
+  @added(Versions.v2026_04_15)
+  getSearchesWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
+  @added(Versions.v2026_04_15)
+  getSearchesTileJson is MosaicSearchesTileJson.get;
+  @added(Versions.v2026_04_15)
+  getSearchesTileNoTmsPlain is MosaicSearchesTilesPlain.getZxy;
+  @added(Versions.v2026_04_15)
+  getSearchesTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
+  @added(Versions.v2026_04_15)
+  getSearchesTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
+  @added(Versions.v2026_04_15)
+  getSearchesTileNoTms is MosaicSearchesTiles.getZxyScaleByFormat;
+  @added(Versions.v2026_04_15)
+  getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
+  @added(Versions.v2026_04_15)
+  getSearchesPointAssets is MosaicSearchesPointAssets.getPointAssets;
 }
 
 // === Shared Access Signature (SAS) ===
