@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using AzureMonitorExporter;
 
 @@clientName(AzureMonitorExporter, "ApplicationInsightsClient");
+@@clientName(AzureMonitorExporter, "ApplicationInsightsRestClient", "csharp");
 @@clientName(AzureMonitorExporter, "AzureMonitorClient", "python");
 
 @@clientName(Base, "MonitorBase");
@@ -67,6 +68,7 @@ using AzureMonitorExporter;
 @@usage(ContextTagKeys, Usage.output | Usage.json);
 @@access(ContextTagKeys, Access.public, "python,javascript,java");
 
+@@access(AzureMonitorExporter, Access.internal, "csharp");
 @@access(Base, Access.internal, "csharp");
 @@access(Domain, Access.internal, "csharp");
 @@access(DomainKind, Access.internal, "csharp");
