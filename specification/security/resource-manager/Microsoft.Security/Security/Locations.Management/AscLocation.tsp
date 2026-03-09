@@ -14,7 +14,7 @@ namespace Microsoft.Security;
  * The ASC location of the subscription is in the "name" field
  */
 @subscriptionResource
-model AscLocation is Azure.ResourceManager.ProxyResource<AnyObject> {
+model AscLocation is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = AscLocation,
     KeyName = "ascLocation",

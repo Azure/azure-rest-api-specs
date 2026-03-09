@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Defender for Cloud",
-    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2015-06-01-preview"
+    "title": "SecurityCenter",
+    "version": "2015-06-01-preview",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,52 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "AscLocations"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations": {
       "get": {
-        "x-ms-examples": {
-          "Get security data locations": {
-            "$ref": "./examples/Locations/GetLocations_example.json"
-          }
-        },
+        "operationId": "Locations_List",
         "tags": [
-          "Locations"
+          "AscLocations"
         ],
         "description": "The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.",
-        "operationId": "Locations_List",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/AscLocationList"
+              "$ref": "#/definitions/AscLocationList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security data locations": {
+            "$ref": "./examples/Locations/GetLocations_example.json"
           }
         },
         "x-ms-pageable": {
@@ -75,68 +85,79 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}": {
       "get": {
-        "x-ms-examples": {
-          "Get security data location": {
-            "$ref": "./examples/Locations/GetLocation_example.json"
-          }
-        },
+        "operationId": "Locations_Get",
         "tags": [
-          "Locations"
+          "AscLocations"
         ],
         "description": "Details of a specific location",
-        "operationId": "Locations_Get",
         "parameters": [
           {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./common/v1/types.json#/parameters/AscLocation"
+            "name": "ascLocation",
+            "in": "path",
+            "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/AscLocation"
+              "$ref": "#/definitions/AscLocation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get security data location": {
+            "$ref": "./examples/Locations/GetLocation_example.json"
           }
         }
       }
     }
   },
-  "parameters": {
-    "ExtendedResourceProvider": {
-      "name": "extendedResourceProvider",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Resource provider name of the base resource",
-      "x-ms-parameter-location": "method"
+  "definitions": {
+    "AscLocation": {
+      "type": "object",
+      "description": "The ASC location of the subscription is in the \"name\" field",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
-    "ExtendedResourceType": {
-      "name": "extendedResourceType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Type of the base resource",
-      "x-ms-parameter-location": "method"
-    },
-    "ExtendedResourceName": {
-      "name": "extendedResourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the base resource",
-      "x-ms-parameter-location": "method"
+    "AscLocationList": {
+      "type": "object",
+      "description": "List of locations where ASC saves your data",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AscLocation items on this page",
+          "items": {
+            "$ref": "#/definitions/AscLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
-  }
+  },
+  "parameters": {}
 }
