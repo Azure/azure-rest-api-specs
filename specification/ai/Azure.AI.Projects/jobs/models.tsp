@@ -281,6 +281,7 @@ model JobSystemData {
 model CommandJob {
   @doc("The name of the Job. This is case-sensitive.")
   @key
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   name: string;
 
   @doc("The id for the Job")

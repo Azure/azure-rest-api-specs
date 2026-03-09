@@ -1402,18 +1402,18 @@
         }
       }
     },
-    "/jobs/{id}": {
+    "/jobs/{name}": {
       "get": {
         "operationId": "Jobs_Get",
-        "description": "Get a Job by id.",
+        "description": "Get a Job by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "description": "The name of the Job. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -1462,9 +1462,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "description": "The name of the Job. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -1512,15 +1512,15 @@
       },
       "delete": {
         "operationId": "Jobs_Delete",
-        "description": "Delete a Job by id.",
+        "description": "Delete a Job by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "description": "The name of the Job. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -1559,18 +1559,18 @@
         }
       }
     },
-    "/jobs/{id}:cancel": {
+    "/jobs/{name}:cancel": {
       "post": {
         "operationId": "Jobs_Cancel",
-        "description": "Cancel a Job by id.",
+        "description": "Cancel a Job by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
-            "description": "The name and identifier for the Job. This is case-sensitive.",
+            "description": "The name of the Job. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -2294,14 +2294,18 @@
       "type": "object",
       "description": "Command job definition.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The name and identifier for the Job. This is case-sensitive.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
-          "description": "The name of the resource.",
+          "description": "The name of the Job. This is case-sensitive.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "The id for the Job",
           "readOnly": true
         },
         "jobType": {
@@ -2413,7 +2417,7 @@
         }
       },
       "required": [
-        "id",
+        "name",
         "jobType",
         "command",
         "environmentId"
