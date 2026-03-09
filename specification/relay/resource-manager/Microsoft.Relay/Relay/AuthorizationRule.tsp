@@ -46,7 +46,7 @@ interface AuthorizationRuleOps
         ...KeysOf<RelayNamespaceNameParameter>,
       },
       KeysOf<AuthorizationRuleNameParameter>,
-      ResourceName="RelayNamespaceAuthorizationRule"
+      ResourceName = "RelayNamespaceAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -105,7 +105,7 @@ interface HybridConnectionOps
         ...KeysOf<HybridConnectionNameParameter>,
       },
       KeysOf<AuthorizationRuleNameParameter>,
-      ResourceName="RelayHybridConnectionAuthorizationRule"
+      ResourceName = "RelayHybridConnectionAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -165,7 +165,7 @@ interface WCFRelayOps
         ...KeysOf<WcfRelayNameParameter>,
       },
       KeysOf<AuthorizationRuleNameParameter>,
-      ResourceName = "WcfRelayAuthorizationRule"  
+      ResourceName = "WcfRelayAuthorizationRule"
     > {}
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
