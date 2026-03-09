@@ -78,10 +78,7 @@ interface WorkflowRuns {
   /**
    * Gets a workflow run.
    */
-  get is WorkflowRunsOps.Read<
-    WorkflowRun,
-    OverrideErrorType = WorkflowErrorResponse
-  >;
+  get is WorkflowRunsOps.Read<WorkflowRun, OverrideErrorType = WorkflowErrorResponse>;
 
   /**
    * Gets a list of workflow runs.
