@@ -206,6 +206,8 @@ stages:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
 
+      - template: /eng/common/pipelines/templates/steps/authenticate-temp-npmrc.yml
+
       - task: UsePythonVersion@0
         inputs:
           versionSpec: $(PythonVersion)
