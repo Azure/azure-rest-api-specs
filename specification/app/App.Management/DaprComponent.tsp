@@ -104,7 +104,6 @@ interface ConnectedEnvironmentsDaprComponents {
   /**
    * List secrets for a dapr component
    */
-  @list
   @summary("List secrets for a dapr component")
   listSecrets is DaprComponentCustomErrorOps.ActionSync<
     DaprComponent,
@@ -172,7 +171,6 @@ interface DaprComponents {
   /**
    * List secrets for a dapr component
    */
-  @list
   @summary("List secrets for a dapr component")
   listSecrets is DaprComponentOperationGroupOps.ActionSync<
     DaprComponent,

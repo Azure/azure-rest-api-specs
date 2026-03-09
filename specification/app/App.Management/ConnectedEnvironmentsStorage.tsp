@@ -52,7 +52,7 @@ interface ConnectedEnvironmentsStorages {
    * Get all storages for a connectedEnvironment.
    */
   @summary("Get all storages for a connectedEnvironment.")
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ConnectedEnvironmentStorage,
     Response = ArmResponse<ConnectedEnvironmentStoragesCollection>,
     Error = DefaultErrorResponse

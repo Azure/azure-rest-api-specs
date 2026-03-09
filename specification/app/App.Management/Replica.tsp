@@ -36,7 +36,7 @@ interface ContainerAppsRevisionReplicas {
    * List replicas for a Container App Revision.
    */
   @summary("List replicas for a Container App Revision.")
-  listReplicas is ArmResourceListByParent<
+  listReplicas is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     Replica,
     Response = ArmResponse<ReplicaCollection>,
     Error = DefaultErrorResponse
