@@ -42,7 +42,6 @@ interface QueueClient extends Storage.Queues.Queue {}
 @@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues");
 
 @@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
-
 @@clientName(Storage.Queues.SentMessage, "SentMessageInternal", "rust");
 
 @@alternateType(Storage.Queues.ListOfSentMessage,
