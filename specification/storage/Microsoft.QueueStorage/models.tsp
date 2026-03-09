@@ -314,7 +314,7 @@ model QueueServiceStats {
 /** Geo-Replication information for the Secondary Storage Service */
 model GeoReplication {
   /** The status of the secondary location */
-  @Xml.name("Status") status: GeoReplicationStatusType;
+  @Xml.name("Status") status: GeoReplicationStatus;
 
   /** A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
@@ -324,7 +324,7 @@ model GeoReplication {
 }
 
 /** The geo replication status. */
-union GeoReplicationStatusType {
+union GeoReplicationStatus {
   /** The geo replication is live. */
   Live: "live",
 
@@ -467,7 +467,7 @@ model SignedIdentifiers {
  * List wrapper for DequeuedMessageItem array
  */
 @Xml.name("QueueMessagesList")
-model ListOfReceivedMessage {
+model ReceivedMessages {
   /**
    * The list of dequeued messages.
    */
@@ -493,7 +493,7 @@ model ListOfSentMessage {
  * List wrapper for PeekedMessageItem array
  */
 @Xml.name("QueueMessagesList")
-model ListOfPeekedMessage {
+model PeekedMessages {
   /**
    * The list of peeked messages.
    */

@@ -204,7 +204,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
   @route("?comp=metadata")
-  getMetadata is StorageOperationNoBody<
+  getProperties is StorageOperationNoBody<
     {
       ...TimeoutParameter;
     },
@@ -301,7 +301,7 @@ interface Queue {
       ...TimeoutParameter;
     },
     {
-      @bodyRoot body: ListOfReceivedMessage;
+      @bodyRoot body: ReceivedMessages;
     }
   >;
 
@@ -385,7 +385,7 @@ interface Queue {
       ...TimeoutParameter;
     },
     {
-      @bodyRoot body: ListOfPeekedMessage;
+      @bodyRoot body: PeekedMessages;
     }
   >;
 
@@ -401,7 +401,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  update is StorageOperationRequestBody<
+  updateMessage is StorageOperationRequestBody<
     {
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
