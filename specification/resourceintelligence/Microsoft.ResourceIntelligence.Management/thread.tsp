@@ -40,6 +40,12 @@ model ThreadProperties {
    */
   @visibility(Lifecycle.Read)
   status?: RunStatus;
+
+  /**
+   * The ID of the most recent run. Informational only — do not use for execution logic.
+   */
+  @visibility(Lifecycle.Read)
+  lastRunId?: string;
 }
 
 // ============================================
