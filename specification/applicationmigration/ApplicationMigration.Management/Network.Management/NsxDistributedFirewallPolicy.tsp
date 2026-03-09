@@ -48,8 +48,11 @@ model NsxDistributedFirewallPolicyProperties is AzureResourceProperties {
   /** The federation scope of the policy. */
   federationScope?: FederationScope;
 
-  /** The NSX scope paths this policy applies to. */
-  scope?: string[];
+  /** Whether scope is applied. */
+  scope?: boolean;
+
+  /** ARM resource IDs of scope groups this policy applies to. */
+  scopeGroupArmIds?: string[];
 }
 
 @armResourceOperations

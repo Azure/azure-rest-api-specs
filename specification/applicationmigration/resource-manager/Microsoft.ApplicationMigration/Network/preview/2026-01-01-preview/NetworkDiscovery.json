@@ -5411,8 +5411,12 @@
           "description": "The federation scope of the policy."
         },
         "scope": {
+          "type": "boolean",
+          "description": "Whether scope is applied."
+        },
+        "scopeGroupArmIds": {
           "type": "array",
-          "description": "The NSX scope paths this policy applies to.",
+          "description": "ARM resource IDs of scope groups this policy applies to.",
           "items": {
             "type": "string"
           }
@@ -5495,8 +5499,12 @@
           "description": "The federation scope of the policy."
         },
         "scope": {
+          "type": "boolean",
+          "description": "Whether scope is applied."
+        },
+        "scopeGroupArmIds": {
           "type": "array",
-          "description": "The NSX scope paths this policy applies to.",
+          "description": "ARM resource IDs of scope groups this policy applies to.",
           "items": {
             "type": "string"
           }
@@ -6517,14 +6525,6 @@
           "type": "string",
           "description": "The display name."
         },
-        "nsxTags": {
-          "type": "array",
-          "description": "NSX tags.",
-          "items": {
-            "$ref": "#/definitions/NsxTag"
-          },
-          "x-ms-identifiers": []
-        },
         "errors": {
           "type": "array",
           "description": "The list of errors.",
@@ -6577,6 +6577,13 @@
                 }
               ]
             }
+          }
+        },
+        "applianceNames": {
+          "type": "array",
+          "description": "The appliance names.",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -6604,22 +6611,10 @@
           "type": "string",
           "description": "The NSX display name."
         },
-        "nsxOriginalPath": {
-          "type": "string",
-          "description": "The NSX original path identifier."
-        },
         "uniqueId": {
           "type": "string",
           "description": "The NSX unique identifier.",
           "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
-        },
-        "nsxTags": {
-          "type": "array",
-          "description": "NSX tags applied to this resource.",
-          "items": {
-            "$ref": "#/definitions/NsxTag"
-          },
-          "x-ms-identifiers": []
         },
         "errors": {
           "type": "array",
@@ -6673,6 +6668,13 @@
                 }
               ]
             }
+          }
+        },
+        "applianceNames": {
+          "type": "array",
+          "description": "The appliance names.",
+          "items": {
+            "type": "string"
           }
         }
       },

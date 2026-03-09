@@ -29,7 +29,9 @@ model NsxManager
 /**
  * Properties of an NSX Manager.
  */
-model NsxManagerProperties is AzureResourceProperties {
+model NsxManagerProperties {
+  ...OmitProperties<AzureResourceProperties, "nsxOriginalPath" | "nsxTags">;
+
   /** The fully qualified domain name of the NSX Manager. */
   fqdn: string;
 
@@ -51,6 +53,9 @@ model NsxManagerProperties is AzureResourceProperties {
       type: "Microsoft.OffAzure/vmwareSites/vcenters";
     }
   ]>[];
+
+  /** The appliance names. */
+  applianceNames?: string[];
 }
 
 @armResourceOperations

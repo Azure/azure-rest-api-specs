@@ -701,10 +701,6 @@ model NsxManagerPatchFields {
   /** The display name. */
   displayName?: string;
 
-  /** NSX tags. */
-  @identifiers(#[])
-  nsxTags?: NsxTag[];
-
   /** The list of errors. */
   @identifiers(#[])
   errors?: Error[];
@@ -733,6 +729,9 @@ model NsxManagerPatchFields {
       type: "Microsoft.OffAzure/vmwareSites/vcenters";
     }
   ]>[];
+
+  /** The appliance names. */
+  applianceNames?: string[];
 }
 
 /** NsxTier0Gateway patch envelope. */
@@ -1044,8 +1043,11 @@ model NsxDistributedFirewallPolicyPatchFields {
   /** The federation scope of the policy. */
   federationScope?: FederationScope;
 
-  /** The NSX scope paths this policy applies to. */
-  scope?: string[];
+  /** Whether scope is applied. */
+  scope?: boolean;
+
+  /** ARM resource IDs of scope groups this policy applies to. */
+  scopeGroupArmIds?: string[];
 }
 
 /** NsxDistributedFirewallRule patch envelope. */
