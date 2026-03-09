@@ -39,10 +39,14 @@ export async function fileExists(file: string) {
   }
 
   // Verify exact case match to avoid false positives on case-insensitive file systems (Windows)
-  const dir = defaultPath.dirname(file);
-  const base = defaultPath.basename(file);
-  const entries = await readdir(dir);
-  return entries.includes(base);
+  try {
+    const dir = defaultPath.dirname(file);
+    const base = defaultPath.basename(file);
+    const entries = await readdir(dir);
+    return entries.includes(base);
+  } catch {
+    return false;
+  }
 }
 
 export async function readTspConfig(folder: string) {
