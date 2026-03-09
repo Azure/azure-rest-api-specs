@@ -604,6 +604,35 @@
       },
       "readOnly": true
     },
+    "ShipToAddress": {
+      "type": "object",
+      "description": "Shipping address details",
+      "properties": {
+        "addressLine1": {
+          "type": "string",
+          "description": "First line of the street address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City name"
+        },
+        "region": {
+          "type": "string",
+          "description": "State or region"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal or ZIP code"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "ISO country code (e.g. US, GB)"
+        }
+      },
+      "required": [
+        "countryCode"
+      ]
+    },
     "SupportPlan": {
       "type": "object",
       "description": "A Support Plan resource",
@@ -832,6 +861,10 @@
         "shipToAddressId": {
           "type": "string",
           "description": "Shipping address identifier for add-on scenarios"
+        },
+        "shipToAddress": {
+          "$ref": "#/definitions/ShipToAddress",
+          "description": "Shipping address details, used when shipToAddressId is not available"
         },
         "tenantId": {
           "type": "string",
