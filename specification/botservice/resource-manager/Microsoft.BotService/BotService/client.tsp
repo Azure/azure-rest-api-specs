@@ -6,9 +6,18 @@ using Azure.ClientGenerator.Core;
 using Microsoft.BotService;
 
 @@scope(Operations.list, "!csharp");
-@@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
 @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
+@@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
+@@alternateType(Bot.location, azureLocation, "csharp");
+@@alternateType(Bot.etag, eTag, "csharp");
+@@alternateType(BotChannel.location, azureLocation, "csharp");
+@@alternateType(BotChannel.etag, eTag, "csharp");
 @@alternateType(BotProperties.endpoint, url, "csharp");
+@@alternateType(BotProperties.iconUrl, url, "csharp");
+@@alternateType(BotProperties.manifestUrl, url, "csharp");
+@@alternateType(BotProperties.cmekKeyVaultUrl, url, "csharp");
+@@alternateType(BotProperties.tenantId, uuid, "csharp");
+@@alternateType(ServiceProviderParameter.helpUrl, url, "csharp");
 @@alternateType(BotProperties.msaAppMSIResourceId,
   armResourceIdentifier,
   "csharp"
@@ -18,16 +27,14 @@ using Microsoft.BotService;
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(PrivateLinkResource,
-  "BotServicePrivateLinkResourceData",
-  "csharp"
-);
+
 @@clientName(Channel, "BotChannelProperties", "csharp");
 @@alternateType(Channel.etag, eTag, "csharp");
 @@alternateType(Channel.location, azureLocation, "csharp");
-@@clientName(ChannelName, "BotChannelName", "csharp");
 @@clientName(ChannelSettings, "BotChannelSettings", "csharp");
 @@alternateType(ChannelSettings.botIconUrl, url, "csharp");
+@@alternateType(ConnectionSetting.location, azureLocation, "csharp");
+@@alternateType(ConnectionSetting.etag, eTag, "csharp");
 @@usage(ChannelSettings, Usage.input | Usage.output, "csharp");
 @@clientName(CheckNameAvailabilityRequestBody,
   "BotServiceNameAvailabilityContent",
@@ -55,17 +62,20 @@ using Microsoft.BotService;
   "BotCreateEmailSignInUriResult",
   "csharp"
 );
+@@alternateType(CreateEmailSignInUrlResponse.location, azureLocation, "csharp");
 @@alternateType(CreateEmailSignInUrlResponse.id,
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
+@@alternateType(Resource.location, azureLocation, "csharp");
+@@alternateType(Resource.etag, eTag, "csharp");
 @@clientName(Site, "BotChannelSite", "csharp");
+@@alternateType(Site.tenantId, uuid, "csharp");
+@@alternateType(Site.eTag, eTag, "csharp");
 @@clientName(HostSettingsResponse, "BotServiceHostSettingsResult", "csharp");
 @@clientName(Key, "BotServiceKey", "csharp");
-@@clientName(ListChannelWithKeysResponse,
-  "BotChannelGetWithKeysResult",
-  "csharp"
-);
+
 @@clientName(MsaAppType, "BotMsaAppType", "csharp");
 @@clientName(MsTeamsChannelProperties.enableCalling,
   "IsCallingEnabled",
@@ -140,3 +150,120 @@ using Microsoft.BotService;
 
 // Java SDK back-compat: keep unknown as Object
 @@alternateType(OperationEntity.properties, unknown, "java");
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(ListChannelWithKeysResponse,
+  ListChannelWithKeysResponseReplacement,
+  "csharp"
+);
+@@clientName(ListChannelWithKeysResponseReplacement,
+  "BotChannelGetWithKeysResult",
+  "csharp"
+);
+
+@@usage(ServiceProviderProperties, Usage.input | Usage.output, "csharp");
+
+@@alternateType(SlackChannelProperties.landingPageUrl, url, "csharp");
+@@alternateType(FacebookChannelProperties.callbackUrl, url, "csharp");
+@@alternateType(LineChannelProperties.callbackUrl, url, "csharp");
+@@alternateType(HostSettingsResponse.OAuthUrl, url, "csharp");
+@@alternateType(HostSettingsResponse.ToBotFromChannelOpenIdMetadataUrl,
+  url,
+  "csharp"
+);
+@@alternateType(HostSettingsResponse.ToBotFromEmulatorOpenIdMetadataUrl,
+  url,
+  "csharp"
+);
+@@alternateType(HostSettingsResponse.ToChannelFromBotLoginUrl, url, "csharp");
+@@alternateType(ServiceProviderProperties.devPortalUrl, url, "csharp");
+@@alternateType(ServiceProviderProperties.iconUrl, url, "csharp");
+@@alternateType(CreateEmailSignInUrlResponseProperties.url, url, "csharp");
+
+@@alternateType(ChannelName, ChannelNameUnion, "csharp");
+@@clientName(ChannelNameUnion, "BotChannelName", "csharp");
+
+@@clientName(PrivateEndpointConnection,
+  "BotServicePrivateEndpointConnection",
+  "csharp"
+);
+
+@@clientName(ServiceProviderParameter.type,
+  "ServiceProviderParameterType",
+  "csharp"
+);
+@@clientName(TelephonyChannelProperties.premiumSKU, "PremiumSku", "csharp");
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+@@alternateType(BotChannel, BotChannelReplacement, "csharp");
+@@clientName(BotChannel, "BotChannelTemp", "csharp");
+@@clientName(BotChannelReplacement, "BotChannel", "csharp");
+
+@@alternateType(Bot, BotReplacement, "csharp");
+@@clientName(Bot, "BotTemp", "csharp");
+@@clientName(BotReplacement, "Bot", "csharp");
+
+@@alternateType(ConnectionSetting, ConnectionSettingReplacement, "csharp");
+@@clientName(ConnectionSetting, "ConnectionSettingTemp", "csharp");
+@@clientName(ConnectionSettingReplacement, "BotConnectionSetting", "csharp");
+
+@@clientName(BotChannels.listWithKeys, "GetChannelWithKeys", "csharp");
+@@clientName(Bots.createSignInUrl, "createEmailSignInUri", "csharp");
+@@clientName(Bots.listByBotResource,
+  "GetPrivateLinkResourcesByBotResource",
+  "csharp"
+);
+@@clientName(BotChannels.regenerateKeys,
+  "GetBotChannelWithRegenerateKeysAsync",
+  "csharp"
+);
+@@clientName(BotsOperationGroup.getCheckNameAvailability,
+  "CheckBotServiceNameAvailability",
+  "csharp"
+);
+@@clientName(BotConnectionOperationGroup.listServiceProviders,
+  "GetBotConnectionServiceProviders",
+  "csharp"
+);
+@@clientName(HostSettingsOperationGroup.get,
+  "GetBotServiceHostSettings",
+  "csharp"
+);
+@@clientName(QnAMakerEndpointKeysOperationGroup.get,
+  "GetBotServiceQnAMakerEndpointKey",
+  "csharp"
+);
+
+@@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
+@@clientName(PrivateLinkResourceReplacement,
+  "BotServicePrivateLinkResourceData",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Bots.listByBotResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(BotConnectionOperationGroup.listServiceProviders,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
+);
+
+@@usage(ListChannelWithKeysResponseReplacement,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");

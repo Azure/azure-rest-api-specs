@@ -63,6 +63,45 @@ model ConnectionSetting
   zones?: string[];
 }
 
+/**
+ * Bot channel resource definition
+ */
+@parentResource(Bot)
+model ConnectionSettingReplacement
+  is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
+  ...ResourceNameParameter<
+    Resource = ConnectionSetting,
+    KeyName = "connectionName",
+    SegmentName = "connections",
+    NamePattern = "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$"
+  >;
+
+  /**
+   * Gets or sets the SKU of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: Sku;
+
+  /**
+   * Required. Gets or sets the Kind of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: Kind;
+
+  /**
+   * Entity Tag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: Azure.Core.eTag;
+
+  /**
+   * Entity zones
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  zones?: string[];
+}
+
 @armResourceOperations
 interface ConnectionSettings {
   /**

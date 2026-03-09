@@ -62,6 +62,47 @@ model BotChannel is Azure.ResourceManager.ProxyResource<Channel> {
   zones?: string[];
 }
 
+/**
+ * Bot channel resource definition
+ */
+@parentResource(Bot)
+model BotChannelReplacement is Azure.ResourceManager.TrackedResource<Channel> {
+  ...ResourceNameParameter<
+    Resource = BotChannel,
+    KeyName = "channelName",
+    SegmentName = "channels",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+  >;
+
+  /**
+   * Gets or sets the SKU of the resource.
+   */
+  /**
+   * Gets or sets the SKU of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: Sku;
+
+  /**
+   * Required. Gets or sets the Kind of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: Kind;
+
+  /**
+   * Entity Tag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: Azure.Core.eTag;
+
+  /**
+   * Entity zones
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  zones?: string[];
+}
+
 @armResourceOperations
 interface BotChannelOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -128,7 +169,8 @@ interface BotChannels {
    * Returns a BotService Channel registration specified by the parameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  get is ArmResourceRead<BotChannel, Error = Error>;
+  //get is ArmResourceRead<BotChannel, Error = Error>;
+  get is BotChannelOps.Read<BotChannel>;
 
   /**
    * Creates a Channel registration for a Bot Service
@@ -150,8 +192,8 @@ interface BotChannels {
    * Deletes a Channel registration from a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
-
+  //delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
+  delete is BotChannelOps.DeleteSync<BotChannel>;
   /**
    * Returns all the Channel registrations of a particular BotService resource
    */

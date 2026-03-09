@@ -190,6 +190,31 @@ union OperationResultStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union ChannelNameUnion {
+  string,
+  AlexaChannel: "AlexaChannel",
+  FacebookChannel: "FacebookChannel",
+  EmailChannel: "EmailChannel",
+  KikChannel: "KikChannel",
+  TelegramChannel: "TelegramChannel",
+  SlackChannel: "SlackChannel",
+  MsTeamsChannel: "MsTeamsChannel",
+  SkypeChannel: "SkypeChannel",
+  WebChatChannel: "WebChatChannel",
+  DirectLineChannel: "DirectLineChannel",
+  SmsChannel: "SmsChannel",
+  LineChannel: "LineChannel",
+  DirectLineSpeechChannel: "DirectLineSpeechChannel",
+  OutlookChannel: "OutlookChannel",
+  Omnichannel: "Omnichannel",
+  TelephonyChannel: "TelephonyChannel",
+  AcsChatChannel: "AcsChatChannel",
+  SearchAssistant: "SearchAssistant",
+  M365Extensions: "M365Extensions",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ChannelName {
   AlexaChannel,
   FacebookChannel,
@@ -885,6 +910,68 @@ model Channel {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string = "global";
+}
+
+/**
+ * The ARM channel of list channel with keys operation response.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ListChannelWithKeysResponseReplacement
+  extends Azure.ResourceManager.CommonTypes.TrackedResource {
+  /**
+   * The set of properties specific to bot channel resource
+   */
+  resource?: Channel;
+
+  /**
+   * Channel settings
+   */
+  setting?: ChannelSettings;
+
+  /**
+   * Provisioning state of the resource
+   */
+  provisioningState?: string;
+
+  /**
+   * Entity tag of the resource
+   */
+  entityTag?: string;
+
+  /**
+   * Changed time of the resource
+   */
+  changedTime?: string;
+
+  /**
+   *The set of properties specific to bot channel resource
+   */
+  properties?: Channel;
+
+  /**
+   * Gets or sets the SKU of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: Sku;
+
+  /**
+   * Required. Gets or sets the Kind of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: Kind;
+
+  /**
+   * Entity Tag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: Azure.Core.eTag;
+
+  /**
+   * Entity zones
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  zones?: string[];
 }
 
 /**
@@ -1596,6 +1683,18 @@ model PrivateLinkResourceListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends PrivateLinkResourceBase {
+  /**
+   * Resource properties.
+   */
+  properties?: PrivateLinkResourceProperties;
+}
+
+/**
+ * A private link resource
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PrivateLinkResourceReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
    */
