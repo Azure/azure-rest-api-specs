@@ -78,6 +78,9 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
+
+  @doc("The blob URI for the evaluator storage")
+  blob_uri?: string;
 }
 
 @doc("Prompt-based evaluator")
