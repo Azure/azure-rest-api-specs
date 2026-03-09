@@ -31,6 +31,7 @@ op StorageOperation<
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
+  ...DateResponseHeader;
 }) | TError;
 
 /** Azure Storage File basic operation template */
@@ -42,6 +43,7 @@ op StorageOperationNoBody<
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
+  ...DateResponseHeader;
 }) | TError;
 
 /** Azure Storage File basic operation template */
@@ -1037,7 +1039,7 @@ interface File {
       ...NfsResponseHeaders;
 
       /** An MD5 hash returned for the content. */
-      @header("Content-MD5") contentMd5?: string;
+      @header("Content-MD5") contentMd5?: bytes;
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
@@ -1076,7 +1078,7 @@ interface File {
       @header("Content-Type") contentType?: string;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: string;
-      @header("Content-MD5") contentMd5?: string;
+      @header("Content-MD5") contentMd5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1134,7 +1136,7 @@ interface File {
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
       @header("ETag") etag: string;
-      @header("Content-MD5") contentMd5?: string;
+      @header("Content-MD5") contentMd5?: bytes;
       @header("Content-Encoding") contentEncoding?: string;
       @header("Cache-Control") cacheControl?: string;
       @header("Content-Disposition") contentDisposition?: string;
@@ -1362,7 +1364,7 @@ interface File {
       @header("x-ms-range") targetRange: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
-      @header("x-ms-write") fileRangeWrite: FileRangeWriteType;
+      @header("x-ms-write") fileRangeWrite: FileRangeWriteType = FileRangeWriteType.update;
 
       /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
@@ -1394,11 +1396,13 @@ interface File {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("Content-MD5") contentMd5?: string;
+      @header("Content-MD5") contentMd5?: bytes;
       ...RequestServerEncryptedResponseHeader;
 
       /** The file last write time. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-last-write-time")
+      @encode("rfc7231")
+      fileLastWriteTime?: utcDateTime;
 
       /** Structured body response header. */
       @header("x-ms-structured-body") structuredBody?: string;
