@@ -280,7 +280,7 @@ model JobSystemData {
 @removed(Versions.v1)
 model CommandJob {
   @doc("The name of the Job. This is case-sensitive.")
-  @key
+  @key("name")
   @visibility(Lifecycle.Read)
   name: string;
 
