@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Azure Login with Workload Identity Federation
-        if: github.repository == 'Azure/azure-rest-api-specs' || github.repository == 'Azure/azure-rest-api-specs-pr'
+        if: github.repository_owner == 'Azure'
         uses: azure/login@v2
         with:
           client-id: "c277c2aa-5326-4d16-90de-98feeca69cbc"
