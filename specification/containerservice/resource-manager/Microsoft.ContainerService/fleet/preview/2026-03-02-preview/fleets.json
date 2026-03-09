@@ -3605,10 +3605,9 @@
           "description": "The state of the cluster mesh.",
           "readOnly": true
         },
-        "lastAppliedMemberLabelSelector": {
-          "type": "string",
-          "description": "The last applied Kubernetes-style label selector defining which Fleet members are in the mesh, e.g. `env=production`.",
-          "maxLength": 512,
+        "lastAppliedMemberSelector": {
+          "$ref": "#/definitions/MemberSelector",
+          "description": "The last applied MemberSelector for the cluster mesh profile.",
           "readOnly": true
         },
         "lastOperationId": {
