@@ -19,6 +19,7 @@
 | `storageType` | `StorageType` | Storage type for the cluster. |
 | `s2d` | `StorageS2dConfig` | S2D configuration. Applicable when `storageType` is `S2D` or `SANS2D`. |
 | `san` | `StorageSanConfig` | SAN configuration. Applicable when `storageType` is `SAN` or `SANS2D`. |
+| `disks` | `Disk[]` | List of storage disks. |
 
 ---
 
@@ -32,7 +33,29 @@
 
 ---
 
+## HciStorageProfile
+
+### New fields
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `disks` | `Disk[]` | Read-only | List of storage disks on the device. |
+
+---
+
 ## New models
+
+### `Disk`
+
+Represents a storage disk on the device.
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `id` | `string` | Read-only | The unique identifier of the disk. Required. |
+| `size` | `string` | Read-only | The size of the disk. |
+| `type` | `string` | Read-only | The type of the disk. |
+
+---
 
 ### `StorageType`
 
@@ -97,7 +120,7 @@ Top-level SAN network configuration for host network.
 
 | Field | Type | Description |
 |---|---|---|
-| `clusterNetworkConfig` | `SanClusterNetworkConfig` | Cluster (CSV/LiveMig) network configuration. Required. |
+| `clusterNetworkConfig` | `SanClusterNetworkConfig` | Cluster (CSV/LiveMig) network configuration. |
 
 ---
 
@@ -108,7 +131,7 @@ Cluster network configuration for SAN deployments (CSV/LiveMig traffic).
 | Field | Type | Description |
 |---|---|---|
 | `adapterProperties` | `SanAdapterProperties` | QoS and adapter property overrides. |
-| `adapterIPConfig` | `SanAdapterIPConfig[]` | Per-adapter IP configuration. Required. |
+| `adapterIPConfig` | `SanAdapterIPConfig[]` | Per-adapter IP configuration. |
 
 ---
 
@@ -129,12 +152,12 @@ QoS and adapter overrides for SAN cluster network traffic.
 
 Per-adapter IP configuration for SAN cluster network.
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `name` | `string` | ✅ | Logical name of the adapter IP configuration. |
-| `networkAdapterName` | `string` | ✅ | Physical NIC name. |
-| `vlanId` | `int32` | | VLAN ID. |
-| `addressPrefix` | `string` | ✅ | IP address prefix in CIDR notation. |
+| Field | Type | Description |
+|---|---|---|
+| `name` | `string` | Logical name of the adapter IP configuration. |
+| `networkAdapterName` | `string` | Physical NIC name. |
+| `vlanId` | `int32` | VLAN ID. |
+| `addressPrefix` | `string` | IP address prefix in CIDR notation. |
 
 ---
 

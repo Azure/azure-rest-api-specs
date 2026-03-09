@@ -3165,6 +3165,13 @@ model Storage {
    */
   @added(Versions.v2026_03_15_preview)
   san?: StorageSanConfig;
+
+  /**
+   * List of storage disks.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @identifiers(#["id"])
+  disks?: Disk[];
 }
 
 /**
@@ -3455,7 +3462,7 @@ model SanNetworks {
   /**
    * Cluster (CSV/LiveMig) network configuration for SAN deployments.
    */
-  clusterNetworkConfig: SanClusterNetworkConfig;
+  clusterNetworkConfig?: SanClusterNetworkConfig;
 }
 
 /**
@@ -3473,7 +3480,7 @@ model SanClusterNetworkConfig {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
-  adapterIPConfig: SanAdapterIPConfig[];
+  adapterIPConfig?: SanAdapterIPConfig[];
 }
 
 /**
@@ -3510,12 +3517,12 @@ model SanAdapterIPConfig {
   /**
    * Logical name of the adapter IP configuration (e.g., clusterNetwork-A).
    */
-  name: string;
+  name?: string;
 
   /**
    * Physical NIC name (e.g., ethernet 3).
    */
-  networkAdapterName: string;
+  networkAdapterName?: string;
 
   /**
    * VLAN ID (0-4095). Value of 0 or omitted means untagged.
@@ -3525,7 +3532,7 @@ model SanAdapterIPConfig {
   /**
    * Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24).
    */
-  addressPrefix: string;
+  addressPrefix?: string;
 }
 
 /**
@@ -6051,6 +6058,38 @@ model HciStorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the device.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_15_preview)
+  @identifiers(#["id"])
+  disks?: Disk[];
+}
+
+/**
+ * Represents a storage disk on the device.
+ */
+@added(Versions.v2026_03_15_preview)
+model Disk {
+  /**
+   * The unique identifier of the disk.
+   */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /**
+   * The size of the disk.
+   */
+  @visibility(Lifecycle.Read)
+  size?: string;
+
+  /**
+   * The type of the disk.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 }
 
 /**

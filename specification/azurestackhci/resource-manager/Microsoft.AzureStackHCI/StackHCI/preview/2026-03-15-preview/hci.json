@@ -11218,6 +11218,30 @@
         ]
       }
     },
+    "Disk": {
+      "type": "object",
+      "description": "Represents a storage disk on the device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the disk.",
+          "readOnly": true
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the disk.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the disk.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "DiskConfiguration": {
       "type": "object",
       "description": "Desired configuration for a disk.",
@@ -14896,6 +14920,17 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of storage disks on the device.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -18706,12 +18741,7 @@
           "type": "string",
           "description": "Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24)."
         }
-      },
-      "required": [
-        "name",
-        "networkAdapterName",
-        "addressPrefix"
-      ]
+      }
     },
     "SanAdapterProperties": {
       "type": "object",
@@ -18757,10 +18787,7 @@
             "name"
           ]
         }
-      },
-      "required": [
-        "adapterIPConfig"
-      ]
+      }
     },
     "SanNetworks": {
       "type": "object",
@@ -18770,10 +18797,7 @@
           "$ref": "#/definitions/SanClusterNetworkConfig",
           "description": "Cluster (CSV/LiveMig) network configuration for SAN deployments."
         }
-      },
-      "required": [
-        "clusterNetworkConfig"
-      ]
+      }
     },
     "SbeCredentials": {
       "type": "object",
@@ -19828,6 +19852,16 @@
         "san": {
           "$ref": "#/definitions/StorageSanConfig",
           "description": "SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'."
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of storage disks.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
