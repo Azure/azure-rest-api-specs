@@ -10006,7 +10006,7 @@ model ClusterVolumeReportedProperties {
   @visibility(Lifecycle.Read)
   clusterResourceId?: string;
 
-  /** Health rollup reported by Windows Health Service. */
+  /** Health roll-up reported by Windows Health Service. */
   @visibility(Lifecycle.Read)
   statusCategory?: ClusterVolumeStatusCategory;
 
@@ -10048,7 +10048,7 @@ model ClusterVolumeReportedProperties {
 
   /** Whether data deduplication is enabled. */
   @visibility(Lifecycle.Read)
-  isDedupEnabled?: boolean;
+  isDedupeEnabled?: boolean;
 
   /** Whether BitLocker encryption is enabled. */
   @visibility(Lifecycle.Read)
@@ -10060,7 +10060,7 @@ model ClusterVolumeReportedProperties {
 }
 
 /**
- * Health rollup status category for a cluster volume.
+ * Health roll-up status category for a cluster volume.
  */
 @added(Versions.v2026_03_15_preview)
 union ClusterVolumeStatusCategory {

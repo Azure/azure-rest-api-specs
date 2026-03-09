@@ -198,7 +198,7 @@ Read-only child resource of `Cluster` for surfacing cluster storage volumes.
 | `name` | `string` | Read-only | User-visible volume label. |
 | `path` | `string` | Read-only | Cluster volume mount path (CSV or device path). |
 | `clusterResourceId` | `string` | Read-only | Cluster resource GUID for PDR-backed volumes. |
-| `statusCategory` | `ClusterVolumeStatusCategory` | Read-only | Health rollup (Healthy, Warning, Unhealthy, Others). |
+| `statusCategory` | `ClusterVolumeStatusCategory` | Read-only | Health roll-up (Healthy, Warning, Unhealthy, Others). |
 | `status` | `int32[]` | Read-only | Operational status codes. |
 | `size` | `int64` | Read-only | Total size in bytes. |
 | `sizeRemaining` | `int64` | Read-only | Free space in bytes. |
@@ -208,7 +208,7 @@ Read-only child resource of `Cluster` for surfacing cluster storage volumes.
 | `provisioningType` | `ClusterVolumeProvisioningType` | Read-only | Provisioning mode (Thin, Fixed). |
 | `storagePoolName` | `string` | Read-only | Containing storage pool name. |
 | `server` | `string` | Read-only | Current owner node. |
-| `isDedupEnabled` | `boolean` | Read-only | Data deduplication enabled. |
+| `isDedupeEnabled` | `boolean` | Read-only | Data deduplication enabled. |
 | `isEncrypted` | `boolean` | Read-only | BitLocker encryption enabled. |
 | `isIntegrityEnabled` | `boolean` | Read-only | ReFS integrity streams enabled. |
 
