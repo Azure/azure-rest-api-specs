@@ -96,7 +96,11 @@ interface Capacities {
   suspend is ArmResourceActionAsync<
     DedicatedCapacity,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
@@ -106,7 +110,11 @@ interface Capacities {
   resume is ArmResourceActionAsync<
     DedicatedCapacity,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Error = ErrorResponse
   >;
 
