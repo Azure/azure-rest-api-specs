@@ -58,3 +58,5 @@ using Azure.ClientGenerator.Core;
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
   "go"
 );
+@@clientLocation(listGeodataByIp, "SecurityInsightsClient", "go");
+@@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
