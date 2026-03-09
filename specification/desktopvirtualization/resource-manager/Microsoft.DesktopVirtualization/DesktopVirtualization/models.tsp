@@ -5567,7 +5567,7 @@ model ExpandMsixFileRequestProperties {
   outputFileType?: OutputFileType;
 
   /**
-   * The ARM path of the host pool where the MSIX expansion request is processed. This is used to route the request to the appropriate region and does not determine where the expanded files are stored.
+   * The ARM path of the host pool is used to route the request to the appropriate region.
    */
   hostpoolArmPath?: string;
 }
