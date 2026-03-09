@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Azure Login with Workload Identity Federation
+        # Likely to fail on forks with other owners
         if: github.repository_owner == 'Azure'
         uses: azure/login@v2
         with:
