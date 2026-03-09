@@ -286,6 +286,7 @@ These settings apply only when `--tag=package-2018-02-14-preview` is specified o
 input-file:
   - preview/2018-02-14-preview/keyvault.json
   - preview/2018-02-14-preview/providers.json
+  - preview/2018-02-14-preview/secrets.json
 ```
 
 ### Tag: package-2018-02
@@ -296,6 +297,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 input-file:
   - stable/2018-02-14/keyvault.json
   - stable/2018-02-14/providers.json
+  - stable/2018-02-14/secrets.json
 ```
 
 ### Tag: package-2016-10
@@ -306,6 +308,7 @@ These settings apply only when `--tag=package-2016-10` is specified on the comma
 input-file:
   - stable/2016-10-01/keyvault.json
   - stable/2016-10-01/providers.json
+  - stable/2016-10-01/secrets.json
 ```
 
 ### Tag: package-2015-06
