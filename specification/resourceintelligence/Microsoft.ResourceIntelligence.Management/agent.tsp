@@ -76,7 +76,15 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Per API review: Agent PUT is a synchronous tracked resource operation that returns 200 only."
+  @armResourceCreateOrUpdate(Agent)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<Agent>,
+
+    /** The resource to create or update. */
+    @bodyRoot resource: Agent,
+  ): ArmResponse<Agent> | ErrorResponse;
 
   /**
    * Updates an agent.
@@ -101,5 +109,13 @@ interface Agents {
   /**
    * Creates a new run for the agent.
    */
-  execute is ArmResourceActionAsync<Agent, RunRequest, Run>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per API review: execute operations use 200+201 LRO pattern instead of standard 202."
+  @armResourceAction(Agent)
+  @post
+  execute(
+    ...ResourceInstanceParameters<Agent>,
+
+    /** The content of the action request. */
+    @body body: RunRequest,
+  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
 }

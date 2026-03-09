@@ -84,5 +84,13 @@ interface Threads {
   /**
    * Creates a new run for the thread.
    */
-  execute is ArmResourceActionAsync<Thread, RunRequest, Run>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per API review: execute operations use 200+201 LRO pattern instead of standard 202."
+  @armResourceAction(Thread)
+  @post
+  execute(
+    ...ResourceInstanceParameters<Thread>,
+
+    /** The content of the action request. */
+    @body body: RunRequest,
+  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
 }

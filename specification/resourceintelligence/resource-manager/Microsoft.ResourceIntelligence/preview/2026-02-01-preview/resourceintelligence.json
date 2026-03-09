@@ -296,7 +296,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agent"
@@ -305,13 +305,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Agent' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "201": {
-            "description": "Resource 'Agent' create operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -460,7 +454,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The content of the action request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunRequest"
@@ -474,8 +468,8 @@
               "$ref": "#/definitions/Run"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
+          "201": {
+            "description": "Response for a long-running POST action that returns 201 with Location polling.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -776,7 +770,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The content of the action request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunRequest"
@@ -790,8 +784,8 @@
               "$ref": "#/definitions/Run"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
+          "201": {
+            "description": "Response for a long-running POST action that returns 201 with Location polling.",
             "headers": {
               "Location": {
                 "type": "string",
