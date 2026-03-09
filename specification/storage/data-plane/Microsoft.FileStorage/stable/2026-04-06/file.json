@@ -2391,8 +2391,8 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
-            "description": "If specified, the lease ID must match the lease ID of the file.",
-            "required": false,
+            "description": "Specifies the current lease ID on the resource.",
+            "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
           },
@@ -4536,6 +4536,14 @@
               ]
             },
             "x-ms-client-name": "filePropertySemantics"
+          },
+          {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
           }
         ],
         "responses": {
@@ -4746,6 +4754,14 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
           }
         ],
         "responses": {
@@ -4953,6 +4969,14 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
           }
         ],
         "responses": {

@@ -369,7 +369,7 @@ interface Share {
   releaseLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
-      ...LeaseIdOptionalParameter;
+      ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -741,6 +741,8 @@ interface Directory {
       /** SMB only. Default value is New. */
       @header("x-ms-file-property-semantics")
       filePropertySemantics?: FilePropertySemantics;
+
+      ...AllowTrailingDotParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -764,6 +766,7 @@ interface Directory {
       ...ShareSnapshotParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+      ...AllowTrailingDotParameter;
     },
     {
       ...MetadataHeaders;
@@ -789,6 +792,7 @@ interface Directory {
       ...DirectoryPathParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+      ...AllowTrailingDotParameter;
     },
     {
       @statusCode statusCode: 202;
