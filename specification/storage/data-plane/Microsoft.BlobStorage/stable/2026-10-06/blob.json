@@ -9591,7 +9591,7 @@
         }
       ]
     },
-    "/{containerName}": {
+    "/{containerName}?restype=container&comp=session": {
       "post": {
         "tags": [
           "container"
@@ -9599,22 +9599,6 @@
         "operationId": "Container_CreateSession",
         "description": "The Create Session operation enables users to create a session scoped to a container.",
         "parameters": [
-          {
-            "name": "restype",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": ["container"],
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "name": "comp",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": ["session"],
-            "x-ms-parameter-location": "method"
-          },
           {
             "name": "createSessionRequest",
             "in": "body",
@@ -9649,6 +9633,20 @@
       "parameters": [
         {
           "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["container"]
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["session"]
         }
       ]
     },
