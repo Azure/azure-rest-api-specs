@@ -451,6 +451,7 @@ union PublicNetworkAccess {
   /**
    * Property used by NetworkSecurityPerimeters for locking down the vault to only perimeter rules.
    */
+  @Versioning.added(KeyVault.Versions.v2026_04_01)
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
