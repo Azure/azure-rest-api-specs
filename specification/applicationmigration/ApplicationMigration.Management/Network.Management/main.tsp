@@ -12,6 +12,8 @@ import "./NsxSegment.tsp";
 import "./NsxGroup.tsp";
 import "./NsxGatewayFirewallPolicy.tsp";
 import "./NsxGatewayFirewallRule.tsp";
+import "./NsxDistributedFirewallPolicy.tsp";
+import "./NsxDistributedFirewallRule.tsp";
 import "./NsxLoadBalancer.tsp";
 import "./NsxNatRule.tsp";
 

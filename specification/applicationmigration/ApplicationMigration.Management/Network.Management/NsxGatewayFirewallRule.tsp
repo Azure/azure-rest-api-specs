@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./NsxGatewayFirewallPolicy.tsp";
+import "./NetworkSite.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -13,9 +13,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ApplicationMigration;
 
 /**
- * A gateway firewall rule resource (child of NsxGatewayFirewallPolicy).
+ * A gateway firewall rule resource.
  */
-@parentResource(NsxGatewayFirewallPolicy)
+@parentResource(NetworkSite)
 model NsxGatewayFirewallRule
   is Azure.ResourceManager.ProxyResource<
     NsxGatewayFirewallRuleProperties,
@@ -24,7 +24,7 @@ model NsxGatewayFirewallRule
   ...ResourceNameParameter<
     Resource = NsxGatewayFirewallRule,
     KeyName = "ruleName",
-    SegmentName = "rules",
+    SegmentName = "nsxGatewayFirewallRules",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 }
@@ -35,6 +35,9 @@ model NsxGatewayFirewallRule
 model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
   nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
+  /** ARM resource ID of the parent gateway firewall policy. */
+  parentGatewayFirewallPolicyArmId?: Azure.Core.armResourceIdentifier;
 
   /** The action to take when the rule matches. */
   action?: FirewallAction;
@@ -101,9 +104,9 @@ interface NsxGatewayFirewallRules {
   delete is ArmResourceDeleteSync<NsxGatewayFirewallRule>;
 
   /**
-   * Lists NsxGatewayFirewallRule resources within a gateway firewall policy.
+   * Lists NsxGatewayFirewallRule resources within a network site.
    */
-  listByNsxGatewayFirewallPolicy is ArmResourceListByParent<
+  listByNetworkSite is ArmResourceListByParent<
     NsxGatewayFirewallRule,
     Response = ArmResponse<NsxGatewayFirewallRuleList>
   >;

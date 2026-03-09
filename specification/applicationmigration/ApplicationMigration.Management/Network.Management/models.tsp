@@ -202,6 +202,9 @@ union FirewallAction {
 
   /** Reject traffic. */
   REJECT: "REJECT",
+
+  /** Jump to application category (distributed firewall). */
+  JUMP_TO_APPLICATION: "JUMP_TO_APPLICATION",
 }
 
 /**
@@ -352,6 +355,28 @@ union PolicyContextType {
 
   /** Gateway-specific context. */
   GatewaySpecific: "GatewaySpecific",
+}
+
+/**
+ * The category of a distributed firewall policy.
+ */
+union DistributedFirewallPolicyCategory {
+  string,
+
+  /** Ethernet rules category. */
+  Ethernet: "Ethernet",
+
+  /** Emergency rules category. */
+  Emergency: "Emergency",
+
+  /** Infrastructure rules category. */
+  Infrastructure: "Infrastructure",
+
+  /** Environment rules category. */
+  Environment: "Environment",
+
+  /** Application rules category. */
+  Application: "Application",
 }
 
 // ──────────────────────────────────────────────
@@ -933,6 +958,9 @@ model NsxGatewayFirewallRulePatchFields {
   /** The display name. */
   displayName?: string;
 
+  /** ARM resource ID of the parent gateway firewall policy. */
+  parentGatewayFirewallPolicyArmId?: Azure.Core.armResourceIdentifier;
+
   /** NSX tags. */
   @identifiers(#[])
   nsxTags?: NsxTag[];
@@ -980,6 +1008,110 @@ model NsxGatewayFirewallRulePatchFields {
 
   /** ARM resource IDs of effective scopes. */
   effectiveScopes?: Azure.Core.armResourceIdentifier[];
+}
+
+/** NsxDistributedFirewallPolicy patch envelope. */
+model NsxDistributedFirewallPolicyPatchProperties {
+  /** Patch payload. */
+  properties?: NsxDistributedFirewallPolicyPatchFields;
+}
+
+/** NsxDistributedFirewallPolicy updatable fields. */
+model NsxDistributedFirewallPolicyPatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** The policy category. */
+  category?: DistributedFirewallPolicyCategory;
+
+  /** The sequence number determining policy evaluation order. */
+  sequenceNumber?: int32;
+
+  /** Whether this is a default policy. */
+  isDefault?: boolean;
+
+  /** The federation scope of the policy. */
+  federationScope?: FederationScope;
+
+  /** The NSX scope paths this policy applies to. */
+  scope?: string[];
+}
+
+/** NsxDistributedFirewallRule patch envelope. */
+model NsxDistributedFirewallRulePatchProperties {
+  /** Patch payload. */
+  properties?: NsxDistributedFirewallRulePatchFields;
+}
+
+/** NsxDistributedFirewallRule updatable fields. */
+model NsxDistributedFirewallRulePatchFields {
+  /** The display name. */
+  displayName?: string;
+
+  /** NSX tags. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
+
+  /** The list of errors. */
+  @identifiers(#[])
+  errors?: Error[];
+
+  /** The number of errors. */
+  errorCount?: int64;
+
+  /** ARM resource ID of the parent distributed firewall policy. */
+  parentDistributedFirewallPolicyArmId?: Azure.Core.armResourceIdentifier;
+
+  /** The action to take when the rule matches. */
+  action?: FirewallAction;
+
+  /** The traffic direction the rule applies to. */
+  direction?: FirewallDirection;
+
+  /** Whether scope is ANY. */
+  anyScope?: boolean;
+
+  /** ARM resource IDs of scope groups. */
+  scopeGroupArmIds?: Azure.Core.armResourceIdentifier[];
+
+  /** Whether source groups are excluded. */
+  sourceExcluded?: boolean;
+
+  /** Whether source is ANY. */
+  sourceAny?: boolean;
+
+  /** ARM resource IDs of source groups. */
+  sourceGroupArmIds?: Azure.Core.armResourceIdentifier[];
+
+  /** Source IP addresses. */
+  sourceAddresses?: string[];
+
+  /** Whether destination groups are excluded. */
+  destinationsExcluded?: boolean;
+
+  /** Whether destination is ANY. */
+  destinationAny?: boolean;
+
+  /** ARM resource IDs of destination groups. */
+  destinationGroupsArmIds?: Azure.Core.armResourceIdentifier[];
+
+  /** Destination IP addresses. */
+  destinationAddresses?: string[];
+
+  /** The services this rule applies to. */
+  @identifiers(#[])
+  services?: FirewallService[];
 }
 
 /** NsxLoadBalancer patch envelope. */

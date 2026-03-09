@@ -70,6 +70,12 @@
       "name": "NsxGatewayFirewallRules"
     },
     {
+      "name": "NsxDistributedFirewallPolicies"
+    },
+    {
+      "name": "NsxDistributedFirewallRules"
+    },
+    {
       "name": "NsxLoadBalancers"
     },
     {
@@ -747,6 +753,618 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxDistributedFirewallPolicies": {
+      "get": {
+        "operationId": "NsxDistributedFirewallPolicies_ListByNetworkSite",
+        "tags": [
+          "NsxDistributedFirewallPolicies"
+        ],
+        "description": "Lists NsxDistributedFirewallPolicy resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallPolicies_ListByNetworkSite_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallPolicies_ListByNetworkSite_MaximumSet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxDistributedFirewallPolicies/{policyName}": {
+      "get": {
+        "operationId": "NsxDistributedFirewallPolicies_Get",
+        "tags": [
+          "NsxDistributedFirewallPolicies"
+        ],
+        "description": "Gets the NsxDistributedFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the distributed firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallPolicies_Get_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallPolicies_Get_MaximumSet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxDistributedFirewallPolicies_CreateOrUpdate",
+        "tags": [
+          "NsxDistributedFirewallPolicies"
+        ],
+        "description": "Creates or updates the NsxDistributedFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the distributed firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxDistributedFirewallPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxDistributedFirewallPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallPolicies_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallPolicies_CreateOrUpdate_MaximumSet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxDistributedFirewallPolicies_Update",
+        "tags": [
+          "NsxDistributedFirewallPolicies"
+        ],
+        "description": "Patches the NsxDistributedFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the distributed firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicyPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallPolicies_Update_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallPolicies_Update_MaximumSet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxDistributedFirewallPolicies_Delete",
+        "tags": [
+          "NsxDistributedFirewallPolicies"
+        ],
+        "description": "Deletes the NsxDistributedFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the distributed firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallPolicies_Delete_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallPolicies_Delete_MaximumSet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxDistributedFirewallRules": {
+      "get": {
+        "operationId": "NsxDistributedFirewallRules_ListByNetworkSite",
+        "tags": [
+          "NsxDistributedFirewallRules"
+        ],
+        "description": "Lists NsxDistributedFirewallRule resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallRules_ListByNetworkSite_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallRules_ListByNetworkSite_MaximumSet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxDistributedFirewallRules/{ruleName}": {
+      "get": {
+        "operationId": "NsxDistributedFirewallRules_Get",
+        "tags": [
+          "NsxDistributedFirewallRules"
+        ],
+        "description": "Gets the NsxDistributedFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the distributed firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallRules_Get_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallRules_Get_MaximumSet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxDistributedFirewallRules_CreateOrUpdate",
+        "tags": [
+          "NsxDistributedFirewallRules"
+        ],
+        "description": "Creates or updates the NsxDistributedFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the distributed firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxDistributedFirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxDistributedFirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallRules_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallRules_CreateOrUpdate_MaximumSet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxDistributedFirewallRules_Update",
+        "tags": [
+          "NsxDistributedFirewallRules"
+        ],
+        "description": "Patches the NsxDistributedFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the distributed firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRulePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDistributedFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallRules_Update_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallRules_Update_MaximumSet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxDistributedFirewallRules_Delete",
+        "tags": [
+          "NsxDistributedFirewallRules"
+        ],
+        "description": "Deletes the NsxDistributedFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the distributed firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxDistributedFirewallRules_Delete_MaximumSet": {
+            "$ref": "./examples/NsxDistributedFirewallRules_Delete_MaximumSet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxGatewayFirewallPolicies": {
       "get": {
         "operationId": "NsxGatewayFirewallPolicies_ListByNetworkSite",
@@ -1053,13 +1671,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxGatewayFirewallPolicies/{policyName}/rules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxGatewayFirewallRules": {
       "get": {
-        "operationId": "NsxGatewayFirewallRules_ListByNsxGatewayFirewallPolicy",
+        "operationId": "NsxGatewayFirewallRules_ListByNetworkSite",
         "tags": [
           "NsxGatewayFirewallRules"
         ],
-        "description": "Lists NsxGatewayFirewallRule resources within a gateway firewall policy.",
+        "description": "Lists NsxGatewayFirewallRule resources within a network site.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1074,16 +1692,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "The name of the gateway firewall policy.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1106,8 +1714,8 @@
           }
         },
         "x-ms-examples": {
-          "NsxGatewayFirewallRules_ListByNsxGatewayFirewallPolicy_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules__MaximumSet.json"
+          "NsxGatewayFirewallRules_ListByNetworkSite_MaximumSet": {
+            "$ref": "./examples/NsxGatewayFirewallRules_ListByNetworkSite_MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -1115,7 +1723,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxGatewayFirewallPolicies/{policyName}/rules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxGatewayFirewallRules/{ruleName}": {
       "get": {
         "operationId": "NsxGatewayFirewallRules_Get",
         "tags": [
@@ -1136,16 +1744,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "The name of the gateway firewall policy.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1203,16 +1801,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "The name of the gateway firewall policy.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1292,16 +1880,6 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "policyName",
-            "in": "path",
-            "description": "The name of the gateway firewall policy.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
             "name": "ruleName",
             "in": "path",
             "description": "The name of the gateway firewall rule.",
@@ -1361,16 +1939,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "The name of the gateway firewall policy.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -3881,6 +4449,48 @@
         ]
       }
     },
+    "DistributedFirewallPolicyCategory": {
+      "type": "string",
+      "description": "The category of a distributed firewall policy.",
+      "enum": [
+        "Ethernet",
+        "Emergency",
+        "Infrastructure",
+        "Environment",
+        "Application"
+      ],
+      "x-ms-enum": {
+        "name": "DistributedFirewallPolicyCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ethernet",
+            "value": "Ethernet",
+            "description": "Ethernet rules category."
+          },
+          {
+            "name": "Emergency",
+            "value": "Emergency",
+            "description": "Emergency rules category."
+          },
+          {
+            "name": "Infrastructure",
+            "value": "Infrastructure",
+            "description": "Infrastructure rules category."
+          },
+          {
+            "name": "Environment",
+            "value": "Environment",
+            "description": "Environment rules category."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application rules category."
+          }
+        ]
+      }
+    },
     "EffectiveVmArmId": {
       "type": "object",
       "description": "A reference to an effective virtual machine.",
@@ -3965,7 +4575,8 @@
       "enum": [
         "ALLOW",
         "DROP",
-        "REJECT"
+        "REJECT",
+        "JUMP_TO_APPLICATION"
       ],
       "x-ms-enum": {
         "name": "FirewallAction",
@@ -3985,6 +4596,11 @@
             "name": "REJECT",
             "value": "REJECT",
             "description": "Reject traffic."
+          },
+          {
+            "name": "JUMP_TO_APPLICATION",
+            "value": "JUMP_TO_APPLICATION",
+            "description": "Jump to application category (distributed firewall)."
           }
         ]
       }
@@ -4709,6 +5325,473 @@
         }
       }
     },
+    "NsxDistributedFirewallPolicy": {
+      "type": "object",
+      "description": "A distributed firewall policy resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDistributedFirewallPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxDistributedFirewallPolicyList": {
+      "type": "object",
+      "description": "Paged collection of NsxDistributedFirewallPolicy items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxDistributedFirewallPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxDistributedFirewallPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxDistributedFirewallPolicyPatchFields": {
+      "type": "object",
+      "description": "NsxDistributedFirewallPolicy updatable fields.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "category": {
+          "$ref": "#/definitions/DistributedFirewallPolicyCategory",
+          "description": "The policy category."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number determining policy evaluation order."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is a default policy."
+        },
+        "federationScope": {
+          "$ref": "#/definitions/FederationScope",
+          "description": "The federation scope of the policy."
+        },
+        "scope": {
+          "type": "array",
+          "description": "The NSX scope paths this policy applies to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NsxDistributedFirewallPolicyPatchProperties": {
+      "type": "object",
+      "description": "NsxDistributedFirewallPolicy patch envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDistributedFirewallPolicyPatchFields",
+          "description": "Patch payload."
+        }
+      }
+    },
+    "NsxDistributedFirewallPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a distributed firewall policy.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalPath": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "category": {
+          "$ref": "#/definitions/DistributedFirewallPolicyCategory",
+          "description": "The policy category."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number determining policy evaluation order."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is a default policy."
+        },
+        "federationScope": {
+          "$ref": "#/definitions/FederationScope",
+          "description": "The federation scope of the policy."
+        },
+        "scope": {
+          "type": "array",
+          "description": "The NSX scope paths this policy applies to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NsxDistributedFirewallRule": {
+      "type": "object",
+      "description": "A distributed firewall rule resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDistributedFirewallRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxDistributedFirewallRuleList": {
+      "type": "object",
+      "description": "Paged collection of NsxDistributedFirewallRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxDistributedFirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxDistributedFirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxDistributedFirewallRulePatchFields": {
+      "type": "object",
+      "description": "NsxDistributedFirewallRule updatable fields.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "parentDistributedFirewallPolicyArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent distributed firewall policy."
+        },
+        "action": {
+          "$ref": "#/definitions/FirewallAction",
+          "description": "The action to take when the rule matches."
+        },
+        "direction": {
+          "$ref": "#/definitions/FirewallDirection",
+          "description": "The traffic direction the rule applies to."
+        },
+        "anyScope": {
+          "type": "boolean",
+          "description": "Whether scope is ANY."
+        },
+        "scopeGroupArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of scope groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceExcluded": {
+          "type": "boolean",
+          "description": "Whether source groups are excluded."
+        },
+        "sourceAny": {
+          "type": "boolean",
+          "description": "Whether source is ANY."
+        },
+        "sourceGroupArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of source groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "Source IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationsExcluded": {
+          "type": "boolean",
+          "description": "Whether destination groups are excluded."
+        },
+        "destinationAny": {
+          "type": "boolean",
+          "description": "Whether destination is ANY."
+        },
+        "destinationGroupsArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of destination groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "Destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "The services this rule applies to.",
+          "items": {
+            "$ref": "#/definitions/FirewallService"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NsxDistributedFirewallRulePatchProperties": {
+      "type": "object",
+      "description": "NsxDistributedFirewallRule patch envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDistributedFirewallRulePatchFields",
+          "description": "Patch payload."
+        }
+      }
+    },
+    "NsxDistributedFirewallRuleProperties": {
+      "type": "object",
+      "description": "Properties of a distributed firewall rule.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalPath": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "parentDistributedFirewallPolicyArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent distributed firewall policy."
+        },
+        "action": {
+          "$ref": "#/definitions/FirewallAction",
+          "description": "The action to take when the rule matches."
+        },
+        "direction": {
+          "$ref": "#/definitions/FirewallDirection",
+          "description": "The traffic direction the rule applies to."
+        },
+        "anyScope": {
+          "type": "boolean",
+          "description": "Whether scope is ANY."
+        },
+        "scopeGroupArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of scope groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceExcluded": {
+          "type": "boolean",
+          "description": "Whether source groups are excluded."
+        },
+        "sourceAny": {
+          "type": "boolean",
+          "description": "Whether source is ANY."
+        },
+        "sourceGroupArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of source groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "Source IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationsExcluded": {
+          "type": "boolean",
+          "description": "Whether destination groups are excluded."
+        },
+        "destinationAny": {
+          "type": "boolean",
+          "description": "Whether destination is ANY."
+        },
+        "destinationGroupsArmIds": {
+          "type": "array",
+          "description": "ARM resource IDs of destination groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "Destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "The services this rule applies to.",
+          "items": {
+            "$ref": "#/definitions/FirewallService"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "NsxGatewayFirewallPolicy": {
       "type": "object",
       "description": "A gateway firewall policy resource.",
@@ -4919,7 +6002,7 @@
     },
     "NsxGatewayFirewallRule": {
       "type": "object",
-      "description": "A gateway firewall rule resource (child of NsxGatewayFirewallPolicy).",
+      "description": "A gateway firewall rule resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NsxGatewayFirewallRuleProperties",
@@ -4963,6 +6046,11 @@
         "displayName": {
           "type": "string",
           "description": "The display name."
+        },
+        "parentGatewayFirewallPolicyArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway firewall policy."
         },
         "nsxTags": {
           "type": "array",
@@ -5123,6 +6211,11 @@
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "parentGatewayFirewallPolicyArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway firewall policy."
         },
         "action": {
           "$ref": "#/definitions/FirewallAction",
