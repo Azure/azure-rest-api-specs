@@ -495,3 +495,19 @@ using Azure.ClientGenerator.Core;
 // Make BackupStoreDetails public (was internal in new generator)
 @@access(BackupStoreDetails, Access.public, "csharp");
 @@usage(BackupStoreDetails, Usage.input, "csharp");
+
+// Preserve backward-compatible enum member names
+@@clientName(SourceType.AWS_AURORA, "AWSAurora", "csharp");
+@@clientName(SourceType.AzureVM, "AzureVm", "csharp");
+
+// Restore public constructors and property setters for additional models
+@@usage(AdvancedThreatProtectionSettingsModel, Usage.input, "csharp");
+@@usage(PrivateEndpointConnection, Usage.input, "csharp");
+
+// Make UserIdentity public (it's used in public ModelFactory method)
+@@access(UserIdentity, Access.public, "csharp");
+
+// Preserve backward-compatible version enum member names
+@@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
+@@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
+@@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
