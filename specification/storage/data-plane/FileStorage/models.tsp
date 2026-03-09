@@ -1881,3 +1881,9 @@ alias FileStorageResponseHeaders = ApiVersionHeader &
 alias FileStorageResourceHeaders = FileStorageResponseHeaders &
   EtagResponseHeader &
   LastModifiedResponseHeader;
+
+alias OptionalBody = {
+  /** Initial data. */
+  @bodyRoot
+  optionalBody?: bytes;
+};

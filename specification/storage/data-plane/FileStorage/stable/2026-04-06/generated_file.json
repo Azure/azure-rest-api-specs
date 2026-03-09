@@ -29,10 +29,12 @@
     ]
   },
   "produces": [
-    "application/xml"
+    "application/xml",
+    "application/json"
   ],
   "consumes": [
-    "application/xml"
+    "application/xml",
+    "application/json"
   ],
   "security": [
     {
@@ -618,6 +620,12 @@
       "put": {
         "operationId": "File_Create",
         "description": "Creates a new file or replaces a file. Note it only initializes the file with no content.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -946,6 +954,16 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "optionalContentLength"
+          },
+          {
+            "name": "optionalBody",
+            "in": "body",
+            "description": "Initial data.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           }
         ],
         "responses": {
@@ -1137,6 +1155,9 @@
       "delete": {
         "operationId": "File_Delete",
         "description": "Removes the file from the storage account.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -1313,6 +1334,9 @@
       "head": {
         "operationId": "File_GetProperties",
         "description": "Returns all user-defined metadata, standard HTTP properties, and system properties for the file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -1649,6 +1673,9 @@
       "put": {
         "operationId": "Share_Create",
         "description": "Creates a new share under the specified account. If the share with the same name already exists, the operation fails.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -1993,6 +2020,9 @@
       "get": {
         "operationId": "Share_GetProperties",
         "description": "Returns all user-defined metadata and system properties for the specified share or share snapshot.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2273,6 +2303,9 @@
       "delete": {
         "operationId": "Share_Delete",
         "description": "Operation marks the specified share or share snapshot for deletion. The share or share snapshot and any files contained within it are later deleted during garbage collection.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2477,6 +2510,9 @@
       "put": {
         "operationId": "Share_AcquireLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2665,6 +2701,9 @@
       "put": {
         "operationId": "Share_ReleaseLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -2840,6 +2879,9 @@
       "put": {
         "operationId": "Share_ChangeLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3027,6 +3069,9 @@
       "put": {
         "operationId": "Share_RenewLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3206,6 +3251,9 @@
       "put": {
         "operationId": "Share_BreakLease",
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3398,6 +3446,9 @@
       "put": {
         "operationId": "Share_CreateSnapshot",
         "description": "Creates a read-only snapshot of a share.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3570,6 +3621,12 @@
       "put": {
         "operationId": "Share_CreatePermission",
         "description": "Create a permission (a security descriptor). This is used to support file level ACLs for SMB shares.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3924,6 +3981,9 @@
       "put": {
         "operationId": "Share_SetProperties",
         "description": "Sets properties for the specified share.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4272,6 +4332,9 @@
       "put": {
         "operationId": "Share_SetMetadata",
         "description": "Sets one or more user-defined name-value pairs for the specified share.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4448,6 +4511,9 @@
       "get": {
         "operationId": "Share_GetAccessPolicy",
         "description": "Returns information about stored access policies specified on the share that may be used with Shared Access Signatures.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4622,6 +4688,12 @@
       "put": {
         "operationId": "Share_SetAccessPolicy",
         "description": "Sets stored access policies for the share that may be used with Shared Access Signatures.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4802,6 +4874,9 @@
       "get": {
         "operationId": "Share_GetStatistics",
         "description": "Retrieves statistics related to the share.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4973,6 +5048,9 @@
       "put": {
         "operationId": "Share_Restore",
         "description": "Restores a previously deleted share.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5169,6 +5247,9 @@
       "put": {
         "operationId": "Directory_Create",
         "description": "Creates a new directory under the specified share or parent directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5549,6 +5630,9 @@
       "get": {
         "operationId": "Directory_GetProperties",
         "description": "Returns all system properties for the specified directory, and can also be used to check the existence of a directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5804,6 +5888,9 @@
       "delete": {
         "operationId": "Directory_Delete",
         "description": "Removes the specified empty directory. Note that the directory must be empty before it can be deleted.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5962,6 +6049,9 @@
       "put": {
         "operationId": "Directory_SetProperties",
         "description": "Sets properties for the specified directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6281,6 +6371,9 @@
       "put": {
         "operationId": "Directory_SetMetadata",
         "description": "Sets one or more user-defined name-value pairs for the specified directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6463,6 +6556,9 @@
       "get": {
         "operationId": "Directory_ListFilesAndDirectoriesSegment",
         "description": "Returns a list of files and directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6681,6 +6777,9 @@
       "get": {
         "operationId": "Directory_ListHandles",
         "description": "Lists handles for directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6881,6 +6980,9 @@
       "put": {
         "operationId": "Directory_ForceCloseHandles",
         "description": "Closes all handles open for given directory.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7089,6 +7191,9 @@
       "put": {
         "operationId": "Directory_Rename",
         "description": "Renames a directory. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7431,6 +7536,9 @@
       "put": {
         "operationId": "File_SetHttpHeaders",
         "description": "Sets HTTP headers on a file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -7827,6 +7935,9 @@
       "put": {
         "operationId": "File_SetMetadata",
         "description": "Sets one or more user-defined name-value pairs for the specified file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8024,6 +8135,9 @@
       "put": {
         "operationId": "File_AcquireLease",
         "description": "The Lease File operation establishes and manages a lock on a file for write and delete operations.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8226,6 +8340,9 @@
       "put": {
         "operationId": "File_ReleaseLease",
         "description": "The Lease File operation establishes and manages a lock on a file for write and delete operations.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8416,6 +8533,9 @@
       "put": {
         "operationId": "File_ChangeLease",
         "description": "The Lease File operation establishes and manages a lock on a file for write and delete operations.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8617,6 +8737,9 @@
       "put": {
         "operationId": "File_BreakLease",
         "description": "The Lease File operation establishes and manages a lock on a file for write and delete operations.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8811,6 +8934,9 @@
       "put": {
         "operationId": "File_UploadRange",
         "description": "Upload a range of bytes to a file.",
+        "produces": [
+          "application/xml"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -8999,9 +9125,9 @@
             "x-ms-client-name": "structuredContentLength"
           },
           {
-            "name": "content",
+            "name": "optionalBody",
             "in": "body",
-            "description": "The file content to upload.",
+            "description": "Initial data.",
             "required": false,
             "schema": {
               "type": "string",
@@ -9130,6 +9256,9 @@
       "put": {
         "operationId": "File_UploadRangeFromUrl",
         "description": "Upload a range of bytes to a file where the contents are read from a URL.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -9447,6 +9576,9 @@
       "get": {
         "operationId": "File_GetRangeList",
         "description": "Returns the list of valid page ranges for a file or snapshot of a file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -9675,6 +9807,9 @@
       "put": {
         "operationId": "File_StartCopy",
         "description": "Copies a blob or file to a destination file within the storage account.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10097,6 +10232,9 @@
       "put": {
         "operationId": "File_AbortCopy",
         "description": "Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10299,6 +10437,9 @@
       "get": {
         "operationId": "File_ListHandles",
         "description": "Lists handles for file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10498,6 +10639,9 @@
       "put": {
         "operationId": "File_ForceCloseHandles",
         "description": "Closes all handles open for given file.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -10705,6 +10849,9 @@
       "put": {
         "operationId": "File_Rename",
         "description": "Renames a file. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11062,6 +11209,9 @@
       "put": {
         "operationId": "File_CreateSymbolicLink",
         "description": "Creates a symbolic link to a target file. NFS only.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11354,6 +11504,9 @@
       "get": {
         "operationId": "File_GetSymbolicLink",
         "description": "Returns the target of a symbolic link. NFS only.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11539,6 +11692,9 @@
       "put": {
         "operationId": "File_CreateHardLink",
         "description": "Creates a hard link to a target file. NFS only.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11810,6 +11966,9 @@
       "get": {
         "operationId": "Service_ListSharesSegment",
         "description": "The List Shares Segment operation returns a list of the shares and share snapshots under the specified account.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -11991,6 +12150,12 @@
       "put": {
         "operationId": "Service_SetProperties",
         "description": "Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -12144,6 +12309,9 @@
       "get": {
         "operationId": "Service_GetProperties",
         "description": "Gets the properties of a storage account's File service, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -12291,6 +12459,12 @@
       "post": {
         "operationId": "Service_GetUserDelegationKey",
         "description": "Retrieves a user delegation key for the File service. This can be used to generate a user delegation SAS.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
         "parameters": [
           {
             "name": "x-ms-version",
@@ -12427,22 +12601,28 @@
       "type": "object",
       "description": "An Access policy.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "string",
           "format": "date-time",
           "description": "The date-time the policy is active.",
-          "x-ms-client-name": "start"
+          "xml": {
+            "name": "Start"
+          }
         },
-        "Expiry": {
+        "expiry": {
           "type": "string",
           "format": "date-time",
           "description": "The date-time the policy expires.",
-          "x-ms-client-name": "expiry"
+          "xml": {
+            "name": "Expiry"
+          }
         },
-        "Permission": {
+        "permission": {
           "type": "string",
           "description": "The permissions for the ACL policy.",
-          "x-ms-client-name": "permission"
+          "xml": {
+            "name": "Permission"
+          }
         }
       }
     },
@@ -12480,61 +12660,75 @@
       "type": "object",
       "description": "A clear range.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "integer",
           "format": "int64",
           "description": "Start of the range.",
-          "x-ms-client-name": "start"
+          "xml": {
+            "name": "Start"
+          }
         },
-        "End": {
+        "end": {
           "type": "integer",
           "format": "int64",
           "description": "End of the range.",
-          "x-ms-client-name": "end"
+          "xml": {
+            "name": "End"
+          }
         }
       },
       "required": [
-        "Start",
-        "End"
+        "start",
+        "end"
       ]
     },
     "CorsRule": {
       "type": "object",
       "description": "CORS is an HTTP feature that enables a web application running under one domain\nto access resources in another domain. Web browsers implement a security\nrestriction known as same-origin policy that prevents a web page from calling\nAPIs in a different domain; CORS provides a secure way to allow one domain (the\norigin domain) to call APIs in another domain.",
       "properties": {
-        "AllowedOrigins": {
+        "allowedOrigins": {
           "type": "string",
           "description": "The origin domains that are permitted to make a request against the storage\nservice via CORS. The origin domain is the domain from which the request\noriginates. Note that the origin must be an exact case-sensitive match with the\norigin that the user age sends to the service. You can also use the wildcard\ncharacter '*' to allow all origin domains to make requests via CORS.",
-          "x-ms-client-name": "allowedOrigins"
+          "xml": {
+            "name": "AllowedOrigins"
+          }
         },
-        "AllowedMethods": {
+        "allowedMethods": {
           "type": "string",
           "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS\nrequest. (comma separated)",
-          "x-ms-client-name": "allowedMethods"
+          "xml": {
+            "name": "AllowedMethods"
+          }
         },
-        "AllowedHeaders": {
+        "allowedHeaders": {
           "type": "string",
           "description": "The request headers that the origin domain may specify on the CORS request.",
-          "x-ms-client-name": "allowedHeaders"
+          "xml": {
+            "name": "AllowedHeaders"
+          }
         },
-        "ExposedHeaders": {
+        "exposedHeaders": {
           "type": "string",
           "description": "The response headers that may be sent in the response to the CORS request and\nexposed by the browser to the request issuer.",
-          "x-ms-client-name": "exposedHeaders"
+          "xml": {
+            "name": "ExposedHeaders"
+          }
         },
-        "MaxAgeInSeconds": {
+        "maxAgeInSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum amount time that a browser should cache the preflight OPTIONS\nrequest.",
-          "x-ms-client-name": "maxAgeInSeconds"
+          "xml": {
+            "name": "MaxAgeInSeconds"
+          }
         }
       },
       "required": [
-        "AllowedOrigins",
-        "AllowedMethods",
-        "AllowedHeaders",
-        "ExposedHeaders",
-        "MaxAgeInSeconds"
+        "allowedOrigins",
+        "allowedMethods",
+        "allowedHeaders",
+        "exposedHeaders",
+        "maxAgeInSeconds"
       ]
     },
     "DeleteSnapshotsOptionType": {
@@ -12565,34 +12759,44 @@
       "type": "object",
       "description": "A listed directory item.",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/StringEncoded",
           "description": "The directory name.",
-          "x-ms-client-name": "name"
+          "xml": {
+            "name": "Name"
+          }
         },
-        "FileId": {
+        "fileId": {
           "type": "string",
           "description": "The file ID.",
-          "x-ms-client-name": "fileId"
+          "xml": {
+            "name": "FileId"
+          }
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/FileProperty",
           "description": "File properties.",
-          "x-ms-client-name": "properties"
+          "xml": {
+            "name": "Properties"
+          }
         },
-        "Attributes": {
+        "attributes": {
           "type": "string",
           "description": "The file attributes.",
-          "x-ms-client-name": "attributes"
+          "xml": {
+            "name": "Attributes"
+          }
         },
-        "PermissionKey": {
+        "permissionKey": {
           "type": "string",
           "description": "The permission key.",
-          "x-ms-client-name": "permissionKey"
+          "xml": {
+            "name": "PermissionKey"
+          }
         }
       },
       "required": [
-        "Name"
+        "name"
       ],
       "xml": {
         "name": "Directory"
@@ -12602,35 +12806,45 @@
       "type": "object",
       "description": "A listed file item.",
       "properties": {
-        "Name": {
+        "name": {
           "$ref": "#/definitions/StringEncoded",
           "description": "The file name.",
-          "x-ms-client-name": "name"
+          "xml": {
+            "name": "Name"
+          }
         },
-        "FileId": {
+        "fileId": {
           "type": "string",
           "description": "The file ID.",
-          "x-ms-client-name": "fileId"
+          "xml": {
+            "name": "FileId"
+          }
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/FileProperty",
           "description": "File properties.",
-          "x-ms-client-name": "properties"
+          "xml": {
+            "name": "Properties"
+          }
         },
-        "Attributes": {
+        "attributes": {
           "type": "string",
           "description": "The file attributes.",
-          "x-ms-client-name": "attributes"
+          "xml": {
+            "name": "Attributes"
+          }
         },
-        "PermissionKey": {
+        "permissionKey": {
           "type": "string",
           "description": "The permission key.",
-          "x-ms-client-name": "permissionKey"
+          "xml": {
+            "name": "PermissionKey"
+          }
         }
       },
       "required": [
-        "Name",
-        "Properties"
+        "name",
+        "properties"
       ],
       "xml": {
         "name": "File"
@@ -12688,50 +12902,64 @@
       "type": "object",
       "description": "File properties.",
       "properties": {
-        "Content-Length": {
+        "contentLength": {
           "type": "integer",
           "format": "int64",
           "description": "Content length of the file. This value may not be up-to-date since an SMB\nclient may have modified the file locally. The value of Content-Length may not\nreflect that fact until the handle is closed or the op-lock is broken. To\nretrieve current property values, call Get File Properties.",
-          "x-ms-client-name": "contentLength"
+          "xml": {
+            "name": "Content-Length"
+          }
         },
-        "CreationTime": {
+        "creationTime": {
           "type": "string",
           "format": "date-time",
           "description": "The creation time.",
-          "x-ms-client-name": "creationTime"
+          "xml": {
+            "name": "CreationTime"
+          }
         },
-        "LastAccessTime": {
+        "lastAccessTime": {
           "type": "string",
           "format": "date-time",
           "description": "The last access time.",
-          "x-ms-client-name": "lastAccessTime"
+          "xml": {
+            "name": "LastAccessTime"
+          }
         },
-        "LastWriteTime": {
+        "lastWriteTime": {
           "type": "string",
           "format": "date-time",
           "description": "The last write time.",
-          "x-ms-client-name": "lastWriteTime"
+          "xml": {
+            "name": "LastWriteTime"
+          }
         },
-        "ChangeTime": {
+        "changeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The change time.",
-          "x-ms-client-name": "changeTime"
+          "xml": {
+            "name": "ChangeTime"
+          }
         },
-        "Last-Modified": {
+        "lastModified": {
           "type": "string",
           "format": "date-time",
           "description": "The last modified time.",
-          "x-ms-client-name": "lastModified"
+          "xml": {
+            "name": "Last-Modified"
+          }
         },
-        "Etag": {
+        "eTag": {
           "type": "string",
           "description": "The ETag of the file.",
-          "x-ms-client-name": "eTag"
+          "xml": {
+            "name": "Etag"
+          }
         }
       },
       "required": [
-        "Content-Length"
+        "contentLength"
       ]
     },
     "FilePropertySemantics": {
@@ -12762,22 +12990,26 @@
       "type": "object",
       "description": "An Azure Storage file range.",
       "properties": {
-        "Start": {
+        "start": {
           "type": "integer",
           "format": "int64",
           "description": "Start of the range.",
-          "x-ms-client-name": "start"
+          "xml": {
+            "name": "Start"
+          }
         },
-        "End": {
+        "end": {
           "type": "integer",
           "format": "int64",
           "description": "End of the range.",
-          "x-ms-client-name": "end"
+          "xml": {
+            "name": "End"
+          }
         }
       },
       "required": [
-        "Start",
-        "End"
+        "start",
+        "end"
       ],
       "xml": {
         "name": "Range"
@@ -12811,32 +13043,32 @@
       "type": "object",
       "description": "Abstract for entries that can be listed from Directory.",
       "properties": {
-        "DirectoryItems": {
+        "directoryItems": {
           "type": "array",
           "description": "The directory items.",
           "items": {
             "$ref": "#/definitions/DirectoryItem"
           },
           "xml": {
+            "name": "DirectoryItems",
             "wrapped": false
-          },
-          "x-ms-client-name": "directoryItems"
+          }
         },
-        "FileItems": {
+        "fileItems": {
           "type": "array",
           "description": "The file items.",
           "items": {
             "$ref": "#/definitions/FileItem"
           },
           "xml": {
+            "name": "FileItems",
             "wrapped": false
-          },
-          "x-ms-client-name": "fileItems"
+          }
         }
       },
       "required": [
-        "DirectoryItems",
-        "FileItems"
+        "directoryItems",
+        "fileItems"
       ],
       "xml": {
         "name": "Entries"
@@ -12846,73 +13078,91 @@
       "type": "object",
       "description": "A listed Azure Storage handle item.",
       "properties": {
-        "HandleId": {
+        "handleId": {
           "type": "string",
           "description": "XSMB service handle ID",
-          "x-ms-client-name": "handleId"
+          "xml": {
+            "name": "HandleId"
+          }
         },
-        "Path": {
+        "path": {
           "$ref": "#/definitions/StringEncoded",
           "description": "The path.",
-          "x-ms-client-name": "path"
+          "xml": {
+            "name": "Path"
+          }
         },
-        "FileId": {
+        "fileId": {
           "type": "string",
           "description": "FileId uniquely identifies the file or directory.",
-          "x-ms-client-name": "fileId"
+          "xml": {
+            "name": "FileId"
+          }
         },
-        "ParentId": {
+        "parentId": {
           "type": "string",
           "description": "ParentId uniquely identifies the parent directory of the object.",
-          "x-ms-client-name": "parentId"
+          "xml": {
+            "name": "ParentId"
+          }
         },
-        "SessionId": {
+        "sessionId": {
           "type": "string",
           "description": "SMB session ID in context of which the file handle was opened",
-          "x-ms-client-name": "sessionId"
+          "xml": {
+            "name": "SessionId"
+          }
         },
-        "ClientIp": {
+        "clientIp": {
           "type": "string",
           "description": "Client IP that opened the handle",
-          "x-ms-client-name": "clientIp"
+          "xml": {
+            "name": "ClientIp"
+          }
         },
-        "ClientName": {
+        "clientName": {
           "type": "string",
           "description": "Name of the client machine where the share is being mounted",
-          "x-ms-client-name": "clientName"
+          "xml": {
+            "name": "ClientName"
+          }
         },
-        "OpenTime": {
+        "openTime": {
           "type": "string",
           "format": "date-time",
           "description": "Time when the session that previously opened the handle has last been\nreconnected. (UTC)",
-          "x-ms-client-name": "openTime"
+          "xml": {
+            "name": "OpenTime"
+          }
         },
-        "LastReconnectTime": {
+        "lastReconnectTime": {
           "type": "string",
           "format": "date-time",
           "description": "Time handle was last connected to (UTC)",
-          "x-ms-client-name": "lastReconnectTime"
+          "xml": {
+            "name": "LastReconnectTime"
+          }
         },
-        "AccessRightList": {
+        "accessRightList": {
           "type": "array",
           "description": "The access rights.",
           "items": {
             "$ref": "#/definitions/AccessRight"
           },
           "xml": {
+            "name": "AccessRightList",
             "wrapped": true
-          },
-          "x-ms-client-name": "accessRightList"
+          }
         }
       },
       "required": [
-        "HandleId",
-        "Path",
-        "FileId",
-        "SessionId",
-        "ClientIp",
-        "ClientName",
-        "OpenTime"
+        "handleId",
+        "path",
+        "fileId",
+        "sessionId",
+        "clientIp",
+        "clientName",
+        "openTime"
       ],
       "xml": {
         "name": "Handle"
@@ -12922,24 +13172,30 @@
       "type": "object",
       "description": "Key information",
       "properties": {
-        "Start": {
+        "start": {
           "type": "string",
           "description": "The date-time the key is active in ISO 8601 UTC time",
-          "x-ms-client-name": "start"
+          "xml": {
+            "name": "Start"
+          }
         },
-        "Expiry": {
+        "expiry": {
           "type": "string",
           "description": "The date-time the key expires in ISO 8601 UTC time",
-          "x-ms-client-name": "expiry"
+          "xml": {
+            "name": "Expiry"
+          }
         },
-        "DelegatedUserTid": {
+        "delegatedUserTid": {
           "type": "string",
           "description": "The delegated user tenant id in Azure AD",
-          "x-ms-client-name": "delegatedUserTid"
+          "xml": {
+            "name": "DelegatedUserTid"
+          }
         }
       },
       "required": [
-        "Expiry"
+        "expiry"
       ]
     },
     "LeaseDurationType": {
@@ -13036,85 +13292,97 @@
       "type": "object",
       "description": "An enumeration of directories and files.",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
           "description": "The service endpoint.",
           "xml": {
+            "name": "ServiceEndpoint",
             "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          }
         },
-        "ShareName": {
+        "shareName": {
           "type": "string",
           "description": "The share name.",
           "xml": {
+            "name": "ShareName",
             "attribute": true
-          },
-          "x-ms-client-name": "shareName"
+          }
         },
-        "ShareSnapshot": {
+        "shareSnapshot": {
           "type": "string",
           "description": "The share snapshot.",
           "xml": {
+            "name": "ShareSnapshot",
             "attribute": true
-          },
-          "x-ms-client-name": "shareSnapshot"
+          }
         },
-        "Encoded": {
+        "encoded": {
           "type": "boolean",
           "description": "Whether the listing is encoded.",
           "xml": {
+            "name": "Encoded",
             "attribute": true
-          },
-          "x-ms-client-name": "encoded"
+          }
         },
-        "DirectoryPath": {
+        "directoryPath": {
           "type": "string",
           "description": "The directory path.",
           "xml": {
+            "name": "DirectoryPath",
             "attribute": true
-          },
-          "x-ms-client-name": "directoryPath"
+          }
         },
-        "Prefix": {
+        "prefix": {
           "$ref": "#/definitions/StringEncoded",
           "description": "The prefix.",
-          "x-ms-client-name": "prefix"
+          "xml": {
+            "name": "Prefix"
+          }
         },
-        "Marker": {
+        "marker": {
           "type": "string",
           "description": "The marker.",
-          "x-ms-client-name": "marker"
+          "xml": {
+            "name": "Marker"
+          }
         },
-        "MaxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
           "description": "The max results.",
-          "x-ms-client-name": "maxResults"
+          "xml": {
+            "name": "MaxResults"
+          }
         },
-        "Segment": {
+        "segment": {
           "$ref": "#/definitions/FilesAndDirectoriesListSegment",
           "description": "Abstract for entries that can be listed from Directory.",
-          "x-ms-client-name": "segment"
+          "xml": {
+            "name": "Segment"
+          }
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
           "description": "The next marker.",
-          "x-ms-client-name": "nextMarker"
+          "xml": {
+            "name": "NextMarker"
+          }
         },
-        "DirectoryId": {
+        "directoryId": {
           "type": "string",
           "description": "The directory ID.",
-          "x-ms-client-name": "directoryId"
+          "xml": {
+            "name": "DirectoryId"
+          }
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "ShareName",
-        "DirectoryPath",
-        "Prefix",
-        "Segment",
-        "NextMarker"
+        "serviceEndpoint",
+        "shareName",
+        "directoryPath",
+        "prefix",
+        "segment",
+        "nextMarker"
       ],
       "xml": {
         "name": "EnumerationResults"
@@ -13160,25 +13428,27 @@
       "type": "object",
       "description": "An enumeration of handles.",
       "properties": {
-        "Entries": {
+        "handleList": {
           "type": "array",
           "description": "The handle list.",
           "items": {
             "$ref": "#/definitions/HandleItem"
           },
           "xml": {
+            "name": "Entries",
             "wrapped": true
-          },
-          "x-ms-client-name": "handleList"
+          }
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
           "description": "The next marker.",
-          "x-ms-client-name": "nextMarker"
+          "xml": {
+            "name": "NextMarker"
+          }
         }
       },
       "required": [
-        "NextMarker"
+        "nextMarker"
       ],
       "xml": {
         "name": "EnumerationResults"
@@ -13218,50 +13488,58 @@
       "type": "object",
       "description": "An enumeration of shares.",
       "properties": {
-        "ServiceEndpoint": {
+        "serviceEndpoint": {
           "type": "string",
           "description": "The service endpoint.",
           "xml": {
+            "name": "ServiceEndpoint",
             "attribute": true
-          },
-          "x-ms-client-name": "serviceEndpoint"
+          }
         },
-        "Prefix": {
+        "prefix": {
           "type": "string",
           "description": "The prefix.",
-          "x-ms-client-name": "prefix"
+          "xml": {
+            "name": "Prefix"
+          }
         },
-        "Marker": {
+        "marker": {
           "type": "string",
           "description": "The marker.",
-          "x-ms-client-name": "marker"
+          "xml": {
+            "name": "Marker"
+          }
         },
-        "MaxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
           "description": "The max results.",
-          "x-ms-client-name": "maxResults"
+          "xml": {
+            "name": "MaxResults"
+          }
         },
-        "Shares": {
+        "shareItems": {
           "type": "array",
           "description": "The share items.",
           "items": {
             "$ref": "#/definitions/ShareItemInternal"
           },
           "xml": {
+            "name": "Shares",
             "wrapped": true
-          },
-          "x-ms-client-name": "shareItems"
+          }
         },
-        "NextMarker": {
+        "nextMarker": {
           "type": "string",
           "description": "The next marker.",
-          "x-ms-client-name": "nextMarker"
+          "xml": {
+            "name": "NextMarker"
+          }
         }
       },
       "required": [
-        "ServiceEndpoint",
-        "NextMarker"
+        "serviceEndpoint",
+        "nextMarker"
       ],
       "xml": {
         "name": "EnumerationResults"
@@ -13271,30 +13549,38 @@
       "type": "object",
       "description": "Storage Analytics metrics for file service.",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string",
           "description": "The version of Storage Analytics to configure.",
-          "x-ms-client-name": "version"
+          "xml": {
+            "name": "Version"
+          }
         },
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
           "description": "Indicates whether metrics are enabled for the File service.",
-          "x-ms-client-name": "enabled"
+          "xml": {
+            "name": "Enabled"
+          }
         },
-        "IncludeAPIs": {
+        "includeApis": {
           "type": "boolean",
           "description": "Indicates whether metrics should generate summary statistics for called API\noperations.",
-          "x-ms-client-name": "includeApis"
+          "xml": {
+            "name": "IncludeAPIs"
+          }
         },
-        "RetentionPolicy": {
+        "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "The retention policy.",
-          "x-ms-client-name": "retentionPolicy"
+          "xml": {
+            "name": "RetentionPolicy"
+          }
         }
       },
       "required": [
-        "Version",
-        "Enabled"
+        "version",
+        "enabled"
       ]
     },
     "ModeCopyMode": {
@@ -13403,22 +13689,26 @@
       "type": "object",
       "description": "The retention policy.",
       "properties": {
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
           "description": "Indicates whether a retention policy is enabled for the File service. If false,\nmetrics data is retained, and the user is responsible for deleting it.",
-          "x-ms-client-name": "enabled"
+          "xml": {
+            "name": "Enabled"
+          }
         },
-        "Days": {
+        "days": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates the number of days that metrics data should be retained. All data\nolder than this value will be deleted. Metrics data is deleted on a best-effort\nbasis after the retention period expires.",
           "minimum": 1,
           "maximum": 365,
-          "x-ms-client-name": "days"
+          "xml": {
+            "name": "Days"
+          }
         }
       },
       "required": [
-        "Enabled"
+        "enabled"
       ]
     },
     "ShareAccessTier": {
@@ -13461,27 +13751,27 @@
       "type": "object",
       "description": "The list of file ranges",
       "properties": {
-        "Ranges": {
+        "ranges": {
           "type": "array",
           "description": "The file ranges.",
           "items": {
             "$ref": "#/definitions/FileRange"
           },
           "xml": {
+            "name": "Ranges",
             "wrapped": false
-          },
-          "x-ms-client-name": "ranges"
+          }
         },
-        "ClearRanges": {
+        "clearRanges": {
           "type": "array",
           "description": "The clear ranges.",
           "items": {
             "$ref": "#/definitions/ClearRange"
           },
           "xml": {
+            "name": "ClearRanges",
             "wrapped": false
-          },
-          "x-ms-client-name": "clearRanges"
+          }
         }
       }
     },
@@ -13489,43 +13779,55 @@
       "type": "object",
       "description": "A listed Azure Storage share item.",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The share name.",
-          "x-ms-client-name": "name"
+          "xml": {
+            "name": "Name"
+          }
         },
-        "Snapshot": {
+        "snapshot": {
           "type": "string",
           "description": "The share snapshot.",
-          "x-ms-client-name": "snapshot"
+          "xml": {
+            "name": "Snapshot"
+          }
         },
-        "Deleted": {
+        "deleted": {
           "type": "boolean",
           "description": "Whether the share is deleted.",
-          "x-ms-client-name": "deleted"
+          "xml": {
+            "name": "Deleted"
+          }
         },
-        "Version": {
+        "version": {
           "type": "string",
           "description": "The share version.",
-          "x-ms-client-name": "version"
+          "xml": {
+            "name": "Version"
+          }
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/SharePropertiesInternal",
           "description": "Properties of a share.",
-          "x-ms-client-name": "properties"
+          "xml": {
+            "name": "Properties"
+          }
         },
-        "Metadata": {
+        "metadata": {
           "type": "object",
           "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           },
-          "x-ms-client-name": "metadata"
+          "xml": {
+            "name": "Metadata"
+          }
         }
       },
       "required": [
-        "Name",
-        "Properties"
+        "name",
+        "properties"
       ],
       "xml": {
         "name": "Share"
@@ -13535,10 +13837,12 @@
       "type": "object",
       "description": "Settings for SMB protocol.",
       "properties": {
-        "EncryptionInTransit": {
+        "encryptionInTransit": {
           "$ref": "#/definitions/ShareNfsSettingsEncryptionInTransit",
           "description": "Enable or disable encryption in transit.",
-          "x-ms-client-name": "encryptionInTransit"
+          "xml": {
+            "name": "EncryptionInTransit"
+          }
         }
       },
       "xml": {
@@ -13549,10 +13853,12 @@
       "type": "object",
       "description": "Enable or disable encryption in transit.",
       "properties": {
-        "Required": {
+        "required": {
           "type": "boolean",
           "description": "If encryption in transit is required",
-          "x-ms-client-name": "required"
+          "xml": {
+            "name": "Required"
+          }
         }
       }
     },
@@ -13577,177 +13883,235 @@
       "type": "object",
       "description": "Properties of a share.",
       "properties": {
-        "Last-Modified": {
+        "lastModified": {
           "type": "string",
           "format": "date-time",
           "description": "The last modified time.",
-          "x-ms-client-name": "lastModified"
+          "xml": {
+            "name": "Last-Modified"
+          }
         },
-        "Etag": {
+        "eTag": {
           "type": "string",
           "description": "The ETag of the share.",
-          "x-ms-client-name": "eTag"
+          "xml": {
+            "name": "Etag"
+          }
         },
-        "Quota": {
+        "quota": {
           "type": "integer",
           "format": "int32",
           "description": "The share quota.",
-          "x-ms-client-name": "quota"
+          "xml": {
+            "name": "Quota"
+          }
         },
-        "ProvisionedIops": {
+        "provisionedIops": {
           "type": "integer",
           "format": "int32",
           "description": "The provisioned IOPS.",
-          "x-ms-client-name": "provisionedIops"
+          "xml": {
+            "name": "ProvisionedIops"
+          }
         },
-        "ProvisionedIngressMBps": {
+        "provisionedIngressMBps": {
           "type": "integer",
           "format": "int32",
           "description": "The provisioned ingress in MBps.",
-          "x-ms-client-name": "provisionedIngressMBps"
+          "xml": {
+            "name": "ProvisionedIngressMBps"
+          }
         },
-        "ProvisionedEgressMBps": {
+        "provisionedEgressMBps": {
           "type": "integer",
           "format": "int32",
           "description": "The provisioned egress in MBps.",
-          "x-ms-client-name": "provisionedEgressMBps"
+          "xml": {
+            "name": "ProvisionedEgressMBps"
+          }
         },
-        "ProvisionedBandwidthMiBps": {
+        "provisionedBandwidthMiBps": {
           "type": "integer",
           "format": "int32",
           "description": "The provisioned bandwidth in MiBps.",
-          "x-ms-client-name": "provisionedBandwidthMiBps"
+          "xml": {
+            "name": "ProvisionedBandwidthMiBps"
+          }
         },
-        "NextAllowedQuotaDowngradeTime": {
+        "nextAllowedQuotaDowngradeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The next allowed quota downgrade time.",
-          "x-ms-client-name": "nextAllowedQuotaDowngradeTime"
+          "xml": {
+            "name": "NextAllowedQuotaDowngradeTime"
+          }
         },
-        "DeletedTime": {
+        "deletedTime": {
           "type": "string",
           "format": "date-time",
           "description": "The deleted time.",
-          "x-ms-client-name": "deletedTime"
+          "xml": {
+            "name": "DeletedTime"
+          }
         },
-        "RemainingRetentionDays": {
+        "remainingRetentionDays": {
           "type": "integer",
           "format": "int32",
           "description": "The remaining retention days.",
-          "x-ms-client-name": "remainingRetentionDays"
+          "xml": {
+            "name": "RemainingRetentionDays"
+          }
         },
-        "AccessTier": {
+        "accessTier": {
           "type": "string",
           "description": "The access tier.",
-          "x-ms-client-name": "accessTier"
+          "xml": {
+            "name": "AccessTier"
+          }
         },
-        "AccessTierChangeTime": {
+        "accessTierChangeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The access tier change time.",
-          "x-ms-client-name": "accessTierChangeTime"
+          "xml": {
+            "name": "AccessTierChangeTime"
+          }
         },
-        "AccessTierTransitionState": {
+        "accessTierTransitionState": {
           "type": "string",
           "description": "The access tier transition state.",
-          "x-ms-client-name": "accessTierTransitionState"
+          "xml": {
+            "name": "AccessTierTransitionState"
+          }
         },
-        "LeaseStatus": {
+        "leaseStatus": {
           "$ref": "#/definitions/LeaseStatusType",
           "description": "The current lease status of the share.",
-          "x-ms-client-name": "leaseStatus"
+          "xml": {
+            "name": "LeaseStatus"
+          }
         },
-        "LeaseState": {
+        "leaseState": {
           "$ref": "#/definitions/LeaseStateType",
           "description": "Lease state of the share.",
-          "x-ms-client-name": "leaseState"
+          "xml": {
+            "name": "LeaseState"
+          }
         },
-        "LeaseDuration": {
+        "leaseDuration": {
           "$ref": "#/definitions/LeaseDurationType",
           "description": "When a share is leased, specifies whether the lease is of infinite or fixed\nduration.",
-          "x-ms-client-name": "leaseDuration"
+          "xml": {
+            "name": "LeaseDuration"
+          }
         },
-        "EnabledProtocols": {
+        "enabledProtocols": {
           "type": "string",
           "description": "The enabled protocols.",
-          "x-ms-client-name": "enabledProtocols"
+          "xml": {
+            "name": "EnabledProtocols"
+          }
         },
-        "RootSquash": {
+        "rootSquash": {
           "$ref": "#/definitions/ShareRootSquash",
           "description": "The root squash setting.",
-          "x-ms-client-name": "rootSquash"
+          "xml": {
+            "name": "RootSquash"
+          }
         },
-        "EnableSnapshotVirtualDirectoryAccess": {
+        "enableSnapshotVirtualDirectoryAccess": {
           "type": "boolean",
           "description": "Whether snapshot virtual directory access is enabled.",
-          "x-ms-client-name": "enableSnapshotVirtualDirectoryAccess"
+          "xml": {
+            "name": "EnableSnapshotVirtualDirectoryAccess"
+          }
         },
-        "PaidBurstingEnabled": {
+        "paidBurstingEnabled": {
           "type": "boolean",
           "description": "Whether paid bursting is enabled.",
-          "x-ms-client-name": "paidBurstingEnabled"
+          "xml": {
+            "name": "PaidBurstingEnabled"
+          }
         },
-        "PaidBurstingMaxIops": {
+        "paidBurstingMaxIops": {
           "type": "integer",
           "format": "int64",
           "description": "The maximum IOPS for paid bursting.",
-          "x-ms-client-name": "paidBurstingMaxIops"
+          "xml": {
+            "name": "PaidBurstingMaxIops"
+          }
         },
-        "PaidBurstingMaxBandwidthMibps": {
+        "paidBurstingMaxBandwidthMibps": {
           "type": "integer",
           "format": "int64",
           "description": "The maximum bandwidth for paid bursting in MiBps.",
-          "x-ms-client-name": "paidBurstingMaxBandwidthMibps"
+          "xml": {
+            "name": "PaidBurstingMaxBandwidthMibps"
+          }
         },
-        "IncludedBurstIops": {
+        "includedBurstIops": {
           "type": "integer",
           "format": "int64",
           "description": "The included burst IOPS.",
-          "x-ms-client-name": "includedBurstIops"
+          "xml": {
+            "name": "IncludedBurstIops"
+          }
         },
-        "MaxBurstCreditsForIops": {
+        "maxBurstCreditsForIops": {
           "type": "integer",
           "format": "int64",
           "description": "The maximum burst credits for IOPS.",
-          "x-ms-client-name": "maxBurstCreditsForIops"
+          "xml": {
+            "name": "MaxBurstCreditsForIops"
+          }
         },
-        "NextAllowedProvisionedIopsDowngradeTime": {
+        "nextAllowedProvisionedIopsDowngradeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The next allowed provisioned IOPS downgrade time.",
-          "x-ms-client-name": "nextAllowedProvisionedIopsDowngradeTime"
+          "xml": {
+            "name": "NextAllowedProvisionedIopsDowngradeTime"
+          }
         },
-        "NextAllowedProvisionedBandwidthDowngradeTime": {
+        "nextAllowedProvisionedBandwidthDowngradeTime": {
           "type": "string",
           "format": "date-time",
           "description": "The next allowed provisioned bandwidth downgrade time.",
-          "x-ms-client-name": "nextAllowedProvisionedBandwidthDowngradeTime"
+          "xml": {
+            "name": "NextAllowedProvisionedBandwidthDowngradeTime"
+          }
         },
-        "EnableSmbDirectoryLease": {
+        "enableSmbDirectoryLease": {
           "type": "boolean",
           "description": "Whether SMB directory lease is enabled.",
-          "x-ms-client-name": "enableSmbDirectoryLease"
+          "xml": {
+            "name": "EnableSmbDirectoryLease"
+          }
         }
       },
       "required": [
-        "Last-Modified",
-        "Etag",
-        "Quota"
+        "lastModified",
+        "eTag",
+        "quota"
       ]
     },
     "ShareProtocolSettings": {
       "type": "object",
       "description": "Protocol settings",
       "properties": {
-        "Smb": {
+        "smb": {
           "$ref": "#/definitions/ShareSmbSettings",
           "description": "Settings for SMB protocol.",
-          "x-ms-client-name": "smb"
+          "xml": {
+            "name": "Smb"
+          }
         },
-        "Nfs": {
+        "nfs": {
           "$ref": "#/definitions/ShareNfsSettings",
           "description": "Settings for NFS protocol.",
-          "x-ms-client-name": "nfs"
+          "xml": {
+            "name": "Nfs"
+          }
         }
       },
       "xml": {
@@ -13788,15 +14152,19 @@
       "type": "object",
       "description": "Settings for SMB protocol.",
       "properties": {
-        "Multichannel": {
+        "multichannel": {
           "$ref": "#/definitions/SmbMultichannel",
           "description": "Settings for SMB Multichannel.",
-          "x-ms-client-name": "multichannel"
+          "xml": {
+            "name": "Multichannel"
+          }
         },
-        "EncryptionInTransit": {
+        "encryptionInTransit": {
           "$ref": "#/definitions/ShareSmbSettingsEncryptionInTransit",
           "description": "Enable or disable encryption in transit.",
-          "x-ms-client-name": "encryptionInTransit"
+          "xml": {
+            "name": "EncryptionInTransit"
+          }
         }
       },
       "xml": {
@@ -13807,10 +14175,12 @@
       "type": "object",
       "description": "Enable or disable encryption in transit.",
       "properties": {
-        "Required": {
+        "required": {
           "type": "boolean",
           "description": "If encryption in transit is required",
-          "x-ms-client-name": "required"
+          "xml": {
+            "name": "Required"
+          }
         }
       }
     },
@@ -13818,15 +14188,17 @@
       "type": "object",
       "description": "Stats for the share.",
       "properties": {
-        "ShareUsageBytes": {
+        "shareUsageBytes": {
           "type": "integer",
           "format": "int32",
           "description": "The approximate size of the data stored in bytes. Note that this value may not\ninclude all recently created or recently resized files.",
-          "x-ms-client-name": "shareUsageBytes"
+          "xml": {
+            "name": "ShareUsageBytes"
+          }
         }
       },
       "required": [
-        "ShareUsageBytes"
+        "shareUsageBytes"
       ]
     },
     "ShareTokenIntent": {
@@ -13851,29 +14223,35 @@
       "type": "object",
       "description": "Signed identifier.",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string",
           "description": "A unique id.",
-          "x-ms-client-name": "id"
+          "xml": {
+            "name": "Id"
+          }
         },
-        "AccessPolicy": {
+        "accessPolicy": {
           "$ref": "#/definitions/AccessPolicy",
           "description": "The access policy.",
-          "x-ms-client-name": "accessPolicy"
+          "xml": {
+            "name": "AccessPolicy"
+          }
         }
       },
       "required": [
-        "Id"
+        "id"
       ]
     },
     "SmbMultichannel": {
       "type": "object",
       "description": "Settings for SMB multichannel",
       "properties": {
-        "Enabled": {
+        "enabled": {
           "type": "boolean",
           "description": "If SMB multichannel is enabled.",
-          "x-ms-client-name": "enabled"
+          "xml": {
+            "name": "Enabled"
+          }
         }
       },
       "xml": {
@@ -13884,31 +14262,41 @@
       "type": "object",
       "description": "The storage error response.",
       "properties": {
-        "Message": {
+        "message": {
           "type": "string",
           "description": "The error message.",
-          "x-ms-client-name": "message"
+          "xml": {
+            "name": "Message"
+          }
         },
-        "CopySourceStatusCode": {
+        "copySourceStatusCode": {
           "type": "integer",
           "format": "int64",
           "description": "The copy source status code.",
-          "x-ms-client-name": "copySourceStatusCode"
+          "xml": {
+            "name": "CopySourceStatusCode"
+          }
         },
-        "CopySourceErrorCode": {
+        "copySourceErrorCode": {
           "type": "string",
           "description": "The copy source error code.",
-          "x-ms-client-name": "copySourceErrorCode"
+          "xml": {
+            "name": "CopySourceErrorCode"
+          }
         },
-        "CopySourceErrorMessage": {
+        "copySourceErrorMessage": {
           "type": "string",
           "description": "The copy source error message.",
-          "x-ms-client-name": "copySourceErrorMessage"
+          "xml": {
+            "name": "CopySourceErrorMessage"
+          }
         },
-        "AuthenticationErrorDetail": {
+        "authenticationErrorDetail": {
           "type": "string",
           "description": "The authentication error detail.",
-          "x-ms-client-name": "authenticationErrorDetail"
+          "xml": {
+            "name": "AuthenticationErrorDetail"
+          }
         }
       }
     },
@@ -14390,31 +14778,37 @@
       "type": "object",
       "description": "Storage service properties.",
       "properties": {
-        "HourMetrics": {
+        "hourMetrics": {
           "$ref": "#/definitions/Metrics",
           "description": "A summary of request statistics grouped by API in hourly aggregates for files.",
-          "x-ms-client-name": "hourMetrics"
+          "xml": {
+            "name": "HourMetrics"
+          }
         },
-        "MinuteMetrics": {
+        "minuteMetrics": {
           "$ref": "#/definitions/Metrics",
           "description": "A summary of request statistics grouped by API in minute aggregates for files.",
-          "x-ms-client-name": "minuteMetrics"
+          "xml": {
+            "name": "MinuteMetrics"
+          }
         },
-        "Cors": {
+        "cors": {
           "type": "array",
           "description": "The set of CORS rules.",
           "items": {
             "$ref": "#/definitions/CorsRule"
           },
           "xml": {
+            "name": "Cors",
             "wrapped": true
-          },
-          "x-ms-client-name": "cors"
+          }
         },
-        "Protocol": {
+        "protocol": {
           "$ref": "#/definitions/ShareProtocolSettings",
           "description": "Protocol settings",
-          "x-ms-client-name": "protocol"
+          "xml": {
+            "name": "Protocol"
+          }
         }
       }
     },
@@ -14422,13 +14816,13 @@
       "type": "object",
       "description": "An encoded string value.",
       "properties": {
-        "Encoded": {
+        "encoded": {
           "type": "boolean",
           "description": "Whether the value is encoded.",
           "xml": {
+            "name": "Encoded",
             "attribute": true
-          },
-          "x-ms-client-name": "encoded"
+          }
         },
         "content": {
           "type": "string",
@@ -14443,57 +14837,73 @@
       "type": "object",
       "description": "A user delegation key",
       "properties": {
-        "SignedOid": {
+        "signedOid": {
           "type": "string",
           "description": "The Azure Active Directory object ID in GUID format.",
-          "x-ms-client-name": "signedOid"
+          "xml": {
+            "name": "SignedOid"
+          }
         },
-        "SignedTid": {
+        "signedTid": {
           "type": "string",
           "description": "The Azure Active Directory tenant ID in GUID format",
-          "x-ms-client-name": "signedTid"
+          "xml": {
+            "name": "SignedTid"
+          }
         },
-        "SignedStart": {
+        "signedStart": {
           "type": "string",
           "format": "date-time",
           "description": "The date-time the key is active",
-          "x-ms-client-name": "signedStart"
+          "xml": {
+            "name": "SignedStart"
+          }
         },
-        "SignedExpiry": {
+        "signedExpiry": {
           "type": "string",
           "format": "date-time",
           "description": "The date-time the key expires",
-          "x-ms-client-name": "signedExpiry"
+          "xml": {
+            "name": "SignedExpiry"
+          }
         },
-        "SignedService": {
+        "signedService": {
           "type": "string",
           "description": "Abbreviation of the Azure Storage service that accepts the key",
-          "x-ms-client-name": "signedService"
+          "xml": {
+            "name": "SignedService"
+          }
         },
-        "SignedVersion": {
+        "signedVersion": {
           "type": "string",
           "description": "The service version that created the key",
-          "x-ms-client-name": "signedVersion"
+          "xml": {
+            "name": "SignedVersion"
+          }
         },
-        "SignedDelegatedUserTid": {
+        "signedDelegatedUserTid": {
           "type": "string",
           "description": "The delegated user tenant id in Azure AD. Return if DelegatedUserTid is\nspecified.",
-          "x-ms-client-name": "signedDelegatedUserTid"
+          "xml": {
+            "name": "SignedDelegatedUserTid"
+          }
         },
-        "Value": {
+        "value": {
           "type": "string",
           "description": "The key as a base64 string",
-          "x-ms-client-name": "value"
+          "xml": {
+            "name": "Value"
+          }
         }
       },
       "required": [
-        "SignedOid",
-        "SignedTid",
-        "SignedStart",
-        "SignedExpiry",
-        "SignedService",
-        "SignedVersion",
-        "Value"
+        "signedOid",
+        "signedTid",
+        "signedStart",
+        "signedExpiry",
+        "signedService",
+        "signedVersion",
+        "value"
       ]
     }
   },

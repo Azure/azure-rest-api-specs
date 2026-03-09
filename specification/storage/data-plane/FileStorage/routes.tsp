@@ -505,7 +505,8 @@ interface Share {
 
       /** Key of the permission set for the directory/file. */
       @header("x-ms-file-permission-key") filePermissionKey: string;
-    }
+    },
+    "application/json"
   >;
 
   /**
@@ -530,7 +531,8 @@ interface Share {
     },
     {
       @body permission: SharePermission;
-    }
+    },
+    "application/json"
   >;
 
   /**
@@ -993,9 +995,10 @@ interface File {
   /**
    * Creates a new file or replaces a file. Note it only initializes the file with no content.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}")
   @put
-  create is StorageOperationNoBody<
+  create is StorageOperationRequestBody<
     {
       ...ShareNamePathParameter;
       ...DirectoryPathParameter;
@@ -1029,6 +1032,8 @@ interface File {
 
       /** Optional. Specifies the content length of the file. */
       @header("Content-Length") optionalContentLength?: int64;
+
+      ...OptionalBody;
     },
     {
       @statusCode statusCode: 201;
@@ -1043,7 +1048,8 @@ interface File {
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /**
@@ -1390,8 +1396,7 @@ interface File {
       /** Optional. Used for structured put operations to specify content length. */
       @header("x-ms-structured-content-length") structuredContentLength?: int64;
 
-      /** The file content to upload. */
-      @body content?: bytes;
+      ...OptionalBody;
     },
     {
       @statusCode statusCode: 201;
