@@ -7715,11 +7715,20 @@
             "description": "Only update is supported.",
             "required": true,
             "type": "string",
+            "default": "update",
             "enum": [
               "update"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "FileRangeWriteFromUrlType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "Writes the bytes specified by the source URL into the specified range."
+                }
+              ]
             },
             "x-ms-client-name": "fileRangeWriteFromUrl"
           },
@@ -10827,6 +10836,24 @@
       ],
       "xml": {
         "name": "Range"
+      }
+    },
+    "FileRangeWriteFromUrlType": {
+      "type": "string",
+      "description": "Only update is supported: - Update: Writes the bytes downloaded from the source url into the specified range.",
+      "enum": [
+        "update"
+      ],
+      "x-ms-enum": {
+        "name": "FileRangeWriteFromUrlType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "update",
+            "value": "update",
+            "description": "Writes the bytes specified by the source URL into the specified range."
+          }
+        ]
       }
     },
     "FileRangeWriteType": {

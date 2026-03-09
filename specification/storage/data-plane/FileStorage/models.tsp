@@ -1499,8 +1499,12 @@ enum FileRangeWriteType {
   clear: "clear",
 }
 
-// Common Parameter Aliases
-//
+/** Only update is supported: - Update: Writes the bytes downloaded from the source url into the specified range. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum FileRangeWriteFromUrlType {
+  /** Writes the bytes specified by the source URL into the specified range. */
+  update: "update",
+}
 
 /** Share name path parameter. */
 alias ShareNamePathParameter = {

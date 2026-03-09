@@ -1411,7 +1411,8 @@ interface File {
       @header("x-ms-source-range") sourceRange?: string;
 
       /** Only update is supported. */
-      @header("x-ms-write") fileRangeWriteFromUrl: "update";
+      @header("x-ms-write")
+      fileRangeWriteFromUrl: FileRangeWriteFromUrlType = FileRangeWriteFromUrlType.update;
 
       /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
