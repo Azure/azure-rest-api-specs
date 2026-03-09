@@ -1639,18 +1639,24 @@ alias ContentLengthParameter = {
   contentLength: int64;
 };
 
-/** Range header (x-ms-range). */
+/** Range header. */
 alias RangeHeader = {
   /** Return file data only from the specified byte range. */
-  @header("x-ms-range")
+  @header("Range")
   range?: string;
 };
 
 /** Lease ID parameter. */
-alias LeaseIdParameter = {
+alias LeaseIdOptionalParameter = {
   /** If specified, the lease ID must match the lease ID of the file. */
   @header("x-ms-lease-id")
   leaseId?: string;
+};
+
+alias LeaseIdRequiredParameter = {
+  /** Specifies the current lease ID on the resource. */
+  @header("x-ms-lease-id")
+  leaseId: string;
 };
 
 /** Share quota optional header. */
@@ -1900,4 +1906,9 @@ alias OptionalBody = {
 alias FileTypeParameter = {
   /** Dummy type header, must be "file". */
   @header("x-ms-type") fileType: "file";
+};
+
+alias ProposeLeaseIdParameter = {
+  /** Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats. */
+  @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
 };

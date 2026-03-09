@@ -111,7 +111,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Return file data only from the specified byte range.",
             "required": false,
@@ -2322,7 +2322,7 @@
               },
               "x-ms-lease-id": {
                 "type": "string",
-                "description": "Uniquely identifies a share's lease"
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -2602,7 +2602,7 @@
               },
               "x-ms-lease-id": {
                 "type": "string",
-                "description": "Uniquely identifies a share's lease"
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -2740,7 +2740,7 @@
               },
               "x-ms-lease-id": {
                 "type": "string",
-                "description": "Uniquely identifies a share's lease"
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -2887,7 +2887,7 @@
               },
               "x-ms-lease-id": {
                 "type": "string",
-                "description": "Uniquely identifies a share's lease"
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-lease-time": {
                 "type": "string",
@@ -6793,7 +6793,7 @@
           {
             "name": "x-ms-proposed-lease-id",
             "in": "header",
-            "description": "Proposed lease ID, in a GUID string format.",
+            "description": "Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "proposedLeaseId"
@@ -6861,7 +6861,8 @@
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-lease-id": {
-                "type": "string"
+                "type": "string",
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -6945,7 +6946,7 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
-            "description": "The lease ID of the active lease.",
+            "description": "Specifies the current lease ID on the resource.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
@@ -7094,7 +7095,7 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
-            "description": "The lease ID of the active lease.",
+            "description": "Specifies the current lease ID on the resource.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
@@ -7102,7 +7103,7 @@
           {
             "name": "x-ms-proposed-lease-id",
             "in": "header",
-            "description": "Proposed lease ID, in a GUID string format.",
+            "description": "Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "proposedLeaseId"
@@ -7170,7 +7171,8 @@
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-lease-id": {
-                "type": "string"
+                "type": "string",
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -7323,7 +7325,7 @@
               },
               "x-ms-lease-id": {
                 "type": "string",
-                "description": "Uniquely identifies a file's lease"
+                "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -7982,7 +7984,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Return file data only from the specified byte range.",
             "required": false,
