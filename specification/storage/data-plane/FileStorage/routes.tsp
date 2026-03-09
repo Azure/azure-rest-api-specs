@@ -1124,7 +1124,10 @@ interface File {
     {
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
-      ...FileTypeParameter;
+
+      /** Dummy type header, must be "file". */
+      @header("x-ms-type") fileType: "File";
+
       @header("Content-Length") contentLength: int64;
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
