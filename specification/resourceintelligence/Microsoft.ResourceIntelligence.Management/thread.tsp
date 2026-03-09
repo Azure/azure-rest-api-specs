@@ -56,6 +56,7 @@ interface Threads {
   /**
    * Creates or updates a thread.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Tracked ARM resources must not return 201 on PUT per API review guidance"
   @armResourceCreateOrUpdate(Thread)
   @put
   createOrUpdate(
@@ -63,7 +64,7 @@ interface Threads {
 
     /** The content of the action request. */
     @body body: RunRequest,
-  ): ArmResponse<Thread> | ArmResourceCreatedResponse<Thread> | ErrorResponse;
+  ): ArmResponse<Thread> | ErrorResponse;
 
   /**
    * Deletes a thread.
@@ -87,5 +88,5 @@ interface Threads {
 
     /** The content of the action request. */
     @body body: RunRequest,
-  ): ArmAccepted201LroResponse | ErrorResponse;
+  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
 }

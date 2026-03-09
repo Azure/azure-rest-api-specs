@@ -305,13 +305,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Agent' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            }
-          },
-          "201": {
-            "description": "Resource 'Agent' create operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -468,6 +462,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
           "201": {
             "description": "Response for a long-running POST action that returns 201 with Location polling.",
             "headers": {
@@ -654,19 +654,6 @@
               "$ref": "#/definitions/Thread"
             }
           },
-          "201": {
-            "description": "Resource 'Thread' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -778,6 +765,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
           "201": {
             "description": "Response for a long-running POST action that returns 201 with Location polling.",
             "headers": {

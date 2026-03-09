@@ -74,7 +74,16 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Tracked ARM resources must not return 201 on PUT per API review guidance"
+  @armResourceCreateOrUpdate(Agent)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<Agent>,
+
+    /** Resource create parameters. */
+    @bodyRoot
+    resource: Agent,
+  ): ArmResponse<Agent> | ErrorResponse;
 
   /**
    * Updates an agent.
@@ -108,5 +117,5 @@ interface Agents {
 
     /** The content of the action request. */
     @body body: RunRequest,
-  ): ArmAccepted201LroResponse | ErrorResponse;
+  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
 }
