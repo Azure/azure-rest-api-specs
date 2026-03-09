@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Commit",
-    "description": "The Microsoft Azure Commit API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "title": "Commitment",
+    "description": "The Microsoft Azure Commitment API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
     "version": "2025-07-01"
   },
   "host": "management.azure.com",
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commitments/{commitmentName}": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -46,7 +46,7 @@
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/CommitNameParameter"
+          "$ref": "#/parameters/CommitmentNameParameter"
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -54,15 +54,15 @@
       ],
       "get": {
         "tags": [
-          "Commits"
+          "Commitments"
         ],
-        "operationId": "Commits_Get",
-        "description": "Gets the specified commit.",
+        "operationId": "Commitments_Get",
+        "description": "Gets the specified commitment.",
         "responses": {
           "200": {
-            "description": "OK - Returns information about the commit.",
+            "description": "OK - Returns information about the commitment.",
             "schema": {
-              "$ref": "#/definitions/Commit"
+              "$ref": "#/definitions/Commitment"
             }
           },
           "default": {
@@ -73,26 +73,26 @@
           }
         },
         "x-ms-examples": {
-          "CommitsGet": {
-            "$ref": "./examples/NetworkManagerCommitGet.json"
+          "CommitmentsGet": {
+            "$ref": "./examples/NetworkManagerCommitmentGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Commits"
+          "Commitments"
         ],
-        "operationId": "Commits_CreateOrUpdate",
-        "description": "Creates or updates a commit.",
+        "operationId": "Commitments_CreateOrUpdate",
+        "description": "Creates or updates a commitment.",
         "parameters": [
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Commit"
+              "$ref": "#/definitions/Commitment"
             },
-            "description": "Parameters supplied to the specify which commit need to create"
+            "description": "Parameters supplied to specify which commitment to create"
           },
           {
             "name": "If-Match",
@@ -105,9 +105,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the commit.",
+            "description": "Updated - Returns information about the commitment.",
             "schema": {
-              "$ref": "#/definitions/Commit"
+              "$ref": "#/definitions/Commitment"
             },
             "headers": {
               "ETag": {
@@ -117,9 +117,9 @@
             }
           },
           "201": {
-            "description": "Created - Returns information about the commit.",
+            "description": "Created - Returns information about the commitment.",
             "schema": {
-              "$ref": "#/definitions/Commit"
+              "$ref": "#/definitions/Commitment"
             },
             "headers": {
               "ETag": {
@@ -137,7 +137,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Commit"
+              "$ref": "#/definitions/Commitment"
             }
           },
           "default": {
@@ -152,17 +152,17 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "CommitsPut": {
-            "$ref": "./examples/NetworkManagerCommitPut.json"
+          "CommitmentsPut": {
+            "$ref": "./examples/NetworkManagerCommitmentPut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Commits"
+          "Commitments"
         ],
-        "operationId": "Commits_Delete",
-        "description": "Deletes a commit.",
+        "operationId": "Commitments_Delete",
+        "description": "Deletes a commitment.",
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
@@ -193,19 +193,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "CommitsDelete": {
-            "$ref": "./examples/NetworkManagerCommitDelete.json"
+          "CommitmentsDelete": {
+            "$ref": "./examples/NetworkManagerCommitmentDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commitments": {
       "get": {
         "tags": [
-          "Commits"
+          "Commitments"
         ],
-        "operationId": "Commits_List",
-        "description": "Lists the specified commit.",
+        "operationId": "Commitments_List",
+        "description": "Lists the specified commitment.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -231,9 +231,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the commit.",
+            "description": "OK - Returns information about the commitment.",
             "schema": {
-              "$ref": "#/definitions/CommitListResult"
+              "$ref": "#/definitions/CommitmentListResult"
             }
           },
           "default": {
@@ -244,21 +244,21 @@
           }
         },
         "x-ms-examples": {
-          "CommitsList": {
-            "$ref": "./examples/NetworkManagerCommitList.json"
+          "CommitmentsList": {
+            "$ref": "./examples/NetworkManagerCommitmentList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Commit": {
+    "Commitment": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CommitProperties",
-          "description": "The Commit properties"
+          "$ref": "#/definitions/CommitmentProperties",
+          "description": "The Commitment properties"
         },
         "systemData": {
           "readOnly": true,
@@ -271,31 +271,31 @@
           "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
-      "description": "The commit resource"
+      "description": "The commitment resource"
     },
-    "CommitListResult": {
+    "CommitmentListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Commit"
+            "$ref": "#/definitions/Commitment"
           },
-          "description": "Gets a page of Commit"
+          "description": "Gets a page of Commitment"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Result of the request to list Commit. It contains a list of groups and a URL link to get the next set of results."
+      "description": "Result of the request to list Commitment. It contains a list of groups and a URL link to get the next set of results."
     },
-    "CommitProperties": {
+    "CommitmentProperties": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of the commit."
+          "description": "A description of the commitment."
         },
         "provisioningState": {
           "readOnly": true,
@@ -307,10 +307,10 @@
           "readOnly": true,
           "description": "Unique identifier for this resource."
         },
-        "commitType": {
+        "commitmentType": {
           "type": "string",
           "$ref": "./networkManager.json#/definitions/ConfigurationType",
-          "description": "Commit Type."
+          "description": "Commitment Type."
         },
         "configurationIds": {
           "type": "array",
@@ -334,16 +334,16 @@
           },
           "description": "List of active locations."
         },
-        "commitTag": {
+        "commitmentTag": {
           "type": "string",
-          "description": "Unique identifier for this commit."
+          "description": "Unique identifier for this commitment."
         }
       },
       "required": [
         "targetLocations",
-        "commitType"
+        "commitmentType"
       ],
-      "description": "Properties of commit"
+      "description": "Properties of commitment"
     }
   },
   "parameters": {
@@ -363,12 +363,12 @@
       "description": "The name of the network manager.",
       "x-ms-parameter-location": "method"
     },
-    "CommitNameParameter": {
-      "name": "commitName",
+    "CommitmentNameParameter": {
+      "name": "commitmentName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the commit.",
+      "description": "The name of the commitment.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {

@@ -73,7 +73,7 @@ input-file:
   - stable/2025-07-01/networkManagerConnectivityConfiguration.json
   - stable/2025-07-01/networkManagerEffectiveConfiguration.json
   - stable/2025-07-01/networkManagerGroup.json
-  - stable/2025-07-01/networkManagerCommit.json
+  - stable/2025-07-01/networkManagerCommitment.json
   - stable/2025-07-01/networkManagerRoutingConfiguration.json
   - stable/2025-07-01/networkManagerScopeConnection.json
   - stable/2025-07-01/networkManagerSecurityAdminConfiguration.json
@@ -4471,7 +4471,7 @@ directive:
     from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: ResourceNameRestriction
-    from: networkManagerCommit.json
+    from: networkManagerCommitment.json
     reason: The resource name parameter 'networkManagerName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all AvNM APIs.
   - suppress: DeleteResponseCodes
     from: networkManagerRoutingConfiguration.json
@@ -4492,7 +4492,7 @@ directive:
     from: networkManagerRoutingConfiguration.json
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: SystemDataDefinitionsCommonTypes
-    from: networkManagerCommit.json
+    from: networkManagerCommitment.json
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
