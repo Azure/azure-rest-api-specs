@@ -265,7 +265,7 @@ union MatchVariable {
 
  @added(Versions.v2025_11_01)
   /**
-   * JA4
+   * JA4 Match Variable
    */
   JA4: "JA4",
 }
@@ -343,13 +343,13 @@ union Operator {
   
   @added(Versions.v2025_11_01)
   /**
-   * AsnMatch
+   * Asn Match Operator
    */
   AsnMatch: "AsnMatch",
   
   @added(Versions.v2025_11_01)
   /**
-   * ClientFingerprint
+   * Client Finger print Operator
    */
   ClientFingerprint: "ClientFingerprint",
 }
@@ -1792,8 +1792,8 @@ model ManagedRuleSetList {
   /**
    * List of exceptions applied on the managed rule sets.
    */
-   @added(Versions.v2025_11_01)
-   exceptionsList?: ManagedRuleSetExceptionList;
+  @added(Versions.v2025_11_01)
+  exceptionsList?: ManagedRuleSetExceptionList;
 }
 
 /**
@@ -1910,17 +1910,17 @@ union ExceptionMatchVariable {
   string,
 
   /**
-   * RequestUri
+   * Request Uri Exception Match Variable
    */
   RequestUri: "RequestUri",
 
   /**
-   * SocketAddr
+   * Socket Address Exception Match Variable
    */
   SocketAddr: "SocketAddr",
 
   /**
-   * RequestHeaderNames
+   * Request Header Names Exception Match Variable
    */
   RequestHeaderNames: "RequestHeaderNames",
 }
@@ -1933,7 +1933,7 @@ union ExceptionSelectorMatchOperator {
   string,
 
   /**
-   * Equals
+   * Equals Selector Match Operator
    */
   Equals: "Equals",
 }
@@ -1946,32 +1946,32 @@ union ExceptionValueMatchOperator {
   string,
 
   /**
-   * Equals
+   * Equals Exception Value Match Operator
    */
   Equals: "Equals",
 
   /**
-	* Contains
+	* Contains Exception Value Match Operator
 	*/
   Contains: "Contains",
 
   /**
-   * StartsWith
+   * StartsWith Exception Value Match Operator
    */
   StartsWith: "StartsWith",
 
   /**
-   * EndsWith
+   * EndsWith Exception Value Match Operator
    */
   EndsWith: "EndsWith",
 
   /**
-   * EqualsAny
+   * EqualsAny Exception Value Match Operator
    */
   EqualsAny: "EqualsAny",
 
   /**
-   * IPMatch
+   * IPMatch Exception Value Match Operator
    */
   IPMatch: "IPMatch",
 }
