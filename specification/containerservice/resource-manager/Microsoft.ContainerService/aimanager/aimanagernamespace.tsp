@@ -12,8 +12,8 @@ namespace Microsoft.ContainerService;
 
 @doc("The AI Manager namespace.")
 @resource("namespaces")
-@parentResource(AiManager)
-model AiManagerNamespace is TrackedResource<AiManagerNamespaceProperties> {
+@parentResource(AIManager)
+model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
   @doc("The name of the AI Manager namespace resource.")
   @key("namespaceName")
   @segment("namespaces")
@@ -28,7 +28,7 @@ model AiManagerNamespace is TrackedResource<AiManagerNamespaceProperties> {
 }
 
 @doc("The properties of an AI Manager namespace.")
-model AiManagerNamespaceProperties {
+model AIManagerNamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
   labels?: Record<string>;
@@ -39,30 +39,30 @@ model AiManagerNamespaceProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
-  provisioningState?: AiManagerNamespaceProvisioningState;
+  provisioningState?: AIManagerNamespaceProvisioningState;
 
   @visibility(Lifecycle.Read)
   @doc("The underlying managed namespace ID in the Kubernetes cluster.")
   managedNamespaceId?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Status information for the AiManager.")
-  status?: AiManagerNamespaceStatus;
+  @doc("Status information for the AIManager.")
+  status?: AIManagerNamespaceStatus;
 }
 
-@doc("Status information for the AiManagerNamespace.")
-model AiManagerNamespaceStatus {
+@doc("Status information for the AIManagerNamespace.")
+model AIManagerNamespaceStatus {
   @visibility(Lifecycle.Read)
-  @doc("The last operation ID for the AiManagerNamespace.")
+  @doc("The last operation ID for the AIManagerNamespace.")
   lastOperationId?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The last operation error for the AiManagerNamespace.")
+  @doc("The last operation error for the AIManagerNamespace.")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("The provisioning state of the AI Manager namespace resource.")
-union AiManagerNamespaceProvisioningState {
+union AIManagerNamespaceProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -86,42 +86,42 @@ union AiManagerNamespaceProvisioningState {
 }
 
 @armResourceOperations
-interface AiManagerNamespaces {
-  get is ArmResourceRead<AiManagerNamespace>;
+interface AIManagerNamespaces {
+  get is ArmResourceRead<AIManagerNamespace>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    AiManagerNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
-      IfMatchParameters<AiManagerNamespace> &
-      IfNoneMatchParameters<AiManagerNamespace>
+    AIManagerNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
+      IfMatchParameters<AIManagerNamespace> &
+      IfNoneMatchParameters<AIManagerNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    AiManagerNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
-      IfMatchParameters<AiManagerNamespace>
+    AIManagerNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
+      IfMatchParameters<AIManagerNamespace>
   >;
 
-  listByAiManager is ArmResourceListByParent<AiManagerNamespace>;
+  listByAIManager is ArmResourceListByParent<AIManagerNamespace>;
 
   update is ArmCustomPatchSync<
-    AiManagerNamespace,
-    AiManagerNamespacePatch,
-    Azure.ResourceManager.Foundations.BaseParameters<AiManagerNamespace> &
-      IfMatchParameters<AiManagerNamespace>
+    AIManagerNamespace,
+    AIManagerNamespacePatch,
+    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
+      IfMatchParameters<AIManagerNamespace>
   >;
 
   @doc("Lists the credentials of an AI Manager namespace.")
   @post
   listCredential is ArmResourceActionSync<
-    AiManagerNamespace,
+    AIManagerNamespace,
     void,
     ArmResponse<CredentialResults>
   >;
 }
 
 @doc("The properties of an AI Manager namespace that can be patched.")
-model AiManagerNamespacePatch {
+model AIManagerNamespacePatch {
   /* The ARM tags of the AI Manager namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

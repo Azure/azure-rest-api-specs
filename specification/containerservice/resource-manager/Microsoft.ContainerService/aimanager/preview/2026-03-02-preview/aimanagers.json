@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "AiManagers"
+      "name": "AIManagers"
     },
     {
-      "name": "AiManagerNamespaces"
+      "name": "AIManagerNamespaces"
     }
   ],
   "paths": {
@@ -88,11 +88,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
-        "operationId": "AiManagers_ListBySubscription",
+        "operationId": "AIManagers_ListBySubscription",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "List AiManager resources by subscription ID",
+        "description": "List AIManager resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManagerListResult"
+              "$ref": "#/definitions/AIManagerListResult"
             }
           },
           "default": {
@@ -117,7 +117,7 @@
         },
         "x-ms-examples": {
           "Lists AI Manager resources by subscription.": {
-            "$ref": "./examples/AiManagers_ListBySubscription.json"
+            "$ref": "./examples/AIManagers_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -127,11 +127,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers": {
       "get": {
-        "operationId": "AiManagers_ListByResourceGroup",
+        "operationId": "AIManagers_ListByResourceGroup",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "List AiManager resources by resource group",
+        "description": "List AIManager resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -147,7 +147,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManagerListResult"
+              "$ref": "#/definitions/AIManagerListResult"
             }
           },
           "default": {
@@ -159,7 +159,7 @@
         },
         "x-ms-examples": {
           "Lists AI Manager resources by resource group.": {
-            "$ref": "./examples/AiManagers_ListByResourceGroup.json"
+            "$ref": "./examples/AIManagers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -169,11 +169,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}": {
       "get": {
-        "operationId": "AiManagers_Get",
+        "operationId": "AIManagers_Get",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "Get a AiManager",
+        "description": "Get a AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -199,7 +199,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManager"
+              "$ref": "#/definitions/AIManager"
             }
           },
           "default": {
@@ -211,16 +211,16 @@
         },
         "x-ms-examples": {
           "Gets an AI Manager resource.": {
-            "$ref": "./examples/AiManagers_Get.json"
+            "$ref": "./examples/AIManagers_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AiManagers_CreateOrUpdate",
+        "operationId": "AIManagers_CreateOrUpdate",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "Create a AiManager",
+        "description": "Create a AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -247,21 +247,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AiManager"
+              "$ref": "#/definitions/AIManager"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AiManager' update operation succeeded",
+            "description": "Resource 'AIManager' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AiManager"
+              "$ref": "#/definitions/AIManager"
             }
           },
           "201": {
-            "description": "Resource 'AiManager' create operation succeeded",
+            "description": "Resource 'AIManager' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AiManager"
+              "$ref": "#/definitions/AIManager"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -284,7 +284,7 @@
         },
         "x-ms-examples": {
           "Creates or updates an AI Manager resource.": {
-            "$ref": "./examples/AiManagers_CreateOrUpdate.json"
+            "$ref": "./examples/AIManagers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -293,11 +293,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AiManagers_Update",
+        "operationId": "AIManagers_Update",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "Update a AiManager",
+        "description": "Update a AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -324,7 +324,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AiManagerPatch"
+              "$ref": "#/definitions/AIManagerPatch"
             }
           }
         ],
@@ -332,7 +332,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManager"
+              "$ref": "#/definitions/AIManager"
             }
           },
           "default": {
@@ -344,16 +344,16 @@
         },
         "x-ms-examples": {
           "Updates an AI Manager resource.": {
-            "$ref": "./examples/AiManagers_Update.json"
+            "$ref": "./examples/AIManagers_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "AiManagers_Delete",
+        "operationId": "AIManagers_Delete",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
-        "description": "Delete a AiManager",
+        "description": "Delete a AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -402,7 +402,7 @@
         },
         "x-ms-examples": {
           "Deletes an AI Manager resource.": {
-            "$ref": "./examples/AiManagers_Delete.json"
+            "$ref": "./examples/AIManagers_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -413,9 +413,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listCredential": {
       "post": {
-        "operationId": "AiManagers_ListCredential",
+        "operationId": "AIManagers_ListCredential",
         "tags": [
-          "AiManagers"
+          "AIManagers"
         ],
         "description": "Lists the credentials of an AI Manager.",
         "parameters": [
@@ -455,18 +455,18 @@
         },
         "x-ms-examples": {
           "Lists the credentials of an AI Manager.": {
-            "$ref": "./examples/AiManagers_ListCredential.json"
+            "$ref": "./examples/AIManagers_ListCredential.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces": {
       "get": {
-        "operationId": "AiManagerNamespaces_ListByAiManager",
+        "operationId": "AIManagerNamespaces_ListByAIManager",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
-        "description": "List AiManagerNamespace resources by AiManager",
+        "description": "List AIManagerNamespace resources by AIManager",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -492,7 +492,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespaceListResult"
+              "$ref": "#/definitions/AIManagerNamespaceListResult"
             }
           },
           "default": {
@@ -504,7 +504,7 @@
         },
         "x-ms-examples": {
           "Lists AI Manager namespace resources by AI Manager.": {
-            "$ref": "./examples/AiManagerNamespaces_ListByAiManager.json"
+            "$ref": "./examples/AIManagerNamespaces_ListByAIManager.json"
           }
         },
         "x-ms-pageable": {
@@ -514,11 +514,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}": {
       "get": {
-        "operationId": "AiManagerNamespaces_Get",
+        "operationId": "AIManagerNamespaces_Get",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
-        "description": "Get a AiManagerNamespace",
+        "description": "Get a AIManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -554,7 +554,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespace"
+              "$ref": "#/definitions/AIManagerNamespace"
             }
           },
           "default": {
@@ -566,16 +566,16 @@
         },
         "x-ms-examples": {
           "Gets an AI Manager namespace resource.": {
-            "$ref": "./examples/AiManagerNamespaces_Get.json"
+            "$ref": "./examples/AIManagerNamespaces_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AiManagerNamespaces_CreateOrUpdate",
+        "operationId": "AIManagerNamespaces_CreateOrUpdate",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
-        "description": "Create a AiManagerNamespace",
+        "description": "Create a AIManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -628,21 +628,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespace"
+              "$ref": "#/definitions/AIManagerNamespace"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AiManagerNamespace' update operation succeeded",
+            "description": "Resource 'AIManagerNamespace' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespace"
+              "$ref": "#/definitions/AIManagerNamespace"
             }
           },
           "201": {
-            "description": "Resource 'AiManagerNamespace' create operation succeeded",
+            "description": "Resource 'AIManagerNamespace' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespace"
+              "$ref": "#/definitions/AIManagerNamespace"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -665,7 +665,7 @@
         },
         "x-ms-examples": {
           "Creates or updates an AI Manager namespace resource.": {
-            "$ref": "./examples/AiManagerNamespaces_CreateOrUpdate.json"
+            "$ref": "./examples/AIManagerNamespaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -674,11 +674,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AiManagerNamespaces_Update",
+        "operationId": "AIManagerNamespaces_Update",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
-        "description": "Update a AiManagerNamespace",
+        "description": "Update a AIManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -723,7 +723,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespacePatch"
+              "$ref": "#/definitions/AIManagerNamespacePatch"
             }
           }
         ],
@@ -731,7 +731,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiManagerNamespace"
+              "$ref": "#/definitions/AIManagerNamespace"
             }
           },
           "default": {
@@ -743,16 +743,16 @@
         },
         "x-ms-examples": {
           "Updates an AI Manager namespace resource.": {
-            "$ref": "./examples/AiManagerNamespaces_Update.json"
+            "$ref": "./examples/AIManagerNamespaces_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "AiManagerNamespaces_Delete",
+        "operationId": "AIManagerNamespaces_Delete",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
-        "description": "Delete a AiManagerNamespace",
+        "description": "Delete a AIManagerNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -819,7 +819,7 @@
         },
         "x-ms-examples": {
           "Deletes an AI Manager namespace resource.": {
-            "$ref": "./examples/AiManagerNamespaces_Delete.json"
+            "$ref": "./examples/AIManagerNamespaces_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -830,9 +830,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/listCredential": {
       "post": {
-        "operationId": "AiManagerNamespaces_ListCredential",
+        "operationId": "AIManagerNamespaces_ListCredential",
         "tags": [
-          "AiManagerNamespaces"
+          "AIManagerNamespaces"
         ],
         "description": "Lists the credentials of an AI Manager namespace.",
         "parameters": [
@@ -882,19 +882,19 @@
         },
         "x-ms-examples": {
           "Lists the credentials of an AI Manager namespace.": {
-            "$ref": "./examples/AiManagerNamespaces_ListCredential.json"
+            "$ref": "./examples/AIManagerNamespaces_ListCredential.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AiManager": {
+    "AIManager": {
       "type": "object",
       "description": "The AI Manager resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AiManagerProperties",
+          "$ref": "#/definitions/AIManagerProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -913,15 +913,15 @@
         }
       ]
     },
-    "AiManagerListResult": {
+    "AIManagerListResult": {
       "type": "object",
-      "description": "The response of a AiManager list operation.",
+      "description": "The response of a AIManager list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AiManager items on this page",
+          "description": "The AIManager items on this page",
           "items": {
-            "$ref": "#/definitions/AiManager"
+            "$ref": "#/definitions/AIManager"
           }
         },
         "nextLink": {
@@ -934,12 +934,12 @@
         "value"
       ]
     },
-    "AiManagerNamespace": {
+    "AIManagerNamespace": {
       "type": "object",
       "description": "The AI Manager namespace.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AiManagerNamespaceProperties",
+          "$ref": "#/definitions/AIManagerNamespaceProperties",
           "description": "The resource-specific properties for this resource."
         },
         "eTag": {
@@ -954,15 +954,15 @@
         }
       ]
     },
-    "AiManagerNamespaceListResult": {
+    "AIManagerNamespaceListResult": {
       "type": "object",
-      "description": "The response of a AiManagerNamespace list operation.",
+      "description": "The response of a AIManagerNamespace list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AiManagerNamespace items on this page",
+          "description": "The AIManagerNamespace items on this page",
           "items": {
-            "$ref": "#/definitions/AiManagerNamespace"
+            "$ref": "#/definitions/AIManagerNamespace"
           }
         },
         "nextLink": {
@@ -975,7 +975,7 @@
         "value"
       ]
     },
-    "AiManagerNamespacePatch": {
+    "AIManagerNamespacePatch": {
       "type": "object",
       "description": "The properties of an AI Manager namespace that can be patched.",
       "properties": {
@@ -988,7 +988,7 @@
         }
       }
     },
-    "AiManagerNamespaceProperties": {
+    "AIManagerNamespaceProperties": {
       "type": "object",
       "description": "The properties of an AI Manager namespace.",
       "properties": {
@@ -1007,7 +1007,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/AiManagerNamespaceProvisioningState",
+          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -1017,13 +1017,13 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/AiManagerNamespaceStatus",
-          "description": "Status information for the AiManager.",
+          "$ref": "#/definitions/AIManagerNamespaceStatus",
+          "description": "Status information for the AIManager.",
           "readOnly": true
         }
       }
     },
-    "AiManagerNamespaceProvisioningState": {
+    "AIManagerNamespaceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the AI Manager namespace resource.",
       "enum": [
@@ -1035,7 +1035,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "AiManagerNamespaceProvisioningState",
+        "name": "AIManagerNamespaceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1072,23 +1072,23 @@
       },
       "readOnly": true
     },
-    "AiManagerNamespaceStatus": {
+    "AIManagerNamespaceStatus": {
       "type": "object",
-      "description": "Status information for the AiManagerNamespace.",
+      "description": "Status information for the AIManagerNamespace.",
       "properties": {
         "lastOperationId": {
           "type": "string",
-          "description": "The last operation ID for the AiManagerNamespace.",
+          "description": "The last operation ID for the AIManagerNamespace.",
           "readOnly": true
         },
         "lastOperationError": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The last operation error for the AiManagerNamespace.",
+          "description": "The last operation error for the AIManagerNamespace.",
           "readOnly": true
         }
       }
     },
-    "AiManagerPatch": {
+    "AIManagerPatch": {
       "type": "object",
       "description": "The AI Manager resource patch model.",
       "properties": {
@@ -1105,7 +1105,7 @@
         }
       }
     },
-    "AiManagerProperties": {
+    "AIManagerProperties": {
       "type": "object",
       "description": "AI Manager properties.",
       "properties": {
@@ -1114,7 +1114,7 @@
           "description": "Delete options of the AI Manager."
         },
         "provisioningState": {
-          "$ref": "#/definitions/AiManagerProvisioningState",
+          "$ref": "#/definitions/AIManagerProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
@@ -1127,13 +1127,13 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/AiManagerStatus",
+          "$ref": "#/definitions/AIManagerStatus",
           "description": "Status information for the AIManager.",
           "readOnly": true
         }
       }
     },
-    "AiManagerProvisioningState": {
+    "AIManagerProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the AI Manager resource.",
       "enum": [
@@ -1145,7 +1145,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "AiManagerProvisioningState",
+        "name": "AIManagerProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1182,18 +1182,18 @@
       },
       "readOnly": true
     },
-    "AiManagerStatus": {
+    "AIManagerStatus": {
       "type": "object",
-      "description": "Status information for the AiManager.",
+      "description": "Status information for the AIManager.",
       "properties": {
         "lastOperationId": {
           "type": "string",
-          "description": "The last operation ID for the AiManager.",
+          "description": "The last operation ID for the AIManager.",
           "readOnly": true
         },
         "lastOperationError": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The last operation error for the AiManager.",
+          "description": "The last operation error for the AIManager.",
           "readOnly": true
         }
       }

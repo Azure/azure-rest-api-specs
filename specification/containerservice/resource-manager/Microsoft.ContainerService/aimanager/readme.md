@@ -39,10 +39,10 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: aimanagers.json
-    where: $.definitions.AiManagerNamespaceProperties.properties.labels
+    where: $.definitions.AIManagerNamespaceProperties.properties.labels
     reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
   - code: AvoidAdditionalProperties
     from: aimanagers.json
-    where: $.definitions.AiManagerNamespaceProperties.properties.annotations
+    where: $.definitions.AIManagerNamespaceProperties.properties.annotations
     reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
 ```

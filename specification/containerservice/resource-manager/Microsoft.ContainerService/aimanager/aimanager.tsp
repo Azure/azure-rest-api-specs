@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 
 @doc("The AI Manager resource.")
 @resource("aiManagers")
-model AiManager is TrackedResource<AiManagerProperties> {
+model AIManager is TrackedResource<AIManagerProperties> {
   @doc("The name of the AI Manager resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -33,13 +33,13 @@ model AiManager is TrackedResource<AiManagerProperties> {
 }
 
 @doc("AI Manager properties.")
-model AiManagerProperties {
+model AIManagerProperties {
   @doc("Delete options of the AI Manager.")
   deletePolicy?: DeletePolicy;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
-  provisioningState?: AiManagerProvisioningState;
+  provisioningState?: AIManagerProvisioningState;
 
   @visibility(Lifecycle.Read)
   @doc("The underlying cluster IDs of the AI Manager.")
@@ -47,17 +47,17 @@ model AiManagerProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Status information for the AIManager.")
-  status?: AiManagerStatus;
+  status?: AIManagerStatus;
 }
 
-@doc("Status information for the AiManager.")
-model AiManagerStatus {
+@doc("Status information for the AIManager.")
+model AIManagerStatus {
   @visibility(Lifecycle.Read)
-  @doc("The last operation ID for the AiManager.")
+  @doc("The last operation ID for the AIManager.")
   lastOperationId?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The last operation error for the AiManager.")
+  @doc("The last operation error for the AIManager.")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -73,7 +73,7 @@ union DeletePolicy {
 }
 
 @doc("The provisioning state of the AI Manager resource.")
-union AiManagerProvisioningState {
+union AIManagerProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -97,7 +97,7 @@ union AiManagerProvisioningState {
 }
 
 @doc("The AI Manager resource patch model.")
-model AiManagerPatch {
+model AIManagerPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
@@ -106,19 +106,19 @@ model AiManagerPatch {
 }
 
 @armResourceOperations
-interface AiManagers {
-  get is ArmResourceRead<AiManager>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AiManager>;
-  update is ArmCustomPatchSync<AiManager, AiManagerPatch>;
-  delete is ArmResourceDeleteWithoutOkAsync<AiManager>;
-  listByResourceGroup is ArmResourceListByParent<AiManager>;
-  listBySubscription is ArmListBySubscription<AiManager>;
+interface AIManagers {
+  get is ArmResourceRead<AIManager>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AIManager>;
+  update is ArmCustomPatchSync<AIManager, AIManagerPatch>;
+  delete is ArmResourceDeleteWithoutOkAsync<AIManager>;
+  listByResourceGroup is ArmResourceListByParent<AIManager>;
+  listBySubscription is ArmListBySubscription<AIManager>;
 
   @doc("Lists the credentials of an AI Manager.")
   @post
   @action("ListCredential")
   listCredential is ArmResourceActionSync<
-    AiManager,
+    AIManager,
     void,
     ArmResponse<CredentialResults>
   >;

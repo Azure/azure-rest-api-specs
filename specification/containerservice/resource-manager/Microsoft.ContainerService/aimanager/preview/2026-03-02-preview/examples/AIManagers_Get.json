@@ -1,30 +1,21 @@
 {
-  "operationId": "AiManagerNamespaces_Update",
-  "title": "Updates an AI Manager namespace resource.",
+  "operationId": "AIManagers_Get",
+  "title": "Gets an AI Manager resource.",
   "parameters": {
     "api-version": "2026-03-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "aiManagerName": "aimanager1",
-    "namespaceName": "namespace1",
-    "If-Match": null,
-    "properties": {
-      "tags": {
-        "key1": "value1",
-        "key2": "value2"
-      }
-    }
+    "aiManagerName": "aimanager1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
-        "name": "namespace1",
-        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1",
+        "name": "aimanager1",
+        "type": "Microsoft.ContainerService/aiManagers",
         "location": "eastus",
         "tags": {
-          "key1": "value1",
-          "key2": "value2"
+          "key1": "value1"
         },
         "systemData": {
           "createdBy": "user@example.com",
@@ -35,15 +26,19 @@
           "lastModifiedAt": "2024-01-01T00:00:00.000Z"
         },
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "identity": {
+          "identity": {
+            "type": "SystemAssigned",
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "tenantId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
         "properties": {
-          "labels": {
-            "app": "myapp"
-          },
-          "annotations": {
-            "note": "example"
-          },
+          "deletePolicy": "Keep",
           "provisioningState": "Succeeded",
-          "managedNamespaceId": "managed-namespace-id",
+          "clusterIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          ],
           "status": {
             "lastOperationId": "00000000-0000-0000-0000-000000000000"
           }
