@@ -41,6 +41,9 @@ namespace Language.AnalyzeDocuments;
 
 /** Analyze Documents Service Versions */
 enum Versions {
+  /** Version 2026-05-01 */
+  v2026_05_01: "2026-05-01",
+  
   /** Version 2024-11-15-preview */
   v2024_11_15_preview: "2024-11-15-preview",
 }

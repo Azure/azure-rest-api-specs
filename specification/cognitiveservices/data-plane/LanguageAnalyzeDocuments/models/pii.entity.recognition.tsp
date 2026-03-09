@@ -25,8 +25,13 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 
+  /** List of RedactionPolicies to be used on the input. */
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2024_11_15_preview)
+  redactionPolicies?: BaseRedactionPolicy[];
+
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2026_05_01)
   excludeExtractionData?: boolean;
 }
 
