@@ -10,7 +10,7 @@ using Microsoft.ConfidentialLedger;
   "confidentialLedger"
 );
 @@clientName(ConfidentialLedgers.backup::parameters.body, "confidentialLedger");
-@@clientName(ConfidentialLedgers.restore::parameters.body,
+@@clientName(ConfidentialLedgerRestoreOps.restore::parameters.body,
   "confidentialLedger"
 );
 
@@ -26,7 +26,7 @@ using Microsoft.ConfidentialLedger;
 @@clientLocation(ConfidentialLedgers.listByResourceGroup, "Ledger");
 @@clientLocation(ConfidentialLedgers.listBySubscription, "Ledger");
 @@clientLocation(ConfidentialLedgers.backup, "Ledger");
-@@clientLocation(ConfidentialLedgers.restore, "Ledger");
+@@clientLocation(ConfidentialLedgerRestoreOps.restore, "Ledger");
 @@clientLocation(ManagedCCFs.get, "ManagedCCF");
 @@clientLocation(ManagedCCFs.create, "ManagedCCF");
 @@clientName(ManagedCCFs.create::parameters.resource, "ManagedCCF");

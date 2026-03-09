@@ -394,6 +394,7 @@ model ConfidentialLedgerBackupResponse {
 /**
  * Object representing Restore properties of a Confidential Ledger Resource.
  */
+@removed(Versions.v2026_02_23)
 model ConfidentialLedgerRestore {
   /**
    * Fileshare where the ledger backup is stored.
@@ -415,6 +416,7 @@ model ConfidentialLedgerRestore {
 /**
  * Object representing the restore response of a Confidential Ledger Resource.
  */
+@removed(Versions.v2026_02_23)
 model ConfidentialLedgerRestoreResponse {
   /**
    * Response body stating if the ledger is being restored.

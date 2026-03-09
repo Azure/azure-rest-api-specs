@@ -548,81 +548,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/restore": {
-      "post": {
-        "operationId": "Ledger_Restore",
-        "tags": [
-          "ConfidentialLedgers"
-        ],
-        "description": "Restores a Confidential Ledger Resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "ledgerName",
-            "in": "path",
-            "description": "Name of the Confidential Ledger",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^-0-9][A-Za-z0-9-]{1,33}[A-Za-z0-9]$"
-          },
-          {
-            "name": "confidentialLedger",
-            "in": "body",
-            "description": "Confidential Ledger Restore Request Body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerRestore"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerRestoreResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfidentialLedgerRestore": {
-            "$ref": "./examples/ConfidentialLedger_Restore.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ConfidentialLedgerRestoreResponse"
-        },
-        "x-ms-long-running-operation": true
-      }
     }
   },
   "definitions": {
@@ -745,42 +670,6 @@
       "required": [
         "value"
       ]
-    },
-    "ConfidentialLedgerRestore": {
-      "type": "object",
-      "description": "Object representing Restore properties of a Confidential Ledger Resource.",
-      "properties": {
-        "fileShareName": {
-          "type": "string",
-          "description": "Fileshare where the ledger backup is stored."
-        },
-        "restoreRegion": {
-          "type": "string",
-          "description": "The region the ledger is being restored to."
-        },
-        "uri": {
-          "type": "string",
-          "format": "password",
-          "description": "SAS URI used to access the backup fileshare.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "fileShareName",
-        "restoreRegion",
-        "uri"
-      ]
-    },
-    "ConfidentialLedgerRestoreResponse": {
-      "type": "object",
-      "description": "Object representing the restore response of a Confidential Ledger Resource.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Response body stating if the ledger is being restored.",
-          "readOnly": true
-        }
-      }
     },
     "EnclavePlatform": {
       "type": "string",
