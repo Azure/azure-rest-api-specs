@@ -1,12 +1,9 @@
 import "@typespec/rest";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "./models.stac.spec.tsp";
-import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
 @service(#{ title: "MPCPro Ingestion and Management API" })

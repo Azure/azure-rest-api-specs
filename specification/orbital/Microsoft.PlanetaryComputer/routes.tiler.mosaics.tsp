@@ -1,14 +1,11 @@
 // Tiles for STAC Collections Mosaics interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.tiler.mosaics.tsp";
-import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
