@@ -2,7 +2,7 @@ import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { join, PlatformPath } from "path";
+import defaultPath, { basename, dirname, join, PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { context } from "./index.js";
@@ -33,15 +33,12 @@ export async function runNpm(
 
 export async function fileExists(file: string) {
   try {
+    // Check if file is visible to process.  Uses case-insensitive match on Windows.
     await access(file);
-  } catch {
-    return false;
-  }
 
-  // Verify exact case match to avoid false positives on case-insensitive file systems (Windows)
-  try {
-    const dir = defaultPath.dirname(file);
-    const base = defaultPath.basename(file);
+    // Verify exact case match to avoid false positives on case-insensitive file systems (Windows)
+    const dir = dirname(file);
+    const base = basename(file);
     const entries = await readdir(dir);
     return entries.includes(base);
   } catch {
