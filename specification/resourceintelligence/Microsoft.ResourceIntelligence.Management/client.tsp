@@ -6,5 +6,6 @@ using Microsoft.ResourceIntelligence;
 
 // SDK client configuration for Agent Builder resources
 @@clientName(Agents, "AgentsClient", "csharp");
+@@clientName(Threads, "ThreadsClient", "csharp");
 @@clientName(Runs, "RunsClient", "csharp");
 @@clientName(Messages, "MessagesClient", "csharp");

@@ -1,14 +1,13 @@
 {
-  "operationId": "Runs_CreateOrUpdate",
-  "title": "Create or update a Run",
+  "operationId": "Threads_CreateOrUpdate",
+  "title": "Create or update a Thread",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "agentName": "myAgent",
     "threadId": "thread-001",
-    "runId": "run-001",
-    "resource": {
+    "body": {
       "message": "Show me all virtual machines in this subscription",
       "modelUrl": "https://myopenai.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01",
       "allowToolUse": "enabled",
@@ -18,12 +17,11 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/runs/run-001",
-        "name": "run-001",
-        "type": "Microsoft.ResourceIntelligence/agents/threads/runs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001",
+        "name": "thread-001",
+        "type": "Microsoft.ResourceIntelligence/agents/threads",
         "properties": {
-          "status": "running",
-          "startTime": "2026-02-01T12:00:00Z"
+          "status": "running"
         },
         "systemData": {
           "createdBy": "user@contoso.com",
@@ -34,9 +32,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/runs/run-001",
-        "name": "run-001",
-        "type": "Microsoft.ResourceIntelligence/agents/threads/runs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001",
+        "name": "thread-001",
+        "type": "Microsoft.ResourceIntelligence/agents/threads",
         "properties": {
           "status": "running"
         },

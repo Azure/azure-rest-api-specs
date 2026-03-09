@@ -1,20 +1,21 @@
 {
   "operationId": "Runs_ListByParent",
-  "title": "List runs for an agent",
+  "title": "List runs for a thread",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "agentName": "myAgent"
+    "agentName": "myAgent",
+    "threadId": "thread-001"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/6fa459ea-ee8a-3ca4-894e-db77e160355e",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/runs/6fa459ea-ee8a-3ca4-894e-db77e160355e",
             "name": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
-            "type": "Microsoft.ResourceIntelligence/agents/runs",
+            "type": "Microsoft.ResourceIntelligence/agents/threads/runs",
             "properties": {
               "status": "completed",
               "startTime": "2026-02-01T12:00:00Z",
@@ -22,9 +23,9 @@
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/runs/7fb560fb-ff9b-4db5-995f-ec88f261466f",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/runs/7fb560fb-ff9b-4db5-995f-ec88f261466f",
             "name": "7fb560fb-ff9b-4db5-995f-ec88f261466f",
-            "type": "Microsoft.ResourceIntelligence/agents/runs",
+            "type": "Microsoft.ResourceIntelligence/agents/threads/runs",
             "properties": {
               "status": "running",
               "startTime": "2026-02-01T12:05:00Z"

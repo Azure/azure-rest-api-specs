@@ -99,5 +99,14 @@ interface Agents {
   /**
    * Creates a new run for the agent.
    */
-  execute is ArmResourceActionAsync<Agent, RunRequest, Run>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Execute returns 201 with Location header for LRO polling"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO execute returns 201 with Location/Retry-After headers only, no body"
+  @armResourceAction(Agent)
+  @post
+  execute(
+    ...ResourceInstanceParameters<Agent>,
+
+    /** The content of the action request. */
+    @body body: RunRequest,
+  ): ArmAccepted201LroResponse | ErrorResponse;
 }

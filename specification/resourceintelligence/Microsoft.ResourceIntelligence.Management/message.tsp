@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./run.tsp";
+import "./thread.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Rest;
@@ -16,9 +16,9 @@ namespace Microsoft.ResourceIntelligence;
 // ============================================
 
 /**
- * A message within a run. Records the conversation history.
+ * A message within a thread. Records the conversation history.
  */
-@parentResource(Run)
+@parentResource(Thread)
 model Message is ProxyResource<MessageProperties> {
   /**
    * The unique identifier of the message.
@@ -35,6 +35,12 @@ model Message is ProxyResource<MessageProperties> {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Messages are read-only projections with no create/update/delete lifecycle, so provisioningState is not applicable."
 model MessageProperties {
+  /**
+   * The ID of the run this message belongs to.
+   */
+  @visibility(Lifecycle.Read)
+  runId?: string;
+
   /**
    * The type of message (system_message, tool_call, tool_return, assistant_message).
    */
@@ -72,7 +78,7 @@ interface Messages {
   get is ArmResourceRead<Message>;
 
   /**
-   * Lists messages for a run.
+   * Lists messages for a thread.
    */
   listByParent is ArmResourceListByParent<Message>;
 }
