@@ -13407,7 +13407,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/WorkflowErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -14690,7 +14690,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/WorkflowErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -45258,6 +45258,16 @@
         }
       }
     },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorProperties",
+          "description": "The error properties."
+        }
+      }
+    },
     "Experiments": {
       "type": "object",
       "description": "Routing rules in production experiments.",
@@ -51181,7 +51191,7 @@
           "description": "Gets the service request Id."
         },
         "error": {
-          "$ref": "#/definitions/WorkflowErrorResponse",
+          "$ref": "#/definitions/ErrorResponse",
           "description": "Gets the error response."
         }
       }
@@ -57393,16 +57403,6 @@
         "health": {
           "$ref": "#/definitions/WorkflowHealth",
           "description": "Gets or sets workflow health."
-        }
-      }
-    },
-    "WorkflowErrorResponse": {
-      "type": "object",
-      "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorProperties",
-          "description": "The error properties."
         }
       }
     },

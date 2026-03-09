@@ -13890,6 +13890,7 @@ model RegenerateActionParameter {
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
 @error
+@renamedFrom(Versions.v2026_03_15, "ErrorResponse")
 model WorkflowErrorResponse {
   /**
    * The error properties.
