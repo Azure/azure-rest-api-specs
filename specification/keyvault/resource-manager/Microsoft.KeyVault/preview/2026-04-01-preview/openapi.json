@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultManagementClient",
-    "version": "2026-04-01",
+    "version": "2026-04-01-preview",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
     "x-typespec-generated": [
       {
@@ -5817,6 +5817,80 @@
         ]
       }
     },
+    "TokenBindingMode": {
+      "type": "string",
+      "description": "This specifies whether token binding is disabled, enabled or enforced.",
+      "enum": [
+        "Enforced",
+        "NotEnforced"
+      ],
+      "x-ms-enum": {
+        "name": "TokenBindingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Token binding is enforced for the vault. Only bounded tokens will be accepted. Bearer tokens will be rejected."
+          },
+          {
+            "name": "NotEnforced",
+            "value": "NotEnforced",
+            "description": "Token binding is not enforced for the vault. Bounded tokens will be rejected."
+          }
+        ]
+      }
+    },
+    "TokenBindingParameters": {
+      "type": "object",
+      "description": "Configuration for Token Binding for Entra tokens",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TokenBindingMode",
+          "description": "This specifies whether token binding is disabled, enabled or enforced."
+        },
+        "minimumTokenBindingStrength": {
+          "$ref": "#/definitions/TokenBindingStrength",
+          "description": "Must be one of the following values \"NoValidation\", \"Unattested\", \"AttestedTrustedLaunch\", \"AttestedConfidential\". Strength of the token binding increases with each value in that order."
+        }
+      }
+    },
+    "TokenBindingStrength": {
+      "type": "string",
+      "description": "Must be one of the following values \"NoValidation\", \"Unattested\", \"AttestedTrustedLaunch\", \"AttestedConfidential\". Strength of the token binding increases with each value in that order.",
+      "enum": [
+        "NoValidation",
+        "Unattested",
+        "AttestedTrustedLaunch",
+        "AttestedConfidential"
+      ],
+      "x-ms-enum": {
+        "name": "TokenBindingStrength",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoValidation",
+            "value": "NoValidation",
+            "description": "This is default when token binding is not enabled."
+          },
+          {
+            "name": "Unattested",
+            "value": "Unattested",
+            "description": "No attestation proof is required for the bounded token."
+          },
+          {
+            "name": "AttestedTrustedLaunch",
+            "value": "AttestedTrustedLaunch",
+            "description": "Bounded Entra token must originate from a trusted launch VM with attestation proof from the attestation authority like Microsoft Azure Attestation."
+          },
+          {
+            "name": "AttestedConfidential",
+            "value": "AttestedConfidential",
+            "description": "Bounded Entra token must originate from a confidential VM with attestation proof from the attestation authority like Microsoft Azure Attestation."
+          }
+        ]
+      }
+    },
     "Trigger": {
       "type": "object",
       "properties": {
@@ -6064,6 +6138,10 @@
         "publicNetworkAccess": {
           "type": "string",
           "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
+        },
+        "tokenBindingParameters": {
+          "$ref": "#/definitions/TokenBindingParameters",
+          "description": "Configuration for Token Binding for Entra tokens"
         }
       }
     },
@@ -6163,6 +6241,10 @@
           "type": "string",
           "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.",
           "default": "enabled"
+        },
+        "tokenBindingParameters": {
+          "$ref": "#/definitions/TokenBindingParameters",
+          "description": "Configuration for Token Binding for Entra tokens"
         }
       },
       "required": [
