@@ -73,6 +73,7 @@ input-file:
   - stable/2025-07-01/networkManagerConnectivityConfiguration.json
   - stable/2025-07-01/networkManagerEffectiveConfiguration.json
   - stable/2025-07-01/networkManagerGroup.json
+  - stable/2025-07-01/networkManagerCommit.json
   - stable/2025-07-01/networkManagerRoutingConfiguration.json
   - stable/2025-07-01/networkManagerScopeConnection.json
   - stable/2025-07-01/networkManagerSecurityAdminConfiguration.json
