@@ -123,7 +123,7 @@ interface WorkflowTriggers {
     {
       @body body: void;
     },
-    OverrideErrorType = ErrorResponse,
+    OverrideErrorType = WorkflowErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader<FinalResult = void>
   >;
