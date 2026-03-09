@@ -54,10 +54,12 @@ model AgentProperties {
 /**
  * The type used for update operations of the Agent.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Only tags are updatable via PATCH for Agent"
 model AgentUpdate {
   /** Resource tags. */
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The managed service identities assigned to this resource. */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 // ============================================
@@ -74,16 +76,7 @@ interface Agents {
   /**
    * Creates or updates an agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Tracked ARM resources must not return 201 on PUT per API review guidance"
-  @armResourceCreateOrUpdate(Agent)
-  @put
-  createOrUpdate(
-    ...ResourceInstanceParameters<Agent>,
-
-    /** Resource create parameters. */
-    @bodyRoot
-    resource: Agent,
-  ): ArmResponse<Agent> | ErrorResponse;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
    * Updates an agent.
@@ -108,14 +101,5 @@ interface Agents {
   /**
    * Creates a new run for the agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Execute returns 201 with Location header for LRO polling"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO execute returns 201 with Location/Retry-After headers only, no body"
-  @armResourceAction(Agent)
-  @post
-  execute(
-    ...ResourceInstanceParameters<Agent>,
-
-    /** The content of the action request. */
-    @body body: RunRequest,
-  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
+  execute is ArmResourceActionAsync<Agent, RunRequest, Run>;
 }

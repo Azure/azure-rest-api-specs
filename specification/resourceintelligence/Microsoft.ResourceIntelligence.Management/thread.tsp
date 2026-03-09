@@ -62,7 +62,6 @@ interface Threads {
   /**
    * Creates or updates a thread.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Tracked ARM resources must not return 201 on PUT per API review guidance"
   @armResourceCreateOrUpdate(Thread)
   @put
   createOrUpdate(
@@ -70,7 +69,7 @@ interface Threads {
 
     /** The content of the action request. */
     @body body: RunRequest,
-  ): ArmResponse<Thread> | ErrorResponse;
+  ): ArmResponse<Thread> | ArmResourceCreatedResponse<Thread> | ErrorResponse;
 
   /**
    * Deletes a thread.
@@ -85,14 +84,5 @@ interface Threads {
   /**
    * Creates a new run for the thread.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Execute returns 201 with Location header for LRO polling"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO execute returns 201 with Location/Retry-After headers only, no body"
-  @armResourceAction(Thread)
-  @post
-  execute(
-    ...ResourceInstanceParameters<Thread>,
-
-    /** The content of the action request. */
-    @body body: RunRequest,
-  ): ArmResponse<Run> | ArmAccepted201LroResponse | ErrorResponse;
+  execute is ArmResourceActionAsync<Thread, RunRequest, Run>;
 }

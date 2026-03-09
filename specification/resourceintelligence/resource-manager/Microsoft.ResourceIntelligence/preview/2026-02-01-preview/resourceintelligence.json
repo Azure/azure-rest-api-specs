@@ -305,7 +305,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'Agent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Resource 'Agent' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -454,7 +460,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunRequest"
@@ -468,8 +474,8 @@
               "$ref": "#/definitions/Run"
             }
           },
-          "201": {
-            "description": "Response for a long-running POST action that returns 201 with Location polling.",
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -654,6 +660,19 @@
               "$ref": "#/definitions/Thread"
             }
           },
+          "201": {
+            "description": "Resource 'Thread' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -757,7 +776,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunRequest"
@@ -771,8 +790,8 @@
               "$ref": "#/definitions/Run"
             }
           },
-          "201": {
-            "description": "Response for a long-running POST action that returns 201 with Location polling.",
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1117,6 +1136,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },

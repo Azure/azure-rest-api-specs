@@ -125,25 +125,3 @@ model RunRequest {
    */
   modelUrl: string;
 }
-
-// ============================================
-// LRO RESPONSE MODELS
-// ============================================
-
-/**
- * Response for a long-running POST action that returns 201 with Location polling.
- */
-model ArmAccepted201LroResponse {
-  @doc("Resource operation accepted.")
-  @statusCode
-  statusCode: 201;
-
-  ...ArmLroLocationHeader<
-    Azure.Core.StatusMonitorPollingOptions<PollingModel = ArmOperationStatus>,
-    Run
-  >;
-
-  @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
-  @header("Retry-After")
-  retryAfter?: int32;
-}
