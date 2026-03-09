@@ -4054,7 +4054,8 @@
               "CreateIndex",
               "DropIndex",
               "ReIndex",
-              "AnalyzeTable"
+              "AnalyzeTable",
+              "VacuumTable"
             ],
             "x-ms-enum": {
               "name": "RecommendationTypeParameterEnum",
@@ -4075,6 +4076,10 @@
                 {
                   "name": "AnalyzeTable",
                   "value": "AnalyzeTable"
+                },
+                {
+                  "name": "VacuumTable",
+                  "value": "VacuumTable"
                 }
               ]
             }
@@ -6302,6 +6307,24 @@
         ]
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Log specification for an operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the log."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration for the log."
+        }
+      }
+    },
     "LogicalReplicationOnSourceServer": {
       "type": "string",
       "description": "Indicates whether to setup logical replication on source server, if needed.",
@@ -6478,6 +6501,50 @@
           "type": "integer",
           "format": "int32",
           "description": "Day of the week to be used for maintenance window."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification for an operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type of the metric."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Supported aggregation types for the metric.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Supported time grain types for the metric.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the metric."
         }
       }
     },
@@ -7522,9 +7589,8 @@
           "readOnly": true
         },
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/OperationProperties",
           "description": "Additional descriptions for the operation.",
-          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -7604,6 +7670,16 @@
             "value": "system"
           }
         ]
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Additional properties for operation metadata.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification for the operation."
+        }
       }
     },
     "OverwriteDatabasesOnTargetServer": {
@@ -7938,7 +8014,8 @@
         "CreateIndex",
         "DropIndex",
         "ReIndex",
-        "AnalyzeTable"
+        "AnalyzeTable",
+        "VacuumTable"
       ],
       "x-ms-enum": {
         "name": "RecommendationTypeEnum",
@@ -7959,6 +8036,10 @@
           {
             "name": "AnalyzeTable",
             "value": "AnalyzeTable"
+          },
+          {
+            "name": "VacuumTable",
+            "value": "VacuumTable"
           }
         ]
       }
@@ -8644,6 +8725,34 @@
         }
       ]
     },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification for an operation.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specifications for the operation.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Log specifications for the operation.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "Compute information of a server.",
@@ -9164,6 +9273,12 @@
     "TuningOptions": {
       "type": "object",
       "description": "Impact on some metric if this recommended action is applied.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TuningOptionsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -9193,6 +9308,17 @@
       "required": [
         "value"
       ]
+    },
+    "TuningOptionsProperties": {
+      "type": "object",
+      "description": "Properties of a tuning option.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the tuning option.",
+          "readOnly": true
+        }
+      }
     },
     "UserAssignedIdentity": {
       "type": "object",

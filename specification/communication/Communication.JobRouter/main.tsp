@@ -20,7 +20,7 @@ using Azure.Core.Traits;
   "Azure Communication Routing Service",
   {
     @doc("Uri of your Communication resource")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(Versions)

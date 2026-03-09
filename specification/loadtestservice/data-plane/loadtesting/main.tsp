@@ -15,7 +15,7 @@ using Azure.Core;
   "https://{endpoint}",
   "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
   {
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("""

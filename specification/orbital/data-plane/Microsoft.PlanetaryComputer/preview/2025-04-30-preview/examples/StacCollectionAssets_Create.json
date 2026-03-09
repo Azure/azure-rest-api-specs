@@ -2,140 +2,180 @@
   "title": "StacCollectionAssets_Create",
   "operationId": "StacCollectionAssets_Create",
   "parameters": {
+    "collectionId": "naip-atl",
     "api-version": "2025-04-30-preview",
-    "collectionId": "test-collection-d45537668d06",
     "contentType": "multipart/form-data",
-    "data": "{\"key\": \"visual\", \"type\": \"image/png\", \"roles\": [\"visual\", \"transaction\"], \"title\": \"visual\", \"description\": \"This is an example upload\"}",
-    "file": "This is some text"
+    "data": "{\"key\": \"test-asset\", \"href\": \"https://example.com/test-asset.txt\", \"type\": \"text/plain\", \"roles\": [\"metadata\"], \"title\": \"Test Asset\"}",
+    "file": "Test asset content"
   },
   "responses": {
     "201": {
       "body": {
         "type": "Collection",
-        "id": "test-collection-b07e7de4387b",
+        "id": "naip-atl",
         "stac_version": "1.0.0",
-        "description": "A collection for integration tests purposes",
+        "description": "A Subset of NAIP imagery for sample MPC Pro GeoCatalog deployments. Includes multiple city and national park focus areas, useful for quick product evaluation. - Updated for testing",
         "links": [
           {
             "rel": "items",
             "type": "application/geo+json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-b07e7de4387b/items"
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/naip-atl/items"
           },
           {
             "rel": "parent",
             "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/"
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/"
           },
           {
             "rel": "root",
             "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/"
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/"
           },
           {
             "rel": "self",
             "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-b07e7de4387b"
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/naip-atl"
           }
         ],
-        "msft:_created": "2024-11-06T22:41:26.982611Z",
-        "msft:_updated": "2024-11-06T22:41:27.735413Z",
-        "title": "Test Collection b07e7de4387b",
+        "stac_extensions": [
+          "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/table/v1.2.0/schema.json"
+        ],
+        "item_assets": {
+          "image": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "roles": [
+              "data"
+            ],
+            "title": "RGBIR COG tile",
+            "eo:bands": [
+              {
+                "name": "Red",
+                "common_name": "red"
+              },
+              {
+                "name": "Green",
+                "common_name": "green"
+              },
+              {
+                "name": "Blue",
+                "common_name": "blue"
+              },
+              {
+                "name": "NIR",
+                "common_name": "nir",
+                "description": "near-infrared"
+              }
+            ]
+          },
+          "metadata": {
+            "type": "text/plain",
+            "roles": [
+              "metadata"
+            ],
+            "title": "FGDC Metdata"
+          },
+          "thumbnail": {
+            "type": "image/jpeg",
+            "roles": [
+              "thumbnail"
+            ],
+            "title": "Thumbnail"
+          }
+        },
+        "msft:_created": "2025-10-22T11:14:31.811918Z",
+        "msft:_updated": "2025-10-28T18:49:28.953860Z",
+        "title": "NAIP Atlanta (MPC Pro Sample Datasets)",
         "extent": {
           "spatial": {
             "bbox": [
               [
-                -180,
-                -90,
-                180,
-                90
+                -85.605165,
+                30.357851,
+                -80.839729,
+                35.000659
               ]
             ]
           },
           "temporal": {
             "interval": [
               [
-                "2020-01-01T00:00:00Z",
-                null
+                "2010-01-01T00:00:00Z",
+                "2023-12-31T00:00:00Z"
               ]
             ]
           }
         },
-        "license": "CC-BY-4.0",
-        "assets": {
-          "visual": {
-            "href": "https://ysuxzldatasa.blob.core.windows.net/test-collection-b07e7de4387b-61cc3d6e/collection-assets/visual/text.txt",
-            "type": "image/png",
-            "title": "visual",
-            "description": "This is an example upload",
+        "license": "proprietary",
+        "providers": [
+          {
+            "name": "USDA Farm Service Agency",
             "roles": [
-              "visual",
-              "transaction"
-            ]
-          }
-        }
-      }
-    },
-    "200": {
-      "body": {
-        "type": "Collection",
-        "id": "test-collection-b07e7de4387b",
-        "stac_version": "1.0.0",
-        "description": "A collection for integration tests purposes",
-        "links": [
-          {
-            "rel": "items",
-            "type": "application/geo+json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-b07e7de4387b/items"
+              "producer",
+              "licensor"
+            ],
+            "url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
           },
           {
-            "rel": "parent",
-            "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/"
+            "name": "Esri",
+            "roles": [
+              "processor"
+            ],
+            "url": "https://www.esri.com/"
           },
           {
-            "rel": "root",
-            "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/"
-          },
-          {
-            "rel": "self",
-            "type": "application/json",
-            "href": "https://sample.cmbtazhseqhgeudd.uksouth.geocatalog.spatio.azure.com/stac/collections/test-collection-b07e7de4387b"
+            "name": "Microsoft",
+            "roles": [
+              "host",
+              "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
           }
         ],
-        "msft:_created": "2024-11-06T22:41:26.982611Z",
-        "msft:_updated": "2024-11-06T22:41:27.735413Z",
-        "title": "Test Collection b07e7de4387b",
-        "extent": {
-          "spatial": {
-            "bbox": [
-              [
-                -180,
-                -90,
-                180,
-                90
-              ]
+        "summaries": {
+          "gsd": [
+            0.3,
+            0.6,
+            1
+          ],
+          "eo:bands": [
+            {
+              "name": "Red",
+              "common_name": "red",
+              "description": "visible red"
+            },
+            {
+              "name": "Green",
+              "common_name": "green",
+              "description": "visible green"
+            },
+            {
+              "name": "Blue",
+              "common_name": "blue",
+              "description": "visible blue"
+            },
+            {
+              "name": "NIR",
+              "common_name": "nir",
+              "description": "near-infrared"
+            }
+          ]
+        },
+        "assets": {
+          "thumbnail": {
+            "href": "https://SANITIZED.blob.core.windows.net/naip-atl-bde3e846/collection-assets/thumbnail/thumbnail.png",
+            "type": "image/png",
+            "title": "NAIP thumbnail",
+            "roles": [
+              "thumbnail"
             ]
           },
-          "temporal": {
-            "interval": [
-              [
-                "2020-01-01T00:00:00Z",
-                null
-              ]
-            ]
-          }
-        },
-        "license": "CC-BY-4.0",
-        "assets": {
-          "visual": {
-            "href": "https://ysuxzldatasa.blob.core.windows.net/test-collection-b07e7de4387b-61cc3d6e/collection-assets/visual/text.txt",
-            "type": "image/png",
-            "title": "visual",
-            "description": "This is an example upload",
+          "test-asset": {
+            "href": "https://SANITIZED.blob.core.windows.net/naip-atl-bde3e846/collection-assets/test-asset/test-asset.txt",
+            "type": "text/plain",
+            "title": "Test Asset",
             "roles": [
-              "visual",
-              "transaction"
+              "metadata"
             ]
           }
         }

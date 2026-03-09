@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-12-15-preview",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "group1",
+            "type": "Microsoft.NetApp/netAppAccounts/volumeGroups",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/volumeGroups/group1",
+            "location": "eastus",
+            "properties": {
+              "groupMetaData": {
+                "applicationIdentifier": "DEV",
+                "applicationType": "ORACLE",
+                "groupDescription": "Volume group",
+                "volumesCount": 12
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VolumeGroups_ListByNetAppAccount",
+  "title": "VolumeGroups_List_Oracle"
+}

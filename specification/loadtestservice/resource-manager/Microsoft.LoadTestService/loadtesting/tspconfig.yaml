@@ -14,7 +14,6 @@ parameters:
     default: "loadtesting"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/loadtestservice.json"
@@ -33,10 +32,8 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"
     namespace: "Azure.ResourceManager.LoadTesting"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-loadtesting"
