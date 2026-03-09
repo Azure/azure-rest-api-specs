@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-changeSafety"
-  output-folder: "$(typescript-sdks-folder)/sdk/changeSafety/arm-changeSafety"
+  package-name: "@azure/arm-applink"
+  output-folder: "$(typescript-sdks-folder)/sdk/applink/arm-applink"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

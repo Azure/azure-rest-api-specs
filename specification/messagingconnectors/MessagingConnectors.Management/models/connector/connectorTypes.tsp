@@ -74,6 +74,15 @@ union ConnectorType {
   @doc("Dataverse source connector v2.")
   DataverseSourceV2: "DataverseSourceV2",
 
+  @doc("DeltaChangeFeed source connector.")
+  DeltaChangeFeedSource: "DeltaChangeFeedSource",
+
+  @doc("IoTHub source connector.")
+  IoTHubSource: "IoTHubSource",
+
+  @doc("General source connector.")
+  GeneralConnectorSource: "GeneralConnectorSource",
+
   string,
 }
 

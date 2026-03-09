@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase;
-using Azure.Core;
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -23,6 +22,18 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2_preview: "2025-01-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v3_preview: "2026-03-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v4_preview: "2026-05-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -644,6 +655,66 @@ model StopBackupProtectionGroupRequest {
   comment?: string;
 }
 
+@doc("The properties of BackupProtectionGroupRequest")
+model BackupProtectionGroupRequest {
+  @doc("The vm list details.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  vmList: VmList;
+}
+
+@doc("Backup job response for a Protection Group")
+model BackupProtectionGroupResponse {
+  @doc("The Commvault response for taskId")
+  @visibility(Lifecycle.Read)
+  taskId: int32;
+
+  @doc("The jobIds returned from Commvault.")
+  @visibility(Lifecycle.Read)
+  jobIds: string[];
+}
+
+@doc("The VM list for backup")
+model VmList {
+  @doc("The list of VM GUIDs to backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
+  vmGuid: VmGuid[];
+
+  @doc("The backup options for the VM backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupOptions: BackupOptions;
+}
+
+@doc("The VM GUID for backup")
+model VmGuid {
+  @doc("The id of the VM")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  id: string;
+}
+
+@doc("The backup options for the VM backup")
+model BackupOptions {
+  @doc("Indicates whether to stop backup or not for the VM")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupLevel: string;
+
+  @doc("The name of the backup job to be shown in Commvault")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  jobDescription: string;
+
+  @doc("Indicates whether to run backup immediately or not for the VM")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupCopyImmediately: boolean;
+
+  @doc("Indicates whether to run snapshot backup or not for the VM, if false, it will run regular backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  runSnapShotBackup: boolean;
+
+  @doc("Indicates whether to notify the user on job completion")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  notifyUserOnJobCompletion: boolean;
+}
+
 @armResourceOperations
 interface ProtectionGroups {
   get is ArmResourceRead<ProtectionGroup>;
@@ -662,6 +733,41 @@ interface ProtectionGroups {
     @doc("The body type of the operation request.")
     request: StopBackupProtectionGroupRequest,
   ): ArmAcceptedLroResponse | ErrorResponse;
+
+  @doc("Restore resource for a protected items in given protection group.")
+  @armResourceAction(ProtectionGroup)
+  @action("restore")
+  @post
+  @added(Versions.v2_preview)
+  restore(
+    ...ResourceInstanceParameters<ProtectionGroup>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: RestoreProtectionItemRequest,
+  ): ArmResponse<RestoreProtectionItemResponse> | ErrorResponse;
+
+  @doc("Resume Backup for a Protection Group.")
+  @armResourceAction(ProtectionGroup)
+  @action("resumeBackup")
+  @post
+  @added(Versions.v3_preview)
+  resumeBackup(
+    ...ResourceInstanceParameters<ProtectionGroup>,
+  ): ArmNoContentResponse<"Resource operation accepted."> | ErrorResponse;
+
+  @doc("Ad-hoc backup of protected items resource in given protection group.")
+  @armResourceAction(ProtectionGroup)
+  @action("backup")
+  @post
+  @added(Versions.v4_preview)
+  backup(
+    ...ResourceInstanceParameters<ProtectionGroup>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: BackupProtectionGroupRequest,
+  ): ArmResponse<BackupProtectionGroupResponse> | ErrorResponse;
 }
 
 @parentResource(ProtectionGroup)
@@ -765,10 +871,18 @@ model VmInfo {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   targetVmGuid?: string;
 
+  @added(Versions.v1_preview)
+  @removed(Versions.v3_preview)
   @doc("The vmTag of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
   vmtag?: VmTag[];
+
+  @added(Versions.v3_preview)
+  @doc("The vmTag of the VM.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
+  vmtags?: VmTag[];
 }
 
 @doc("The properties of VmDestinationInfo")

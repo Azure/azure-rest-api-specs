@@ -1,0 +1,51 @@
+{
+  "title": "ConfigDef SqlServerSourceConnector",
+  "operationId": "ConfigDefOperations_GetConfigurationDef",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "isolationId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "packageStorageInformation": {
+        "blobPath": "blob.windows.net.xxxx/xxxx/xxx",
+        "authentication": {
+          "authenticationMode": "ConnectionString",
+          "connectionString": "connection1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurationDefs": [
+          {
+            "className": "xxx.xxx.com",
+            "configKeysInformations": [
+              {
+                "name": "hostname",
+                "type": "STRING",
+                "required": false,
+                "defaultValue": "",
+                "importance": "HIGH",
+                "documentation": "host name of sql server",
+                "group": "",
+                "orderInGroup": null,
+                "width": null,
+                "displayName": "Host Name",
+                "dependents": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}

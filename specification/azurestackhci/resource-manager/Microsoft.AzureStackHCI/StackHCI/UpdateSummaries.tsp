@@ -73,8 +73,18 @@ interface UpdateSummariesOperationGroup {
    * Check for updates
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @removed(Versions.v2025_12_01_preview)
-  checkUpdates is ArmResourceActionNoContentAsync<UpdateSummaries, void>;
+  @added(Versions.v2026_03_15_preview)
+  checkUpdates is ArmResourceActionNoContentAsync<
+    UpdateSummaries,
+    CheckUpdatesRequest
+  >;
+
+  /**
+   * Check health of UpdateSummaries
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
+  @added(Versions.v2026_03_15_preview)
+  checkHealth is ArmResourceActionNoContentAsync<UpdateSummaries, void>;
 }
 
 @@doc(UpdateSummaries.name, "");

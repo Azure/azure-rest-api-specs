@@ -55,6 +55,7 @@ import "./resources/RoutePolicy.tsp";
 import "./resources/NetworkMonitor.tsp";
 import "./resources/NetworkBootstrapDevice.tsp";
 import "./resources/NetworkBootstrapInterface.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -81,4 +82,7 @@ enum Versions {
 
   @doc("2025-07-15")
   v2025_07_15: "2025-07-15",
+
+  @doc("2026-01-15-preview")
+  v2026_01_15_preview: "2026-01-15-preview",
 }

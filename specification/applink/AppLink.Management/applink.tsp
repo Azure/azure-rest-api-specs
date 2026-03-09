@@ -23,8 +23,11 @@ model AppLinkProperties {
 
 @armResourceOperations
 interface AppLinks {
+  @doc("Get an AppLink")
   get is ArmResourceRead<AppLink>;
+  @doc("Create an AppLink")
   createOrReplace is ArmResourceCreateOrReplaceAsync<AppLink>;
+  @doc("Update an AppLink")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmResourcePatchAsync<
     AppLink,
@@ -33,6 +36,7 @@ interface AppLinks {
       ArmLroLocationHeader<FinalResult = AppLink> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+  @doc("Delete an AppLink")
   delete is ArmResourceDeleteWithoutOkAsync<AppLink>;
   listByResourceGroup is ArmResourceListByParent<AppLink>;
   listBySubscription is ArmListBySubscription<AppLink>;

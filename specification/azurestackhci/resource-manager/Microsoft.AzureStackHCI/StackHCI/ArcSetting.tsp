@@ -24,12 +24,11 @@ model ArcSetting is Azure.ResourceManager.ProxyResource<ArcSettingProperties> {
     SegmentName = "arcSettings",
     NamePattern = ""
   >;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "using for MSI field"
-  @removed(Versions.v2025_12_01_preview)
-  @doc("The managed service identities assigned to this resource.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
+
+// here is the augment decorator for versioning
+@@added(ArcSetting.identity, Versions.v2026_03_15_preview);
 
 @armResourceOperations
 interface ArcSettings {

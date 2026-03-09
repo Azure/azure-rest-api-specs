@@ -1,0 +1,73 @@
+{
+  "title": "EdgeMachineVolumes_CreateOrUpdate",
+  "operationId": "EdgeMachineVolumes_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "volumeName": "vol-002",
+    "resource": {
+      "properties": {
+        "volumeConfiguration": {
+          "reserved": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "volumeConfiguration": {
+            "reserved": null
+          },
+          "reportedProperties": {
+            "partitionId": "part-002",
+            "offsetInBytes": 107375231040,
+            "name": "NewVolume",
+            "path": "E:\\",
+            "parentDiskId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/disks/disk-0",
+            "isBoot": false,
+            "sizeInBytes": 53687091200,
+            "sizeRemainingInBytes": 53687091200,
+            "fileSystem": "NTFS"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/volumes/vol-002",
+        "name": "vol-002",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/volumes",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "volumeConfiguration": {
+            "reserved": null
+          },
+          "provisioningState": "Creating"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/volumes/vol-002",
+        "name": "vol-002",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/volumes",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

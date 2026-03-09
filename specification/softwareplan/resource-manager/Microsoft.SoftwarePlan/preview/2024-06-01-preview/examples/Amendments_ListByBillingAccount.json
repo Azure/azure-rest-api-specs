@@ -1,0 +1,33 @@
+{
+  "title": "Amendments_ListByBillingAccount",
+  "operationId": "Amendments_ListByBillingAccount",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
+    "filter": "properties/amendmentType eq 'trueUp' and properties/isActive eq true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31/providers/Microsoft.SoftwarePlan/amendments/xxxxxxx-351d-4694-9392-03acc5870eb1",
+            "name": "xxxxxxx-351d-4694-9392-03acc5870eb1",
+            "type": "Microsoft.SoftwarePlan/amendments",
+            "properties": {
+              "amendmentType": "trueUp",
+              "amendmentDescription": "Annual true up for FY25",
+              "startDate": "2025-01-01",
+              "endDate": "2028-01-01",
+              "isActive": true
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdAt": "2024-01-10T10:30:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

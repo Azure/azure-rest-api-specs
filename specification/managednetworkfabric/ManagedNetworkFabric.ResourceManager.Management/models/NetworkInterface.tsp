@@ -4,10 +4,9 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Network Interface Properties defines the properties of the resource.")
-model NetworkInterfaceProperties {
-  ...AnnotationResource;
-
+model NetworkInterfaceProperties extends AnnotationResource {
   @doc("Physical Identifier of the network interface.")
   @visibility(Lifecycle.Read)
   physicalIdentifier?: string;
@@ -69,6 +68,11 @@ model NetworkInterfaceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkInterface indicating if the interface is reachable")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
 }
 
 @doc("The NetworkInterfacePatch resource definition.")
@@ -89,10 +93,9 @@ model NetworkInterfacePatch {
   identity?: ManagedServiceIdentityPatch;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Network Interface Patch properties.")
-model NetworkInterfacePatchProperties {
-  ...AnnotationResource;
-
+model NetworkInterfacePatchProperties extends AnnotationResource {
   @added(Versions.v2024_06_15_preview)
   @removed(Versions.v2025_07_15)
   @doc("Description of the interface.")

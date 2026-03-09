@@ -1,11 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./discoveryHub.tsp";
 
 using Azure.Core;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApplicationMigration;
 
@@ -38,9 +41,24 @@ model ApplicationProperties {
   @doc("The complexity of the application.")
   complexity?: Complexity;
 
+  @doc("The entity that manages the application.")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+  managedBy?: ManagedBy;
+
+  @doc("The confidence score for the application (used in autoAppDiscovery).")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  confidenceScore?: float32;
+
   @doc("The provisioning status of Application.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("The code scan details for the application.")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  codeScanDetails?: CodeScanDetail[];
 }
 
 /**
@@ -94,6 +112,64 @@ union Complexity {
   string,
 }
 
+/**
+ * Model representing the code scan details for an application.
+ */
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+model CodeScanDetail {
+  @doc("The code scan tool used to scan the application.")
+  codeScanTool: CodeScanTool;
+
+  @doc("The Azure target platform for migration.")
+  azureTarget: AzureTarget;
+
+  @doc("The total number of code scan issues found.")
+  @minValue(0)
+  totalCodeScanIssues: int32;
+}
+
+@doc("The enum defining the code scan tool.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+union CodeScanTool {
+  @doc("Application Containerization and Assessment Tool.")
+  APPCAT: "APPCAT",
+
+  @doc("CAST code analysis tool.")
+  CAST: "CAST",
+
+  string,
+}
+
+@doc("The enum defining the Azure target platform.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+union AzureTarget {
+  @doc("Unknown target.")
+  Unknown: "Unknown",
+
+  @doc("Azure Kubernetes Service.")
+  AKS: "AKS",
+
+  @doc("Azure App Service (Code based deployment).")
+  AzureAppService: "AzureAppService",
+
+  @doc("Azure App Service (Container based deployment).")
+  AzureAppServiceContainer: "AzureAppServiceContainer",
+
+  string,
+}
+
+@doc("The enum defining the entity that manages the application.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+union ManagedBy {
+  @doc("The application is managed by the system.")
+  System: "System",
+
+  @doc("The application is managed by a user.")
+  User: "User",
+
+  string,
+}
+
 @doc("Model representing the result of the fetch SAS URI operation.")
 model FetchSasUriResult {
   @doc("The SAS URI to upload the import applications csv.")
@@ -105,7 +181,7 @@ model FetchSasUriResult {
 
 @doc("Model representing the request to import applications.")
 model ImportApplicationsRequest {
-  @doc("The name of the CSV file to be imported.")
+  @doc("The SAS URI of the CSV file to be imported.")
   importApplicationsSasUri: string;
 }
 
@@ -129,7 +205,7 @@ model ImportApplicationsOperationStatusResult {
   @doc("Contains error details if status is Failed/Canceled.")
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
-  @doc("Additional properties applicable for SAP Discovery import entities operation status result")
+  @doc("Additional properties applicable for import applications operation status result")
   properties?: ImportOperationStatusProperties;
 }
 

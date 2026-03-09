@@ -7,14 +7,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("Network Bootstrap Device Properties defines the properties of the resource.")
 model NetworkBootstrapDeviceProperties {
   ...AnnotationResource;
-
-  @doc("The host name of the device.")
-  @minLength(1)
-  hostName?: string;
-
-  @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
-  @minLength(1)
-  serialNumber?: string;
+  ...NetworkBootstrapDevicePatchableProperties;
 
   @doc("Current version of the device as defined in SKU.")
   @visibility(Lifecycle.Read)
@@ -64,13 +57,23 @@ model NetworkBootstrapDeviceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkBootstrapDevice indicating if the device is reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
+  @doc("Secret rotation status for the terminal server's secrets.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  @Azure.ResourceManager.identifiers(#["secretType"])
+  secretRotationStatus?: SecretRotationStatus[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The Network Bootstrap Device Patch Parameters defines the patch parameters of the resource.")
 @added(Versions.v2025_07_15)
-model NetworkBootstrapDevicePatch {
-  ...TagsUpdate;
-
+model NetworkBootstrapDevicePatch extends TagsUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Bootstrap Device Patch properties.")
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
@@ -80,10 +83,8 @@ model NetworkBootstrapDevicePatch {
   identity?: ManagedServiceIdentityPatch;
 }
 
-@doc("Network Bootstrap Device Patch properties.")
-model NetworkBootstrapDevicePatchProperties {
-  ...AnnotationResource;
-
+@doc("Network Bootstrap Device updatable properties.")
+model NetworkBootstrapDevicePatchableProperties {
   @doc("The host name of the device.")
   @minLength(1)
   hostName?: string;
@@ -91,6 +92,20 @@ model NetworkBootstrapDevicePatchProperties {
   @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   serialNumber?: string;
+
+  @doc("Control Plane Access Control List ARM resource IDs.")
+  @added(Versions.v2026_01_15_preview)
+  controlPlaneAcls?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>[];
+}
+
+@doc("Network Bootstrap Device Patch properties.")
+model NetworkBootstrapDevicePatchProperties {
+  ...AnnotationResource;
+  ...NetworkBootstrapDevicePatchableProperties;
 }
 
 @doc("Response body for a ResyncPasswords request on a Network Bootstrap Device.")
