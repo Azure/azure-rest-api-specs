@@ -47,10 +47,16 @@ interface IpPrefixes {
   delete is ArmResourceDeleteWithoutOkAsync<IpPrefix>;
 
   @doc("Implements IpPrefixes list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<IpPrefix>;
+  listByResourceGroup is ArmResourceListByParent<
+    IpPrefix,
+    Response = IpPrefixesListResult
+  >;
 
   @doc("Implements IpPrefixes list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<IpPrefix>;
+  listBySubscription is ArmListBySubscription<
+    IpPrefix,
+    Response = IpPrefixesListResult
+  >;
 }
 
 @@doc(IpPrefixes.create::parameters.resource, "Request payload.");

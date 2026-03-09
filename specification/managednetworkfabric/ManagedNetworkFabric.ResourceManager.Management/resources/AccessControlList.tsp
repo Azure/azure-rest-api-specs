@@ -49,10 +49,16 @@ interface AccessControlLists {
   delete is ArmResourceDeleteWithoutOkAsync<AccessControlList>;
 
   @doc("Implements AccessControlLists list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<AccessControlList>;
+  listByResourceGroup is ArmResourceListByParent<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements AccessControlLists list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<AccessControlList>;
+  listBySubscription is ArmListBySubscription<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
   @action("updateAdministrativeState")

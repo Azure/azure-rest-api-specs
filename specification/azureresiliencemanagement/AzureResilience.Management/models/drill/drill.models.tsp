@@ -636,6 +636,11 @@ model DrillsQualifiedResource {
   @visibility(Lifecycle.Read)
   resourceId: armResourceIdentifier;
 
+  @doc("Drill Resource ID of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  drillResourceId?: armResourceIdentifier;
+
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)

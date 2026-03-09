@@ -158,7 +158,6 @@ model OrderLineQuantity {
   fulfilled?: int64;
 
   @doc("Order line quantity pending cancellation")
-  @visibility(Lifecycle.Read)
   pendingCancel?: int64;
 
   @doc("Order line cancelled quantity")
