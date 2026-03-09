@@ -57,10 +57,16 @@ interface L2IsolationDomains {
   delete is ArmResourceDeleteWithoutOkAsync<L2IsolationDomain>;
 
   @doc("Displays L2IsolationDomains list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<L2IsolationDomain>;
+  listByResourceGroup is ArmResourceListByParent<
+    L2IsolationDomain,
+    Response = L2IsolationDomainsListResult
+  >;
 
   @doc("Displays L2IsolationDomains list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<L2IsolationDomain>;
+  listBySubscription is ArmListBySubscription<
+    L2IsolationDomain,
+    Response = L2IsolationDomainsListResult
+  >;
 
   @doc("Enables isolation domain across the fabric or on specified racks.")
   @action("updateAdministrativeState")

@@ -56,10 +56,16 @@ interface NetworkFabrics {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkFabric>;
 
   @doc("List all the Network Fabric resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkFabric>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkFabric,
+    Response = NetworkFabricsListResult
+  >;
 
   @doc("List all the Network Fabric resources in the given subscription.")
-  listBySubscription is ArmListBySubscription<NetworkFabric>;
+  listBySubscription is ArmListBySubscription<
+    NetworkFabric,
+    Response = NetworkFabricsListResult
+  >;
 
   @doc("Provisions the underlying resources in the given Network Fabric instance.")
   @action("provision")

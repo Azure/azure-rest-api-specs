@@ -11,6 +11,11 @@ using Microsoft.Maintenance;
 //@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Update.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.Maintenance.Operation.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
 @@clientName(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "configuration"
 );
@@ -100,6 +105,9 @@ using Microsoft.Maintenance;
 );
 @@clientLocation(ConfigurationAssignmentsForSubscriptions.list,
   "ConfigurationAssignmentsWithinSubscription"
+);
+@@clientLocation(ApplyUpdatesOperationGroup.createOrUpdateGrandParent,
+  ApplyUpdates
 );
 @@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvents");
 @@clientLocation(ScheduledEventOperationGroup.acknowledgeList,

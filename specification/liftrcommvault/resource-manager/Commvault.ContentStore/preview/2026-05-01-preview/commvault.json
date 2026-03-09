@@ -1,0 +1,3860 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Commvault.ContentStore",
+    "version": "2026-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CloudAccounts"
+    },
+    {
+      "name": "Storages"
+    },
+    {
+      "name": "Plans"
+    },
+    {
+      "name": "ProtectionGroups"
+    },
+    {
+      "name": "ProtectedItems"
+    }
+  ],
+  "paths": {
+    "/providers/Commvault.ContentStore/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Commvault.ContentStore/cloudAccounts": {
+      "get": {
+        "operationId": "CloudAccounts_ListBySubscription",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "List CloudAccount resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts": {
+      "get": {
+        "operationId": "CloudAccounts_ListByResourceGroup",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "List CloudAccount resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}": {
+      "get": {
+        "operationId": "CloudAccounts_Get",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "Get a CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_Get_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudAccounts_CreateOrUpdate",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "Create a CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudAccounts_Update",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "Update a CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudAccount"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_Update_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudAccounts_Delete",
+        "tags": [
+          "CloudAccounts"
+        ],
+        "description": "Delete a CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudAccounts_Delete_MaximumSet": {
+            "$ref": "./examples/CloudAccounts_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/plans": {
+      "get": {
+        "operationId": "Plans_ListByCloudAccount",
+        "tags": [
+          "Plans"
+        ],
+        "description": "List CommvaultPlan resources by CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommvaultPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Plans_ListByCloudAccount_MaximumSet": {
+            "$ref": "./examples/Plans_ListByCloudAccount_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/plans/{planName}": {
+      "get": {
+        "operationId": "Plans_Get",
+        "tags": [
+          "Plans"
+        ],
+        "description": "Get a CommvaultPlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "Name of the Plan resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommvaultPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Plans_Get_MaximumSet": {
+            "$ref": "./examples/Plans_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Plans_CreateOrupdate",
+        "tags": [
+          "Plans"
+        ],
+        "description": "Create a CommvaultPlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "Name of the Plan resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommvaultPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CommvaultPlan' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommvaultPlan"
+            }
+          },
+          "201": {
+            "description": "Resource 'CommvaultPlan' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CommvaultPlan"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Plans_CreateOrupdate_MaximumSet": {
+            "$ref": "./examples/Plans_CreateOrupdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Plans_Delete",
+        "tags": [
+          "Plans"
+        ],
+        "description": "Delete a CommvaultPlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "planName",
+            "in": "path",
+            "description": "Name of the Plan resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Plans_Delete_MaximumSet": {
+            "$ref": "./examples/Plans_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups": {
+      "get": {
+        "operationId": "ProtectionGroups_ListByCloudAccount",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "List ProtectionGroup resources by CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectionGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_ListByCloudAccount_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_ListByCloudAccount_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}": {
+      "get": {
+        "operationId": "ProtectionGroups_Get",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Get a ProtectionGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectionGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_Get_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProtectionGroups_CreateOrupdate",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Create a ProtectionGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectionGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProtectionGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProtectionGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProtectionGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProtectionGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_CreateOrupdate_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_CreateOrupdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ProtectionGroups_Delete",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Delete a ProtectionGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_Delete_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/backup": {
+      "post": {
+        "operationId": "ProtectionGroups_Backup",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Ad-hoc backup of protected items resource in given protection group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The body type of the operation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupProtectionGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupProtectionGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_Backup_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_Backup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/protectedItems": {
+      "get": {
+        "operationId": "ProtectedItems_ListByProtectionGroup",
+        "tags": [
+          "ProtectedItems"
+        ],
+        "description": "List ProtectedItem resources by ProtectionGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItems_ListByProtectionGroup_MaximumSet": {
+            "$ref": "./examples/ProtectedItems_ListByProtectionGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/protectedItems/{protectedItemName}": {
+      "get": {
+        "operationId": "ProtectedItems_Get",
+        "tags": [
+          "ProtectedItems"
+        ],
+        "description": "Get a ProtectedItem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItems_Get_MaximumSet": {
+            "$ref": "./examples/ProtectedItems_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/protectedItems/{protectedItemName}/getRestorePoints": {
+      "post": {
+        "operationId": "ProtectedItems_GetRestorePoints",
+        "tags": [
+          "ProtectedItems"
+        ],
+        "description": "Limits used for creation of resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoints"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItems_GetRestorePoints_MaximumSet": {
+            "$ref": "./examples/ProtectedItems_GetRestorePoints_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/protectedItems/{protectedItemName}/restore": {
+      "post": {
+        "operationId": "ProtectedItems_Restore",
+        "tags": [
+          "ProtectedItems"
+        ],
+        "description": "Restore resource for a protected item.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The body type of the operation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreProtectionItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestoreProtectionItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectedItems_Restore_MaximumSet": {
+            "$ref": "./examples/ProtectedItems_Restore_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/restore": {
+      "post": {
+        "operationId": "ProtectionGroups_Restore",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Restore resource for a protected items in given protection group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The body type of the operation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreProtectionItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestoreProtectionItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_Restore_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_Restore_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/resumeBackup": {
+      "post": {
+        "operationId": "ProtectionGroups_ResumeBackup",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Resume Backup for a Protection Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource operation accepted."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_ResumeBackup_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_ResumeBackup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/stopBackup": {
+      "post": {
+        "operationId": "ProtectionGroups_StopBackup",
+        "tags": [
+          "ProtectionGroups"
+        ],
+        "description": "Stop Backup for a Protection Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "protectionGroupName",
+            "in": "path",
+            "description": "Name of the ProtectionGroup resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The body type of the operation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopBackupProtectionGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProtectionGroups_StopBackup_MaximumSet": {
+            "$ref": "./examples/ProtectionGroups_StopBackup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/storages": {
+      "get": {
+        "operationId": "Storages_ListByCloudAccount",
+        "tags": [
+          "Storages"
+        ],
+        "description": "List Storage resources by CloudAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_ListByCloudAccount_MaximumSet": {
+            "$ref": "./examples/Storages_ListByCloudAccount_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/storages/{storageName}": {
+      "get": {
+        "operationId": "Storages_Get",
+        "tags": [
+          "Storages"
+        ],
+        "description": "Get a Storage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "description": "Name of the Storage resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Get_MaximumSet": {
+            "$ref": "./examples/Storages_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Storages_CreateOrUpdate",
+        "tags": [
+          "Storages"
+        ],
+        "description": "Create a Storage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "description": "Name of the Storage resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Storage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "201": {
+            "description": "Resource 'Storage' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Storages_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Storages_Delete",
+        "tags": [
+          "Storages"
+        ],
+        "description": "Delete a Storage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudAccountName",
+            "in": "path",
+            "description": "Name of the Cloud Account resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "description": "Name of the Storage resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storages_Delete_MaximumSet": {
+            "$ref": "./examples/Storages_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "BackUpType": {
+      "type": "string",
+      "description": "The type of backup",
+      "enum": [
+        "INCREMENTAL",
+        "FULL",
+        "BOTH"
+      ],
+      "x-ms-enum": {
+        "name": "BackUpType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Incremental",
+            "value": "INCREMENTAL",
+            "description": "Incremental backup"
+          },
+          {
+            "name": "Full",
+            "value": "FULL",
+            "description": "Full backup"
+          },
+          {
+            "name": "Both",
+            "value": "BOTH",
+            "description": "Both incremental and full backups"
+          }
+        ]
+      }
+    },
+    "BackupOptions": {
+      "type": "object",
+      "description": "The backup options for the VM backup",
+      "properties": {
+        "backupLevel": {
+          "type": "string",
+          "description": "Indicates whether to stop backup or not for the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "jobDescription": {
+          "type": "string",
+          "description": "The name of the backup job to be shown in Commvault",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupCopyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether to run backup immediately or not for the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runSnapShotBackup": {
+          "type": "boolean",
+          "description": "Indicates whether to run snapshot backup or not for the VM, if false, it will run regular backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "notifyUserOnJobCompletion": {
+          "type": "boolean",
+          "description": "Indicates whether to notify the user on job completion",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "backupLevel",
+        "jobDescription",
+        "backupCopyImmediately",
+        "runSnapShotBackup",
+        "notifyUserOnJobCompletion"
+      ]
+    },
+    "BackupProtectionGroupRequest": {
+      "type": "object",
+      "description": "The properties of BackupProtectionGroupRequest",
+      "properties": {
+        "vmList": {
+          "$ref": "#/definitions/VmList",
+          "description": "The vm list details.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmList"
+      ]
+    },
+    "BackupProtectionGroupResponse": {
+      "type": "object",
+      "description": "Backup job response for a Protection Group",
+      "properties": {
+        "taskId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Commvault response for taskId",
+          "readOnly": true
+        },
+        "jobIds": {
+          "type": "array",
+          "description": "The jobIds returned from Commvault.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "taskId",
+        "jobIds"
+      ]
+    },
+    "BackupRuleType": {
+      "type": "string",
+      "description": "The type of backup rule",
+      "enum": [
+        "ALL_JOBS",
+        "ALL_FULLS",
+        "HOURLY_FULLS",
+        "DAILY_FULLS",
+        "WEEKLY_FULLS",
+        "MONTHLY_FULLS",
+        "YEARLY_FULLS",
+        "QUARTERLY_FULLS",
+        "HALF_YEARLY_FULLS"
+      ],
+      "x-ms-enum": {
+        "name": "BackupRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllJobs",
+            "value": "ALL_JOBS",
+            "description": "All Jobs"
+          },
+          {
+            "name": "AllFulls",
+            "value": "ALL_FULLS",
+            "description": "All Fulls"
+          },
+          {
+            "name": "HourlyFulls",
+            "value": "HOURLY_FULLS",
+            "description": "Hourly Fulls"
+          },
+          {
+            "name": "DailyFulls",
+            "value": "DAILY_FULLS",
+            "description": "Daily Fulls"
+          },
+          {
+            "name": "WeeklyFulls",
+            "value": "WEEKLY_FULLS",
+            "description": "Weekly Fulls"
+          },
+          {
+            "name": "MonthlyFulls",
+            "value": "MONTHLY_FULLS",
+            "description": "Monthly Fulls"
+          },
+          {
+            "name": "YearlyFulls",
+            "value": "YEARLY_FULLS",
+            "description": "Yearly Fulls"
+          },
+          {
+            "name": "QuarterlyFulls",
+            "value": "QUARTERLY_FULLS",
+            "description": "Quarterly Fulls"
+          },
+          {
+            "name": "HalfYearlyFulls",
+            "value": "HALF_YEARLY_FULLS",
+            "description": "Half Yearly Fulls"
+          }
+        ]
+      }
+    },
+    "CloudAccount": {
+      "type": "object",
+      "description": "A Commvault Cloud Account Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudAccountListResult": {
+      "type": "object",
+      "description": "The response of a CloudAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudAccountProperties": {
+      "type": "object",
+      "description": "Properties specific to Commvault Cloud Account resource",
+      "properties": {
+        "marketplace": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "user": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "Details of the user."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "ssoUrl": {
+          "type": "string",
+          "description": "SSO URL for the Commvault Cloud Account",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "marketplace",
+        "user"
+      ]
+    },
+    "CloudAccountPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Commvault Cloud Account resource",
+      "properties": {
+        "marketplace": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "user": {
+          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
+          "description": "Details of the user."
+        }
+      }
+    },
+    "CloudAccountUpdate": {
+      "type": "object",
+      "description": "A Commvault Cloud Account Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudAccountPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "CommvaultPlan": {
+      "type": "object",
+      "description": "A Commvault Plan Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlanProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CommvaultPlanListResult": {
+      "type": "object",
+      "description": "The response of a CommvaultPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CommvaultPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/CommvaultPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "The Day of Week Enum",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "DAY",
+        "WEEKDAY",
+        "WEEKEND_DAYS"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "SUNDAY",
+            "description": "First Day of the Week"
+          },
+          {
+            "name": "Monday",
+            "value": "MONDAY",
+            "description": "Second Day of the Week"
+          },
+          {
+            "name": "Tuesday",
+            "value": "TUESDAY",
+            "description": "Third Day of the Week"
+          },
+          {
+            "name": "Wednesday",
+            "value": "WEDNESDAY",
+            "description": "Fourth Day of the Week"
+          },
+          {
+            "name": "Thursday",
+            "value": "THURSDAY",
+            "description": "Fifth Day of the Week"
+          },
+          {
+            "name": "Friday",
+            "value": "FRIDAY",
+            "description": "Sixth Day of the Week"
+          },
+          {
+            "name": "Saturday",
+            "value": "SATURDAY",
+            "description": "Seventh Day of the Week"
+          },
+          {
+            "name": "Day",
+            "value": "DAY",
+            "description": "Any Day of the week"
+          },
+          {
+            "name": "Weekday",
+            "value": "WEEKDAY",
+            "description": "Weekday Identifier"
+          },
+          {
+            "name": "WeekendDays",
+            "value": "WEEKEND_DAYS",
+            "description": "Weekend Identifier"
+          }
+        ]
+      }
+    },
+    "ExtendedRetentionTime": {
+      "type": "object",
+      "description": "Extended Retention Time",
+      "properties": {
+        "retentionTime": {
+          "$ref": "#/definitions/RetentionTime",
+          "description": "Retention time for Extended Retention"
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period for Extended Retention"
+        },
+        "backupRuleType": {
+          "$ref": "#/definitions/BackupRuleType",
+          "description": "Backup Rule Type for Extended Retention"
+        }
+      }
+    },
+    "Frequency": {
+      "type": "string",
+      "description": "The frequency of backups",
+      "enum": [
+        "daily",
+        "weekly",
+        "monthly",
+        "yearly",
+        "minutes"
+      ],
+      "x-ms-enum": {
+        "name": "Frequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "daily",
+            "description": "Daily backups"
+          },
+          {
+            "name": "Weekly",
+            "value": "weekly",
+            "description": "Weekly backups"
+          },
+          {
+            "name": "Monthly",
+            "value": "monthly",
+            "description": "Monthly backups"
+          },
+          {
+            "name": "Yearly",
+            "value": "yearly",
+            "description": "Yearly backups"
+          },
+          {
+            "name": "Minutes",
+            "value": "minutes",
+            "description": "Minutes backups"
+          }
+        ]
+      }
+    },
+    "LiftrBase.MarketplaceDetails": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status",
+          "readOnly": true
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetails",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "offerDetails"
+      ]
+    },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of a resource.",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Purchased but not yet activated"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace subscription is activated"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "This state indicates that a customer's payment for the Marketplace service was not received"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Customer has cancelled the subscription"
+          }
+        ]
+      }
+    },
+    "LiftrBase.OfferDetails": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        }
+      },
+      "required": [
+        "publisherId",
+        "offerId",
+        "planId"
+      ]
+    },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        }
+      }
+    },
+    "LiftrBase.UserDetails": {
+      "type": "object",
+      "description": "User details for an organization",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ]
+    },
+    "LiftrBase.UserDetailsUpdate": {
+      "type": "object",
+      "description": "User details for an organization",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        }
+      }
+    },
+    "LiftrBase.email": {
+      "type": "string",
+      "description": "Reusable representation of an email address.",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    },
+    "MatchType": {
+      "type": "string",
+      "description": "The match type",
+      "enum": [
+        "all",
+        "any"
+      ],
+      "x-ms-enum": {
+        "name": "MatchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "all",
+            "description": "All rules should match"
+          },
+          {
+            "name": "Any",
+            "value": "any",
+            "description": "Any rule should match"
+          }
+        ]
+      }
+    },
+    "MonthOfYear": {
+      "type": "string",
+      "description": "The Month of Year Enum",
+      "enum": [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER"
+      ],
+      "x-ms-enum": {
+        "name": "MonthOfYear",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "January",
+            "value": "JANUARY",
+            "description": "First Month of the Year"
+          },
+          {
+            "name": "February",
+            "value": "FEBRUARY",
+            "description": "Second Month of the Year"
+          },
+          {
+            "name": "March",
+            "value": "MARCH",
+            "description": "Third Month of the Year"
+          },
+          {
+            "name": "April",
+            "value": "APRIL",
+            "description": "Fourth Month of the Year"
+          },
+          {
+            "name": "May",
+            "value": "MAY",
+            "description": "Fifth Month of the Year"
+          },
+          {
+            "name": "June",
+            "value": "JUNE",
+            "description": "Sixth Month of the Year"
+          },
+          {
+            "name": "July",
+            "value": "JULY",
+            "description": "Seventh Month of the Year"
+          },
+          {
+            "name": "August",
+            "value": "AUGUST",
+            "description": "Eighth Month of the Year"
+          },
+          {
+            "name": "September",
+            "value": "SEPTEMBER",
+            "description": "Ninth Month of the Year"
+          },
+          {
+            "name": "October",
+            "value": "OCTOBER",
+            "description": "Tenth Month of the Year"
+          },
+          {
+            "name": "November",
+            "value": "NOVEMBER",
+            "description": "Eleventh Month of the Year"
+          },
+          {
+            "name": "December",
+            "value": "DECEMBER",
+            "description": "Twelfth Month of the Year"
+          }
+        ]
+      }
+    },
+    "Operator": {
+      "type": "string",
+      "description": "The types of operator",
+      "enum": [
+        "contains",
+        "doesNotContains",
+        "doesNotEqual",
+        "startsWith",
+        "endsWith",
+        "equals"
+      ],
+      "x-ms-enum": {
+        "name": "Operator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Contains",
+            "value": "contains",
+            "description": "The operator contains"
+          },
+          {
+            "name": "DoesNotContains",
+            "value": "doesNotContains",
+            "description": "The operator does not contains"
+          },
+          {
+            "name": "DoesNotEqual",
+            "value": "doesNotEqual",
+            "description": "The operator does not equal"
+          },
+          {
+            "name": "StartsWith",
+            "value": "startsWith",
+            "description": "The operator starts with"
+          },
+          {
+            "name": "EndsWith",
+            "value": "endsWith",
+            "description": "The operator ends with"
+          },
+          {
+            "name": "Equals",
+            "value": "equals",
+            "description": "The operator equals"
+          }
+        ]
+      }
+    },
+    "PlanProperties": {
+      "type": "object",
+      "description": "The properties of Commvault Plan",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Commvault Plan",
+          "minLength": 1,
+          "maxLength": 50,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storagePlans": {
+          "type": "array",
+          "description": "The storage plans associated with the Commvault Plan",
+          "minItems": 1,
+          "maxItems": 11,
+          "items": {
+            "$ref": "#/definitions/StoragePlan"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "schedules": {
+          "type": "array",
+          "description": "The Commvault Plan Schedule",
+          "minItems": 1,
+          "maxItems": 11,
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "retention": {
+          "$ref": "#/definitions/Retention",
+          "description": "The Commvault Plan Retention",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location",
+        "storagePlans"
+      ]
+    },
+    "ProtectedItem": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectedItemProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProtectedItemListResult": {
+      "type": "object",
+      "description": "The response of a ProtectedItem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProtectedItem items on this page",
+          "items": {
+            "$ref": "#/definitions/ProtectedItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProtectedItemProperties": {
+      "type": "object",
+      "description": "The properties of Commvault Protected Item",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The Name of the commvault protected item",
+          "readOnly": true
+        },
+        "lastBackUpTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Commvault Protected Item backup time",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group of the protected item",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the protected item",
+          "readOnly": true
+        },
+        "vmGuid": {
+          "type": "string",
+          "description": "The GUID of VM",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceName",
+        "lastBackUpTime",
+        "resourceGroup",
+        "location",
+        "vmGuid"
+      ]
+    },
+    "ProtectionGroup": {
+      "type": "object",
+      "description": "A Commvault Plan Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProtectionGroupListResult": {
+      "type": "object",
+      "description": "The response of a ProtectionGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProtectionGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ProtectionGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProtectionGroupProperties": {
+      "type": "object",
+      "description": "The properties of Commvault Protection Group",
+      "properties": {
+        "dataSourceType": {
+          "type": "string",
+          "description": "The datasource type of Commvault Protection Group",
+          "enum": [
+            "AzureVM"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "plan": {
+          "type": "string",
+          "description": "The Commvault Plan to be associated with the Protection Group",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/ProtectionGroupResources",
+          "description": "The resources to be protected under Protection Group",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ProtectionStatus",
+          "description": "The protection group schedule",
+          "readOnly": true
+        },
+        "numberOfProtectedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of ProtectedItems under the Protection Group",
+          "readOnly": true
+        },
+        "lastBackUpTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Commvault Protection Group backup time",
+          "readOnly": true
+        },
+        "backupActivityStatus": {
+          "type": "string",
+          "description": "The backup activity status indicating if backup is enabled or not on the protection group",
+          "default": "Enabled",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataSourceType",
+        "plan",
+        "resources",
+        "protectionStatus",
+        "numberOfProtectedItems",
+        "lastBackUpTime"
+      ]
+    },
+    "ProtectionGroupResources": {
+      "type": "object",
+      "description": "The resources to be protected under Protection Group",
+      "properties": {
+        "manual": {
+          "type": "array",
+          "description": "The items to be protected under Protection Group",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "matchRules": {
+          "type": "object",
+          "description": "Rules to match resources",
+          "properties": {
+            "rules": {
+              "type": "array",
+              "description": "rules to match",
+              "items": {
+                "$ref": "#/definitions/Rule"
+              },
+              "x-ms-identifiers": [],
+              "x-ms-mutability": [
+                "read",
+                "update",
+                "create"
+              ]
+            },
+            "matchType": {
+              "$ref": "#/definitions/MatchType",
+              "description": "match Type all or any",
+              "x-ms-mutability": [
+                "read",
+                "update",
+                "create"
+              ]
+            }
+          },
+          "required": [
+            "rules",
+            "matchType"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProtectionStatus": {
+      "type": "string",
+      "description": "The Protection Status",
+      "enum": [
+        "all",
+        "protected",
+        "not_protected",
+        "pending",
+        "backed_up_with_error",
+        "discovered"
+      ],
+      "x-ms-enum": {
+        "name": "ProtectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "all",
+            "description": "The protection group status is All"
+          },
+          {
+            "name": "Protected",
+            "value": "protected",
+            "description": "The protection group status is Protected"
+          },
+          {
+            "name": "Not_Protected",
+            "value": "not_protected",
+            "description": "The protection group status is Not Protected"
+          },
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "The protection group status is Pending"
+          },
+          {
+            "name": "Backed_up_with_error",
+            "value": "backed_up_with_error",
+            "description": "The protection group status is backed_up_with_error"
+          },
+          {
+            "name": "Discovered",
+            "value": "discovered",
+            "description": "The protection group status is discovered"
+          }
+        ]
+      }
+    },
+    "RestorePoints": {
+      "type": "object",
+      "description": "Restore points of a Protected Item",
+      "properties": {
+        "restoreTimes": {
+          "type": "array",
+          "description": "The Commvault Protected Item Restore points",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "restoreTimes"
+      ]
+    },
+    "RestoreProtectionItemRequest": {
+      "type": "object",
+      "description": "The properties of RestoreProtectionItemRequest",
+      "properties": {
+        "inPlaceRestore": {
+          "type": "boolean",
+          "description": "Check whether inplace or out of place restore.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "restoreType": {
+          "$ref": "#/definitions/RestoreType",
+          "description": "Type of Restore",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "toTime": {
+          "type": "string",
+          "description": "Time to restore",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmDestinationInfo": {
+          "$ref": "#/definitions/VmDestinationInfo",
+          "description": "The vm destination details of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "inPlaceRestore",
+        "vmDestinationInfo"
+      ]
+    },
+    "RestoreProtectionItemResponse": {
+      "type": "object",
+      "description": "Restore resource response for a Protected Item",
+      "properties": {
+        "taskId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Commvault response for taskId",
+          "readOnly": true
+        },
+        "jobIds": {
+          "type": "array",
+          "description": "The jobIds returned from Commvault.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "taskId",
+        "jobIds"
+      ]
+    },
+    "RestoreType": {
+      "type": "string",
+      "description": "Types of Restore Supported",
+      "enum": [
+        "NONE",
+        "VIRTUAL_MACHINE",
+        "DISK_ATTACH"
+      ],
+      "x-ms-enum": {
+        "name": "RestoreType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "NONE",
+            "description": "Azure In place Restore"
+          },
+          {
+            "name": "VirtualMachine",
+            "value": "VIRTUAL_MACHINE",
+            "description": "Azure Out of Place"
+          },
+          {
+            "name": "DiskAttach",
+            "value": "DISK_ATTACH",
+            "description": "Azure Attach disk restore to existing VM"
+          }
+        ]
+      }
+    },
+    "Retention": {
+      "type": "object",
+      "description": "A Commvault Plan Retention Model",
+      "properties": {
+        "numberOfSnapshots": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Snapshots",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "RetentionTime": {
+      "type": "string",
+      "description": "The retention time for Commvault Plan",
+      "enum": [
+        "monthly",
+        "yearly"
+      ],
+      "x-ms-enum": {
+        "name": "RetentionTime",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monthly",
+            "value": "monthly",
+            "description": "Monthly retention time"
+          },
+          {
+            "name": "Yearly",
+            "value": "yearly",
+            "description": "Yearly retention time"
+          }
+        ]
+      }
+    },
+    "Rule": {
+      "type": "object",
+      "description": "The rules to match resources",
+      "properties": {
+        "property": {
+          "$ref": "#/definitions/RuleProperty",
+          "description": "property of the rule",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator",
+          "description": "property of the rule",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "property of the rule",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "property",
+        "operator",
+        "value"
+      ]
+    },
+    "RuleProperty": {
+      "type": "string",
+      "description": "The Rule property",
+      "enum": [
+        "resourceGroup",
+        "name",
+        "tagName",
+        "tagValue",
+        "region",
+        "status"
+      ],
+      "x-ms-enum": {
+        "name": "RuleProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceGroup",
+            "value": "resourceGroup",
+            "description": "The resource group of the rule"
+          },
+          {
+            "name": "Name",
+            "value": "name",
+            "description": "The name of the rule"
+          },
+          {
+            "name": "TagName",
+            "value": "tagName",
+            "description": "The tag name of the rule"
+          },
+          {
+            "name": "TagValue",
+            "value": "tagValue",
+            "description": "The tag value of the rule"
+          },
+          {
+            "name": "Region",
+            "value": "region",
+            "description": "The region of the rule"
+          },
+          {
+            "name": "Status",
+            "value": "status",
+            "description": "The status of the rule"
+          }
+        ]
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "A Commvault Plan Schedule Model",
+      "properties": {
+        "backupType": {
+          "$ref": "#/definitions/BackUpType",
+          "description": "Type of Backup"
+        },
+        "frequency": {
+          "$ref": "#/definitions/Frequency",
+          "description": "Frequency of Retention"
+        },
+        "runsEvery": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval of Retention"
+        },
+        "weekOfMonth": {
+          "$ref": "#/definitions/WeekOfMonth",
+          "description": "Week of the month"
+        },
+        "dayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Day of the week"
+        },
+        "monthOfYear": {
+          "$ref": "#/definitions/MonthOfYear",
+          "description": "Month of the year"
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Day of the month"
+        },
+        "weeklyDays": {
+          "type": "array",
+          "description": "Weekly Days List",
+          "items": {
+            "$ref": "#/definitions/WeeklyDays"
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "Time of Retention"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Time Zone"
+        }
+      },
+      "required": [
+        "backupType"
+      ]
+    },
+    "ScheduleDetails": {
+      "type": "object",
+      "description": "Schedule Details",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/Frequency",
+          "description": "Frequency of backups",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "time": {
+          "type": "string",
+          "description": "Time of backups",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "frequency",
+        "time"
+      ]
+    },
+    "StopBackupProtectionGroupRequest": {
+      "type": "object",
+      "description": "The properties of StopBackupProtectionGroupRequest",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "The reason for stopping the backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "comment": {
+          "type": "string",
+          "description": "Any further comments",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "Storage": {
+      "type": "object",
+      "description": "A Commvault Storage Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StorageClassType": {
+      "type": "string",
+      "description": "Class of Commvault Storage",
+      "enum": [
+        "COLD",
+        "HOT"
+      ],
+      "x-ms-enum": {
+        "name": "StorageClassType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cool",
+            "value": "COLD",
+            "description": "Cold storage class"
+          },
+          {
+            "name": "Hot",
+            "value": "HOT",
+            "description": "Hot storage class"
+          }
+        ]
+      }
+    },
+    "StorageListResult": {
+      "type": "object",
+      "description": "The response of a Storage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Storage items on this page",
+          "items": {
+            "$ref": "#/definitions/Storage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StoragePlan": {
+      "type": "object",
+      "description": "The properties of Commvault Storage Plan",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Storage resource"
+        },
+        "storagePoolId": {
+          "type": "string",
+          "description": "Id of the Storage Pool"
+        },
+        "copyName": {
+          "type": "string",
+          "description": "Copy Name from Commvault"
+        },
+        "copyPrecedence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Precedence of the Storage Plan, 1 is the highest precedence, 2 is the next highest, and so on"
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates the retention period valid only if the type of retention chosen in CUSTOM"
+        },
+        "retentionTime": {
+          "$ref": "#/definitions/RetentionTime",
+          "description": "Indicates the retention timeframe valid only if the type of retention chosen in CUSTOM"
+        },
+        "backupRuleType": {
+          "$ref": "#/definitions/BackupRuleType",
+          "description": "Backup Rule Type"
+        },
+        "extendedRetention": {
+          "type": "array",
+          "description": "Extended Retention Policy",
+          "items": {
+            "$ref": "#/definitions/ExtendedRetentionTime"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "StorageProperties": {
+      "type": "object",
+      "description": "The properties of Commvault Storage",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Commvault Storage",
+          "minLength": 1,
+          "maxLength": 50,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageType": {
+          "$ref": "#/definitions/StorageType",
+          "description": "The type of Commvault Storage"
+        },
+        "vendor": {
+          "$ref": "#/definitions/Vendor",
+          "description": "The vendor of Commvault Storage"
+        },
+        "class": {
+          "$ref": "#/definitions/StorageClassType",
+          "description": "The class of Commvault Storage"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location",
+        "storageType",
+        "vendor",
+        "class"
+      ]
+    },
+    "StorageType": {
+      "type": "string",
+      "description": "Storage Type of Commvault Storage",
+      "enum": [
+        "Air_Gap_Protect"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AirGapProtect",
+            "value": "Air_Gap_Protect",
+            "description": "Air Gap Protect"
+          }
+        ]
+      }
+    },
+    "Vendor": {
+      "type": "string",
+      "description": "Vendor of Commvault Storage",
+      "enum": [
+        "Azure_Blob_Storage"
+      ],
+      "x-ms-enum": {
+        "name": "Vendor",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlobStorage",
+            "value": "Azure_Blob_Storage",
+            "description": "Azure Blob Storage"
+          }
+        ]
+      }
+    },
+    "VmDestinationInfo": {
+      "type": "object",
+      "description": "The properties of VmDestinationInfo",
+      "properties": {
+        "vmInfoList": {
+          "type": "array",
+          "description": "List of information on VMs",
+          "items": {
+            "$ref": "#/definitions/VmInfo"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmInfoList"
+      ]
+    },
+    "VmGuid": {
+      "type": "object",
+      "description": "The VM GUID for backup",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VmInfo": {
+      "type": "object",
+      "description": "The properties of information of a VM",
+      "properties": {
+        "sourceVmGuid": {
+          "type": "string",
+          "description": "The GUID of VM to be restored.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "The storage account to be used for restore.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "powerOnVmAfterRestore": {
+          "type": "boolean",
+          "description": "The identifier to check if VM needs to be powered on.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "region": {
+          "type": "string",
+          "description": "The region of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkId": {
+          "type": "string",
+          "description": "The network Id of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet Id of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "attachAndSwapOsDisk": {
+          "type": "boolean",
+          "description": "The identifier to check if to attach and swap disk of the VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetVmGuid": {
+          "type": "string",
+          "description": "The GUID of target VM used in DISK ATTACH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmtags": {
+          "type": "array",
+          "description": "The vmTag of the VM.",
+          "items": {
+            "$ref": "#/definitions/VmTag"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "sourceVmGuid",
+        "storageAccountId"
+      ]
+    },
+    "VmList": {
+      "type": "object",
+      "description": "The VM list for backup",
+      "properties": {
+        "vmGuid": {
+          "type": "array",
+          "description": "The list of VM GUIDs to backup",
+          "items": {
+            "$ref": "#/definitions/VmGuid"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupOptions": {
+          "$ref": "#/definitions/BackupOptions",
+          "description": "The backup options for the VM backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmGuid",
+        "backupOptions"
+      ]
+    },
+    "VmTag": {
+      "type": "object",
+      "description": "The properties of VMTag for Restore Request",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of VM tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of VM tag."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "WeekOfMonth": {
+      "type": "string",
+      "description": "The Week of Month Enum",
+      "enum": [
+        "FIRST",
+        "SECOND",
+        "THIRD",
+        "FOURTH",
+        "LAST"
+      ],
+      "x-ms-enum": {
+        "name": "WeekOfMonth",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "First",
+            "value": "FIRST",
+            "description": "First Week"
+          },
+          {
+            "name": "Second",
+            "value": "SECOND",
+            "description": "Second Week"
+          },
+          {
+            "name": "Third",
+            "value": "THIRD",
+            "description": "Third Week"
+          },
+          {
+            "name": "Fourth",
+            "value": "FOURTH",
+            "description": "Fourth Week"
+          },
+          {
+            "name": "Last",
+            "value": "LAST",
+            "description": "LAST Week"
+          }
+        ]
+      }
+    },
+    "WeeklyDays": {
+      "type": "string",
+      "description": "To represent the days of the week in Weekly type",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ],
+      "x-ms-enum": {
+        "name": "WeeklyDays",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "SUNDAY",
+            "description": "First Day of the Week"
+          },
+          {
+            "name": "Monday",
+            "value": "MONDAY",
+            "description": "Second Day of the Week"
+          },
+          {
+            "name": "Tuesday",
+            "value": "TUESDAY",
+            "description": "Third Day of the Week"
+          },
+          {
+            "name": "Wednesday",
+            "value": "WEDNESDAY",
+            "description": "Fourth Day of the Week"
+          },
+          {
+            "name": "Thursday",
+            "value": "THURSDAY",
+            "description": "Fifth Day of the Week"
+          },
+          {
+            "name": "Friday",
+            "value": "FRIDAY",
+            "description": "Sixth Day of the Week"
+          },
+          {
+            "name": "Saturday",
+            "value": "SATURDAY",
+            "description": "Seventh Day of the Week"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

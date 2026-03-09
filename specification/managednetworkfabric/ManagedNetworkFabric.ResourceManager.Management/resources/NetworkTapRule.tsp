@@ -51,10 +51,16 @@ interface NetworkTapRules {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkTapRule>;
 
   @doc("List all the Network Tap Rule resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkTapRule>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkTapRule,
+    Response = NetworkTapRulesListResult
+  >;
 
   @doc("List all the Network Tap Rule resources in the given subscription.")
-  listBySubscription is ArmListBySubscription<NetworkTapRule>;
+  listBySubscription is ArmListBySubscription<
+    NetworkTapRule,
+    Response = NetworkTapRulesListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
   updateAdministrativeState is ArmResourceActionAsync<

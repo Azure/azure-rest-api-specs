@@ -1,0 +1,57 @@
+{
+  "operationId": "DelegatedIdentities_CreateOrUpdate",
+  "title": "DelegatedIdentities_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "delegatedIdentityName": "myIdentity",
+    "resource": {
+      "location": "westus",
+      "tags": {
+        "tagName": "tag value"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudDevicePlatform/delegatedIdentities/myIdentity",
+        "type": "Microsoft.CloudDevicePlatform/delegatedIdentities",
+        "location": "westus",
+        "tags": {
+          "tagName": "tag value"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "SystemAssigned"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudDevicePlatform/delegatedIdentities/myIdentity",
+        "type": "Microsoft.CloudDevicePlatform/delegatedIdentities",
+        "location": "westus",
+        "tags": {
+          "tagName": "tag value"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}
