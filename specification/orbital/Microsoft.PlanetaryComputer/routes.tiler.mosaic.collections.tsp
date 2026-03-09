@@ -934,5 +934,3 @@ interface MosaicCollectionsBboxWithDimensions {
     TileResponse
   >;
 }
-
-

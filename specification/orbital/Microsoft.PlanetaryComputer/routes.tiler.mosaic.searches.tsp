@@ -801,13 +801,20 @@ interface MosaicSearchesTilesPlain {
   getZxy is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
-      @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -825,15 +832,26 @@ interface MosaicSearchesTilesFormat {
   getZxyByFormat is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+
       /** Output format for the tile or image (e.g., png, jpeg, webp) */
-      @path @maxLength(500) @pattern(".*") format: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
-      @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -851,15 +869,23 @@ interface MosaicSearchesTilesScale {
   getZxyByScale is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+
       /** Numeric scale factor for the tile. Higher values produce larger tiles */
       @path scale: float32;
+
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
-      @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -877,17 +903,29 @@ interface MosaicSearchesTiles {
   getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
-      @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+
       /** Numeric scale factor for the tile. Higher values produce larger tiles */
       @path scale: float32;
+
       /** Output format for the tile or image (e.g., png, jpeg, webp) */
-      @path @maxLength(500) @pattern(".*") format: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      format: string;
+
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -906,11 +944,17 @@ interface MosaicSearchesAssetsForTiles {
   getZxyAssets is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...MosaicSearchQueryParameters;
       ...ZxyPathParameters;
+
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
-      @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      @query("tileMatrixSetId")
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
     ApplicationJsonResponse
   >;
@@ -927,12 +971,19 @@ interface MosaicSearchesPointAssets {
   getPointAssets is Azure.Core.Foundations.Operation<
     {
       /** Search Id (pgSTAC Search Hash) */
-      @path @maxLength(500) @pattern(".*") searchId: string;
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      searchId: string;
+
       ...MosaicSearchQueryParameters;
+
       /** Longitude */
       @path longitude: float32;
+
       /** Latitude */
       @path latitude: float32;
+
       /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
       @query("coord-crs") coordinateReferenceSystem?: string;
     },

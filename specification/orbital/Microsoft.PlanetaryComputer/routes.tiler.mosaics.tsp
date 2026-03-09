@@ -556,5 +556,3 @@ interface MosaicsAssetsForPoints {
     StacItemPointAsset[]
   >;
 }
-
-
