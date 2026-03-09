@@ -168,6 +168,9 @@ input-file:
   - preview/2025-08-01-preview/SyncMembers.json
   - preview/2025-08-01-preview/TdeCertificates.json
   - preview/2025-08-01-preview/TimeZones.json
+  - preview/2025-08-01-preview/TopQueries.json
+  - preview/2025-08-01-preview/TopQueriesQueryText.json
+  - preview/2025-08-01-preview/TopQueryStatistics.json
   - preview/2025-08-01-preview/TransparentDataEncryptions.json
   - preview/2025-08-01-preview/Usages.json
   - preview/2025-08-01-preview/VirtualClusters.json
