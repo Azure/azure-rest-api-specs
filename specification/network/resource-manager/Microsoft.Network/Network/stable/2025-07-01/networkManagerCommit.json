@@ -104,28 +104,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Updated - Returns information about the commit.",
-            "schema": {
-              "$ref": "#/definitions/Commit"
-            },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously",
             "headers": {
-              "ETag": {
-                "description": "The current entity tag.",
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               }
-            }
-          },
-          "201": {
-            "description": "Created - Returns information about the commit.",
+            },
             "schema": {
               "$ref": "#/definitions/Commit"
-            },
-            "headers": {
-              "ETag": {
-                "description": "The current entity tag.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -134,6 +122,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "CommitsPut": {
