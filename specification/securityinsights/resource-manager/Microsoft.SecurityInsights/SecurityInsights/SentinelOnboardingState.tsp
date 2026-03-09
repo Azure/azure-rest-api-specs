@@ -72,6 +72,44 @@ interface SentinelOnboardingStatesOps
     > {}
 
 @armResourceOperations
+interface SentinelOnboardingStatesOperations
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /** the provider namespace */
+        @path
+        @segment("providers")
+        @key
+        providerNamespace: "Microsoft.OperationalInsights",
+
+        /**
+         * The name of the workspace.
+         */
+        @segment("workspaces")
+        @key
+        @path
+        @minLength(1)
+        @maxLength(90)
+        @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+        workspaceName: string,
+
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * The Sentinel onboarding state name. Supports - default
+         */
+        @path
+        @key
+        @segment("onboardingStates")
+        sentinelOnboardingStateName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface SentinelOnboardingStates {
   /**
    * Get Sentinel onboarding state
@@ -103,11 +141,10 @@ interface SentinelOnboardingStates {
   /**
    * Gets all Sentinel onboarding states
    */
-  list is Extension.ListByTarget<
-    OperationalInsights,
+  list is SentinelOnboardingStatesOperations.ListSinglePage<
     SentinelOnboardingState,
     Response = ArmResponse<SentinelOnboardingStatesList>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 }
 
