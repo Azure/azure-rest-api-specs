@@ -123,7 +123,7 @@ namespace Azure.AI.Projects {
     /**
      * Optional user-defined name for this tool or configuration.
      */
-      name?: string;
+    name?: string;
 
     /**
      * Optional user-defined description for this tool or configuration.
@@ -140,7 +140,7 @@ namespace Azure.AI.Projects {
      */
     type: "bing_grounding";
 
-      ...ToolNameAndDescriptionExtension;
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The bing grounding search tool parameters.

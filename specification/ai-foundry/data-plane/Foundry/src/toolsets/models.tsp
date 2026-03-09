@@ -6,6 +6,10 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const ToolsetsRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolset_v1_preview],
+};
+
 union ToolsetObjectType {
   toolset: "toolset",
   toolsetDeleted: "toolset.deleted",
