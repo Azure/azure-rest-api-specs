@@ -13890,8 +13890,7 @@ model RegenerateActionParameter {
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
 @error
-@renamedFrom(Versions.v2026_03_15, "ErrorResponse")
-model WorkflowErrorResponse {
+model ErrorResponse {
   /**
    * The error properties.
    */
@@ -14359,7 +14358,7 @@ model RetryHistory {
   /**
    * Gets the error response.
    */
-  error?: WorkflowErrorResponse;
+  error?: ErrorResponse;
 }
 
 /**
@@ -16017,7 +16016,7 @@ model StaticSitesOperationStatusProperties {
   /**
    * Error details for the asynchronous operation, if any.
    */
-  error?: WorkflowErrorResponse;
+  error?: ErrorResponse;
 }
 
 /**
