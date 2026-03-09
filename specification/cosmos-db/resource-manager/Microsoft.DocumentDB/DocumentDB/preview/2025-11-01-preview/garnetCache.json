@@ -400,10 +400,10 @@
               "format": "int32",
               "description": "Number of copies of data maintained by the cluster"
             },
-            "nodeCount": {
+            "shardCount": {
               "type": "integer",
               "format": "int32",
-              "description": "Number of nodes"
+              "description": "Number of shards in the cluster"
             },
             "nodeSku": {
               "type": "string",
@@ -412,6 +412,10 @@
             "availabilityZone": {
               "type": "boolean",
               "description": "If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the garnet cluster virtual machines."
+            },
+            "authenticationMethod": {
+              "type": "string",
+              "description": "The authentication method used for the Garnet cluster."
             },
             "allocationState": {
               "type": "string",
@@ -469,6 +473,17 @@
               ],
               "x-ms-enum": {
                 "name": "ClusterType",
+                "modelAsString": true
+              }
+            },
+            "authenticationMethod": {
+              "type": "string",
+              "description": "The authentication method used for the Garnet cluster.",
+              "enum": [
+                "Entra"
+              ],
+              "x-ms-enum": {
+                "name": "GarnetAuthenticationType",
                 "modelAsString": true
               }
             },
