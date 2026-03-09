@@ -58,6 +58,15 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 ```
 
+### Tag: package-2026-03-preview
+
+These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-preview'
+input-file:
+- preview/2026-03-01-preview/servicefabric.json
+```
+
 ### Tag: package-2023-11-preview
 
 These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
@@ -270,6 +279,12 @@ suppressions:
   
   - code: ValidFormats
     reason: duration-constant is an expected format to the .NET SDK generator
+
+  - code: XMSSecretInResponse
+    reason: High key and low key refer to partition ranges, not secrets
+    where:
+    - $.definitions.UniformInt64RangePartitionSchemeDescription.properties.lowKey
+    - $.definitions.UniformInt64RangePartitionSchemeDescription.properties.highKey
 ```
 
 ---
