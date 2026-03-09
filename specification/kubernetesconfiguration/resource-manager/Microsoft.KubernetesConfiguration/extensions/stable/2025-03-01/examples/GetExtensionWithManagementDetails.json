@@ -2,8 +2,8 @@
   "parameters": {
     "subscriptionId": "subId1",
     "resourceGroupName": "rg1",
-    "clusterRp": "Microsoft.Kubernetes",
-    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.ContainerService",
+    "clusterResourceName": "managedClusters",
     "extensionName": "azureVote",
     "api-version": "2025-03-01",
     "clusterName": "clusterName1"
@@ -13,7 +13,7 @@
       "headers": {},
       "description": "Details of the Kubernetes Extension's current status.",
       "body": {
-        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/azureVote",
         "type": "Microsoft.KubernetesConfiguration/extensions",
         "name": "azureVote",
         "systemData": {
@@ -31,8 +31,8 @@
         },
         "properties": {
           "extensionType": "azure-vote",
-          "autoUpgradeMode": "none",
-          "autoUpgradeMinorVersion": false,
+          "autoUpgradeMode": "compatible",
+          "autoUpgradeMinorVersion": true,
           "releaseTrain": "Preview",
           "version": "0.1.4",
           "scope": {
@@ -47,11 +47,31 @@
           "provisioningState": "Succeeded",
           "currentVersion": "0.1.4",
           "statuses": [],
-          "isSystemExtension": false
+          "isSystemExtension": false,
+          "managementDetails": {
+            "category": "managed",
+            "accessDetails": [
+              {
+                "entity": "Microsoft.ContainerService",
+                "allowedActions": [
+                  "Read",
+                  "Write"
+                ],
+                "description": " Microsoft.ContainerService is only allowed to PUT/PATCH this extension instance."
+              },
+              {
+                "entity": "Users",
+                "allowedActions": [
+                  "Read"
+                ],
+                "description": "Users are allowed to only READ through Extensions RP."
+              }
+            ]
+          }
         }
       }
     }
   },
   "operationId": "Extensions_Get",
-  "title": "Get Extension with Plan"
+  "title": "Get Extension with Management Details"
 }
