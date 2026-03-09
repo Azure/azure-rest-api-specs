@@ -29,9 +29,12 @@
           "kind": "PiiEntityRecognition",
           "taskName": "Redact PII Task 1",
           "parameters": {
-            "redactionPolicy": {
-              "policyKind": "entityMask"
-            },
+            "redactionPolicies": [
+              {
+                "policyKind": "characterMask",
+                "redactionCharacter": "-"
+              }
+            ],
             "piiCategories": [
               "Person",
               "Organization"
