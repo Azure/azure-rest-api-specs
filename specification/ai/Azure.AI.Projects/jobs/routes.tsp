@@ -26,7 +26,7 @@ interface Jobs {
   @doc("List Jobs in the workspace.")
   list is JobOperations.ResourceList<CommandJob, ListJobsQueryParameters>;
 
-  @doc("Get a Job by id.")
+  @doc("Get a Job by name.")
   get is JobOperations.ResourceRead<CommandJob>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
@@ -42,11 +42,11 @@ interface Jobs {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<CommandJob>
   >;
 
-  @doc("Delete a Job by id.")
+  @doc("Delete a Job by name.")
   delete is JobOperations.ResourceDelete<CommandJob>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cancel action uses ResourceAction with no response body"
-  @doc("Cancel a Job by id.")
+  @doc("Cancel a Job by name.")
   @post
   cancel is JobOperations.ResourceAction<
     CommandJob,

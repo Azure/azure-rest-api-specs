@@ -279,14 +279,13 @@ model JobSystemData {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model CommandJob {
-  @doc("The name and identifier for the Job. This is case-sensitive.")
-  @visibility(Lifecycle.Read)
+  @doc("The name of the Job. This is case-sensitive.")
   @key
-  id: string;
+  name: string;
 
-  @doc("The name of the resource.")
+  @doc("The id for the Job")
   @visibility(Lifecycle.Read)
-  name?: string;
+  id?: string;
 
   @doc("Specifies the type of job.")
   @visibility(Lifecycle.Read)
