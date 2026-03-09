@@ -58,7 +58,7 @@ interface ManagedEnvironmentsStorages {
    * Get all storages for a managedEnvironment.
    */
   @summary("Get all storages for a managedEnvironment.")
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     ManagedEnvironmentStorage,
     Response = ArmResponse<ManagedEnvironmentStoragesCollection>,
     Error = DefaultErrorResponse

@@ -130,7 +130,6 @@ interface Jobs {
    * List secrets for a container apps job
    */
   @tag("Jobs")
-  @list
   @summary("List secrets for a container apps job")
   listSecrets is ArmResourceActionSync<
     Job,

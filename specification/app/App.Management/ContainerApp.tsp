@@ -134,7 +134,6 @@ interface ContainerApps {
   /**
    * List secrets for a container app
    */
-  @list
   @summary("List secrets for a container app")
   listSecrets is ArmResourceActionSync<
     ContainerApp,
