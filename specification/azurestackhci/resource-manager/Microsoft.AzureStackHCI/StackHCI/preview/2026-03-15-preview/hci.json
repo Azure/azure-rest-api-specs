@@ -133,6 +133,9 @@
       "name": "ClusterJobs"
     },
     {
+      "name": "ClusterVolumes"
+    },
+    {
       "name": "DevicePools"
     }
   ],
@@ -5856,6 +5859,109 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/volumes": {
+      "get": {
+        "operationId": "ClusterVolumes_List",
+        "tags": [
+          "ClusterVolumes"
+        ],
+        "description": "List all volumes on a Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumes_List": {
+            "$ref": "./examples/ClusterVolumes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/volumes/{volumeName}": {
+      "get": {
+        "operationId": "ClusterVolumes_Get",
+        "tags": [
+          "ClusterVolumes"
+        ],
+        "description": "Get a specific volume on a Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ClusterVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolume"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumes_Get": {
+            "$ref": "./examples/ClusterVolumes_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/devicePools": {
       "get": {
         "operationId": "DevicePools_ListByResourceGroup",
@@ -9909,6 +10015,359 @@
           "$ref": "#/definitions/SdnProperties"
         }
       ]
+    },
+    "ClusterVolume": {
+      "type": "object",
+      "description": "Cluster Volume resource representing a storage volume on a Cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterVolumeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterVolumeFaultDomainAwareness": {
+      "type": "string",
+      "description": "Fault domain awareness level for a cluster volume.",
+      "enum": [
+        "Unknown",
+        "Drive",
+        "Enclosure",
+        "Server",
+        "Chassis",
+        "Rack"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeFaultDomainAwareness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown fault domain."
+          },
+          {
+            "name": "Drive",
+            "value": "Drive",
+            "description": "Drive-level fault domain."
+          },
+          {
+            "name": "Enclosure",
+            "value": "Enclosure",
+            "description": "Enclosure-level fault domain."
+          },
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "Server-level fault domain."
+          },
+          {
+            "name": "Chassis",
+            "value": "Chassis",
+            "description": "Chassis-level fault domain."
+          },
+          {
+            "name": "Rack",
+            "value": "Rack",
+            "description": "Rack-level fault domain."
+          }
+        ]
+      }
+    },
+    "ClusterVolumeListResult": {
+      "type": "object",
+      "description": "The response of a ClusterVolume list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterVolume items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterVolume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterVolumeMediaType": {
+      "type": "string",
+      "description": "Dominant media type for a cluster volume.",
+      "enum": [
+        "Unknown",
+        "Disk",
+        "SSD",
+        "Journal",
+        "SCM"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeMediaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown media type."
+          },
+          {
+            "name": "Disk",
+            "value": "Disk",
+            "description": "Hard disk drive."
+          },
+          {
+            "name": "SSD",
+            "value": "SSD",
+            "description": "Solid-state drive."
+          },
+          {
+            "name": "Journal",
+            "value": "Journal",
+            "description": "Journal device."
+          },
+          {
+            "name": "SCM",
+            "value": "SCM",
+            "description": "Storage-class memory."
+          }
+        ]
+      }
+    },
+    "ClusterVolumeProperties": {
+      "type": "object",
+      "description": "Properties of a cluster volume.",
+      "properties": {
+        "reportedProperties": {
+          "$ref": "#/definitions/ClusterVolumeReportedProperties",
+          "description": "The actual state of the cluster volume as reported by the cluster.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the cluster volume resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterVolumeProvisioningType": {
+      "type": "string",
+      "description": "Provisioning type for a cluster volume.",
+      "enum": [
+        "Thin",
+        "Fixed"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeProvisioningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Thin",
+            "value": "Thin",
+            "description": "Thin provisioning."
+          },
+          {
+            "name": "Fixed",
+            "value": "Fixed",
+            "description": "Fixed provisioning."
+          }
+        ]
+      }
+    },
+    "ClusterVolumeReportedProperties": {
+      "type": "object",
+      "description": "The actual state of the cluster volume as reported by the cluster.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Volume GUID. Primary identifier for the cluster volume.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "User-visible volume label.",
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "description": "Cluster volume mount path. This can be a CSV path or device path depending on the backing storage.",
+          "readOnly": true
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Cluster resource GUID for a PDR-backed volume when applicable.",
+          "readOnly": true
+        },
+        "statusCategory": {
+          "$ref": "#/definitions/ClusterVolumeStatusCategory",
+          "description": "Health rollup reported by Windows Health Service.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "array",
+          "description": "Operational status codes for the volume.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total cluster volume size in bytes.",
+          "readOnly": true
+        },
+        "sizeRemaining": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Free space in bytes.",
+          "readOnly": true
+        },
+        "resiliency": {
+          "$ref": "#/definitions/ClusterVolumeResiliency",
+          "description": "Volume resiliency type.",
+          "readOnly": true
+        },
+        "media": {
+          "$ref": "#/definitions/ClusterVolumeMediaType",
+          "description": "Dominant media type for the volume.",
+          "readOnly": true
+        },
+        "faultDomainAwareness": {
+          "$ref": "#/definitions/ClusterVolumeFaultDomainAwareness",
+          "description": "Fault domain level for placement.",
+          "readOnly": true
+        },
+        "provisioningType": {
+          "$ref": "#/definitions/ClusterVolumeProvisioningType",
+          "description": "Provisioning mode for the volume.",
+          "readOnly": true
+        },
+        "storagePoolName": {
+          "type": "string",
+          "description": "Name of the containing storage pool.",
+          "readOnly": true
+        },
+        "server": {
+          "type": "string",
+          "description": "Current owner node for the cluster volume when applicable.",
+          "readOnly": true
+        },
+        "isDedupEnabled": {
+          "type": "boolean",
+          "description": "Whether data deduplication is enabled.",
+          "readOnly": true
+        },
+        "isEncrypted": {
+          "type": "boolean",
+          "description": "Whether BitLocker encryption is enabled.",
+          "readOnly": true
+        },
+        "isIntegrityEnabled": {
+          "type": "boolean",
+          "description": "Whether ReFS integrity streams are enabled.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterVolumeResiliency": {
+      "type": "string",
+      "description": "Volume resiliency type.",
+      "enum": [
+        "Unknown",
+        "Simple",
+        "SingleParity",
+        "DualParity",
+        "TwoWayMirror",
+        "ThreeWayMirror",
+        "MRT"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeResiliency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown resiliency."
+          },
+          {
+            "name": "Simple",
+            "value": "Simple",
+            "description": "Simple (no resiliency)."
+          },
+          {
+            "name": "SingleParity",
+            "value": "SingleParity",
+            "description": "Single parity."
+          },
+          {
+            "name": "DualParity",
+            "value": "DualParity",
+            "description": "Dual parity."
+          },
+          {
+            "name": "TwoWayMirror",
+            "value": "TwoWayMirror",
+            "description": "Two-way mirror."
+          },
+          {
+            "name": "ThreeWayMirror",
+            "value": "ThreeWayMirror",
+            "description": "Three-way mirror."
+          },
+          {
+            "name": "MRT",
+            "value": "MRT",
+            "description": "Mirror-accelerated parity (MRT)."
+          }
+        ]
+      }
+    },
+    "ClusterVolumeStatusCategory": {
+      "type": "string",
+      "description": "Health rollup status category for a cluster volume.",
+      "enum": [
+        "Healthy",
+        "Warning",
+        "Unhealthy",
+        "Others"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeStatusCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Volume is healthy."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Volume has a warning."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Volume is unhealthy."
+          },
+          {
+            "name": "Others",
+            "value": "Others",
+            "description": "Other status."
+          }
+        ]
+      }
     },
     "CollectLogJobProperties": {
       "type": "object",
@@ -19913,11 +20372,7 @@
           "type": "string",
           "description": "Infrastructure performance LUN ID."
         }
-      },
-      "required": [
-        "infraVolLunId",
-        "infraPerfLunId"
-      ]
+      }
     },
     "StorageType": {
       "type": "string",

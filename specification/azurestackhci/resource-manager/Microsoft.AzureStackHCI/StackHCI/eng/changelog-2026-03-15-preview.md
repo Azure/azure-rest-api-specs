@@ -167,3 +167,57 @@ Per-adapter IP configuration for SAN cluster network.
 |---|---|
 | `examples/2026-03-15-preview/PutDeploymentSettings_StorageS2D.json` | DeploymentSettings PUT with S2D storage config. |
 | `examples/2026-03-15-preview/PutDeploymentSettings_StorageSAN.json` | DeploymentSettings PUT with SAN storage config including `sanNetworks`. |
+
+---
+
+## New resource: ClusterVolume
+
+Read-only child resource of `Cluster` for surfacing cluster storage volumes.
+
+### Operations
+
+| Operation | Description |
+|---|---|
+| `GET` | Get a specific cluster volume |
+| `LIST` | List all cluster volumes on a cluster |
+
+### `ClusterVolumeProperties`
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `reportedProperties` | `ClusterVolumeReportedProperties` | Read-only | Actual state of the cluster volume as reported by the cluster. |
+| `provisioningState` | `ProvisioningState` | Read-only | Standard ARM provisioning state. |
+
+> **Note:** `clusterVolumeConfiguration` is reserved for future use (TODO).
+
+### `ClusterVolumeReportedProperties`
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `id` | `string` | Read-only | Volume GUID. |
+| `name` | `string` | Read-only | User-visible volume label. |
+| `path` | `string` | Read-only | Cluster volume mount path (CSV or device path). |
+| `clusterResourceId` | `string` | Read-only | Cluster resource GUID for PDR-backed volumes. |
+| `statusCategory` | `ClusterVolumeStatusCategory` | Read-only | Health rollup (Healthy, Warning, Unhealthy, Others). |
+| `status` | `int32[]` | Read-only | Operational status codes. |
+| `size` | `int64` | Read-only | Total size in bytes. |
+| `sizeRemaining` | `int64` | Read-only | Free space in bytes. |
+| `resiliency` | `ClusterVolumeResiliency` | Read-only | Resiliency type (Simple, TwoWayMirror, etc.). |
+| `media` | `ClusterVolumeMediaType` | Read-only | Media type (Disk, SSD, SCM, etc.). |
+| `faultDomainAwareness` | `ClusterVolumeFaultDomainAwareness` | Read-only | Fault domain level (Drive, Server, Rack, etc.). |
+| `provisioningType` | `ClusterVolumeProvisioningType` | Read-only | Provisioning mode (Thin, Fixed). |
+| `storagePoolName` | `string` | Read-only | Containing storage pool name. |
+| `server` | `string` | Read-only | Current owner node. |
+| `isDedupEnabled` | `boolean` | Read-only | Data deduplication enabled. |
+| `isEncrypted` | `boolean` | Read-only | BitLocker encryption enabled. |
+| `isIntegrityEnabled` | `boolean` | Read-only | ReFS integrity streams enabled. |
+
+### New unions
+
+| Union | Values |
+|---|---|
+| `ClusterVolumeStatusCategory` | `Healthy`, `Warning`, `Unhealthy`, `Others` |
+| `ClusterVolumeResiliency` | `Unknown`, `Simple`, `SingleParity`, `DualParity`, `TwoWayMirror`, `ThreeWayMirror`, `MRT` |
+| `ClusterVolumeMediaType` | `Unknown`, `Disk`, `SSD`, `Journal`, `SCM` |
+| `ClusterVolumeFaultDomainAwareness` | `Unknown`, `Drive`, `Enclosure`, `Server`, `Chassis`, `Rack` |
+| `ClusterVolumeProvisioningType` | `Thin`, `Fixed` |

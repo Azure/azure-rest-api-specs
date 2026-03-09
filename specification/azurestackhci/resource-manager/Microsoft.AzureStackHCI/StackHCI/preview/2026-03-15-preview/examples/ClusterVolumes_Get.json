@@ -1,0 +1,52 @@
+{
+  "title": "ClusterVolumes_Get",
+  "operationId": "ClusterVolumes_Get",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
+    "resourceGroupName": "rghci",
+    "clusterName": "HciCluster1",
+    "volumeName": "Volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6D37FF61-4C93-4377-B06B-FC6D6D561A7D/resourceGroups/rghci/providers/Microsoft.AzureStackHCI/clusters/HciCluster1/volumes/Volume1",
+        "name": "Volume1",
+        "type": "Microsoft.AzureStackHCI/clusters/volumes",
+        "properties": {
+          "reportedProperties": {
+            "id": "550e8400-e29b-41d4-a716-446655440000",
+            "name": "Volume1",
+            "path": "C:\\ClusterStorage\\Volume1",
+            "clusterResourceId": "8b7b6c8d-8c66-4d7f-8a09-2b1c2c0d0d10",
+            "statusCategory": "Healthy",
+            "status": [
+              2
+            ],
+            "size": 1099511627776,
+            "sizeRemaining": 549755813888,
+            "resiliency": "TwoWayMirror",
+            "media": "SSD",
+            "faultDomainAwareness": "Server",
+            "provisioningType": "Thin",
+            "storagePoolName": "S2DPool",
+            "server": "cluster-node-01",
+            "isDedupEnabled": true,
+            "isEncrypted": true,
+            "isIntegrityEnabled": true
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2025-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}
