@@ -389,7 +389,7 @@ interface Share {
   changeLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
-      ...LeaseIdOptionalParameter;
+      ...LeaseIdRequiredParameter;
       ...ProposeLeaseIdParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
@@ -411,7 +411,7 @@ interface Share {
   renewLease is StorageOperationNoBody<
     {
       ...ShareNamePathParameter;
-      ...LeaseIdOptionalParameter;
+      ...LeaseIdRequiredParameter;
       ...TimeoutParameter;
       ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
@@ -446,7 +446,7 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** Approximate time remaining in the lease period, in seconds. */
-      @header("x-ms-lease-time") leaseTime?: string;
+      @header("x-ms-lease-time") leaseTime?: int32;
 
       ...LeaseIdOptionalParameter;
     }

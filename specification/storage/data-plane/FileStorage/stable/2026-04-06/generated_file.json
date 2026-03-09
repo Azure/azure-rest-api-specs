@@ -2526,8 +2526,8 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
-            "description": "If specified, the lease ID must match the lease ID of the file.",
-            "required": false,
+            "description": "Specifies the current lease ID on the resource.",
+            "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
           },
@@ -2672,8 +2672,8 @@
           {
             "name": "x-ms-lease-id",
             "in": "header",
-            "description": "If specified, the lease ID must match the lease ID of the file.",
-            "required": false,
+            "description": "Specifies the current lease ID on the resource.",
+            "required": true,
             "type": "string",
             "x-ms-client-name": "leaseId"
           },
@@ -2890,7 +2890,8 @@
                 "description": "If specified, the lease ID must match the lease ID of the file."
               },
               "x-ms-lease-time": {
-                "type": "string",
+                "type": "integer",
+                "format": "int32",
                 "description": "Approximate time remaining in the lease period, in seconds."
               },
               "x-ms-request-id": {
