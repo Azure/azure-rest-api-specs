@@ -1320,31 +1320,40 @@ model ShareFileRangeList {
   clearRanges?: ClearRange[];
 }
 
-/** The storage error response. */
+/**
+ * The error response.
+ *
+ * This defines the wire format only. Language SDKs wrap this in idiomatic error types.
+ */
 @error
 @mediaTypeHint("application/xml")
-model StorageError {
-  /** The status code of the error. */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API"
-  @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
+model Error {
+  /** The error code. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  xMsCopySourceErrorCode?: string;
+
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  xMsCopySourceStatusCode?: int32;
 
   /** The error code. */
-  @header("x-ms-error-code") errorCode?: string;
+  @Xml.name("Code") code?: StorageErrorCode;
 
   /** The error message. */
   @Xml.name("Message") message?: string;
 
-  /** The copy source status code. */
-  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int64;
+  /** Copy source status code */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
 
-  /** The copy source error code. */
+  /** Copy source error code */
   @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
 
-  /** The copy source error message. */
+  /** Copy source error message */
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
-
-  /** The authentication error detail. */
-  @Xml.name("AuthenticationErrorDetail") authenticationErrorDetail?: string;
 }
 
 /**
