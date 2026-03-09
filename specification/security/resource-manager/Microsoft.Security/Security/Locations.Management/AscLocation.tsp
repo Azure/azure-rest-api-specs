@@ -28,8 +28,6 @@ interface AscLocations {
   /**
    * Details of a specific location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_Get")
   @tag("Locations")
   get is ArmResourceRead<
     AscLocation,
@@ -40,8 +38,6 @@ interface AscLocations {
   /**
    * The location of the responsible ASC of the specific subscription (home region). For each subscription there is only one responsible location. The location in the response should be used to read or write other resources in ASC according to their ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_List")
   @tag("Locations")
   list is ArmResourceListByParent<
     AscLocation,
