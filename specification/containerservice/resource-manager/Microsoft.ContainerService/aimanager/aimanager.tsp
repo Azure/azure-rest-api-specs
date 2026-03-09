@@ -33,6 +33,7 @@ model AIManager is TrackedResource<AIManagerProperties> {
 }
 
 @doc("AI Manager properties.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerProperties {
   @doc("Delete options of the AI Manager.")
   deletePolicy?: DeletePolicy;
@@ -51,6 +52,7 @@ model AIManagerProperties {
 }
 
 @doc("Status information for the AIManager.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerStatus {
   @visibility(Lifecycle.Read)
   @doc("The last operation ID for the AIManager.")
@@ -97,6 +99,7 @@ union AIManagerProvisioningState {
 }
 
 @doc("The AI Manager resource patch model.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 

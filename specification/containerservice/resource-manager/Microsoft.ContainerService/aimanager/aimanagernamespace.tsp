@@ -13,6 +13,7 @@ namespace Microsoft.ContainerService;
 @doc("The AI Manager namespace.")
 @resource("namespaces")
 @parentResource(AIManager)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
   @doc("The name of the AI Manager namespace resource.")
   @key("namespaceName")
@@ -28,6 +29,7 @@ model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
 }
 
 @doc("The properties of an AI Manager namespace.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerNamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
@@ -51,6 +53,7 @@ model AIManagerNamespaceProperties {
 }
 
 @doc("Status information for the AIManagerNamespace.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerNamespaceStatus {
   @visibility(Lifecycle.Read)
   @doc("The last operation ID for the AIManagerNamespace.")
@@ -86,6 +89,7 @@ union AIManagerNamespaceProvisioningState {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 interface AIManagerNamespaces {
   get is ArmResourceRead<AIManagerNamespace>;
 
@@ -102,6 +106,7 @@ interface AIManagerNamespaces {
       IfMatchParameters<AIManagerNamespace>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
   listByAIManager is ArmResourceListByParent<AIManagerNamespace>;
 
   update is ArmCustomPatchSync<
@@ -121,6 +126,7 @@ interface AIManagerNamespaces {
 }
 
 @doc("The properties of an AI Manager namespace that can be patched.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 model AIManagerNamespacePatch {
   /* The ARM tags of the AI Manager namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
