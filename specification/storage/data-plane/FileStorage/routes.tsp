@@ -1364,7 +1364,8 @@ interface File {
       @header("x-ms-range") targetRange: string;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
-      @header("x-ms-write") fileRangeWrite: FileRangeWriteType = FileRangeWriteType.update;
+      @header("x-ms-write")
+      fileRangeWrite: FileRangeWriteType = FileRangeWriteType.update;
 
       /** The number of bytes being transmitted in the request body. */
       @header("Content-Length") contentLength: int64;
