@@ -254,7 +254,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the deny assignment to create. The scope can be any REST resource instance. For example, use '/subscriptions/{subscription-id}/' for a subscription, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "description": "The scope of the deny assignment to create. The scope can be any REST resource instance. For example, use 'subscriptions/{subscription-id}' for a subscription, 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -486,14 +486,14 @@
         "principals": {
           "type": "array",
           "items": {
-            "$ref": "../../stable/2022-04-01/common-types.json#/definitions/Principal"
+            "$ref": "#/definitions/DenyAssignmentPrincipal"
           },
           "description": "Array of principals to which the deny assignment applies."
         },
         "excludePrincipals": {
           "type": "array",
           "items": {
-            "$ref": "../../stable/2022-04-01/common-types.json#/definitions/Principal"
+            "$ref": "#/definitions/DenyAssignmentPrincipal"
           },
           "description": "Array of principals to which the deny assignment does not apply."
         },
@@ -548,6 +548,7 @@
       "description": "Deny assignment properties."
     },
     "DenyAssignment": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -645,6 +646,24 @@
       },
       "type": "object",
       "description": "Deny assignment permissions."
+    },
+    "DenyAssignmentPrincipal": {
+      "type": "object",
+      "description": "Deny assignment principal.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The object ID of the principal."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the principal such as user, group, servicePrincipal, etc.",
+          "x-ms-enum": {
+            "name": "DenyAssignmentPrincipalType",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
