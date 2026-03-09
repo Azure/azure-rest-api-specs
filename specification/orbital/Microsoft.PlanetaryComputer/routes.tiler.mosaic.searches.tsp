@@ -800,11 +800,13 @@ interface MosaicSearchesTilesPlain {
   @get
   getZxy is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+      /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
@@ -822,12 +824,15 @@ interface MosaicSearchesTilesFormat {
   @get
   getZxyByFormat is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
       @path @maxLength(500) @pattern(".*") format: string;
+      /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
@@ -845,12 +850,15 @@ interface MosaicSearchesTilesScale {
   @get
   getZxyByScale is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
       @path scale: float32;
+      /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
@@ -868,13 +876,17 @@ interface MosaicSearchesTiles {
   @get
   getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
+      /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
+      /** Numeric scale factor for the tile. Higher values produce larger tiles */
       @path scale: float32;
+      /** Output format for the tile or image (e.g., png, jpeg, webp) */
       @path @maxLength(500) @pattern(".*") format: string;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
@@ -893,9 +905,11 @@ interface MosaicSearchesAssetsForTiles {
   @get
   getZxyAssets is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...MosaicSearchQueryParameters;
       ...ZxyPathParameters;
+      /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
       @query("tileMatrixSetId") tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
     ApplicationJsonResponse
@@ -912,10 +926,14 @@ interface MosaicSearchesPointAssets {
   @get
   getPointAssets is Azure.Core.Foundations.Operation<
     {
+      /** Search Id (pgSTAC Search Hash) */
       @path @maxLength(500) @pattern(".*") searchId: string;
       ...MosaicSearchQueryParameters;
+      /** Longitude */
       @path longitude: float32;
+      /** Latitude */
       @path latitude: float32;
+      /** Coordinate Reference System of the input coords. Default to `epsg:4326`. */
       @query("coord-crs") coordinateReferenceSystem?: string;
     },
     StacItemPointAsset[]
