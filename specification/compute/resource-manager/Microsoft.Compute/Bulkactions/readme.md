@@ -56,5 +56,5 @@ These settings apply only when `--tag=package-2026-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2026-04-01-preview'
 input-file:
-- stable/2026-04-01/Bulkactions.json
+- preview/2026-04-01-preview/Bulkactions.json
 ```
