@@ -5520,7 +5520,39 @@
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Timestamps",
+                "Etag",
+                "Attributes",
+                "PermissionKey"
+              ],
+              "x-ms-enum": {
+                "name": "ListFilesIncludeType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "name": "Timestamps",
+                    "value": "Timestamps",
+                    "description": "Timestamps"
+                  },
+                  {
+                    "name": "Etag",
+                    "value": "Etag",
+                    "description": "Etag"
+                  },
+                  {
+                    "name": "Attributes",
+                    "value": "Attributes",
+                    "description": "Attributes"
+                  },
+                  {
+                    "name": "PermissionKey",
+                    "value": "PermissionKey",
+                    "description": "PermissionKey"
+                  }
+                ]
+              }
             },
             "collectionFormat": "csv"
           },
@@ -10023,11 +10055,37 @@
           {
             "name": "include",
             "in": "query",
-            "description": "Include additional metadata in response.",
+            "description": "Include this parameter to specify one or more datasets to include in the response.",
             "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "snapshots",
+                "metadata",
+                "deleted"
+              ],
+              "x-ms-enum": {
+                "name": "ListSharesIncludeType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "name": "snapshots",
+                    "value": "snapshots",
+                    "description": "snapshots"
+                  },
+                  {
+                    "name": "metadata",
+                    "value": "metadata",
+                    "description": "metadata"
+                  },
+                  {
+                    "name": "deleted",
+                    "value": "deleted",
+                    "description": "deleted"
+                  }
+                ]
+              }
             },
             "collectionFormat": "csv"
           }

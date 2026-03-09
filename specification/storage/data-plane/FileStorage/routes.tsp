@@ -132,8 +132,8 @@ interface Service {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
 
-      /** Include additional metadata in response. */
-      @query include?: string[];
+      /** Include this parameter to specify one or more datasets to include in the response. */
+      @query include?: ListSharesIncludeType[];
     },
     {
       @body response: ListSharesResponse;
@@ -864,7 +864,7 @@ interface Directory {
       ...MaxResultsParameter;
 
       /** Include this parameter to specify one or more datasets to include in the response. */
-      @query include?: string[];
+      @query include?: ListFilesIncludeType[];
 
       ...TimeoutParameter;
 
