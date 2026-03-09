@@ -631,7 +631,10 @@ interface Share {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @body signedIdentifiers: SignedIdentifier[];
+
+      @body
+      @Xml.name("SignedIdentifiers")
+      signedIdentifiers: SignedIdentifier[];
     }
   >;
 
@@ -1043,7 +1046,7 @@ interface File {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}")
   @get
-  download is StorageOperationNoBody<
+  download is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
       ...DirectoryPathParameter;
@@ -1066,7 +1069,6 @@ interface File {
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
-      @header("Content-Type") contentType?: string;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: string;
       @header("Content-MD5") contentMd5?: bytes;
