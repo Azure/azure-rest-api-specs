@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments": {
       "get": {
         "tags": [
           "DenyAssignments"
@@ -43,10 +43,10 @@
         "description": "Gets deny assignments for a resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
@@ -72,10 +72,11 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource to get deny assignments for."
+            "description": "The name of the resource to get deny assignments for.",
+            "pattern": "^[a-zA-Z0-9._-]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -91,7 +92,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -115,13 +116,13 @@
         "description": "Gets deny assignments for a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -137,7 +138,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -161,10 +162,10 @@
         "description": "Gets all deny assignments for the subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -180,7 +181,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -204,12 +205,7 @@
         "description": "Get the specified deny assignment.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the deny assignment.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ScopeParameter"
           },
           {
             "name": "denyAssignmentId",
@@ -219,7 +215,7 @@
             "description": "The ID of the deny assignment to get."
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -232,7 +228,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -250,12 +246,7 @@
         "description": "Create or update a deny assignment by scope and name.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the deny assignment to create. The scope can be any REST resource instance. For example, use 'subscriptions/{subscription-id}' for a subscription, 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ScopeParameter"
           },
           {
             "name": "denyAssignmentId",
@@ -268,18 +259,18 @@
             "$ref": "#/parameters/DenyAssignmentCreateParameters"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created - Returns the deny assignment.",
+          "200": {
+            "description": "OK - Returns the deny assignment.",
             "schema": {
               "$ref": "#/definitions/DenyAssignment"
             }
           },
-          "200": {
-            "description": "OK - Returns the deny assignment.",
+          "201": {
+            "description": "Created - Returns the deny assignment.",
             "schema": {
               "$ref": "#/definitions/DenyAssignment"
             }
@@ -287,7 +278,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -305,12 +296,7 @@
         "description": "Delete a deny assignment by scope and name.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the deny assignment to delete.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ScopeParameter"
           },
           {
             "name": "denyAssignmentId",
@@ -320,15 +306,12 @@
             "description": "The ID of the deny assignment to delete."
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the deleted deny assignment.",
-            "schema": {
-              "$ref": "#/definitions/DenyAssignment"
-            }
+            "description": "OK - Deny assignment was successfully deleted."
           },
           "204": {
             "description": "Deny assignment was already deleted or does not exist."
@@ -336,7 +319,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -364,7 +347,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -377,7 +360,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -397,15 +380,10 @@
         "description": "Gets deny assignments for a scope.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the deny assignments.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ScopeParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -421,7 +399,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -574,20 +552,6 @@
       "type": "object",
       "description": "Deny Assignment"
     },
-    "DenyAssignmentCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DenyAssignmentProperties",
-          "description": "Deny assignment properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "description": "Deny assignment create parameters."
-    },
     "DenyAssignmentListResult": {
       "properties": {
         "value": {
@@ -689,7 +653,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/DenyAssignmentCreateParameters"
+        "$ref": "#/definitions/DenyAssignment"
       },
       "description": "Parameters for the deny assignment.",
       "x-ms-parameter-location": "method"
