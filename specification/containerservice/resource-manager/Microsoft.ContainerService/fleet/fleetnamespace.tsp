@@ -267,8 +267,8 @@ interface FleetManagedNamespaces {
   >;
 }
 
-@doc("The properties of a fleet managed namespace that can be patched.")
 @added(Versions.v2026_04_02_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
 model FleetManagedNamespacePropertiesPatch {
   @doc("The namespace properties for the fleet managed namespace.")
   managedNamespaceProperties?: ManagedNamespaceProperties;
@@ -277,6 +277,7 @@ model FleetManagedNamespacePropertiesPatch {
   rolloutStrategy?: RolloutStrategyPatch;
 }
 
+@added(Versions.v2025_08_01_preview)
 @doc("The properties of a fleet managed namespace that can be patched.")
 model FleetManagedNamespacePatch {
   /* The ARM tags of the fleet managed namespace resource.*/
