@@ -152,7 +152,6 @@ interface Incidents {
   /**
    * Gets all alerts for an incident.
    */
-  @list
   @action("alerts")
   @tag("IncidentAlerts")
   listAlerts is Extension.ActionSync<
@@ -166,7 +165,6 @@ interface Incidents {
   /**
    * Gets all bookmarks for an incident.
    */
-  @list
   @action("bookmarks")
   @tag("IncidentBookmarks")
   listBookmarks is Extension.ActionSync<
