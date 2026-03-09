@@ -1896,3 +1896,8 @@ alias OptionalBody = {
   @bodyRoot
   optionalBody?: bytes;
 };
+
+alias FileTypeParameter = {
+  /** Dummy type header, must be "file". */
+  @header("x-ms-type") fileType: "file";
+};

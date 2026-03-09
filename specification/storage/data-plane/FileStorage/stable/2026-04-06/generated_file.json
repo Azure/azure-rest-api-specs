@@ -641,9 +641,15 @@
           {
             "name": "x-ms-type",
             "in": "header",
-            "description": "Dummy constant parameter, file type can only be file.",
+            "description": "Dummy type header, must be \"file\".",
             "required": true,
             "type": "string",
+            "enum": [
+              "file"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
             "x-ms-client-name": "fileType"
           },
           {
@@ -1459,7 +1465,14 @@
                 "description": "The value of this header indicates whether the file data and application metadata are completely encrypted."
               },
               "x-ms-type": {
-                "type": "string"
+                "type": "string",
+                "description": "Dummy type header, must be \"file\".",
+                "enum": [
+                  "file"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               },
               "x-ms-version": {
                 "type": "string",

@@ -1008,10 +1008,7 @@ interface File {
       @header("x-ms-content-length") contentLength: int64;
 
       ...TimeoutParameter;
-
-      /** Dummy constant parameter, file type can only be file. */
-      @header("x-ms-type") fileType: string;
-
+      ...FileTypeParameter;
       ...FileContentRequestHeaders;
       ...MetadataHeaders;
       ...FileSmtPropertyRequestHeaders;
@@ -1137,7 +1134,7 @@ interface File {
     {
       @header("Last-Modified") lastModified: string;
       ...MetadataHeaders;
-      @header("x-ms-type") fileType: string;
+      ...FileTypeParameter;
       @header("Content-Length") contentLength: int64;
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
@@ -1830,10 +1827,7 @@ interface File {
       ...DirectoryPathParameter;
       ...FileNamePathParameter;
       ...TimeoutParameter;
-
-      /** Dummy type header, must be "file". */
-      @header("x-ms-type") fileType: "file";
-
+      ...FileTypeParameter;
       ...LeaseIdParameter;
 
       /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. */
