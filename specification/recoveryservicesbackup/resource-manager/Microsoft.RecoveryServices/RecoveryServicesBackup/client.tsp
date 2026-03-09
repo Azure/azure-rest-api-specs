@@ -1126,6 +1126,7 @@ op exportJobsOperationResultsGet(
   operationId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupJobs: "backupJobs",
 ): OperationResultInfoBaseResource;
 
@@ -2079,3 +2080,6 @@ op protectionPolicyOperationStatusesGet(
   protectionPolicyOperationStatusesGet,
   "java,go,python,javascript"
 );
+
+// rename for duplicate model from Azure.ResourceManager.CommonTypes
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail");

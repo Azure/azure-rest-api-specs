@@ -26,6 +26,10 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          # openapi-diff-runner must use Node <= 22, since url.parse() is deprecated in Node 24
+          # https://github.com/Azure/azure-rest-api-specs/issues/40552
+          node-version: "22.x"
 
       - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v5

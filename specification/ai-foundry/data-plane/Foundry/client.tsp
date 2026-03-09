@@ -82,29 +82,17 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
+@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
-
-// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
-// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
-// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
-@@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each message is identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
-@@clientDoc(MemoryStoreUpdateRequest.items, "A list of message items you would like to store in memory, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
-@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message identical to OpenAI's EasyInputMessageParam. For example: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "python");
-@@clientDoc(MemoryStoreSearchRequest.items, "A list of queries you would like to use in the search, each one represented as a dictionary, with `role`, `content` and `type` properties (with type equals `message`). Each query is a message similar to how OpenAI defines input items in Responses calls. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}", DocumentationMode.replace, "javascript");
 
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
 @@clientName(MemoryStores.getMemoryStore, "get");
 @@clientName(MemoryStores.listMemoryStores, "list");
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
-
-// The Python SDK will have custom code to handle LRO memory updates.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
-@@scope(MemoryStores.getUpdateResult, "!(python)");
-
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
@@ -113,15 +101,39 @@ using Azure.AI.Projects;
   "python"
 );
 
-// Hand written code still needs the below classes. Make sure they are emitted.
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+@@clientDoc(MemoryStoreUpdateRequest.items,
+  "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+@@clientDoc(MemoryStoreSearchRequest.items,
+  "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
+// The Python SDK will have custom code to handle LRO memory updates, and
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
 
+// The Python SDK will have custom code to handle memory search, with
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.searchMemories, Access.internal, "python");
+@@access(MemoryStoreSearchResponse, Access.public, "python");
+
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+// Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
@@ -130,6 +142,30 @@ using Azure.AI.Projects;
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
+
+// --------------------------------------------------------------------------------
+// Evaluators sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Evaluators.listLatestVersions, "list");
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
+
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+
+// --------------------------------------------------------------------------------
+// Insights sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -161,6 +197,15 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
+@@clientName(Schedule.id, "schedule_id");
+
+// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
+@@alternateType(CronTrigger.startTime, utcDateTime, "python");
+@@alternateType(CronTrigger.endTime, utcDateTime, "python");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -177,6 +222,36 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+// --------------------------------------------------------------------------------
+// To support custom client-side handling of "opt-in" to preview features.
+// --------------------------------------------------------------------------------
+
+// Remove preview opt-in union types from the public PythonSDK surface.
+//
+// TODO: These do not work. Follow up with the Python emitter team.
+// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
+// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
+// in alias WithConditionalFoundryPreviewHeader.
+//
+//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+
+// Add optional boolean "allow_preview" client initialization parameter
+// See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
+model AIProjectClientOptions {
+  @doc("Whether to enable preview features. Must be specified and set to True to enable preview features.")
+  allow_preview?: boolean;
+}
+
+@@clientInitialization(Azure.AI.Projects,
+  {
+    parameters: AIProjectClientOptions,
+  },
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Other

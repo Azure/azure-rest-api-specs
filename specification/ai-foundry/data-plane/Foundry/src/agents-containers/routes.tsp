@@ -24,12 +24,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   startAgentContainer is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -58,12 +58,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   updateAgentContainer is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -92,12 +92,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   stopAgentContainer is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -120,12 +120,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   deleteAgentContainer is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -145,12 +145,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   getAgentContainer is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -189,12 +189,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   streamAgentContainerLogs is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -233,12 +233,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   getAgentContainerOperation is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -259,12 +259,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   listAgentContainerOperations is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -284,12 +284,12 @@ interface AgentContainers {
     "x-ms-foundry-meta",
     #{
       required_previews: #[
-        AgentDefinitionFeatureKeys.container_agents_v1_preview
+        AgentDefinitionOptInKeys.container_agents_v1_preview
       ],
     }
   )
   listAgentVersionContainerOperations is FoundryDataPlanePreviewOperation<
-    AgentDefinitionFeatureKeys.container_agents_v1_preview,
+    AgentDefinitionOptInKeys.container_agents_v1_preview,
     {
       /** The name of the agent. */
       @path agent_name: string;
