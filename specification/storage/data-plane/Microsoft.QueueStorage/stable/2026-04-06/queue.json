@@ -276,7 +276,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListOfReceivedMessage"
+              "$ref": "#/definitions/ReceivedMessages"
             },
             "headers": {
               "Date": {
@@ -516,7 +516,7 @@
     },
     "/messages/{messageId}": {
       "put": {
-        "operationId": "Queue_Update",
+        "operationId": "Queue_UpdateMessage",
         "description": "The Update operation was introduced with version 2011-08-18 of the Queue\nservice API. The Update Message operation updates the visibility timeout of a\nmessage. You can also use this operation to update the contents of a message. A\nmessage must be in a format that can be included in an XML request with UTF-8\nencoding, and the encoded message can be up to 64KB in size.",
         "parameters": [
           {
@@ -1042,7 +1042,7 @@
     },
     "/?comp=metadata": {
       "get": {
-        "operationId": "Queue_GetMetadata",
+        "operationId": "Queue_GetProperties",
         "description": "returns all user-defined metadata and system properties for the specified queue.",
         "parameters": [
           {
@@ -1616,7 +1616,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListOfPeekedMessage"
+              "$ref": "#/definitions/PeekedMessages"
             },
             "headers": {
               "Date": {
@@ -1734,7 +1734,7 @@
       "description": "Geo-Replication information for the Secondary Storage Service",
       "properties": {
         "Status": {
-          "$ref": "#/definitions/GeoReplicationStatusType",
+          "$ref": "#/definitions/GeoReplicationStatus",
           "description": "The status of the secondary location",
           "x-ms-client-name": "status"
         },
@@ -1750,7 +1750,7 @@
         "LastSyncTime"
       ]
     },
-    "GeoReplicationStatusType": {
+    "GeoReplicationStatus": {
       "type": "string",
       "description": "The geo replication status.",
       "enum": [
@@ -1759,7 +1759,7 @@
         "unavailable"
       ],
       "x-ms-enum": {
-        "name": "GeoReplicationStatusType",
+        "name": "GeoReplicationStatus",
         "modelAsString": true,
         "values": [
           {
@@ -1805,52 +1805,6 @@
       "required": [
         "Expiry"
       ]
-    },
-    "ListOfPeekedMessage": {
-      "type": "object",
-      "description": "List wrapper for PeekedMessageItem array",
-      "properties": {
-        "QueueMessage": {
-          "type": "array",
-          "description": "The list of peeked messages.",
-          "items": {
-            "$ref": "#/definitions/PeekedMessage"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "items"
-        }
-      },
-      "required": [
-        "QueueMessage"
-      ],
-      "xml": {
-        "name": "QueueMessagesList"
-      }
-    },
-    "ListOfReceivedMessage": {
-      "type": "object",
-      "description": "List wrapper for DequeuedMessageItem array",
-      "properties": {
-        "QueueMessage": {
-          "type": "array",
-          "description": "The list of dequeued messages.",
-          "items": {
-            "$ref": "#/definitions/ReceivedMessage"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "items"
-        }
-      },
-      "required": [
-        "QueueMessage"
-      ],
-      "xml": {
-        "name": "QueueMessagesList"
-      }
     },
     "ListOfSentMessage": {
       "type": "object",
@@ -2056,6 +2010,29 @@
         "MessageText"
       ]
     },
+    "PeekedMessages": {
+      "type": "object",
+      "description": "List wrapper for PeekedMessageItem array",
+      "properties": {
+        "QueueMessage": {
+          "type": "array",
+          "description": "The list of peeked messages.",
+          "items": {
+            "$ref": "#/definitions/PeekedMessage"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "items"
+        }
+      },
+      "required": [
+        "QueueMessage"
+      ],
+      "xml": {
+        "name": "QueueMessagesList"
+      }
+    },
     "QueueItem": {
       "type": "object",
       "description": "An Azure Storage Queue.",
@@ -2194,6 +2171,29 @@
         "DequeueCount",
         "MessageText"
       ]
+    },
+    "ReceivedMessages": {
+      "type": "object",
+      "description": "List wrapper for DequeuedMessageItem array",
+      "properties": {
+        "QueueMessage": {
+          "type": "array",
+          "description": "The list of dequeued messages.",
+          "items": {
+            "$ref": "#/definitions/ReceivedMessage"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "items"
+        }
+      },
+      "required": [
+        "QueueMessage"
+      ],
+      "xml": {
+        "name": "QueueMessagesList"
+      }
     },
     "RetentionPolicy": {
       "type": "object",
