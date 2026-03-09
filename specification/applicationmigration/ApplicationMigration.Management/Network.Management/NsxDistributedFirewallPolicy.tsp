@@ -87,7 +87,8 @@ interface NsxDistributedFirewallPolicies {
   >;
 }
 
-model NsxDistributedFirewallPolicyList is Azure.Core.Page<NsxDistributedFirewallPolicy>;
+model NsxDistributedFirewallPolicyList
+  is Azure.Core.Page<NsxDistributedFirewallPolicy>;
 
 @@maxLength(NsxDistributedFirewallPolicy.name, 63);
 @@minLength(NsxDistributedFirewallPolicy.name, 3);

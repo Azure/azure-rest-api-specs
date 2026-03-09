@@ -112,7 +112,8 @@ interface NsxDistributedFirewallRules {
   >;
 }
 
-model NsxDistributedFirewallRuleList is Azure.Core.Page<NsxDistributedFirewallRule>;
+model NsxDistributedFirewallRuleList
+  is Azure.Core.Page<NsxDistributedFirewallRule>;
 
 @@maxLength(NsxDistributedFirewallRule.name, 63);
 @@minLength(NsxDistributedFirewallRule.name, 3);
