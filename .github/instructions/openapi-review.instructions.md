@@ -77,14 +77,14 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Verify each operation uses the correct HTTP method and defines the correct success response codes:
 
-  | Method | Purpose | Success Status Code |
-  |--------|---------|---------------------|
-  | GET    | Read resource / list collection | `200` |
-  | PUT    | Create or replace resource | `200`, `201` |
-  | PATCH  | Create or update resource (JSON Merge Patch) | `200`, `201` |
-  | POST   | Create (service-assigned ID) | `201` |
-  | POST   | Action | `200` |
-  | DELETE | Remove resource | `204` (avoid `404`) |
+  | Method | Purpose                                      | Success Status Code |
+  | ------ | -------------------------------------------- | ------------------- |
+  | GET    | Read resource / list collection              | `200`               |
+  | PUT    | Create or replace resource                   | `200`, `201`        |
+  | PATCH  | Create or update resource (JSON Merge Patch) | `200`, `201`        |
+  | POST   | Create (service-assigned ID)                 | `201`               |
+  | POST   | Action                                       | `200`               |
+  | DELETE | Remove resource                              | `204` (avoid `404`) |
 
 - Long-running operations **MUST** return `202-Accepted` and include `x-ms-long-running-operation: true`.
 - **DO** return the resource body on PUT, PATCH, POST, and GET operations with `200` or `201`.
@@ -97,11 +97,14 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 **Reference: [Azure Guidelines — JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)**
 
 ### Naming
+=======
+
 - All JSON property names **MUST** use camelCase. Do not upper-case acronyms (use `resourceId`, not `ResourceID` or `resourceID`).
 - Property names **MUST** be treated as case-sensitive.
 - Avoid abbreviations in property names unless they are industry-standard.
 
 ### Types & Formats
+=======
 - Integer properties **MUST** specify `format` as `int32` or `int64`.
 - Object definitions **MUST** have `"type": "object"`.
 - Array properties **MUST** have an `items` schema defined.
@@ -111,17 +114,29 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Boolean properties deserve scrutiny — consider if an extensible enum would be more future-proof.
 
 ### Field Mutability
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/main
 - Read-only properties **MUST** be marked `"readOnly": true` (e.g. `id`, `name`, `type`, `systemData`, computed properties).
 - Use `x-ms-mutability` to specify `["create", "read"]`, `["read"]`, or `["create", "update", "read"]` behavior.
 - Required read-only properties **MUST NOT** be required in request bodies. Check that `"required"` arrays don't include read-only fields for request schemas.
 
 ### Schema Consistency
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/main
 - **MUST** use the same JSON schema for PUT request/response, PATCH response, GET response, and POST request/response on a given URL path.
 - PATCH request schema **SHOULD** have all the same fields as the resource schema but with no required fields (to support partial update).
 - **DO NOT** return secret/sensitive fields in GET responses (e.g. `administratorPassword`). Secrets **MAY** only be returned via POST if absolutely necessary.
 - **DO NOT** include fields whose values are trivially computable from other fields.
 
 ### Null Values
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/main
 - **DO NOT** define response properties that can be `null`. Services should omit fields with null values rather than sending `null`.
 - Accept `null` values only in PATCH request bodies with JSON Merge Patch semantics (to delete a field).
 
@@ -301,6 +316,10 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 ## 21. Data Plane Specific Rules
 
 For data plane (non-ARM) swagger files, additionally verify:
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/main
 - An `api-version` query parameter is present and required on all operations.
 - The `host` and `basePath` are correctly defined for the data plane endpoint pattern.
 - Security definitions are appropriate for the service (may use API keys, bearer tokens, or other schemes instead of ARM OAuth2).

@@ -3,6 +3,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
 # ARM-Specific OpenAPI (Swagger) Review Instructions
+# ARM-Specific OpenAPI (Swagger) Review Instructions
 
 This file contains **ARM control plane–specific** review rules that supplement the generic OpenAPI review instructions in `openapi-review.instructions.md`. All generic rules (versioning, naming, JSON conventions, enums, error handling, pagination, descriptions, x-ms extensions, etc.) are enforced by that file and are **not repeated here**. When reviewing ARM resource-manager swagger files, apply **both** instruction sets. If the Azure RPC contract conflicts with the generic guidelines, the ARM RPC rules below take precedence.
 
