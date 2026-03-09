@@ -263,10 +263,10 @@ union MatchVariable {
    */
   SocketAddr: "SocketAddr",
 
- @added(Versions.v2025_11_01)
   /**
    * JA4 Match Variable
    */
+  @added(Versions.v2025_11_01)
   JA4: "JA4",
 }
 
@@ -340,17 +340,17 @@ union Operator {
    * ServiceTagMatch
    */
   ServiceTagMatch: "ServiceTagMatch",
-  
-  @added(Versions.v2025_11_01)
+
   /**
    * Asn Match Operator
    */
-  AsnMatch: "AsnMatch",
-  
   @added(Versions.v2025_11_01)
+  AsnMatch: "AsnMatch",
+
   /**
    * Client Finger print Operator
    */
+  @added(Versions.v2025_11_01)
   ClientFingerprint: "ClientFingerprint",
 }
 
@@ -1848,7 +1848,6 @@ model ManagedRuleSetException {
   scopes: ManagedRuleSetScope[];
 }
 
-
 /**
  * Defines the scope of the managed rules.
  */
@@ -1872,7 +1871,6 @@ model ManagedRuleSetScope {
   @identifiers(#["ruleGroupName"])
   ruleGroupScopes?: RuleGroupScope[];
 }
-
 
 /**
  * Defines the scope of the rule group.
@@ -1951,8 +1949,8 @@ union ExceptionValueMatchOperator {
   Equals: "Equals",
 
   /**
-	* Contains Exception Value Match Operator
-	*/
+   * Contains Exception Value Match Operator
+   */
   Contains: "Contains",
 
   /**
