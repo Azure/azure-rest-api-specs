@@ -118,7 +118,7 @@ union RolloutStrategyType {
 @added(Versions.v2026_04_02_preview)
 model RolloutStrategyPatch {
   @doc("The type of rollout strategy. Can only be set to External when current value is RollingUpdate. Once set to External, cannot be changed back to RollingUpdate.")
-  type: RolloutStrategyTypePatch;
+  type?: RolloutStrategyTypePatch;
 }
 
 @doc("The possible rollout strategy types for patch operations. Only External is allowed to enforce one-way transition.")
@@ -267,17 +267,22 @@ interface FleetManagedNamespaces {
   >;
 }
 
-@added(Versions.v2025_08_01_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
+@added(Versions.v2026_04_02_preview)
+model FleetManagedNamespacePropertiesPatch {
+  @doc("The namespace properties for the fleet managed namespace.")
+  managedNamespaceProperties?: ManagedNamespaceProperties;
+
+  @doc("The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External.")
+  rolloutStrategy?: RolloutStrategyPatch;
+}
+
 @doc("The properties of a fleet managed namespace that can be patched.")
 model FleetManagedNamespacePatch {
   /* The ARM tags of the fleet managed namespace resource.*/
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @added(Versions.v2026_04_02_preview)
-  @doc("The namespace properties for the fleet managed namespace.")
-  managedNamespaceProperties?: ManagedNamespaceProperties;
-
-  @added(Versions.v2026_04_02_preview)
-  @doc("The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External.")
-  rolloutStrategy?: RolloutStrategyPatch;
+  @doc("The updatable properties of the fleet managed namespace.")
+  properties?: FleetManagedNamespacePropertiesPatch;
 }

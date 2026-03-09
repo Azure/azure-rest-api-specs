@@ -3923,13 +3923,9 @@
             "type": "string"
           }
         },
-        "managedNamespaceProperties": {
-          "$ref": "#/definitions/ManagedNamespaceProperties",
-          "description": "The namespace properties for the fleet managed namespace."
-        },
-        "rolloutStrategy": {
-          "$ref": "#/definitions/RolloutStrategyPatch",
-          "description": "The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External."
+        "properties": {
+          "$ref": "#/definitions/FleetManagedNamespacePropertiesPatch",
+          "description": "The updatable properties of the fleet managed namespace."
         }
       }
     },
@@ -3977,6 +3973,20 @@
         "adoptionPolicy",
         "deletePolicy"
       ]
+    },
+    "FleetManagedNamespacePropertiesPatch": {
+      "type": "object",
+      "description": "The properties of a fleet managed namespace that can be patched.",
+      "properties": {
+        "managedNamespaceProperties": {
+          "$ref": "#/definitions/ManagedNamespaceProperties",
+          "description": "The namespace properties for the fleet managed namespace."
+        },
+        "rolloutStrategy": {
+          "$ref": "#/definitions/RolloutStrategyPatch",
+          "description": "The rollout strategy configuration for the fleet managed namespace. Note: Can only transition from RollingUpdate to External."
+        }
+      }
     },
     "FleetManagedNamespaceProvisioningState": {
       "type": "string",
@@ -5491,10 +5501,7 @@
           "$ref": "#/definitions/RolloutStrategyTypePatch",
           "description": "The type of rollout strategy. Can only be set to External when current value is RollingUpdate. Once set to External, cannot be changed back to RollingUpdate."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "RolloutStrategyTypePatch": {
       "type": "string",
