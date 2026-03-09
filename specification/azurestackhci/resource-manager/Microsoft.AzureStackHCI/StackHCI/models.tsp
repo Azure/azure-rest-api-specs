@@ -3129,12 +3129,12 @@ model StorageSanConfig {
   /**
    * Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF).
    */
-  infraVolLunId: string;
+  infraVolLunId?: string;
 
   /**
    * Infrastructure performance LUN ID.
    */
-  infraPerfLunId: string;
+  infraPerfLunId?: string;
 }
 
 /**
