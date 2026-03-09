@@ -65,7 +65,7 @@ StackHCI/
 ├── ValidateOwnershipVouchers.tsp # Ownership voucher validation
 ├── back-compatible.tsp         # Backward compatibility
 ├── Operations.tsp              # Operations
-├── eng/                        # Engineering docs
+├── .agents/                    # Engineering docs & Copilot instructions
 │   ├── repo-understanding.md   # This file
 │   ├── typespec-style-guide.md # TypeSpec style guide
 │   └── version-creator.md      # API version creation guide

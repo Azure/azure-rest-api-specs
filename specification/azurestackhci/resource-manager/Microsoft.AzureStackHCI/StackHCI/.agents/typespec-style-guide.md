@@ -267,5 +267,5 @@ npx tsp compile .
 
 | Script | Purpose |
 |--------|---------|
-| `eng/convert-doc-to-jsdoc.ps1` | Convert `@doc` decorators to `/** */` comments |
-| `eng/version-creator.md` | Instructions for creating new API versions |
+| `.agents/convert-doc-to-jsdoc.ps1` | Convert `@doc` decorators to `/** */` comments |
+| `.agents/version-creator.md` | Instructions for creating new API versions |

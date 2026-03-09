@@ -319,7 +319,7 @@ Ensure you're running commands from the correct directory:
 4. **Proper Discriminated Types**: Always define concrete classes for discriminated union types
 5. **Regular Validation**: Run validation frequently during development
 6. **Pre-Commit Checks**: Include formatting and validation in your pre-commit process
-7. **Update the Changelog**: When adding or modifying models, fields, or examples, update the corresponding `eng/changelog-{API_VERSION}.md` file. Include the field name, type, access level (if read-only), and a brief description. This keeps the changelog in sync with TypeSpec and example changes.
+7. **Update the Changelog**: When adding or modifying models, fields, or examples, update the corresponding `.agents/changelog-{API_VERSION}.md` file. Include the field name, type, access level (if read-only), and a brief description. This keeps the changelog in sync with TypeSpec and example changes.
 8. **Read-Only Awareness in Examples**: When a model or its properties use `@visibility(Lifecycle.Read)`, remember to include those properties only in response bodies of example files, never in request bodies.
 
 ---
