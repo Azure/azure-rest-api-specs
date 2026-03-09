@@ -33,7 +33,7 @@ tag: package-2026-04-01
 
 These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-03'
+```yaml $(tag) == 'package-preview-2026-04'
 input-file:
   - Microsoft.KeyVault/preview/2026-04-01-preview/openapi.json
 ```
@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-02-01'
+```yaml $(tag) == 'package-2026-04-01'
 input-file:
   - Microsoft.KeyVault/stable/2026-04-01/openapi.json
 ```
