@@ -4470,6 +4470,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: ResourceNameRestriction
+    from: networkManagerCommit.json
+    reason: The resource name parameter 'networkManagerName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all AvNM APIs.
   - suppress: DeleteResponseCodes
     from: networkManagerRoutingConfiguration.json
     reason: support response code 200 for delete operations
@@ -4487,6 +4490,9 @@ directive:
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: SystemDataDefinitionsCommonTypes
     from: networkManagerRoutingConfiguration.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkManagerCommit.json
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
