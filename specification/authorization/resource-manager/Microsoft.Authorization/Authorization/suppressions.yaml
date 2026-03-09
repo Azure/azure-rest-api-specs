@@ -63,18 +63,6 @@
 - tool: TypeSpecRequirement
   path: ./preview/2024-07-01-preview/*.json
   reason: Brownfield service not ready to migrate
-# Deny Assignment LintDiff suppressions - matches existing stable role assignment patterns
-- tool: LintDiff
-  paths:
-    - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
-  rules:
-    - NoDuplicatePathsForScopeParameter
-    - PathContainsResourceType
-    - RepeatedPathInfo
-  reason: >
-    Deny assignments follow the same explicit+scope path pattern as existing stable
-    role assignments (stable/2022-04-01). Explicit subscription/RG/resource paths
-    are required for backward compatibility and cannot be removed.
 - tool: TypeSpecRequirement
   path: ./preview/2025-12-01-preview/*.json
   reason: Brownfield service not ready to migrate

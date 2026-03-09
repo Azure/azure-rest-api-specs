@@ -91,6 +91,15 @@ directive:
   - suppress: R2015
     from: common-types.json
     reason: common-types doesn't need to reference api version.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: authorization-DenyAssignmentCalls.json
+    reason: Deny assignments follow the same explicit+scope path pattern as existing role definitions and role assignments. Explicit subscription/RG/resource paths are required for backward compatibility.
+  - suppress: PathContainsResourceType
+    from: authorization-DenyAssignmentCalls.json
+    reason: The resource-level list path uses generic {resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} parameters, matching the existing role assignments pattern.
+  - suppress: RepeatedPathInfo
+    from: authorization-DenyAssignmentCalls.json
+    reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
 ```
 
 ### Tag: package-2025-12-01-preview
