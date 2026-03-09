@@ -23,16 +23,18 @@ model AscLocation is Azure.ResourceManager.ProxyResource<never> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AscLocations {
   /**
    * Details of a specific location
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Locations_Get")
+  @tag("Locations")
   get is ArmResourceRead<
     AscLocation,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -40,10 +42,12 @@ interface AscLocations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Locations_List")
+  @tag("Locations")
   list is ArmResourceListByParent<
     AscLocation,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<AscLocationList>
+    Response = ArmResponse<AscLocationList>,
+    Error = CloudError
   >;
 }
 
