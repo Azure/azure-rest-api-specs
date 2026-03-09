@@ -80,10 +80,9 @@ model ClusterMeshProfileStatus {
   @visibility(Lifecycle.Read)
   state: ClusterMeshState;
 
-  @doc("The last applied Kubernetes-style label selector defining which Fleet members are in the mesh, e.g. `env=production`.")
-  @maxLength(512)
   @visibility(Lifecycle.Read)
-  lastAppliedMemberLabelSelector?: string;
+  @doc("The last applied MemberSelector for the cluster mesh profile.")
+  lastAppliedMemberSelector?: MemberSelector;
 
   @visibility(Lifecycle.Read)
   @doc("The last operation ID for the cluster mesh profile.")
