@@ -1,7 +1,7 @@
 import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
-import { access, readFile } from "fs/promises";
+import { access, readdir, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
@@ -32,9 +32,17 @@ export async function runNpm(
 }
 
 export async function fileExists(file: string) {
-  return access(file)
-    .then(() => true)
-    .catch(() => false);
+  try {
+    await access(file);
+  } catch {
+    return false;
+  }
+
+  // Verify exact case match to avoid false positives on case-insensitive file systems (Windows)
+  const dir = defaultPath.dirname(file);
+  const base = defaultPath.basename(file);
+  const entries = await readdir(dir);
+  return entries.includes(base);
 }
 
 export async function readTspConfig(folder: string) {
