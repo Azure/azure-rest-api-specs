@@ -2644,6 +2644,65 @@
         }
       ]
     },
+    "/{containerName}?restype=container&comp=session": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "operationId": "Container_CreateSession",
+        "description": "The Create Session operation enables users to create a session scoped to a container.",
+        "parameters": [
+          {
+            "name": "createSessionRequest",
+            "in": "body",
+            "required": true,
+            "x-ms-client-name": "createSessionOptions",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Session created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["container"]
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["session"]
+        }
+      ]
+    },
     "/{containerName}/{blob}": {
       "get": {
         "tags": [
@@ -9588,65 +9647,6 @@
           "enum": [
             "query"
           ]
-        }
-      ]
-    },
-    "/{containerName}?restype=container&comp=session": {
-      "post": {
-        "tags": [
-          "container"
-        ],
-        "operationId": "Container_CreateSession",
-        "description": "The Create Session operation enables users to create a session scoped to a container.",
-        "parameters": [
-          {
-            "name": "createSessionRequest",
-            "in": "body",
-            "required": true,
-            "x-ms-client-name": "createSessionOptions",
-            "schema": {
-              "$ref": "#/definitions/CreateSessionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Session created successfully.",
-            "schema": {
-              "$ref": "#/definitions/CreateSessionResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/ContainerName"
-        },
-        {
-          "name": "restype",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": ["container"]
-        },
-        {
-          "name": "comp",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": ["session"]
         }
       ]
     },
