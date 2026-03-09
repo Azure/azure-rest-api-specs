@@ -25,34 +25,34 @@ alias LocationParameter = {
   locationparameter: Azure.Core.azureLocation;
 };
 
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteDeallocate::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDeallocate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesExecuteDeallocate::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkDeallocate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteHibernate::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkHibernate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesExecuteHibernate::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkHibernate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteStart::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkStart::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesExecuteStart::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkStart::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteCreate::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCreate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesExecuteCreate::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkCreate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteDelete::parameters.body,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDelete::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.virtualMachinesExecuteDelete::parameters.body,
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkDelete::parameters.body,
   "The request body"
 );
 @@clientName(VirtualMachineBulkOperations.virtualMachinesGetOperationStatus::parameters.body,
@@ -71,40 +71,40 @@ alias LocationParameter = {
 @armResourceOperations(#{ omitTags: true })
 interface VirtualMachineBulkOperations {
   // -------------- Routes -------------
-  /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  virtualMachinesExecuteDeallocate is ArmProviderActionSync<
+  /** VirtualMachinesBulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkDeallocate is ArmProviderActionSync<
     Request = ExecuteDeallocateRequest,
     Response = ArmResponse<DeallocateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  virtualMachinesExecuteHibernate is ArmProviderActionSync<
+  /** VirtualMachinesBulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkHibernate is ArmProviderActionSync<
     Request = ExecuteHibernateRequest,
     Response = ArmResponse<HibernateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  virtualMachinesExecuteStart is ArmProviderActionSync<
+  /** VirtualMachinesBulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkStart is ArmProviderActionSync<
     Request = ExecuteStartRequest,
     Response = ArmResponse<StartResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  virtualMachinesExecuteCreate is ArmProviderActionSync<
+  /** VirtualMachinesBulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  virtualMachinesExecuteDelete is ArmProviderActionSync<
+  /** VirtualMachinesBulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,
     Response = ArmResponse<DeleteResourceOperationResponse>,
     Scope = Extension.Subscription,

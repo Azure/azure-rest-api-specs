@@ -82,6 +82,231 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesBulkCreate": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_VirtualMachinesBulkCreate",
+        "description": "VirtualMachinesBulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesBulkDeallocate": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_VirtualMachinesBulkDeallocate",
+        "description": "VirtualMachinesBulkDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteDeallocateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeallocateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesBulkDelete": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_VirtualMachinesBulkDelete",
+        "description": "VirtualMachinesBulkDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesBulkHibernate": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_VirtualMachinesBulkHibernate",
+        "description": "VirtualMachinesBulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteHibernateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HibernateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesBulkStart": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_VirtualMachinesBulkStart",
+        "description": "VirtualMachinesBulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteStartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StartResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesCancelOperations": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_VirtualMachinesCancelOperations",
@@ -131,271 +356,6 @@
           },
           "VirtualMachineBulkOperations_VirtualMachinesCancelOperations_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesCancelOperations_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesExecuteCreate": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_VirtualMachinesExecuteCreate",
-        "description": "VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CreateResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteCreate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteCreate_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteCreate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteCreate_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesExecuteDeallocate": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_VirtualMachinesExecuteDeallocate",
-        "description": "VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteDeallocateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeallocateResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteDeallocate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteDeallocate_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteDeallocate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteDeallocate_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesExecuteDelete": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_VirtualMachinesExecuteDelete",
-        "description": "VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteDeleteRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteDelete_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteDelete_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteDelete_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteDelete_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesExecuteHibernate": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_VirtualMachinesExecuteHibernate",
-        "description": "VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteHibernateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HibernateResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteHibernate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteHibernate_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteHibernate_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteHibernate_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachinesExecuteStart": {
-      "post": {
-        "operationId": "VirtualMachineBulkOperations_VirtualMachinesExecuteStart",
-        "description": "VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteStartRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StartResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteStart_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteStart_MaximumSet_Gen.json"
-          },
-          "VirtualMachineBulkOperations_VirtualMachinesExecuteStart_MaximumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
-            "$ref": "./examples/VirtualMachineBulkOperations_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
           }
         }
       }

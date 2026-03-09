@@ -5,15 +5,15 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteDeallocate,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDeallocate,
   "ExecuteVirtualMachineDeallocate",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteHibernate,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkHibernate,
   "ExecuteVirtualMachineHibernate",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteStart,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkStart,
   "ExecuteVirtualMachineStart",
   "csharp"
 );
@@ -25,11 +25,11 @@ namespace Microsoft.Compute;
   "CancelVirtualMachineOperations",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteCreate,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCreate,
   "ExecuteVirtualMachineCreateOperation",
   "csharp"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesExecuteDelete,
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDelete,
   "ExecuteVirtualMachineDeleteOperation",
   "csharp"
 );
