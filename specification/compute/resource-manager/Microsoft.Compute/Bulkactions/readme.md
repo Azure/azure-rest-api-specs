@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ``` yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-04-01
+tag: package-2026-04-01-preview
 
 suppressions:  
   - code: DefinitionsPropertiesNamesCamelCase
@@ -50,11 +50,11 @@ suppressions:
     where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings   
 ```
 
-### Tag: package-2026-04-01
+### Tag: package-2026-04-01-preview
 
-These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-04-01'
+``` yaml $(tag) == 'package-2026-04-01-preview'
 input-file:
 - stable/2026-04-01/Bulkactions.json
 ```
