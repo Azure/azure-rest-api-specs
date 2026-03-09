@@ -7,9 +7,6 @@ import "./virtualMachineProfile.tsp";
 import "./virtualMachineExtension.tsp";
 import "./common.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;

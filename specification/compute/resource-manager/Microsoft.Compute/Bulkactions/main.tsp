@@ -5,10 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -20,7 +16,7 @@ namespace Microsoft.Compute;
 
 /** ComputeSchedule API versions */
 enum Versions {
-  /** 2026-04-01 version */
+  /** 2026-04-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  `2026-04-01`,
+  `2026-04-01-preview`,
 }

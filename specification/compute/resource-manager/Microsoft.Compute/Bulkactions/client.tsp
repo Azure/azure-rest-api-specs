@@ -84,3 +84,16 @@ namespace Microsoft.Compute;
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent");
 @@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
+@@clientName(CancelOperationsRequest, "CancelOperationsContent");
+@@clientName(ManagedDiskParameters, "ManagedDiskParametersContent");
+@@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent");
+
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "UserInitiatedRedeployAutomaticallyApprove"
+);
+@@clientName(UserInitiatedReboot.automaticallyApprove,
+  "UserInitiatedRebootAutomaticallyApprove"
+);
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AllInstancesDownAutomaticallyApprove"
+);
