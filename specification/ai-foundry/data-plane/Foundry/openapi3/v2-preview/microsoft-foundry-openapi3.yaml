@@ -1,11 +1,9 @@
 openapi: 3.0.0
 info:
   title: Microsoft Foundry
-  version: virtual-public-preview
+  version: v2-preview
 tags:
   - name: Agents
-  - name: Agent Containers
-  - name: Agent Invocations
   - name: Connections
   - name: Datasets
   - name: Deployments
@@ -311,159 +309,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
-  /agents/{agent_name}/operations:
-    get:
-      operationId: AgentContainers_listAgentContainerOperations
-      description: List container operations for an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AgentContainerOperationObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/operations/{operation_id}:
-    get:
-      operationId: AgentContainers_getAgentContainerOperation
-      description: Get the status of a container operation for an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: operation_id
-          in: path
-          required: true
-          description: The operation ID.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion
@@ -688,773 +533,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents/{agent_name}/versions/{agent_version}/containers/default:
-    get:
-      operationId: AgentContainers_getAgentContainer
-      description: Get a container for a specific version of an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default/operations:
-    get:
-      operationId: AgentContainers_listAgentVersionContainerOperations
-      description: List container operations for a specific version of an agent.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AgentContainerOperationObject'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:delete:
-    post:
-      operationId: AgentContainers_deleteAgentContainer
-      description: |-
-        Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
-    post:
-      operationId: AgentContainers_streamAgentContainerLogs
-      description: |-
-        Container log entry streamed from the container as text chunks.
-        Each chunk is a UTF-8 string that may be either a plain text log line
-        or a JSON-formatted log entry, depending on the type of container log being streamed.
-        Clients should treat each chunk as opaque text and, if needed, attempt
-        to parse it as JSON based on their logging requirements.
-
-        For system logs, the format is JSON with the following structure:
-        {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
-        {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
-
-        For console logs, the format is plain text as emitted by the container's stdout/stderr.
-        2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
-        2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
-        2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
-        2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
-        2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: kind
-          in: query
-          required: false
-          description: console returns container stdout/stderr, system returns container app event stream. defaults to console
-          schema:
-            $ref: '#/components/schemas/ContainerLogKind'
-          explode: false
-        - name: replica_name
-          in: query
-          required: false
-          description: When omitted, the server chooses the first replica for console logs. Required to target a specific replica.
-          schema:
-            type: string
-          explode: false
-        - name: tail
-          in: query
-          required: false
-          description: Number of trailing lines returned. Enforced to 1-300. Defaults to 20
-          schema:
-            type: integer
-            format: int32
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:start:
-    post:
-      operationId: AgentContainers_startAgentContainer
-      description: |-
-        Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                min_replicas:
-                  type: integer
-                  format: int32
-                  description: The minimum number of replicas. Defaults to 1.
-                  default: 1
-                max_replicas:
-                  type: integer
-                  format: int32
-                  description: The maximum number of replicas. Defaults to 1.
-                  default: 1
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:stop:
-    post:
-      operationId: AgentContainers_stopAgentContainer
-      description: |-
-        Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/containers/default:update:
-    post:
-      operationId: AgentContainers_updateAgentContainer
-      description: |-
-        Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.
-        The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-        https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ContainerAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The request has been accepted for processing, but processing has not yet completed.
-          headers:
-            Operation-Location:
-              required: true
-              schema:
-                type: string
-                format: uri
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Containers
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                min_replicas:
-                  type: integer
-                  format: int32
-                  description: The minimum number of replicas.
-                max_replicas:
-                  type: integer
-                  format: int32
-                  description: The maximum number of replicas.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/invocations:
-    post:
-      operationId: AgentInvocations_createAgentInvocation
-      description: Creates an invocation for the specified agent version.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: agent_session_id
-          in: query
-          required: false
-          description: Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated.
-          schema:
-            type: string
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            x-agent-invocation-id:
-              required: true
-              description: Unique identifier for this invocation.
-              schema:
-                type: string
-            x-agent-session-id:
-              required: true
-              description: Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.
-              schema:
-                type: string
-          content:
-            '*/*':
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations
-      requestBody:
-        required: true
-        content:
-          '*/*':
-            schema:
-              type: string
-              format: binary
-        description: The request body.
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json:
-    get:
-      operationId: AgentInvocations_getAgentInvocationOpenApiSpec
-      description: |-
-        Retrieves the OpenAPI specification for an agent version's invocation contract.
-        Returns 404 if the agent does not expose an OpenAPI specification.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: {}
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}:
-    get:
-      operationId: AgentInvocations_getAgentInvocation
-      description: |-
-        Retrieves the invocation with the given ID.
-        Returns 404 if the agent does not support this operation or if the invocation ID is not found.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: invocation_id
-          in: path
-          required: true
-          description: The unique identifier of the invocation.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            '*/*':
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
-  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel:
-    post:
-      operationId: AgentInvocations_cancelAgentInvocation
-      description: |-
-        Cancels an invocation.
-        Returns 404 if the agent does not support this operation or if the invocation ID is not found.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent.
-          schema:
-            type: string
-        - name: invocation_id
-          in: path
-          required: true
-          description: The unique identifier of the invocation to cancel.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            '*/*':
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations
-      requestBody:
-        required: false
-        content:
-          '*/*':
-            schema:
-              type: string
-              format: binary
-        description: Optional request body.
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
   /agents/{agent_name}/versions:import:
     post:
       operationId: Agents_createAgentVersionFromManifest
@@ -2186,207 +1264,6 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluationRule'
         description: Evaluation rule resource
-  /evaluations/runs:
-    get:
-      operationId: Evaluations_list
-      description: List evaluation runs
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PagedEvaluation'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-  /evaluations/runs/{name}:
-    get:
-      operationId: Evaluations_get
-      description: Get an evaluation run by name.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: Identifier of the evaluation.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Evaluation'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-    delete:
-      operationId: Evaluations_delete
-      description: Delete an evaluation run by name
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: Identifier of the evaluation.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
-      responses:
-        '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-  /evaluations/runs/{name}:cancel:
-    post:
-      operationId: Evaluations_cancel
-      description: Cancel an evaluation run by name
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: Identifier of the evaluation.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
-      responses:
-        '204':
-          description: 'There is no content to send for this request, but the headers may be useful. '
-          headers:
-            x-ms-client-request-id:
-              required: false
-              description: An opaque, globally-unique, client-generated string identifier for the request.
-              schema:
-                $ref: '#/components/schemas/Azure.Core.uuid'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-  /evaluations/runs:run:
-    post:
-      operationId: Evaluations_create
-      description: Creates an evaluation run.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Evaluation'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Evaluation'
-        description: Evaluation to be run
-  /evaluations/runs:runAgent:
-    post:
-      operationId: Evaluations_createAgentEvaluation
-      description: Creates an agent evaluation run.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentEvaluation'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentEvaluationRequest'
-        description: Agent evaluation to be run
   /evaluationtaxonomies:
     get:
       operationId: EvaluationTaxonomies_list
@@ -5241,12 +4118,6 @@ paths:
                         $ref: '#/components/schemas/OpenAI.ContextManagementParam'
                       nullable: true
                       description: Context management configuration for this request.
-                    agent:
-                      allOf:
-                        - $ref: '#/components/schemas/AgentReference'
-                      description: |-
-                        (Deprecated) Use agent_reference instead.
-                        The agent to use for generating the response.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5255,12 +4126,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
                 - type: object
                   properties:
                     metadata:
@@ -5385,12 +4250,6 @@ paths:
                         $ref: '#/components/schemas/OpenAI.ContextManagementParam'
                       nullable: true
                       description: Context management configuration for this request.
-                    agent:
-                      allOf:
-                        - $ref: '#/components/schemas/AgentReference'
-                      description: |-
-                        (Deprecated) Use agent_reference instead.
-                        The agent to use for generating the response.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5399,12 +4258,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
     get:
       operationId: listResponses
       description: Returns the list of all responses.
@@ -6289,143 +5142,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
-    AgentContainerObject:
-      type: object
-      required:
-        - object
-        - status
-        - created_at
-        - updated_at
-      properties:
-        object:
-          type: string
-          enum:
-            - agent.container
-          description: The object type, which is always 'agent.container'.
-          readOnly: true
-        id:
-          type: string
-          description: The identifier of the container.
-          readOnly: true
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerStatus'
-          description: The status of the container of a specific version of an agent.
-          readOnly: true
-        max_replicas:
-          type: integer
-          format: int32
-          description: The maximum number of replicas for the container. Default is 1.
-          example: 10
-        min_replicas:
-          type: integer
-          format: int32
-          description: The minimum number of replicas for the container. Default is 1.
-          example: 1
-        error_message:
-          type: string
-          description: The error message if the container failed to operate, if any.
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: The creation time of the container.
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: The last update time of the container.
-          readOnly: true
-        container:
-          allOf:
-            - $ref: '#/components/schemas/ContainerDetails'
-          description: The detailed container information.
-          readOnly: true
-      description: The details of the container of a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationError:
-      type: object
-      required:
-        - code
-        - type
-        - message
-      properties:
-        code:
-          type: string
-          description: The error code of the container operation.
-        type:
-          type: string
-          description: The error type of the container operation.
-        message:
-          type: string
-          description: The error message of the container operation.
-      description: The error details of the container operation, if any.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationObject:
-      type: object
-      required:
-        - id
-        - agent_id
-        - agent_version_id
-        - status
-      properties:
-        id:
-          type: string
-          description: The ID of the container operation. This id is a globally unique identifier.
-        agent_id:
-          type: string
-          description: The ID of the agent.
-        agent_version_id:
-          type: string
-          description: The ID of the agent version.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationStatus'
-          description: The status of the container operation.
-        error:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationError'
-          description: The error of the container operation, if any.
-        container:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerObject'
-          description: The container of the specific version of an agent.
-      description: The container operation for a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerOperationStatus:
-      type: string
-      enum:
-        - NotStarted
-        - InProgress
-        - Succeeded
-        - Failed
-      description: Status of the container operation for a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    AgentContainerStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - Starting
-            - Running
-            - Stopping
-            - Stopped
-            - Failed
-            - Deleting
-            - Deleted
-            - Updating
-      description: Status of the container of a specific version of an agent.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -6443,7 +5159,6 @@ components:
           prompt: '#/components/schemas/PromptAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           hosted: '#/components/schemas/HostedAgentDefinition'
-          container_app: '#/components/schemas/ContainerAppAgentDefinition'
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
@@ -6455,147 +5170,8 @@ components:
       enum:
         - HostedAgents=V1Preview
         - WorkflowAgents=V1Preview
-        - ContainerAgents=V1Preview
         - CodeAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
-    AgentEvaluation:
-      type: object
-      required:
-        - id
-        - status
-      properties:
-        id:
-          type: string
-          description: Identifier of the agent evaluation run.
-        status:
-          type: string
-          description: 'Status of the agent evaluation. Options: Running, Completed, Failed.'
-        error:
-          type: string
-          description: The reason of the request failure for the long running process, if applicable.
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentEvaluationResult'
-          description: The agent evaluation result.
-      description: Evaluation response for agent evaluation run.
-    AgentEvaluationRedactionConfiguration:
-      type: object
-      properties:
-        redactScoreProperties:
-          type: boolean
-          description: Redact score properties. If not specified, the default is to redact in production.
-      description: The redaction configuration will allow the user to control what is redacted.
-    AgentEvaluationRequest:
-      type: object
-      required:
-        - runId
-        - evaluators
-        - appInsightsConnectionString
-      properties:
-        runId:
-          type: string
-          description: Identifier of the agent run.
-        threadId:
-          type: string
-          description: Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future.
-        evaluators:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EvaluatorConfiguration'
-          description: Evaluators to be used for the evaluation.
-        samplingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AgentEvaluationSamplingConfiguration'
-          description: Sampling configuration for the evaluation.
-        redactionConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AgentEvaluationRedactionConfiguration'
-          description: Redaction configuration for the evaluation.
-        appInsightsConnectionString:
-          type: string
-          description: Pass the AppInsights connection string to the agent evaluation for the evaluation results and the errors logs.
-      description: Evaluation request for agent run.
-    AgentEvaluationResult:
-      type: object
-      required:
-        - evaluator
-        - evaluatorId
-        - score
-        - status
-        - runId
-      properties:
-        evaluator:
-          type: string
-          description: Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.
-        evaluatorId:
-          type: string
-          description: Identifier of the evaluator.
-        score:
-          type: number
-          format: float
-          description: Score of the given evaluator. No restriction on range.
-        status:
-          type: string
-          description: 'Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable.'
-        reason:
-          type: string
-          description: Reasoning for the evaluation result.
-        version:
-          type: string
-          description: Version of the evaluator that was used to evaluate the agent's completion.
-        threadId:
-          type: string
-          description: The unique identifier of the thread.
-        runId:
-          type: string
-          description: The unique identifier of the run.
-        error:
-          type: string
-          description: A string explaining why there was an error, if applicable.
-        additionalDetails:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional properties relevant to the evaluator. These will differ between evaluators.
-      description: Result for the agent evaluation evaluator run.
-    AgentEvaluationSamplingConfiguration:
-      type: object
-      required:
-        - name
-        - samplingPercent
-        - maxRequestRate
-      properties:
-        name:
-          type: string
-          description: Name of the sampling strategy.
-        samplingPercent:
-          type: number
-          format: float
-          description: Percentage of sampling per hour (0-100).
-        maxRequestRate:
-          type: number
-          format: float
-          description: Maximum request rate per hour (0 to 1000).
-      description: Definition for sampling strategy.
-    AgentId:
-      type: object
-      required:
-        - type
-        - name
-        - version
-      properties:
-        type:
-          type: string
-          enum:
-            - agent_id
-        name:
-          type: string
-          maxLength: 256
-          description: The name of the agent.
-        version:
-          type: string
-          description: The version identifier of the agent.
     AgentKind:
       anyOf:
         - type: string
@@ -6604,7 +5180,6 @@ components:
             - prompt
             - hosted
             - workflow
-            - container_app
     AgentObject:
       type: object
       required:
@@ -6640,7 +5215,6 @@ components:
           enum:
             - activity_protocol
             - responses
-            - invocations
     AgentReference:
       type: object
       required:
@@ -6712,7 +5286,6 @@ components:
         - version
         - created_at
         - definition
-        - status
       properties:
         metadata:
           type: object
@@ -6752,24 +5325,6 @@ components:
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentVersionStatus'
-          description: The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.
-          default: active
-        error:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details if the agent version provisioning failed.
-    AgentVersionStatus:
-      type: string
-      enum:
-        - creating
-        - active
-        - failed
-        - deleting
-        - deleted
-      description: The provisioning status of an agent version.
     AgenticIdentityPreviewCredentials:
       type: object
       required:
@@ -6823,23 +5378,6 @@ components:
     AssetId:
       type: string
       description: Identifier of a saved asset.
-    AssistantMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          type: string
-          enum:
-            - assistant
-          description: Indicates this is an assistant message.
-        content:
-          type: string
-          description: Response content generated by the assistant.
-      allOf:
-        - $ref: '#/components/schemas/Message'
-      description: A message generated by the assistant in response to previous messages.
     AttackStrategy:
       anyOf:
         - type: string
@@ -7862,6 +6400,29 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+    CodeConfiguration:
+      type: object
+      required:
+        - code_uri
+        - runtime
+        - entry_point
+      properties:
+        code_uri:
+          type: string
+          format: uri
+          description: The URI pointing to the packaged code artifact.
+        runtime:
+          type: string
+          description: The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').
+        entry_point:
+          type: array
+          items:
+            type: string
+          description: The entry point command and arguments for the code execution.
+      description: Code-based deployment configuration for a hosted agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - CodeAgents=V1Preview
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -7941,104 +6502,19 @@ components:
             - CustomKeys
             - RemoteTool_Preview
       description: The Type (or category) of the connection
-    ContainerAppAgentDefinition:
+    ContainerConfiguration:
       type: object
       required:
-        - kind
-        - container_protocol_versions
-        - container_app_resource_id
-        - ingress_subdomain_suffix
+        - image
       properties:
-        kind:
+        image:
           type: string
-          enum:
-            - container_app
-        container_protocol_versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication of the containers.
-          example:
-            - protocol: responses
-              version: v0.1.1
-            - protocol: a2a
-              version: v0.3.0
-        container_app_resource_id:
-          type: string
-          description: The resource ID of the Azure Container App that hosts this agent. Not mutable across versions.
-        ingress_subdomain_suffix:
-          type: string
-          description: The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app.
-          example: --0000001
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
-      description: The container app agent definition.
+          description: The container image for the hosted agent.
+          example: my-registry.azurecr.io/my-hosted-agent:latest
+      description: Container-based deployment configuration for a hosted agent.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=V1Preview
-    ContainerDetails:
-      type: object
-      required:
-        - provisioning_state
-        - state
-        - health_state
-        - replicas
-        - updated_on
-      properties:
-        provisioning_state:
-          type: string
-          description: The provisioning state of the container.
-        provisioning_error:
-          type: string
-          description: The provisioning error of the container, if any.
-        state:
-          type: string
-          description: The state of the container.
-        health_state:
-          type: string
-          description: The health state of the container.
-        replicas:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerReplica'
-          description: The list of replicas in the container.
-        updated_on:
-          type: string
-          format: date-time
-          description: The last update time of the container.
-      description: Detailed information about the container.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    ContainerLogKind:
-      type: string
-      enum:
-        - console
-        - system
-      description: The type of logs to stream from a container.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
-    ContainerReplica:
-      type: object
-      required:
-        - name
-        - state
-        - container_state
-      properties:
-        name:
-          type: string
-          description: The name of the replica.
-        state:
-          type: string
-          description: The state of the replica.
-        container_state:
-          type: string
-          description: The container state of the replica.
-      description: Information about a container replica.
-      x-ms-foundry-meta:
-        required_previews:
-          - ContainerAgents=V1Preview
+          - HostedAgents=V1Preview
     ContinuousEvaluationRuleAction:
       type: object
       required:
@@ -8304,16 +6780,6 @@ components:
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
       title: CreateEvalRunRequest
-    CreatedBy:
-      type: object
-      properties:
-        agent:
-          allOf:
-            - $ref: '#/components/schemas/AgentId'
-          description: The agent that created the item.
-        response_id:
-          type: string
-          description: The response on which the item is created.
     CredentialType:
       anyOf:
         - type: string
@@ -8634,23 +7100,6 @@ components:
         - type: string
           enum:
             - ModelDeployment
-    DeveloperMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          type: string
-          enum:
-            - developer
-          description: Indicates this is a developer message.
-        content:
-          type: string
-          description: Content provided by a developer to guide model behavior in an evaluation context.
-      allOf:
-        - $ref: '#/components/schemas/Message'
-      description: A message authored by a developer to guide the model during evaluation.
     EntraIDCredentials:
       type: object
       required:
@@ -9423,51 +7872,6 @@ components:
           format: float
           description: Standard deviation of the metric in the evaluation run.
       description: Summary statistics of a metric in an evaluation run.
-    Evaluation:
-      type: object
-      required:
-        - id
-        - data
-        - evaluators
-      properties:
-        id:
-          type: string
-          description: Identifier of the evaluation.
-          readOnly: true
-        data:
-          allOf:
-            - $ref: '#/components/schemas/InputData'
-          description: Data for evaluation.
-        displayName:
-          type: string
-          description: Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.
-        description:
-          type: string
-          description: Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.
-        status:
-          type: string
-          description: Status of the evaluation. It is set by service and is read-only.
-          readOnly: true
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Evaluation's tags. Unlike properties, tags are fully mutable.
-        properties:
-          type: object
-          additionalProperties:
-            type: string
-          description: Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.
-        evaluators:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/EvaluatorConfiguration'
-          description: Evaluators to be used for the evaluation.
-        target:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationTarget'
-          description: Specifies the type and configuration of the entity used for this evaluation.
-      description: Evaluation Definition
     EvaluationComparisonInsightRequest:
       type: object
       required:
@@ -9593,7 +7997,6 @@ components:
         propertyName: type
         mapping:
           continuousEvaluation: '#/components/schemas/ContinuousEvaluationRuleAction'
-          humanEvaluation: '#/components/schemas/HumanEvaluationRuleAction'
           humanEvaluationPreview: '#/components/schemas/HumanEvaluationPreviewRuleAction'
       description: Evaluation action model.
     EvaluationRuleActionType:
@@ -9602,7 +8005,6 @@ components:
         - type: string
           enum:
             - continuousEvaluation
-            - humanEvaluation
             - humanEvaluationPreview
       description: Type of the evaluation action.
     EvaluationRuleEventType:
@@ -9685,27 +8087,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
-    EvaluationTarget:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationTargetType'
-          description: Discriminator that defines the type of the evaluation target.
-      discriminator:
-        propertyName: type
-        mapping:
-          modelResponseGeneration: '#/components/schemas/modelResponseGenerationTarget'
-      description: Abstract base model for defining evaluation targets.
-    EvaluationTargetType:
-      anyOf:
-        - type: string
-          enum:
-            - modelResponseGeneration
-        - type: string
-      description: Allowed types of evaluation targets.
     EvaluationTaxonomy:
       type: object
       required:
@@ -9839,24 +8220,6 @@ components:
             - safety
             - agents
       description: The category of the evaluator
-    EvaluatorConfiguration:
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          type: string
-          description: Identifier of the evaluator.
-        initParams:
-          type: object
-          additionalProperties: {}
-          description: Initialization parameters of the evaluator.
-        dataMapping:
-          type: object
-          additionalProperties:
-            type: string
-          description: Data parameters of the evaluator.
-      description: Evaluator Configuration
     EvaluatorDefinition:
       type: object
       required:
@@ -10196,7 +8559,7 @@ components:
       type: object
       required:
         - kind
-        - container_protocol_versions
+        - protocol_versions
         - cpu
         - memory
       properties:
@@ -10211,11 +8574,11 @@ components:
           description: |-
             An array of tools the hosted agent's model may call while generating a response. You
             can specify which tool to use by setting the `tool_choice` parameter.
-        container_protocol_versions:
+        protocol_versions:
           type: array
           items:
             $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication of the containers.
+          description: The protocols that the agent supports for ingress communication.
           example:
             - protocol: responses
               version: v0.1.1
@@ -10237,10 +8600,14 @@ components:
           example:
             name: LOG_LEVEL
             value: debug
-        image:
-          type: string
-          description: The image ID for the agent, applicable to image-based hosted agents.
-          example: my-registry.azurecr.io/my-hosted-agent:latest
+        container_configuration:
+          allOf:
+            - $ref: '#/components/schemas/ContainerConfiguration'
+          description: Container-based deployment configuration. Mutually exclusive with code_configuration.
+        code_configuration:
+          allOf:
+            - $ref: '#/components/schemas/CodeConfiguration'
+          description: Code-based deployment configuration. Mutually exclusive with container_configuration.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -10269,23 +8636,6 @@ components:
           type: string
           enum:
             - humanEvaluationPreview
-        templateId:
-          allOf:
-            - $ref: '#/components/schemas/AssetId'
-          description: Human evaluation template Id.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationRuleAction'
-      description: Evaluation rule action for human evaluation.
-    HumanEvaluationRuleAction:
-      type: object
-      required:
-        - type
-        - templateId
-      properties:
-        type:
-          type: string
-          enum:
-            - humanEvaluation
         templateId:
           allOf:
             - $ref: '#/components/schemas/AssetId'
@@ -10355,35 +8705,6 @@ components:
           ManagedAzureSearch: '#/components/schemas/ManagedAzureAISearchIndexUpdate'
           CosmosDBNoSqlVectorStore: '#/components/schemas/CosmosDBIndexUpdate'
       description: Index resource Definition
-    InputData:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: Type of the data
-      discriminator:
-        propertyName: type
-        mapping:
-          dataset: '#/components/schemas/InputDataset'
-      description: Abstract data class.
-    InputDataset:
-      type: object
-      required:
-        - type
-        - id
-      properties:
-        type:
-          type: string
-          enum:
-            - dataset
-        id:
-          type: string
-          description: Evaluation input data
-      allOf:
-        - $ref: '#/components/schemas/InputData'
-      description: Dataset as source for evaluation.
     Insight:
       type: object
       required:
@@ -10785,39 +9106,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool for integrating memories into the agent.
-    MemorySearchTool:
-      type: object
-      required:
-        - type
-        - memory_store_name
-        - scope
-      properties:
-        type:
-          type: string
-          enum:
-            - memory_search
-          description: The type of the tool. Always `memory_search_preview`.
-        memory_store_name:
-          type: string
-          description: The name of the memory store to use.
-        scope:
-          type: string
-          description: |-
-            The namespace used to group and isolate memories, such as a user ID.
-            Limits which memories can be retrieved or updated.
-            Use special variable `{{$userId}}` to scope memories to the current signed-in user.
-        search_options:
-          allOf:
-            - $ref: '#/components/schemas/MemorySearchOptions'
-          description: Options for searching the memory store.
-        update_delay:
-          type: integer
-          format: int32
-          description: Time to wait before updating memories after inactivity (seconds). Default 300.
-          default: 300
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: A tool for integrating memories into the agent.
     MemorySearchToolCallItemParam:
       type: object
       required:
@@ -11133,29 +9421,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - MemoryStores=V1Preview
-    Message:
-      type: object
-      required:
-        - role
-      properties:
-        role:
-          anyOf:
-            - type: string
-              enum:
-                - system
-                - assistant
-                - developer
-                - user
-            - type: string
-          description: "The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'."
-      discriminator:
-        propertyName: role
-        mapping:
-          system: '#/components/schemas/SystemMessage'
-          developer: '#/components/schemas/DeveloperMessage'
-          user: '#/components/schemas/UserMessage'
-          assistant: '#/components/schemas/AssistantMessage'
-      description: Abstract base model representing a single message in a conversation.
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -21209,11 +19474,6 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.OutputItemType'
-        created_by:
-          anyOf:
-            - $ref: '#/components/schemas/CreatedBy'
-            - type: string
-          description: The information about the creator of the item
         agent_reference:
           allOf:
             - $ref: '#/components/schemas/AgentReference'
@@ -22343,25 +20603,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ConversationReference'
           nullable: true
-        agent:
-          allOf:
-            - $ref: '#/components/schemas/AgentId'
-          description: |-
-            (Deprecated) Use agent_reference instead.
-            The agent used for this response
         agent_reference:
           type: object
           allOf:
             - $ref: '#/components/schemas/AgentReference'
           nullable: true
           description: The agent used for this response
-        agent_session_id:
-          type: string
-          description: |-
-            The session identifier for this response. Currently only relevant for hosted agents.
-            Always returned for hosted agents — either the caller-provided value, the auto-derived value,
-            or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
-            affinity in follow-up calls.
       title: The response object
     OpenAI.ResponseAudioDeltaEvent:
       type: object
@@ -25219,7 +23466,6 @@ components:
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
-          memory_search: '#/components/schemas/MemorySearchTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
@@ -25503,7 +23749,6 @@ components:
             - bing_grounding
             - capture_structured_outputs
             - openapi
-            - memory_search
     OpenAI.ToolsArray:
       type: array
       items:
@@ -26108,21 +24353,6 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of Deployment items
-    PagedEvaluation:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Evaluation'
-          description: The Evaluation items on this page
-        nextLink:
-          type: string
-          format: uri
-          description: The link to the next page of items
-      description: Paged collection of Evaluation items
     PagedEvaluationRule:
       type: object
       required:
@@ -27055,23 +25285,6 @@ components:
           description: The optional seed data content source files for data generation.
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
-    SystemMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          type: string
-          enum:
-            - system
-          description: Indicates this is a system message.
-        content:
-          type: string
-          description: Plain text instructions provided by the system to steer model behavior.
-      allOf:
-        - $ref: '#/components/schemas/Message'
-      description: A message authored by the system to guide model behavior.
     Target:
       type: object
       required:
@@ -27391,23 +25604,6 @@ components:
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-    UserMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          type: string
-          enum:
-            - user
-          description: Indicates this is a user message.
-        content:
-          type: string
-          description: Input content or question provided by the end user.
-      allOf:
-        - $ref: '#/components/schemas/Message'
-      description: A message authored by the end user as input to the model.
     UserProfileMemoryItem:
       type: object
       required:
@@ -27511,34 +25707,6 @@ components:
     integer:
       type: integer
       format: int64
-    modelResponseGenerationTarget:
-      type: object
-      required:
-        - type
-        - baseMessages
-        - modelDeploymentName
-        - modelParams
-      properties:
-        type:
-          type: string
-          enum:
-            - modelResponseGeneration
-          description: The type of evaluation target. Always 'modelResponseGeneration'.
-        baseMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-          description: A list of messages comprising the conversation so far.
-        modelDeploymentName:
-          type: string
-          description: The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
-        modelParams:
-          type: object
-          additionalProperties: {}
-          description: Optional parameters passed to the model for evaluation.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationTarget'
-      description: Evaluation target for generating responses using a given model and dataset.
   securitySchemes:
     OAuth2Auth:
       type: oauth2
