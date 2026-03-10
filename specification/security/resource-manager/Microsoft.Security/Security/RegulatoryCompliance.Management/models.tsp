@@ -46,7 +46,7 @@ model RegulatoryComplianceStandardList
 /**
  * Regulatory compliance standard data
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RegulatoryComplianceStandardProperties {
   /**
    * Aggregative state based on the standard's supported controls states
@@ -104,7 +104,9 @@ model Resource {
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * The error object.
@@ -115,7 +117,9 @@ model CloudError {
 /**
  * The error detail.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Suppress converter-generated warning for CloudError compatibility shape."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * The error code.
@@ -151,7 +155,7 @@ model CloudErrorBody {
 /**
  * The resource management error additional info.
  */
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress converter-generated warning for compatibility with original swagger shape."
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorAdditionalInfo {
   /**
    * The additional info type.
@@ -175,7 +179,7 @@ model RegulatoryComplianceControlList
 /**
  * Regulatory compliance control data
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RegulatoryComplianceControlProperties {
   /**
    * The description of the regulatory compliance control
@@ -216,7 +220,7 @@ model RegulatoryComplianceAssessmentList
 /**
  * Regulatory compliance assessment data
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RegulatoryComplianceAssessmentProperties {
   /**
    * The description of the regulatory compliance assessment
