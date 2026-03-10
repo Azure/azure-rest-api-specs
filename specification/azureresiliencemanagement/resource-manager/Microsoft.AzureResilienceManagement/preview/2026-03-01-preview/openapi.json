@@ -97,6 +97,12 @@
     },
     {
       "name": "UnifiedResilienceItems"
+    },
+    {
+      "name": "UsagePlans"
+    },
+    {
+      "name": "Enrollments"
     }
   ],
   "paths": {
@@ -5176,6 +5182,549 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureResilienceManagement/usagePlans": {
+      "get": {
+        "operationId": "UsagePlans_ListBySubscription",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "List UsagePlan resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagePlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/UsagePlans_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans": {
+      "get": {
+        "operationId": "UsagePlans_ListByResourceGroup",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "List UsagePlan resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagePlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/UsagePlans_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans/{usagePlanName}": {
+      "get": {
+        "operationId": "UsagePlans_Get",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "Get a UsagePlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagePlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_Get_MaximumSet": {
+            "$ref": "./examples/UsagePlans_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UsagePlans_CreateOrUpdate",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "Create a UsagePlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsagePlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UsagePlan' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UsagePlan"
+            }
+          },
+          "201": {
+            "description": "Resource 'UsagePlan' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UsagePlan"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/UsagePlans_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UsagePlans_Update",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "Update a UsagePlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UsagePlanTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagePlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_Update_MaximumSet": {
+            "$ref": "./examples/UsagePlans_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UsagePlans_Delete",
+        "tags": [
+          "UsagePlans"
+        ],
+        "description": "Delete a UsagePlan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UsagePlans_Delete_MaximumSet": {
+            "$ref": "./examples/UsagePlans_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans/{usagePlanName}/enrollments": {
+      "get": {
+        "operationId": "Enrollments_List",
+        "tags": [
+          "Enrollments"
+        ],
+        "description": "List Enrollments by Usage Plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enrollments_List_MaximumSet": {
+            "$ref": "./examples/Enrollments_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureResilienceManagement/usagePlans/{usagePlanName}/enrollments/{enrollmentName}": {
+      "get": {
+        "operationId": "Enrollments_Get",
+        "tags": [
+          "Enrollments"
+        ],
+        "description": "Get an Enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the enrollment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enrollments_Get_MaximumSet": {
+            "$ref": "./examples/Enrollments_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Enrollments_CreateOrUpdate",
+        "tags": [
+          "Enrollments"
+        ],
+        "description": "Create or update an Enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the enrollment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Enrollment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            }
+          },
+          "201": {
+            "description": "Resource 'Enrollment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enrollments_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Enrollments_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Enrollments_Delete",
+        "tags": [
+          "Enrollments"
+        ],
+        "description": "Delete an Enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "usagePlanName",
+            "in": "path",
+            "description": "The name of the usage plan.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the enrollment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enrollments_Delete_MaximumSet": {
+            "$ref": "./examples/Enrollments_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7283,6 +7832,12 @@
           "description": "ARM Resource ID of the Azure resource.",
           "readOnly": true
         },
+        "drillResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Drill Resource ID of the Azure resource.",
+          "readOnly": true
+        },
         "activeLocations": {
           "type": "array",
           "description": "Active Resource location and zones of Azure Resource.",
@@ -7367,6 +7922,73 @@
       },
       "required": [
         "resourceId"
+      ]
+    },
+    "Enrollment": {
+      "type": "object",
+      "description": "An enrollment that links a usage plan to a service group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnrollmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EnrollmentListResult": {
+      "type": "object",
+      "description": "The response of a Enrollment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Enrollment items on this page",
+          "items": {
+            "$ref": "#/definitions/Enrollment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnrollmentProperties": {
+      "type": "object",
+      "description": "Definition of enrollment properties.",
+      "properties": {
+        "serviceGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource identifier of the service group associated with this usage plan.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/serviceGroups"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the enrollment.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during Enrollment create or update.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serviceGroupId"
       ]
     },
     "ErrorDetails": {
@@ -11422,6 +12044,99 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "UsagePlan": {
+      "type": "object",
+      "description": "A usage plan resource for Resiliency feature billing.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UsagePlanProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UsagePlanListResult": {
+      "type": "object",
+      "description": "The response of a UsagePlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UsagePlan items on this page",
+          "items": {
+            "$ref": "#/definitions/UsagePlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UsagePlanProperties": {
+      "type": "object",
+      "description": "Definition of usage plan properties.",
+      "properties": {
+        "planType": {
+          "$ref": "#/definitions/UsagePlanType",
+          "description": "The type of the usage plan."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the usage plan.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered during Usage Plan create or update.",
+          "readOnly": true
+        }
+      }
+    },
+    "UsagePlanTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in UsagePlan resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UsagePlanType": {
+      "type": "string",
+      "description": "The type of usage plan.",
+      "enum": [
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "UsagePlanType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic usage plan with restricted functionality without any charges."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard usage plan with comprehensive functionality and usage based charges."
+          }
+        ]
       }
     },
     "UserConsent": {
