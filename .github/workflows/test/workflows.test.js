@@ -15,7 +15,7 @@ describe("workflow files", () => {
       .map((e) => e.name)
       .filter((f) => {
         const extension = extname(f);
-        return extension !== ".yaml" && extension !== ".md";
+        return extension !== ".yaml" && extension !== ".yml" && extension !== ".md";
       });
 
     expect(disallowedFiles, "workflow files must use extension '.yaml' or '.md'").toEqual([]);
