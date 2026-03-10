@@ -437,10 +437,7 @@ using Azure.ClientGenerator.Core;
   "ExecuteLocationBasedCapabilities",
   "csharp"
 );
-@@clientName(QuotaUsagesOperationGroup.list,
-  "GetQuotaUsages",
-  "csharp"
-);
+@@clientName(QuotaUsagesOperationGroup.list, "GetQuotaUsages", "csharp");
 @@clientName(NameAvailabilityOperationGroup.checkGlobally,
   "CheckPostgreSqlFlexibleServerNameAvailability",
   "csharp"
@@ -459,7 +456,10 @@ using Azure.ClientGenerator.Core;
 );
 
 // Preserve backward-compatible operation names for server-level operations
-@@clientName(Servers.listByServer, "GetPostgreSqlFlexibleServerLogFiles", "csharp");
+@@clientName(Servers.listByServer,
+  "GetPostgreSqlFlexibleServerLogFiles",
+  "csharp"
+);
 @@clientName(Servers.replicasListByServer, "GetReplicas", "csharp");
 @@clientName(Servers.list, "GetServerCapabilities", "csharp");
 @@clientName(Servers.checkNameAvailability,
@@ -471,8 +471,6 @@ using Azure.ClientGenerator.Core;
   "TriggerLtrPreBackupFlexibleServer",
   "csharp"
 );
-
-// Preserve backward-compatible type names from FlexibleServers sub-namespace
 @@clientName(Replica, "PostgreSqlFlexibleServersReplica", "csharp");
 @@clientName(ReplicationState,
   "PostgreSqlFlexibleServersReplicationState",
@@ -494,6 +492,8 @@ using Azure.ClientGenerator.Core;
   "PostgreSqlFlexibleServersValidationState",
   "csharp"
 );
+@@clientName(MigrateNetworkStatus, "DbMigrateNetworkStatus", "csharp");
+@@clientName(NetworkMigrationState, "DbNetworkMigrationState", "csharp");
 
 // Restore public constructors and property setters for models treated as output-only
 @@usage(ObjectRecommendation, Usage.input, "csharp");
@@ -552,6 +552,22 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+// Make ForPatch sub-models public (used in public ModelFactory methods)
+@@access(SkuForPatch, Access.public, "csharp");
+@@usage(SkuForPatch, Usage.input, "csharp");
+@@access(BackupForPatch, Access.public, "csharp");
+@@usage(BackupForPatch, Usage.input, "csharp");
+@@access(HighAvailabilityForPatch, Access.public, "csharp");
+@@usage(HighAvailabilityForPatch, Usage.input, "csharp");
+@@access(MaintenanceWindowForPatch, Access.public, "csharp");
+@@usage(MaintenanceWindowForPatch, Usage.input, "csharp");
+@@access(AuthConfigForPatch, Access.public, "csharp");
+@@usage(AuthConfigForPatch, Usage.input, "csharp");
+@@access(MigrationSecretParametersForPatch, Access.public, "csharp");
+@@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
+@@access(AdminCredentialsForPatch, Access.public, "csharp");
+@@usage(AdminCredentialsForPatch, Usage.input, "csharp");
+
 // Make UserIdentity public (it's used in public ModelFactory method)
 @@access(UserIdentity, Access.public, "csharp");
 
@@ -572,8 +588,7 @@ using Azure.ClientGenerator.Core;
 // for backward compatibility with the 1.4.1 API contract.
 
 // Fix TenantId type on AdministratorMicrosoftEntraPropertiesForAdd (string → Guid?)
-@@alternateType(
-  AdministratorMicrosoftEntraPropertiesForAdd.tenantId,
+@@alternateType(AdministratorMicrosoftEntraPropertiesForAdd.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -592,3 +607,9 @@ using Azure.ClientGenerator.Core;
 @@usage(SkuForPatch, Usage.input, "csharp");
 @@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
 @@usage(AdminCredentialsForPatch, Usage.input, "csharp");
+
+@@alternateType(LocationParameter.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(MigrateNetworkStatus.subscriptionId, Azure.Core.uuid, "csharp");

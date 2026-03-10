@@ -13,6 +13,17 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
 
+alias LocationParameter = {
+  /**
+   * The name of the location.
+   */
+  @minLength(1)
+  @pattern("^[-\\w\\._]+$")
+  @path
+  @segment("locations")
+  locationName: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CapabilitiesByLocationOperationGroup {
   /**
@@ -26,14 +37,7 @@ interface CapabilitiesByLocationOperationGroup {
     Response = CapabilityList,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The name of the location.
-       */
-      @minLength(1)
-      @pattern("^[-\\w\\._]+$")
-      @path
-      @segment("locations")
-      locationName: string;
+      ...LocationParameter;
     }
   >;
 }
@@ -61,14 +65,7 @@ interface NameAvailabilityOperationGroup {
     Response = NameAvailabilityModel,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The name of the location.
-       */
-      @minLength(1)
-      @pattern("^[-\\w\\._]+$")
-      @path
-      @segment("locations")
-      locationName: string;
+      ...LocationParameter;
     }
   >;
 }
@@ -99,14 +96,7 @@ interface QuotaUsagesOperationGroup {
     Response = QuotaUsageList,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The name of the location.
-       */
-      @minLength(1)
-      @pattern("^[-\\w\\._]+$")
-      @path
-      @segment("locations")
-      locationName: string;
+      ...LocationParameter;
     }
   >;
 }
@@ -123,14 +113,7 @@ interface VirtualNetworkSubnetUsageOperationGroup {
     Response = VirtualNetworkSubnetUsageModel,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The name of the location.
-       */
-      @minLength(1)
-      @pattern("^[-\\w\\._]+$")
-      @path
-      @segment("locations")
-      locationName: string;
+      ...LocationParameter;
     }
   >;
 }
