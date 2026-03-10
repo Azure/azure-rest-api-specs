@@ -315,7 +315,7 @@ namespace Azure.AI.Projects {
   @@access(CreatedBy, Access.public);
   @@usage(CreatedBy, Usage.output);
   @@clientName(CreatedBy, "AgentItemSource");
-
+  @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
