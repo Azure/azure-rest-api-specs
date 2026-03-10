@@ -139,17 +139,35 @@ model SupercomputerIdentities {
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
 
+@doc("Dictionary of identity properties for the Supercomputer.")
+model SupercomputerIdentitiesUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
+  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
+}
+
+@doc("Updatable properties for Supercomputer (all fields optional for PATCH)")
+model SupercomputerPropertiesUpdate {
+  @doc("Dictionary of identity properties.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  identities?: SupercomputerIdentitiesUpdate;
+}
+
+@doc("Update model for Supercomputer PATCH operations")
+model SupercomputerUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: SupercomputerPropertiesUpdate;
+}
+
 @armResourceOperations
 interface Supercomputers {
   get is ArmResourceRead<Supercomputer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Supercomputer>;
-  update is ArmCustomPatchAsync<
-    Supercomputer,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Supercomputer,
-      SupercomputerProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Supercomputer, SupercomputerUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Supercomputer>;
   listByResourceGroup is ArmResourceListByParent<Supercomputer>;
   listBySubscription is ArmListBySubscription<Supercomputer>;

@@ -91,17 +91,46 @@ model BookshelfProperties {
   bookshelfUri?: url;
 }
 
+@doc("Key Vault update properties for Bookshelf (all fields optional for PATCH)")
+@added(Versions.v2026_02_01_preview)
+model BookshelfKeyVaultUpdateProperties {
+  @doc("The Key Name in Key Vault")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  keyName?: string;
+
+  @doc("The Key Version in Key Vault")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  keyVersion?: string;
+}
+
+@doc("The updatable properties of the Bookshelf.")
+model BookshelfPropertiesUpdate {
+  @doc("The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2026_02_01_preview)
+  keyVaultProperties?: BookshelfKeyVaultUpdateProperties;
+
+  @doc("Whether or not public network access is allowed for this resource. For security reasons, it is recommended to disable it whenever possible.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2026_02_01_preview)
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
+@doc("The type used for update operations of the Bookshelf.")
+model BookshelfUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: BookshelfPropertiesUpdate;
+}
+
 @armResourceOperations
 interface Bookshelves {
   get is ArmResourceRead<Bookshelf>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Bookshelf>;
-  update is ArmCustomPatchAsync<
-    Bookshelf,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Bookshelf,
-      BookshelfProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Bookshelf, BookshelfUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Bookshelf>;
   listByResourceGroup is ArmResourceListByParent<Bookshelf>;
   listBySubscription is ArmListBySubscription<Bookshelf>;
