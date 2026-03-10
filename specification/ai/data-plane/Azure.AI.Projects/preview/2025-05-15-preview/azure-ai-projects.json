@@ -3324,29 +3324,6 @@
         }
       }
     },
-    "ListJobsQueryParameters": {
-      "type": "object",
-      "description": "Query parameters for filtering the job list.",
-      "properties": {
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of records to skip for pagination."
-        },
-        "jobType": {
-          "type": "string",
-          "description": "Filter jobs by type (e.g., 'Command')."
-        },
-        "tag": {
-          "type": "string",
-          "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch')."
-        },
-        "listViewType": {
-          "$ref": "#/definitions/ListViewType",
-          "description": "Specifies which view type to apply when listing jobs."
-        }
-      }
-    },
     "ListViewType": {
       "type": "string",
       "description": "Specifies which jobs to include in a list result based on their lifecycle state.",
