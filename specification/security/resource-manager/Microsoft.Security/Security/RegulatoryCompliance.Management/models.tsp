@@ -1,0 +1,265 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Security;
+
+/**
+ * Aggregative state based on the standard's supported controls states
+ */
+union State {
+  string,
+
+  /**
+   * All supported regulatory compliance controls in the given standard have a passed state
+   */
+  Passed: "Passed",
+
+  /**
+   * At least one supported regulatory compliance control in the given standard has a state of failed
+   */
+  Failed: "Failed",
+
+  /**
+   * All supported regulatory compliance controls in the given standard have a state of skipped
+   */
+  Skipped: "Skipped",
+
+  /**
+   * No supported regulatory compliance data for the given standard
+   */
+  Unsupported: "Unsupported",
+}
+
+/**
+ * List of regulatory compliance standards response
+ */
+model RegulatoryComplianceStandardList
+  is Azure.Core.Page<RegulatoryComplianceStandard>;
+
+/**
+ * Regulatory compliance standard data
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model RegulatoryComplianceStandardProperties {
+  /**
+   * Aggregative state based on the standard's supported controls states
+   */
+  state?: State;
+
+  /**
+   * The number of supported regulatory compliance controls of the given standard with a passed state
+   */
+  @visibility(Lifecycle.Read)
+  passedControls?: int32;
+
+  /**
+   * The number of supported regulatory compliance controls of the given standard with a failed state
+   */
+  @visibility(Lifecycle.Read)
+  failedControls?: int32;
+
+  /**
+   * The number of supported regulatory compliance controls of the given standard with a skipped state
+   */
+  @visibility(Lifecycle.Read)
+  skippedControls?: int32;
+
+  /**
+   * The number of regulatory compliance controls of the given standard which are unsupported by automated assessments
+   */
+  @visibility(Lifecycle.Read)
+  unsupportedControls?: int32;
+}
+
+/**
+ * Describes an Azure resource.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}
+
+/**
+ * List of regulatory compliance controls response
+ */
+model RegulatoryComplianceControlList
+  is Azure.Core.Page<RegulatoryComplianceControl>;
+
+/**
+ * Regulatory compliance control data
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model RegulatoryComplianceControlProperties {
+  /**
+   * The description of the regulatory compliance control
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /**
+   * Aggregative state based on the control's supported assessments states
+   */
+  state?: State;
+
+  /**
+   * The number of supported regulatory compliance assessments of the given control with a passed state
+   */
+  @visibility(Lifecycle.Read)
+  passedAssessments?: int32;
+
+  /**
+   * The number of supported regulatory compliance assessments of the given control with a failed state
+   */
+  @visibility(Lifecycle.Read)
+  failedAssessments?: int32;
+
+  /**
+   * The number of supported regulatory compliance assessments of the given control with a skipped state
+   */
+  @visibility(Lifecycle.Read)
+  skippedAssessments?: int32;
+}
+
+/**
+ * List of regulatory compliance assessment response
+ */
+model RegulatoryComplianceAssessmentList
+  is Azure.Core.Page<RegulatoryComplianceAssessment>;
+
+/**
+ * Regulatory compliance assessment data
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model RegulatoryComplianceAssessmentProperties {
+  /**
+   * The description of the regulatory compliance assessment
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /**
+   * The expected type of assessment contained in the AssessmentDetailsLink
+   */
+  @visibility(Lifecycle.Read)
+  assessmentType?: string;
+
+  /**
+   * Link to more detailed assessment results data. The response type will be according to the assessmentType field
+   */
+  @visibility(Lifecycle.Read)
+  assessmentDetailsLink?: string;
+
+  /**
+   * Aggregative state based on the assessment's scanned resources states
+   */
+  state?: State;
+
+  /**
+   * The given assessment's related resources count with passed state.
+   */
+  @visibility(Lifecycle.Read)
+  passedResources?: int32;
+
+  /**
+   * The given assessment's related resources count with failed state.
+   */
+  @visibility(Lifecycle.Read)
+  failedResources?: int32;
+
+  /**
+   * The given assessment's related resources count with skipped state.
+   */
+  @visibility(Lifecycle.Read)
+  skippedResources?: int32;
+
+  /**
+   * The given assessment's related resources count with unsupported state.
+   */
+  @visibility(Lifecycle.Read)
+  unsupportedResources?: int32;
+}
