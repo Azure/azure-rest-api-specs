@@ -39,6 +39,7 @@ using Microsoft.ContainerRegistry;
   "csharp"
 );
 @@clientName(PlatformUpdateParameters, "PlatformUpdateContent", "csharp");
+@@clientName(RunRequest, "RunContent", "csharp");
 @@clientName(SourceTriggerUpdateParameters,
   "SourceTriggerUpdateContent",
   "csharp"
