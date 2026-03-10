@@ -15056,6 +15056,38 @@
         }
       }
     },
+    "QuotaScopeType": {
+      "type": "string",
+      "description": "The quota scope that determines the level at which the quota is applied.",
+      "enum": [
+        "Regional",
+        "Global",
+        "DataZone",
+        "Classic"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regional",
+            "value": "Regional"
+          },
+          {
+            "name": "Global",
+            "value": "Global"
+          },
+          {
+            "name": "DataZone",
+            "value": "DataZone"
+          },
+          {
+            "name": "Classic",
+            "value": "Classic"
+          }
+        ]
+      }
+    },
     "QuotaTier": {
       "type": "object",
       "description": "The quota tier information for the subscription",
@@ -15144,21 +15176,6 @@
           "x-nullable": true
         }
       }
-    },
-    "QuotaScopeType": {
-      "type": "string",
-      "description": "The quota scope that determines the level at which the quota is applied.",
-      "enum": [
-        "Regional",
-        "Global",
-        "DataZone",
-        "Classic"
-      ],
-      "x-ms-enum": {
-        "name": "QuotaScopeType",
-        "modelAsString": true
-      },
-      "x-nullable": true
     },
     "QuotaUsageStatus": {
       "type": "string",
