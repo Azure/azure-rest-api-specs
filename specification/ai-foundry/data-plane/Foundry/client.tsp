@@ -60,11 +60,12 @@ using Azure.AI.Projects;
 @@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
 @@clientName(Agents.listAgentVersions, "listVersions", "javascript");
 
-// Suppress these operations from Python and JavaScript SDK public surface.
-@@access(Agents.createAgent, Access.internal);
-@@access(Agents.updateAgent, Access.internal);
-@@access(Agents.createAgentFromManifest, Access.internal);
-@@access(Agents.updateAgentFromManifest, Access.internal);
+// Exclude these operations entirely from the Python SDK.
+// Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
+@@scope(Agents.createAgent, "!(python)");
+@@scope(Agents.updateAgent, "!(python)");
+@@scope(Agents.createAgentFromManifest, "!(python)");
+@@scope(Agents.updateAgentFromManifest, "!(python)");
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
