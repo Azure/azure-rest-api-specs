@@ -3,8 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Subscription;
-using Azure.Core;
-using Http;
 using Azure.ResourceManager;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
@@ -16,7 +14,7 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionAcceptOwnershipStatus(
   ...ApiVersionParameter,
-  scope: SubscriptionActionScope,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   subscriptionId: Azure.Core.uuid,
   body: void,
@@ -34,7 +32,7 @@ op subscriptionAcceptOwnershipStatus(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op subscriptionAcceptOwnership(
   ...ApiVersionParameter,
-  scope: SubscriptionActionScope,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   subscriptionId: Azure.Core.uuid,
   body: AcceptOwnershipRequest,
@@ -53,7 +51,7 @@ op subscriptionAcceptOwnership(
 op subscriptionCancel(
   ...ApiVersionParameter,
   subscriptionId: Azure.Core.uuid,
-  scope: SubscriptionActionScope,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: void,
 ): CanceledSubscriptionId | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -68,7 +66,7 @@ op subscriptionCancel(
 op subscriptionEnable(
   ...ApiVersionParameter,
   subscriptionId: Azure.Core.uuid,
-  scope: SubscriptionActionScope,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: void,
 ): EnabledSubscriptionId | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -83,7 +81,7 @@ op subscriptionEnable(
 op subscriptionRename(
   ...ApiVersionParameter,
   subscriptionId: Azure.Core.uuid,
-  scope: SubscriptionActionScope,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   body: SubscriptionName,
 ): RenamedSubscriptionId | Azure.ResourceManager.CommonTypes.ErrorResponse;
