@@ -136,7 +136,7 @@ npx oav validate-example preview/2026-03-15-preview/hci.json
 
 ## Agent & Detailed Docs
 
-For complex tasks (adding resources, models, running the pipeline), use the **`@stackhci_api`** agent.
+For complex tasks (adding resources, models, running the pipeline), use the **`@azurestackhci_api`** agent.
 
 | Document | Purpose |
 |----------|---------|

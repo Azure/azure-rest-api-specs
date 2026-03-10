@@ -106,7 +106,7 @@ model SpecificJobProperties extends BaseJobProperties {
   "parameters": {
     "api-version": "2026-03-15-preview",
     "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
-    "resourceGroupName": "rghci",
+    "resourceGroupName": "resourceGroup",
     "clusterName": "HciCluster1",
     "resourceName": "resource1"
   },
