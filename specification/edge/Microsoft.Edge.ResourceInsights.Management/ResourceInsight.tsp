@@ -46,11 +46,11 @@ union ConnectivityStatusEnum {
   @doc("The device is in Connected state")
   Connected: "Connected",
 
-  @doc("The device needs attention")
-  NeedsAttention: "NeedsAttention",
-
   @doc("The device was not recently connected")
   NotRecentlyConnected: "NotRecentlyConnected",
+
+  @doc("The device needs attention")
+  NeedsAttention: "NeedsAttention",
 
   @added(Versions.v2026_04_01_preview)
   @doc("The device is in Disconnected state and replaces NotRecentlyConnected")
