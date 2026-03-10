@@ -80,7 +80,10 @@ interface SecurityTasks {
    * Recommended tasks that will help improve the security of the subscription proactively
    */
   @tag("Tasks")
-  getSubscriptionLevelTask is SecurityTaskOps.Read<SecurityTask>;
+  getSubscriptionLevelTask is SecurityTaskOps.Read<
+    SecurityTask,
+    ErrorType = CloudError
+  >;
 
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
@@ -187,7 +190,8 @@ interface Tasks {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<SecurityTaskList>
+    Response = ArmResponse<SecurityTaskList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
