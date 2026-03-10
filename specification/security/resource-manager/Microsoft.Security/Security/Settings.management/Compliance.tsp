@@ -1,0 +1,45 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Security;
+/**
+ * Compliance of a scope
+ */
+@extensionResource
+model Compliance
+  is Azure.ResourceManager.ExtensionResource<ComplianceProperties> {
+  ...ResourceNameParameter<
+    Resource = Compliance,
+    KeyName = "complianceName",
+    SegmentName = "compliances",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface Compliances {
+  /**
+   * Details of a specific Compliance.
+   */
+  get is Extension.Read<Extension.ScopeParameter, Compliance>;
+
+  /**
+   * The Compliance scores of the specific management group.
+   */
+  list is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    Compliance,
+    Response = ArmResponse<ComplianceList>
+  >;
+}
+
+@@doc(Compliance.name, "name of the Compliance");
+@@doc(Compliance.properties, "Compliance data");

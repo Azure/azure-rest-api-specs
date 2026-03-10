@@ -99,7 +99,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: Tasks.Management
+tag: Settings.management
 ```
 
 ### Composite packages
@@ -122,4 +122,16 @@ These settings apply only when `--tag=package-2026-01` is specified on the comma
 ```yaml $(tag) == 'Tasks.Management'
 input-file:
   - preview/2015-06-01-preview/tasks.json
+```
+
+### Tag: Settings.management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'Settings.management'
+input-file:
+  - preview/2017-08-01-preview/autoProvisioningSettings.json
+  - preview/2017-08-01-preview/compliances.json
+  - preview/2017-08-01-preview/informationProtectionPolicies.json
+  - preview/2017-08-01-preview/workspaceSettings.json
 ```

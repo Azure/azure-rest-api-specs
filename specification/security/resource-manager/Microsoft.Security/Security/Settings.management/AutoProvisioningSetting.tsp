@@ -1,0 +1,61 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Security;
+/**
+ * Auto provisioning setting
+ */
+@subscriptionResource
+model AutoProvisioningSetting
+  is Azure.ResourceManager.ProxyResource<AutoProvisioningSettingProperties> {
+  ...ResourceNameParameter<
+    Resource = AutoProvisioningSetting,
+    KeyName = "settingName",
+    SegmentName = "autoProvisioningSettings",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface AutoProvisioningSettings {
+  /**
+   * Details of a specific setting
+   */
+  get is ArmResourceRead<
+    AutoProvisioningSetting,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
+
+  /**
+   * Details of a specific setting
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceSync<
+    AutoProvisioningSetting,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResourceUpdatedResponse<AutoProvisioningSetting>
+  >;
+
+  /**
+   * Exposes the auto provisioning settings of the subscriptions
+   */
+  list is ArmResourceListByParent<
+    AutoProvisioningSetting,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<AutoProvisioningSettingList>
+  >;
+}
+
+@@doc(AutoProvisioningSetting.name, "Auto provisioning setting key");
+@@doc(AutoProvisioningSetting.properties, "Auto provisioning setting data");
+@@doc(AutoProvisioningSettings.create::parameters.resource,
+  "Auto provisioning setting key"
+);
