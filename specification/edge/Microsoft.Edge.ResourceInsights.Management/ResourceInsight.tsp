@@ -49,7 +49,7 @@ union ConnectivityStatusEnum {
   @doc("The device needs attention")
   NeedsAttention: "NeedsAttention",
 
-  @doc("The device was not recently connected (deprecated; use Disconnected)")
+  @doc("The device was not recently connected")
   NotRecentlyConnected: "NotRecentlyConnected",
 
   @added(Versions.v2026_04_01_preview)
@@ -57,7 +57,7 @@ union ConnectivityStatusEnum {
   Disconnected: "Disconnected",
 
   @added(Versions.v2026_04_01_preview)
-  @doc("The device is in transition; NoDataAvailable should be represented as InProgress")
+  @doc("The device is in transition")
   InProgress: "InProgress",
 
   @added(Versions.v2026_04_01_preview)
