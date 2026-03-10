@@ -513,6 +513,69 @@ model EffectiveVmArmId {
 }
 
 /**
+ * The registration status of an appliance.
+ */
+union RegistrationStatus {
+  string,
+
+  /** The appliance is in the process of registering. */
+  Registering: "Registering",
+
+  /** The appliance is fully registered. */
+  Registered: "Registered",
+}
+
+/**
+ * Data associated with a discovery appliance.
+ */
+model ApplianceData {
+  /** The run-as account identifier. */
+  runAsAccountId?: string;
+
+  /** The appliance name. */
+  applianceName?: string;
+
+  /** The registration status of the appliance. */
+  status?: RegistrationStatus;
+}
+
+/**
+ * A machine instance discovered through NSX Manager by the network agent.
+ * This may include machines from vCenters not yet present in VMware sites.
+ */
+model DiscoveredMachineInstance {
+  /** ARM resource ID of the vCenter that manages this machine. */
+  vcenterArmId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/vmwareSites/vcenters";
+    }
+  ]>;
+
+  /** The unique identifier of the machine instance from NSX discovery. */
+  machineInstanceUid?: string;
+}
+
+/**
+ * A resolved machine reference that maps to an existing resource in a VMware site.
+ * This is a subset of discovered machine instances.
+ */
+model ResolvedMachineReference {
+  /** ARM resource ID of the machine instance in the VMware site. */
+  machineInstanceArmId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/vmwareSites/machines";
+    }
+  ]>;
+
+  /** ARM resource ID of the vCenter in the VMware site. */
+  vcenterArmId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/vmwareSites/vcenters";
+    }
+  ]>;
+}
+
+/**
  * A member of a load balancer backend pool.
  */
 model BackendPoolMember {
@@ -730,8 +793,9 @@ model NsxManagerPatchFields {
     }
   ]>[];
 
-  /** The appliance names. */
-  applianceNames?: string[];
+  /** The collection of appliance data associated with this NSX Manager. */
+  @identifiers(#[])
+  applianceDataCollection?: ApplianceData[];
 }
 
 /** NsxTier0Gateway patch envelope. */
@@ -898,7 +962,7 @@ model NsxNsGroupPatchFields {
   @identifiers(#[])
   effectiveVirtualMachineArmIds?: EffectiveVmArmId[];
 
-  /** Effective IP address members resolved by the group. */
+  /** Effective IPv4/IPv6 address members resolved by the group. */
   effectiveIpMembers?: string[];
 }
 
@@ -989,13 +1053,13 @@ model NsxGatewayFirewallRulePatchFields {
   /** ARM resource IDs of source IP groups. */
   sourceIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Source IP addresses. */
+  /** Source IPv4/IPv6 addresses or CIDR ranges. */
   sourceAddresses?: string[];
 
   /** ARM resource IDs of destination IP groups. */
   destinationIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Destination IP addresses. */
+  /** Destination IPv4/IPv6 addresses or CIDR ranges. */
   destinationAddresses?: string[];
 
   /** The services this rule applies to. */
@@ -1099,7 +1163,7 @@ model NsxDistributedFirewallRulePatchFields {
   /** ARM resource IDs of source groups. */
   sourceGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Source IP addresses. */
+  /** Source IPv4/IPv6 addresses or CIDR ranges. */
   sourceAddresses?: string[];
 
   /** Whether destination groups are excluded. */
@@ -1111,7 +1175,7 @@ model NsxDistributedFirewallRulePatchFields {
   /** ARM resource IDs of destination groups. */
   destinationGroupsArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Destination IP addresses. */
+  /** Destination IPv4/IPv6 addresses or CIDR ranges. */
   destinationAddresses?: string[];
 
   /** The services this rule applies to. */

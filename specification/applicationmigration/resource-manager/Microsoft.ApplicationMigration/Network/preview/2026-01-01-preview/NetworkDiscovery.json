@@ -4308,6 +4308,24 @@
         }
       }
     },
+    "ApplianceData": {
+      "type": "object",
+      "description": "Data associated with a discovery appliance.",
+      "properties": {
+        "runAsAccountId": {
+          "type": "string",
+          "description": "The run-as account identifier."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "The appliance name."
+        },
+        "status": {
+          "$ref": "#/definitions/RegistrationStatus",
+          "description": "The registration status of the appliance."
+        }
+      }
+    },
     "AzureResourceProperties": {
       "type": "object",
       "description": "Base properties shared by all resources.",
@@ -4447,6 +4465,28 @@
             "description": "Logical AND."
           }
         ]
+      }
+    },
+    "DiscoveredMachineInstance": {
+      "type": "object",
+      "description": "A machine instance discovered through NSX Manager by the network agent.\nThis may include machines from vCenters not yet present in VMware sites.",
+      "properties": {
+        "vcenterArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the vCenter that manages this machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/vmwareSites/vcenters"
+              }
+            ]
+          }
+        },
+        "machineInstanceUid": {
+          "type": "string",
+          "description": "The unique identifier of the machine instance from NSX discovery."
+        }
       }
     },
     "DistributedFirewallPolicyCategory": {
@@ -5632,7 +5672,7 @@
         },
         "sourceAddresses": {
           "type": "array",
-          "description": "Source IP addresses.",
+          "description": "Source IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -5656,7 +5696,7 @@
         },
         "destinationAddresses": {
           "type": "array",
-          "description": "Destination IP addresses.",
+          "description": "Destination IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -5774,7 +5814,7 @@
         },
         "sourceAddresses": {
           "type": "array",
-          "description": "Source IP addresses.",
+          "description": "Source IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -5798,7 +5838,7 @@
         },
         "destinationAddresses": {
           "type": "array",
-          "description": "Destination IP addresses.",
+          "description": "Destination IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -6133,7 +6173,7 @@
         },
         "sourceAddresses": {
           "type": "array",
-          "description": "Source IP addresses.",
+          "description": "Source IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -6149,7 +6189,7 @@
         },
         "destinationAddresses": {
           "type": "array",
-          "description": "Destination IP addresses.",
+          "description": "Destination IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -6277,7 +6317,7 @@
         },
         "sourceAddresses": {
           "type": "array",
-          "description": "Source IP addresses.",
+          "description": "Source IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -6293,7 +6333,7 @@
         },
         "destinationAddresses": {
           "type": "array",
-          "description": "Destination IP addresses.",
+          "description": "Destination IPv4/IPv6 addresses or CIDR ranges.",
           "items": {
             "type": "string"
           }
@@ -6605,12 +6645,13 @@
             }
           }
         },
-        "applianceNames": {
+        "applianceDataCollection": {
           "type": "array",
-          "description": "The appliance names.",
+          "description": "The collection of appliance data associated with this NSX Manager.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/ApplianceData"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6696,12 +6737,13 @@
             }
           }
         },
-        "applianceNames": {
+        "applianceDataCollection": {
           "type": "array",
-          "description": "The appliance names.",
+          "description": "The collection of appliance data associated with this NSX Manager.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/ApplianceData"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6969,7 +7011,7 @@
         },
         "effectiveIpMembers": {
           "type": "array",
-          "description": "Effective IP address members resolved by the group.",
+          "description": "Effective IPv4/IPv6 address members resolved by the group.",
           "items": {
             "type": "string"
           }
@@ -7052,7 +7094,7 @@
         },
         "effectiveIpMembers": {
           "type": "array",
-          "description": "Effective IP address members resolved by the group.",
+          "description": "Effective IPv4/IPv6 address members resolved by the group.",
           "items": {
             "type": "string"
           }
@@ -7839,6 +7881,60 @@
         ]
       },
       "readOnly": true
+    },
+    "RegistrationStatus": {
+      "type": "string",
+      "description": "The registration status of an appliance.",
+      "enum": [
+        "Registering",
+        "Registered"
+      ],
+      "x-ms-enum": {
+        "name": "RegistrationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registering",
+            "value": "Registering",
+            "description": "The appliance is in the process of registering."
+          },
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "The appliance is fully registered."
+          }
+        ]
+      }
+    },
+    "ResolvedMachineReference": {
+      "type": "object",
+      "description": "A resolved machine reference that maps to an existing resource in a VMware site.\nThis is a subset of discovered machine instances.",
+      "properties": {
+        "machineInstanceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the machine instance in the VMware site.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/vmwareSites/machines"
+              }
+            ]
+          }
+        },
+        "vcenterArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the vCenter in the VMware site.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/vmwareSites/vcenters"
+              }
+            ]
+          }
+        }
+      }
     },
     "SegmentType": {
       "type": "string",

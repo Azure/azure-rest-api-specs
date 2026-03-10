@@ -57,13 +57,13 @@ model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   /** ARM resource IDs of source IP groups. */
   sourceIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Source IP addresses. */
+  /** Source IPv4/IPv6 addresses or CIDR ranges. */
   sourceAddresses?: string[];
 
   /** ARM resource IDs of destination IP groups. */
   destinationIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Destination IP addresses. */
+  /** Destination IPv4/IPv6 addresses or CIDR ranges. */
   destinationAddresses?: string[];
 
   /** The services this rule applies to. */

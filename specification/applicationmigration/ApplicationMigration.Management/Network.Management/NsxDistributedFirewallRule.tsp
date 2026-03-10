@@ -60,7 +60,7 @@ model NsxDistributedFirewallRuleProperties is AzureResourceProperties {
   /** ARM resource IDs of source groups. */
   sourceGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Source IP addresses. */
+  /** Source IPv4/IPv6 addresses or CIDR ranges. */
   sourceAddresses?: string[];
 
   /** Whether destination groups are excluded. */
@@ -72,7 +72,7 @@ model NsxDistributedFirewallRuleProperties is AzureResourceProperties {
   /** ARM resource IDs of destination groups. */
   destinationGroupsArmIds?: Azure.Core.armResourceIdentifier[];
 
-  /** Destination IP addresses. */
+  /** Destination IPv4/IPv6 addresses or CIDR ranges. */
   destinationAddresses?: string[];
 
   /** The services this rule applies to. */

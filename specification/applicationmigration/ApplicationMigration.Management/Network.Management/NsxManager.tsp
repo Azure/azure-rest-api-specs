@@ -54,8 +54,9 @@ model NsxManagerProperties {
     }
   ]>[];
 
-  /** The appliance names. */
-  applianceNames?: string[];
+  /** The collection of appliance data associated with this NSX Manager. */
+  @identifiers(#[])
+  applianceDataCollection?: ApplianceData[];
 }
 
 @armResourceOperations
