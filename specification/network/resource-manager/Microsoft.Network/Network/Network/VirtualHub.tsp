@@ -308,7 +308,7 @@ interface VirtualHubs {
     VirtualHub,
     void,
     ArmResponse<ListVirtualHubRouteTableV2SResult>,
-    Error = Error
+    Error = CloudError
   >;
 }
 

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./ServiceEndpointPolicy.tsp";
+import "./VpnServerConfiguration.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,25 +12,25 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 /**
- * Service Endpoint policy definitions.
+ * VpnServerConfigurationPolicyGroup Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@parentResource(ServiceEndpointPolicy)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@parentResource(VpnServerConfiguration)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceEndpointPolicyDefinition extends SubResourceModel {
-  properties?: ServiceEndpointPolicyDefinitionPropertiesFormat;
+model VpnServerConfigurationPolicyGroup extends SubResourceModel {
+  properties?: VpnServerConfigurationPolicyGroupProperties;
 
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
   @visibility(Lifecycle.Read)
   @path
-  @key("serviceEndpointPolicyDefinitionName")
-  @segment("serviceEndpointPolicyDefinitions")
+  @key("configurationPolicyGroupName")
+  @segment("configurationPolicyGroups")
   name: string;
 
   /**
@@ -42,48 +42,49 @@ model ServiceEndpointPolicyDefinition extends SubResourceModel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
-interface ServiceEndpointPolicyDefinitions {
-  @tag("ServiceEndpointPolicyDefinitions")
-  get is ArmResourceRead<ServiceEndpointPolicyDefinition, Error = CloudError>;
+interface VpnServerConfigurationPolicyGroups {
+  /**
+   * Retrieves the details of a ConfigurationPolicyGroup.
+   */
+  get is ArmResourceRead<VpnServerConfigurationPolicyGroup, Error = CloudError>;
 
   /**
-   * Creates or updates a service endpoint policy definition in the specified service endpoint policy.
+   * Creates a ConfigurationPolicyGroup if it doesn't exist else updates the existing one.
    */
-  @tag("ServiceEndpointPolicyDefinitions")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ServiceEndpointPolicyDefinition,
+    VpnServerConfigurationPolicyGroup,
     Error = CloudError
   >;
 
   /**
-   * Deletes the specified ServiceEndpoint policy definitions.
+   * Deletes a ConfigurationPolicyGroup.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("ServiceEndpointPolicyDefinitions")
   delete is ArmResourceDeleteWithoutOkAsync<
-    ServiceEndpointPolicyDefinition,
+    VpnServerConfigurationPolicyGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
   /**
-   * Gets all service endpoint policy definitions in a service end point policy.
+   * Lists all the configurationPolicyGroups in a resource group for a vpnServerConfiguration.
    */
-  @tag("ServiceEndpointPolicyDefinitions")
-  listByResourceGroup is ArmResourceListByParent<
-    ServiceEndpointPolicyDefinition,
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  listByVpnServerConfiguration is ArmResourceListByParent<
+    VpnServerConfigurationPolicyGroup,
+    Response = ArmResponse<ListVpnServerConfigurationPolicyGroupsResult>,
     Error = CloudError
   >;
 }
 
-@@doc(ServiceEndpointPolicyDefinition.name,
+@@doc(VpnServerConfigurationPolicyGroup.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(ServiceEndpointPolicyDefinition.properties,
-  "Properties of the service endpoint policy definition."
+@@doc(VpnServerConfigurationPolicyGroup.properties,
+  "Properties of the VpnServerConfigurationPolicyGroup."
 );
-@@doc(ServiceEndpointPolicyDefinitions.createOrUpdate::parameters.resource,
-  "Parameters supplied to the create or update service endpoint policy operation."
+@@doc(VpnServerConfigurationPolicyGroups.createOrUpdate::parameters.resource,
+  "Parameters supplied to create or update a VpnServerConfiguration PolicyGroup."
 );

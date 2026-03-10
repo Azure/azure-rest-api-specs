@@ -28,12 +28,6 @@ model ConnectionMonitorResult extends TrackedResourcewithOptionalLocation {
   properties?: ConnectionMonitorResultProperties;
 
   /**
-   * Connection monitor tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
    * The name of the resource.
    */
   @visibility(Lifecycle.Read)

@@ -1410,7 +1410,7 @@ using Microsoft.Network;
   "ConfigurationPolicyGroups"
 );
 @@clientLocation(VpnServerConfigurationPolicyGroups.listByVpnServerConfiguration,
-  "configurationPolicyGroups"
+  "ConfigurationPolicyGroups"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnServerConfigurationPolicyGroup.properties);
