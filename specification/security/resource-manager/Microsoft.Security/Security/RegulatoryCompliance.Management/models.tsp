@@ -115,6 +115,7 @@ model CloudError {
 /**
  * The error detail.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Suppress converter-generated warning for CloudError compatibility shape."
 model CloudErrorBody {
   /**
    * The error code.
@@ -150,6 +151,7 @@ model CloudErrorBody {
 /**
  * The resource management error additional info.
  */
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress converter-generated warning for compatibility with original swagger shape."
 model ErrorAdditionalInfo {
   /**
    * The additional info type.
