@@ -17,18 +17,42 @@ This document provides a comprehensive guide for developing, formatting, and val
 The recommended workflow for API development follows this sequence:
 
 ```
-1. Edit TypeSpec files or source example files
-2. Format JSON source files with Prettier
-3. Compile TypeSpec (generates schema and copies examples)
-4. Run model validation
-5. Fix any issues and repeat
+1. Edit TypeSpec files (models, properties, etc.)
+2. Identify and update all affected source example files
+3. Format JSON source files with Prettier
+4. Compile TypeSpec (generates schema and copies examples)
+5. Run model validation
+6. Fix any issues and repeat
+7. Update the changelog
 ```
+
+### Step 2 Detail: Updating Examples When Adding New Properties
+
+When you add a new property or model in TypeSpec, you must find and update every example file that includes the parent model. Here's how:
+
+1. **Identify which examples use the model.** Search for the parent model's property name in example files:
+   ```bash
+   # e.g., adding "disks" to the "Storage" model — find examples that have "storage":
+   grep -rl "\"storage\"" examples/{API_VERSION}/*.json
+   ```
+
+2. **Determine request vs. response placement.** If the new property or its child model uses `@visibility(Lifecycle.Read)` (read-only), add it **only to response bodies** (200/201), not the request body. If the property is writable, add it to both.
+
+3. **Handle PUT examples carefully.** PUT examples typically have three sections containing the same model:
+   - **Request body** — the input payload (shallower indentation)
+   - **200 response body** — returned on update
+   - **201 response body** — returned on create
+   
+   The 200 and 201 bodies are usually identical. For read-only properties, only the response bodies should include them.
+
+4. **Don't forget non-deployment examples.** A model like `HciStorageProfile` may appear in `ListEdgeDevices.json` (reported properties), not just `PutDeploymentSettings*.json`. Search broadly.
 
 ### Quick Reference Commands
 
 ```bash
 # Complete workflow for a specific API version
 npx prettier --write .\examples\{API_VERSION}\*.json
+npx tsp format *
 tsp compile .
 npx oav validate-example preview/{API_VERSION}/hci.json
 ```
@@ -54,6 +78,8 @@ Understanding the file structure is crucial for successful development:
 
 ```
 [Source] examples/{API_VERSION}/*.json
+    ↓ (npx tsp format *)
+[Formatted] *.tsp files
     ↓ (tsp compile .)
 [Target] preview/{API_VERSION}/examples/*.json
     ↓ (validation reads from)
@@ -184,6 +210,32 @@ model ConcreteTypeProperties extends BaseDiscriminatedProperties {
 }
 ```
 
+#### Read-Only Properties in Request Body (`READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST`)
+
+**Description:** Properties decorated with `@visibility(Lifecycle.Read)` (which generates `"readOnly": true` in the OpenAPI schema) appear in the request body of a PUT/PATCH example.
+
+**Solution:**
+- Include read-only properties **only in response bodies** (200/201), not in the request body.
+- If the parent property (e.g., `disks`) contains a model whose fields are all read-only, omit the entire property from the request body.
+- Be careful when the 200 and 201 response bodies in a PUT example are structurally identical — text-based find-and-replace tools may match both responses but miss the request body (which has different indentation). Verify each section independently.
+
+**Example:** A `Disk` model with `@visibility(Lifecycle.Read)` on `id`, `size`, `type`:
+```json
+// ❌ Request body — do NOT include read-only properties
+"storage": {
+  "configurationMode": "Express",
+  "disks": [ { "id": "disk-1", "size": "1024GB" } ]  // WRONG
+}
+
+// ✅ Response body (200/201) — read-only properties belong here
+"storage": {
+  "configurationMode": "Express",
+  "disks": [ { "id": "disk-1", "size": "1024GB", "type": "SSD" } ]
+}
+```
+
+---
+
 #### Additional Properties Not Allowed
 
 **Description:** Example files contain properties that don't belong to the specific resource type.
@@ -264,12 +316,14 @@ Ensure you're running commands from the correct directory:
 
 ## Best Practices
 
-1. **Format Before Compilation**: Always format source files before `tsp compile .`
+1. **Format Before Compilation**: Always format source files (`npx prettier` for JSON, `npx tsp format *` for TypeSpec) before `tsp compile .`
 2. **Version-Specific Formatting**: Use specific API version paths when working on a particular version
 3. **Consistent Property Sets**: Ensure example files include all required properties
 4. **Proper Discriminated Types**: Always define concrete classes for discriminated union types
 5. **Regular Validation**: Run validation frequently during development
 6. **Pre-Commit Checks**: Include formatting and validation in your pre-commit process
+7. **Update the Changelog**: When adding or modifying models, fields, or examples, update the corresponding `.agents/changelog-{API_VERSION}.md` file. Include the field name, type, access level (if read-only), and a brief description. This keeps the changelog in sync with TypeSpec and example changes.
+8. **Read-Only Awareness in Examples**: When a model or its properties use `@visibility(Lifecycle.Read)`, remember to include those properties only in response bodies of example files, never in request bodies.
 
 ---
 
@@ -294,6 +348,9 @@ npx prettier --write .\examples\*\*.json
 # Check formatting without modifying
 npx prettier --check .\examples\{API_VERSION}\*.json
 
+# Format TypeSpec files
+npx tsp format *
+
 # Compile TypeSpec
 tsp compile .
 
@@ -301,7 +358,7 @@ tsp compile .
 npx oav validate-example preview/{API_VERSION}/hci.json
 
 # Complete workflow
-npx prettier --write .\examples\{API_VERSION}\*.json && tsp compile . && npx oav validate-example preview/{API_VERSION}/hci.json
+npx prettier --write .\examples\{API_VERSION}\*.json && npx tsp format * && tsp compile . && npx oav validate-example preview/{API_VERSION}/hci.json
 ```
 
 ---

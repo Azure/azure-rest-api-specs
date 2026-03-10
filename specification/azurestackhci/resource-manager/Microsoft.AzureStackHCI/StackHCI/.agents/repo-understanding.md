@@ -36,6 +36,7 @@ StackHCI/
 ├── Cluster.tsp                 # Cluster resource and operations
 ├── ArcSetting.tsp              # ArcSetting resource
 ├── ClusterJobs.tsp             # Cluster jobs resource
+├── ClusterVolume.tsp           # Cluster volume resource (PRIVATE ONLY)
 ├── DevicePool.tsp              # Device pool resource
 ├── EdgeMachine.tsp             # Edge machine resource
 ├── EdgeMachineJobs.tsp         # Edge machine jobs
@@ -64,7 +65,7 @@ StackHCI/
 ├── ValidateOwnershipVouchers.tsp # Ownership voucher validation
 ├── back-compatible.tsp         # Backward compatibility
 ├── Operations.tsp              # Operations
-├── eng/                        # Engineering docs
+├── .agents/                    # Engineering docs & Copilot instructions
 │   ├── repo-understanding.md   # This file
 │   ├── typespec-style-guide.md # TypeSpec style guide
 │   └── version-creator.md      # API version creation guide
@@ -89,7 +90,8 @@ Comparison between public `preview/2026-03-01-preview/hci.json` and private `pre
 |------------------|-------------------|------------|
 | ✓ All 23 public tags present | ✓ All 23 public tags + 8 additional | +8 private-only |
 
-**Private-Only Operation Groups (+8)**:
+**Private-Only Operation Groups (+9)**:
+- `ClusterVolumes` - Cluster volume management
 - `NetworkProfiles` - Network profile management
 - `EdgeDeviceMetadataOperations` - EdgeDevice metadata
 - `EdgeMachineGpus` - GPU management
@@ -141,12 +143,13 @@ The swagger output matches the documented private preview features. All 78 priva
 | EdgeMachineNetworkAdapters.tsp | **PRIVATE** | ✓ | ✗ | Private preview only |
 | EdgeDeviceMetadata.tsp | **PRIVATE** | ✓ | ✗ | Private preview only |
 | NetworkProfile.tsp | **PRIVATE** | ✓ | ✗ | Private preview only |
+| ClusterVolume.tsp | **PRIVATE** | ✓ | ✗ | Private preview only |
 
 ### Summary Statistics
-- **Total Files**: 34 (28 shared + 6 private-only)
+- **Total Files**: 35 (28 shared + 7 private-only)
 - **Identical/Near-identical**: 22 (79% of shared)
 - **Different**: 6 (21% of shared)
-- **Private-Only**: 6 files
+- **Private-Only**: 7 files
 
 ---
 
@@ -189,6 +192,10 @@ All features marked with `@added(Versions.v2026_03_15_preview)`:
 
 6. **NetworkProfile.tsp** - Network profile management
    - Child resource of Cluster for network configuration
+
+7. **ClusterVolume.tsp** - Cluster volume management
+   - Read-only child resource of Cluster for cluster storage volumes
+   - ClusterVolumeReportedProperties with volume health, size, resiliency, media type
 
 ---
 

@@ -67,6 +67,26 @@
                       ],
                       "vlanId": "5"
                     }
+                  ],
+                  "sanNetworks": [
+                    {
+                      "clusterNetworkConfig": {
+                        "adapterProperties": {
+                          "bandwidthPercentageSmb": 50,
+                          "jumboPacket": 9014,
+                          "priorityValue8021ActionCluster": 7,
+                          "priorityValue8021ActionSmb": 3
+                        },
+                        "adapterIPConfig": [
+                          {
+                            "name": "clusterNetwork-A",
+                            "networkAdapterName": "ethernet 3",
+                            "vlanId": 711,
+                            "addressPrefix": "10.10.30.0/24"
+                          }
+                        ]
+                      }
+                    }
                   ]
                 },
                 "infrastructureNetwork": [
@@ -105,13 +125,6 @@
                     "ipv4Address": "10.57.53.236"
                   }
                 ],
-                "sdnIntegration": {
-                  "networkController": {
-                    "macAddressPoolStart": "00-0D-3A-1B-C7-21",
-                    "macAddressPoolStop": "00-0D-3A-1B-C7-29",
-                    "networkVirtualizationEnabled": true
-                  }
-                },
                 "secrets": [
                   {
                     "eceSecretName": "BMCAdminUserCred",
@@ -138,7 +151,12 @@
                   "wdacEnforced": true
                 },
                 "storage": {
-                  "configurationMode": "Express"
+                  "configurationMode": "Express",
+                  "storageType": "SAN",
+                  "san": {
+                    "infraVolLunId": "PURE1234567890ABCDEF",
+                    "infraPerfLunId": "PURE0987654321MNOPQR"
+                  }
                 }
               },
               "sbePartnerInfo": {
@@ -202,6 +220,7 @@
                     "name": "testHCICluster",
                     "azureServiceEndpoint": "core.windows.net",
                     "cloudAccountName": "myasestoragacct",
+                    "hardwareClass": "Medium",
                     "witnessPath": "Cloud",
                     "witnessType": "Cloud"
                   },
@@ -251,6 +270,26 @@
                         ],
                         "vlanId": "5"
                       }
+                    ],
+                    "sanNetworks": [
+                      {
+                        "clusterNetworkConfig": {
+                          "adapterProperties": {
+                            "bandwidthPercentageSmb": 50,
+                            "jumboPacket": 9014,
+                            "priorityValue8021ActionCluster": 7,
+                            "priorityValue8021ActionSmb": 3
+                          },
+                          "adapterIPConfig": [
+                            {
+                              "name": "clusterNetwork-A",
+                              "networkAdapterName": "ethernet 3",
+                              "vlanId": 711,
+                              "addressPrefix": "10.10.30.0/24"
+                            }
+                          ]
+                        }
+                      }
                     ]
                   },
                   "infrastructureNetwork": [
@@ -288,13 +327,6 @@
                       "ipv4Address": "10.57.53.236"
                     }
                   ],
-                  "sdnIntegration": {
-                    "networkController": {
-                      "macAddressPoolStart": "00-0D-3A-1B-C7-21",
-                      "macAddressPoolStop": "00-0D-3A-1B-C7-29",
-                      "networkVirtualizationEnabled": true
-                    }
-                  },
                   "secrets": [
                     {
                       "eceSecretName": "BMCAdminUserCred",
@@ -322,6 +354,11 @@
                   },
                   "storage": {
                     "configurationMode": "Express",
+                    "storageType": "SAN",
+                    "san": {
+                      "infraVolLunId": "PURE1234567890ABCDEF",
+                      "infraPerfLunId": "PURE0987654321MNOPQR"
+                    },
                     "disks": [
                       {
                         "id": "disk-1",
@@ -371,97 +408,7 @@
             "version": "string"
           },
           "deploymentMode": "Deploy",
-          "provisioningState": "Succeeded",
-          "reportedProperties": {
-            "deploymentStatus": {
-              "status": "Error",
-              "steps": [
-                {
-                  "name": "Cloud Deployment",
-                  "description": "Deploy Cloud.",
-                  "endTimeUtc": "2023-06-09T04:01:47",
-                  "exception": [
-                    "exception1",
-                    "exception2"
-                  ],
-                  "fullStepIndex": "0",
-                  "startTimeUtc": "2023-06-09T00:08:19",
-                  "status": "Error",
-                  "steps": [
-                    {
-                      "name": "Before Cloud Deployment",
-                      "description": null,
-                      "endTimeUtc": "2023-06-09T01:10:10",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.1",
-                      "startTimeUtc": "2023-06-09T00:08:23",
-                      "steps": []
-                    },
-                    {
-                      "name": "Clean up temporary content",
-                      "description": null,
-                      "endTimeUtc": "2023-06-09T04:01:47",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.36",
-                      "startTimeUtc": "2023-06-09T03:58:37",
-                      "status": "Error",
-                      "steps": []
-                    }
-                  ]
-                }
-              ]
-            },
-            "validationStatus": {
-              "status": "Error",
-              "steps": [
-                {
-                  "name": "Cloud Deployment",
-                  "description": "Deploy Cloud.",
-                  "endTimeUtc": "2023-06-09T04:01:47",
-                  "exception": [
-                    "exception1",
-                    "exception2"
-                  ],
-                  "fullStepIndex": "0",
-                  "startTimeUtc": "2023-06-09T00:08:19",
-                  "status": "Error",
-                  "steps": [
-                    {
-                      "name": "Before Cloud Deployment",
-                      "description": "Before Cloud Deployment",
-                      "endTimeUtc": "2023-06-09T01:10:10",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.1",
-                      "startTimeUtc": "2023-06-09T00:08:23",
-                      "steps": []
-                    },
-                    {
-                      "name": "Clean up temporary content",
-                      "description": "Clean up temporary content",
-                      "endTimeUtc": "2023-06-09T04:01:47",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.36",
-                      "startTimeUtc": "2023-06-09T03:58:37",
-                      "status": "Error",
-                      "steps": []
-                    }
-                  ]
-                }
-              ]
-            }
-          }
+          "provisioningState": "Succeeded"
         },
         "systemData": {
           "createdAt": "2021-01-01T17:18:19.1234567Z",
@@ -492,6 +439,7 @@
                     "name": "testHCICluster",
                     "azureServiceEndpoint": "core.windows.net",
                     "cloudAccountName": "myasestoragacct",
+                    "hardwareClass": "Medium",
                     "witnessPath": "Cloud",
                     "witnessType": "Cloud"
                   },
@@ -541,6 +489,26 @@
                         ],
                         "vlanId": "5"
                       }
+                    ],
+                    "sanNetworks": [
+                      {
+                        "clusterNetworkConfig": {
+                          "adapterProperties": {
+                            "bandwidthPercentageSmb": 50,
+                            "jumboPacket": 9014,
+                            "priorityValue8021ActionCluster": 7,
+                            "priorityValue8021ActionSmb": 3
+                          },
+                          "adapterIPConfig": [
+                            {
+                              "name": "clusterNetwork-A",
+                              "networkAdapterName": "ethernet 3",
+                              "vlanId": 711,
+                              "addressPrefix": "10.10.30.0/24"
+                            }
+                          ]
+                        }
+                      }
                     ]
                   },
                   "infrastructureNetwork": [
@@ -578,13 +546,6 @@
                       "ipv4Address": "10.57.53.236"
                     }
                   ],
-                  "sdnIntegration": {
-                    "networkController": {
-                      "macAddressPoolStart": "00-0D-3A-1B-C7-21",
-                      "macAddressPoolStop": "00-0D-3A-1B-C7-29",
-                      "networkVirtualizationEnabled": true
-                    }
-                  },
                   "secrets": [
                     {
                       "eceSecretName": "BMCAdminUserCred",
@@ -612,6 +573,11 @@
                   },
                   "storage": {
                     "configurationMode": "Express",
+                    "storageType": "SAN",
+                    "san": {
+                      "infraVolLunId": "PURE1234567890ABCDEF",
+                      "infraPerfLunId": "PURE0987654321MNOPQR"
+                    },
                     "disks": [
                       {
                         "id": "disk-1",
@@ -661,87 +627,7 @@
             "version": "string"
           },
           "deploymentMode": "Deploy",
-          "provisioningState": "Succeeded",
-          "reportedProperties": {
-            "deploymentStatus": {
-              "status": "Error",
-              "steps": [
-                {
-                  "name": "Cloud Deployment",
-                  "description": "Deploy Cloud.",
-                  "endTimeUtc": "2023-06-09T04:01:47",
-                  "exception": [
-                    "exception1",
-                    "exception2"
-                  ],
-                  "fullStepIndex": "0",
-                  "startTimeUtc": "2023-06-09T00:08:19",
-                  "status": "Error",
-                  "steps": [
-                    {
-                      "name": "Before Cloud Deployment",
-                      "description": "Before Cloud Deployment",
-                      "endTimeUtc": "2023-06-09T01:10:10",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.1",
-                      "startTimeUtc": "2023-06-09T00:08:23",
-                      "steps": []
-                    },
-                    {
-                      "name": "Clean up temporary content",
-                      "description": "Clean up temporary content",
-                      "endTimeUtc": "2023-06-09T04:01:47",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.36",
-                      "startTimeUtc": "2023-06-09T03:58:37",
-                      "status": "Error",
-                      "steps": []
-                    }
-                  ]
-                }
-              ]
-            },
-            "validationStatus": {
-              "status": "Error",
-              "steps": [
-                {
-                  "name": "Cloud Deployment",
-                  "description": "Deploy Cloud.",
-                  "endTimeUtc": "2023-06-09T04:01:47",
-                  "fullStepIndex": "0",
-                  "startTimeUtc": "2023-06-09T00:08:19",
-                  "status": "Error",
-                  "steps": [
-                    {
-                      "name": "Before Cloud Deployment",
-                      "description": "Before Cloud Deployment",
-                      "endTimeUtc": "2023-06-09T01:10:10",
-                      "fullStepIndex": "0.1",
-                      "startTimeUtc": "2023-06-09T00:08:23"
-                    },
-                    {
-                      "name": "Clean up temporary content",
-                      "description": "Clean up temporary content",
-                      "endTimeUtc": "2023-06-09T04:01:47",
-                      "exception": [
-                        "exception1",
-                        "exception2"
-                      ],
-                      "fullStepIndex": "0.36",
-                      "startTimeUtc": "2023-06-09T03:58:37",
-                      "status": "Error"
-                    }
-                  ]
-                }
-              ]
-            }
-          }
+          "provisioningState": "Accepted"
         },
         "systemData": {
           "createdAt": "2021-01-01T17:18:19.1234567Z",
@@ -755,5 +641,5 @@
     }
   },
   "operationId": "DeploymentSettings_CreateOrUpdate",
-  "title": "Create Deployment Settings"
+  "title": "Create Deployment Settings with SAN Storage"
 }
