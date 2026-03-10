@@ -120,17 +120,21 @@ interface UserSessions {
   /**
    * Send a message to a user.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   sendMessage is ArmResourceActionSync<
     UserSession,
-    Request = {
-      /**
-       * Represents message sent to a UserSession.
-       */
-      @bodyRoot sendMessage?: SendMessage;
-    },
+    Request = SendMessageRequest,
     Response = OkResponse
   >;
+}
+
+/**
+ * Request body for sending a message to a UserSession.
+ */
+model SendMessageRequest {
+  /**
+   * Represents message sent to a UserSession.
+   */
+  @bodyRoot sendMessage?: SendMessage;
 }
 
 @@maxLength(UserSession.name, 24);
