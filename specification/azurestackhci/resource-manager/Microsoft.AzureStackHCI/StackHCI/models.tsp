@@ -6080,10 +6080,10 @@ model Disk {
   id: string;
 
   /**
-   * The size of the disk.
+   * The size of the disk in bytes.
    */
   @visibility(Lifecycle.Read)
-  size?: string;
+  sizeInBytes?: string;
 
   /**
    * The type of the disk. For example, S2D or SAN.
