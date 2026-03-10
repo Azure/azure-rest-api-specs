@@ -38,7 +38,7 @@ interface AlertsSuppressionRules {
   /**
    * Update existing rule or create new rule if it doesn't exist
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceSync<
     AlertsSuppressionRule,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -49,7 +49,7 @@ interface AlertsSuppressionRules {
   /**
    * Delete dismiss alert rule for this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     AlertsSuppressionRule,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

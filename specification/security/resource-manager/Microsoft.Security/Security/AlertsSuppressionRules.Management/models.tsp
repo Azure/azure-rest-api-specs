@@ -13,7 +13,7 @@ namespace Microsoft.Security;
 /**
  * Possible states of the rule
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RuleState {
   /**
    * Enabled
@@ -39,7 +39,7 @@ model AlertsSuppressionRulesList is Azure.Core.Page<AlertsSuppressionRule>;
 /**
  * describes AlertsSuppressionRule properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertsSuppressionRuleProperties {
   /**
    * Type of the alert to automatically suppress. For all alert types, use '*'
@@ -80,7 +80,7 @@ model AlertsSuppressionRuleProperties {
   suppressionAlertsScope?: SuppressionAlertsScope;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SuppressionAlertsScope {
   /**
    * All the conditions inside need to be true in order to suppress the alert
