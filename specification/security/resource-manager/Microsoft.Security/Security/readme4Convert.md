@@ -99,7 +99,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: Settings.management
+tag: AlertsSuppressionRules.Management
 ```
 
 ### Composite packages
@@ -134,4 +134,13 @@ input-file:
   - preview/2017-08-01-preview/compliances.json
   - preview/2017-08-01-preview/informationProtectionPolicies.json
   - preview/2017-08-01-preview/workspaceSettings.json
+```
+
+### Tag: AlertsSuppressionRules.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'AlertsSuppressionRules.Management'
+input-file:
+  - preview/2019-01-01-preview/alertsSuppressionRules.json
 ```
