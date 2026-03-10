@@ -10,7 +10,8 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     AgentDefinitionOptInKeys.container_agents_v1_preview,
-    AgentDefinitionOptInKeys.workflow_agents_v1_preview
+    AgentDefinitionOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionOptInKeys.code_agents_v1_preview
   ],
 };
 
@@ -262,6 +263,35 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("Container-based deployment configuration for a hosted agent.")
+@added(Versions.v2_preview)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model ContainerConfiguration {
+  @doc("The container image for the hosted agent.")
+  @example("myregistry.azurecr.io/my-hosted-agent:latest")
+  image: string;
+}
+
+@doc("Code-based deployment configuration for a hosted agent.")
+@added(Versions.v2_preview)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CodeConfiguration {
+  @doc("The URI pointing to the packaged code artifact.")
+  code_uri: url;
+
+  @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
+  runtime: string;
+
+  @doc("The entry point command and arguments for the code execution.")
+  entry_point: string[];
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -276,12 +306,21 @@ model HostedAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
+  @removed(Versions.v2_preview)
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   container_protocol_versions: ProtocolVersionRecord[];
+
+  @added(Versions.v2_preview)
+  @doc("The protocols that the agent supports for ingress communication.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  protocol_versions: ProtocolVersionRecord[];
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
@@ -299,9 +338,18 @@ model HostedAgentDefinition extends AgentDefinition {
   @example(#{ name: "LOG_LEVEL", value: "debug" })
   environment_variables?: Record<string>;
 
+  @removed(Versions.v2_preview)
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
+
+  @added(Versions.v2_preview)
+  @doc("Container-based deployment configuration. Mutually exclusive with code_configuration.")
+  container_configuration?: ContainerConfiguration;
+
+  @added(Versions.v2_preview)
+  @doc("Code-based deployment configuration. Mutually exclusive with container_configuration.")
+  code_configuration?: CodeConfiguration;
 
   @removed(Versions.v1)
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
