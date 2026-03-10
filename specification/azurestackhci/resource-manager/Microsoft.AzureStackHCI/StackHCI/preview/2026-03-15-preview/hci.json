@@ -10220,16 +10220,19 @@
           },
           "readOnly": true
         },
-        "size": {
-          "type": "integer",
-          "format": "int64",
+        "sizeInBytes": {
+          "type": "string",
           "description": "Total cluster volume size in bytes.",
           "readOnly": true
         },
-        "sizeRemaining": {
-          "type": "integer",
-          "format": "int64",
+        "sizeRemainingInBytes": {
+          "type": "string",
           "description": "Free space in bytes.",
+          "readOnly": true
+        },
+        "fileSystem": {
+          "type": "string",
+          "description": "Filesystem type (NTFS, ReFS, CSVFS_NTFS, CSVFS_ReFS).",
           "readOnly": true
         },
         "resiliency": {
@@ -10340,6 +10343,7 @@
         "Healthy",
         "Warning",
         "Unhealthy",
+        "Missing",
         "Others"
       ],
       "x-ms-enum": {
@@ -10360,6 +10364,11 @@
             "name": "Unhealthy",
             "value": "Unhealthy",
             "description": "Volume is unhealthy."
+          },
+          {
+            "name": "Missing",
+            "value": "Missing",
+            "description": "Volume is missing."
           },
           {
             "name": "Others",

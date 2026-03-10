@@ -10016,11 +10016,15 @@ model ClusterVolumeReportedProperties {
 
   /** Total cluster volume size in bytes. */
   @visibility(Lifecycle.Read)
-  size?: int64;
+  sizeInBytes?: string;
 
   /** Free space in bytes. */
   @visibility(Lifecycle.Read)
-  sizeRemaining?: int64;
+  sizeRemainingInBytes?: string;
+
+  /** Filesystem type (NTFS, ReFS, CSVFS_NTFS, CSVFS_ReFS). */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
 
   /** Volume resiliency type. */
   @visibility(Lifecycle.Read)
@@ -10074,6 +10078,9 @@ union ClusterVolumeStatusCategory {
 
   /** Volume is unhealthy. */
   Unhealthy: "Unhealthy",
+
+  /** Volume is missing. */
+  Missing: "Missing",
 
   /** Other status. */
   Others: "Others",
