@@ -35,10 +35,6 @@ interface Jobs {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     CommandJob,
     {
-      @doc("The name of the Job. This is case-sensitive.")
-      @path
-      name: string;
-
       @doc("The command job to create or update.")
       @bodyRoot
       body: CommandJob;
