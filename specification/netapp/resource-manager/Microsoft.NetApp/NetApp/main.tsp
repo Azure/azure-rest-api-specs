@@ -75,15 +75,15 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 
   /**
-   * The 2025-12-01 API version.
+   * The 2026-01-01 API version.
    */
-  v2025_12_01: "2025-12-01",
+  v2026_01_01: "2026-01-01",
 
   /**
-   * The 2025-12-15-preview API version.
+   * The 2026-01-15-preview API version.
    */
   @previewVersion
-  v2025_12_15_preview: "2025-12-15-preview",
+  v2026_01_15_preview: "2026-01-15-preview",
 }
 
 interface Operations

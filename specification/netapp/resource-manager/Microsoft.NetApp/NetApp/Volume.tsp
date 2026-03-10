@@ -70,8 +70,8 @@ model VolumeProperties {
   /**
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
-  @removed(Versions.v2025_12_15_preview)
-  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -81,7 +81,7 @@ model VolumeProperties {
    * For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB.
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -268,7 +268,7 @@ model VolumeProperties {
   /**
    * Specifies the type of LDAP server for a given NFS volume.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -411,7 +411,7 @@ model VolumeProperties {
    * If it is set to 'ExtraLargeVolume7Dot2PiB', the extra large volume is created with higher capacity limit 7.2PiB with cool access enabled,
    * delivering higher capacity limit with lower costs.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -432,13 +432,13 @@ model VolumeProperties {
   /**
    * Language supported for volume.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   language?: VolumeLanguage;
 
   /**
    * Specifies whether the volume operates in Breakthrough Mode.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -462,7 +462,7 @@ union LdapServerType {
 /**
  * Language supported for volume.
  */
-@added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_15_preview)
 union VolumeLanguage {
   string,
 
@@ -964,7 +964,7 @@ model VolumePropertiesDataProtection {
   /**
    * Advanced Ransomware Protection settings
    */
-  @added(Versions.v2025_12_01)
+  @added(Versions.v2026_01_01)
   ransomwareProtection?: RansomwareProtectionSettings;
 }
 
@@ -1044,28 +1044,28 @@ model ReplicationObject {
   /**
    * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
   /**
    * Contains human-readable instructions on what the next step is to finish the external replication setup.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
   /**
    * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
   /**
    * The status of the Volume Replication
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1073,7 +1073,7 @@ model ReplicationObject {
 /**
  * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
  */
-@added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_15_preview)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -1245,8 +1245,8 @@ model VolumePatchProperties {
   /**
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
-  @removed(Versions.v2025_12_15_preview)
-  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1256,7 +1256,7 @@ model VolumePatchProperties {
    * For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB.
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1372,7 +1372,7 @@ model VolumePatchPropertiesDataProtection {
   /**
    * Advanced Ransomware Protection updatable settings
    */
-  @added(Versions.v2025_12_01)
+  @added(Versions.v2026_01_01)
   ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
 
@@ -2066,7 +2066,7 @@ union LargeVolumeType {
  * delivering improved performance and higher throughput. If set to 'Disabled' or omitted, the volume uses the basic configuration. This feature
  * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
  */
-@added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_15_preview)
 union BreakthroughMode {
   string,
 
@@ -2084,7 +2084,7 @@ union BreakthroughMode {
 /**
  * Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model QuotaReportFilterRequest {
   /**
    * Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
@@ -2107,7 +2107,7 @@ model QuotaReportFilterRequest {
 /**
  * * Result of ListQuotaReportResponse
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model ListQuotaReportResult {
   /**
    * Represents the properties of the ListQuotaReport.
@@ -2118,7 +2118,7 @@ model ListQuotaReportResult {
 /**
  * Quota Report for volume
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
@@ -2130,7 +2130,7 @@ model ListQuotaReportResponse {
 /**
  * Quota report record properties
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model QuotaReport {
   /**
    * Type of quota
@@ -2166,7 +2166,7 @@ model QuotaReport {
 /**
  * Advanced Ransomware Protection reports (ARP) settings
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model RansomwareProtectionSettings {
   /**
    * The desired value of the Advanced Ransomware Protection feature state available to the volume
@@ -2183,7 +2183,7 @@ model RansomwareProtectionSettings {
 /**
  * Advanced Ransomware Protection reports (ARP) updatable settings
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 model RansomwareProtectionPatchSettings {
   /**
    * The desired value of the ARP feature state available to the volume
@@ -2194,7 +2194,7 @@ model RansomwareProtectionPatchSettings {
 /**
  * The desired state of the Advanced Ransomware Protection feature
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 union DesiredRansomwareProtectionState {
   string,
 
@@ -2212,7 +2212,7 @@ union DesiredRansomwareProtectionState {
 /**
  * The actual state of the Advanced Ransomware Protection feature
  */
-@added(Versions.v2025_12_01)
+@added(Versions.v2026_01_01)
 union ActualRansomwareProtectionState {
   string,
 
@@ -2609,7 +2609,7 @@ interface Volumes {
    */
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @added(Versions.v2025_12_01)
+  @added(Versions.v2026_01_01)
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     /**
