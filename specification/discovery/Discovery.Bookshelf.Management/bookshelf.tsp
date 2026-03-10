@@ -118,7 +118,7 @@ model BookshelfPropertiesUpdate {
 
 @doc("The type used for update operations of the Bookshelf.")
 model BookshelfUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
   tags?: Record<string>;
 

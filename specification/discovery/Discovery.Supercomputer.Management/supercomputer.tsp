@@ -156,6 +156,7 @@ model SupercomputerPropertiesUpdate {
 
 @doc("Update model for Supercomputer PATCH operations")
 model SupercomputerUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
   tags?: Record<string>;
 
