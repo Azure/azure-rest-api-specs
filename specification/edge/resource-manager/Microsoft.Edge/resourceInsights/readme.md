@@ -27,7 +27,17 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: resourceInsights-package-2024-10-01-preview
+tag: resourceInsights-package-2026-04-01-preview
+```
+
+
+### Tag: resourceInsights-package-2026-04-01-preview
+
+These settings apply only when `--tag=resourceInsights-package-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'resourceInsights-package-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/resourceInsights.json
 ```
 
 ### Tag: resourceInsights-package-2024-10-01-preview
@@ -38,6 +48,7 @@ These settings apply only when `--tag=resourceInsights-package-2024-10-01-previe
 input-file:
   - preview/2024-10-01-preview/resourceInsights.json
 ```
+
 ---
 
 # Code Generation
@@ -55,6 +66,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -77,7 +89,8 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ### Suppress Operations API Implemented exception
 
- For operations API, we have defined it in a common folder "edge" under the RP. We don't have it in individual specs file for resources since we need partial manifest rollout. Hence the swagger has been split for each resource but operations API is at a common place here -- azure-rest-api-specs-pr\specification\edge\resource-manager\Microsoft.Edge\edge\preview\2023-07-01-preview\operations.json
+ For operations API, we use the shared Edge RP definition in:
+ specification/edge/resource-manager/Microsoft.Edge/edge/preview/2023-07-01-preview/operations.json
 
 ``` yaml
 suppressions:
