@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft ESRP",
-    "version": "2024-09-24-preview",
+    "version": "2026-01-31-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -42,7 +42,7 @@
       "name": "Operations"
     },
     {
-      "name": "EnterpriseSupportsResource"
+      "name": "SupportPlansResource"
     },
     {
       "name": "ProviderLevelOperations"
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -108,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ValidateEnterpriseSupportResponse"
             }
@@ -121,19 +121,25 @@
           }
         },
         "x-ms-examples": {
-          "ValidateEnterpriseSupport": {
+          "ValidateEnterpriseSupportEligibility": {
             "$ref": "./examples/ProviderLevelOperations_ValidateEnterpriseSupport.json"
+          },
+          "ValidateEnterpriseSupportEligibility_SupportCommit": {
+            "$ref": "./examples/ProviderLevelOperations_ValidateEnterpriseSupport_SupportCommit.json"
+          },
+          "ValidateEnterpriseSupportEligibility_UfPAddOn": {
+            "$ref": "./examples/ProviderLevelOperations_ValidateEnterpriseSupport_UfP.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EnterpriseSupport/enterpriseSupports": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EnterpriseSupport/supportPlans": {
       "get": {
-        "operationId": "EnterpriseSupportsResource_ListBySubscription",
+        "operationId": "SupportPlansResource_ListBySubscription",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "List EnterpriseSupports resources by subscription ID",
+        "description": "List SupportPlan resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -144,9 +150,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupportsListResult"
+              "$ref": "#/definitions/SupportPlanListResult"
             }
           },
           "default": {
@@ -157,8 +163,8 @@
           }
         },
         "x-ms-examples": {
-          "EnterpriseSupports_ListBySubscription": {
-            "$ref": "./examples/EnterpriseSupportsResource_ListBySubscription.json"
+          "ListSupportPlansBySubscription": {
+            "$ref": "./examples/SupportPlansResource_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -166,13 +172,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/enterpriseSupports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/supportPlans": {
       "get": {
-        "operationId": "EnterpriseSupportsResource_ListByResourceGroup",
+        "operationId": "SupportPlansResource_ListByResourceGroup",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "List EnterpriseSupports resources by resource group",
+        "description": "List SupportPlan resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -186,9 +192,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupportsListResult"
+              "$ref": "#/definitions/SupportPlanListResult"
             }
           },
           "default": {
@@ -199,8 +205,8 @@
           }
         },
         "x-ms-examples": {
-          "EnterpriseSupports_ListByResourceGroup": {
-            "$ref": "./examples/EnterpriseSupportsResource_ListByResourceGroup.json"
+          "ListSupportPlansByResourceGroup": {
+            "$ref": "./examples/SupportPlansResource_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -208,13 +214,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/enterpriseSupports/{enterpriseSupportName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/supportPlans/{supportPlanName}": {
       "get": {
-        "operationId": "EnterpriseSupportsResource_Get",
+        "operationId": "SupportPlansResource_Get",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "Get a EnterpriseSupports",
+        "description": "Get a SupportPlan",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -226,9 +232,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "enterpriseSupportName",
+            "name": "supportPlanName",
             "in": "path",
-            "description": "The name of the  Enterprise Support",
+            "description": "The name of the Support Plan",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -236,9 +242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupports"
+              "$ref": "#/definitions/SupportPlan"
             }
           },
           "default": {
@@ -249,17 +255,17 @@
           }
         },
         "x-ms-examples": {
-          "GetEnterpriseSupports": {
-            "$ref": "./examples/EnterpriseSupportsResource_Get.json"
+          "GetSupportPlan": {
+            "$ref": "./examples/SupportPlansResource_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "EnterpriseSupportsResource_CreateOrUpdate",
+        "operationId": "SupportPlansResource_CreateOrUpdate",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "Create a EnterpriseSupports",
+        "description": "Create a SupportPlan",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -271,9 +277,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "enterpriseSupportName",
+            "name": "supportPlanName",
             "in": "path",
-            "description": "The name of the  Enterprise Support",
+            "description": "The name of the Support Plan",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -284,23 +290,27 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupports"
+              "$ref": "#/definitions/SupportPlan"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'EnterpriseSupports' update operation succeeded",
+            "description": "Resource 'SupportPlan' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupports"
+              "$ref": "#/definitions/SupportPlan"
             }
           },
           "201": {
-            "description": "Resource 'EnterpriseSupports' create operation succeeded",
+            "description": "Resource 'SupportPlan' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupports"
+              "$ref": "#/definitions/SupportPlan"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -316,8 +326,14 @@
           }
         },
         "x-ms-examples": {
-          "CreateEnterpriseSupports": {
-            "$ref": "./examples/EnterpriseSupportsResource_CreateOrUpdate.json"
+          "CreateSupportPlan": {
+            "$ref": "./examples/SupportPlansResource_CreateOrUpdate.json"
+          },
+          "CreateSupportPlanWithAddOn": {
+            "$ref": "./examples/SupportPlansResource_CreateOrUpdate_WithAddOn.json"
+          },
+          "CreateSupportPlanWithSupportCommit": {
+            "$ref": "./examples/SupportPlansResource_CreateOrUpdate_WithSupportCommit.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -326,11 +342,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "EnterpriseSupportsResource_Update",
+        "operationId": "SupportPlansResource_Update",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "Update a EnterpriseSupports",
+        "description": "Update a SupportPlan",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -342,9 +358,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "enterpriseSupportName",
+            "name": "supportPlanName",
             "in": "path",
-            "description": "The name of the  Enterprise Support",
+            "description": "The name of the Support Plan",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -355,15 +371,15 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupportsUpdate"
+              "$ref": "#/definitions/SupportPlanUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EnterpriseSupports"
+              "$ref": "#/definitions/SupportPlan"
             }
           },
           "default": {
@@ -374,17 +390,17 @@
           }
         },
         "x-ms-examples": {
-          "UpdateEnterpriseSupports": {
-            "$ref": "./examples/EnterpriseSupportsResource_Update.json"
+          "UpdateSupportPlan": {
+            "$ref": "./examples/SupportPlansResource_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "EnterpriseSupportsResource_Delete",
+        "operationId": "SupportPlansResource_Delete",
         "tags": [
-          "EnterpriseSupportsResource"
+          "SupportPlansResource"
         ],
-        "description": "Delete a EnterpriseSupports",
+        "description": "Delete a SupportPlan",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -396,34 +412,31 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "enterpriseSupportName",
+            "name": "supportPlanName",
             "in": "path",
-            "description": "The name of the  Enterprise Support",
+            "description": "The name of the Support Plan",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -433,8 +446,79 @@
           }
         },
         "x-ms-examples": {
-          "DeleteEnterpriseSupports": {
-            "$ref": "./examples/EnterpriseSupportsResource_Delete.json"
+          "DeleteSupportPlan": {
+            "$ref": "./examples/SupportPlansResource_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseSupport/supportPlans/{supportPlanName}/cancel": {
+      "post": {
+        "operationId": "SupportPlansResource_Cancel",
+        "tags": [
+          "SupportPlansResource"
+        ],
+        "description": "Cancel a Support Plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supportPlanName",
+            "in": "path",
+            "description": "The name of the Support Plan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Cancel request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelSupportPlanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource cancelled successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a Support Plan": {
+            "$ref": "./examples/SupportPlansResource_Cancel.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -445,160 +529,24 @@
     }
   },
   "definitions": {
-    "EnterpriseSupports": {
+    "CancelSupportPlanRequest": {
       "type": "object",
-      "description": "A ESRPProviderHub resource",
+      "description": "The request to cancel a Support Plan",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnterpriseSupportsResponseProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
+        "serviceEndDate": {
           "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "EnterpriseSupportsListResult": {
-      "type": "object",
-      "description": "The response of a EnterpriseSupports list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EnterpriseSupports items on this page",
-          "items": {
-            "$ref": "#/definitions/EnterpriseSupports"
-          }
+          "format": "date-time",
+          "description": "The date when the support plan service should end"
         },
-        "nextLink": {
+        "reasonCode": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The reason code for the cancellation"
         }
       },
       "required": [
-        "value"
+        "serviceEndDate",
+        "reasonCode"
       ]
-    },
-    "EnterpriseSupportsResponseProperties": {
-      "type": "object",
-      "description": "Details of the ESRP EnterpriseSupport.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning status"
-        },
-        "billingAccountId": {
-          "type": "string",
-          "description": "Billing Account ID"
-        },
-        "billingGroupId": {
-          "type": "string",
-          "description": "Billing Group ID"
-        },
-        "projectId": {
-          "type": "string",
-          "description": "Invoice section for the billing account"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Quantity for the purchase"
-        },
-        "serviceStartDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Service start date for  Enterprise Support"
-        },
-        "csam": {
-          "type": "string",
-          "description": "CSAM for the  Enterprise Support"
-        },
-        "upn": {
-          "type": "string",
-          "description": "Product UPN"
-        }
-      },
-      "required": [
-        "billingAccountId",
-        "billingGroupId",
-        "projectId",
-        "quantity",
-        "serviceStartDate",
-        "csam",
-        "upn"
-      ]
-    },
-    "EnterpriseSupportsUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the EnterpriseSupports.",
-      "properties": {
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/EnterpriseSupportsUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "EnterpriseSupportsUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EnterpriseSupports.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning status"
-        },
-        "billingAccountId": {
-          "type": "string",
-          "description": "Billing Account ID"
-        },
-        "billingGroupId": {
-          "type": "string",
-          "description": "Billing Group ID"
-        },
-        "projectId": {
-          "type": "string",
-          "description": "Invoice section for the billing account"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Quantity for the purchase"
-        },
-        "serviceStartDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Service start date for  Enterprise Support"
-        },
-        "csam": {
-          "type": "string",
-          "description": "CSAM for the  Enterprise Support"
-        },
-        "upn": {
-          "type": "string",
-          "description": "Product UPN"
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -615,7 +563,7 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Succeeded",
@@ -653,6 +601,197 @@
             "value": "Deleted"
           }
         ]
+      },
+      "readOnly": true
+    },
+    "ShipToAddress": {
+      "type": "object",
+      "description": "Shipping address details",
+      "properties": {
+        "addressLine1": {
+          "type": "string",
+          "description": "First line of the street address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City name"
+        },
+        "region": {
+          "type": "string",
+          "description": "State or region"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal or ZIP code"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "ISO country code (e.g. US, GB)"
+        }
+      },
+      "required": [
+        "countryCode"
+      ]
+    },
+    "SupportPlan": {
+      "type": "object",
+      "description": "A Support Plan resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportPlanProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SupportPlanListResult": {
+      "type": "object",
+      "description": "The response of a SupportPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SupportPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/SupportPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SupportPlanProperties": {
+      "type": "object",
+      "description": "Properties of a Support Plan resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "upn": {
+          "type": "string",
+          "description": "Product UPN",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quantity for the purchase"
+        },
+        "serviceStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service start date for Support Plan"
+        },
+        "serviceEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service end date for Support Plan"
+        },
+        "endCustomerId": {
+          "type": "string",
+          "description": "End customer identifier for add-on scenarios"
+        },
+        "shipToAddressId": {
+          "type": "string",
+          "description": "Shipping address identifier for add-on scenarios"
+        },
+        "isAutoRenewed": {
+          "type": "boolean",
+          "description": "Flag indicating if the support plan should auto-renew"
+        },
+        "multiEntityReferenceType": {
+          "type": "string",
+          "description": "Describes the type of the multi-entity reference identifier"
+        },
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
+        },
+        "isMultiEntityParticipationAllowed": {
+          "type": "boolean",
+          "description": "Flag indicating if multi-entity participation is allowed"
+        }
+      },
+      "required": [
+        "upn",
+        "quantity",
+        "serviceStartDate"
+      ]
+    },
+    "SupportPlanUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SupportPlan.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SupportPlanUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SupportPlanUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SupportPlan.",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quantity for the purchase"
+        },
+        "serviceStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service start date for Support Plan"
+        },
+        "serviceEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Service end date for Support Plan"
+        },
+        "endCustomerId": {
+          "type": "string",
+          "description": "End customer identifier for add-on scenarios"
+        },
+        "shipToAddressId": {
+          "type": "string",
+          "description": "Shipping address identifier for add-on scenarios"
+        },
+        "isAutoRenewed": {
+          "type": "boolean",
+          "description": "Flag indicating if the support plan should auto-renew"
+        },
+        "multiEntityReferenceType": {
+          "type": "string",
+          "description": "Describes the type of the multi-entity reference identifier"
+        },
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
+        },
+        "isMultiEntityParticipationAllowed": {
+          "type": "boolean",
+          "description": "Flag indicating if multi-entity participation is allowed"
+        }
       }
     },
     "ValidateEligibility": {
@@ -665,13 +804,17 @@
       ],
       "x-ms-enum": {
         "name": "ValidateEligibility",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "ValidateEnterpriseSupportRequest": {
       "type": "object",
       "description": "The request for an eligibility check.",
       "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Indicates the purpose of the validation request"
+        },
         "lineItems": {
           "type": "array",
           "description": "The array of line items to be validated",
@@ -706,12 +849,42 @@
           "type": "string",
           "format": "date-time",
           "description": "The start date for this purchase"
+        },
+        "market": {
+          "type": "string",
+          "description": "Market/region for the purchase"
+        },
+        "endCustomerId": {
+          "type": "string",
+          "description": "End customer identifier for add-on scenarios"
+        },
+        "shipToAddressId": {
+          "type": "string",
+          "description": "Shipping address identifier for add-on scenarios"
+        },
+        "shipToAddress": {
+          "$ref": "#/definitions/ShipToAddress",
+          "description": "Shipping address details, used when shipToAddressId is not available"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant identifier for the purchase"
+        },
+        "multiEntityReferenceType": {
+          "type": "string",
+          "description": "Describes the type of the multi-entity reference identifier"
+        },
+        "multiEntityReferenceId": {
+          "type": "string",
+          "description": "Identifier used to correlate related entities in a multi-entity arrangement"
         }
       },
       "required": [
         "scope",
         "upn",
-        "quantity"
+        "quantity",
+        "serviceStartDate",
+        "market"
       ]
     },
     "ValidateEnterpriseSupportResponse": {
