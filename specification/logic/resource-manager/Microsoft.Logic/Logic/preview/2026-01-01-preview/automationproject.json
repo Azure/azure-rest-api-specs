@@ -3,7 +3,7 @@
   "info": {
     "title": "LogicManagementClient",
     "version": "2026-01-01-preview",
-    "description": "REST API for Azure Logic Apps — AutoProject resource.",
+    "description": "REST API for Azure Logic Apps — AutomationProject resource.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "AutoProjects"
+      "name": "AutomationProjects"
     }
   ],
   "paths": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/autoProjects": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/automationProjects": {
       "get": {
-        "operationId": "AutoProjects_ListBySubscription",
+        "operationId": "AutomationProjects_ListBySubscription",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Gets a list of auto projects by subscription.",
+        "description": "Gets a list of automation projects by subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoProjectListResult"
+              "$ref": "#/definitions/AutomationProjectListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "List Auto Projects by Subscription": {
-            "$ref": "./examples/AutoProjects_ListBySubscription.json"
+          "List Automation Projects by Subscription": {
+            "$ref": "./examples/AutomationProjects_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/autoProjects": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects": {
       "get": {
-        "operationId": "AutoProjects_ListByResourceGroup",
+        "operationId": "AutomationProjects_ListByResourceGroup",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Gets a list of auto projects by resource group.",
+        "description": "Gets a list of automation projects by resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoProjectListResult"
+              "$ref": "#/definitions/AutomationProjectListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "List Auto Projects by Resource Group": {
-            "$ref": "./examples/AutoProjects_ListByResourceGroup.json"
+          "List Automation Projects by Resource Group": {
+            "$ref": "./examples/AutomationProjects_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/autoProjects/{autoProjectName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}": {
       "get": {
-        "operationId": "AutoProjects_Get",
+        "operationId": "AutomationProjects_Get",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Gets an auto project.",
+        "description": "Gets an automation project.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -182,9 +182,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoProjectName",
+            "name": "automationProjectName",
             "in": "path",
-            "description": "The auto project name.",
+            "description": "The automation project name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoProject"
+              "$ref": "#/definitions/AutomationProject"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "Get Auto Project": {
-            "$ref": "./examples/AutoProjects_Get.json"
+          "Get Automation Project": {
+            "$ref": "./examples/AutomationProjects_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AutoProjects_CreateOrUpdate",
+        "operationId": "AutomationProjects_CreateOrUpdate",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Creates or updates an auto project. When creating, the auto project provisions its\nmanaged auto apps (ContainerApps with kind 'workflowapp') and sets\nthe managedBy property on each to this auto project's resource ID.",
+        "description": "Creates or updates an automation project. When creating, the automation project provisions its\nmanaged auto apps (ContainerApps with kind 'workflowapp') and sets\nthe managedBy property on each to this automation project's resource ID.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -227,9 +227,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoProjectName",
+            "name": "automationProjectName",
             "in": "path",
-            "description": "The auto project name.",
+            "description": "The automation project name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
@@ -237,24 +237,24 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The auto project definition.",
+            "description": "The automation project definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutoProject"
+              "$ref": "#/definitions/AutomationProject"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AutoProject' update operation succeeded",
+            "description": "Resource 'AutomationProject' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AutoProject"
+              "$ref": "#/definitions/AutomationProject"
             }
           },
           "201": {
-            "description": "Resource 'AutoProject' create operation succeeded",
+            "description": "Resource 'AutomationProject' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AutoProject"
+              "$ref": "#/definitions/AutomationProject"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -276,22 +276,22 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update Auto Project": {
-            "$ref": "./examples/AutoProjects_CreateOrUpdate.json"
+          "Create or Update Automation Project": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/AutoProject"
+          "final-state-schema": "#/definitions/AutomationProject"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AutoProjects_Update",
+        "operationId": "AutomationProjects_Update",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Updates an auto project using JSON Merge Patch.",
+        "description": "Updates an automation project using JSON Merge Patch.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -303,9 +303,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoProjectName",
+            "name": "automationProjectName",
             "in": "path",
-            "description": "The auto project name.",
+            "description": "The automation project name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
@@ -316,7 +316,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutoProjectUpdate"
+              "$ref": "#/definitions/AutomationProjectUpdate"
             }
           }
         ],
@@ -324,7 +324,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoProject"
+              "$ref": "#/definitions/AutomationProject"
             }
           },
           "202": {
@@ -349,22 +349,22 @@
           }
         },
         "x-ms-examples": {
-          "Update Auto Project": {
-            "$ref": "./examples/AutoProjects_Update.json"
+          "Update Automation Project": {
+            "$ref": "./examples/AutomationProjects_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/AutoProject"
+          "final-state-schema": "#/definitions/AutomationProject"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AutoProjects_Delete",
+        "operationId": "AutomationProjects_Delete",
         "tags": [
-          "AutoProjects"
+          "AutomationProjects"
         ],
-        "description": "Deletes an auto project and all of its managed auto apps.\nThis operation cascades — all ContainerApps with managedBy pointing\nto this auto project will be deleted.",
+        "description": "Deletes an automation project and all of its managed auto apps.\nThis operation cascades — all ContainerApps with managedBy pointing\nto this automation project will be deleted.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -376,9 +376,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "autoProjectName",
+            "name": "automationProjectName",
             "in": "path",
-            "description": "The auto project name.",
+            "description": "The automation project name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
@@ -410,8 +410,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Auto Project": {
-            "$ref": "./examples/AutoProjects_Delete.json"
+          "Delete Automation Project": {
+            "$ref": "./examples/AutomationProjects_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -422,13 +422,13 @@
     }
   },
   "definitions": {
-    "AutoProject": {
+    "AutomationProject": {
       "type": "object",
-      "description": "The auto project resource. An auto project is a logical grouping that owns and manages\nmultiple ContainerApps of kind 'workflowapp' via the managedBy relationship.\nThe auto project is the single entry point for lifecycle management of its auto apps.",
+      "description": "The automation project resource. An automation project is a logical grouping that owns and manages\nmultiple ContainerApps of kind 'workflowapp' via the managedBy relationship.\nThe automation project is the single entry point for lifecycle management of its auto apps.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AutoProjectProperties",
-          "description": "The auto project properties."
+          "$ref": "#/definitions/AutomationProjectProperties",
+          "description": "The automation project properties."
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -441,15 +441,15 @@
         }
       ]
     },
-    "AutoProjectListResult": {
+    "AutomationProjectListResult": {
       "type": "object",
-      "description": "The response of a AutoProject list operation.",
+      "description": "The response of a AutomationProject list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AutoProject items on this page",
+          "description": "The AutomationProject items on this page",
           "items": {
-            "$ref": "#/definitions/AutoProject"
+            "$ref": "#/definitions/AutomationProject"
           }
         },
         "nextLink": {
@@ -462,36 +462,36 @@
         "value"
       ]
     },
-    "AutoProjectProperties": {
+    "AutomationProjectProperties": {
       "type": "object",
-      "description": "The properties of the auto project resource.",
+      "description": "The properties of the automation project resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/AutoProjectProvisioningState",
-          "description": "Gets the provisioning state of the auto project.",
+          "$ref": "#/definitions/AutomationProjectProvisioningState",
+          "description": "Gets the provisioning state of the automation project.",
           "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the created time of the auto project.",
+          "description": "Gets the created time of the automation project.",
           "readOnly": true
         },
         "changedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the last modified time of the auto project.",
+          "description": "Gets the last modified time of the automation project.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "A description of the auto project."
+          "description": "A description of the automation project."
         }
       }
     },
-    "AutoProjectProvisioningState": {
+    "AutomationProjectProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of the auto project resource.",
+      "description": "The provisioning state of the automation project resource.",
       "enum": [
         "InProgress",
         "Succeeded",
@@ -500,40 +500,40 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "AutoProjectProvisioningState",
+        "name": "AutomationProjectProvisioningState",
         "modelAsString": true,
         "values": [
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "The auto project is being created or updated."
+            "description": "The automation project is being created or updated."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The auto project has been successfully provisioned."
+            "description": "The automation project has been successfully provisioned."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The auto project provisioning has failed."
+            "description": "The automation project provisioning has failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The auto project provisioning was canceled."
+            "description": "The automation project provisioning was canceled."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The auto project is being deleted."
+            "description": "The automation project is being deleted."
           }
         ]
       }
     },
-    "AutoProjectUpdate": {
+    "AutomationProjectUpdate": {
       "type": "object",
-      "description": "The auto project patch model for update operations.",
+      "description": "The automation project patch model for update operations.",
       "properties": {
         "tags": {
           "type": "object",
@@ -543,8 +543,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/AutoProjectUpdateProperties",
-          "description": "The updatable properties of the auto project."
+          "$ref": "#/definitions/AutomationProjectUpdateProperties",
+          "description": "The updatable properties of the automation project."
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -552,13 +552,13 @@
         }
       }
     },
-    "AutoProjectUpdateProperties": {
+    "AutomationProjectUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the auto project resource.",
+      "description": "The updatable properties of the automation project resource.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of the auto project."
+          "description": "A description of the automation project."
         }
       }
     }

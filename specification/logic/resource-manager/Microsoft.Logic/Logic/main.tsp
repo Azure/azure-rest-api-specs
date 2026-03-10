@@ -2,8 +2,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./AutoProject.tsp";
-import "./autoProjectModels.tsp";
+import "./AutomationProject.tsp";
+import "./automationProjectModels.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 /**
- * REST API for Azure Logic Apps — AutoProject resource.
+ * REST API for Azure Logic Apps — AutomationProject resource.
  */
 @armProviderNamespace
 @service(#{ title: "LogicManagementClient" })
