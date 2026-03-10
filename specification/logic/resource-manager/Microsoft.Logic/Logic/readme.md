@@ -39,13 +39,13 @@ directive:
 
 ```
 
-### Tag: package-2026-01-preview
+### Tag: package-2026-04-preview
 
-These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-04-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-01-preview'
+``` yaml $(tag) == 'package-2026-04-preview'
 input-file:
-- preview/2026-01-01-preview/automationproject.json
+- preview/2026-04-01-preview/automationproject.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: automationproject.json

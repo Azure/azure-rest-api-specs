@@ -26,9 +26,9 @@ namespace Microsoft.Logic;
  */
 enum Versions {
   /**
-   * The 2026-01-01-preview API version.
+   * The 2026-04-01-preview API version.
    */
-  v2026_01_01_preview: "2026-01-01-preview",
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
