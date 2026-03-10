@@ -69,3 +69,12 @@ These settings apply only when `--tag=package-2025-02-11-preview` is specified o
 input-file:
   - Microsoft.Orbital/preview/2025-02-11-preview/planetarycomputer.json
 ```
+
+### Tag: package-2026-03-12
+
+These settings apply only when `--tag=package-2026-03-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-12'
+input-file:
+  - Microsoft.Orbital/stable/2026-03-12/planetarycomputer.json
+```
