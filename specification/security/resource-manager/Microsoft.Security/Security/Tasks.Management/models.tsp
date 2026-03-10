@@ -1,0 +1,182 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Security;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union TaskUpdateActionType {
+  string,
+
+  /**
+   * Activate
+   */
+  Activate: "Activate",
+
+  /**
+   * Dismiss
+   */
+  Dismiss: "Dismiss",
+
+  /**
+   * Start
+   */
+  Start: "Start",
+
+  /**
+   * Resolve
+   */
+  Resolve: "Resolve",
+
+  /**
+   * Close
+   */
+  Close: "Close",
+}
+
+/**
+ * List of security task recommendations
+ */
+model SecurityTaskList is Azure.Core.Page<SecurityTask>;
+
+/**
+ * Describes properties of a task.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model SecurityTaskProperties {
+  /**
+   * State of the task (Active, Resolved etc.)
+   */
+  @visibility(Lifecycle.Read)
+  state?: string;
+
+  /**
+   * The time this task was discovered in UTC
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  creationTimeUtc?: utcDateTime;
+
+  /**
+   * Changing set of properties, depending on the task type that is derived from the name field
+   */
+  securityTaskParameters?: SecurityTaskParameters;
+
+  /**
+   * The time this task's details were last changed in UTC
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastStateChangeTimeUtc?: utcDateTime;
+
+  /**
+   * Additional data on the state of the task
+   */
+  @visibility(Lifecycle.Read)
+  subState?: string;
+}
+
+/**
+ * Changing set of properties, depending on the task type that is derived from the name field
+ */
+model SecurityTaskParameters {
+  ...Record<unknown>;
+
+  /**
+   * Name of the task type
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+}
+
+/**
+ * Describes an Azure resource.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}

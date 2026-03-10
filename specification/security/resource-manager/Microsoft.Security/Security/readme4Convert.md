@@ -99,18 +99,27 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: 2015-06-01-preview
+tag: Tasks.Management
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-2026-01
+### Tag: Locations.Management
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
 
-```yaml $(tag) == '2015-06-01-preview'
+```yaml $(tag) == 'Locations.Management'
 input-file:
   - preview/2015-06-01-preview/locations.json
+```
+
+### Tag: Tasks.Management
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'Tasks.Management'
+input-file:
+  - preview/2015-06-01-preview/tasks.json
 ```
