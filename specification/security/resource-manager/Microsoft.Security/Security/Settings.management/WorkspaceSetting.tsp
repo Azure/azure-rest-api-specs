@@ -25,6 +25,7 @@ model WorkspaceSetting
 }
 
 @armResourceOperations
+@tag("Workspace Settings")
 interface WorkspaceSettings {
   /**
    * Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set
