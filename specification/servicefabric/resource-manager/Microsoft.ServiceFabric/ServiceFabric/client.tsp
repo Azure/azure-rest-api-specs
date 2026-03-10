@@ -12,8 +12,3 @@ using Microsoft.ServiceFabric;
   "ArmProxyResource",
   "python,java"
 );
-
-@@clientName(Microsoft.ServiceFabric.ProxyResource,
-  "ServiceFabricProxyResource",
-  "java"
-);
