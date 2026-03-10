@@ -74,7 +74,8 @@ interface DeploymentScripts {
   create is ArmResourceCreateOrReplaceAsync<
     DeploymentScript,
     BaseParameters = DeploymentScriptBaseParameters,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DeploymentScript> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -124,10 +125,13 @@ interface DeploymentScripts {
   /**
    * Gets deployment script logs for a given deployment script name.
    */
-  getLogs is ArmResourceListByParent<
-    ScriptLog,
-    BaseParameters = DeploymentScriptBaseParameters,
-    Response = ArmResponse<ScriptLogsList>
+  @get
+  @action("logs")
+  getLogs is ArmResourceActionSync<
+    DeploymentScript,
+    void,
+    ArmResponse<ScriptLogsList>,
+    BaseParameters = DeploymentScriptBaseParameters
   >;
 
   /**

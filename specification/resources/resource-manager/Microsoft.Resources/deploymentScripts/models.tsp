@@ -223,7 +223,6 @@ model ScriptLogsList {
   /**
    * Deployment scripts logs.
    */
-  @pageItems
   value?: ScriptLog[];
 }
 
