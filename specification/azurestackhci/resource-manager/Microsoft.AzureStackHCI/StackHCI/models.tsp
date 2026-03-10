@@ -6086,7 +6086,7 @@ model Disk {
   size?: string;
 
   /**
-   * The type of the disk.
+   * The type of the disk. For example, S2D or SAN.
    */
   @visibility(Lifecycle.Read)
   type?: string;
@@ -7216,6 +7216,13 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the device.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  disks?: Disk[];
 }
 /**
  * details of validation failure

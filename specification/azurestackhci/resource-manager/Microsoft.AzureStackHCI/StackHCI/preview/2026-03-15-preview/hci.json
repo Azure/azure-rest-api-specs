@@ -11701,7 +11701,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the disk.",
+          "description": "The type of the disk. For example, S2D or SAN.",
           "readOnly": true
         }
       },
@@ -20347,6 +20347,17 @@
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of storage disks on the device.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },

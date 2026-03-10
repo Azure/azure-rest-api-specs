@@ -136,26 +136,44 @@ model SpecificJobProperties extends BaseJobProperties {
 }
 ```
 
+## Example Update Prompt (IMPORTANT)
+
+**After every change** to models, properties, unions, resources, or operations, you **MUST** ask the user:
+
+> "Would you like me to update an example file in `examples/2026-03-15-preview/` to reflect this change?"
+
+To identify affected examples:
+1. Search for the parent model/resource name in example files: `grep -rl "parentModelName" examples/2026-03-15-preview/*.json`
+2. List the affected files to the user
+3. If the user confirms, update **one representative example** (typically the primary GET example) to include the new property or updated value. You do NOT need to update every example — one is sufficient to ensure the change is reflected and validated.
+4. If the user declines, remind them that at least one example will need to be updated before the build will pass validation
+
+**Never skip this prompt.** Even for small changes like adding a single property or enum value, at least one example must reflect the change. Stale examples cause `oav validate-example` failures.
+
+**Keep it simple:** Only update one example per change. Pick the most representative one (usually the GET example for the resource).
+
 ## How to Handle Common Tasks
 
 ### Adding a New Property to an Existing Model
 1. Add the property in `models.tsp` under the correct model
-2. Find all example files that include the parent model: `grep -rl "parentModelName" examples/2026-03-15-preview/*.json`
-3. Add the property to response bodies (and request bodies if writable)
-4. Run the build workflow
+2. **Ask the user if they want to update an example** (search for affected files first)
+3. If yes: pick **one representative example** (typically the GET example) and add the property to its response body (and request body if writable)
+4. Run the build workflow (`npx prettier`, `npx tsp format .`, `npx tsp compile .`, `npx oav validate-example`)
 
 ### Adding a New Resource
 1. Create properties model in `models.tsp` with section comment
 2. Create a new `ResourceName.tsp` file with resource definition and interface
 3. Add `import "./ResourceName.tsp"` to `main.tsp`
-4. Create example files in `examples/2026-03-15-preview/`
-5. Run the build workflow
+4. **Ask the user if they want to create example files** in `examples/2026-03-15-preview/`
+5. If yes: create example files following naming conventions
+6. Run the build workflow
 
 ### Adding a New Enum Value
 1. Find the union in `models.tsp`
 2. Add the new value with a JSDoc comment
-3. Update any affected examples
-4. Run the build workflow
+3. **Ask the user if they want to update an example**
+4. If yes: pick **one representative example** and update it to use the new enum value
+5. Run the build workflow
 
 ## Reference Documentation
 
@@ -178,7 +196,9 @@ Before finishing, verify:
 - [ ] Proper `@added(Versions.v2026_03_15_preview)` decorators applied
 - [ ] Private preview features marked with `// PRIVATE PREVIEW`
 - [ ] New resource file imported in `main.tsp`
-- [ ] Examples created in `examples/2026-03-15-preview/`
+- [ ] **User was asked whether to update/create an example file**
+- [ ] At least one representative example created/updated in `examples/2026-03-15-preview/` (if user confirmed)
 - [ ] Read-only properties only in response bodies of examples
+- [ ] `npx tsp format .` run to format TypeSpec files
 - [ ] `npx tsp compile .` succeeds
 - [ ] `npx oav validate-example` passes
