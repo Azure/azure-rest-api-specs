@@ -139,17 +139,27 @@ model SupercomputerIdentities {
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
 
+@doc("Updatable properties for Supercomputer (all fields optional for PATCH)")
+model SupercomputerUpdateProperties {
+  @doc("Dictionary of identity properties.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  identities?: SupercomputerIdentities;
+}
+
+@doc("Update model for Supercomputer PATCH operations")
+model SupercomputerUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: SupercomputerUpdateProperties;
+}
+
 @armResourceOperations
 interface Supercomputers {
   get is ArmResourceRead<Supercomputer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Supercomputer>;
-  update is ArmCustomPatchAsync<
-    Supercomputer,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Supercomputer,
-      SupercomputerProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Supercomputer, SupercomputerUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Supercomputer>;
   listByResourceGroup is ArmResourceListByParent<Supercomputer>;
   listBySubscription is ArmListBySubscription<Supercomputer>;
