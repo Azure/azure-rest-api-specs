@@ -64,7 +64,6 @@ paths:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-          - CodeAgents=V1Preview
     get:
       operationId: Agents_listAgents
       description: Returns the list of all agents.
@@ -364,7 +363,6 @@ paths:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-          - CodeAgents=V1Preview
     get:
       operationId: Agents_listAgentVersions
       description: Returns the list of versions of an agent.
@@ -5164,13 +5162,11 @@ components:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-          - CodeAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
         - HostedAgents=V1Preview
         - WorkflowAgents=V1Preview
-        - CodeAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentKind:
       anyOf:
@@ -6388,7 +6384,6 @@ components:
       type: object
       required:
         - type
-        - code_text
       properties:
         type:
           type: string
@@ -6397,6 +6392,12 @@ components:
         code_text:
           type: string
           description: Inline code text for the evaluator
+        entry_point:
+          type: string
+          description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
+        image_tag:
+          type: string
+          description: The container image tag to use for evaluator code execution
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
@@ -6602,13 +6603,11 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
-              - CodeAgents=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-          - CodeAgents=V1Preview
     CreateAgentVersionFromManifestRequest:
       type: object
       required:
@@ -6668,13 +6667,11 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
-              - CodeAgents=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
-          - CodeAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -25546,7 +25543,6 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
-              - CodeAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
