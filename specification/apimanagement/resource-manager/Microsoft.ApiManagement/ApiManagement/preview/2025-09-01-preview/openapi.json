@@ -3001,6 +3001,9 @@
           "ApiManagementCreateGrpcApi": {
             "$ref": "./examples/ApiManagementCreateGrpcApi.json"
           },
+          "ApiManagementCreateMcpApi": {
+            "$ref": "./examples/ApiManagementCreateMcpApi.json"
+          },
           "ApiManagementCreateODataApi": {
             "$ref": "./examples/ApiManagementCreateODataApi.json"
           },
@@ -52472,6 +52475,10 @@
         "license": {
           "$ref": "#/definitions/ApiLicenseInformation",
           "description": "License information for the API."
+        },
+        "mcpProperties": {
+          "$ref": "#/definitions/McpProperties",
+          "description": "Properties specific to MCP API type."
         }
       }
     },
@@ -53958,7 +53965,8 @@
         "websocket",
         "graphql",
         "odata",
-        "grpc"
+        "grpc",
+        "mcp"
       ],
       "x-ms-enum": {
         "name": "ApiType",
@@ -53987,6 +53995,11 @@
           {
             "name": "grpc",
             "value": "grpc"
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Model Context Protocol API."
           }
         ]
       }
@@ -59596,6 +59609,58 @@
         }
       }
     },
+    "McpEndpoint": {
+      "type": "object",
+      "description": "Endpoint definition for MCP API type.",
+      "properties": {
+        "uriTemplate": {
+          "type": "string",
+          "description": "Relative URL path that must start with '/'.",
+          "pattern": "^/.*$"
+        }
+      }
+    },
+    "McpProperties": {
+      "type": "object",
+      "description": "Properties specific to MCP API type.",
+      "properties": {
+        "transportType": {
+          "$ref": "#/definitions/McpTransportType",
+          "description": "Transport type for Model Context Protocol API."
+        },
+        "endpoints": {
+          "type": "object",
+          "description": "Collection of MCP endpoint definitions with relative URLs.",
+          "additionalProperties": {
+            "$ref": "#/definitions/McpEndpoint"
+          }
+        }
+      }
+    },
+    "McpTransportType": {
+      "type": "string",
+      "description": "Transport type for Model Context Protocol API.",
+      "enum": [
+        "sse",
+        "streamable"
+      ],
+      "x-ms-enum": {
+        "name": "McpTransportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sse",
+            "value": "sse",
+            "description": "This API uses HTTP+SSE transport type."
+          },
+          {
+            "name": "streamable",
+            "value": "streamable",
+            "description": "This API uses the Streamable HTTP transport type."
+          }
+        ]
+      }
+    },
     "Method": {
       "type": "string",
       "description": "The HTTP method to be used.",
@@ -63655,7 +63720,8 @@
         "websocket",
         "graphql",
         "odata",
-        "grpc"
+        "grpc",
+        "mcp"
       ],
       "x-ms-enum": {
         "name": "SoapApiType",
@@ -63690,6 +63756,11 @@
             "name": "gRPC",
             "value": "grpc",
             "description": "Imports the API having a gRPC front end."
+          },
+          {
+            "name": "MCP",
+            "value": "mcp",
+            "description": "Imports the API having a Model Context Protocol (MCP) front end."
           }
         ]
       }

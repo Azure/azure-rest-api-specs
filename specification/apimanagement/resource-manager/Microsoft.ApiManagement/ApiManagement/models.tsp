@@ -183,6 +183,11 @@ union ApiType {
   odata: "odata",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   grpc: "grpc",
+
+  /**
+   * Model Context Protocol API.
+   */
+  mcp: "mcp",
 }
 
 /**
@@ -307,6 +312,55 @@ union SoapApiType {
    * Imports the API having a gRPC front end.
    */
   gRPC: "grpc",
+
+  /**
+   * Imports the API having a Model Context Protocol (MCP) front end.
+   */
+  MCP: "mcp",
+}
+
+/**
+ * Transport type for Model Context Protocol API.
+ */
+union McpTransportType {
+  string,
+
+  /**
+   * This API uses HTTP+SSE transport type.
+   */
+  sse: "sse",
+
+  /**
+   * This API uses the Streamable HTTP transport type.
+   */
+  streamable: "streamable",
+}
+
+/**
+ * Endpoint definition for MCP API type.
+ */
+model McpEndpoint {
+  /**
+   * Relative URL path that must start with '/'.
+   */
+  @pattern("^/.*$")
+  uriTemplate?: string;
+}
+
+/**
+ * Properties specific to MCP API type.
+ */
+model McpProperties {
+  /**
+   * Transport type for Model Context Protocol API.
+   */
+  transportType?: McpTransportType;
+
+  /**
+   * Collection of MCP endpoint definitions with relative URLs.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "MCP endpoints are a dynamic map of endpoint names to endpoint definitions"
+  endpoints?: Record<McpEndpoint>;
 }
 
 /**
@@ -2194,6 +2248,11 @@ model ApiEntityBaseContract {
    * License information for the API.
    */
   license?: ApiLicenseInformation;
+
+  /**
+   * Properties specific to MCP API type.
+   */
+  mcpProperties?: McpProperties;
 }
 
 /**
