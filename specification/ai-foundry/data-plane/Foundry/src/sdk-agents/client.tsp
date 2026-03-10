@@ -136,6 +136,16 @@ using Azure.AI.Projects;
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
+// AI Tooling: openai-java de-dup
+// Suppress emission of standalone models that are exact duplicates of openai-java classes.
+// Map them to their openai-java equivalents so the codegen does not emit its own versions.
+//   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
+//   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
+//   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
+@@alternateType(OpenAI.ComparisonFilter, { identity: "com.openai.models.ComparisonFilter" }, "java");
+@@alternateType(OpenAI.CompoundFilter, { identity: "com.openai.models.CompoundFilter" }, "java");
+@@alternateType(OpenAI.Reasoning, { identity: "com.openai.models.Reasoning" }, "java");
+
 // TimeZone property override via model indirection
 @alternateType({
   identity: "java.util.TimeZone"
