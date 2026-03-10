@@ -35,11 +35,6 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   @added(Versions.v2026_05_01)
   excludePiiCategories?: PiiCategoriesExclude[];
 
-  /** RedactionPolicy to be used on the input. */
-  @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v2025_11_15_preview)
-  redactionPolicy?: BaseRedactionPolicy;
-
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
   @added(Versions.v2026_05_01)
   valueExclusionPolicy?: ValueExclusionPolicy;
@@ -50,20 +45,14 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 
   /** List of RedactionPolicies to be used on the input. */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   redactionPolicies?: BaseRedactionPolicy[];
 
   /** Confidence score threshold configuration for PII entity recognition */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   confidenceScoreThreshold?: ConfidenceScoreThreshold;
 
   /** Disable entity validation for PII entity recognition */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   disableEntityValidation?: boolean = false;
 }
 
@@ -79,8 +68,6 @@ model EntitySynonyms {
 
 /** Configuration for confidence score threshold for PII entity recognition */
 @added(Versions.v2026_05_01)
-@removed(Versions.v2025_05_15_preview)
-@added(Versions.v2025_11_15_preview)
 model ConfidenceScoreThreshold {
   /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
   default: float32 = 0.3;
@@ -91,8 +78,6 @@ model ConfidenceScoreThreshold {
 
 /** Confidence score threshold override for a specific PII category */
 @added(Versions.v2026_05_01)
-@removed(Versions.v2025_05_15_preview)
-@added(Versions.v2025_11_15_preview)
 model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
   entity: PiiCategoriesExclude;
@@ -133,25 +118,19 @@ model BaseRedactionPolicy {
 
   /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   entityTypes?: PiiCategoriesExclude[];
 
   /** (Optional) name of the redaction policy for identification purposes. */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   policyName?: string;
 
   /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   isDefaultPolicy?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -179,14 +158,14 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
@@ -235,7 +214,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2025_05_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2025_11_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -260,15 +239,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   maskLength?: int32;
 }
 
@@ -279,7 +258,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2025_05_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2025_11_15_preview, Entity[])
   entities: PiiEntityWithTags[];
 }
 
@@ -846,7 +825,7 @@ union PiiCategoriesExclude {
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
@@ -858,13 +837,11 @@ union PiiCategoriesExclude {
   PIN: "PIN",
 
   /** VIN */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   VIN: "VIN",
 
   /** VIN */
   @added(Versions.v2025_11_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
   /** License Plate */
@@ -873,97 +850,65 @@ union PiiCategoriesExclude {
 
   /** KR Passport Number */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   KRPassportNumber: "KRPassportNumber",
 
   /** KR Driver's License Number */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   KRDriversLicenseNumber: "KRDriversLicenseNumber",
 
   /** KR Social Security Number */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   KRSocialSecurityNumber: "KRSocialSecurityNumber",
 
   /** Government Issued ID */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   GovernmentIssuedId: "GovernmentIssuedId",
 
   /** Password */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   Password: "Password",
 
   /** National Identification */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   NationalId: "NationalId",
 
   /** Zip Code */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   ZipCode: "ZipCode",
 
   /** Card Verification Value */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   CVV: "CVV",
 
   /** Expiration Date */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   ExpirationDate: "ExpirationDate",
 
   /** CA Social Identification Number */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   CASocialIdentificationNumber: "CASocialIdentificationNumber",
 
   /** Medicare Beneficiary ID */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   MedicareBeneficiaryId: "USMedicareBeneficiaryId",
 
   /** Location */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   Location: "Location",
 
   /** City */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   City: "City",
 
   /** State */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   State: "State",
 
   /** Airport */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   Airport: "Airport",
 
   /** Geopolitical Entity */
   @added(Versions.v2026_05_01)
-  @removed(Versions.v2025_05_15_preview)
-  @added(Versions.v2025_11_15_preview)
   GPE: "GPE",
 }
