@@ -1,131 +1,62 @@
 ---
 name: azure-typespec-author
-description: "Author or modify Azure TypeSpec API specifications in the azure-rest-api-specs repository. USE FOR: Any task that creates, modifies, or troubleshoots .tsp files or TypeSpec API specifications — including but not limited to API versioning, ARM or data-plane resource definitions (tracked, proxy, extension, child resources), resource operations (CRUD, PATCH, custom actions, async/LRO), models, enums, unions, properties, decorators, constraints, and swagger-to-TypeSpec conversion. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, single MCP tool calls that do not require multi-step workflows. TOOLS/COMMANDS: azsdk_typespec_generate_authoring_plan, azsdk_run_typespec_validation"
+license: MIT
+metadata:
+  version: "0.0.1"
+description: "Author or modify Azure TypeSpec API specifications in the azure-rest-api-specs repository. USE FOR: Any task that creates, modifies, or troubleshoots .tsp files or TypeSpec API specifications — including but not limited to API versioning for ARM services (e.g. add new preview version, add new stable version, add new api version, add preview api version, add stable api version; NOTE: API versioning is only supported for ARM/resource-manager services, not data-plane services), ARM or data-plane resource definitions (tracked, proxy, extension, child resources), resource manager specifications, resource operations (CRUD, PATCH, custom actions, async/LRO), models, enums, unions, properties, decorators, constraints, and swagger-to-TypeSpec conversion. DO NOT USE FOR: SDK generation from TypeSpec, releasing SDK packages, single MCP tool calls that do not require multi-step workflows, API versioning for data-plane services. TOOLS/COMMANDS: azsdk_typespec_generate_authoring_plan, azsdk_run_typespec_validation"
+compatibility: >-
+  Requires: azure-sdk-mcp server with azsdk_typespec_generate_authoring_plan and azsdk_run_typespec_validation tools.
 ---
 
 # Azure TypeSpec Author
 
-## Quick Reference
+## MCP Prerequisites
 
-| Property      | Value                                                                     |
-| ------------- | ------------------------------------------------------------------------- |
-| **Services**  | Azure TypeSpec API Specifications (ARM & Data-plane)                      |
-| **MCP Tools** | `azsdk_typespec_generate_authoring_plan`, `azsdk_run_typespec_validation` |
-| **Best For**  | Authoring, modifying, and troubleshooting `.tsp` files                    |
-
-## When to Use This Skill
-
-- Creating, modifying, or deleting content in `.tsp` files
-- API versioning (adding preview or stable versions)
-- ARM or data-plane resource definitions (tracked, proxy, extension, child resources)
-- Resource operations (CRUD, PATCH, custom actions, async/LRO)
-- Models, enums, unions, properties, decorators, and constraints
-- Swagger-to-TypeSpec conversion follow-up
+Requires `azure-sdk-mcp` server with TypeSpec authoring and validation tools.
 
 ## MCP Tools
 
-| Tool                                     | Command                 | Use                                                                                   |
-| ---------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
-| `azsdk_typespec_generate_authoring_plan` | Generate authoring plan | Produces a grounded plan for TypeSpec changes based on user request and existing code |
-| `azsdk_run_typespec_validation`          | Run validation          | Runs TypeSpec compilation and lint validation after edits                             |
+| Tool                                     | Purpose                              |
+| ---------------------------------------- | ------------------------------------ |
+| `azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan     |
+| `azsdk_run_typespec_validation`          | Validate TypeSpec compilation + lint |
 
----
+## Principles
 
-## Operating Principles
+1. **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
+2. **Minimal, scoped edits** — only change what the request requires.
+3. **Always validate** — run `azsdk_run_typespec_validation` after every edit.
+4. **Always cite references** — provide links that justify the approach.
 
-> **Non-negotiable** — all principles below apply to every invocation of this skill.
+## Task Types
 
-1. **This skill is MANDATORY for ALL `.tsp` file edits.** Any request that modifies, creates, or deletes content in a `.tsp` file MUST follow the full workflow — regardless of how simple the change appears. There are no "trivial" TypeSpec edits. Even changing a single `?` (optional → required) can be a breaking change requiring versioning decorators.
-2. **Do not edit any files until you have required inputs and have retrieved a solution.** Use the `azsdk_typespec_generate_authoring_plan` MCP tool.
-3. **Make minimal, scoped edits** to satisfy the request. Avoid refactors unless explicitly asked.
-4. **After edits, validate** using the `azsdk_run_typespec_validation` MCP tool and report results.
-5. **Always provide references** (titles / sections / links) from retrieved context that justify the recommended approach.
+| Type                  | Description                                                       | Examples                                               |
+| --------------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
+| **API Versioning (ARM only)** | Adding a new preview or stable API version to an existing ARM service. Not supported for data-plane services. | "add new preview version", "promote preview to stable" |
+| **General Authoring** | Any other TypeSpec authoring task that modifies `.tsp` files      | "add a resource", "add CRUD operations", "add LRO"    |
 
----
+## Steps
 
-## Workflow Steps
+All tasks follow a 5-step workflow. Steps 2–3 branch by task type; the rest are shared.
 
-> **All 6 steps are MANDATORY. Do NOT skip any step.**
+1. **Analyze Project** — Follow the [project analysis guide](references/analyze-project.md) to collect project context and determine task type.
 
-| Step | Name                                                    | Tool / File                              | Gate                                      |
-| ---- | ------------------------------------------------------- | ---------------------------------------- | ----------------------------------------- |
-| 1    | [Intake & Clarification](#step-1-intake--clarification) | `references/intake-arm.md`               | All inputs collected + analysis displayed |
-| 2    | [Retrieve Solution](#step-2-retrieve-solution)          | `azsdk_typespec_generate_authoring_plan` | Grounded plan returned                    |
-| 3    | [Apply Changes](#step-3-apply-changes)                  | Editor                                   | User confirms uncertainties               |
-| 4    | [Validate](#step-4-validate)                            | `azsdk_run_typespec_validation`          | Compilation passes                        |
-| 5    | [Summarize](#step-5-summarize)                          | —                                        | Summary displayed to user                 |
-| 6    | [Next Steps](#step-6-next-steps)                        | `references/next-steps-arm.md`           | Follow-up actions presented               |
+2. **Intake & Clarification**
+   - *API Versioning:* determine the versioning scenario from Step 1, use [agentic search](references/agentic-search.md) with the scenario URL below to collect information from user. Be sure to use a user-friendly way to collect required inputs from user. e.g., list the existing features (resources, operations, properties) from the latest version and then ask the user which to carry over or exclude, instead of asking for raw input.
 
----
+     | Latest  | Target  | URL to fetch                                                                          |
+     | ------- | ------- | ------------------------------------------------------------------------------------- |
+     | preview | preview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/02-preview-after-preview/` |
+     | preview | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/03-stable-after-preview/`  |
+     | stable  | preview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/`  |
+     | stable  | stable  | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/05-stable-after-stable/`   |
 
-### Step 1: Intake & Clarification
+   - *General Authoring:* follow [intake guide](references/general-authoring-intake.md).
 
-Follow `references/intake-arm.md` to gather all required inputs.
+3. **Retrieve Solution**
+   - *API Versioning:* search the downloaded guide content for implementation steps via [agentic search](references/agentic-search.md) and generate solution. No MCP tool call needed.
+   - *General Authoring:* invoke `azsdk_typespec_generate_authoring_plan` with request, context from Steps 1–2, and project root path. Do not proceed without a grounded plan.
 
-Do NOT proceed to Step 2 until all required inputs are collected **and** the analysis output has been displayed.
+4. **Apply Changes** — Confirm uncertainties with user, make minimal `.tsp` edits, prefer official templates from retrieved context.
 
----
-
-### Step 2: Retrieve Solution
-
-Invoke `azsdk_typespec_generate_authoring_plan` MCP tool:
-
-| Parameter                 | Value                                                                                                        |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `request`                 | User request (verbatim)                                                                                      |
-| `additionalInformation`   | All content gathered from Step 1 (intake analysis, user answers, relevant `.tsp` code read from the project) |
-| `typeSpecProjectRootPath` | TypeSpec project root path                                                                                   |
-
-Do NOT proceed to Step 3 without a grounded plan from this tool.
-
----
-
-### Step 3: Apply Changes
-
-Only after a grounded plan is produced:
-
-1. Confirm with user if any uncertainties remain
-2. Make the minimal changes required in the relevant `.tsp` files
-3. Prefer the official template/pattern from retrieved context even if the repo has older patterns
-
----
-
-### Step 4: Validate
-
-Invoke `azsdk_run_typespec_validation` MCP tool to run validation.
-
-- If validation **passes** → proceed to Step 5
-- If validation **fails** → fix forward with minimal changes and re-validate
-- Do NOT skip validation even if the change appears trivial
-
----
-
-### Step 5: Summarize
-
-Return the following to the user:
-
-| Item                   | Detail                                                                                                                                                                        |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Files changed**      | List of modified files                                                                                                                                                        |
-| **What changed**       | Brief description of changes and rationale                                                                                                                                    |
-| **Validation results** | Pass/fail + key output                                                                                                                                                        |
-| **References**         | Titles/sections/links from the azure-sdk-mcp/azsdk_typespec_generate_authoring_plan tool response (do not omit this even for small or trivial changes) that justify decisions |
-
----
-
-### Step 6: Next Steps
-
-Read the file `references/next-steps-arm.md` (using the read_file tool) and execute **ALL** of its instructions.
-
-> **Do NOT** summarize and end your turn without presenting the follow-up actions from `references/next-steps-arm.md` to the user. The user must be given the opportunity to request additional changes.
-
----
-
-## Related Skills & References
-
-| Resource                                                       | Purpose                                                              |
-| -------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [`references/intake-arm.md`](references/intake-arm.md)         | Step 1 — Intake and clarification steps for ARM authoring            |
-| [`references/next-steps-arm.md`](references/next-steps-arm.md) | Step 6 — Post-authoring follow-up actions and case-specific guidance |
-| `sdk-generation` skill                                         | SDK generation from TypeSpec                                         |
-| `check-package-readiness` skill                                | Release readiness checks                                             |
+5. **Validate** — Follow the [validation guide](references/validation.md).
