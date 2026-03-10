@@ -23,6 +23,8 @@ using Http;
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
 
+@@clientName(HttpStatusCode.Continue, "CONTINUE_ENUM", "python");
+
 // Migration mappings added to mitigate Java SDK breaking changes after TypeSpec migration
 @@clientName(Microsoft.RecoveryServices.IaaSVMContainer,
   "IaaSvmContainer",
@@ -485,7 +487,7 @@ using Http;
 
 @@clientName(Microsoft.RecoveryServices,
   "RecoveryServicesBackupClient",
-  "javascript"
+  "javascript,python"
 );
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
