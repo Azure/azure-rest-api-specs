@@ -104,12 +104,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@clientOption(BlobItem.name,
   "deserialize_with",
-  "crate::models::deserialize_blob_name",
+  "crate::models::blob_name::option::deserialize",
   "rust"
 );
 @@clientOption(BlobPrefix.name,
   "deserialize_with",
-  "crate::models::deserialize_blob_name",
+  "crate::models::blob_name::option::deserialize",
   "rust"
 );
 
@@ -338,8 +338,14 @@ enum ImmutabilityPolicySetting {
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
-@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyUntilDate, "ImmutabilityPolicyExpiry", "go");
-@@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyUntilDate, "ImmutabilityPolicyExpiry", "go");
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyUntilDate,
+  "ImmutabilityPolicyExpiry",
+  "go"
+);
+@@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyUntilDate,
+  "ImmutabilityPolicyExpiry",
+  "go"
+);
 @@clientName(ListBlobsIncludeItemGo, "ListBlobsIncludeItem", "go");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "go");
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
@@ -490,11 +496,79 @@ op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
 @@access(BlobProperties, Access.internal, "csharp");
 @@access(BlobItem, Access.internal, "csharp");
 
-@@clientOption(MetadataHeaders.`metadata`, "collectionHeaderPrefix", "x-ms-meta-", "csharp");
+@@clientOption(MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Disabling pageable in favor of custom pageable implementation in client"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
+  "csharp"
+);
+/** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
+alias MetadataHeadersRequired = {
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string;
+};
+
+/** operation sets one or more user-defined name-value pairs for the specified container. */
+@sharedRoute
+@route("?restype=container&comp=metadata")
+op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...MetadataHeadersRequired;
+    ...IfModifiedSinceParameter;
+  },
+  {
+    ...EtagResponseHeaderPrivate;
+    ...LastModifiedResponseHeaderPrivate;
+  }
+>;
+
+@@override(Container.setMetadata, setMetadataRequiredMetadataContainer, "rust");
+
+/** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@route("?comp=metadata")
+op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...MetadataHeadersRequired;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    ...EtagResponseHeaderPrivate;
+    ...LastModifiedResponseHeaderPrivate;
+    ...VersionIdResponseHeaderPrivate;
+    ...RequestServerEncryptedResponseHeaderPrivate;
+    ...EncryptionKeySha256ResponseHeaderPrivate;
+    ...EncryptionScopeResponseHeaderPrivate;
+  }
+>;
+
+@@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");

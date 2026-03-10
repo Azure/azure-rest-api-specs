@@ -23,12 +23,31 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model Error {
   /** The error code. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Code?: StorageErrorCode;
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  xMsCopySourceErrorCode?: string;
+
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  xMsCopySourceStatusCode?: int32;
+
+  /** The error code. */
+  @Xml.name("Code") code?: StorageErrorCode;
 
   /** The error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Message?: string;
+  @Xml.name("Message") message?: string;
+
+  /** Copy source status code */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
+
+  /** Copy source error code */
+  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
+
+  /** Copy source error message */
+  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
 /** Error codes returned by the Azure Blob Storage service. */
@@ -57,6 +76,10 @@ union StorageErrorCode {
 
   /** Empty metadata key. */
   EmptyMetadataKey: "EmptyMetadataKey",
+
+  /** Incremental copy of an earlier snapshot is not allowed. */
+  @added(Versions.v2026_04_06)
+  IncrementalCopyOfEarlierSnapshotNotAllowed: "IncrementalCopyOfEarlierSnapshotNotAllowed",
 
   /** Insufficient account permissions. */
   InsufficientAccountPermissions: "InsufficientAccountPermissions",
@@ -91,6 +114,9 @@ union StorageErrorCode {
   /** Invalid request URL. */
   InvalidRequestUrl: "InvalidRequestUrl",
 
+  /** Invalid resource name. */
+  InvalidResourceName: "InvalidResourceName",
+
   /** Invalid URI. */
   InvalidUri: "InvalidUri",
 
@@ -120,6 +146,9 @@ union StorageErrorCode {
 
   /** Multiple condition headers not supported. */
   MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
+
+  /** No authentication information. */
+  NoAuthenticationInformation: "NoAuthenticationInformation",
 
   /** Operation timed out. */
   OperationTimedOut: "OperationTimedOut",
@@ -435,7 +464,7 @@ model SignedIdentifier {
   @Xml.name("Id") id: string;
 
   /** The access policy for the signed identifier. */
-  @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
+  @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
 /** The result of a Filter Blobs API call */
@@ -585,7 +614,7 @@ model ContainerItem {
   @Xml.name("Name") name: string;
 
   /** Whether the container is deleted. */
-  @Xml.name("Deleted") delete?: boolean;
+  @Xml.name("Deleted") deleted?: boolean;
 
   /** The version of the container. */
   @Xml.name("Version") version?: string;
@@ -607,7 +636,7 @@ model ContainerProperties {
   lastModified: utcDateTime;
 
   /** The ETag of the container. */
-  @Xml.name("Etag") eTag: string;
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The lease status of the container. */
   @Xml.name("LeaseStatus") leaseStatus?: LeaseStatus;
@@ -801,15 +830,15 @@ model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
-  start: utcDateTime;
+  start?: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
-  expiry: utcDateTime;
+  expiry?: utcDateTime;
 
   /** The permissions for acl the policy. */
-  @Xml.name("Permission") permission: string;
+  @Xml.name("Permission") permission?: string;
 }
 
 /** The access tiers. */
@@ -933,7 +962,7 @@ model BlobProperties {
   lastModified: utcDateTime;
 
   /** The blob ETag. */
-  @Xml.name("Etag") eTag: string;
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The content length of the blob. */
   @Xml.name("Content-Length") contentLength?: int64;
@@ -1373,7 +1402,7 @@ model QueryFormat {
 
   /** The Parquet configuration. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
-  @Xml.name("ParquetConfiguration")
+  @Xml.name("ParquetTextConfiguration")
   parquetTextConfiguration?: ParquetConfiguration;
 }
 
@@ -2049,7 +2078,7 @@ alias DateResponseHeaderPrivate = {
 /** The ETag response header */
 alias EtagResponseHeader = {
   /** The ETag contains a value that you can use to perform operations conditionally. */
-  @header("ETag") eTag: string;
+  @header("ETag") eTag: Azure.Core.eTag;
 };
 
 /** The private ETag response header */
@@ -2057,7 +2086,7 @@ alias EtagResponseHeaderPrivate = {
   /** The ETag contains a value that you can use to perform operations conditionally. */
   @access(Access.internal)
   @header("ETag")
-  eTag: string;
+  eTag: Azure.Core.eTag;
 };
 
 /** The copy source tags header parameter. */
@@ -2137,14 +2166,14 @@ alias SourceIfTagsParameter = {
 alias SourceIfMatchParameter = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @header("x-ms-source-if-match")
-  sourceIfMatch?: string;
+  sourceIfMatch?: Azure.Core.eTag;
 };
 
 /** The source if none match parameter. */
 alias SourceIfNoneMatchParameter = {
   /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
   @header("x-ms-source-if-none-match")
-  sourceIfNoneMatch?: string;
+  sourceIfNoneMatch?: Azure.Core.eTag;
 };
 
 /** The source if modified since parameter. */
@@ -2425,14 +2454,14 @@ alias IfTagsParameter = {
 alias IfMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @header("If-Match")
-  ifMatch?: string;
+  ifMatch?: Azure.Core.eTag;
 };
 
 /** The If-None-Match parameter. */
 alias IfNoneMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @header("If-None-Match")
-  ifNoneMatch?: string;
+  ifNoneMatch?: Azure.Core.eTag;
 };
 
 /** The range parameter. */
@@ -2769,7 +2798,7 @@ alias IfBlobMatchHeader = {
   /** Specify an ETag value to operate only on blobs with a matching value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-match")
-  ifMatch?: string;
+  ifMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobModifiedSinceHeader = {
@@ -2784,7 +2813,7 @@ alias IfBlobNoneMatchHeader = {
   /** Specify an ETag value to operate only on blobs without a matching value. */
   @added(Versions.v2026_02_06)
   @header("x-ms-blob-if-none-match")
-  ifNoneMatch?: string;
+  ifNoneMatch?: Azure.Core.eTag;
 };
 
 alias IfBlobUnmodifiedSinceHeader = {

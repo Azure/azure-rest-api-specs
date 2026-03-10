@@ -201,7 +201,7 @@ interface Service {
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
     @alternateType(string, "javascript")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
@@ -211,6 +211,8 @@ interface Service {
     /** The batch request content */
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
+    @statusCode statusCode: 202;
+
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
@@ -440,7 +442,7 @@ interface Container {
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
     @alternateType(string, "javascript")
-    multipartContentType: "multipart/mixed",
+    contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
@@ -454,7 +456,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "multipart/mixed";
+    contentType: "multipart/mixed";
 
     ...RequestIdResponseHeader;
     ...ApiVersionHeader;
@@ -1282,7 +1284,6 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=copy")
   copyFromUrl is StorageOperationNoBody<
     {
       ...TimeoutParameter;
