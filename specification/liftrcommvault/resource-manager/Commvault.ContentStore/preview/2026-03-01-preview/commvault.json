@@ -1826,6 +1826,100 @@
         ]
       }
     },
+    "BackupOptions": {
+      "type": "object",
+      "description": "The backup options for the VM backup",
+      "properties": {
+        "backupLevel": {
+          "type": "string",
+          "description": "Indicates whether to stop backup or not for the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "jobDescription": {
+          "type": "string",
+          "description": "The name of the backup job to be shown in Commvault",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupCopyImmediately": {
+          "type": "boolean",
+          "description": "Indicates whether to run backup immediately or not for the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runSnapShotBackup": {
+          "type": "boolean",
+          "description": "Indicates whether to run snapshot backup or not for the VM, if false, it will run regular backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "notifyUserOnJobCompletion": {
+          "type": "boolean",
+          "description": "Indicates whether to notify the user on job completion",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "backupLevel",
+        "jobDescription",
+        "backupCopyImmediately",
+        "runSnapShotBackup",
+        "notifyUserOnJobCompletion"
+      ]
+    },
+    "BackupProtectionGroupRequest": {
+      "type": "object",
+      "description": "The properties of BackupProtectionGroupRequest",
+      "properties": {
+        "vmList": {
+          "$ref": "#/definitions/VmList",
+          "description": "The vm list details.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmList"
+      ]
+    },
+    "BackupProtectionGroupResponse": {
+      "type": "object",
+      "description": "Backup job response for a Protection Group",
+      "properties": {
+        "taskId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Commvault response for taskId",
+          "readOnly": true
+        },
+        "jobIds": {
+          "type": "array",
+          "description": "The jobIds returned from Commvault.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "taskId",
+        "jobIds"
+      ]
+    },
     "BackupRuleType": {
       "type": "string",
       "description": "The type of backup rule",
@@ -3430,6 +3524,23 @@
         "vmInfoList"
       ]
     },
+    "VmGuid": {
+      "type": "object",
+      "description": "The VM GUID for backup",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the VM",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "VmInfo": {
       "type": "object",
       "description": "The properties of information of a VM",
@@ -3514,7 +3625,7 @@
             "create"
           ]
         },
-        "vmtag": {
+        "vmtags": {
           "type": "array",
           "description": "The vmTag of the VM.",
           "items": {
@@ -3530,6 +3641,36 @@
       "required": [
         "sourceVmGuid",
         "storageAccountId"
+      ]
+    },
+    "VmList": {
+      "type": "object",
+      "description": "The VM list for backup",
+      "properties": {
+        "vmGuid": {
+          "type": "array",
+          "description": "The list of VM GUIDs to backup",
+          "items": {
+            "$ref": "#/definitions/VmGuid"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupOptions": {
+          "$ref": "#/definitions/BackupOptions",
+          "description": "The backup options for the VM backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmGuid",
+        "backupOptions"
       ]
     },
     "VmTag": {

@@ -142,10 +142,9 @@ model Layer2ConfigurationPatch {
   ]>[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The Network To Network Interconnect resource patch definition.")
-model NetworkToNetworkInterconnectPatch {
-  ...ProxyResourceBase;
-
+model NetworkToNetworkInterconnectPatch extends ProxyResourceBase {
   @doc("Resource properties.")
   properties?: NetworkToNetworkInterconnectPatchProperties;
 }
@@ -224,11 +223,11 @@ model NetworkToNetworkInterconnectPatchProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Common properties for Layer3Configuration.")
 @withOptionalProperties
-model OptionBLayer3ConfigurationPatchProperties {
-  ...Layer3IpPrefixPatchProperties;
-
+model OptionBLayer3ConfigurationPatchProperties
+  extends Layer3IpPrefixPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
   @maxValue(4294967295)
@@ -270,10 +269,9 @@ model OptionBLayer3ConfigurationPatchProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("OptionB Layer3 Configuration properties.")
-model OptionBLayer3Configuration {
-  ...Layer3IpPrefixProperties;
-
+model OptionBLayer3Configuration extends Layer3IpPrefixProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
   @maxValue(4294967295)
@@ -384,16 +382,15 @@ model NniBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
 @added(Versions.v2024_06_15_preview)
-model NniBfdAdministrativeStateResponse {
+model NniBfdAdministrativeStateResponse extends CommonErrorResponse {
   @doc("Route Type. Choose either Static or OptionA.")
   routeType?: RouteType;
 
   @doc("State. Select either enable or disable.")
   administrativeState?: BfdAdministrativeState;
-
-  ...ErrorResponse;
 }
 
 @added(Versions.v2024_06_15_preview)

@@ -24,6 +24,7 @@ import "./operations/anchors/networkAnchorOperations.tsp";
 import "./operations/anchors/resourceAnchorOperations.tsp";
 import "./operations/basedb/dbSystemOperations.tsp";
 import "./operations/basedb/dbVersionOperations.tsp";
+import "./operations/managedidentity/managedIdentityResourceOperations.tsp";
 import "./versions.tsp";
 
 using TypeSpec.Http;
