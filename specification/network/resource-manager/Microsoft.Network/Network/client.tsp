@@ -611,3 +611,35 @@ namespace CombineClient;
 
 // Model rename (from separate .tsp file)
 @@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
+
+// Rename Vmss interfaces to avoid merging with Network interfaces of the same name
+@@clientName(Microsoft.Compute.NetworkInterfaces,
+  "VmssNetworkInterfaces",
+  "java"
+);
+@@clientName(Microsoft.Compute.PublicIPAddresses,
+  "VmssPublicIPAddresses",
+  "java"
+);
+@@clientName(Microsoft.Compute.NetworkInterfaceIPConfigurations,
+  "VmssNetworkInterfaceIPConfigurations",
+  "java"
+);
+@@clientName(Microsoft.Compute.NetworkInterfacesOperationGroup,
+  "VmssNetworkInterfacesOperationGroup",
+  "java"
+);
+@@clientName(Microsoft.Compute.PublicIPAddressesOperationGroup,
+  "VmssPublicIPAddressesOperationGroup",
+  "java"
+);
+
+// Property renames to preserve backward compatibility
+@@clientName(Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
+  "httpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringConfig.customerASN,
+  "customerAsn",
+  "java"
+);
