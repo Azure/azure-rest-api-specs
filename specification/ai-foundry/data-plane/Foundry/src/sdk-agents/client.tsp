@@ -147,10 +147,16 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.Reasoning, { identity: "com.openai.models.Reasoning" }, "java");
 
 // TimeZone property override via model indirection
-@alternateType({
-  identity: "java.util.TimeZone"
-}, "java")
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
