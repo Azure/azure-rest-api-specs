@@ -19,32 +19,32 @@ union ProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * Resource has been created.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * Resource creation failed.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Resource creation was canceled.
    */
   Canceled: "Canceled",
 
   /**
-   * Creating
+   * Resource is being created.
    */
   Creating: "Creating",
 
   /**
-   * Updating
+   * Resource is being updated.
    */
   Updating: "Updating",
 
   /**
-   * Deleting
+   * Resource is being deleted.
    */
   Deleting: "Deleting",
 }
@@ -56,17 +56,17 @@ union LevelType {
   string,
 
   /**
-   * Error
+   * Indicates an error status from the extension.
    */
   Error: "Error",
 
   /**
-   * Warning
+   * Indicates a warning status from the extension.
    */
   Warning: "Warning",
 
   /**
-   * Information
+   * Indicates an informational status from the extension.
    */
   Information: "Information",
 }
@@ -78,22 +78,22 @@ union CreatedByType {
   string,
 
   /**
-   * User
+   * Created through an interactive sign-in by a person.
    */
   User: "User",
 
   /**
-   * Application
+   * Created by an app registration or service principal acting as a client.
    */
   Application: "Application",
 
   /**
-   * ManagedIdentity
+   * Created via an Azure managed identity (system- or user-assigned).
    */
   ManagedIdentity: "ManagedIdentity",
 
   /**
-   * Key
+   * Created using a key-based credential flow supported by some services.
    */
   Key: "Key",
 }
@@ -104,17 +104,17 @@ union CreatedByType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AKSIdentityType {
   /**
-   * SystemAssigned
+   * SystemAssigned identity
    */
   SystemAssigned,
 
   /**
-   * UserAssigned
+   * UserAssigned identity
    */
   UserAssigned,
 
   /**
-   * Workload
+   * Workload identity
    */
   @added(Versions.v2025_03_01)
   Workload,
