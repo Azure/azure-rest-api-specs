@@ -26,11 +26,12 @@ model RegulatoryComplianceControl
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface RegulatoryComplianceControls {
   /**
    * Selected regulatory compliance control details and state
    */
+  @tag("RegulatoryCompliance")
   get is ArmResourceRead<
     RegulatoryComplianceControl,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -40,6 +41,7 @@ interface RegulatoryComplianceControls {
   /**
    * All supported regulatory compliance controls details and state for selected standard
    */
+  @tag("RegulatoryCompliance")
   list is ArmResourceListByParent<
     RegulatoryComplianceControl,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
