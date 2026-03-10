@@ -432,35 +432,76 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Fix duplicate GetAll methods - CapabilitiesByLocation and QuotaUsages both generate GetAll(locationName)
+// Preserve backward-compatible operation names for subscription-level operations
 @@clientName(CapabilitiesByLocationOperationGroup.list,
-  "GetLocationCapabilities",
+  "ExecuteLocationBasedCapabilities",
   "csharp"
 );
 @@clientName(QuotaUsagesOperationGroup.list,
-  "GetLocationQuotaUsages",
+  "GetQuotaUsages",
+  "csharp"
+);
+@@clientName(NameAvailabilityOperationGroup.checkGlobally,
+  "CheckPostgreSqlFlexibleServerNameAvailability",
+  "csharp"
+);
+@@clientName(NameAvailabilityOperationGroup.checkWithLocation,
+  "CheckPostgreSqlFlexibleServerNameAvailabilityWithLocation",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetUsageOperationGroup.list,
+  "ExecuteVirtualNetworkSubnetUsage",
+  "csharp"
+);
+@@clientName(PrivateDnsZoneSuffixOperationGroup.get,
+  "ExecuteGetPrivateDnsZoneSuffix",
   "csharp"
 );
 
-// Fix duplicate GetByServer methods - CapturedLogs and Replicas both generate GetByServer()
-@@clientName(Servers.listByServer, "GetCapturedLogsByServer", "csharp");
-@@clientName(Servers.replicasListByServer, "GetReplicasByServer", "csharp");
+// Preserve backward-compatible operation names for server-level operations
+@@clientName(Servers.listByServer, "GetPostgreSqlFlexibleServerLogFiles", "csharp");
+@@clientName(Servers.replicasListByServer, "GetReplicas", "csharp");
+@@clientName(Servers.list, "GetServerCapabilities", "csharp");
+@@clientName(Servers.checkNameAvailability,
+  "CheckPostgreSqlMigrationNameAvailability",
+  "csharp"
+);
+@@clientName(Servers.start, "StartLtrBackupFlexibleServer", "csharp");
+@@clientName(Servers.checkPrerequisites,
+  "TriggerLtrPreBackupFlexibleServer",
+  "csharp"
+);
 
 // Preserve backward-compatible type names from FlexibleServers sub-namespace
 @@clientName(Replica, "PostgreSqlFlexibleServersReplica", "csharp");
-@@clientName(ReplicationState, "PostgreSqlFlexibleServersReplicationState", "csharp");
+@@clientName(ReplicationState,
+  "PostgreSqlFlexibleServersReplicationState",
+  "csharp"
+);
 @@clientName(ServerSku, "PostgreSqlFlexibleServersServerSku", "csharp");
 @@clientName(SourceType, "PostgreSqlFlexibleServersSourceType", "csharp");
 @@clientName(SslMode, "PostgreSqlFlexibleServersSslMode", "csharp");
 @@clientName(StorageType, "PostgreSqlFlexibleServersStorageType", "csharp");
-@@clientName(ValidationDetails, "PostgreSqlFlexibleServersValidationDetails", "csharp");
-@@clientName(ValidationMessage, "PostgreSqlFlexibleServersValidationMessage", "csharp");
-@@clientName(ValidationState, "PostgreSqlFlexibleServersValidationState", "csharp");
+@@clientName(ValidationDetails,
+  "PostgreSqlFlexibleServersValidationDetails",
+  "csharp"
+);
+@@clientName(ValidationMessage,
+  "PostgreSqlFlexibleServersValidationMessage",
+  "csharp"
+);
+@@clientName(ValidationState,
+  "PostgreSqlFlexibleServersValidationState",
+  "csharp"
+);
 
 // Restore public constructors and property setters for models treated as output-only
 @@usage(ObjectRecommendation, Usage.input, "csharp");
 @@usage(ObjectRecommendationPropertiesAnalyzedWorkload, Usage.input, "csharp");
-@@usage(ObjectRecommendationPropertiesImplementationDetails, Usage.input, "csharp");
+@@usage(ObjectRecommendationPropertiesImplementationDetails,
+  Usage.input,
+  "csharp"
+);
 @@usage(CapturedLog, Usage.input, "csharp");
 @@usage(BackupAutomaticAndOnDemand, Usage.input, "csharp");
 @@usage(Configuration, Usage.input, "csharp");
@@ -503,6 +544,13 @@ using Azure.ClientGenerator.Core;
 // Restore public constructors and property setters for additional models
 @@usage(AdvancedThreatProtectionSettingsModel, Usage.input, "csharp");
 @@usage(PrivateEndpointConnection, Usage.input, "csharp");
+@@usage(ServerForPatch, Usage.input, "csharp");
+@@usage(DataEncryption, Usage.input, "csharp");
+@@usage(MigrationResourceForPatch, Usage.input, "csharp");
+@@usage(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+  Usage.input,
+  "csharp"
+);
 
 // Make UserIdentity public (it's used in public ModelFactory method)
 @@access(UserIdentity, Access.public, "csharp");
@@ -511,3 +559,36 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
 @@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
+
+// Rename AdministratorMicrosoftEntraAdd to preserve backward-compatible C# name
+@@clientName(AdministratorMicrosoftEntraAdd,
+  "PostgreSqlFlexibleServerMicrosoftEntraAdministratorCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(AdministratorMicrosoftEntraAdd, Usage.input, "csharp");
+
+// Note: Removed @@usage for MigrationSubstateDetails, ValidationDetails, ValidationSummaryItem,
+// DbLevelValidationStatus, ObjectRecommendationDetails to preserve IReadOnlyList property types
+// for backward compatibility with the 1.4.1 API contract.
+
+// Fix TenantId type on AdministratorMicrosoftEntraPropertiesForAdd (string → Guid?)
+@@alternateType(
+  AdministratorMicrosoftEntraPropertiesForAdd.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+// Fix LogFile.Uri type (string → System.Uri)
+@@alternateType(CapturedLogProperties.url, TypeSpec.url, "csharp");
+
+// Restore old property name TypePropertiesType on LogFile
+@@clientName(CapturedLogProperties.type, "TypePropertiesType", "csharp");
+
+// Make ForPatch types public via @@usage (@@access alone doesn't work for these types)
+@@usage(AuthConfigForPatch, Usage.input, "csharp");
+@@usage(BackupForPatch, Usage.input, "csharp");
+@@usage(HighAvailabilityForPatch, Usage.input, "csharp");
+@@usage(MaintenanceWindowForPatch, Usage.input, "csharp");
+@@usage(SkuForPatch, Usage.input, "csharp");
+@@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
+@@usage(AdminCredentialsForPatch, Usage.input, "csharp");
