@@ -15,9 +15,9 @@ options:
     include-subscription-lifecycle-controller: true
     include-versioning-classes: true
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/slis"
-    emitter-output-dir: "{output-dir}/{service-dir}/armslis"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armslis"
+    service-dir: "sdk/resourcemanager/monitorslis"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitorslis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitorslis"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -25,27 +25,27 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-slis"
-    package-dir: "azure-mgmt-slis"
-    namespace: "azure.mgmt.slis"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitorslis"
+    package-dir: "azure-mgmt-monitorslis"
+    namespace: "azure.mgmt.monitorslis"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-slis"
-    namespace: "com.azure.resourcemanager.slis"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitorslis"
+    namespace: "com.azure.resourcemanager.monitorslis"
     service-name: "Slis"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     flavor: "azure"
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-slis"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitorslis"
     package-details:
-      name: "@azure/arm-slis"
+      name: "@azure/arm-monitorslis"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    namespace: "Azure.ResourceManager.Slis"
+    namespace: "Azure.ResourceManager.Monitor.Slis"
     clear-output-folder: true
 linter:
   extends:
