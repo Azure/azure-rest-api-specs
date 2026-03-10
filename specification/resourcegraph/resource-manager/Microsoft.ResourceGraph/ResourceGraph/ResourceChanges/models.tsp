@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.ResourceGraph;
+namespace ResourceChanges;
 
 /**
  * The change type for snapshot. PropertyChanges will be provided in case of Update change type

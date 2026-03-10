@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.ResourceGraph;
+namespace ResourceGraph;
 
 /**
  * The role which generates a specific message. Restricted to the user or assistant role.

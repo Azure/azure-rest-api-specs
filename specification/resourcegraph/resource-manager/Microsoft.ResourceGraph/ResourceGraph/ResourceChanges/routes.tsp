@@ -9,16 +9,26 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace Microsoft.ResourceGraph;
+namespace ResourceChanges;
 
 /**
- * List all snapshots of a resource for a given time interval.
+ * List changes to a resource for a given time interval.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @autoRoute
-@tag("History")
-op resourcesHistory is ArmProviderActionSync<
-  Request = ResourcesHistoryRequest,
-  Response = ArmResponse<ResourcesHistoryResult>,
+@tag("Changes")
+op resourceChanges is ArmProviderActionSync<
+  Request = ResourceChangesRequestParameters,
+  Response = ResourceChangeList,
+  Error = ErrorResponse
+>;
+/**
+ * Get resource change details.
+ */
+@autoRoute
+@tag("Changes")
+op resourceChangeDetails is ArmProviderActionSync<
+  Request = ResourceChangeDetailsRequestParameters,
+  Response = Body<ResourceChangeData[]>,
   Error = ErrorResponse
 >;

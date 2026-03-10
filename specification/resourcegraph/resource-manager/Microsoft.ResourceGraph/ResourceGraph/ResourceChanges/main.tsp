@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.12
- * Date: 2026-03-05T08:37:51.305Z
+ * Date: 2026-03-05T08:13:02.444Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -24,35 +24,20 @@ using TypeSpec.Versioning;
 /**
  * Azure Resource Graph API Reference
  */
-@armProviderNamespace
-@service(#{ title: "ResourceGraphClient" })
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" ""
+@armProviderNamespace("Microsoft.ResourceGraph")
+@service(#{ title: "Azure Resource Graph" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.ResourceGraph;
+namespace ResourceChanges;
 
 /**
  * The available API versions.
  */
 enum Versions {
   /**
-   * The 2023-09-01-preview API version.
+   * The 2020-09-01-preview API version.
    */
-  v2023_09_01_preview: "2023-09-01-preview",
-}
-
-interface Operations {
-  /**
-   * Lists all of the available REST API operations.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @segment("operations")
-  @get
-  @list
-  list(
-    ...CommonTypes.ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  v2020_09_01_preview: "2020-09-01-preview",
 }

@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.ResourceGraph;
+using ResourceChanges;
 
 // @@clientName(ResourceChangesRequestParameters.$skipToken, "skipToken");
 // @@clientName(ResourceChangesRequestParameters.$top, "top");
