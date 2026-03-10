@@ -18,8 +18,6 @@ interface TasksOperationGroup {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tasks_List")
   @autoRoute
   @get
   @list

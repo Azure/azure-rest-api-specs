@@ -79,15 +79,11 @@ interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tasks_GetSubscriptionLevelTask")
   getSubscriptionLevelTask is SecurityTaskOps.Read<SecurityTask>;
 
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tasks_ListByHomeRegion")
   listByHomeRegion is SecurityTaskOps.List<
     SecurityTask,
     Parameters = {
@@ -104,8 +100,6 @@ interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tasks_UpdateSubscriptionLevelTaskState")
   @action("{taskUpdateActionType}")
   @route("/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<
