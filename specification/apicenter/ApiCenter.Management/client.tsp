@@ -9,7 +9,15 @@ namespace Microsoft.ApiCenter;
 @@clientName(Azure.Core.EtagResponseEnvelope.etagHeader, "etag", "java");
 
 // Rename mapping for C# client
+@@clientName(ApiSources, "ApiCenterApiResource", "csharp");
+@@clientName(ApiImportSuccess, "ApiCenterApiImportResult", "csharp");
+@@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
+@@clientName(ImportSpecificationOptions,
+  "ApiCenterImportSpecificationFormat",
+  "csharp"
+);
 @@clientName(Contact, "ApiContactInformation", "csharp");
+@@clientName(DeletedServices, "ApiCenterDeletedService", "csharp");
 @@clientName(License, "ApiLicenseInformation", "csharp");
 @@clientName(Onboarding, "EnvironmentOnboardingInformation", "csharp");
 @@clientName(ApiDefinitionPropertiesSpecification,
