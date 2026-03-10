@@ -11,3 +11,10 @@ using Microsoft.Commerce;
   "Daily",
   "javascript"
 );
+
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(UsageAggregatesListParameters.aggregationGranularity,
+  "Daily",
+  "python"
+);
