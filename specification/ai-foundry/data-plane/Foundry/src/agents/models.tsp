@@ -271,7 +271,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 )
 model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
-  @example("myregistry.azurecr.io/my-hosted-agent:latest")
+  @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image: string;
 }
 
