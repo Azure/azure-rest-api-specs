@@ -137,10 +137,8 @@ using Azure.AI.Projects;
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 // AI Tooling: openai-java de-dup
-// Suppress emission of models that are exact duplicates of openai-java classes.
+// Suppress emission of standalone models that are exact duplicates of openai-java classes.
 // Users should use the openai-java equivalents directly.
-//
-// Group A: Standalone models (no hierarchy) — fully suppressed.
 //   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
 //   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
 //   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
@@ -149,31 +147,8 @@ using Azure.AI.Projects;
 @@access(OpenAI.Reasoning, Access.internal, "java");
 @@access(OpenAI.ReasoningEffort, Access.internal, "java");
 // Change reasoning property type to string so it maps to BinaryData in Java.
-// Manual getters/setters for com.openai.models.Reasoning will be added in customizations.
+// Manual getters/setters for com.openai.models.Reasoning are added in customizations.
 @@changePropertyType(PromptAgentDefinition.reasoning, string);
-
-// Group B: Tool / ResponseFormat hierarchy members — suppressed.
-//   FunctionTool         → com.openai.models.responses.FunctionTool
-//   FileSearchTool       → com.openai.models.responses.FileSearchTool
-//   WebSearchPreviewTool → com.openai.models.responses.WebSearchPreviewTool
-//   ComputerUsePreviewTool → com.openai.models.responses.ComputerTool
-//   TextResponseFormatJsonSchema → com.openai.models.responses.ResponseFormatTextJsonSchemaConfig
-//   TextResponseFormatConfigurationResponseFormatText → com.openai.models.ResponseFormatText
-//   TextResponseFormatConfigurationResponseFormatJsonObject → com.openai.models.ResponseFormatJsonObject
-@@access(OpenAI.FunctionTool, Access.internal, "java");
-@@access(OpenAI.FileSearchTool, Access.internal, "java");
-@@access(OpenAI.WebSearchPreviewTool, Access.internal, "java");
-@@access(OpenAI.ComputerUsePreviewTool, Access.internal, "java");
-@@access(OpenAI.TextResponseFormatJsonSchema, Access.internal, "java");
-@@access(OpenAI.TextResponseFormatConfigurationResponseFormatText, Access.internal, "java");
-@@access(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject, Access.internal, "java");
-
-// Sub-types used only by the suppressed hierarchy members above.
-@@access(OpenAI.RankingOptions, Access.internal, "java");
-@@access(OpenAI.HybridSearchOptions, Access.internal, "java");
-@@access(OpenAI.ResponseFormatJsonSchemaSchema, Access.internal, "java");
-@@access(OpenAI.ComputerEnvironment, Access.internal, "java");
-@@access(OpenAI.SearchContextSize, Access.internal, "java");
 
 // TimeZone property override via model indirection
 @alternateType({
