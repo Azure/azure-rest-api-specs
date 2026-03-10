@@ -3961,30 +3961,6 @@
         "identityClientId"
       ]
     },
-    "BookshelfKeyVaultUpdateProperties": {
-      "type": "object",
-      "description": "Key Vault update properties for Bookshelf (all fields optional for PATCH)",
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "The Key Name in Key Vault",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The Key Version in Key Vault",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
-    },
     "BookshelfListResult": {
       "type": "object",
       "description": "The response of a Bookshelf list operation.",
@@ -4224,7 +4200,7 @@
       "description": "The updatable properties of the Bookshelf.",
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/BookshelfKeyVaultUpdateProperties",
+          "$ref": "#/definitions/BookshelfKeyVaultProperties",
           "description": "The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.",
           "x-ms-mutability": [
             "read",
@@ -5447,7 +5423,7 @@
     },
     "SupercomputerUpdate": {
       "type": "object",
-      "description": "Update model for Supercomputer PATCH operations",
+      "description": "The type used for update operations of the Supercomputer.",
       "properties": {
         "tags": {
           "type": "object",
@@ -5464,7 +5440,7 @@
     },
     "SupercomputerUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties for Supercomputer (all fields optional for PATCH)",
+      "description": "The updatable properties of the Supercomputer.",
       "properties": {
         "identities": {
           "$ref": "#/definitions/SupercomputerIdentities",
@@ -5591,7 +5567,7 @@
     },
     "ToolUpdate": {
       "type": "object",
-      "description": "Update model for Tool PATCH operations",
+      "description": "The type used for update operations of the Tool.",
       "properties": {
         "tags": {
           "type": "object",
@@ -5608,7 +5584,7 @@
     },
     "ToolUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties for Tool (all fields optional for PATCH)",
+      "description": "The updatable properties of the Tool.",
       "properties": {
         "version": {
           "type": "string",
@@ -6127,7 +6103,7 @@
     },
     "WorkspaceUpdate": {
       "type": "object",
-      "description": "Update model for Workspace PATCH operations",
+      "description": "The type used for update operations of the Workspace.",
       "properties": {
         "tags": {
           "type": "object",
@@ -6144,7 +6120,7 @@
     },
     "WorkspaceUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties for Workspace (all fields optional for PATCH)",
+      "description": "The updatable properties of the Workspace.",
       "properties": {
         "supercomputerIds": {
           "type": "array",

@@ -103,37 +103,17 @@ model WorkspaceProperties {
   ...MoboConfigurationWithMrg;
 }
 
-@doc("Updatable properties for Workspace (all fields optional for PATCH)")
-model WorkspaceUpdateProperties {
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @doc("List of linked SuperComputers.")
-  supercomputerIds?: Array<Microsoft.Discovery.Shared.SuperComputerId>;
-
-  @doc("The key to use for encrypting data at rest when customer managed keys are enabled.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
-  keyVaultProperties?: KeyVaultProperties;
-
-  @doc("Whether or not public network access is allowed for this resource. For security reasons, it is recommended to disable it whenever possible.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Versions.v2026_02_01_preview)
-  publicNetworkAccess?: PublicNetworkAccess;
-}
-
-@doc("Update model for Workspace PATCH operations")
-model WorkspaceUpdate {
-  @doc("Resource tags.")
-  tags?: Record<string>;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: WorkspaceUpdateProperties;
-}
-
 @armResourceOperations
 interface Workspaces {
   get is ArmResourceRead<Workspace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
-  update is ArmCustomPatchAsync<Workspace, WorkspaceUpdate>;
+  update is ArmCustomPatchAsync<
+    Workspace,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Workspace,
+      WorkspaceProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
   listByResourceGroup is ArmResourceListByParent<Workspace>;
   listBySubscription is ArmListBySubscription<Workspace>;
