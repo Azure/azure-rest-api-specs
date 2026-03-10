@@ -158,7 +158,7 @@ To identify affected examples:
 1. Add the property in `models.tsp` under the correct model
 2. **Ask the user if they want to update an example** (search for affected files first)
 3. If yes: pick **one representative example** (typically the GET example) and add the property to its response body (and request body if writable)
-4. Run the build workflow (`npx prettier`, `npx tsp format .`, `npx tsp compile .`, `npx oav validate-example`)
+4. Run the build workflow (`npx prettier`, `npx tsp format *`, `npx tsp compile .`, `npx oav validate-example`)
 
 ### Adding a New Resource
 1. Create properties model in `models.tsp` with section comment
@@ -199,6 +199,6 @@ Before finishing, verify:
 - [ ] **User was asked whether to update/create an example file**
 - [ ] At least one representative example created/updated in `examples/2026-03-15-preview/` (if user confirmed)
 - [ ] Read-only properties only in response bodies of examples
-- [ ] `npx tsp format .` run to format TypeSpec files
+- [ ] `npx tsp format *` run to format TypeSpec files
 - [ ] `npx tsp compile .` succeeds
 - [ ] `npx oav validate-example` passes

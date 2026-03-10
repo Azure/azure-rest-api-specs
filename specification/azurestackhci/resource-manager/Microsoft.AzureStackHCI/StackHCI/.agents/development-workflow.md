@@ -52,7 +52,7 @@ When you add a new property or model in TypeSpec, you must find and update every
 ```bash
 # Complete workflow for a specific API version
 npx prettier --write .\examples\{API_VERSION}\*.json
-npx tsp format .
+npx tsp format *
 tsp compile .
 npx oav validate-example preview/{API_VERSION}/hci.json
 ```
@@ -78,7 +78,7 @@ Understanding the file structure is crucial for successful development:
 
 ```
 [Source] examples/{API_VERSION}/*.json
-    ↓ (npx tsp format .)
+    ↓ (npx tsp format *)
 [Formatted] *.tsp files
     ↓ (tsp compile .)
 [Target] preview/{API_VERSION}/examples/*.json
@@ -316,7 +316,7 @@ Ensure you're running commands from the correct directory:
 
 ## Best Practices
 
-1. **Format Before Compilation**: Always format source files (`npx prettier` for JSON, `npx tsp format .` for TypeSpec) before `tsp compile .`
+1. **Format Before Compilation**: Always format source files (`npx prettier` for JSON, `npx tsp format *` for TypeSpec) before `tsp compile .`
 2. **Version-Specific Formatting**: Use specific API version paths when working on a particular version
 3. **Consistent Property Sets**: Ensure example files include all required properties
 4. **Proper Discriminated Types**: Always define concrete classes for discriminated union types
@@ -349,7 +349,7 @@ npx prettier --write .\examples\*\*.json
 npx prettier --check .\examples\{API_VERSION}\*.json
 
 # Format TypeSpec files
-npx tsp format .
+npx tsp format *
 
 # Compile TypeSpec
 tsp compile .
@@ -358,7 +358,7 @@ tsp compile .
 npx oav validate-example preview/{API_VERSION}/hci.json
 
 # Complete workflow
-npx prettier --write .\examples\{API_VERSION}\*.json && npx tsp format . && tsp compile . && npx oav validate-example preview/{API_VERSION}/hci.json
+npx prettier --write .\examples\{API_VERSION}\*.json && npx tsp format * && tsp compile . && npx oav validate-example preview/{API_VERSION}/hci.json
 ```
 
 ---

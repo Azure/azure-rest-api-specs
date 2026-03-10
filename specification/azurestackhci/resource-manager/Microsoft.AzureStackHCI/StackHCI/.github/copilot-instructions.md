@@ -119,7 +119,7 @@ After any change, always run this sequence:
 npx prettier --write .\examples\2026-03-15-preview\*.json
 
 # 2. Format TypeSpec files
-npx tsp format .
+npx tsp format *
 
 # 3. Compile TypeSpec (generates schema + copies examples)
 npx tsp compile .
