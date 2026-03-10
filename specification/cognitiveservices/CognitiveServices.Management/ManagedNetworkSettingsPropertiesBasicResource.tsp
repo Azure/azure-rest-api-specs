@@ -23,7 +23,6 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedNetworkSettingsPropertiesBasicResource' does not support standalone delete – removed via parent or side-effect"
 @armResourceOperations(#{ omitTags: true })
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
@@ -52,6 +51,12 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     PatchModel = ManagedNetworkSettingsPropertiesBasicResource,
     OptionalRequestBody = true
   >;
+
+  /**
+   * Delete API for managed network settings of a cognitive services account.
+   */
+  @tag("ManagedNetwork")
+  delete is ArmResourceDeleteWithoutOkAsync<ManagedNetworkSettingsPropertiesBasicResource>;
 
   /**
    * List API for managed network settings of a cognitive services account.
@@ -100,6 +105,9 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
 );
 @@summary(ManagedNetworkSettingsPropertiesBasicResources.patch,
   "Patch API for managed network settings of a cognitive services account."
+);
+@@summary(ManagedNetworkSettingsPropertiesBasicResources.delete,
+  "Delete API for managed network settings of a cognitive services account."
 );
 @@summary(ManagedNetworkSettingsPropertiesBasicResources.post,
   "The POST API for updating the outbound rules of the managed network associated with the cognitive services account."
