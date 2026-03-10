@@ -12725,6 +12725,10 @@
           "$ref": "#/definitions/DeploymentState",
           "description": "The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.",
           "x-nullable": true
+        },
+        "routing": {
+          "$ref": "#/definitions/DeploymentRouting",
+          "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models based on optimization criteria."
         }
       }
     },
@@ -12864,6 +12868,57 @@
             "name": "Paused",
             "value": "Paused",
             "description": "The deployment is paused and not accepting inference requests."
+          }
+        ]
+      }
+    },
+    "DeploymentRouting": {
+      "type": "object",
+      "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/RoutingMode",
+          "description": "The routing mode that determines how requests are distributed across models."
+        },
+        "models": {
+          "type": "array",
+          "description": "The list of models to route requests across.",
+          "items": {
+            "$ref": "#/definitions/DeploymentModel"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "version"
+          ]
+        }
+      }
+    },
+    "RoutingMode": {
+      "type": "string",
+      "description": "The routing mode that determines how requests are distributed across models.",
+      "enum": [
+        "cost",
+        "balanced",
+        "accuracy"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "cost",
+            "description": "Route requests to minimize cost while meeting performance requirements."
+          },
+          {
+            "name": "Balanced",
+            "value": "balanced",
+            "description": "Balance cost and accuracy when routing requests across models."
+          },
+          {
+            "name": "Accuracy",
+            "value": "accuracy",
+            "description": "Route requests to maximize accuracy regardless of cost."
           }
         ]
       }
