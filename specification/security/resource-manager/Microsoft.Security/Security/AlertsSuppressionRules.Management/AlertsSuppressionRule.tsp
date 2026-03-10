@@ -31,7 +31,8 @@ interface AlertsSuppressionRules {
    */
   get is ArmResourceRead<
     AlertsSuppressionRule,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -41,7 +42,8 @@ interface AlertsSuppressionRules {
   update is ArmResourceCreateOrReplaceSync<
     AlertsSuppressionRule,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<AlertsSuppressionRule>
+    Response = ArmResourceUpdatedResponse<AlertsSuppressionRule>,
+    Error = CloudError
   >;
 
   /**
@@ -51,7 +53,8 @@ interface AlertsSuppressionRules {
   delete is ArmResourceDeleteSync<
     AlertsSuppressionRule,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -67,7 +70,8 @@ interface AlertsSuppressionRules {
       @query("AlertType")
       AlertType?: string;
     },
-    Response = ArmResponse<AlertsSuppressionRulesList>
+    Response = ArmResponse<AlertsSuppressionRulesList>,
+    Error = CloudError
   >;
 }
 

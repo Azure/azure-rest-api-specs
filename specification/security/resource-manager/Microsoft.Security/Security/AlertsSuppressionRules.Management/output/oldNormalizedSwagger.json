@@ -3,48 +3,16 @@
   "info": {
     "title": "Security Center",
     "version": "2019-01-01-preview",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
   },
-  "schemes": [
-    "https"
-  ],
-  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "AlertsSuppressionRules"
-    }
-  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/alertsSuppressionRules": {
       "get": {
         "operationId": "AlertsSuppressionRules_List",
         "tags": [
@@ -53,30 +21,22 @@
         "description": "List of all the dismiss rules for the given subscription",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "AlertType",
             "in": "query",
-            "description": "Type of the alert to get rules for",
-            "required": false,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AlertsSuppressionRulesList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -93,7 +53,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules/{alertsSuppressionRuleName}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Security/alertsSuppressionRules/{alertsSuppressionRuleName}": {
       "get": {
         "operationId": "AlertsSuppressionRules_Get",
         "tags": [
@@ -102,30 +62,23 @@
         "description": "Get dismiss rule, with name: {alertsSuppressionRuleName}, for the given subscription",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "alertsSuppressionRuleName",
             "in": "path",
-            "description": "The unique name of the suppression alert rule",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AlertsSuppressionRule"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -143,22 +96,14 @@
         "description": "Update existing rule or create new rule if it doesn't exist",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "alertsSuppressionRuleName",
             "in": "path",
-            "description": "The unique name of the suppression alert rule",
             "required": true,
             "type": "string"
           },
           {
             "name": "alertsSuppressionRule",
             "in": "body",
-            "description": "Suppression rule object",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AlertsSuppressionRule"
@@ -167,15 +112,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AlertsSuppressionRule' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/AlertsSuppressionRule"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -193,27 +138,20 @@
         "description": "Delete dismiss alert rule for this subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "alertsSuppressionRuleName",
             "in": "path",
-            "description": "The unique name of the suppression alert rule",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -232,13 +170,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AlertsSuppressionRuleProperties",
-          "description": "describes AlertsSuppressionRule properties",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "./common/v1/types.json#/definitions/Resource"
         }
       ]
     },
@@ -266,8 +203,16 @@
           "description": "The reason for dismissing the alert"
         },
         "state": {
-          "$ref": "#/definitions/RuleState",
-          "description": "Possible states of the rule"
+          "type": "string",
+          "description": "Possible states of the rule",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "RuleState"
+          }
         },
         "comment": {
           "type": "string",
@@ -275,6 +220,7 @@
         },
         "suppressionAlertsScope": {
           "$ref": "#/definitions/SuppressionAlertsScope",
+          "type": "object",
           "description": "The suppression conditions"
         }
       },
@@ -286,11 +232,11 @@
     },
     "AlertsSuppressionRulesList": {
       "type": "object",
-      "description": "Suppression rules list for subscription.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AlertsSuppressionRule items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AlertsSuppressionRule"
           }
@@ -298,107 +244,12 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
         "value"
       ]
-    },
-    "CloudError": {
-      "type": "object",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "The error object.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message.",
-          "readOnly": true
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target.",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "The error details.",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "The error additional info.",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "readOnly": true
-        }
-      },
-      "x-ms-external": true
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
-    },
-    "RuleState": {
-      "type": "string",
-      "description": "Possible states of the rule",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "Expired"
-      ],
-      "x-ms-enum": {
-        "name": "RuleState",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "Expired",
-            "value": "Expired",
-            "description": "Expired"
-          }
-        ]
-      }
     },
     "ScopeElement": {
       "type": "object",
@@ -409,7 +260,7 @@
           "description": "The alert entity type to suppress by."
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": true
     },
     "SuppressionAlertsScope": {
       "type": "object",
