@@ -183,8 +183,8 @@ interface StaticSiteARMResources {
    * Description for Updates a user entry with the listed roles
    */
   @summary("Updates a user entry with the listed roles")
-  @patch(#{ implicitOptionality: true })
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  @patch(#{ implicitOptionality: false })
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   updateStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     StaticSiteUserARMResource,
