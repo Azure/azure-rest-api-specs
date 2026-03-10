@@ -194,6 +194,22 @@ union QuotaUsageStatus {
 }
 
 /**
+ * The quota scope that determines the level at which the quota is applied.
+ */
+@added(Versions.v2026_01_15_preview)
+union QuotaScopeType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
+  Regional: "Regional",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Global quota scope"
+  Global: "Global",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "DataZone quota scope"
+  DataZone: "DataZone",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Classic quota scope"
+  Classic: "Classic",
+}
+
+/**
  * Indicates whether the deprecation date is a confirmed planned end-of-life date or an estimated deprecation date. When 'Planned', the deprecation date represents a confirmed and communicated model end-of-life date. When 'Tentative', the deprecation date is an estimated timeline that may be subject to change.
  */
 union DeprecationStatus {
@@ -2242,6 +2258,20 @@ model Usage {
    * Cognitive Services account quota usage status.
    */
   status?: QuotaUsageStatus;
+
+  /**
+   * The scope type for the quota (e.g., Global, DataZone, Regional).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeType' is nullable in 'Usage' for backward compatibility with existing API behavior"
+  @added(Versions.v2026_01_15_preview)
+  scopeType?: QuotaScopeType | null;
+
+  /**
+   * The scope identifier for the quota (e.g., US, EUR, Global, or a region name like eastus).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeId' is nullable in 'Usage' for backward compatibility with existing API behavior"
+  @added(Versions.v2026_01_15_preview)
+  scopeId?: string | null;
 }
 
 /**
@@ -2747,6 +2777,20 @@ model ModelSkuCapacityProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The sku name for ModelSkuCapacityProperties"
   skuName?: string;
+
+  /**
+   * The scope identifier for the capacity (e.g., US, EUR, Global, or a region name like eastus).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeId' is nullable in 'ModelSkuCapacityProperties' for backward compatibility with existing API behavior"
+  @added(Versions.v2026_01_15_preview)
+  scopeId?: string | null;
+
+  /**
+   * The scope type for the capacity (e.g., Global, DataZone, Regional).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'scopeType' is nullable in 'ModelSkuCapacityProperties' for backward compatibility with existing API behavior"
+  @added(Versions.v2026_01_15_preview)
+  scopeType?: QuotaScopeType | null;
 
   /**
    * The available capacity for deployment with this model and sku.
