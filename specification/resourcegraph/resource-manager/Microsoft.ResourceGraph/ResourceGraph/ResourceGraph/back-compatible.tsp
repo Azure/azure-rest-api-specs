@@ -12,3 +12,4 @@ using ResourceGraph;
 @@clientName(QueryResponse.$skipToken, "skipToken");
 
 @@clientLocation(QueryOperationGroup.generateQuery, "Query");
+@@clientName(resources::parameters.body, "query");
