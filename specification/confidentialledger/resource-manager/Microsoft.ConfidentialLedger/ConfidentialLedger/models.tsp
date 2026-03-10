@@ -365,27 +365,29 @@ model CertBasedSecurityPrincipal {
 model ConfidentialLedgerList is Azure.Core.Page<ConfidentialLedger>;
 
 /**
- * Object representing Backup properties of a Confidential Ledger Resource.
+ * Object representing Files Export properties of a Confidential Ledger Resource.
  */
-model ConfidentialLedgerBackup {
+@renamedFrom(Versions.v2026_02_23, "ConfidentialLedgerBackup")
+model ConfidentialLedgerFilesExport {
   /**
-   * The region where the backup of the ledger will eventually be restored to.
+   * The region where the exported ledger files will eventually be restored to.
    */
   restoreRegion?: string;
 
   /**
-   * SAS URI used to access the backup Fileshare.
+   * SAS URI used to access the Fileshare for exporting ledger files.
    */
   @secret
   uri: string;
 }
 
 /**
- * Object representing the backup response of a Confidential Ledger Resource.
+ * Object representing the files export response of a Confidential Ledger Resource.
  */
-model ConfidentialLedgerBackupResponse {
+@renamedFrom(Versions.v2026_02_23, "ConfidentialLedgerBackupResponse")
+model ConfidentialLedgerFilesExportResponse {
   /**
-   * Response body stating if the ledger is being backed up.
+   * Response body stating if the ledger files are being exported.
    */
   @visibility(Lifecycle.Read)
   message?: string;

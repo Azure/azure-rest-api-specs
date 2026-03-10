@@ -474,13 +474,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/backup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/filesExport": {
       "post": {
-        "operationId": "Ledger_Backup",
+        "operationId": "Ledger_FilesExport",
         "tags": [
           "ConfidentialLedgers"
         ],
-        "description": "Backs up a Confidential Ledger Resource.",
+        "description": "Copies the ledger files and the service certificate to a customer's storage account of choice.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -502,10 +502,10 @@
           {
             "name": "confidentialLedger",
             "in": "body",
-            "description": "Confidential Ledger Backup Request Body",
+            "description": "Confidential Ledger Files Export Request Body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackup"
+              "$ref": "#/definitions/ConfidentialLedgerFilesExport"
             }
           }
         ],
@@ -513,7 +513,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedgerBackupResponse"
+              "$ref": "#/definitions/ConfidentialLedgerFilesExportResponse"
             }
           },
           "202": {
@@ -538,13 +538,13 @@
           }
         },
         "x-ms-examples": {
-          "ConfidentialLedgerBackup": {
-            "$ref": "./examples/ConfidentialLedger_Backup.json"
+          "ConfidentialLedgerFilesExport": {
+            "$ref": "./examples/ConfidentialLedger_FilesExport.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ConfidentialLedgerBackupResponse"
+          "final-state-schema": "#/definitions/ConfidentialLedgerFilesExportResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -620,18 +620,18 @@
         }
       ]
     },
-    "ConfidentialLedgerBackup": {
+    "ConfidentialLedgerFilesExport": {
       "type": "object",
-      "description": "Object representing Backup properties of a Confidential Ledger Resource.",
+      "description": "Object representing Files Export properties of a Confidential Ledger Resource.",
       "properties": {
         "restoreRegion": {
           "type": "string",
-          "description": "The region where the backup of the ledger will eventually be restored to."
+          "description": "The region where the exported ledger files will eventually be restored to."
         },
         "uri": {
           "type": "string",
           "format": "password",
-          "description": "SAS URI used to access the backup Fileshare.",
+          "description": "SAS URI used to access the Fileshare for exporting ledger files.",
           "x-ms-secret": true
         }
       },
@@ -639,13 +639,13 @@
         "uri"
       ]
     },
-    "ConfidentialLedgerBackupResponse": {
+    "ConfidentialLedgerFilesExportResponse": {
       "type": "object",
-      "description": "Object representing the backup response of a Confidential Ledger Resource.",
+      "description": "Object representing the files export response of a Confidential Ledger Resource.",
       "properties": {
         "message": {
           "type": "string",
-          "description": "Response body stating if the ledger is being backed up.",
+          "description": "Response body stating if the ledger files are being exported.",
           "readOnly": true
         }
       }

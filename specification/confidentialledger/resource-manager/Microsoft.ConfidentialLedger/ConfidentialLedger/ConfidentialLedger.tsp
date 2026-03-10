@@ -88,12 +88,13 @@ interface ConfidentialLedgers {
   >;
 
   /**
-   * Backs up a Confidential Ledger Resource.
+   * Copies the ledger files and the service certificate to a customer's storage account of choice.
    */
-  backup is ArmResourceActionAsync<
+  @renamedFrom(Versions.v2026_02_23, "backup")
+  filesExport is ArmResourceActionAsync<
     ConfidentialLedger,
-    ConfidentialLedgerBackup,
-    ConfidentialLedgerBackupResponse
+    ConfidentialLedgerFilesExport,
+    ConfidentialLedgerFilesExportResponse
   >;
 }
 
@@ -120,8 +121,8 @@ interface ConfidentialLedgerRestoreOps {
 @@doc(ConfidentialLedgers.update::parameters.properties,
   "Confidential Ledger request body for Updating Ledger"
 );
-@@doc(ConfidentialLedgers.backup::parameters.body,
-  "Confidential Ledger Backup Request Body"
+@@doc(ConfidentialLedgers.filesExport::parameters.body,
+  "Confidential Ledger Files Export Request Body"
 );
 @@doc(ConfidentialLedgerRestoreOps.restore::parameters.body,
   "Confidential Ledger Restore Request Body"
