@@ -1,12 +1,15 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.stac.spec.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -236,12 +239,14 @@ model TilerStacSearchDefinition {
   /**
    * SQL WHERE clause representing the search filters
    */
+  @removed(Versions.v2026_04_15)
   @encodedName("application/json", "_where")
   where: string;
 
   /**
    * SQL ORDER BY clause for sorting results
    */
+  @removed(Versions.v2026_04_15)
   @encodedName("application/json", "orderby")
   orderBy: string;
 
