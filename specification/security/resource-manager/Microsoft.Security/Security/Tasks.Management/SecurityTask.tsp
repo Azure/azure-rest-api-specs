@@ -51,7 +51,30 @@ alias SecurityTaskOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
+    @path
+    @segment("locations")
+    @key
+    ascLocation: string;
+  },
+  {
+    /** Name of the task object, will be a GUID */
+    @path
+    @segment("tasks")
+    @key
+    taskName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
@@ -74,7 +97,8 @@ interface SecurityTasks {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<SecurityTaskList>
+    Response = ArmResponse<SecurityTaskList>,
+    ErrorType = CloudError
   >;
 
   /**
@@ -83,7 +107,8 @@ interface SecurityTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_UpdateSubscriptionLevelTaskState")
   @action("{taskUpdateActionType}")
-  updateSubscriptionLevelTaskState is SecurityTaskOps.ActionSync<
+  @route("/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
+  updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<
     SecurityTask,
     void,
     NoContentResponse,
@@ -93,7 +118,8 @@ interface SecurityTasks {
        */
       @path
       taskUpdateActionType: TaskUpdateActionType;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 }
 alias TaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -118,12 +144,39 @@ alias TaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
+    @path
+    @segment("locations")
+    @key
+    ascLocation: string;
+  },
+  {
+    /** Name of the task object, will be a GUID */
+    @path
+    @segment("tasks")
+    @key
+    taskName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Tasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  getResourceGroupLevelTask is TaskOps.Read<SecurityTask>;
+  getResourceGroupLevelTask is TaskOps.Read<
+    SecurityTask,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
@@ -143,8 +196,9 @@ interface Tasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   @action("{taskUpdateActionType}")
-  updateResourceGroupLevelTaskState is TaskOps.ActionSync<
+  updateResourceGroupLevelTaskState is TaskBuildingOps.ActionSync<
     SecurityTask,
     void,
     NoContentResponse,
@@ -154,7 +208,8 @@ interface Tasks {
        */
       @path
       taskUpdateActionType: TaskUpdateActionType;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 }
 

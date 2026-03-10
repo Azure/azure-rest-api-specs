@@ -22,6 +22,7 @@ interface TasksOperationGroup {
   @operationId("Tasks_List")
   @autoRoute
   @get
+  @list
   @action("tasks")
   list is ArmProviderActionSync<
     Response = SecurityTaskList,
@@ -32,6 +33,7 @@ interface TasksOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
