@@ -10,7 +10,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Security;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TaskUpdateActionType {
   string,
 
@@ -48,7 +48,7 @@ model SecurityTaskList is Azure.Core.Page<SecurityTask>;
 /**
  * Describes properties of a task.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityTaskProperties {
   /**
    * State of the task (Active, Resolved etc.)
@@ -158,12 +158,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -181,6 +183,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
