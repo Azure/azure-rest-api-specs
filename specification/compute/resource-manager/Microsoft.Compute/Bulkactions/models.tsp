@@ -10,6 +10,7 @@ import "./common.tsp";
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 
@@ -132,6 +133,128 @@ model BulkactionVMSpec {
 }
 
 /**
+ * The flex properties for flexible VM creation.
+ */
+// ----------- ExecuteCreateFlex ---------
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The supported operating system types for flex VM creation")
+union OsType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The priority type for VM allocation")
+union PriorityType {
+  @doc("Regular priority VMs")
+  regular: "regular",
+
+  @doc("Spot priority VMs")
+  spot: "spot",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The allocation strategy for VM size selection")
+union AllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  CapacityOptimized: "CapacityOptimized",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The distribution strategy for zone allocation")
+union DistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  StrictBalanced: "StrictBalanced",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("A VM size profile with a name and rank for flex VM creation")
+model VmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
+
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The priority profile for flex VM creation")
+model PriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("A zone preference with a zone identifier and rank")
+model ZonePreference {
+  @doc("The zone identifier")
+  zone: string;
+
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The zone allocation policy for distributing VMs across availability zones")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation")
+  distributionStrategy?: DistributionStrategy;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
+@doc("The flex properties for flexible VM creation")
+model FlexProperties {
+  @identifiers(#[])
+  @doc("The list of VM size profiles to use for flex creation")
+  @minItems(1)
+  @maxItems(5)
+  vmSizeProfiles: Array<VmSizeProfile>;
+
+  @doc("The operating system type for the VMs")
+  osType: OsType;
+
+  @doc("The priority profile for VM allocation")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy for distributing VMs across availability zones")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
+/**
  * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
  */
 model BulkVMConfiguration {
@@ -159,6 +282,14 @@ model ResourceProvisionPayload {
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
+}
+
+@doc("Resource creation data model with Flex properties for VDI scenarios")
+model ResourceProvisionVdiPayload {
+  ...ResourceProvisionPayload;
+
+  @doc("Flex properties used for VDI resource creation scenarios")
+  flexProperties: FlexProperties;
 }
 
 @doc("The retry policy for the user request")
@@ -395,6 +526,15 @@ model ExecuteStartRequest {
 model ExecuteCreateRequest {
   @doc("resource creation payload")
   resourceConfigParameters: ResourceProvisionPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+}
+
+@doc("The VdiCreateRequest request for create operations")
+model ExecuteVdiCreateRequest {
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionVdiPayload;
 
   @doc("The execution parameters for the request")
   executionParameters: ExecutionParameters;

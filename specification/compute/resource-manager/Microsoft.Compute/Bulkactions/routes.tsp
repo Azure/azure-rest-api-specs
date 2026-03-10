@@ -49,6 +49,12 @@ alias LocationParameter = {
 @@doc(VirtualMachineBulkOperations.virtualMachinesBulkCreate::parameters.body,
   "The request body"
 );
+@@clientName(VirtualMachineBulkOperations.virtualMachinesVdiCreate::parameters.body,
+  "requestBody"
+);
+@@doc(VirtualMachineBulkOperations.virtualMachinesVdiCreate::parameters.body,
+  "The request body"
+);
 @@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDelete::parameters.body,
   "requestBody"
 );
@@ -98,6 +104,14 @@ interface VirtualMachineBulkOperations {
   /** VirtualMachinesBulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   virtualMachinesBulkCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
+    Response = ArmResponse<CreateResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesBulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesVdiCreate is ArmProviderActionSync<
+    Request = ExecuteVdiCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
