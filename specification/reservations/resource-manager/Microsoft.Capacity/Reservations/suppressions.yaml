@@ -28,3 +28,17 @@
 - tool: TypeSpecRequirement
   path: ./stable/2022-11-01/*.json
   reason: Brownfield service not ready to migrate
+
+  - tool: TypeSpecValidation
+  reason: >
+    KeyVault data-plane sub-projects are nested three levels under data-plane (e.g.
+    data-plane/Administration/BackupRestore) as part of the unified folder structure
+    refactor, which is one level deeper than the standard two-level requirement.
+    Cross-folder imports from ../common/ are also required by this layout.
+    Suppressed pending tsp-validation support for the new structure.
+    Responsibility: Service team.
+  rules: [FolderStructure]
+  paths:
+    - Quota
+    - Reservations
+    
