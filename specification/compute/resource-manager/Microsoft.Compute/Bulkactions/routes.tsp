@@ -61,6 +61,12 @@ alias LocationParameter = {
 @@doc(VirtualMachineBulkOperations.virtualMachinesBulkDelete::parameters.body,
   "The request body"
 );
+@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkReimage::parameters.body,
+  "requestBody"
+);
+@@doc(VirtualMachineBulkOperations.virtualMachinesBulkReimage::parameters.body,
+  "The request body"
+);
 @@clientName(VirtualMachineBulkOperations.virtualMachinesGetOperationStatus::parameters.body,
   "requestBody"
 );
@@ -109,7 +115,7 @@ interface VirtualMachineBulkOperations {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesBulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** VirtualMachinesVdiCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   virtualMachinesVdiCreate is ArmProviderActionSync<
     Request = ExecuteVdiCreateRequest,
     Response = ArmResponse<CreateResourceOperationResponse>,
@@ -137,6 +143,14 @@ interface VirtualMachineBulkOperations {
   virtualMachinesCancelOperations is ArmProviderActionSync<
     Request = CancelOperationsRequest,
     Response = ArmResponse<CancelOperationsResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** VirtualMachinesBulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  virtualMachinesBulkReimage is ArmProviderActionSync<
+    Request = ExecuteReimageRequest,
+    Response = ArmResponse<ReimageResourceOperationResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;

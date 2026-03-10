@@ -540,6 +540,41 @@ model ExecuteVdiCreateRequest {
   executionParameters: ExecutionParameters;
 }
 
+@doc("Per-resource override entry for reimage requests")
+model ReimageResourceOverride {
+  @doc("The ARM resource ID of the virtual machine for this override")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  @doc("Per-resource reimage profile override")
+  profile: VirtualMachineReimageParameters;
+}
+
+@doc("Reimage payload with common profile and per-resource overrides")
+model ReimagePayload {
+  @doc("Common reimage profile applied to all resources unless overridden")
+  baseProfile?: VirtualMachineReimageParameters;
+
+  @identifiers(#[])
+  @doc("Per-resource reimage overrides")
+  resourceOverrides?: ReimageResourceOverride[];
+}
+
+@doc("The ExecuteReimageRequest request for reimage operations")
+model ExecuteReimageRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("Reimage parameters including base profile and per-resource overrides")
+  reimageParameters?: ReimagePayload;
+}
+
 @doc("The response from a create request")
 model CreateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -548,12 +583,29 @@ model CreateResourceOperationResponse {
   @doc("The type of resources used in the create request eg virtual machines")
   type: string;
 
-  @doc("The location of the start request eg westus")
+  @doc("The location of the create request eg westus")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
   @doc("The results from the create request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+@doc("The response from a reimage request")
+model ReimageResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the reimage request eg virtual machines")
+  type: string;
+
+  @doc("The location of the reimage request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @identifiers(#["resourceId"])
+  @doc("The results from the reimage request if no errors exist")
   results?: Array<ResourceOperation>;
 }
 
@@ -565,7 +617,7 @@ model DeleteResourceOperationResponse {
   @doc("The type of resources used in the delete request eg virtual machines")
   type: string;
 
-  @doc("The location of the start request eg westus")
+  @doc("The location of the delete request eg westus")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
