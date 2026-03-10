@@ -51,6 +51,17 @@ model NeighborGroupProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @added(Versions.v2026_01_15_preview)
+  @doc("Administrative state of the resource.")
+  @visibility(Lifecycle.Read)
+  administrativeState?: AdministrativeState;
+}
+
+@doc("Neighbor Group Patchable Properties defines the patchable properties of the resource.")
+model NeighborGroupPatchableProperties {
+  @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
+  destination?: NeighborGroupDestinationPatch;
 }
 
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
@@ -67,10 +78,9 @@ model NeighborGroupDestination {
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
 model NeighborGroupDestinationPatch is NeighborGroupDestination;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The Neighbor Group Patch definition.")
-model NeighborGroupPatch {
-  ...TagsUpdate;
-
+model NeighborGroupPatch extends TagsUpdate {
   @doc("Neighbor Group Patch properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
@@ -90,9 +100,7 @@ model NeighborGroupPatch {
 @doc("Neighbor Group Patch properties.")
 model NeighborGroupPatchProperties {
   ...AnnotationResource;
-
-  @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
-  destination?: NeighborGroupDestinationPatch;
+  ...NeighborGroupPatchableProperties;
 }
 
 @doc("Response for Neighbor Group Resync operation.")

@@ -1,0 +1,57 @@
+{
+  "title": "EdgeMachineNetworkAdapters_Get",
+  "operationId": "EdgeMachineNetworkAdapters_Get",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "networkAdapterName": "vmanagement"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkConfiguration": {
+            "adapterName": "vmanagement",
+            "ip4Address": "192.168.200.92",
+            "subnetMask": "255.255.255.0",
+            "defaultGateway": "192.168.200.1",
+            "dnsServers": [
+              "192.168.200.222"
+            ]
+          },
+          "reportedProperties": {
+            "adapterName": "vmanagement",
+            "ip4Address": "192.168.200.92",
+            "subnetMask": "255.255.255.0",
+            "defaultGateway": "192.168.200.1",
+            "dnsServers": [
+              "192.168.200.222"
+            ],
+            "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+            "componentId": "vms_mp",
+            "driverVersion": "10.0.25398.1",
+            "defaultIsolationId": "0",
+            "macAddress": "000000000041",
+            "slot": "0",
+            "switchName": "vmanagement",
+            "interfaceType": "Virtual"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/networkAdapters/vmanagement",
+        "name": "vmanagement",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/networkAdapters",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

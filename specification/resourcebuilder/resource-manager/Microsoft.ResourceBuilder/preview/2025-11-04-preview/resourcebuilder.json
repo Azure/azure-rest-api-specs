@@ -1100,35 +1100,118 @@
     }
   },
   "definitions": {
-    "AnomalyMode": {
+    "AdditionalProperties": {
+      "type": "object",
+      "description": "Additional Properties column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the column."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "AnomalyDetectionStrategy": {
       "type": "string",
-      "description": "Anomaly detection mode",
+      "description": "Anomaly detection strategy",
       "enum": [
-        "isAnomaly",
-        "isPositiveAnomaly",
-        "isNegativeAnomaly"
+        "BidirectionalAnomaly",
+        "PositiveAnomaly",
+        "NegativeAnomaly"
       ],
       "x-ms-enum": {
-        "name": "AnomalyMode",
+        "name": "AnomalyDetectionStrategy",
         "modelAsString": true,
         "values": [
           {
-            "name": "IsAnomaly",
-            "value": "isAnomaly",
+            "name": "BidirectionalAnomaly",
+            "value": "BidirectionalAnomaly",
             "description": "Detects anomalies in either the negative or positive direction."
           },
           {
-            "name": "IsPositiveAnomaly",
-            "value": "isPositiveAnomaly",
+            "name": "PositiveAnomaly",
+            "value": "PositiveAnomaly",
             "description": "Detects anomalies only in the positive direction."
           },
           {
-            "name": "IsNegativeAnomaly",
-            "value": "isNegativeAnomaly",
+            "name": "NegativeAnomaly",
+            "value": "NegativeAnomaly",
             "description": "Detects anomalies only in the negative direction."
           }
         ]
       }
+    },
+    "ArmResourceDatasetSchema": {
+      "type": "object",
+      "description": "ARM resource dataset schema.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full ARM resource ID."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the ARM resource."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID where the resource resides."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID where the resource resides."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group where the resource resides."
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "The kind of the ARM resource (optional)."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The Azure region where the resource is located (optional)."
+        },
+        "resourceTags": {
+          "type": "array",
+          "description": "The tags associated with the ARM resource (optional).",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
+          }
+        },
+        "resourceProperties": {
+          "type": "array",
+          "description": "The resource properties of the ARM resource (optional).",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperties"
+          }
+        },
+        "resourceTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource information was captured (optional)."
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceType",
+        "resourceName",
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup"
+      ]
     },
     "AutoDataQualityParameters": {
       "type": "object",
@@ -1139,9 +1222,9 @@
           "format": "int32",
           "description": "Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90."
         },
-        "anomalyMode": {
-          "$ref": "#/definitions/AnomalyMode",
-          "description": "Anomaly detection mode."
+        "anomalyDetectionStrategy": {
+          "$ref": "#/definitions/AnomalyDetectionStrategy",
+          "description": "Anomaly detection strategy."
         },
         "lookbackWindowInDays": {
           "type": "integer",
@@ -1260,7 +1343,7 @@
       "type": "object",
       "description": "Data quality metric evaluation",
       "properties": {
-        "metricEvaluationType": {
+        "evaluationType": {
           "$ref": "#/definitions/DataQualityMetricEvaluationType",
           "description": "Metric evaluation type."
         },
@@ -1293,7 +1376,7 @@
         }
       },
       "required": [
-        "metricEvaluationType",
+        "evaluationType",
         "metricType"
       ]
     },
@@ -1319,11 +1402,11 @@
       "type": "string",
       "description": "Data quality metric evaluation type",
       "enum": [
-        "unknown",
-        "tableRowCount",
-        "nonNullColumnCount",
-        "latency",
-        "size"
+        "Unknown",
+        "TableRowCount",
+        "NonNullColumnCount",
+        "Latency",
+        "Size"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricEvaluationType",
@@ -1331,27 +1414,27 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown evaluation type."
           },
           {
             "name": "TableCount",
-            "value": "tableRowCount",
+            "value": "TableRowCount",
             "description": "Table count evaluation type."
           },
           {
             "name": "NonNullColumnCount",
-            "value": "nonNullColumnCount",
+            "value": "NonNullColumnCount",
             "description": "Non-null column count evaluation type."
           },
           {
             "name": "Latency",
-            "value": "latency",
+            "value": "Latency",
             "description": "Latency evaluation type."
           },
           {
             "name": "Size",
-            "value": "size",
+            "value": "Size",
             "description": "Size evaluation type."
           }
         ]
@@ -1361,13 +1444,13 @@
       "type": "string",
       "description": "Data quality metric type",
       "enum": [
-        "unknown",
-        "count",
-        "minimum",
-        "maximum",
+        "Unknown",
+        "Count",
+        "Minimum",
+        "Maximum",
         "P50",
         "P90",
-        "distinctCount"
+        "DistinctCount"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricType",
@@ -1375,22 +1458,22 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown metric type."
           },
           {
             "name": "Count",
-            "value": "count",
+            "value": "Count",
             "description": "Count metric type."
           },
           {
             "name": "Minimum",
-            "value": "minimum",
+            "value": "Minimum",
             "description": "Minimum metric type."
           },
           {
             "name": "Maximum",
-            "value": "maximum",
+            "value": "Maximum",
             "description": "Maximum metric type."
           },
           {
@@ -1405,7 +1488,7 @@
           },
           {
             "name": "DistinctCount",
-            "value": "distinctCount",
+            "value": "DistinctCount",
             "description": "Distinct count metric type."
           }
         ]
@@ -1415,10 +1498,10 @@
       "type": "string",
       "description": "Data quality metric unit",
       "enum": [
-        "count",
-        "seconds",
-        "minutes",
-        "hours"
+        "Count",
+        "Seconds",
+        "Minutes",
+        "Hours"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricUnit",
@@ -1426,22 +1509,22 @@
         "values": [
           {
             "name": "Count",
-            "value": "count",
+            "value": "Count",
             "description": "Count unit."
           },
           {
             "name": "Seconds",
-            "value": "seconds",
+            "value": "Seconds",
             "description": "Seconds unit."
           },
           {
             "name": "Minutes",
-            "value": "minutes",
+            "value": "Minutes",
             "description": "Minutes unit."
           },
           {
             "name": "Hours",
-            "value": "hours",
+            "value": "Hours",
             "description": "Hours unit."
           }
         ]
@@ -1451,11 +1534,11 @@
       "type": "object",
       "description": "Data quality metric validation",
       "properties": {
-        "dataQualityMetricValidationType": {
+        "validationType": {
           "$ref": "#/definitions/DataQualityMetricValidationType",
           "description": "Data quality metric validation type."
         },
-        "dataQualityMetricEvaluationName": {
+        "metricEvaluationName": {
           "type": "string",
           "description": "Data quality metric evaluation name."
         },
@@ -1508,10 +1591,10 @@
       "type": "string",
       "description": "Data quality metric validation type",
       "enum": [
-        "unknown",
-        "anomalyValidation",
-        "ratioValidation",
-        "thresholdValidation"
+        "Unknown",
+        "AnomalyValidation",
+        "RatioValidation",
+        "ThresholdValidation"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricValidationType",
@@ -1519,33 +1602,57 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown validation type."
           },
           {
             "name": "AnomalyValidation",
-            "value": "anomalyValidation",
+            "value": "AnomalyValidation",
             "description": "Anomaly validation type."
           },
           {
             "name": "RatioValidation",
-            "value": "ratioValidation",
+            "value": "RatioValidation",
             "description": "Ratio validation type."
           },
           {
             "name": "ThresholdValidation",
-            "value": "thresholdValidation",
+            "value": "ThresholdValidation",
             "description": "Threshold validation type."
           }
         ]
       }
     },
-    "DataQualityValidation": {
+    "DataQualityMetrics": {
       "type": "object",
-      "description": "Data quality validation",
+      "description": "Data quality metrics",
       "properties": {
-        "validationCondition": {
-          "$ref": "#/definitions/DataQualityValidationCondition",
+        "evaluations": {
+          "type": "array",
+          "description": "Metric evaluations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
+          }
+        },
+        "validations": {
+          "type": "array",
+          "description": "Metric validations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricValidationEntry"
+          }
+        }
+      },
+      "required": [
+        "evaluations",
+        "validations"
+      ]
+    },
+    "DataQualityValidationPolicy": {
+      "type": "object",
+      "description": "Data quality validation policy",
+      "properties": {
+        "passCriteria": {
+          "$ref": "#/definitions/DataQualityValidationPolicyPassCriteria",
           "description": "Dataset validation condition."
         },
         "validations": {
@@ -1557,35 +1664,35 @@
         }
       },
       "required": [
-        "validationCondition",
+        "passCriteria",
         "validations"
       ]
     },
-    "DataQualityValidationCondition": {
+    "DataQualityValidationPolicyPassCriteria": {
       "type": "string",
       "description": "Data quality validation condition",
       "enum": [
-        "alwaysSucceed",
-        "any",
-        "all"
+        "AlwaysPass",
+        "PassIfAnySucceed",
+        "PassIfAllSucceed"
       ],
       "x-ms-enum": {
-        "name": "DataQualityValidationCondition",
+        "name": "DataQualityValidationPolicyPassCriteria",
         "modelAsString": true,
         "values": [
           {
-            "name": "AlwaysSucceed",
-            "value": "alwaysSucceed",
+            "name": "AlwaysPass",
+            "value": "AlwaysPass",
             "description": "Always succeed condition."
           },
           {
-            "name": "Any",
-            "value": "any",
+            "name": "PassIfAnySucceed",
+            "value": "PassIfAnySucceed",
             "description": "Any validation succeeds condition."
           },
           {
-            "name": "All",
-            "value": "all",
+            "name": "PassIfAllSucceed",
+            "value": "PassIfAllSucceed",
             "description": "All validations succeed condition."
           }
         ]
@@ -1598,6 +1705,17 @@
         "properties": {
           "$ref": "#/definitions/DatasetProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind",
+          "description": "Dataset kind discriminator. Determines which properties are valid for this dataset.\n- Custom: Custom user-defined dataset.\n- ArmResource: ARM (Azure Resource Manager) managed resource dataset."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -1700,6 +1818,30 @@
         ]
       }
     },
+    "DatasetKind": {
+      "type": "string",
+      "description": "Dataset kind discriminator",
+      "enum": [
+        "Custom",
+        "ArmResource"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom user-defined dataset."
+          },
+          {
+            "name": "ArmResource",
+            "value": "ArmResource",
+            "description": "ARM (Azure Resource Manager) managed resource dataset."
+          }
+        ]
+      }
+    },
     "DatasetListResult": {
       "type": "object",
       "description": "The response of a Dataset list operation.",
@@ -1732,10 +1874,14 @@
         },
         "schema": {
           "type": "array",
-          "description": "Dataset schema definition.",
+          "description": "Custom Dataset schema definition.",
           "items": {
             "$ref": "#/definitions/DatasetColumn"
           }
+        },
+        "armResourceSchema": {
+          "$ref": "#/definitions/ArmResourceDatasetSchema",
+          "description": "ArmResource ArmResourceDatasetSchema object."
         },
         "locations": {
           "type": "array",
@@ -2033,22 +2179,12 @@
           "$ref": "#/definitions/AzureDataExplorerSink",
           "description": "Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs."
         },
-        "dataQualityMetricEvaluations": {
-          "type": "array",
-          "description": "Metric evaluations. Required for DataQualityValidation jobs.",
-          "items": {
-            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
-          }
+        "metrics": {
+          "$ref": "#/definitions/DataQualityMetrics",
+          "description": "Data quality metrics evaluations and validations. Required for DataQualityValidation jobs."
         },
-        "dataQualityMetricValidations": {
-          "type": "array",
-          "description": "Data quality metric validations. Required for DataQualityValidation jobs.",
-          "items": {
-            "$ref": "#/definitions/DataQualityMetricValidationEntry"
-          }
-        },
-        "dataQualityValidation": {
-          "$ref": "#/definitions/DataQualityValidation",
+        "validationPolicy": {
+          "$ref": "#/definitions/DataQualityValidationPolicy",
           "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
         },
         "resourceType": {
@@ -2088,6 +2224,13 @@
         "properties": {
           "$ref": "#/definitions/PipelineProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [

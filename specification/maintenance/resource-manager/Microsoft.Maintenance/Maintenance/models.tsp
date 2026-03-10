@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Maintenance;
 
@@ -128,6 +130,78 @@ union UpdateStatus {
    * Send the Cancelled response to the user if request came to cancel the schedule. Applicable to Maintenance Configuration resource type only.
    */
   Cancelled: "Cancelled",
+
+  /**
+   * Updates installation failed.
+   */
+  Failed: "Failed",
+}
+
+/**
+ * Update status code.
+ */
+union UpdateStatusCode {
+  string,
+
+  /**
+   * Default value, no update status code provided.
+   */
+  None: "None",
+
+  /**
+   * Update successfully applied.
+   */
+  Success: "Success",
+
+  /**
+   * Update has timed out.
+   */
+  TimedOut: "TimedOut",
+
+  /**
+   * Underlying node is unhealthy.
+   */
+  NodeUnhealthy: "NodeUnhealthy",
+
+  /**
+   * Payload is unhealthy.
+   */
+  RolloutUnhealthy: "RolloutUnhealthy",
+
+  /**
+   * Wait for bake time period to expire.
+   */
+  BakeTimeViolation: "BakeTimeViolation",
+
+  /**
+   * Cannot have these many updates going on concurrently; wait for some to finish.
+   */
+  ConcurrentUpdateLimitViolation: "ConcurrentUpdateLimitViolation",
+
+  /**
+   * Transient platform issue.
+   */
+  SkippedByPlatform: "SkippedByPlatform",
+}
+
+/**
+ * Update status details.
+ */
+model UpdateStatusDetails {
+  /**
+   * Represents the message providing details about the update.
+   */
+  details?: string;
+
+  /**
+   * Represents the code indicating the update status.
+   */
+  code?: UpdateStatusCode;
+
+  /**
+   * Represents the step needed to take in case of recovery.
+   */
+  recoveryAction?: string;
 }
 
 /**
@@ -167,13 +241,76 @@ enum TagOperators {
 }
 
 /**
- * Response of scheduled event acknowledge
+ * Response of ScheduledEvents acknowledge
  */
-model ScheduledEventApproveResponse {
+model ScheduledEventsApproveResponse {
   /**
    * Successfully Approved
    */
   value?: string;
+}
+
+/**
+ * ScheduledEvents Id List
+ */
+model ScheduledEventsIdList {
+  /**
+   * The list of ScheduledEvents Id.
+   */
+  @pageItems
+  value: string[];
+}
+
+/**
+ * An error response received from the Azure Maintenance service.
+ */
+@error
+model ScheduledEventsListAcknowledgeError {
+  /**
+   * Error response
+   */
+  error?: ScheduledEventsListAcknowledgeErrorDetails;
+}
+
+/**
+ * An error response details received from the Azure Maintenance service.
+ */
+model ScheduledEventsListAcknowledgeErrorDetails {
+  /**
+   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
+
+  /**
+   * Error details for each ScheduledEvents.
+   */
+  @identifiers(#[])
+  details?: ScheduledEventsAcknowledgeErrorDetails[];
+}
+
+/**
+ * An error response details received from the Azure Maintenance service for each ScheduledEvents.
+ */
+model ScheduledEventsAcknowledgeErrorDetails {
+  /**
+   * ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)
+   */
+  target?: string;
+
+  /**
+   * Status code for the ScheduledEvents acknowledge operation on the target ScheduledEvents Id.
+   */
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  message?: string;
 }
 
 /**
@@ -398,8 +535,17 @@ model ApplyUpdateProperties {
   /**
    * Last Update time
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdateTime?: utcDateTime;
+
+  /**
+   * Maintenance plan name if the update is part of a maintenance plan.
+   */
+  maintenancePlanId?: string;
+
+  /**
+   * Update status details, includes failure reason and recovery step for the update (if any).
+   */
+  statusDetails?: UpdateStatusDetails;
 }
 
 /**
@@ -593,9 +739,71 @@ model UpdateProperties {
 }
 
 /**
+ * Represents an operation returned by the GetOperations request
+ */
+model Operation {
+  /**
+   * Fully qualified identifier of the resource
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the operation
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the resource
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Display name of the operation
+   */
+  display?: OperationInfo;
+
+  /**
+   * Origin of the operation
+   */
+  origin?: string;
+
+  /**
+   * Properties of the operation
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty properties bag for operation metadata"
+  properties?: {};
+
+  /**
+   * Indicates whether the operation is a data action
+   */
+  isDataAction?: boolean;
+}
+
+/**
  * Result of the List Operations operation
  */
 model OperationsListResult {
+  /**
+   * Fully qualified identifier of the resource
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the resource
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   /**
    * The link used to get the next page of operations.
    */

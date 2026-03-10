@@ -7,6 +7,7 @@ import "./common.tsp";
 import "./discoveryHub.tsp";
 
 using Azure.Core;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApplicationMigration;
@@ -52,6 +53,12 @@ model ApplicationProperties {
   @doc("The provisioning status of Application.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("The code scan details for the application.")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  codeScanDetails?: CodeScanDetail[];
 }
 
 /**
@@ -101,6 +108,52 @@ union Complexity {
 
   @doc("The application is intricate, with multiple interdependent components and complex interactions.")
   High: "High",
+
+  string,
+}
+
+/**
+ * Model representing the code scan details for an application.
+ */
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+model CodeScanDetail {
+  @doc("The code scan tool used to scan the application.")
+  codeScanTool: CodeScanTool;
+
+  @doc("The Azure target platform for migration.")
+  azureTarget: AzureTarget;
+
+  @doc("The total number of code scan issues found.")
+  @minValue(0)
+  totalCodeScanIssues: int32;
+}
+
+@doc("The enum defining the code scan tool.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+union CodeScanTool {
+  @doc("Application Containerization and Assessment Tool.")
+  APPCAT: "APPCAT",
+
+  @doc("CAST code analysis tool.")
+  CAST: "CAST",
+
+  string,
+}
+
+@doc("The enum defining the Azure target platform.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_02_02_preview)
+union AzureTarget {
+  @doc("Unknown target.")
+  Unknown: "Unknown",
+
+  @doc("Azure Kubernetes Service.")
+  AKS: "AKS",
+
+  @doc("Azure App Service (Code based deployment).")
+  AzureAppService: "AzureAppService",
+
+  @doc("Azure App Service (Container based deployment).")
+  AzureAppServiceContainer: "AzureAppServiceContainer",
 
   string,
 }

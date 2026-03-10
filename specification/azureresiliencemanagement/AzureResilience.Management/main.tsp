@@ -10,6 +10,7 @@ import "./drill.tsp";
 import "./drillResource.tsp";
 import "./drillRun.tsp";
 import "./partnersolution.tsp";
+import "./usagePlan.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -1,0 +1,56 @@
+{
+  "title": "EdgeMachineNetworkAdapterJobs_Get",
+  "operationId": "EdgeMachineNetworkAdapterJobs_Get",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "networkAdapterName": "vmanagement",
+    "jobName": "nic-job-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "ApplyConfiguration",
+          "targetConfiguration": {
+            "adapterName": "vmanagement",
+            "ip4Address": "192.168.200.100",
+            "subnetMask": "255.255.255.0",
+            "defaultGateway": "192.168.200.1",
+            "dnsServers": [
+              "192.168.200.222",
+              "192.168.200.223"
+            ]
+          },
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "nic-job-001",
+          "startTimeUtc": "2024-11-14T10:46:55.167Z",
+          "endTimeUtc": "2024-11-14T10:50:55.167Z",
+          "status": "Succeeded",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Completed"
+            },
+            "deploymentStatus": {
+              "status": "Completed"
+            }
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/networkAdapters/vmanagement/jobs/nic-job-001",
+        "name": "nic-job-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/networkAdapters/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:50:55.167Z"
+        }
+      }
+    }
+  }
+}

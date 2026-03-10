@@ -27,6 +27,15 @@ Run [check package readiness](../eng/common/instructions/azsdk-tools/check-packa
 
 Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.instructions.md) to get the most up-to-date documentation for TypeSpec, including best practices for writing TypeSpec for Azure.
 
+# ARM Api Copilot Review Instructions
+
+Follow [armapi-review.instructions.md](./instructions/armapi-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. Github Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
+
+# GitHub Actions Development
+
+Follow [github-actions.instructions.md](./instructions/github-actions.instructions.md) for instructions on developing and maintaining GitHub Actions code in this repository. This includes workflows, composite actions, and shared utilities.
+
+
 <!-- LINKS -->
 
 [contoso-widget-manager]: ../specification/contosowidgetmanager/Contoso.WidgetManager/
