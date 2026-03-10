@@ -16,6 +16,10 @@ using Microsoft.Attestation;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(PrivateEndpointConnection,
   "AttestationPrivateEndpointConnection",
   "csharp"
