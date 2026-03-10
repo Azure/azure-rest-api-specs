@@ -146,6 +146,10 @@ using Azure.AI.Projects;
 @@access(OpenAI.CompoundFilter, Access.internal, "java");
 @@access(OpenAI.Reasoning, Access.internal, "java");
 @@access(OpenAI.ReasoningEffort, Access.internal, "java");
+// Map ComparisonFilter and CompoundFilter to their openai-java equivalents so the
+// codegen does not emit its own versions.
+@@alternateType(OpenAI.ComparisonFilter, { identity: "com.openai.models.ComparisonFilter" }, "java");
+@@alternateType(OpenAI.CompoundFilter, { identity: "com.openai.models.CompoundFilter" }, "java");
 // Change reasoning property type to string so it maps to BinaryData in Java.
 // Manual getters/setters for com.openai.models.Reasoning are added in customizations.
 @@changePropertyType(PromptAgentDefinition.reasoning, string);
