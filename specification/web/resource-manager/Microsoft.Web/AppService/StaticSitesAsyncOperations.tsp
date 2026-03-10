@@ -60,7 +60,7 @@ interface StaticSitesAsyncOperations {
 }
 
 @@segment(StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
-  "staticSiteOperationStatuses"
+  "staticSitesOperationStatuses"
 );
 @@segment(StaticSitesAsyncOperations.getOperationResult::parameters.operationId,
   "staticSitesOperationResults"

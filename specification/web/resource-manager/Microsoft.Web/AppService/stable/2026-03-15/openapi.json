@@ -1966,49 +1966,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSiteOperationStatuses/{operationId}": {
-      "get": {
-        "operationId": "StaticSitesAsyncOperations_GetOperationStatus",
-        "tags": [
-          "StaticSitesAsyncOperations"
-        ],
-        "summary": "Gets the status of a static site async operation.",
-        "description": "Gets the status of a static site async operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StaticSitesOperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the status of a static site async operation": {
-            "$ref": "./examples/GetStaticSiteOperationStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}": {
       "get": {
         "operationId": "StaticSitesAsyncOperations_GetOperationResult",
@@ -2062,6 +2019,49 @@
         "x-ms-examples": {
           "Gets the result of a static site async operation": {
             "$ref": "./examples/GetStaticSiteOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationStatuses/{operationId}": {
+      "get": {
+        "operationId": "StaticSitesAsyncOperations_GetOperationStatus",
+        "tags": [
+          "StaticSitesAsyncOperations"
+        ],
+        "summary": "Gets the status of a static site async operation.",
+        "description": "Gets the status of a static site async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSitesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a static site async operation": {
+            "$ref": "./examples/GetStaticSiteOperationStatus.json"
           }
         }
       }
