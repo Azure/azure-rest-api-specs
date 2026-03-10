@@ -191,4 +191,9 @@ namespace Azure.AI.Projects {
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "AgentVersion");
+  
+  // Relocate all Tools to the tools namespace
+  interface Tools {}
+  @@clientLocation(SharepointPreviewTool, Tools);
 }
+
