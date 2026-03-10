@@ -2068,6 +2068,14 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   identityProvider?: IdentityProvider = IdentityProvider.ActiveDirectory;
+
+  // PRIVATE PREVIEW
+  /**
+   * Storage type of the cluster. Indicates whether the cluster uses S2D, SAN, or a combination.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @visibility(Lifecycle.Read)
+  storageType?: StorageType;
 }
 
 /**
@@ -3047,6 +3055,88 @@ model DeploymentCluster {
   clusterPattern?: ClusterPattern;
 }
 
+// PRIVATE PREVIEW - Storage type and SAN/S2D configuration
+
+/**
+ * Storage type supported for HCI Cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+union StorageType {
+  string,
+
+  /** Storage Spaces Direct (S2D) storage type. */
+  S2D: "S2D",
+
+  /** Storage Area Network (SAN) storage type. */
+  SAN: "SAN",
+
+  /** Combined SAN and Storage Spaces Direct (SANS2D) storage type. */
+  SANS2D: "SANS2D",
+}
+
+/**
+ * Volume provisioning type for S2D storage.
+ */
+@added(Versions.v2026_03_15_preview)
+union VolumeType {
+  string,
+
+  /** Fixed provisioning type. */
+  Fixed: "Fixed",
+
+  /** Thin provisioned provisioning type. */
+  ThinProvisioned: "ThinProvisioned",
+}
+
+/**
+ * Overprovisioning ratio for S2D storage.
+ */
+@added(Versions.v2026_03_15_preview)
+union OverprovisioningRatio {
+  string,
+
+  /** No overprovisioning. */
+  Zero: "0",
+
+  /** Overprovisioning ratio of 1. */
+  One: "1",
+
+  /** Overprovisioning ratio of 2. */
+  Two: "2",
+}
+
+/**
+ * The S2D (Storage Spaces Direct) configuration for AzureStackHCI Cluster storage.
+ */
+@added(Versions.v2026_03_15_preview)
+model StorageS2dConfig {
+  /**
+   * Volume provisioning type. Allowed values are 'Fixed', 'ThinProvisioned'.
+   */
+  volumeType?: VolumeType;
+
+  /**
+   * Overprovisioning ratio for S2D storage. Allowed values are '0', '1', '2'.
+   */
+  overprovisioningRatio?: OverprovisioningRatio;
+}
+
+/**
+ * The SAN (Storage Area Network) configuration for AzureStackHCI Cluster storage.
+ */
+@added(Versions.v2026_03_15_preview)
+model StorageSanConfig {
+  /**
+   * Infrastructure volume LUN ID (e.g. PURE1234567890ABCDEF).
+   */
+  infraVolLunId?: string;
+
+  /**
+   * Infrastructure performance LUN ID.
+   */
+  infraPerfLunId?: string;
+}
+
 /**
  * The Storage config of AzureStackHCI Cluster.
  */
@@ -3055,6 +3145,33 @@ model Storage {
    * By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'
    */
   configurationMode?: string = "Express";
+
+  // PRIVATE PREVIEW - Storage type and SAN/S2D sub-configuration
+
+  /**
+   * Storage type for the HCI Cluster. Allowed values are 'S2D', 'SAN', 'SANS2D'.
+   */
+  @added(Versions.v2026_03_15_preview)
+  storageType?: StorageType;
+
+  /**
+   * S2D (Storage Spaces Direct) configuration. Applicable when StorageType is 'S2D' or 'SANS2D'.
+   */
+  @added(Versions.v2026_03_15_preview)
+  s2d?: StorageS2dConfig;
+
+  /**
+   * SAN (Storage Area Network) configuration. Applicable when StorageType is 'SAN' or 'SANS2D'.
+   */
+  @added(Versions.v2026_03_15_preview)
+  san?: StorageSanConfig;
+
+  /**
+   * List of storage disks.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @identifiers(#["id"])
+  disks?: Disk[];
 }
 
 /**
@@ -3155,10 +3272,19 @@ model DeploymentSettingHostNetwork {
   intents?: DeploymentSettingIntents[];
 
   /**
-   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
+   * List of S2D (Storage Spaces Direct) storage networks config to deploy AzureStackHCI Cluster.
    */
   @identifiers(#["name"])
   storageNetworks?: DeploymentSettingStorageNetworks[];
+
+  // PRIVATE PREVIEW - SAN host network configuration
+
+  /**
+   * SAN network configuration for the host network. Applicable when StorageType is 'SAN' or 'SANS2D'.
+   */
+  @added(Versions.v2026_03_15_preview)
+  @identifiers(#[])
+  sanNetworks?: SanNetworks[];
 
   /**
    * Defines how the storage adapters between nodes are connected either switch or switch less..
@@ -3324,6 +3450,89 @@ model DeploymentSettingStorageAdapterIPInfo {
    * The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.
    */
   subnetMask?: string;
+}
+
+// PRIVATE PREVIEW - SAN network models
+
+/**
+ * SAN network configuration for host network of AzureStackHCI Cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model SanNetworks {
+  /**
+   * Cluster (CSV/LiveMig) network configuration for SAN deployments.
+   */
+  clusterNetworkConfig?: SanClusterNetworkConfig;
+}
+
+/**
+ * Cluster network configuration for SAN deployments (CSV/LiveMig traffic).
+ */
+@added(Versions.v2026_03_15_preview)
+model SanClusterNetworkConfig {
+  /**
+   * QoS and adapter overrides for the cluster network.
+   */
+  adapterProperties?: SanAdapterProperties;
+
+  /**
+   * Per-adapter IP configuration for the cluster network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["name"])
+  adapterIPConfig?: SanAdapterIPConfig[];
+}
+
+/**
+ * QoS and adapter property overrides for SAN cluster network traffic.
+ */
+@added(Versions.v2026_03_15_preview)
+model SanAdapterProperties {
+  /**
+   * 802.1p priority value for cluster traffic.
+   */
+  priorityValue8021ActionCluster?: int32;
+
+  /**
+   * 802.1p priority value for SMB traffic.
+   */
+  priorityValue8021ActionSmb?: int32;
+
+  /**
+   * SMB bandwidth percentage (1-97).
+   */
+  bandwidthPercentageSmb?: int32;
+
+  /**
+   * Jumbo frame size in bytes.
+   */
+  jumboPacket?: int32;
+}
+
+/**
+ * Per-adapter IP configuration for SAN cluster network.
+ */
+@added(Versions.v2026_03_15_preview)
+model SanAdapterIPConfig {
+  /**
+   * Logical name of the adapter IP configuration (e.g., clusterNetwork-A).
+   */
+  name?: string;
+
+  /**
+   * Physical NIC name (e.g., ethernet 3).
+   */
+  networkAdapterName?: string;
+
+  /**
+   * VLAN ID (0-4095). Value of 0 or omitted means untagged.
+   */
+  vlanId?: int32;
+
+  /**
+   * Subnet address prefix in CIDR notation (e.g., 10.10.30.0/24).
+   */
+  addressPrefix?: string;
 }
 
 /**
@@ -5849,6 +6058,38 @@ model HciStorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the device.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_15_preview)
+  @identifiers(#["id"])
+  disks?: Disk[];
+}
+
+/**
+ * Represents a storage disk on the device.
+ */
+@added(Versions.v2026_03_15_preview)
+model Disk {
+  /**
+   * The unique identifier of the disk.
+   */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /**
+   * The size of the disk in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /**
+   * The type of the disk. For example, S2D or SAN.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 }
 
 /**
@@ -6975,6 +7216,13 @@ model StorageProfile {
    */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+
+  /**
+   * List of storage disks on the device.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  disks?: Disk[];
 }
 /**
  * details of validation failure
@@ -8228,10 +8476,10 @@ model GpuPartitionDetails {
   partitionableGpuName?: string;
 
   /**
-   * Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.
+   * Reported partition size in MB (default: 0 for DDA) For e.g. 2, 4, etc.
    */
   @visibility(Lifecycle.Read)
-  partitionSizeGb?: string;
+  partitionSizeMb?: string;
 
   /**
    * This is the count of total partitions.
@@ -8530,7 +8778,7 @@ model DiskConfiguration {
 @added(Versions.v2026_03_15_preview)
 model DiskVolumeConfiguration {
   /** Size of the volume in bytes. */
-  sizeInBytes: int64;
+  sizeInBytes: string;
 
   /** Mount path for the volume (e.g., /data or D:\data). */
   path: string;
@@ -8586,7 +8834,7 @@ model DiskReportedProperties {
 
   /** Size in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Type of the disk. */
   @visibility(Lifecycle.Read)
@@ -8598,7 +8846,7 @@ model DiskReportedProperties {
 
   /** Unallocated space on the disk in bytes. */
   @visibility(Lifecycle.Read)
-  unallocatedSizeInBytes?: int64;
+  unallocatedSizeInBytes?: string;
 
   /** Current state of the disk. */
   @visibility(Lifecycle.Read)
@@ -8680,7 +8928,7 @@ model DiskVolumeReportedProperties {
 
   /** Size of the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Mount path for the volume. */
   @visibility(Lifecycle.Read)
@@ -8748,11 +8996,11 @@ model VolumeReportedProperties {
 
   /** Total size of the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Available space on the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeRemainingInBytes?: int64;
+  sizeRemainingInBytes?: string;
 
   /** File system on the volume. */
   @visibility(Lifecycle.Read)
@@ -8837,7 +9085,7 @@ model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
   jobType: DiskJobType.CreateVolume;
 
   /** Size of the volume to create in bytes. */
-  sizeInBytes: int64;
+  sizeInBytes: string;
 
   /** Absolute path where the volume should be mounted. */
   path: string;
@@ -9722,4 +9970,217 @@ union NetworkProfileNetworkType {
 
   /** Logical network type. */
   Logical: "Logical",
+}
+
+////////////////////////////////////////////////////////////////
+////////// PRIVATE PREVIEW - Cluster Volume Models /////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Properties of a cluster volume.
+ */
+@added(Versions.v2026_03_15_preview)
+model ClusterVolumeProperties {
+  // TODO: Add clusterVolumeConfiguration when cluster volume-level configuration is ready to be exposed.
+
+  /** The actual state of the cluster volume as reported by the cluster. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: ClusterVolumeReportedProperties;
+
+  /** Provisioning state of the cluster volume resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * The actual state of the cluster volume as reported by the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model ClusterVolumeReportedProperties {
+  /** Volume GUID. Primary identifier for the cluster volume. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** User-visible volume label. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Cluster volume mount path. This can be a CSV path or device path depending on the backing storage. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** Cluster resource GUID for a PDR-backed volume when applicable. */
+  @visibility(Lifecycle.Read)
+  clusterResourceId?: string;
+
+  /** Health roll-up reported by Windows Health Service. */
+  @visibility(Lifecycle.Read)
+  statusCategory?: ClusterVolumeStatusCategory;
+
+  /** Operational status codes for the volume. */
+  @visibility(Lifecycle.Read)
+  status?: int32[];
+
+  /** Total cluster volume size in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /** Free space in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: string;
+
+  /** Filesystem type (NTFS, ReFS, CSVFS_NTFS, CSVFS_ReFS). */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
+
+  /** Volume resiliency type. */
+  @visibility(Lifecycle.Read)
+  resiliency?: ClusterVolumeResiliency;
+
+  /** Dominant media type for the volume. */
+  @visibility(Lifecycle.Read)
+  media?: ClusterVolumeMediaType;
+
+  /** Fault domain level for placement. */
+  @visibility(Lifecycle.Read)
+  faultDomainAwareness?: ClusterVolumeFaultDomainAwareness;
+
+  /** Provisioning mode for the volume. */
+  @visibility(Lifecycle.Read)
+  provisioningType?: ClusterVolumeProvisioningType;
+
+  /** Name of the containing storage pool. */
+  @visibility(Lifecycle.Read)
+  storagePoolName?: string;
+
+  /** Current owner node for the cluster volume when applicable. */
+  @visibility(Lifecycle.Read)
+  server?: string;
+
+  /** Whether data deduplication is enabled. */
+  @visibility(Lifecycle.Read)
+  isDedupeEnabled?: boolean;
+
+  /** Whether BitLocker encryption is enabled. */
+  @visibility(Lifecycle.Read)
+  isEncrypted?: boolean;
+
+  /** Whether ReFS integrity streams are enabled. */
+  @visibility(Lifecycle.Read)
+  isIntegrityEnabled?: boolean;
+}
+
+/**
+ * Health roll-up status category for a cluster volume.
+ */
+@added(Versions.v2026_03_15_preview)
+union ClusterVolumeStatusCategory {
+  string,
+
+  /** Volume is healthy. */
+  Healthy: "Healthy",
+
+  /** Volume has a warning. */
+  Warning: "Warning",
+
+  /** Volume is unhealthy. */
+  Unhealthy: "Unhealthy",
+
+  /** Volume is missing. */
+  Missing: "Missing",
+
+  /** Other status. */
+  Others: "Others",
+}
+
+/**
+ * Volume resiliency type.
+ */
+@added(Versions.v2026_03_15_preview)
+union ClusterVolumeResiliency {
+  string,
+
+  /** Unknown resiliency. */
+  Unknown: "Unknown",
+
+  /** Simple (no resiliency). */
+  Simple: "Simple",
+
+  /** Single parity. */
+  SingleParity: "SingleParity",
+
+  /** Dual parity. */
+  DualParity: "DualParity",
+
+  /** Two-way mirror. */
+  TwoWayMirror: "TwoWayMirror",
+
+  /** Three-way mirror. */
+  ThreeWayMirror: "ThreeWayMirror",
+
+  /** Mirror-accelerated parity (MRT). */
+  MRT: "MRT",
+}
+
+/**
+ * Dominant media type for a cluster volume.
+ */
+@added(Versions.v2026_03_15_preview)
+union ClusterVolumeMediaType {
+  string,
+
+  /** Unknown media type. */
+  Unknown: "Unknown",
+
+  /** Hard disk drive. */
+  Disk: "Disk",
+
+  /** Solid-state drive. */
+  SSD: "SSD",
+
+  /** Journal device. */
+  Journal: "Journal",
+
+  /** Storage-class memory. */
+  SCM: "SCM",
+}
+
+/**
+ * Fault domain awareness level for a cluster volume.
+ */
+@added(Versions.v2026_03_15_preview)
+union ClusterVolumeFaultDomainAwareness {
+  string,
+
+  /** Unknown fault domain. */
+  Unknown: "Unknown",
+
+  /** Drive-level fault domain. */
+  Drive: "Drive",
+
+  /** Enclosure-level fault domain. */
+  Enclosure: "Enclosure",
+
+  /** Server-level fault domain. */
+  Server: "Server",
+
+  /** Chassis-level fault domain. */
+  Chassis: "Chassis",
+
+  /** Rack-level fault domain. */
+  Rack: "Rack",
+}
+
+/**
+ * Provisioning type for a cluster volume.
+ */
+@added(Versions.v2026_03_15_preview)
+union ClusterVolumeProvisioningType {
+  string,
+
+  /** Thin provisioning. */
+  Thin: "Thin",
+
+  /** Fixed provisioning. */
+  Fixed: "Fixed",
 }
