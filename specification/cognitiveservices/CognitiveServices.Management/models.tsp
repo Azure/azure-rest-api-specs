@@ -5450,10 +5450,12 @@ model RaiPolicyListResult {
 union ComputeProvisioningState {
   string,
   Accepted: "Accepted",
-  Scaling: "Scaling",
   Succeeded: "Succeeded",
-  Deleting: "Deleting",
   Failed: "Failed",
+  Canceled: "Canceled",
+  Deleting: "Deleting",
+  Scaling: "Scaling",
+  Disabled: "Disabled",
 }
 
 /**
