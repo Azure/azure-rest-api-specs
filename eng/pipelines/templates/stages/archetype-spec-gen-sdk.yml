@@ -209,7 +209,6 @@ stages:
       - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
         parameters:
           npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
-          CustomCondition: and(succeeded(), contains(variables['SdkRepoName'], '-js'))
 
       - task: UsePythonVersion@0
         inputs:
