@@ -7,10 +7,9 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 interface ManagedAgentIdentityBlueprints {
-  /**
-   * Creates a managed agent identity blueprint.
-   */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @put
   @route("/managedAgentIdentityBlueprints/{managed_agent_identity_blueprint_name}")
   @extension(
@@ -28,7 +27,6 @@ interface ManagedAgentIdentityBlueprints {
 
       ...CreateOrUpdateManagedAgentIdentityBlueprintRequest;
     },
-    CreateOrUpdateManagedAgentIdentityBlueprintRequest,
     ManagedAgentIdentityBlueprint
   >;
 
