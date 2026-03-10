@@ -195,3 +195,11 @@ using Dynatrace.Observability;
 @@alternateType(ManageAgentList.id, armResourceIdentifier, "csharp");
 @@clientName(LiftrResourceCategories, "LiftrResourceCategory", "csharp");
 @@clientName(VMHostsListResponse, "VmHostsListResult", "csharp");
+
+// Java backward compatibility
+@@clientName(SSOStatus, "SsoStatus", "java");
+@@clientName(SSODetailsRequest, "SsoDetailsRequest", "java");
+@@clientName(SSODetailsResponse, "SsoDetailsResponse", "java");
+@@clientName(AppServiceInfo.hostName, "hostname", "java");
+@@clientName(VMInfo.hostName, "hostname", "java");
+@@clientName(MonitorResources.getSSODetails, "getSsoDetails", "java");
