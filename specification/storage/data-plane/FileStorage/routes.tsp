@@ -124,6 +124,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/?comp=list")
   @get
+  @list
   listSharesSegment is StorageOperationResponseBody<
     {
       ...PrefixParameter;
@@ -854,6 +855,7 @@ interface Directory {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?restype=directory&comp=list")
   @get
+  @list
   listFilesAndDirectoriesSegment is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
@@ -885,6 +887,7 @@ interface Directory {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}?comp=listhandles")
   @get
+  @list
   listHandles is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
@@ -1613,6 +1616,7 @@ interface File {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/{shareName}/{directory}/{fileName}?comp=listhandles")
   @get
+  @list
   listHandles is StorageOperationResponseBody<
     {
       ...ShareNamePathParameter;
