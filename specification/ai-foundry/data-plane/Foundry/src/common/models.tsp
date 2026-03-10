@@ -65,6 +65,7 @@ union FoundryFeaturesOptInKeys {
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   toolset_v1_preview: "Toolsets=V1Preview",
+  agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
@@ -93,6 +94,22 @@ op FoundryDataPlanePreviewOperation<
 > is FoundryDataPlaneOperation<
   {
     ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>;
+    ...Params;
+  },
+  Response,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryDataPlaneRequiredPreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+> is FoundryDataPlaneOperation<
+  {
+    ...WithRequiredFoundryPreviewHeader<AreaPreviewLabel>;
     ...Params;
   },
   Response,
