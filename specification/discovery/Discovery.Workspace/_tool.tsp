@@ -61,7 +61,7 @@ scalar DataUri extends string;
  *  2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.
  */
 @added(Versions.`2026-02-01-preview`)
-@pattern("^discovery://(storages|storageassets)/.*$")
+@pattern("^discovery://storageassets/.*$")
 scalar StorageUri extends string;
 
 /** Data URI and path where it will be mounted in the tool container. */
@@ -75,6 +75,7 @@ model InputDataMount {
   storageUri: StorageUri;
 
   /** Absolute path within the container at which to mount this input. */
+  @pattern("^/.+$")
   mountPath: string;
 }
 
@@ -98,6 +99,7 @@ model OutputDataMount {
   storageUri: StorageUri;
 
   /** Absolute path within the container from which to collect output data. */
+  @pattern("^/.+$")
   mountPath: string;
 }
 
@@ -112,6 +114,7 @@ model OutputDataUri {
   storageUri: StorageUri;
 
   /** The path within the container from which the output was collected. */
+  @pattern("^/.+$")
   mountPath: string;
 }
 
@@ -230,10 +233,10 @@ model RunRequest {
   @doc("The Discovery Storage resource to use for this run.")
   storageId?: DiscoveryStorageId;
 
-  @doc("Input data and associated mountPath for each.")
+  @doc("Input data references and mount paths.")
   inputData?: InputDataMount[];
 
-  @doc("Output data mount paths (with optional data URIs to specify persistence location).")
+  @doc("Output data references and mount paths.")
   outputData?: OutputDataMount[];
 
   @doc("IDs of NodePools to use for this run.")
@@ -244,20 +247,24 @@ model RunRequest {
 
   @added(Versions.`2026-02-01-preview`)
   @doc("Optional environment variables to set in the tool container. This must not contain any secrets.")
+  @maxItems(50)
   environmentVariables?: EnvironmentVariable[];
 }
 
 alias EnvironmentVariable = {
   @doc("Name of the environment variable. This must not contain any secrets.")
+  @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
   name: string;
 
   @doc("Value of the environment variable. This must not contain any secrets.")
-  value: string;
+  @maxLength(8192) // Arbitrary length limit to discourage improper usage of this field. In general, Linux will support much larger env size than this.
+  value?: string;
 };
 
 @doc("A file to be included in the input data for a tool run and the path where it will be mounted, relative to the working directory.")
 model InlineFile {
   @doc("Absolute path within the container at which to mount this file.")
+  @pattern("^/.+$")
   mountPath: string;
 
   /*

@@ -2451,7 +2451,8 @@
       "properties": {
         "mountPath": {
           "type": "string",
-          "description": "Absolute path within the container at which to mount this file."
+          "description": "Absolute path within the container at which to mount this file.",
+          "pattern": "^/.+$"
         },
         "encodedFile": {
           "type": "string",
@@ -2474,7 +2475,8 @@
         },
         "mountPath": {
           "type": "string",
-          "description": "Absolute path within the container at which to mount this input."
+          "description": "Absolute path within the container at which to mount this input.",
+          "pattern": "^/.+$"
         }
       },
       "required": [
@@ -2822,7 +2824,8 @@
         },
         "mountPath": {
           "type": "string",
-          "description": "Absolute path within the container from which to collect output data."
+          "description": "Absolute path within the container from which to collect output data.",
+          "pattern": "^/.+$"
         }
       },
       "required": [
@@ -2840,7 +2843,8 @@
         },
         "mountPath": {
           "type": "string",
-          "description": "The path within the container from which the output was collected."
+          "description": "The path within the container from which the output was collected.",
+          "pattern": "^/.+$"
         }
       },
       "required": [
@@ -2983,14 +2987,14 @@
         },
         "inputData": {
           "type": "array",
-          "description": "Input data and associated mountPath for each.",
+          "description": "Input data references and mount paths.",
           "items": {
             "$ref": "#/definitions/InputDataMount"
           }
         },
         "outputData": {
           "type": "array",
-          "description": "Output data mount paths (with optional data URIs to specify persistence location).",
+          "description": "Output data references and mount paths.",
           "items": {
             "$ref": "#/definitions/OutputDataMount"
           }
@@ -3018,21 +3022,23 @@
         "environmentVariables": {
           "type": "array",
           "description": "Optional environment variables to set in the tool container. This must not contain any secrets.",
+          "maxItems": 50,
           "items": {
             "type": "object",
             "properties": {
               "name": {
                 "type": "string",
-                "description": "Name of the environment variable. This must not contain any secrets."
+                "description": "Name of the environment variable. This must not contain any secrets.",
+                "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
               },
               "value": {
                 "type": "string",
-                "description": "Value of the environment variable. This must not contain any secrets."
+                "description": "Value of the environment variable. This must not contain any secrets.",
+                "maxLength": 8192
               }
             },
             "required": [
-              "name",
-              "value"
+              "name"
             ]
           }
         }
@@ -3168,7 +3174,7 @@
     "StorageUri": {
       "type": "string",
       "description": "A URI that references data. There are two forms this can take:\n1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.",
-      "pattern": "^discovery://(storages|storageassets)/.*$"
+      "pattern": "^discovery://storageassets/.*$"
     },
     "Suggestion": {
       "type": "object",
