@@ -91,6 +91,9 @@ directive:
   - suppress: R2015
     from: common-types.json
     reason: common-types doesn't need to reference api version.
+  - suppress: PathForResourceAction
+    from: AttributeNamespaces.json
+    reason: The createAttributeNamespace action path follows the service's existing API design. Changing the path format would break the service contract.
 ```
 
 ### Tag: package-2026-03-01-preview
@@ -117,7 +120,6 @@ input-file:
   - preview/2024-09-01-preview/RoleManagementPolicy.json
   - preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
-  - preview/2025-12-01-preview/AttributeNamespaces.json
   - preview/2026-03-01-preview/AttributeNamespaces.json
 ```
 
