@@ -4202,24 +4202,7 @@
         }
       }
     },
-    "BookshelfUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Bookshelf.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/BookshelfUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "BookshelfUpdateProperties": {
+    "BookshelfPropertiesUpdate": {
       "type": "object",
       "description": "The updatable properties of the Bookshelf.",
       "properties": {
@@ -4240,6 +4223,23 @@
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "BookshelfUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Bookshelf.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/BookshelfPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -4442,6 +4442,30 @@
         "keyVaultUri",
         "keyName"
       ]
+    },
+    "KeyVaultPropertiesUpdate": {
+      "type": "object",
+      "description": "For Key Vault Key references",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The Key Name in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The Key Version in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "KeyVaultWithIdentityReferenceProperties": {
       "type": "object",
@@ -5281,6 +5305,25 @@
         "kubeletIdentity"
       ]
     },
+    "SupercomputerIdentitiesUpdate": {
+      "type": "object",
+      "description": "Dictionary of identity properties for the Supercomputer.",
+      "properties": {
+        "workloadIdentities": {
+          "type": "object",
+          "description": "User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "SupercomputerListResult": {
       "type": "object",
       "description": "The response of a Supercomputer list operation.",
@@ -5445,6 +5488,21 @@
         "identities"
       ]
     },
+    "SupercomputerPropertiesUpdate": {
+      "type": "object",
+      "description": "Updatable properties for Supercomputer (all fields optional for PATCH)",
+      "properties": {
+        "identities": {
+          "$ref": "#/definitions/SupercomputerIdentitiesUpdate",
+          "description": "Dictionary of identity properties.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "SupercomputerUpdate": {
       "type": "object",
       "description": "Update model for Supercomputer PATCH operations",
@@ -5457,23 +5515,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/SupercomputerUpdateProperties",
+          "$ref": "#/definitions/SupercomputerPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "SupercomputerUpdateProperties": {
-      "type": "object",
-      "description": "Updatable properties for Supercomputer (all fields optional for PATCH)",
-      "properties": {
-        "identities": {
-          "$ref": "#/definitions/SupercomputerIdentities",
-          "description": "Dictionary of identity properties.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       }
     },
@@ -5591,7 +5634,7 @@
     },
     "ToolUpdate": {
       "type": "object",
-      "description": "Update model for Tool PATCH operations",
+      "description": "The type used for update operations of the Tool.",
       "properties": {
         "tags": {
           "type": "object",
@@ -5608,7 +5651,7 @@
     },
     "ToolUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties for Tool (all fields optional for PATCH)",
+      "description": "The updatable properties of the Tool.",
       "properties": {
         "version": {
           "type": "string",
@@ -6125,24 +6168,7 @@
         "workspaceIdentity"
       ]
     },
-    "WorkspaceUpdate": {
-      "type": "object",
-      "description": "Update model for Workspace PATCH operations",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/WorkspaceUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "WorkspaceUpdateProperties": {
+    "WorkspacePropertiesUpdate": {
       "type": "object",
       "description": "Updatable properties for Workspace (all fields optional for PATCH)",
       "properties": {
@@ -6168,7 +6194,7 @@
           ]
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/KeyVaultPropertiesUpdate",
           "description": "The key to use for encrypting data at rest when customer managed keys are enabled.",
           "x-ms-mutability": [
             "read",
@@ -6184,6 +6210,23 @@
             "update",
             "create"
           ]
+        }
+      }
+    },
+    "WorkspaceUpdate": {
+      "type": "object",
+      "description": "Update model for Workspace PATCH operations",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspacePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
       }
     }
