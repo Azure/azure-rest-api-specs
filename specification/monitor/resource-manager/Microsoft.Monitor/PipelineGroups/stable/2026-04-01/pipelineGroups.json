@@ -250,7 +250,7 @@
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           },
           "Create a PipelineGroup instance using a syslog receiver and backfill.": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithBackfill.json"
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithPersistence.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransformToCustomTable.json"
@@ -269,6 +269,27 @@
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table": {
             "$ref": "./examples/PipelineGroupCreateStandardSyslog.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to cefRfc3164": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCefRfc3164.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to cefRfc5424": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCefRfc5424.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to rawCef": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithRawCef.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164 and allowSkipPriHeader set to false": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc3164AndAllowSkipPri.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc3164 and syslogRfc5424 for migration": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithAllowedFormats.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with allowedFormats set to syslogRfc5424": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithSyslogRfc5424.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithUdp.json"
@@ -426,6 +447,54 @@
     }
   },
   "definitions": {
+    "AllowedFormats": {
+      "type": "string",
+      "description": "Supported literals for allowed syslog and CEF parsing formats.",
+      "enum": [
+        "all",
+        "syslogRfc3164",
+        "syslogRfc5424",
+        "cefRfc3164",
+        "cefRfc5424",
+        "rawCef"
+      ],
+      "x-ms-enum": {
+        "name": "AllowedFormats",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "all",
+            "value": "all",
+            "description": "Allow all supported syslog and CEF formats."
+          },
+          {
+            "name": "syslogRfc3164",
+            "value": "syslogRfc3164",
+            "description": "Allow RFC3164 syslog messages."
+          },
+          {
+            "name": "syslogRfc5424",
+            "value": "syslogRfc5424",
+            "description": "Allow RFC5424 syslog messages."
+          },
+          {
+            "name": "cefRfc3164",
+            "value": "cefRfc3164",
+            "description": "Allow CEF payloads embedded in RFC3164 syslog messages."
+          },
+          {
+            "name": "cefRfc5424",
+            "value": "cefRfc5424",
+            "description": "Allow CEF payloads embedded in RFC5424 syslog messages."
+          },
+          {
+            "name": "rawCef",
+            "value": "rawCef",
+            "description": "Allow raw CEF payloads without syslog encapsulation."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",
@@ -526,32 +595,14 @@
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
           "description": "API configurations for Azure Monitor workspace exporter."
         },
-        "backfill": {
-          "$ref": "#/definitions/BackfillConfiguration",
-          "description": "Backfill configurations."
+        "persistence": {
+          "$ref": "#/definitions/ExporterPersistenceConfiguration",
+          "description": "Persistence options for the exporter."
         }
       },
       "required": [
         "api"
       ]
-    },
-    "BackfillConfiguration": {
-      "type": "object",
-      "description": "Backfill configurations.",
-      "properties": {
-        "maxStorageUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage usage in gigabytes.",
-          "minimum": 1
-        },
-        "retentionPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period in minutes.",
-          "minimum": 1
-        }
-      }
     },
     "BatchProcessor": {
       "type": "object",
@@ -728,6 +779,24 @@
         "type",
         "name"
       ]
+    },
+    "ExporterPersistenceConfiguration": {
+      "type": "object",
+      "description": "Persistence options for this exporter.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in gigabytes.",
+          "minimum": 1
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes.",
+          "minimum": 1
+        }
+      }
     },
     "ExporterType": {
       "type": "string",
@@ -1379,6 +1448,16 @@
           "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
+        "allowedFormats": {
+          "type": "array",
+          "description": "List of allowed message formats for syslog/CEF ingestion. Default 'all'.",
+          "default": [
+            "all"
+          ],
+          "items": {
+            "$ref": "#/definitions/AllowedFormats"
+          }
+        },
         "transportProtocol": {
           "type": "string",
           "description": "Transport protocol. Default tcp.",
@@ -1403,6 +1482,11 @@
               }
             ]
           }
+        },
+        "allowSkipPriHeader": {
+          "type": "boolean",
+          "description": "Configure the receiver to allow parsing of messages without the PRI header. Default false.",
+          "default": false
         }
       },
       "required": [

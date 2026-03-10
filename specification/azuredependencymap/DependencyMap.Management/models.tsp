@@ -121,6 +121,72 @@ model GetConnectionsForProcessOnFocusedMachineRequest {
   filters?: DependencyMapVisualizationFilter;
 }
 
+@added(Versions.v2026_03_01_preview)
+@doc("Model representing the result of the getDependencyViewForFocusedMachine asynchronous operation.")
+model GetDependencyViewForFocusedMachineOperationResult {
+  @doc("The status URL of the asynchronous operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Model representing the result of the getConnectionsWithConnectedMachineForFocusedMachine asynchronous operation.")
+model GetConnectionsWithConnectedMachineForFocusedMachineOperationResult {
+  @doc("The status URL of the asynchronous operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Model representing the result of the getConnectionsForProcessOnFocusedMachine asynchronous operation.")
+model GetConnectionsForProcessOnFocusedMachineOperationResult {
+  @doc("The status URL of the asynchronous operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+}
+
 @doc("ExportDependencies request model")
 model ExportDependenciesRequest {
   @doc("Machine arm id")

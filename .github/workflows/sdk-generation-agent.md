@@ -36,7 +36,6 @@ env:
   AZSDK_CLI_PATH: /tmp/bin
   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
   AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
-  AZURE_FEDERATED_TOKEN_FILE: /tmp/azure-oidc-token
   GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_ACTIONS: "true"
 tools:
@@ -47,7 +46,7 @@ safe-outputs:
     max: 15
     hide-older-comments: true
   messages:
-    run-started: "[{workflow_name}]({run_url}) started for sdk generation."
+    run-started: "[{workflow_name}]({run_url}) started for Azure sdk generation."
   noop:
 ---
 
@@ -100,6 +99,7 @@ When validation succeeds, execute the following steps in order.
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
+- **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 5.
 
 5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
 
@@ -120,8 +120,29 @@ When validation succeeds, execute the following steps in order.
 3. If failed, add a comment indicating failure and include pipeline link and failure summary (fallback to `noop` only when comments are unavailable).
 4. Add a final status update by commenting one line per language using the exact format `sdk pr for  <language>: <Link to sdk pull request>` (fallback to `noop` only if commenting fails).
 
+## Failure Troubleshooting Comment
+
+If any SDK generation pipeline fails for one or more languages, add a comment on the issue with the following information:
+
+1. List each language whose SDK generation pipeline failed.
+2. For each failed language, include the full, non-redacted pipeline run URL so the user can inspect logs directly.
+3. For each failed language, run the pipeline analysis command **once per language** to identify the root cause:
+   - Execute `azsdk azp analyze <build-id> -a false` where `<build-id>` is the pipeline build ID for that language.
+   - Run this command only once per failed language — do not retry or re-run the analysis for the same build.
+   - Review the analysis output and extract a concise summary of the core error (e.g. compilation error, missing dependency, TypeSpec validation failure).
+   - Include the error summary under each failed language in the issue comment so users can understand the failure without inspecting pipeline logs.
+
+4. Include the following troubleshooting guidance in the comment:
+
+   > To troubleshoot SDK generation failures locally:
+   >
+   > 1. Clone the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repository.
+   > 2. Open the cloned repository in VS Code and use GitHub Copilot Chat with a prompt like "generate SDK locally for \<failed language\>" to troubleshoot the error.
+   > 3. Make any required TypeSpec changes to fix the SDK generation errors, then re-trigger SDK generation.
+
 ## Output Requirements
 
 - Always leave a visible status outcome when validation succeeds (triggered, failed, or completed).
 - Keep comments concise and actionable.
 - If no SDK PR links are found after completion, explicitly state that no SDK PR links were discovered and include the pipeline link for manual inspection.
+- Create a consolidated comment to show SDK pull request status and any troubleshooting and failure details in one comment.

@@ -1,0 +1,29 @@
+{
+  "title": "SoftwareSubscriptions_RefreshFulfillment_200",
+  "operationId": "SoftwareSubscriptions_RefreshFulfillment",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "softwareSubscriptionName": "testsw1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "refreshFulfillment_operationResultId",
+        "name": "refreshFulfillment_operationResultName",
+        "status": "Succeeded",
+        "properties": {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.SoftwarePlan/softwareSubscriptions/testsw1"
+        },
+        "type": "OperationResult"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.SoftwarePlan/softwareSubscriptions/testsw1/operationResults/refreshFulfillment_operationResultId",
+        "Retry-After": 10
+      }
+    }
+  }
+}

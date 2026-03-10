@@ -5,10 +5,9 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Network Fabric Properties defines the properties of the resource.")
-model NetworkFabricProperties {
-  ...AnnotationResource;
-
+model NetworkFabricProperties extends AnnotationResource {
   @doc("Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
@@ -323,10 +322,9 @@ model VpnConfigurationPatchableProperties {
   optionAProperties?: VpnOptionAPatchProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The Network Fabric resource definition.")
-model NetworkFabricPatch {
-  ...TagsUpdate;
-
+model NetworkFabricPatch extends TagsUpdate {
   @doc("Network Fabric Patch properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
@@ -346,40 +344,11 @@ model NetworkFabricPatch {
 @doc("Network Fabric Patch properties.")
 model NetworkFabricPatchProperties {
   ...AnnotationResource;
-
-  @doc("Number of compute racks associated to Network Fabric.")
-  @maxValue(8)
-  @minValue(1)
-  rackCount?: int32;
-
-  @doc("Number of servers.Possible values are from 1-16.")
-  @maxValue(16)
-  @minValue(1)
-  serverCountPerRack?: int32;
-
-  @doc("IPv4Prefix for Management Network. Example: 10.1.0.0/19.")
-  @minLength(1)
-  ipv4Prefix?: string;
-
-  @doc("IPv6Prefix for Management Network. Example: 3FFE:FFFF:0:CD40::/59.")
-  @minLength(1)
-  ipv6Prefix?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-  @doc("ASN of CE devices for CE/PE connectivity.")
-  @maxValue(4294967295)
-  @minValue(1)
-  fabricASN?: int64;
+  ...NetworkFabricPatchableProperties;
 
   @doc("Bring your own storage account configurations for Network Fabric.")
   @added(Versions.v2024_06_15_preview)
   storageAccountConfiguration?: StorageAccountPatchConfiguration;
-
-  @doc("Network and credentials configuration already applied to terminal server.")
-  terminalServerConfiguration?: TerminalServerPatchConfiguration;
-
-  @doc("Configuration to be used to setup the management network.")
-  managementNetworkConfiguration?: ManagementNetworkPatchConfiguration;
 
   @doc("Hardware alert threshold percentage. Possible values are from 20 to 100.")
   @added(Versions.v2024_06_15_preview)
@@ -434,6 +403,39 @@ model NetworkFabricPatchProperties {
   upgradeProfile?: UpgradeProfilePropertiesPatchProperties[];
 }
 
+@doc("Network Fabric updatable properties.")
+model NetworkFabricPatchableProperties {
+  @doc("Number of compute racks associated to Network Fabric.")
+  @maxValue(8)
+  @minValue(1)
+  rackCount?: int32;
+
+  @doc("Number of servers.Possible values are from 1-16.")
+  @maxValue(16)
+  @minValue(1)
+  serverCountPerRack?: int32;
+
+  @doc("IPv4Prefix for Management Network. Example: 10.1.0.0/19.")
+  @minLength(1)
+  ipv4Prefix?: string;
+
+  @doc("IPv6Prefix for Management Network. Example: 3FFE:FFFF:0:CD40::/59.")
+  @minLength(1)
+  ipv6Prefix?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of CE devices for CE/PE connectivity.")
+  @maxValue(4294967295)
+  @minValue(1)
+  fabricASN?: int64;
+
+  @doc("Network and credentials configuration already applied to terminal server.")
+  terminalServerConfiguration?: TerminalServerPatchConfiguration;
+
+  @doc("Configuration to be used to setup the management network.")
+  managementNetworkConfiguration?: ManagementNetworkPatchConfiguration;
+}
+
 @doc("Network and credentials configuration already applied to terminal server.")
 model TerminalServerPatchConfiguration {
   @doc("Username for the terminal server connection.")
@@ -471,10 +473,9 @@ model ManagementNetworkPatchConfiguration {
   workloadVpnConfiguration?: VpnConfigurationPatchableProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Model used for Upgrade Network Fabric Properties")
-model UpgradeNetworkFabricProperties {
-  ...UpdateVersion;
-
+model UpgradeNetworkFabricProperties extends UpdateVersion {
   @doc("Action to be performed while upgrading the fabric.")
   action?: NetworkFabricUpgradeAction;
 }
@@ -486,8 +487,9 @@ model ValidateConfigurationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("option A properties")
-model VpnOptionAProperties {
+model VpnOptionAProperties extends Layer3IpPrefixProperties {
   @doc("MTU to use for option A peering.")
   @maxValue(9200)
   @minValue(64)
@@ -506,13 +508,12 @@ model VpnOptionAProperties {
 
   @doc("BFD Configuration properties.")
   bfdConfiguration?: BfdConfiguration;
-
-  ...Layer3IpPrefixProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Peering optionA properties")
-model VpnOptionAPatchProperties {
+model VpnOptionAPatchProperties extends Layer3IpPrefixPatchProperties {
   @doc("MTU to use for option A peering.")
   @maxValue(9200)
   @minValue(64)
@@ -531,8 +532,6 @@ model VpnOptionAPatchProperties {
 
   @doc("BFD Configuration properties.")
   bfdConfiguration?: BfdPatchConfiguration;
-
-  ...Layer3IpPrefixPatchProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -680,13 +679,12 @@ model FeatureFlagProperties {
   featureFlagValue?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
-model ArmConfigurationDiffResponse {
+model ArmConfigurationDiffResponse extends CommonErrorResponse {
   @doc("Storage URL to the diff file.")
   configurationDiffUrl?: string;
-
-  ...ErrorResponse;
 }
 
 @doc("Arm Configuration Diff Response V2.")
@@ -704,13 +702,12 @@ model ArmConfigurationDiffResponseProperties {
   configurationDiffUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
-model ViewDeviceConfigurationResponse {
+model ViewDeviceConfigurationResponse extends CommonErrorResponse {
   @doc("Storage URL to the device configuration file.")
   deviceConfigurationUrl?: string;
-
-  ...ErrorResponse;
 }
 
 @doc("View Device Configuration Response V2.")
@@ -764,9 +761,10 @@ model CommitBatchStatusRequest {
   commitBatchId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2024_06_15_preview)
-model CommitBatchStatusResponse {
+model CommitBatchStatusResponse extends CommonErrorResponse {
   @doc("Commit Batch Identifier.")
   commitBatchId?: string;
 
@@ -775,8 +773,6 @@ model CommitBatchStatusResponse {
 
   @doc("Commit Batch Details.")
   commitBatchDetails?: CommitBatchDetails;
-
-  ...ErrorResponse;
 }
 
 @doc("Commit Batch Status Response.")
@@ -808,13 +804,12 @@ model DiscardCommitBatchRequest {
   commitBatchId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2024_06_15_preview)
-model DiscardCommitBatchResponse {
+model DiscardCommitBatchResponse extends CommonErrorResponse {
   @doc("Commit Batch Identifier.")
   commitBatchId?: string;
-
-  ...ErrorResponse;
 }
 
 @doc("Discard Commit Batch Response.")
