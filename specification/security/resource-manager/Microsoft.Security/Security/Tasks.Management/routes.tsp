@@ -18,6 +18,7 @@ interface TasksOperationGroup {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  @tag("Tasks")
   @autoRoute
   @get
   @list

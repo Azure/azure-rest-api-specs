@@ -48,12 +48,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/locations/{ascLocation}/tasks'].get.parameters[1].type__added` | added | `string` |
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Security/tasks'].get.tags__deleted` | deleted | `["Tasks"]` |
-
 ### Changes for `CloudError`
 
 | Path | Change Type | Value |

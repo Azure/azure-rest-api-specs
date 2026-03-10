@@ -74,16 +74,18 @@ alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  @tag("Tasks")
   getSubscriptionLevelTask is SecurityTaskOps.Read<SecurityTask>;
 
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  @tag("Tasks")
   listByHomeRegion is SecurityTaskOps.List<
     SecurityTask,
     Parameters = {
@@ -100,6 +102,7 @@ interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  @tag("Tasks")
   @action("{taskUpdateActionType}")
   @route("/subscriptions/{subscriptionId}/providers/microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
   updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<

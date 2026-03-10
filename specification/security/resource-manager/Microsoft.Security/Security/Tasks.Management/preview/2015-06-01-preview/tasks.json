@@ -41,9 +41,6 @@
   "tags": [
     {
       "name": "Tasks"
-    },
-    {
-      "name": "SecurityTasks"
     }
   ],
   "paths": {
@@ -51,7 +48,7 @@
       "get": {
         "operationId": "Tasks_ListByHomeRegion",
         "tags": [
-          "SecurityTasks"
+          "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
         "parameters": [
@@ -104,7 +101,7 @@
       "get": {
         "operationId": "Tasks_GetSubscriptionLevelTask",
         "tags": [
-          "SecurityTasks"
+          "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
         "parameters": [
@@ -153,6 +150,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/tasks": {
       "get": {
         "operationId": "Tasks_List",
+        "tags": [
+          "Tasks"
+        ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
         "parameters": [
           {
@@ -197,7 +197,7 @@
       "post": {
         "operationId": "Tasks_UpdateSubscriptionLevelTaskState",
         "tags": [
-          "SecurityTasks"
+          "Tasks"
         ],
         "description": "Recommended tasks that will help improve the security of the subscription proactively",
         "parameters": [
