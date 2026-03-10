@@ -27,10 +27,6 @@ interface Jobs {
   list is JobOperations.ResourceList<
     CommandJob,
     ListQueryParametersTrait<{
-      @doc("Filter jobs by type (e.g., 'Command').")
-      @query
-      jobType?: string;
-
       @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
       @query
       tag?: string;
