@@ -105,25 +105,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager.",
-            "schema": {
-              "$ref": "#/definitions/Commitment"
-            }
-          },
-          "201": {
             "description": "Created - Returns information about the network manager.",
             "schema": {
               "$ref": "#/definitions/Commitment"
             }
           },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            },
+          "201": {
+            "description": "Succeeded - Returns information about the network manager.",
             "schema": {
               "$ref": "#/definitions/Commitment"
             }
@@ -305,7 +293,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of configuration ids."
+          "description": "List of configuration IDs. Each value must be a fully qualified ARM resource ID in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/{configurationType}/{configurationName}."
         },
         "targetLocations": {
           "type": "array",
