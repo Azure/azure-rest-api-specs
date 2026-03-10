@@ -1356,10 +1356,57 @@
     "/jobs": {
       "get": {
         "operationId": "Jobs_List",
-        "description": "List Jobs in the workspace.",
+        "description": "List Jobs.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobType",
+            "in": "query",
+            "description": "Filter jobs by type (e.g., 'Command').",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "description": "Specifies which view type to apply when listing jobs.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ActiveOnly",
+                  "value": "ActiveOnly",
+                  "description": "Show only active (non-archived) jobs."
+                },
+                {
+                  "name": "ArchivedOnly",
+                  "value": "ArchivedOnly",
+                  "description": "Show only archived jobs."
+                },
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "Show all jobs regardless of archived state."
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
