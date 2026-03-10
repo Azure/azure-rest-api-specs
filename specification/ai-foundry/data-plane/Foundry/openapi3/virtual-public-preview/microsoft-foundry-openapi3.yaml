@@ -6788,13 +6788,13 @@ components:
       properties:
         code:
           type: string
-          description: The error code of the container operation, if any.
+          description: The error code of the container operation.
         type:
           type: string
-          description: The error type of the container operation, if any.
+          description: The error type of the container operation.
         message:
           type: string
-          description: The error message of the container operation, if any.
+          description: The error message of the container operation.
       description: The error details of the container operation, if any.
       x-ms-foundry-meta:
         required_previews:
@@ -6809,7 +6809,7 @@ components:
       properties:
         id:
           type: string
-          description: The ID of the container operation. This id is unique identifier across the system.
+          description: The ID of the container operation. This id is a globally unique identifier.
         agent_id:
           type: string
           description: The ID of the agent.
@@ -8362,6 +8362,9 @@ components:
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+        blob_uri:
+          type: string
+          description: The blob URI for the evaluator storage
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
@@ -16458,6 +16461,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -17075,6 +17084,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -25823,6 +25838,7 @@ components:
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
+          work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
@@ -26103,6 +26119,7 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
+            - work_iq_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -28269,6 +28286,33 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
+    WorkIQPreviewTool:
+      type: object
+      required:
+        - type
+        - work_iq_preview
+      properties:
+        type:
+          type: string
+          enum:
+            - work_iq_preview
+          description: The object type, which is always 'work_iq_preview'.
+        work_iq_preview:
+          allOf:
+            - $ref: '#/components/schemas/WorkIQPreviewToolParameters'
+          description: The WorkIQ tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A WorkIQ server-side tool.
+    WorkIQPreviewToolParameters:
+      type: object
+      required:
+        - project_connection_id
+      properties:
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
+      description: The WorkIQ tool parameters.
     WorkflowActionOutputItem:
       type: object
       required:

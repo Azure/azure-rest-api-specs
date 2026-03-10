@@ -1793,6 +1793,114 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluatorVersionUpdate'
         description: Evaluator resource
+  /evaluators/{name}/versions/{version}/credentials:
+    post:
+      operationId: Evaluators_getCredentials
+      description: Get the SAS credential to access the storage account associated with an Evaluator version.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluatorVersion to operate on.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetCredentialResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Evaluators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatorCredentialRequest'
+        description: The credential request parameters
+  /evaluators/{name}/versions/{version}/startPendingUpload:
+    post:
+      operationId: Evaluators_startPendingUpload
+      description: Start a new or get an existing pending upload of an evaluator for a specific version.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluatorVersion to operate on.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingUploadResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Evaluators
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PendingUploadRequest'
+        description: The pending upload request parameters
   /indexes:
     get:
       operationId: Indexes_listLatest
@@ -6792,6 +6900,9 @@ components:
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+        blob_uri:
+          type: string
+          description: The blob URI for the evaluator storage
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
@@ -8594,6 +8705,16 @@ components:
             - safety
             - agents
       description: The category of the evaluator
+    EvaluatorCredentialRequest:
+      type: object
+      required:
+        - blobUri
+      properties:
+        blobUri:
+          type: string
+          format: uri
+          description: 'The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`'
+      description: Request body for getting evaluator credentials
     EvaluatorDefinition:
       type: object
       required:
@@ -14524,6 +14645,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -15141,6 +15268,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -23871,6 +24004,7 @@ components:
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
+          work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
@@ -24150,6 +24284,7 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
+            - work_iq_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -26132,6 +26267,33 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
+    WorkIQPreviewTool:
+      type: object
+      required:
+        - type
+        - work_iq_preview
+      properties:
+        type:
+          type: string
+          enum:
+            - work_iq_preview
+          description: The object type, which is always 'work_iq_preview'.
+        work_iq_preview:
+          allOf:
+            - $ref: '#/components/schemas/WorkIQPreviewToolParameters'
+          description: The WorkIQ tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A WorkIQ server-side tool.
+    WorkIQPreviewToolParameters:
+      type: object
+      required:
+        - project_connection_id
+      properties:
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
+      description: The WorkIQ tool parameters.
     WorkflowActionOutputItem:
       type: object
       required:

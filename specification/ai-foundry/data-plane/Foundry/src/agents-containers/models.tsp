@@ -70,13 +70,13 @@ union AgentContainerStatus {
   }
 )
 model AgentContainerOperationError {
-  @doc("The error code of the container operation, if any.")
+  @doc("The error code of the container operation.")
   code: string;
 
-  @doc("The error type of the container operation, if any.")
+  @doc("The error type of the container operation.")
   type: string;
 
-  @doc("The error message of the container operation, if any.")
+  @doc("The error message of the container operation.")
   message: string;
 }
 
@@ -88,7 +88,7 @@ model AgentContainerOperationError {
   }
 )
 model AgentContainerOperationObject {
-  @doc("The ID of the container operation. This id is unique identifier across the system.")
+  @doc("The ID of the container operation. This id is a globally unique identifier.")
   id: string;
 
   @doc("The ID of the agent.")
