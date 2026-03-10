@@ -352,31 +352,6 @@ model CommandJob {
   creationContext?: JobSystemData;
 }
 
-// =============================================
-// List filter parameters
-// =============================================
-
-@doc("Query parameters for filtering the job list.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model ListJobsQueryParameters {
-  @doc("Number of records to skip for pagination.")
-  @query
-  skip?: int32;
-
-  @doc("Filter jobs by type (e.g., 'Command').")
-  @query
-  jobType?: string;
-
-  @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
-  @query
-  tag?: string;
-
-  @doc("Specifies which view type to apply when listing jobs.")
-  @query
-  listViewType?: ListViewType;
-}
-
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)

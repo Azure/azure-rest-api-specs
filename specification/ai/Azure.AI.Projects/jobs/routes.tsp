@@ -24,7 +24,26 @@ alias JobOperations = Azure.Core.ResourceOperations<JobServiceTraits>;
 @removed(Versions.v1)
 interface Jobs {
   @doc("List Jobs in the workspace.")
-  list is JobOperations.ResourceList<CommandJob, ListJobsQueryParameters>;
+  list is JobOperations.ResourceList<
+    CommandJob,
+    {
+      @doc("Number of records to skip for pagination.")
+      @query
+      skip?: int32;
+
+      @doc("Filter jobs by type (e.g., 'Command').")
+      @query
+      jobType?: string;
+
+      @doc("Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').")
+      @query
+      tag?: string;
+
+      @doc("Specifies which view type to apply when listing jobs.")
+      @query
+      listViewType?: ListViewType;
+    }
+  >;
 
   @doc("Get a Job by name.")
   get is JobOperations.ResourceRead<CommandJob>;
