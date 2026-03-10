@@ -222,6 +222,7 @@ using Microsoft.Cache;
 @@usage(RedisCreateParameters, Usage.input | Usage.output, "csharp");
 @@usage(RedisCreateProperties, Usage.input | Usage.output, "csharp");
 @@usage(RedisProperties, Usage.input | Usage.output, "csharp");
+@@usage(RedisResource, Usage.input | Usage.output, "csharp");
 
 @@clientName(RedisResources.listBySubscription, "getAllRedis", "csharp");
 @@clientName(RedisResources.listByRedisCache,
@@ -243,3 +244,17 @@ using Microsoft.Cache;
 @@usage(RedisLinkedServer, Usage.output, "csharp");
 
 @@clientName(TlsVersion, "RedisTlsVersion", "csharp");
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(RedisLinkedServer,
+  Azure.ResourceManager.Models.SubResource,
+  "csharp"
+);
