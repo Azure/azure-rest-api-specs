@@ -29,7 +29,11 @@ interface Compliances {
   /**
    * Details of a specific Compliance.
    */
-  get is Extension.Read<Extension.ScopeParameter, Compliance>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    Compliance,
+    Error = CloudError
+  >;
 
   /**
    * The Compliance scores of the specific management group.
@@ -37,7 +41,8 @@ interface Compliances {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     Compliance,
-    Response = ArmResponse<ComplianceList>
+    Response = ArmResponse<ComplianceList>,
+    Error = CloudError
   >;
 }
 

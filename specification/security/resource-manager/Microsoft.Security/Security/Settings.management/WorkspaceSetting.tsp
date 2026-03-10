@@ -31,7 +31,8 @@ interface WorkspaceSettings {
    */
   get is ArmResourceRead<
     WorkspaceSetting,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -41,7 +42,8 @@ interface WorkspaceSettings {
   create is ArmResourceCreateOrReplaceSync<
     WorkspaceSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<WorkspaceSetting>
+    Response = ArmResourceUpdatedResponse<WorkspaceSetting>,
+    Error = CloudError
   >;
 
   /**
@@ -51,7 +53,8 @@ interface WorkspaceSettings {
   update is ArmCustomPatchSync<
     WorkspaceSetting,
     PatchModel = WorkspaceSetting,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +64,8 @@ interface WorkspaceSettings {
   delete is ArmResourceDeleteSync<
     WorkspaceSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -70,7 +74,8 @@ interface WorkspaceSettings {
   list is ArmResourceListByParent<
     WorkspaceSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<WorkspaceSettingList>
+    Response = ArmResponse<WorkspaceSettingList>,
+    Error = CloudError
   >;
 }
 

@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
  * API spec for Microsoft.Security (Azure Security Center) resource provider
  */
 @armProviderNamespace
-@service(#{ title: "SecurityCenter" })
+@service(#{ title: "Security Center" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

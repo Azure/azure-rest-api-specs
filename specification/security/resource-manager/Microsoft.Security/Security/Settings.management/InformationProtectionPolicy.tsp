@@ -30,14 +30,19 @@ interface InformationProtectionPolicies {
   /**
    * Details of the information protection policy.
    */
-  get is Extension.Read<Extension.ScopeParameter, InformationProtectionPolicy>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    InformationProtectionPolicy,
+    Error = CloudError
+  >;
 
   /**
    * Details of the information protection policy.
    */
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
-    InformationProtectionPolicy
+    InformationProtectionPolicy,
+    Error = CloudError
   >;
 
   /**
@@ -46,7 +51,8 @@ interface InformationProtectionPolicies {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     InformationProtectionPolicy,
-    Response = ArmResponse<InformationProtectionPolicyList>
+    Response = ArmResponse<InformationProtectionPolicyList>,
+    Error = CloudError
   >;
 }
 

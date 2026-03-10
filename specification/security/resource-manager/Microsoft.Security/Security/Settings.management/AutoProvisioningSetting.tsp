@@ -31,7 +31,8 @@ interface AutoProvisioningSettings {
    */
   get is ArmResourceRead<
     AutoProvisioningSetting,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -41,7 +42,8 @@ interface AutoProvisioningSettings {
   create is ArmResourceCreateOrReplaceSync<
     AutoProvisioningSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<AutoProvisioningSetting>
+    Response = ArmResourceUpdatedResponse<AutoProvisioningSetting>,
+    Error = CloudError
   >;
 
   /**
@@ -50,7 +52,8 @@ interface AutoProvisioningSettings {
   list is ArmResourceListByParent<
     AutoProvisioningSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<AutoProvisioningSettingList>
+    Response = ArmResponse<AutoProvisioningSettingList>,
+    Error = CloudError
   >;
 }
 
