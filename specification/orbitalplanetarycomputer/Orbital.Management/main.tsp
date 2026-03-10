@@ -153,6 +153,8 @@ model GeoCatalogProperties {
   ]>[];
 }
 
+@added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2026-03-12`)
 @doc("State of the public network access.")
 union PublicNetworkAccess {
   string,
