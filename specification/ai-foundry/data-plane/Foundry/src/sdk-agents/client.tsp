@@ -145,3 +145,4 @@ model TimeZoneType {}
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
 @@alternateType(OpenAI.LocalShellExecAction.timeout_ms, duration, "java");
+@@alternateType(Agents.deleteAgent, void, "java");
