@@ -13,7 +13,7 @@ namespace Microsoft.Security;
 /**
  * Compliance of a scope
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model Compliance
   is Azure.ResourceManager.ExtensionResource<ComplianceProperties> {

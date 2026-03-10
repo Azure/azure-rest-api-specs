@@ -27,7 +27,7 @@ union AutoProvision {
   Off: "Off",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union InformationProtectionPolicyName {
   string,
 
@@ -45,7 +45,7 @@ union InformationProtectionPolicyName {
 /**
  * The rank of the sensitivity label.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Rank {
   /**
    * None
@@ -81,7 +81,7 @@ model AutoProvisioningSettingList is Azure.Core.Page<AutoProvisioningSetting>;
 /**
  * describes properties of an auto provisioning setting
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoProvisioningSettingProperties {
   /**
    * Describes what kind of security agent provisioning action to take
@@ -152,14 +152,14 @@ model CloudErrorBody {
   /**
    * The error details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -177,7 +177,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -190,7 +190,7 @@ model ComplianceList is Azure.Core.Page<Compliance>;
 /**
  * The Compliance score (percentage) of a Subscription is a sum of all Resources' Compliances under the given Subscription. A Resource Compliance is defined as the compliant ('healthy') Policy Definitions out of all Policy Definitions applicable to a given resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ComplianceProperties {
   /**
    * The timestamp when the Compliance calculation was conducted.
@@ -208,7 +208,7 @@ model ComplianceProperties {
   /**
    * An array of segment, which is the actually the compliance assessment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   assessmentResult?: ComplianceSegment[];
 }
@@ -233,7 +233,7 @@ model ComplianceSegment {
 /**
  * describes properties of an information protection policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InformationProtectionPolicyProperties {
   /**
    * Describes the last UTC time the policy was modified.
@@ -251,13 +251,13 @@ model InformationProtectionPolicyProperties {
   /**
    * Dictionary of sensitivity labels.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labels?: Record<SensitivityLabel>;
 
   /**
    * The sensitivity information types.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   informationTypes?: Record<InformationType>;
 }
 
@@ -313,7 +313,7 @@ model InformationType {
   /**
    * The recommended label id to be associated with this information type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   recommendedLabelId?: string;
 
@@ -330,7 +330,7 @@ model InformationType {
   /**
    * The information type keywords.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keywords?: InformationProtectionKeyword[];
 }
 
@@ -373,7 +373,7 @@ model WorkspaceSettingList is Azure.Core.Page<WorkspaceSetting>;
 /**
  * Workspace setting data
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceSettingProperties {
   /**
    * The full Azure ID of the workspace to save the data in

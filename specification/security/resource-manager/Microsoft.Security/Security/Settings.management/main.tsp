@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
 /**
  * API spec for Microsoft.Security (Azure Security Center) resource provider
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Security Center" })
 @versioned(Versions)

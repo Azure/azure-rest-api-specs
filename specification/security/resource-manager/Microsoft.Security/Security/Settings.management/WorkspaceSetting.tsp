@@ -39,7 +39,7 @@ interface WorkspaceSettings {
   /**
    * creating settings about where we should store your security data and logs
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     WorkspaceSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -61,7 +61,7 @@ interface WorkspaceSettings {
   /**
    * Deletes the custom workspace settings for this subscription. new VMs will report to the default workspace
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     WorkspaceSetting,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
