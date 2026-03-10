@@ -13,6 +13,7 @@ namespace Microsoft.Security;
 /**
  * Information protection policy.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
 @extensionResource
 model InformationProtectionPolicy
   is Azure.ResourceManager.ExtensionResource<InformationProtectionPolicyProperties> {
@@ -25,6 +26,7 @@ model InformationProtectionPolicy
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface InformationProtectionPolicies {
   /**
