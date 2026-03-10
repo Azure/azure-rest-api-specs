@@ -45,10 +45,10 @@ These settings apply only when `--tag=package-2026-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2026-01-preview'
 input-file:
-- preview/2026-01-01-preview/logic.json
+- preview/2026-01-01-preview/autoproject.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
-    from: logic.json
+    from: autoproject.json
     reason: "provisioningState is already marked readOnly via @visibility(Lifecycle.Read) in TypeSpec. This is a known false positive in the linter."
 ```
 
