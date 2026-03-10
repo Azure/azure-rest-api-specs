@@ -219,3 +219,4 @@ using Microsoft.DataFactory;
   "PrivateLinkResources",
   "python"
 );
+@@clientName(LinkedServiceReference.type, "LinkedServiceReferenceType", "go");
