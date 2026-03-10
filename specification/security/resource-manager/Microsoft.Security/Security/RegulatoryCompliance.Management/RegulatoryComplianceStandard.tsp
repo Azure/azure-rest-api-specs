@@ -31,7 +31,8 @@ interface RegulatoryComplianceStandards {
    */
   get is ArmResourceRead<
     RegulatoryComplianceStandard,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -47,7 +48,8 @@ interface RegulatoryComplianceStandards {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<RegulatoryComplianceStandardList>
+    Response = ArmResponse<RegulatoryComplianceStandardList>,
+    Error = CloudError
   >;
 }
 
