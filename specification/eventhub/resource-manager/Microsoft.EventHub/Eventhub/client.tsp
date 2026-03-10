@@ -142,9 +142,9 @@ using Microsoft.EventHub;
   "csharp"
 );
 @@clientName(UnavailableReason, "EventHubsNameUnavailableReason", "csharp");
-@@clientName(FailOver, "EventHubsNamespaceFailOver", "csharp");
+@@clientName(FailOver, "EventHubsNamespaceFailover", "csharp");
 @@clientName(GeoDataReplicationProperties,
-  "NamespaceGeoDataReplicationProperties",
+  "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
 @@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
