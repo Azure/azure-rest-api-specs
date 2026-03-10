@@ -31,7 +31,7 @@ model NsxLoadBalancer
  */
 model NsxLoadBalancerProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The type of load balancer (L4 or L7). */
   lbType?: LbType;
@@ -40,7 +40,7 @@ model NsxLoadBalancerProperties is AzureResourceProperties {
   adminState?: AdminState;
 
   /** ARM resource ID of the parent gateway. */
-  parentGateway?: Azure.Core.armResourceIdentifier;
+  parentGatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** The frontend configuration. */
   frontend?: FrontendConfig;

@@ -5476,7 +5476,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -5509,7 +5509,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxDistributedFirewallRule": {
       "type": "object",
@@ -5557,6 +5560,11 @@
         "displayName": {
           "type": "string",
           "description": "The display name."
+        },
+        "nsxManagerArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
         },
         "nsxTags": {
           "type": "array",
@@ -5716,6 +5724,11 @@
           "format": "int64",
           "description": "The number of errors."
         },
+        "nsxManagerArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
         "parentDistributedFirewallPolicyArmId": {
           "type": "string",
           "format": "arm-id",
@@ -5798,7 +5811,11 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId",
+        "parentDistributedFirewallPolicyArmId"
+      ]
     },
     "NsxGatewayFirewallPolicy": {
       "type": "object",
@@ -5889,7 +5906,7 @@
           "$ref": "#/definitions/FederationScope",
           "description": "The federation scope of the policy."
         },
-        "appliedScopes": {
+        "appliedScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of scopes this policy is applied to.",
           "items": {
@@ -5898,7 +5915,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "effectiveScopes": {
+        "effectiveScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of effective scopes.",
           "items": {
@@ -5962,7 +5979,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -5988,7 +6005,7 @@
           "$ref": "#/definitions/FederationScope",
           "description": "The federation scope of the policy."
         },
-        "appliedScopes": {
+        "appliedScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of scopes this policy is applied to.",
           "items": {
@@ -5997,7 +6014,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "effectiveScopes": {
+        "effectiveScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of effective scopes.",
           "items": {
@@ -6006,7 +6023,10 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxGatewayFirewallRule": {
       "type": "object",
@@ -6102,7 +6122,7 @@
           "type": "string",
           "description": "The global priority of the rule."
         },
-        "sourceIpGroups": {
+        "sourceIpGroupArmIds": {
           "type": "array",
           "description": "ARM resource IDs of source IP groups.",
           "items": {
@@ -6118,7 +6138,7 @@
             "type": "string"
           }
         },
-        "destinationIpGroups": {
+        "destinationIpGroupArmIds": {
           "type": "array",
           "description": "ARM resource IDs of destination IP groups.",
           "items": {
@@ -6142,7 +6162,7 @@
           },
           "x-ms-identifiers": []
         },
-        "appliedScopes": {
+        "appliedScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of scopes this rule is applied to.",
           "items": {
@@ -6151,7 +6171,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "effectiveScopes": {
+        "effectiveScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of effective scopes.",
           "items": {
@@ -6215,7 +6235,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -6246,7 +6266,7 @@
           "type": "string",
           "description": "The global priority of the rule."
         },
-        "sourceIpGroups": {
+        "sourceIpGroupArmIds": {
           "type": "array",
           "description": "ARM resource IDs of source IP groups.",
           "items": {
@@ -6262,7 +6282,7 @@
             "type": "string"
           }
         },
-        "destinationIpGroups": {
+        "destinationIpGroupArmIds": {
           "type": "array",
           "description": "ARM resource IDs of destination IP groups.",
           "items": {
@@ -6286,7 +6306,7 @@
           },
           "x-ms-identifiers": []
         },
-        "appliedScopes": {
+        "appliedScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of scopes this rule is applied to.",
           "items": {
@@ -6295,7 +6315,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "effectiveScopes": {
+        "effectiveScopeArmIds": {
           "type": "array",
           "description": "ARM resource IDs of effective scopes.",
           "items": {
@@ -6304,7 +6324,10 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxLoadBalancer": {
       "type": "object",
@@ -6382,7 +6405,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -6450,7 +6473,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -6463,7 +6486,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -6476,7 +6499,10 @@
           "$ref": "#/definitions/BackendConfig",
           "description": "The backend configuration (pool, health probe, SNAT)."
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxManager": {
       "type": "object",
@@ -6758,7 +6784,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -6826,7 +6852,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -6839,7 +6865,7 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -6852,7 +6878,10 @@
           "$ref": "#/definitions/NatTranslate",
           "description": "The translation target."
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxNsGroup": {
       "type": "object",
@@ -7000,7 +7029,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -7028,7 +7057,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxSegment": {
       "type": "object",
@@ -7098,7 +7130,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -7201,12 +7233,12 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
         },
-        "parentGateway": {
+        "parentGatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent gateway."
@@ -7254,7 +7286,10 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxTag": {
       "type": "object",
@@ -7437,7 +7472,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -7490,7 +7525,10 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "NsxTier1Gateway": {
       "type": "object",
@@ -7568,7 +7606,7 @@
           "type": "boolean",
           "description": "Whether the firewall is enabled."
         },
-        "parentTier0Gateway": {
+        "parentTier0GatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent Tier-0 gateway."
@@ -7664,7 +7702,7 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "nsxManagerRef": {
+        "nsxManagerArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the associated NSX Manager."
@@ -7677,7 +7715,7 @@
           "type": "boolean",
           "description": "Whether the firewall is enabled on this gateway."
         },
-        "parentTier0Gateway": {
+        "parentTier0GatewayArmId": {
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the parent Tier-0 gateway."
@@ -7718,7 +7756,10 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
-      }
+      },
+      "required": [
+        "nsxManagerArmId"
+      ]
     },
     "PolicyContextType": {
       "type": "string",

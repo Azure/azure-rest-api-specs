@@ -33,8 +33,11 @@ model NsxDistributedFirewallRule
  * Properties of a distributed firewall rule.
  */
 model NsxDistributedFirewallRuleProperties is AzureResourceProperties {
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
+
   /** ARM resource ID of the parent distributed firewall policy. */
-  parentDistributedFirewallPolicyArmId?: Azure.Core.armResourceIdentifier;
+  parentDistributedFirewallPolicyArmId: Azure.Core.armResourceIdentifier;
 
   /** The action to take when the rule matches. */
   action?: FirewallAction;

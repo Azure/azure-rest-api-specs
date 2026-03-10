@@ -804,7 +804,7 @@ model NsxTier1GatewayPatchFields {
   firewallEnabled?: boolean;
 
   /** ARM resource ID of the parent Tier-0 gateway. */
-  parentTier0Gateway?: Azure.Core.armResourceIdentifier;
+  parentTier0GatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** ARM resource IDs of associated segments. */
   associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];
@@ -842,7 +842,7 @@ model NsxSegmentPatchFields {
   errorCount?: int64;
 
   /** ARM resource ID of the parent gateway. */
-  parentGateway?: Azure.Core.armResourceIdentifier;
+  parentGatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** The segment type. */
   segmentType?: SegmentType;
@@ -940,10 +940,10 @@ model NsxGatewayFirewallPolicyPatchFields {
   federationScope?: FederationScope;
 
   /** ARM resource IDs of scopes this policy is applied to. */
-  appliedScopes?: Azure.Core.armResourceIdentifier[];
+  appliedScopeArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of effective scopes. */
-  effectiveScopes?: Azure.Core.armResourceIdentifier[];
+  effectiveScopeArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxGatewayFirewallRule patch envelope. */
@@ -987,13 +987,13 @@ model NsxGatewayFirewallRulePatchFields {
   globalPriority?: string;
 
   /** ARM resource IDs of source IP groups. */
-  sourceIpGroups?: Azure.Core.armResourceIdentifier[];
+  sourceIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** Source IP addresses. */
   sourceAddresses?: string[];
 
   /** ARM resource IDs of destination IP groups. */
-  destinationIpGroups?: Azure.Core.armResourceIdentifier[];
+  destinationIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** Destination IP addresses. */
   destinationAddresses?: string[];
@@ -1003,10 +1003,10 @@ model NsxGatewayFirewallRulePatchFields {
   services?: FirewallService[];
 
   /** ARM resource IDs of scopes this rule is applied to. */
-  appliedScopes?: Azure.Core.armResourceIdentifier[];
+  appliedScopeArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of effective scopes. */
-  effectiveScopes?: Azure.Core.armResourceIdentifier[];
+  effectiveScopeArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 /** NsxDistributedFirewallPolicy patch envelope. */
@@ -1060,6 +1060,9 @@ model NsxDistributedFirewallRulePatchProperties {
 model NsxDistributedFirewallRulePatchFields {
   /** The display name. */
   displayName?: string;
+
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerArmId?: Azure.Core.armResourceIdentifier;
 
   /** NSX tags. */
   @identifiers(#[])
@@ -1145,7 +1148,7 @@ model NsxLoadBalancerPatchFields {
   adminState?: AdminState;
 
   /** ARM resource ID of the parent gateway. */
-  parentGateway?: Azure.Core.armResourceIdentifier;
+  parentGatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** The frontend configuration. */
   frontend?: FrontendConfig;
@@ -1183,7 +1186,7 @@ model NsxNatRulePatchFields {
   adminState?: AdminState;
 
   /** ARM resource ID of the parent gateway. */
-  parentGateway?: Azure.Core.armResourceIdentifier;
+  parentGatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** The match criteria. */
   match?: NatMatch;

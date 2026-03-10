@@ -34,7 +34,7 @@ model NsxDistributedFirewallPolicy
  */
 model NsxDistributedFirewallPolicyProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The policy category. */
   category?: DistributedFirewallPolicyCategory;

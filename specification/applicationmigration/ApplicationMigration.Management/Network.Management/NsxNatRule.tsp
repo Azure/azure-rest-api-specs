@@ -31,7 +31,7 @@ model NsxNatRule
  */
 model NsxNatRuleProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The NAT type (SNAT or DNAT). */
   natType?: NatType;
@@ -40,7 +40,7 @@ model NsxNatRuleProperties is AzureResourceProperties {
   adminState?: AdminState;
 
   /** ARM resource ID of the parent gateway. */
-  parentGateway?: Azure.Core.armResourceIdentifier;
+  parentGatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** The match criteria. */
   match?: NatMatch;

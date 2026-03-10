@@ -31,7 +31,7 @@ model NsxTier1Gateway
  */
 model NsxTier1GatewayProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The high-availability mode. */
   haMode?: HaMode;
@@ -40,7 +40,7 @@ model NsxTier1GatewayProperties is AzureResourceProperties {
   firewallEnabled?: boolean;
 
   /** ARM resource ID of the parent Tier-0 gateway. */
-  parentTier0Gateway?: Azure.Core.armResourceIdentifier;
+  parentTier0GatewayArmId?: Azure.Core.armResourceIdentifier;
 
   /** ARM resource IDs of associated segments. */
   associatedSegmentArmIds?: Azure.Core.armResourceIdentifier[];

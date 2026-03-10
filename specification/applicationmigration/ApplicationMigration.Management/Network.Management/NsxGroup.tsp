@@ -31,7 +31,7 @@ model NsxNsGroup
  */
 model NsxNsGroupProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The group membership expressions. */
   @identifiers(#[])

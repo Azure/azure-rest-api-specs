@@ -34,7 +34,7 @@ model NsxGatewayFirewallPolicy
  */
 model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The policy category. */
   category?: GatewayPolicyCategory;
@@ -52,10 +52,10 @@ model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
   federationScope?: FederationScope;
 
   /** ARM resource IDs of scopes this policy is applied to. */
-  appliedScopes?: Azure.Core.armResourceIdentifier[];
+  appliedScopeArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of effective scopes. */
-  effectiveScopes?: Azure.Core.armResourceIdentifier[];
+  effectiveScopeArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @armResourceOperations

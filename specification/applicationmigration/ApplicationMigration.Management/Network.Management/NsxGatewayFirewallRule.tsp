@@ -34,7 +34,7 @@ model NsxGatewayFirewallRule
  */
 model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** ARM resource ID of the parent gateway firewall policy. */
   parentGatewayFirewallPolicyArmId?: Azure.Core.armResourceIdentifier;
@@ -55,13 +55,13 @@ model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   globalPriority?: string;
 
   /** ARM resource IDs of source IP groups. */
-  sourceIpGroups?: Azure.Core.armResourceIdentifier[];
+  sourceIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** Source IP addresses. */
   sourceAddresses?: string[];
 
   /** ARM resource IDs of destination IP groups. */
-  destinationIpGroups?: Azure.Core.armResourceIdentifier[];
+  destinationIpGroupArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** Destination IP addresses. */
   destinationAddresses?: string[];
@@ -71,10 +71,10 @@ model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   services?: FirewallService[];
 
   /** ARM resource IDs of scopes this rule is applied to. */
-  appliedScopes?: Azure.Core.armResourceIdentifier[];
+  appliedScopeArmIds?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of effective scopes. */
-  effectiveScopes?: Azure.Core.armResourceIdentifier[];
+  effectiveScopeArmIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @armResourceOperations

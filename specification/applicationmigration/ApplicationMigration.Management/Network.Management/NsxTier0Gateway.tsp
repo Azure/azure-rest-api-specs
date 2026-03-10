@@ -31,7 +31,7 @@ model NsxTier0Gateway
  */
 model NsxTier0GatewayProperties is AzureResourceProperties {
   /** ARM resource ID of the associated NSX Manager. */
-  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+  nsxManagerArmId: Azure.Core.armResourceIdentifier;
 
   /** The high-availability mode. */
   haMode?: HaMode;
