@@ -35328,71 +35328,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
-      "patch": {
-        "operationId": "StaticSites_UpdateStaticSiteUser",
-        "tags": [
-          "StaticSiteARMResources"
-        ],
-        "summary": "Updates a user entry with the listed roles",
-        "description": "Description for Updates a user entry with the listed roles",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authprovider",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "staticSiteUserEnvelope",
-            "in": "body",
-            "description": "A JSON representation of the StaticSiteUser properties. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a user for a static site": {
-            "$ref": "./examples/UpdateStaticSiteUser.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "StaticSites_DeleteStaticSiteUser",
         "tags": [
@@ -39448,6 +39383,73 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
+      "patch": {
+        "operationId": "StaticSites_UpdateStaticSiteUser",
+        "tags": [
+          "StaticSiteARMResources"
+        ],
+        "summary": "Updates a user entry with the listed roles",
+        "description": "Description for Updates a user entry with the listed roles",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteUser properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a user for a static site": {
+            "$ref": "./examples/UpdateStaticSiteUser.json"
           }
         }
       }
