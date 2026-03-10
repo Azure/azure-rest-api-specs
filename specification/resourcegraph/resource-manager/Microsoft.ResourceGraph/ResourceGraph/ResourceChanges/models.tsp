@@ -79,6 +79,7 @@ model ResourceChangesRequestParameters {
   /**
    * The subscription id of resources to query the changes from.
    */
+  @Versioning.added(Versions.v2020_09_01_preview)
   subscriptionId?: string;
 
   /**
@@ -101,6 +102,7 @@ model ResourceChangesRequestParameters {
   /**
    * The table name to query resources from.
    */
+  @Versioning.added(Versions.v2020_09_01_preview)
   table?: string;
 
   /**
@@ -111,6 +113,7 @@ model ResourceChangesRequestParameters {
   /**
    * The flag if set to true will fetch change snapshots
    */
+  @Versioning.added(Versions.v2020_09_01_preview)
   fetchSnapshots?: boolean;
 }
 

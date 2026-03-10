@@ -37,6 +37,10 @@ namespace ResourceChanges;
  */
 enum Versions {
   /**
+   * The 2020-04-01-preview API version.
+   */
+  v2020_04_01_preview: "2020-04-01-preview",
+  /**
    * The 2020-09-01-preview API version.
    */
   v2020_09_01_preview: "2020-09-01-preview",

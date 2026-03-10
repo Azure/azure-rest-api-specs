@@ -37,6 +37,10 @@ namespace ResourceHistory;
  */
 enum Versions {
   /**
+   * The 2020-04-01-preview API version.
+   */
+  v2020_04_01_preview: "2020-04-01-preview",
+  /**
    * The 2021-06-01-preview API version.
    */
   v2021_06_01_preview: "2021-06-01-preview",

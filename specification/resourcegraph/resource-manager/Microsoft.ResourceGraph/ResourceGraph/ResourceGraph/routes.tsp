@@ -21,6 +21,7 @@ interface QueryOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Query_GenerateQuery")
   @autoRoute
+  @Versioning.added(Versions.v2023_09_01_preview)
   generateQuery is ArmProviderActionSync<
     Request = QueryGenerationRequest,
     Response = QueryGenerationResponse,
