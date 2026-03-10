@@ -142,7 +142,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 @@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
   "expiry",
-  "!python, !csharp"
+  "!python, !csharp, !javascript"
 );
 
 @@alternateType(AccessPolicy.start, string, "javascript");
