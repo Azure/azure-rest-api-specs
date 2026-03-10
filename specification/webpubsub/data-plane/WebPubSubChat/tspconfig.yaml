@@ -1,0 +1,15 @@
+parameters:
+  "service-dir":
+    default: "sdk/webpubsub"
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/webpubsubchat.json"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

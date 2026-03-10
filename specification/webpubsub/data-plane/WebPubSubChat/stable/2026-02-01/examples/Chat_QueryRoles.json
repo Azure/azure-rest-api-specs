@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01",
+    "hub": "chat_hub",
+    "maxCount": 10
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "roles": [
+          {
+            "role": "admin",
+            "permissions": [
+              "sendMessage",
+              "deleteMessage",
+              "manageRoom"
+            ]
+          },
+          {
+            "role": "member",
+            "permissions": [
+              "sendMessage"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Chat_QueryRoles",
+  "title": "Chat_QueryRoles"
+}
