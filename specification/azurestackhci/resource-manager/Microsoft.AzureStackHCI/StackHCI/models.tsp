@@ -8771,7 +8771,7 @@ model DiskConfiguration {
 @added(Versions.v2026_03_15_preview)
 model DiskVolumeConfiguration {
   /** Size of the volume in bytes. */
-  sizeInBytes: int64;
+  sizeInBytes: string;
 
   /** Mount path for the volume (e.g., /data or D:\data). */
   path: string;
@@ -8827,7 +8827,7 @@ model DiskReportedProperties {
 
   /** Size in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Type of the disk. */
   @visibility(Lifecycle.Read)
@@ -8839,7 +8839,7 @@ model DiskReportedProperties {
 
   /** Unallocated space on the disk in bytes. */
   @visibility(Lifecycle.Read)
-  unallocatedSizeInBytes?: int64;
+  unallocatedSizeInBytes?: string;
 
   /** Current state of the disk. */
   @visibility(Lifecycle.Read)
@@ -8921,7 +8921,7 @@ model DiskVolumeReportedProperties {
 
   /** Size of the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Mount path for the volume. */
   @visibility(Lifecycle.Read)
@@ -8989,11 +8989,11 @@ model VolumeReportedProperties {
 
   /** Total size of the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeInBytes?: int64;
+  sizeInBytes?: string;
 
   /** Available space on the volume in bytes. */
   @visibility(Lifecycle.Read)
-  sizeRemainingInBytes?: int64;
+  sizeRemainingInBytes?: string;
 
   /** File system on the volume. */
   @visibility(Lifecycle.Read)
@@ -9078,7 +9078,7 @@ model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
   jobType: DiskJobType.CreateVolume;
 
   /** Size of the volume to create in bytes. */
-  sizeInBytes: int64;
+  sizeInBytes: string;
 
   /** Absolute path where the volume should be mounted. */
   path: string;
