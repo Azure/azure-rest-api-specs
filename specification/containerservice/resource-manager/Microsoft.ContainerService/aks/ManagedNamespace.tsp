@@ -90,6 +90,7 @@ interface ManagedNamespaces {
 /**
  * The current provisioning state of the namespace.
  */
+@Azure.Core.lroStatus
 union NamespaceProvisioningState {
   string,
 
