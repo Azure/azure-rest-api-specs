@@ -117,7 +117,7 @@ enum AKSIdentityType {
    * Workload
    */
   @added(Versions.v2025_03_01)
-  Workload
+  Workload,
 }
 
 /**
@@ -216,7 +216,7 @@ model ExtensionProperties {
    */
   @visibility(Lifecycle.Read)
   isSystemExtension?: boolean = false;
-  
+
   /**
    * The upgrade mode for auto upgrade.
    * The default is "compatible".
@@ -235,13 +235,13 @@ model ExtensionProperties {
    */
   @added(Versions.v2025_03_01)
   additionalDetails?: AdditionalDetails;
-  
+
   /**
-  * State of the extension on the cluster.
-  */
+   * State of the extension on the cluster.
+   */
   @added(Versions.v2025_03_01)
   @visibility(Lifecycle.Read)
-  extensionState?: string;  
+  extensionState?: string;
 }
 
 /**
@@ -375,7 +375,7 @@ model PatchExtensionProperties {
    * The default is "compatible".
    */
   @added(Versions.v2025_03_01)
-  autoUpgradeMode?: AutoUpgradeMode = AutoUpgradeMode.compatible;  
+  autoUpgradeMode?: AutoUpgradeMode = AutoUpgradeMode.compatible;
 
   /**
    * ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.
@@ -443,8 +443,6 @@ model OperationStatusResult {
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 }
 
-
-
 /**
  * The upgrade mode for auto upgrade.
  * The default is "compatible".
@@ -455,7 +453,7 @@ union AutoUpgradeMode {
    * The extension will not be automatically upgraded.
    */
   none: "none",
-  
+
   /**
    * The extension will be automatically upgraded to the latest patch version within the minor version.
    */
@@ -463,8 +461,9 @@ union AutoUpgradeMode {
 
   /**
    * The extension will be automatically upgraded to compatible versions as determined by the user.
-   */ 
+   */
   compatible: "compatible",
+
   string,
 }
 
@@ -490,17 +489,16 @@ model ManagementDetails {
  */
 @added(Versions.v2025_03_01)
 model AccessDetail {
-
   /**
    * The entity to which the access details apply
    */
   entity?: string;
 
   /**
-  * The list of allowed actions for the entity
+   * The list of allowed actions for the entity
    */
   allowedActions?: string[];
-  
+
   /**
    * The description of the entity
    */

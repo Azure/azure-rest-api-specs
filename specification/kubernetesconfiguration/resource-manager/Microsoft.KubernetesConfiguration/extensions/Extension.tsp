@@ -8,7 +8,8 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.KubernetesConfiguration;
 /**
@@ -34,7 +35,7 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_03_01)
-  managedBy?: string;  
+  managedBy?: string;
 
   ...Azure.ResourceManager.ResourcePlanProperty;
 }
