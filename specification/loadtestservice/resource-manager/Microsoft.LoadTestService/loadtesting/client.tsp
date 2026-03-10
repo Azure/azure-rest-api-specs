@@ -2,50 +2,12 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
-using Azure.ResourceManager;
 
-@useDependency(Microsoft.LoadTestService.APIVersions.v2022_12_01)
 namespace Customizations;
 
-@@clientName(LoadTests.updateLoadtest::parameters.properties,
-  "LoadTestResourcePatchRequestBody"
-);
 @@clientName(Quotas.checkAvailability::parameters.body, "QuotaBucketRequest");
-@@clientName(LoadTests.createOrUpdateLoadtest::parameters.resource,
-  "LoadTestResource"
-);
-
-@client({
-  name: "LoadTestMgmtClient",
-  service: Microsoft.LoadTestService,
-})
-@armResourceOperations
-interface LoadTests {
-  listBySubscription is Microsoft.LoadTestService.LoadTests.listBySubscription;
-
-  listByResourceGroup is Microsoft.LoadTestService.LoadTests.listByResourceGroup;
-
-  getLoadtest is Microsoft.LoadTestService.LoadTests.get;
-
-  createOrUpdateLoadtest is Microsoft.LoadTestService.LoadTests.createOrUpdate;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  updateLoadtest is Microsoft.LoadTestService.LoadTests.update;
-
-  deleteLoadtest is Microsoft.LoadTestService.LoadTests.delete;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
-  outboundNetworkDependenciesEndpoints is Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints;
-
-  getQuota is Microsoft.LoadTestService.Quotas.get;
-
-  listQuota is Microsoft.LoadTestService.Quotas.list;
-
-  checkAvailabilityQuota is Microsoft.LoadTestService.Quotas.checkAvailability;
-}
 
 @@clientName(type, "LoadTestingCmkIdentityType", "csharp");
 @@clientName(LoadTestResource, "LoadTestingResource", "csharp");
@@ -71,8 +33,7 @@ interface LoadTests {
   "LoadTestingOutboundEnvironmentEndpoint",
   "csharp"
 );
-
-@@clientName(LoadTests.checkAvailabilityQuota,
+@@clientName(Quotas.checkAvailability,
   "CheckLoadTestingQuotaAvailability",
   "csharp"
 );
@@ -144,6 +105,55 @@ model QuotaBucketRequestReplacement
   "csharp"
 );
 @@clientName(EncryptionPropertiesIdentity.type, "IdentityType", "csharp");
+
+// Fix breaking changes: preserve method names from 1.1.2 GA
+@@clientName(Microsoft.LoadTestService.Quotas.checkAvailability,
+  "CheckLoadTestingQuotaAvailability",
+  "csharp"
+);
+@@clientName(Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints,
+  "GetOutboundNetworkDependenciesEndpoints",
+  "csharp"
+);
+
+// Fix naming: model ends with 'Request', should use 'Content' suffix (AZC0030)
+@@clientName(MaxMonthlyVirtualUserHoursLimitRequest,
+  "MaxMonthlyVirtualUserHoursLimitContent",
+  "csharp"
+);
+
+// Remove 'Resource' from model names
+@@clientName(LoadTestMappingResource, "LoadTestMapping", "csharp");
+@@clientName(LoadTestProfileMappingResource,
+  "LoadTestProfileMapping",
+  "csharp"
+);
+@@clientName(MaxMonthlyVirtualUserHoursResourceProperties,
+  "MaxMonthlyVirtualUserHoursProperties",
+  "csharp"
+);
+@@clientName(MaxMonthlyVirtualUserHoursResource,
+  "MaxMonthlyVirtualUserHours",
+  "csharp"
+);
+
+// Fix property types: resource IDs should use ResourceIdentifier
+@@alternateType(LoadTestMappingProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestMappingProperties.azureLoadTestingResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestProfileMappingProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(LoadTestProfileMappingProperties.azureLoadTestingResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResourceUpdate.properties,

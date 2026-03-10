@@ -9,3 +9,5 @@ using Azure.ClientGenerator.Core;
   "DiscoveryManagedStorage",
   "go"
 );
+
+@@clientName(Microsoft.Discovery, "DiscoveryMgmtClient", "python");
