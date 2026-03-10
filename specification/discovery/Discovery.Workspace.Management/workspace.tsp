@@ -107,7 +107,13 @@ model WorkspaceProperties {
 interface Workspaces {
   get is ArmResourceRead<Workspace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
-  update is ArmResourcePatchAsync<Workspace, WorkspaceProperties>;
+  update is ArmCustomPatchAsync<
+    Workspace,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Workspace,
+      WorkspaceProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
   listByResourceGroup is ArmResourceListByParent<Workspace>;
   listBySubscription is ArmListBySubscription<Workspace>;

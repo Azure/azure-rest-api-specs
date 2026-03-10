@@ -143,7 +143,13 @@ model SupercomputerIdentities {
 interface Supercomputers {
   get is ArmResourceRead<Supercomputer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Supercomputer>;
-  update is ArmResourcePatchAsync<Supercomputer, SupercomputerProperties>;
+  update is ArmCustomPatchAsync<
+    Supercomputer,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Supercomputer,
+      SupercomputerProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Supercomputer>;
   listByResourceGroup is ArmResourceListByParent<Supercomputer>;
   listBySubscription is ArmListBySubscription<Supercomputer>;

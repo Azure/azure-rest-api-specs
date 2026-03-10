@@ -104,7 +104,13 @@ model DataContainerProperties {
 interface DataContainers {
   get is ArmResourceRead<DataContainer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainer>;
-  update is ArmResourcePatchAsync<DataContainer, DataContainerProperties>;
+  update is ArmCustomPatchAsync<
+    DataContainer,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataContainer,
+      DataContainerProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<DataContainer>;
   listByResourceGroup is ArmResourceListByParent<DataContainer>;
   listBySubscription is ArmListBySubscription<DataContainer>;

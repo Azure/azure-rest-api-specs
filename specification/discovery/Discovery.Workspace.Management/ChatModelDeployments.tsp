@@ -44,9 +44,12 @@ model ChatModelDeploymentProperties {
 interface ChatModelDeployments {
   get is ArmResourceRead<ChatModelDeployment>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ChatModelDeployment>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     ChatModelDeployment,
-    ChatModelDeploymentProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ChatModelDeployment,
+      ChatModelDeploymentProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<ChatModelDeployment>;
   listByWorkspace is ArmResourceListByParent<ChatModelDeployment>;

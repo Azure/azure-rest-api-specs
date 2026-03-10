@@ -43,7 +43,13 @@ model StorageAsset is TrackedResource<StorageAssetProperties> {
 interface StorageAssets {
   get is ArmResourceRead<StorageAsset>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageAsset>;
-  update is ArmResourcePatchAsync<StorageAsset, StorageAssetProperties>;
+  update is ArmCustomPatchAsync<
+    StorageAsset,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StorageAsset,
+      StorageAssetProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<StorageAsset>;
   listByStorageContainer is ArmResourceListByParent<StorageAsset>;
 }

@@ -95,7 +95,13 @@ model BookshelfProperties {
 interface Bookshelves {
   get is ArmResourceRead<Bookshelf>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Bookshelf>;
-  update is ArmResourcePatchAsync<Bookshelf, BookshelfProperties>;
+  update is ArmCustomPatchAsync<
+    Bookshelf,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Bookshelf,
+      BookshelfProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Bookshelf>;
   listByResourceGroup is ArmResourceListByParent<Bookshelf>;
   listBySubscription is ArmListBySubscription<Bookshelf>;

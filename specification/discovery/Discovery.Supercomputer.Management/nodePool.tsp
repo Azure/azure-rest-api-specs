@@ -115,7 +115,13 @@ model NodePoolProperties {
 interface NodePools {
   get is ArmResourceRead<NodePool>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NodePool>;
-  update is ArmResourcePatchAsync<NodePool, NodePoolProperties>;
+  update is ArmCustomPatchAsync<
+    NodePool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      NodePool,
+      NodePoolProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<NodePool>;
   listBySupercomputer is ArmResourceListByParent<NodePool>;
 
