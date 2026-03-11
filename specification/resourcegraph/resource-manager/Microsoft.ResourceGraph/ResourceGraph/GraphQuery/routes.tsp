@@ -34,7 +34,7 @@ model GraphQueryResource
 }
 
 @armResourceOperations
-interface GraphQueryResources {
+interface GraphQuery {
   /**
    * Get a single graph query by its resourceName.
    */
@@ -105,9 +105,9 @@ interface GraphQueryResources {
 @@doc(GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(GraphQuery.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(GraphQueryResources.update::parameters.properties,
+@@doc(GraphQuery.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );

@@ -74,14 +74,13 @@ model ResourceChangesRequestParameters {
   /**
    * Specifies the resource for a changes request.
    */
-  @Versioning.added(Versions.v2018_09_01_preview)
-  @Versioning.removed(Versions.v2020_04_01_preview)
+  @Versioning.removed(Versions.v2020_09_01_preview)
   resourceId: string;
 
   /**
    * Specifies the list of resources for a changes request.
    */
-  @Versioning.added(Versions.v2020_04_01_preview)
+  @Versioning.added(Versions.v2020_09_01_preview)
   resourceIds?: string[];
 
   /**
@@ -337,26 +336,24 @@ model ResourceChangeDetailsRequestParameters {
   /**
    * Specifies the resource for a change details request.
    */
-  @Versioning.added(Versions.v2018_09_01_preview)
-  @Versioning.removed(Versions.v2020_04_01_preview)
+  @Versioning.removed(Versions.v2020_09_01_preview)
   resourceId: string;
 
   /**
    * Specifies the change ID.
    */
-  @Versioning.added(Versions.v2018_09_01_preview)
-  @Versioning.removed(Versions.v2020_04_01_preview)
+  @Versioning.removed(Versions.v2020_09_01_preview)
   changeId: string;
 
   /**
    * Specifies the list of resources for a change details request.
    */
-  @Versioning.added(Versions.v2020_04_01_preview)
+  @Versioning.added(Versions.v2020_09_01_preview)
   resourceIds: string[];
 
   /**
    * Specifies the list of change IDs for a change details request.
    */
-  @Versioning.added(Versions.v2020_04_01_preview)
+  @Versioning.added(Versions.v2020_09_01_preview)
   changeIds: string[];
 }

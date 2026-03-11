@@ -45,8 +45,15 @@ model ResourcesHistoryRequest {
   options?: ResourcesHistoryRequestOptions;
 
   /**
+   * Azure management group against which to execute the query. Example: 'mg1'
+   */
+  @Versioning.removed(Versions.v2021_06_01_preview)
+  managementGroupId?: string;
+
+  /**
    * Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]
    */
+  @Versioning.added(Versions.v2021_06_01_preview)
   managementGroups?: string[];
 }
 

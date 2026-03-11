@@ -58,12 +58,33 @@ model GraphQueryError {
   /**
    * The error object.
    */
+  @Versioning.added(Versions.v2019_04_01)
   error?: GraphQueryErrorError;
+
+  /**
+   * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+   */
+  @Versioning.removed(Versions.v2019_04_01)
+  code?: string;
+
+  /**
+   * Human-readable representation of the error.
+   */
+  @Versioning.removed(Versions.v2019_04_01)
+  message?: string;
+
+  /**
+   * The list of invalid fields send in request, in case of validation error.
+   */
+  @identifiers(#[])
+  @Versioning.removed(Versions.v2019_04_01)
+  details?: ErrorFieldContract[];
 }
 
 /**
  * The error object.
  */
+@Versioning.added(Versions.v2019_04_01)
 model GraphQueryErrorError {
   /**
    * Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.

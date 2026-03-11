@@ -317,8 +317,7 @@
           "format": "int32",
           "description": "The maximum number of facet rows that should be returned.",
           "minimum": 1,
-          "maximum": 1000,
-          "x-ms-client-name": "top"
+          "maximum": 1000
         }
       }
     },
@@ -450,22 +449,20 @@
       "properties": {
         "$skipToken": {
           "type": "string",
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
-          "x-ms-client-name": "skipToken"
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
         },
         "$top": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
           "minimum": 1,
-          "maximum": 1000,
-          "x-ms-client-name": "top"
+          "maximum": 1000
         },
         "$skip": {
           "type": "integer",
           "format": "int32",
           "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
-          "x-ms-client-name": "skip"
+          "minimum": 0
         },
         "resultFormat": {
           "type": "string",
@@ -494,7 +491,45 @@
         },
         "allowPartialScopes": {
           "type": "boolean",
-          "description": "Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits."
+          "description": "Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.",
+          "default": false
+        },
+        "authorizationScopeFilter": {
+          "type": "string",
+          "description": "Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.",
+          "default": "AtScopeAndBelow",
+          "enum": [
+            "AtScopeAndBelow",
+            "AtScopeAndAbove",
+            "AtScopeExact",
+            "AtScopeAboveAndBelow"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationScopeFilter",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "AtScopeAndBelow",
+                "value": "AtScopeAndBelow",
+                "description": "AtScopeAndBelow"
+              },
+              {
+                "name": "AtScopeAndAbove",
+                "value": "AtScopeAndAbove",
+                "description": "AtScopeAndAbove"
+              },
+              {
+                "name": "AtScopeExact",
+                "value": "AtScopeExact",
+                "description": "AtScopeExact"
+              },
+              {
+                "name": "AtScopeAboveAndBelow",
+                "value": "AtScopeAboveAndBelow",
+                "description": "AtScopeAboveAndBelow"
+              }
+            ]
+          }
         }
       }
     },
@@ -518,8 +553,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "x-ms-client-name": "skipToken"
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         },
         "data": {
           "description": "Query output in JObject array or Table format."

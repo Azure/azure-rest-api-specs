@@ -65,21 +65,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/OperationsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -320,8 +311,7 @@
           "format": "int32",
           "description": "The maximum number of facet rows that should be returned.",
           "minimum": 1,
-          "maximum": 1000,
-          "x-ms-client-name": "top"
+          "maximum": 1000
         }
       }
     },
@@ -405,10 +395,6 @@
           "items": {
             "$ref": "#/definitions/Operation"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
         }
       }
     },
@@ -451,22 +437,20 @@
       "properties": {
         "$skipToken": {
           "type": "string",
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
-          "x-ms-client-name": "skipToken"
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
         },
         "$top": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
           "minimum": 1,
-          "maximum": 1000,
-          "x-ms-client-name": "top"
+          "maximum": 1000
         },
         "$skip": {
           "type": "integer",
           "format": "int32",
           "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
-          "x-ms-client-name": "skip"
+          "minimum": 0
         },
         "resultFormat": {
           "type": "string",
@@ -515,8 +499,7 @@
         },
         "$skipToken": {
           "type": "string",
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "x-ms-client-name": "skipToken"
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         },
         "data": {
           "description": "Query output in JObject array or Table format."

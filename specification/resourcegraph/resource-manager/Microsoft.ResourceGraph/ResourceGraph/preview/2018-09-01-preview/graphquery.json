@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "GraphQueryResources"
+      "name": "GraphQuery"
     }
   ],
   "paths": {
@@ -48,7 +48,7 @@
       "get": {
         "operationId": "GraphQuery_List",
         "tags": [
-          "GraphQueryResources"
+          "GraphQuery"
         ],
         "description": "Get all graph queries defined within a specified subscription and resource group.",
         "parameters": [
@@ -90,7 +90,7 @@
       "get": {
         "operationId": "GraphQuery_Get",
         "tags": [
-          "GraphQueryResources"
+          "GraphQuery"
         ],
         "description": "Get a single graph query by its resourceName.",
         "parameters": [
@@ -135,7 +135,7 @@
       "put": {
         "operationId": "GraphQuery_CreateOrUpdate",
         "tags": [
-          "GraphQueryResources"
+          "GraphQuery"
         ],
         "description": "Create a new graph query.",
         "parameters": [
@@ -189,7 +189,7 @@
       "patch": {
         "operationId": "GraphQuery_Update",
         "tags": [
-          "GraphQueryResources"
+          "GraphQuery"
         ],
         "description": "Updates a graph query that has already been added.",
         "parameters": [
@@ -243,7 +243,7 @@
       "delete": {
         "operationId": "GraphQuery_Delete",
         "tags": [
-          "GraphQueryResources"
+          "GraphQuery"
         ],
         "description": "Delete a graph query.",
         "parameters": [
@@ -309,16 +309,6 @@
     "GraphQueryError": {
       "type": "object",
       "description": "Error message body that will indicate why the operation failed.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/GraphQueryErrorError",
-          "description": "The error object."
-        }
-      }
-    },
-    "GraphQueryErrorError": {
-      "type": "object",
-      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",

@@ -48,13 +48,13 @@ enum Versions {
    */
   v2020_04_01_preview: "2020-04-01-preview",
   /**
-   * The 2020-06-01-preview API version.
-   */
-  v2020_06_01_preview: "2021-06-01-preview",
-  /**
    * The 2021-03-01 API version.
    */
   v2021_03_01: "2021-03-01",
+  /**
+   * The 2021-06-01-preview API version.
+   */
+  v2021_06_01_preview: "2021-06-01-preview",
   /**
    * The 2022-10-01 API version.
    */
@@ -79,6 +79,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
+  @Versioning.returnTypeChangedFrom(Versions.v2020_04_01_preview, ArmResponse<OperationListResult>)
   list(
     ...CommonTypes.ApiVersionParameter,
     ...Azure.ResourceManager.Legacy.Provider,

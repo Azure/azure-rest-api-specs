@@ -27,6 +27,7 @@ op resourceChanges is ArmProviderActionSync<
  */
 @autoRoute
 @tag("Changes")
+@Versioning.returnTypeChangedFrom(Versions.v2020_09_01_preview, ResourceChangeData | ErrorResponse)
 op resourceChangeDetails is ArmProviderActionSync<
   Request = ResourceChangeDetailsRequestParameters,
   Response = Body<ResourceChangeData[]>,

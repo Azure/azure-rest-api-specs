@@ -29,7 +29,7 @@ enum ResultFormat {
  * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-@Versioning.added(Versions.v2023_09_01_preview)
+@Versioning.added(Versions.v2021_06_01_preview)
 enum AuthorizationScopeFilter {
   /**
    * AtScopeAndBelow
@@ -94,11 +94,18 @@ model QueryRequest {
   @Versioning.madeOptional(Versions.v2020_04_01_preview)
   subscriptions?: string[];
 
+  
+  /**
+   * Azure management group against which to execute the query. Example: 'mg1'
+   */
+  @Versioning.added(Versions.v2020_04_01_preview)
+  @Versioning.removed(Versions.v2021_03_01)
+  managementGroupId?: string;
+
   /**
    * Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]
    */
-  
-  @Versioning.added(Versions.v2020_04_01_preview)
+  @Versioning.added(Versions.v2021_03_01)
   managementGroups?: string[];
 
   /**
@@ -137,23 +144,25 @@ model QueryRequestOptions {
   /**
    * The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.
    */
+  @minValue(0)
   $skip?: int32;
 
   /**
    * Defines in which format query result returned.
    */
+  @Versioning.added(Versions.v2019_04_01)
   resultFormat?: ResultFormat = ResultFormat.objectArray;
 
   /**
    * Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits.
    */
   @Versioning.added(Versions.v2021_03_01)
-  allowPartialScopes?: boolean;
+  allowPartialScopes?: boolean = false;
 
   /**
    * Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes.
    */
-  @Versioning.added(Versions.v2023_09_01_preview)
+  @Versioning.added(Versions.v2021_06_01_preview)
   authorizationScopeFilter?: AuthorizationScopeFilter = AuthorizationScopeFilter.AtScopeAndBelow;
 }
 
@@ -228,6 +237,7 @@ model QueryResponse {
    * Query output in JObject array or Table format.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  @Versioning.typeChangedFrom(Versions.v2019_04_01, Table)
   data: unknown;
 
   /**
@@ -317,9 +327,7 @@ model OperationListResult {
    * The link to the next page of items
    */
   @nextLink
-  @Versioning.removed(Versions.v2022_10_01)
-  @Versioning.added(Versions.v2023_09_01_preview)
-  @Versioning.removed(Versions.v2024_04_01)
+  @Versioning.removed(Versions.v2019_04_01)
   nextLink?: string;
 }
 
@@ -386,6 +394,7 @@ model FacetResult extends Facet {
    * A JObject array or Table containing the desired facets. Only present if the facet is valid.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  @Versioning.typeChangedFrom(Versions.v2019_04_01, Table)
   data: unknown;
 
   /**
@@ -408,4 +417,69 @@ model FacetError extends Facet {
    * Result type
    */
   resultType: "FacetError";
+}
+
+/**
+ * Query output in tabular format.
+ */
+@Versioning.removed(Versions.v2019_04_01)
+model Table {
+  /**
+   * Query result column descriptors.
+   */
+  columns: Column[];
+
+  /**
+   * Query result rows.
+   */
+  @identifiers(#[])
+  rows: unknown[][];
+}
+
+/**
+ * Query result column descriptor.
+ */
+@Versioning.removed(Versions.v2019_04_01)
+model Column {
+  /**
+   * Column name.
+   */
+  name: string;
+
+  /**
+   * Column data type.
+   */
+  type: ColumnDataType;
+}
+
+/**
+ * Data type of a column in a table.
+ */
+@Versioning.removed(Versions.v2019_04_01)
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ColumnDataType {
+  /**
+   * string
+   */
+  string,
+
+  /**
+   * integer
+   */
+  integer,
+
+  /**
+   * number
+   */
+  number,
+
+  /**
+   * boolean
+   */
+  boolean,
+
+  /**
+   * object
+   */
+  object,
 }

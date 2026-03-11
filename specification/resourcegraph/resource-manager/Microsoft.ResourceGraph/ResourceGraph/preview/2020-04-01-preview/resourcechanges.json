@@ -69,10 +69,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ResourceChangeData"
-              }
+              "$ref": "#/definitions/ResourceChangeData"
             }
           },
           "default": {
@@ -365,24 +362,18 @@
       "type": "object",
       "description": "The parameters for a specific change details request.",
       "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "Specifies the list of resources for a change details request.",
-          "items": {
-            "type": "string"
-          }
+        "resourceId": {
+          "type": "string",
+          "description": "Specifies the resource for a change details request."
         },
-        "changeIds": {
-          "type": "array",
-          "description": "Specifies the list of change IDs for a change details request.",
-          "items": {
-            "type": "string"
-          }
+        "changeId": {
+          "type": "string",
+          "description": "Specifies the change ID."
         }
       },
       "required": [
-        "resourceIds",
-        "changeIds"
+        "resourceId",
+        "changeId"
       ]
     },
     "ResourceChangeList": {
@@ -406,12 +397,9 @@
       "type": "object",
       "description": "The parameters for a specific changes request.",
       "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "Specifies the list of resources for a changes request.",
-          "items": {
-            "type": "string"
-          }
+        "resourceId": {
+          "type": "string",
+          "description": "Specifies the resource for a changes request."
         },
         "interval": {
           "$ref": "#/definitions/ResourceChangesRequestParametersInterval",
@@ -434,6 +422,7 @@
         }
       },
       "required": [
+        "resourceId",
         "interval"
       ]
     },

@@ -6,15 +6,15 @@ using GraphQuery;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GraphQueryUpdateParameters.properties);
 
-@@clientLocation(GraphQueryResources.get, "GraphQuery");
-@@clientLocation(GraphQueryResources.createOrUpdate, "GraphQuery");
-@@clientName(GraphQueryResources.createOrUpdate::parameters.resource,
+@@clientLocation(global.GraphQuery.GraphQuery.get, "GraphQuery");
+@@clientLocation(global.GraphQuery.GraphQuery.createOrUpdate, "GraphQuery");
+@@clientName(global.GraphQuery.GraphQuery.createOrUpdate::parameters.resource,
   "properties"
 );
-@@clientLocation(GraphQueryResources.update, "GraphQuery");
-@@clientName(GraphQueryResources.update::parameters.properties, "body");
-@@clientLocation(GraphQueryResources.delete, "GraphQuery");
-@@clientLocation(GraphQueryResources.list, "GraphQuery");
-@@clientLocation(GraphQueryResources.listBySubscription, "GraphQuery");
+@@clientLocation(global.GraphQuery.GraphQuery.update, "GraphQuery");
+@@clientName(global.GraphQuery.GraphQuery.update::parameters.properties, "body");
+@@clientLocation(global.GraphQuery.GraphQuery.delete, "GraphQuery");
+@@clientLocation(global.GraphQuery.GraphQuery.list, "GraphQuery");
+@@clientLocation(global.GraphQuery.GraphQuery.listBySubscription, "GraphQuery");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GraphQueryResource.properties);
