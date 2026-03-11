@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2026-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2026-04'
 input-file:
-  - preview/2026-04-01-preview/openapi.json
+  - 2026-04-01-preview/openapi.json
 ```
 
 ### Suppression

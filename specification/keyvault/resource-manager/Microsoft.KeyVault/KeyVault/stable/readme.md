@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2026-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-01'
 input-file:
-  - stable/2026-04-01/openapi.json
+  - 2026-04-01/openapi.json
 ```
 
 ### Tag: package-2026-02-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2026-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-02-01'
 input-file:
-  - stable/2026-02-01/openapi.json
+  - 2026-02-01/openapi.json
 ```
 
 ### Suppression
