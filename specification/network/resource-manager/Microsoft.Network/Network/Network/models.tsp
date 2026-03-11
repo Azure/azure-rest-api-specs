@@ -5939,6 +5939,8 @@ union SensitivityType {
 /**
  * The action type of a rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 union FirewallPolicyNatRuleCollectionActionType {
   string,
 
@@ -5973,6 +5975,8 @@ union FirewallPolicyRuleType {
 /**
  * The action type of a rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 union FirewallPolicyFilterRuleCollectionActionType {
   string,
 
@@ -5990,6 +5994,8 @@ union FirewallPolicyFilterRuleCollectionActionType {
 /**
  * The application protocol type of a Rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 union FirewallPolicyRuleApplicationProtocolType {
   string,
 
@@ -6007,6 +6013,8 @@ union FirewallPolicyRuleApplicationProtocolType {
 /**
  * The Network protocol of a Rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 union FirewallPolicyRuleNetworkProtocol {
   string,
 
@@ -11075,6 +11083,8 @@ model AzureFirewallFqdnTagPropertiesFormat {
  * Azure Web Category Properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.azureWebCategory)
 model AzureWebCategoryPropertiesFormat {
   /**
    * The name of the group that the category belongs to.
@@ -11082,6 +11092,13 @@ model AzureWebCategoryPropertiesFormat {
   @visibility(Lifecycle.Read)
   group?: string;
 }
+
+/**
+ * List of Azure Web Categories for a given Subscription.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.azureWebCategory)
+model AzureWebCategoryListResult is Azure.Core.Page<AzureWebCategory>;
 
 /**
  * Properties of the Bastion Host.
@@ -13187,6 +13204,8 @@ model ExpressRouteProviderPortProperties {
 /**
  * Firewall Policy definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyPropertiesFormat {
   /**
    * A read-only string that represents the size of the FirewallPolicyPropertiesFormat in MB. (ex 0.5MB)
@@ -13277,6 +13296,8 @@ model FirewallPolicyPropertiesFormat {
 /**
  * ThreatIntel Whitelist for Firewall Policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyThreatIntelWhitelist {
   /**
    * List of IP addresses for the ThreatIntel Whitelist.
@@ -13292,6 +13313,8 @@ model FirewallPolicyThreatIntelWhitelist {
 /**
  * Firewall Policy Insights.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyInsights {
   /**
    * A flag to indicate if the insights are enabled on the policy.
@@ -13312,6 +13335,8 @@ model FirewallPolicyInsights {
 /**
  * Log Analytics Resources for Firewall Policy Insights.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyLogAnalyticsResources {
   /**
    * List of workspaces for Firewall Policy Insights.
@@ -13328,6 +13353,8 @@ model FirewallPolicyLogAnalyticsResources {
 /**
  * Log Analytics Workspace for Firewall Policy Insights.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyLogAnalyticsWorkspace {
   /**
    * Region to configure the Workspace.
@@ -13343,6 +13370,8 @@ model FirewallPolicyLogAnalyticsWorkspace {
 /**
  * The private IP addresses/IP ranges to which traffic will not be SNAT.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicySnat {
   /**
    * List of private IP addresses/IP address ranges to not be SNAT.
@@ -13359,6 +13388,8 @@ model FirewallPolicySnat {
  * SQL Settings in Firewall Policy.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicySQL {
   /**
    * A flag to indicate if SQL Redirect traffic filtering is enabled. Turning on the flag requires no rule using port 11000-11999.
@@ -13369,6 +13400,8 @@ model FirewallPolicySQL {
 /**
  * DNS Proxy Settings in Firewall Policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model DnsSettings {
   /**
    * List of Custom DNS Servers.
@@ -13390,6 +13423,8 @@ model DnsSettings {
 /**
  * Explicit Proxy Settings in Firewall Policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model ExplicitProxy {
   /**
    * When set to true, explicit proxy mode is enabled.
@@ -13433,6 +13468,8 @@ model ExplicitProxy {
 /**
  * Configuration for intrusion detection mode and rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyIntrusionDetection {
   /**
    * Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two.
@@ -13453,6 +13490,8 @@ model FirewallPolicyIntrusionDetection {
 /**
  * The operation for configuring intrusion detection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyIntrusionDetectionConfiguration {
   /**
    * List of specific signatures states.
@@ -13474,6 +13513,8 @@ model FirewallPolicyIntrusionDetectionConfiguration {
 /**
  * Intrusion detection signatures specification states.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyIntrusionDetectionSignatureSpecification {
   /**
    * Signature id.
@@ -13489,6 +13530,8 @@ model FirewallPolicyIntrusionDetectionSignatureSpecification {
 /**
  * Intrusion detection bypass traffic specification.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyIntrusionDetectionBypassTrafficSpecifications {
   /**
    * Name of the bypass traffic rule.
@@ -13534,6 +13577,8 @@ model FirewallPolicyIntrusionDetectionBypassTrafficSpecifications {
 /**
  * Configuration needed to perform TLS termination & initiation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyTransportSecurity {
   /**
    * The CA used for intermediate CA generation.
@@ -13544,6 +13589,8 @@ model FirewallPolicyTransportSecurity {
 /**
  * Trusted Root certificates properties for tls.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyCertificateAuthority {
   /**
    * Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault.
@@ -13559,6 +13606,8 @@ model FirewallPolicyCertificateAuthority {
 /**
  * SKU of Firewall policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicySku {
   /**
    * Tier of Firewall Policy.
@@ -13569,6 +13618,8 @@ model FirewallPolicySku {
 /**
  * Properties of the rule collection group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyRuleCollectionGroupProperties {
   /**
    * A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
@@ -13599,6 +13650,8 @@ model FirewallPolicyRuleCollectionGroupProperties {
 /**
  * Properties of the rule collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @discriminator("ruleCollectionType")
 model FirewallPolicyRuleCollection {
   /**
@@ -13622,6 +13675,8 @@ model FirewallPolicyRuleCollection {
 /**
  * Will describe the query to run against the IDPS signatures DB
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model IdpsQueryObject {
   /**
    * Contain all filters names and values
@@ -13655,6 +13710,8 @@ model IdpsQueryObject {
 /**
  * Will contain the filter name and values to operate on
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FilterItems {
   /**
    * The name of the field we would like to filter
@@ -13670,6 +13727,8 @@ model FilterItems {
 /**
  * Describes a column to sort
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model OrderBy {
   /**
    * Describes the actual column name to sort by
@@ -13685,6 +13744,8 @@ model OrderBy {
 /**
  * Query result
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model QueryResults {
   /**
    * Number of total records matching the query.
@@ -13699,6 +13760,8 @@ model QueryResults {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model SingleQueryResult {
   /**
    * The ID of the signature
@@ -13760,6 +13823,8 @@ model SingleQueryResult {
  * Will contain the properties of the resource (the actual signature overrides)
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model SignaturesOverridesProperties {
   /**
    * Dictionary of <string>
@@ -13771,6 +13836,8 @@ model SignaturesOverridesProperties {
 /**
  * Describes the filter values possibles for a given column
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model SignatureOverridesFilterValuesQuery {
   /**
    * Describes the name of the column which values will be returned
@@ -13781,6 +13848,8 @@ model SignatureOverridesFilterValuesQuery {
 /**
  * Describes the list of all possible values for a specific filter value
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model SignatureOverridesFilterValuesResponse {
   /**
    * Describes the possible values
@@ -13791,6 +13860,8 @@ model SignatureOverridesFilterValuesResponse {
 /**
  * Describes an object containing an array with a single item
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model SignaturesOverridesList {
   /**
    * Describes a list consisting exactly one item describing the policy's signature override status
@@ -13801,6 +13872,8 @@ model SignaturesOverridesList {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyDraftProperties {
   /**
    * The parent firewall policy from which rules are inherited.
@@ -13852,6 +13925,8 @@ model FirewallPolicyDraftProperties {
  * Properties of the rule collection group draft.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyRuleCollectionGroupDraftProperties {
   /**
    * A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
@@ -26571,6 +26646,8 @@ model ApplicationGatewayForContainersReferenceDefinition {
 /**
  * Firewall Policy NAT Rule Collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyNatRuleCollection extends FirewallPolicyRuleCollection {
   /**
    * The action type of a Nat rule collection.
@@ -26592,6 +26669,8 @@ model FirewallPolicyNatRuleCollection extends FirewallPolicyRuleCollection {
 /**
  * Properties of the FirewallPolicyNatRuleCollectionAction.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyNatRuleCollectionAction {
   /**
    * The type of action.
@@ -26602,6 +26681,8 @@ model FirewallPolicyNatRuleCollectionAction {
 /**
  * Properties of a rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @discriminator("ruleType")
 model FirewallPolicyRule {
   /**
@@ -26623,6 +26704,8 @@ model FirewallPolicyRule {
 /**
  * Firewall Policy Filter Rule Collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyFilterRuleCollection extends FirewallPolicyRuleCollection {
   /**
    * The action type of a Filter rule collection.
@@ -26644,6 +26727,8 @@ model FirewallPolicyFilterRuleCollection extends FirewallPolicyRuleCollection {
 /**
  * Properties of the FirewallPolicyFilterRuleCollectionAction.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyFilterRuleCollectionAction {
   /**
    * The type of action.
@@ -26654,6 +26739,8 @@ model FirewallPolicyFilterRuleCollectionAction {
 /**
  * Rule of type application.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model ApplicationRule extends FirewallPolicyRule {
   /**
    * List of source IP addresses for this rule.
@@ -26717,6 +26804,8 @@ model ApplicationRule extends FirewallPolicyRule {
 /**
  * Properties of the application rule protocol.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyRuleApplicationProtocol {
   /**
    * Protocol type.
@@ -26734,6 +26823,8 @@ model FirewallPolicyRuleApplicationProtocol {
 /**
  * name and value of HTTP/S header to insert
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model FirewallPolicyHttpHeaderToInsert {
   /**
    * Contains the name of the header
@@ -26749,6 +26840,8 @@ model FirewallPolicyHttpHeaderToInsert {
 /**
  * Rule of type nat.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model NatRule extends FirewallPolicyRule {
   /**
    * Array of FirewallPolicyRuleNetworkProtocols.
@@ -26799,6 +26892,8 @@ model NatRule extends FirewallPolicyRule {
 /**
  * Rule of type network.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 model NetworkRule extends FirewallPolicyRule {
   /**
    * Array of FirewallPolicyRuleNetworkProtocols.
