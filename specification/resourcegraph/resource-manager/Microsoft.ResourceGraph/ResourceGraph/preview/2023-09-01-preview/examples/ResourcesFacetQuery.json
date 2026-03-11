@@ -1,133 +1,136 @@
 {
-  "operationId": "Resources",
+  "title": "Facet Query",
   "description": "A query on resources requesting extra facets.",
   "parameters": {
     "api-version": "2023-09-01-preview",
     "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
       "facets": [
         {
           "expression": "location",
           "options": {
-            "$top": 3,
-            "sortOrder": "desc"
+            "sortOrder": "desc",
+            "$top": 3
           }
         },
         {
           "expression": "properties.storageProfile.osDisk.osType",
           "options": {
-            "$top": 3,
-            "sortOrder": "desc"
+            "sortOrder": "desc",
+            "$top": 3
           }
         },
         {
           "expression": "nonExistingColumn",
           "options": {
-            "$top": 3,
-            "sortOrder": "desc"
+            "sortOrder": "desc",
+            "$top": 3
           }
         },
         {
           "expression": "resourceGroup",
           "options": {
-            "$top": 3,
             "sortBy": "tolower(resourceGroup)",
-            "sortOrder": "asc"
+            "sortOrder": "asc",
+            "$top": 3
           }
         },
         {
           "expression": "resourceGroup",
           "options": {
-            "$top": 3,
-            "filter": "resourceGroup contains 'test'"
+            "filter": "resourceGroup contains 'test'",
+            "$top": 3
           }
         }
-      ],
-      "query": "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
-      "subscriptions": [
-        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
       ]
     }
   },
-  "title": "Query with a facet request",
   "responses": {
     "200": {
       "body": {
+        "totalRecords": 5,
         "count": 5,
+        "resultTruncated": "false",
         "data": [
           {
-            "name": "myTestVm",
             "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/B-TEST-RG/providers/Microsoft.Compute/virtualMachines/myTestVm",
+            "name": "myTestVm",
             "location": "eastus",
-            "properties_storageProfile_osDisk_osType": "Windows",
-            "resourceGroup": "B-TEST-RG"
+            "resourceGroup": "B-TEST-RG",
+            "properties_storageProfile_osDisk_osType": "Windows"
           },
           {
-            "name": "myTestAccountVm",
             "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/c-rg/providers/Microsoft.Compute/virtualMachines/myTestAccountVm",
+            "name": "myTestAccountVm",
             "location": "westcentralus",
-            "properties_storageProfile_osDisk_osType": "Windows",
-            "resourceGroup": "c-rg"
+            "resourceGroup": "c-rg",
+            "properties_storageProfile_osDisk_osType": "Windows"
           },
           {
-            "name": "yetanothertest",
             "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/I-RG/providers/Microsoft.Compute/virtualMachines/yetanothertest",
+            "name": "yetanothertest",
             "location": "eastus",
-            "properties_storageProfile_osDisk_osType": "Linux",
-            "resourceGroup": "I-RG"
+            "resourceGroup": "I-RG",
+            "properties_storageProfile_osDisk_osType": "Linux"
           },
           {
-            "name": "drafttest1bux4cv7a7q3aw",
             "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/x-test-rg/providers/Microsoft.Compute/virtualMachines/drafttest1bux4cv7a7q3aw",
+            "name": "drafttest1bux4cv7a7q3aw",
             "location": "southcentralus",
-            "properties_storageProfile_osDisk_osType": "Linux",
-            "resourceGroup": "x-test-rg"
+            "resourceGroup": "x-test-rg",
+            "properties_storageProfile_osDisk_osType": "Linux"
           },
           {
-            "name": "testvmntp25370",
             "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/y-rg/providers/Microsoft.Compute/virtualMachines/testvmntp25370",
+            "name": "testvmntp25370",
             "location": "eastus",
-            "properties_storageProfile_osDisk_osType": "Windows",
-            "resourceGroup": "y-rg"
+            "resourceGroup": "y-rg",
+            "properties_storageProfile_osDisk_osType": "Windows"
           }
         ],
         "facets": [
           {
+            "expression": "location",
+            "resultType": "FacetResult",
+            "totalRecords": 3,
             "count": 3,
             "data": [
               {
-                "count": 3,
-                "location": "eastus"
+                "location": "eastus",
+                "count": 3
               },
               {
-                "count": 1,
-                "location": "southcentralus"
+                "location": "southcentralus",
+                "count": 1
               },
               {
-                "count": 1,
-                "location": "westcentralus"
+                "location": "westcentralus",
+                "count": 1
               }
-            ],
-            "expression": "location",
-            "resultType": "FacetResult",
-            "totalRecords": 3
+            ]
           },
           {
+            "expression": "properties.storageProfile.osDisk.osType",
+            "resultType": "FacetResult",
+            "totalRecords": 2,
             "count": 2,
             "data": [
               {
-                "count": 2,
-                "properties_storageProfile_osDisk_osType": "Linux"
+                "properties_storageProfile_osDisk_osType": "Linux",
+                "count": 2
               },
               {
-                "count": 3,
-                "properties_storageProfile_osDisk_osType": "Windows"
+                "properties_storageProfile_osDisk_osType": "Windows",
+                "count": 3
               }
-            ],
-            "expression": "properties.storageProfile.osDisk.osType",
-            "resultType": "FacetResult",
-            "totalRecords": 2
+            ]
           },
           {
+            "expression": "nonExistingColumn",
+            "resultType": "FacetError",
             "errors": [
               {
                 "code": "NoValidColumns",
@@ -137,49 +140,45 @@
                 "code": "InvalidColumnNames",
                 "message": "Invalid column names: [nonExistingColumn]."
               }
-            ],
-            "expression": "nonExistingColumn",
-            "resultType": "FacetError"
+            ]
           },
           {
+            "expression": "resourceGroup",
+            "resultType": "FacetResult",
+            "totalRecords": 5,
             "count": 3,
             "data": [
               {
-                "count": 1,
-                "resourceGroup": "B-TEST-RG"
+                "resourceGroup": "B-TEST-RG",
+                "count": 1
               },
               {
-                "count": 1,
-                "resourceGroup": "c-rg"
+                "resourceGroup": "c-rg",
+                "count": 1
               },
               {
-                "count": 1,
-                "resourceGroup": "I-RG"
+                "resourceGroup": "I-RG",
+                "count": 1
               }
-            ],
-            "expression": "resourceGroup",
-            "resultType": "FacetResult",
-            "totalRecords": 5
+            ]
           },
           {
+            "expression": "resourceGroup",
+            "resultType": "FacetResult",
+            "totalRecords": 2,
             "count": 2,
             "data": [
               {
-                "count": 1,
-                "resourceGroup": "B-TEST-RG"
+                "resourceGroup": "B-TEST-RG",
+                "count": 1
               },
               {
-                "count": 1,
-                "resourceGroup": "x-test-rg"
+                "resourceGroup": "x-test-rg",
+                "count": 1
               }
-            ],
-            "expression": "resourceGroup",
-            "resultType": "FacetResult",
-            "totalRecords": 2
+            ]
           }
-        ],
-        "resultTruncated": "false",
-        "totalRecords": 5
+        ]
       }
     }
   }

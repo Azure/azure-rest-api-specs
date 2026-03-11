@@ -47,8 +47,7 @@ These settings apply only when `--tag=2024-04` is specified on the command line.
 
 ```yaml $(tag) == '2024-04'
 input-file:
-  - stable/2024-04-01/resourcegraph.json
-  - stable/2024-04-01/graphquery.json
+  - stable/2024-04-01/openapi.json
   - preview/2021-06-01-preview/resourceshistory.json
   - preview/2020-09-01-preview/resourcechanges.json
 ```
@@ -59,7 +58,8 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - preview/2023-09-01-preview/openapi.json
+  - preview/2023-09-01-preview/resourcegraph.json
+  - preview/2023-09-01-preview/graphquery.json
   - preview/2021-06-01-preview/resourceshistory.json
   - preview/2020-09-01-preview/resourcechanges.json
 ```
