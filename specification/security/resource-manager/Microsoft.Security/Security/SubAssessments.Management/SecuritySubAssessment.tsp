@@ -24,6 +24,31 @@ model SecuritySubAssessment
   >;
 }
 
+alias SecuritySubAssessmentLegacyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Extension.ScopeParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /**
+     * The security assessment key - unique key for the assessment type
+     */
+    @path
+    @segment("assessments")
+    @key
+    assessmentName: string;
+  },
+  {
+    /**
+     * The Sub-Assessment Key - Unique key for the sub-assessment type
+     */
+    @path
+    @segment("subAssessments")
+    @key
+    subAssessmentName: string;
+  }
+>;
+
 @armResourceOperations
 interface SecuritySubAssessments {
   /**
@@ -31,18 +56,14 @@ interface SecuritySubAssessments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubAssessments_Get")
-  get is Extension.Read<Extension.ScopeParameter, SecuritySubAssessment>;
+  get is SecuritySubAssessmentLegacyOps.Read<SecuritySubAssessment>;
 
   /**
    * Get security sub-assessments on all your scanned resources inside a scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubAssessments_List")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
-    SecuritySubAssessment,
-    Response = ArmResponse<SecuritySubAssessmentList>
-  >;
+  list is SecuritySubAssessmentLegacyOps.List<SecuritySubAssessment>;
 }
 
 @@doc(SecuritySubAssessment.name,
