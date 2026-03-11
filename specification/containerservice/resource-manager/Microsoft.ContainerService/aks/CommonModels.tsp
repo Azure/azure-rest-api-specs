@@ -3474,7 +3474,7 @@ model ManagedClusterIngressProfile {
    * Settings for the managed Gateway API installation
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_02_01)
   gatewayAPI?: ManagedClusterIngressProfileGatewayConfiguration;
 
   /**
@@ -3485,7 +3485,7 @@ model ManagedClusterIngressProfile {
 }
 
 /** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_02_01)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
    * Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details.
