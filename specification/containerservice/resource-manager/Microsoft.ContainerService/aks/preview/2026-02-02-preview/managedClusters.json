@@ -10540,7 +10540,7 @@
     },
     "ManagedClusterAzureMonitorProfileAppMonitoring": {
       "type": "object",
-      "description": "Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring auto-instrumentation for AKS profile.",
       "properties": {
         "autoInstrumentation": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation",
@@ -10558,11 +10558,11 @@
     },
     "ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation": {
       "type": "object",
-      "description": "Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.",
+      "description": "Application Monitoring auto-instrumentation for AKS. Deploys a webhook that auto-instruments workloads with Microsoft OpenTelemetry Distros to collect OpenTelemetry metrics, logs, and traces. See https://aka.ms/AKSAppMonitoringDocs and https://aka.ms/AzureMonitorApplicationMonitoring for an overview.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if Application Monitoring Auto Instrumentation is enabled or not."
+          "description": "Indicates if Application Monitoring Auto-instrumentation is enabled or not."
         }
       }
     },
