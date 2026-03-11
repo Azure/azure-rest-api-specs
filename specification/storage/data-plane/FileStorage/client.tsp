@@ -107,11 +107,6 @@ namespace Customizations;
   "accessTierChangedOn",
   "javascript"
 );
-@@clientName(Storage.File.HandleItem.openTime, "openedOn", "javascript");
-@@clientName(Storage.File.HandleItem.lastReconnectTime,
-  "lastReconnectedOn",
-  "javascript"
-);
 
 @@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileCreationTime,
   "fileCreatedOn",
