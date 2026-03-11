@@ -895,7 +895,9 @@ interface Directory {
       @header("x-ms-marker") marker?: string;
 
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+
+      @header("x-ms-number-of-handles-failed")
+      numberOfHandlesFailedToClose: int32;
     }
   >;
 
@@ -1588,7 +1590,8 @@ interface File {
       @header("x-ms-marker") marker?: string;
 
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+      @header("x-ms-number-of-handles-failed")
+      numberOfHandlesFailedToClose: int32;
     }
   >;
 
