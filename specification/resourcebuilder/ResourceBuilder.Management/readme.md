@@ -1,15 +1,14 @@
-## Local Test Commands
+## Build Process
 
-```
-cd specification/resourcebuilder/ResourceBuilder.Management
+Run the build script to generate Swagger:
 
-tsp format .
+```powershell
+# From repo root
+.\specification\resourcebuilder\ResourceBuilder.Management\build.ps1
 
-tsp compile .
-
-npx prettier --write .
-
-npx tsv .
+# Or from ResourceBuilder.Management
+cd .\specification\resourcebuilder\ResourceBuilder.Management
+.\build.ps1
 ```
 
 ## Helpful tips
