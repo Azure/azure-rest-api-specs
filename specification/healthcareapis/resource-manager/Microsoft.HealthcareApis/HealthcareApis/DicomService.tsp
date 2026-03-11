@@ -14,6 +14,7 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Dicom Service
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model DicomService
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DicomServiceProperties> {
@@ -27,7 +28,7 @@ model DicomService
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -43,8 +44,8 @@ interface DicomServices {
   /**
    * Creates or updates a DICOM Service resource with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DicomService,
     Response = ArmResourceUpdatedResponse<DicomService> | ArmResourceCreatedResponse<
@@ -61,12 +62,16 @@ interface DicomServices {
   /**
    * Patch DICOM Service details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DicomService,
     PatchModel = DicomServicePatchResource,
-    Response = ArmResponse<DicomService> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<DicomService> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       @bodyRoot
       _: DicomService;
     }),
@@ -76,7 +81,7 @@ interface DicomServices {
   /**
    * Deletes a DICOM Service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DicomService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

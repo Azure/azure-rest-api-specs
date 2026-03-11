@@ -14,6 +14,7 @@ namespace Microsoft.HealthcareApis;
 /**
  * IoT Connector definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model IotConnector
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IotConnectorProperties> {
@@ -27,7 +28,7 @@ model IotConnector
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -43,8 +44,8 @@ interface IotConnectors {
   /**
    * Creates or updates an IoT Connector resource with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotConnector,
     Response = ArmResourceUpdatedResponse<IotConnector> | ArmResourceCreatedResponse<
@@ -61,12 +62,16 @@ interface IotConnectors {
   /**
    * Patch an IoT Connector.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     IotConnector,
     PatchModel = IotConnectorPatchResource,
-    Response = ArmResponse<IotConnector> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       @bodyRoot
       _: IotConnector;
     }),
@@ -76,7 +81,7 @@ interface IotConnectors {
   /**
    * Deletes an IoT Connector.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     IotConnector,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

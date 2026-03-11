@@ -3,10 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.HealthcareApis;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServicesPatchDescription.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IotDestinationProperties.provisioningState);
 
 @@clientLocation(ServicesDescriptions.get, "Services");
@@ -55,14 +55,14 @@ using Microsoft.HealthcareApis;
 @@clientName(DicomServices.update::parameters.properties,
   "dicomservicePatchResource"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DicomService.properties);
 
 @@clientName(IotConnectors.createOrUpdate::parameters.resource, "iotConnector");
 @@clientName(IotConnectors.update::parameters.properties,
   "iotConnectorPatchResource"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IotConnector.properties);
 
 @@clientLocation(IotFhirDestinations.get, "IotConnectorFhirDestination");
@@ -74,14 +74,14 @@ using Microsoft.HealthcareApis;
 );
 @@clientLocation(IotFhirDestinations.delete, "IotConnectorFhirDestination");
 @@clientLocation(IotFhirDestinations.listByIotConnector, "FhirDestinations");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IotFhirDestination.properties);
 
 @@clientName(FhirServices.createOrUpdate::parameters.resource, "fhirservice");
 @@clientName(FhirServices.update::parameters.properties,
   "fhirservicePatchResource"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FhirService.properties);
 
 @@clientLocation(ServicesOperationGroup.checkNameAvailability, "Services");

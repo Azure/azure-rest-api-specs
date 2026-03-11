@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "Proxy"
     },
     {
       "name": "Resource"
@@ -71,9 +71,6 @@
     },
     {
       "name": "FhirServices"
-    },
-    {
-      "name": "Proxy"
     }
   ],
   "paths": {
@@ -81,25 +78,25 @@
       "get": {
         "operationId": "Operations_List",
         "tags": [
-          "Operations"
+          "Proxy"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available operations supported by Microsoft Healthcare resource provider.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ListOperations"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -122,13 +119,13 @@
         "description": "Check if a service instance name is available.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "checkNameAvailabilityRequest",
+            "name": "checkNameAvailabilityInputs",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -167,10 +164,10 @@
         "description": "Get the operation result for a long running operation.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationName",
@@ -217,10 +214,10 @@
         "description": "Get all the service instances in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -256,10 +253,10 @@
         "description": "Lists all the available workspaces under the specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -295,13 +292,13 @@
         "description": "Get all the service instances in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -337,13 +334,13 @@
         "description": "Get the metadata of a service instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -386,13 +383,13 @@
         "description": "Create or update the metadata of a service instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -469,13 +466,13 @@
         "description": "Update the metadata of a service instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -498,9 +495,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ServicesDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -514,7 +522,12 @@
           "Patch service": {
             "$ref": "./examples/legacy/ServicePatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServicesDescription"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Services_Delete",
@@ -524,13 +537,13 @@
         "description": "Delete a service instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -587,20 +600,22 @@
         "description": "Lists all private endpoint connections for a service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           }
         ],
         "responses": {
@@ -621,6 +636,9 @@
           "PrivateEndpointConnection_List": {
             "$ref": "./examples/legacy/ServiceListPrivateEndpointConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -633,20 +651,22 @@
         "description": "Gets the specified private endpoint connection associated with the service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -684,20 +704,22 @@
         "description": "Update the state of the specified private endpoint connection associated with the service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -712,15 +734,26 @@
             "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-manager/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionDescription' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -734,7 +767,12 @@
           "PrivateEndpointConnection_CreateOrUpdate": {
             "$ref": "./examples/legacy/ServiceCreatePrivateEndpointConnection.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnectionDescription"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
@@ -744,20 +782,22 @@
         "description": "Deletes a private endpoint connection.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -815,20 +855,22 @@
         "description": "Gets the private link resources that need to be created for a service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           }
         ],
         "responses": {
@@ -861,20 +903,22 @@
         "description": "Gets a private link resource that need to be created for a service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
             "in": "path",
             "description": "The name of the service instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "groupName",
@@ -914,13 +958,13 @@
         "description": "Lists all the available workspaces under the specified resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -956,13 +1000,13 @@
         "description": "Gets the properties of the specified workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1002,13 +1046,13 @@
         "description": "Creates or updates a workspace resource with the specified parameters.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1096,13 +1140,13 @@
         "description": "Patch workspace details.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1160,7 +1204,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Workspace"
         },
         "x-ms-long-running-operation": true
       },
@@ -1172,13 +1217,13 @@
         "description": "Deletes a specified workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1238,13 +1283,13 @@
         "description": "Lists all DICOM Services for the given workspace",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1289,13 +1334,13 @@
         "description": "Gets the properties of the specified DICOM Service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1344,13 +1389,13 @@
         "description": "Creates or updates a DICOM Service resource with the specified parameters.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1447,13 +1492,13 @@
         "description": "Patch DICOM Service details.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1520,7 +1565,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DicomService"
         },
         "x-ms-long-running-operation": true
       },
@@ -1532,13 +1578,13 @@
         "description": "Deletes a DICOM Service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1607,13 +1653,13 @@
         "description": "Lists all FHIR Services for the given workspace",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1658,13 +1704,13 @@
         "description": "Gets the properties of the specified FHIR Service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1713,13 +1759,13 @@
         "description": "Creates or updates a FHIR Service resource with the specified parameters.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1816,13 +1862,13 @@
         "description": "Patch FHIR Service details.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1889,7 +1935,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FhirService"
         },
         "x-ms-long-running-operation": true
       },
@@ -1901,13 +1948,13 @@
         "description": "Deletes a FHIR Service.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -1976,13 +2023,13 @@
         "description": "Lists all IoT Connectors for the given workspace",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2027,13 +2074,13 @@
         "description": "Gets the properties of the specified IoT Connector.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2082,13 +2129,13 @@
         "description": "Creates or updates an IoT Connector resource with the specified parameters.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2185,13 +2232,13 @@
         "description": "Patch an IoT Connector.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2258,7 +2305,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/IotConnector"
         },
         "x-ms-long-running-operation": true
       },
@@ -2270,13 +2318,13 @@
         "description": "Deletes an IoT Connector.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2345,13 +2393,13 @@
         "description": "Lists all FHIR destinations for the given IoT Connector",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2405,13 +2453,13 @@
         "description": "Gets the properties of the specified Iot Connector FHIR destination.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2469,13 +2517,13 @@
         "description": "Creates or updates an IoT Connector FHIR destination resource with the specified parameters.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2581,13 +2629,13 @@
         "description": "Deletes an IoT Connector FHIR destination.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2665,20 +2713,22 @@
         "description": "Lists all private endpoint connections for a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           }
         ],
         "responses": {
@@ -2699,6 +2749,9 @@
           "WorkspacePrivateEndpointConnection_List": {
             "$ref": "./examples/privatelink/WorkspaceListPrivateEndpointConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2711,20 +2764,22 @@
         "description": "Gets the specified private endpoint connection associated with the workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -2762,20 +2817,22 @@
         "description": "Update the state of the specified private endpoint connection associated with the workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -2796,9 +2853,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionDescription' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2812,7 +2880,12 @@
           "WorkspacePrivateEndpointConnection_CreateOrUpdate": {
             "$ref": "./examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnectionDescription"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "WorkspacePrivateEndpointConnections_Delete",
@@ -2822,20 +2895,22 @@
         "description": "Deletes a private endpoint connection.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "privateEndpointConnectionName",
@@ -2893,20 +2968,22 @@
         "description": "Gets the private link resources that need to be created for a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           }
         ],
         "responses": {
@@ -2927,6 +3004,9 @@
           "WorkspacePrivateLinkResources_ListGroupIds": {
             "$ref": "./examples/privatelink/PrivateLinkResourcesListByWorkspace.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2939,20 +3019,22 @@
         "description": "Gets a private link resource that need to be created for a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
             "in": "path",
             "description": "The name of workspace resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
           },
           {
             "name": "groupName",
@@ -2985,6 +3067,24 @@
     }
   },
   "definitions": {
+    "ActionType": {
+      "type": "string",
+      "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+      "enum": [
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal"
+          }
+        ]
+      }
+    },
     "CheckNameAvailabilityParameters": {
       "type": "object",
       "description": "Input values.",
@@ -3069,13 +3169,13 @@
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-manager/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -3167,7 +3267,7 @@
           "type": "array",
           "description": "The list of private endpoint connections that are set up for this resource.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-manager/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -3314,7 +3414,7 @@
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-manager/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "kind": {
@@ -3324,7 +3424,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -3536,7 +3636,7 @@
           "type": "array",
           "description": "The list of private endpoint connections that are set up for this resource.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-manager/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -3606,13 +3706,13 @@
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-manager/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -3735,7 +3835,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3851,6 +3951,45 @@
         ]
       }
     },
+    "ListOperations": {
+      "type": "object",
+      "description": "Available operations of the service",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of available operation details",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log"
+        }
+      }
+    },
     "ManagedServiceIdentityType": {
       "type": "string",
       "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
@@ -3873,6 +4012,174 @@
             "description": "None"
           }
         ]
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Whether this dimension should be included for the Shoebox export scenario"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit that makes sense for the metric"
+        },
+        "category": {
+          "type": "string",
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Supported aggregation types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "Supported time grain types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern for the filter of the metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Whether the metric is internal."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether regional MDM account enabled."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "The resource Id dimension name override."
+        }
+      }
+    },
+    "OperationDetail": {
+      "type": "object",
+      "description": "Service REST API operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Default value is 'user,system'.",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.HealthcareApis",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource Type: Services",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the operation",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Friendly description for the operation,",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
       }
     },
     "OperationResultStatus": {
@@ -3956,13 +4263,13 @@
       "description": "The Private Endpoint Connection resource.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3976,6 +4283,10 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionDescription"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -3984,13 +4295,13 @@
       "description": "The Private Endpoint Connection resource.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4004,6 +4315,10 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResourceDescription"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       }
     },
@@ -4435,6 +4750,28 @@
         }
       }
     },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Log for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ServicesDescription": {
       "type": "object",
       "description": "The description of the service.",
@@ -4461,7 +4798,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4560,7 +4897,7 @@
           "type": "array",
           "description": "The list of private endpoint connections that are set up for this resource.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-manager/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
@@ -4740,7 +5077,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-manager/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -4787,7 +5124,7 @@
           "type": "array",
           "description": "The list of private endpoint connections that are set up for this resource.",
           "items": {
-            "$ref": "../../../../../../common-types/resource-manager/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },

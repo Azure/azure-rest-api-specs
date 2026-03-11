@@ -25,19 +25,19 @@ model ServicesDescription
   /**
    * The kind of the service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: Kind;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Setting indicating whether the service has a managed identity associated with it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ServicesResourceIdentity;
 }
 
@@ -46,16 +46,12 @@ interface ServicesDescriptions {
   /**
    * Get the metadata of a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Get")
   @tag("Resource")
   get is ArmResourceRead<ServicesDescription, Error = ErrorDetails>;
 
   /**
    * Create or update the metadata of a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_CreateOrUpdate")
   @tag("Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServicesDescription,
@@ -67,22 +63,20 @@ interface ServicesDescriptions {
   /**
    * Update the metadata of a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Update")
   @tag("Resource")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServicesDescription,
     PatchModel = ServicesPatchDescription,
-    Response = ArmResponse<ServicesDescription>,
+    Response = ArmResponse<ServicesDescription> &
+      ArmLroLocationHeader<FinalResult = ServicesDescription> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorDetails
   >;
 
   /**
    * Delete a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Delete")
   @tag("Resource")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServicesDescription,
@@ -92,8 +86,6 @@ interface ServicesDescriptions {
   /**
    * Get all the service instances in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_ListByResourceGroup")
   @tag("Collection")
   listByResourceGroup is ArmResourceListByParent<
     ServicesDescription,
@@ -103,8 +95,6 @@ interface ServicesDescriptions {
   /**
    * Get all the service instances in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_List")
   @tag("Collection")
   list is ArmListBySubscription<ServicesDescription, Error = ErrorDetails>;
 }

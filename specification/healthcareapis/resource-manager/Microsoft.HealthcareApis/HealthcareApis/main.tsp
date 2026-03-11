@@ -9,6 +9,7 @@
  */
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
@@ -25,6 +26,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -32,6 +34,7 @@ using TypeSpec.Versioning;
 /**
  * Use this API to manage Microsoft HealthcareApis services in your Azure subscription.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "HealthcareApisClient" })
 @versioned(Versions)
@@ -48,4 +51,18 @@ enum Versions {
   v2025_04_01_preview: "2025-04-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * Lists all of the available operations supported by Microsoft Healthcare resource provider.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Proxy")
+  @autoRoute
+  @segment("operations")
+  @list
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<ListOperations> | ErrorDetails;
+}

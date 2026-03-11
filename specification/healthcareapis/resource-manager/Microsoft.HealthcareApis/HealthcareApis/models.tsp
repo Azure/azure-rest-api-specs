@@ -308,7 +308,7 @@ union OperationResultStatus {
 /**
  * The kind of the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Kind {
   /**
    * fhir
@@ -329,7 +329,7 @@ enum Kind {
 /**
  * The reason for unavailability.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ServiceNameUnavailabilityReason {
   /**
    * Invalid
@@ -355,6 +355,7 @@ model ServicesProperties {
   /**
    * The access policies of the service instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessPolicies?: ServiceAccessPolicyEntry[];
 
   /**
@@ -585,7 +586,7 @@ model ServicesResource {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -658,11 +659,12 @@ model ErrorDetailsInternal {
 /**
  * The description of the service.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServicesPatchDescription {
   /**
    * Instance tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -727,6 +729,10 @@ model PrivateEndpointConnectionListResultDescription {
    */
   @pageItems
   value?: PrivateEndpointConnectionDescription[];
+
+  /** The link to the next page of items */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -738,6 +744,10 @@ model PrivateLinkResourceListResultDescription {
    */
   @pageItems
   value?: PrivateLinkResourceDescription[];
+
+  /** The link to the next page of items */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -782,7 +792,7 @@ model ResourceTags {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -790,7 +800,7 @@ model ResourceTags {
 /**
  * The common properties for any location based resource, tracked or proxy.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocationBasedResource extends ResourceCore {
   /**
    * The resource location.
@@ -831,7 +841,8 @@ model ResourceCore {
 /**
  * Workspace patch properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspacePatchResource extends ResourceTags {}
 
 /**
@@ -842,6 +853,7 @@ model Error {
   /**
    * Error details
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorDetailsInternal;
 }
 
@@ -1029,7 +1041,7 @@ model ServiceManagedIdentityIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -1037,7 +1049,7 @@ model ServiceManagedIdentityIdentity {
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -1045,7 +1057,7 @@ model ServiceManagedIdentityIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1056,7 +1068,7 @@ model UserAssignedIdentity {
   /**
    * The principal ID of the assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -1064,7 +1076,7 @@ model UserAssignedIdentity {
   /**
    * The client ID of the assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   clientId?: string;
@@ -1131,6 +1143,7 @@ model IotMappingProperties {
   /**
    * The mapping.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   content?: unknown;
 }
 
@@ -1150,8 +1163,8 @@ model IotFhirDestinationCollection is Azure.Core.Page<IotFhirDestination>;
 /**
  * IoT Connector destination properties for an Azure FHIR service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IotFhirDestinationProperties extends IotDestinationProperties {
   /**
    * Determines how resource identity is resolved on the destination.
@@ -1384,7 +1397,7 @@ model ResourceVersionPolicyConfiguration {
   /**
    * A list of FHIR Resources and their version policy overrides.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceTypeOverrides?: Record<FhirResourceVersionPolicy>;
 }
 
@@ -1684,7 +1697,28 @@ model OperationResultsDescription {
   /**
    * Additional properties of the operation result.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
+}
+
+/**
+ * Available operations of the service
+ */
+model ListOperations {
+  /**
+   * Collection of available operation details
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  @pageItems
+  value?: OperationDetail[];
+
+  /**
+   * URL client should use to fetch the next page (per server side paging).
+   * It's null for now, added for future use.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

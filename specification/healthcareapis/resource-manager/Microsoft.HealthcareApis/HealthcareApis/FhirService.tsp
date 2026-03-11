@@ -14,6 +14,7 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Fhir Service
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model FhirService
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FhirServiceProperties> {
@@ -27,7 +28,7 @@ model FhirService
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -35,7 +36,7 @@ model FhirService
   /**
    * The kind of the service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: FhirServiceKind;
 }
 
@@ -49,8 +50,8 @@ interface FhirServices {
   /**
    * Creates or updates a FHIR Service resource with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FhirService,
     Response = ArmResourceUpdatedResponse<FhirService> | ArmResourceCreatedResponse<
@@ -67,12 +68,16 @@ interface FhirServices {
   /**
    * Patch FHIR Service details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     FhirService,
     PatchModel = FhirServicePatchResource,
-    Response = ArmResponse<FhirService> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<FhirService> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       @bodyRoot
       _: FhirService;
     }),
@@ -82,7 +87,7 @@ interface FhirServices {
   /**
    * Deletes a FHIR Service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FhirService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

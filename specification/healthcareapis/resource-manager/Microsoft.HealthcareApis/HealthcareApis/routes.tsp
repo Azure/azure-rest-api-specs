@@ -13,13 +13,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.HealthcareApis;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServicesOperationGroup {
   /**
    * Check if a service instance name is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_CheckNameAvailability")
   @tag("Proxy")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
@@ -30,13 +28,11 @@ interface ServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationResultsOperationGroup {
   /**
    * Get the operation result for a long running operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationResults_Get")
   @tag("Proxy")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/operationresults/{operationResultId}")
   @get

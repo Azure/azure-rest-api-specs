@@ -15,9 +15,11 @@ namespace Microsoft.HealthcareApis;
 /**
  * The Private Endpoint Connection resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ServicesDescription)
 model PrivateEndpointConnectionDescription
-  is Azure.ResourceManager.ProxyResource<{}> {
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnectionDescription,
     KeyName = "privateEndpointConnectionName",
@@ -25,6 +27,16 @@ model PrivateEndpointConnectionDescription
     NamePattern = ""
   >;
 }
+
+// @Http.Private.includeInapplicableMetadataInPayload(false)
+// @parentResource(ServicesDescription)
+// model PrivateEndpointConnectionDescription
+//   extends Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
+//   @visibility(Lifecycle.Read)
+//   @key("privateEndpointConnectionName")
+//   @segment("privateEndpointConnections")
+//   name: string;
+// }
 
 alias PrivateEndpointConnectionDescriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -37,6 +49,8 @@ alias PrivateEndpointConnectionDescriptionOps = Azure.ResourceManager.Legacy.Leg
     @path
     @segment("services")
     @key
+    @minLength(3)
+    @maxLength(24)
     resourceName: string;
   },
   {
@@ -54,32 +68,26 @@ interface PrivateEndpointConnectionDescriptions {
   /**
    * Gets the specified private endpoint connection associated with the service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnections_Get")
   @tag("PrivateEndpointConnections")
   get is PrivateEndpointConnectionDescriptionOps.Read<PrivateEndpointConnectionDescription>;
 
   /**
    * Update the state of the specified private endpoint connection associated with the service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnections")
   createOrUpdate is PrivateEndpointConnectionDescriptionOps.CreateOrUpdateAsync<
     PrivateEndpointConnectionDescription,
     Request = PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionDescription>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionDescription> &
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionDescription> &
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionDescription> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateEndpointConnections")
   delete is PrivateEndpointConnectionDescriptionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnectionDescription,
@@ -89,8 +97,7 @@ interface PrivateEndpointConnectionDescriptions {
   /**
    * Lists all private endpoint connections for a service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnections_ListByService")
+  @list
   @tag("PrivateEndpointConnections")
   listByService is PrivateEndpointConnectionDescriptionOps.List<
     PrivateEndpointConnectionDescription,
@@ -108,6 +115,8 @@ alias WorkspacePrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.Legac
     @path
     @segment("workspaces")
     @key
+    @minLength(3)
+    @maxLength(24)
     workspaceName: string;
   },
   {
@@ -130,18 +139,18 @@ interface WorkspacePrivateEndpointConnections {
   /**
    * Update the state of the specified private endpoint connection associated with the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is WorkspacePrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnectionDescription,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionDescription>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionDescription> &
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionDescription> &
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionDescription> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is WorkspacePrivateEndpointConnectionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnectionDescription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

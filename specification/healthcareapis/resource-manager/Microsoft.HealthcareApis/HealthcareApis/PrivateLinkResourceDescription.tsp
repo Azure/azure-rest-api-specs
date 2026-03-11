@@ -15,9 +15,11 @@ namespace Microsoft.HealthcareApis;
 /**
  * The Private Endpoint Connection resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ServicesDescription)
 model PrivateLinkResourceDescription
-  is Azure.ResourceManager.ProxyResource<{}> {
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   ...ResourceNameParameter<
     Resource = PrivateLinkResourceDescription,
     KeyName = "groupName",
@@ -37,6 +39,8 @@ alias PrivateLinkResourceDescriptionOps = Azure.ResourceManager.Legacy.LegacyOpe
     @path
     @segment("services")
     @key
+    @minLength(3)
+    @maxLength(24)
     resourceName: string;
   },
   {
@@ -54,18 +58,14 @@ interface PrivateLinkResourceDescriptions {
   /**
    * Gets a private link resource that need to be created for a service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_Get")
   @tag("PrivateLinkResources")
   get is PrivateLinkResourceDescriptionOps.Read<PrivateLinkResourceDescription>;
 
   /**
    * Gets the private link resources that need to be created for a service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_ListByService")
   @tag("PrivateLinkResources")
-  listByService is PrivateLinkResourceDescriptionOps.List<
+  listByService is PrivateLinkResourceDescriptionOps.ListSinglePage<
     PrivateLinkResourceDescription,
     Response = ArmResponse<PrivateLinkResourceListResultDescription>
   >;
@@ -81,6 +81,8 @@ alias WorkspacePrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOpera
     @path
     @segment("workspaces")
     @key
+    @minLength(3)
+    @maxLength(24)
     workspaceName: string;
   },
   {

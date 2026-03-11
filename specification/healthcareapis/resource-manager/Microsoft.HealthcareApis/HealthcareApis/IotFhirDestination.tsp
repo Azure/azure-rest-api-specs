@@ -27,13 +27,13 @@ model IotFhirDestination
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The resource location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
@@ -43,18 +43,14 @@ interface IotFhirDestinations {
   /**
    * Gets the properties of the specified Iot Connector FHIR destination.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IotConnectorFhirDestination_Get")
   @tag("IotConnectors")
   get is ArmResourceRead<IotFhirDestination, Error = ErrorDetails>;
 
   /**
    * Creates or updates an IoT Connector FHIR destination resource with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("IotConnectorFhirDestination_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("IotConnectors")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotFhirDestination,
@@ -72,9 +68,7 @@ interface IotFhirDestinations {
   /**
    * Deletes an IoT Connector FHIR destination.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("IotConnectorFhirDestination_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("IotConnectors")
   delete is ArmResourceDeleteWithoutOkAsync<
     IotFhirDestination,
@@ -85,8 +79,6 @@ interface IotFhirDestinations {
   /**
    * Lists all FHIR destinations for the given IoT Connector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FhirDestinations_ListByIotConnector")
   @tag("IotConnectors")
   listByIotConnector is ArmResourceListByParent<
     IotFhirDestination,
