@@ -46,6 +46,9 @@ enum Versions {
   
   /** Version 2024-11-15-preview */
   v2024_11_15_preview: "2024-11-15-preview",
+
+  /** Version 2026-05-15-preview */
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &
