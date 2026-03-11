@@ -322,13 +322,8 @@ interface Share {
     },
     {
       @statusCode statusCode: 202;
-
-      /** The approximate size of the data stored on the share. */
-      @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
-
-      /** The approximate size of the data stored on the share snapshot. */
-      @header("x-ms-file-share-snapshot-usage-bytes")
-      shareSnapshotUsageBytes?: int64;
+      ...ShareUsageResponseHeader;
+      ...ShareSnapshotUsageResponseHeader;
     }
   >;
 
@@ -1590,6 +1585,7 @@ interface File {
       @header("x-ms-marker") marker?: string;
 
       @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
+
       @header("x-ms-number-of-handles-failed")
       numberOfHandlesFailedToClose: int32;
     }

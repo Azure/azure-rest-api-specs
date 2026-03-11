@@ -1868,6 +1868,19 @@ alias LeaseTimeResponseHeader = {
   @header("x-ms-lease-time") leaseTime?: int32;
 };
 
+/** Share usage bytes response header. */
+alias ShareUsageResponseHeader = {
+  /** The approximate size of the data stored on the share. */
+  @header("x-ms-file-share-usage-bytes") shareUsageBytes?: int64;
+};
+
+/** Share snapshot usage bytes response header. */
+alias ShareSnapshotUsageResponseHeader = {
+  /** The approximate size of the data stored on the share snapshot. */
+  @header("x-ms-file-share-snapshot-usage-bytes")
+  shareSnapshotUsageBytes?: int64;
+};
+
 /** Lease response headers. */
 alias LeaseResponseHeaders = {
   /** The lease duration. */

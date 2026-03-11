@@ -49,9 +49,6 @@ namespace Customizations;
   "javascript"
 );
 
-@@clientName(Storage.File.KeyInfo.start, "startsOn", "javascript");
-@@clientName(Storage.File.KeyInfo.expiry, "expiresOn", "javascript");
-
 @@clientName(Storage.File.Metrics.includeApis, "includeAPIs", "javascript");
 
 @@clientName(Storage.File.StorageServiceProperties,
@@ -99,15 +96,6 @@ namespace Customizations;
 @@clientName(Storage.File.SharePropertiesInternal.eTag, "etag", "javascript");
 @@clientName(Storage.File.FileProperty.eTag, "etag", "javascript");
 
-@@clientName(Storage.File.SharePropertiesInternal.deletedTime,
-  "deletedOn",
-  "javascript"
-);
-@@clientName(Storage.File.SharePropertiesInternal.accessTierChangeTime,
-  "accessTierChangedOn",
-  "javascript"
-);
-
 @@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileCreationTime,
   "fileCreatedOn",
   "javascript"
@@ -133,18 +121,8 @@ namespace Customizations;
   "javascript"
 );
 
-@@clientName(Storage.File.FileProperty.creationTime, "createdOn", "javascript");
-@@clientName(Storage.File.FileProperty.lastWriteTime,
-  "lastWriteOn",
-  "javascript"
-);
-@@clientName(Storage.File.FileProperty.changeTime, "changedOn", "javascript");
 @@clientName(Storage.File.FileProperty.lastAccessTime,
   "lastAccessedOn",
-  "javascript"
-);
-@@clientName(Storage.File.FileProperty.lastModified,
-  "lastModifiedOn",
   "javascript"
 );
 
@@ -187,6 +165,15 @@ namespace Customizations;
 
 @@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
   "signedDelegatedUserTenantId",
+  "javascript"
+);
+
+@@clientName(Storage.File.ShareUsageResponseHeader.shareUsageBytes,
+  "usageBytes",
+  "javascript"
+);
+@@clientName(Storage.File.ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
+  "snapshotUsageBytes",
   "javascript"
 );
 
