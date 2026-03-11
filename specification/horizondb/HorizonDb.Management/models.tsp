@@ -436,6 +436,7 @@ union RestartMode {
 @doc("Properties of a HorizonDb parameter group")
 model HorizonDbParameterGroupProperties {
   @doc("Parameters in the parameter group")
+  @identifiers(#["name"])
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameters?: ParameterProperties[];
 
@@ -516,6 +517,7 @@ model ParameterProperties {
 model HorizonDbParameterGroupPropertiesForPatchUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Parameters in the parameter group")
+  @identifiers(#["name"])
   @visibility(Lifecycle.Update)
   parameters?: ParameterProperties[];
 
@@ -543,6 +545,7 @@ model HorizonDbParameterGroupForPatchUpdate {
 @doc("Properties for parameter group connections")
 model HorizonDbParameterGroupConnectionsProperties {
   @doc("Connected clusters and pools")
+  @identifiers(#["id"])
   @visibility(Lifecycle.Read)
   clusters?: ConnectionInfo[];
 }

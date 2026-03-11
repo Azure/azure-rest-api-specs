@@ -2080,7 +2080,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
-      "post": {
+      "get": {
         "operationId": "HorizonDbParameterGroups_ListConnections",
         "tags": [
           "HorizonDbParameterGroups"
@@ -2111,19 +2111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-              "properties": {
-                "properties": {
-                  "$ref": "#/definitions/HorizonDbParameterGroupConnectionsProperties",
-                  "description": "The resource-specific properties for this resource."
-                }
-              },
-              "allOf": [
-                {
-                  "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-                }
-              ]
+              "$ref": "#/definitions/HorizonDbParameterGroupConnectionsPropertiesListResult"
             }
           },
           "default": {
@@ -2137,6 +2125,9 @@
           "List connections for a HorizonDb parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2622,9 +2613,33 @@
           "items": {
             "$ref": "#/definitions/ConnectionInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
+    },
+    "HorizonDbParameterGroupConnectionsPropertiesListResult": {
+      "type": "object",
+      "description": "The response of a HorizonDbParameterGroupConnectionsProperties list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HorizonDbParameterGroupConnectionsProperties items on this page",
+          "items": {
+            "$ref": "#/definitions/HorizonDbParameterGroupConnectionsProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
@@ -2674,6 +2689,9 @@
           "items": {
             "$ref": "#/definitions/ParameterProperties"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-ms-mutability": [
             "read",
             "update",
@@ -2734,6 +2752,9 @@
           "items": {
             "$ref": "#/definitions/ParameterProperties"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-ms-mutability": [
             "update"
           ]
