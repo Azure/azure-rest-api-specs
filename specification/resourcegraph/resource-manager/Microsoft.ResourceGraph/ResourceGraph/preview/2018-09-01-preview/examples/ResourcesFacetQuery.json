@@ -1,59 +1,57 @@
 {
-  "title": "Facet Query",
   "description": "A query on resources requesting extra facets.",
   "parameters": {
     "api-version": "2018-09-01-preview",
     "query": {
-      "subscriptions": [
-        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
-      ],
-      "query": "where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
       "facets": [
         {
           "expression": "location",
           "options": {
-            "sortOrder": "desc",
-            "$top": 3
+            "$top": 3,
+            "sortOrder": "desc"
           }
         },
         {
           "expression": "properties.storageProfile.osDisk.osType",
           "options": {
-            "sortOrder": "desc",
-            "$top": 3
+            "$top": 3,
+            "sortOrder": "desc"
           }
         },
         {
           "expression": "nonExistingColumn",
           "options": {
-            "sortOrder": "desc",
-            "$top": 3
+            "$top": 3,
+            "sortOrder": "desc"
           }
         },
         {
           "expression": "resourceGroup",
           "options": {
+            "$top": 3,
             "sortBy": "tolower(resourceGroup)",
-            "sortOrder": "asc",
-            "$top": 3
+            "sortOrder": "asc"
           }
         },
         {
           "expression": "resourceGroup",
           "options": {
-            "filter": "resourceGroup contains 'test'",
-            "$top": 3
+            "$top": 3,
+            "filter": "resourceGroup contains 'test'"
           }
         }
+      ],
+      "query": "where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
       ]
     }
   },
+  "title": "Query with a facet request",
   "responses": {
     "200": {
       "body": {
-        "totalRecords": 5,
         "count": 5,
-        "resultTruncated": "false",
         "data": {
           "columns": [
             {
@@ -117,9 +115,6 @@
         },
         "facets": [
           {
-            "expression": "location",
-            "resultType": "FacetResult",
-            "totalRecords": 3,
             "count": 3,
             "data": {
               "columns": [
@@ -146,12 +141,12 @@
                   1
                 ]
               ]
-            }
+            },
+            "expression": "location",
+            "resultType": "FacetResult",
+            "totalRecords": 3
           },
           {
-            "expression": "properties.storageProfile.osDisk.osType",
-            "resultType": "FacetResult",
-            "totalRecords": 2,
             "count": 2,
             "data": {
               "columns": [
@@ -174,11 +169,12 @@
                   3
                 ]
               ]
-            }
+            },
+            "expression": "properties.storageProfile.osDisk.osType",
+            "resultType": "FacetResult",
+            "totalRecords": 2
           },
           {
-            "expression": "nonExistingColumn",
-            "resultType": "FacetError",
             "errors": [
               {
                 "code": "NoValidColumns",
@@ -188,12 +184,11 @@
                 "code": "InvalidColumnNames",
                 "message": "Invalid column names: [nonExistingColumn]."
               }
-            ]
+            ],
+            "expression": "nonExistingColumn",
+            "resultType": "FacetError"
           },
           {
-            "expression": "resourceGroup",
-            "resultType": "FacetResult",
-            "totalRecords": 5,
             "count": 3,
             "data": {
               "columns": [
@@ -220,12 +215,12 @@
                   1
                 ]
               ]
-            }
-          },
-          {
+            },
             "expression": "resourceGroup",
             "resultType": "FacetResult",
-            "totalRecords": 2,
+            "totalRecords": 5
+          },
+          {
             "count": 2,
             "data": {
               "columns": [
@@ -248,10 +243,16 @@
                   1
                 ]
               ]
-            }
+            },
+            "expression": "resourceGroup",
+            "resultType": "FacetResult",
+            "totalRecords": 2
           }
-        ]
+        ],
+        "resultTruncated": "false",
+        "totalRecords": 5
       }
     }
-  }
+  },
+  "operationId": "Resources"
 }

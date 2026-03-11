@@ -1,21 +1,19 @@
 {
-  "title": "Filter query",
   "description": "A filtering query on resources.",
   "parameters": {
     "api-version": "2018-09-01-preview",
     "query": {
+      "query": "project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | limit 3",
       "subscriptions": [
         "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
-      ],
-      "query": "project id, name, type, location | where type =~ 'Microsoft.Compute/virtualMachines' | limit 3"
+      ]
     }
   },
+  "title": "Filter resources",
   "responses": {
     "200": {
       "body": {
-        "totalRecords": 3,
         "count": 3,
-        "resultTruncated": "false",
         "data": {
           "columns": [
             {
@@ -55,8 +53,11 @@
               "eastus"
             ]
           ]
-        }
+        },
+        "resultTruncated": "false",
+        "totalRecords": 3
       }
     }
-  }
+  },
+  "operationId": "Resources"
 }
