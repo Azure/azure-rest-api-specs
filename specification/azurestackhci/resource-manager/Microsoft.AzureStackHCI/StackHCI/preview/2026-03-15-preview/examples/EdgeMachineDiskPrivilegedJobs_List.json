@@ -1,0 +1,46 @@
+{
+  "title": "EdgeMachineDiskPrivilegedJobs_List",
+  "operationId": "EdgeMachineDiskPrivilegedJobs_List",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "diskName": "disk-0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "jobType": "DeleteVolume",
+              "deploymentMode": "Deploy",
+              "provisioningState": "Succeeded",
+              "jobId": "pvtjob-001",
+              "startTimeUtc": "2024-11-14T10:46:55.167Z",
+              "endTimeUtc": "2024-11-14T10:50:55.167Z",
+              "status": "Succeeded",
+              "volumePath": "/data",
+              "confirmDeletion": true,
+              "reportedProperties": {
+                "percentComplete": 100
+              }
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/disks/disk-0/privilegedJobs/pvtjob-001",
+            "name": "pvtjob-001",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/disks/privilegedJobs",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2024-11-14T10:46:55.167Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-11-14T10:50:55.167Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

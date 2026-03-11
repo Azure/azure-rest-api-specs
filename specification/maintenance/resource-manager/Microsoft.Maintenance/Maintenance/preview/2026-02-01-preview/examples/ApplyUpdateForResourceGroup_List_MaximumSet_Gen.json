@@ -1,0 +1,42 @@
+{
+  "title": "Get Configuration records within a subscription and resource group",
+  "operationId": "ApplyUpdateForResourceGroup_List",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "B0D46BBE-44A0-442D-ADD6-68389EC84593",
+    "resourceGroupName": "rgMaintenance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "status": "Pending",
+              "resourceId": "resourceId1",
+              "lastUpdateTime": "2026-02-24T15:47:50.865Z",
+              "maintenancePlanId": "maintenancePlanId1",
+              "statusDetails": {
+                "details": "None",
+                "code": "None",
+                "recoveryAction": "No recovery action needed"
+              }
+            },
+            "name": "e9b9685d-78e4-44c4-a81c-64a14f9b87b6",
+            "type": "Microsoft.Maintenance/applyUpdates",
+            "id": "/subscriptions/B0D46BBE-44A0-442D-ADD6-68389EC84593/resourcegroups/rgMaintenance/providers/Microsoft.Compute/virtualMachines/resourceId1/providers/Microsoft.Maintenance/applyUpdates/e9b9685d-78e4-44c4-a81c-64a14f9b87b6",
+            "systemData": {
+              "createdBy": "jdoes",
+              "createdByType": "User",
+              "createdAt": "2026-02-24T15:47:50.865Z",
+              "lastModifiedBy": "janedoe",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-02-24T15:47:50.865Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/ascqowfy"
+      }
+    }
+  }
+}
