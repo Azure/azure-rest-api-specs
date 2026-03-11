@@ -190,6 +190,11 @@ namespace Customizations;
 
 @@clientOption(Storage.File, "includeRootSlash", false, "python,javascript");
 
+@@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "javascript"
+);
+
 @@Legacy.disablePageable(Storage.File.Service.listSharesSegment,
   "python,javascript"
 );
