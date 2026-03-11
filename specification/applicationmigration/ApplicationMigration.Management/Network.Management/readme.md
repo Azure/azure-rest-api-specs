@@ -19,14 +19,14 @@ and writes them into Azure as ARM resources under a **NetworkSite** container.
                                                    NetworkDiscovery.json
 ```
 
-- **Inputs:** 13 TypeSpec files + `tspconfig.yaml` + 59 example JSONs
+- **Inputs:** 15 TypeSpec files + `tspconfig.yaml` + 69 example JSONs
 - **Output:** One Swagger 2.0 JSON file — `NetworkDiscovery.json`
 - **API version:** `2026-01-01-preview`
 - **ARM namespace:** `Microsoft.ApplicationMigration`
 
 ---
 
-## 2. Resource Hierarchy (12 resource types)
+## 2. Resource Hierarchy (14 resource types)
 
 ```
                          Microsoft.ApplicationMigration
@@ -39,22 +39,26 @@ and writes them into Azure as ARM resources under a **NetworkSite** container.
  NetworkAgent  NsxManager    NsxTier0Gateway    NsxTier1Gateway     NsxSegment
  /agents/      /nsxManagers/ /tier0Gateways/    /tier1Gateways/     /segments/
  {agentName}   {managerName} {gatewayName}      {gatewayName}       {segmentName}
-                                     │
-     ┌───────────────────────────────┼──────────────────┬──────────────────┐
+
+     ┌───────────────────────────────┬──────────────────┬──────────────────┐
      │                               │                  │                  │
-  NsxNsGroup               GatewayFirewallPolicy   NsxLoadBalancer    NsxNatRule
-  /nsGroups/                /gatewayFirewall         /loadBalancers/   /natRules/
-  {groupName}               Policies/{policyName}   {loadBalancerName} {natRuleName}
-                                     │
-                           GatewayFirewallRule          ◄── only 3-level nested resource
-                           /rules/{ruleName}
+  NsxNsGroup           NsxGatewayFirewallPolicy   NsxLoadBalancer    NsxNatRule
+  /nsGroups/           /gatewayFirewall             /loadBalancers/   /natRules/
+  {groupName}           Policies/{policyName}       {lbName}          {natRuleName}
+
+     ┌───────────────────────────────┬──────────────────┐
+     │                               │                  │
+NsxGatewayFirewallRule   NsxDistributedFirewall   NsxDistributedFirewall
+/nsxGatewayFirewallRules/    Policy                   Rule
+{ruleName}               /nsxDistributedFirewall   /nsxDistributedFirewall
+                          Policies/{policyName}     Rules/{ruleName}
 ```
 
 **Key facts:**
 - **1** TrackedResource: `NetworkSite` (has `location` + Azure `tags`)
-- **11** ProxyResources: everything below NetworkSite (no location, no Azure tags)
-- **1** 3-level nested resource: `GatewayFirewallRule` is a child of `GatewayFirewallPolicy`
-- All other children are direct children of `NetworkSite`
+- **13** ProxyResources: everything below NetworkSite (no location, no Azure tags)
+- **All** children are direct children of `NetworkSite` (flat hierarchy)
+- Relationships between resources (e.g., GFW Rule → GFW Policy) are expressed via ARM ID properties, not URL nesting
 
 ---
 
@@ -72,7 +76,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | `errors` | Error[] | List of discovery/health errors |
 | `errorCount` | int64 | The number of errors |
 
-> **Note:** `nsxManagerRef` is **not** in the base model. It is added individually to each resource that needs it (all except NsxManager and NetworkAgent).
+> **Note:** `nsxManagerArmId` is **not** in the base model. It is added individually to each resource that needs it (all except NsxManager and NetworkAgent).
 
 **Example in a response:**
 ```json
@@ -81,7 +85,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
     "provisioningState": "Succeeded",
     "displayName": "Segment-Web-Tier",
     "nsxOriginalPath": "/infra/segments/segment-web",
-    "nsxManagerRef": "/subscriptions/.../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": "/subscriptions/.../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "nsxTags": [{ "scope": "env", "tag": "production" }],
     "errors": [],
@@ -123,7 +127,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 **URL:** `.../networkSites/{siteName}/agents/{agentName}`
 **TypeSpec file:** `NetworkAgent.tsp`
 
-> **Note:** NetworkAgent does NOT inherit `AzureResourceProperties`, same as NetworkSite. It has its own standalone properties (NSX tags, nsxOriginalPath, uniqueId, and nsxManagerRef do not apply to agents or the site).
+> **Note:** NetworkAgent does NOT inherit `AzureResourceProperties`, same as NetworkSite. It has its own standalone properties (NSX tags, nsxOriginalPath, uniqueId, and nsxManagerArmId do not apply to agents or the site).
 
 | Property | Type | Required | Visibility | Notes |
 |----------|------|----------|------------|-------|
@@ -145,14 +149,24 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 **URL:** `.../networkSites/{siteName}/nsxManagers/{managerName}`
 **TypeSpec file:** `NsxManager.tsp`
 
-> **Note:** NsxManager does NOT have `nsxManagerRef` (it IS the manager, so a self-reference is meaningless).
+> **Note:** NsxManager does NOT have `nsxManagerArmId` (it IS the manager, so a self-reference is meaningless).
 
 | Property | Type | Required | Notes |
 |----------|------|----------|-------|
 | `fqdn` | string | **yes** | NSX Manager FQDN (e.g., `nsx-mgr01.contoso.com`) |
 | `runAsAccount` | string | no | Credential reference |
-| `localNsxManagerRefs` | armResourceIdentifier[] | no | ARM resource IDs of local NSX Manager references |
-| `vcenterRefs` | armResourceIdentifier[] | no | → `Microsoft.OffAzure/vmwareSites/vcenters` |
+| `version` | string | no | The NSX Manager version |
+| `isGlobalManager` | boolean | no | Whether this is a global manager |
+| `localNsxManagerArmIds` | armResourceIdentifier[] | no | ARM resource IDs of local NSX Manager references |
+| `vcenterArmIds` | armResourceIdentifier[] | no | → `Microsoft.OffAzure/vmwareSites/vcenters` |
+| `applianceDataCollection` | ApplianceData[] | no | Collection of appliance data (runAsAccountId, applianceName, status) |
+
+**ApplianceData model:**
+| Property | Type | Notes |
+|----------|------|-------|
+| `runAsAccountId` | string | The run-as account identifier |
+| `applianceName` | string | The appliance name |
+| `status` | RegistrationStatus | Registering / Registered |
 
 ---
 
@@ -166,10 +180,10 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | `haMode` | HaMode | ACTIVE_ACTIVE / ACTIVE_STANDBY |
 | `firewallEnabled` | boolean | Whether gateway firewall is on |
 | `isVrf` | boolean | Whether this is a VRF gateway |
-| `associatedTier1Gateways` | armResourceIdentifier[] | References to child T1 gateways |
-| `associatedSegments` | armResourceIdentifier[] | References to connected segments |
-| `associatedNatRules` | armResourceIdentifier[] | References to NAT rules on this gateway |
-| `associatedGfwPolicies` | armResourceIdentifier[] | References to firewall policies |
+| `associatedTier1GatewayArmIds` | armResourceIdentifier[] | References to child T1 gateways |
+| `associatedSegmentArmIds` | armResourceIdentifier[] | References to connected segments |
+| `associatedNatRuleArmIds` | armResourceIdentifier[] | References to NAT rules on this gateway |
+| `associatedGfwPolicyArmIds` | armResourceIdentifier[] | References to firewall policies |
 
 **Custom action:**
 - `POST .../tier0Gateways/{gatewayName}/listNatRules` → returns `NsxNatRuleList`
@@ -185,11 +199,11 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 |----------|------|-------|
 | `haMode` | HaMode | ACTIVE_ACTIVE / ACTIVE_STANDBY |
 | `firewallEnabled` | boolean | |
-| `parentTier0Gateway` | armResourceIdentifier | Reference to the parent T0 gateway |
-| `associatedSegments` | armResourceIdentifier[] | |
-| `associatedNatRules` | armResourceIdentifier[] | |
-| `associatedGfwPolicies` | armResourceIdentifier[] | |
-| `associatedLoadBalancers` | armResourceIdentifier[] | |
+| `parentTier0GatewayArmId` | armResourceIdentifier | Reference to the parent T0 gateway |
+| `associatedSegmentArmIds` | armResourceIdentifier[] | |
+| `associatedNatRuleArmIds` | armResourceIdentifier[] | |
+| `associatedGfwPolicyArmIds` | armResourceIdentifier[] | |
+| `associatedLoadBalancerArmIds` | armResourceIdentifier[] | |
 
 **Custom action:**
 - `POST .../tier1Gateways/{gatewayName}/listNatRules` → returns `NsxNatRuleList`
@@ -203,13 +217,13 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 
 | Property | Type | Notes |
 |----------|------|-------|
-| `parentGateway` | armResourceIdentifier | Reference to the T0 or T1 gateway this segment is attached to |
+| `parentGatewayArmId` | armResourceIdentifier | Reference to the T0 or T1 gateway this segment is attached to |
 | `segmentType` | SegmentType | ROUTED / EXTENDED / ROUTED_AND_EXTENDED / DISCONNECTED |
 | `vlanIds` | string[] | VLAN identifiers |
 | `subnets` | Subnet[] | { gatewayAddress, network } |
 | `systemOwned` | boolean | Whether NSX owns this segment |
 | `adminState` | AdminState | UP / DOWN |
-| `associatedVirtualMachines` | armResourceIdentifier[] | → `Microsoft.OffAzure/vmwareSites/machines` |
+| `associatedVirtualMachineArmIds` | armResourceIdentifier[] | → `Microsoft.OffAzure/vmwareSites/machines` |
 
 ---
 
@@ -222,7 +236,7 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | Property | Type | Notes |
 |----------|------|-------|
 | `expressions` | GroupExpression[] | Membership criteria (conditions + conjunctions) |
-| `effectiveVirtualMachineRefs` | EffectiveVmRef[] | Resolved VM references |
+| `effectiveVirtualMachineArmIds` | EffectiveVmArmId[] | Resolved VM references |
 | `effectiveIpMembers` | string[] | Resolved IP addresses |
 
 ---
@@ -239,31 +253,31 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 | `isDefault` | boolean | Default policy flag |
 | `contextType` | PolicyContextType | Generic / GatewaySpecific |
 | `federationScope` | FederationScope | Local / Global |
-| `appliedScopes` | armResourceIdentifier[] | Scopes this policy applies to |
-| `effectiveScopes` | armResourceIdentifier[] | Computed effective scopes |
+| `appliedScopeArmIds` | armResourceIdentifier[] | Scopes this policy applies to |
+| `effectiveScopeArmIds` | armResourceIdentifier[] | Computed effective scopes |
 
 ---
 
-### 4i. NsxGatewayFirewallRule (ProxyResource — 3-level nested)
+### 4i. NsxGatewayFirewallRule (ProxyResource)
 
-**URL:** `.../gatewayFirewallPolicies/{policyName}/rules/{ruleName}`
-**Parent:** `NsxGatewayFirewallPolicy`
+**URL:** `.../networkSites/{siteName}/nsxGatewayFirewallRules/{ruleName}`
 **TypeSpec file:** `NsxGatewayFirewallRule.tsp`
 
 | Property | Type | Notes |
 |----------|------|-------|
+| `parentGatewayFirewallPolicyArmId` | armResourceIdentifier | Reference to the parent GFW Policy |
 | `action` | FirewallAction | ALLOW / DROP / REJECT |
 | `direction` | FirewallDirection | IN / OUT / IN_OUT |
 | `disabled` | boolean | |
 | `sequenceNumber` | int32 | Rule evaluation order |
 | `globalPriority` | string | Global priority of the rule |
-| `sourceIpGroups` | armResourceIdentifier[] | NsxNsGroup references |
-| `sourceAddresses` | string[] | Raw IP/CIDR addresses |
-| `destinationIpGroups` | armResourceIdentifier[] | NsxNsGroup references |
-| `destinationAddresses` | string[] | |
+| `sourceIpGroupArmIds` | armResourceIdentifier[] | NsxNsGroup references |
+| `sourceAddresses` | string[] | Source IPv4/IPv6 addresses or CIDR ranges |
+| `destinationIpGroupArmIds` | armResourceIdentifier[] | NsxNsGroup references |
+| `destinationAddresses` | string[] | Destination IPv4/IPv6 addresses or CIDR ranges |
 | `services` | FirewallService[] | Inline service definitions (see below) |
-| `appliedScopes` | armResourceIdentifier[] | |
-| `effectiveScopes` | armResourceIdentifier[] | |
+| `appliedScopeArmIds` | armResourceIdentifier[] | |
+| `effectiveScopeArmIds` | armResourceIdentifier[] | |
 
 **FirewallService model (inline, not a separate ARM resource):**
 ```json
@@ -291,9 +305,9 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 |----------|------|-------|
 | `lbType` | LbType | L4 / L7 |
 | `adminState` | AdminState | UP / DOWN / ENABLED / DISABLED |
-| `parentGateway` | armResourceIdentifier | Reference to the T1 gateway this LB is on |
+| `parentGatewayArmId` | armResourceIdentifier | Reference to the T1 gateway this LB is on |
 | `frontend` | FrontendConfig | { vip, port, protocol } |
-| `backendConfig` | BackendConfig | { backendPool (members with vmRef → OffAzure machines), healthProbe, snat } |
+| `backendConfig` | BackendConfig | { backendPool (members with vmArmId → OffAzure machines), healthProbe, snat } |
 
 ---
 
@@ -306,9 +320,49 @@ Every NSX-discovered ProxyResource's properties model inherits from `AzureResour
 |----------|------|-------|
 | `natType` | NatType | SNAT / DNAT |
 | `adminState` | AdminState | |
-| `parentGateway` | armResourceIdentifier | Reference to the T0 or T1 gateway |
+| `parentGatewayArmId` | armResourceIdentifier | Reference to the T0 or T1 gateway |
 | `match` | NatMatch | { source, destination, protocol } |
 | `translate` | NatTranslate | { ipAddress, port } |
+
+---
+
+### 4l. NsxDistributedFirewallPolicy (ProxyResource)
+
+**URL:** `.../networkSites/{siteName}/nsxDistributedFirewallPolicies/{policyName}`
+**TypeSpec file:** `NsxDistributedFirewallPolicy.tsp`
+
+| Property | Type | Notes |
+|----------|------|-------|
+| `category` | DistributedFirewallPolicyCategory | Ethernet, Emergency, Infrastructure, Environment, Application |
+| `sequenceNumber` | int32 | Evaluation order |
+| `isDefault` | boolean | Default policy flag |
+| `federationScope` | FederationScope | Local / Global |
+| `scope` | boolean | Whether scope is applied |
+| `scopeGroupArmIds` | string[] | Scope groups this policy applies to |
+
+---
+
+### 4m. NsxDistributedFirewallRule (ProxyResource)
+
+**URL:** `.../networkSites/{siteName}/nsxDistributedFirewallRules/{ruleName}`
+**TypeSpec file:** `NsxDistributedFirewallRule.tsp`
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `parentDistributedFirewallPolicyArmId` | armResourceIdentifier | **yes** | Reference to the parent DFW Policy |
+| `action` | FirewallAction | no | ALLOW / DROP / REJECT |
+| `direction` | FirewallDirection | no | IN / OUT / IN_OUT |
+| `anyScope` | boolean | no | Whether scope is ANY |
+| `scopeGroupArmIds` | armResourceIdentifier[] | no | Scope group references |
+| `sourceExcluded` | boolean | no | Whether source groups are excluded |
+| `sourceAny` | boolean | no | Whether source is ANY |
+| `sourceGroupArmIds` | armResourceIdentifier[] | no | Source group references |
+| `sourceAddresses` | string[] | no | Source IPv4/IPv6 addresses or CIDR ranges |
+| `destinationsExcluded` | boolean | no | Whether destination groups are excluded |
+| `destinationAny` | boolean | no | Whether destination is ANY |
+| `destinationGroupsArmIds` | armResourceIdentifier[] | no | Destination group references |
+| `destinationAddresses` | string[] | no | Destination IPv4/IPv6 addresses or CIDR ranges |
+| `services` | FirewallService[] | no | Inline service definitions |
 
 ---
 
@@ -322,38 +376,48 @@ Instead, relationships are data properties.
 
 ```
 NsxManager
-  ├──▶ localNsxManagerRefs[]     → NsxManager (local managers)
-  └──▶ vcenterRefs[]            → Microsoft.OffAzure/vmwareSites/vcenters
+  ├──▶ localNsxManagerArmIds[]     → NsxManager (local managers)
+  └──▶ vcenterArmIds[]            → Microsoft.OffAzure/vmwareSites/vcenters
 
 NsxTier0Gateway
-  ├──▶ associatedTier1Gateways[]  → NsxTier1Gateway (by ARM ID)
-  ├──▶ associatedSegments[]       → NsxSegment
-  ├──▶ associatedNatRules[]       → NsxNatRule
-  └──▶ associatedGfwPolicies[]    → NsxGatewayFirewallPolicy
+  ├──▶ associatedTier1GatewayArmIds[]  → NsxTier1Gateway (by ARM ID)
+  ├──▶ associatedSegmentArmIds[]       → NsxSegment
+  ├──▶ associatedNatRuleArmIds[]       → NsxNatRule
+  └──▶ associatedGfwPolicyArmIds[]    → NsxGatewayFirewallPolicy
 
 NsxTier1Gateway
-  ├──▶ parentTier0Gateway         → NsxTier0Gateway (single ref)
-  ├──▶ associatedSegments[]       → NsxSegment
-  ├──▶ associatedNatRules[]       → NsxNatRule
-  ├──▶ associatedGfwPolicies[]    → NsxGatewayFirewallPolicy
-  └──▶ associatedLoadBalancers[]  → NsxLoadBalancer
+  ├──▶ parentTier0GatewayArmId         → NsxTier0Gateway (single ref)
+  ├──▶ associatedSegmentArmIds[]       → NsxSegment
+  ├──▶ associatedNatRuleArmIds[]       → NsxNatRule
+  ├──▶ associatedGfwPolicyArmIds[]    → NsxGatewayFirewallPolicy
+  └──▶ associatedLoadBalancerArmIds[]  → NsxLoadBalancer
 
 NsxSegment
-  ├──▶ parentGateway              → NsxTier0Gateway or NsxTier1Gateway (single ref)
-  └──▶ associatedVirtualMachines[]→ Microsoft.OffAzure/vmwareSites/machines
+  ├──▶ parentGatewayArmId              → NsxTier0Gateway or NsxTier1Gateway (single ref)
+  └──▶ associatedVirtualMachineArmIds[]→ Microsoft.OffAzure/vmwareSites/machines
 
 NsxLoadBalancer
-  └──▶ parentGateway              → NsxTier1Gateway (single ref)
+  └──▶ parentGatewayArmId              → NsxTier1Gateway (single ref)
 
 NsxNatRule
-  └──▶ parentGateway              → NsxTier0Gateway or NsxTier1Gateway (single ref)
+  └──▶ parentGatewayArmId              → NsxTier0Gateway or NsxTier1Gateway (single ref)
 
 NsxGatewayFirewallRule
-  ├──▶ sourceIpGroups[]           → NsxNsGroup
-  └──▶ destinationIpGroups[]      → NsxNsGroup
+  ├──▶ parentGatewayFirewallPolicyArmId → NsxGatewayFirewallPolicy (single ref)
+  ├──▶ sourceIpGroupArmIds[]           → NsxNsGroup
+  └──▶ destinationIpGroupArmIds[]      → NsxNsGroup
 
-ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef):
-  └──▶ nsxManagerRef              → NsxManager (which manager discovered this)
+NsxDistributedFirewallPolicy
+  └──▶ scopeGroupArmIds[]             → scope groups
+
+NsxDistributedFirewallRule
+  ├──▶ parentDistributedFirewallPolicyArmId → NsxDistributedFirewallPolicy (single ref, required)
+  ├──▶ scopeGroupArmIds[]             → scope groups
+  ├──▶ sourceGroupArmIds[]            → NsxNsGroup
+  └──▶ destinationGroupsArmIds[]      → NsxNsGroup
+
+ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerArmId):
+  └──▶ nsxManagerArmId              → NsxManager (which manager discovered this)
 ```
 
 ### 5b. Example: How T0 → T1 → Segment → NAT → LB Are Connected
@@ -365,14 +429,14 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
   "properties": {
     "displayName": "T0-Main",
     "isVrf": false,
-    "associatedTier1Gateways": [
+    "associatedTier1GatewayArmIds": [
       ".../networkSites/site1/tier1Gateways/T1-Web",
       ".../networkSites/site1/tier1Gateways/T1-App"
     ],
-    "associatedSegments": [
+    "associatedSegmentArmIds": [
       ".../networkSites/site1/segments/transit-segment"
     ],
-    "associatedNatRules": [
+    "associatedNatRuleArmIds": [
       ".../networkSites/site1/natRules/snat-outbound"
     ]
   }
@@ -383,14 +447,14 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
   "id": ".../networkSites/site1/tier1Gateways/T1-Web",
   "properties": {
     "displayName": "T1-Web-Tier",
-    "parentTier0Gateway": ".../networkSites/site1/tier0Gateways/T0-Main",
-    "associatedSegments": [
+    "parentTier0GatewayArmId": ".../networkSites/site1/tier0Gateways/T0-Main",
+    "associatedSegmentArmIds": [
       ".../networkSites/site1/segments/web-segment"
     ],
-    "associatedLoadBalancers": [
+    "associatedLoadBalancerArmIds": [
       ".../networkSites/site1/loadBalancers/web-lb"
     ],
-    "associatedNatRules": [
+    "associatedNatRuleArmIds": [
       ".../networkSites/site1/natRules/dnat-web-ingress"
     ]
   }
@@ -401,10 +465,10 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
   "id": ".../networkSites/site1/segments/web-segment",
   "properties": {
     "displayName": "Web-Segment",
-    "parentGateway": ".../networkSites/site1/tier1Gateways/T1-Web",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/T1-Web",
     "segmentType": "ROUTED",
     "subnets": [{ "gatewayAddress": "10.0.1.1/24", "network": "10.0.1.0/24" }],
-    "associatedVirtualMachines": [
+    "associatedVirtualMachineArmIds": [
       ".../vmwareSites/vsphere1/machines/vm-web-01",
       ".../vmwareSites/vsphere1/machines/vm-web-02"
     ]
@@ -417,7 +481,7 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
   "properties": {
     "displayName": "DNAT-Web-Ingress",
     "natType": "DNAT",
-    "parentGateway": ".../networkSites/site1/tier1Gateways/T1-Web",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/T1-Web",
     "match": {
       "source": { "ipAddress": ["0.0.0.0/0"], "port": "1024-65535" },
       "destination": { "ipAddress": ["203.0.113.10"], "port": "443" },
@@ -433,14 +497,14 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
   "properties": {
     "displayName": "Web-LB",
     "lbType": "L4",
-    "parentGateway": ".../networkSites/site1/tier1Gateways/T1-Web",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/T1-Web",
     "frontend": { "vip": "10.0.1.50", "port": 443, "protocol": "HTTPS" },
     "backendConfig": {
       "backendPool": {
         "algorithm": "ROUND_ROBIN",
         "members": [
-          { "ipAddress": "10.0.1.11", "port": 8443, "adminState": "ENABLED", "vmRef": ".../vmwareSites/vs1/machines/vm1" },
-          { "ipAddress": "10.0.1.12", "port": 8443, "adminState": "ENABLED", "vmRef": ".../vmwareSites/vs1/machines/vm2" }
+          { "ipAddress": "10.0.1.11", "port": 8443, "adminState": "ENABLED", "vmArmId": ".../vmwareSites/vs1/machines/vm1" },
+          { "ipAddress": "10.0.1.12", "port": 8443, "adminState": "ENABLED", "vmArmId": ".../vmwareSites/vs1/machines/vm2" }
         ]
       }
     }
@@ -454,26 +518,35 @@ ALL resources except NsxManager and NetworkAgent (via per-resource nsxManagerRef
 "Given a Tier-1 gateway, find all its resources"
 
 GET .../tier1Gateways/T1-Web
-  └── response.properties.associatedSegments[]     → GET each segment
-  └── response.properties.associatedNatRules[]     → GET each NAT rule
-  └── response.properties.associatedLoadBalancers[]→ GET each load balancer
-  └── response.properties.associatedGfwPolicies[] → GET each firewall policy
-         └── GET .../gatewayFirewallPolicies/{name}/rules  → list rules under it
+  └── response.properties.associatedSegmentArmIds[]     → GET each segment
+  └── response.properties.associatedNatRuleArmIds[]     → GET each NAT rule
+  └── response.properties.associatedLoadBalancerArmIds[]→ GET each load balancer
+  └── response.properties.associatedGfwPolicyArmIds[] → GET each firewall policy
+
+"Given a firewall policy, find its rules"
+
+GET .../nsxGatewayFirewallRules?$filter=parentGatewayFirewallPolicyArmId eq '...'
+  └── or list all rules and filter by parentGatewayFirewallPolicyArmId
+
+"Given a DFW policy, find its rules"
+
+GET .../nsxDistributedFirewallRules?$filter=parentDistributedFirewallPolicyArmId eq '...'
+  └── or list all rules and filter by parentDistributedFirewallPolicyArmId
 
 "Given a NAT rule, find which gateway it belongs to"
 
 GET .../natRules/dnat-web-ingress
-  └── response.properties.parentGateway            → the T0 or T1 gateway ARM ID
+  └── response.properties.parentGatewayArmId            → the T0 or T1 gateway ARM ID
 
 "Given a segment, find VMs connected to it"
 
 GET .../segments/web-segment
-  └── response.properties.associatedVirtualMachines[] → OffAzure VM ARM IDs
+  └── response.properties.associatedVirtualMachineArmIds[] → OffAzure VM ARM IDs
 
 "Given any resource (except Agent/Manager), find which NSX Manager discovered it"
 
 GET .../segments/web-segment
-  └── response.properties.nsxManagerRef              → NsxManager ARM ID
+  └── response.properties.nsxManagerArmId              → NsxManager ARM ID
 ```
 
 ---
@@ -506,8 +579,11 @@ TypeSpec:
     errorCount?: int64;
     fqdn?: string;
     runAsAccount?: string;
-    localNsxManagerRefs?: armResourceIdentifier[];
-    vcenterRefs?: armResourceIdentifier[];
+    version?: string;
+    isGlobalManager?: boolean;
+    localNsxManagerArmIds?: armResourceIdentifier[];
+    vcenterArmIds?: armResourceIdentifier[];
+    applianceDataCollection?: ApplianceData[];
   }
 
 Request body:
@@ -532,10 +608,12 @@ Request body:
 | NsxTier1Gateway | `haMode`, `firewallEnabled` |
 | NsxSegment | `adminState` |
 | NsxNsGroup | `expressions` |
-| GatewayFirewallPolicy | `sequenceNumber` |
-| GatewayFirewallRule | `disabled`, `sequenceNumber` |
+| NsxGatewayFirewallPolicy | `sequenceNumber` |
+| NsxGatewayFirewallRule | `disabled`, `sequenceNumber` |
 | NsxLoadBalancer | `adminState` |
 | NsxNatRule | `adminState` |
+| NsxDistributedFirewallPolicy | `category`, `sequenceNumber`, `isDefault`, `federationScope`, `scope`, `scopeGroupArmIds` |
+| NsxDistributedFirewallRule | `parentDistributedFirewallPolicyArmId`, `action`, `direction`, `anyScope`, `scopeGroupArmIds`, `sourceExcluded`, `sourceAny`, `sourceGroupArmIds`, `sourceAddresses`, `destinationsExcluded`, `destinationAny`, `destinationGroupsArmIds`, `destinationAddresses`, `services` |
 
 ### 6d. Custom Actions (non-CRUD)
 
@@ -585,12 +663,14 @@ Network.Management/
 ├── NsxSegment.tsp                   ← Segment (ProxyResource)
 ├── NsxGroup.tsp                     ← NsxNsGroup (ProxyResource, segment=nsGroups)
 ├── NsxGatewayFirewallPolicy.tsp     ← Firewall Policy (ProxyResource)
-├── NsxGatewayFirewallRule.tsp       ← Firewall Rule (3-level, parent=Policy)
+├── NsxGatewayFirewallRule.tsp       ← Gateway Firewall Rule (ProxyResource, flat under NetworkSite)
+├── NsxDistributedFirewallPolicy.tsp ← Distributed Firewall Policy (ProxyResource)
+├── NsxDistributedFirewallRule.tsp   ← Distributed Firewall Rule (ProxyResource)
 ├── NsxLoadBalancer.tsp              ← Load Balancer (ProxyResource)
 ├── NsxNatRule.tsp                   ← NAT Rule (ProxyResource)
 ├── readme.md                        ← This file
 └── examples/
-    └── 2026-01-01-preview/          ← 59 example JSON files
+    └── 2026-01-01-preview/          ← 69 example JSON files
         ├── Operations_List_MaximumSet.json
         ├── NetworkSites_{6 ops}.json       (Get, Create, Update, Delete, ListByRG, ListBySub)
         ├── NetworkAgents_{5 ops}.json      (Get, Create, Update, Delete, ListByNetworkSite)
@@ -601,9 +681,11 @@ Network.Management/
         ├── NsxNsGroups_{5 ops}.json
         ├── GatewayFirewallPolicies_{5 ops}.json
         ├── NsxGatewayFirewallRules_{5 ops}.json
+        ├── NsxDistributedFirewallPolicies_{5 ops}.json
+        ├── NsxDistributedFirewallRules_{5 ops}.json
         ├── NsxLoadBalancers_{5 ops}.json
         └── NsxNatRules_{5 ops}.json
-                                     Total: 1 + 6 + (10 × 5) + 2 = 59
+                                     Total: 1 + 6 + (12 × 5) + 2 = 69
 ```
 
 ---
@@ -632,8 +714,10 @@ All enums use `union` with a `string` fallback for forward compatibility:
 | ConjunctionOperator | OR, AND |
 | GroupExpressionKey | Name, Tag, OSName, ComputerName |
 | GatewayPolicyCategory | Emergency, Infrastructure, Environment, Application, LocalGatewayRules, Default |
+| DistributedFirewallPolicyCategory | Ethernet, Emergency, Infrastructure, Environment, Application |
 | FederationScope | Local, Global |
 | PolicyContextType | Generic, GatewaySpecific |
+| RegistrationStatus | Registering, Registered |
 
 ---
 
@@ -641,15 +725,18 @@ All enums use `union` with a `string` fallback for forward compatibility:
 
 | # | Decision | Rationale |
 |---|----------|-----------|
-| 1 | **Flat hierarchy** under NetworkSite | All NSX resources are direct children of NetworkSite (not nested under gateways). Matches sibling repo patterns and enables future extension for other network fabrics (HyperV, Physical). |
+| 1 | **Flat hierarchy** under NetworkSite | All NSX resources are direct children of NetworkSite (not nested under gateways or policies). Matches sibling repo patterns and enables future extension for other network fabrics (HyperV, Physical). |
 | 2 | **NetworkSite** (not NsxSite) | Generic name supports future non-NSX network discovery. |
 | 3 | **NsxNsGroup** model name | Correct NSX terminology. Segment = `nsGroups`, interface = `NsxNsGroups`. |
 | 4 | **Full CRUD on all resources** | Consistent with all sibling services (Oracle, Mongo, Storage, etc.) — no read-only resources. |
 | 5 | **Relationships via ARM resource ID properties** | Not through URL nesting. Follows the same pattern as all sibling repos. |
-| 6 | **`parentGateway` (direct armResourceIdentifier)** | NatRule and LoadBalancer reference their parent gateway directly, not through a wrapper object. |
-| 7 | **FirewallService is inline** (not a separate ARM resource) | Modeled as a property of GatewayFirewallRule, with `serviceEntries[]` array. |
+| 6 | **`parentGatewayArmId` (direct armResourceIdentifier)** | NatRule and LoadBalancer reference their parent gateway directly, not through a wrapper object. |
+| 7 | **FirewallService is inline** (not a separate ARM resource) | Modeled as a property of firewall rules, with `serviceEntries[]` array. |
 | 8 | **`listNatRules` custom action on gateways** | POST action to get NAT rules for a specific gateway. Under team discussion. |
 | 9 | **API version 2026-01-01-preview** | Aligned with team timeline. |
+| 10 | **GFW Rule flattened** | GatewayFirewallRule is a flat ProxyResource under NetworkSite with `parentGatewayFirewallPolicyArmId` linking to its policy, rather than 3-level URL nesting. |
+| 11 | **DFW Policy + Rule as separate resources** | Distributed firewall policies and rules modeled as separate flat resources under NetworkSite, with `parentDistributedFirewallPolicyArmId` on rules. |
+| 12 | **`applianceDataCollection` on NsxManager** | Structured array of `ApplianceData` objects (runAsAccountId, applianceName, status) replacing simple `applianceNames` string array. |
 
 ---
 
@@ -765,16 +852,25 @@ GET .../networkSites/site1/nsxManagers/mgr1
     "errorCount": 0,
     "fqdn": "nsx-manager.contoso.com",
     "runAsAccount": "account1",
-    "localNsxManagerRefs": [],
-    "vcenterRefs": [
+    "version": "4.1.0",
+    "isGlobalManager": false,
+    "localNsxManagerArmIds": [],
+    "vcenterArmIds": [
       ".../Microsoft.OffAzure/vmwareSites/vs1/vcenters/vc1"
+    ],
+    "applianceDataCollection": [
+      {
+        "runAsAccountId": "account1",
+        "applianceName": "appliance1",
+        "status": "Registered"
+      }
     ]
   }
 }
 ```
 
-> **Key relationship:** `vcenterRefs` → points to OffAzure vCenter resources.
-> **Note:** NsxManager does not have `nsxManagerRef` — it IS the manager.
+> **Key relationship:** `vcenterArmIds` → points to OffAzure vCenter resources.
+> **Note:** NsxManager does not have `nsxManagerArmId` — it IS the manager.
 
 ---
 
@@ -794,7 +890,7 @@ GET .../networkSites/site1/tier0Gateways/t0gw1
     "provisioningState": "Succeeded",
     "displayName": "T0-Gateway",
     "nsxOriginalPath": "/infra/tier-0s/t0gw",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "33333333-3333-3333-3333-333333333333",
     "nsxTags": [],
     "errors": [],
@@ -802,16 +898,16 @@ GET .../networkSites/site1/tier0Gateways/t0gw1
     "haMode": "ACTIVE_ACTIVE",
     "firewallEnabled": true,
     "isVrf": false,
-    "associatedTier1Gateways": [
+    "associatedTier1GatewayArmIds": [
       ".../networkSites/site1/tier1Gateways/t1gw1"
     ],
-    "associatedSegments": [
+    "associatedSegmentArmIds": [
       ".../networkSites/site1/segments/seg1"
     ],
-    "associatedNatRules": [
+    "associatedNatRuleArmIds": [
       ".../networkSites/site1/natRules/nat1"
     ],
-    "associatedGfwPolicies": [
+    "associatedGfwPolicyArmIds": [
       ".../networkSites/site1/gatewayFirewallPolicies/pol1"
     ]
   }
@@ -838,24 +934,24 @@ GET .../networkSites/site1/tier1Gateways/t1gw1
     "provisioningState": "Succeeded",
     "displayName": "T1-Gateway",
     "nsxOriginalPath": "/infra/tier-1s/t1gw",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "44444444-4444-4444-4444-444444444444",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
     "haMode": "ACTIVE_STANDBY",
     "firewallEnabled": true,
-    "parentTier0Gateway": ".../networkSites/site1/tier0Gateways/t0gw1",
-    "associatedSegments": [
+    "parentTier0GatewayArmId": ".../networkSites/site1/tier0Gateways/t0gw1",
+    "associatedSegmentArmIds": [
       ".../networkSites/site1/segments/seg1"
     ],
-    "associatedNatRules": [
+    "associatedNatRuleArmIds": [
       ".../networkSites/site1/natRules/nat1"
     ],
-    "associatedGfwPolicies": [
+    "associatedGfwPolicyArmIds": [
       ".../networkSites/site1/gatewayFirewallPolicies/pol1"
     ],
-    "associatedLoadBalancers": [
+    "associatedLoadBalancerArmIds": [
       ".../networkSites/site1/loadBalancers/lb1"
     ]
   }
@@ -863,7 +959,7 @@ GET .../networkSites/site1/tier1Gateways/t1gw1
 ```
 
 > **Key relationships:**
-> - `parentTier0Gateway` → **single** ref pointing UP to its parent T0
+> - `parentTier0GatewayArmId` → **single** ref pointing UP to its parent T0
 > - `associated*` arrays → point OUT to segments, NAT, policies, LBs
 
 ---
@@ -884,12 +980,12 @@ GET .../networkSites/site1/segments/seg1
     "provisioningState": "Succeeded",
     "displayName": "Segment-01",
     "nsxOriginalPath": "/infra/segments/seg1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "55555555-5555-5555-5555-555555555555",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
-    "parentGateway": ".../networkSites/site1/tier1Gateways/t1gw1",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/t1gw1",
     "segmentType": "ROUTED",
     "vlanIds": ["100"],
     "subnets": [
@@ -897,7 +993,7 @@ GET .../networkSites/site1/segments/seg1
     ],
     "systemOwned": false,
     "adminState": "UP",
-    "associatedVirtualMachines": [
+    "associatedVirtualMachineArmIds": [
       ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
     ]
   }
@@ -905,8 +1001,8 @@ GET .../networkSites/site1/segments/seg1
 ```
 
 > **Key relationships:**
-> - `parentGateway` → the T0 or T1 gateway this segment is attached to
-> - `associatedVirtualMachines` → cross-provider refs to OffAzure VM resources
+> - `parentGatewayArmId` → the T0 or T1 gateway this segment is attached to
+> - `associatedVirtualMachineArmIds` → cross-provider refs to OffAzure VM resources
 
 ---
 
@@ -926,7 +1022,7 @@ GET .../networkSites/site1/nsGroups/grp1
     "provisioningState": "Succeeded",
     "displayName": "Group-01",
     "nsxOriginalPath": "/infra/domains/default/groups/grp1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "66666666-6666-6666-6666-666666666666",
     "nsxTags": [],
     "errors": [],
@@ -951,9 +1047,9 @@ GET .../networkSites/site1/nsGroups/grp1
         "value": "app-tier"
       }
     ],
-    "effectiveVirtualMachineRefs": [
+    "effectiveVirtualMachineArmIds": [
       {
-        "vmRef": ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1",
+        "vmArmId": ".../Microsoft.OffAzure/vmwareSites/vs1/machines/vm1",
         "displayName": "vm-01"
       }
     ],
@@ -964,9 +1060,9 @@ GET .../networkSites/site1/nsGroups/grp1
 
 > **Key relationships:**
 > - `expressions` → group membership criteria (input)
-> - `effectiveVirtualMachineRefs` → resolved VMs that match (output, cross-provider to OffAzure)
+> - `effectiveVirtualMachineArmIds` → resolved VMs that match (output, cross-provider to OffAzure)
 > - `effectiveIpMembers` → resolved IPs
-> - Referenced **by** firewall rules via `sourceIpGroups` / `destinationIpGroups`
+> - Referenced **by** firewall rules via `sourceIpGroupArmIds` / `destinationIpGroupArmIds`
 
 ---
 
@@ -986,7 +1082,7 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1
     "provisioningState": "Succeeded",
     "displayName": "Default-Policy",
     "nsxOriginalPath": "/infra/domains/default/gateway-policies/pol1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "77777777-7777-7777-7777-777777777777",
     "nsxTags": [],
     "errors": [],
@@ -996,10 +1092,10 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1
     "isDefault": true,
     "contextType": "GatewaySpecific",
     "federationScope": "Local",
-    "appliedScopes": [
+    "appliedScopeArmIds": [
       ".../networkSites/site1/tier0Gateways/t0gw1"
     ],
-    "effectiveScopes": [
+    "effectiveScopeArmIds": [
       ".../networkSites/site1/tier0Gateways/t0gw1"
     ]
   }
@@ -1007,43 +1103,44 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1
 ```
 
 > **Key relationships:**
-> - `appliedScopes` / `effectiveScopes` → point to gateways this policy protects
-> - Referenced **by** T0/T1 via `associatedGfwPolicies`
-> - **Contains** firewall rules as 3-level children (see 12i)
+> - `appliedScopeArmIds` / `effectiveScopeArmIds` → point to gateways this policy protects
+> - Referenced **by** T0/T1 via `associatedGfwPolicyArmIds`
+> - Referenced **by** GFW Rules via `parentGatewayFirewallPolicyArmId`
 
 ---
 
-### 12i. NsxGatewayFirewallRule (3-level nested under Policy)
+### 12i. NsxGatewayFirewallRule (flat ProxyResource under NetworkSite)
 
 ```
-GET .../networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1
+GET .../networkSites/site1/nsxGatewayFirewallRules/rule1
 ```
 
 ```json
 {
-  "id": ".../networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1",
+  "id": ".../networkSites/site1/nsxGatewayFirewallRules/rule1",
   "name": "rule1",
-  "type": "Microsoft.ApplicationMigration/networkSites/gatewayFirewallPolicies/rules",
+  "type": "Microsoft.ApplicationMigration/networkSites/nsxGatewayFirewallRules",
   "systemData": { "..." },
   "properties": {
     "provisioningState": "Succeeded",
     "displayName": "Allow-SSH",
     "nsxOriginalPath": "/infra/domains/default/gateway-policies/pol1/rules/rule1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "88888888-8888-8888-8888-888888888888",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
+    "parentGatewayFirewallPolicyArmId": ".../networkSites/site1/gatewayFirewallPolicies/pol1",
     "action": "ALLOW",
     "direction": "IN_OUT",
     "disabled": false,
     "sequenceNumber": 10,
     "globalPriority": "05-0000000010-0000000001",
-    "sourceIpGroups": [
+    "sourceIpGroupArmIds": [
       ".../networkSites/site1/nsGroups/grp1"
     ],
     "sourceAddresses": ["10.0.0.0/24"],
-    "destinationIpGroups": [],
+    "destinationIpGroupArmIds": [],
     "destinationAddresses": ["192.168.1.0/24"],
     "services": [
       {
@@ -1068,10 +1165,10 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1
         ]
       }
     ],
-    "appliedScopes": [
+    "appliedScopeArmIds": [
       ".../networkSites/site1/tier0Gateways/t0gw1"
     ],
-    "effectiveScopes": [
+    "effectiveScopeArmIds": [
       ".../networkSites/site1/tier0Gateways/t0gw1"
     ]
   }
@@ -1079,10 +1176,10 @@ GET .../networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1
 ```
 
 > **Key relationships:**
-> - `sourceIpGroups` / `destinationIpGroups` → point to NsxNsGroup resources
-> - `appliedScopes` / `effectiveScopes` → point to gateways
+> - `parentGatewayFirewallPolicyArmId` → reference to the parent GFW Policy
+> - `sourceIpGroupArmIds` / `destinationIpGroupArmIds` → point to NsxNsGroup resources
+> - `appliedScopeArmIds` / `effectiveScopeArmIds` → point to gateways
 > - `services` → **inline** (not ARM references) — each has `serviceEntries[]`
-> - Parent in URL path → `gatewayFirewallPolicies/pol1`
 
 ---
 
@@ -1102,14 +1199,14 @@ GET .../networkSites/site1/loadBalancers/lb1
     "provisioningState": "Succeeded",
     "displayName": "LB-01",
     "nsxOriginalPath": "/infra/lb-services/lb1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "99999999-9999-9999-9999-999999999999",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
     "lbType": "L4",
     "adminState": "ENABLED",
-    "parentGateway": ".../networkSites/site1/tier1Gateways/t1gw1",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/t1gw1",
     "frontend": {
       "vip": "10.0.1.100",
       "port": 443,
@@ -1124,7 +1221,7 @@ GET .../networkSites/site1/loadBalancers/lb1
             "port": 8443,
             "adminState": "ENABLED",
             "weight": 1,
-            "vmRef": ".../vmwareSites/vs1/machines/vm1"
+            "vmArmId": ".../vmwareSites/vs1/machines/vm1"
           }
         ]
       },
@@ -1142,8 +1239,8 @@ GET .../networkSites/site1/loadBalancers/lb1
 ```
 
 > **Key relationships:**
-> - `parentGateway` → the T1 gateway this LB is attached to
-> - Referenced **by** T1 via `associatedLoadBalancers`
+> - `parentGatewayArmId` → the T1 gateway this LB is attached to
+> - Referenced **by** T1 via `associatedLoadBalancerArmIds`
 
 ---
 
@@ -1163,14 +1260,14 @@ GET .../networkSites/site1/natRules/nat1
     "provisioningState": "Succeeded",
     "displayName": "NAT-SNAT-01",
     "nsxOriginalPath": "/infra/tier-1s/t1gw/nat/USER/nat-rules/nat1",
-    "nsxManagerRef": ".../networkSites/site1/nsxManagers/mgr1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
     "uniqueId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
     "nsxTags": [],
     "errors": [],
     "errorCount": 0,
     "natType": "SNAT",
     "adminState": "ENABLED",
-    "parentGateway": ".../networkSites/site1/tier1Gateways/t1gw1",
+    "parentGatewayArmId": ".../networkSites/site1/tier1Gateways/t1gw1",
     "match": {
       "source": { "ipAddress": ["10.0.0.0/24"], "port": "1024-65535" },
       "destination": { "ipAddress": ["0.0.0.0/0"], "port": "443" },
@@ -1185,12 +1282,115 @@ GET .../networkSites/site1/natRules/nat1
 ```
 
 > **Key relationships:**
-> - `parentGateway` → the T0 or T1 gateway this rule is on
-> - Referenced **by** T0/T1 via `associatedNatRules`
+> - `parentGatewayArmId` → the T0 or T1 gateway this rule is on
+> - Referenced **by** T0/T1 via `associatedNatRuleArmIds`
 
 ---
 
-### 12l. Quick Reference: ARM Type → ARM ID Pattern
+### 12l. NsxDistributedFirewallPolicy
+
+```
+GET .../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1
+```
+
+```json
+{
+  "id": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1",
+  "name": "dfwpol1",
+  "type": "Microsoft.ApplicationMigration/networkSites/nsxDistributedFirewallPolicies",
+  "systemData": { "..." },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "displayName": "DFW-App-Policy",
+    "nsxOriginalPath": "/infra/domains/default/security-policies/dfwpol1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
+    "uniqueId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "nsxTags": [],
+    "errors": [],
+    "errorCount": 0,
+    "category": "Application",
+    "sequenceNumber": 100,
+    "isDefault": false,
+    "federationScope": "Local",
+    "scope": true,
+    "scopeGroupArmIds": [
+      ".../networkSites/site1/nsGroups/grp1"
+    ]
+  }
+}
+```
+
+> **Key relationships:**
+> - `scopeGroupArmIds` → scope groups this policy applies to
+> - Referenced **by** DFW Rules via `parentDistributedFirewallPolicyArmId`
+
+---
+
+### 12m. NsxDistributedFirewallRule
+
+```
+GET .../networkSites/site1/nsxDistributedFirewallRules/dfwrule1
+```
+
+```json
+{
+  "id": ".../networkSites/site1/nsxDistributedFirewallRules/dfwrule1",
+  "name": "dfwrule1",
+  "type": "Microsoft.ApplicationMigration/networkSites/nsxDistributedFirewallRules",
+  "systemData": { "..." },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "displayName": "DFW-Allow-Web",
+    "nsxOriginalPath": "/infra/domains/default/security-policies/dfwpol1/rules/dfwrule1",
+    "nsxManagerArmId": ".../networkSites/site1/nsxManagers/mgr1",
+    "uniqueId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "nsxTags": [],
+    "errors": [],
+    "errorCount": 0,
+    "parentDistributedFirewallPolicyArmId": ".../networkSites/site1/nsxDistributedFirewallPolicies/dfwpol1",
+    "action": "ALLOW",
+    "direction": "IN_OUT",
+    "anyScope": false,
+    "scopeGroupArmIds": [
+      ".../networkSites/site1/nsGroups/grp1"
+    ],
+    "sourceExcluded": false,
+    "sourceAny": false,
+    "sourceGroupArmIds": [
+      ".../networkSites/site1/nsGroups/grp1"
+    ],
+    "sourceAddresses": ["10.0.0.0/24"],
+    "destinationsExcluded": false,
+    "destinationAny": false,
+    "destinationGroupsArmIds": [],
+    "destinationAddresses": ["192.168.1.0/24"],
+    "services": [
+      {
+        "displayName": "HTTPS",
+        "serviceEntries": [
+          {
+            "serviceEntryType": "L4PortSetServiceEntry",
+            "displayName": "HTTPS",
+            "l4Protocol": "TCP",
+            "protocol": "TCP",
+            "destinationPorts": ["443"]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+> **Key relationships:**
+> - `parentDistributedFirewallPolicyArmId` → reference to the parent DFW Policy (**required**)
+> - `sourceGroupArmIds` / `destinationGroupsArmIds` → point to NsxNsGroup resources
+> - `scopeGroupArmIds` → scope groups
+> - `services` → **inline** (not ARM references) — shared `FirewallService` model
+
+---
+
+### 12n. Quick Reference: ARM Type → ARM ID Pattern
 
 | ARM Type | ARM ID Pattern |
 |----------|---------------|
@@ -1202,49 +1402,59 @@ GET .../networkSites/site1/natRules/nat1
 | `networkSites/segments` | `.../networkSites/{siteName}/segments/{segmentName}` |
 | `networkSites/nsGroups` | `.../networkSites/{siteName}/nsGroups/{groupName}` |
 | `networkSites/gatewayFirewallPolicies` | `.../networkSites/{siteName}/gatewayFirewallPolicies/{policyName}` |
-| `networkSites/gatewayFirewallPolicies/rules` | `.../gatewayFirewallPolicies/{policyName}/rules/{ruleName}` |
+| `networkSites/nsxGatewayFirewallRules` | `.../networkSites/{siteName}/nsxGatewayFirewallRules/{ruleName}` |
+| `networkSites/nsxDistributedFirewallPolicies` | `.../networkSites/{siteName}/nsxDistributedFirewallPolicies/{policyName}` |
+| `networkSites/nsxDistributedFirewallRules` | `.../networkSites/{siteName}/nsxDistributedFirewallRules/{ruleName}` |
 | `networkSites/loadBalancers` | `.../networkSites/{siteName}/loadBalancers/{loadBalancerName}` |
 | `networkSites/natRules` | `.../networkSites/{siteName}/natRules/{natRuleName}` |
 
-### 12m. Cross-Reference Summary: Who Points Where
+### 12o. Cross-Reference Summary: Who Points Where
 
 ```
 ┌──────────────────────────┬────────────────────────────┬────────────────────────────────────┐
 │ Source Resource           │ Property                   │ Target Resource                    │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ Most resources           │ nsxManagerRef               │ → NsxManager (not on Agent/Manager)│
+│ Most resources           │ nsxManagerArmId               │ → NsxManager (not on Agent/Manager)│
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
 │ NetworkSite              │ masterSiteId                │ → Microsoft.OffAzure/masterSites   │
 │ NetworkSite              │ migrateProjectId            │ → Microsoft.Migrate/migrateProjects│
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxManager               │ localNsxManagerRefs[]       │ → NsxManager (local managers)      │
-│ NsxManager               │ vcenterRefs[]               │ → OffAzure/vmwareSites/vcenters    │
+│ NsxManager               │ localNsxManagerArmIds[]       │ → NsxManager (local managers)      │
+│ NsxManager               │ vcenterArmIds[]               │ → OffAzure/vmwareSites/vcenters    │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxTier0Gateway          │ associatedTier1Gateways[]   │ → NsxTier1Gateway                  │
-│ NsxTier0Gateway          │ associatedSegments[]        │ → NsxSegment                       │
-│ NsxTier0Gateway          │ associatedNatRules[]        │ → NsxNatRule                       │
-│ NsxTier0Gateway          │ associatedGfwPolicies[]     │ → NsxGatewayFirewallPolicy         │
+│ NsxTier0Gateway          │ associatedTier1GatewayArmIds[]   │ → NsxTier1Gateway                  │
+│ NsxTier0Gateway          │ associatedSegmentArmIds[]        │ → NsxSegment                       │
+│ NsxTier0Gateway          │ associatedNatRuleArmIds[]        │ → NsxNatRule                       │
+│ NsxTier0Gateway          │ associatedGfwPolicyArmIds[]     │ → NsxGatewayFirewallPolicy         │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxTier1Gateway          │ parentTier0Gateway          │ → NsxTier0Gateway                  │
-│ NsxTier1Gateway          │ associatedSegments[]        │ → NsxSegment                       │
-│ NsxTier1Gateway          │ associatedNatRules[]        │ → NsxNatRule                       │
-│ NsxTier1Gateway          │ associatedGfwPolicies[]     │ → NsxGatewayFirewallPolicy         │
-│ NsxTier1Gateway          │ associatedLoadBalancers[]   │ → NsxLoadBalancer                  │
+│ NsxTier1Gateway          │ parentTier0GatewayArmId          │ → NsxTier0Gateway                  │
+│ NsxTier1Gateway          │ associatedSegmentArmIds[]        │ → NsxSegment                       │
+│ NsxTier1Gateway          │ associatedNatRuleArmIds[]        │ → NsxNatRule                       │
+│ NsxTier1Gateway          │ associatedGfwPolicyArmIds[]     │ → NsxGatewayFirewallPolicy         │
+│ NsxTier1Gateway          │ associatedLoadBalancerArmIds[]   │ → NsxLoadBalancer                  │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxSegment               │ parentGateway               │ → NsxTier0Gateway/NsxTier1Gateway  │
-│ NsxSegment               │ associatedVirtualMachines[] │ → OffAzure/vmwareSites/machines     │
+│ NsxSegment               │ parentGatewayArmId               │ → NsxTier0Gateway/NsxTier1Gateway  │
+│ NsxSegment               │ associatedVirtualMachineArmIds[] │ → OffAzure/vmwareSites/machines     │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxGatewayFirewallPolicy │ appliedScopes[]             │ → NsxTier0/T1 Gateway              │
-│ NsxGatewayFirewallPolicy │ effectiveScopes[]           │ → NsxTier0/T1 Gateway              │
+│ NsxGatewayFirewallPolicy │ appliedScopeArmIds[]             │ → NsxTier0/T1 Gateway              │
+│ NsxGatewayFirewallPolicy │ effectiveScopeArmIds[]           │ → NsxTier0/T1 Gateway              │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxGatewayFirewallRule   │ sourceIpGroups[]            │ → NsxNsGroup                       │
-│ NsxGatewayFirewallRule   │ destinationIpGroups[]       │ → NsxNsGroup                       │
-│ NsxGatewayFirewallRule   │ appliedScopes[]             │ → NsxTier0/T1 Gateway              │
-│ NsxGatewayFirewallRule   │ effectiveScopes[]           │ → NsxTier0/T1 Gateway              │
+│ NsxGatewayFirewallRule   │ parentGatewayFirewallPolicyArmId  │ → NsxGatewayFirewallPolicy         │
+│ NsxGatewayFirewallRule   │ sourceIpGroupArmIds[]            │ → NsxNsGroup                       │
+│ NsxGatewayFirewallRule   │ destinationIpGroupArmIds[]       │ → NsxNsGroup                       │
+│ NsxGatewayFirewallRule   │ appliedScopeArmIds[]             │ → NsxTier0/T1 Gateway              │
+│ NsxGatewayFirewallRule   │ effectiveScopeArmIds[]           │ → NsxTier0/T1 Gateway              │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxLoadBalancer          │ parentGateway               │ → NsxTier1Gateway                  │
-│ NsxLoadBalancer          │ backendPool.members[].vmRef  │ → OffAzure/vmwareSites/machines     │
+│ NsxDistributedFWPolicy   │ scopeGroupArmIds[]               │ → Scope groups                     │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
-│ NsxNatRule               │ parentGateway               │ → NsxTier0/NsxTier1Gateway         │
+│ NsxDistributedFWRule     │ parentDistributedFirewallPolicyArmId │ → NsxDistributedFirewallPolicy │
+│ NsxDistributedFWRule     │ scopeGroupArmIds[]               │ → Scope groups                     │
+│ NsxDistributedFWRule     │ sourceGroupArmIds[]              │ → NsxNsGroup                       │
+│ NsxDistributedFWRule     │ destinationGroupsArmIds[]        │ → NsxNsGroup                       │
+├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
+│ NsxLoadBalancer          │ parentGatewayArmId               │ → NsxTier1Gateway                  │
+│ NsxLoadBalancer          │ backendPool.members[].vmArmId  │ → OffAzure/vmwareSites/machines     │
+├──────────────────────────┼────────────────────────────┼────────────────────────────────────┤
+│ NsxNatRule               │ parentGatewayArmId               │ → NsxTier0/NsxTier1Gateway         │
 └──────────────────────────┴────────────────────────────┴────────────────────────────────────┘
 ```
