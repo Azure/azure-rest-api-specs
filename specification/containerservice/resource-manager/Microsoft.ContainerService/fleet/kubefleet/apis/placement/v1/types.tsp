@@ -13,6 +13,7 @@ namespace Placement.V1;
 
 @doc("The rollout strategy configuration.")
 model RolloutStrategy {
+  @madeOptional(Versions.v2026_04_02_preview)
   @doc("The type of rollout strategy. Default is RollingUpdate.")
   type?: RolloutStrategyType;
 }
@@ -79,6 +80,7 @@ model ClusterAffinity {
 
 @doc("ClusterSelector")
 model ClusterSelector {
+  @madeOptional(Versions.v2026_04_02_preview)
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   @identifiers(#[])
   clusterSelectorTerms?: ClusterSelectorTerm[];
