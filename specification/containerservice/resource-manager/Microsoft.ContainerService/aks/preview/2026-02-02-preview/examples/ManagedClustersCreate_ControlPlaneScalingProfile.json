@@ -4,7 +4,6 @@
     "parameters": {
       "location": "location1",
       "properties": {
-        "addonProfiles": {},
         "agentPoolProfiles": [
           {
             "name": "nodepool1",
@@ -16,15 +15,10 @@
             "vmSize": "Standard_DS2_v2"
           }
         ],
-        "autoScalerProfile": {
-          "scale-down-delay-after-add": "15m",
-          "scan-interval": "20s"
-        },
         "controlPlaneScalingProfile": {
           "scalingSize": "H4"
         },
         "dnsPrefix": "dnsprefix1",
-        "enableRBAC": true,
         "kubernetesVersion": "1.33.0",
         "linuxProfile": {
           "adminUsername": "azureuser",
@@ -46,14 +40,6 @@
           "networkPlugin": "azure",
           "networkPluginMode": "overlay",
           "outboundType": "loadBalancer"
-        },
-        "servicePrincipalProfile": {
-          "clientId": "clientid",
-          "secret": "secret"
-        },
-        "windowsProfile": {
-          "adminPassword": "replacePassword1234$",
-          "adminUsername": "azureuser"
         }
       },
       "sku": {
@@ -93,16 +79,12 @@
               "vmSize": "Standard_DS2_v2"
             }
           ],
-          "autoScalerProfile": {
-            "scale-down-delay-after-add": "15m",
-            "scan-interval": "20s"
-          },
           "controlPlaneScalingProfile": {
             "scalingSize": "H4"
           },
           "dnsPrefix": "dnsprefix1",
           "enableRBAC": true,
-          "fqdn": "dnsprefix1-ee788a1f.hcp.location1.azmk8s.io",
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
           "kubernetesVersion": "1.33.0",
           "linuxProfile": {
             "adminUsername": "azureuser",
@@ -152,10 +134,6 @@
           "provisioningState": "Succeeded",
           "servicePrincipalProfile": {
             "clientId": "clientid"
-          },
-          "supportPlan": "KubernetesOfficial",
-          "windowsProfile": {
-            "adminUsername": "azureuser"
           }
         },
         "tags": {
@@ -186,16 +164,11 @@
               "vmSize": "Standard_DS2_v2"
             }
           ],
-          "autoScalerProfile": {
-            "scale-down-delay-after-add": "15m",
-            "scan-interval": "20s"
-          },
           "controlPlaneScalingProfile": {
             "scalingSize": "H4"
           },
           "dnsPrefix": "dnsprefix1",
           "enableRBAC": true,
-          "fqdn": "dnsprefix1-ee788a1f.hcp.location1.azmk8s.io",
           "kubernetesVersion": "1.33.0",
           "linuxProfile": {
             "adminUsername": "azureuser",
@@ -245,10 +218,6 @@
           "provisioningState": "Creating",
           "servicePrincipalProfile": {
             "clientId": "clientid"
-          },
-          "supportPlan": "KubernetesOfficial",
-          "windowsProfile": {
-            "adminUsername": "azureuser"
           }
         },
         "tags": {
